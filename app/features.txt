@@ -1,0 +1,17 @@
+release blockers
+* ocr testing, 90 fix, red +15 fix
+* import/export/autosave improvements
+
+nice to haves:
+* bonus stats
+* save stat preferences per hero
+* move logic into api
+* optional refresh or local copy of e7db data
+
+done
+* jar fix
+* autosave
+* get current permutations done
+* new sets, pen revenge injury
+* live char data refresh from e7db
+

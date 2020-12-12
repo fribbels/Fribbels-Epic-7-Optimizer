@@ -1,0 +1,43 @@
+.rangeslider {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 25px;
+    width: 100%;
+}
+.rangeslider__fill,
+.rangeslider__fill__bg {
+    display: block;
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    z-index: 2;
+    background: #29e;
+    border-radius: 10px;
+    will-change: width;
+}
+.rangeslider__handle {
+    will-change: width, height, top;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 50%;
+    background: #29e;
+    display: inline-block;
+    z-index: 3;
+    cursor: pointer;
+    border: solid 2px #ffffff;
+    border-radius: 50%;
+    -webkit-transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;
+    transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;
+}
+.rangeslider__handle:active {
+    background: #107ecd;
+}
+.rangeslider__fill__bg {
+    background: #ccc;
+    width: 100%;
+}
+.rangeslider--disabled {
+    opacity: 0.4;
+}

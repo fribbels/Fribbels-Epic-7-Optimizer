@@ -1,0 +1,630 @@
+<head>
+<script>  
+global.$ = require('jquery');
+window.$ = $;
+window.jQuery = $;
+</script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-grid.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-theme-balham.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-theme-alpine.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-theme-material.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/rangeslider.css">
+
+</head>
+
+<div class="tabset">
+  <!-- Tab 1 -->
+  <input type="radio" name="tabset" id="tab1" checked>
+  <label for="tab1" class="tabLabel" id="tab1label">Optimizer</label>
+  <!-- Tab 2 -->
+  <input type="radio" name="tabset" id="tab2" style="display: none">
+  <label for="tab2" class="tabLabel" style="display: none">Ocr Debugger</label>
+  <!-- Tab 3 -->
+  <input type="radio" name="tabset" id="tab3" >
+  <label for="tab3" class="tabLabel" id="tab3label">Gear</label>
+  <!-- Tab 4 -->
+  <input type="radio" name="tabset" id="tab4" >
+  <label for="tab4" class="tabLabel" id="tab4label">Heroes</label>
+  <!-- Tab 5 -->
+  <input type="radio" name="tabset" id="tab5" >
+  <label for="tab5" class="tabLabel">Importer</label>
+  <!-- Tab 6 -->
+  <input type="radio" name="tabset" id="tab6" style="display: none">
+  <label for="tab6" class="tabLabel" style="display: none">Subprocess Debugger</label>
+  
+  <div class="tab-panels">
+
+
+
+
+
+
+
+
+
+
+    <div id="optimizer-section" class="tab-panel">
+      <div id="optimizer-tab" class="tab">
+        <div id="optimizer-panel" class="optimizer-panel">
+          <div id="constraints-panel" class="constraints-panel">
+            <div id="constaints-options-panel" class="constraints-panel-col constraints-left-panel">
+              Hero:<br>
+              <select id="inputHeroAdd" class="gearPreviewButton"></select>
+              
+              <div class="horizontalSpace" ></div>
+
+              Force mode:<br>
+              <select id="forceNumberSelect" class="gearPreviewButton">
+                <option value=1 selected>At least 1 stat</option>
+                <option value=2>At least 2 stats</option>
+                <option value=3>At least 3 stats</option>
+                <option value=4>All 4 stats</option>
+              </select>
+
+              <div class="horizontalSpace"></div>
+
+              Permutations:<br>
+              <text id="estimatedPermutations">0</text>
+
+              <div class="horizontalSpace"></div>
+
+              <div>
+                <input type="checkbox" id="inputAllowLockedItems" class="optimizer-checkbox">
+                <label for="inputAllowLockedItems">Locked items</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="inputAllowEquippedItems" class="optimizer-checkbox">
+                <label for="inputAllowEquippedItems">Equipped items</label>
+              </div>
+              
+              <div>
+                <input type="checkbox" id="inputKeepCurrentItems" class="optimizer-checkbox">
+                <label for="inputKeepCurrentItems">Keep current</label>
+              </div>
+              <div class="horizontalSpace"></div>
+
+              <input type="submit" value="Submit" class="gearPreviewButton" id="submitOptimizerRequest"><br>
+              <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter"><br>
+              <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel">
+
+            </div>
+            <div class="vertical"></div>
+            <div id="constraints-filter-panel-stats" class="constraints-panel-col">
+              Filter primary stats:<br>
+              <input type="number" id="inputMinAtkLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Atk</div>
+              <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinHpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Hp</div>
+              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDefLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Def</div>
+              <input type="number" id="inputMaxDefLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinSpdLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Speed</div>
+              <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCrLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">CRate</div>
+              <input type="number" id="inputMaxCrLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCdLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">CDmg</div>
+              <input type="number" id="inputMaxCdLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEffLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Eff</div>
+              <input type="number" id="inputMaxEffLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinResLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Res</div>
+              <input type="number" id="inputMaxResLimit" class="optimizer-number-input"><br>
+
+            </div>
+            <div class="vertical"></div>
+            <div id="constraints-filter-panel-calculated" class="constraints-panel-col">
+              Filter calculated stats:<br>
+              <input type="number" id="inputMinHppsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Hp*s</div>
+              <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEhpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Ehp</div>
+              <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Ehp*s</div>
+              <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDmgLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Dmg</div>
+              <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Dmg*s</div>
+              <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Mcdmg</div>
+              <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Mcdmg*s</div>
+              <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input"><br>
+            </div>
+            <div class="vertical"></div>
+            <div id="constraints-force-panel" class="constraints-panel-col">
+              Force:
+              <br>
+              <input type="number" id="inputMinAtkForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Atk</div>
+              <input type="number" id="inputMaxAtkForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinAtkPercentForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Atk%</div>
+              <input type="number" id="inputMaxAtkPercentForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinSpdForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Speed</div>
+              <input type="number" id="inputMaxSpdForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCrForce" class="optimizer-number-input">
+              <div class="inputStatLabel">CRate</div>
+              <input type="number" id="inputMaxCrForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCdForce" class="optimizer-number-input">
+              <div class="inputStatLabel">CDmg</div>
+              <input type="number" id="inputMaxCdForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinHpForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Hp</div>
+              <input type="number" id="inputMaxHpForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinHpPercentForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Hp%</div>
+              <input type="number" id="inputMaxHpPercentForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDefForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Def</div>
+              <input type="number" id="inputMaxDefForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDefPercentForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Def%</div>
+              <input type="number" id="inputMaxDefPercentForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEffForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Eff</div>
+              <input type="number" id="inputMaxEffForce" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinResForce" class="optimizer-number-input">
+              <div class="inputStatLabel">Res</div>
+              <input type="number" id="inputMaxResForce" class="optimizer-number-input"><br>
+            </div>
+            <div class="vertical"></div>
+
+            <div id="stat-priority-panel" class="constraints-panel-col">
+              Stat Priority:<br>
+              
+              <div class="sliderLabel">Atk</div>
+              <input class="sliderInput" id="atkSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+
+              <div class="sliderLabel">Hp</div>
+              <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+              
+              <div class="sliderLabel">Def</div>
+              <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+
+              <div class="sliderLabel">Spd</div>
+              <input class="sliderInput" id="spdSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="spdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+              
+              <div class="sliderLabel">Cr</div>
+              <input class="sliderInput" id="crSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="crSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+
+              <div class="sliderLabel">Cd</div>
+              <input class="sliderInput" id="cdSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="cdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+              
+              <div class="sliderLabel">Eff</div>
+              <input class="sliderInput" id="effSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="effSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+
+              <div class="sliderLabel">Res</div>
+              <input class="sliderInput" id="resSliderInput" type="number" value="0" readonly>
+              <div class="sliderContainer"><input class="slider" id="resSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              <br>
+              <br>
+
+              <div class="sliderLabel">Top%</div>
+              <input class="sliderInput" id="filterSliderInput" type="number" value="100" readonly>
+              <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="0" max="100" value="100" step="5"></div>
+              <br>
+            </div>
+            <div class="vertical"></div>
+
+            <div id="constraints-focus-panel" class="constraints-panel-col">
+              Necklace:<br>
+              <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
+                <option value="CriticalHitChancePercent">Crit Chance</option>
+                <option value="CriticalHitDamagePercent">Crit Damage</option>
+                <option value="AttackPercent">Attack %</option>
+                <option value="Attack">Attack</option>
+                <option value="HealthPercent">Health %</option>
+                <option value="Health">Health</option>
+                <option value="DefensePercent">Defense %</option>
+                <option value="Defense">Defense</option>
+              </select><br>
+
+              Ring:<br>
+              <select multiple="multiple" id="inputRingStat" class="inputGearFilterSelect">
+                <option value="EffectivenessPercent">Effectiveness</option>
+                <option value="EffectResistancePercent">Effect Resistance</option>
+                <option value="AttackPercent">Attack %</option>
+                <option value="Attack">Attack</option>
+                <option value="HealthPercent">Health %</option>
+                <option value="Health">Health</option>
+                <option value="DefensePercent">Defense %</option>
+                <option value="Defense">Defense</option>
+              </select><br>
+
+              Boots:<br>
+              <select multiple="multiple" id="inputBootsStat" class="inputGearFilterSelect">
+                <option value="Speed">Speed</option>
+                <option value="AttackPercent">Attack %</option>
+                <option value="Attack">Attack</option>
+                <option value="HealthPercent">Health %</option>
+                <option value="Health">Health</option>
+                <option value="DefensePercent">Defense %</option>
+                <option value="Defense">Defense</option>
+              </select><br>
+
+              Set 1 (either 2 or 4 pieces):<br>
+              <select multiple="multiple" id="inputSet1" class="inputSetFilterSelect">
+                <!-- <option value="None">None</option> -->
+                <optgroup label="4 Piece">
+                  <option value="AttackSet">Attack</option>
+                  <option value="SpeedSet">Speed</option>
+                  <option value="DestructionSet">Destruction</option>
+                  <option value="LifestealSet">Lifesteal</option>
+                  <option value="CounterSet">Counter</option>
+                  <option value="RageSet">Rage</option>
+                  <option value="RevengeSet">Revenge</option>
+                  <option value="InjurySet">Injury</option>
+                </optgroup>
+                <optgroup label="2 Piece">
+                  <option value="HealthSet">Health</option>
+                  <option value="DefenseSet">Defense</option>
+                  <option value="CriticalSet">Critical</option>
+                  <option value="HitSet">Hit</option>
+                  <option value="ResistSet">Resist</option>
+                  <option value="UnitySet">Unity</option>
+                  <option value="ImmunitySet">Immunity</option>
+                  <option value="PenetrationSet">Penetration</option>
+                </optgroup>
+              </select><br>
+
+              Set 2:<br>
+              <select multiple="multiple" id="inputSet2" class="inputSetFilterSelect">
+                <!-- <option value="None">None</option> -->
+                <optgroup label="2 Piece">
+                  <option value="HealthSet">Health</option>
+                  <option value="DefenseSet">Defense</option>
+                  <option value="CriticalSet">Critical</option>
+                  <option value="HitSet">Hit</option>
+                  <option value="ResistSet">Resist</option>
+                  <option value="UnitySet">Unity</option>
+                  <option value="ImmunitySet">Immunity</option>
+                  <option value="PenetrationSet">Penetration</option>
+                </optgroup>
+              </select><br>
+
+              Set 3:<br>
+              <select multiple="multiple" id="inputSet3" class="inputSetFilterSelect">
+                <!-- <option value="None">None</option> -->
+                <optgroup label="2 Piece">
+                  <option value="HealthSet">Health</option>
+                  <option value="DefenseSet">Defense</option>
+                  <option value="CriticalSet">Critical</option>
+                  <option value="HitSet">Hit</option>
+                  <option value="ResistSet">Resist</option>
+                  <option value="UnitySet">Unity</option>
+                  <option value="ImmunitySet">Immunity</option>
+                  <option value="PenetrationSet">Penetration</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div id="current-gear-panel" class="current-gear-panel">
+          </div>
+          <div id="optimization-results-panel" class="optimization-results-panel">
+            <!-- <div id="myGrid" style="height: 150px;width: 800px" class="ag-theme-balham"></div> -->
+            <div id="myGrid" class="ag-theme-balham"></div>
+          </div>
+
+
+          <div id="optimizer-equipped-section" class="optimizer-equipped-section">
+            <div id="optimizer-heroes-equipped-weapon" class="gear-preview-row">
+            </div>
+            <div class="vertical"></div>
+            <div id="optimizer-heroes-equipped-helmet" class="gear-preview-row">
+            </div>
+            <div class="vertical"></div>
+            <div id="optimizer-heroes-equipped-armor" class="gear-preview-row">
+            </div>
+            <div class="vertical"></div>
+            <div id="optimizer-heroes-equipped-necklace" class="gear-preview-row">
+            </div>
+            <div class="vertical"></div>
+            <div id="optimizer-heroes-equipped-ring" class="gear-preview-row">
+            </div>
+            <div class="vertical"></div>
+            <div id="optimizer-heroes-equipped-boots" class="gear-preview-row">
+            </div>
+          </div>
+          <div class="optimizerActionButtons">
+            <input type="submit" class="gearPreviewButton" value="Equip Selected" id="gearPreviewEquip">
+            <input type="submit" class="gearPreviewButton" value="Lock Selected" id="gearPreviewLockAndEquip"><div id="buttonSpace"></div>
+            <input type="submit" class="gearPreviewButton" value="Select All" id="gearPreviewSelectAll">
+            <input type="submit" class="gearPreviewButton" value="Deselect All" id="gearPreviewDeselectAll">
+          </div>
+        </div>
+      </div>  
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="ocr-debugger-section" class="tab-panel">
+      Url:<br>
+      <input type="text" id="ocr-test-input-url" value="" style="width:800px"><br>
+      Folder:<br>
+      <input type="text" id="ocr-test-input-folder" value="" style="width:800px"><br>
+      Left:<br>
+      <input type="number" id="ocr-test-input-left" value="65"><br>
+      Top:<br>
+      <input type="number" id="ocr-test-input-top" value="214"><br>
+      Width:<br>
+      <input type="number" id="ocr-test-input-width" value="27"><br>
+      Height:<br>
+      <input type="number" id="ocr-test-input-height" value="20"><br>
+
+      <input type="submit" value="Submit" id="ocr-test-submit-number">Submit Number<br>
+      <input type="submit" value="Submit" id="ocr-test-submit-text">Submit Text<br>
+      
+      <input type="submit" value="Submit" id="ocr-test-file-scan">File Scan<br>
+
+      <br><br>
+
+      <input type="submit" value="Submit" id="ocr-test-main-name">Main Stat name<br>
+      <input type="submit" value="Submit" id="ocr-test-main-numbers">Main Stat numbers<br>
+      <input type="submit" value="Submit" id="ocr-test-sub-name">Sub Stat name<br>
+      <input type="submit" value="Submit" id="ocr-test-sub-numbers">Sub Stat numbers<br>
+      <input type="submit" value="Submit" id="ocr-test-all">All<br>
+      <input type="submit" value="Submit" id="ocr-test-jimp">Jimp<br>
+      <input type="submit" value="Submit" id="ocr-test-full-scan">Full scan<br>
+      <input type="submit" value="Submit" id="ocr-test-lib">Lib<br>
+
+      <br>
+
+      <input type="submit" value="Submit" id="ocr-test-debug1">Debug1<br>
+      <img src="" id="ocr-test-crop"/>
+      <br>
+      <img src="" id="ocr-test-crop1"/>
+      <img src="" id="ocr-test-crop2"/>
+      <img src="" id="ocr-test-crop3"/>
+      <img src="" id="ocr-test-crop4"/>
+      <img src="" id="ocr-test-crop5"/>
+      <img src="" id="ocr-test-crop6"/>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div id="gear-section" class="tab-panel">
+      <!-- <h2>gear-section</h2> -->
+
+      <!-- <input type="submit" value="Update" class="gearPreviewButton" id="updateGear"> -->
+
+      <input type="submit" value="Edit Selected Item" class="gearPreviewButton" id="editGear">
+      <input type="submit" value="Add New Item" class="gearPreviewButton" id="addGear"><br><br>
+
+      <div id="gear-grid" style="height: 450px" class="ag-theme-balham"></div>
+
+      <br>
+
+      <div id="gearFilterBar">
+        <div id="setsFilterBar"></div>
+        <div id="gearFilterBar"></div>
+      </div>
+
+      <br>
+      <br>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="heroes-section" class="tab-panel">
+      <select id="addHeroesSelector"></select>
+
+      <input type="submit" value="Add New Hero" class="gearPreviewButton" id="addHeroesSubmit">
+      <br><br>
+      <div id="heroes-table" style="height: 450px" class="ag-theme-balham"></div>
+      <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipHeroesSubmit">
+      <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit">
+      <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit">
+
+      <div id="heroes-equipped-section">
+        <div id="heroes-equipped-weapon" class="gear-preview-row">
+        </div>
+        <div class="vertical"></div>
+        <div id="heroes-equipped-helmet" class="gear-preview-row">
+        </div>
+        <div class="vertical"></div>
+        <div id="heroes-equipped-armor" class="gear-preview-row">
+        </div>
+        <div class="vertical"></div>
+        <div id="heroes-equipped-necklace" class="gear-preview-row">
+        </div>
+        <div class="vertical"></div>
+        <div id="heroes-equipped-ring" class="gear-preview-row">
+        </div>
+        <div class="vertical"></div>
+        <div id="heroes-equipped-boots" class="gear-preview-row">
+        </div>
+      </div>
+
+      <br>
+      <br>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div id="importer-section" class="tab-panel">
+      <h2>Creating a new gear set from screenshots</h2>
+      <p>
+      Hit 'Choose File', navigate into the folder where your screenshots are located, then hit 'Submit'. </br>
+      </p>
+      <input type="file" webkitdirectory id="fileFolderSelect"/>
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit">
+
+      <br>
+      <br>
+
+      <textarea type="text" id="exportOutputText" value="" readonly></textarea>
+
+      <br>
+
+      <p>
+        Once results are printed, hit 'Export'. This will output a "gear.txt" in the folder where you installed this app.
+      </p>
+
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput">
+
+      <br>
+      <br>
+      <hr>
+      
+      <h2>Importing a gear set from a file</h2>
+      <p>
+      After the gear set is created, hit Choose File and find your "gear.txt", and hit Import.
+      </p>
+
+      <input type="submit" class="gearPreviewButton" value="Choose File" id="importFileSelect"> 
+      <text id="importOutputText">Waiting for file..</text>
+
+      <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit"> -->
+
+      <br>
+      <br>
+      <hr>
+
+      <h2>Save/Load gear and heroes</h2>
+      <p>
+      You can load/save your hero/gear configuration here.
+      </p>
+
+      <input type="submit" class="gearPreviewButton" value="Save current data" id="saveDataSubmit">
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Load saved data" id="loadDataSubmit">
+
+      <br>
+      <br>
+      <hr>
+
+      <h2>Import gear from Zarroc optimizer</h2>
+      <p>
+      Select the Zarroc optimizer file here.
+      </p>
+
+      <input type="file" id="importZarrocFileSelect"/>
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Import" id="importZarrocFileSubmit">
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="subprocess-debugger-section" class="tab-panel">
+      <h2>subprocess-debugger</h2>
+
+      <input type="submit" value="Debug" id="subprocessDebugButton">
+
+      <br>
+      <br>
+
+    </div>
+
+  </div>
+</div>
+<script type="module" src="./js/init.js"></script>

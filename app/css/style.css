@@ -1,0 +1,479 @@
+/*
+ CSS for the main interaction
+*/
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabLabel {
+  user-select: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+/*
+ Styling
+*/
+body {
+  font: 14px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
+  color: #333;
+  font-weight: 300;
+}
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 5px 15px 15px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  width: 22px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: #06c;
+}
+
+.tabset > input:checked + label {
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+}
+
+.optimizer-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.constraints-panel {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin-bottom: 5px;
+}
+
+.tab {
+  height: 90%;
+}
+
+.gearPreviewButton {
+  width: 150px;
+}
+
+.optimization-results-panel {
+  flex-grow: 2;
+  min-height: 250px;
+  height: 100%;
+}
+
+#myGrid {
+  height: 100%;
+}
+
+.optimizer-equipped-section {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  min-height: 245px;
+}
+
+.optimizerActionButtons {
+  flex-grow: 1;
+}
+
+label {
+  display: inline;
+  vertical-align: middle;
+}
+input {
+  vertical-align: middle;
+}
+
+.constraints-panel-col {
+  padding: 5px 8px 5px 8px;
+  width: 178px;
+}
+
+.constraints-left-panel {
+  min-width: 130px;
+  width: 150px;
+}
+
+.gear-preview-panel {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+}
+
+.gear-preview-col {
+  display: flex;
+  flex-direction: column;
+}
+
+#buttonSpace {
+  width: 20px;
+  display: inline-block;
+}
+
+.gear-preview-row {
+  padding: 0px 10px 5px;
+  margin-top: 10px;
+  font-size: 12px;
+  width: 170px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;
+}
+.
+/*
+ Demo purposes only
+*/
+
+#ocr-test-input-url {
+  width: 500px;
+}
+
+#exportOutputText {
+  width: 90%;
+  height: 200px;
+}
+
+#example-table .tabulator-row {
+
+}
+
+.tabulator-col {
+  font-size: 10px;
+}
+
+.tabulator-arrow {
+  display: none !important;
+}
+
+.tabulator-col-title {
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+#heroes-equipped-section {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  height: 245px;
+}
+
+.heroes-equipped-item {
+  width: 150px;
+  padding: 10px 15px;
+}
+
+.optimizer-number-input {
+  min-width: 50px;
+  max-width: 60px;
+}
+
+.inputStatLabel {
+  font-size:12px;
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+
+}    
+
+.sliderLabel {
+  font-size:12px;
+  display: inline-block;
+  width: 30px;
+}
+
+.sliderInput {
+  width: 25px;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.sliderContainer {
+  width: 60%;
+  display:inline-block;
+  margin: auto;
+  height: 16.5px;
+}
+
+.gearTypeImg {
+  width: 35px;
+  height: 35px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.itemDisplayHeader {
+  display: flex;
+  flex-direction: row;
+  height:45px;
+}
+
+.itemDisplayHeaderData {
+  display: flex;
+  flex-direction: column;
+  width: 95px;
+  line-height: 16px;
+  padding: 0px 5px;
+}
+
+.itemDisplayHeaderDataTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemDisplayGearRank {
+  font-weight: 700;
+}
+
+.itemDisplayEquippedHero {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.itemDisplayMainStat {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: solid 1px;
+  border-bottom: solid 1px;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.itemDisplaySubstats {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 85px;
+}
+.itemDisplaySubstat {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemDisplayFooter {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: space-between;
+}
+
+.vertical {
+  border-left: 1px solid #e8e8e8;
+  height: 85%;
+  margin-top: 15px;
+}
+
+.horizontalSpace {
+  height: 5px;  
+}
+
+.itemDisplayFooterSet {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+}
+.itemDisplaySetImg {
+  width: 30px;
+  height: 30px;
+}
+.itemDisplaySetType {
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 7px
+}
+.ag-theme-balham .ag-header-cell, .ag-theme-balham .ag-header-group-cell {
+  padding-left: 2px;
+  padding-right: 2px;
+  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  /*letter-spacing: -0.5px;*/
+  text-align: center;
+}
+.ag-header-cell-text {
+  text-overflow: clip;
+}
+.ag-header-cell-label, .ag-header-group-cell-label {
+  justify-content: space-around;
+  text-overflow: clip;
+}
+.ag-theme-balham .ag-icon {
+  font-size: 14px;
+  font-weight: 800;
+}
+.ag-cell-value {
+  font-weight: 400;
+  text-align: center;
+  /*font-family: Helvetica Neue,Helvetica,Arial,sans-serif;*/
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+  font-size: 1em;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+}
+
+.gear-preview-panel-wrapper {
+  display:flex;
+  flex-direction: column;
+}
+
+.gearPreviewActions {
+  padding-left: 40px
+}
+
+.image {
+  width: 40px;
+  height: 40px;
+}
+
+.onImage {
+  opacity: 1 !important;
+}
+
+.offImage {
+  opacity: 0.5 !important;
+}
+
+.imageLabel {
+  display: none !important;
+}
+.pretty.p-toggle .state.p-on {
+  background: gray !important;
+  border-radius: 10%;
+}
+
+.inputSetFilterSelect {
+  min-width: 200px;
+  width: 100%;
+  user-select: none;
+}
+
+.inputGearFilterSelect {
+  min-width: 200px;
+  width: 100%;
+  user-select: none;
+}
+
+.ms-choice>div.icon-close:before {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+/* Disable arrows on number inputs */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.optimizerSetIcon {
+  height: 29px;
+  vertical-align: middle;
+}
+
+.heroIcon {
+  height: 50px;
+}
+
+.editGearFormRow {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.editGearStatLabel {
+  width: 100px;
+  text-align: left;
+}
+
+.editGearStatSelect {
+  width: 150px;
+  margin-right: 5px;
+}
+
+.editGearStatNumber {
+  width: 50px;
+}
+
+/*https://stackoverflow.com/questions/50862009/how-to-disable-selection-of-cells-in-ag-grid*/
+
+.ag-cell-focus,.ag-cell-no-focus{
+  border:none !important;
+}
+/* This CSS is to not apply the border for the column having 'no-border' class */
+.no-border.ag-cell:focus{
+  border:none !important;
+  outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
