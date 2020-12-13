@@ -3,6 +3,8 @@ const { remote } = require('electron')
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
+const defaultPath = (Files.getDataPath() + "/saves").replace(/\//g, "\\");
+
 module.exports = {
     addDebugFile: () => {
         // const path = Path.resolve(__dirname, '../../../resources/saves/gear.txt');
@@ -60,22 +62,12 @@ module.exports = {
             }).catch(e => console.log(e));
         });
 
-        // document.getElementById('saveExportOutput').addEventListener("click", async () => {
-        //     const output = document.getElementById('exportOutputText').value;
-        //     fs.writeFile('./resources/resources/saves/gear.txt', output, (err) => {
-        //         if (err) 
-        //             return console.log(err);
-        //         console.log('Exported gear to gear.txt');
-        //         document.getElementById('exportOutputText').value = `Exported data to ${__dirname}\\resources\\resources\\saves\\gear.txt`;
-        //     });
-        // });
-
         document.getElementById('saveExportOutput').addEventListener("click", async () => {
             const output = document.getElementById('exportOutputText').value;
-            console.error('defaultPath', Path.resolve(__dirname, '../resources/saves/gear'))
+            console.error('defaultPath', defaultPath)
             const options = {
                 title: "Save file",
-                defaultPath : Path.resolve(__dirname, '../../../resources/saves/gear'),
+                defaultPath : defaultPath,
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -97,7 +89,7 @@ module.exports = {
         document.getElementById('importFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : Path.resolve(__dirname, '../../../resources/saves/'),
+                defaultPath : defaultPath,
                 buttonLabel : "Load file",
                 // filters :[
                 //     {name: 'JSON', extensions: ['json']},

@@ -60,9 +60,7 @@
       "app.html",
       "css/",
       "assets/",
-      "tessdata/",
       "js/",
-      "gear.jar",
       "main.prod.js",
       "main.prod.js.map",
       "package.json"
@@ -101,6 +99,9 @@
     "extraResources": [
       "./resources/**"
     ],
+    "extraFiles": [
+      "./data/**"
+    ],
     "publish": {
       "provider": "github",
       "owner": "electron-react-boilerplate",
@@ -108,49 +109,6 @@
       "private": false
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
-  },
-  "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
-  },
-  "contributors": [
-    {
-      "name": "Vikram Rangaraj",
-      "email": "vikr01@icloud.com",
-      "url": "https://github.com/vikr01"
-    },
-    {
-      "name": "Amila Welihinda",
-      "email": "amilajack@gmail.com",
-      "url": "https://github.com/amilajack"
-    },
-    {
-      "name": "John Tran",
-      "email": "jptran318@gmail.com",
-      "url": "https://github.com/jooohhn"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
-  },
-  "keywords": [
-    "electron",
-    "boilerplate",
-    "react",
-    "redux",
-    "typescript",
-    "ts",
-    "sass",
-    "webpack",
-    "hot",
-    "reload"
-  ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
@@ -278,11 +236,6 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.0.9"
   },
-  "comment": {
-    "@ag-grid-community/core": "23.1.1",
-    "@ag-grid-community/client-side-row-model": "23.1.1",
-    "@ag-grid-community/infinite-row-model": "23.1.1"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@hot-loader/react-dom": "^16.13.0",
@@ -340,10 +293,5 @@
     "baseBranches": [
       "next"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

@@ -4,34 +4,39 @@ var currentAggregate = {};
 module.exports = {
     
     initialize: async () => {
-/*
-
-disabled for throttling
-
-        const heroListResults = await fetch('https://api.epicsevendb.com/hero');
-        const heroListStr = await heroListResults.text();
-        const heroList = JSON.parse(heroListStr).results.map(x => x._id);
-
-        const promises = Promise.allSettled(heroList.map(x => 'https://api.epicsevendb.com/hero/' + x)
-                                                    .map(x => fetch(x)));
-
-        var results = await promises;
-
-        results = results.filter(x => x.status != 'rejected');
-        results = results.map(x => x.value.json())
-        results = await Promise.allSettled(results);
-
-        results = results.filter(x => x.status != 'rejected' && !x.value.error);
-        results = results.map(x => x.value.results[0])
-
-        heroesByName = {};
-
-        for (var result of results) {
-            heroesByName[result.name] = result;
-        }
-*/
-        const heroesByNameStr = await Files.readFile(Path.resolve(__dirname, './fullData.json'));
+        var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/e7dbherodata.json');
         heroesByName = JSON.parse(heroesByNameStr);
+        const heroNameList = Object.keys(heroesByName);
+
+        const newHeroListResults = await fetch('https://api.epicsevendb.com/hero');
+        const newHeroListStr = await newHeroListResults.text();
+        const newHeroesList = JSON.parse(newHeroListStr).results;
+        const newHeroIdList = newHeroesList.map(x => x._id);
+        const newHeroNameList = newHeroesList.map(x => x.name)
+        const newHeroesByName = newHeroesList.reduce((map, obj) => (map[obj.name] = obj, map), {});
+
+        const diff = newHeroNameList.filter(x => !heroNameList.includes(x))
+        console.log("DIFF", diff);
+
+        if (diff.length != 0) {
+            const ids = diff.map(x => newHeroesByName[x]).map(x => x._id);
+            const promises = Promise.allSettled(ids.map(x => 'https://api.epicsevendb.com/hero/' + x)
+                                                   .map(x => fetch(x)));
+            var results = await promises;
+
+            results = results.filter(x => x.status != 'rejected');
+            results = results.map(x => x.value.json())
+            results = await Promise.allSettled(results);
+
+            results = results.filter(x => x.status != 'rejected' && !x.value.error);
+            results = results.map(x => x.value.results[0])
+
+            for (var result of results) {
+                heroesByName[result.name] = result;
+            }
+
+            Files.saveFile(Files.getDataPath() + '/e7dbherodata.json', JSON.stringify(heroesByName));
+        }
 
         const baseStatsByName = {};
         Object.keys(heroesByName)

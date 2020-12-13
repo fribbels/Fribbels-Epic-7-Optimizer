@@ -43,7 +43,7 @@ function buildFilter(name, url, isChecked) {
 function getHeroImage(item) {
     const heroName = item.equippedByName;
     if (!heroName)
-        return "https://gamepedia.cursecdn.com/arksurvivalevolved_gamepedia/d/d2/Blank.png";
+        return "https://i.imgur.com/IuUKPRw.png"; // blank transparent
 
     const data = HeroData.getHeroExtraInfo(heroName);
     return data.assets.icon;
@@ -56,7 +56,7 @@ module.exports = {
     },
 
     buildFilterSetsBar: () => {
-        const clearUrl = "https://f1.pngfuel.com/png/683/783/667/delete-icon-calculate-icon-multiplication-icon-multiply-icon-remove-icon-x-mark-user-interface-symbol-png-clip-art.png";
+        const clearUrl = "https://i.imgur.com/NI8rtdF.png"; // black x
         const html = buildFilter("ClearSets", clearUrl, true);
         document.getElementById('setsFilterBar').innerHTML += html;
 
@@ -70,7 +70,7 @@ module.exports = {
     },
 
     buildFilterGearBar: () => {
-        const clearUrl = "https://f1.pngfuel.com/png/683/783/667/delete-icon-calculate-icon-multiplication-icon-multiply-icon-remove-icon-x-mark-user-interface-symbol-png-clip-art.png";
+        const clearUrl = "https://i.imgur.com/NI8rtdF.png"; // black x
         const html = buildFilter("ClearGears", clearUrl, true);
         document.getElementById('gearFilterBar').innerHTML += html;
 

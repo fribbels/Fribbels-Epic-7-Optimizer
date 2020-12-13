@@ -33,8 +33,8 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
         System.err.println("Current relative path is: " + s);
-        System.err.println("path is: " + s + "/resources/resources/tessdata/eng.traineddata");
-        if (tessBaseAPI.Init(s + "\\resources\\resources\\tessdata\\eng.traineddata", "eng", 0) != 0) {
+        System.err.println("path is: " + s + "/data/tessdata/eng.traineddata");
+        if (tessBaseAPI.Init(s + "/data/tessdata/eng.traineddata", "eng", 0) != 0) {
             System.err.println("Could not initialize tesseract.");
             System.exit(1);
         }

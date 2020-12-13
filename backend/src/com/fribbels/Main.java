@@ -33,7 +33,7 @@ public class Main {
     }
 
     public static void start() throws IOException {
-        server = HttpServer.create(new InetSocketAddress("localhost", 8001), 0);
+        server = HttpServer.create(new InetSocketAddress("localhost", 8212), 0);
 
         server.createContext("/system", new SystemRequestHandler());
         server.createContext("/items", new ItemsRequestHandler(itemDb));

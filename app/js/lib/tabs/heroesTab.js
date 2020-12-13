@@ -97,7 +97,7 @@ module.exports = {
             console.warn("HEROESRESPONSE", response);
 
             if (response.heroes.length == 0) {
-                addHero("Maid Chloe")
+                // addHero("Maid Chloe")
             } else {
                 redrawHeroInputSelector();
             }

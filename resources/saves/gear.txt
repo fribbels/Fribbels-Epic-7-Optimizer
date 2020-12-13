@@ -1,1 +1,0 @@
-{"items":[{"gear":"Armor","rank":"Heroic","set":"SpeedSet","level":85,"enhance":15,"main":{"type":"Defense","value":300},"substats":[{"type":"Speed","value":14},{"type":"Health","value":325},{"type":"DefensePercent","value":5},{"type":"EffectivenessPercent","value":7}],"name":"Abglss DrakeHi e Tunic"}]}

@@ -1,4 +1,6 @@
 var fs = require('fs');
+var path = require("path");
+var electron = require('electron');
 
 module.exports = {
     listFilesInFolder: (path) => {
@@ -30,5 +32,16 @@ module.exports = {
                 return console.log(err);
             console.log('Exported text to: ', path);
         });
-    }
+    },
+
+    getRootPath: () => {
+        if (__dirname.includes('app.asar')) {
+            return path.dirname(electron.remote.app.getPath("exe"));
+        }
+        return path.resolve(electron.remote.app.getAppPath(), '../')
+    },
+
+    getDataPath: () => {
+        return module.exports.getRootPath() + "/data"
+    },
 }
