@@ -17,6 +17,13 @@ Features include:
 Here's what it looks like currently:
 
 ![](https://i.imgur.com/vVR4ZMq.png)
+_________________
+
+## Requirements
+- Windows 64-bit
+- Java 8 installed (Please download if you don't yet have it: https://www.java.com/en/download/)
+
+_________________
 
 **Table of Contents**:
   * [Optimizer Tab](#optimizer-tab)
@@ -257,12 +264,7 @@ To get started with the app, you'll need to run image recognition on screenshots
 ![](https://i.imgur.com/ny7uaa8.jpg)
 
 Each screenshot should look like this, and should be exactly 1600x900. I usually only screenshot gears that are +9 or above, as anything lower probably won't be useful for the optimization results anyways.
-  
-_________________
 
-## Requirements
-- Windows 64-bit
-- Java 8 installed (Please download if you don't yet have it: https://www.java.com/en/download/)
   
 _________________
 
