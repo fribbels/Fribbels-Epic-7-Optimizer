@@ -14,7 +14,9 @@ Features include:
  - Gear substat efficiency scoring
  - Color coded results sorting
 
+Here's what it looks like currently:
 
+![](https://i.imgur.com/vVR4ZMq.png)
 
 **Table of Contents**:
   * [Optimizer Tab](#optimizer-tab)
@@ -41,9 +43,7 @@ _________________
 
 ## Optimizer Tab
 
-![](https://i.imgur.com/AeLRJ9B.png)
-
-Hers's an example of the optimizer tab. There are a bunch of panels with options for filtering the gear that I'll walk through.
+Here I'll go through the different parts of the optimizer tab, using a tank Ruele build as an example. There are a bunch of panels with options for filtering the gear that I'll walk through in detail.
   
 _________________
 
