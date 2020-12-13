@@ -1,4 +1,5 @@
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -6,13 +7,35 @@ This is a tool for organizing gear and optimizing gear and unit builds for Epic 
 Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#getting-started) section for instructions on how to use it.
 
 Features include:
-
  - Built in image recognition to import gear from screenshots
  - Filter gear optimizer with main stats/sub stats/sets/etc
  - Automatic data updates from EpicSevenDB for new heroes
  - Hero bonus stats for imprints/artifacts
  - Gear substat efficiency scoring
  - Color coded results sorting
+
+
+
+**Table of Contents**:
+  * [Optimizer Tab](#optimizer-tab)
+    + [Settings panel](#settings-panel)
+    + [Primary stat filter](#primary-stat-filter)
+    + [Calculated stat filter](#calculated-stat-filter)
+    + [Substat force filter](#substat-force-filter)
+    + [Substat priority filter](#substat-priority-filter)
+    + [Main stat and set filters](#main-stat-and-set-filters)
+    + [Optimization Results](#optimization-results)
+  * [Gear Tab](#gear-tab)
+  * [Heroes Tab](#heroes-tab)
+  * [Importer tab](#importer-tab)
+    + [Creating a new gear set from screenshots](#creating-a-new-gear-set-from-screenshots)
+    + [Importing a gear set from a file](#importing-a-gear-set-from-a-file)
+    + [Save/Load gear and heroes](#save-load-gear-and-heroes)
+    + [Import gear from Zarroc optimizer](#import-gear-from-zarroc-optimizer)
+  * [Getting Started](#getting-started)
+  * [Requirements](#requirements)
+  * [Closing thoughts](#closing-thoughts)
+  * [Contact me](#contact-me)
 
 ## Optimizer Tab
 
@@ -214,7 +237,9 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well. 
 
-Feel free to contact me on discord at fribbels#7526 with questions or comments.
-
 Planned features:
  - TBD
+
+## Contact me
+
+Feel free to contact me on discord at fribbels#7526 with questions or comments.
