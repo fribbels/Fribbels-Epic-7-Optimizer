@@ -36,12 +36,16 @@ Features include:
   * [Requirements](#requirements)
   * [Closing thoughts](#closing-thoughts)
   * [Contact me](#contact-me)
+  
+_________________
 
 ## Optimizer Tab
 
 ![](https://i.imgur.com/AeLRJ9B.png)
 
 Hers's an example of the optimizer tab. There are a bunch of panels with options for filtering the gear that I'll walk through.
+  
+_________________
 
 ### Settings panel
 
@@ -58,6 +62,8 @@ This panel tracks settings for the other panels to use.
 - **Submit**: Click to start to optimization request.
 - **Filter**: Once an optimization is complete, click to filter the results by the stats on the filter panels.
 - **Cancel**: Interrupts and cancels an ongoing optimization request.
+  
+_________________
 
 ### Primary stat filter
 
@@ -69,6 +75,8 @@ This panel defines the stats to filter your optimization results by. The left bo
 - Between 180 and 200 speed
 
 The filter will apply on your optimization results after you click Submit. Once the results have been generated, you can apply more restrictive filters by changing the numbers here, then clicking the **Filter** button. This will narrow down your results without having to do another search.
+  
+_________________
 
 ### Calculated stat filter
 
@@ -86,6 +94,8 @@ This panel is similar to the primary stats panel, but applies for calculated sta
 - **CP** -- This is the CP you would see on the unit's stat page ingame, but doesn't take skill enhances into account. Useful for optimizing unused characters with leftover gear for world boss.
 
 In this example we're looking for Ruele builds with at least 200,000 Effective HP.
+  
+_________________
 
 ### Substat force filter
 
@@ -101,6 +111,8 @@ For example:
 - A gear with substats: 2 Speed / 8% Atk / 16% HP / 8% Res would fail this filter, because only 1 substat matches the filter: Hp% . This gear will not be used in the optimizations.
 
 Setting the substat force filter is useful for narrowing down the search space for the optimizer, and reducing the number of permutations it needs to go calculate will make it go faster. Do be careful about filters you set, because an overly aggressive filter could exclude good gears that are useable for this unit. You could have a gear with 2 Speed/ 40% Hp / 100 flat Def / 200 flat HP, and it would fail this filter because only Hp% matches, even though the gear would still be useful.
+  
+_________________
 
 ### Substat priority filter
 
@@ -125,6 +137,8 @@ Or for a tanky Champion Zerato, where you want a mix of tankiness, damage, and e
 ![](https://i.imgur.com/CF3KmxT.png)
 
 Choosing a good priority filter makes the optimization a lot easier since you won't have to consider irrelevant or low-rolled gears as much.
+  
+_________________
 
 ### Main stat and set filters
 
@@ -140,6 +154,8 @@ This one's fairly straightforward, we're looking for:
 If we don't care about sets as much for a tanky/damage ML Ken or something, this allows for broken sets as well. Here we only care that he has an immunity set, and no preference for any other sets, so they're left blank.
 
 ![](https://i.imgur.com/8HEsbvY.png)
+  
+_________________
 
 ### Optimization Results
 
@@ -151,6 +167,8 @@ Here you can see all the results from the optimization, sort by stat, and equip/
 - Select All/Deselect All modifies the little checkbox on each gear, or alternatively you can click individual boxes
 - Equip Selected will equip those checked gears onto the hero (while unequipping anything they were holding before)
 - Lock Selected will mark those checked gears as locked, which affects later optimizations that have "Locked Items" unchecked in settings.
+  
+_________________
 
 ## Gear Tab
 
@@ -175,6 +193,8 @@ Its used as a measure of how well your gear rolled, scaled by the max roll for 8
 ![](https://i.imgur.com/fwqjtkF.png)
 
 You can edit existing gears or add new gears with this page, and filling in the relevant fields.
+  
+_________________
 
 ## Heroes Tab
 
@@ -185,29 +205,38 @@ Here you can add new heroes and manage existing ones. I think most of the button
 ![](https://i.imgur.com/5uZv8lf.png)
 
 SSS Krau on self imprint with a +30 Aurius would have +1971 HP, so I added it here to let the optimizer calculate the accurate stats for him.
+  
+_________________
 
 ## Importer tab
 
 ![](https://i.imgur.com/1nQfSy5.png)
 
 This tab lets you do various things with importing/exporting files.
+  
+_________________
 
 ### Creating a new gear set from screenshots
 
 Select the folder you have your screenshots in, and hit Submit to run OCR on them. Make sure the folder only contains your screenshots and nothing else. This will then output your gear.txt file, and you can export it somewhere for the next step.
+  
 
 ### Importing a gear set from a file
 
 Once you have the gear.txt file from the OCR step, choose the file and it will import the gear into the optimizer.
+  
 
 ### Save/Load gear and heroes
 
 Once you make changes to your items/heroes, the changes should be saved before you close the app. You can choose a file to save it to, and then later on load that file to import the data back in.
 The app also does autosave to an 'autosave.json' on changes being made, but that's mostly meant for recovering data from unexpected shutdowns.
 
+
 ### Import gear from Zarroc optimizer
 
 If you're already a user of Zarroc's gear optimizer, this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in afterwards.
+  
+_________________
 
 ## Getting Started
 
@@ -228,10 +257,14 @@ To get started with the app, you'll need to run image recognition on screenshots
 ![](https://i.imgur.com/ny7uaa8.jpg)
 
 Each screenshot should look like this, and should be exactly 1600x900. I usually only screenshot gears that are +9 or above, as anything lower probably won't be useful for the optimization results anyways.
+  
+_________________
 
 ## Requirements
 - Windows 64-bit
 - Java 8 installed (?) I tried to make it work without an existing Java installation, might still need it though
+  
+_________________
 
 ## Closing thoughts
 
@@ -239,6 +272,8 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 Planned features:
  - TBD
+  
+_________________
 
 ## Contact me
 
