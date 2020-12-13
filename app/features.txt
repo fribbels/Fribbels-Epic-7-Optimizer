@@ -1,6 +1,6 @@
-release blockers
-* ocr testing, 90 fix, red +15 fix
-* import/export/autosave improvements
+fixes:
+* crit rate cp cap
+* subprocess space in filepath
 
 nice to haves:
 * bonus stats
@@ -9,9 +9,11 @@ nice to haves:
 * optional refresh or local copy of e7db data
 
 done
+* ocr testing, 90 fix, red +15 fix
 * jar fix
 * autosave
 * get current permutations done
 * new sets, pen revenge injury
 * live char data refresh from e7db
+
 

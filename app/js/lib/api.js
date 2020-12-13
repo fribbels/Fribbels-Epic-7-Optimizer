@@ -114,6 +114,18 @@ module.exports = {
         });
     },
 
+    unlockHeroById: async (id) => {
+        return post('/heroes/unlockHeroById', {
+            id: id
+        });
+    },
+
+    lockHeroById: async (id) => {
+        return post('/heroes/lockHeroById', {
+            id: id
+        });
+    },
+
     unequipItem: async (id) => {
         return post('/heroes/unequipItem', {
             id: id

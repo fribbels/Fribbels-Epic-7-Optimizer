@@ -63,6 +63,32 @@ module.exports = {
             })
         });
 
+        document.getElementById('unlockHeroesSubmit').addEventListener("click", async () => {
+            console.log("unlockHeroesSubmit", HeroesGrid.getSelectedRow());
+            const row = HeroesGrid.getSelectedRow();
+            if (!row) return;
+
+            Api.unlockHeroById(row.id).then(response => {
+                console.log("RESPONSE", response)
+                HeroesGrid.refresh(response.heroes)
+                redrawGrid();
+                clearPreview();
+            })
+        });
+
+        document.getElementById('lockHeroesSubmit').addEventListener("click", async () => {
+            console.log("lockHeroesSubmit", HeroesGrid.getSelectedRow());
+            const row = HeroesGrid.getSelectedRow();
+            if (!row) return;
+
+            Api.lockHeroById(row.id).then(response => {
+                console.log("RESPONSE", response)
+                HeroesGrid.refresh(response.heroes)
+                redrawGrid();
+                clearPreview();
+            })
+        });
+
         document.getElementById('tab4label').addEventListener("click", () => {
             module.exports.redraw();
         });

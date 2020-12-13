@@ -14,7 +14,7 @@ module.exports = {
     initialize: () => {
         // return;
 
-        child = spawn('java', ['-jar', Path.resolve(__dirname, '../../../resources/gear.jar')], {shell: true, detached: false})
+        child = spawn('java', ['-jar', `"${Path.resolve(__dirname, '../../../resources/gear.jar')}"`], {shell: true, detached: false})
 
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);
