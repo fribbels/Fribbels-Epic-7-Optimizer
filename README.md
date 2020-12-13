@@ -252,6 +252,7 @@ To get started with the app, you'll need to run image recognition on screenshots
 
 **Steps:**
  1. Install Java (https://www.java.com/en/download/) if you don't already have it, then download the latest release of this app and extract it. The app should be run using FribbelsE7Optimizer.exe
+     * On the releases page, download the option that looks like FribbelsE7Optimizer-x.x.x-win.7z, not the 'Source code' options
  2. Download an emulator to run E7 on
      * I used LDPlayer for all my testing as it works best for my machine, but other emulators are probably fine
  3. Set the emulator to 1600x900 resolution
