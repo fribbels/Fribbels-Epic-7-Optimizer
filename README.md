@@ -262,12 +262,14 @@ To get started with the app, you'll need to run image recognition on screenshots
      * The default screenshot button on LDPlayer is Ctrl + 0
      * I would recommend doing a few gears first so you can check if everything is set up correctly, before doing all your gear
  7. Collect all your screenshots into a folder. And follow the instructions for **Creating a new gear set from screenshots**
+ 8. Click below to see a video example of how to import the gear:
 
-![](https://i.imgur.com/ny7uaa8.jpg)
+[![Alt text](https://img.youtube.com/vi/i_QW4INcZIE/0.jpg)](https://www.youtube.com/watch?v=i_QW4INcZIE)
 
 Each screenshot should look like this, and should be exactly 1600x900. I usually only screenshot gears that are +9 or above, as anything lower probably won't be useful for the optimization results anyways.
 
-  
+![](https://i.imgur.com/ny7uaa8.jpg)
+
 _________________
 
 ## Closing thoughts
@@ -276,9 +278,15 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 Planned features:
  - TBD
-  
+
+_________________
+
+## Troubleshooting
+
+- Error message: 'java is not recognized as an internal or external command' upon opening the app. Install Java 8 64-bit version to fix.
+- After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like the one in the Getting Started section, and bad screenshots may cause it to get stuck.
 _________________
 
 ## Contact me
 
-Feel free to contact me on discord at fribbels#7526 with questions or comments.
+Feel free to contact me on discord at fribbels#7526 with questions or comments. If you ran into any issues, please check out the troubleshooting steps above first.
