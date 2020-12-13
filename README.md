@@ -1,8 +1,9 @@
+
 # Fribbels Epic 7 Gear Optimizer
 
-This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not very easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
+This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
 
-Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-E7-Optimizer#getting-started) section for instructions on how to use it.
+Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#getting-started) section for instructions on how to use it.
 
 Features include:
 
@@ -13,15 +14,13 @@ Features include:
  - Gear substat efficiency scoring
  - Color coded results sorting
 
-##  Tabs
-
-### Optimizer Tab
+## Optimizer Tab
 
 ![](https://i.imgur.com/AeLRJ9B.png)
 
 Hers's an example of the optimizer tab. There are a bunch of panels with options for filtering the gear that I'll walk through.
 
-#### Settings panel
+### Settings panel
 
 ![](https://i.imgur.com/GHzzZCA.png)
 
@@ -37,7 +36,7 @@ This panel tracks settings for the other panels to use.
 - **Filter**: Once an optimization is complete, click to filter the results by the stats on the filter panels.
 - **Cancel**: Interrupts and cancels an ongoing optimization request.
 
-#### Primary stat filter
+### Primary stat filter
 
 ![](https://i.imgur.com/j8ZcSCv.png)
 
@@ -48,7 +47,7 @@ This panel defines the stats to filter your optimization results by. The left bo
 
 The filter will apply on your optimization results after you click Submit. Once the results have been generated, you can apply more restrictive filters by changing the numbers here, then clicking the **Filter** button. This will narrow down your results without having to do another search.
 
-#### Calculated stat filter
+### Calculated stat filter
 
 ![](https://i.imgur.com/fp4C5mf.png)
 
@@ -65,7 +64,7 @@ This panel is similar to the primary stats panel, but applies for calculated sta
 
 In this example we're looking for Ruele builds with at least 200,000 Effective HP.
 
-#### Substat force filter
+### Substat force filter
 
 ![](https://i.imgur.com/83nF7ID.png)
 
@@ -80,7 +79,7 @@ For example:
 
 Setting the substat force filter is useful for narrowing down the search space for the optimizer, and reducing the number of permutations it needs to go calculate will make it go faster. Do be careful about filters you set, because an overly aggressive filter could exclude good gears that are useable for this unit. You could have a gear with 2 Speed/ 40% Hp / 100 flat Def / 200 flat HP, and it would fail this filter because only Hp% matches, even though the gear would still be useful.
 
-#### Substat priority filter
+### Substat priority filter
 
 ![](https://i.imgur.com/i60uzCg.png)
 
@@ -94,7 +93,7 @@ Then, we set the Top % slider to 30%. This will take all your weapons, score the
 
 The Top % slider must be set to something other than 100% for this filter to work, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 20-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 20% is where you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
 
-An example priority filter for a DPS unit like Arby could be something like this were you only want damage stats:
+An example priority filter for a DPS unit like Arby could be something like this, where you only want damage stats:
 
 ![](https://i.imgur.com/sdIG6xQ.png)
 
@@ -104,7 +103,7 @@ Or for a tanky Champion Zerato, where you want a mix of tankiness, damage, and e
 
 Choosing a good priority filter makes the optimization a lot easier since you won't have to consider irrelevant or low-rolled gears as much.
 
-#### Main stat and set filters
+### Main stat and set filters
 
 ![](https://i.imgur.com/Ce0Osot.png)
 
@@ -119,7 +118,7 @@ If we don't care about sets as much for a tanky/damage ML Ken or something, this
 
 ![](https://i.imgur.com/8HEsbvY.png)
 
-#### Optimization Results
+### Optimization Results
 
 ![](https://i.imgur.com/V2UkTRc.png)
 
@@ -130,7 +129,7 @@ Here you can see all the results from the optimization, sort by stat, and equip/
 - Equip Selected will equip those checked gears onto the hero (while unequipping anything they were holding before)
 - Lock Selected will mark those checked gears as locked, which affects later optimizations that have "Locked Items" unchecked in settings.
 
-### Gear Tab
+## Gear Tab
 
 ![](https://i.imgur.com/94DbEKc.png)
 
@@ -154,7 +153,7 @@ Its used as a measure of how well your gear rolled, scaled by the max roll for 8
 
 You can edit existing gears or add new gears with this page, and filling in the relevant fields.
 
-### Heroes Tab
+## Heroes Tab
 
 ![](https://i.imgur.com/czOpXvo.png)
 
@@ -162,43 +161,45 @@ Here you can add new heroes and manage existing ones. I think most of the button
 
 ![](https://i.imgur.com/5uZv8lf.png)
 
-For example, SSS Krau on self imprint with a +30 Aurius would have +1971 HP, so I added it here to let the optimizer calculate the accurate stats for him.
+SSS Krau on self imprint with a +30 Aurius would have +1971 HP, so I added it here to let the optimizer calculate the accurate stats for him.
 
-#### Importer tab
+## Importer tab
 
 ![](https://i.imgur.com/1nQfSy5.png)
 
 This tab lets you do various things with importing/exporting files.
 
-#### Creating a new gear set from screenshots
+### Creating a new gear set from screenshots
 
-Select the folder you have your screenshots in, and hit Submit to run OCR on them. This will output your gear set, and you can export it somewhere for the next step.
+Select the folder you have your screenshots in, and hit Submit to run OCR on them. Make sure the folder only contains your screenshots and nothing else. This will then output your gear.txt file, and you can export it somewhere for the next step.
 
-#### Importing a gear set from a file
+### Importing a gear set from a file
 
-Once you have the gear set from the OCR, choose the file and it will import the gear into the optimizer.
+Once you have the gear.txt file from the OCR step, choose the file and it will import the gear into the optimizer.
 
-#### Save/Load gear and heroes
+### Save/Load gear and heroes
 
 Once you make changes to your items/heroes, the changes should be saved before you close the app. You can choose a file to save it to, and then later on load that file to import the data back in.
 The app also does autosave to an 'autosave.json' on changes being made, but that's mostly meant for recovering data from unexpected shutdowns.
 
-#### Import gear from Zarroc optimizer
+### Import gear from Zarroc optimizer
 
-If you're a user of the other gear optimizer from [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer), this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in.
+If you're already a user of Zarroc's gear optimizer, this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in afterwards.
 
 ## Getting Started
 
-To get started with the app, you'll need to run image recognition on screenshots of your gear, which is built into the Importer tab. If you've previously used the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer), you can import the gear file directly from that into this app, with the instructions above.
+To get started with the app, you'll need to run image recognition on screenshots of your gear, which is built into the Importer tab. If you've previously used the Zarroc optimizer, you can import the gear file directly from that into this app, with the instructions above.
 
- 1. Download the latest release of this app and extract it. The app can be run with FribbelsE7Optimizer.exe
+**Steps:**
+ 1. Download the latest release of this app and extract it. The app should be run using FribbelsE7Optimizer.exe
  2. Download an emulator to run E7 on
      * I used LDPlayer for all my testing as it works best for my machine, but other emulators are probably fine
  3. Set the emulator to 1600x900 resolution
  4. Navigate to the Manage Equipment screen on any unit
  5. Sort by max enhance
- 6. Click on each gear you want included in the optimizer, and screenshot it
+ 6. Click on each gear you want included in the optimizer, and screenshot it 
      * The default screenshot button on LDPlayer is Ctrl + 0
+     * I would recommend doing a few gears first so you can check if everything is set up correctly, before doing all your gear
  7. Collect all your screenshots into a folder. And follow the instructions for **Creating a new gear set from screenshots**
 
 ![](https://i.imgur.com/ny7uaa8.jpg)
@@ -211,7 +212,9 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 
 ## Closing thoughts
 
-Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, or you can help contribute to the code as well. Feel free to contact me on discord at fribbels#7526 with questions or suggestions.
+Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well. 
+
+Feel free to contact me on discord at fribbels#7526 with questions or comments.
 
 Planned features:
  - TBD
