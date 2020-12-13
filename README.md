@@ -243,7 +243,7 @@ _________________
 To get started with the app, you'll need to run image recognition on screenshots of your gear, which is built into the Importer tab. If you've previously used the Zarroc optimizer, you can import the gear file directly from that into this app, with the instructions above.
 
 **Steps:**
- 1. Download the latest release of this app and extract it. The app should be run using FribbelsE7Optimizer.exe
+ 1. Install Java (https://www.java.com/en/download/) if you don't already have it, then download the latest release of this app and extract it. The app should be run using FribbelsE7Optimizer.exe
  2. Download an emulator to run E7 on
      * I used LDPlayer for all my testing as it works best for my machine, but other emulators are probably fine
  3. Set the emulator to 1600x900 resolution
@@ -262,7 +262,7 @@ _________________
 
 ## Requirements
 - Windows 64-bit
-- Java 8 installed (?) I tried to make it work without an existing Java installation, might still need it though
+- Java 8 installed (Please download if you don't yet have it: https://www.java.com/en/download/)
   
 _________________
 
