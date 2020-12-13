@@ -22,9 +22,11 @@ module.exports = {
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);
 
-            if (code != 0 && killed == false) {
-                alert(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
+            if (code == 0 || killed == true) {
+                return;
             }
+             
+            alert(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
         });
 
         child.stderr.on('data', (data) => {
@@ -56,6 +58,7 @@ module.exports = {
         });
 
         window.onbeforeunload = (e) => {
+            killed = true;
             // mainWindow.webContents.send('app-unload');
             treekill(child.pid, 'SIGTERM', () => {
                 console.log("Terminated child");

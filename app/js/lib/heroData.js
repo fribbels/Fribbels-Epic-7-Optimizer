@@ -35,7 +35,9 @@ module.exports = {
                 heroesByName[result.name] = result;
             }
 
-            Files.saveFile(Files.getDataPath() + '/e7dbherodata.json', JSON.stringify(heroesByName));
+            if (newHeroesList.legnth >= heroNameList.length) {
+                Files.saveFile(Files.getDataPath() + '/e7dbherodata.json', JSON.stringify(heroesByName));
+            }
         }
 
         const baseStatsByName = {};
