@@ -19,7 +19,7 @@ const assetsBySet = {
 
 const assetsByElement = {
     "dark": "./assets/elementdark.png",
-    "earth": "./assets/elementearth.png",
+    "wind": "./assets/elementearth.png",
     "fire": "./assets/elementfire.png",
     "ice": "./assets/elementice.png",
     "light": "./assets/elementlight.png",

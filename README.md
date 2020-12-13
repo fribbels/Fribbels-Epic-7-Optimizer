@@ -1,5 +1,3 @@
-
-
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -22,6 +20,9 @@ _________________
 ## Requirements
 - Windows 64-bit
 - Java 8 installed (Please download if you don't yet have it: https://www.java.com/en/download/)
+
+## Troubleshooting
+- If none of the buttons seem to do anything, its likely you don't have Java installed, see above
 
 _________________
 

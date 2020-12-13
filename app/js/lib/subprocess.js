@@ -10,6 +10,7 @@ const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
 var errors = "";
+var killed = false;
 
 module.exports = {
 
@@ -21,7 +22,7 @@ module.exports = {
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);
 
-            if (code != 0) {
+            if (code != 0 && killed == false) {
                 alert(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
             }
         });
@@ -48,6 +49,7 @@ module.exports = {
         });
 
         ipc.on('app-close', _ => {
+            killed = true;
             treekill(child.pid, 'SIGTERM', () => {
                 ipc.send('closed');
             });
