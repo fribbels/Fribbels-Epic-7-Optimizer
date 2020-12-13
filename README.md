@@ -1,7 +1,8 @@
 # Fribbels Epic 7 Gear Optimizer
-This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and its not very easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
 
-Please see the **Getting Started** section for instructions.
+This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not very easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
+
+Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-E7-Optimizer#getting-started) section for instructions on how to use it.
 
 Features include:
 
@@ -22,7 +23,7 @@ Hers's an example of the optimizer tab. There are a bunch of panels with options
 
 #### Settings panel
 
-![](https://i.imgur.com/eSw8bnM.png)
+![](https://i.imgur.com/GHzzZCA.png)
 
 This panel tracks settings for the other panels to use. 
 
@@ -184,11 +185,11 @@ The app also does autosave to an 'autosave.json' on changes being made, but that
 
 #### Import gear from Zarroc optimizer
 
-If you're a user of the other gear optimizer from Zarroc2762, this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in.
+If you're a user of the other gear optimizer from [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer), this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in.
 
 ## Getting Started
 
-To get started with the app, you'll need to run image recognition on screenshots of your gear, which is built into the Importer tab. If you've previously used the Zarroc2762 optimizer, you can import the gear file directly from that into this app, with the instructions above.
+To get started with the app, you'll need to run image recognition on screenshots of your gear, which is built into the Importer tab. If you've previously used the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer), you can import the gear file directly from that into this app, with the instructions above.
 
  1. Download the latest release of this app and extract it. The app can be run with FribbelsE7Optimizer.exe
  2. Download an emulator to run E7 on
@@ -210,7 +211,7 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 
 ## Closing thoughts
 
-Hopefully this is useful for anyone looking for an easier way to gear their units. I know the Zarroc optimizer does a lot of similar things (https://github.com/Zarroc2762/E7-Gear-Optimizer) but it has been pretty unmaintained and out of date, so I decided to build my own to add some improvements to it. There's still a lot of room to improve and I plan on improving it as feedback comes in. I only work on this in my spare time, so please be patient with new features, or feel free to contribute to the code as well. Feel free to contact me on discord at fribbels#7526 with questions or suggestions.
+Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, or you can help contribute to the code as well. Feel free to contact me on discord at fribbels#7526 with questions or suggestions.
 
 Planned features:
  - TBD
