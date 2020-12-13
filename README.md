@@ -83,7 +83,7 @@ Setting the substat force filter is useful for narrowing down the search space f
 
 ![](https://i.imgur.com/i60uzCg.png)
 
-This filter assigns a rating to each of your gears, and then filters by only the top N% of the rated gears. In this example we're mostly looking for a fast and tanky Ruele so we assign:
+This is probably the most useful filter. It works by assigning a rating to each of your gears, and then filters by only the top N% of the rated gears. In this example we're mostly looking for a fast and tanky Ruele so we assign:
 - HP and Def a high rating of 3, since those are the highest priority stats
 - Speed a slightly lower rating of 2
 - And Res a rating of 1, as its a nice-to-have stat and can still be useful for her
@@ -91,7 +91,7 @@ This filter assigns a rating to each of your gears, and then filters by only the
 
 Then, we set the Top % slider to 30%. This will take all your weapons, score them based on the priority defined above, then only considers the Top 30% of the scores for optimization. Then it does the same for helmets, armors, etc, and then the optimizer generates permutations based on those Top 30% gears.
 
-The Top % slider must be set to something other than 100% for this filter to work, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 20-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 20% is where you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
+**The Top % slider must be set to something other than 100% for this filter to work**, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 20-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 20% is where you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
 
 An example priority filter for a DPS unit like Arby could be something like this, where you only want damage stats:
 
