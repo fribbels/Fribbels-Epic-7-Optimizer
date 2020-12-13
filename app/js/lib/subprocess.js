@@ -9,6 +9,8 @@ var child;
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
+var errors = "";
+
 module.exports = {
 
     initialize: () => {
@@ -18,10 +20,15 @@ module.exports = {
 
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);
+
+            if (code != 0) {
+                alert(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
+            }
         });
 
         child.stderr.on('data', (data) => {
             console.error(data.toString());
+            errors += data.toString();
         })
 
         child.stdout.on('data', (data) => {
