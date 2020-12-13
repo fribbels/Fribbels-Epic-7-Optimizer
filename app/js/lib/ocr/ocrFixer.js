@@ -127,9 +127,10 @@ function replaceErrorLevel(str) {
     if (Object.keys(levelErrors).includes(str)) {
         return levelErrors[str];
     }
-    return str;
+
+    return str.substring(0, 2);
 }
 
 const levelErrors = {
-    "9": "90",
+    "9": "90"
 }

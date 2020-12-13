@@ -3,7 +3,7 @@ const { remote } = require('electron')
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
-const defaultPath = (Files.getDataPath() + "/saves").replace(/\//g, "\\");
+const defaultPath = (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
 
 module.exports = {
     addDebugFile: () => {
@@ -64,10 +64,10 @@ module.exports = {
 
         document.getElementById('saveExportOutput').addEventListener("click", async () => {
             const output = document.getElementById('exportOutputText').value;
-            console.error('defaultPath', defaultPath)
+            console.error('defaultPath', defaultPath + 'gear.txt')
             const options = {
                 title: "Save file",
-                defaultPath : defaultPath,
+                defaultPath : defaultPath + 'gear.txt',
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -89,7 +89,7 @@ module.exports = {
         document.getElementById('importFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : defaultPath,
+                defaultPath : defaultPath + 'gear.txt',
                 buttonLabel : "Load file",
                 // filters :[
                 //     {name: 'JSON', extensions: ['json']},

@@ -294,6 +294,8 @@ module.exports = {
         const gear = [];
         var count = 1;
 
+        var length = filenames.filter(x => !x.includes('debug')).length;
+
         for (var filename of filenames) {
             if (filename.includes("inverted") || filename.includes("debug")) {
                 await fs.unlink(filename, err => {if (err) console.log(err)})
@@ -311,8 +313,8 @@ module.exports = {
 
             const converted = await module.exports.readGearFile(filename);
             gear.push(converted);
-            console.log(gear.length + " / " + filenames.length);
-            $('#exportOutputText').val(gear.length + " / " + filenames.length)
+            console.log(gear.length + " / " + length);
+            $('#exportOutputText').val(gear.length + " / " + length)
 
             const pathSteps = filename.split("\\");
             const details = `TEST ${converted.level} ${converted.enhance} ${converted.rank} ${converted.gear} ${converted.set} --- ${converted.main.type} ${converted.main.value} --- ${converted.substats.map(x => "" + x.type + " " + x.value).join(" ")}`;

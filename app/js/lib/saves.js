@@ -2,12 +2,12 @@ const { remote } = require('electron')
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
-const defaultPath = (Files.getDataPath() + "/saves").replace(/\//g, "\\");
+const defaultPath = (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
 
 module.exports = {
 
     autoSave: async () => {
-        module.exports.saveData(Files.getDataPath() + '/saves/autosave.json');
+        module.exports.saveData(defaultPath + 'autosave.json');
     },
 
     saveData: async (filename) => {
@@ -27,7 +27,7 @@ module.exports = {
         document.getElementById('saveDataSubmit').addEventListener("click", async () => {
             const options = {
                 title: "Save file",
-                defaultPath : defaultPath,
+                defaultPath : defaultPath + 'export.json',
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'JSON', extensions: ['json']},
