@@ -285,6 +285,8 @@ _________________
 
 - Error message: 'java is not recognized as an internal or external command' upon opening the app. Install Java 8 64-bit version to fix.
 - After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like the one in the Getting Started section, and bad screenshots may cause it to get stuck.
+- If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases
+ And click on the 'FribbelsE7Optimizer-x.x.x-win.7z' file (for whatever the latest version is)
 _________________
 
 ## Contact me
