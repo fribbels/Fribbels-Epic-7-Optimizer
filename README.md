@@ -1,3 +1,4 @@
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -15,15 +16,10 @@ Features include:
 Here's what it looks like currently:
 
 ![](https://i.imgur.com/vVR4ZMq.png)
-_________________
 
 ## Requirements
 - Windows 64-bit
 - Java 8 installed (Please download if you don't yet have it: https://www.java.com/en/download/)
-
-## Troubleshooting
-- If none of the buttons seem to do anything, its likely you don't have Java installed, see above
-
 _________________
 
 **Table of Contents**:
@@ -47,7 +43,6 @@ _________________
   * [Closing thoughts](#closing-thoughts)
   * [Contact me](#contact-me)
   
-_________________
 
 ## Optimizer Tab
 
@@ -176,7 +171,6 @@ Here you can see all the results from the optimization, sort by stat, and equip/
 - Equip Selected will equip those checked gears onto the hero (while unequipping anything they were holding before)
 - Lock Selected will mark those checked gears as locked, which affects later optimizations that have "Locked Items" unchecked in settings.
   
-_________________
 
 ## Gear Tab
 
@@ -202,7 +196,6 @@ Its used as a measure of how well your gear rolled, scaled by the max roll for 8
 
 You can edit existing gears or add new gears with this page, and filling in the relevant fields.
   
-_________________
 
 ## Heroes Tab
 
@@ -213,8 +206,7 @@ Here you can add new heroes and manage existing ones. I think most of the button
 ![](https://i.imgur.com/5uZv8lf.png)
 
 SSS Krau on self imprint with a +30 Aurius would have +1971 HP, so I added it here to let the optimizer calculate the accurate stats for him.
-  
-_________________
+ 
 
 ## Importer tab
 
@@ -244,7 +236,6 @@ The app also does autosave to an 'autosave.json' on changes being made, but that
 
 If you're already a user of Zarroc's gear optimizer, this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in afterwards.
   
-_________________
 
 ## Getting Started
 
@@ -270,16 +261,45 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 
 ![](https://i.imgur.com/ny7uaa8.jpg)
 
-_________________
 
 ## Closing thoughts
 
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well. 
 
-Planned features:
- - TBD
+TODO list:
+ - Fix: Update # of permutations when a filter is removed.
+ - Fix: Allow editing input text box without selecting the whole thing - currently selects the whole box 
+ - Fix: Add a limit to color coded boxes for 100% crit and for crit dmg
+ - Show current stats for the hero in the Optimizer tab
+ - Show percentage equivalent of flat stats on Optimizer page
+ - Tools for optimizing HP scaling units/skill scaling
+ - Gear page, option to use more than one set/gear filter at time
+ - Enable cross platform for Mac/Linux
+ - Fix: Add the 3 new sets through the edit item page
+ - Fix: Decimal numbers for crit chance imprint
+ - Import heroes from Zarroc optimizer file
+ - Add stats for specialty change heroes
+ - Arrow keys for going up and down the grid
+ - Class/Element filter for Heroes tab
+ - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
+ - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
+ - Add more confirmation dialogs/output text for the optimizer page
+ - Fix: Don't deselect filters when editing items
+ - Option to equip gear from heroes page
+ - CP on heroes page + optimizer screen
+ - Don't overwrite heroes when using Zarroc importer 
+ - Add percent options for the bonus stats page
+ - Add add different level/awakening options
+ - Improvements to the priority ranking filter
+ - Button to delete items
+ - Fix: Crit chance uncapped in CP calculation
+ - Simulate reforged stats on non-reforged piece
+ - Add a filter for reforge-able optimization results
+ - Optimize multiple heroes at once
+ - Save hero's filter preferences
+ - Optimize results with a missing piece(s)
+ - Merge gear files
 
-_________________
 
 ## Troubleshooting
 
@@ -287,7 +307,7 @@ _________________
 - After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like the one in the Getting Started section, and bad screenshots may cause it to get stuck.
 - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases
  And click on the 'FribbelsE7Optimizer-x.x.x-win.7z' file (for whatever the latest version is)
-_________________
+
 
 ## Contact me
 
