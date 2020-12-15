@@ -19,6 +19,10 @@ module.exports = {
         optimizerGrid.gridOptions.api.paginationGoToPage(0);
     },
 
+    setPinnedHero: (hero) => {
+        optimizerGrid.gridOptions.api.setPinnedTopRowData([hero]);
+    },
+
     showLoadingOverlay: () => {
         optimizerGrid.gridOptions.api.showLoadingOverlay();
     },
@@ -68,6 +72,11 @@ const datasource = {
             aggregateCurrentHeroStats(getResultRowsResponse.heroStats)
             optimizerGrid.gridOptions.api.hideOverlay();
             params.successCallback(getResultRowsResponse.heroStats, getResultRowsResponse.maximum)
+
+            var pinned = optimizerGrid.gridOptions.api.getPinnedTopRow(0);
+            if (pinned) {
+                optimizerGrid.gridOptions.api.setPinnedTopRowData([pinned.data])
+            }
         });
     },
 }
@@ -102,6 +111,15 @@ function aggregateCurrentHeroStats(heroStats) {
         var min = Math.min(...getField(heroStats, stat));
         var sum = arrSum(heroStats);
         var avg = sum/count;
+
+        if (stat == 'cr') {
+            max = Math.min(100, max);
+            min = Math.min(100, min);
+        }
+        if (stat == 'cd') {
+            max = Math.min(350, max);
+            min = Math.min(350, min);
+        }
 
         currentAggregate[stat] = {
             max,
@@ -178,6 +196,8 @@ function columnGradient(params) {
         if (!agg) return;
 
         var percent = (value - agg.min) / (agg.max - agg.min + 1);
+        percent = Math.min(1, Math.max(0, percent))
+
         const color = gradient.rgbAt(percent);
 
         return {

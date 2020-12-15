@@ -459,7 +459,9 @@ input[type=number]::-webkit-outer-spin-button {
   outline: none;
 }
 
-
+.ag-floating-top {
+  margin-bottom: 3px;
+}
 
 
 

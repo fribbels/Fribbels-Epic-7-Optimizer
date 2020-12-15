@@ -93,6 +93,21 @@ public class ItemDb {
         existingItem.setEquippedByName(null);
     }
 
+    public void deleteItem(final String id) {
+        final Item existingItem = getItemById(id);
+
+        if (existingItem == null) return;
+
+        final String heroId = existingItem.getEquippedById();
+        final Hero hero = heroDb.getHeroById(heroId);
+
+        if (hero != null) {
+            hero.getEquipment().remove(existingItem.getGear());
+        }
+
+        items.removeIf(item -> StringUtils.equals(item.getId(), id));
+    }
+
     public void equipItemOnHero(final String itemId, final String heroId) {
         final Item item = getItemById(itemId);
         final Hero hero = heroDb.getHeroById(heroId);

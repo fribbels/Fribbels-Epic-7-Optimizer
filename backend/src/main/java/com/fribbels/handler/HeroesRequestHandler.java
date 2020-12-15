@@ -131,41 +131,43 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         System.out.println("Heroes" + heroes);
 
         for (final Hero hero : heroes) {
-
-            final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
-
-            final Map<Gear, Item> equipment = hero.getEquipment();
-
-
-            if (equipment == null || equipment.values().size() != 6) {
-                hero.setStats(new HeroStats());
-                continue;
-            }
-
-            final Item[] items = Iterables.toArray(equipment.values(), Item.class);
-
-            final int[] setsArr = StatCalculator.buildSetsArr(items);
-            final List<float[]> statAccumulators = equipment.values()
-                    .stream()
-                    .map(item -> StatCalculator.buildStatAccumulatorArr(baseStats, item))
-                    .collect(Collectors.toList());
-            final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
-
-            final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero);
-            hero.setStats(finalStats);
+            addStatsToHero(hero);
         }
 
         final GetAllHeroesResponse response = GetAllHeroesResponse.builder()
                 .heroes(heroes)
                 .build();
 
-//        System.out.println(response);
-
         return toJson(response);
+    }
+
+    private void addStatsToHero(final Hero hero) {
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
+
+        final Map<Gear, Item> equipment = hero.getEquipment();
+
+
+        if (equipment == null || equipment.values().size() != 6) {
+            hero.setStats(new HeroStats());
+            return;
+        }
+
+        final Item[] items = Iterables.toArray(equipment.values(), Item.class);
+
+        final int[] setsArr = StatCalculator.buildSetsArr(items);
+        final List<float[]> statAccumulators = equipment.values()
+                .stream()
+                .map(item -> StatCalculator.buildStatAccumulatorArr(baseStats, item))
+                .collect(Collectors.toList());
+        final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
+
+        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero);
+        hero.setStats(finalStats);
     }
 
     public String getHeroById(final IdRequest request) {
         final Hero hero = heroDb.getHeroById(request.getId());
+        addStatsToHero(hero);
         final GetHeroByIdResponse response = GetHeroByIdResponse.builder()
                 .hero(hero)
                 .build();

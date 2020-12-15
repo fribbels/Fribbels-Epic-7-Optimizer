@@ -50,6 +50,10 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     final IdsRequest lockItemsRequest = parseRequest(exchange, IdsRequest.class);
                     sendResponse(exchange, lockItems(lockItemsRequest));
                     return;
+                case "/items/deleteItems":
+                    final IdsRequest deleteItemsRequest = parseRequest(exchange, IdsRequest.class);
+                    sendResponse(exchange, deleteItems(deleteItemsRequest));
+                    return;
                 case "/items/editItems":
                     final ItemsRequest editItemsRequest = parseRequest(exchange, ItemsRequest.class);
                     sendResponse(exchange, editItems(editItemsRequest));
@@ -107,6 +111,21 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         final List<Item> items = itemDb.getItemsById(request.getIds());
         for (final Item item : items) {
             item.setLocked(true);
+        }
+
+        return "";
+    }
+
+    public String deleteItems(final IdsRequest request) {
+        System.out.println(request.getIds());
+        final List<Item> items = itemDb.getItemsById(request.getIds());
+
+        for (final Item item : items) {
+            if (item == null)
+                continue;
+
+            System.out.println("Deleting: " + item);
+            itemDb.deleteItem(item.getId());
         }
 
         return "";

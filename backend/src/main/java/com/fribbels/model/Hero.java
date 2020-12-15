@@ -52,6 +52,9 @@ public class Hero {
     private int bonusEff;
     private int bonusRes;
 
+    private int[] sets;
+    private int cp;
+
     private Map<Gear, Item> equipment;
 
     public Item switchItem(final Item item) {
@@ -102,6 +105,9 @@ public class Hero {
         this.res = heroStats.getRes();
         this.dac = heroStats.getDac();
         this.spd = heroStats.getSpd();
+
+        this.cp = heroStats.getCp();
+        this.sets = heroStats.getSets();
 
         this.ehp = heroStats.getEhp();
         this.ehpps = heroStats.getEhpps();

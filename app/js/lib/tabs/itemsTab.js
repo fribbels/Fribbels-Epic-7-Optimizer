@@ -19,6 +19,9 @@ module.exports = {
         document.getElementById('addGear').addEventListener("click", () => {
             addGear();
         });
+        document.getElementById('removeGear').addEventListener("click", () => {
+            removeGear();
+        });
 
         document.getElementById('tab3label').addEventListener("click", () => {
             module.exports.redraw();
@@ -54,6 +57,13 @@ async function editGear() {
 async function addGear() {
     const newItem = await Dialog.editGearDialog(null, false);
     console.warn("NEWITEM", newItem);
+
+    module.exports.redraw();
+}
+
+async function removeGear() {
+    const item = ItemsGrid.getSelectedGear();
+    await Api.deleteItems([item.id]);
 
     module.exports.redraw();
 }

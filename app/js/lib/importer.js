@@ -78,7 +78,7 @@ module.exports = {
 
             fs.writeFile(filename, output, (err) => {
                 if (err) 
-                    return console.log(err);
+                    return console.err(err);
                 console.log('Exported gear.txt');
                 document.getElementById('exportOutputText').value = `Exported data to ${filename}`;
             });

@@ -20,9 +20,10 @@ public class StatCalculator {
         int eff = (int) (base.getEff() + mapAccumulatorArrsToFloat(8, accs)  + (sets[5] > 1 ? sets[5] / 2 * 20 : 0)) + hero.getBonusEff();
         int res = (int) (base.getRes() + mapAccumulatorArrsToFloat(9, accs)  + (sets[9] > 1 ? sets[9] / 2 * 20 : 0)) + hero.getBonusRes();
         int dac = base.getDac() + sets[10] / 2 * 4;
-        int cp = (int) (((atk * 1.6f + atk * 1.6f * cr/100f * cd/100f) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
-        float critRate = (float)Math.min(cr, 100) / 100;
+        float critRate = (float)Math.min(cr, 100) / 100f;
+        int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * cd/100f) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
+
 
         int ehp = (int) (hp * ((float)def/300 + 1));
         int hpps = (int) ((float)hp*spd/100);

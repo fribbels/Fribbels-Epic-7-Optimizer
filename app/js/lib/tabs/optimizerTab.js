@@ -154,6 +154,10 @@ async function equipSelectedGear() {
     if (selectedGear.length == 0) return;
 
     await Api.equipItemsOnHero(heroId, selectedGear);
+
+    const response = await Api.getHeroById(heroId);
+    OptimizerGrid.setPinnedHero(response.hero);
+
     drawPreview()
     Saves.autoSave();
 }

@@ -2,69 +2,26 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Gear:jar" />
+      <artifact name="Gear" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/subprocess.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/subprocess.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gear.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Gear.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tessdata/eng.traineddata/eng.traineddata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Gear_jar/Gear.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Gear_jar/Gear.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Gear/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Gear/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Gear/com/fribbels/enums/SortOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Gear/com/fribbels/enums/SortOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Gear/com/fribbels/handler/OptimizationRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Gear/com/fribbels/handler/OptimizationRequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/core/FileIO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/core/Sorter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/core/StatCalculator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/BaseStatsDb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/HeroDb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/ItemDb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/OptimizationDb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/Gear.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/OptimizationColumn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/Rank.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/Set.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/SortOrder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/StatType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/HeroesRequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/ItemsRequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/OcrRequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/OptimizationRequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/RequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/SystemRequestHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/AugmentedStats.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Hero.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/HeroStats.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/MiniOptimizationResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Stat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/ocr/OcrEngine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/BaseStatsRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/BonusStatsRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/EquipItemsOnHeroRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/GetResultRowsRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/HeroesRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/IdRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/IdsRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/ItemsRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/Ocr2Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/OptimizationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetAllHeroesResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetAllItemsResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetHeroByIdResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetItemByIdResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetResultRowsResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/OcrResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/OptimizationResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/Response.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tst/com/fribbels/DebugTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/fribbels/DebugTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/Gear.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../data/Gear.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/../app/app.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/db/ItemDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/db/ItemDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/HeroesRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/HeroesRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/ItemsRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/ItemsRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/db/ItemDb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/db/ItemDb.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/HeroesRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/HeroesRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/ItemsRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/ItemsRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,42 +131,46 @@
     </state>
     <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607991663649" />
     <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999435807" />
-    <state width="2750" height="380" key="GridCell.Tab.0.bottom" timestamp="1607999586405">
+    <state width="2908" height="466" key="GridCell.Tab.0.bottom" timestamp="1608014596347">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="380" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2750" height="380" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
-    <state width="2750" height="380" key="GridCell.Tab.0.center" timestamp="1607999586405">
+    <state width="2908" height="466" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596347" />
+    <state width="2908" height="466" key="GridCell.Tab.0.center" timestamp="1608014596347">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="380" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2750" height="380" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
-    <state width="2750" height="380" key="GridCell.Tab.0.left" timestamp="1607999586405">
+    <state width="2908" height="466" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596347" />
+    <state width="2908" height="466" key="GridCell.Tab.0.left" timestamp="1608014596347">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="380" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2750" height="380" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
-    <state width="2750" height="380" key="GridCell.Tab.0.right" timestamp="1607999586405">
+    <state width="2908" height="466" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596347" />
+    <state width="2908" height="466" key="GridCell.Tab.0.right" timestamp="1608014596347">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="380" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2750" height="380" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
-    <state width="1375" height="466" key="GridCell.Tab.1.bottom" timestamp="1607994014594">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state width="2908" height="466" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596347" />
+    <state width="2908" height="466" key="GridCell.Tab.1.bottom" timestamp="1608014596348">
+      <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="466" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
-    <state width="1375" height="466" key="GridCell.Tab.1.center" timestamp="1607994014594">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state width="2908" height="466" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596348" />
+    <state width="2908" height="466" key="GridCell.Tab.1.center" timestamp="1608014596348">
+      <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="466" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
-    <state width="1375" height="466" key="GridCell.Tab.1.left" timestamp="1607994014594">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state width="2908" height="466" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596348" />
+    <state width="2908" height="466" key="GridCell.Tab.1.left" timestamp="1608014596348">
+      <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="466" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
-    <state width="1375" height="466" key="GridCell.Tab.1.right" timestamp="1607994014594">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state width="2908" height="466" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596348" />
+    <state width="2908" height="466" key="GridCell.Tab.1.right" timestamp="1608014596348">
+      <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state width="1375" height="466" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="2908" height="466" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014596348" />
     <state x="4990" y="358" width="1337" height="850" key="SettingsEditor" timestamp="1607997825948">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
@@ -224,5 +185,20 @@
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="4391" y="344" key="new project wizard/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607996019681" />
+    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1608014989065">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014989065" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/fribbels/db/ItemDb.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

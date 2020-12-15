@@ -268,14 +268,10 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 TODO list:
  - Fix: Update # of permutations when a filter is removed.
- - Fix: Allow editing input text box without selecting the whole thing - currently selects the whole box 
- - Fix: Add a limit to color coded boxes for 100% crit and for crit dmg
- - Show current stats for the hero in the Optimizer tab
  - Show percentage equivalent of flat stats on Optimizer page
  - Tools for optimizing HP scaling units/skill scaling
  - Gear page, option to use more than one set/gear filter at time
  - Enable cross platform for Mac/Linux
- - Fix: Add the 3 new sets through the edit item page
  - Fix: Decimal numbers for crit chance imprint
  - Import heroes from Zarroc optimizer file
  - Add stats for specialty change heroes
@@ -292,14 +288,20 @@ TODO list:
  - Add add different level/awakening options
  - Improvements to the priority ranking filter
  - Button to delete items
- - Fix: Crit chance uncapped in CP calculation
  - Simulate reforged stats on non-reforged piece
  - Add a filter for reforge-able optimization results
  - Optimize multiple heroes at once
  - Save hero's filter preferences
  - Optimize results with a missing piece(s)
  - Merge gear files
+ - Clear out item previews on refresh
+ - Throw error when adding invalid item
 
+ Planned in 1.0.2
+ - Fix: Crit chance uncapped in CP calculation
+ - Fix: Add the 3 new sets through the edit item page
+ - Fix: Add a limit to color coded boxes for 100% crit and for crit dmg
+ - Show current stats for the hero in the Optimizer tab
 
 ## Troubleshooting
 
@@ -307,7 +309,7 @@ TODO list:
 - After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like the one in the Getting Started section, and bad screenshots may cause it to get stuck.
 - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases
  And click on the 'FribbelsE7Optimizer-x.x.x-win.7z' file (for whatever the latest version is)
-
+- If your optimization suddenly stops working completely, check if you have one of these weird looking items in your gear tab: https://i.imgur.com/BzAgRjR.png. If one is there, edit it to fill in all the fields, but just leave the stats at 0. https://i.imgur.com/wDKDaE5.png
 
 ## Contact me
 

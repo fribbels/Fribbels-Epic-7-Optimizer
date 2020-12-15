@@ -80,6 +80,12 @@ module.exports = {
         });
     },
 
+    deleteItems: async (itemIds) => {
+        return post('/items/deleteItems', {
+            ids: itemIds
+        });
+    },
+
     lockItems: async (itemIds) => {
         return post('/items/lockItems', {
             ids: itemIds
