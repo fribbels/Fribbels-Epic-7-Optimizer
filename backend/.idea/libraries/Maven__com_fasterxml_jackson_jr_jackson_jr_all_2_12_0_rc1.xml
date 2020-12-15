@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.fasterxml.jackson.jr:jackson-jr-all:2.12.0-rc1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/jr/jackson-jr-all/2.12.0-rc1/jackson-jr-all-2.12.0-rc1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/jr/jackson-jr-all/2.12.0-rc1/jackson-jr-all-2.12.0-rc1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/jr/jackson-jr-all/2.12.0-rc1/jackson-jr-all-2.12.0-rc1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -17,7 +17,7 @@ module.exports = {
     initialize: () => {
         // return;
 
-        child = spawn('java', ['-jar', `"${Files.getDataPath() + "/Gear.jar"}"`], {shell: true, detached: false})
+        child = spawn('java', ['-cp', `"${Files.getDataPath() + "/Gear.jar"}" com.fribbels.Main`], {shell: true, detached: false})
 
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);

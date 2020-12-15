@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.bytedeco:leptonica:linux-x86_64:1.78.0-1.5">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bytedeco/leptonica/1.78.0-1.5/leptonica-1.78.0-1.5-linux-x86_64.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bytedeco/leptonica/1.78.0-1.5/leptonica-1.78.0-1.5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bytedeco/leptonica/1.78.0-1.5/leptonica-1.78.0-1.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

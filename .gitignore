@@ -43,10 +43,10 @@ dll
 main.js
 main.js.map
 
-.idea
+# .idea
 npm-debug.log.*
 *.css.d.ts
 *.sass.d.ts
 *.scss.d.ts
 
-backend/lib
+# backend/lib

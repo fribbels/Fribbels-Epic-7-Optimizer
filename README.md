@@ -242,7 +242,7 @@ If you're already a user of Zarroc's gear optimizer, this lets you import your g
 To get started with the app, you'll need to run image recognition on screenshots of your gear, which is built into the Importer tab. If you've previously used the Zarroc optimizer, you can import the gear file directly from that into this app, with the instructions above.
 
 **Steps:**
- 1. Install Java (https://www.java.com/en/download/) if you don't already have it, then download the latest release of this app and extract it. The app should be run using FribbelsE7Optimizer.exe
+ 1. Install Java (https://www.java.com/en/download/) if you don't already have it, and restart your computer after. Then download the latest release of this app and extract it. The app should be run using FribbelsE7Optimizer.exe
      * On the releases page, download the option that looks like FribbelsE7Optimizer-x.x.x-win.7z, not the 'Source code' options
  2. Download an emulator to run E7 on
      * I used LDPlayer for all my testing as it works best for my machine, but other emulators are probably fine

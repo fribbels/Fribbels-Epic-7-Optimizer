@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Gear:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/subprocess.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/subprocess.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gear.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Gear.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tessdata/eng.traineddata/eng.traineddata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Gear_jar/Gear.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Gear_jar/Gear.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Gear/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Gear/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Gear/com/fribbels/enums/SortOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Gear/com/fribbels/enums/SortOrder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Gear/com/fribbels/handler/OptimizationRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Gear/com/fribbels/handler/OptimizationRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/core/FileIO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/core/Sorter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/core/StatCalculator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/BaseStatsDb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/HeroDb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/ItemDb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/db/OptimizationDb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/Gear.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/OptimizationColumn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/Rank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/Set.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/SortOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/enums/StatType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/HeroesRequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/ItemsRequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/OcrRequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/OptimizationRequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/RequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/handler/SystemRequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/AugmentedStats.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Hero.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/HeroStats.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/MiniOptimizationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Request.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/model/Stat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/ocr/OcrEngine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/BaseStatsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/BonusStatsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/EquipItemsOnHeroRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/GetResultRowsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/HeroesRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/IdRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/IdsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/ItemsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/Ocr2Request.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/request/OptimizationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetAllHeroesResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetAllItemsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetHeroByIdResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetItemByIdResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/GetResultRowsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/OcrResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/OptimizationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fribbels/response/Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst/com/fribbels/DebugTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/fribbels/DebugTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../data/Gear.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../data/Gear.jar" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1lfb95gvcVhyXYKSdCxrr9Vsbpm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.15632184" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fribbels.Main" />
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fribbels.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1739" y="386" key="#Main" timestamp="1607994118152">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1739" y="386" key="#Main/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994118152" />
+    <state x="4725" y="587" key="#Project_Structure" timestamp="1607999720538">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1285" y="587" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607995075587" />
+    <state x="4725" y="587" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999720538" />
+    <state x="1503" y="370" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607994013529">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1503" y="370" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994013529" />
+    <state x="5232" y="518" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607996158578">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1792" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607992458801" />
+    <state x="5232" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607996158578" />
+    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607999456749">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999456749" />
+    <state x="1772" y="404" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1607994856663">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1772" y="404" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994856663" />
+    <state x="1714" y="583" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1607990972337">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1714" y="583" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607990972337" />
+    <state x="4863" y="683" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1607997004393">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="4863" y="683" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997004393" />
+    <state x="4981" y="409" key="FileChooserDialogImpl" timestamp="1607999435807">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607991663649" />
+    <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999435807" />
+    <state width="2750" height="380" key="GridCell.Tab.0.bottom" timestamp="1607999586405">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="380" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
+    <state width="2750" height="380" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
+    <state width="2750" height="380" key="GridCell.Tab.0.center" timestamp="1607999586405">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="380" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
+    <state width="2750" height="380" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
+    <state width="2750" height="380" key="GridCell.Tab.0.left" timestamp="1607999586405">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="380" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
+    <state width="2750" height="380" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
+    <state width="2750" height="380" key="GridCell.Tab.0.right" timestamp="1607999586405">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="380" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
+    <state width="2750" height="380" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999586405" />
+    <state width="1375" height="466" key="GridCell.Tab.1.bottom" timestamp="1607994014594">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="466" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="1375" height="466" key="GridCell.Tab.1.center" timestamp="1607994014594">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="466" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="1375" height="466" key="GridCell.Tab.1.left" timestamp="1607994014594">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="466" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="1375" height="466" key="GridCell.Tab.1.right" timestamp="1607994014594">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1375" height="466" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state x="4990" y="358" width="1337" height="850" key="SettingsEditor" timestamp="1607997825948">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1550" y="358" key="SettingsEditor/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994677262" />
+    <state x="4990" y="358" width="1337" height="850" key="SettingsEditor/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997825948" />
+    <state x="5010" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1607997486292">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1570" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607993981752" />
+    <state x="5010" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997486292" />
+    <state x="4391" y="344" key="new project wizard" timestamp="1607996019681">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="4391" y="344" key="new project wizard/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607996019681" />
+  </component>
+</project>
