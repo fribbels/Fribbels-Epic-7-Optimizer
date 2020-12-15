@@ -32,6 +32,7 @@ public class OptimizationRequest extends Request {
     private Boolean inputAllowEquippedItems;
     private Boolean inputKeepCurrentItems;
     private Boolean inputAllowBrokenSets;
+    private Boolean inputCanReforge;
 
     private int atk;
     private int hp;
@@ -59,6 +60,8 @@ public class OptimizationRequest extends Request {
     private int inputEffMaxLimit = Integer.MAX_VALUE;
     private int inputResMinLimit;
     private int inputResMaxLimit = Integer.MAX_VALUE;
+    private int inputMinCpLimit;
+    private int inputMaxCpLimit = Integer.MAX_VALUE;
     private int inputMinHppsLimit;
     private int inputMaxHppsLimit = Integer.MAX_VALUE;
     private int inputMinEhpLimit;

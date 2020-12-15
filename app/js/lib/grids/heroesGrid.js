@@ -47,7 +47,7 @@ function buildGrid(heroes) {
             {headerName: 'cd', field: 'cd'},
             {headerName: 'eff', field: 'eff'},
             {headerName: 'res', field: 'res'},
-            {headerName: 'dac', field: 'dac'},
+            {headerName: 'cp', field: 'cp'},
             {headerName: 'hp*s', field: 'hpps'},
             {headerName: 'ehp', field: 'ehp'},
             {headerName: 'ehp*s', field: 'ehpps'},

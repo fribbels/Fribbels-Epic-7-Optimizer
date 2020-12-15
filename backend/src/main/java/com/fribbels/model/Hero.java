@@ -46,6 +46,9 @@ public class Hero {
     private int bonusAtk;
     private int bonusDef;
     private int bonusHp;
+    private int bonusAtkPercent;
+    private int bonusDefPercent;
+    private int bonusHpPercent;
     private int bonusSpeed;
     private int bonusCr;
     private int bonusCd;
@@ -80,6 +83,9 @@ public class Hero {
         this.bonusAtk = bonusStats.getAtk();
         this.bonusDef = bonusStats.getDef();
         this.bonusHp = bonusStats.getHp();
+        this.bonusAtkPercent = bonusStats.getAtkPercent();
+        this.bonusDefPercent = bonusStats.getDefPercent();
+        this.bonusHpPercent = bonusStats.getHpPercent();
         this.bonusSpeed = bonusStats.getSpeed();
         this.bonusCr = bonusStats.getCr();
         this.bonusCd = bonusStats.getCd();

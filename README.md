@@ -267,41 +267,42 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well. 
 
 TODO list:
- - Fix: Update # of permutations when a filter is removed.
+ - Don't overwrite heroes when using Zarroc importer 
  - Show percentage equivalent of flat stats on Optimizer page
- - Tools for optimizing HP scaling units/skill scaling
  - Gear page, option to use more than one set/gear filter at time
  - Enable cross platform for Mac/Linux
- - Fix: Decimal numbers for crit chance imprint
  - Import heroes from Zarroc optimizer file
- - Add stats for specialty change heroes
  - Arrow keys for going up and down the grid
- - Class/Element filter for Heroes tab
+ - Add stats for specialty change heroes
+ - Fix: Update # of permutations when a filter is removed.
  - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
+ - Class/Element filter for Heroes tab
  - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
  - Add more confirmation dialogs/output text for the optimizer page
  - Fix: Don't deselect filters when editing items
  - Option to equip gear from heroes page
- - CP on heroes page + optimizer screen
- - Don't overwrite heroes when using Zarroc importer 
- - Add percent options for the bonus stats page
- - Add add different level/awakening options
  - Improvements to the priority ranking filter
- - Button to delete items
  - Simulate reforged stats on non-reforged piece
- - Add a filter for reforge-able optimization results
- - Optimize multiple heroes at once
  - Save hero's filter preferences
+ - Tools for optimizing HP scaling units/skill scaling
+ - Add different level/awakening options
  - Optimize results with a missing piece(s)
  - Merge gear files
  - Clear out item previews on refresh
- - Throw error when adding invalid item
+ - Optimize multiple heroes at once
+ - Fix: Decimal numbers for crit chance imprint
+ - Add canReforge, canEnhance columns
 
  Planned in 1.0.2
  - Fix: Crit chance uncapped in CP calculation
  - Fix: Add the 3 new sets through the edit item page
  - Fix: Add a limit to color coded boxes for 100% crit and for crit dmg
  - Show current stats for the hero in the Optimizer tab
+ - Button to delete items
+ - CP on heroes page + optimizer screen
+ - Fix: Throw error when adding invalid item
+ - Add percent options for the bonus stats page
+ - Add a filter for reforge-able optimization results
 
 ## Troubleshooting
 

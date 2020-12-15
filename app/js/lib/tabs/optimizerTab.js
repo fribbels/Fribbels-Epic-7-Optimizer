@@ -279,6 +279,7 @@ async function submitOptimizationRequest() {
 
     console.log("OPTIMIZING HERO", heroResponse.hero);
 
+    OptimizerGrid.setPinnedHero(heroResponse.hero);
     const request = {
         base: baseStats,
         requestType: "OptimizationRequest",
@@ -366,6 +367,7 @@ function getOptimizationRequestParams() {
     request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems');
     request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems');
     request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems');
+    request.inputCanReforge   = readCheckbox('inputCanReforge');
 
     request.inputAtkMinLimit = readNumber('inputMinAtkLimit');
     request.inputAtkMaxLimit = readNumber('inputMaxAtkLimit');
@@ -384,6 +386,8 @@ function getOptimizationRequestParams() {
     request.inputResMinLimit = readNumber('inputMinResLimit');
     request.inputResMaxLimit = readNumber('inputMaxResLimit');
 
+    request.inputMinCpLimit = readNumber('inputMinCpLimit');
+    request.inputMaxCpLimit = readNumber('inputMaxCpLimit');
     request.inputMinHppsLimit = readNumber('inputMinHppsLimit');
     request.inputMaxHppsLimit = readNumber('inputMaxHppsLimit');
     request.inputMinEhpLimit = readNumber('inputMinEhpLimit');

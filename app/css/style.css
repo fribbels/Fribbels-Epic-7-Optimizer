@@ -445,7 +445,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .editGearStatNumber {
-  width: 50px;
+  width: 80px;
 }
 
 /*https://stackoverflow.com/questions/50862009/how-to-disable-selection-of-cells-in-ag-grid*/
@@ -463,19 +463,54 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 3px;
 }
 
+.valuePadding {
+  border: 1px inset #ccc;
+  font-size: 15px;
+  height: 100%;
+}
+.valuePadding input {
+  border: none;
+  padding: 0px;
+  outline: none;
+  height: 20px;
+}
+.blankFormSpace {
+  width: 40px;
+}
 
+.input-holder {
+  border: 1px solid black;
+  display: inline-block;
+}
+.input-holder > input {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline:none;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.input-holder-percent {
+  border: 1px solid black;
+  display: inline-block;
+}
+.input-holder-percent > input {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline:none;
+}
+.input-holder-percent:after {
+  content: '%';
+}
+.bonusStatInput {
+  height: 100%;
+  text-align: left;
+  padding-left: 4px !important;
+  width: 70px !important;
+}
+.bonusStatInputPercent {
+  height: 100%;
+  text-align: left;
+  padding-left: 4px !important;
+  width: 55px !important;
+}

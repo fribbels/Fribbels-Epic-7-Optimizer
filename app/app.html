@@ -92,6 +92,11 @@ window.jQuery = $;
                 <input type="checkbox" id="inputKeepCurrentItems" class="optimizer-checkbox">
                 <label for="inputKeepCurrentItems">Keep current</label>
               </div>
+              
+              <div>
+                <input type="checkbox" id="inputCanReforge" class="optimizer-checkbox">
+                <label for="inputCanReforge">Can reforge</label>
+              </div>
               <div class="horizontalSpace"></div>
 
               <input type="submit" value="Submit" class="gearPreviewButton" id="submitOptimizerRequest"><br>
@@ -138,6 +143,10 @@ window.jQuery = $;
             <div class="vertical"></div>
             <div id="constraints-filter-panel-calculated" class="constraints-panel-col">
               Filter calculated stats:<br>
+              <input type="number" id="inputMinCpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Cp</div>
+              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input"><br>
+
               <input type="number" id="inputMinHppsLimit" class="optimizer-number-input">
               <div class="inputStatLabel">Hp*s</div>
               <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input"><br>

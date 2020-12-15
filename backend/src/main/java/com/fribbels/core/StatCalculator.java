@@ -11,9 +11,9 @@ import java.util.Map;
 public class StatCalculator {
 
     public static HeroStats addAccumulatorArrsToHero(final HeroStats base, final float[][] accs, final int[] sets, final Hero hero) {
-        int atk = (int) (base.getAtk() + mapAccumulatorArrsToFloat(0, accs)  + (sets[2] > 1 ? sets[2] / 4 * 0.35f * base.getAtk() : 0)) + hero.getBonusAtk();
-        int hp = (int) (base.getHp()   + mapAccumulatorArrsToFloat(1, accs)  + (sets[0] > 1 ? sets[0] / 2 * 0.15f * base.getHp() : 0)) + hero.getBonusHp();
-        int def = (int) (base.getDef() + mapAccumulatorArrsToFloat(2, accs)  + (sets[1] > 1 ? sets[1] / 2 * 0.15f * base.getDef() : 0)) + hero.getBonusDef();
+        int atk = (int) (base.getAtk() + mapAccumulatorArrsToFloat(0, accs)  + (sets[2] > 1 ? sets[2] / 4 * 0.35f * base.getAtk() : 0) + base.getAtk() * hero.getBonusAtkPercent() / 100f) + hero.getBonusAtk();
+        int hp = (int) (base.getHp()   + mapAccumulatorArrsToFloat(1, accs)  + (sets[0] > 1 ? sets[0] / 2 * 0.15f * base.getHp() : 0) + base.getHp() * hero.getBonusHpPercent() / 100f) + hero.getBonusHp();
+        int def = (int) (base.getDef() + mapAccumulatorArrsToFloat(2, accs)  + (sets[1] > 1 ? sets[1] / 2 * 0.15f * base.getDef() : 0) + base.getDef() * hero.getBonusDefPercent() / 100f) + hero.getBonusDef();
         int spd = (int) (base.getSpd() + mapAccumulatorArrsToFloat(10, accs) + (sets[3] > 1 ? sets[3] / 4 * 0.25f * base.getSpd() : 0) + (sets[14] > 1 ? sets[14] / 4 * 0.1f * base.getSpd() : 0)) + hero.getBonusSpeed();
         int cr = (int) (base.getCr()   + mapAccumulatorArrsToFloat(6, accs)  + (sets[4] > 1 ? sets[4] / 2 * 12 : 0)) + hero.getBonusCr();
         int cd = (int) (base.getCd()   + mapAccumulatorArrsToFloat(7, accs)  + (sets[6] > 1 ? sets[6] / 4 * 40 : 0)) + hero.getBonusCd();
@@ -21,14 +21,14 @@ public class StatCalculator {
         int res = (int) (base.getRes() + mapAccumulatorArrsToFloat(9, accs)  + (sets[9] > 1 ? sets[9] / 2 * 20 : 0)) + hero.getBonusRes();
         int dac = base.getDac() + sets[10] / 2 * 4;
 
-        float critRate = (float)Math.min(cr, 100) / 100f;
-        int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * cd/100f) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
-
+        float critRate = Math.min(cr, 100) / 100f;
+        float critDamage = Math.min(cd, 350) / 100f;
+        int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
         int ehp = (int) (hp * ((float)def/300 + 1));
         int hpps = (int) ((float)hp*spd/100);
         int ehpps = (int) ((float)ehp*spd/100);
-        int dmg = (int) ((critRate * atk * cd/100) + (1-critRate) * atk);
+        int dmg = (int) ((critRate * atk * critDamage) + (1-critRate) * atk);
         int dmgps = (int) ((float)dmg*spd/100);
         int mcdmg = (int) ((float)atk * cd/100);
         int mcdmgps = (int) ((float)mcdmg*spd/100);

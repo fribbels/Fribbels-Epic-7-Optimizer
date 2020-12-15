@@ -131,6 +131,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         ||  heroStats.getCd() < request.getInputCdMinLimit()   || heroStats.getCd() > request.getInputCdMaxLimit()
         ||  heroStats.getEff() < request.getInputEffMinLimit() || heroStats.getEff() > request.getInputEffMaxLimit()
         ||  heroStats.getRes() < request.getInputResMinLimit() || heroStats.getRes() > request.getInputResMaxLimit()
+        ||  heroStats.getCp() < request.getInputMinCpLimit() || heroStats.getCp() > request.getInputMaxCpLimit()
         ||  heroStats.getHpps() < request.getInputMinHppsLimit() || heroStats.getHpps() > request.getInputMaxHppsLimit()
         ||  heroStats.getEhp() < request.getInputMinEhpLimit() || heroStats.getEhp() > request.getInputMaxEhpLimit()
         ||  heroStats.getEhpps() < request.getInputMinEhppsLimit() || heroStats.getEhpps() > request.getInputMaxEhppsLimit()
@@ -274,7 +275,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         final HeroStats result = StatCalculator.addAccumulatorArrsToHero(base, new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr}, collectedSets, request.getHero());
                                         final long index = counter.getAndIncrement();
                                         //                                        final boolean passesFilter = true;
-                                        final boolean passesFilter = passesFilter(result, request, collectedSets);
+                                        final boolean canReforge = weapon.getLevel() == 85 || helmet.getLevel() == 85 || armor.getLevel() == 85 || necklace.getLevel() == 85 || ring.getLevel() == 85 || boots.getLevel() == 85;
+                                        final boolean passesFilter = passesFilter(result, request, collectedSets, canReforge);
                                         result.setSets(collectedSets);
                                         if (passesFilter) {
                                             final long resultsIndex = resultsCounter.getAndIncrement();
@@ -361,7 +363,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return output;
     }
 
-    public boolean passesFilter(final HeroStats heroStats, final OptimizationRequest request, final int[] sets) {
+    public boolean passesFilter(final HeroStats heroStats, final OptimizationRequest request, final int[] sets, final boolean canReforge) {
         if (heroStats.getAtk() < request.getInputAtkMinLimit() || heroStats.getAtk() > request.getInputAtkMaxLimit()
         ||  heroStats.getHp()  < request.getInputHpMinLimit()  || heroStats.getHp() > request.getInputHpMaxLimit()
         ||  heroStats.getDef() < request.getInputDefMinLimit() || heroStats.getDef() > request.getInputDefMaxLimit()
@@ -370,6 +372,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         ||  heroStats.getCd() < request.getInputCdMinLimit()   || heroStats.getCd() > request.getInputCdMaxLimit()
         ||  heroStats.getEff() < request.getInputEffMinLimit() || heroStats.getEff() > request.getInputEffMaxLimit()
         ||  heroStats.getRes() < request.getInputResMinLimit() || heroStats.getRes() > request.getInputResMaxLimit()
+        ||  heroStats.getCp() < request.getInputMinCpLimit() || heroStats.getCp() > request.getInputMaxCpLimit()
         ||  heroStats.getHpps() < request.getInputMinHppsLimit() || heroStats.getHpps() > request.getInputMaxHppsLimit()
         ||  heroStats.getEhp() < request.getInputMinEhpLimit() || heroStats.getEhp() > request.getInputMaxEhpLimit()
         ||  heroStats.getEhpps() < request.getInputMinEhppsLimit() || heroStats.getEhpps() > request.getInputMaxEhppsLimit()
@@ -386,6 +389,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 //        System.out.println(Arrays.toString(indexArray));
 
         if (request.getBoolArr()[index] == false) {
+            return false;
+        }
+
+        if (request.getInputCanReforge() && !canReforge) {
             return false;
         }
 

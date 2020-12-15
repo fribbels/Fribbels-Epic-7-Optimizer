@@ -13,52 +13,84 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Attack</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
+                            <div class="editGearStatLabel">Attack</div>   
+                            <div class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
+                            </div>              
+                            <div class="blankFormSpace"></div>         
+                            <span class="valuePadding input-holder-percent">
+                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || 0}">
+                            </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Defense</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
+                            <div class="editGearStatLabel">Defense</div> 
+                            <span class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
+                            </span>                         
+                            <div class="blankFormSpace"></div>
+                            <span class="valuePadding input-holder-percent">
+                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || 0}">
+                            </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Health</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
+                            <div class="editGearStatLabel">Health</div>  
+                            <span class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
+                            </span>     
+                            <div class="blankFormSpace"></div>                   
+                            <span class="valuePadding input-holder-percent">
+                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || 0}">
+                            </span>
+                        </div>
+                        
+                        <div class="editGearFormRow">
+                            <div class="editGearStatLabel">Speed</div>      
+                            <span class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonus || 0}">
+                            </span>           
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Speed</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusSpeed" value="${hero.bonusSpeed || 0}">
+                            <div class="editGearStatLabel">Crit Rate</div>      
+                            <span class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
+                            </span>           
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Rate</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
+                            <div class="editGearStatLabel">Crit Dmg</div>      
+                            <span class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
+                            </span>           
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Dmg</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
+                            <div class="editGearStatLabel">Eff</div>      
+                            <span class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
+                            </span>           
                         </div>
-
+                        
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Eff</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
-                        </div>
-
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Eff Res</div>
-                            <input type="number" class="editGearStatNumber" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
+                            <div class="editGearStatLabel">Res</div>      
+                            <span class="valuePadding input-holder">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
+                            </span>           
                         </div>
                     </div>
                 `,
                 focusConfirm: false,
+                showCancelButton: true,
                 preConfirm: async () => {
                     const editedHero = {
                         attack: document.getElementById('editHeroBonusAttack').value,
                         defense: document.getElementById('editHeroBonusDefense').value,
                         health: document.getElementById('editHeroBonusHealth').value,
+                        attackPercent: document.getElementById('editHeroBonusAttackPercent').value,
+                        defensePercent: document.getElementById('editHeroBonusDefensePercent').value,
+                        healthPercent: document.getElementById('editHeroBonusHealthPercent').value,
                         speed: document.getElementById('editHeroBonusSpeed').value,
                         critChance: document.getElementById('editHeroBonusCritChance').value,
                         critDamage: document.getElementById('editHeroBonusCritDamage').value,
@@ -177,6 +209,7 @@ module.exports = {
                     </div>
                 `,
                 focusConfirm: false,
+                showCancelButton: true,
                 preConfirm: async () => {
                     const editedItem = {
                         rank: document.getElementById('editGearRank').value,
@@ -186,9 +219,14 @@ module.exports = {
                             type: document.getElementById('editGearMainStatType').value,
                             value: parseInt(document.getElementById('editGearMainStatValue').value),
                         },
-                        enhance: parseInt(document.getElementById('editGearEnhance').value),
-                        level: parseInt(document.getElementById('editGearLevel').value),
+                        enhance: parseInt(document.getElementById('editGearEnhance').value) || 0,
+                        level: parseInt(document.getElementById('editGearLevel').value) || 0,
                         locked: document.getElementById('editGearLocked').checked,
+                    }
+
+                    if (!editedItem.rank || !editedItem.set || !editedItem.gear || !editedItem.main || !editedItem.main.type || !editedItem.main.value) {
+                        alert("Please make sure Rank / Set / Gear / Main stat are not empty");
+                        return false;
                     }
 
                     const substats = [];
