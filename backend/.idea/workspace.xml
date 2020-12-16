@@ -7,8 +7,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/backend_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/backend_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/backend_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/animal-sniffer-annotations-1.14.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/commons-collections-3.2.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/commons-io-2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/commons-lang3-3.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/error_prone_annotations-2.0.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/gson-2.8.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/guava-22.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/j2objc-annotations-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/jackson-jr-all-2.12.0-rc1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/javacpp-1.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/jsr305-1.3.9.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-arm.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-arm64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-x86.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-armhf.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-ppc64le.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-x86.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-macosx-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-windows-x86.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-windows-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-platform-1.78.0-1.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-arm.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-arm64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-x86.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-armhf.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-ppc64le.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-x86.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-macosx-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-windows-x86.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-windows-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-platform-4.0.0-1.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/testmf/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/testmf/test2/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/java/testmf/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/java/testmf/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +84,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/testmf/test2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/testmf" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.15632184" />
@@ -86,11 +127,11 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1739" y="386" key="#Main/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994118152" />
-    <state x="4725" y="587" width="907" height="682" key="#Project_Structure" timestamp="1608108367595">
+    <state x="4725" y="587" width="907" height="682" key="#Project_Structure" timestamp="1608109604998">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="1285" y="587" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607995075587" />
-    <state x="4725" y="587" width="907" height="682" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108367595" />
+    <state x="4725" y="587" width="907" height="682" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109604998" />
     <state x="1503" y="370" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607994013529">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -100,10 +141,10 @@
     </state>
     <state x="1792" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607992458801" />
     <state x="5232" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607996158578" />
-    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1608108318440">
+    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1608109317105">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108318440" />
+    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109317105" />
     <state x="1772" y="404" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1607994856663">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -116,11 +157,11 @@
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="4863" y="683" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997004393" />
-    <state x="4981" y="409" key="FileChooserDialogImpl" timestamp="1608108335991">
+    <state x="4981" y="409" key="FileChooserDialogImpl" timestamp="1608109325925">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607991663649" />
-    <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108335991" />
+    <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109325925" />
     <state width="2908" height="208" key="GridCell.Tab.0.bottom" timestamp="1608103117856">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
@@ -166,10 +207,10 @@
     </state>
     <state x="1550" y="358" key="SettingsEditor/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994677262" />
     <state x="4990" y="358" width="1337" height="850" key="SettingsEditor/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997825948" />
-    <state x="4982" y="797" key="classpath-attribute-editor" timestamp="1608108216529">
+    <state x="4982" y="797" key="classpath-attribute-editor" timestamp="1608109393087">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state x="4982" y="797" key="classpath-attribute-editor/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108216529" />
+    <state x="4982" y="797" key="classpath-attribute-editor/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109393087" />
     <state x="5010" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1607997486292">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
