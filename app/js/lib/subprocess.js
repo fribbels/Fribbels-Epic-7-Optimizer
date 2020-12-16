@@ -17,7 +17,8 @@ module.exports = {
     initialize: () => {
         // return;
 
-        child = spawn('java', ['-cp', `"${Files.getDataPath() + "/Gear.jar"}" com.fribbels.Main`], {shell: true, detached: false})
+        // child = spawn('java', ['-cp', `"${Files.getDataPath() + "/Gear.jar"}" com.fribbels.Main`], {shell: true, detached: false})
+        child = spawn('java', ['-jar', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
 
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);
@@ -25,7 +26,7 @@ module.exports = {
             if (code == 0 || killed == true) {
                 return;
             }
-             
+
             alert(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
         });
 
@@ -64,13 +65,13 @@ module.exports = {
                 console.log("Terminated child");
             });
         };
-        
+
         return child;
     },
 
     sendString: (str) => {
         fs.writeFile('request.txt', str, (err) => {
-            if (err) 
+            if (err)
                 return console.error(err);
             console.log('Wrote request to file');
 

@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Gear" />
+      <artifact name="backend:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/backend_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +26,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1lfb95gvcVhyXYKSdCxrr9Vsbpm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="flattenPackages" value="true" />
@@ -39,7 +42,8 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/testmf/test2" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.15632184" />
@@ -82,11 +86,11 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1739" y="386" key="#Main/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994118152" />
-    <state x="4725" y="587" key="#Project_Structure" timestamp="1607999720538">
+    <state x="4725" y="587" width="907" height="682" key="#Project_Structure" timestamp="1608108367595">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="1285" y="587" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607995075587" />
-    <state x="4725" y="587" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999720538" />
+    <state x="4725" y="587" width="907" height="682" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108367595" />
     <state x="1503" y="370" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607994013529">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -96,10 +100,10 @@
     </state>
     <state x="1792" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607992458801" />
     <state x="5232" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607996158578" />
-    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607999456749">
+    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1608108318440">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999456749" />
+    <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108318440" />
     <state x="1772" y="404" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1607994856663">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -112,11 +116,11 @@
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="4863" y="683" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997004393" />
-    <state x="4981" y="409" key="FileChooserDialogImpl" timestamp="1607999435807">
+    <state x="4981" y="409" key="FileChooserDialogImpl" timestamp="1608108335991">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607991663649" />
-    <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607999435807" />
+    <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108335991" />
     <state width="2908" height="208" key="GridCell.Tab.0.bottom" timestamp="1608103117856">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
@@ -162,6 +166,10 @@
     </state>
     <state x="1550" y="358" key="SettingsEditor/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994677262" />
     <state x="4990" y="358" width="1337" height="850" key="SettingsEditor/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997825948" />
+    <state x="4982" y="797" key="classpath-attribute-editor" timestamp="1608108216529">
+      <screen x="3440" y="0" width="3440" height="1400" />
+    </state>
+    <state x="4982" y="797" key="classpath-attribute-editor/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608108216529" />
     <state x="5010" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1607997486292">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
