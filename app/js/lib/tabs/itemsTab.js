@@ -29,15 +29,17 @@ module.exports = {
     },
 
     redraw: () => {
-        ItemsGrid.redraw();
-        setFilter = null;
-        for (var checkbox of setCheckboxes) {
-            checkbox.checked = false;
-        }
-        gearFilter = null;
-        for (var checkbox of gearCheckboxes) {
-            checkbox.checked = false;
-        }
+        ItemsGrid.redraw().then(x => {
+            ItemsGrid.refreshFilters(setFilter, gearFilter)
+            // setFilter = null;
+            // for (var checkbox of setCheckboxes) {
+            //     checkbox.checked = false;
+            // }
+            // gearFilter = null;
+            // for (var checkbox of gearCheckboxes) {
+            //     checkbox.checked = false;
+            // }
+        });
     }
 }
 

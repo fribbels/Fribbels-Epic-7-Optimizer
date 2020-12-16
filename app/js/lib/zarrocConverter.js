@@ -1,7 +1,7 @@
 var count = 0;
 module.exports = {
     initialize: () => {
-
+        allHeroData = HeroData.getAllHeroData();
     },
 
     convertItem: (item) => {
@@ -23,6 +23,29 @@ module.exports = {
         }
     },
 
+    attachItemsToHeroes: (items, heroes) => {
+        const itemsById = items.reduce(function(map, obj) {
+            map[obj.zarrocId] = obj;
+            return map;
+        }, {});
+
+        for (const hero of heroes) {
+            hero.equipment = {};
+
+            const zarrocItems = hero.zarrocGear;
+
+            for (const zarrocItem of zarrocItems) {
+                const item = itemsById[zarrocItem.ID];
+                hero.equipment[item.gear] = item;
+
+                item.equippedById = hero.id;
+                item.equippedByName = hero.name;
+            }
+        }
+
+        console.log("ITEMSBYID", itemsById)
+    },
+
     reverseConvertItem: (item) => {
         const substats = [];
         for (var substat of item.SubStats) {
@@ -37,8 +60,20 @@ module.exports = {
             "enhance": item.Enhance,
             "level": item.Ilvl,
             "main": reverseBuildStat(item.Main),
-            "substats": substats
+            "substats": substats,
+            "zarrocId": item.ID,
+            "locked": item.Locked
         }
+    },
+
+    reverseConvertHero: (hero) => {
+        const convertedHero = HeroesTab.getNewHeroByName(hero.Name);
+        convertedHero.rarity = convertedHero.data.rarity;
+        convertedHero.attribute = convertedHero.data.attribute;
+        convertedHero.role = convertedHero.data.role;
+        convertedHero.zarrocGear = hero.Gear;
+
+        return convertedHero;
     }
 }
 

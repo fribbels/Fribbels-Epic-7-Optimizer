@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 module.exports = {
     initialize: () => {
         const selector = document.getElementById('addHeroesSelector')
@@ -46,7 +48,7 @@ module.exports = {
             Api.removeHeroById(row.id).then(response => {
                 console.log("RESPONSE", response)
                 HeroesGrid.refresh(response.heroes)
-                redrawHeroInputSelector();
+                module.exports.redrawHeroInputSelector();
             });
         });
 
@@ -99,9 +101,25 @@ module.exports = {
             if (response.heroes.length == 0) {
                 // addHero("Maid Chloe")
             } else {
-                redrawHeroInputSelector();
+                module.exports.redrawHeroInputSelector();
             }
             HeroesGrid.refresh(response.heroes);
+        })
+    },
+
+    redrawHeroInputSelector: () => {
+        Api.getAllHeroes().then(getAllHeroesResponse => {
+            clearOptions("inputHeroAdd");
+            const optimizerHeroSelector = document.getElementById('inputHeroAdd')
+            const heroes = getAllHeroesResponse.heroes;
+            console.log("getAllHeroesResponse", getAllHeroesResponse)
+            for (var hero of heroes) {
+                const option = document.createElement('option');
+                option.innerHTML = hero.name;
+                option.value = hero.id;
+                    
+                optimizerHeroSelector.add(option);
+            }
         })
     },
 
@@ -111,54 +129,39 @@ module.exports = {
 
             HeroesGrid.refresh(response.heroes);
         })
-    }
+    },
+
+    getNewHeroByName: (heroName) => {
+        const allHeroData = HeroData.getAllHeroData();
+        const heroData = allHeroData[heroName];
+        const id = uuidv4();
+        const data = JSON.parse(JSON.stringify(heroData));
+
+        return {
+            id: id,
+            name: heroName,
+            data: data,
+            equipped: new Array(6)
+        }
+    },
 }
 
 function addHero(heroName) {
-    const newHero = getNewHeroByName(heroName);
+    const newHero = module.exports.getNewHeroByName(heroName);
     newHero.rarity = newHero.data.rarity;
     newHero.attribute = newHero.data.attribute;
     newHero.role = newHero.data.role;
     Api.addHeroes([newHero]).then(x => {
-        redrawHeroInputSelector();
+        module.exports.redrawHeroInputSelector();
         redrawGrid();
         Saves.autoSave();
     })
-}
-
-function getNewHeroByName(heroName) {
-    const allHeroData = HeroData.getAllHeroData();
-    const heroData = allHeroData[heroName];
-    const id = new Date().getTime();
-
-    return {
-        id: id,
-        name: heroName,
-        data: JSON.parse(JSON.stringify(heroData)),
-        equipped: new Array(6)
-    }
 }
 
 function redrawGrid() {
     Api.getAllHeroes().then(response => {
         HeroesGrid.refresh(response.heroes);
     });
-}
-
-function redrawHeroInputSelector() {
-    Api.getAllHeroes().then(getAllHeroesResponse => {
-        clearOptions("inputHeroAdd");
-        const optimizerHeroSelector = document.getElementById('inputHeroAdd')
-        const heroes = getAllHeroesResponse.heroes;
-        console.log("getAllHeroesResponse", getAllHeroesResponse)
-        for (var hero of heroes) {
-            const option = document.createElement('option');
-            option.innerHTML = hero.name;
-            option.value = hero.id;
-                
-            optimizerHeroSelector.add(option);
-        }
-    })
 }
 
 function clearPreview() {

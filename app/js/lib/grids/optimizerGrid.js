@@ -122,14 +122,21 @@ function aggregateCurrentHeroStats(heroStats) {
         }
 
         currentAggregate[stat] = {
-            max,
-            min,
-            sum,
-            avg
+            max: cleanInfinities(max),
+            min: cleanInfinities(min),
+            sum: cleanInfinities(sum),
+            avg: cleanInfinities(avg)
         }
     }
 
     console.log("Aggregated", currentAggregate);
+}
+
+function cleanInfinities(num) {
+    if (num == -Infinity || num == Infinity) {
+        return 0;
+    }
+    return num;
 }
 
 function getField(heroStats, stat) {
@@ -198,7 +205,13 @@ function columnGradient(params) {
         var percent = (value - agg.min) / (agg.max - agg.min + 1);
         percent = Math.min(1, Math.max(0, percent))
 
-        const color = gradient.rgbAt(percent);
+        console.log("AGG", agg, percent)
+
+        var color = gradient.rgbAt(percent);
+        if (agg.min == 0 && agg.max == 0) {
+            color = gradient.rgbAt(0.5)
+        } 
+
 
         return {
             backgroundColor: color.toHexString()

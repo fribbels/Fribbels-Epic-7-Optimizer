@@ -171,8 +171,8 @@ input {
 }
 
 #exportOutputText {
-  width: 90%;
-  height: 200px;
+  width: 75%;
+  height: 100px;
 }
 
 #example-table .tabulator-row {

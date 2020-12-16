@@ -21,6 +21,19 @@ module.exports = {
 
         const stringified = JSON.stringify(data);
         Files.saveFile(filename, stringified);
+        return data;
+    },
+
+    loadAutoSave: async () => {
+        const autoSavePath = defaultPath + 'autosave.json';
+
+        try {
+            const data = await Files.readFile(autoSavePath);
+            module.exports.loadSavedData(JSON.parse(data));
+            console.log(JSON.parse(data));
+        } catch (e) {
+            console.error("Failed to load autosave -", e);
+        }
     },
 
     initialize: async () => {
@@ -38,7 +51,9 @@ module.exports = {
 
             if (!filename) return;
 
-            module.exports.saveData(filename);
+            const data = await module.exports.saveData(filename);
+            console.log("DATA", data);
+            $('#saveDataSubmitOutputText').text(`Saved ${data.heroes.length} heroes and ${data.items.length} items to ${filename}`)
         });
 
         document.getElementById('loadDataSubmit').addEventListener("click", async () => {
@@ -58,8 +73,11 @@ module.exports = {
             };
 
             const data = await Files.readFile(filenames[0]);
-            module.exports.loadSavedData(JSON.parse(data));
-            console.log(JSON.parse(data));
+            const parsedData = JSON.parse(data);
+            module.exports.loadSavedData(parsedData);
+            console.log(parsedData);
+
+            $('#loadDataSubmitOutputText').text(`Loaded ${parsedData.heroes.length} heroes and ${parsedData.items.length} items from ${filenames[0]}`)
         })
     },
 

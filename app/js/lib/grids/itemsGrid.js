@@ -63,9 +63,9 @@ module.exports = {
         return null;
     },
 
-    redraw: () => {
+    redraw: async () => {
         console.log("Redraw items");
-        Api.getAllItems().then(getAllItemsResponse => {
+        return Api.getAllItems().then(getAllItemsResponse => {
             aggregateCurrentGearStats(getAllItemsResponse.items);
             itemsGrid.gridOptions.api.setRowData(getAllItemsResponse.items)
         });

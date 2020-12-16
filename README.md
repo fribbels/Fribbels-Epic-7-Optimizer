@@ -42,30 +42,30 @@ _________________
   * [Requirements](#requirements)
   * [Closing thoughts](#closing-thoughts)
   * [Contact me](#contact-me)
-  
+
 
 ## Optimizer Tab
 
 Here I'll go through the different parts of the optimizer tab, using a tank Ruele build as an example. There are a bunch of panels with options for filtering the gear that I'll walk through in detail.
-  
+
 _________________
 
 ### Settings panel
 
 ![](https://i.imgur.com/GHzzZCA.png)
 
-This panel tracks settings for the other panels to use. 
+This panel tracks settings for the other panels to use.
 
 - **Hero**: Select the hero you want to optimize for from the drop down.
-- **Force mode**: Selects the number of substats to enforce from the options selected in the force panel. (See force panel for more details). 
-- **Permutations**: Displays the current number of gear permutations possible from your filter choices. The more permutations there are, the more gear the optimizer has to calculate, and the longer the optimization will take. Try to adjust your filters to shrink this number down. 
+- **Force mode**: Selects the number of substats to enforce from the options selected in the force panel. (See force panel for more details).
+- **Permutations**: Displays the current number of gear permutations possible from your filter choices. The more permutations there are, the more gear the optimizer has to calculate, and the longer the optimization will take. Try to adjust your filters to shrink this number down.
 - **Locked items**: When checked, locked items will be used in the optimization. When unchecked, locked items are ignored.
 - **Equipped items**: When checked, equipped items will be used in the optimization. When unchecked, equipped items are ignored EXCEPT for the unit's own equipped items.
-- **Keep current**: When checked, the unit will be forced to use the gear that it currently has, and the optimizer will only try to optimize the gear slots that the unit has unequipped. 
+- **Keep current**: When checked, the unit will be forced to use the gear that it currently has, and the optimizer will only try to optimize the gear slots that the unit has unequipped.
 - **Submit**: Click to start to optimization request.
 - **Filter**: Once an optimization is complete, click to filter the results by the stats on the filter panels.
 - **Cancel**: Interrupts and cancels an ongoing optimization request.
-  
+
 _________________
 
 ### Primary stat filter
@@ -78,7 +78,7 @@ This panel defines the stats to filter your optimization results by. The left bo
 - Between 180 and 200 speed
 
 The filter will apply on your optimization results after you click Submit. Once the results have been generated, you can apply more restrictive filters by changing the numbers here, then clicking the **Filter** button. This will narrow down your results without having to do another search.
-  
+
 _________________
 
 ### Calculated stat filter
@@ -97,24 +97,24 @@ This panel is similar to the primary stats panel, but applies for calculated sta
 - **CP** -- This is the CP you would see on the unit's stat page ingame, but doesn't take skill enhances into account. Useful for optimizing unused characters with leftover gear for world boss.
 
 In this example we're looking for Ruele builds with at least 200,000 Effective HP.
-  
+
 _________________
 
 ### Substat force filter
 
 ![](https://i.imgur.com/83nF7ID.png)
 
-Note that in the settings panel previously we set Force mode to "At least 2 stats". Here we have 3 substats we want to force, and with the force mode, we're only optimizing with gear that match at least 2 of these substats: 
+Note that in the settings panel previously we set Force mode to "At least 2 stats". Here we have 3 substats we want to force, and with the force mode, we're only optimizing with gear that match at least 2 of these substats:
 - At least 3 Speed
 - At least 1 Hp %
 - At least 1 Def %
 
-For example: 
+For example:
 - A gear with substats: 4 Speed / 8% Atk / 16% Hp / 8% Res would pass this filter because it matches at least 2 stats: Hp% and Speed.
 - A gear with substats: 2 Speed / 8% Atk / 16% HP / 8% Res would fail this filter, because only 1 substat matches the filter: Hp% . This gear will not be used in the optimizations.
 
 Setting the substat force filter is useful for narrowing down the search space for the optimizer, and reducing the number of permutations it needs to go calculate will make it go faster. Do be careful about filters you set, because an overly aggressive filter could exclude good gears that are useable for this unit. You could have a gear with 2 Speed/ 40% Hp / 100 flat Def / 200 flat HP, and it would fail this filter because only Hp% matches, even though the gear would still be useful.
-  
+
 _________________
 
 ### Substat priority filter
@@ -140,7 +140,7 @@ Or for a tanky Champion Zerato, where you want a mix of tankiness, damage, and e
 ![](https://i.imgur.com/CF3KmxT.png)
 
 Choosing a good priority filter makes the optimization a lot easier since you won't have to consider irrelevant or low-rolled gears as much.
-  
+
 _________________
 
 ### Main stat and set filters
@@ -157,20 +157,20 @@ This one's fairly straightforward, we're looking for:
 If we don't care about sets as much for a tanky/damage ML Ken or something, this allows for broken sets as well. Here we only care that he has an immunity set, and no preference for any other sets, so they're left blank.
 
 ![](https://i.imgur.com/8HEsbvY.png)
-  
+
 _________________
 
 ### Optimization Results
 
 ![](https://i.imgur.com/V2UkTRc.png)
 
-Here you can see all the results from the optimization, sort by stat, and equip/lock the results. 
+Here you can see all the results from the optimization, sort by stat, and equip/lock the results.
 - Each column is color coded based on the min/max ranges of the stat on each page
 - You can use the arrows at the bottom to navigate between multiple pages of results
 - Select All/Deselect All modifies the little checkbox on each gear, or alternatively you can click individual boxes
 - Equip Selected will equip those checked gears onto the hero (while unequipping anything they were holding before)
 - Lock Selected will mark those checked gears as locked, which affects later optimizations that have "Locked Items" unchecked in settings.
-  
+
 
 ## Gear Tab
 
@@ -179,9 +179,9 @@ Here you can see all the results from the optimization, sort by stat, and equip/
 Here you can find a table of all your gears, and sort/filter them. The icons at the bottom enable filters for set and gear slot, and the X clears the filters.
 The **Score** column is a stat I made up which is similar to WSS, with the difference that it takes flat stats into consideration while WSS ignores them. The calculation is:
 
-    Score = Attack % 
-    + Defense % 
-    + Hp % 
+    Score = Attack %
+    + Defense %
+    + Hp %
     + Effectiveness
     + Effect Resistance
     + Speed * (8/4)
@@ -195,7 +195,7 @@ Its used as a measure of how well your gear rolled, scaled by the max roll for 8
 ![](https://i.imgur.com/fwqjtkF.png)
 
 You can edit existing gears or add new gears with this page, and filling in the relevant fields.
-  
+
 
 ## Heroes Tab
 
@@ -206,25 +206,25 @@ Here you can add new heroes and manage existing ones. I think most of the button
 ![](https://i.imgur.com/5uZv8lf.png)
 
 SSS Krau on self imprint with a +30 Aurius would have +1971 HP, so I added it here to let the optimizer calculate the accurate stats for him.
- 
+
 
 ## Importer tab
 
 ![](https://i.imgur.com/1nQfSy5.png)
 
 This tab lets you do various things with importing/exporting files.
-  
+
 _________________
 
 ### Creating a new gear set from screenshots
 
 Select the folder you have your screenshots in, and hit Submit to run OCR on them. Make sure the folder only contains your screenshots and nothing else. This will then output your gear.txt file, and you can export it somewhere for the next step.
-  
+
 
 ### Importing a gear set from a file
 
 Once you have the gear.txt file from the OCR step, choose the file and it will import the gear into the optimizer.
-  
+
 
 ### Save/Load gear and heroes
 
@@ -235,7 +235,7 @@ The app also does autosave to an 'autosave.json' on changes being made, but that
 ### Import gear from Zarroc optimizer
 
 If you're already a user of Zarroc's gear optimizer, this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in afterwards.
-  
+
 
 ## Getting Started
 
@@ -249,7 +249,7 @@ To get started with the app, you'll need to run image recognition on screenshots
  3. Set the emulator to 1600x900 resolution
  4. Navigate to the Manage Equipment screen on any unit
  5. Sort by max enhance
- 6. Click on each gear you want included in the optimizer, and screenshot it 
+ 6. Click on each gear you want included in the optimizer, and screenshot it
      * The default screenshot button on LDPlayer is Ctrl + 0
      * I would recommend doing a few gears first so you can check if everything is set up correctly, before doing all your gear
  7. Collect all your screenshots into a folder. And follow the instructions for **Creating a new gear set from screenshots**
@@ -264,45 +264,60 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 
 ## Closing thoughts
 
-Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well. 
+Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
-TODO list:
- - Don't overwrite heroes when using Zarroc importer 
- - Show percentage equivalent of flat stats on Optimizer page
- - Gear page, option to use more than one set/gear filter at time
- - Enable cross platform for Mac/Linux
- - Import heroes from Zarroc optimizer file
- - Arrow keys for going up and down the grid
+TODO list high priority:
+ - Memory cleanup, force garbage collection on new optimization request
+ - Clean up instructions
  - Add stats for specialty change heroes
- - Fix: Update # of permutations when a filter is removed.
- - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
- - Class/Element filter for Heroes tab
- - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
- - Add more confirmation dialogs/output text for the optimizer page
- - Fix: Don't deselect filters when editing items
- - Option to equip gear from heroes page
+ - Enable cross platform for Mac
+
+ - Show percentage equivalent of flat stats on Optimizer page
  - Improvements to the priority ranking filter
- - Simulate reforged stats on non-reforged piece
- - Save hero's filter preferences
- - Tools for optimizing HP scaling units/skill scaling
- - Add different level/awakening options
- - Optimize results with a missing piece(s)
- - Merge gear files
+ - Arrow keys for going up and down the grids
+ - Gear page, option to use more than one set/gear filter at time
+ - Fix: Update # of permutations when a filter is removed.
  - Clear out item previews on refresh
+
+ Medium priority:
+ - Enable cross platform for Linux
+ - Clean up optimization panel - getting too cluttered
+ - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
+ - Add can reforge, can enhance columns
+ - Save hero's filter preferences
+ - Option to equip gear from heroes page
+ - Customize result limit
+
+ Low priority:
+ - Investigate decrypting cache for imports
+ - Simulate reforged stats on non-reforged piece
+ - Move save/load to File menu
  - Optimize multiple heroes at once
  - Fix: Decimal numbers for crit chance imprint
- - Add canReforge, canEnhance columns
+ - Optimize results with a missing piece(s)
+ - Add different level/awakening options
+ - Tools for optimizing HP scaling units/skill scaling
+ - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
+ - Class/Element filter for Heroes tab
 
- Planned in 1.0.2
- - Fix: Crit chance uncapped in CP calculation
+ Already completed for 1.1 release:
+ - Fix: Crit chance/crit damage uncapped in CP calculation
  - Fix: Add the 3 new sets through the edit item page
  - Fix: Add a limit to color coded boxes for 100% crit and for crit dmg
  - Show current stats for the hero in the Optimizer tab
  - Button to delete items
- - CP on heroes page + optimizer screen
+ - Add CP on heroes page + optimizer screen
  - Fix: Throw error when adding invalid item
  - Add percent options for the bonus stats page
  - Add a filter for reforge-able optimization results
+ - Remove dual attack chance
+ - Fix: Damage calculations with overcapped crit damage
+ - Add more confirmation dialogs/output text for the optimizer page
+ - Merge gear files
+ - Don't overwrite heroes when using Zarroc importer
+ - Import heroes from Zarroc optimizer file
+ - Fix: Don't deselect filters when editing items
+ - Autoload save file
 
 ## Troubleshooting
 

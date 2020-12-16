@@ -30,24 +30,67 @@ module.exports = {
     },
 
     addEventListener: () => {
+        // document.getElementById('fileReadSubmit').addEventListener("click", async () => {
+        //     // const fullFilenames = [];
+        //     // document.getElementById('fileFolderSelect').files.forEach(x => fullFilenames.push(x.path));
+
+        //     // const items = await Ocr.readGearFiles(fullFilenames);
+        //     // console.log("SERIALIZING");
+        //     // var serializedStr = ItemSerializer.serialize(items);
+        //     // console.log("DESERIALIZING");
+        //     // var deserializedItems = ItemSerializer.deserialize(serializedStr); // maybe this causing memory issues?
+
+        //     // // console.log(serializedStr);
+        //     // // console.log(deserializedItems);
+
+        //     // document.getElementById('exportOutputText').value = serializedStr;
+        //     const fullFilenames = [];
+        //     document.getElementById('fileFolderSelect').files.forEach(x => fullFilenames.push(x.path));
+
+        //     Ocr.readGearFiles(fullFilenames).then((items) => {
+        //         console.log("SERIALIZING");
+        //         var serializedStr = "{\"items\":" + ItemSerializer.serialize(items) + "}";
+        //         // console.log("DESERIALIZING");
+        //         // var deserializedItems = {
+        //         //     items: ItemSerializer.deserialize(serializedStr); // maybe this causing memory issues?
+        //         // };
+
+        //         // console.log(serializedStr);
+        //         // console.log(deserializedItems);
+
+        //         document.getElementById('exportOutputText').value = serializedStr;
+        //     }).catch(e => console.log(e));
+        // });
+
+
         document.getElementById('fileReadSubmit').addEventListener("click", async () => {
-            // const fullFilenames = [];
-            // document.getElementById('fileFolderSelect').files.forEach(x => fullFilenames.push(x.path));
+            const options = {
+                title: "Open folder",
+                // defaultPath : defaultPath + 'gear.txt',
+                buttonLabel : "Open folder",
+                properties: ['openDirectory'],
+                // filters :[
+                //     {name: 'TEXT', extensions: ['txt']},
+                // ]
+            }
+            const filenames = dialog.showOpenDialogSync(currentWindow, options);
 
-            // const items = await Ocr.readGearFiles(fullFilenames);
-            // console.log("SERIALIZING");
-            // var serializedStr = ItemSerializer.serialize(items);
-            // console.log("DESERIALIZING");
-            // var deserializedItems = ItemSerializer.deserialize(serializedStr); // maybe this causing memory issues?
+            if (!filenames || filenames.length < 1) {
+                return console.error("Invalid filename")
+            };
 
-            // // console.log(serializedStr);
-            // // console.log(deserializedItems);
+            const path = filenames[0];
+            const filesInFolder = Files.listFilesInFolder(path);
+            const fullFilenames = filesInFolder.filter(x => !x.includes('debug'))
+                                               .map(x => path + "/" + x);
 
-            // document.getElementById('exportOutputText').value = serializedStr;
-            const fullFilenames = [];
-            document.getElementById('fileFolderSelect').files.forEach(x => fullFilenames.push(x.path));
+            console.log("FILENAMES", fullFilenames);
+
+            $('#fileReadSubmitOutputText').text(`Reading data from ${fullFilenames.length} screenshots..`)
 
             Ocr.readGearFiles(fullFilenames).then((items) => {
+                $('#fileReadSubmitOutputText').text(`Finished reading ${fullFilenames.length} screenshots`)
+
                 console.log("SERIALIZING");
                 var serializedStr = "{\"items\":" + ItemSerializer.serialize(items) + "}";
                 // console.log("DESERIALIZING");
@@ -59,12 +102,13 @@ module.exports = {
                 // console.log(deserializedItems);
 
                 document.getElementById('exportOutputText').value = serializedStr;
-            }).catch(e => console.log(e));
+            }).catch(e => console.error(e));
         });
+
 
         document.getElementById('saveExportOutput').addEventListener("click", async () => {
             const output = document.getElementById('exportOutputText').value;
-            console.error('defaultPath', defaultPath + 'gear.txt')
+            console.log('defaultPath', defaultPath + 'gear.txt')
             const options = {
                 title: "Save file",
                 defaultPath : defaultPath + 'gear.txt',
@@ -77,10 +121,12 @@ module.exports = {
             if (!filename) return;
 
             fs.writeFile(filename, output, (err) => {
-                if (err) 
-                    return console.err(err);
+                if (err) {
+                    console.error(err)
+                    return;
+                }
                 console.log('Exported gear.txt');
-                document.getElementById('exportOutputText').value = `Exported data to ${filename}`;
+                $('#screenshotExportOutputText').text(`Exported data to ${filename}`)
             });
         });
 
@@ -91,9 +137,9 @@ module.exports = {
                 title: "Load file",
                 defaultPath : defaultPath + 'gear.txt',
                 buttonLabel : "Load file",
-                // filters :[
-                //     {name: 'JSON', extensions: ['json']},
-                // ]
+                filters :[
+                    {name: 'TEXT', extensions: ['txt']},
+                ]
             }
             const filenames = dialog.showOpenDialogSync(currentWindow, options);
             console.log(filenames);
@@ -122,9 +168,52 @@ module.exports = {
 
                 // Db.setItems(items);
                 await Api.setItems(items);
-                await Api.setHeroes(heroes);
+                await Api.setHeroes([]);
 
-                $('#importOutputText').text('Done')
+                $('#importOutputText').text(`Imported ${items.length} items from ${path}`)
+            });
+        })
+
+
+
+        document.getElementById('importAppendFileSelect').addEventListener("click", async () => {
+            const options = {
+                title: "Load file",
+                defaultPath : defaultPath + 'gear.txt',
+                buttonLabel : "Load file",
+                filters :[
+                    {name: 'TEXT', extensions: ['txt']},
+                ]
+            }
+            const filenames = dialog.showOpenDialogSync(currentWindow, options);
+            console.log(filenames);
+
+            if (!filenames || filenames.length < 1) {
+                return console.error("Invalid filename")
+            };
+
+            const path = filenames[0];
+
+            fs.readFile(path, 'utf8', async function read(err, data) {
+                if (err) {
+                    throw err;
+                }
+
+                $('#importAppendOutputText').text('Parsing data..')
+
+                const parsedData = JSON.parse(data);
+                console.log("PARSEDDATA", parsedData);
+                const items = parsedData.items;
+                const heroes = parsedData.heroes;
+                // const deserializedData = ItemSerializer.deserialize(data);
+                // const items = deserializedData.items;
+                console.log("ITEMS", items);
+                ItemAugmenter.augmentStats(items);
+
+                // Db.setItems(items);
+                await Api.addItems(items);
+
+                $('#importAppendOutputText').text(`Appended ${items.length} items from ${path}`)
             });
         })
 
@@ -155,33 +244,83 @@ module.exports = {
         //     });
         // });
 
-        document.getElementById('importZarrocFileSubmit').addEventListener("click", async () => {
-            console.log('zarroc clicked')
-            const files = document.getElementById('importZarrocFileSelect').files;
-            if (files.length == 0) return;
+        // document.getElementById('importZarrocFileSubmit').addEventListener("click", async () => {
+        //     console.log('zarroc clicked')
+        //     const files = document.getElementById('importZarrocFileSelect').files;
+        //     if (files.length == 0) return;
 
-            const path = files[0].path;
+        //     const path = files[0].path;
 
-            fs.readFile(path, 'utf8', async function read(err, data) {
-                if (err) {
-                    throw err;
-                }
+        //     fs.readFile(path, 'utf8', async function read(err, data) {
+        //         if (err) {
+        //             throw err;
+        //         }
 
-                const parsedData = JSON.parse(data);
-                console.log("PARSEDDATA", parsedData);
-                var items = parsedData.items;
-                // const deserializedData = ItemSerializer.deserialize(data);
-                // const items = deserializedData.items;
-                console.log("ITEMS", items);
+        //         const parsedData = JSON.parse(data);
+        //         console.log("PARSEDDATA", parsedData);
+        //         var items = parsedData.items || [];
+        //         var heroes = parsedData.heroes || [];
+        //         // const deserializedData = ItemSerializer.deserialize(data);
+        //         // const items = deserializedData.items;
+        //         console.log("ITEMS", items);
 
-                items = items.map(item => ZarrocConverter.reverseConvertItem(item))
-                console.log("CONVERTEDITEMS", items);
-                ItemAugmenter.augmentStats(items);
+        //         items = items.map(item => ZarrocConverter.reverseConvertItem(item))
+        //         heroes = heroes.map(hero => ZarrocConverter.reverseConvertHero(hero))
+        //         console.log("CONVERTEDITEMS", items);
+        //         console.log("CONVERTEDHEROES", heroes);
+        //         ItemAugmenter.augmentStats(items);
 
-                // Db.setItems(items);
-                await Api.setItems(items);
-                await Api.setHeroes([]);
-            });
-        });
+        //         ZarrocConverter.attachItemsToHeroes(items, heroes);
+        //         // Db.setItems(items);
+        //         await Api.setItems(items);
+        //         await Api.setHeroes(heroes);
+
+        //         HeroesTab.redrawHeroInputSelector();
+
+
+        //     });
+        // });
+
+        document.getElementById('importZarrocSaveFileSelect').addEventListener("click", async () => {
+            const options = {
+                title: "Load file",
+                // defaultPath : defaultPath,
+                buttonLabel : "Load file",
+                filters :[
+                    {name: 'JSON', extensions: ['json']},
+                ]
+            }
+            const filenames = dialog.showOpenDialogSync(currentWindow, options);
+            console.log(filenames);
+
+            if (!filenames || filenames.length < 1) {
+                return console.error("Invalid filename")
+            };
+
+            const data = await Files.readFile(filenames[0]);
+
+            const parsedData = JSON.parse(data);
+            console.log("PARSEDDATA", parsedData);
+            var items = parsedData.items || [];
+            var heroes = parsedData.heroes || [];
+            // const deserializedData = ItemSerializer.deserialize(data);
+            // const items = deserializedData.items;
+            console.log("ITEMS", items);
+
+            items = items.map(item => ZarrocConverter.reverseConvertItem(item))
+            heroes = heroes.map(hero => ZarrocConverter.reverseConvertHero(hero))
+            console.log("CONVERTEDITEMS", items);
+            console.log("CONVERTEDHEROES", heroes);
+            ItemAugmenter.augmentStats(items);
+
+            ZarrocConverter.attachItemsToHeroes(items, heroes);
+            // Db.setItems(items);
+            await Api.setItems(items);
+            await Api.setHeroes(heroes);
+
+            HeroesTab.redrawHeroInputSelector();
+
+            $('#importZarrocSaveFileSelectOutputText').text(`Loaded ${heroes.length} heroes and ${items.length} items from ${filenames[0]}`)
+        })
     }
 }

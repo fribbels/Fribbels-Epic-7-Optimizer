@@ -550,12 +550,13 @@ window.jQuery = $;
       <p>
       Hit 'Choose File', navigate into the folder where your screenshots are located, then hit 'Submit'. </br>
       </p>
-      <input type="file" webkitdirectory id="fileFolderSelect"/>
+      <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
 
-      <br>
-      <br>
+      <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
 
-      <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit">
+
+      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit">
+      <text id="fileReadSubmitOutputText">Waiting for folder..</text>
 
       <br>
       <br>
@@ -569,6 +570,7 @@ window.jQuery = $;
       </p>
 
       <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput">
+      <text id="screenshotExportOutputText">Waiting for file..</text>
 
       <br>
       <br>
@@ -579,7 +581,12 @@ window.jQuery = $;
       After the gear set is created, hit Choose File and find your "gear.txt", and hit Import.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Choose File" id="importFileSelect"> 
+      <input type="submit" class="gearPreviewButton" value="Append data" id="importAppendFileSelect"> 
+      <text id="importAppendOutputText">Waiting for file..</text>
+      
+      <br><br>
+      
+      <input type="submit" class="gearPreviewButton" value="Overwrite data" id="importFileSelect"> 
       <text id="importOutputText">Waiting for file..</text>
 
       <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit"> -->
@@ -594,11 +601,13 @@ window.jQuery = $;
       </p>
 
       <input type="submit" class="gearPreviewButton" value="Save current data" id="saveDataSubmit">
+      <text id="saveDataSubmitOutputText">Waiting for file..</text>
 
       <br>
       <br>
 
       <input type="submit" class="gearPreviewButton" value="Load saved data" id="loadDataSubmit">
+      <text id="loadDataSubmitOutputText">Waiting for file..</text>
 
       <br>
       <br>
@@ -609,13 +618,8 @@ window.jQuery = $;
       Select the Zarroc optimizer file here.
       </p>
 
-      <input type="file" id="importZarrocFileSelect"/>
-
-      <br>
-      <br>
-
-      <input type="submit" class="gearPreviewButton" value="Import" id="importZarrocFileSubmit">
-
+      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect"> 
+      <text id="importZarrocSaveFileSelectOutputText">Waiting for file..</text>
 
     </div>
 

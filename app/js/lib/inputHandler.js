@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     Assets.initialize();
     Saves.initialize();
     Selectors.initialize();
-    ZarrocConverter.initialize();
 
     HeroesTab.initialize();
     HeroesGrid.initialize();
@@ -79,11 +78,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     Importer.addDebugFile();
     Importer.addEventListener();
+    ZarrocConverter.initialize();
     
     console.log("Document initialized")
 
     $(document).on('click','input[type=number]',function(){ this.select(); });;
     $(document).on('click','input[type=text]',function(){ this.select(); });;
+
+    Saves.loadAutoSave();
 });
 
 function copyLang() {
