@@ -277,9 +277,6 @@ async function submitOptimizationRequest() {
     const baseStats = await getHeroBaseStats(heroId);
     const heroResponse = await Api.getHeroById(heroId);
 
-    if (heroResponse.hero.name == "Adventurer Ras")
-        baseStats.hp = 6818;
-
     var items = await applyItemFilters(params, heroId);
 
     console.log("OPTIMIZING HERO", heroResponse.hero);

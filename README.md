@@ -267,19 +267,16 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
 TODO list high priority:
- - Memory cleanup, force garbage collection on new optimization request
  - Clean up instructions
- - Enable cross platform for Mac
-
+ - Multi select
+ - Arrow keys for going up and down the grids
  - Show percentage equivalent of flat stats on Optimizer page
  - Improvements to the priority ranking filter
- - Arrow keys for going up and down the grids
- - Clear out item previews on refresh
-
- - Add stats for specialty change heroes
- - Fix: Update # of permutations when a filter is removed.
+ - Enable cross platform for Mac
 
  Medium priority:
+ - Fix: Update WSS/Score when gear stats changed
+ - Clear out item previews on refresh
  - Enable cross platform for Linux
  - Clean up optimization panel - getting too cluttered
  - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
@@ -320,6 +317,9 @@ TODO list high priority:
  - Fix: Don't deselect filters when editing items
  - Autoload save file
  - Import artifact data from Zarroc file
+ - Add stats for specialty change heroes
+ - Fix: Update # of permutations when a filter is removed.
+ - Memory cleanup, attempt garbage collection on new optimization request
 
 ## Troubleshooting
 
