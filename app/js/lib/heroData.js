@@ -2,42 +2,48 @@ var heroesByName = {};
 var currentAggregate = {};
 
 module.exports = {
-    
+
     initialize: async () => {
         var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/e7dbherodata.json');
         heroesByName = JSON.parse(heroesByNameStr);
         const heroNameList = Object.keys(heroesByName);
 
-        const newHeroListResults = await fetch('https://api.epicsevendb.com/hero');
-        const newHeroListStr = await newHeroListResults.text();
-        const newHeroesList = JSON.parse(newHeroListStr).results;
-        const newHeroIdList = newHeroesList.map(x => x._id);
-        const newHeroNameList = newHeroesList.map(x => x.name)
-        const newHeroesByName = newHeroesList.reduce((map, obj) => (map[obj.name] = obj, map), {});
+        try {
+            const newHeroListResults = await fetch('https://api.epicsevendb.com/hero');
+            const newHeroListStr = await newHeroListResults.text();
+            const newHeroesList = JSON.parse(newHeroListStr).results;
+            const newHeroIdList = newHeroesList.map(x => x._id);
+            const newHeroNameList = newHeroesList.map(x => x.name)
+            const newHeroesByName = newHeroesList.reduce((map, obj) => (map[obj.name] = obj, map), {});
 
-        const diff = newHeroNameList.filter(x => !heroNameList.includes(x))
-        console.log("DIFF", diff);
+            const diff = newHeroNameList.filter(x => !heroNameList.includes(x))
+            console.log("DIFF", diff);
 
-        if (diff.length != 0) {
-            const ids = diff.map(x => newHeroesByName[x]).map(x => x._id);
-            const promises = Promise.allSettled(ids.map(x => 'https://api.epicsevendb.com/hero/' + x)
-                                                   .map(x => fetch(x)));
-            var results = await promises;
+            if (diff.length != 0) {
+                const ids = diff.map(x => newHeroesByName[x]).map(x => x._id);
+                const promises = Promise.allSettled(ids.map(x => 'https://api.epicsevendb.com/hero/' + x)
+                                                       .map(x => fetch(x)));
+                var results = await promises;
 
-            results = results.filter(x => x.status != 'rejected');
-            results = results.map(x => x.value.json())
-            results = await Promise.allSettled(results);
+                results = results.filter(x => x.status != 'rejected');
+                results = results.map(x => x.value.json())
+                results = await Promise.allSettled(results);
 
-            results = results.filter(x => x.status != 'rejected' && !x.value.error);
-            results = results.map(x => x.value.results[0])
+                results = results.filter(x => x.status != 'rejected' && !x.value.error);
+                results = results.map(x => x.value.results[0])
 
-            for (var result of results) {
-                heroesByName[result.name] = result;
+                for (var result of results) {
+                    heroesByName[result.name] = result;
+                }
+
+                if (newHeroesList.legnth >= heroNameList.length) {
+                    Files.saveFile(Files.getDataPath() + '/e7dbherodata.json', JSON.stringify(heroesByName));
+                }
             }
-
-            if (newHeroesList.legnth >= heroNameList.length) {
-                Files.saveFile(Files.getDataPath() + '/e7dbherodata.json', JSON.stringify(heroesByName));
-            }
+            console.log("Finished loading from E7DB");
+        } catch (e) {
+            console.error("Unable to finish loading from E7DB");
+            console.error(e);
         }
 
         const baseStatsByName = {};
@@ -61,7 +67,7 @@ module.exports = {
 
     getBaseStatsByName: (name) => {
         const stats = heroesByName[name].calculatedStatus.lv60SixStarFullyAwakened;
-        
+
         return {
             atk: stats.atk,
             hp: stats.hp,

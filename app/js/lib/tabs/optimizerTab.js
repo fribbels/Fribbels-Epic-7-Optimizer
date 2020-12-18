@@ -50,12 +50,14 @@ module.exports = {
             $('#optimizerGridBoots').prop('checked', false);
         });
 
+
         $('#forceNumberSelect').change(recalculateFilters);
         $('#inputHeroAdd').change(recalculateFilters);
         $('.optimizer-number-input').change(recalculateFilters);
         $('.optimizer-checkbox').change(recalculateFilters);
         $('.inputGearFilterSelect').change(recalculateFilters);
         $('.inputSetFilterSelect').change(recalculateFilters);
+        $('.icon-close').click(recalculateFilters)
         // $('#filterSliderInput').change(recalculateFilters);
 
         buildSlider('#atkSlider')
@@ -118,9 +120,9 @@ function recalculateFilters(e) {
         const rings = items.filter(x => x.gear == "Ring");
         const boots = items.filter(x => x.gear == "Boots");
 
-        permutations = weapons.length 
-                * helmets.length 
-                * armors.length 
+        permutations = weapons.length
+                * helmets.length
+                * armors.length
                 * necklaces.length
                 * rings.length
                 * boots.length
@@ -274,6 +276,9 @@ async function submitOptimizationRequest() {
     const heroId = document.getElementById('inputHeroAdd').value;
     const baseStats = await getHeroBaseStats(heroId);
     const heroResponse = await Api.getHeroById(heroId);
+
+    if (heroResponse.hero.name == "Adventurer Ras")
+        baseStats.hp = 6818;
 
     var items = await applyItemFilters(params, heroId);
 
@@ -477,7 +482,7 @@ function getSetFormat(sets) {
             throw 'Invalid Sets';
         }
         if (sets[1].length > 0) {
-            return 1;       
+            return 1;
         }
         return 2
     }
@@ -485,9 +490,9 @@ function getSetFormat(sets) {
         if (sets[1].length > 0) {
             if (sets[2].length > 0) {
                 return 5;
-            } 
+            }
             return 4;
-        } 
+        }
         if (sets[2].length > 0) {
             throw 'Invalid Sets';
         }

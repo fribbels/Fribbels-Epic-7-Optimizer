@@ -117,7 +117,7 @@ module.exports = {
                 const option = document.createElement('option');
                 option.innerHTML = hero.name;
                 option.value = hero.id;
-                    
+
                 optimizerHeroSelector.add(option);
             }
         })
@@ -167,7 +167,7 @@ function redrawGrid() {
 function clearPreview() {
     for (var i = 0; i < 6; i++) {
         const displayId = Constants.gearDisplayIdByIndex[i];
-        document.getElementById(displayId).innerHTML = "";    
+        document.getElementById(displayId).innerHTML = "";
     }
 }
 

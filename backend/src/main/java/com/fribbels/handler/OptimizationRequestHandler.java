@@ -2,6 +2,7 @@ package com.fribbels.handler;
 
 import com.fribbels.Main;
 import com.fribbels.core.StatCalculator;
+import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.OptimizationDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.enums.Set;
@@ -40,13 +41,15 @@ import java.util.stream.Collectors;
 public class OptimizationRequestHandler extends RequestHandler implements HttpHandler {
 
     private OptimizationDb optimizationDb;
+    private BaseStatsDb baseStatsDb;
 
     private static final Gson gson = new Gson();
     @Getter
     private AtomicLong counter;
 
-    public OptimizationRequestHandler(final OptimizationDb optimizationDb) {
+    public OptimizationRequestHandler(final OptimizationDb optimizationDb, final BaseStatsDb baseStatsDb) {
         this.optimizationDb = optimizationDb;
+        this.baseStatsDb = baseStatsDb;
     }
 
     @Override
@@ -147,6 +150,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     public String handleOptimizationRequest(final OptimizationRequest request) {
         optimizationDb = new OptimizationDb();
+        System.gc();
         return test(request, HeroStats.builder()
                 .atk(request.getAtk())
                 .hp(request.getHp())
@@ -171,7 +175,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return gson.toJson(response);
     }
 
-    public String test(final OptimizationRequest request, final HeroStats base) {
+    public String test(final OptimizationRequest request, final HeroStats unused) {
+        final HeroStats base = baseStatsDb.getBaseStatsByName(request.getHero().getName());
         System.out.println("REQUEST");
         //        final OptimizationRequest request = gson.fromJson(data, OptimizationRequest.class);
         addCalculatedFields(request);

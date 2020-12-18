@@ -269,15 +269,15 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 TODO list high priority:
  - Memory cleanup, force garbage collection on new optimization request
  - Clean up instructions
- - Add stats for specialty change heroes
  - Enable cross platform for Mac
 
  - Show percentage equivalent of flat stats on Optimizer page
  - Improvements to the priority ranking filter
  - Arrow keys for going up and down the grids
- - Gear page, option to use more than one set/gear filter at time
- - Fix: Update # of permutations when a filter is removed.
  - Clear out item previews on refresh
+
+ - Add stats for specialty change heroes
+ - Fix: Update # of permutations when a filter is removed.
 
  Medium priority:
  - Enable cross platform for Linux
@@ -299,6 +299,7 @@ TODO list high priority:
  - Tools for optimizing HP scaling units/skill scaling
  - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
  - Class/Element filter for Heroes tab
+ - Gear page, option to use more than one set/gear filter at time
 
  Already completed for 1.1 release:
  - Fix: Crit chance/crit damage uncapped in CP calculation
@@ -318,6 +319,7 @@ TODO list high priority:
  - Import heroes from Zarroc optimizer file
  - Fix: Don't deselect filters when editing items
  - Autoload save file
+ - Import artifact data from Zarroc file
 
 ## Troubleshooting
 

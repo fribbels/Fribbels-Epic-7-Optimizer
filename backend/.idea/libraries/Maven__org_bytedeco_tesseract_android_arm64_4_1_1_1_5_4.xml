@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.bytedeco:tesseract:android-arm64:4.1.1-1.5.4">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bytedeco/tesseract/4.1.1-1.5.4/tesseract-4.1.1-1.5.4-android-arm64.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bytedeco/tesseract/4.1.1-1.5.4/tesseract-4.1.1-1.5.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bytedeco/tesseract/4.1.1-1.5.4/tesseract-4.1.1-1.5.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

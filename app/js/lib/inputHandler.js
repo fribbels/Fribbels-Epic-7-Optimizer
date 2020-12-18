@@ -6,6 +6,7 @@ global.Constants = require('./constants');
 global.Api = require('./api');
 global.Dialog = require('./dialog');
 global.DataFetcher = require('./datafetcher');
+global.SpecialtyChange = require('./specialtychange');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -79,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     Importer.addDebugFile();
     Importer.addEventListener();
     ZarrocConverter.initialize();
-    
+
     console.log("Document initialized")
 
     $(document).on('click','input[type=number]',function(){ this.select(); });;
@@ -128,7 +129,7 @@ function error(e) {
 }
 
 function getValueFromId(id) {
-    const value = document.getElementById(id).value; 
+    const value = document.getElementById(id).value;
     console.log("Input:", "[" + value + "]");
     return value;
 }

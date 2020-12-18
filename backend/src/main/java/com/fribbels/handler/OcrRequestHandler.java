@@ -8,8 +8,10 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.leptonica.PIX;
 import org.bytedeco.tesseract.TessBaseAPI;
+import org.bytedeco.tesseract.Tesseract;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,6 +30,10 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
     private TessBaseAPI tessBaseAPI;
 
     public OcrRequestHandler() {
+        initialize();
+    }
+
+    private void initialize() {
         tessBaseAPI = new TessBaseAPI();
         System.err.println("Working Directory = " + System.getProperty("user.dir"));
         Path currentRelativePath = Paths.get("");
@@ -78,7 +84,6 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         final PIX substatsImage = pixRead(substatsFilename);
 
         tessBaseAPI.SetImage(levelImage);
-        pixDestroy(levelImage);
 
         final String enhance;
         final String level;
@@ -94,7 +99,6 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         }
 
         tessBaseAPI.SetImage(substatsImage);
-        pixDestroy(substatsImage);
 
         if (request.getShifted()) {
             substatsText = readShiftedSubstatsText();
@@ -113,6 +117,8 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
         System.out.println(ocrResponse);
 
+        pixDestroy(levelImage);
+        pixDestroy(substatsImage);
         return toJson(ocrResponse);
     }
 
@@ -121,50 +127,30 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         final PIX image = pixRead(filename);
 
         tessBaseAPI.SetImage(image);
-        pixDestroy(image);
 
         final Set set = readSet();
         final String title;
-        final String enhance;
-        final String level;
         final String main;
-        final String substats;
-        final String substatsText;
-        final String substatsNumbers;
 
         if (isShiftedSet(set)) {
             title = readShiftedTitle();
-//            enhance = readShiftedEnhance();
-//            level = readShiftedLevel();
             main = readShiftedMain();
-//            substats = readShiftedSubstats();
-//            substatsText = readShiftedSubstatsText();
-//            substatsNumbers = readShiftedSubstatsNumbers();
         } else {
             title = readTitle();
-//            enhance = readEnhance();
-//            level = readLevel();
             main = readMain();
-//            substats = readSubstats();
-//            substatsText = readSubstatsText();
-//            substatsNumbers = readSubstatsNumbers();
         }
 
         // Get OCR result
 
         final OcrResponse ocrResponse = OcrResponse.builder()
                 .title(title)
-//                .enhance(enhance)
-//                .level(level)
                 .main(main)
-//                .substats(substats)
-//                .substatsText(substatsText)
-//                .substatsNumbers(substatsNumbers)
                 .set(set.getName())
                 .build();
 
         System.out.println(ocrResponse);
 
+        pixDestroy(image);
         return toJson(ocrResponse);
     }
 
@@ -258,9 +244,8 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         outText = tessBaseAPI.GetUTF8Text();
 
         final String text = outText.getString();
+
         outText.deallocate();
-
-
         return text;
     }
 

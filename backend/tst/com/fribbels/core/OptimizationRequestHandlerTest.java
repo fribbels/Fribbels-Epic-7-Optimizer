@@ -59,7 +59,7 @@ public class OptimizationRequestHandlerTest {
 
     @BeforeEach
     public void setup() {
-        handler = new OptimizationRequestHandler(null);
+        handler = new OptimizationRequestHandler(null, null);
     }
 
     @Test

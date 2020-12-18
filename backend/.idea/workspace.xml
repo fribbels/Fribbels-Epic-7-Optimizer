@@ -7,54 +7,80 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/backend_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/backend_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/grids/itemsGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/grids/itemsGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/heroData.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/heroData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/inputHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/inputHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/itemsTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/itemsTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/zarrocConverter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/zarrocConverter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_javacpp_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_android_arm64_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_android_arm_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_android_x86_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_android_x86_64_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_linux_armhf_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_linux_ppc64le_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_linux_x86_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_linux_x86_64_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_macosx_x86_64_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_platform_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_windows_x86_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_leptonica_windows_x86_64_1_78_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_android_arm64_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_android_arm_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_android_x86_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_android_x86_64_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_linux_armhf_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_linux_ppc64le_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_linux_x86_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_linux_x86_64_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_macosx_x86_64_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_platform_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_windows_x86_4_0_0_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bytedeco_tesseract_windows_x86_64_4_0_0_1_5.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/animal-sniffer-annotations-1.14.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/commons-collections-3.2.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/commons-io-2.7.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/commons-lang3-3.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/error_prone_annotations-2.0.18.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/gson-2.8.6.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/guava-22.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/j2objc-annotations-1.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/jackson-jr-all-2.12.0-rc1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/javacpp-1.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/jsr305-1.3.9.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-arm.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-arm64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-x86.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-android-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-armhf.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-ppc64le.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-x86.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-linux-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-macosx-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-windows-x86.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5-windows-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-1.78.0-1.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/leptonica-platform-1.78.0-1.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-arm.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-arm64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-x86.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-android-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-armhf.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-ppc64le.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-x86.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-linux-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-macosx-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-windows-x86.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5-windows-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-4.0.0-1.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/tesseract-platform-4.0.0-1.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/testmf/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/testmf/test2/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/java/testmf/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/java/testmf/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/db/BaseStatsDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/db/BaseStatsDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/db/HeroDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/db/HeroDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OcrRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OcrRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/HeroStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/HeroStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/db/BaseStatsDb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/db/BaseStatsDb.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/db/HeroDb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/db/HeroDb.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OcrRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OcrRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats$HeroStatsBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats$HeroStatsBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/java/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/java/testmf/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/fribbels/core/OptimizationRequestHandlerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/fribbels/core/OptimizationRequestHandlerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../data/saves/autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/../data/saves/autosave.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -127,11 +153,11 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1739" y="386" key="#Main/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994118152" />
-    <state x="4725" y="587" width="907" height="682" key="#Project_Structure" timestamp="1608109604998">
+    <state x="4725" y="587" width="907" height="682" key="#Project_Structure" timestamp="1608110149040">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="1285" y="587" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607995075587" />
-    <state x="4725" y="587" width="907" height="682" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109604998" />
+    <state x="4725" y="587" width="907" height="682" key="#Project_Structure/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608110149040" />
     <state x="1503" y="370" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607994013529">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -141,6 +167,10 @@
     </state>
     <state x="1792" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607992458801" />
     <state x="5232" y="518" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607996158578" />
+    <state x="1330" y="545" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1608146684276">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1330" y="545" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608146684276" />
     <state x="4863" y="712" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1608109317105">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
@@ -157,50 +187,50 @@
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="4863" y="683" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997004393" />
-    <state x="4981" y="409" key="FileChooserDialogImpl" timestamp="1608109325925">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state x="1541" y="409" key="FileChooserDialogImpl" timestamp="1608146732879">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607991663649" />
+    <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608146732879" />
     <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109325925" />
-    <state width="2908" height="208" key="GridCell.Tab.0.bottom" timestamp="1608103117856">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.0.bottom" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="380" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2908" height="208" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608103117856" />
-    <state width="2908" height="208" key="GridCell.Tab.0.center" timestamp="1608103117856">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
+    <state width="2908" height="208" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608255255357" />
+    <state width="2908" height="465" key="GridCell.Tab.0.center" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="380" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2908" height="208" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608103117856" />
-    <state width="2908" height="208" key="GridCell.Tab.0.left" timestamp="1608103117856">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
+    <state width="2908" height="208" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608255255356" />
+    <state width="2908" height="465" key="GridCell.Tab.0.left" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="380" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2908" height="208" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608103117856" />
-    <state width="2908" height="208" key="GridCell.Tab.0.right" timestamp="1608103117856">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
+    <state width="2908" height="208" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608255255356" />
+    <state width="2908" height="465" key="GridCell.Tab.0.right" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="380" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994689311" />
-    <state width="2908" height="208" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608103117856" />
-    <state width="2908" height="466" key="GridCell.Tab.1.bottom" timestamp="1608024984274">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
+    <state width="2908" height="208" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608255255356" />
+    <state width="2908" height="465" key="GridCell.Tab.1.bottom" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="466" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="2908" height="465" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
     <state width="2908" height="466" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608024984274" />
-    <state width="2908" height="466" key="GridCell.Tab.1.center" timestamp="1608024984274">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.1.center" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="466" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="2908" height="465" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
     <state width="2908" height="466" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608024984274" />
-    <state width="2908" height="466" key="GridCell.Tab.1.left" timestamp="1608024984274">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.1.left" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="466" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="2908" height="465" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
     <state width="2908" height="466" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608024984274" />
-    <state width="2908" height="466" key="GridCell.Tab.1.right" timestamp="1608024984274">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="2908" height="465" key="GridCell.Tab.1.right" timestamp="1608284602123">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1375" height="466" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607994014594" />
+    <state width="2908" height="465" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608284602123" />
     <state width="2908" height="466" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608024984274" />
     <state x="4990" y="358" width="1337" height="850" key="SettingsEditor" timestamp="1607997825948">
       <screen x="3440" y="0" width="3440" height="1400" />
@@ -216,13 +246,18 @@
     </state>
     <state x="1570" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607993981752" />
     <state x="5010" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997486292" />
+    <state x="1310" y="375" width="740" height="777" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1608256166703">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1310" y="375" width="740" height="777" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608256166703" />
     <state x="4391" y="344" key="new project wizard" timestamp="1607996019681">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="4391" y="344" key="new project wizard/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607996019681" />
-    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1608014989065">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state x="1514" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1608272683130">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
+    <state x="1514" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608272683130" />
     <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608014989065" />
   </component>
 </project>

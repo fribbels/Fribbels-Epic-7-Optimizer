@@ -1,11 +1,13 @@
 package com.fribbels.db;
 
+import com.fribbels.core.SpecialStats;
 import com.fribbels.model.Hero;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HeroDb {
 
@@ -20,7 +22,9 @@ public class HeroDb {
     }
 
     public List<Hero> getAllHeroes() {
-        return heroes;
+        return heroes
+                .stream()
+                .collect(Collectors.toList());
     }
 
     public void setHeroes(final List<Hero> newHeroes) {
@@ -38,6 +42,7 @@ public class HeroDb {
                 .orElse(null);
     }
 }
+
 
 // SetHeroes
 // GetHeroById

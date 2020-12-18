@@ -1,6 +1,8 @@
 package com.fribbels.db;
 
+import com.fribbels.core.SpecialStats;
 import com.fribbels.model.HeroStats;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class BaseStatsDb {
         }
 
         final HeroStats baseStats = baseStatsByName.get(name);
-        return HeroStats.builder()
+        final HeroStats heroStats = HeroStats.builder()
                 .atk(baseStats.getAtk())
                 .hp(baseStats.getHp())
                 .def(baseStats.getDef())
@@ -37,7 +39,12 @@ public class BaseStatsDb {
                 .dmgps(baseStats.getDmgps())
                 .mcdmg(baseStats.getMcdmg())
                 .mcdmgps(baseStats.getMcdmgps())
+                .name(name)
                 .build();
+
+        SpecialStats.setScBonusStats(heroStats);
+
+        return heroStats;
     }
 
     public void setBaseStatsByName(final Map<String, HeroStats> baseStatsByName) {

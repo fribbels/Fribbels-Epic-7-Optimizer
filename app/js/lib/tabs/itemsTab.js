@@ -90,7 +90,7 @@ function setupEventListeners() {
             }
 
             ItemsGrid.refreshFilters(setFilter, gearFilter);
-        });   
+        });
         setCheckboxes.push(checkbox);
     }
 
@@ -102,14 +102,14 @@ function setupEventListeners() {
                 checkbox.checked = false;
             }
         } else {
-            
+
         }
 
         ItemsGrid.refreshFilters(setFilter, gearFilter);
-    });   
+    });
 
     // Gear
-    
+
     const gears = Object.keys(Assets.getAssetsByGear())
     console.log("SETUP", gears);
     for (var gear of gears) {
@@ -127,7 +127,7 @@ function setupEventListeners() {
             }
 
             ItemsGrid.refreshFilters(setFilter, gearFilter);
-        });   
+        });
         gearCheckboxes.push(checkbox);
     }
 
@@ -139,9 +139,9 @@ function setupEventListeners() {
                 checkbox.checked = false;
             }
         } else {
-            
+
         }
 
         ItemsGrid.refreshFilters(setFilter, gearFilter);
-    });   
+    });
 }

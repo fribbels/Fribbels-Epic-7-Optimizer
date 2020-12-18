@@ -36,6 +36,7 @@ module.exports = {
             cd: bonusStats.critDamage,
             eff: bonusStats.effectiveness,
             res: bonusStats.effectResistance,
+            scRes: bonusStats.scRes,
 
             heroId: heroId
         });

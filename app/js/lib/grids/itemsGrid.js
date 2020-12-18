@@ -78,7 +78,7 @@ module.exports = {
             setFilterComponent.setModel(null);
         } else {
             document.getElementById('checkboxImageClearSets').checked = false;
-            
+
             setFilterComponent.setModel({
                 type: 'startsWith',
                 filter: setFilter
@@ -91,7 +91,7 @@ module.exports = {
             gearFilterComponent.setModel(null);
         } else {
             document.getElementById('checkboxImageClearGears').checked = false;
-            
+
             gearFilterComponent.setModel({
                 type: 'startsWith',
                 filter: gearFilter
@@ -113,7 +113,7 @@ function columnGradient(params) {
 
         var percent = (value) / (agg.max + 1);
         const color = gradient.rgbAt(percent);
-        
+
         return {
             backgroundColor: color.toHexString()
         };

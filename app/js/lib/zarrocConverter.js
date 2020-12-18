@@ -72,6 +72,8 @@ module.exports = {
         convertedHero.attribute = convertedHero.data.attribute;
         convertedHero.role = convertedHero.data.role;
         convertedHero.zarrocGear = hero.Gear;
+        convertedHero.bonusHp = hero.Artifact.HP || 0;
+        convertedHero.bonusAtk = hero.Artifact.ATK || 0;
 
         return convertedHero;
     }

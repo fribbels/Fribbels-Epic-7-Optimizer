@@ -55,6 +55,10 @@ public class Hero {
     private int bonusEff;
     private int bonusRes;
 
+    private int bonusMaxAtkPercent;
+    private int bonusMaxDefPercent;
+    private int bonusMaxHpPercent;
+
     private int[] sets;
     private int cp;
 

@@ -8,7 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -23,33 +22,50 @@
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract-platform:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica-platform:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-arm:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-arm64:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-x86:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-x86_64:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-x86:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-x86_64:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-armhf:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-ppc64le:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:macosx-x86_64:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:windows-x86:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:windows-x86_64:1.78.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-arm:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-arm64:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-x86:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-x86_64:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-x86:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-x86_64:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-armhf:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-ppc64le:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:macosx-x86_64:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:windows-x86:4.0.0-1.5" level="project" />
-    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:windows-x86_64:4.0.0-1.5" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract-platform:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica-platform:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp-platform:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:android-arm:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:android-arm64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:android-x86:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:android-x86_64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:ios-arm64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:ios-x86_64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:linux-armhf:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:linux-arm64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:linux-ppc64le:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:linux-x86:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:linux-x86_64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:macosx-x86_64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:windows-x86:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:windows-x86_64:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-arm:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-arm64:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-x86:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:android-x86_64:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-x86:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-x86_64:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-armhf:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-arm64:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:linux-ppc64le:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:macosx-x86_64:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:windows-x86:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:leptonica:windows-x86_64:1.80.0-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:javacpp:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-arm:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-arm64:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-x86:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:android-x86_64:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-x86:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-x86_64:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-armhf:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-arm64:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:linux-ppc64le:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:macosx-x86_64:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:windows-x86:4.1.1-1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.bytedeco:tesseract:windows-x86_64:4.1.1-1.5.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
