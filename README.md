@@ -1,5 +1,6 @@
 
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -257,6 +258,7 @@ Please read these instructions carefully!
     * Do not download the Source Code options, those won't work <br><br>
 2. Install **Java 8 - 64 bit** https://www.java.com/en/download/
    * After installing, restart your computer (required!)<br><br>
+   * Mac apparently requires both the JRE and JDK. Get the JDK here: https://www.oracle.com/java/technologies/javase-downloads.html
 3. Install an emulator to run Epic 7 on
     * I used LDPlayer, but others have work as well: MeMu, BlueStacks, Nox, etc<br><br>
 4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br><br>
@@ -376,6 +378,8 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 ## Troubleshooting
 
+- Restart your computer and retry first
+- Try killing any java.exe processes in Task Manager that came from this app
 - Error message: 'java is not recognized as an internal or external command' upon opening the app. Install Java 8 64-bit version to fix.
 - After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like exactly like https://i.imgur.com/ny7uaa8.jpg in 1600x900 resolution
 - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases
@@ -393,6 +397,9 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
 - If your optimization suddenly stops working completely, check if you have one of these weird looking items in your gear tab: https://i.imgur.com/BzAgRjR.png. If one is there, edit it to fill in all the fields, but just leave the stats at 0. https://i.imgur.com/wDKDaE5.png
 - If a hero is missing from the drop down list, the data is being pulled from Epic7DB API. If the hero is available in the API but not in the app, contact me.
+- Mac - "The application "FribbelsE7Optimizer" can't be opened.
+  - Try unzipping the file using Unarchiver from the app store instead of Archive Utility. [Example](https://i.imgur.com/y9uGQcH.png)
+  - Try downloading the .dmg file if you were using the zip file.
 
 ## Contact me
 
