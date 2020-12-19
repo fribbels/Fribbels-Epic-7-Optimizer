@@ -1,6 +1,4 @@
 
-
-
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -20,7 +18,7 @@ Here's what it looks like currently:
 ![](https://i.imgur.com/vVR4ZMq.png)
 
 ## Requirements
-- Windows 64-bit
+- Windows or MacOS 64-bit
 - Java 8 installed (Please download if you don't yet have it: https://www.java.com/en/download/)
 _________________
 
@@ -360,9 +358,20 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 ## Troubleshooting
 
 - Error message: 'java is not recognized as an internal or external command' upon opening the app. Install Java 8 64-bit version to fix.
-- After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like the one in the Getting Started section, and bad screenshots may cause it to get stuck.
+- After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like exactly like https://i.imgur.com/ny7uaa8.jpg in 1600x900 resolution
 - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases
- And click on the 'FribbelsE7Optimizer-x.x.x-win.7z' file (for whatever the latest version is)
+ And click on the 'FribbelsE7Optimizer-x.x.x...' file (for whatever the latest version is)
+- If you see a "Error: EPERM: operation not permitted" error in the dev console, there are a couple potential fixes:
+  - Restart your computer, especially if you installed Java recently
+  - Your antivirus might be blocking the app, try disabling it
+  - Your file or folder contents might be compressed, uncheck this box on the folder: https://i.imgur.com/kSzTqek.png
+  - Run the app as administrator
+  - Move the app and screenshots folder to a new file location
+- Gear shows up as +45 or i90 pieces show as i20, etc
+  - Make sure your screenshots are 1600x900, and on the correct page.
+  - Make sure Epic 7 has High Quality Support enabled
+- If you get a error that contains "Current relative path is C:\Windows\system32..."
+  - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
 - If your optimization suddenly stops working completely, check if you have one of these weird looking items in your gear tab: https://i.imgur.com/BzAgRjR.png. If one is there, edit it to fill in all the fields, but just leave the stats at 0. https://i.imgur.com/wDKDaE5.png
 
 ## Contact me
