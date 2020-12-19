@@ -1,5 +1,6 @@
 
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -245,15 +246,16 @@ Please read these instructions carefully!
 
 **Installation:**
 
-1. Install Java 8 - 64 bit https://www.java.com/en/download/
+1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
+    * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
+    * Do not download the Source Code options, those won't work <br><br>
+2. Install **Java 8 - 64 bit** https://www.java.com/en/download/
    * After installing, restart your computer (required!)<br><br>
-2. Install an emulator to run Epic 7 on
+3. Install an emulator to run Epic 7 on
     * I used LDPlayer, but others have work as well: MeMu, BlueStacks, Nox, etc<br><br>
-3. Set the emulator's screen resolution to 1600 x 900. [Example](https://i.imgur.com/sj1oUfU.png)<br><br>
-4. Set Epic 7 to enable High Quality Support in settings [Example](https://i.imgur.com/iEbfVN3.png)<br><br>
-5. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
-    * There should will be a Windows and Mac version, choose the one you're running on.
-    * Do not download the Source Code options!<br><br>
+4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/sj1oUfU.png)<br><br>
+5. Set Epic 7 to enable **High Quality Support** in settings [Example](https://i.imgur.com/iEbfVN3.png)<br><br>
+
 6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br><br>
 
 
@@ -268,9 +270,9 @@ Please read these instructions carefully!
 * Most emulators have a screenshot hotkey to make this easier: Ctrl + 0 for LDPlayer
 * I would recommend screenshotting just a few gears to start with, then testing the rest of the steps to make sure the screenshots work before doing them all. I usually only screenshot the +9 to +15 gears.
 3. Collect all your screenshots into a single folder.<br><br>
-4. Go to the Importer tab, click on "Choose folder" under **Creating a new gear set from screenshots**, find your screenshots folder, and click Open Folder.<br><br>
+4. Go to the Importer tab, click on "Choose folder" under *Creating a new gear set from screenshots*, find your screenshots folder, and click Open Folder.<br><br>
 5. The app will start reading the screenshots and your progress will be displayed. Once it is done, click Export, and save the *gear.txt* file.<br><br>
-6. Under the **Importing a gear set from a file** section, click on Append data, and select your *gear.txt* file.<br><br>
+6. Under the *Importing a gear set from a file* section, click on Append data, and select your *gear.txt* file.<br><br>
 7. Now you should see your imported gears under the Gears tab.
 
 **Optimizing a unit:**
@@ -283,7 +285,7 @@ Please read these instructions carefully!
 6. Navigate the results with your arrow keys or mouse, select the result you want, and click Equip Selected.
 7. You should now see your hero using those gears.
 
-Here's a video that covers the importing process: https://www.youtube.com/watch?v=i_QW4INcZIE
+Here's a video that covers most of the importing process: https://www.youtube.com/watch?v=i_QW4INcZIE
 
 
 ## Closing thoughts
