@@ -1,4 +1,5 @@
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -52,7 +53,7 @@ _________________
 
 ### Settings panel
 
-![](https://i.imgur.com/GHzzZCA.png)
+![](https://i.imgur.com/IvYnxpk.png)
 
 This panel tracks settings for the other panels to use.
 
@@ -62,6 +63,7 @@ This panel tracks settings for the other panels to use.
 - **Locked items**: When checked, locked items will be used in the optimization. When unchecked, locked items are ignored.
 - **Equipped items**: When checked, equipped items will be used in the optimization. When unchecked, equipped items are ignored EXCEPT for the unit's own equipped items.
 - **Keep current**: When checked, the unit will be forced to use the gear that it currently has, and the optimizer will only try to optimize the gear slots that the unit has unequipped.
+- **Can reforge**: When checked, the results will only contain builds with at least one piece of 85 gear that can be reforged.
 - **Submit**: Click to start to optimization request.
 - **Filter**: Once an optimization is complete, click to filter the results by the stats on the filter panels.
 - **Cancel**: Interrupts and cancels an ongoing optimization request.
@@ -123,7 +125,7 @@ _________________
 
 **This is probably the most useful filter but please read before using it. Using this wrong can exclude good results from the search.**
 
-This filter is applied AFTER the set and accessory filter. It works by assigning a rating to each of your gears, and then filters by only the top N% of the rated gears. In this example we're mostly looking for a fast and tanky Ruele so we assign:
+This filter is applied AFTER the force and set/main stat filters. It works by assigning a rating to each of your gears based on your priority, and then filters by only the top N% of the rated gears. In this example we're mostly looking for a fast and tanky Ruele so we assign:
 - HP and Def a high rating of 3, since those are the highest priority stats
 - Speed a slightly lower rating of 2
 - And Res a rating of 1, as its a nice-to-have stat and can still be useful for her
@@ -285,6 +287,17 @@ Please read these instructions carefully!
 
 Here's a video that covers most of the importing process: https://www.youtube.com/watch?v=i_QW4INcZIE
 
+
+**Tips to get good optimization results:**
+
+* Here's some quick tips on getting the best results. This is assuming you've read the [Optimization panel](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#optimizer-tab) descriptions
+* The goal is to add filters to narrow down results so the optimizer doesn't take forever, but keep the search range wide enough that you don't lose good options.
+* Input the sets and main stats whenever possible. This is the easiest way to narrow down results.
+* Don't narrow down your results too much. If you see your # of permutations at like 10,000 or so, your filters might be too narrow, you can expand/remove some filters for more/better results.
+* Make sure to set your stat priority correctly! DPS units should have high priority on Atk / Cr / Cd / Speed. Tank units should have high priority on Hp / Def / Speed for example. Bad priorities will lead to bad results because good options get filtered out.
+* Adjust the Top n% bar on the priority filter to see what your results look like. Too high % will take a long time, but too low % will exclude good results. Most of the time I use 30-50%, sometimes lower if I want my best gear on the unit.
+* The Top n%/priority filter is applied AFTER the set and force filters. If your result permutations are already low enough after those two filters, you don't need the priority filter - it might start excluding good results.
+* If you want a certain piece of gear to stay on a hero, go to the Gear tab -> Edit Selected Item -> Equipped and equip it on them first. [Example](https://i.imgur.com/oNO9ivL.png) Then you can use the optimizer with "Keep current" checked to keep that piece on them.
 
 ## Closing thoughts
 
