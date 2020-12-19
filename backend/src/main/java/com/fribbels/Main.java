@@ -28,12 +28,12 @@ public class Main {
 
     public static boolean interrupt = false;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         executorService = Executors.newFixedThreadPool(10);
         start();
     }
 
-    public static void start() throws IOException {
+    public static void start() throws Exception {
         try {
             server = HttpServer.create(new InetSocketAddress("localhost", 8212), 0);
         } catch (BindException e) {

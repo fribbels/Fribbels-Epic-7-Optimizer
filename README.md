@@ -267,13 +267,10 @@ Each screenshot should look like this, and should be exactly 1600x900. I usually
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
 TODO list high priority:
- - Clean up instructions
-
- - Fix: Remove hero should unequip items
+ - TBD
 
  Medium priority:
  - Improvements to the priority ranking filter
- - Enable cross platform for Mac
  - Fix: Update WSS/Score when gear stats changed
  - Clear out item previews on refresh
  - Enable cross platform for Linux
@@ -283,7 +280,6 @@ TODO list high priority:
  - Save hero's filter preferences
  - Option to equip gear from heroes page
  - Customize result limit
- - Score per roll on gear tab
 
  Low priority:
  - Investigate decrypting cache for imports
@@ -311,7 +307,7 @@ TODO list high priority:
  - Add percent options for the bonus stats page
  - Add a filter for reforge-able optimization results
  - Remove dual attack chance
- - Fix: Damage calculations with overcapped crit damage
+ - Fix: Damage calculations with overcapped crit damage/chance
  - Add more confirmation dialogs/output text for the optimizer page
  - Merge gear files
  - Don't overwrite heroes when using Zarroc importer
@@ -325,6 +321,13 @@ TODO list high priority:
  - Arrow keys for going up and down the grids
  - Multi select
  - Show percentage equivalent of flat stats on Optimizer page
+ - Fix: Remove hero should unequip items
+ - Add counts for filtered items
+ - Added lock/unlock multiple items button
+ - Fix: Prevent saving invalid items without set/type/etc
+ - Fix: Update score when item is updated
+ - Enable cross platform for Mac
+ - Clean up instructions
 
 ## Troubleshooting
 

@@ -1,4 +1,5 @@
 var fs = require('fs');
+var os = require('os');
 var path = require("path");
 var electron = require('electron');
 
@@ -28,13 +29,24 @@ module.exports = {
 
     saveFile: (path, text) => {
         fs.writeFile(path, text, (err) => {
-            if (err) 
+            if (err)
                 return console.log(err);
             console.log('Exported text to: ', path);
         });
     },
 
+    isMac: () => {
+        return os.platform() == 'darwin';
+    },
+
     getRootPath: () => {
+        if (os.platform() == 'darwin') {
+            if (__dirname.includes('app.asar')) {
+                return path.resolve(electron.remote.app.getAppPath(), '../../');
+            }
+            return path.resolve(electron.remote.app.getAppPath(), '../');
+        }
+
         if (__dirname.includes('app.asar')) {
             return path.dirname(electron.remote.app.getPath("exe"));
         }

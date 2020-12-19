@@ -1,5 +1,6 @@
 package com.fribbels.handler;
 
+import com.fribbels.Main;
 import com.fribbels.enums.Set;
 import com.fribbels.request.IdRequest;
 import com.fribbels.request.Ocr2Request;
@@ -11,9 +12,8 @@ import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.leptonica.PIX;
 import org.bytedeco.tesseract.TessBaseAPI;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.AbstractMap;
 import java.util.Comparator;
 import java.util.Map;
@@ -27,18 +27,17 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
     private TessBaseAPI tessBaseAPI;
 
-    public OcrRequestHandler() {
+    public OcrRequestHandler() throws Exception {
         initialize();
     }
 
-    private void initialize() {
+    private void initialize() throws Exception {
+        final String path = new File(Main.class.getProtectionDomain().getCodeSource().getLocation()
+                .toURI()).getParentFile().getParentFile().getParentFile().getPath();
+        System.err.println("Path: " + path);
+
         tessBaseAPI = new TessBaseAPI();
-        System.err.println("Working Directory = " + System.getProperty("user.dir"));
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        System.err.println("Current relative path is: " + s);
-        System.err.println("path is: " + s + "/data/tessdata/eng.traineddata");
-        if (tessBaseAPI.Init(s + "/data/tessdata/eng.traineddata", "eng", 0) != 0) {
+        if (tessBaseAPI.Init(path + "/data/tessdata/eng.traineddata", "eng", 0) != 0) {
             System.err.println("Could not initialize tesseract.");
             System.exit(1);
         }

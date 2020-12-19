@@ -2,7 +2,9 @@ const { remote } = require('electron')
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
-const defaultPath = (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
+const defaultPath = Files.isMac() ?
+                    (Files.getDataPath() + "/saves/").replace(/\//g, "/") :
+                    (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
 
 module.exports = {
 
