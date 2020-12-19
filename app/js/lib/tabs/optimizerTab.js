@@ -334,8 +334,9 @@ function drawPreviewForGearId(id, elementId, baseStats) {
     })
 }
 
-// Unused i think
 async function drawPreview() {
+    const heroId = document.getElementById('inputHeroAdd').value;
+
     const getHeroByIdResponse = await Api.getHeroById(heroId);
     const hero = getHeroByIdResponse.hero;
     const baseStatsResponse = await Api.getBaseStats(hero.name);

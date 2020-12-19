@@ -208,9 +208,16 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
             for (int i = 0; i < equipment.length; i++) {
                 final Item previousItem = equipment[i];
 
-                previousItem.setEquippedById(null);
-                previousItem.setEquippedByName(null);
+                if (previousItem == null) {
+                    continue;
+                }
+
+                final Item dbItem = itemDb.getItemById(previousItem.getId());
+
+                dbItem.setEquippedById(null);
+                dbItem.setEquippedByName(null);
             }
+            hero.setEquipment(new HashMap<>());
         }
 
         // Remove the hero from db
@@ -263,7 +270,6 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         if (hero == null) return "";
 
         if (hero.getEquipment() != null) {
-            // Unlink the gear from the hero
             final Item[] equipment = hero.getEquipment().values().toArray(new Item[0]);
             for (int i = 0; i < equipment.length; i++) {
                 final Item item = equipment[i];
@@ -274,7 +280,6 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
                 final Item dbItem = itemDb.getItemById(item.getId());
                 dbItem.setLocked(locked);
-
             }
         }
 

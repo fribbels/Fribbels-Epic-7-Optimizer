@@ -54,10 +54,12 @@ module.exports = {
 
 
 async function editGear() {
-    const item = ItemsGrid.getSelectedGear();
-    if (!item) {
+    const items = ItemsGrid.getSelectedGear();
+    if (!items || items.length != 1) {
         return;
     }
+
+    const item = items[0]
 
     const editedItem = await Dialog.editGearDialog(item, true);
     console.warn("EDITITEMS", editedItem);

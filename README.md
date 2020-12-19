@@ -269,6 +269,8 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 TODO list high priority:
  - Clean up instructions
 
+ - Fix: Remove hero should unequip items
+
  Medium priority:
  - Improvements to the priority ranking filter
  - Enable cross platform for Mac
@@ -281,6 +283,7 @@ TODO list high priority:
  - Save hero's filter preferences
  - Option to equip gear from heroes page
  - Customize result limit
+ - Score per roll on gear tab
 
  Low priority:
  - Investigate decrypting cache for imports

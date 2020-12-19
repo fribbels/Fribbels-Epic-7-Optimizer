@@ -30,7 +30,7 @@ public class StatCalculator {
         int ehpps = (int) ((float)ehp*spd/100);
         int dmg = (int) ((critRate * atk * critDamage) + (1-critRate) * atk);
         int dmgps = (int) ((float)dmg*spd/100);
-        int mcdmg = (int) ((float)atk * cd/100);
+        int mcdmg = (int) ((float)atk * critDamage);
         int mcdmgps = (int) ((float)mcdmg*spd/100);
 
         return new HeroStats(atk, hp, def, cr, cd, eff, res, dac, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps,

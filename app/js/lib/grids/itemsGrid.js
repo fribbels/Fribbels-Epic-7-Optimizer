@@ -41,6 +41,8 @@ module.exports = {
                 {headerName: 'Locked', field: 'locked'},
             ],
             rowSelection: 'multiple',
+            pagination: true,
+            paginationPageSize: 100000,
             rowData: getAllItemsResponse.items,
             onRowSelected: onRowSelected,
         };

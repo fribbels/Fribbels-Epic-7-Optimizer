@@ -13,21 +13,21 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Attack</div>   
+                            <div class="editGearStatLabel">Attack</div>
                             <div class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
-                            </div>              
-                            <div class="blankFormSpace"></div>         
+                            </div>
+                            <div class="blankFormSpace"></div>
                             <span class="valuePadding input-holder-percent">
                                 <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Defense</div> 
+                            <div class="editGearStatLabel">Defense</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
-                            </span>                         
+                            </span>
                             <div class="blankFormSpace"></div>
                             <span class="valuePadding input-holder-percent">
                                 <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || 0}">
@@ -35,49 +35,49 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Health</div>  
+                            <div class="editGearStatLabel">Health</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
-                            </span>     
-                            <div class="blankFormSpace"></div>                   
+                            </span>
+                            <div class="blankFormSpace"></div>
                             <span class="valuePadding input-holder-percent">
                                 <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || 0}">
                             </span>
                         </div>
-                        
+
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Speed</div>      
+                            <div class="editGearStatLabel">Speed</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonus || 0}">
-                            </span>           
+                            </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Rate</div>      
+                            <div class="editGearStatLabel">Crit Rate</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
-                            </span>           
+                            </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Dmg</div>      
+                            <div class="editGearStatLabel">Crit Dmg</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
-                            </span>           
+                            </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Eff</div>      
+                            <div class="editGearStatLabel">Eff</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
-                            </span>           
+                            </span>
                         </div>
-                        
+
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Res</div>      
+                            <div class="editGearStatLabel">Res</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
-                            </span>           
+                            </span>
                         </div>
                     </div>
                 `,
@@ -105,6 +105,7 @@ module.exports = {
     },
 
     editGearDialog: async (item, edit) => {
+        console.log("EDIT", item);
         if (!item) {
             item = {
                 main: {},
@@ -121,7 +122,7 @@ module.exports = {
                 html: `
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css" rel="stylesheet">
-                        
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Equipped</div>
                             <select id="editGearEquipped" class="editGearStatSelect">
@@ -149,17 +150,17 @@ module.exports = {
                                 ${getGearRankOptionsHtml(item)}
                             </select>
                         </div>
-                        
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Level</div>
                             <input type="number" class="editGearStatNumber" id="editGearLevel" value="${item.level}">
                         </div>
-                        
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Enhance</div>
                             <input type="number" class="editGearStatNumber" id="editGearEnhance" value="${item.enhance}">
                         </div>
-                        
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Locked</div>
                             <input type="checkbox" id="editGearLocked" ${item.locked ? "checked" : ""}>
@@ -182,7 +183,7 @@ module.exports = {
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat1Value" value="${item.substats[0] ? item.substats[0].value : ""}">
                         </div>
-                        
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Substat 2</div>
                             <select id="editGearStat2Type" class="editGearStatSelect">
@@ -190,7 +191,7 @@ module.exports = {
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat2Value" value="${item.substats[1] ? item.substats[1].value : ""}">
                         </div>
-                        
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Substat 3</div>
                             <select id="editGearStat3Type" class="editGearStatSelect">
@@ -198,7 +199,7 @@ module.exports = {
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat3Value" value="${item.substats[2] ? item.substats[2].value : ""}">
                         </div>
-                        
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Substat 4</div>
                             <select id="editGearStat4Type" class="editGearStatSelect">
@@ -225,7 +226,7 @@ module.exports = {
                     }
 
                     if (!editedItem.rank || !editedItem.set || !editedItem.gear || !editedItem.main || !editedItem.main.type || !editedItem.main.value) {
-                        alert("Please make sure Rank / Set / Gear / Main stat are not empty");
+                        alert("Please make sure Type / Set / Rank / Level / Enhance / Main stat are not empty");
                         return false;
                     }
 
@@ -240,7 +241,7 @@ module.exports = {
                     if (subStatType2 != "None") substats.push({type: subStatType2, value: parseInt(document.getElementById('editGearStat2Value').value)})
                     if (subStatType3 != "None") substats.push({type: subStatType3, value: parseInt(document.getElementById('editGearStat3Value').value)})
                     if (subStatType4 != "None") substats.push({type: subStatType4, value: parseInt(document.getElementById('editGearStat4Value').value)})
-                    
+
                     editedItem.substats = substats;
 
                     ItemAugmenter.augmentStats([editedItem]);
@@ -252,12 +253,12 @@ module.exports = {
 
                     if (edit) {
                         if (equippedById == "None") {
-                            await Api.unequipItem(editedItem.id)
+                            await Api.unequipItems([editedItem.id])
                         } else {
                             editedItem.equippedById = equippedById;
                             editedItem.equippedByName = heroes.filter(x => x.id == equippedById)[0].name
                             await Api.equipItemsOnHero(equippedById, [editedItem.id])
-                        }   
+                        }
                     } else {
 
                         if (equippedById == "None") {
@@ -267,7 +268,7 @@ module.exports = {
                             editedItem.equippedByName = heroes.filter(x => x.id == equippedById)[0].name
                             await Api.addItems([editedItem]);
                             await Api.equipItemsOnHero(equippedById, [editedItem.id])
-                        }   
+                        }
                     }
 
                     console.log(editedItem);

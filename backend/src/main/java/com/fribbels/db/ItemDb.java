@@ -1,13 +1,10 @@
 package com.fribbels.db;
 
-import com.fribbels.enums.Gear;
 import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.Hero;
 import com.fribbels.model.Item;
-import com.fribbels.request.ItemsRequest;
 import org.apache.commons.lang3.StringUtils;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -25,20 +22,32 @@ public class ItemDb {
     }
 
     public void addItems(final List<Item> newItems) {
-        newItems.forEach(this::calculateWss);
-        items.addAll(newItems);
+        final List<Item> validItems = newItems.stream()
+                .filter(this::isValid)
+                .map(this::calculateWss)
+                .collect(Collectors.toList());
+
+        items.addAll(validItems);
     }
 
     public void setItems(final List<Item> newItems) {
-        newItems.forEach(this::calculateWss);
-        items = newItems;
+        final List<Item> validItems = newItems.stream()
+                .filter(this::isValid)
+                .map(this::calculateWss)
+                .collect(Collectors.toList());
+
+        items = validItems;
     }
 
     public List<Item> getAllItems() {
         return items;
     }
 
-    private void calculateWss(final Item item) {
+    private boolean isValid(final Item item) {
+        return item.getSet() != null;
+    }
+
+    public Item calculateWss(final Item item) {
         final AugmentedStats stats = item.getAugmentedStats();
         double value =
                 stats.getAttackPercent() +
@@ -59,6 +68,7 @@ public class ItemDb {
         System.out.println("VALUE" + value);
 
         item.setWss((int) Math.round(value));
+        return item;
     }
 
     public Item getItemById(final String id) {
@@ -87,6 +97,13 @@ public class ItemDb {
 
         if (existingItem == null) {
             return;
+        }
+
+        final String previousOwnerId = existingItem.getEquippedById();
+        final Hero hero = heroDb.getHeroById(previousOwnerId);
+
+        if (hero != null) {
+            hero.getEquipment().remove(existingItem.getGear());
         }
 
         existingItem.setEquippedById(null);
@@ -128,6 +145,8 @@ public class ItemDb {
             unequipItem(previousItem.getId());
         }
 
+
+        hero.getEquipment().put(item.getGear(), item);
         item.setEquippedById(heroId);
         item.setEquippedByName(hero.getName());
     }

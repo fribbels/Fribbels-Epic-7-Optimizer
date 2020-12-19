@@ -59,6 +59,8 @@ function buildGrid(heroes) {
         rowSelection: 'single',
         rowData: heroes,
         rowHeight: 52,
+        pagination: true,
+        paginationPageSize: 100000,
         onRowSelected: onRowSelected,
     };
 
