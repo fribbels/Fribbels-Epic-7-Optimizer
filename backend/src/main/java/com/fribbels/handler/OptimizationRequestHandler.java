@@ -44,6 +44,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private BaseStatsDb baseStatsDb;
 
     private static final Gson gson = new Gson();
+    private static final int SET_COUNT = 16;
     @Getter
     private AtomicLong counter;
 
@@ -356,7 +357,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final int[] output = new int[]{0, 0, 0, 0, 0, 0};
         int count = 0;
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < SET_COUNT; i++) {
             if (sets[i] > 0) {
                 for (int j = 0; j < sets[i]; j++) {
                     output[count] = i;
@@ -427,17 +428,23 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private static final int POW_13_2 = 169;
     private static final int POW_13_1 = 13;
 
+    private static final int POW_16_5 = 1048576;
+    private static final int POW_16_4 = 65536;
+    private static final int POW_16_3 = 4096;
+    private static final int POW_16_2 = 256;
+    private static final int POW_16_1 = 16;
+
     public int calculateSetIndex(final int[] indices) { // sorted, size 6, elements [0-12]
-        return indices[0] * POW_13_5
-                + indices[1] * POW_13_4
-                + indices[2] * POW_13_3
-                + indices[3] * POW_13_2
-                + indices[4] * POW_13_1
+        return indices[0] * POW_16_5
+                + indices[1] * POW_16_4
+                + indices[2] * POW_16_3
+                + indices[3] * POW_16_2
+                + indices[4] * POW_16_1
                 + indices[5];
     }
 
     public void addCalculatedFields(OptimizationRequest request) {
-        boolean[] permutations = new boolean[4826809];
+        boolean[] permutations = new boolean[16777216];
         final List<Set> inputSets1 = getSetsOrElseAll(request.getInputSetsOne());
         final List<Set> inputSets2 = getSetsOrElseAll(request.getInputSetsTwo());
         final List<Set> inputSets3 = getSetsOrElseAll(request.getInputSetsThree());
@@ -469,8 +476,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final int[] missing = new int[]{0, 0};
             for (Set set1 : inputSets1) {
                 final int[] indices = ArrayUtils.addAll(set1.getIndices(), missing);
-                for (int a = 0; a < 13; a++) {
-                    for (int b = 0; b < 13; b++) {
+                for (int a = 0; a < SET_COUNT; a++) {
+                    for (int b = 0; b < SET_COUNT; b++) {
                         final int[] indicesInstance = ArrayUtils.clone(indices);
                         indicesInstance[4] = a;
                         indicesInstance[5] = b;
@@ -491,10 +498,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final int[] missing = new int[]{0, 0, 0, 0};
             for (Set set1 : inputSets1) {
                 final int[] indices = ArrayUtils.addAll(set1.getIndices(), missing);
-                for (int a = 0; a < 13; a++) {
-                    for (int b = 0; b < 13; b++) {
-                        for (int c = 0; c < 13; c++) {
-                            for (int d = 0; d < 13; d++) {
+                for (int a = 0; a < SET_COUNT; a++) {
+                    for (int b = 0; b < SET_COUNT; b++) {
+                        for (int c = 0; c < SET_COUNT; c++) {
+                            for (int d = 0; d < SET_COUNT; d++) {
                                 final int[] indicesInstance = ArrayUtils.clone(indices);
                                 indicesInstance[2] = a;
                                 indicesInstance[3] = b;
@@ -520,8 +527,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             for (Set set1 : inputSets1) {
                 for (Set set2 : inputSets2) {
                     final int[] indices = ArrayUtils.addAll(ArrayUtils.addAll(set1.getIndices(), set2.getIndices()), missing);
-                    for (int a = 0; a < 13; a++) {
-                        for (int b = 0; b < 13; b++) {
+                    for (int a = 0; a < SET_COUNT; a++) {
+                        for (int b = 0; b < SET_COUNT; b++) {
                             final int[] indicesInstance = ArrayUtils.clone(indices);
                             indicesInstance[4] = a;
                             indicesInstance[5] = b;

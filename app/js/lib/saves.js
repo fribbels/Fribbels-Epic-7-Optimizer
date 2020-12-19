@@ -54,6 +54,7 @@ module.exports = {
             if (!filename) return;
 
             const data = await module.exports.saveData(filename);
+            await module.exports.autoSave();
             console.log("DATA", data);
             $('#saveDataSubmitOutputText').text(`Saved ${data.heroes.length} heroes and ${data.items.length} items to ${filename}`)
         });

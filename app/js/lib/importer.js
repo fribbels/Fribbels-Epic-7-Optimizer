@@ -90,8 +90,11 @@ module.exports = {
 
             $('#fileReadSubmitOutputText').text(`Reading data from ${fullFilenames.length} screenshots..`)
 
-            Ocr.readGearFiles(fullFilenames).then((items) => {
-                $('#fileReadSubmitOutputText').text(`Finished reading ${fullFilenames.length} screenshots`)
+            Ocr.readGearFiles(fullFilenames).then((data) => {
+                const items = data.items;
+                const failed = data.failed;
+
+                $('#fileReadSubmitOutputText').html(`Finished reading ${fullFilenames.length} screenshots. \n${items.length} screenshots succeded, ${failed.length} failed. ${failed.length > 0 ? "Failed files are:<br>" + failed.join("<br>") : ""} `)
 
                 console.log("SERIALIZING");
                 var serializedStr = "{\"items\":" + ItemSerializer.serialize(items) + "}";
@@ -104,7 +107,10 @@ module.exports = {
                 // console.log(deserializedItems);
 
                 document.getElementById('exportOutputText').value = serializedStr;
-            }).catch(e => console.error(e));
+            }).catch(e => {
+                console.error(e)
+                alert("Error occurred while reading screenshots\n" + e);
+            });
         });
 
 

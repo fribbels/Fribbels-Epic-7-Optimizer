@@ -6,7 +6,7 @@ function handleError(error) {
     console.error(error);
 }
 
-const options = { 
+const options = {
     langPath: Path.resolve(__dirname, '../../../tessdata/') ,
     cacheMethod: 'none',
     workerBlobURL: false,
@@ -50,7 +50,7 @@ async function setupWorkers() {
     //         console.log("Loading languages..");
     //         loadLanguages().then(x => {
     //             console.log("Initializing..");
-    //             initialize().then(x => { 
+    //             initialize().then(x => {
     //                 console.log("Setting parameters..");
     //                 setParameters().then(x => {
     //                     console.log("Done loading workers");
@@ -62,7 +62,7 @@ async function setupWorkers() {
     //                 })
     //             })
     //         })
-    //     })   
+    //     })
     // })
 }
 
@@ -129,10 +129,10 @@ module.exports = {
     },
     workerDebug: async (filename) => {
         return await numberWorker.recognize(filename);
-    }, 
+    },
 
     readGearFile: async (filename) => {
-        const image = await Jimp.read(filename); 
+        const image = await Jimp.read(filename);
         const c = image.getPixelColor(88, 162); // returns the colour of that pixel e.g. 0xFFFFFFFF
         var shifted = false;
         if (c < 260) {
@@ -193,7 +193,7 @@ module.exports = {
         const mainStatText = split[0];
         const mainStatNumbers = split[1];
 
-        // SUBSTATS 
+        // SUBSTATS
         // console.log("substats", response.substats);
         // const subStatArr = response.substats.split('\n').filter(x => x.length > 0);
         // console.log("subStatArr", subStatArr);
@@ -222,7 +222,7 @@ module.exports = {
     },
 
     readGearFileOld: async (filename) => {
-        const image = await Jimp.read(filename); 
+        const image = await Jimp.read(filename);
         const clone = image.clone();
         // Get the necessary gear section
         clone.crop(20, 180, 400, 600)
@@ -295,84 +295,94 @@ module.exports = {
         var count = 1;
 
         var length = filenames.filter(x => !x.includes('debug')).length;
+        var failed = [];
 
         for (var filename of filenames) {
-            if (filename.includes("inverted") || filename.includes("debug")) {
-                await fs.unlink(filename, err => {if (err) console.log(err)})
-                continue;
-            }
+            try {
+                $('#exportOutputText').val("Succeeded: " + gear.length + " / " + length + "\nFailed: " + failed.length + " / " + length)
 
-            console.log("COUNT", count);
-            count++;
-
-            if (count % 100 == 0) {
-                console.log("REINITIALIZE BEGIN")
-                await setupWorkers();
-                console.log("REINITIALIZE END")
-            }
-
-            const converted = await module.exports.readGearFile(filename);
-            gear.push(converted);
-            console.log(gear.length + " / " + length);
-            $('#exportOutputText').val(gear.length + " / " + length)
-
-            const pathSteps = filename.split("\\");
-            const details = `TEST ${converted.level} ${converted.enhance} ${converted.rank} ${converted.gear} ${converted.set} --- ${converted.main.type} ${converted.main.value} --- ${converted.substats.map(x => "" + x.type + " " + x.value).join(" ")}`;
-            pathSteps[pathSteps.length-1] = details + ".png";
-            const newFilename = pathSteps.join("\\");
-
-            if (testEnabled && filename.includes("TEST")) {
-                const parts = filename.split(".png")[0].split("---")
-
-                const gearData = parts[0].split(" ");
-                const parsedLevel = gearData[1];
-                const parsedEnhance = gearData[2];
-                const parsedRank = gearData[3];
-                const parsedGear = gearData[4];
-                const parsedSet = gearData[5];
-
-                const mainData = parts[1].split(" ");
-                const parsedMainType = mainData[1]
-                const parsedMainValue = parseInt(mainData[2])
-
-
-                const subData = parts[2].split(" ").filter(x => x.length > 0);
-                const parsedSubstats = [];
-                for (var i = 0; i < subData.length; i += 2) {
-                    parsedSubstats.push({
-                        type: subData[i],
-                        value: parseInt(subData[i+1])
-                    })
+                if (filename.includes("inverted") || filename.includes("debug")) {
+                    await fs.unlink(filename, err => {if (err) console.log(err)})
+                    continue;
                 }
 
-                if (parsedLevel != converted.level
-                ||  parsedEnhance != converted.enhance
-                ||  parsedRank != converted.rank
-                ||  parsedGear != converted.gear
-                ||  parsedSet != converted.set
-                ||  parsedMainType != converted.main.type
-                ||  parsedMainValue != converted.main.value
-                ||  parsedSubstats.length != converted.substats.length) {
-                    console.log(parsedLevel, parsedEnhance, parsedRank, parsedGear, parsedSet, parsedMainType, parsedMainValue, parsedSubstats)
-                    throw 'INVALID main data ' + filename;
+                console.log("COUNT", count);
+                count++;
+
+                if (count % 100 == 0) {
+                    console.log("REINITIALIZE BEGIN")
+                    await setupWorkers();
+                    console.log("REINITIALIZE END")
                 }
 
-                for (var i = 0; i < converted.substats.length; i++) {
-                    const substat = converted.substats[i];
-                    if (parsedSubstats[i].type != substat.type || parsedSubstats[i].value != substat.value) {
-                        console.log(substat);
-                        console.log(parsedSubstats[i]);
-                        throw 'INVALID sub data ' + filename;
+                const converted = await module.exports.readGearFile(filename);
+                gear.push(converted);
+                console.log(gear.length + " / " + length);
+
+                const pathSteps = filename.split("\\");
+                const details = `TEST ${converted.level} ${converted.enhance} ${converted.rank} ${converted.gear} ${converted.set} --- ${converted.main.type} ${converted.main.value} --- ${converted.substats.map(x => "" + x.type + " " + x.value).join(" ")}`;
+                pathSteps[pathSteps.length-1] = details + ".png";
+                const newFilename = pathSteps.join("\\");
+
+                if (testEnabled && filename.includes("TEST")) {
+                    const parts = filename.split(".png")[0].split("---")
+
+                    const gearData = parts[0].split(" ");
+                    const parsedLevel = gearData[1];
+                    const parsedEnhance = gearData[2];
+                    const parsedRank = gearData[3];
+                    const parsedGear = gearData[4];
+                    const parsedSet = gearData[5];
+
+                    const mainData = parts[1].split(" ");
+                    const parsedMainType = mainData[1]
+                    const parsedMainValue = parseInt(mainData[2])
+
+
+                    const subData = parts[2].split(" ").filter(x => x.length > 0);
+                    const parsedSubstats = [];
+                    for (var i = 0; i < subData.length; i += 2) {
+                        parsedSubstats.push({
+                            type: subData[i],
+                            value: parseInt(subData[i+1])
+                        })
+                    }
+
+                    if (parsedLevel != converted.level
+                    ||  parsedEnhance != converted.enhance
+                    ||  parsedRank != converted.rank
+                    ||  parsedGear != converted.gear
+                    ||  parsedSet != converted.set
+                    ||  parsedMainType != converted.main.type
+                    ||  parsedMainValue != converted.main.value
+                    ||  parsedSubstats.length != converted.substats.length) {
+                        console.log(parsedLevel, parsedEnhance, parsedRank, parsedGear, parsedSet, parsedMainType, parsedMainValue, parsedSubstats)
+                        throw 'INVALID main data ' + filename;
+                    }
+
+                    for (var i = 0; i < converted.substats.length; i++) {
+                        const substat = converted.substats[i];
+                        if (parsedSubstats[i].type != substat.type || parsedSubstats[i].value != substat.value) {
+                            console.log(substat);
+                            console.log(parsedSubstats[i]);
+                            throw 'INVALID sub data ' + filename;
+                        }
                     }
                 }
-            }
 
             // fs.rename(filename, newFilename, function(err) {
             //     if ( err ) console.log('ERROR: ' + err);
             // });
+            } catch (e) {
+                console.error(e);
+                failed.push(filename);
+            }
         }
 
-        return gear;
+        return {
+            items: gear,
+            failed: failed
+        };
     },
 
     readGearFiles2: async (filenames) => {
@@ -386,7 +396,7 @@ module.exports = {
             // Save inverted image
             const regularPath = filename;
             const invertedPath = regularPath + "_inverted.png";
-            const image = await Jimp.read(regularPath); 
+            const image = await Jimp.read(regularPath);
             await image.invert().greyscale().brightness(-0.3).contrast(0.5).writeAsync(invertedPath);
 
             console.log("Start reading gear")

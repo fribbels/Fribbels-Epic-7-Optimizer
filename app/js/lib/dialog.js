@@ -338,6 +338,9 @@ function getGearSetOptionsHtml(item) {
 <option value="ResistSet" ${set == "ResistSet" ? "selected" : ""}>Resist</option>
 <option value="UnitySet" ${set == "UnitySet" ? "selected" : ""}>Unity</option>
 <option value="ImmunitySet" ${set == "ImmunitySet" ? "selected" : ""}>Immunity</option>
+<option value="PenetrationSet" ${set == "PenetrationSet" ? "selected" : ""}>Penetration</option>
+<option value="InjurySet" ${set == "InjurySet" ? "selected" : ""}>Injury</option>
+<option value="RevengeSet" ${set == "RevengeSet" ? "selected" : ""}>Revenge</option>
 `
 }
 

@@ -1,4 +1,5 @@
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -121,7 +122,9 @@ _________________
 
 ![](https://i.imgur.com/i60uzCg.png)
 
-This is probably the most useful filter. It works by assigning a rating to each of your gears, and then filters by only the top N% of the rated gears. In this example we're mostly looking for a fast and tanky Ruele so we assign:
+**This is probably the most useful filter but please read before using it. Using this wrong can exclude good results from the search.**
+
+This filter is applied AFTER the set and accessory filter. It works by assigning a rating to each of your gears, and then filters by only the top N% of the rated gears. In this example we're mostly looking for a fast and tanky Ruele so we assign:
 - HP and Def a high rating of 3, since those are the highest priority stats
 - Speed a slightly lower rating of 2
 - And Res a rating of 1, as its a nice-to-have stat and can still be useful for her
@@ -129,7 +132,7 @@ This is probably the most useful filter. It works by assigning a rating to each 
 
 Then, we set the Top % slider to 30%. This will take all your weapons, score them based on the priority defined above, then only considers the Top 30% of the scores for optimization. Then it does the same for helmets, armors, etc, and then the optimizer generates permutations based on those Top 30% gears.
 
-**The Top % slider must be set to something other than 100% for this filter to work**, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 20-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 20% is where you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
+**The Top % slider must be set to something other than 100% for this filter to work**, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 30-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 30% is where you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
 
 An example priority filter for a DPS unit like Arby could be something like this, where you only want damage stats:
 
@@ -162,19 +165,19 @@ _________________
 
 ### Optimization Results
 
-![](https://i.imgur.com/V2UkTRc.png)
+![](https://i.imgur.com/7KakkCR.png)
 
 Here you can see all the results from the optimization, sort by stat, and equip/lock the results.
+- The top row shows your currently equipped gear stats
 - Each column is color coded based on the min/max ranges of the stat on each page
 - You can use the arrows at the bottom to navigate between multiple pages of results
 - Select All/Deselect All modifies the little checkbox on each gear, or alternatively you can click individual boxes
 - Equip Selected will equip those checked gears onto the hero (while unequipping anything they were holding before)
 - Lock Selected will mark those checked gears as locked, which affects later optimizations that have "Locked Items" unchecked in settings.
 
-
 ## Gear Tab
 
-![](https://i.imgur.com/94DbEKc.png)
+![](https://i.imgur.com/EVfm8z3.png)
 
 Here you can find a table of all your gears, and sort/filter them. The icons at the bottom enable filters for set and gear slot, and the X clears the filters.
 The **Score** column is a stat I made up which is similar to WSS, with the difference that it takes flat stats into consideration while WSS ignores them. The calculation is:
@@ -203,14 +206,13 @@ You can edit existing gears or add new gears with this page, and filling in the 
 
 Here you can add new heroes and manage existing ones. I think most of the buttons are fairly self explanatory, the one thing worth noting is the **Add Bonus Stats** page, which lets you add artifact/imprint stats to the hero for optimization.
 
-![](https://i.imgur.com/5uZv8lf.png)
+![](https://i.imgur.com/tAytvsb.png)
 
-SSS Krau on self imprint with a +30 Aurius would have +1971 HP, so I added it here to let the optimizer calculate the accurate stats for him.
-
+SSS Krau with +30 Aurius will have 91 Atk / 819 Hp / and 18% imprint Hp.
 
 ## Importer tab
 
-![](https://i.imgur.com/1nQfSy5.png)
+![](https://i.imgur.com/gbgjOgv.png)
 
 This tab lets you do various things with importing/exporting files.
 
@@ -234,42 +236,64 @@ The app also does autosave to an 'autosave.json' on changes being made, but that
 
 ### Import gear from Zarroc optimizer
 
-If you're already a user of Zarroc's gear optimizer, this lets you import your gear directly from your existing save file. It won't import heroes though, so you'll have to add those back in afterwards.
+If you're already a user of Zarroc's gear optimizer, this lets you import your gear directly from your existing save file. Gear, heroes, and artifacts will be imported.
 
 
 ## Getting Started
 
-To get started with the app, you'll need to run image recognition on screenshots of your gear, which is built into the Importer tab. If you've previously used the Zarroc optimizer, you can import the gear file directly from that into this app, with the instructions above.
+Please read these instructions carefully!
 
-**Steps:**
- 1. Install Java (https://www.java.com/en/download/) if you don't already have it, and restart your computer after. Then download the latest release of this app and extract it. The app should be run using FribbelsE7Optimizer.exe
-     * On the releases page, download the option that looks like FribbelsE7Optimizer-x.x.x-win.7z, not the 'Source code' options
- 2. Download an emulator to run E7 on
-     * I used LDPlayer for all my testing as it works best for my machine, but other emulators are probably fine
- 3. Set the emulator to 1600x900 resolution
- 4. Navigate to the Manage Equipment screen on any unit
- 5. Sort by max enhance
- 6. Click on each gear you want included in the optimizer, and screenshot it
-     * The default screenshot button on LDPlayer is Ctrl + 0
-     * I would recommend doing a few gears first so you can check if everything is set up correctly, before doing all your gear
- 7. Collect all your screenshots into a folder. And follow the instructions for **Creating a new gear set from screenshots**
- 8. Click below to see a video example of how to import the gear:
+**Installation:**
 
-[![Alt text](https://img.youtube.com/vi/i_QW4INcZIE/0.jpg)](https://www.youtube.com/watch?v=i_QW4INcZIE)
+1. Install Java 8 - 64 bit https://www.java.com/en/download/
+   * After installing, restart your computer (required!)<br><br>
+2. Install an emulator to run Epic 7 on
+    * I used LDPlayer, but others have work as well: MeMu, BlueStacks, Nox, etc<br><br>
+3. Set the emulator's screen resolution to 1600 x 900. [Example](https://i.imgur.com/sj1oUfU.png)<br><br>
+4. Set Epic 7 to enable High Quality Support in settings [Example](https://i.imgur.com/iEbfVN3.png)<br><br>
+5. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
+    * There should will be a Windows and Mac version, choose the one you're running on.
+    * Do not download the Source Code options!<br><br>
+6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br><br>
 
-Each screenshot should look like this, and should be exactly 1600x900. I usually only screenshot gears that are +9 or above, as anything lower probably won't be useful for the optimization results anyways.
 
-![](https://i.imgur.com/ny7uaa8.jpg)
+**Importing gear screenshots:**
+
+1. Open the Gear Management screen in Epic 7 and sort by Max Enhance<br><br>
+2. Click each of the gears that you want to import, and screenshot it. Every screenshot should be 1600x900 and look EXACTLY like this:
+
+![https://i.imgur.com/ny7uaa8.jpg](https://i.imgur.com/ny7uaa8.jpg)
+
+
+* Most emulators have a screenshot hotkey to make this easier: Ctrl + 0 for LDPlayer
+* I would recommend screenshotting just a few gears to start with, then testing the rest of the steps to make sure the screenshots work before doing them all. I usually only screenshot the +9 to +15 gears.
+3. Collect all your screenshots into a single folder.<br><br>
+4. Go to the Importer tab, click on "Choose folder" under **Creating a new gear set from screenshots**, find your screenshots folder, and click Open Folder.<br><br>
+5. The app will start reading the screenshots and your progress will be displayed. Once it is done, click Export, and save the *gear.txt* file.<br><br>
+6. Under the **Importing a gear set from a file** section, click on Append data, and select your *gear.txt* file.<br><br>
+7. Now you should see your imported gears under the Gears tab.
+
+**Optimizing a unit:**
+
+1. Add a unit on the Heroes tab, by selecting their name and clicking Add New Hero.
+2. Select the new hero and click Add Bonus Stats. Here add any stats from your artifact, imprint, or EE. [Example](https://i.imgur.com/2aC22mN.png)
+3. Go to the Optimizer tab, then select the hero. Fill in the main stats and set that you want into the right panel. [Example](https://i.imgur.com/3yfbkrE.png)
+4. Fill in any filters you would like to apply. Each filter is described in detail in this section: https://github.com/fribbels/Fribbels-Epic-7-Optimizer#optimizer-tab
+5. Hit Submit, and after processing a bit you should see a table of results.
+6. Navigate the results with your arrow keys or mouse, select the result you want, and click Equip Selected.
+7. You should now see your hero using those gears.
+
+Here's a video that covers the importing process: https://www.youtube.com/watch?v=i_QW4INcZIE
 
 
 ## Closing thoughts
 
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
-TODO list high priority:
- - TBD
+**TODO - high priority:**
+ - Release 1.1.0
 
- Medium priority:
+ **Medium priority:**
  - Improvements to the priority ranking filter
  - Fix: Update WSS/Score when gear stats changed
  - Clear out item previews on refresh
@@ -281,12 +305,12 @@ TODO list high priority:
  - Option to equip gear from heroes page
  - Customize result limit
 
- Low priority:
+ **Low priority:**
  - Investigate decrypting cache for imports
  - Simulate reforged stats on non-reforged piece
  - Move save/load to File menu
  - Optimize multiple heroes at once
- - Fix: Decimal numbers for crit chance imprint
+ - Fix: Decimal numbers for imprints
  - Optimize results with a missing piece(s)
  - Add different level/awakening options
  - Tools for optimizing HP scaling units/skill scaling
@@ -295,8 +319,9 @@ TODO list high priority:
  - Gear page, option to use more than one set/gear filter at time
  - Score per roll column in gear
  - Gear enhance filters
+ - Option to select a location to save zarroc import
 
- Already completed for 1.1 release:
+**Version 1.1.0 Release:**
  - Fix: Crit chance/crit damage uncapped in CP calculation
  - Fix: Add the 3 new sets through the edit item page
  - Fix: Add a limit to color coded boxes for 100% crit and for crit dmg
@@ -310,7 +335,6 @@ TODO list high priority:
  - Fix: Damage calculations with overcapped crit damage/chance
  - Add more confirmation dialogs/output text for the optimizer page
  - Merge gear files
- - Don't overwrite heroes when using Zarroc importer
  - Import heroes from Zarroc optimizer file
  - Fix: Don't deselect filters when editing items
  - Autoload save file
@@ -327,7 +351,9 @@ TODO list high priority:
  - Fix: Prevent saving invalid items without set/type/etc
  - Fix: Update score when item is updated
  - Enable cross platform for Mac
- - Clean up instructions
+ - Update instructions
+ - Autosave more frequently, autosave on manual save
+ - Fix calculations for 3 new sets
 
 ## Troubleshooting
 
@@ -340,3 +366,5 @@ TODO list high priority:
 ## Contact me
 
 Feel free to contact me on discord at fribbels#7526 with questions or comments. If you ran into any issues, please check out the troubleshooting steps above first.
+
+If you want to show support for the optimizer, you can [buy me a coffee!](https://www.buymeacoffee.com/fribbels)

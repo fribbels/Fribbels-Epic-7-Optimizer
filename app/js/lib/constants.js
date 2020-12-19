@@ -1,19 +1,22 @@
 module.exports = {
 
     setsByIndex: [
-        "HealthSet", 
-        "DefenseSet", 
-        "AttackSet", 
-        "SpeedSet", 
-        "CriticalSet", 
-        "HitSet", 
-        "DestructionSet", 
-        "LifestealSet", 
-        "CounterSet", 
-        "ResistSet", 
-        "UnitySet", 
-        "RageSet", 
-        "ImmunitySet"
+        "HealthSet",
+        "DefenseSet",
+        "AttackSet",
+        "SpeedSet",
+        "CriticalSet",
+        "HitSet",
+        "DestructionSet",
+        "LifestealSet",
+        "CounterSet",
+        "ResistSet",
+        "UnitySet",
+        "RageSet",
+        "ImmunitySet",
+        "PenetrationSet",
+        "RevengeSet",
+        "InjurySet"
     ],
 
     piecesBySetIndex: [
@@ -29,7 +32,10 @@ module.exports = {
         2,
         2,
         4,
-        2
+        2,
+        2,
+        4,
+        4
     ],
 
     indexByGearType: {

@@ -37,7 +37,8 @@ module.exports = {
             const bonusStats = await Dialog.editHeroDialog(row);
             console.warn("BONUS STATS", bonusStats, row.id);
 
-            Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
+            await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
+            Saves.autoSave();
         });
 
         document.getElementById('removeHeroesSubmit').addEventListener("click", async () => {
@@ -49,6 +50,7 @@ module.exports = {
                 console.log("RESPONSE", response)
                 HeroesGrid.refresh(response.heroes)
                 module.exports.redrawHeroInputSelector();
+                Saves.autoSave();
             });
         });
 
@@ -62,6 +64,7 @@ module.exports = {
                 HeroesGrid.refresh(response.heroes)
                 redrawGrid();
                 clearPreview();
+                Saves.autoSave();
             })
         });
 
@@ -75,6 +78,7 @@ module.exports = {
                 HeroesGrid.refresh(response.heroes)
                 redrawGrid();
                 clearPreview();
+                Saves.autoSave();
             })
         });
 
@@ -88,6 +92,7 @@ module.exports = {
                 HeroesGrid.refresh(response.heroes)
                 redrawGrid();
                 clearPreview();
+                Saves.autoSave();
             })
         });
 

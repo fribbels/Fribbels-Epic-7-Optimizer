@@ -58,7 +58,7 @@ public class StatCalculator {
 
     public static float[] buildStatAccumulatorArr(final HeroStats base, final Item item) {
         final AugmentedStats stats = item.getAugmentedStats();
-        final float[] statAccumulatorArr = new float[12];
+        final float[] statAccumulatorArr = new float[15];
 
         // Add base
         statAccumulatorArr[0] += stats.getAttack() + stats.getAttackPercent()/100f * base.getAtk();

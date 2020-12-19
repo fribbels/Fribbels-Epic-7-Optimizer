@@ -64,7 +64,10 @@ async function editGear() {
     const editedItem = await Dialog.editGearDialog(item, true);
     console.warn("EDITITEMS", editedItem);
 
-    Api.editItems([editedItem]).then(module.exports.redraw);
+    await Api.editItems([editedItem]);
+
+    module.exports.redraw();
+    Saves.autoSave();
 }
 
 async function addGear() {
@@ -72,6 +75,7 @@ async function addGear() {
     console.warn("NEWITEM", newItem);
 
     module.exports.redraw();
+    Saves.autoSave();
 }
 
 async function removeGear() {
@@ -80,6 +84,7 @@ async function removeGear() {
     await Api.deleteItems(items.map(x => x.id));
 
     module.exports.redraw();
+    Saves.autoSave();
 }
 
 async function unequipGear() {
@@ -88,6 +93,7 @@ async function unequipGear() {
     await Api.unequipItems(items.map(x => x.id));
 
     module.exports.redraw();
+    Saves.autoSave();
 }
 
 async function lockGear() {
@@ -96,6 +102,7 @@ async function lockGear() {
     await Api.lockItems(items.map(x => x.id));
 
     module.exports.redraw();
+    Saves.autoSave();
 }
 
 async function unlockGear() {
@@ -104,6 +111,7 @@ async function unlockGear() {
     await Api.unlockItems(items.map(x => x.id));
 
     module.exports.redraw();
+    Saves.autoSave();
 }
 
 function setupEventListeners() {
