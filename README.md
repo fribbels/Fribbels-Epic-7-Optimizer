@@ -133,7 +133,7 @@ This filter is applied AFTER the force and set/main stat filters. It works by as
 
 Then, we set the Top % slider to 30%. This will take all your weapons, score them based on the priority defined above, then only considers the Top 30% of the scores for optimization. Then it does the same for helmets, armors, etc, and then the optimizer generates permutations based on those Top 30% gears.
 
-**The Top % slider must be set to something other than 100% for this filter to work**, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 30-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 30% is where you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
+**The Top % slider must be set to something other than 100% for this filter to work**, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 30-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 30%, the filter gets very sensitive and you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
 
 An example priority filter for a DPS unit like Arby could be something like this, where you only want damage stats:
 
@@ -221,23 +221,29 @@ _________________
 
 ### Creating a new gear set from screenshots
 
-Select the folder you have your screenshots in, and hit Submit to run OCR on them. Make sure the folder only contains your screenshots and nothing else. This will then output your gear.txt file, and you can export it somewhere for the next step.
+Select the folder you have your screenshots in and the app will start reading your screenshots. Make sure the folder only contains your screenshots and nothing else. This will then output your gear.txt file, and you can export it somewhere for the next step. If there are any errors reading the screenshots, the list of failed files will be shown.
 
 
 ### Importing a gear set from a file
 
 Once you have the gear.txt file from the OCR step, choose the file and it will import the gear into the optimizer.
 
+* *Append data* will add the new gears to your existing gears.
+* *Overwrite data* will load in the new data, removing all previous items and heroes
+
+If you have new screenshot files to add to a save, use the Append option.
+
 
 ### Save/Load gear and heroes
 
 Once you make changes to your items/heroes, the changes should be saved before you close the app. You can choose a file to save it to, and then later on load that file to import the data back in.
-The app also does autosave to an 'autosave.json' on changes being made, but that's mostly meant for recovering data from unexpected shutdowns.
+
+The app also does autosave to an 'autosave.json' upon changes being made, and will autoload whatever was saved to the autosave file the next time the app opens.
 
 
 ### Import gear from Zarroc optimizer
 
-If you're already a user of Zarroc's gear optimizer, this lets you import your gear directly from your existing save file. Gear, heroes, and artifacts will be imported.
+If you're already a user of Zarroc's gear optimizer, this lets you import your data directly from your existing save file. All gear, heroes, and artifacts will be imported.
 
 
 ## Getting Started
@@ -253,7 +259,7 @@ Please read these instructions carefully!
    * After installing, restart your computer (required!)<br><br>
 3. Install an emulator to run Epic 7 on
     * I used LDPlayer, but others have work as well: MeMu, BlueStacks, Nox, etc<br><br>
-4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/sj1oUfU.png)<br><br>
+4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br><br>
 5. Set Epic 7 to enable **High Quality Support** in settings [Example](https://i.imgur.com/iEbfVN3.png)<br><br>
 
 6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br><br>
@@ -386,6 +392,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 - If you get a error that contains "Current relative path is C:\Windows\system32..."
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
 - If your optimization suddenly stops working completely, check if you have one of these weird looking items in your gear tab: https://i.imgur.com/BzAgRjR.png. If one is there, edit it to fill in all the fields, but just leave the stats at 0. https://i.imgur.com/wDKDaE5.png
+- If a hero is missing from the drop down list, the data is being pulled from Epic7DB API. If the hero is available in the API but not in the app, contact me.
 
 ## Contact me
 
