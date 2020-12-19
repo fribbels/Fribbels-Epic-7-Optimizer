@@ -7,14 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/dialog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/saves/gear.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
