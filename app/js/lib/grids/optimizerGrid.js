@@ -1,7 +1,7 @@
 const tinygradient = require('tinygradient');
 var gradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
 
-var optimizerGrid; 
+var optimizerGrid;
 var currentSortModel;
 var currentAggregate = {};
 
@@ -34,11 +34,11 @@ module.exports = {
             console.log("SELECTED ROW", row)
 
             return [
-                row.items[0], 
-                row.items[1], 
-                row.items[2], 
-                row.items[3], 
-                row.items[4], 
+                row.items[0],
+                row.items[1],
+                row.items[2],
+                row.items[3],
+                row.items[4],
                 row.items[5]
             ];
         }
@@ -60,9 +60,9 @@ const datasource = {
         const optimizationRequest = OptimizerTab.getOptimizationRequestParams();
 
         const request = {
-            startRow: startRow, 
-            endRow: endRow, 
-            sortColumn: sortColumn, 
+            startRow: startRow,
+            endRow: endRow,
+            sortColumn: sortColumn,
             sortOrder: sortOrder,
             optimizationRequest: optimizationRequest
         }
@@ -151,7 +151,7 @@ function buildGrid() {
             sortable: true,
             sortingOrder: ['desc', 'asc'],
             cellStyle: columnGradient,
-            suppressNavigable: true,
+            // suppressNavigable: true,
             cellClass: 'no-border'
             // valueFormatter: numberFormatter,
         },
@@ -186,12 +186,63 @@ function buildGrid() {
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
         datasource: datasource,
+        navigateToNextCell: navigateToNextCell.bind(this),
     };
 
     const gridDiv = document.getElementById('myGrid');
     optimizerGrid = new Grid(gridDiv, gridOptions);
     console.log("Built optimizergrid", optimizerGrid);
 }
+
+// define some handy keycode constants
+var KEY_LEFT = 37;
+var KEY_UP = 38;
+var KEY_RIGHT = 39;
+var KEY_DOWN = 40;
+
+
+function navigateToNextCell(params) {
+  var previousCell = params.previousCellPosition,
+    suggestedNextCell = params.nextCellPosition,
+    nextRowIndex,
+    renderedRowCount;
+
+  switch (params.key) {
+    case KEY_DOWN:
+      // return the cell below
+      nextRowIndex = previousCell.rowIndex + 1;
+      renderedRowCount = optimizerGrid.gridOptions.api.getModel().getRowCount();
+      if (nextRowIndex >= renderedRowCount) {
+        return null;
+      } // returning null means don't navigate
+
+      optimizerGrid.gridOptions.api.selectNode(optimizerGrid.gridOptions.api.getRowNode("" + nextRowIndex))
+      return {
+        rowIndex: nextRowIndex,
+        column: previousCell.column,
+        floating: previousCell.floating,
+      };
+    case KEY_UP:
+      // return the cell above
+      nextRowIndex = previousCell.rowIndex - 1;
+      if (nextRowIndex <= -1) {
+        return null;
+      } // returning null means don't navigate
+
+      optimizerGrid.gridOptions.api.selectNode(optimizerGrid.gridOptions.api.getRowNode("" + nextRowIndex))
+      return {
+        rowIndex: nextRowIndex,
+        column: previousCell.column,
+        floating: previousCell.floating,
+      };
+    case KEY_LEFT:
+    case KEY_RIGHT:
+      return suggestedNextCell;
+    default:
+      throw 'this will never happen, navigation is always one of the 4 keys above';
+  }
+}
+
 
 function columnGradient(params) {
     try {
@@ -210,7 +261,7 @@ function columnGradient(params) {
         var color = gradient.rgbAt(percent);
         if (agg.min == 0 && agg.max == 0) {
             color = gradient.rgbAt(0.5)
-        } 
+        }
 
 
         return {

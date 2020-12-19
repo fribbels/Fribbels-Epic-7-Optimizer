@@ -13,8 +13,10 @@ import com.fribbels.request.BonusStatsRequest;
 import com.fribbels.request.EquipItemsOnHeroRequest;
 import com.fribbels.request.HeroesRequest;
 import com.fribbels.request.IdRequest;
+import com.fribbels.request.IdsRequest;
 import com.fribbels.response.GetAllHeroesResponse;
 import com.fribbels.response.GetHeroByIdResponse;
+import com.fribbels.response.HeroStatsResponse;
 import com.google.common.collect.Iterables;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -69,13 +71,17 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                     final IdRequest lockHeroByIdRequest = parseRequest(exchange, IdRequest.class);
                     sendResponse(exchange, toggleLockHeroById(lockHeroByIdRequest, true));
                     return;
-                case "/heroes/unequipItem":
-                    final IdRequest unequipItemRequest = parseRequest(exchange, IdRequest.class);
-                    sendResponse(exchange, unequipItem(unequipItemRequest));
+                case "/heroes/unequipItems":
+                    final IdsRequest unequipItemsRequest = parseRequest(exchange, IdsRequest.class);
+                    sendResponse(exchange, unequipItems(unequipItemsRequest));
                     return;
                 case "/heroes/getHeroById":
                     final IdRequest getHeroByIdRequest = parseRequest(exchange, IdRequest.class);
                     sendResponse(exchange, getHeroById(getHeroByIdRequest));
+                    return;
+                case "/heroes/getBaseStats":
+                    final IdRequest getBaseStatsRequest = parseRequest(exchange, IdRequest.class);
+                    sendResponse(exchange, getBaseStats(getBaseStatsRequest));
                     return;
                 case "/heroes/equipItemsOnHero":
                     final EquipItemsOnHeroRequest equipItemsOnHeroRequest = parseRequest(exchange, EquipItemsOnHeroRequest.class);
@@ -175,6 +181,20 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         return toJson(response);
     }
 
+    public String getBaseStats(final IdRequest request) {
+        if (request.getId() == null) return "";
+
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(request.getId());
+
+        if (baseStats == null) return "";
+
+        final HeroStatsResponse response = HeroStatsResponse.builder()
+                .heroStats(baseStats)
+                .build();
+
+        return toJson(response);
+    }
+
     public String removeHeroById(final IdRequest request) {
         System.out.println(request);
         final String id = request.getId();
@@ -261,11 +281,12 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         return "";
     }
 
-    public String unequipItem(final IdRequest request) {
-        final String itemId = request.getId();
-        if (itemDb.getItemById(itemId) == null) return "";
-
-        itemDb.unequipItem(itemId);
+    public String unequipItems(final IdsRequest request) {
+        System.out.println(request);
+        final List<Item> items = itemDb.getItemsById(request.getIds());
+        for (final Item item : items) {
+            itemDb.unequipItem(item.getId());
+        }
 
         return "";
     }

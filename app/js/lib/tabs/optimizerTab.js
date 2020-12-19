@@ -83,13 +83,18 @@ module.exports = {
             Api.getItemById(gearIds[3]),
             Api.getItemById(gearIds[4]),
             Api.getItemById(gearIds[5]),
-        ]).then(selectedGear => {
-            document.getElementById('optimizer-heroes-equipped-weapon').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[0].item, "optimizerGrid");
-            document.getElementById('optimizer-heroes-equipped-helmet').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[1].item, "optimizerGrid");
-            document.getElementById('optimizer-heroes-equipped-armor').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[2].item, "optimizerGrid");
-            document.getElementById('optimizer-heroes-equipped-necklace').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[3].item, "optimizerGrid");
-            document.getElementById('optimizer-heroes-equipped-ring').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[4].item, "optimizerGrid");
-            document.getElementById('optimizer-heroes-equipped-boots').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[5].item, "optimizerGrid");
+        ]).then(async (selectedGear) => {
+            const heroId = document.getElementById('inputHeroAdd').value;
+            const getHeroByIdResponse = await Api.getHeroById(heroId);
+            const hero = getHeroByIdResponse.hero;
+            const baseStatsResponse = await Api.getBaseStats(hero.name);
+
+            document.getElementById('optimizer-heroes-equipped-weapon').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[0].item, "optimizerGrid", baseStatsResponse.heroStats);
+            document.getElementById('optimizer-heroes-equipped-helmet').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[1].item, "optimizerGrid", baseStatsResponse.heroStats);
+            document.getElementById('optimizer-heroes-equipped-armor').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[2].item, "optimizerGrid", baseStatsResponse.heroStats);
+            document.getElementById('optimizer-heroes-equipped-necklace').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[3].item, "optimizerGrid", baseStatsResponse.heroStats);
+            document.getElementById('optimizer-heroes-equipped-ring').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[4].item, "optimizerGrid", baseStatsResponse.heroStats);
+            document.getElementById('optimizer-heroes-equipped-boots').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[5].item, "optimizerGrid", baseStatsResponse.heroStats);
         })
         HeroesTab.redraw();
     },
@@ -260,9 +265,11 @@ function submitOptimizationFilterRequest() {
     });
 }
 
+// Should not be used
 async function getHeroBaseStats(heroId) {
     const getHeroByIdResponse = await Api.getHeroById(heroId);
     const hero = getHeroByIdResponse.hero;
+
     const baseStats = HeroData.getBaseStatsByName(hero.name);
     console.warn(baseStats);
     return baseStats;
@@ -321,20 +328,27 @@ function updateProgress() {
     })
 }
 
-function drawPreviewForGearId(id, elementId) {
+function drawPreviewForGearId(id, elementId, baseStats) {
     Api.getItemById(id).then(response => {
-        document.getElementById(elementId).innerHTML = HtmlGenerator.buildItemPanel(response.item, "optimizerGrid");
+        document.getElementById(elementId).innerHTML = HtmlGenerator.buildItemPanel(response.item, "optimizerGrid", baseStats);
     })
 }
 
-function drawPreview() {
+// Unused i think
+async function drawPreview() {
+    const getHeroByIdResponse = await Api.getHeroById(heroId);
+    const hero = getHeroByIdResponse.hero;
+    const baseStatsResponse = await Api.getBaseStats(hero.name);
+
+    console.warn("BASESTATSRESPONSE", baseStatsResponse)
+
     const selectedGear = OptimizerGrid.getSelectedGearIds();
-    drawPreviewForGearId(selectedGear[0], 'optimizer-heroes-equipped-weapon');
-    drawPreviewForGearId(selectedGear[1], 'optimizer-heroes-equipped-helmet');
-    drawPreviewForGearId(selectedGear[2], 'optimizer-heroes-equipped-armor');
-    drawPreviewForGearId(selectedGear[3], 'optimizer-heroes-equipped-necklace');
-    drawPreviewForGearId(selectedGear[4], 'optimizer-heroes-equipped-ring');
-    drawPreviewForGearId(selectedGear[5], 'optimizer-heroes-equipped-boots');
+    drawPreviewForGearId(selectedGear[0], 'optimizer-heroes-equipped-weapon', baseStatsResponse.heroStats);
+    drawPreviewForGearId(selectedGear[1], 'optimizer-heroes-equipped-helmet', baseStatsResponse.heroStats);
+    drawPreviewForGearId(selectedGear[2], 'optimizer-heroes-equipped-armor', baseStatsResponse.heroStats);
+    drawPreviewForGearId(selectedGear[3], 'optimizer-heroes-equipped-necklace', baseStatsResponse.heroStats);
+    drawPreviewForGearId(selectedGear[4], 'optimizer-heroes-equipped-ring', baseStatsResponse.heroStats);
+    drawPreviewForGearId(selectedGear[5], 'optimizer-heroes-equipped-boots', baseStatsResponse.heroStats);
 }
 
 const fourPieceSets = [

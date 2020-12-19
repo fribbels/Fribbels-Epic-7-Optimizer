@@ -1,4 +1,4 @@
-function handlePercent(stat) {
+function handlePercent(stat, baseStats) {
     if (!stat) {
         return {
             type: '',
@@ -7,12 +7,30 @@ function handlePercent(stat) {
     }
 
     const unpercentedStat = stat.type.match(/[A-Z][a-z]+/g).filter(x => x != 'Percent').join(' ');
-    const percentedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
-    
+    const percentedValue = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats);
+
     return {
         type: unpercentedStat,
         value: percentedValue
-    }   
+    }
+}
+
+function getPercentageEquivalent(stat, baseStats) {
+    if (stat.type == "Health") {
+        var num = stat.value/baseStats.hp*100;
+        return stat.value + ` (${Math.round(num)}%)`;
+    }
+    if (stat.type == "Defense") {
+        var num = stat.value/baseStats.def*100;
+        return stat.value + ` (${Math.round(num)}%)`;
+    }
+    if (stat.type == "Attack") {
+        var num = stat.value/baseStats.atk*100;
+        return stat.value + ` (${Math.round(num)}%)`;
+    }
+    if (stat.type == "Speed") {
+        return stat.value;
+    }
 }
 
 const colorsByRank = {
@@ -36,7 +54,7 @@ function buildFilter(name, url, isChecked) {
         <label class="imageLabel"></label>
     </div>
 </div>
-`;  
+`;
     return html;
 }
 
@@ -83,7 +101,7 @@ module.exports = {
         }
     },
 
-    buildItemPanel(item, checkboxPrefix) {
+    buildItemPanel(item, checkboxPrefix, baseStats) {
         if (!item) {
             return `
 
@@ -108,11 +126,11 @@ module.exports = {
             `
         }
         console.log("!!", item)
-        const main = handlePercent(item.main);
-        const substat0 = handlePercent(item.substats[0]);
-        const substat1 = handlePercent(item.substats[1]);
-        const substat2 = handlePercent(item.substats[2]);
-        const substat3 = handlePercent(item.substats[3]);
+        const main = handlePercent(item.main, baseStats);
+        const substat0 = handlePercent(item.substats[0], baseStats);
+        const substat1 = handlePercent(item.substats[1], baseStats);
+        const substat2 = handlePercent(item.substats[2], baseStats);
+        const substat3 = handlePercent(item.substats[3], baseStats);
 
         const color = colorsByRank[item.rank];
         const gearImage = Assets.getGearAsset(item.gear);

@@ -48,6 +48,12 @@ module.exports = {
         });
     },
 
+    getBaseStats: async (name) => {
+        return post('/heroes/getBaseStats', {
+            id: name
+        });
+    },
+
     cancelOptimizationRequest: async () => {
         return post('/system');
     },
@@ -96,6 +102,12 @@ module.exports = {
         });
     },
 
+    unlockItems: async (itemIds) => {
+        return post('/items/unlockItems', {
+            ids: itemIds
+        });
+    },
+
     addHeroes: async (heroes) => {
         return post('/heroes/addHeroes', {
             heroes: heroes
@@ -136,9 +148,9 @@ module.exports = {
         });
     },
 
-    unequipItem: async (id) => {
-        return post('/heroes/unequipItem', {
-            id: id
+    unequipItems: async (ids) => {
+        return post('/heroes/unequipItems', {
+            ids: ids
         });
     },
 

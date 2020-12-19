@@ -1,5 +1,5 @@
 <head>
-<script>  
+<script>
 global.$ = require('jquery');
 window.$ = $;
 window.jQuery = $;
@@ -41,7 +41,7 @@ window.jQuery = $;
   <!-- Tab 6 -->
   <input type="radio" name="tabset" id="tab6" style="display: none">
   <label for="tab6" class="tabLabel" style="display: none">Subprocess Debugger</label>
-  
+
   <div class="tab-panels">
 
 
@@ -60,7 +60,7 @@ window.jQuery = $;
             <div id="constaints-options-panel" class="constraints-panel-col constraints-left-panel">
               Hero:<br>
               <select id="inputHeroAdd" class="gearPreviewButton"></select>
-              
+
               <div class="horizontalSpace" ></div>
 
               Force mode:<br>
@@ -87,12 +87,12 @@ window.jQuery = $;
                 <input type="checkbox" id="inputAllowEquippedItems" class="optimizer-checkbox">
                 <label for="inputAllowEquippedItems">Equipped items</label>
               </div>
-              
+
               <div>
                 <input type="checkbox" id="inputKeepCurrentItems" class="optimizer-checkbox">
                 <label for="inputKeepCurrentItems">Keep current</label>
               </div>
-              
+
               <div>
                 <input type="checkbox" id="inputCanReforge" class="optimizer-checkbox">
                 <label for="inputCanReforge">Can reforge</label>
@@ -227,7 +227,7 @@ window.jQuery = $;
 
             <div id="stat-priority-panel" class="constraints-panel-col">
               Stat Priority:<br>
-              
+
               <div class="sliderLabel">Atk</div>
               <input class="sliderInput" id="atkSliderInput" type="number" value="0" readonly>
               <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
@@ -237,7 +237,7 @@ window.jQuery = $;
               <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
               <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               <br>
-              
+
               <div class="sliderLabel">Def</div>
               <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
               <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
@@ -247,7 +247,7 @@ window.jQuery = $;
               <input class="sliderInput" id="spdSliderInput" type="number" value="0" readonly>
               <div class="sliderContainer"><input class="slider" id="spdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               <br>
-              
+
               <div class="sliderLabel">Cr</div>
               <input class="sliderInput" id="crSliderInput" type="number" value="0" readonly>
               <div class="sliderContainer"><input class="slider" id="crSlider" type="range" min="-1" max="3" value="0" step="1"></div>
@@ -257,7 +257,7 @@ window.jQuery = $;
               <input class="sliderInput" id="cdSliderInput" type="number" value="0" readonly>
               <div class="sliderContainer"><input class="slider" id="cdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               <br>
-              
+
               <div class="sliderLabel">Eff</div>
               <input class="sliderInput" id="effSliderInput" type="number" value="0" readonly>
               <div class="sliderContainer"><input class="slider" id="effSlider" type="range" min="-1" max="3" value="0" step="1"></div>
@@ -402,7 +402,7 @@ window.jQuery = $;
             <input type="submit" class="gearPreviewButton" value="Deselect All" id="gearPreviewDeselectAll">
           </div>
         </div>
-      </div>  
+      </div>
     </div>
 
 
@@ -433,7 +433,7 @@ window.jQuery = $;
 
       <input type="submit" value="Submit" id="ocr-test-submit-number">Submit Number<br>
       <input type="submit" value="Submit" id="ocr-test-submit-text">Submit Text<br>
-      
+
       <input type="submit" value="Submit" id="ocr-test-file-scan">File Scan<br>
 
       <br><br>
@@ -477,7 +477,10 @@ window.jQuery = $;
 
       <input type="submit" value="Edit Selected Item" class="gearPreviewButton" id="editGear">
       <input type="submit" value="Add New Item" class="gearPreviewButton" id="addGear">
-      <input type="submit" value="Remove Item" class="gearPreviewButton" id="removeGear"><br><br>
+      <input type="submit" value="Remove Items" class="gearPreviewButton" id="removeGear">
+      <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipGear">
+      <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockGear">
+      <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockGear"><br><br>
 
       <div id="gear-grid" style="height: 450px" class="ag-theme-balham"></div>
 
@@ -575,18 +578,18 @@ window.jQuery = $;
       <br>
       <br>
       <hr>
-      
+
       <h2>Importing a gear set from a file</h2>
       <p>
       After the gear set is created, hit Choose File and find your "gear.txt", and hit Import.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Append data" id="importAppendFileSelect"> 
+      <input type="submit" class="gearPreviewButton" value="Append data" id="importAppendFileSelect">
       <text id="importAppendOutputText">Waiting for file..</text>
-      
+
       <br><br>
-      
-      <input type="submit" class="gearPreviewButton" value="Overwrite data" id="importFileSelect"> 
+
+      <input type="submit" class="gearPreviewButton" value="Overwrite data" id="importFileSelect">
       <text id="importOutputText">Waiting for file..</text>
 
       <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit"> -->
@@ -618,7 +621,7 @@ window.jQuery = $;
       Select the Zarroc optimizer file here.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect"> 
+      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect">
       <text id="importZarrocSaveFileSelectOutputText">Waiting for file..</text>
 
     </div>

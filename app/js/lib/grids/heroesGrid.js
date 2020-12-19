@@ -146,7 +146,7 @@ function onRowSelected(event) {
     if (event.node.selected) {
         const heroId = event.data.id;
 
-        Api.getHeroById(heroId).then(response => {
+        Api.getHeroById(heroId).then(async (response) => {
             const hero = response.hero;
             console.log(hero);
 
@@ -160,11 +160,13 @@ function onRowSelected(event) {
                 equipmentMap["Boots"],
             ]
 
+            const baseStatsResponse = await Api.getBaseStats(hero.name);
+
             for (var i = 0; i < 6; i++) {
                 const gear = equipment[i];
                 const displayId = Constants.gearDisplayIdByIndex[i];
 
-                const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid")
+                const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStatsResponse.heroStats)
                 document.getElementById(displayId).innerHTML = html;
             }
         })

@@ -22,6 +22,15 @@ module.exports = {
         document.getElementById('removeGear').addEventListener("click", () => {
             removeGear();
         });
+        document.getElementById('unequipGear').addEventListener("click", () => {
+            unequipGear();
+        });
+        document.getElementById('lockGear').addEventListener("click", () => {
+            lockGear();
+        });
+        document.getElementById('unlockGear').addEventListener("click", () => {
+            unlockGear();
+        });
 
         document.getElementById('tab3label').addEventListener("click", () => {
             module.exports.redraw();
@@ -64,8 +73,33 @@ async function addGear() {
 }
 
 async function removeGear() {
-    const item = ItemsGrid.getSelectedGear();
-    await Api.deleteItems([item.id]);
+    const items = ItemsGrid.getSelectedGear();
+
+    await Api.deleteItems(items.map(x => x.id));
+
+    module.exports.redraw();
+}
+
+async function unequipGear() {
+    const items = ItemsGrid.getSelectedGear();
+
+    await Api.unequipItems(items.map(x => x.id));
+
+    module.exports.redraw();
+}
+
+async function lockGear() {
+    const items = ItemsGrid.getSelectedGear();
+
+    await Api.lockItems(items.map(x => x.id));
+
+    module.exports.redraw();
+}
+
+async function unlockGear() {
+    const items = ItemsGrid.getSelectedGear();
+
+    await Api.unlockItems(items.map(x => x.id));
 
     module.exports.redraw();
 }

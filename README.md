@@ -268,13 +268,10 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 TODO list high priority:
  - Clean up instructions
- - Multi select
- - Arrow keys for going up and down the grids
- - Show percentage equivalent of flat stats on Optimizer page
- - Improvements to the priority ranking filter
- - Enable cross platform for Mac
 
  Medium priority:
+ - Improvements to the priority ranking filter
+ - Enable cross platform for Mac
  - Fix: Update WSS/Score when gear stats changed
  - Clear out item previews on refresh
  - Enable cross platform for Linux
@@ -297,6 +294,8 @@ TODO list high priority:
  - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
  - Class/Element filter for Heroes tab
  - Gear page, option to use more than one set/gear filter at time
+ - Score per roll column in gear
+ - Gear enhance filters
 
  Already completed for 1.1 release:
  - Fix: Crit chance/crit damage uncapped in CP calculation
@@ -320,6 +319,9 @@ TODO list high priority:
  - Add stats for specialty change heroes
  - Fix: Update # of permutations when a filter is removed.
  - Memory cleanup, attempt garbage collection on new optimization request
+ - Arrow keys for going up and down the grids
+ - Multi select
+ - Show percentage equivalent of flat stats on Optimizer page
 
 ## Troubleshooting
 

@@ -40,7 +40,7 @@ module.exports = {
                 {headerName: 'Equipped', field: 'equippedByName', width: 120},
                 {headerName: 'Locked', field: 'locked'},
             ],
-            rowSelection: 'single',
+            rowSelection: 'multiple',
             rowData: getAllItemsResponse.items,
             onRowSelected: onRowSelected,
         };
@@ -54,13 +54,9 @@ module.exports = {
 
     getSelectedGear: () => {
         const selectedRows = itemsGrid.gridOptions.api.getSelectedRows();
-        if (selectedRows.length > 0) {
-            const row = selectedRows[0];
-            console.log("SELECTED ROW", row)
+        console.log("SELECTED ROWS", selectedRows)
 
-            return row;
-        }
-        return null;
+        return selectedRows;
     },
 
     redraw: async () => {
