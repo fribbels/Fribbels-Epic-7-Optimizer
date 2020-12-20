@@ -42,6 +42,7 @@ _________________
     + [Import gear from Zarroc optimizer](#import-gear-from-zarroc-optimizer)
   * [Getting Started](#getting-started)
   * [Requirements](#requirements)
+  * [Troubleshooting](#troubleshooting)
   * [Closing thoughts](#closing-thoughts)
   * [Contact me](#contact-me)
 
@@ -292,6 +293,7 @@ Please read these instructions carefully!
 5. Hit Submit, and after processing a bit you should see a table of results.
 6. Navigate the results with your arrow keys or mouse, select the result you want, and click Equip Selected.
 7. You should now see your hero using those gears.
+8. If you want to manually equip a certain item on a unit, go to the Gear tab -> Edit Selected Item -> Equipped. [Example](https://i.imgur.com/Bqs3ETL.png)
 
 Here's a video that covers most of the importing process: https://www.youtube.com/watch?v=i_QW4INcZIE
 
@@ -378,7 +380,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 ## Troubleshooting
 
-- Restart your computer and retry first
+- Restart your computer and retry first (there might be an child process still kicking around)
 - Try killing any java.exe processes in Task Manager that came from this app
 - Error message: 'java is not recognized as an internal or external command' upon opening the app. Install Java 8 64-bit version to fix.
 - After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like exactly like https://i.imgur.com/ny7uaa8.jpg in 1600x900 resolution
