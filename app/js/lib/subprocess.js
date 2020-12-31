@@ -27,7 +27,7 @@ module.exports = {
                 return;
             }
 
-            alert(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
+            Dialog.error(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
         });
 
         child.stderr.on('data', (data) => {

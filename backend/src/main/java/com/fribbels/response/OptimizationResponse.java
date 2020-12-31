@@ -12,4 +12,5 @@ import lombok.ToString;
 public class OptimizationResponse extends Response {
 
     private long count;
+    private long results;
 }

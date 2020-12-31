@@ -16,7 +16,7 @@ module.exports = {
             const newHeroNameList = newHeroesList.map(x => x.name)
             const newHeroesByName = newHeroesList.reduce((map, obj) => (map[obj.name] = obj, map), {});
 
-            const diff = newHeroNameList.filter(x => !heroNameList.includes(x))
+            const diff = newHeroNameList.filter(x => !heroNameList.includes(x)).filter(x => !x.includes("MISSING_TRANSLATION_VALUE"))
             console.log("DIFF", diff);
 
             if (diff.length != 0) {
@@ -24,6 +24,8 @@ module.exports = {
                 const promises = Promise.allSettled(ids.map(x => 'https://api.epicsevendb.com/hero/' + x)
                                                        .map(x => fetch(x)));
                 var results = await promises;
+
+                console.warn(results);
 
                 results = results.filter(x => x.status != 'rejected');
                 results = results.map(x => x.value.json())

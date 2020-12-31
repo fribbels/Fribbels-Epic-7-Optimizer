@@ -28,6 +28,7 @@
     "sweetalert2": "^10.10.4",
     "tinygradient": "^1.1.2",
     "tree-kill": "latest",
-    "uuid": "latest"
+    "uuid": "latest",
+    "tippy.js": "^6.2.7"
   }
 }

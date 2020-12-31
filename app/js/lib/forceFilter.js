@@ -35,17 +35,17 @@ module.exports = {
 }
 
 function forceDisabled(params) {
-    return params.inputAtkMinForce == null && params.inputAtkMinForce == null 
-    &&     params.inputAtkPercentMinForce == null && params.inputAtkPercentMaxForce == null 
-    &&     params.inputCrMinForce == null && params.inputCrMaxForce == null 
-    &&     params.inputCdMinForce == null &&  params.inputCdMaxForce == null 
-    &&     params.inputDefMinForce == null && params.inputDefMaxForce == null 
-    &&     params.inputDefPercentMinForce == null && params.inputDefPercentMaxForce == null 
-    &&     params.inputResMinForce == null && params.inputResMaxForce == null 
-    &&     params.inputEffMinForce == null && params.inputEffMaxForce == null 
-    &&     params.inputHpMinForce == null && params.inputHpMaxForce == null 
-    &&     params.inputHpPercentMinForce == null && params.inputHpPercentMaxForce == null 
-    &&     params.inputSpdMinForce == null && params.inputSpdMaxForce == null 
+    return params.inputAtkMinForce == null && params.inputAtkMinForce == null
+    &&     params.inputAtkPercentMinForce == null && params.inputAtkPercentMaxForce == null
+    &&     params.inputCrMinForce == null && params.inputCrMaxForce == null
+    &&     params.inputCdMinForce == null &&  params.inputCdMaxForce == null
+    &&     params.inputDefMinForce == null && params.inputDefMaxForce == null
+    &&     params.inputDefPercentMinForce == null && params.inputDefPercentMaxForce == null
+    &&     params.inputResMinForce == null && params.inputResMaxForce == null
+    &&     params.inputEffMinForce == null && params.inputEffMaxForce == null
+    &&     params.inputHpMinForce == null && params.inputHpMaxForce == null
+    &&     params.inputHpPercentMinForce == null && params.inputHpPercentMaxForce == null
+    &&     params.inputSpdMinForce == null && params.inputSpdMaxForce == null
 }
 
 function passesGenericCheck(item, min, max, allowedMain, allowedGear) {
@@ -68,6 +68,6 @@ function passesNumberCheck(number, min, max) {
     if (min && number < min)
         passes = false;
     if (max && number > max)
-        passes = false; 
+        passes = false;
     return passes;
 }

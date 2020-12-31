@@ -3,6 +3,7 @@ package com.fribbels.handler;
 import com.fribbels.Main;
 import com.fribbels.core.StatCalculator;
 import com.fribbels.db.BaseStatsDb;
+import com.fribbels.db.HeroDb;
 import com.fribbels.db.OptimizationDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.enums.Set;
@@ -42,15 +43,20 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private OptimizationDb optimizationDb;
     private BaseStatsDb baseStatsDb;
+    private HeroDb heroDb;
 
     private static final Gson gson = new Gson();
     private static final int SET_COUNT = 16;
     @Getter
-    private AtomicLong counter;
+    private AtomicLong counter = new AtomicLong(0);
+    private AtomicLong resultsCounter = new AtomicLong(0);
 
-    public OptimizationRequestHandler(final OptimizationDb optimizationDb, final BaseStatsDb baseStatsDb) {
+    public OptimizationRequestHandler(final OptimizationDb optimizationDb,
+                                      final BaseStatsDb baseStatsDb,
+                                      final HeroDb heroDb) {
         this.optimizationDb = optimizationDb;
         this.baseStatsDb = baseStatsDb;
+        this.heroDb = heroDb;
     }
 
     @Override
@@ -100,12 +106,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     public String handleGetProgressRequest() {
         final OptimizationResponse response = OptimizationResponse.builder()
                 .count(counter.get())
+                .results(resultsCounter.get())
                 .build();
 
         return gson.toJson(response);
     }
 
     public String handleOptimizationFilterRequest(final OptimizationRequest request) {
+        heroDb.saveOptimizationRequest(request);
         final HeroStats[] heroStats = optimizationDb.getAllHeroStats();
         final int[] indices = new int[heroStats.length];
         final java.util.Set<String> ids = new HashSet<>();
@@ -151,6 +159,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     public String handleOptimizationRequest(final OptimizationRequest request) {
         optimizationDb = new OptimizationDb();
+        heroDb.saveOptimizationRequest(request);
         System.gc();
         return test(request, HeroStats.builder()
                 .atk(request.getAtk())
@@ -211,9 +220,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
 
         final Map<Item, float[]> accumulatorArrsByItem = new HashMap<>();
-        final ExecutorService executorService = Executors.newFixedThreadPool(8);
+        final ExecutorService executorService = Executors.newFixedThreadPool(1);
         counter = new AtomicLong(0);
-        final AtomicLong resultsCounter = new AtomicLong(0);
+        resultsCounter = new AtomicLong(0);
 
         final int wSize = itemsByGear.get(Gear.WEAPON).size();
         final int hSize = itemsByGear.get(Gear.HELMET).size();
@@ -248,13 +257,13 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                             // For 4 piece sets, we can short circuit if the first 3 pieces don't match possible sets,
                             // but only if the items are sorted & prioritized by set.
-//                            System.out.println(weapon.getSet() + " " + helmet.getSet() + " " + armor.getSet());
+//                                System.out.println(weapon.getSet() + " " + helmet.getSet() + " " + armor.getSet());
                             if (isShortCircuitable4PieceSet) {
                                 if (!(firstSets.contains(weapon.getSet())
                                 ||    firstSets.contains(helmet.getSet())
                                 ||    firstSets.contains(armor.getSet()))) {
-//                                    exit = true;
-                                    return;
+                                    // continue not return because other helmets may work
+                                    break;
                                 }
                             }
 
@@ -269,6 +278,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                     for (int b = 0; b < bSize; b++) {
                                         if (Main.interrupt) {
                                             System.err.println("Interrupted");
+                                            executorService.shutdownNow();
                                             return;
                                         }
                                         if (exit) return;
@@ -422,19 +432,13 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return sets;
     }
 
-    private static final int POW_13_5 = 371293;
-    private static final int POW_13_4 = 28561;
-    private static final int POW_13_3 = 2197;
-    private static final int POW_13_2 = 169;
-    private static final int POW_13_1 = 13;
-
     private static final int POW_16_5 = 1048576;
     private static final int POW_16_4 = 65536;
     private static final int POW_16_3 = 4096;
     private static final int POW_16_2 = 256;
     private static final int POW_16_1 = 16;
 
-    public int calculateSetIndex(final int[] indices) { // sorted, size 6, elements [0-12]
+    public int calculateSetIndex(final int[] indices) { // sorted, size 6, elements [0-15]
         return indices[0] * POW_16_5
                 + indices[1] * POW_16_4
                 + indices[2] * POW_16_3

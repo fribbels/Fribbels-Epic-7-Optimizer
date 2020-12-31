@@ -109,7 +109,7 @@ module.exports = {
                 document.getElementById('exportOutputText').value = serializedStr;
             }).catch(e => {
                 console.error(e)
-                alert("Error occurred while reading screenshots\n" + e);
+                Dialog.error("Error occurred while reading screenshots\n" + e);
             });
         });
 

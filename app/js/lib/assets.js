@@ -25,6 +25,12 @@ const assetsByElement = {
     "light": "./assets/elementlight.png",
 }
 
+const assetsByLevel = {
+    "85above": "./assets/85up.png",
+    "85at": "./assets/85.png",
+    "85below": "./assets/85down.png",
+}
+
 const assetsByClass = {
     "ranger": "./assets/classranger.png",
     "knight": "./assets/classknight.png",
@@ -57,19 +63,35 @@ module.exports = {
         return assetsByGear;
     },
 
+    getAssetsByLevel: () => {
+        return assetsByLevel;
+    },
+
     getSetAsset: (set) => {
         return assetsBySet[set];
-    }, 
+    },
 
     getClassAsset: (clazz) => {
         return assetsByClass[clazz];
-    }, 
+    },
 
     getElementAsset: (element) => {
         return assetsByElement[element];
-    }, 
+    },
 
     getGearAsset: (gear) => {
         return assetsByGear[gear];
+    },
+    getBlank: () => {
+        return './assets/blank.png';
+    },
+    getX: () => {
+        return './assets/blackx.png';
+    },
+    getLock: () => {
+        return './assets/lock.png';
+    },
+    getEdit: () => {
+        return './assets/edit.png';
     },
 }

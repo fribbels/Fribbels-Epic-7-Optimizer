@@ -8,7 +8,16 @@ module.exports = {
             item.id = uuidv4();
         }
         console.log("Augmented items", items);
-    }
+    },
+
+    augmentReforge: (items) => {
+        for (var item of items) {
+            if (item.level == 85) {
+                augmentStats(item);
+            }
+        }
+        console.log("Augmented items", items);
+    },
 }
 
 function augmentStats(item) {

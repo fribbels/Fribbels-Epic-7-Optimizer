@@ -26,12 +26,12 @@ public class StatCalculator {
         int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
         int ehp = (int) (hp * ((float)def/300 + 1));
-        int hpps = (int) ((float)hp*spd/100);
-        int ehpps = (int) ((float)ehp*spd/100);
+        int hpps = (int) ((float)hp*spd/1000);
+        int ehpps = (int) ((float)ehp*spd/1000);
         int dmg = (int) ((critRate * atk * critDamage) + (1-critRate) * atk);
-        int dmgps = (int) ((float)dmg*spd/100);
+        int dmgps = (int) ((float)dmg*spd/1000);
         int mcdmg = (int) ((float)atk * critDamage);
-        int mcdmgps = (int) ((float)mcdmg*spd/100);
+        int mcdmgps = (int) ((float)mcdmg*spd/1000);
 
         return new HeroStats(atk, hp, def, cr, cd, eff, res, dac, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps,
                 base.getBonusMaxAtkPercent(), base.getBonusMaxDefPercent(), base.getBonusMaxHpPercent(), sets, null, null, null, null);

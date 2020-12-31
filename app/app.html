@@ -20,6 +20,10 @@ window.jQuery = $;
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/rangeslider.css">
 
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/tippy.js@6/dist/tippy.css"
+/>
 </head>
 
 <div class="tabset">
@@ -43,29 +47,42 @@ window.jQuery = $;
   <label for="tab6" class="tabLabel" style="display: none">Subprocess Debugger</label>
 
   <div class="tab-panels">
-
-
-
-
-
-
-
-
-
-
     <div id="optimizer-section" class="tab-panel">
       <div id="optimizer-tab" class="tab">
         <div id="optimizer-panel" class="optimizer-panel">
           <div id="constraints-panel" class="constraints-panel">
-            <div id="constaints-options-panel" class="constraints-panel-col constraints-left-panel">
-              Hero:<br>
+            <div id="constaints-options-panel" class="constraints-panel-col-small">
+
+              <div class="panelLabel">Hero</div>
               <select id="inputHeroAdd" class="gearPreviewButton"></select>
 
               <div class="horizontalSpace" ></div>
 
-              Force mode:<br>
+              <div class="inputHeroImageContainer">
+                <img src="" id="inputHeroImage" class="inputHeroImage"></img>
+              </div>
+
+              <div class="horizontalSpace" ></div>
+
+              <input type="submit" value="Start" class="gearPreviewButton" id="submitOptimizerRequest"><br>
+              <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter"><br>
+              <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel"><br>
+              <input type="submit" value="Load settings" class="gearPreviewButton" id="submitOptimizerLoad"><br>
+              <input type="submit" value="Reset settings" class="gearPreviewButton" id="submitOptimizerReset">
+
+            </div>
+            <div class="vertical"></div>
+
+            <div id="options-panel" class="constraints-panel-col-small">
+
+              <div class="panelLabel">
+                <div class="panelLabelText">Force mode</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="forceModeTooltip"></img>
+              </div>
+
               <select id="forceNumberSelect" class="gearPreviewButton">
-                <option value=1 selected>At least 1 stat</option>
+                <option value=0 selected>Disabled</option>
+                <option value=1>At least 1 stat</option>
                 <option value=2>At least 2 stats</option>
                 <option value=3>At least 3 stats</option>
                 <option value=4>All 4 stats</option>
@@ -73,10 +90,11 @@ window.jQuery = $;
 
               <div class="horizontalSpace"></div>
 
-              Permutations:<br>
-              <text id="estimatedPermutations">0</text>
 
-              <div class="horizontalSpace"></div>
+              <div>
+                <input type="checkbox" id="inputPredictReforges" class="optimizer-checkbox" checked>
+                <label for="inputPredictReforges">Predict reforges</label>
+              </div>
 
               <div>
                 <input type="checkbox" id="inputAllowLockedItems" class="optimizer-checkbox">
@@ -99,185 +117,68 @@ window.jQuery = $;
               </div>
               <div class="horizontalSpace"></div>
 
-              <input type="submit" value="Submit" class="gearPreviewButton" id="submitOptimizerRequest"><br>
-              <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter"><br>
-              <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel">
 
-            </div>
-            <div class="vertical"></div>
-            <div id="constraints-filter-panel-stats" class="constraints-panel-col">
-              Filter primary stats:<br>
-              <input type="number" id="inputMinAtkLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Atk</div>
-              <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinHpLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Hp</div>
-              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDefLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Def</div>
-              <input type="number" id="inputMaxDefLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinSpdLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Speed</div>
-              <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinCrLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">CRate</div>
-              <input type="number" id="inputMaxCrLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinCdLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">CDmg</div>
-              <input type="number" id="inputMaxCdLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinEffLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Eff</div>
-              <input type="number" id="inputMaxEffLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinResLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Res</div>
-              <input type="number" id="inputMaxResLimit" class="optimizer-number-input"><br>
-
-            </div>
-            <div class="vertical"></div>
-            <div id="constraints-filter-panel-calculated" class="constraints-panel-col">
-              Filter calculated stats:<br>
-              <input type="number" id="inputMinCpLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Cp</div>
-              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinHppsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Hp*s</div>
-              <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinEhpLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Ehp</div>
-              <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Ehp*s</div>
-              <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDmgLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Dmg</div>
-              <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Dmg*s</div>
-              <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Mcdmg</div>
-              <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Mcdmg*s</div>
-              <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input"><br>
-            </div>
-            <div class="vertical"></div>
-            <div id="constraints-force-panel" class="constraints-panel-col">
-              Force:
-              <br>
-              <input type="number" id="inputMinAtkForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Atk</div>
-              <input type="number" id="inputMaxAtkForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinAtkPercentForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Atk%</div>
-              <input type="number" id="inputMaxAtkPercentForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinSpdForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Speed</div>
-              <input type="number" id="inputMaxSpdForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinCrForce" class="optimizer-number-input">
-              <div class="inputStatLabel">CRate</div>
-              <input type="number" id="inputMaxCrForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinCdForce" class="optimizer-number-input">
-              <div class="inputStatLabel">CDmg</div>
-              <input type="number" id="inputMaxCdForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinHpForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Hp</div>
-              <input type="number" id="inputMaxHpForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinHpPercentForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Hp%</div>
-              <input type="number" id="inputMaxHpPercentForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDefForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Def</div>
-              <input type="number" id="inputMaxDefForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDefPercentForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Def%</div>
-              <input type="number" id="inputMaxDefPercentForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinEffForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Eff</div>
-              <input type="number" id="inputMaxEffForce" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinResForce" class="optimizer-number-input">
-              <div class="inputStatLabel">Res</div>
-              <input type="number" id="inputMaxResForce" class="optimizer-number-input"><br>
             </div>
             <div class="vertical"></div>
 
             <div id="stat-priority-panel" class="constraints-panel-col">
-              Stat Priority:<br>
 
-              <div class="sliderLabel">Atk</div>
-              <input class="sliderInput" id="atkSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
+              <div class="panelLabel">Substat Priority</div>
 
-              <div class="sliderLabel">Hp</div>
-              <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
+                <div class="sliderLabel">Atk</div>
+                <input class="sliderInput" id="atkSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
 
-              <div class="sliderLabel">Def</div>
-              <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
+                <div class="sliderLabel">Hp</div>
+                <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
 
-              <div class="sliderLabel">Spd</div>
-              <input class="sliderInput" id="spdSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="spdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
+                <div class="sliderLabel">Def</div>
+                <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
 
-              <div class="sliderLabel">Cr</div>
-              <input class="sliderInput" id="crSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="crSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
+                <div class="sliderLabel">Spd</div>
+                <input class="sliderInput" id="spdSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="spdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
 
-              <div class="sliderLabel">Cd</div>
-              <input class="sliderInput" id="cdSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="cdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
+                <div class="sliderLabel">Cr</div>
+                <input class="sliderInput" id="crSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="crSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
 
-              <div class="sliderLabel">Eff</div>
-              <input class="sliderInput" id="effSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="effSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
+                <div class="sliderLabel">Cd</div>
+                <input class="sliderInput" id="cdSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="cdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
 
-              <div class="sliderLabel">Res</div>
-              <input class="sliderInput" id="resSliderInput" type="number" value="0" readonly>
-              <div class="sliderContainer"><input class="slider" id="resSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              <br>
-              <br>
+                <div class="sliderLabel">Eff</div>
+                <input class="sliderInput" id="effSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="effSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
 
-              <div class="sliderLabel">Top%</div>
-              <input class="sliderInput" id="filterSliderInput" type="number" value="100" readonly>
-              <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="0" max="100" value="100" step="5"></div>
+                <div class="sliderLabel">Res</div>
+                <input class="sliderInput" id="resSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="resSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+                <br>
+                <br>
+
+                <div class="sliderLabel">Top %</div>
+                <input class="sliderInput" id="filterSliderInput" type="number" value="100" readonly>
+                <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="10" max="100" value="100" step="1"></div><!--
+                <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="0" max="100" value="100" step="5"></div> -->
               <br>
             </div>
             <div class="vertical"></div>
 
             <div id="constraints-focus-panel" class="constraints-panel-col">
-              Necklace:<br>
+              <div class="panelLabel">
+                <div class="panelLabelText">Accessory main stats</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="accessoryMainStatsTooltip"></img>
+              </div>
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
                 <option value="CriticalHitChancePercent">Crit Chance</option>
                 <option value="CriticalHitDamagePercent">Crit Damage</option>
@@ -289,7 +190,6 @@ window.jQuery = $;
                 <option value="Defense">Defense</option>
               </select><br>
 
-              Ring:<br>
               <select multiple="multiple" id="inputRingStat" class="inputGearFilterSelect">
                 <option value="EffectivenessPercent">Effectiveness</option>
                 <option value="EffectResistancePercent">Effect Resistance</option>
@@ -301,7 +201,6 @@ window.jQuery = $;
                 <option value="Defense">Defense</option>
               </select><br>
 
-              Boots:<br>
               <select multiple="multiple" id="inputBootsStat" class="inputGearFilterSelect">
                 <option value="Speed">Speed</option>
                 <option value="AttackPercent">Attack %</option>
@@ -312,7 +211,10 @@ window.jQuery = $;
                 <option value="Defense">Defense</option>
               </select><br>
 
-              Set 1 (either 2 or 4 pieces):<br>
+              <div class="panelLabel">
+                <div class="panelLabelText">Sets</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="setsTooltip"></img>
+              </div>
               <select multiple="multiple" id="inputSet1" class="inputSetFilterSelect">
                 <!-- <option value="None">None</option> -->
                 <optgroup label="4 Piece">
@@ -337,7 +239,6 @@ window.jQuery = $;
                 </optgroup>
               </select><br>
 
-              Set 2:<br>
               <select multiple="multiple" id="inputSet2" class="inputSetFilterSelect">
                 <!-- <option value="None">None</option> -->
                 <optgroup label="2 Piece">
@@ -352,7 +253,6 @@ window.jQuery = $;
                 </optgroup>
               </select><br>
 
-              Set 3:<br>
               <select multiple="multiple" id="inputSet3" class="inputSetFilterSelect">
                 <!-- <option value="None">None</option> -->
                 <optgroup label="2 Piece">
@@ -366,13 +266,244 @@ window.jQuery = $;
                   <option value="PenetrationSet">Penetration</option>
                 </optgroup>
               </select>
+
+              <div class="panelLabel">Exclude</div>
+              <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
+                <!-- <option value="None">None</option> -->
+                <optgroup label="4 Piece">
+                  <option value="AttackSet">Attack</option>
+                  <option value="SpeedSet">Speed</option>
+                  <option value="DestructionSet">Destruction</option>
+                  <option value="LifestealSet">Lifesteal</option>
+                  <option value="CounterSet">Counter</option>
+                  <option value="RageSet">Rage</option>
+                  <option value="RevengeSet">Revenge</option>
+                  <option value="InjurySet">Injury</option>
+                </optgroup>
+                <optgroup label="2 Piece">
+                  <option value="HealthSet">Health</option>
+                  <option value="DefenseSet">Defense</option>
+                  <option value="CriticalSet">Critical</option>
+                  <option value="HitSet">Hit</option>
+                  <option value="ResistSet">Resist</option>
+                  <option value="UnitySet">Unity</option>
+                  <option value="ImmunitySet">Immunity</option>
+                  <option value="PenetrationSet">Penetration</option>
+                </optgroup>
+              </select><br>
             </div>
+
+            <div class="vertical"></div>
+
+            <div id="placeholder-panel" class="constraints-panel-col-small">
+                <div class="panelLabel">Force:</div>
+                <input type="number" id="inputMinAtkForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Atk</div>
+                <input type="number" id="inputMaxAtkForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinAtkPercentForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Atk %</div>
+                <input type="number" id="inputMaxAtkPercentForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinSpdForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Spd</div>
+                <input type="number" id="inputMaxSpdForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinCrForce" class="optimizer-number-input">
+                <div class="inputStatLabel">CRate</div>
+                <input type="number" id="inputMaxCrForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinCdForce" class="optimizer-number-input">
+                <div class="inputStatLabel">CDmg</div>
+                <input type="number" id="inputMaxCdForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinHpForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Hp</div>
+                <input type="number" id="inputMaxHpForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinHpPercentForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Hp %</div>
+                <input type="number" id="inputMaxHpPercentForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinDefForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Def</div>
+                <input type="number" id="inputMaxDefForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinDefPercentForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Def %</div>
+                <input type="number" id="inputMaxDefPercentForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinEffForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Eff</div>
+                <input type="number" id="inputMaxEffForce" class="optimizer-number-input"><br>
+
+                <input type="number" id="inputMinResForce" class="optimizer-number-input">
+                <div class="inputStatLabel">Res</div>
+                <input type="number" id="inputMaxResForce" class="optimizer-number-input"><br>
+            </div>
+
+            <div class="vertical"></div>
+
+            <div id="placeholder-panel" class="constraints-panel-col-small">
+              <div class="panelLabel">Filter stats</div>
+              <input type="number" id="inputMinAtkLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Atk</div>
+              <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinHpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Hp</div>
+              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDefLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Def</div>
+              <input type="number" id="inputMaxDefLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinSpdLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Spd</div>
+              <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCrLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">CRate</div>
+              <input type="number" id="inputMaxCrLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCdLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">CDmg</div>
+              <input type="number" id="inputMaxCdLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEffLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Eff</div>
+              <input type="number" id="inputMaxEffLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinResLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Res</div>
+              <input type="number" id="inputMaxResLimit" class="optimizer-number-input"><br>
+            </div>
+
+            <div id="placeholder-panel" class="constraints-panel-col-small">
+              <div class="panelLabel">Filter ratings</div>
+              <input type="number" id="inputMinCpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Cp</div>
+              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinHppsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">HpS</div>
+              <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEhpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Ehp</div>
+              <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">EhpS</div>
+              <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDmgLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Dmg</div>
+              <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">DmgS</div>
+              <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Mcd</div>
+              <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">McdS</div>
+              <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input"><br>
+            </div>
+
           </div>
-          <div id="current-gear-panel" class="current-gear-panel">
-          </div>
+
+
           <div id="optimization-results-panel" class="optimization-results-panel">
-            <!-- <div id="myGrid" style="height: 150px;width: 800px" class="ag-theme-balham"></div> -->
             <div id="myGrid" class="ag-theme-balham"></div>
+            <div id="gridRightPanel" class="gridRightPanel">
+
+            <div id="optimizer-actions-panel" class="constraints-right-panel constraints-panel-col">
+
+              <div class="topHalfRightPanel">
+                <div class="leftRightText">
+                  <text id="" class="leftRightTextContent">Filtered weapons</text>
+                  <text id="filteredWeaponsNum" class="leftRightTextContent">0</text>
+                </div>
+                <div class="leftRightText">
+                  <text id="l1" class="leftRightTextContent">Filtered helmets</text>
+                  <text id="filteredHelmetsNum" class="leftRightTextContent">0</text>
+                </div>
+                <div class="leftRightText">
+                  <text id="l1" class="leftRightTextContent">Filtered armors</text>
+                  <text id="filteredArmorsNum" class="leftRightTextContent">0</text>
+                </div>
+                <div class="leftRightText">
+                  <text id="l1" class="leftRightTextContent">Filtered necklaces</text>
+                  <text id="filteredNecklacesNum" class="leftRightTextContent">0</text>
+                </div>
+                <div class="leftRightText">
+                  <text id="a1" class="leftRightTextContent">Filtered rings</text>
+                  <text id="filteredRingsNum" class="leftRightTextContent">0</text>
+                </div>
+                <div class="leftRightText">
+                  <text id="a1" class="leftRightTextContent">Filtered boots</text>
+                  <text id="filteredBootsNum" class="leftRightTextContent">0</text>
+                </div>
+
+                <div class=horizontalSpace></div>
+                <div class=horizontalSpace></div>
+
+                <div class="leftRightText">
+                  <text id="a1" class="leftRightTextContent">Permutations</text>
+                  <text id="maxPermutationsNum" class="leftRightTextContent">0</text>
+                </div>
+                <div class="leftRightText">
+                  <text id="a1" class="leftRightTextContent">Searched</text>
+                  <text id="searchedPermutationsNum" class="leftRightTextContent">0</text>
+                </div>
+                <div class="leftRightText">
+                  <text id="a1" class="leftRightTextContent">Results</text>
+                  <text id="resultsFoundNum" class="leftRightTextContent">0</text>
+                </div>
+              </div>
+
+              <div class="optimizerActionButtons">
+                <div class="optimizerActionButtonsRow">
+                  <input type="submit" class="gearPreviewButton" value="Equip Items" id="gearPreviewEquip">
+                  <input type="submit" class="gearPreviewButton" value="Unequip Items" id="gearPreviewUnequip">
+                </div>
+                <div id="buttonSpace"></div>
+                <div class="optimizerActionButtonsRow">
+                  <input type="submit" class="gearPreviewButton" value="Lock Items" id="gearPreviewLock">
+                  <input type="submit" class="gearPreviewButton" value="Unlock Items" id="gearPreviewUnlock">
+                </div>
+                <div id="buttonSpace"></div>
+                <div class="optimizerActionButtonsRow">
+                  <input type="submit" class="gearPreviewButton" value="Select All" id="gearPreviewSelectAll">
+                  <input type="submit" class="gearPreviewButton" value="Deselect All" id="gearPreviewDeselectAll">
+                </div>
+              </div>
+            </div>
+            </div>
+<!--             <div id="gridRightPanel" class="gridRightPanel">
+              <div id="girdRightPanelLeftColumn">
+                <div id="optimizer-heroes-equipped-weapon" class="gear-preview-row">
+                </div>
+                <div id="optimizer-heroes-equipped-helmet" class="gear-preview-row">
+                </div>
+                <div id="optimizer-heroes-equipped-armor" class="gear-preview-row">
+                </div>
+              </div>
+              <div class="vertical"></div>
+              <div id="girdRightPanelRightColumn">
+                <div id="optimizer-heroes-equipped-necklace" class="gear-preview-row">
+                </div>
+                <div id="optimizer-heroes-equipped-ring" class="gear-preview-row">
+                </div>
+                <div id="optimizer-heroes-equipped-boots" class="gear-preview-row">
+                </div>
+              </div>
+            </div> -->
+
           </div>
 
 
@@ -394,12 +525,6 @@ window.jQuery = $;
             <div class="vertical"></div>
             <div id="optimizer-heroes-equipped-boots" class="gear-preview-row">
             </div>
-          </div>
-          <div class="optimizerActionButtons">
-            <input type="submit" class="gearPreviewButton" value="Equip Selected" id="gearPreviewEquip">
-            <input type="submit" class="gearPreviewButton" value="Lock Selected" id="gearPreviewLockAndEquip"><div id="buttonSpace"></div>
-            <input type="submit" class="gearPreviewButton" value="Select All" id="gearPreviewSelectAll">
-            <input type="submit" class="gearPreviewButton" value="Deselect All" id="gearPreviewDeselectAll">
           </div>
         </div>
       </div>
@@ -486,10 +611,9 @@ window.jQuery = $;
 
       <br>
 
-      <div id="gearFilterBar">
         <div id="setsFilterBar"></div>
         <div id="gearFilterBar"></div>
-      </div>
+        <div id="levelFilterBar"></div>
 
       <br>
       <br>
@@ -504,35 +628,44 @@ window.jQuery = $;
 
 
     <div id="heroes-section" class="tab-panel">
-      <select id="addHeroesSelector"></select>
 
-      <input type="submit" value="Add New Hero" class="gearPreviewButton" id="addHeroesSubmit">
-      <br><br>
+      <div class="heroesTabButtonRow">
+        <select id="addHeroesSelector"></select>
+        <input type="submit" value="Add New Hero" class="gearPreviewButton" id="addHeroesSubmit">
+      </div>
+
       <div id="heroes-table" style="height: 450px" class="ag-theme-balham"></div>
-      <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockHeroesSubmit">
-      <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockHeroesSubmit">
-      <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipHeroesSubmit">
-      <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit">
-      <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit">
+      <div class="heroesTabButtonRow">
+        <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit">
+        <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit">
+      </div>
 
       <div id="heroes-equipped-section">
         <div id="heroes-equipped-weapon" class="gear-preview-row">
         </div>
-        <div class="vertical"></div>
+        <div class="shortVertical"></div>
         <div id="heroes-equipped-helmet" class="gear-preview-row">
         </div>
-        <div class="vertical"></div>
+        <div class="shortVertical"></div>
         <div id="heroes-equipped-armor" class="gear-preview-row">
         </div>
-        <div class="vertical"></div>
+        <div class="shortVertical"></div>
         <div id="heroes-equipped-necklace" class="gear-preview-row">
         </div>
-        <div class="vertical"></div>
+        <div class="shortVertical"></div>
         <div id="heroes-equipped-ring" class="gear-preview-row">
         </div>
-        <div class="vertical"></div>
+        <div class="shortVertical"></div>
         <div id="heroes-equipped-boots" class="gear-preview-row">
         </div>
+      </div>
+
+      <div class="heroesTabButtonRow">
+        <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipHeroesSubmit">
+        <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockHeroesSubmit">
+        <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockHeroesSubmit">
+        <input type="submit" value="Select All" class="gearPreviewButton" id="heroPreviewSelectAll">
+        <input type="submit" value="Deselect All" class="gearPreviewButton" id="heroPreviewDeselectAll">
       </div>
 
       <br>

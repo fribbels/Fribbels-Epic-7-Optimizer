@@ -17,6 +17,23 @@ module.exports = {
             selector.add(option);
         }
 
+        document.getElementById('heroPreviewSelectAll').addEventListener("click", () => {
+            $('#heroesGridWeapon').prop('checked', true);
+            $('#heroesGridHelmet').prop('checked', true);
+            $('#heroesGridArmor').prop('checked', true);
+            $('#heroesGridNecklace').prop('checked', true);
+            $('#heroesGridRing').prop('checked', true);
+            $('#heroesGridBoots').prop('checked', true);
+        });
+        document.getElementById('heroPreviewDeselectAll').addEventListener("click", () => {
+            $('#heroesGridWeapon').prop('checked', false);
+            $('#heroesGridHelmet').prop('checked', false);
+            $('#heroesGridArmor').prop('checked', false);
+            $('#heroesGridNecklace').prop('checked', false);
+            $('#heroesGridRing').prop('checked', false);
+            $('#heroesGridBoots').prop('checked', false);
+        });
+
         document.getElementById('addHeroesSubmit').addEventListener("click", async () => {
             console.log("addHeroesSubmit");
             const id = selector.value;
@@ -48,8 +65,8 @@ module.exports = {
 
             Api.removeHeroById(row.id).then(response => {
                 console.log("RESPONSE", response)
-                HeroesGrid.refresh(response.heroes)
                 module.exports.redrawHeroInputSelector();
+                redrawGrid();
                 Saves.autoSave();
             });
         });
@@ -59,9 +76,8 @@ module.exports = {
             const row = HeroesGrid.getSelectedRow();
             if (!row) return;
 
-            Api.unequipHeroById(row.id).then(response => {
+            Api.unequipItems(getSelectedGearIds()).then(response => {
                 console.log("RESPONSE", response)
-                HeroesGrid.refresh(response.heroes)
                 redrawGrid();
                 clearPreview();
                 Saves.autoSave();
@@ -73,9 +89,16 @@ module.exports = {
             const row = HeroesGrid.getSelectedRow();
             if (!row) return;
 
-            Api.unlockHeroById(row.id).then(response => {
+            // Api.unlockHeroById(row.id).then(response => {
+            //     console.log("RESPONSE", response)
+            //     HeroesGrid.refresh(response.heroes)
+            //     redrawGrid();
+            //     clearPreview();
+            //     Saves.autoSave();
+            // })
+
+            Api.unlockItems(getSelectedGearIds()).then(response => {
                 console.log("RESPONSE", response)
-                HeroesGrid.refresh(response.heroes)
                 redrawGrid();
                 clearPreview();
                 Saves.autoSave();
@@ -87,9 +110,16 @@ module.exports = {
             const row = HeroesGrid.getSelectedRow();
             if (!row) return;
 
-            Api.lockHeroById(row.id).then(response => {
+            // Api.lockHeroById(row.id).then(response => {
+            //     console.log("RESPONSE", response)
+            //     HeroesGrid.refresh(response.heroes)
+            //     redrawGrid();
+            //     clearPreview();
+            //     Saves.autoSave();
+            // })
+
+            Api.lockItems(getSelectedGearIds()).then(response => {
                 console.log("RESPONSE", response)
-                HeroesGrid.refresh(response.heroes)
                 redrawGrid();
                 clearPreview();
                 Saves.autoSave();
@@ -113,27 +143,11 @@ module.exports = {
     },
 
     redrawHeroInputSelector: () => {
-        Api.getAllHeroes().then(getAllHeroesResponse => {
-            clearOptions("inputHeroAdd");
-            const optimizerHeroSelector = document.getElementById('inputHeroAdd')
-            const heroes = getAllHeroesResponse.heroes;
-            console.log("getAllHeroesResponse", getAllHeroesResponse)
-            for (var hero of heroes) {
-                const option = document.createElement('option');
-                option.innerHTML = hero.name;
-                option.value = hero.id;
-
-                optimizerHeroSelector.add(option);
-            }
-        })
+        OptimizerTab.redrawHeroSelector();
     },
 
     redraw: () => {
-        Api.getAllHeroes().then(response => {
-            console.warn("HEROESRESPONSE", response);
-
-            HeroesGrid.refresh(response.heroes);
-        })
+        redrawGrid();
     },
 
     getNewHeroByName: (heroName) => {
@@ -151,6 +165,25 @@ module.exports = {
     },
 }
 
+function getSelectedGear() {
+    const row = HeroesGrid.getSelectedRow()
+    if (!row || !row.equipment) return [];
+
+    var results = [];
+    if (row.equipment.Weapon && $('#heroesGridWeapon').prop('checked')) results.push(row.equipment.Weapon);
+    if (row.equipment.Helmet && $('#heroesGridHelmet').prop('checked')) results.push(row.equipment.Helmet);
+    if (row.equipment.Armor && $('#heroesGridArmor').prop('checked')) results.push(row.equipment.Armor);
+    if (row.equipment.Necklace && $('#heroesGridNecklace').prop('checked')) results.push(row.equipment.Necklace);
+    if (row.equipment.Ring && $('#heroesGridRing').prop('checked')) results.push(row.equipment.Ring);
+    if (row.equipment.Boots && $('#heroesGridBoots').prop('checked')) results.push(row.equipment.Boots);
+
+    return results;
+}
+
+function getSelectedGearIds() {
+    return getSelectedGear().map(x => x.id);
+}
+
 function addHero(heroName) {
     const newHero = module.exports.getNewHeroByName(heroName);
     newHero.rarity = newHero.data.rarity;
@@ -158,14 +191,14 @@ function addHero(heroName) {
     newHero.role = newHero.data.role;
     Api.addHeroes([newHero]).then(x => {
         module.exports.redrawHeroInputSelector();
-        redrawGrid();
+        redrawGrid(newHero.id);
         Saves.autoSave();
     })
 }
 
-function redrawGrid() {
+function redrawGrid(id) {
     Api.getAllHeroes().then(response => {
-        HeroesGrid.refresh(response.heroes);
+        HeroesGrid.refresh(response.heroes, id);
     });
 }
 
@@ -173,13 +206,5 @@ function clearPreview() {
     for (var i = 0; i < 6; i++) {
         const displayId = Constants.gearDisplayIdByIndex[i];
         document.getElementById(displayId).innerHTML = "";
-    }
-}
-
-function clearOptions(id) {
-    var select = document.getElementById(id);
-    var length = select.options.length;
-    for (i = length-1; i >= 0; i--) {
-      select.options[i] = null;
     }
 }

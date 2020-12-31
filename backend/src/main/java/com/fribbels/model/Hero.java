@@ -2,6 +2,7 @@ package com.fribbels.model;
 
 import com.fribbels.enums.Gear;
 import com.fribbels.request.BonusStatsRequest;
+import com.fribbels.request.OptimizationRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,6 +64,8 @@ public class Hero {
     private int cp;
 
     private Map<Gear, Item> equipment;
+
+    private OptimizationRequest optimizationRequest;
 
     public Item switchItem(final Item item) {
         final Gear gear = item.getGear();

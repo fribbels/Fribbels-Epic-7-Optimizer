@@ -1,6 +1,7 @@
 package com.fribbels.request;
 
 import com.fribbels.enums.Set;
+import com.fribbels.enums.StatType;
 import com.fribbels.model.Hero;
 import com.fribbels.model.Item;
 import com.fribbels.model.Request;
@@ -10,9 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Wither;
 
 import java.util.List;
 
+@Wither
 @Setter
 @Getter
 @Builder
@@ -27,11 +30,16 @@ public class OptimizationRequest extends Request {
     private List<Set> inputSetsOne;
     private List<Set> inputSetsTwo;
     private List<Set> inputSetsThree;
+    private List<Set> inputExcludeSet;
 
+    private List<StatType> inputNecklaceStat;
+    private List<StatType> inputRingStat;
+    private List<StatType> inputBootsStat;
+
+    private Boolean inputPredictReforges;
     private Boolean inputAllowLockedItems;
     private Boolean inputAllowEquippedItems;
     private Boolean inputKeepCurrentItems;
-    private Boolean inputAllowBrokenSets;
     private Boolean inputCanReforge;
 
     private int atk;
@@ -100,15 +108,19 @@ public class OptimizationRequest extends Request {
     private Integer inputResMinForce;
     private Integer inputResMaxForce;
 
-    private String inputNecklaceStat;
-    private String inputRingStat;
-    private String inputBootsStat;
+    private Integer inputForceNumberSelect;
+    private Integer inputForceMode;
+    private Integer inputFilterPriority;
+    private Integer inputAtkPriority;
+    private Integer inputHpPriority;
+    private Integer inputDefPriority;
+    private Integer inputSpdPriority;
+    private Integer inputCrPriority;
+    private Integer inputCdPriority;
+    private Integer inputEffPriority;
+    private Integer inputResPriority;
 
     // calculated fields
-    private int[][] possibleSetCombinations;
     private boolean[] boolArr;
-
     private int setFormat;
-    private int bonusAtk;
-    private int bonusHp;
 }

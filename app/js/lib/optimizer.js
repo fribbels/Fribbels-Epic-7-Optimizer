@@ -1,10 +1,10 @@
 var resultStats = [];
-var grid; 
+var grid;
 var currentSortModel;
 var currentFilteredItems;
 
 function numberFormatter(params) {
-    if (!params.value) 
+    if (!params.value)
         return '';
     return Math.floor(params.value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
@@ -21,7 +21,7 @@ function equipSelectedGear() {
     const heroId = document.getElementById('inputHeroAdd').value;
 
     if (selectedGear.length == 0) return;
-    HeroManager.equipGearOnHero(heroId, selectedGear);    
+    HeroManager.equipGearOnHero(heroId, selectedGear);
     console.log("See equipped:", HeroManager.getHeroById(heroId))
     drawPreview(selectedGear)
 }
@@ -67,11 +67,11 @@ module.exports = {
         for (var id of Object.keys(heroesById)) {
             const hero = heroesById[id];
 
-            console.log("DEBUG", hero)
+            // console.log("DEBUG", hero)
             const option = document.createElement('option');
             option.innerHTML = hero.name;
             option.value = hero.id;
-                
+
             optimizerHeroSelector.add(option);
         }
     },
@@ -180,7 +180,7 @@ function getSetFormat(sets) {
             throw 'Invalid Sets';
         }
         if (sets[1].length > 0) {
-            return 1;       
+            return 1;
         }
         return 2
     }
@@ -188,9 +188,9 @@ function getSetFormat(sets) {
         if (sets[1].length > 0) {
             if (sets[2].length > 0) {
                 return 5;
-            } 
+            }
             return 4;
-        } 
+        }
         if (sets[2].length > 0) {
             throw 'Invalid Sets';
         }

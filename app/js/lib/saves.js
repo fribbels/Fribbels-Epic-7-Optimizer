@@ -96,7 +96,7 @@ module.exports = {
         await Api.setHeroes(data.heroes);
 
 
-        Optimizer.redraw();
+        OptimizerTab.redrawHeroSelector();
         HeroesTab.redraw();
     },
 

@@ -69,7 +69,7 @@ body {
 }
 
 .tab-panel {
-  padding: 10px 0;
+  padding: 4px 0;
   border-top: 1px solid #ccc;
 }
 
@@ -88,32 +88,48 @@ body {
 }
 
 .tab {
-  height: 90%;
+  height: 94%;
 }
 
 .gearPreviewButton {
-  width: 150px;
+  width: 140px;
 }
 
 .optimization-results-panel {
   flex-grow: 2;
   min-height: 250px;
   height: 100%;
+  display: flex;
 }
 
 #myGrid {
   height: 100%;
+  flex-grow: 2;
+  min-width: 700px;
 }
 
 .optimizer-equipped-section {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  min-height: 245px;
+  min-height: 210px;
+  margin-top: 10px;
 }
 
 .optimizerActionButtons {
-  flex-grow: 1;
+  /*flex-grow: 1;*/
+  display: flex;
+  flex-direction: column;
+
+    align-self: flex-end;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.optimizerActionButtonsRow {
+  display: flex;
+  flex-direction: row;
 }
 
 label {
@@ -126,7 +142,17 @@ input {
 
 .constraints-panel-col {
   padding: 5px 8px 5px 8px;
-  width: 178px;
+  width: 200px;
+  flex-grow: 1;
+  line-height: 14px;
+}
+
+.constraints-panel-col-small {
+  padding: 5px 8px 5px 8px;
+  width: 150px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  line-height: 14px;
 }
 
 .constraints-left-panel {
@@ -147,14 +173,16 @@ input {
 
 #buttonSpace {
   width: 20px;
+      height: 5px;
   display: inline-block;
 }
 
 .gear-preview-row {
-  padding: 0px 10px 5px;
-  margin-top: 10px;
-  font-size: 12px;
-  width: 170px;
+  padding: 0px 27px 5px;
+  margin-top: 5px;
+  font-size: 13px;
+  width: 165px;
+  height: 195px;
 }
 
 .tab {
@@ -196,7 +224,7 @@ input {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  height: 245px;
+  height: 200px;
 }
 
 .heroes-equipped-item {
@@ -205,26 +233,28 @@ input {
 }
 
 .optimizer-number-input {
-  min-width: 50px;
-  max-width: 60px;
+  height: 18px;
+  /*min-width: 50px;
+  max-width: 60px;*/
+  width: 50px;
 }
 
 .inputStatLabel {
   font-size:12px;
   display: inline-block;
-  width: 50px;
+  width: 35px;
   text-align: center;
 
-}    
+}
 
 .sliderLabel {
   font-size:12px;
   display: inline-block;
-  width: 30px;
+  width: 35px;
 }
 
 .sliderInput {
-  width: 25px;
+  width: 30px;
   text-align: center;
   margin-right: 5px;
 }
@@ -237,8 +267,10 @@ input {
 }
 
 .gearTypeImg {
-  width: 35px;
-  height: 35px;
+  width: 33px;
+  height: 33px;
+      /*border: solid 1px red;*/
+      border-radius: 8px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -247,21 +279,25 @@ input {
 .itemDisplayHeader {
   display: flex;
   flex-direction: row;
-  height:45px;
+  height:30px;
 }
 
 .itemDisplayHeaderData {
   display: flex;
   flex-direction: column;
-  width: 95px;
+  width: 65px;
   line-height: 16px;
   padding: 0px 5px;
 }
 
 .itemDisplayHeaderDataTop {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    text-align: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 17px;
 }
 
 .itemDisplayGearRank {
@@ -269,7 +305,7 @@ input {
 }
 
 .itemDisplayEquippedHero {
-  width: 45px;
+  /*width: 45px;*/
   height: 45px;
   position: relative;
   top: 50%;
@@ -282,57 +318,75 @@ input {
   justify-content: space-between;
   border-top: solid 1px;
   border-bottom: solid 1px;
-  margin-top: 10px;
+  margin-top: 12px;
   padding-top: 5px;
-  padding-bottom: 5px;
-  height: 20px;
-  font-size: 13px;
+  padding-bottom: 4px;
+  /* height: 16px; */
+  font-size: 14px;
   font-weight: 600;
 }
 .itemDisplaySubstats {
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  height: 85px;
+  margin-top: 4px;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  height: 80px;
 }
 .itemDisplaySubstat {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  line-height: 22px;
 }
 
 .itemDisplayFooter {
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  align-items: center;
   justify-content: space-between;
+  padding-top: 4px;
 }
 
 .vertical {
   border-left: 1px solid #e8e8e8;
-  height: 85%;
+  height: 90%;
+  margin-top: 15px;
+}
+
+.shortVertical {
+  border-left: 1px solid #e8e8e8;
+  height: 65%;
   margin-top: 15px;
 }
 
 .horizontalSpace {
-  height: 5px;  
+  height: 5px;
 }
 
 .itemDisplayFooterSet {
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  align-items: center;
 }
 .itemDisplaySetImg {
-  width: 30px;
-  height: 30px;
+  /*width: 25px;*/
+  margin-top: 3px;
+  height: 25px;
+}
+.itemDisplayLockImg {
+  /*width: 25px;*/
+  margin-top: 3px;
+  height: 25px;
+  margin-right: 16px;
+  opacity: 0.6;
 }
 .itemDisplaySetType {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  padding-left: 7px
+  padding-left: 7px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .ag-theme-balham .ag-header-cell, .ag-theme-balham .ag-header-group-cell {
   padding-left: 2px;
@@ -399,12 +453,16 @@ input {
   min-width: 200px;
   width: 100%;
   user-select: none;
+    padding: 1px;
+    height: 26px;
 }
 
 .inputGearFilterSelect {
   min-width: 200px;
   width: 100%;
   user-select: none;
+    padding: 1px;
+    height: 26px;
 }
 
 .ms-choice>div.icon-close:before {
@@ -413,10 +471,10 @@ input {
 }
 
 /* Disable arrows on number inputs */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .optimizerSetIcon {
@@ -460,7 +518,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .ag-floating-top {
-  margin-bottom: 3px;
+  border-bottom: solid #cecece 3px !important;
 }
 
 .valuePadding {
@@ -513,4 +571,96 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: left;
   padding-left: 4px !important;
   width: 55px !important;
+}
+
+.gridLeftPanel {
+  width: 165px;
+}
+
+.gridRightPanel {
+  width: 325px;
+  display: flex;
+  flex-direction: row;
+}
+.panelLabel {
+  line-height: 21px;
+  display:flex;
+  flex-direction: row;
+}
+
+.ms-drop ul>li {
+    line-height: 24px;
+    padding: 0px 8px;
+}
+
+.ms-drop ul>li.hide-radio label {
+    padding: 0px 8px;
+}
+#stat-priority-panel {
+    min-width: 220px;
+}
+.constraints-right-panel {
+  width: 307px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  /*position: relative;*/
+  justify-content: space-between;
+  flex-direction: column;
+}
+.inputHeroImage {
+  padding-top: 5px;
+  /*width: 100px;*/
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: -15px;
+}
+.inputHeroImageContainer {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100px;
+}
+.checkbox {
+    width: 18px;
+    height: 18px;
+}
+.leftRightText {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: 22px;
+}
+.leftRightTextContent {
+    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+}
+.heroesTabButtonRow {
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+.tooltipImage {
+  height: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 7px;
+  opacity: 0.5;
+}
+.itemPreviewCheckbox {
+  height: 18px;
+  width: 18px;
+}
+.itemDisplayFooterIconContainer {
+    display: flex;
+    align-items: center;
+
+}
+.itemDisplayEditImg {
+    height: 21px;
+    padding-right: 5px;
+    opacity: 0.6;
 }

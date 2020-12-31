@@ -49,7 +49,7 @@ public class ItemDb {
 
     public Item calculateWss(final Item item) {
         final AugmentedStats stats = item.getAugmentedStats();
-        double value =
+        double wssValue =
                 stats.getAttackPercent() +
                 stats.getDefensePercent() +
                 stats.getHealthPercent() +
@@ -62,12 +62,36 @@ public class ItemDb {
                 stats.getDefense() / 31.0 * (1.0/2.0) +
                 stats.getHealth() / 174.0 * (1.0/2.0);
 
-        DecimalFormat df = new DecimalFormat("#.#");
-        df.setRoundingMode(RoundingMode.CEILING);
+        double dpsWssValue =
+                stats.getAttackPercent() +
+                stats.getSpeed() * (8.0/4.0) +
+                stats.getCritDamage() * (8.0/7.0) +
+                stats.getCritRate() * (8.0/5.0) +
+                stats.getAttack() / 39.0 * (1.0/2.0);
 
-        System.out.println("VALUE" + value);
+        double supportWssValue =
+                stats.getDefensePercent() +
+                stats.getHealthPercent() +
+                stats.getEffectResistance() +
+                stats.getSpeed() * (8.0/4.0) +
+                stats.getDefense() / 31.0 * (1.0/2.0) +
+                stats.getHealth() / 174.0 * (1.0/2.0);
 
-        item.setWss((int) Math.round(value));
+        double combatWssValue =
+                stats.getAttackPercent() +
+                stats.getDefensePercent() +
+                stats.getHealthPercent() +
+                stats.getSpeed() * (8.0/4.0) +
+                stats.getCritDamage() * (8.0/7.0) +
+                stats.getCritRate() * (8.0/5.0) +
+                stats.getAttack() / 39.0 * (1.0/2.0) +
+                stats.getDefense() / 31.0 * (1.0/2.0) +
+                stats.getHealth() / 174.0 * (1.0/2.0);
+
+        item.setWss((int) Math.round(wssValue));
+        item.setDpsWss((int) Math.round(dpsWssValue));
+        item.setSupportWss((int) Math.round(supportWssValue));
+        item.setCombatWss((int) Math.round(combatWssValue));
         return item;
     }
 

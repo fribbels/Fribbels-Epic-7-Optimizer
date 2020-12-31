@@ -1,6 +1,20 @@
 const Swal = require('sweetalert2');
 
 module.exports = {
+    error: (text) => {
+        Swal.fire({
+          icon: 'error',
+          text: text,
+        })
+    },
+
+    info: (text) => {
+        Swal.fire({
+          icon: 'info',
+          text: text,
+        })
+    },
+
     editHeroDialog: async (hero) => {
         return new Promise(async (resolve, reject) => {
             const getAllHeroesResponse = await Api.getAllHeroes();
@@ -10,7 +24,7 @@ module.exports = {
                 title: '',
                 html: `
                     <div class="editGearForm">
-                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css" rel="stylesheet">
+                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/bulma/bulma.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Attack</div>
@@ -48,7 +62,7 @@ module.exports = {
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Speed</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonus || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || 0}">
                             </span>
                         </div>
 
@@ -85,17 +99,17 @@ module.exports = {
                 showCancelButton: true,
                 preConfirm: async () => {
                     const editedHero = {
-                        attack: document.getElementById('editHeroBonusAttack').value,
-                        defense: document.getElementById('editHeroBonusDefense').value,
-                        health: document.getElementById('editHeroBonusHealth').value,
-                        attackPercent: document.getElementById('editHeroBonusAttackPercent').value,
-                        defensePercent: document.getElementById('editHeroBonusDefensePercent').value,
-                        healthPercent: document.getElementById('editHeroBonusHealthPercent').value,
-                        speed: document.getElementById('editHeroBonusSpeed').value,
-                        critChance: document.getElementById('editHeroBonusCritChance').value,
-                        critDamage: document.getElementById('editHeroBonusCritDamage').value,
-                        effectiveness: document.getElementById('editHeroBonusEffectiveness').value,
-                        effectResistance: document.getElementById('editHeroBonusEffectResistance').value,
+                        attack: parseInt(document.getElementById('editHeroBonusAttack').value),
+                        defense: parseInt(document.getElementById('editHeroBonusDefense').value),
+                        health: parseInt(document.getElementById('editHeroBonusHealth').value),
+                        attackPercent: parseInt(document.getElementById('editHeroBonusAttackPercent').value),
+                        defensePercent: parseInt(document.getElementById('editHeroBonusDefensePercent').value),
+                        healthPercent: parseInt(document.getElementById('editHeroBonusHealthPercent').value),
+                        speed: parseInt(document.getElementById('editHeroBonusSpeed').value),
+                        critChance: parseInt(document.getElementById('editHeroBonusCritChance').value),
+                        critDamage: parseInt(document.getElementById('editHeroBonusCritDamage').value),
+                        effectiveness: parseInt(document.getElementById('editHeroBonusEffectiveness').value),
+                        effectResistance: parseInt(document.getElementById('editHeroBonusEffectResistance').value),
                     }
 
                     resolve(editedHero);
@@ -121,7 +135,7 @@ module.exports = {
                 title: '',
                 html: `
                     <div class="editGearForm">
-                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css" rel="stylesheet">
+                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/bulma/bulma.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Equipped</div>
@@ -225,8 +239,12 @@ module.exports = {
                         locked: document.getElementById('editGearLocked').checked,
                     }
 
-                    if (!editedItem.rank || !editedItem.set || !editedItem.gear || !editedItem.main || !editedItem.main.type || !editedItem.main.value) {
-                        alert("Please make sure Type / Set / Rank / Level / Enhance / Main stat are not empty");
+                    if (!editedItem.rank || editedItem.rank == "None" ||
+                        !editedItem.set  || editedItem.set == "None" ||
+                        !editedItem.gear || editedItem.gear == "None" ||
+                        !editedItem.main || !editedItem.main.type || editedItem.main.type == "None" || !editedItem.main.value) {
+                        module.exports.error("Please make sure Type / Set / Rank / Level / Enhance / Main stat are not empty");
+                        console.error("FAIL", editedItem)
                         return false;
                     }
 

@@ -1,6 +1,6 @@
 module.exports = {
 
-    applyPriorityFilters: (params, items, baseStats) => {
+    applyPriorityFilters: (params, items, baseStats, allItems) => {
         var passed = [];
 
         if (filterDisabled(params)) {
@@ -11,19 +11,22 @@ module.exports = {
         console.log("PRIORITY FILTER ENABLED")
 
         const groups = groupBy(items, 'gear');
+        const allItemsGroups = groupBy(allItems, 'gear');
+
         console.log("GROUPS", groups);
 
-        for (var gearArr of Object.values(groups)) {
+        for (var key of Object.keys(groups)) {
+            var gearArr = groups[key];
             for (var gear of gearArr) {
                 calculateScore(gear, params, baseStats);
             }
 
             gearArr.sort((a, b) => b.score - a.score);
             console.log("GearArr", gearArr)
-            const index = Math.round(params.inputFilterPriority / 100 * gearArr.length);
+            const index = Math.round(params.inputFilterPriority / 100 * allItemsGroups[key].length);
             console.log("Index", index)
             passed = passed.concat(gearArr.slice(0, index));
-            console.log("Passed", passed)
+            // console.log("Passed", passed)
         }
 
         return passed;
@@ -49,7 +52,7 @@ function calculateScore(item, params, baseStats) {
     const effRolls = item.augmentedStats.EffectivenessPercent/9;
     const resRolls = item.augmentedStats.EffectResistancePercent/9;
 
-    const score = atkRolls * params.inputAtkPriority + 
+    const score = atkRolls * params.inputAtkPriority +
                   hpRolls * params.inputHpPriority +
                   defRolls * params.inputDefPriority +
                   spdRolls * params.inputSpdPriority +

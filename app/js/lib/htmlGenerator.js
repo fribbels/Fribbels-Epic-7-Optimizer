@@ -1,4 +1,4 @@
-function handlePercent(stat, baseStats) {
+function statToText(stat, baseStats, item) {
     if (!stat) {
         return {
             type: '',
@@ -6,13 +6,35 @@ function handlePercent(stat, baseStats) {
         }
     }
 
-    const unpercentedStat = stat.type.match(/[A-Z][a-z]+/g).filter(x => x != 'Percent').join(' ');
-    const percentedValue = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats);
+// ${substat3.reforgedValue ? " [" + substat3.reforgedValue + "]" : ""}
+
+    const unpercentedStat = shortenStats(stat.type.match(/[A-Z][a-z]+/g).filter(x => x != 'Percent').join(' '));
+    var value;
+
+    if (item.level == 85 && item.enhance == 15) {
+        const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
+        const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : stat.reforgedValue;
+
+        value = unreforgedValue + " ⯈ " + reforgedValue
+    } else {
+        value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats);
+    }
+
 
     return {
         type: unpercentedStat,
-        value: percentedValue
+        value: value
     }
+}
+
+function shortenStats(statType) {
+    if (statType == "Effect Resistance")
+        return "Effect Resist"
+    if (statType == "Critical Hit Chance")
+        return "Crit Chance"
+    if (statType == "Critical Hit Damage")
+        return "Crit Damage"
+    return statType;
 }
 
 function getPercentageEquivalent(stat, baseStats) {
@@ -61,7 +83,7 @@ function buildFilter(name, url, isChecked) {
 function getHeroImage(item) {
     const heroName = item.equippedByName;
     if (!heroName)
-        return "https://i.imgur.com/IuUKPRw.png"; // blank transparent
+        return Assets.getBlank(); // blank transparent
 
     const data = HeroData.getHeroExtraInfo(heroName);
     return data.assets.icon;
@@ -71,10 +93,11 @@ module.exports = {
     initialize: () => {
         module.exports.buildFilterSetsBar();
         module.exports.buildFilterGearBar();
+        module.exports.buildFilterLevelBar();
     },
 
     buildFilterSetsBar: () => {
-        const clearUrl = "https://i.imgur.com/NI8rtdF.png"; // black x
+        const clearUrl = Assets.getX(); // black x
         const html = buildFilter("ClearSets", clearUrl, true);
         document.getElementById('setsFilterBar').innerHTML += html;
 
@@ -87,8 +110,22 @@ module.exports = {
         }
     },
 
+    buildFilterLevelBar: () => {
+        const clearUrl = Assets.getX(); // black x
+        const html = buildFilter("ClearLevels", clearUrl, true);
+        document.getElementById('levelFilterBar').innerHTML += html;
+
+        const assetsByLevel = Assets.getAssetsByLevel();
+        for (var level of Object.keys(assetsByLevel)) {
+            const url = assetsByLevel[level];
+            const html = buildFilter(level, url, false);
+
+            document.getElementById('levelFilterBar').innerHTML += html;
+        }
+    },
+
     buildFilterGearBar: () => {
-        const clearUrl = "https://i.imgur.com/NI8rtdF.png"; // black x
+        const clearUrl = Assets.getX(); // black x
         const html = buildFilter("ClearGears", clearUrl, true);
         document.getElementById('gearFilterBar').innerHTML += html;
 
@@ -115,22 +152,20 @@ module.exports = {
     </div>
   </div>
 </div>
-<div class="itemDisplayMainStat">
-  <div class="itemDisplayMainType"></div>
-  <div class="itemDisplayMainValue"></div>
-</div>
 <div class="itemDisplaySubstats">
 </div>
 <div class="itemDisplayFooter">
 </div>
             `
         }
-        console.log("!!", item)
-        const main = handlePercent(item.main, baseStats);
-        const substat0 = handlePercent(item.substats[0], baseStats);
-        const substat1 = handlePercent(item.substats[1], baseStats);
-        const substat2 = handlePercent(item.substats[2], baseStats);
-        const substat3 = handlePercent(item.substats[3], baseStats);
+
+        Reforge.getReforgeStats(item);
+
+        const main = statToText(item.main, baseStats, item);
+        const substat0 = statToText(item.substats[0], baseStats, item);
+        const substat1 = statToText(item.substats[1], baseStats, item);
+        const substat2 = statToText(item.substats[2], baseStats, item);
+        const substat3 = statToText(item.substats[3], baseStats, item);
 
         const color = colorsByRank[item.rank];
         const gearImage = Assets.getGearAsset(item.gear);
@@ -141,15 +176,16 @@ module.exports = {
 
         const html = `
 <div class="itemDisplayHeader">
-  <img src="${gearImage}" class="gearTypeImg"></img>
+  <img src="${gearImage}" class="gearTypeImg" ${styleForImage(item.rank)}></img>
   <div class="itemDisplayHeaderData">
     <div class="itemDisplayHeaderDataTop">
-      <div class="itemDisplayLevel">+${item.enhance}, level ${item.level}</div>
+      <div class="itemDisplayLevel" ${styleEnhance(item.enhance)}>+${item.enhance}</div>
     </div>
-    <div class="itemDisplayHeaderDataBot">
-      <div class="itemDisplayGearRank" style='color: ${color}'>${item.rank}</br>${item.gear}</div>
+    <div class="itemDisplayHeaderDataTop">
+      <div class="itemDisplayLevel" ${styleLevel(item.level)}>${item.level}</div>
     </div>
   </div>
+  <img src="${Assets.getLock()}" class="itemDisplayLockImg" ${styleLocked(item.locked)}></img>
   <img src="${heroImage}" class="itemDisplayEquippedHero"></img>
 </div>
 <div class="itemDisplayMainStat">
@@ -177,11 +213,49 @@ module.exports = {
 <div class="itemDisplayFooter">
   <div class="itemDisplayFooterSet">
     <img src="${setImage}" class="itemDisplaySetImg"></img>
-    <div class="itemDisplaySetType">${item.set}</div>
+    <div class="itemDisplaySetType">${item.set.replace("Set", "")}</div>
   </div>
-  <input type="checkbox" id="${checkboxPrefix + item.gear}" checked>
+  <div class="itemDisplayFooterIconContainer">
+      <input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>
+  </div>
 </div>
         `
         return html;
     }
+}
+
+function editItem() {
+      // <img src="${Assets.getEdit()}" class="itemDisplayEditImg"></img>
+}
+
+function styleEnhance(enhance) {
+    if (enhance != "15") {
+        return 'style="color: red;font-weight: bold;"'
+    }
+}
+
+function styleLocked(locked) {
+    if (!locked) {
+        return 'style="opacity:0"'
+    }
+}
+
+function styleLevel(level) {
+    if (level == "85") {
+        return 'style="color: #00b306;font-weight: bold;"'
+    }
+}
+
+function styleForImage(rank) {
+    if (rank == "Epic")
+        return 'style="border: solid 2px #a20707;background: #ff58588a;"'
+    if (rank == "Heroic")
+        return 'style="border: solid 2px #ca56ff;background: #eda6ff99;"'
+    if (rank == "Rare")
+        return 'style="border: solid 2px #1722f9;background: #6db5ffab;"'
+    if (rank == "Good")
+        return 'style="border: solid 2px #009208;background: #93ffaaab;"'
+    if (rank == "Normal")
+        return 'style="border: solid 2px #616161;background: #d2d4d2ab;"'
+    return "";
 }

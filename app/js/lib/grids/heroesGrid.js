@@ -7,10 +7,29 @@ module.exports = {
         buildGrid();
     },
 
-    refresh: (heroes) => {
+    refresh: (heroes, id) => {
+        const selectedNode = heroesGrid.gridOptions.api.getSelectedNodes()[0]
+
         currentHeroes = heroes;
         heroesGrid.gridOptions.api.setRowData(heroes)
         heroesGrid.gridOptions.api.redrawRows();
+
+        if (!selectedNode && !id) {
+            return;
+        }
+
+        heroesGrid.gridOptions.api.forEachNode((node) => {
+            if (id) {
+                if (node.data.id == id) {
+                    node.setSelected(true, false);
+                    heroesGrid.gridOptions.api.ensureNodeVisible(node);
+                }
+            } else {
+                if (node.data.id == selectedNode.data.id) {
+                    node.setSelected(true, false);
+                }
+            }
+        })
     },
 
     getSelectedRow: () => {
@@ -58,6 +77,7 @@ function buildGrid(heroes) {
         ],
         rowSelection: 'single',
         rowData: heroes,
+        suppressScrollOnNewData: true,
         rowHeight: 52,
         pagination: true,
         paginationPageSize: 100000,
@@ -83,7 +103,6 @@ function renderElement(element) {
 }
 
 function renderSets(equipment) {
-    console.log("EQUIPMENT", equipment);
     if (!equipment) return;
 
     const setNames = Object.values(equipment).map(x => x.set);
@@ -105,8 +124,6 @@ function renderSets(equipment) {
         Math.floor(setNames.filter(x => x == "RevengeSet").length),
         Math.floor(setNames.filter(x => x == "InjurySet").length)
     ]
-
-    console.log("SETCOUNTERS", setCounters)
 
     const sets = [];
     for (var i = 0; i < setCounters.length; i++) {
@@ -150,7 +167,7 @@ function onRowSelected(event) {
 
         Api.getHeroById(heroId).then(async (response) => {
             const hero = response.hero;
-            console.log(hero);
+            console.log("Selected hero row", hero);
 
             const equipmentMap = hero.equipment ? hero.equipment : {};
             const equipment = [

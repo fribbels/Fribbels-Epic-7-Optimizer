@@ -150,8 +150,16 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     private void addStatsToHero(final Hero hero) {
         final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
 
+        // Update equipment
         final Map<Gear, Item> equipment = hero.getEquipment();
+        equipment.entrySet()
+                 .stream()
+                 .forEach(x -> {
+                     final Item item = itemDb.getItemById(x.getValue().getId());
+                     if (item == null) return;
 
+                     equipment.put(x.getKey(), item);
+                 });
 
         if (equipment == null || equipment.values().size() != 6) {
             hero.setStats(new HeroStats());

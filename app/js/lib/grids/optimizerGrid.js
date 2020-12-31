@@ -147,7 +147,7 @@ function buildGrid() {
 
     const gridOptions = {
         defaultColDef: {
-            width: 45,
+            width: 42,
             sortable: true,
             sortingOrder: ['desc', 'asc'],
             cellStyle: columnGradient,
@@ -159,7 +159,7 @@ function buildGrid() {
         columnDefs: [
             {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => renderSets(params.value)},
             {headerName: 'atk', field: 'atk'},
-            {headerName: 'hp', field: 'hp', width: 70},
+            {headerName: 'hp', field: 'hp', width: 52},
             {headerName: 'def', field: 'def'},
             {headerName: 'spd', field: 'spd'},
             {headerName: 'cr', field: 'cr'},
@@ -167,14 +167,14 @@ function buildGrid() {
             {headerName: 'eff', field: 'eff'},
             {headerName: 'res', field: 'res'},
             // {headerName: 'dac', field: 'dac'},
-            {headerName: 'cp', field: 'cp'},
-            {headerName: 'hp*s', field: 'hpps', width: 65},
-            {headerName: 'ehp', field: 'ehp', width: 65},
-            {headerName: 'ehp*s', field: 'ehpps', width: 65},
-            {headerName: 'dmg', field: 'dmg'},
-            {headerName: 'dmg*s', field: 'dmgps', width: 65},
-            {headerName: 'mcdmg', field: 'mcdmg', width: 65},
-            {headerName: 'mcdmg*s', field: 'mcdmgps', width: 65},
+            {headerName: 'cp', field: 'cp', width: 55},
+            {headerName: 'hps', field: 'hpps', width: 47},
+            {headerName: 'ehp', field: 'ehp', width: 55},
+            {headerName: 'ehps', field: 'ehpps', width: 47},
+            {headerName: 'dmg', field: 'dmg', width: 47},
+            {headerName: 'dmgs', field: 'dmgps', width: 47},
+            {headerName: 'mcd', field: 'mcdmg', width: 52},
+            {headerName: 'mcds', field: 'mcdmgps', width: 47},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',
@@ -253,16 +253,13 @@ function columnGradient(params) {
         var agg = currentAggregate[colId];
         if (!agg) return;
 
-        var percent = (value - agg.min) / (agg.max - agg.min + 1);
+        var percent = agg.max == agg.min ? 1 : (value - agg.min) / (agg.max - agg.min);
         percent = Math.min(1, Math.max(0, percent))
-
-        console.log("AGG", agg, percent)
 
         var color = gradient.rgbAt(percent);
         if (agg.min == 0 && agg.max == 0) {
             color = gradient.rgbAt(0.5)
         }
-
 
         return {
             backgroundColor: color.toHexString()

@@ -2,6 +2,7 @@ package com.fribbels.db;
 
 import com.fribbels.core.SpecialStats;
 import com.fribbels.model.Hero;
+import com.fribbels.request.OptimizationRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -40,6 +41,20 @@ public class HeroDb {
                 .filter(x -> StringUtils.equals(x.getId(), id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void saveOptimizationRequest(final OptimizationRequest request) {
+        if (request.getHero() == null || request.getHero().getId() == null) return;
+
+        final String heroId = request.getHero().getId();
+        final Hero hero = getHeroById(heroId);
+
+        if (hero == null) return;
+
+        hero.setOptimizationRequest(request
+                .withHero(null)
+                .withItems(null)
+                .withBoolArr(null));
     }
 }
 

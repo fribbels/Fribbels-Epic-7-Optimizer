@@ -120,7 +120,7 @@ const createWindow = async () => {
       app.quit();
     }
   });
-  
+
   // const menuBuilder = new MenuBuilder(mainWindow);
   // menuBuilder.buildMenu();
 

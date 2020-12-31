@@ -4,6 +4,9 @@ const setCheckboxes = [];
 var gearFilter;
 const gearCheckboxes = [];
 
+var levelFilter;
+const levelCheckboxes = [];
+
 module.exports = {
 
     initialize: () => {
@@ -37,9 +40,9 @@ module.exports = {
         });
     },
 
-    redraw: () => {
-        ItemsGrid.redraw().then(x => {
-            ItemsGrid.refreshFilters(setFilter, gearFilter)
+    redraw: (newItem) => {
+        ItemsGrid.redraw(newItem).then(x => {
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter)
             // setFilter = null;
             // for (var checkbox of setCheckboxes) {
             //     checkbox.checked = false;
@@ -74,7 +77,7 @@ async function addGear() {
     const newItem = await Dialog.editGearDialog(null, false);
     console.warn("NEWITEM", newItem);
 
-    module.exports.redraw();
+    module.exports.redraw(newItem);
     Saves.autoSave();
 }
 
@@ -133,7 +136,7 @@ function setupEventListeners() {
                 setFilter = null;
             }
 
-            ItemsGrid.refreshFilters(setFilter, gearFilter);
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
         });
         setCheckboxes.push(checkbox);
     }
@@ -149,7 +152,7 @@ function setupEventListeners() {
 
         }
 
-        ItemsGrid.refreshFilters(setFilter, gearFilter);
+        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
     });
 
     // Gear
@@ -170,7 +173,7 @@ function setupEventListeners() {
                 gearFilter = null;
             }
 
-            ItemsGrid.refreshFilters(setFilter, gearFilter);
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
         });
         gearCheckboxes.push(checkbox);
     }
@@ -186,6 +189,43 @@ function setupEventListeners() {
 
         }
 
-        ItemsGrid.refreshFilters(setFilter, gearFilter);
+        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+    });
+
+    // Level
+
+    const levels = Object.keys(Assets.getAssetsByLevel())
+    console.log("SETUP", levels);
+    for (var level of levels) {
+        const checkbox = document.getElementById('checkboxImage' + level);
+        checkbox.addEventListener('change', function(event) {
+            var eventLevel = event.target.id.split("checkboxImage")[1];
+            if (event.target.checked) {
+                levelFilter = eventLevel
+                for (var checkbox of levelCheckboxes) {
+                    if (checkbox != event.target)
+                        checkbox.checked = false;
+                }
+            } else {
+                levelFilter = null;
+            }
+
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+        });
+        levelCheckboxes.push(checkbox);
+    }
+
+    document.getElementById('checkboxImageClearLevels').addEventListener('change', function(event) {
+        console.log(event);
+        if (event.target.checked) {
+            levelFilter = null;
+            for (var checkbox of levelCheckboxes) {
+                checkbox.checked = false;
+            }
+        } else {
+
+        }
+
+        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
     });
 }

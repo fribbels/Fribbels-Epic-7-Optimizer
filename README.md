@@ -135,7 +135,7 @@ This filter is applied AFTER the force and set/main stat filters. It works by as
 
 Then, we set the Top % slider to 30%. This will take all your weapons, score them based on the priority defined above, then only considers the Top 30% of the scores for optimization. Then it does the same for helmets, armors, etc, and then the optimizer generates permutations based on those Top 30% gears.
 
-**The Top % slider must be set to something other than 100% for this filter to work**, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 30-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 30%, the filter gets very sensitive and you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out.
+**The Top % slider must be set to something other than 100% for this filter to work**, otherwise you're just using the Top 100% of your gears and nothing is being filtered. Worth noting that this rating is a heuristic so it doesn't always produce optimal results if your percent is set too low. I find that 30-50% is a good range to work with, because 50% filters out most of the irrelevant gears (like dps stats on a tank build, or vice versa). Below 30%, the filter gets very sensitive and you might not have enough gears to produce optimal results, so the results can be missing some permutations when some useful gears get filtered out. Try playing around with different Top % values.
 
 An example priority filter for a DPS unit like Arby could be something like this, where you only want damage stats:
 
@@ -261,11 +261,11 @@ Please read these instructions carefully!
    * After installing, restart your computer (required!)<br><br>
    * Mac apparently requires both the JRE and JDK. Get the JDK here: https://www.oracle.com/java/technologies/javase-downloads.html
 3. Install an emulator to run Epic 7 on
-    * I used LDPlayer, but others have work as well: MeMu, BlueStacks, Nox, etc<br><br>
+    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative.<br><br>
 4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br><br>
-5. Set Epic 7 to enable **High Quality Support** in settings [Example](https://i.imgur.com/iEbfVN3.png)<br><br>
+5. Set Epic 7 to enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)<br><br>
 
-6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br><br>
+6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br><br>
 
 
 **Importing gear screenshots:**
@@ -313,27 +313,41 @@ Here's a video that covers most of the importing process: https://www.youtube.co
 
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
+ **Release 1.2.0**
+ - Fix: Optimizer producing suboptimal results for 4 piece set when filtered armor # > helm #
+ - Fix: Decimal numbers for imprints
+ - Fix: Update WSS/Score when gear stats changed
+ - Divide speed stats by 10
+ - Simplify gear preview panel
+ - More detailed permutations
+ - Clean up optimization panel - getting too cluttered
+ - DPS score/Support score
+ - Hero pic
+ - Simulate reforged stats on non-reforged piece
+ - Exclude filter
+ - Fix alert messages
+ - Improvements to the priority ranking filter
+ - Save hero's filter preferences
+ - Fix speed imprints
+ - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
+
 **TODO - high priority:**
- - Release 1.1.0
+ - Tooltips
 
  **Medium priority:**
- - Improvements to the priority ranking filter
- - Fix: Update WSS/Score when gear stats changed
- - Clear out item previews on refresh
- - Enable cross platform for Linux
- - Clean up optimization panel - getting too cluttered
- - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
- - Add can reforge, can enhance columns
- - Save hero's filter preferences
  - Option to equip gear from heroes page
- - Customize result limit
+ - Save Gear configurations, compare between them
+ - Move save/load to File menu
+ - Verify all image files
+ - Update permutations on 4 piece set
 
  **Low priority:**
- - Investigate decrypting cache for imports
- - Simulate reforged stats on non-reforged piece
- - Move save/load to File menu
+ - Add can reforge, can enhance columns
+ - Customize result limit
+ - Enable cross platform for Linux
+ - Clear out item previews on refresh
+ - Investigate decrypting network traffic for gear data
  - Optimize multiple heroes at once
- - Fix: Decimal numbers for imprints
  - Optimize results with a missing piece(s)
  - Add different level/awakening options
  - Tools for optimizing HP scaling units/skill scaling
@@ -343,40 +357,11 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Score per roll column in gear
  - Gear enhance filters
  - Option to select a location to save zarroc import
-
-**Version 1.1.0 Release:**
- - Fix: Crit chance/crit damage uncapped in CP calculation
- - Fix: Add the 3 new sets through the edit item page
- - Fix: Add a limit to color coded boxes for 100% crit and for crit dmg
- - Show current stats for the hero in the Optimizer tab
- - Button to delete items
- - Add CP on heroes page + optimizer screen
- - Fix: Throw error when adding invalid item
- - Add percent options for the bonus stats page
- - Add a filter for reforge-able optimization results
- - Remove dual attack chance
- - Fix: Damage calculations with overcapped crit damage/chance
- - Add more confirmation dialogs/output text for the optimizer page
- - Merge gear files
- - Import heroes from Zarroc optimizer file
- - Fix: Don't deselect filters when editing items
- - Autoload save file
- - Import artifact data from Zarroc file
- - Add stats for specialty change heroes
- - Fix: Update # of permutations when a filter is removed.
- - Memory cleanup, attempt garbage collection on new optimization request
- - Arrow keys for going up and down the grids
- - Multi select
- - Show percentage equivalent of flat stats on Optimizer page
- - Fix: Remove hero should unequip items
- - Add counts for filtered items
- - Added lock/unlock multiple items button
- - Fix: Prevent saving invalid items without set/type/etc
- - Fix: Update score when item is updated
- - Enable cross platform for Mac
- - Update instructions
- - Autosave more frequently, autosave on manual save
- - Fix calculations for 3 new sets
+ - Reorder heroes list
+ - Have two windows open at once
+ - Select/interact with multiple heroes at once
+ - Keyboard actions ctrl + a, ctrl + s, ctrl + arrows
+ - Rage set damage calculation
 
 ## Troubleshooting
 
@@ -398,10 +383,11 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 - If you get a error that contains "Current relative path is C:\Windows\system32..."
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
 - If your optimization suddenly stops working completely, check if you have one of these weird looking items in your gear tab: https://i.imgur.com/BzAgRjR.png. If one is there, edit it to fill in all the fields, but just leave the stats at 0. https://i.imgur.com/wDKDaE5.png
-- If a hero is missing from the drop down list, the data is being pulled from Epic7DB API. If the hero is available in the API but not in the app, contact me.
+- If a hero is missing from the drop down list, the data is being pulled from Epic7DB API so it may be an issue with that. If the hero is available in the Epic7DB API but not in this app, then contact me.
 - Mac - "The application "FribbelsE7Optimizer" can't be opened.
   - Try unzipping the file using Unarchiver from the app store instead of Archive Utility. [Example](https://i.imgur.com/y9uGQcH.png)
-  - Try downloading the .dmg file if you were using the zip file.
+  - Try downloading the .dmg file if you were using the zip/app file.
+  - Can't resize Bluestacks to 1600x900. Resize to 1600x900 through options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900.
 
 ## Contact me
 

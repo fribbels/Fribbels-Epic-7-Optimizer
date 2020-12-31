@@ -36,6 +36,9 @@ public class Item {
 
     private boolean locked;
     private int wss;
+    private int dpsWss;
+    private int supportWss;
+    private int combatWss;
 
     public String toString() {
         return new Gson().toJson(this);

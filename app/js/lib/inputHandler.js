@@ -7,6 +7,7 @@ global.Api = require('./api');
 global.Dialog = require('./dialog');
 global.DataFetcher = require('./datafetcher');
 global.SpecialtyChange = require('./specialtychange');
+global.Reforge = require('./reforge');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -55,25 +56,17 @@ global.Saves = require('./saves');
 const Jimp = require('jimp');
 
 document.addEventListener("DOMContentLoaded", async () => {
+    Selectors.initialize();
     console.log("DOMContentLoaded")
-
-    document.onkeydown = handleKey;
 
     Subprocess.initialize();
     await copyLang();
     HtmlGenerator.initialize();
     GearCalculator.initialize();
     await HeroData.initialize();
-    // HeroManager.initialize();
     Ocr.initialize();
     Assets.initialize();
     Saves.initialize();
-    Selectors.initialize();
-
-    HeroesTab.initialize();
-    HeroesGrid.initialize();
-    OptimizerTab.initialize();
-    OptimizerGrid.initialize();
     ItemsTab.initialize();
     ItemsGrid.initialize();
 
@@ -85,6 +78,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     $(document).on('click','input[type=number]',function(){ this.select(); });;
     $(document).on('click','input[type=text]',function(){ this.select(); });;
+
+    HeroesTab.initialize();
+    HeroesGrid.initialize();
+    OptimizerTab.initialize();
+    OptimizerGrid.initialize();
 
     Saves.loadAutoSave();
 });
