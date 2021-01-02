@@ -7,7 +7,7 @@ module.exports = {
 
             item.id = uuidv4();
         }
-        console.log("Augmented items", items.length);
+        console.log("Augmented items", items);
     },
 
     augmentReforge: (items) => {
@@ -16,7 +16,7 @@ module.exports = {
                 augmentStats(item);
             }
         }
-        console.log("Augmented reforged items", items.length);
+        console.log("Augmented reforged items", items);
     },
 }
 

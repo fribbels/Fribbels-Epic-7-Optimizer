@@ -550,7 +550,7 @@ async function applyItemFilters(params, heroId) {
     if (params.inputPredictReforges) {
         console.log("Predict reforges enabled")
         items.forEach(x => {
-            if (x.level == 85) {
+            if (x.level == 85 && x.enhance == 15) {
                 x.substats.forEach(substat => {
                     if (substat.reforgedValue) {
                         substat.value = substat.reforgedValue;

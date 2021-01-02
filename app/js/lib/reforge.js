@@ -126,6 +126,7 @@ function calc(gear) {
         // console.log(rolls);
         // console.log(gear.substats);
     }
+        console.log(gear.enhance, gear.main.reforgedValue);
 }
 
 function calculateReforgeValues(substat) {
