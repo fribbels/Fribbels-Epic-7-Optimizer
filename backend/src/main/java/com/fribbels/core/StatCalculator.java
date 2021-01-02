@@ -47,8 +47,8 @@ public class StatCalculator {
     }
 
     public static float[] getStatAccumulatorArr(final HeroStats base, final Item item, final Map<String, float[]> accumulatorsByItemId) {
-        if (accumulatorsByItemId.containsKey(item)) {
-            return accumulatorsByItemId.get(item);
+        if (accumulatorsByItemId.containsKey(item.getId())) {
+            return accumulatorsByItemId.get(item.getId());
         }
 
         final float[] accumulator = buildStatAccumulatorArr(base, item);
