@@ -307,11 +307,10 @@ Here's a video that covers most of the importing process: https://www.youtube.co
 
 * Here's some quick tips on getting the best results. This is assuming you've read the [Optimization panel](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#optimizer-tab) descriptions
 * The goal is to add filters to narrow down results so the optimizer doesn't take forever, but keep the search range wide enough that you don't lose good options.
-* Input the sets and main stats whenever possible. This is the easiest way to narrow down results.
+* **Input the sets and main stats whenever possible.** This is the easiest way to narrow down results.
 * Don't narrow down your results too much. If you see your # of permutations at like 10,000 or so, your filters might be too narrow, you can expand/remove some filters for more/better results.
-* Make sure to set your stat priority correctly! DPS units should have high priority on Atk / Cr / Cd / Speed. Tank units should have high priority on Hp / Def / Speed for example. Bad priorities will lead to bad results because good options get filtered out.
-* Adjust the Top n% bar on the priority filter to see what your results look like. Too high % will take a long time, but too low % will exclude good results. Most of the time I use 30-50%, sometimes lower if I want my best gear on the unit.
-* The Top n%/priority filter is applied AFTER the set and force filters. If your result permutations are already low enough after those two filters, you don't need the priority filter - it might start excluding good results.
+* **Make sure to set your stat priority correctly!** DPS units should have high priority on Atk / Cr / Cd / Speed. Tank units should have high priority on Hp / Def / Speed for example. Bad priorities will lead to bad results because good options get filtered out.
+* Adjust the Top n% bar on the priority filter to see what your results look like. Too high % will take a long time, but too low % will exclude good results. Most of the time I use 30-50%, sometimes lower if I want only my best gear on the unit.
 * If you want a certain piece of gear to stay on a hero, go to the Gear tab -> Edit Selected Item -> Equipped and equip it on them first. [Example](https://i.imgur.com/oNO9ivL.png) Then you can use the optimizer with "Keep current" checked to keep that piece on them.
 
 ## Closing thoughts
@@ -343,7 +342,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 -   Fix: Speed bonus save correctly now
 -   Fix: Bug with optimizer producing suboptimal results for 4 piece set when filtered armor # > helm #
 -   Fix: Bug with optimizer not sorting prioritized gear correctly
--   Fix: Update WSS/Score when gear stats changed
+-   Fix: Update gear scores when gear stats changed
 -   Fix: Alert messages making input boxes break
 -
 **TODO - High priority:**
