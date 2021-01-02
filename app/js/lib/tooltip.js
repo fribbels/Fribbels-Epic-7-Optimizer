@@ -137,10 +137,10 @@ Lowering the percent narrows down your best gears to make the search faster, but
             content:
 `
 <p><b>Predict reforges - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate. </p>
+<p><b>At least one lv 85 - </b> Search only for builds that contain at least one level 85 gear. </p>
 <p><b>Locked items - </b> Allow locked items in the search. </p>
 <p><b>Equipped items - </b> Allow items equipped by other heroes in the search. </p>
 <p><b>Keep current - </b> Keep any existing gears on the unit, and search only for the missing gear pieces. </p>
-<p><b>Can reforge - </b> Search only for builds that contain at least one level 85 gear. </p>
 `
         });
 
