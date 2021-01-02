@@ -678,9 +678,6 @@ async function submitOptimizationRequest() {
 
     const results = Api.submitOptimizationRequest(mergedRequest).then(result => {
         console.log("RESPONSE RECEIVED", result);
-        if (result.results >= 5000000) {
-            Dialog.info('Search terminated after the 5,000,000 result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
-        }
         clearInterval(progressTimer);
         // $('#estimatedPermutations').text(Number(permutations).toLocaleString());
         var searchedCount = result.searched;
@@ -689,7 +686,12 @@ async function submitOptimizationRequest() {
         var searchedStr = Number(searchedCount).toLocaleString();
         var resultsStr = Number(resultsCounter).toLocaleString();
 
-        $('#maxPermutationsNum').text(searchedStr);
+        if (result.results >= 5000000) {
+            Dialog.info('Search terminated after the 5,000,000 result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
+        } else {
+            $('#maxPermutationsNum').text(searchedStr);
+        }
+
         $('#searchedPermutationsNum').text(searchedStr);
         $('#resultsFoundNum').text(resultsStr);
         OptimizerGrid.refresh();

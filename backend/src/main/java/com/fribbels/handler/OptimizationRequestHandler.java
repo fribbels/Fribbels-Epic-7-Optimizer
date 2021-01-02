@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -216,7 +217,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
         //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
 
-        final Map<String, float[]> accumulatorArrsByItemId = new HashMap<>();
+        final Map<String, float[]> accumulatorArrsByItemId = new ConcurrentHashMap<>(new HashMap<>());
         final ExecutorService executorService = Executors.newFixedThreadPool(8);
         searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
