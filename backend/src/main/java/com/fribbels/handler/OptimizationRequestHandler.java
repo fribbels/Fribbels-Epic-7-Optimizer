@@ -220,7 +220,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
 
         final Map<Item, float[]> accumulatorArrsByItem = new HashMap<>();
-        final ExecutorService executorService = Executors.newFixedThreadPool(1);
+        final ExecutorService executorService = Executors.newFixedThreadPool(8);
         counter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
 
@@ -321,7 +321,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                             }
                                         }
 
-                                        if (index % 100000 == 1) {
+                                        if (index % 1000000 == 1) {
                                             System.out.println("PROGRESS: [" + index + "]");
                                         }
                                     }

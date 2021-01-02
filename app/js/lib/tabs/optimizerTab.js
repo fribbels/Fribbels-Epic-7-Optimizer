@@ -168,6 +168,7 @@ module.exports = {
             $('#forceNumberSelect').val(inputDisplayNumberNumber(request.inputForceNumberSelect))
 
             Selectors.setGearMainAndSetsFromRequest(request);
+            recalculateFilters();
         });
 
         document.getElementById('submitOptimizerReset').addEventListener("click", () => {
@@ -318,7 +319,6 @@ module.exports = {
             option.innerHTML = hero.name;
             option.value = hero.id;
 
-
             optimizerHeroSelector.add(option);
 
             if (selectedId && selectedId == hero.id) {
@@ -336,7 +336,7 @@ async function editGearFromIcon(id) {
     console.log(result.item);
     const editedItem = await Dialog.editGearDialog(result.item, true, true);
     await Api.editItems([editedItem]);
-    Notifier.success("Edited item");
+    Notifier.quick("Edited item");
 
     ItemsTab.redraw();
     drawPreview();

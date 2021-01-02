@@ -15,7 +15,7 @@ function statToText(stat, baseStats, item) {
         const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
         const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : stat.reforgedValue;
 
-        value = unreforgedValue + " ⯈ " + reforgedValue
+        value = unreforgedValue + " ➤ " + reforgedValue
     } else {
         value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats);
     }
@@ -211,13 +211,15 @@ module.exports = {
   </div>
 </div>
 <div class="itemDisplayFooter">
-  <div class="itemDisplayFooterSet">
-    <img src="${setImage}" class="itemDisplaySetImg"></img>
-    <div class="itemDisplaySetType">${item.set.replace("Set", "")}</div>
+  <div class="itemDisplayFooterIconContainer">
+      <input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>
+      <div class="itemDisplayFooterSet">
+        <img src="${setImage}" class="itemDisplaySetImg"></img>
+        <div class="itemDisplaySetType">${item.set.replace("Set", "")}</div>
+      </div>
   </div>
   <div class="itemDisplayFooterIconContainer">
       ${editItemDisplay(item)}
-      <input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>
   </div>
 </div>
         `
