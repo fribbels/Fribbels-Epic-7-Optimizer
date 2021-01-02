@@ -277,7 +277,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                                     for (int b = 0; b < bSize; b++) {
                                         if (Main.interrupt) {
-                                            System.err.println("Interrupted");
                                             executorService.shutdownNow();
                                             return;
                                         }

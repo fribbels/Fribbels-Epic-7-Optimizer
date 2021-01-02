@@ -94,6 +94,7 @@ module.exports = {
                 const items = data.items;
                 const failed = data.failed;
 
+                Notifier.success("Finished reading screenshots");
                 $('#fileReadSubmitOutputText').html(`Finished reading ${fullFilenames.length} screenshots. \n${items.length} screenshots succeded, ${failed.length} failed. ${failed.length > 0 ? "Failed files are:<br>" + failed.join("<br>") : ""} `)
 
                 console.log("SERIALIZING");
@@ -131,14 +132,13 @@ module.exports = {
             fs.writeFile(filename, output, (err) => {
                 if (err) {
                     console.error(err)
+                    Notifier.error("Unable to write file " + filename + " - " + err);
                     return;
                 }
                 console.log('Exported gear.txt');
                 $('#screenshotExportOutputText').text(`Exported data to ${filename}`)
             });
         });
-
-
 
         document.getElementById('importFileSelect').addEventListener("click", async () => {
             const options = {

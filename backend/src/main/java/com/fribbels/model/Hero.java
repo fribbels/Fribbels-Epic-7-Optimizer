@@ -47,14 +47,14 @@ public class Hero {
     private int bonusAtk;
     private int bonusDef;
     private int bonusHp;
-    private int bonusAtkPercent;
-    private int bonusDefPercent;
-    private int bonusHpPercent;
+    private float bonusAtkPercent;
+    private float bonusDefPercent;
+    private float bonusHpPercent;
     private int bonusSpeed;
-    private int bonusCr;
-    private int bonusCd;
-    private int bonusEff;
-    private int bonusRes;
+    private float bonusCr;
+    private float bonusCd;
+    private float bonusEff;
+    private float bonusRes;
 
     private int bonusMaxAtkPercent;
     private int bonusMaxDefPercent;

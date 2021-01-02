@@ -36,10 +36,10 @@ module.exports = {
                 {headerName: 'Def', field: 'augmentedStats.Defense'},
                 {headerName: 'Eff', field: 'augmentedStats.EffectivenessPercent'},
                 {headerName: 'Res', field: 'augmentedStats.EffectResistancePercent'},
-                {headerName: 'Wss', field: 'wss'},
-                {headerName: 'dWss', field: 'dpsWss'},
-                {headerName: 'sWss', field: 'supportWss'},
-                {headerName: 'cWss', field: 'combatWss'},
+                {headerName: 'Score', field: 'wss', width: 50},
+                {headerName: 'dScore', field: 'dpsWss', width: 50},
+                {headerName: 'sScore', field: 'supportWss', width: 50},
+                {headerName: 'cScore', field: 'combatWss', width: 50},
                 {headerName: 'Equipped', field: 'equippedByName', width: 120},
                 {headerName: 'Locked', field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
             ],
@@ -66,7 +66,13 @@ module.exports = {
     },
 
     redraw: async (newItem) => {
-        console.log("Redraw items");
+        console.log("Redraw items", newItem);
+        var selectedNode;
+        const selectedNodes = itemsGrid.gridOptions.api.getSelectedNodes()
+        if (selectedNodes.length == 1) {
+            selectedNode = selectedNodes[0];
+        }
+
         return Api.getAllItems().then(getAllItemsResponse => {
             aggregateCurrentGearStats(getAllItemsResponse.items);
             itemsGrid.gridOptions.api.setRowData(getAllItemsResponse.items)
@@ -74,6 +80,13 @@ module.exports = {
             if (newItem) {
                 itemsGrid.gridOptions.api.forEachNode((node) => {
                     if (node.data.id == newItem.id) {
+                        node.setSelected(true, false);
+                        itemsGrid.gridOptions.api.ensureNodeVisible(node);
+                    }
+                })
+            } else if (selectedNode) {
+                itemsGrid.gridOptions.api.forEachNode((node) => {
+                    if (node.data.id == selectedNode.data.id) {
                         node.setSelected(true, false);
                         itemsGrid.gridOptions.api.ensureNodeVisible(node);
                     }

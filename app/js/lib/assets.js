@@ -26,9 +26,9 @@ const assetsByElement = {
 }
 
 const assetsByLevel = {
-    "85above": "./assets/85up.png",
-    "85at": "./assets/85.png",
     "85below": "./assets/85down.png",
+    "85at": "./assets/85.png",
+    "85above": "./assets/85up.png",
 }
 
 const assetsByClass = {
@@ -93,5 +93,8 @@ module.exports = {
     },
     getEdit: () => {
         return './assets/edit.png';
+    },
+    getReforge: () => {
+        return './assets/reforge.png';
     },
 }

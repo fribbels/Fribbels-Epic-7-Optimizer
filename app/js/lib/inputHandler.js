@@ -46,12 +46,14 @@ global.Ocr = require('./ocr/ocr');
 global.Optimizer = require('./optimizer');
 global.GearCalculator = require('./gearCalculator');
 global.ItemSerializer = require('./itemSerializer');
+global.Tooltip = require('./tooltip');
 // global.Backend = require('../backend');
 global.Files = require('./files');
 global.HeroData = require('./heroData');
 // global.HeroManager = require('./heroManager');
 global.HtmlGenerator = require('./htmlGenerator');
 global.fs = require('fs');
+global.Notifier = require('./notifier');
 global.Saves = require('./saves');
 const Jimp = require('jimp');
 
@@ -83,6 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     HeroesGrid.initialize();
     OptimizerTab.initialize();
     OptimizerGrid.initialize();
+    Tooltip.initialize();
 
     Saves.loadAutoSave();
 });

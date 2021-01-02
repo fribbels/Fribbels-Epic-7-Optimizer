@@ -5,6 +5,7 @@ window.$ = $;
 window.jQuery = $;
 </script>
 
+<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
 
 <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
@@ -24,6 +25,7 @@ window.jQuery = $;
   rel="stylesheet"
   href="https://unpkg.com/tippy.js@6/dist/tippy.css"
 />
+<link rel="stylesheet" type="text/css" href="css/awn.css"></link>
 </head>
 
 <div class="tabset">
@@ -53,7 +55,10 @@ window.jQuery = $;
           <div id="constraints-panel" class="constraints-panel">
             <div id="constaints-options-panel" class="constraints-panel-col-small">
 
-              <div class="panelLabel">Hero</div>
+              <div class="panelLabel">
+                <div class="panelLabelText">Hero</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="heroTooltip"></img>
+              </div>
               <select id="inputHeroAdd" class="gearPreviewButton"></select>
 
               <div class="horizontalSpace" ></div>
@@ -90,7 +95,10 @@ window.jQuery = $;
 
               <div class="horizontalSpace"></div>
 
-
+              <div class="panelLabel">
+                <div class="panelLabelText">Options</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="optionsTooltip"></img>
+              </div>
               <div>
                 <input type="checkbox" id="inputPredictReforges" class="optimizer-checkbox" checked>
                 <label for="inputPredictReforges">Predict reforges</label>
@@ -119,11 +127,94 @@ window.jQuery = $;
 
 
             </div>
+
+
+            <div class="vertical"></div>
+
+            <div id="placeholder-panel" class="constraints-panel-col-small">
+              <div class="panelLabel">
+                <div class="panelLabelText">Stat filters</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="filterStatsTooltip"></img>
+              </div>
+              <input type="number" id="inputMinAtkLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Atk</div>
+              <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinHpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Hp</div>
+              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDefLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Def</div>
+              <input type="number" id="inputMaxDefLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinSpdLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Spd</div>
+              <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCrLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">CRate</div>
+              <input type="number" id="inputMaxCrLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinCdLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">CDmg</div>
+              <input type="number" id="inputMaxCdLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEffLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Eff</div>
+              <input type="number" id="inputMaxEffLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinResLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Res</div>
+              <input type="number" id="inputMaxResLimit" class="optimizer-number-input"><br>
+            </div>
+
+            <div id="placeholder-panel" class="constraints-panel-col-small">
+              <div class="panelLabel">
+                <div class="panelLabelText">Rating filters</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="filterRatingsTooltip"></img>
+              </div>
+              <input type="number" id="inputMinCpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Cp</div>
+              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinHppsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">HpS</div>
+              <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEhpLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Ehp</div>
+              <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">EhpS</div>
+              <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDmgLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Dmg</div>
+              <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">DmgS</div>
+              <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">Mcd</div>
+              <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input"><br>
+
+              <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input">
+              <div class="inputStatLabel">McdS</div>
+              <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input"><br>
+            </div>
+
             <div class="vertical"></div>
 
             <div id="stat-priority-panel" class="constraints-panel-col">
 
-              <div class="panelLabel">Substat Priority</div>
+                <div class="panelLabel">
+                  <div class="panelLabelText">Substat Priority</div>
+                  <img src="./assets/tooltip.png" class="tooltipImage" id="substatPriorityTooltip"></img>
+                </div>
 
                 <div class="sliderLabel">Atk</div>
                 <input class="sliderInput" id="atkSliderInput" type="number" value="0" readonly>
@@ -267,7 +358,10 @@ window.jQuery = $;
                 </optgroup>
               </select>
 
-              <div class="panelLabel">Exclude</div>
+              <div class="panelLabel">
+                <div class="panelLabelText">Exclude</div>
+                <img src="./assets/tooltip.png" class="tooltipImage" id="excludeTooltip"></img>
+              </div>
               <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
                 <!-- <option value="None">None</option> -->
                 <optgroup label="4 Piece">
@@ -296,7 +390,11 @@ window.jQuery = $;
             <div class="vertical"></div>
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
-                <div class="panelLabel">Force:</div>
+
+                <div class="panelLabel">
+                  <div class="panelLabelText">Force</div>
+                  <img src="./assets/tooltip.png" class="tooltipImage" id="forceTooltip"></img>
+                </div>
                 <input type="number" id="inputMinAtkForce" class="optimizer-number-input">
                 <div class="inputStatLabel">Atk</div>
                 <input type="number" id="inputMaxAtkForce" class="optimizer-number-input"><br>
@@ -342,78 +440,6 @@ window.jQuery = $;
                 <input type="number" id="inputMaxResForce" class="optimizer-number-input"><br>
             </div>
 
-            <div class="vertical"></div>
-
-            <div id="placeholder-panel" class="constraints-panel-col-small">
-              <div class="panelLabel">Filter stats</div>
-              <input type="number" id="inputMinAtkLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Atk</div>
-              <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinHpLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Hp</div>
-              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDefLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Def</div>
-              <input type="number" id="inputMaxDefLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinSpdLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Spd</div>
-              <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinCrLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">CRate</div>
-              <input type="number" id="inputMaxCrLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinCdLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">CDmg</div>
-              <input type="number" id="inputMaxCdLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinEffLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Eff</div>
-              <input type="number" id="inputMaxEffLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinResLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Res</div>
-              <input type="number" id="inputMaxResLimit" class="optimizer-number-input"><br>
-            </div>
-
-            <div id="placeholder-panel" class="constraints-panel-col-small">
-              <div class="panelLabel">Filter ratings</div>
-              <input type="number" id="inputMinCpLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Cp</div>
-              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinHppsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">HpS</div>
-              <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinEhpLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Ehp</div>
-              <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">EhpS</div>
-              <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDmgLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Dmg</div>
-              <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">DmgS</div>
-              <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">Mcd</div>
-              <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input"><br>
-
-              <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input">
-              <div class="inputStatLabel">McdS</div>
-              <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input"><br>
-            </div>
-
           </div>
 
 
@@ -424,6 +450,11 @@ window.jQuery = $;
             <div id="optimizer-actions-panel" class="constraints-right-panel constraints-panel-col">
 
               <div class="topHalfRightPanel">
+                <div class="panelLabel">
+                  <div class="panelLabelText">Filter details</div>
+                  <img src="./assets/tooltip.png" class="tooltipImage" id="filterDetailsTooltip"></img>
+                </div>
+
                 <div class="leftRightText">
                   <text id="" class="leftRightTextContent">Filtered weapons</text>
                   <text id="filteredWeaponsNum" class="leftRightTextContent">0</text>
@@ -450,23 +481,32 @@ window.jQuery = $;
                 </div>
 
                 <div class=horizontalSpace></div>
-                <div class=horizontalSpace></div>
+
+                <div class="panelLabel">
+                  <div class="panelLabelText">Search details</div>
+                  <img src="./assets/tooltip.png" class="tooltipImage" id="searchDetailsTooltip"></img>
+                </div>
 
                 <div class="leftRightText">
-                  <text id="a1" class="leftRightTextContent">Permutations</text>
+                  <text id="permutationsText" class="leftRightTextContent">Permutations</text>
                   <text id="maxPermutationsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="a1" class="leftRightTextContent">Searched</text>
+                  <text id="searchedText" class="leftRightTextContent">Searched</text>
                   <text id="searchedPermutationsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="a1" class="leftRightTextContent">Results</text>
+                  <text id="resultsText" class="leftRightTextContent">Results</text>
                   <text id="resultsFoundNum" class="leftRightTextContent">0</text>
                 </div>
               </div>
 
               <div class="optimizerActionButtons">
+                <div class="panelLabel" style="margin: auto;">
+                  <div class="panelLabelText">Actions</div>
+                  <img src="./assets/tooltip.png" class="tooltipImage" id="actionsTooltip"></img>
+                </div>
+
                 <div class="optimizerActionButtonsRow">
                   <input type="submit" class="gearPreviewButton" value="Equip Items" id="gearPreviewEquip">
                   <input type="submit" class="gearPreviewButton" value="Unequip Items" id="gearPreviewUnequip">
@@ -600,20 +640,34 @@ window.jQuery = $;
 
       <!-- <input type="submit" value="Update" class="gearPreviewButton" id="updateGear"> -->
 
+      <div class="panelLabel" style="margin: auto;">
+        <div class="panelLabelText">Gear table</div>
+        <img src="./assets/tooltip.png" class="tooltipImage" id="gearTableTooltip"></img>
+      </div>
+
+      <div id="gear-grid" style="height: 450px" class="ag-theme-balham"></div>
+
+      <div class="panelLabel" style="margin: auto;">
+        <div class="panelLabelText">Actions</div>
+        <img src="./assets/tooltip.png" class="tooltipImage" id="gearActionsTooltip"></img>
+      </div>
+
       <input type="submit" value="Edit Selected Item" class="gearPreviewButton" id="editGear">
+      <input type="submit" value="Reforge Item" class="gearPreviewButton" id="reforgeGear">
       <input type="submit" value="Add New Item" class="gearPreviewButton" id="addGear">
       <input type="submit" value="Remove Items" class="gearPreviewButton" id="removeGear">
       <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipGear">
       <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockGear">
       <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockGear"><br><br>
 
-      <div id="gear-grid" style="height: 450px" class="ag-theme-balham"></div>
+      <div class="panelLabel" style="margin: auto;">
+        <div class="panelLabelText">Filters</div>
+        <img src="./assets/tooltip.png" class="tooltipImage" id="gearFiltersTooltip"></img>
+      </div>
 
-      <br>
-
-        <div id="setsFilterBar"></div>
-        <div id="gearFilterBar"></div>
-        <div id="levelFilterBar"></div>
+      <div id="setsFilterBar"></div>
+      <div id="gearFilterBar"></div>
+      <div id="levelFilterBar"></div>
 
       <br>
       <br>

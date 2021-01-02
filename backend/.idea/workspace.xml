@@ -10,45 +10,48 @@
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/../app/app.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../app/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/css/tabulator.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/assets.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/assets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/dialog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/grids/heroesGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/grids/heroesGrid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/grids/itemsGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/grids/itemsGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/forceFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/forceFilter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/grids/optimizerGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/grids/optimizerGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/heroData.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/heroData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/htmlGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/htmlGenerator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/importer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/importer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/inputHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/inputHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/itemAugmenter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/itemAugmenter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/ocr/ocr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/ocr/ocr.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/priorityFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/priorityFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/saves.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/saves.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/selectors.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/selectors.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/subprocess.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/subprocess.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/itemsTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/itemsTab.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tooltip.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tooltip.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/main.dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/main.dev.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/db/HeroDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/db/HeroDb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/db/ItemDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/db/ItemDb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/HeroesRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/HeroesRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OcrRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OcrRequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/request/OptimizationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/request/OptimizationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/response/OptimizationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/response/OptimizationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/request/BonusStatsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/request/BonusStatsRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/db/ItemDb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/db/ItemDb.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/response/OptimizationResponse$OptimizationResponseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/response/OptimizationResponse$OptimizationResponseBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/response/OptimizationResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/response/OptimizationResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/fribbels/core/OptimizationRequestHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/HeroesRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/HeroesRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OcrRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OcrRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/request/BonusStatsRequest$BonusStatsRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/request/BonusStatsRequest$BonusStatsRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/request/BonusStatsRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/request/BonusStatsRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../data/jar/backend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../data/jar/backend.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../data/saves/autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/../data/saves/autosave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,26 +180,26 @@
     </state>
     <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608329135029" />
     <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109325925" />
-    <state width="2793" height="455" key="GridCell.Tab.0.bottom" timestamp="1609419726188">
+    <state width="2842" height="238" key="GridCell.Tab.0.bottom" timestamp="1609546369367">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2908" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609161977951" />
-    <state width="2793" height="455" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609419726188" />
-    <state width="2793" height="455" key="GridCell.Tab.0.center" timestamp="1609419726188">
+    <state width="2842" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609508893365" />
+    <state width="2842" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369367" />
+    <state width="2842" height="238" key="GridCell.Tab.0.center" timestamp="1609546369367">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2908" height="238" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609161977951" />
-    <state width="2793" height="455" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609419726188" />
-    <state width="2793" height="455" key="GridCell.Tab.0.left" timestamp="1609419726188">
+    <state width="2842" height="238" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609508893364" />
+    <state width="2842" height="238" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369367" />
+    <state width="2842" height="238" key="GridCell.Tab.0.left" timestamp="1609546369366">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2908" height="238" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609161977950" />
-    <state width="2793" height="455" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609419726188" />
-    <state width="2793" height="455" key="GridCell.Tab.0.right" timestamp="1609419726188">
+    <state width="2842" height="238" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609508893364" />
+    <state width="2842" height="238" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369366" />
+    <state width="2842" height="238" key="GridCell.Tab.0.right" timestamp="1609546369367">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2908" height="238" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609161977951" />
-    <state width="2793" height="455" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609419726188" />
+    <state width="2842" height="238" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609508893365" />
+    <state width="2842" height="238" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369367" />
     <state width="2793" height="455" key="GridCell.Tab.1.bottom" timestamp="1609419726189">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
@@ -232,10 +235,10 @@
     </state>
     <state x="1570" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607993981752" />
     <state x="5010" y="588" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1607997486292" />
-    <state x="1310" y="375" width="740" height="777" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1608256166703">
+    <state x="1310" y="375" width="740" height="777" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609505219320">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1310" y="375" width="740" height="777" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608256166703" />
+    <state x="1310" y="375" width="740" height="777" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609505219320" />
     <state x="1241" y="412" width="607" height="536" key="find.popup" timestamp="1608342302306">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -248,18 +251,18 @@
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="4560" y="344" key="run.anything.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609386502963" />
-    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1608791054106">
+    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1609545611561">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="1514" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608540018463" />
-    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608791054106" />
+    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609545611561" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/fribbels/handler/HeroesRequestHandler.java</url>
-          <line>182</line>
+          <line>184</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

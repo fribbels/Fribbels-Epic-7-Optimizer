@@ -7,7 +7,7 @@ module.exports = {
 
             item.id = uuidv4();
         }
-        console.log("Augmented items", items);
+        console.log("Augmented items", items.length);
     },
 
     augmentReforge: (items) => {
@@ -16,12 +16,24 @@ module.exports = {
                 augmentStats(item);
             }
         }
-        console.log("Augmented items", items);
+        console.log("Augmented reforged items", items.length);
     },
 }
 
 function augmentStats(item) {
-    item.augmentedStats = {};
+    item.augmentedStats = {
+        AttackPercent: 0,
+        HealthPercent: 0,
+        DefensePercent: 0,
+        Attack: 0,
+        Health: 0,
+        Defense: 0,
+        Speed: 0,
+        CriticalHitChancePercent: 0,
+        CriticalHitDamagePercent: 0,
+        EffectivenessPercent: 0,
+        EffectResistancePercent: 0,
+    };
     item.augmentedStats.mainType = item.main.type;
     item.augmentedStats.mainValue = item.main.value;
 

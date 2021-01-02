@@ -216,6 +216,7 @@ module.exports = {
     <div class="itemDisplaySetType">${item.set.replace("Set", "")}</div>
   </div>
   <div class="itemDisplayFooterIconContainer">
+      ${editItemDisplay(item)}
       <input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>
   </div>
 </div>
@@ -224,8 +225,11 @@ module.exports = {
     }
 }
 
-function editItem() {
-      // <img src="${Assets.getEdit()}" class="itemDisplayEditImg"></img>
+function editItemDisplay(item) {
+    if (item.level == 85 && item.enhance == 15) {
+        return `<img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
+    }
+    return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
 }
 
 function styleEnhance(enhance) {

@@ -34,7 +34,7 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
     private void initialize() throws Exception {
         final String path = new File(Main.class.getProtectionDomain().getCodeSource().getLocation()
                 .toURI()).getParentFile().getParentFile().getParentFile().getPath();
-        System.err.println("Path: " + path);
+//        System.err.println("Path: " + path);
 
         tessBaseAPI = new TessBaseAPI();
         if (tessBaseAPI.Init(path + "/data/tessdata/eng.traineddata", "eng", 0) != 0) {

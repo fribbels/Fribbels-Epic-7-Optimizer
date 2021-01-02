@@ -180,7 +180,11 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     public String getHeroById(final IdRequest request) {
+        if (request.getId() == null) return "";
+
         final Hero hero = heroDb.getHeroById(request.getId());
+        if (hero == null) return "";
+
         addStatsToHero(hero);
         final GetHeroByIdResponse response = GetHeroByIdResponse.builder()
                 .hero(hero)

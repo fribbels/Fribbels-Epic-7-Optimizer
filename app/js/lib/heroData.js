@@ -46,6 +46,7 @@ module.exports = {
         } catch (e) {
             console.error("Unable to finish loading from E7DB");
             console.error(e);
+            Notifier.error("Unable to load data from Epic7DB - " + e);
         }
 
         const baseStatsByName = {};
@@ -112,6 +113,7 @@ function manualFetchData() {
             heroesByName[name] = fullData;
         } catch (e) {
             console.error(e);
+            Notifier.error("Unable to load data from Epic7DB - " + e);
         }
     })
 

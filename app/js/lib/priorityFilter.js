@@ -4,16 +4,16 @@ module.exports = {
         var passed = [];
 
         if (filterDisabled(params)) {
-            console.warn("PRIORITY FILTER NOT ENABLED")
+            console.log("Priority filter disabled")
             return items;
         }
 
-        console.log("PRIORITY FILTER ENABLED")
+        console.log("Priority filter enabled")
 
         const groups = groupBy(items, 'gear');
         const allItemsGroups = groupBy(allItems, 'gear');
 
-        console.log("GROUPS", groups);
+        console.log("Grouped gears", groups);
 
         for (var key of Object.keys(groups)) {
             var gearArr = groups[key];
@@ -22,11 +22,11 @@ module.exports = {
             }
 
             gearArr.sort((a, b) => b.score - a.score);
-            console.log("GearArr", gearArr)
+
+            console.log("SORTED", key, gearArr);
+
             const index = Math.round(params.inputFilterPriority / 100 * allItemsGroups[key].length);
-            console.log("Index", index)
             passed = passed.concat(gearArr.slice(0, index));
-            // console.log("Passed", passed)
         }
 
         return passed;
@@ -39,8 +39,6 @@ var groupBy = function(xs, key) {
     return rv;
   }, {});
 };
-
-console.log(groupBy(['one', 'two', 'three'], 'length'));
 
 function calculateScore(item, params, baseStats) {
     const atkRolls = item.augmentedStats.AttackPercent/9 + item.augmentedStats.Attack/baseStats.atk*100/9;
@@ -61,16 +59,9 @@ function calculateScore(item, params, baseStats) {
                   effRolls * params.inputEffPriority +
                   resRolls * params.inputResPriority;
 
-    // console.log("Score: " + score +
-    //             "\nAtk rolls: " + atkRolls +
-    //             "\nHp rolls: " + hpRolls +
-    //             "\nDef rolls: " + defRolls +
-    //             "\nSpd rolls: " + spdRolls +
-    //             "\nCr rolls: " + crRolls +
-    //             "\nCd rolls: " + cdRolls +
-    //             "\nEff rolls: " + effRolls +
-    //             "\nRes rolls: " + resRolls);
-
+    if (isNaN(score)) {
+        console.error(item, params, baseStats);
+    }
     item.score = score;
 }
 

@@ -13,6 +13,10 @@ module.exports = {
 
 function calc(gear) {
     if (gear.level == 85 && gear.enhance == 15) {
+        if (!gear.substats || gear.substats.length != 4) {
+            Notifier.error("Cannot calculate reforged stats, item is missing stats");
+            return;
+        }
 
         gear.main.reforgedValue = mainStatValuesByStatType[gear.main.type]
 

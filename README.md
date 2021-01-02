@@ -330,9 +330,12 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Save hero's filter preferences
  - Fix speed imprints
  - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
+ - Tooltips
+ - Usage popup hints/tips
+ - Detect & warn java version
 
 **TODO - high priority:**
- - Tooltips
+ - Release 1.2.0
 
  **Medium priority:**
  - Option to equip gear from heroes page
@@ -340,6 +343,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Move save/load to File menu
  - Verify all image files
  - Update permutations on 4 piece set
+ - Dark mode
 
  **Low priority:**
  - Add can reforge, can enhance columns

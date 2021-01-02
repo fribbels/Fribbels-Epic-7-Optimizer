@@ -284,6 +284,7 @@ module.exports = {
             const heroId = document.getElementById('inputHeroAdd').value;
             const getHeroByIdResponse = await Api.getHeroById(heroId);
             const hero = getHeroByIdResponse.hero;
+            if (!hero) return;
             const baseStatsResponse = await Api.getBaseStats(hero.name);
 
             document.getElementById('optimizer-heroes-equipped-weapon').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[0].item, "optimizerGrid", baseStatsResponse.heroStats);
@@ -298,6 +299,10 @@ module.exports = {
 
     getOptimizationRequestParams: () => {
         return getOptimizationRequestParams();
+    },
+
+    editGearFromIcon: (id) => {
+        editGearFromIcon(id);
     },
 
     redrawHeroSelector: async () => {
@@ -324,6 +329,18 @@ module.exports = {
         redrawHeroImage();
         recalculateFilters();
     }
+}
+
+async function editGearFromIcon(id) {
+    const result = await Api.getItemById(id);
+    console.log(result.item);
+    const editedItem = await Dialog.editGearDialog(result.item, true, true);
+    await Api.editItems([editedItem]);
+    Notifier.success("Edited item");
+
+    ItemsTab.redraw();
+    drawPreview();
+    Saves.autoSave();
 }
 
 function redrawHeroImage() {
@@ -477,7 +494,7 @@ async function applyItemFilters(params, heroId) {
     var allItems = getAllItemsResponse.items;
     var items = allItems;
 
-    console.log("PARAMS", params);
+    console.log("Optimization params", params);
 
     if (params.inputExcludeSet.length > 0) {
         items = items.filter(x => !params.inputExcludeSet.includes(x.set));
@@ -503,7 +520,6 @@ async function applyItemFilters(params, heroId) {
             hero.equipment = {};
         }
 
-        console.warn("EQ", hero)
         const equipped = Object.values(hero.equipment);
         for (var i = 0; i < 6; i++) {
             const item = equipped[i];
@@ -530,10 +546,9 @@ async function applyItemFilters(params, heroId) {
             items = items.filter(x => filter.includes(x.main.type) && x.gear == "Boots" || x.gear != "Boots")
     }
 
-
+    items.forEach(x => Reforge.getReforgeStats(x));
     if (params.inputPredictReforges) {
-        console.log("PREDICT REFORGES");
-        items.forEach(x => Reforge.getReforgeStats(x));
+        console.log("Predict reforges enabled")
         items.forEach(x => {
             if (x.level == 85) {
                 x.substats.forEach(substat => {
@@ -573,9 +588,45 @@ async function applyItemFilters(params, heroId) {
     };
 }
 
+function warnParams(params) {
+    if (params.inputFilterPriority == 100
+    &&  params.inputAtkPriority == 0
+    &&  params.inputHpPriority == 0
+    &&  params.inputDefPriority == 0
+    &&  params.inputSpdPriority == 0
+    &&  params.inputCrPriority == 0
+    &&  params.inputCdPriority == 0
+    &&  params.inputEffPriority == 0
+    &&  params.inputResPriority == 0) {
+        Notifier.warn("No stat priority selected. For best results, use the stat priority filter.")
+    } else if (params.inputFilterPriority == 100) {
+        Notifier.warn("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
+    } else if (params.inputFilterPriority != 100
+    &&  params.inputAtkPriority == 0
+    &&  params.inputHpPriority == 0
+    &&  params.inputDefPriority == 0
+    &&  params.inputSpdPriority == 0
+    &&  params.inputCrPriority == 0
+    &&  params.inputCdPriority == 0
+    &&  params.inputEffPriority == 0
+    &&  params.inputResPriority == 0) {
+        Notifier.warn("Top N% was selected but no stat priorities are assigned. Select a stat priority otherwise the filter will pick random gears.")
+    }
+
+    if (params.inputSetsOne && params.inputSetsOne.length == 0) {
+        Notifier.warn("No sets were selected. For best results, select at least one set.")
+    }
+
+    if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
+    &&  params.inputRingStat && params.inputRingStat.length == 0
+    &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
+        Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
+    }
+}
+
 function submitOptimizationFilterRequest() {
-    console.warn("Click optimization filter");
     const params = getOptimizationRequestParams();
+    warnParams(params);
     OptimizerGrid.showLoadingOverlay();
     Api.submitOptimizationFilterRequest(params).then(response => {
         console.warn("Optimization filter response", response);
@@ -583,13 +634,12 @@ function submitOptimizationFilterRequest() {
     });
 }
 
-// Should not be used
+// Should not be used eventually
 async function getHeroBaseStats(heroId) {
     const getHeroByIdResponse = await Api.getHeroById(heroId);
     const hero = getHeroByIdResponse.hero;
 
     const baseStats = HeroData.getBaseStatsByName(hero.name);
-    console.warn(baseStats);
     return baseStats;
 }
 
@@ -617,6 +667,7 @@ async function submitOptimizationRequest() {
         hero: heroResponse.hero
     }
 
+    warnParams(params);
     const mergedRequest = Object.assign(request, params, baseStats);
     const str = JSON.stringify(mergedRequest);
 

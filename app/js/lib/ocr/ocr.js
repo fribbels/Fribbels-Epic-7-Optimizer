@@ -3,6 +3,7 @@ const OcrConverter = require('./ocrConverter');
 const Jimp = require('jimp');
 
 function handleError(error) {
+    Notifier.error("OCR error " + error);
     console.error(error);
 }
 
@@ -375,6 +376,7 @@ module.exports = {
             // });
             } catch (e) {
                 console.error(e);
+                Notifier.error("Failed to read screenshots - " + e);
                 failed.push(filename);
             }
         }

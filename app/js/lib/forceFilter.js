@@ -5,10 +5,10 @@ module.exports = {
         const passed = [];
 
         if (forceDisabled(params)) {
-            console.warn("FORCE NOT ENABLED")
+            console.log("Force not enabled")
             return items;
         }
-        console.warn("FORCE ENABLED")
+        console.log("Force enabled")
 
         for (var item of items) {
             const passes = [

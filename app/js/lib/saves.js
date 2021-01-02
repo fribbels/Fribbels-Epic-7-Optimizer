@@ -34,6 +34,7 @@ module.exports = {
             module.exports.loadSavedData(JSON.parse(data));
             console.log(JSON.parse(data));
         } catch (e) {
+            Notifier.error("Failed to load autosave - " + e);
             console.error("Failed to load autosave -", e);
         }
     },
@@ -86,11 +87,12 @@ module.exports = {
 
     loadSavedData: async (data) => {
         if (!data || !data.items || !data.heroes) {
+            Notifier.error("Invalid save data");
             return console.error("Invalid data", data);
         }
 
-        console.warn(data.items)
-        console.warn(data.heroes)
+        console.log("Saved items", data.items)
+        console.log("Saved heroes", data.heroes)
 
         await Api.setItems(data.items);
         await Api.setHeroes(data.heroes);

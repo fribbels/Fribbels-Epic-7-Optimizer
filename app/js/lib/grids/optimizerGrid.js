@@ -147,7 +147,7 @@ function buildGrid() {
 
     const gridOptions = {
         defaultColDef: {
-            width: 42,
+            width: 50,
             sortable: true,
             sortingOrder: ['desc', 'asc'],
             cellStyle: columnGradient,
@@ -159,7 +159,7 @@ function buildGrid() {
         columnDefs: [
             {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => renderSets(params.value)},
             {headerName: 'atk', field: 'atk'},
-            {headerName: 'hp', field: 'hp', width: 52},
+            {headerName: 'hp', field: 'hp', width: 55},
             {headerName: 'def', field: 'def'},
             {headerName: 'spd', field: 'spd'},
             {headerName: 'cr', field: 'cr'},
@@ -168,13 +168,13 @@ function buildGrid() {
             {headerName: 'res', field: 'res'},
             // {headerName: 'dac', field: 'dac'},
             {headerName: 'cp', field: 'cp', width: 55},
-            {headerName: 'hps', field: 'hpps', width: 47},
+            {headerName: 'hps', field: 'hpps', width: 50},
             {headerName: 'ehp', field: 'ehp', width: 55},
-            {headerName: 'ehps', field: 'ehpps', width: 47},
-            {headerName: 'dmg', field: 'dmg', width: 47},
-            {headerName: 'dmgs', field: 'dmgps', width: 47},
-            {headerName: 'mcd', field: 'mcdmg', width: 52},
-            {headerName: 'mcds', field: 'mcdmgps', width: 47},
+            {headerName: 'ehps', field: 'ehpps', width: 50},
+            {headerName: 'dmg', field: 'dmg', width: 50},
+            {headerName: 'dmgs', field: 'dmgps', width: 50},
+            {headerName: 'mcd', field: 'mcdmg', width: 55},
+            {headerName: 'mcds', field: 'mcdmgps', width: 50},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',

@@ -22,7 +22,7 @@ module.exports = {
         const inputRingStat = $('#inputRingStat').multipleSelect('getSelects')
         const inputBootsStat = $('#inputBootsStat').multipleSelect('getSelects')
 
-        console.log(inputNecklaceStat, inputRingStat, inputBootsStat);
+        console.log("Main stat selectors", inputNecklaceStat, inputRingStat, inputBootsStat);
         return [inputNecklaceStat, inputRingStat, inputBootsStat];
     },
 
@@ -32,7 +32,7 @@ module.exports = {
         const inputSet3 = $('#inputSet3').multipleSelect('getSelects')
         const inputExcludeSet = $('#inputExcludeSet').multipleSelect('getSelects')
 
-        console.log(inputSet1, inputSet2, inputSet3, inputExcludeSet);
+        console.log("Set selectors", inputSet1, inputSet2, inputSet3, inputExcludeSet);
         return {
             sets: [inputSet1, inputSet2, inputSet3],
             exclude: inputExcludeSet

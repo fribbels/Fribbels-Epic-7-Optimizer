@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const endpoint = "http://localhost:8212";
+const endpoint = "http://localhost:8120";
 
 module.exports = {
 
@@ -184,11 +184,12 @@ function post(api, request) {
     return new Promise((resolve, reject) => {
         axios.post(endpoint + api, request)
         .then(response => {
-            console.log(api, response);
+            console.log("Api call", api, request, response);
             resolve(response.data);
         })
         .catch(error => {
-            console.error(api, error);
+            console.error("Api call", api, request, error);
+            Notifier.error("Failed call to " + api + " - " + error);
             reject(error);
         })
     })

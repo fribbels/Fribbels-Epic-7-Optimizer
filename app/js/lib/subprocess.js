@@ -15,9 +15,24 @@ var killed = false;
 module.exports = {
 
     initialize: () => {
-        // return;
+        javaversion(function(err, notRecognized, notCorrectVersion, not64Bit){
+            if (err) {
+                Notifier.warn("Unable to detect java version");
+                return;
+            }
 
-        // child = spawn('java', ['-cp', `"${Files.getDataPath() + "/Gear.jar"}" com.fribbels.Main`], {shell: true, detached: false})
+            if (notRecognized) {
+                Notifier.error("Java is not installed. Please install Java 8, 64-Bit version")
+                return;
+            }
+
+            if (not64Bit) {
+                Notifier.error("Java is installed but not the 64-Bit version. Please install the 64-Bit version of Java 8")
+                return;
+            }
+        })
+
+
         child = spawn('java', ['-jar', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
 
         child.on('close', (code) => {
@@ -31,7 +46,9 @@ module.exports = {
         });
 
         child.stderr.on('data', (data) => {
-            console.error(data.toString());
+            const str = data.toString()
+            console.error(str);
+            Notifier.error("Subprocess error - " + str);
             errors += data.toString();
         })
 
@@ -71,12 +88,34 @@ module.exports = {
 
     sendString: (str) => {
         fs.writeFile('request.txt', str, (err) => {
-            if (err)
+            if (err) {
+                Notifier.error("Failed to send string to subprocess");
                 return console.error(err);
+            }
             console.log('Wrote request to file');
 
             child.stdin.setEncoding('utf-8');
             child.stdin.write('request.txt' + "\n");
         });
     }
+}
+
+function javaversion(callback) {
+    var spawn = require('child_process').spawn('java', ['-version']);
+    spawn.on('error', function(err){
+        return callback(err, null);
+    })
+    spawn.stderr.on('data', function(data) {
+        data = data.toString()
+
+        console.log("Detecting java:", data);
+
+        if (data && data.includes("VM") && !data.includes("64-Bit")) {
+            return callback(null, false, false, true);
+        }
+
+        if (data && data.includes("not recognized")) {
+            return callback(null, true, false, true);
+        }
+    });
 }

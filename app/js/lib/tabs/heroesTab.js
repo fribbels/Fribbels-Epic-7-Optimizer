@@ -52,9 +52,10 @@ module.exports = {
             // });
 
             const bonusStats = await Dialog.editHeroDialog(row);
-            console.warn("BONUS STATS", bonusStats, row.id);
+            console.log("Bonus stats", bonusStats, row.id);
 
             await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
+            Notifier.success("Saved bonus stats");
             Saves.autoSave();
         });
 
@@ -131,7 +132,7 @@ module.exports = {
         });
 
         Api.getAllHeroes().then(response => {
-            console.warn("HEROESRESPONSE", response);
+            console.log("Heroes response", response);
 
             if (response.heroes.length == 0) {
                 // addHero("Maid Chloe")

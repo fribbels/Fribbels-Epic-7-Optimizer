@@ -1,7 +1,7 @@
 {
   "name": "FribbelsE7Optimizer",
-  "productName": "FribbelsE7Optimizer",
-  "version": "1.1.0",
+  "productName": "FribbelsE7Optimizer-1.2.0",
+  "version": "1.2.0",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "./main.prod.js",
   "author": {
@@ -18,6 +18,7 @@
     "@ag-grid-community/client-side-row-model": "23.1.1",
     "@ag-grid-community/core": "23.1.1",
     "@ag-grid-community/infinite-row-model": "23.1.1",
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "axios": "^0.21.0",
     "jquery": "^3.5.1",
     "jimp": "latest",
@@ -29,6 +30,7 @@
     "tinygradient": "^1.1.2",
     "tree-kill": "latest",
     "uuid": "latest",
-    "tippy.js": "^6.2.7"
+    "tippy.js": "^6.2.7",
+    "awesome-notifications": "^3.1.1"
   }
 }

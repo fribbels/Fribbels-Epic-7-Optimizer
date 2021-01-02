@@ -24,7 +24,7 @@ module.exports = {
                 title: '',
                 html: `
                     <div class="editGearForm">
-                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/bulma/bulma.min.css" rel="stylesheet">
+                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Attack</div>
@@ -102,14 +102,14 @@ module.exports = {
                         attack: parseInt(document.getElementById('editHeroBonusAttack').value),
                         defense: parseInt(document.getElementById('editHeroBonusDefense').value),
                         health: parseInt(document.getElementById('editHeroBonusHealth').value),
-                        attackPercent: parseInt(document.getElementById('editHeroBonusAttackPercent').value),
-                        defensePercent: parseInt(document.getElementById('editHeroBonusDefensePercent').value),
-                        healthPercent: parseInt(document.getElementById('editHeroBonusHealthPercent').value),
+                        attackPercent: parseFloat(document.getElementById('editHeroBonusAttackPercent').value),
+                        defensePercent: parseFloat(document.getElementById('editHeroBonusDefensePercent').value),
+                        healthPercent: parseFloat(document.getElementById('editHeroBonusHealthPercent').value),
                         speed: parseInt(document.getElementById('editHeroBonusSpeed').value),
-                        critChance: parseInt(document.getElementById('editHeroBonusCritChance').value),
-                        critDamage: parseInt(document.getElementById('editHeroBonusCritDamage').value),
-                        effectiveness: parseInt(document.getElementById('editHeroBonusEffectiveness').value),
-                        effectResistance: parseInt(document.getElementById('editHeroBonusEffectResistance').value),
+                        critChance: parseFloat(document.getElementById('editHeroBonusCritChance').value),
+                        critDamage: parseFloat(document.getElementById('editHeroBonusCritDamage').value),
+                        effectiveness: parseFloat(document.getElementById('editHeroBonusEffectiveness').value),
+                        effectResistance: parseFloat(document.getElementById('editHeroBonusEffectResistance').value),
                     }
 
                     resolve(editedHero);
@@ -118,13 +118,25 @@ module.exports = {
         });
     },
 
-    editGearDialog: async (item, edit) => {
-        console.log("EDIT", item);
+    editGearDialog: async (item, edit, useReforgedStats) => {
+        console.log("Dialog editing item", item);
+        console.log("Dialog use reforged", useReforgedStats);
         if (!item) {
             item = {
                 main: {},
                 substats: []
             };
+        }
+
+        Reforge.getReforgeStats(item);
+        if (useReforgedStats && item.main.reforgedValue) {
+            item = JSON.parse(JSON.stringify(item));
+            item.level = 90;
+            item.main.value = item.main.reforgedValue;
+
+            for (var substat of item.substats) {
+                substat.value = substat.reforgedValue;
+            }
         }
 
         return new Promise(async (resolve, reject) => {
@@ -135,7 +147,7 @@ module.exports = {
                 title: '',
                 html: `
                     <div class="editGearForm">
-                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/bulma/bulma.min.css" rel="stylesheet">
+                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Equipped</div>
@@ -240,7 +252,7 @@ module.exports = {
                     }
 
                     if (!editedItem.rank || editedItem.rank == "None" ||
-                        !editedItem.set  || editedItem.set == "None" ||
+                        !editedItem.set  || editedItem.set == "None"  ||
                         !editedItem.gear || editedItem.gear == "None" ||
                         !editedItem.main || !editedItem.main.type || editedItem.main.type == "None" || !editedItem.main.value) {
                         module.exports.error("Please make sure Type / Set / Rank / Level / Enhance / Main stat are not empty");
@@ -255,12 +267,23 @@ module.exports = {
                     const subStatType3 = document.getElementById('editGearStat3Type').value;
                     const subStatType4 = document.getElementById('editGearStat4Type').value;
 
-                    if (subStatType1 != "None") substats.push({type: subStatType1, value: parseInt(document.getElementById('editGearStat1Value').value)})
-                    if (subStatType2 != "None") substats.push({type: subStatType2, value: parseInt(document.getElementById('editGearStat2Value').value)})
-                    if (subStatType3 != "None") substats.push({type: subStatType3, value: parseInt(document.getElementById('editGearStat3Value').value)})
-                    if (subStatType4 != "None") substats.push({type: subStatType4, value: parseInt(document.getElementById('editGearStat4Value').value)})
+                    if (subStatType1 != "None") substats.push({type: subStatType1, value: parseInt(document.getElementById('editGearStat1Value').value || 0)})
+                    if (subStatType2 != "None") substats.push({type: subStatType2, value: parseInt(document.getElementById('editGearStat2Value').value || 0)})
+                    if (subStatType3 != "None") substats.push({type: subStatType3, value: parseInt(document.getElementById('editGearStat3Value').value || 0)})
+                    if (subStatType4 != "None") substats.push({type: subStatType4, value: parseInt(document.getElementById('editGearStat4Value').value || 0)})
 
                     editedItem.substats = substats;
+
+                    if (editedItem.enhance == 15 && editedItem.substats.length != 4) {
+                        module.exports.error("Please make sure +15 items have 4 substats");
+                        console.error("FAIL", editedItem)
+                        return false;
+                    }
+                    if (editedItem.enhance < 0 ||  editedItem.enhance > 15) {
+                        module.exports.error("Item enhance can only be 0 - 15");
+                        console.error("FAIL", editedItem)
+                        return false;
+                    }
 
                     ItemAugmenter.augmentStats([editedItem]);
                     if (item.id) {
@@ -301,7 +324,6 @@ function getEquippedHtml(item, heroes) {
     var html = `<option value="None">Nobody</option>`;
 
     for (var hero of heroes) {
-        console.log(hero);
         html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${hero.name}</option>`
     }
 
