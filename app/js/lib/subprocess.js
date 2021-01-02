@@ -33,7 +33,7 @@ module.exports = {
         })
 
 
-        child = spawn('java', ['-jar', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
+        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
 
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);

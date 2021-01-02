@@ -674,29 +674,38 @@ async function submitOptimizationRequest() {
     console.log("Sending request:", mergedRequest)
     OptimizerGrid.showLoadingOverlay();
     // Subprocess.sendString(str)
-    progressTimer = setInterval(updateProgress, 100)
+    progressTimer = setInterval(updateProgress, 150)
 
-    const results = Api.submitOptimizationRequest(mergedRequest).then(x => {
-        console.log("RESPONSE RECEIVED", x);
-        if (x.count >= 5000000) {
+    const results = Api.submitOptimizationRequest(mergedRequest).then(result => {
+        console.log("RESPONSE RECEIVED", result);
+        if (result.results >= 5000000) {
             Dialog.info('Search terminated after the 5,000,000 result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
         }
-        OptimizerGrid.refresh();
         clearInterval(progressTimer);
-        $('#estimatedPermutations').text(Number(permutations).toLocaleString());
+        // $('#estimatedPermutations').text(Number(permutations).toLocaleString());
+        var searchedCount = result.searched;
+        var resultsCounter = result.results;
+
+        var searchedStr = Number(searchedCount).toLocaleString();
+        var resultsStr = Number(resultsCounter).toLocaleString();
+
+        $('#maxPermutationsNum').text(searchedStr);
+        $('#searchedPermutationsNum').text(searchedStr);
+        $('#resultsFoundNum').text(resultsStr);
+        OptimizerGrid.refresh();
         console.log("REFRESHED");
     });
 }
 
 function updateProgress() {
     Api.getOptimizationProgress().then(result => {
-        var progressCount = result.count;
+        var searchedCount = result.searched;
         var resultsCounter = result.results;
 
-        var progressStr = Number(progressCount).toLocaleString();
+        var searchedStr = Number(searchedCount).toLocaleString();
         var resultsStr = Number(resultsCounter).toLocaleString();
 
-        $('#searchedPermutationsNum').text(progressStr);
+        $('#searchedPermutationsNum').text(searchedStr);
         $('#resultsFoundNum').text(resultsStr);
     })
 }

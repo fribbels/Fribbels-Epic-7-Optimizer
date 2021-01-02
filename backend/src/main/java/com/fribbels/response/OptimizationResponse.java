@@ -11,6 +11,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class OptimizationResponse extends Response {
 
-    private long count;
+    private long searched;
     private long results;
 }

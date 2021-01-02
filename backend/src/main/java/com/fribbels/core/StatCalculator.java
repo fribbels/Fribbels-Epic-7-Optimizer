@@ -46,13 +46,13 @@ public class StatCalculator {
                 + accs[5][index];
     }
 
-    public static float[] getStatAccumulatorArr(final HeroStats base, final Item item, final Map<Item, float[]> accumulatorsByItem) {
-        if (accumulatorsByItem.containsKey(item)) {
-            return accumulatorsByItem.get(item);
+    public static float[] getStatAccumulatorArr(final HeroStats base, final Item item, final Map<String, float[]> accumulatorsByItemId) {
+        if (accumulatorsByItemId.containsKey(item)) {
+            return accumulatorsByItemId.get(item);
         }
 
         final float[] accumulator = buildStatAccumulatorArr(base, item);
-        accumulatorsByItem.put(item, accumulator);
+        accumulatorsByItemId.put(item.getId(), accumulator);
         return accumulator;
     }
 

@@ -7,8 +7,6 @@ import com.fribbels.db.HeroDb;
 import com.fribbels.db.OptimizationDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.enums.Set;
-import com.fribbels.enums.StatType;
-import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
 import com.fribbels.request.GetResultRowsRequest;
@@ -19,7 +17,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -48,7 +45,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private static final Gson gson = new Gson();
     private static final int SET_COUNT = 16;
     @Getter
-    private AtomicLong counter = new AtomicLong(0);
+    private AtomicLong searchedCounter = new AtomicLong(0);
     private AtomicLong resultsCounter = new AtomicLong(0);
 
     public OptimizationRequestHandler(final OptimizationDb optimizationDb,
@@ -105,7 +102,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     public String handleGetProgressRequest() {
         final OptimizationResponse response = OptimizationResponse.builder()
-                .count(counter.get())
+                .searched(searchedCounter.get())
                 .results(resultsCounter.get())
                 .build();
 
@@ -219,9 +216,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
         //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
 
-        final Map<Item, float[]> accumulatorArrsByItem = new HashMap<>();
+        final Map<String, float[]> accumulatorArrsByItemId = new HashMap<>();
         final ExecutorService executorService = Executors.newFixedThreadPool(8);
-        counter = new AtomicLong(0);
+        searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
 
         final int wSize = itemsByGear.get(Gear.WEAPON).size();
@@ -245,15 +242,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 boolean exit = false;
                 try {
 
-                    final float[] weaponAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, weapon, accumulatorArrsByItem);
+                    final float[] weaponAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, weapon, accumulatorArrsByItemId);
 
                     for (int h = 0; h < hSize; h++) {
                         final Item helmet = itemsByGear.get(Gear.HELMET).get(h);
-                        final float[] helmetAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, helmet, accumulatorArrsByItem);
+                        final float[] helmetAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, helmet, accumulatorArrsByItemId);
 
                         for (int a = 0; a < aSize; a++) {
                             final Item armor = itemsByGear.get(Gear.ARMOR).get(a);
-                            final float[] armorAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, armor, accumulatorArrsByItem);
+                            final float[] armorAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, armor, accumulatorArrsByItemId);
 
                             // For 4 piece sets, we can short circuit if the first 3 pieces don't match possible sets,
                             // but only if the items are sorted & prioritized by set.
@@ -269,11 +266,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                             for (int n = 0; n < nSize; n++) {
                                 final Item necklace = itemsByGear.get(Gear.NECKLACE).get(n);
-                                final float[] necklaceAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, necklace, accumulatorArrsByItem);
+                                final float[] necklaceAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, necklace, accumulatorArrsByItemId);
 
                                 for (int r = 0; r < rSize; r++) {
                                     final Item ring = itemsByGear.get(Gear.RING).get(r);
-                                    final float[] ringAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, ring, accumulatorArrsByItem);
+                                    final float[] ringAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, ring, accumulatorArrsByItemId);
 
                                     for (int b = 0; b < bSize; b++) {
                                         if (Main.interrupt) {
@@ -283,12 +280,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         if (exit) return;
 
                                         final Item boots = itemsByGear.get(Gear.BOOTS).get(b);
-                                        final float[] bootsAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, boots, accumulatorArrsByItem);
+                                        final float[] bootsAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, boots, accumulatorArrsByItemId);
 
                                         final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
                                         final int[] collectedSets = StatCalculator.buildSetsArr(collectedItems);
                                         final HeroStats result = StatCalculator.addAccumulatorArrsToHero(base, new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr}, collectedSets, request.getHero());
-                                        final long index = counter.getAndIncrement();
+                                        final long index = searchedCounter.getAndIncrement();
                                         //                                        final boolean passesFilter = true;
                                         final boolean canReforge = weapon.getLevel() == 85 || helmet.getLevel() == 85 || armor.getLevel() == 85 || necklace.getLevel() == 85 || ring.getLevel() == 85 || boots.getLevel() == 85;
                                         final boolean passesFilter = passesFilter(result, request, collectedSets, canReforge);
@@ -348,7 +345,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 System.out.println("OPTIMIZATION_REQUEST_END");
                 System.out.println("PROGRESS: [" + size + "]");
                 OptimizationResponse response = OptimizationResponse.builder()
-                        .count(size)
+                        .searched(searchedCounter.get())
+                        .results(resultsCounter.get())
                         .build();
 
                 return gson.toJson(response);
