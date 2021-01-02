@@ -1,6 +1,7 @@
 
 
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -11,27 +12,29 @@ Features include:
  - Built in image recognition to import gear from screenshots
  - Filter gear optimizer with main stats/sub stats/sets/etc
  - Automatic data updates from EpicSevenDB for new heroes
- - Hero bonus stats for imprints/artifacts
+ - Hero bonus stats for imprints/artifacts/EEs
  - Gear substat efficiency scoring
+ - Reforged stat prediction & editing
  - Color coded results sorting
 
 Here's what it looks like currently:
 
-![](https://i.imgur.com/vVR4ZMq.png)
+![](https://i.imgur.com/dr0Gh1l.png)
 
 ## Requirements
-- Windows or MacOS 64-bit
-- Java 8 installed (Please download if you don't yet have it: https://www.java.com/en/download/)
+- Windows or MacOS, 64-bit
+- Java 8, 64-Bit installed (Please download if you don't yet have it: https://www.java.com/en/download/)
 _________________
 
 **Table of Contents**:
+  * [Requirements](#requirements)
   * [Optimizer Tab](#optimizer-tab)
     + [Settings panel](#settings-panel)
-    + [Primary stat filter](#primary-stat-filter)
-    + [Calculated stat filter](#calculated-stat-filter)
-    + [Substat force filter](#substat-force-filter)
+    + [Stat filters](#stat-filters)
+    + [Rating filters](#rating-filters)
     + [Substat priority filter](#substat-priority-filter)
     + [Main stat and set filters](#main-stat-and-set-filters)
+    + [Substat force filter](#substat-force-filter)
     + [Optimization Results](#optimization-results)
   * [Gear Tab](#gear-tab)
   * [Heroes Tab](#heroes-tab)
@@ -41,10 +44,10 @@ _________________
     + [Save/Load gear and heroes](#save-load-gear-and-heroes)
     + [Import gear from Zarroc optimizer](#import-gear-from-zarroc-optimizer)
   * [Getting Started](#getting-started)
-  * [Requirements](#requirements)
-  * [Troubleshooting](#troubleshooting)
   * [Closing thoughts](#closing-thoughts)
+  * [Troubleshooting](#troubleshooting)
   * [Contact me](#contact-me)
+
 
 
 ## Optimizer Tab
@@ -55,26 +58,28 @@ _________________
 
 ### Settings panel
 
-![](https://i.imgur.com/IvYnxpk.png)
+![](https://i.imgur.com/oOz9b55.png)
 
 This panel tracks settings for the other panels to use.
 
 - **Hero**: Select the hero you want to optimize for from the drop down.
 - **Force mode**: Selects the number of substats to enforce from the options selected in the force panel. (See force panel for more details).
-- **Permutations**: Displays the current number of gear permutations possible from your filter choices. The more permutations there are, the more gear the optimizer has to calculate, and the longer the optimization will take. Try to adjust your filters to shrink this number down.
+- **Predict reforges**: Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not 100% accurate so be ready to adjust their stats.
+- **At least one lv 85**: Search only for builds that contain at least one level 85 gear.
 - **Locked items**: When checked, locked items will be used in the optimization. When unchecked, locked items are ignored.
 - **Equipped items**: When checked, equipped items will be used in the optimization. When unchecked, equipped items are ignored EXCEPT for the unit's own equipped items.
 - **Keep current**: When checked, the unit will be forced to use the gear that it currently has, and the optimizer will only try to optimize the gear slots that the unit has unequipped.
-- **Can reforge**: When checked, the results will only contain builds with at least one piece of 85 gear that can be reforged.
-- **Submit**: Click to start to optimization request.
+- **Start**: Click to start to optimization request.
 - **Filter**: Once an optimization is complete, click to filter the results by the stats on the filter panels.
 - **Cancel**: Interrupts and cancels an ongoing optimization request.
+- **Load settings**: Loads the optimization settings from the last search for this hero.
+- **Reset settings**: Sets all optimization settings to their default values.
 
 _________________
 
-### Primary stat filter
+### Stat filters
 
-![](https://i.imgur.com/j8ZcSCv.png)
+![](https://i.imgur.com/tVgubaV.png)
 
 This panel defines the stats to filter your optimization results by. The left boxes represent the minimum (inclusive) and the right boxes represent the maximum (inclusive). In this example, we're looking for a Ruele build with:
 - At least 20,000 HP
@@ -85,9 +90,9 @@ The filter will apply on your optimization results after you click Submit. Once 
 
 _________________
 
-### Calculated stat filter
+### Rating filters
 
-![](https://i.imgur.com/fp4C5mf.png)
+![](https://i.imgur.com/xmhk8ml.png)
 
 This panel is similar to the primary stats panel, but applies for calculated stats. These stats you won't see in-game but are various ratings that can help decide between different builds.
 
@@ -101,24 +106,6 @@ This panel is similar to the primary stats panel, but applies for calculated sta
 - **CP** -- This is the CP you would see on the unit's stat page ingame, but doesn't take skill enhances into account. Useful for optimizing unused characters with leftover gear for world boss.
 
 In this example we're looking for Ruele builds with at least 200,000 Effective HP.
-
-_________________
-
-### Substat force filter
-
-![](https://i.imgur.com/83nF7ID.png)
-
-Note that in the settings panel previously we set Force mode to "At least 2 stats". Here we have 3 substats we want to force, and with the force mode, we're only optimizing with gear that match at least 2 of these substats:
-- At least 3 Speed
-- At least 1 Hp %
-- At least 1 Def %
-
-For example:
-- A gear with substats: 4 Speed / 8% Atk / 16% Hp / 8% Res would pass this filter because it matches at least 2 stats: Hp% and Speed.
-- A gear with substats: 2 Speed / 8% Atk / 16% HP / 8% Res would fail this filter, because only 1 substat matches the filter: Hp% . This gear will not be used in the optimizations.
-
-Setting the substat force filter is useful for narrowing down the search space for the optimizer, and reducing the number of permutations it needs to go calculate will make it go faster. Do be careful about filters you set, because an overly aggressive filter could exclude good gears that are useable for this unit. You could have a gear with 2 Speed/ 40% Hp / 100 flat Def / 200 flat HP, and it would fail this filter because only Hp% matches, even though the gear would still be useful.
-
 _________________
 
 ### Substat priority filter
@@ -127,7 +114,9 @@ _________________
 
 **This is probably the most useful filter but please read before using it. Using this wrong can exclude good results from the search.**
 
-This filter is applied AFTER the force and set/main stat filters. It works by assigning a rating to each of your gears based on your priority, and then filters by only the top N% of the rated gears. In this example we're mostly looking for a fast and tanky Ruele so we assign:
+Assign a priority to each substat type from -1 to 3. This will go through every gear, and calculates the # of max rolls of each stat. The # of rolls is then multiplied by the stat priority you chose. It adds up all the stat scores for a gear, and sorts your gear by their highest substat score.
+
+ In this example we're mostly looking for a fast and tanky Ruele so we assign:
 - HP and Def a high rating of 3, since those are the highest priority stats
 - Speed a slightly lower rating of 2
 - And Res a rating of 1, as its a nice-to-have stat and can still be useful for her
@@ -145,13 +134,13 @@ Or for a tanky Champion Zerato, where you want a mix of tankiness, damage, and e
 
 ![](https://i.imgur.com/CF3KmxT.png)
 
-Choosing a good priority filter makes the optimization a lot easier since you won't have to consider irrelevant or low-rolled gears as much.
+Choosing a good priority filter makes the optimization a lot easier since you won't have to consider irrelevant or low-rolled gears.
 
 _________________
 
 ### Main stat and set filters
 
-![](https://i.imgur.com/Ce0Osot.png)
+![](https://i.imgur.com/fYOaDPB.png)
 
 This one's fairly straightforward, we're looking for:
 - Necklaces with Health % OR Defense %
@@ -166,9 +155,26 @@ If we don't care about sets as much for a tanky/damage ML Ken or something, this
 
 _________________
 
+### Substat force filter
+
+![](https://i.imgur.com/R8XjYhk.png)
+
+Note that in the settings panel previously we set Force mode to "At least 2 stats". Here we have 3 substats we want to force, and with the force mode, we're only optimizing with gear that match at least 2 of these substats:
+- At least 3 Speed
+- At least 1 Hp %
+- At least 1 Def %
+
+For example:
+- A gear with substats: 4 Speed / 8% Atk / 16% Hp / 8% Res would pass this filter because it matches at least 2 stats: Hp% and Speed.
+- A gear with substats: 2 Speed / 8% Atk / 16% HP / 8% Res would fail this filter, because only 1 substat matches the filter: Hp% . This gear will not be used in the optimizations.
+
+Setting the substat force filter is useful for narrowing down the search space for the optimizer, and reducing the number of permutations it needs to go calculate will make it go faster. Do be careful about filters you set, because an overly aggressive filter could exclude good gears that are useable for this unit. You could have a gear with 2 Speed/ 40% Hp / 100 flat Def / 200 flat HP, and it would fail this filter because only Hp% matches, even though the gear would still be useful.
+
+_________________
+
 ### Optimization Results
 
-![](https://i.imgur.com/7KakkCR.png)
+![](https://i.imgur.com/4rv58Al.png)
 
 Here you can see all the results from the optimization, sort by stat, and equip/lock the results.
 - The top row shows your currently equipped gear stats
@@ -177,10 +183,11 @@ Here you can see all the results from the optimization, sort by stat, and equip/
 - Select All/Deselect All modifies the little checkbox on each gear, or alternatively you can click individual boxes
 - Equip Selected will equip those checked gears onto the hero (while unequipping anything they were holding before)
 - Lock Selected will mark those checked gears as locked, which affects later optimizations that have "Locked Items" unchecked in settings.
+- Clicking on the pencil/hammer icons will allow you to edit/reforge item stats.
 
 ## Gear Tab
 
-![](https://i.imgur.com/EVfm8z3.png)
+![](https://i.imgur.com/EejMOCl.png)
 
 Here you can find a table of all your gears, and sort/filter them. The icons at the bottom enable filters for set and gear slot, and the X clears the filters.
 The **Score** column is a stat I made up which is similar to WSS, with the difference that it takes flat stats into consideration while WSS ignores them. The calculation is:
@@ -196,7 +203,7 @@ The **Score** column is a stat I made up which is similar to WSS, with the diffe
     + Flat Attack / 39 * 0.5
     + Flat Defense / 31 * 0.5
     + Flat Hp / 174 * 0.5
-Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and used that as a measure of how well the flat stats rolled. The 0.5 multiplier is completely arbitrary, but represents that flat stats are generally slightly less desirable than percent stats.
+Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and used that as a measure of how well the flat stats rolled. The 0.5 multiplier is completely arbitrary, but represents that flat stats are generally less desirable than percent stats.
 
 ![](https://i.imgur.com/fwqjtkF.png)
 
@@ -205,7 +212,7 @@ You can edit existing gears or add new gears with this page, and filling in the 
 
 ## Heroes Tab
 
-![](https://i.imgur.com/czOpXvo.png)
+![](https://i.imgur.com/YBGNAwD.png)
 
 Here you can add new heroes and manage existing ones. I think most of the buttons are fairly self explanatory, the one thing worth noting is the **Add Bonus Stats** page, which lets you add artifact/imprint stats to the hero for optimization.
 
@@ -218,13 +225,11 @@ SSS Krau with +30 Aurius will have 91 Atk / 819 Hp / and 18% imprint Hp.
 ![](https://i.imgur.com/gbgjOgv.png)
 
 This tab lets you do various things with importing/exporting files.
-
 _________________
 
 ### Creating a new gear set from screenshots
 
 Select the folder you have your screenshots in and the app will start reading your screenshots. Make sure the folder only contains your screenshots and nothing else. This will then output your gear.txt file, and you can export it somewhere for the next step. If there are any errors reading the screenshots, the list of failed files will be shown.
-
 
 ### Importing a gear set from a file
 
@@ -256,16 +261,16 @@ Please read these instructions carefully!
 
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
     * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
-    * Do not download the Source Code options, those won't work <br><br>
+    * Do not download the Source Code options, those won't work <br>
 2. Install **Java 8 - 64 bit** https://www.java.com/en/download/
-   * After installing, restart your computer (required!)<br><br>
+   * After installing, restart your computer (required!)<br>
    * Mac apparently requires both the JRE and JDK. Get the JDK here: https://www.oracle.com/java/technologies/javase-downloads.html
 3. Install an emulator to run Epic 7 on
-    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative.<br><br>
-4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br><br>
-5. Set Epic 7 to enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)<br><br>
+    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)<br>
+4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br>
+5. Set Epic 7 to enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)<br>
 
-6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br><br>
+6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br>
 
 
 **Importing gear screenshots:**
@@ -313,28 +318,35 @@ Here's a video that covers most of the importing process: https://www.youtube.co
 
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
- **Release 1.2.0**
- - Fix: Optimizer producing suboptimal results for 4 piece set when filtered armor # > helm #
- - Fix: Decimal numbers for imprints
- - Fix: Update WSS/Score when gear stats changed
- - Divide speed stats by 10
- - Simplify gear preview panel
- - More detailed permutations
- - Clean up optimization panel - getting too cluttered
- - DPS score/Support score
- - Hero pic
- - Simulate reforged stats on non-reforged piece
- - Exclude filter
- - Fix alert messages
- - Improvements to the priority ranking filter
- - Save hero's filter preferences
- - Fix speed imprints
- - Fix: Keep current position of a page when edits are made, currently refreshes the entire grid
- - Tooltips
- - Usage popup hints/tips
- - Detect & warn java version
+ **Release 1.2.0 changelog**
 
-**TODO - high priority:**
+-   Added reforged stats prediction for level 85 +15 gear, and reforge button to quickly reforge a gear
+-   Added options for using reforged stats in optimization algorithm
+-   Added a permutations/filter details panel
+-   Added hero portrait
+-   Added DPS score/Support score/Combat score for rating gears
+-   Added gear tab filter for level <85, 85, >85
+-   Added tooltips for most panels
+-   Added popups for hints/warnings/errors/successes
+-   Added an 'Exclude set' filter
+-   Added lock icon on gear
+-   Added lock/unlock actions on optimizer screen
+-   Reorganized optimization panel
+-   Simplified gear preview panel w/ icons & colors
+-   Improved the priority ranking filter to reflect the actual % of gear shown on details panel
+-   Autosaving hero's filter preferences and added options to reset details / load previous search
+-   Detecting & warning when java version is invalid
+-   Renamed option from 'Can reforge' -> 'At least one lv 85'
+-   Divided speed ratings by 10 for easier readability
+-   Fix: Keep current position of a page when edits are made
+-   Fix: Decimal numbers for bonus stats save correctly now
+-   Fix: Speed bonus save correctly now
+-   Fix: Bug with optimizer producing suboptimal results for 4 piece set when filtered armor # > helm #
+-   Fix: Bug with optimizer not sorting prioritized gear correctly
+-   Fix: Update WSS/Score when gear stats changed
+-   Fix: Alert messages making input boxes break
+-
+**TODO - High priority:**
  - Release 1.2.0
 
  **Medium priority:**
@@ -344,6 +356,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Verify all image files
  - Update permutations on 4 piece set
  - Dark mode
+ - Use main stat gear for priority filter
 
  **Low priority:**
  - Add can reforge, can enhance columns
@@ -377,7 +390,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  And click on the 'FribbelsE7Optimizer-x.x.x...' file (for whatever the latest version is)
 - If you see a "Error: EPERM: operation not permitted" error in the dev console, there are a couple potential fixes:
   - Restart your computer, especially if you installed Java recently
-  - Your antivirus might be blocking the app, try disabling it
+  - Your antivirus might be blocking the app, try disabling it. I've seen issues with Avast specifically, and disabling Avast temporarily solves it.
   - Your file or folder contents might be compressed, uncheck this box on the folder: https://i.imgur.com/kSzTqek.png
   - Run the app as administrator
   - Move the app and screenshots folder to a new file location
@@ -391,10 +404,10 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 - Mac - "The application "FribbelsE7Optimizer" can't be opened.
   - Try unzipping the file using Unarchiver from the app store instead of Archive Utility. [Example](https://i.imgur.com/y9uGQcH.png)
   - Try downloading the .dmg file if you were using the zip/app file.
-  - Can't resize Bluestacks to 1600x900. Resize to 1600x900 through options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900.
+  - Can't resize Bluestacks to 1600x900. Resize to 1600x900 through options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268).
 
 ## Contact me
 
-Feel free to contact me on discord at fribbels#7526 with questions or comments. If you ran into any issues, please check out the troubleshooting steps above first.
+Feel free to contact me on discord at fribbels#7526 with questions or comments or ideas. If you ran into any issues, please check out the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above.
 
-If you want to show support for the optimizer, you can [buy me a coffee!](https://www.buymeacoffee.com/fribbels)
+If you want to show support for the optimizer, you can [buy me a coffee](https://www.buymeacoffee.com/fribbels) or come say hi on discord!

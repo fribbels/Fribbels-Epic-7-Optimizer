@@ -7,11 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/itemAugmenter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/itemAugmenter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/reforge.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/reforge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/saves/autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/../data/saves/autosave.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
