@@ -98,7 +98,7 @@ body {
 
 .optimization-results-panel {
   flex-grow: 2;
-  min-height: 250px;
+  min-height: 300px;
   height: 100%;
   display: flex;
 }
@@ -633,7 +633,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    line-height: 22px;
+    line-height: 20px;
 }
 .leftRightTextContent {
     font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
@@ -667,4 +667,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .optimizer-checkbox {
   cursor: pointer;
+}
+.gearActionButton {
+  width: 100px;
+  cursor: pointer;
+  margin-right: 5px;
 }

@@ -276,7 +276,7 @@ Please read these instructions carefully!
 **Importing gear screenshots:**
 
 1. Open the Gear Management screen in Epic 7 and sort by Max Enhance<br><br>
-2. Click each of the gears that you want to import, and screenshot it. Every screenshot should be 1600x900 and look EXACTLY like this:
+2. Click each of the gears that you want to import, and screenshot it. Every screenshot should be 1600x900 and look EXACTLY like this: https://i.imgur.com/68A8Uf0.jpg
 
 ![https://i.imgur.com/ny7uaa8.jpg](https://i.imgur.com/ny7uaa8.jpg)
 
@@ -356,6 +356,10 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Update permutations on 4 piece set
  - Dark mode
  - Use main stat gear for priority filter
+ - Clickable lock icon
+ - Alphabetizing
+ - Save filter preferences
+ - Invalid dpi error
 
  **Low priority:**
  - Add can reforge, can enhance columns
@@ -381,7 +385,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 ## Troubleshooting
 
-- Restart your computer and retry first (there might be an child process still kicking around)
+- Restart your computer and retry first (there might be a child process still kicking around)
 - Try killing any java.exe processes in Task Manager that came from this app
 - Error message: 'java is not recognized as an internal or external command' upon opening the app. Install Java 8 64-bit version to fix.
 - After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like exactly like https://i.imgur.com/ny7uaa8.jpg in 1600x900 resolution

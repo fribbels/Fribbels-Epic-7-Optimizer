@@ -7,7 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OcrRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OcrRequestHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,25 +139,25 @@
     </state>
     <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608329135029" />
     <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109325925" />
-    <state width="2842" height="238" key="GridCell.Tab.0.bottom" timestamp="1609583125667">
+    <state width="2842" height="238" key="GridCell.Tab.0.bottom" timestamp="1609653670463">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609583125667" />
+    <state width="2842" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609653670463" />
     <state width="2842" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369367" />
-    <state width="2842" height="238" key="GridCell.Tab.0.center" timestamp="1609583125667">
+    <state width="2842" height="238" key="GridCell.Tab.0.center" timestamp="1609653670463">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="238" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609583125667" />
+    <state width="2842" height="238" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609653670463" />
     <state width="2842" height="238" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369367" />
-    <state width="2842" height="238" key="GridCell.Tab.0.left" timestamp="1609583125666">
+    <state width="2842" height="238" key="GridCell.Tab.0.left" timestamp="1609653670462">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="238" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609583125666" />
+    <state width="2842" height="238" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609653670462" />
     <state width="2842" height="238" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369366" />
-    <state width="2842" height="238" key="GridCell.Tab.0.right" timestamp="1609583125667">
+    <state width="2842" height="238" key="GridCell.Tab.0.right" timestamp="1609653670463">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="238" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609583125667" />
+    <state width="2842" height="238" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1609653670463" />
     <state width="2842" height="238" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609546369367" />
     <state width="2793" height="455" key="GridCell.Tab.1.bottom" timestamp="1609419726189">
       <screen x="3440" y="0" width="3440" height="1400" />

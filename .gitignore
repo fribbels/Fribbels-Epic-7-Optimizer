@@ -52,3 +52,4 @@ npm-debug.log.*
 data/saves/autosave.json
 # backend/lib
 backend/.idea/workspace.xml
+backend/target/classes

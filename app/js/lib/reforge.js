@@ -145,7 +145,7 @@ function calculateReforgeValues(substat) {
         substat.reforgedValue = substat.value + 9 * substat.rolls;
     }
     if (substat.type == "Health") {
-        substat.reforgedValue = substat.value + 54 * substat.rolls;
+        substat.reforgedValue = substat.value + 56 * substat.rolls;
     }
     if (substat.type == "Speed") {
         substat.reforgedValue = substat.value + speedRollsToValue[substat.rolls];

@@ -11,7 +11,6 @@ import com.fribbels.handler.OptimizationRequestHandler;
 import com.fribbels.handler.SystemRequestHandler;
 import com.sun.net.httpserver.HttpServer;
 
-import java.io.IOException;
 import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;

@@ -6,7 +6,7 @@ var globalOptions = {
     },
     durations: {
         alert: 20000,
-        warning: 10000
+        warning: 5000
     },
     position: 'top-right'
 }

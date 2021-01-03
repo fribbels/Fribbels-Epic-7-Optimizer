@@ -45,6 +45,7 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         tessBaseAPI.SetVariable("load_system_dawg", "false");
         tessBaseAPI.SetVariable("load_freq_dawg", "false");
         tessBaseAPI.SetVariable("classify_enable_learning", "0");
+        tessBaseAPI.SetVariable("user_defined_dpi", "70");
     }
 
     @Override
