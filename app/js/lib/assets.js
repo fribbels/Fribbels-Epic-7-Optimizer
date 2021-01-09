@@ -31,6 +31,15 @@ const assetsByLevel = {
     "85above": "./assets/85up.png",
 }
 
+const assetsByEnhance = {
+    "plus0": "./assets/plus0.png",
+    "plus3": "./assets/plus3.png",
+    "plus6": "./assets/plus6.png",
+    "plus9": "./assets/plus9.png",
+    "plus12": "./assets/plus12.png",
+    "plus15": "./assets/plus15.png"
+}
+
 const assetsByClass = {
     "ranger": "./assets/classranger.png",
     "knight": "./assets/classknight.png",
@@ -65,6 +74,10 @@ module.exports = {
 
     getAssetsByLevel: () => {
         return assetsByLevel;
+    },
+
+    getAssetsByEnhance: () => {
+        return assetsByEnhance;
     },
 
     getSetAsset: (set) => {

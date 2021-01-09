@@ -26,6 +26,9 @@ module.exports = {
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
+                        <p>Add stats from Artifacts, EE, and Imprints</p>
+                        <br>
+
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Attack</div>
                             <div class="valuePadding input-holder">

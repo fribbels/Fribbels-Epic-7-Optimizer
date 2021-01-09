@@ -1,3 +1,4 @@
+const stringSimilarity = require('string-similarity');
 const tinygradient = require('tinygradient');
 var gradient = tinygradient('#ffffff', '#8fed78');
 
@@ -22,7 +23,7 @@ module.exports = {
                 {headerName: 'Gear', field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
                 {headerName: 'Rank', field: 'rank'},
                 {headerName: 'Level', field: 'level', filter: 'agNumberColumnFilter'},
-                {headerName: 'Enhance', width: 60, field: 'enhance'},
+                {headerName: 'Enhance', width: 60, field: 'enhance', filter: 'agNumberColumnFilter'},
                 {headerName: 'Main', field: 'main.type', width: 100, cellRenderer: (params) => renderStat(params.value)},
                 {headerName: 'Value', field: 'main.value'},
                 {headerName: 'Atk%', field: 'augmentedStats.AttackPercent'},
@@ -47,6 +48,7 @@ module.exports = {
             pagination: true,
             paginationPageSize: 100000,
             rowData: getAllItemsResponse.items,
+            onRowSelected: onRowSelected,
             suppressScrollOnNewData: true,
             // onRowSelected: onRowSelected,
         };
@@ -95,7 +97,7 @@ module.exports = {
         });
     },
 
-    refreshFilters: (setFilter, gearFilter, levelFilter) => {
+    refreshFilters: (setFilter, gearFilter, levelFilter, enhanceFilter) => {
         const setFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('set');
         if (!setFilter) {
             document.getElementById('checkboxImageClearSets').checked = true;
@@ -149,9 +151,84 @@ module.exports = {
             }
         }
 
+        const enhanceFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('enhance');
+        if (!enhanceFilter) {
+            document.getElementById('checkboxImageClearEnhances').checked = true;
+            enhanceFilterComponent.setModel(null);
+        } else {
+            document.getElementById('checkboxImageClearEnhances').checked = false;
+
+            if (enhanceFilter == "plus0") {
+                enhanceFilterComponent.setModel({
+                    filterType: 'number',
+                    type: 'inRange',
+                    filter: -1,
+                    filterTo: 3
+                });
+            }
+            if (enhanceFilter == "plus3") {
+                enhanceFilterComponent.setModel({
+                    filterType: 'number',
+                    type: 'inRange',
+                    filter: 2,
+                    filterTo: 6
+                });
+            }
+            if (enhanceFilter == "plus6") {
+                enhanceFilterComponent.setModel({
+                    filterType: 'number',
+                    type: 'inRange',
+                    filter: 5,
+                    filterTo: 9
+                });
+            }
+            if (enhanceFilter == "plus9") {
+                enhanceFilterComponent.setModel({
+                    filterType: 'number',
+                    type: 'inRange',
+                    filter: 8,
+                    filterTo: 12
+                });
+            }
+            if (enhanceFilter == "plus12") {
+                enhanceFilterComponent.setModel({
+                    filterType: 'number',
+                    type: 'inRange',
+                    filter: 11,
+                    filterTo: 15
+                });
+            }
+            if (enhanceFilter == "plus15") {
+                enhanceFilterComponent.setModel({
+                    filterType: 'number',
+                    type: 'inRange',
+                    filter: 14,
+                    filterTo: 16
+                });
+            }
+            // if (levelFilter == "85at") {
+            //     levelFilterComponent.setModel({
+            //         type: 'equals',
+            //         filter: 85
+            //     });
+            // }
+            // if (levelFilter == "85below") {
+            //     levelFilterComponent.setModel({
+            //         type: 'lessThan',
+            //         filter: 85
+            //     });
+            // }
+        }
+
         itemsGrid.gridOptions.api.onFilterChanged();
     }
 }
+
+// function onRowSelected(event) {
+//     const row = module.exports.getSelectedGear();
+//     // OptimizerTab.drawPreview(gearIds);
+// }
+
 
 function columnGradient(params) {
     try {
@@ -231,11 +308,16 @@ function renderStat(name) {
 }
 
 function onRowSelected(event) {
+    return;
+
     if (event.node.selected) {
         console.warn(event)
+        console.error(event.data.name + " " + Reforge.isGaveleets(event.data))
+
+        return;
         const gear = event.data;
 
-        if (gear.level == 85 && gear.enhance == 15) {
+        if (Reforge.isReforgeable(gear)) {
             console.log("REFORGEABLE");
 
             for (var i = 0; i < gear.substats.length; i++) {

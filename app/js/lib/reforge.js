@@ -1,4 +1,3 @@
-
 module.exports = {
     initialize: () => {
         module.exports.buildFilterSetsBar();
@@ -7,14 +6,27 @@ module.exports = {
 
     getReforgeStats: (gear) => {
         calc(gear);
+    },
+
+    isGaveleets: (gear) => {
+        return Utils.stringDistance("Gaveleets", gear.name) > 0.4;
+    },
+
+    isReforgeable: (gear) => {
+        return gear.level == 85 && gear.enhance == 15 && !module.exports.isGaveleets(gear);
     }
 }
 
 
 function calc(gear) {
-    if (gear.level == 85 && gear.enhance == 15) {
+    if (gear.level == 85 && gear.enhance == 15 && !Reforge.isGaveleets(gear)) {
+        // if (stringSimilarity.compareTwoStrings("Gaveleets", gear.name)) {
+        //     Notifier.error("Abyss lifesteal set cannot be reforged: " + JSON.stringify(gear));
+        //     return;
+        // }
+
         if (!gear.substats || gear.substats.length != 4) {
-            Notifier.error("Cannot calculate reforged stats, item is missing stats");
+            Notifier.error("Cannot calculate reforged stats, +15 item is missing a substat: " + JSON.stringify(gear));
             return;
         }
 

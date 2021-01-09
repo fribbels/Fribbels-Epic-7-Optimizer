@@ -41,9 +41,9 @@ module.exports = {
         });
 
         document.getElementById('addHeroStatsSubmit').addEventListener("click", async () => {
-            console.log("addHeroStatsSubmit");
             const row = HeroesGrid.getSelectedRow();
             if (!row) return;
+            console.log("addHeroStatsSubmit", row);
 
             // Api.removeHeroById(row.id).then(response => {
             //     console.log("RESPONSE", response)
@@ -51,6 +51,7 @@ module.exports = {
             //     redrawHeroInputSelector();
             // });
 
+            showEditHeroInfoPopups(row.name)
             const bonusStats = await Dialog.editHeroDialog(row);
             console.log("Bonus stats", bonusStats, row.id);
 
@@ -164,6 +165,21 @@ module.exports = {
             equipped: new Array(6)
         }
     },
+}
+
+function showEditHeroInfoPopups(name) {
+    if (name == "Eaton") {
+        Notifier.info("Eaton's 20% total Health bonus from S2 is already automatically added.")
+    }
+    if (name == "Gunther") {
+        Notifier.info("Gunther's 75% total Attack bonus from S2 is already automatically added.")
+    }
+    if (name == "Lena") {
+        Notifier.info("Lena's 50% Crit Chance bonus from S2 is already automatically added.")
+    }
+    if (name == "Apocalypse Ravi") {
+        Notifier.info("Apocalypse Ravi's 30% Crit Chance bonus from S2 is already automatically added.")
+    }
 }
 
 function getSelectedGear() {

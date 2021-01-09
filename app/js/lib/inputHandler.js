@@ -8,6 +8,7 @@ global.Dialog = require('./dialog');
 global.DataFetcher = require('./datafetcher');
 global.SpecialtyChange = require('./specialtychange');
 global.Reforge = require('./reforge');
+global.Utils = require('./utils');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');

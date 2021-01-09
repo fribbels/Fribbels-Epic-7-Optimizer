@@ -23,7 +23,7 @@ Here's what it looks like currently:
 
 ## Requirements
 - Windows or MacOS, 64-bit
-- Java 8, 64-Bit installed (Please download if you don't yet have it: https://www.java.com/en/download/)
+- Java 8, 64-Bit installed (Please download if you don't yet have it: https://java.com/en/download/manual.jsp, use the offline installer)
 _________________
 
 **Table of Contents**:
@@ -262,13 +262,13 @@ Please read these instructions carefully!
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
     * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
     * Do not download the Source Code options, those won't work <br>
-2. Install **Java 8 - 64 bit** https://www.java.com/en/download/
+2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the offline installer
    * After installing, restart your computer (required!)<br>
    * Mac apparently requires both the JRE and JDK. Get the JDK here: https://www.oracle.com/java/technologies/javase-downloads.html
 3. Install an emulator to run Epic 7 on
     * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)<br>
 4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br>
-5. Set Epic 7 to enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)<br>
+5. Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)<br>
 
 6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br>
 
@@ -317,71 +317,58 @@ Here's a video that covers most of the importing process: https://www.youtube.co
 
 Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
- **Release 1.2.0 changelog**
+** Already done for 1.3.0 Release **
+ - Invalid dpi error
+ - Add info on which preset stats are auto-added
+ - Warning if permutations are > 5 billion
+ - Alphabetizing sets, hero selector
+ - Note to add arti/ee/imprint on bonus stats
+ - Clickable lock icon
+ - Allow append json
+ - Save filter preferences
+ - Filter out abyss 85 lifesteal for reforge
+ - Enhancement +3/6/9/12/15 filter
 
--   Added reforged stats prediction for level 85 +15 gear, and reforge button to quickly reforge a gear
--   Added options for using reforged stats in optimization algorithm
--   Added a permutations/filter details panel
--   Added hero portrait
--   Added DPS score/Support score/Combat score for rating gears
--   Added gear tab filter for level <85, 85, >85
--   Added tooltips for most panels
--   Added popups for hints/warnings/errors/successes
--   Added an 'Exclude set' filter
--   Added lock icon on gear
--   Added lock/unlock actions on optimizer screen
--   Reorganized optimization panel
--   Simplified gear preview panel w/ icons & colors
--   Improved the priority ranking filter to reflect the actual % of gear shown on details panel
--   Autosaving hero's filter preferences and added options to reset details / load previous search
--   Detecting & warning when java version is invalid
--   Renamed option from 'Can reforge' -> 'At least one lv 85'
--   Divided speed ratings by 10 for easier readability
--   Fix: Keep current position of a page when edits are made
--   Fix: Decimal numbers for bonus stats save correctly now
--   Fix: Speed bonus save correctly now
--   Fix: Bug with optimizer producing suboptimal results for 4 piece set when filtered armor # > helm #
--   Fix: Bug with optimizer not sorting prioritized gear correctly
--   Fix: Update gear scores when gear stats changed
--   Fix: Alert messages making input boxes break
--
 **TODO - High priority:**
- - Release 1.2.0
+ - Dark mode
 
  **Medium priority:**
  - Option to equip gear from heroes page
  - Save Gear configurations, compare between them
  - Move save/load to File menu
- - Verify all image files
  - Update permutations on 4 piece set
- - Dark mode
  - Use main stat gear for priority filter
- - Clickable lock icon
- - Alphabetizing
- - Save filter preferences
- - Invalid dpi error
+ - Class/Element filter for Heroes tab
+ - Make Network Error less confusing
+ - Reapply all filters
+ - Gear score column in optimizer results
+ - Sum of substat priority column
+ - Cancel ongoing request when start is clicked again
+ - Main stat filter on gear page
+ - +15 only filter on optimizer
+ - Manual gear input improvements
 
  **Low priority:**
  - Add can reforge, can enhance columns
  - Customize result limit
- - Enable cross platform for Linux
  - Clear out item previews on refresh
- - Investigate decrypting network traffic for gear data
  - Optimize multiple heroes at once
  - Optimize results with a missing piece(s)
  - Add different level/awakening options
  - Tools for optimizing HP scaling units/skill scaling
  - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
- - Class/Element filter for Heroes tab
  - Gear page, option to use more than one set/gear filter at time
  - Score per roll column in gear
  - Gear enhance filters
- - Option to select a location to save zarroc import
  - Reorder heroes list
  - Have two windows open at once
  - Select/interact with multiple heroes at once
  - Keyboard actions ctrl + a, ctrl + s, ctrl + arrows
  - Rage set damage calculation
+ - Option to select a location to save zarroc import
+ - Enable cross platform for Linux
+ - Verify all imported screenshots are image files
+ - Investigate decrypting network traffic for gear data
 
 ## Troubleshooting
 

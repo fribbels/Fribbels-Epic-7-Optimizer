@@ -1,3 +1,5 @@
+const stringSimilarity = require('string-similarity');
+
 function statToText(stat, baseStats, item) {
     if (!stat) {
         return {
@@ -11,7 +13,7 @@ function statToText(stat, baseStats, item) {
     const unpercentedStat = shortenStats(stat.type.match(/[A-Z][a-z]+/g).filter(x => x != 'Percent').join(' '));
     var value;
 
-    if (item.level == 85 && item.enhance == 15) {
+    if (Reforge.isReforgeable(item)) {
         const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
         const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : stat.reforgedValue;
 
@@ -93,6 +95,7 @@ module.exports = {
     initialize: () => {
         module.exports.buildFilterSetsBar();
         module.exports.buildFilterGearBar();
+        module.exports.buildFilterEnhanceBar();
         module.exports.buildFilterLevelBar();
     },
 
@@ -121,6 +124,20 @@ module.exports = {
             const html = buildFilter(level, url, false);
 
             document.getElementById('levelFilterBar').innerHTML += html;
+        }
+    },
+
+    buildFilterEnhanceBar: () => {
+        const clearUrl = Assets.getX(); // black x
+        const html = buildFilter("ClearEnhances", clearUrl, true);
+        document.getElementById('enhanceFilterBar').innerHTML += html;
+
+        const assetsByEnhance = Assets.getAssetsByEnhance();
+        for (var enhance of Object.keys(assetsByEnhance)) {
+            const url = assetsByEnhance[enhance];
+            const html = buildFilter(enhance, url, false);
+
+            document.getElementById('enhanceFilterBar').innerHTML += html;
         }
     },
 
@@ -185,7 +202,7 @@ module.exports = {
       <div class="itemDisplayLevel" ${styleLevel(item.level)}>${item.level}</div>
     </div>
   </div>
-  <img src="${Assets.getLock()}" class="itemDisplayLockImg" ${styleLocked(item.locked)}></img>
+  ${editLockDisplay(item)}
   <img src="${heroImage}" class="itemDisplayEquippedHero"></img>
 </div>
 <div class="itemDisplayMainStat">
@@ -228,7 +245,7 @@ module.exports = {
 }
 
 function editItemDisplay(item) {
-    if (item.level == 85 && item.enhance == 15) {
+    if (Reforge.isReforgeable(item)) {
         return `<img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
     }
     return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
@@ -240,10 +257,12 @@ function styleEnhance(enhance) {
     }
 }
 
-function styleLocked(locked) {
-    if (!locked) {
-        return 'style="opacity:0"'
+function editLockDisplay(item) {
+    if (!item.locked) {
+        return `<img src="${Assets.getLock()}" style="opacity:0.1" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
     }
+    return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
+
 }
 
 function styleLevel(level) {

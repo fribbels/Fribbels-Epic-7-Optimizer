@@ -1,3 +1,5 @@
+const stringSimilarity = require('string-similarity');
+
 var setFilter;
 const setCheckboxes = [];
 
@@ -6,6 +8,9 @@ const gearCheckboxes = [];
 
 var levelFilter;
 const levelCheckboxes = [];
+
+var enhanceFilter;
+const enhanceCheckboxes = [];
 
 module.exports = {
 
@@ -47,7 +52,7 @@ module.exports = {
 
         ItemsGrid.redraw(newItem).then(x => {
 
-            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter)
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter)
 
             // setFilter = null;
             // for (var checkbox of setCheckboxes) {
@@ -92,6 +97,11 @@ async function reforgeGear() {
 
     if (item.level != 85 || item.enhance != 15) {
         Notifier.warn("Only +15 level 85 gear can be reforged.")
+        return;
+    }
+
+    if (Reforge.isGaveleets(item)) {
+        Notifier.warn("Abyss lifesteal set (Gaveleet's) cannot be reforged")
         return;
     }
 
@@ -177,7 +187,7 @@ function setupEventListeners() {
                 setFilter = null;
             }
 
-            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
         });
         setCheckboxes.push(checkbox);
     }
@@ -193,7 +203,7 @@ function setupEventListeners() {
 
         }
 
-        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
     });
 
     // Gear
@@ -214,7 +224,7 @@ function setupEventListeners() {
                 gearFilter = null;
             }
 
-            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
         });
         gearCheckboxes.push(checkbox);
     }
@@ -230,7 +240,7 @@ function setupEventListeners() {
 
         }
 
-        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
     });
 
     // Level
@@ -251,7 +261,7 @@ function setupEventListeners() {
                 levelFilter = null;
             }
 
-            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
         });
         levelCheckboxes.push(checkbox);
     }
@@ -267,6 +277,43 @@ function setupEventListeners() {
 
         }
 
-        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter);
+        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
+    });
+
+    // Enhance
+
+    const enhances = Object.keys(Assets.getAssetsByEnhance())
+    console.log("SETUP", enhances);
+    for (var enhance of enhances) {
+        const checkbox = document.getElementById('checkboxImage' + enhance);
+        checkbox.addEventListener('change', function(event) {
+            var eventEnhance = event.target.id.split("checkboxImage")[1];
+            if (event.target.checked) {
+                enhanceFilter = eventEnhance
+                for (var checkbox of enhanceCheckboxes) {
+                    if (checkbox != event.target)
+                        checkbox.checked = false;
+                }
+            } else {
+                enhanceFilter = null;
+            }
+
+            ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
+        });
+        enhanceCheckboxes.push(checkbox);
+    }
+
+    document.getElementById('checkboxImageClearEnhances').addEventListener('change', function(event) {
+        console.log(event);
+        if (event.target.checked) {
+            enhanceFilter = null;
+            for (var checkbox of enhanceCheckboxes) {
+                checkbox.checked = false;
+            }
+        } else {
+
+        }
+
+        ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter);
     });
 }

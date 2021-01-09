@@ -381,6 +381,15 @@ input {
   height: 25px;
   margin-right: 16px;
   opacity: 0.6;
+  cursor: pointer;
+}
+.itemDisplayLockImgTransparent {
+  /*width: 25px;*/
+  margin-top: 3px;
+  height: 25px;
+  margin-right: 16px;
+  opacity: 0.1;
+  cursor: pointer;
 }
 .itemDisplaySetType {
   font-size: 13px;

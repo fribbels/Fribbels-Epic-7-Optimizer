@@ -306,6 +306,10 @@ module.exports = {
         editGearFromIcon(id);
     },
 
+    lockGearFromIcon: (id) => {
+        lockGearFromIcon(id);
+    },
+
     redrawHeroSelector: async () => {
         const getAllHeroesResponse = await Api.getAllHeroes();
         const selectedId = $( "#inputHeroAdd option:selected" ).val()
@@ -313,6 +317,7 @@ module.exports = {
         clearOptions("inputHeroAdd");
         const optimizerHeroSelector = document.getElementById('inputHeroAdd')
         const heroes = getAllHeroesResponse.heroes;
+        Utils.sortByAttribute(heroes, "name");
         console.log("getAllHeroesResponse", getAllHeroesResponse)
         for (var hero of heroes) {
             const option = document.createElement('option');
@@ -337,6 +342,24 @@ async function editGearFromIcon(id) {
     const editedItem = await Dialog.editGearDialog(result.item, true, true);
     await Api.editItems([editedItem]);
     Notifier.quick("Edited item");
+
+    ItemsTab.redraw();
+    drawPreview();
+    Saves.autoSave();
+}
+
+async function lockGearFromIcon(id) {
+    const result = await Api.getItemById(id);
+    console.log(result.item);
+
+    if (result.item.locked) {
+        await Api.unlockItems([id])
+        Notifier.quick("Unlocked item");
+    } else {
+        await Api.lockItems([id])
+        Notifier.quick("Locked item");
+    }
+
 
     ItemsTab.redraw();
     drawPreview();
@@ -598,9 +621,9 @@ function warnParams(params) {
     &&  params.inputCdPriority == 0
     &&  params.inputEffPriority == 0
     &&  params.inputResPriority == 0) {
-        Notifier.warn("No stat priority selected. For best results, use the stat priority filter.")
+        Notifier.info("No stat priority selected. For best results, use the stat priority filter.")
     } else if (params.inputFilterPriority == 100) {
-        Notifier.warn("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
+        Notifier.info("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
     } else if (params.inputFilterPriority != 100
     &&  params.inputAtkPriority == 0
     &&  params.inputHpPriority == 0
@@ -610,23 +633,31 @@ function warnParams(params) {
     &&  params.inputCdPriority == 0
     &&  params.inputEffPriority == 0
     &&  params.inputResPriority == 0) {
-        Notifier.warn("Top N% was selected but no stat priorities are assigned. Select a stat priority otherwise the filter will pick random gears.")
+        Notifier.info("Top N% was selected but no stat priorities are assigned. Select a stat priority otherwise the filter will pick random gears.")
     }
 
     if (params.inputSetsOne && params.inputSetsOne.length == 0) {
-        Notifier.warn("No sets were selected. For best results, select at least one set.")
+        Notifier.info("No sets were selected. For best results, select at least one set.")
     }
 
     if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
     &&  params.inputRingStat && params.inputRingStat.length == 0
     &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
-        Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
+        Notifier.info("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
+    }
+
+    if (permutations >= 5_000_000_000) {
+        Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
     }
 }
 
-function submitOptimizationFilterRequest() {
+async function submitOptimizationFilterRequest() {
     const params = getOptimizationRequestParams();
     warnParams(params);
+
+    const heroId = document.getElementById('inputHeroAdd').value;
+    const heroResponse = await Api.getHeroById(heroId);
+    params.hero = heroResponse.hero;
     OptimizerGrid.showLoadingOverlay();
     Api.submitOptimizationFilterRequest(params).then(response => {
         console.warn("Optimization filter response", response);

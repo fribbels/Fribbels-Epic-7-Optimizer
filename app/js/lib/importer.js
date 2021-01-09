@@ -146,7 +146,7 @@ module.exports = {
                 defaultPath : defaultPath + 'gear.txt',
                 buttonLabel : "Load file",
                 filters :[
-                    {name: 'TEXT', extensions: ['txt']},
+                    {name: 'TEXT/JSON', extensions: ['txt', 'json']},
                 ]
             }
             const filenames = dialog.showOpenDialogSync(currentWindow, options);
@@ -182,15 +182,13 @@ module.exports = {
             });
         })
 
-
-
         document.getElementById('importAppendFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
                 defaultPath : defaultPath + 'gear.txt',
                 buttonLabel : "Load file",
                 filters :[
-                    {name: 'TEXT', extensions: ['txt']},
+                    {name: 'TEXT/JSON', extensions: ['txt', 'json']},
                 ]
             }
             const filenames = dialog.showOpenDialogSync(currentWindow, options);
