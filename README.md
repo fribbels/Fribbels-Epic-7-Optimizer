@@ -259,19 +259,53 @@ Please read these instructions carefully!
 
 **Installation:**
 
+#### Windows
+
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
     * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
-    * Do not download the Source Code options, those won't work <br>
+    * Do not download the Source Code options, those won't work
 2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the offline installer
-   * After installing, restart your computer (required!)<br>
-   * Mac apparently requires both the JRE and JDK. Get the JDK here: https://www.oracle.com/java/technologies/javase-downloads.html
+    * After installing, restart your computer (required!)
 3. Install an emulator to run Epic 7 on
-    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)<br>
-4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br>
-5. Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)<br>
+    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)
+4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)
+5. Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
+6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)
 
-6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br>
+#### Mac OS/Bluestack
 
+1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
+    * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
+    * Do not download the Source Code options, those won't work
+2. Install **Java 8 - 64 bit** 
+    * JRE: https://java.com/en/download/manual.jsp - Get the offline installer
+    * JDK: https://www.oracle.com/java/technologies/javase-downloads.html
+    * After installing, restart your computer (required!)
+3. Install [Bluestacks](https://www.bluestacks.com/download.html)
+    * Install the game from the Play Store and launch E7
+    * Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
+    * Quit Bluestacks
+4. Set the emulator's screen resolution to **1600 x 900**
+    * The option from Preferences menu does not work
+    * Open `~/Library/Preferences/com.BlueStacks.AppPlayer.plist` with any text editor
+    * Edit `WindowHeight` and `WindowWidth`
+```xml
+<key>WindowHeight</key>
+<integer>900</integer>
+<key>WindowWidth</key>
+<integer>1600</integer>
+```
+5. Check your screenshots Width
+    * Launch Bluestacks and Launch the Game
+    * From Menu: Actions > Take Screenshot
+    * If your screenshot is larger than 1600 width, go to step 6, otherwise skip to step 7
+6. Customize Emulator Resolution (make sure to close and reopen Bluestack when editing resolution)
+    * Retina Display may make it so the Emulator's Resolution Setting lies
+    * Go back to step 4 and scale the width/height appropriately; eg. my screenshots were 3200 pixels wide so I scaled down by half in step 4: 800x450
+7. Once your screenshots are 1600 pixels wide, you'll notice they're not 900 pixels high because Bluestacks includes the window frame on top
+    * Use a cropper to crop all your screenshots to 1600x900 pixels removing the top portion
+    * [BatchCrop](https://www.batchcrop.com/) or any other bulk editor will do the trick
+8. You should be good to import your cropped screenshots after that
 
 **Importing gear screenshots:**
 
