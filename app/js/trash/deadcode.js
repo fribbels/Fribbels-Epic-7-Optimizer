@@ -10,6 +10,42 @@ function sendCommand(input) {
     // child.stdin.write(input + "\n");
 }
 
+function renderSets(equipment) {
+    if (!equipment) return;
+
+    const setNames = Object.values(equipment).map(x => x.set);
+    const setCounters = [
+        Math.floor(setNames.filter(x => x == "HealthSet").length),
+        Math.floor(setNames.filter(x => x == "DefenseSet").length),
+        Math.floor(setNames.filter(x => x == "AttackSet").length),
+        Math.floor(setNames.filter(x => x == "SpeedSet").length),
+        Math.floor(setNames.filter(x => x == "CriticalSet").length),
+        Math.floor(setNames.filter(x => x == "HitSet").length),
+        Math.floor(setNames.filter(x => x == "DestructionSet").length),
+        Math.floor(setNames.filter(x => x == "LifestealSet").length),
+        Math.floor(setNames.filter(x => x == "CounterSet").length),
+        Math.floor(setNames.filter(x => x == "ResistSet").length),
+        Math.floor(setNames.filter(x => x == "UnitySet").length),
+        Math.floor(setNames.filter(x => x == "RageSet").length),
+        Math.floor(setNames.filter(x => x == "ImmunitySet").length),
+        Math.floor(setNames.filter(x => x == "PenetrationSet").length),
+        Math.floor(setNames.filter(x => x == "RevengeSet").length),
+        Math.floor(setNames.filter(x => x == "InjurySet").length)
+    ]
+
+    const sets = [];
+    for (var i = 0; i < setCounters.length; i++) {
+        const setsFound = Math.floor(setCounters[i] / Constants.piecesBySetIndex[i]);
+        for (var j = 0; j < setsFound; j++) {
+            sets.push(Constants.setsByIndex[i]);
+        }
+    }
+
+    const images = sets.map(x => '<img class="optimizerSetIcon" src=' + Assets.getSetAsset(x) + '></img>');
+    // console.log("RenderSets images", images);
+    return images.join("");
+}
+
 function init() {
     setInterval(() => {
         child.stdin.setEncoding('utf-8');
@@ -111,7 +147,7 @@ function calc() {
         "cd": 150,
         "eff": 0,
         "res": 0,
-        "dac": 5   
+        "dac": 5
     };
 
     const setsBuffer = new Array(13).fill();
@@ -144,7 +180,7 @@ function calc() {
                             const bootsAccumulatorArr = getStatAccumulatorArr(base, boots, accumulatorArrsByItem);
 
                             const result = addAccumulatorArrsToHero(
-                                base, 
+                                base,
                                 [weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr],
                                 [weapon, helmet, armor, necklace, ring, boots],
                                 setsBuffer
@@ -204,7 +240,7 @@ function keep() {
                 var part = parts[i];
                 var outputArr = JSON.parse(part);
                 // console.log(outputArr);
-                output = output.concat(outputArr);   
+                output = output.concat(outputArr);
             }
 
             strBuffer = parts[parts.length-1];
@@ -247,7 +283,7 @@ function keep() {
                     //         var part = parts[i];
                     //         var outputArr = JSON.parse(part);
                     //         // console.log(outputArr);
-                    //         output = output.concat(outputArr);   
+                    //         output = output.concat(outputArr);
                     //     }
 
                     //     strBuffer = parts[parts.length-1];
@@ -306,7 +342,7 @@ function cheetah() {
     const {
       SELECTED_CELL,
     } = cheetahGrid.ListGrid.EVENT_TYPE;
-    
+
     grid.listen(SELECTED_CELL, (cell) => {
         console.log(cell)
         if (!cell.selected) {
@@ -343,7 +379,7 @@ function cheetah() {
         // document.getElementById('gear-preview-right-bot').innerHTML = JSON.stringify(boots.augmentedStats, null, 2);
 
         const heroId = document.getElementById('inputHeroAdd').value;
-        HeroManager.equipGearOnHero(heroId, [weapon, helmet, armor, necklace, ring, boots]);    
+        HeroManager.equipGearOnHero(heroId, [weapon, helmet, armor, necklace, ring, boots]);
         console.log("See equipped:", HeroManager.getHeroById(heroId))
 
         grid.invalidate();
@@ -357,7 +393,7 @@ function sorts() {
     }
 
     // 336, 2818-566
-    // 361, 
+    // 361,
     // 351
     // 351
     // 330
@@ -424,7 +460,7 @@ function toItem(item) {
     const newItem = new Item(
         toGear(item.Type),
         toRank(item.Grade),
-        toSet(item.Set), 
+        toSet(item.Set),
         item.Ilvl, //
         item.Enhance, //
         new Stat(mainStat, mainStatNumber),  //
@@ -458,7 +494,7 @@ function toStat(input) {
             return Stats.EFF;
         case 10:
             return Stats.RES;
-        default:   
+        default:
             throw new Error('Invalid enum: ' + JSON.stringify(input));
     }
 }
@@ -491,7 +527,7 @@ function toSet(input) {
             return Sets.IMMUNITY;
         case 12:
             return Sets.UNITY;
-        default:   
+        default:
             throw new Error('Invalid enum: ' + input);
     }
 }
@@ -510,7 +546,7 @@ function toGear(input) {
             return Gears.RING;
         case 5:
             return Gears.BOOTS;
-        default:   
+        default:
             throw new Error('Invalid enum: ' + input);
     }
 }
@@ -527,7 +563,7 @@ function toRank(input) {
             return Ranks.GOOD;
         case 4:
             return Ranks.NORMAL;
-        default:   
+        default:
             throw new Error('Invalid enum: ' + input);
     }
 }

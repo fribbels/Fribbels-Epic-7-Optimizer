@@ -7,8 +7,10 @@ import com.fribbels.db.HeroDb;
 import com.fribbels.db.OptimizationDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.enums.Set;
+import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
+import com.fribbels.request.EditResultRowsRequest;
 import com.fribbels.request.GetResultRowsRequest;
 import com.fribbels.request.OptimizationRequest;
 import com.fribbels.response.GetResultRowsResponse;
@@ -81,6 +83,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     final GetResultRowsRequest getResultRowsRequest = parseRequest(exchange, GetResultRowsRequest.class);
                     System.out.println(getResultRowsRequest);
                     sendResponse(exchange, handleGetResultRowsRequest(getResultRowsRequest));
+                    System.out.println("Sent response");
+                    return;
+                case "/optimization/editResultRows":
+                    final EditResultRowsRequest editResultRowsRequest = parseRequest(exchange, EditResultRowsRequest.class);
+                    System.out.println(editResultRowsRequest);
+                    sendResponse(exchange, handleEditResultRowsRequest(editResultRowsRequest));
                     System.out.println("Sent response");
                     return;
                 case "/optimization/getProgress":
@@ -173,14 +181,40 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     private String handleGetResultRowsRequest(final GetResultRowsRequest request) {
+        final String heroId = request.getOptimizationRequest().getHeroId();
+        final List<HeroStats> builds = heroDb.getBuildsForHero(heroId);
+        final java.util.Set<String> buildHashes = builds.stream()
+                .map(HeroStats::getBuildHash)
+                .collect(Collectors.toSet());
+
         optimizationDb.sort(request.getSortColumn(), request.getSortOrder());
         final HeroStats[] heroStats = optimizationDb.getRows(request.getStartRow(), request.getEndRow());
+
+        if (heroStats != null) {
+            for (final HeroStats build : heroStats) {
+                final String hash = build.getBuildHash();
+                if (buildHashes.contains(hash)) {
+                    build.setProperty("star");
+                }
+            }
+        }
+
         final long maximum = optimizationDb.getMaximum();
         final GetResultRowsResponse response = GetResultRowsResponse.builder()
                 .heroStats(heroStats)
                 .maximum(maximum)
                 .build();
         return gson.toJson(response);
+    }
+
+    private String handleEditResultRowsRequest(final EditResultRowsRequest request) {
+        final HeroStats[] heroStats = optimizationDb.getRows(request.getIndex(), request.getIndex() + 1);
+        final HeroStats heroStat = heroStats[0];
+
+        heroStat.setProperty(request.getProperty());
+        System.out.println(heroStat);
+
+        return "";
     }
 
     public String test(final OptimizationRequest request, final HeroStats unused) {
@@ -231,6 +265,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final AtomicInteger maxReached = new AtomicInteger();
 
+        final boolean useReforgeStats = request.getInputPredictReforges();
         final boolean isShortCircuitable4PieceSet = request.getSetFormat() == 1 || request.getSetFormat() == 2;
 
         System.out.println("OUTPUTSTART");
@@ -243,15 +278,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 boolean exit = false;
                 try {
 
-                    final float[] weaponAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, weapon, accumulatorArrsByItemId);
+                    final float[] weaponAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, weapon, accumulatorArrsByItemId, useReforgeStats);
 
                     for (int h = 0; h < hSize; h++) {
                         final Item helmet = itemsByGear.get(Gear.HELMET).get(h);
-                        final float[] helmetAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, helmet, accumulatorArrsByItemId);
+                        final float[] helmetAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, helmet, accumulatorArrsByItemId, useReforgeStats);
 
                         for (int a = 0; a < aSize; a++) {
                             final Item armor = itemsByGear.get(Gear.ARMOR).get(a);
-                            final float[] armorAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, armor, accumulatorArrsByItemId);
+                            final float[] armorAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, armor, accumulatorArrsByItemId, useReforgeStats);
 
                             // For 4 piece sets, we can short circuit if the first 3 pieces don't match possible sets,
                             // but only if the items are sorted & prioritized by set.
@@ -267,11 +302,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                             for (int n = 0; n < nSize; n++) {
                                 final Item necklace = itemsByGear.get(Gear.NECKLACE).get(n);
-                                final float[] necklaceAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, necklace, accumulatorArrsByItemId);
+                                final float[] necklaceAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, necklace, accumulatorArrsByItemId, useReforgeStats);
 
                                 for (int r = 0; r < rSize; r++) {
                                     final Item ring = itemsByGear.get(Gear.RING).get(r);
-                                    final float[] ringAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, ring, accumulatorArrsByItemId);
+                                    final float[] ringAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, ring, accumulatorArrsByItemId, useReforgeStats);
 
                                     for (int b = 0; b < bSize; b++) {
                                         if (Main.interrupt) {
@@ -281,7 +316,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         if (exit) return;
 
                                         final Item boots = itemsByGear.get(Gear.BOOTS).get(b);
-                                        final float[] bootsAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, boots, accumulatorArrsByItemId);
+                                        final float[] bootsAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, boots, accumulatorArrsByItemId, useReforgeStats);
 
                                         final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
                                         final int[] collectedSets = StatCalculator.buildSetsArr(collectedItems);

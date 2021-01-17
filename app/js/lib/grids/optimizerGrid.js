@@ -11,12 +11,26 @@ module.exports = {
         buildGrid();
     },
 
+    reloadData: (getResultRowsResponse) => {
+
+        optimizerGrid.gridOptions.api.setDatasource(datasource);
+    },
+
     refresh: (getResultRowsResponse) => {
         // gridOptions
         console.log("REFRESH")
-        optimizerGrid.gridOptions.api.setDatasource(datasource);
+        // const selectedNode = optimizerGrid.gridOptions.api.getSelectedNodes()[0]
+
+        optimizerGrid.gridOptions.api.refreshInfiniteCache()
+        // optimizerGrid.gridOptions.api.forEachNode((node) => {
+        //     console.log(node.data)
+        //     console.log(selectedNode.data)
+        //     if (selectedNode && node.data.id == selectedNode.data.id) {
+        //         node.setSelected(true, false);
+        //     }
+        // })
         // optimizerGrid.gridOptions.api.refreshInfiniteCache();
-        optimizerGrid.gridOptions.api.paginationGoToPage(0);
+        // optimizerGrid.gridOptions.api.paginationGoToPage(0);
     },
 
     setPinnedHero: (hero) => {
@@ -44,6 +58,17 @@ module.exports = {
         }
         return [];
     },
+
+    getSelectedRow: () => {
+        const selectedRows = optimizerGrid.gridOptions.api.getSelectedRows();
+        if (selectedRows.length > 0) {
+            const row = selectedRows[0];
+            console.log("SELECTED ROW", row)
+
+            return row;
+        }
+        return null;
+    },
 }
 
 const datasource = {
@@ -57,7 +82,9 @@ const datasource = {
         global.optimizerGrid = optimizerGrid;
 
         optimizerGrid.gridOptions.api.showLoadingOverlay();
+        const heroId = document.getElementById('inputHeroAdd').value;
         const optimizationRequest = OptimizerTab.getOptimizationRequestParams();
+        optimizationRequest.heroId = heroId;
 
         const request = {
             startRow: startRow,
@@ -157,7 +184,7 @@ function buildGrid() {
         },
 
         columnDefs: [
-            {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => renderSets(params.value)},
+            {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
             {headerName: 'atk', field: 'atk'},
             {headerName: 'hp', field: 'hp', width: 55},
             {headerName: 'def', field: 'def'},
@@ -175,6 +202,7 @@ function buildGrid() {
             {headerName: 'dmgs', field: 'dmgps', width: 50},
             {headerName: 'mcd', field: 'mcdmg', width: 55},
             {headerName: 'mcds', field: 'mcdmgps', width: 50},
+            {headerName: 'actions', field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',
@@ -186,61 +214,13 @@ function buildGrid() {
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
         datasource: datasource,
-        navigateToNextCell: navigateToNextCell.bind(this),
+        suppressScrollOnNewData: true,
+        navigateToNextCell: GridRenderer.arrowKeyNavigator().bind(this),
     };
 
     const gridDiv = document.getElementById('myGrid');
     optimizerGrid = new Grid(gridDiv, gridOptions);
     console.log("Built optimizergrid", optimizerGrid);
-}
-
-// define some handy keycode constants
-var KEY_LEFT = 37;
-var KEY_UP = 38;
-var KEY_RIGHT = 39;
-var KEY_DOWN = 40;
-
-
-function navigateToNextCell(params) {
-  var previousCell = params.previousCellPosition,
-    suggestedNextCell = params.nextCellPosition,
-    nextRowIndex,
-    renderedRowCount;
-
-  switch (params.key) {
-    case KEY_DOWN:
-      // return the cell below
-      nextRowIndex = previousCell.rowIndex + 1;
-      renderedRowCount = optimizerGrid.gridOptions.api.getModel().getRowCount();
-      if (nextRowIndex >= renderedRowCount) {
-        return null;
-      } // returning null means don't navigate
-
-      optimizerGrid.gridOptions.api.selectNode(optimizerGrid.gridOptions.api.getRowNode("" + nextRowIndex))
-      return {
-        rowIndex: nextRowIndex,
-        column: previousCell.column,
-        floating: previousCell.floating,
-      };
-    case KEY_UP:
-      // return the cell above
-      nextRowIndex = previousCell.rowIndex - 1;
-      if (nextRowIndex <= -1) {
-        return null;
-      } // returning null means don't navigate
-
-      optimizerGrid.gridOptions.api.selectNode(optimizerGrid.gridOptions.api.getRowNode("" + nextRowIndex))
-      return {
-        rowIndex: nextRowIndex,
-        column: previousCell.column,
-        floating: previousCell.floating,
-      };
-    case KEY_LEFT:
-    case KEY_RIGHT:
-      return suggestedNextCell;
-    default:
-      throw 'this will never happen, navigation is always one of the 4 keys above';
-  }
 }
 
 
@@ -265,7 +245,6 @@ function columnGradient(params) {
             backgroundColor: color.toHexString()
         };
     } catch (e) {console.error(e)}
-
 }
 
 function onRowSelected(event) {
@@ -274,20 +253,3 @@ function onRowSelected(event) {
 }
 
 // Figure out what set images to show on the grid
-function renderSets(setCounters) {
-    // console.log("RENDERSETS", setCounters)
-    if (!setCounters)
-        return;
-
-    const sets = [];
-    for (var i = 0; i < setCounters.length; i++) {
-        const setsFound = Math.floor(setCounters[i] / Constants.piecesBySetIndex[i]);
-        for (var j = 0; j < setsFound; j++) {
-            sets.push(Constants.setsByIndex[i]);
-        }
-    }
-
-    const images = sets.map(x => '<img class="optimizerSetIcon" src=' + Assets.getSetAsset(x) + '></img>');
-    // console.log("RenderSets images", images);
-    return images.join("");
-}

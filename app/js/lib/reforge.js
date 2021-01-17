@@ -6,6 +6,7 @@ module.exports = {
 
     getReforgeStats: (gear) => {
         calc(gear);
+        ItemAugmenter.augmentReforgeStats([gear]);
     },
 
     isGaveleets: (gear) => {
@@ -136,7 +137,8 @@ function calc(gear) {
 
         // console.log(gear.rank);
         // console.log(rolls);
-        // console.log(gear.substats);
+    } else {
+
     }
 }
 

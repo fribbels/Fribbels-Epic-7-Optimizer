@@ -137,6 +137,7 @@ module.exports = {
             $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems);
             $("#inputKeepCurrentItems").prop('checked', request.inputKeepCurrentItems);
             $("#inputCanReforge").prop('checked', request.inputCanReforge);
+            $("#inputOnlyPlus15Gear").prop('checked', request.inputOnlyPlus15Gear);
 
             document.querySelector('#atkSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
             document.querySelector('#atkSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
@@ -208,9 +209,16 @@ module.exports = {
             $("#inputAllowEquippedItems").prop('checked', false);
             $("#inputKeepCurrentItems").prop('checked', false);
             $("#inputCanReforge").prop('checked', false);
+            $("#inputOnlyPlus15Gear").prop('checked', false);
             $('#forceNumberSelect').val(0)
 
             recalculateFilters();
+        });
+        document.getElementById('gearPreviewAddBuild').addEventListener("click", () => {
+            addBuild()
+        });
+        document.getElementById('gearPreviewRemoveBuild').addEventListener("click", () => {
+            removeBuild()
         });
         document.getElementById('gearPreviewEquip').addEventListener("click", () => {
             equipSelectedGear()
@@ -388,6 +396,18 @@ function clearOptions(id) {
     }
 }
 
+function setSort4Piece(sets, arr) {
+    arr.sort((a, b) => {
+        if (sets.includes(a.set)) {
+            return -1;
+        }
+        if (sets.includes(b.set)) {
+            return 1;
+        }
+        return 0;
+    })
+}
+
 function recalculateFilters(e) {
     // Selects fire twice, we should only calculate once
     if (e && e.target.className.includes("offscreen")) {
@@ -402,6 +422,8 @@ function recalculateFilters(e) {
     const params = getOptimizationRequestParams();
 
     applyItemFilters(params, heroId).then(result => {
+        // console.error("applyItemFilters", params);
+
         var items = result.items;
         var allItems = result.allItems;
 
@@ -418,6 +440,24 @@ function recalculateFilters(e) {
         const allNecklaces = allItems.filter(x => x.gear == "Necklace");
         const allRings = allItems.filter(x => x.gear == "Ring");
         const allBoots = allItems.filter(x => x.gear == "Boots");
+
+        // const fourPieces = params.inputSetsOne.filter(x => fourPieceSets.includes(x));
+
+        // setSort4Piece(fourPieces, allWeapons);
+        // setSort4Piece(fourPieces, allHelmets);
+        // setSort4Piece(fourPieces, allArmors);
+
+
+        // console.log("W", allWeapons.filter(x => fourPieces.includes(x.set)).length)
+        // console.log("H", allHelmets.filter(x => fourPieces.includes(x.set)).length)
+        // console.log("A", allArmors.filter(x => fourPieces.includes(x.set)).length)
+        // console.log("N", allNecklaces.length)
+        // console.log("R", allRings.length)
+        // console.log("B", allBoots.length)
+
+        // console.error("allWeapons", allWeapons.map(x => x.set));
+
+
 
         permutations = weapons.length
                 * helmets.length
@@ -460,11 +500,57 @@ function filterSelectedGearByCheckbox(selectedGear) {
     return filteredIds;
 }
 
-async function equipSelectedGear() {
+async function addBuild() {
+    const row = OptimizerGrid.getSelectedRow()
     const selectedGear = filterSelectedGearByCheckbox(OptimizerGrid.getSelectedGearIds());
+    if (!row) return;
+    if (selectedGear.length == 0) return;
+
+    const rowId = row.id;
+
     const heroId = getSelectedHeroId();
 
+    console.log("ADD BUILD", row)
+
+    await Api.addBuild(heroId, row);
+    await Api.editResultRows(parseInt(rowId), "star");
+    OptimizerGrid.refresh()
+
+    // const response = await Api.getHeroById(heroId);
+    // OptimizerGrid.setPinnedHero(response.hero);
+
+    drawPreview()
+    Saves.autoSave();
+}
+
+async function removeBuild() {
+    const row = OptimizerGrid.getSelectedRow()
+    const selectedGear = filterSelectedGearByCheckbox(OptimizerGrid.getSelectedGearIds());
+    if (!row) return;
     if (selectedGear.length == 0) return;
+
+    const rowId = row.id;
+
+    const heroId = getSelectedHeroId();
+
+    console.log("REMOVE BUILD", row)
+
+    await Api.removeBuild(heroId, row);
+    await Api.editResultRows(parseInt(rowId), "");
+    OptimizerGrid.refresh()
+
+    // const response = await Api.getHeroById(heroId);
+    // OptimizerGrid.setPinnedHero(response.hero);
+
+    drawPreview()
+    Saves.autoSave();
+}
+
+async function equipSelectedGear() {
+    const selectedGear = filterSelectedGearByCheckbox(OptimizerGrid.getSelectedGearIds());
+    if (selectedGear.length == 0) return;
+
+    const heroId = getSelectedHeroId();
 
     await Api.equipItemsOnHero(heroId, selectedGear);
 
@@ -477,9 +563,9 @@ async function equipSelectedGear() {
 
 async function unequipSelectedGear() {
     const selectedGear = filterSelectedGearByCheckbox(OptimizerGrid.getSelectedGearIds());
-    const heroId = getSelectedHeroId();
-
     if (selectedGear.length == 0) return;
+
+    const heroId = getSelectedHeroId();
 
     await Api.unequipItems(selectedGear);
 
@@ -521,6 +607,10 @@ async function applyItemFilters(params, heroId) {
 
     if (params.inputExcludeSet.length > 0) {
         items = items.filter(x => !params.inputExcludeSet.includes(x.set));
+    }
+
+    if (params.inputOnlyPlus15Gear) {
+        items = items.filter(x => x.enhance == 15);
     }
 
     if (isFourAndTwoPieceSets(params.inputSets) || isTwoAndTwoAndTwoPieceSets(params.inputSets)) {
@@ -661,7 +751,7 @@ async function submitOptimizationFilterRequest() {
     OptimizerGrid.showLoadingOverlay();
     Api.submitOptimizationFilterRequest(params).then(response => {
         console.warn("Optimization filter response", response);
-        OptimizerGrid.refresh();
+        OptimizerGrid.reloadData();
     });
 }
 
@@ -725,7 +815,7 @@ async function submitOptimizationRequest() {
 
         $('#searchedPermutationsNum').text(searchedStr);
         $('#resultsFoundNum').text(resultsStr);
-        OptimizerGrid.refresh();
+        OptimizerGrid.reloadData();
         console.log("REFRESHED");
     });
 }
@@ -803,6 +893,7 @@ function getOptimizationRequestParams() {
     request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems');
     request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems');
     request.inputCanReforge   = readCheckbox('inputCanReforge');
+    request.inputOnlyPlus15Gear   = readCheckbox('inputOnlyPlus15Gear');
 
     request.inputAtkMinLimit = readNumber('inputMinAtkLimit');
     request.inputAtkMaxLimit = readNumber('inputMaxAtkLimit');

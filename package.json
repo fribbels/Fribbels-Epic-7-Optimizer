@@ -81,7 +81,7 @@
     },
     "win": {
       "target": [
-        "7z"
+        "zip"
       ]
     },
     "linux": {

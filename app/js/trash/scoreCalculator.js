@@ -93,7 +93,7 @@ function maxScore(statType, statValue, hero) {
     if (type == Stats.CD)
         maxRoll = 0.07;
 
-    total = statValue;  
+    total = statValue;
     score = statValue / maxRoll;
     return {
         total,
@@ -102,7 +102,7 @@ function maxScore(statType, statValue, hero) {
 }
 
 function isPercent(type) {
-    return type == Stats.ATK 
+    return type == Stats.ATK
     ||  type == Stats.HP
     ||  type == Stats.DEF;
 }
@@ -118,7 +118,7 @@ function addStat(hero, totals, scores, stat) {
     const x = maxScore(stat.type, stat.value, hero);
     const type = toFlatStat(stat.type);
 
-    totals[type] = totals[type] ? totals[type] + x.total : x.total;  
+    totals[type] = totals[type] ? totals[type] + x.total : x.total;
     scores[type] = scores[type] ? scores[type] + x.score : x.score;
     return;
 }
@@ -141,8 +141,8 @@ function addStat(hero, totals, scores, stat) {
         // 10/88 = 0.11
         // 50/576 = 0.086
 
-         
-        // 10/50 = 0.2 
+
+        // 10/50 = 0.2
 
 // ATK HP DEF EFF RES - 8%
 // CR - 5%

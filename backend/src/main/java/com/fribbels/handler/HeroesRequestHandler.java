@@ -10,7 +10,10 @@ import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
 import com.fribbels.request.BaseStatsRequest;
 import com.fribbels.request.BonusStatsRequest;
+import com.fribbels.request.BuildsRequest;
 import com.fribbels.request.EquipItemsOnHeroRequest;
+import com.fribbels.request.GetAllHeroesRequest;
+import com.fribbels.request.GetHeroByIdRequest;
 import com.fribbels.request.HeroesRequest;
 import com.fribbels.request.IdRequest;
 import com.fribbels.request.IdsRequest;
@@ -53,7 +56,8 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                     sendResponse(exchange, setHeroes(setHeroesRequest));
                     return;
                 case "/heroes/getAllHeroes":
-                    sendResponse(exchange, getAllHeroes());
+                    final GetAllHeroesRequest getAllHeroesRequest = parseRequest(exchange, GetAllHeroesRequest.class);
+                    sendResponse(exchange, getAllHeroes(getAllHeroesRequest));
                     return;
                 case "/heroes/removeHeroById":
                     final IdRequest removeHeroByIdRequest = parseRequest(exchange, IdRequest.class);
@@ -76,7 +80,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                     sendResponse(exchange, unequipItems(unequipItemsRequest));
                     return;
                 case "/heroes/getHeroById":
-                    final IdRequest getHeroByIdRequest = parseRequest(exchange, IdRequest.class);
+                    final GetHeroByIdRequest getHeroByIdRequest = parseRequest(exchange, GetHeroByIdRequest.class);
                     sendResponse(exchange, getHeroById(getHeroByIdRequest));
                     return;
                 case "/heroes/getBaseStats":
@@ -95,6 +99,18 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                     final BonusStatsRequest bonusStatsRequest = parseRequest(exchange, BonusStatsRequest.class);
                     sendResponse(exchange, setBonusStats(bonusStatsRequest));
                     return;
+                case "/heroes/addBuild":
+                    final BuildsRequest addBuildRequest = parseRequest(exchange, BuildsRequest.class);
+                    sendResponse(exchange, addBuild(addBuildRequest));
+                    return;
+                case "/heroes/editBuild":
+                    final BuildsRequest editBuildRequest = parseRequest(exchange, BuildsRequest.class);
+                    sendResponse(exchange, editBuild(editBuildRequest));
+                    return;
+                case "/heroes/removeBuild":
+                    final BuildsRequest removeBuildRequest = parseRequest(exchange, BuildsRequest.class);
+                    sendResponse(exchange, removeBuild(removeBuildRequest));
+                    return;
 
                 default:
                     System.out.println("No handler found for " + path);
@@ -105,6 +121,46 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
             e.printStackTrace();
             throw (e);
         }
+    }
+
+    public String addBuild(final BuildsRequest request) {
+        heroDb.addBuildToHero(request.getHeroId(), request.getBuild());
+
+        return "";
+    }
+
+    public String editBuild(final BuildsRequest request) {
+        final HeroStats build = request.getBuild();
+        final List<HeroStats> builds = heroDb.getBuildsForHero(request.getHeroId());
+        if (builds == null || build == null) return "";
+
+        final String buildHash = build.getBuildHash();
+        final HeroStats matchingBuild = builds.stream()
+                .filter(x -> StringUtils.equals(x.getBuildHash(), buildHash))
+                .findFirst()
+                .orElse(null);
+
+        if (matchingBuild == null) return "";
+
+        matchingBuild.setName(build.getName());
+
+        return "";
+    }
+
+    public String removeBuild(final BuildsRequest request) {
+        final HeroStats build = request.getBuild();
+        final Hero hero = heroDb.getHeroById(request.getHeroId());
+        final List<HeroStats> builds = heroDb.getBuildsForHero(request.getHeroId());
+        if (builds == null || build == null || hero == null) return "";
+
+        final String buildHash = build.getBuildHash();
+        final List<HeroStats> changedBuilds = builds.stream()
+                .filter(x -> !StringUtils.equals(x.getBuildHash(), buildHash))
+                .collect(Collectors.toList());
+
+        hero.setBuilds(changedBuilds);
+
+        return "";
     }
 
     public String setBaseStats(final BaseStatsRequest request) {
@@ -132,12 +188,12 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         return "";
     }
 
-    public String getAllHeroes() {
+    public String getAllHeroes(final GetAllHeroesRequest request) {
         final List<Hero> heroes = heroDb.getAllHeroes();
         System.out.println("Heroes" + heroes);
 
         for (final Hero hero : heroes) {
-            addStatsToHero(hero);
+            addStatsToHero(hero, request.isUseReforgeStats());
         }
 
         final GetAllHeroesResponse response = GetAllHeroesResponse.builder()
@@ -147,7 +203,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         return toJson(response);
     }
 
-    private void addStatsToHero(final Hero hero) {
+    private void addStatsToHero(final Hero hero, final boolean useReforgeStats) {
         final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
 
         // Update equipment
@@ -171,21 +227,56 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final int[] setsArr = StatCalculator.buildSetsArr(items);
         final List<float[]> statAccumulators = equipment.values()
                 .stream()
-                .map(item -> StatCalculator.buildStatAccumulatorArr(baseStats, item))
+                .map(item -> StatCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats))
                 .collect(Collectors.toList());
         final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
         final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero);
         hero.setStats(finalStats);
+
+        final List<HeroStats> builds = hero.getBuilds();
+        for (final HeroStats build : builds) {
+            addStatsToBuild(hero, baseStats, build, useReforgeStats);
+        }
     }
 
-    public String getHeroById(final IdRequest request) {
+    private void addStatsToBuild(final Hero hero, final HeroStats baseStats, final HeroStats build, final boolean useReforgeStats) {
+        final List<String> itemIds = build.getItems();
+        final List<Item> items = itemDb.getItemsById(itemIds);
+
+        final int[] setsArr = StatCalculator.buildSetsArr(items.toArray(new Item[0]));
+        final List<float[]> statAccumulators = items
+                .stream()
+                .map(item -> StatCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats))
+                .collect(Collectors.toList());
+        final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
+
+        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero);
+        build.setAtk(finalStats.getAtk());
+        build.setHp(finalStats.getHp());
+        build.setDef(finalStats.getDef());
+        build.setCr(finalStats.getCr());
+        build.setCd(finalStats.getCd());
+        build.setEff(finalStats.getEff());
+        build.setRes(finalStats.getRes());
+        build.setSpd(finalStats.getSpd());
+        build.setCp(finalStats.getCp());
+        build.setEhp(finalStats.getEhp());
+        build.setHpps(finalStats.getHpps());
+        build.setEhpps(finalStats.getEhpps());
+        build.setDmg(finalStats.getDmg());
+        build.setDmgps(finalStats.getDmgps());
+        build.setMcdmg(finalStats.getMcdmg());
+        build.setMcdmgps(finalStats.getMcdmgps());
+    }
+
+    public String getHeroById(final GetHeroByIdRequest request) {
         if (request.getId() == null) return "";
 
         final Hero hero = heroDb.getHeroById(request.getId());
         if (hero == null) return "";
 
-        addStatsToHero(hero);
+        addStatsToHero(hero, request.isUseReforgeStats());
         final GetHeroByIdResponse response = GetHeroByIdResponse.builder()
                 .hero(hero)
                 .build();

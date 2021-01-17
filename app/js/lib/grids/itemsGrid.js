@@ -24,19 +24,19 @@ module.exports = {
                 {headerName: 'Rank', field: 'rank'},
                 {headerName: 'Level', field: 'level', filter: 'agNumberColumnFilter'},
                 {headerName: 'Enhance', width: 60, field: 'enhance', filter: 'agNumberColumnFilter'},
-                {headerName: 'Main', field: 'main.type', width: 100, cellRenderer: (params) => renderStat(params.value)},
+                {headerName: 'Main', field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(params.value)},
                 {headerName: 'Value', field: 'main.value'},
-                {headerName: 'Atk%', field: 'augmentedStats.AttackPercent'},
-                {headerName: 'Atk', field: 'augmentedStats.Attack'},
-                {headerName: 'Spd', field: 'augmentedStats.Speed'},
-                {headerName: 'Cr', field: 'augmentedStats.CriticalHitChancePercent'},
-                {headerName: 'Cd', field: 'augmentedStats.CriticalHitDamagePercent'},
-                {headerName: 'Hp%', field: 'augmentedStats.HealthPercent'},
-                {headerName: 'Hp', field: 'augmentedStats.Health'},
-                {headerName: 'Def%', field: 'augmentedStats.DefensePercent'},
-                {headerName: 'Def', field: 'augmentedStats.Defense'},
-                {headerName: 'Eff', field: 'augmentedStats.EffectivenessPercent'},
-                {headerName: 'Res', field: 'augmentedStats.EffectResistancePercent'},
+                {headerName: 'Atk%', field: 'augmentedStats.AttackPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Atk', field: 'augmentedStats.Attack', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Spd', field: 'augmentedStats.Speed', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Cr', field: 'augmentedStats.CriticalHitChancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Cd', field: 'augmentedStats.CriticalHitDamagePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Hp%', field: 'augmentedStats.HealthPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Hp', field: 'augmentedStats.Health', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Def%', field: 'augmentedStats.DefensePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Def', field: 'augmentedStats.Defense', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Eff', field: 'augmentedStats.EffectivenessPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: 'Res', field: 'augmentedStats.EffectResistancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
                 {headerName: 'Score', field: 'wss', width: 50},
                 {headerName: 'dScore', field: 'dpsWss', width: 50},
                 {headerName: 'sScore', field: 'supportWss', width: 50},
@@ -68,6 +68,7 @@ module.exports = {
     },
 
     redraw: async (newItem) => {
+        if (!itemsGrid) return;
         console.log("Redraw items", newItem);
         var selectedNode;
         const selectedNodes = itemsGrid.gridOptions.api.getSelectedNodes()
@@ -97,13 +98,21 @@ module.exports = {
         });
     },
 
-    refreshFilters: (setFilter, gearFilter, levelFilter, enhanceFilter) => {
+    // refreshFilters: (setFilter, gearFilter, levelFilter, enhanceFilter, statFilter) => {
+    refreshFilters: (filters) => {
+        const setFilter = filters.setFilter;
+        const gearFilter = filters.gearFilter;
+        const levelFilter = filters.levelFilter;
+        const enhanceFilter = filters.enhanceFilter;
+        const statFilter = filters.statFilter;
+        const substatFilter = filters.substatFilter;
+
         const setFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('set');
         if (!setFilter) {
-            document.getElementById('checkboxImageClearSets').checked = true;
+            // document.getElementById('checkboxImageClearSets').checked = true;
             setFilterComponent.setModel(null);
         } else {
-            document.getElementById('checkboxImageClearSets').checked = false;
+            // document.getElementById('checkboxImageClearSets').checked = false;
 
             setFilterComponent.setModel({
                 type: 'startsWith',
@@ -113,10 +122,10 @@ module.exports = {
 
         const gearFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('gear');
         if (!gearFilter) {
-            document.getElementById('checkboxImageClearGears').checked = true;
+            // document.getElementById('checkboxImageClearGears').checked = true;
             gearFilterComponent.setModel(null);
         } else {
-            document.getElementById('checkboxImageClearGears').checked = false;
+            // document.getElementById('checkboxImageClearGears').checked = false;
 
             gearFilterComponent.setModel({
                 type: 'startsWith',
@@ -126,24 +135,30 @@ module.exports = {
 
         const levelFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('level');
         if (!levelFilter) {
-            document.getElementById('checkboxImageClearLevels').checked = true;
+            // document.getElementById('checkboxImageClearLevels').checked = true;
             levelFilterComponent.setModel(null);
         } else {
-            document.getElementById('checkboxImageClearLevels').checked = false;
+            // document.getElementById('checkboxImageClearLevels').checked = false;
 
-            if (levelFilter == "85above") {
+            if (levelFilter == "90") {
                 levelFilterComponent.setModel({
-                    type: 'greaterThan',
-                    filter: 85
+                    type: 'equals',
+                    filter: 90
                 });
             }
-            if (levelFilter == "85at") {
+            if (levelFilter == "88") {
+                levelFilterComponent.setModel({
+                    type: 'equals',
+                    filter: 88
+                });
+            }
+            if (levelFilter == "85") {
                 levelFilterComponent.setModel({
                     type: 'equals',
                     filter: 85
                 });
             }
-            if (levelFilter == "85below") {
+            if (levelFilter == "under85") {
                 levelFilterComponent.setModel({
                     type: 'lessThan',
                     filter: 85
@@ -153,10 +168,10 @@ module.exports = {
 
         const enhanceFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('enhance');
         if (!enhanceFilter) {
-            document.getElementById('checkboxImageClearEnhances').checked = true;
+            // document.getElementById('checkboxImageClearEnhances').checked = true;
             enhanceFilterComponent.setModel(null);
         } else {
-            document.getElementById('checkboxImageClearEnhances').checked = false;
+            // document.getElementById('checkboxImageClearEnhances').checked = false;
 
             if (enhanceFilter == "plus0") {
                 enhanceFilterComponent.setModel({
@@ -206,6 +221,7 @@ module.exports = {
                     filterTo: 16
                 });
             }
+
             // if (levelFilter == "85at") {
             //     levelFilterComponent.setModel({
             //         type: 'equals',
@@ -218,6 +234,54 @@ module.exports = {
             //         filter: 85
             //     });
             // }
+        }
+
+        const statFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('main.type');
+        console.log(statFilter);
+        console.log(statFilterComponent);
+        if (!statFilter) {
+            // document.getElementById('checkboxImageClearStats').checked = true;
+            statFilterComponent.setModel(null);
+        } else {
+            // document.getElementById('checkboxImageClearStats').checked = false;
+
+            statFilterComponent.setModel({
+                type: 'equals',
+                filter: statFilter
+            });
+        }
+
+        const statList = [
+            "Attack",
+            "AttackPercent",
+            "Defense",
+            "DefensePercent",
+            "Health",
+            "HealthPercent",
+            "Speed",
+            "CriticalHitChancePercent",
+            "CriticalHitDamagePercent",
+            "EffectivenessPercent",
+            "EffectResistancePercent"
+        ]
+        for (var stat of statList) {
+            itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + stat).setModel(null);
+        }
+        if (substatFilter) {
+            const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
+            console.log(substatFilter);
+            console.log(substatFilterComponent);
+            if (!substatFilter) {
+                // document.getElementById('checkboxImageClearStats').checked = true;
+                substatFilterComponent.setModel(null);
+            } else {
+                // document.getElementById('checkboxImageClearStats').checked = false;
+
+                substatFilterComponent.setModel({
+                    type: 'notEqual',
+                    filter: 0
+                });
+            }
         }
 
         itemsGrid.gridOptions.api.onFilterChanged();

@@ -1,13 +1,16 @@
 package com.fribbels.db;
 
-import com.fribbels.core.SpecialStats;
 import com.fribbels.model.Hero;
+import com.fribbels.model.HeroStats;
 import com.fribbels.request.OptimizationRequest;
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HeroDb {
@@ -18,8 +21,8 @@ public class HeroDb {
         heroes = new ArrayList<>();
     }
 
-    public void addHeroes(final List<Hero> newHero) {
-        heroes.addAll(newHero);
+    public void addHeroes(final List<Hero> newHeroes) {
+        heroes.addAll(newHeroes);
     }
 
     public List<Hero> getAllHeroes() {
@@ -55,6 +58,36 @@ public class HeroDb {
                 .withHero(null)
                 .withItems(null)
                 .withBoolArr(null));
+    }
+
+    public List<HeroStats> getBuildsForHero(final String heroId) {
+        if (heroId == null) return ImmutableList.of();
+        final Hero hero = getHeroById(heroId);
+        if (hero == null) return ImmutableList.of();
+
+        if (hero.getBuilds() == null) {
+            hero.setBuilds(new ArrayList<>());
+        }
+
+        return hero.getBuilds();
+    }
+
+    public void addBuildToHero(final String heroId, final HeroStats build) {
+        if (heroId == null || build == null || build.getBuildHash() == null) return;
+        final Hero hero = getHeroById(heroId);
+        if (hero == null) return;
+
+        if (hero.getBuilds() == null) {
+            hero.setBuilds(new ArrayList<>());
+        }
+
+        if (!hero.getBuilds()
+                 .stream()
+                 .map(HeroStats::getBuildHash)
+                 .collect(Collectors.toSet())
+                 .contains(build.getBuildHash())) {
+            hero.getBuilds().add(build);
+        }
     }
 }
 

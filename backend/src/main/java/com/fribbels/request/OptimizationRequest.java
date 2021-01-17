@@ -24,6 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OptimizationRequest extends Request {
 
+    private String heroId;
     private Hero hero;
     private List<Item> items;
 

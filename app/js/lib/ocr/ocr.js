@@ -300,7 +300,7 @@ module.exports = {
 
         for (var filename of filenames) {
             try {
-                $('#exportOutputText').val("Succeeded: " + gear.length + " / " + length + "\nFailed: " + failed.length + " / " + length)
+                $('#exportOutputText').val("Reading screenshots in progress...\nSucceeded: " + gear.length + " / " + length + "\nFailed: " + failed.length + " / " + length)
 
                 if (filename.includes("inverted") || filename.includes("debug")) {
                     await fs.unlink(filename, err => {if (err) console.log(err)})

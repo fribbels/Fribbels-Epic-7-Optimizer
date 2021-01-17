@@ -8,13 +8,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Wither;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
+@Wither
 @Builder
 @AllArgsConstructor
 @ToString
@@ -64,6 +67,8 @@ public class Hero {
     private int cp;
 
     private Map<Gear, Item> equipment;
+
+    private List<HeroStats> builds;
 
     private OptimizationRequest optimizationRequest;
 

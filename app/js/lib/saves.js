@@ -91,6 +91,8 @@ module.exports = {
             return console.error("Invalid data", data);
         }
 
+        data.items.forEach(x => Reforge.getReforgeStats(x))
+
         console.log("Saved items", data.items)
         console.log("Saved heroes", data.heroes)
 

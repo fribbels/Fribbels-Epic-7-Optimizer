@@ -28,6 +28,7 @@ public class Item {
     private String name;
 
     private AugmentedStats augmentedStats;
+    private AugmentedStats reforgedStats;
 
     private String id;
 
