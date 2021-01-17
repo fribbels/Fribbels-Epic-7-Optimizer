@@ -282,30 +282,17 @@ Please read these instructions carefully!
     * JDK: https://www.oracle.com/java/technologies/javase-downloads.html
     * After installing, restart your computer (required!)
 3. Install [Bluestacks](https://www.bluestacks.com/download.html)
-    * Install the game from the Play Store and launch E7
-    * Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
-    * Quit Bluestacks
-4. Set the emulator's screen resolution to **1600 x 900**
-    * The option from Preferences menu does not work
-    * Open `~/Library/Preferences/com.BlueStacks.AppPlayer.plist` with any text editor
-    * Edit `WindowHeight` and `WindowWidth`
-```xml
-<key>WindowHeight</key>
-<integer>900</integer>
-<key>WindowWidth</key>
-<integer>1600</integer>
-```
-5. Check your screenshots Width
-    * Launch Bluestacks and Launch the Game
-    * From Menu: Actions > Take Screenshot
-    * If your screenshot is larger than 1600 width, go to step 6, otherwise skip to step 7
-6. Customize Emulator Resolution (make sure to close and reopen Bluestack when editing resolution)
-    * Retina Display may make it so the Emulator's Resolution Setting lies
-    * Go back to step 4 and scale the width/height appropriately; eg. my screenshots were 3200 pixels wide so I scaled down by half in step 4: 800x450
-7. Once your screenshots are 1600 pixels wide, you'll notice they're not 900 pixels high because Bluestacks includes the window frame on top
-    * Use a cropper to crop all your screenshots to 1600x900 pixels removing the top portion
-    * [BatchCrop](https://www.batchcrop.com/) or any other bulk editor will do the trick
-8. You should be good to import your cropped screenshots after that
+    * Set the emulator's screen resolution to **1600x900** in the Preference menu
+4. Configure keyboard shortcut for Screenshot
+    * On your Mac: System Preference > Keyboard > Shortcuts Tab
+      * Left Sidebar: Select App Shortcuts
+      * Click the [+] button to add a shortcut
+      * Application: Bluestacks
+      * Menu Title: `Take screenshot` (any typo here will make it not work)
+      * Keyboard Shortcut: Anything you want it to be
+5. Back to Bluestacks: Install E7 from the Play Store and launch the game
+   * Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
+6. Make sure to enter Full Screen Mode (Cmd+Shift+F) before starting your gear capture
 
 **Importing gear screenshots:**
 
