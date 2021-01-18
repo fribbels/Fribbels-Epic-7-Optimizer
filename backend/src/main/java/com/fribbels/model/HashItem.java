@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Item {
+public class HashItem {
 
     private Gear gear;
     private Rank rank;
@@ -27,28 +27,7 @@ public class Item {
     private Stat main;
     private List<Stat> substats;
 
-    private String name;
-
-    private AugmentedStats augmentedStats;
-    private AugmentedStats reforgedStats;
-
-    private String id;
-
-    private String equippedById;
-    private String equippedByName;
-
-    private boolean locked;
-    private int wss;
-    private int dpsWss;
-    private int supportWss;
-    private int combatWss;
-
     public String toString() {
         return new Gson().toJson(this);
-    }
-
-    public int getHash() {
-        final HashItem hashItem = new HashItem(gear, rank, set, enhance, level, main, substats);
-        return hashItem.hashCode();
     }
 }

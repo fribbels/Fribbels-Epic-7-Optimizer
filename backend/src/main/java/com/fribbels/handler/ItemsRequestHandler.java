@@ -13,7 +13,9 @@ import com.sun.net.httpserver.HttpHandler;
 import lombok.AllArgsConstructor;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
@@ -34,6 +36,10 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 case "/items/addItems":
                     final ItemsRequest addItemsRequest = parseRequest(exchange, ItemsRequest.class);
                     sendResponse(exchange, addItems(addItemsRequest));
+                    return;
+                case "/items/mergeItems":
+                    final ItemsRequest mergeItemsRequest = parseRequest(exchange, ItemsRequest.class);
+                    sendResponse(exchange, mergeItems(mergeItemsRequest));
                     return;
                 case "/items/setItems":
                     final ItemsRequest setItemsRequest = parseRequest(exchange, ItemsRequest.class);
@@ -77,6 +83,25 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
 
         return "";
     }
+
+    public String mergeItems(final ItemsRequest request) {
+        final List<Item> items = request.getItems();
+        final List<Item> existingItems = itemDb.getAllItems();
+
+        final Map<Integer, Item> x = new HashMap<>();
+
+        for (final Item item : items) {
+            final int hash = item.getHash();
+
+        }
+
+
+        itemDb.addItems(request.getItems());
+
+        return "";
+    }
+
+
 
     public String setItems(final ItemsRequest request) {
         itemDb.setItems(request.getItems());

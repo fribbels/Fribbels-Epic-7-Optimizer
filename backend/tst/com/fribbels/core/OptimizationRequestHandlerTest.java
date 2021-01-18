@@ -1,7 +1,9 @@
 package com.fribbels.core;
 
 import com.fribbels.enums.Set;
+import com.fribbels.enums.StatType;
 import com.fribbels.handler.OptimizationRequestHandler;
+import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.HeroStats;
 import com.fribbels.request.OptimizationRequest;
 import com.google.gson.Gson;
@@ -204,5 +206,12 @@ public class OptimizationRequestHandlerTest {
         final int[] indexArray = handler.convertSetsArrayIntoIndexArray(setsArray);
 
         System.out.println(Arrays.toString(indexArray));
+    }
+
+    @Test
+    public void testHash() {
+        System.out.println(AugmentedStats.builder().attack(3).mainType(StatType.ATTACKPERCENT).build().hashCode());
+        System.out.println(AugmentedStats.builder().attack(3).mainType(StatType.ATTACKPERCENT).build().hashCode());
+        System.out.println(AugmentedStats.builder().attack(3).mainType(StatType.DEFENSEPERCENT).build().hashCode());
     }
 }

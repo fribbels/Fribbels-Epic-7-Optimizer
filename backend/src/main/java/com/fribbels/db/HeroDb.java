@@ -22,7 +22,17 @@ public class HeroDb {
     }
 
     public void addHeroes(final List<Hero> newHeroes) {
+        newHeroes.forEach(this::sanitizeHero);
         heroes.addAll(newHeroes);
+    }
+
+    private void sanitizeHero(final Hero hero) {
+        if (hero.getEquipment() == null) {
+            hero.setEquipment(new HashMap<>());
+        }
+        if (hero.getBuilds() == null) {
+            hero.setBuilds(new ArrayList<>());
+        }
     }
 
     public List<Hero> getAllHeroes() {
@@ -36,6 +46,7 @@ public class HeroDb {
             heroes = new ArrayList<>();
             return;
         }
+        newHeroes.forEach(this::sanitizeHero);
         heroes = newHeroes;
     }
 

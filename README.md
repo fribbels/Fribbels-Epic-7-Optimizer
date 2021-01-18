@@ -352,18 +352,19 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Main stat filter on gear page
  - +15 only filter on optimizer
  - Change 7Zip to Zip
+ - Save Gear configurations, compare between them
+ - Class/Element filter for Heroes tab
+ - Gear enhance filters
 
 **Working on:**
  - Dark mode
  - Tooltips broken
  - Autocheck new version
- - Save Gear configurations, compare between them
 
  **Medium priority:**
  - Option to equip gear from heroes page
  - Move save/load to File menu
  - Use main stat gear for priority filter
- - Class/Element filter for Heroes tab
  - Make Network Error less confusing
  - Reapply all filters on Filter button press
  - Gear score column in optimizer results
@@ -395,7 +396,6 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
  - Gear page, option to use more than one set/gear filter at time
  - Score per roll column in gear
- - Gear enhance filters
  - Reorder heroes list
  - Have two windows open at once
  - Select/interact with multiple heroes at once

@@ -123,6 +123,7 @@ module.exports = {
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
                 ItemAugmenter.augmentStats(items);
+                items.forEach(item => Reforge.getReforgeStats(item));
 
                 // Db.setItems(items);
                 await Api.setItems(items);
@@ -165,11 +166,55 @@ module.exports = {
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
                 ItemAugmenter.augmentStats(items);
+                items.forEach(item => Reforge.getReforgeStats(item));
 
                 // Db.setItems(items);
                 await Api.addItems(items);
 
                 $('#importAppendOutputText').text(`Appended ${items.length} items from ${path}`)
+            });
+        })
+
+
+        document.getElementById('importMergeFileSelect').addEventListener("click", async () => {
+            const options = {
+                title: "Load file",
+                defaultPath : defaultPath + 'gear.txt',
+                buttonLabel : "Load file",
+                filters :[
+                    {name: 'TEXT/JSON', extensions: ['txt', 'json']},
+                ]
+            }
+            const filenames = dialog.showOpenDialogSync(currentWindow, options);
+            console.log(filenames);
+
+            if (!filenames || filenames.length < 1) {
+                return console.error("Invalid filename")
+            };
+
+            const path = filenames[0];
+
+            fs.readFile(path, 'utf8', async function read(err, data) {
+                if (err) {
+                    throw err;
+                }
+
+                $('#importMergeOutputText').text('Parsing data..')
+
+                const parsedData = JSON.parse(data);
+                console.log("PARSEDDATA", parsedData);
+                const items = parsedData.items;
+                const heroes = parsedData.heroes;
+                // const deserializedData = ItemSerializer.deserialize(data);
+                // const items = deserializedData.items;
+                console.log("ITEMS", items);
+                ItemAugmenter.augmentStats(items);
+                items.forEach(item => Reforge.getReforgeStats(item));
+
+                // Db.setItems(items);
+                await Api.mergeItems(items);
+
+                $('#importMergeOutputText').text(`Merged ${items.length} items from ${path}`)
             });
         })
 

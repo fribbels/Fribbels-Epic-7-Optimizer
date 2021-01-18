@@ -1110,12 +1110,12 @@ window.jQuery = $;
               </div>
             </div>
             <div class="heroTabButton">
-              <div class="gearTabButton" id="waterElementFilter">
+              <div class="gearTabButton" id="iceElementFilter">
                 <img class="gearTabIcon" src="./assets/elementice.png"></img>
               </div>
             </div>
             <div class="heroTabButton">
-              <div class="gearTabButton" id="grassElementFilter">
+              <div class="gearTabButton" id="windElementFilter">
                 <img class="gearTabIcon" src="./assets/elementearth.png"></img>
               </div>
             </div>
@@ -1271,7 +1271,8 @@ window.jQuery = $;
       <p>
       After the gear set is created, hit select one of the following options, then select your "gear.txt".</br>
       Use overwrite to replace any existing gear with your new gear screenshots.</br>
-      Use append to add your new gear screenshots to existing gear.
+      Use append to add your new gear screenshots to existing gear.</br>
+      Use merge to combine new gear screenshots with existing gear, replacing old items but keeping builds intact. (TBD, Experimental)
       </p>
 
       <input type="submit" class="gearPreviewButton" value="Overwrite data" id="importFileSelect">
@@ -1281,6 +1282,11 @@ window.jQuery = $;
 
       <input type="submit" class="gearPreviewButton" value="Append data" id="importAppendFileSelect">
       <text id="importAppendOutputText">Waiting for file..</text>
+
+      <br><br>
+
+      <input type="submit" class="gearPreviewButton" value="Merge data" id="importMergeFileSelect">
+      <text id="importMergeOutputText">Waiting for file..</text>
 
       <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit"> -->
 

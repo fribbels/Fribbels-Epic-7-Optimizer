@@ -3,10 +3,13 @@ package com.fribbels.model;
 import com.fribbels.enums.StatType;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
+@Builder
 @ToString
 @AllArgsConstructor
 public class AugmentedStats {

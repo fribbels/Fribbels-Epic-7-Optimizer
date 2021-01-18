@@ -342,8 +342,8 @@ function setupClearListener(elementId, filter) {
 function setupEventListeners() {
     // Elements
     setupFilterListener("fireElementFilter", "elementFilter", "fire");
-    setupFilterListener("waterElementFilter", "elementFilter", "ice");
-    setupFilterListener("grassElementFilter", "elementFilter", "wind");
+    setupFilterListener("iceElementFilter", "elementFilter", "ice");
+    setupFilterListener("windElementFilter", "elementFilter", "wind");
     setupFilterListener("lightElementFilter", "elementFilter", "light");
     setupFilterListener("darkElementFilter", "elementFilter", "dark");
 
