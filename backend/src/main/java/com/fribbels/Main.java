@@ -36,7 +36,7 @@ public class Main {
         try {
             server = HttpServer.create(new InetSocketAddress("localhost", 8120), 0);
         } catch (BindException e) {
-            // Likely because the service already exists
+            // Likely because the service already exists on that port
             System.out.println(e);
             System.exit(0);
             return;

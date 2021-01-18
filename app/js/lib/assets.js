@@ -58,6 +58,20 @@ const assetsByGear = {
     "Boots": "./assets/gearboots.png",
 }
 
+const assetsByStat = {
+    "Attack": "./assets/statatkdark.png",
+    "AttackPercent": "./assets/statatkpercentdark.png",
+    "Defense": "./assets/statdefdark.png",
+    "DefensePercent": "./assets/statdefpercentdark.png",
+    "Health": "./assets/stathpdark.png",
+    "HealthPercent": "./assets/stathppercentdark.png",
+    "Speed": "./assets/statspddark.png",
+    "CriticalHitChancePercent": "./assets/statcrdark.png",
+    "CriticalHitDamagePercent": "./assets/statcddark.png",
+    "EffectivenessPercent": "./assets/stateffdark.png",
+    "EffectResistancePercent": "./assets/statresdark.png",
+}
+
 module.exports = {
 
     initialize: () => {
@@ -66,6 +80,10 @@ module.exports = {
 
     getAssetsBySet: () => {
         return assetsBySet;
+    },
+
+    getAssetsByStat: () => {
+        return assetsByStat;
     },
 
     getAssetsByGear: () => {
@@ -109,5 +127,8 @@ module.exports = {
     },
     getReforge: () => {
         return './assets/reforge.png';
+    },
+    getStar: () => {
+        return './assets/star.png';
     },
 }

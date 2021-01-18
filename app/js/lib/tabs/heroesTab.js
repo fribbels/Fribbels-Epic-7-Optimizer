@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
     initialize: () => {
+        setupEventListeners();
         const selector = document.getElementById('addHeroesSelector')
         const allHeroData = HeroData.getAllHeroData();
         console.log("ALLHERODATA", allHeroData)
@@ -38,6 +39,61 @@ module.exports = {
             console.log("addHeroesSubmit");
             const id = selector.value;
             addHero(id);
+        });
+
+        document.getElementById('heroesTabUseReforgedStats').addEventListener("change", async () => {
+            console.log("CHANGE");
+            redrawGrid();
+            clearPreview();
+            HeroesGrid.refreshBuilds();
+
+        });
+
+        document.getElementById('editBuildSubmit').addEventListener("click", async () => {
+            console.log("editBuildSubmit");
+            const row = HeroesGrid.getSelectedRow();
+
+            const editedBuild = await Dialog.editBuildDialog();
+
+            const existingBuild = HeroesGrid.getSelectedBuildRow();
+            console.warn("EDITBUILD", editedBuild, existingBuild);
+            if (!existingBuild) return;
+            const buildName = editedBuild.buildName;
+
+            existingBuild.name = buildName;
+
+            Api.editBuild(row.id, existingBuild).then(x => {
+                HeroesGrid.refreshBuilds();
+                Saves.autoSave();
+            })
+        });
+
+        document.getElementById('removeBuildSubmit').addEventListener("click", async () => {
+            console.log("removeBuildSubmit");
+            const row = HeroesGrid.getSelectedRow();
+            const existingBuild = HeroesGrid.getSelectedBuildRow();
+
+            console.warn("REMOVEBUILD", row, existingBuild);
+
+            Api.removeBuild(row.id, existingBuild).then(x => {
+                HeroesGrid.refreshBuilds();
+                Saves.autoSave();
+            })
+        });
+
+        document.getElementById('equipBuildSubmit').addEventListener("click", async () => {
+            console.log("equipBuildSubmit");
+            const row = HeroesGrid.getSelectedRow();
+            const existingBuild = HeroesGrid.getSelectedBuildRow()
+
+            console.warn("EQUIP BUILD", row, existingBuild);
+            if (!existingBuild || !row) return;
+
+            Api.equipItemsOnHero(row.id, existingBuild.items).then(x => {
+                HeroesGrid.refreshBuilds();
+                module.exports.redraw();
+                Saves.autoSave();
+            })
         });
 
         document.getElementById('addHeroStatsSubmit').addEventListener("click", async () => {
@@ -132,7 +188,9 @@ module.exports = {
             module.exports.redraw();
         });
 
-        Api.getAllHeroes().then(response => {
+
+        const useReforgedStats = $('#heroesTabUseReforgedStats').prop('checked');
+        Api.getAllHeroes(useReforgedStats).then(response => {
             console.log("Heroes response", response);
 
             if (response.heroes.length == 0) {
@@ -201,11 +259,13 @@ function getSelectedGearIds() {
     return getSelectedGear().map(x => x.id);
 }
 
-function addHero(heroName) {
+function addHero(heroName, isBuild) {
     const newHero = module.exports.getNewHeroByName(heroName);
     newHero.rarity = newHero.data.rarity;
     newHero.attribute = newHero.data.attribute;
     newHero.role = newHero.data.role;
+    newHero.path = heroName;
+
     Api.addHeroes([newHero]).then(x => {
         module.exports.redrawHeroInputSelector();
         redrawGrid(newHero.id);
@@ -214,7 +274,8 @@ function addHero(heroName) {
 }
 
 function redrawGrid(id) {
-    Api.getAllHeroes().then(response => {
+    const useReforgedStats = $('#heroesTabUseReforgedStats').prop('checked');
+    Api.getAllHeroes(useReforgedStats).then(response => {
         HeroesGrid.refresh(response.heroes, id);
     });
 }
@@ -224,4 +285,73 @@ function clearPreview() {
         const displayId = Constants.gearDisplayIdByIndex[i];
         document.getElementById(displayId).innerHTML = "";
     }
+}
+
+
+const filters = {
+    classFilter: null,
+    elementFilter: null,
+}
+
+const elementsByFilter = {
+    elementFilter: [
+        "fireElementFilter",
+        "iceElementFilter",
+        "windElementFilter",
+        "lightElementFilter",
+        "darkElementFilter",
+    ],
+    classFilter: [
+        "knightClassFilter",
+        "warriorClassFilter",
+        "assassinClassFilter",
+        "mageClassFilter",
+        "manauserClassFilter",
+        "rangerClassFilter",
+    ],
+}
+function setupFilterListener(elementId, filter, filterContent) {
+    document.getElementById(elementId).addEventListener('click', () => {
+        console.log("test")
+        const element = $('#' + elementId);
+        element.toggleClass("gearTabButtonSelected");
+        elementsByFilter[filter].forEach(x => {
+            if (x != elementId) {
+                $('#' + x).removeClass("gearTabButtonSelected")
+            }
+        })
+        if (element.hasClass("gearTabButtonSelected")) {
+            filters[filter] = filterContent
+        } else {
+            filters[filter] = null;
+        }
+        HeroesGrid.refreshFilters(filters);
+    })
+}
+
+function setupClearListener(elementId, filter) {
+    document.getElementById(elementId).addEventListener('click', () => {
+        elementsByFilter[filter].forEach(x => {
+            $('#' + x).removeClass("gearTabButtonSelected")
+        })
+        filters[filter] = null;
+        HeroesGrid.refreshFilters(filters);
+    })
+}
+
+function setupEventListeners() {
+    // Elements
+    setupFilterListener("fireElementFilter", "elementFilter", "fire");
+    setupFilterListener("waterElementFilter", "elementFilter", "ice");
+    setupFilterListener("grassElementFilter", "elementFilter", "wind");
+    setupFilterListener("lightElementFilter", "elementFilter", "light");
+    setupFilterListener("darkElementFilter", "elementFilter", "dark");
+
+    // Classes
+    setupFilterListener("knightClassFilter", "classFilter", "knight");
+    setupFilterListener("warriorClassFilter", "classFilter", "warrior");
+    setupFilterListener("assassinClassFilter", "classFilter", "assassin");
+    setupFilterListener("mageClassFilter", "classFilter", "mage");
+    setupFilterListener("manauserClassFilter", "classFilter", "manauser");
+    setupFilterListener("rangerClassFilter", "classFilter", "ranger");
 }

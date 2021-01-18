@@ -349,27 +349,42 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Save filter preferences
  - Filter out abyss 85 lifesteal for reforge
  - Enhancement +3/6/9/12/15 filter
+ - Main stat filter on gear page
+ - +15 only filter on optimizer
+ - Change 7Zip to Zip
 
-**TODO - High priority:**
+**Working on:**
  - Dark mode
+ - Tooltips broken
+ - Autocheck new version
+ - Save Gear configurations, compare between them
 
  **Medium priority:**
  - Option to equip gear from heroes page
- - Save Gear configurations, compare between them
  - Move save/load to File menu
- - Update permutations on 4 piece set
  - Use main stat gear for priority filter
  - Class/Element filter for Heroes tab
  - Make Network Error less confusing
- - Reapply all filters
+ - Reapply all filters on Filter button press
  - Gear score column in optimizer results
  - Sum of substat priority column
  - Cancel ongoing request when start is clicked again
- - Main stat filter on gear page
- - +15 only filter on optimizer
  - Manual gear input improvements
+ - Comparison method violates its general contract
+ - Reforge non +15
+ - Show errors on invalid imports/missing main stat
+ - Heatmap scores
+ - When switching gears, popup asking to unlock the gears being unequipped
+ - Heroes page: average gear score for each unit
+ - Gear page: option to filter gear by custom gs
+ - Date newly added gear
+ - Copying rows to text
+ - Popup gear card
+ - Customizeable # of 85 gear to filter, 0 - 6 lv 85s in results
 
  **Low priority:**
+ - Check if any gear is an upgrade to a unit
+ - Update permutations on 4 piece set
  - Add can reforge, can enhance columns
  - Customize result limit
  - Clear out item previews on refresh
@@ -407,7 +422,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
   - Move the app and screenshots folder to a new file location
 - Gear shows up as +45 or i90 pieces show as i20, etc
   - Make sure your screenshots are 1600x900, and on the correct page.
-  - Make sure Epic 7 has High Quality Support enabled
+  - Make sure Epic 7 has High Quality Support enabled, and the game language is English
 - If you get a error that contains "Current relative path is C:\Windows\system32..."
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
 - If your optimization suddenly stops working completely, check if you have one of these weird looking items in your gear tab: https://i.imgur.com/BzAgRjR.png. If one is there, edit it to fill in all the fields, but just leave the stats at 0. https://i.imgur.com/wDKDaE5.png

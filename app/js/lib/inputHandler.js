@@ -1,4 +1,16 @@
 // Libs
+
+(function(){
+    var original = console.error;
+    console.error = function() {
+        // console.warn(document.getElementsByTagName('script'))
+        // if(!.includes('licenseManager.js')) {
+        if (arguments.length > 0) {
+            original.apply(console, arguments)
+        }
+    }
+})();
+
 global.Assets = require('./assets');
 global.Path = window.require('path');
 global.Files = require('./files');
@@ -9,6 +21,8 @@ global.DataFetcher = require('./datafetcher');
 global.SpecialtyChange = require('./specialtychange');
 global.Reforge = require('./reforge');
 global.Utils = require('./utils');
+global.DarkMode = require('./darkmode');
+global.GridRenderer = require('./renderer/gridRenderer');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -63,6 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOMContentLoaded")
 
     Subprocess.initialize();
+    DarkMode.initialize();
     await copyLang();
     HtmlGenerator.initialize();
     GearCalculator.initialize();
@@ -73,7 +88,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     ItemsTab.initialize();
     ItemsGrid.initialize();
 
-    Importer.addDebugFile();
     Importer.addEventListener();
     ZarrocConverter.initialize();
 

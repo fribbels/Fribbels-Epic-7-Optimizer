@@ -15,9 +15,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ag-grid-community/client-side-row-model": "23.1.1",
-    "@ag-grid-community/core": "23.1.1",
-    "@ag-grid-community/infinite-row-model": "23.1.1",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "axios": "^0.21.0",
     "jquery": "^3.5.1",

@@ -1,3 +1,59 @@
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Fira Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v4/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfvtrftV.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Fira Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v4/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfLtrftV.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Fira Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v4/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfrtrftV.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Fira Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v4/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfXtrftV.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Fira Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v4/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfntrftV.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Fira Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v4/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfjtrftV.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fira Sans Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v4/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfbtrQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 /*
  CSS for the main interaction
 */
@@ -29,6 +85,7 @@
 body {
   font: 14px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
   color: #333;
+  user-select: none;
   font-weight: 300;
 }
 
@@ -491,6 +548,10 @@ input[type=number]::-webkit-outer-spin-button {
   height: 29px;
   vertical-align: middle;
 }
+.optimizerStarIcon {
+  height: 18px;
+  vertical-align: middle;
+}
 
 .heroIcon {
   height: 50px;
@@ -651,7 +712,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .heroesTabButtonRow {
   padding-top: 10px;
-  padding-bottom: 15px;
+  padding-bottom: 12px;
+    display: flex;
+    align-items: center;
 }
 .tooltipImage {
   height: 14px;
@@ -681,4 +744,257 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100px;
   cursor: pointer;
   margin-right: 5px;
+}
+#buildsSelector {
+  width: 167px;
+}
+.ag-watermark {
+  display:none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.darkModeToggle {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+body.dark-theme {
+  color: #eee;
+  background: #121212;
+}
+body.dark-theme a {
+  color: #809fff;
+}
+body.dark-theme input {
+  background: #616161;
+  border-color: #7d7d7d;
+}
+.ms-choice.dark-theme {
+  background: #616161;
+  border-color: #7d7d7d;
+}
+.ms-parent.dark-theme {
+  background: #616161;
+  border-color: #7d7d7d;
+}
+.vertical.dark-theme {
+  border-left: 1px solid #696969;
+}
+.gearPreviewButton.dark-theme  {
+  background: #616161;
+  border-color: #7d7d7d;
+}
+.rangeslider__fill__bg.dark-theme  {
+  background: #616161;
+  border-color: #7d7d7d;
+}
+.rangeslider__handle.dark-theme {
+  border: solid 2px #000000;
+}
+.gearTabWeaponButton {
+  width: 36px;
+  height: 36px;
+}
+.gearTabFilters {
+  height: 370px;
+}
+.gearTabIcon {
+  height: 100%;
+}
+.gearTabLongButton {
+  width: 155px;
+  min-width: 155px;
+  height: 40px;
+}
+.gearTabMediumButton {
+  width: 100px;
+  min-width: 100px;
+  height: 40px;
+}
+.gearTabSquareButton {
+  width: 44px;
+  min-width: 44px;
+  height: 42px;
+}
+.gearTabButton {
+  /* Table/Selection B */
+  height: 100%;
+  background: #F8F8F8;
+  border-radius: 5px;
+  margin-right: 3px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+.gearTabButtonSelected {
+  background: #EDF5FA;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.25);
+}
+.gearTabGearFilterIconsRow {
+  display: flex;
+  flex-direction: row;
+}
+.gearTabGearFilter {
+  min-width: 300px;
+  width: 300px;
+}
+.gearTabSetFilter {
+  width: 750px;
+}
+.gearTabSetFilterIconsRow {
+  display: flex;
+  flex-direction: row;
+}
+.gearTabGearSetFiltersRow {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.gearTabOtherFiltersRow {
+  width: 900px;
+  display: flex;
+  flex-direction: row;
+}
+.gearTabMainStatFilter {
+  width: 300px;
+  margin-right: 60px;
+}
+.gearTabSubstatFilter {
+  width: 300px;
+  margin-right: 60px;
+}
+.gearTabFilterLongRow {
+  margin-bottom: 3px;
+  display: flex;
+  flex-direction: row;
+}
+.gearTabButtonLabel {
+  margin-top: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  font-family: Fira Sans Condensed;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.6px;
+  color: #6B6B6B;
+}
+.gearTabShortButton {
+  width: 50px;
+  min-width: 50px;
+  height: 40px;
+}
+.shortLabel {
+  margin-left: auto;
+}
+.gearTabLevelFilter {
+  width: 100px;
+  min-width: 100px;
+  margin-right: 15px;
+}
+.gearTabEnhanceFilter {
+  width: 200px;
+  min-width: 200px;
+}
+.gearTabHorizontalSpace {
+  width: 40px;
+  height: 1px;
+}
+.gearTabFilterLabel {
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+.reforgeSwitch {
+  min-width: 180px;
+  display: inline-block;
+  float: right;
+  margin-left: auto;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.switch-input {
+  display: none;
+}
+.switch-label {
+  display: block;
+  width: 48px;
+  height: 24px;
+  text-indent: -150%;
+  clip: rect(0 0 0 0);
+  color: transparent;
+  user-select: none;
+}
+.switch-label::before,
+.switch-label::after {
+  content: "";
+  display: block;
+  position: absolute;
+  cursor: pointer;
+}
+.switch-label::before {
+  width: 100%;
+  height: 100%;
+  background-color: #dedede;
+  border-radius: 9999em;
+  -webkit-transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease;
+}
+.switch-label::after {
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
+  -webkit-transition: left 0.25s ease;
+  transition: left 0.25s ease;
+}
+.switch-input:checked + .switch-label::before {
+  background-color: #78c5f5;
+}
+.switch-input:checked + .switch-label::after {
+  left: 24px;
+}
+
+
+
+.heroesTabTopButtonRowLeft {
+  height: 20px;
+  display:inline-block;
+  margin-right: auto;
+}
+
+.heroesTabTopButtonRowRight {
+  height: 30px;
+  display:inline-block;
+  margin-right: 25px;
+}
+.heroTabButton {
+  /*width: 32px;*/
+  /*min-width: 32px;*/
+  height: 32px;
 }

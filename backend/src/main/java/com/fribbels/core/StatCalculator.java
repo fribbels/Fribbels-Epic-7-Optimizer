@@ -15,7 +15,7 @@ public class StatCalculator {
         int hp = (int) (((base.getHp()   + mapAccumulatorArrsToFloat(1, accs)  + (sets[0] > 1 ? sets[0] / 2 * 0.15f * base.getHp() : 0) + base.getHp() * hero.getBonusHpPercent() / 100f) + hero.getBonusHp()) * (1 + base.getBonusMaxHpPercent()/100f));
         int def = (int) (((base.getDef() + mapAccumulatorArrsToFloat(2, accs)  + (sets[1] > 1 ? sets[1] / 2 * 0.15f * base.getDef() : 0) + base.getDef() * hero.getBonusDefPercent() / 100f) + hero.getBonusDef()) * (1 + base.getBonusMaxDefPercent()/100f));
         int spd = (int) (base.getSpd() + mapAccumulatorArrsToFloat(10, accs) + (sets[3] > 1 ? sets[3] / 4 * 0.25f * base.getSpd() : 0) + (sets[14] > 1 ? sets[14] / 4 * 0.1f * base.getSpd() : 0)) + hero.getBonusSpeed();
-        int cr = (int) (base.getCr()   + mapAccumulatorArrsToFloat(6, accs)  + (sets[4] > 1 ? sets[4] / 2 * 12 : 0)) + (int) hero.getBonusCr();
+        float cr = (base.getCr()   + mapAccumulatorArrsToFloat(6, accs)  + (sets[4] > 1 ? sets[4] / 2 * 12 : 0)) + hero.getBonusCr();
         int cd = (int) (base.getCd()   + mapAccumulatorArrsToFloat(7, accs)  + (sets[6] > 1 ? sets[6] / 4 * 40 : 0)) + (int) hero.getBonusCd();
         int eff = (int) (base.getEff() + mapAccumulatorArrsToFloat(8, accs)  + (sets[5] > 1 ? sets[5] / 2 * 20 : 0)) + (int) hero.getBonusEff();
         int res = (int) (base.getRes() + mapAccumulatorArrsToFloat(9, accs)  + (sets[9] > 1 ? sets[9] / 2 * 20 : 0)) + (int) hero.getBonusRes();
@@ -33,7 +33,7 @@ public class StatCalculator {
         int mcdmg = (int) ((float)atk * critDamage);
         int mcdmgps = (int) ((float)mcdmg*spd/1000);
 
-        return new HeroStats(atk, hp, def, cr, cd, eff, res, dac, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps,
+        return new HeroStats(atk, hp, def, (int) cr, cd, eff, res, dac, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps,
                 base.getBonusMaxAtkPercent(), base.getBonusMaxDefPercent(), base.getBonusMaxHpPercent(), sets, null, null, null, null);
     }
 
@@ -46,18 +46,27 @@ public class StatCalculator {
                 + accs[5][index];
     }
 
-    public static float[] getStatAccumulatorArr(final HeroStats base, final Item item, final Map<String, float[]> accumulatorsByItemId) {
+    public static float[] getStatAccumulatorArr(final HeroStats base,
+                                                final Item item,
+                                                final Map<String, float[]> accumulatorsByItemId,
+                                                final boolean useReforgeStats) {
         if (accumulatorsByItemId.containsKey(item.getId())) {
             return accumulatorsByItemId.get(item.getId());
         }
 
-        final float[] accumulator = buildStatAccumulatorArr(base, item);
+        final float[] accumulator = buildStatAccumulatorArr(base, item, useReforgeStats);
         accumulatorsByItemId.put(item.getId(), accumulator);
         return accumulator;
     }
 
-    public static float[] buildStatAccumulatorArr(final HeroStats base, final Item item) {
-        final AugmentedStats stats = item.getAugmentedStats();
+    public static float[] buildStatAccumulatorArr(final HeroStats base, final Item item, final boolean useReforgeStats) {
+        final AugmentedStats stats;
+        if (useReforgeStats) {
+            stats = item.getReforgedStats();
+        } else {
+            stats = item.getAugmentedStats();
+        }
+
         final float[] statAccumulatorArr = new float[15];
 
         // Add base
@@ -72,7 +81,7 @@ public class StatCalculator {
         statAccumulatorArr[9]  += stats.getEffectResistance();
 
         final StatType mainType = stats.getMainType();
-        final int mainTypeIndex = stats.getMainType().getIndex();
+        final int mainTypeIndex = mainType.getIndex();
 
         // Add percents
         if (mainTypeIndex == 3) {

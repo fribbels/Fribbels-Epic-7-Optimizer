@@ -93,10 +93,11 @@ function getHeroImage(item) {
 
 module.exports = {
     initialize: () => {
-        module.exports.buildFilterSetsBar();
-        module.exports.buildFilterGearBar();
-        module.exports.buildFilterEnhanceBar();
-        module.exports.buildFilterLevelBar();
+        // module.exports.buildFilterSetsBar();
+        // module.exports.buildFilterStatBar();
+        // module.exports.buildFilterGearBar();
+        // module.exports.buildFilterEnhanceBar();
+        // module.exports.buildFilterLevelBar();
     },
 
     buildFilterSetsBar: () => {
@@ -152,6 +153,21 @@ module.exports = {
             const html = buildFilter(gear, url, false);
 
             document.getElementById('gearFilterBar').innerHTML += html;
+        }
+    },
+
+
+    buildFilterStatBar: () => {
+        const clearUrl = Assets.getX(); // black x
+        const html = buildFilter("ClearStats", clearUrl, true);
+        document.getElementById('statFilterBar').innerHTML += html;
+
+        const assetsByStat = Assets.getAssetsByStat();
+        for (var stat of Object.keys(assetsByStat)) {
+            const url = assetsByStat[stat];
+            const html = buildFilter(stat, url, false);
+
+            document.getElementById('statFilterBar').innerHTML += html;
         }
     },
 

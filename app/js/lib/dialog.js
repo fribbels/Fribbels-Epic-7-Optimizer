@@ -121,6 +121,45 @@ module.exports = {
         });
     },
 
+    editBuildDialog: async () => {
+        return new Promise(async (resolve, reject) => {
+            const { value: formValues } = await Swal.fire({
+                title: '',
+                html: `
+                    <div class="editGearForm">
+                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
+
+                        <p>Build name</p>
+                        <input type="text" class="bonusStatInput" id="editBuildName" value="">
+                    </div>
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                preConfirm: async () => {
+                    const buildInfo = {
+                        buildName: document.getElementById('editBuildName').value,
+                    }
+
+                    resolve(buildInfo);
+                }
+            });
+        });
+    },
+
+    changeEditGearMainStat: () => {
+        const gear = $('#editGearType').val();
+
+        if (gear == "Weapon") {
+            $('#editGearMainStatType').val("Attack")
+        }
+        if (gear == "Helmet") {
+            $('#editGearMainStatType').val("Health")
+        }
+        if (gear == "Armor") {
+            $('#editGearMainStatType').val("Defense")
+        }
+    },
+
     editGearDialog: async (item, edit, useReforgedStats) => {
         console.log("Dialog editing item", item);
         console.log("Dialog use reforged", useReforgedStats);
@@ -161,7 +200,7 @@ module.exports = {
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Type</div>
-                            <select id="editGearType" class="editGearStatSelect">
+                            <select id="editGearType" class="editGearStatSelect" onchange="Dialog.changeEditGearMainStat()">
                                 ${getGearTypeOptionsHtml(item)}
                             </select>
                         </div>
@@ -289,7 +328,8 @@ module.exports = {
                     }
 
                     ItemAugmenter.augmentStats([editedItem]);
-                    if (item.id) {
+                    Reforge.getReforgeStats(editedItem);
+                    if (item.id && edit) {
                         editedItem.id = item.id;
                     }
 
@@ -304,7 +344,6 @@ module.exports = {
                             await Api.equipItemsOnHero(equippedById, [editedItem.id])
                         }
                     } else {
-
                         if (equippedById == "None") {
                             await Api.addItems([editedItem]);
                         } else {

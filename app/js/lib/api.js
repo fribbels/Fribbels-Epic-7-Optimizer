@@ -120,8 +120,10 @@ module.exports = {
         });
     },
 
-    getAllHeroes: async () => {
-        return post('/heroes/getAllHeroes');
+    getAllHeroes: async (useReforgeStats) => {
+        return post('/heroes/getAllHeroes', {
+            useReforgeStats: useReforgeStats
+        });
     },
 
     removeHeroById: async (id) => {
@@ -154,9 +156,10 @@ module.exports = {
         });
     },
 
-    getHeroById: async (id) => {
+    getHeroById: async (id, useReforgeStats) => {
         return post('/heroes/getHeroById', {
-            id: id
+            id: id,
+            useReforgeStats: useReforgeStats
         });
     },
 
@@ -164,6 +167,31 @@ module.exports = {
         return post('/heroes/equipItemsOnHero', {
             heroId: heroId,
             itemIds: itemIds
+        });
+    },
+
+    addBuild: async (heroId, build) => {
+        return post('/heroes/addBuild', {
+            heroId: heroId,
+            build: build
+        });
+    },
+    editBuild: async (heroId, build) => {
+        return post('/heroes/editBuild', {
+            heroId: heroId,
+            build: build
+        });
+    },
+    removeBuild: async (heroId, build) => {
+        return post('/heroes/removeBuild', {
+            heroId: heroId,
+            build: build
+        });
+    },
+    editResultRows: async (index, property) => {
+        return post('/optimization/editResultRows', {
+            index: index,
+            property: property
         });
     },
 
