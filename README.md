@@ -259,19 +259,40 @@ Please read these instructions carefully!
 
 **Installation:**
 
+#### Windows
+
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
     * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
-    * Do not download the Source Code options, those won't work <br>
+    * Do not download the Source Code options, those won't work
 2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the offline installer
-   * After installing, restart your computer (required!)<br>
-   * Mac apparently requires both the JRE and JDK. Get the JDK here: https://www.oracle.com/java/technologies/javase-downloads.html
+    * After installing, restart your computer (required!)
 3. Install an emulator to run Epic 7 on
-    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)<br>
-4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)<br>
-5. Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)<br>
+    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)
+4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)
+5. Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
+6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)
 
-6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)<br>
+#### Mac OS/Bluestack
 
+1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
+    * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
+    * Do not download the Source Code options, those won't work
+2. Install **Java 8 - 64 bit** 
+    * JRE: https://java.com/en/download/manual.jsp - Get the offline installer
+    * JDK: https://www.oracle.com/java/technologies/javase-downloads.html
+    * After installing, restart your computer (required!)
+3. Install [Bluestacks](https://www.bluestacks.com/download.html)
+    * Set the emulator's screen resolution to **1600x900** in the Preference menu
+4. Configure keyboard shortcut for Screenshot
+    * On your Mac: System Preference > Keyboard > Shortcuts Tab
+      * Left Sidebar: Select App Shortcuts
+      * Click the [+] button to add a shortcut
+      * Application: Bluestacks
+      * Menu Title: `Take screenshot` (any typo here will make it not work)
+      * Keyboard Shortcut: Anything you want it to be
+5. Back to Bluestacks: Install E7 from the Play Store and launch the game
+   * Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
+6. Make sure to enter Full Screen Mode (Cmd+Shift+F) before starting your gear capture
 
 **Importing gear screenshots:**
 
