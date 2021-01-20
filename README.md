@@ -277,7 +277,7 @@ Please read these instructions carefully!
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
     * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
     * Do not download the Source Code options, those won't work
-2. Install **Java 8 - 64 bit** 
+2. Install **Java 8 - 64 bit**
     * JRE: https://java.com/en/download/manual.jsp - Get the offline installer
     * JDK: https://www.oracle.com/java/technologies/javase-downloads.html
     * After installing, restart your computer (required!)
@@ -355,33 +355,41 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Save Gear configurations, compare between them
  - Class/Element filter for Heroes tab
  - Gear enhance filters
+ - Autocheck new version
+ - Manual gear input improvements
+ - Gear page: count of selected
+ - Heatmap scores
+ - Tooltips broken
+ - Block when incorrect substat prio
+ - Manual equip is bricked
+ - Reorder heroes list
+ - Equipping build after sorting bricks
+ - Duplicate filter
 
 **Working on:**
  - Dark mode
- - Tooltips broken
- - Autocheck new version
+ - Show errors on invalid imports/missing main stat
+ - Cancel ongoing request when start is clicked again
 
  **Medium priority:**
  - Option to equip gear from heroes page
  - Move save/load to File menu
  - Use main stat gear for priority filter
- - Make Network Error less confusing
  - Reapply all filters on Filter button press
  - Gear score column in optimizer results
  - Sum of substat priority column
- - Cancel ongoing request when start is clicked again
- - Manual gear input improvements
- - Comparison method violates its general contract
  - Reforge non +15
- - Show errors on invalid imports/missing main stat
- - Heatmap scores
  - When switching gears, popup asking to unlock the gears being unequipped
  - Heroes page: average gear score for each unit
- - Gear page: option to filter gear by custom gs
  - Date newly added gear
  - Copying rows to text
  - Popup gear card
+ - Show conversion/reforge mats
  - Customizeable # of 85 gear to filter, 0 - 6 lv 85s in results
+
+**Bugs**
+ - Make Network Error less confusing
+ - Comparison method violates its general contract
 
  **Low priority:**
  - Check if any gear is an upgrade to a unit
@@ -396,7 +404,6 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
  - Gear page, option to use more than one set/gear filter at time
  - Score per roll column in gear
- - Reorder heroes list
  - Have two windows open at once
  - Select/interact with multiple heroes at once
  - Keyboard actions ctrl + a, ctrl + s, ctrl + arrows

@@ -73,8 +73,8 @@ window.jQuery = $;
               <input type="submit" value="Start" class="gearPreviewButton" id="submitOptimizerRequest"><br>
               <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter"><br>
               <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel"><br>
-              <input type="submit" value="Load settings" class="gearPreviewButton" id="submitOptimizerLoad"><br>
-              <input type="submit" value="Reset settings" class="gearPreviewButton" id="submitOptimizerReset">
+              <input type="submit" value="Load filters" class="gearPreviewButton" id="submitOptimizerLoad"><br>
+              <input type="submit" value="Reset filters" class="gearPreviewButton" id="submitOptimizerReset">
 
             </div>
             <div class="vertical"></div>
@@ -648,9 +648,13 @@ window.jQuery = $;
 
       <!-- <input type="submit" value="Update" class="gearPreviewButton" id="updateGear"> -->
 
-      <div class="panelLabel" style="margin: auto;">
-        <div class="panelLabelText">Gear table</div>
-        <img src="./assets/tooltip.png" class="tooltipImage" id="gearTableTooltip"></img>
+      <div class="panelLabel gearTabTopPanelLabel" style="margin: auto;">
+        <div class="gearTabTopPanelLabelLeft">
+          <div class="panelLabelText">Gear table</div>
+          <img src="./assets/tooltip.png" class="tooltipImage" id="gearTableTooltip"></img>
+        </div>
+
+        <div class="selectedCount" id="selectedCount">Selected: 0</div>
       </div>
 
       <div id="gear-grid" style="height: 375px" class="ag-theme-balham"></div>
@@ -723,42 +727,42 @@ window.jQuery = $;
             <div class="gearTabSetFilterIconsRow">
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="speedSetFilter">
-                  <img class="gearTabIcon" src="./assets/setspeed.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setspeed.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="attackSetFilter">
-                  <img class="gearTabIcon" src="./assets/setattack.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setattack.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="destructionSetFilter">
-                  <img class="gearTabIcon" src="./assets/setdestruction.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setdestruction.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="lifestealSetFilter">
-                  <img class="gearTabIcon" src="./assets/setlifesteal.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setlifesteal.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="counterSetFilter">
-                  <img class="gearTabIcon" src="./assets/setcounter.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setcounter.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="rageSetFilter">
-                  <img class="gearTabIcon" src="./assets/setrage.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setrage.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="revengeSetFilter">
-                  <img class="gearTabIcon" src="./assets/setrevenge.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setrevenge.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="injurySetFilter">
-                  <img class="gearTabIcon" src="./assets/setinjury.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setinjury.png"></img>
                 </div>
               </div>
 
@@ -768,42 +772,42 @@ window.jQuery = $;
 
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="criticalSetFilter">
-                  <img class="gearTabIcon" src="./assets/setcritical.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setcritical.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="hitSetFilter">
-                  <img class="gearTabIcon" src="./assets/sethit.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/sethit.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="healthSetFilter">
-                  <img class="gearTabIcon" src="./assets/sethealth.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/sethealth.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="defenseSetFilter">
-                  <img class="gearTabIcon" src="./assets/setdefense.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setdefense.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="resistSetFilter">
-                  <img class="gearTabIcon" src="./assets/setresist.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setresist.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="immunitySetFilter">
-                  <img class="gearTabIcon" src="./assets/setimmunity.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setimmunity.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="unitySetFilter">
-                  <img class="gearTabIcon" src="./assets/setunity.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setunity.png"></img>
                 </div>
               </div>
               <div class="gearTabSquareButton">
                 <div class="gearTabButton" id="penetrationSetFilter">
-                  <img class="gearTabIcon" src="./assets/setpenetration.png"></img>
+                  <img class="gearTabIcon gearTabIconSet" src="./assets/setpenetration.png"></img>
                 </div>
               </div>
             </div>
@@ -1066,6 +1070,20 @@ window.jQuery = $;
               </div>
             </div>
           </div>
+
+
+
+          <div class="gearTabDuplicateFilter">
+            <div class="gearTabFilterLabel" id="clearOtherFilter">
+              <b>Other</b> (<u>clear</u>)
+            </div>
+            <div class="gearTabLongButton">
+              <div class="gearTabButton" id="duplicateFilter">
+                <img class="gearTabIcon" src="./assets/copy.png" style="opacity:0.6"></img>
+                <div class="gearTabButtonLabel">Duplicates</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 <!--
@@ -1182,8 +1200,8 @@ window.jQuery = $;
 
 
 
-      <div id="heroes-table" style="height: 275px" class="ag-theme-balham"></div>
-      <div id="builds-table" style="height: 200px" class="ag-theme-balham"></div>
+      <div id="heroes-table" style="height: 370px" class="ag-theme-balham"></div>
+      <div id="builds-table" style="height: 165px" class="ag-theme-balham"></div>
       <div class="heroesTabButtonRow">
         <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit">
         <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit">

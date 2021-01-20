@@ -1,6 +1,10 @@
 package com.fribbels.handler;
 
+import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
+import com.fribbels.enums.Gear;
+import com.fribbels.model.Hero;
+import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
 import com.fribbels.request.IdRequest;
 import com.fribbels.request.IdsRequest;
@@ -11,16 +15,23 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
 
     private final ItemDb itemDb;
+    private final HeroDb heroDb;
 
     private static final Gson GSON = new Gson();
 
@@ -85,25 +96,109 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
     }
 
     public String mergeItems(final ItemsRequest request) {
-        final List<Item> items = request.getItems();
+        final List<Item> newItems = request.getItems();
         final List<Item> existingItems = itemDb.getAllItems();
 
-        final Map<Integer, Item> x = new HashMap<>();
+        final Map<Integer, List<Item>> itemsByHash = new HashMap<>();
 
-        for (final Item item : items) {
+        // Note down matching items
+        for (final Item item : existingItems) {
             final int hash = item.getHash();
 
+            if (itemsByHash.containsKey(hash)) {
+                final List<Item> matchingItems = itemsByHash.get(hash);
+                matchingItems.add(item);
+            } else {
+                itemsByHash.put(hash, new ArrayList<>(Collections.singletonList(item)));
+            }
         }
 
+        // Replace matching new items with their existing versions
+        for (int i = 0; i < newItems.size(); i++) {
+            final Item item = newItems.get(i);
+            final int hash = item.getHash();
 
-        itemDb.addItems(request.getItems());
+            if (itemsByHash.containsKey(hash)) {
+                final List<Item> matchingItems = itemsByHash.get(hash);
+
+                if (!matchingItems.isEmpty()) {
+                    final Item removedItem = matchingItems.remove(0);
+                    newItems.set(i, removedItem);
+                }
+            }
+        }
+
+        System.out.println(itemsByHash);
+        System.out.println(itemsByHash.size());
+
+        // Go through heroes and unequip unmatched items
+        final List<Hero> allHeroes = heroDb.getAllHeroes();
+        final Set<String> newItemIds = newItems.stream().map(Item::getId).collect(Collectors.toSet());
+
+        for (final Hero hero : allHeroes) {
+            final Map<Gear, Item> equipment = hero.getEquipment();
+            unequipIfNotExists(equipment, newItemIds, Gear.WEAPON);
+            unequipIfNotExists(equipment, newItemIds, Gear.HELMET);
+            unequipIfNotExists(equipment, newItemIds, Gear.ARMOR);
+            unequipIfNotExists(equipment, newItemIds, Gear.NECKLACE);
+            unequipIfNotExists(equipment, newItemIds, Gear.RING);
+            unequipIfNotExists(equipment, newItemIds, Gear.BOOTS);
+
+            final List<HeroStats> builds = hero.getBuilds();
+            if (builds == null) continue;
+
+            // Clean up builds
+            final List<HeroStats> buildsToRemove = new ArrayList<>();
+            for (final HeroStats build : hero.getBuilds()) {
+                final List<String> buildItems = build.getItems();
+                for (final String itemId : buildItems) {
+                    if (!newItemIds.contains(itemId)) {
+                        buildsToRemove.add(build);
+                    }
+                }
+            }
+            builds.removeAll(buildsToRemove);
+        }
+
+        itemDb.setItems(newItems);
 
         return "";
     }
 
+    private void unequipIfNotExists(final Map<Gear, Item> equipment, final Set<String> newItemIds, final Gear gear) {
+        if (equipment.containsKey(gear)) {
+            final Item item = equipment.get(gear);
+            if (!newItemIds.contains(item.getId())) {
+                equipment.remove(gear);
+            }
+        }
 
+    }
 
     public String setItems(final ItemsRequest request) {
+        itemDb.setItems(request.getItems());
+
+        return "";
+    }
+
+    public String setItemsWithHeroes(final ItemsRequest request) {
+        final List<Hero> allHeroes = heroDb.getAllHeroes();
+        final List<Item> newItems = request.getItems();
+        final Map<String, Hero> heroesByName = new HashMap<>();
+
+        allHeroes.forEach(x -> heroesByName.putIfAbsent(x.getName(), x));
+
+        for (final Item item : newItems) {
+            if (StringUtils.isBlank(item.getHeroName())) {
+                continue;
+            }
+
+            if (heroesByName.containsKey(item.getHeroName())) {
+                final Hero hero = heroesByName.get(item.getHeroName());
+                itemDb.equipItemOnHero(item.getId(), hero.getId());
+            }
+        }
+
         itemDb.setItems(request.getItems());
 
         return "";
@@ -173,6 +268,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
 
     public String getAllItems() {
         final List<Item> items = itemDb.getAllItems();
+        augmentItemData(items);
         final GetAllItemsResponse response = GetAllItemsResponse.builder()
                 .items(items)
                 .build();
@@ -189,5 +285,29 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 .build();
 
         return toJson(response);
+    }
+
+    private void augmentItemData(final List<Item> items) {
+        final Map<Integer, List<Item>> itemsByHash = new HashMap<>();
+
+        // Note down matching items
+        for (final Item item : items) {
+            item.setDuplicateId("");
+            final int hash = item.getHash();
+
+            if (itemsByHash.containsKey(hash)) {
+                final List<Item> matchingItems = itemsByHash.get(hash);
+                matchingItems.add(item);
+            } else {
+                itemsByHash.put(hash, new ArrayList<>(Collections.singletonList(item)));
+            }
+        }
+
+        itemsByHash.entrySet().forEach((x -> {
+            if (x.getValue().size() > 1) {
+                System.out.println("DUPLICATE");
+                x.getValue().forEach(y -> y.setDuplicateId("DUPLICATE" + x.getKey()));
+            }
+        }));
     }
 }

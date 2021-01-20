@@ -78,6 +78,12 @@ module.exports = {
         });
     },
 
+    mergeItems: async (items) => {
+        return post('/items/mergeItems', {
+            items: items
+        });
+    },
+
     setItems: async (items) => {
         return post('/items/setItems', {
             items: items
@@ -121,8 +127,9 @@ module.exports = {
     },
 
     getAllHeroes: async (useReforgeStats) => {
+        const useReforgeStatsOverride = HeroesTab.getUseReforgedStats();
         return post('/heroes/getAllHeroes', {
-            useReforgeStats: useReforgeStats
+            useReforgeStats: useReforgeStatsOverride
         });
     },
 
@@ -157,9 +164,11 @@ module.exports = {
     },
 
     getHeroById: async (id, useReforgeStats) => {
+        // Autosave interferes with the reforge display
+        const useReforgeStatsOverride = HeroesTab.getUseReforgedStats();
         return post('/heroes/getHeroById', {
             id: id,
-            useReforgeStats: useReforgeStats
+            useReforgeStats: useReforgeStatsOverride
         });
     },
 

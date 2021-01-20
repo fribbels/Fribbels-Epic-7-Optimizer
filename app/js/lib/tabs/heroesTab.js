@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+var useReforgedStats = true;
 
 module.exports = {
     initialize: () => {
@@ -42,7 +43,8 @@ module.exports = {
         });
 
         document.getElementById('heroesTabUseReforgedStats').addEventListener("change", async () => {
-            console.log("CHANGE");
+            useReforgedStats = document.getElementById('heroesTabUseReforgedStats').checked;
+            console.log("REFORGE CHANGE TO " + useReforgedStats);
             redrawGrid();
             clearPreview();
             HeroesGrid.refreshBuilds();
@@ -87,7 +89,9 @@ module.exports = {
             const existingBuild = HeroesGrid.getSelectedBuildRow()
 
             console.warn("EQUIP BUILD", row, existingBuild);
-            if (!existingBuild || !row) return;
+            if (!existingBuild || !existingBuild.items || !row || existingBuild.items.includes(undefined) || existingBuild.items.includes(null)) {
+                return;
+            }
 
             Api.equipItemsOnHero(row.id, existingBuild.items).then(x => {
                 HeroesGrid.refreshBuilds();
@@ -189,7 +193,7 @@ module.exports = {
         });
 
 
-        const useReforgedStats = $('#heroesTabUseReforgedStats').prop('checked');
+        console.log("!!! 1");
         Api.getAllHeroes(useReforgedStats).then(response => {
             console.log("Heroes response", response);
 
@@ -208,6 +212,10 @@ module.exports = {
 
     redraw: () => {
         redrawGrid();
+    },
+
+    getUseReforgedStats: () => {
+        return useReforgedStats;
     },
 
     getNewHeroByName: (heroName) => {
@@ -274,7 +282,7 @@ function addHero(heroName, isBuild) {
 }
 
 function redrawGrid(id) {
-    const useReforgedStats = $('#heroesTabUseReforgedStats').prop('checked');
+    console.log("!!! 2");
     Api.getAllHeroes(useReforgedStats).then(response => {
         HeroesGrid.refresh(response.heroes, id);
     });

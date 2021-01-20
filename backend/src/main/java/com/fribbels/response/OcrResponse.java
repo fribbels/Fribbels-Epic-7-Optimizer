@@ -19,4 +19,5 @@ public class OcrResponse extends Response {
     private String substatsText;
     private String substatsNumbers;
     private String set;
+    private String hero;
 }

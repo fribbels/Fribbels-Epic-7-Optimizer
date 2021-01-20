@@ -22,6 +22,7 @@ const filters = {
     enhanceFilter: null,
     statFilter: null,
     substatFilter: null,
+    duplicateFilter: null
 }
 
 module.exports = {
@@ -206,7 +207,6 @@ async function unlockGear() {
 
 function setupFilterListener(elementId, filter, filterContent) {
     document.getElementById(elementId).addEventListener('click', () => {
-        console.log("test")
         const element = $('#' + elementId);
         element.toggleClass("gearTabButtonSelected");
         elementsByFilter[filter].forEach(x => {
@@ -219,6 +219,7 @@ function setupFilterListener(elementId, filter, filterContent) {
         } else {
             filters[filter] = null;
         }
+        console.log("Updated filters", filters)
         ItemsGrid.refreshFilters(filters);
     })
 }
@@ -299,6 +300,9 @@ const elementsByFilter = {
         "plus6Filter",
         "plus3Filter",
         "plus0Filter",
+    ],
+    duplicateFilter: [
+        "duplicateFilter",
     ]
 }
 
@@ -348,7 +352,6 @@ function setupEventListeners() {
 
     setupClearListener("clearMainStatFilter", "statFilter")
 
-
     // Sub
     setupFilterListener("subStatAttackPercentFilter", "substatFilter", "AttackPercent")
     setupFilterListener("subStatAttackFilter", "substatFilter", "Attack")
@@ -381,6 +384,10 @@ function setupEventListeners() {
     setupFilterListener("plus0Filter", "enhanceFilter", "plus0")
 
     setupClearListener("clearEnhanceFilter", "enhanceFilter")
+
+    setupFilterListener("duplicateFilter", "duplicateFilter", "duplicate")
+
+    setupClearListener("clearOtherFilter", "duplicateFilter")
 
 
     // const sets = Object.keys(Assets.getAssetsBySet())

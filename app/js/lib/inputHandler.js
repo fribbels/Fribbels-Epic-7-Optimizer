@@ -23,6 +23,7 @@ global.Reforge = require('./reforge');
 global.Utils = require('./utils');
 global.DarkMode = require('./darkmode');
 global.GridRenderer = require('./renderer/gridRenderer');
+global.Updater = require('./updater');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -103,6 +104,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     Tooltip.initialize();
 
     Saves.loadAutoSave();
+
+    Updater.checkForUpdates();
 });
 
 function copyLang() {

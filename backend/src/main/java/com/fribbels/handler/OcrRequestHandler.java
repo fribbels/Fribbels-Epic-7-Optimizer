@@ -129,6 +129,7 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         final Set set = readSet();
         final String title;
         final String main;
+//        final String hero = readEquippedBy();
 
         if (isShiftedSet(set)) {
             title = readShiftedTitle();
@@ -144,6 +145,7 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
                 .title(title)
                 .main(main)
                 .set(set.getName())
+//                .hero(hero)
                 .build();
 
         System.out.println(ocrResponse);
@@ -188,7 +190,10 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         return readRectangle(1041, 185, 354, 553);
     }
 
-    //
+    private String readEquippedBy() {
+        setText();
+        return readRectangle(165, 825, 265, 34);
+    }
 
     private String readShiftedTitle() {
         setText();

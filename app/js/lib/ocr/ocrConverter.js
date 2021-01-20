@@ -14,7 +14,9 @@ module.exports = {
         const mainStat = constructMainStat(data, gear, level, enhance);
         const subStats = constructSubStats(data);
 
-        return new Item(gear, rank, set, level, enhance, mainStat, subStats, name)
+        // const heroName = constructHeroName(data);
+
+        return new Item(gear, rank, set, level, enhance, mainStat, subStats, name, null)
     }
 }
 
@@ -63,6 +65,10 @@ function constructSet(data) {
 
 function constructName(data) {
     return data.gearName;
+}
+
+function constructHeroName(data) {
+    return data.hero;
 }
 
 function constructMainStat(data, gear, level, enhance) {

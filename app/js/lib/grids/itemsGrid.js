@@ -1,6 +1,7 @@
 const stringSimilarity = require('string-similarity');
 const tinygradient = require('tinygradient');
 var gradient = tinygradient('#ffffff', '#8fed78');
+var scoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
 
 var itemsGrid;
 var currentAggregate = {};
@@ -37,12 +38,13 @@ module.exports = {
                 {headerName: 'Def', field: 'augmentedStats.Defense', cellRenderer: (params) => params.value == 0 ? "" : params.value},
                 {headerName: 'Eff', field: 'augmentedStats.EffectivenessPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
                 {headerName: 'Res', field: 'augmentedStats.EffectResistancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Score', field: 'wss', width: 50},
-                {headerName: 'dScore', field: 'dpsWss', width: 50},
-                {headerName: 'sScore', field: 'supportWss', width: 50},
-                {headerName: 'cScore', field: 'combatWss', width: 50},
+                {headerName: 'Score', field: 'wss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: 'dScore', field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: 'sScore', field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: 'cScore', field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
                 {headerName: 'Equipped', field: 'equippedByName', width: 120},
                 {headerName: 'Locked', field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
+                {headerName: 'Duplicate', field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
             ],
             rowSelection: 'multiple',
             pagination: true,
@@ -95,6 +97,7 @@ module.exports = {
                     }
                 })
             }
+            updateSelectedCount();
         });
     },
 
@@ -106,6 +109,7 @@ module.exports = {
         const enhanceFilter = filters.enhanceFilter;
         const statFilter = filters.statFilter;
         const substatFilter = filters.substatFilter;
+        const duplicateFilter = filters.duplicateFilter;
 
         const setFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('set');
         if (!setFilter) {
@@ -237,8 +241,6 @@ module.exports = {
         }
 
         const statFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('main.type');
-        console.log(statFilter);
-        console.log(statFilterComponent);
         if (!statFilter) {
             // document.getElementById('checkboxImageClearStats').checked = true;
             statFilterComponent.setModel(null);
@@ -269,8 +271,6 @@ module.exports = {
         }
         if (substatFilter) {
             const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
-            console.log(substatFilter);
-            console.log(substatFilterComponent);
             if (!substatFilter) {
                 // document.getElementById('checkboxImageClearStats').checked = true;
                 substatFilterComponent.setModel(null);
@@ -284,7 +284,22 @@ module.exports = {
             }
         }
 
+
+        const duplicateFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('duplicateId');
+        if (!duplicateFilter) {
+            duplicateFilterComponent.setModel(null);
+        } else {
+            duplicateFilterComponent.setModel({
+                type: 'startsWith',
+                filter: "DUPLICATE"
+
+                // type: 'notEqual',
+                // filter: ""
+            });
+        }
+
         itemsGrid.gridOptions.api.onFilterChanged();
+        updateSelectedCount();
     }
 }
 
@@ -293,6 +308,40 @@ module.exports = {
 //     // OptimizerTab.drawPreview(gearIds);
 // }
 
+// const filterParams = {
+//   filterOptions: ['notBlank'],
+//   defaultOption: 'notBlank',
+//   comparator: myComparator,
+//   textCustomComparator: myComparator
+// }
+
+// function myComparator(filter, value, filterText) {
+//     console.error("1");
+//     var filterTextLowerCase = filterText.toLowerCase();
+//     var valueLowerCase = value.toString().toLowerCase();
+
+//     switch (filter) {
+//         case 'contains':
+//             return valueLowerCase.indexOf(filterTextLowerCase) >= 0;
+//         case 'notContains':
+//             return valueLowerCase.indexOf(filterTextLowerCase) === -1;
+//         case 'equals':
+//             return valueLowerCase === filterTextLowerCase;
+//         case 'notEqual':
+//             return valueLowerCase != filterTextLowerCase;
+//         case 'startsWith':
+//             return valueLowerCase.indexOf(filterTextLowerCase) === 0;
+//         case 'notBlank':
+//             return valueLowerCase && valueLowerCase.length > 0;
+//         case 'endsWith':
+//             var index = valueLowerCase.lastIndexOf(filterTextLowerCase);
+//             return index >= 0 && index === (valueLowerCase.length - filterTextLowerCase.length);
+//         default:
+//             // should never happen
+//             console.warn('invalid filter type ' + filter);
+//             return false;
+//     }
+// }
 
 function columnGradient(params) {
     try {
@@ -311,6 +360,25 @@ function columnGradient(params) {
         };
     } catch (e) {console.error(e)}
 
+}
+
+function scoreColumnGradient(params) {
+    try {
+        if (!params || params.value == undefined) return;
+        var colId = params.column.colId;
+        var value = params.value;
+
+        // var percent = value * (80-40) + 0.4;
+        var percent = (80 * (value/80))/100
+        percent = Math.min(1, percent);
+        percent = Math.max(0, percent);
+
+        const color = scoreGradient.rgbAt(percent);
+
+        return {
+            backgroundColor: color.toHexString()
+        };
+    } catch (e) {console.error(e)}
 }
 
 function aggregateCurrentGearStats(items) {
@@ -371,7 +439,13 @@ function renderStat(name) {
     return statEdits[name] || name;
 }
 
+function updateSelectedCount() {
+    const count = module.exports.getSelectedGear().length;
+    $('#selectedCount').html("Selected: " + count);
+}
+
 function onRowSelected(event) {
+    updateSelectedCount();
     return;
 
     if (event.node.selected) {

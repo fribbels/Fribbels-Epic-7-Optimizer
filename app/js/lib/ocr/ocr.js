@@ -179,6 +179,9 @@ module.exports = {
         const gearAndRank = titleArr[0];
         const name = titleArr.slice(1).join(' ');
 
+        // // HERO
+        // const hero = response.hero.split('↵').filter(x => x.length > 0)[0];
+
         // Set
         const set = response.set.split('↵').filter(x => x.length > 0)[0];
         const response2 = await Api.ocr2(filename, shifted);
@@ -212,76 +215,10 @@ module.exports = {
             mainStatNumbers: mainStatNumbers,
             levelNumbers:    level || "0",
             enhanceNumbers:  enhance || "0",
+            // hero: hero
         };
 
         console.log("values", values);
-        const fixed = OcrFixer.fixOcr(values);
-        const converted = OcrConverter.convertOcr(fixed);
-
-        console.log("DONE" + JSON.stringify(converted));
-        return converted;
-    },
-
-    readGearFileOld: async (filename) => {
-        const image = await Jimp.read(filename);
-        const clone = image.clone();
-        // Get the necessary gear section
-        clone.crop(20, 180, 400, 600)
-
-        // Substat numbers
-        const substatNumberClone = clone.clone();
-        substatNumberClone.crop(300-20, 450-180, 85, 130)
-                .resize(Jimp.AUTO, 130*2, Jimp.RESIZE_BICUBIC)
-                .invert()
-                .greyscale();
-        // await substatNumberClone.writeAsync(filename + "debugStat.png");
-
-        const levelNumberClone = clone.clone();
-        levelNumberClone.crop(65-20, 214-180, 25, 18)
-                .resize(75, Jimp.AUTO, Jimp.RESIZE_BICUBIC)
-                .invert()
-                .brightness(0.3)
-                .contrast(0.9)
-                // .brightness()
-                .greyscale();
-        // await levelNumberClone.writeAsync(filename + "debugLevel.png");
-
-        const enhanceNumberClone = clone.clone();
-        enhanceNumberClone.crop(140-20, 206-180, 31, 16)
-                .resize(Jimp.AUTO, 32, Jimp.RESIZE_BICUBIC)
-                .invert()
-                .brightness(0.3)
-                .contrast(0.6)
-                .greyscale();
-        // await enhanceNumberClone.writeAsync(filename + "debugEnhance.png");
-
-
-        const restClone = clone.clone().invert();
-        const restBuffer = await restClone.getBufferAsync('image/png');
-
-        const results = await Promise.all([
-            textScheduler.addJob('recognize', restBuffer, { rectangle: gearTextRectangle }),
-            textScheduler.addJob('recognize', restBuffer, { rectangle: mainstatTextRectangle }),
-            textScheduler.addJob('recognize', restBuffer, { rectangle: substatTextRectangle }),
-            textScheduler.addJob('recognize', restBuffer, { rectangle: setTextRectangle }),
-            numberScheduler.addJob('recognize', await substatNumberClone.getBufferAsync('image/png')),
-            numberScheduler.addJob('recognize', restBuffer, { rectangle: mainstatNumberRectangle }),
-            enhanceScheduler.addJob('recognize', await levelNumberClone.getBufferAsync('image/png')),
-            enhanceScheduler.addJob('recognize', await enhanceNumberClone.getBufferAsync('image/png')),
-        ]);
-
-        const values = {
-            gearText:        results[0].data.text,
-            mainStatText:    results[1].data.text,
-            subStatText:     results[2].data.text,
-            setText:         results[3].data.text,
-            subStatNumbers:  results[4].data.text,
-            mainStatNumbers: results[5].data.text,
-            levelNumbers:    results[6].data.text,
-            enhanceNumbers:  results[7].data.text,
-        };
-
-        // console.log(values.map(x => x.data.text));
         const fixed = OcrFixer.fixOcr(values);
         const converted = OcrConverter.convertOcr(fixed);
 

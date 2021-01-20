@@ -10,6 +10,9 @@ module.exports = {
     },
 
     isGaveleets: (gear) => {
+        if (!gear || !gear.name) {
+            return false;
+        }
         return Utils.stringDistance("Gaveleets", gear.name) > 0.4;
     },
 

@@ -7,9 +7,10 @@ module.exports = {
             subStatText: fixSubStatText(data),
             setText: fixSetText(data),
             subStatNumbers: fixSubStatNumbers(data),
-            mainStatNumbers: fixMainStatNumbers(data), 
+            mainStatNumbers: fixMainStatNumbers(data),
             levelNumbers: fixLevelNumbers(data),
-            enhanceNumbers: fixEnhanceNumbers(data)
+            enhanceNumbers: fixEnhanceNumbers(data),
+            // hero: fixHeroText(data)
         };
     }
 }
@@ -47,6 +48,42 @@ subStatText: "Health↵↵Speed↵CriticalHitChance↵Effectiveness↵"
 */
 function fixGearText(data) {
     return getFirstLine(data.gearText);
+}
+
+function getComparingName(name) {
+    return name.replace(/I/g, "l").toLowerCase();
+}
+
+function fixHeroText(data) {
+    const maybeHero = getFirstLine(data.hero);
+    if (!maybeHero || maybeHero.length < 1) {
+        return null;
+    }
+
+    const allHeroes = HeroData.getAllHeroData();
+
+    if (Utils.stringDistance(maybeHero, "em is not equipped") > 0.5) {
+        return "";
+    }
+
+    const valuedData = Object.keys(allHeroes)
+            .map(x => {
+                return {
+                    value: Utils.stringDistance(getComparingName(x), getComparingName(maybeHero)),
+                    hero: allHeroes[x]
+                }
+            });
+    Utils.sortByAttribute(valuedData, "value");
+
+    const closestData = valuedData[valuedData.length - 1];
+
+    if (closestData.value < 0.5) {
+        return null;
+    }
+    return closestData.hero.name;
+
+    // console.error(getComparingName(maybeHero), valuedData[valuedData.length - 1].value, getComparingName(valuedData[valuedData.length - 1].hero.name), valuedData);
+
 }
 
 function fixGearName(data) {
@@ -106,8 +143,8 @@ function isNotBlankString(str) {
 }
 
 function isBlankString(str) {
-    return str == null 
-    ||     str == undefined 
+    return str == null
+    ||     str == undefined
     ||     str.length == 0;
 }
 

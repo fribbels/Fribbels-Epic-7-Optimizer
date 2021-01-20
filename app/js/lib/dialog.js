@@ -15,6 +15,13 @@ module.exports = {
         })
     },
 
+    htmlInfo: (html) => {
+        Swal.fire({
+          icon: 'info',
+          html: html,
+        })
+    },
+
     editHeroDialog: async (hero) => {
         return new Promise(async (resolve, reject) => {
             const getAllHeroesResponse = await Api.getAllHeroes();
@@ -26,7 +33,7 @@ module.exports = {
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
-                        <p>Add stats from Artifacts, EE, and Imprints</p>
+                        <p>Add stats from Artifact, EE, and Imprint</p>
                         <br>
 
                         <div class="editGearFormRow">

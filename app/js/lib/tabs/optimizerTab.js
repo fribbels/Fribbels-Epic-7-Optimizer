@@ -549,7 +549,9 @@ async function removeBuild() {
 async function equipSelectedGear() {
     const selectedGear = filterSelectedGearByCheckbox(OptimizerGrid.getSelectedGearIds());
     if (selectedGear.length == 0) return;
-
+    if (selectedGear.includes(undefined) || selectedGear.includes(null)) {
+        return;
+    }
     const heroId = getSelectedHeroId();
 
     await Api.equipItemsOnHero(heroId, selectedGear);
@@ -701,6 +703,7 @@ async function applyItemFilters(params, heroId) {
     };
 }
 
+// True if blocking error
 function warnParams(params) {
     if (params.inputFilterPriority == 100
     &&  params.inputAtkPriority == 0
@@ -713,7 +716,8 @@ function warnParams(params) {
     &&  params.inputResPriority == 0) {
         Notifier.info("No stat priority selected. For best results, use the stat priority filter.")
     } else if (params.inputFilterPriority == 100) {
-        Notifier.info("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
+        Dialog.error("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
+        return true;
     } else if (params.inputFilterPriority != 100
     &&  params.inputAtkPriority == 0
     &&  params.inputHpPriority == 0
@@ -723,7 +727,8 @@ function warnParams(params) {
     &&  params.inputCdPriority == 0
     &&  params.inputEffPriority == 0
     &&  params.inputResPriority == 0) {
-        Notifier.info("Top N% was selected but no stat priorities are assigned. Select a stat priority otherwise the filter will pick random gears.")
+        Dialog.error("Top % was selected but no stat priorities are assigned. Assign stat priorities otherwise the filter will not work.")
+        return true;
     }
 
     if (params.inputSetsOne && params.inputSetsOne.length == 0) {
@@ -739,11 +744,14 @@ function warnParams(params) {
     if (permutations >= 5_000_000_000) {
         Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
     }
+    return false;
 }
 
 async function submitOptimizationFilterRequest() {
     const params = getOptimizationRequestParams();
-    warnParams(params);
+    if (warnParams(params)) {
+        return;
+    }
 
     const heroId = document.getElementById('inputHeroAdd').value;
     const heroResponse = await Api.getHeroById(heroId);
@@ -788,7 +796,10 @@ async function submitOptimizationRequest() {
         hero: heroResponse.hero
     }
 
-    warnParams(params);
+    if (warnParams(params)) {
+        return;
+    }
+
     const mergedRequest = Object.assign(request, params, baseStats);
     const str = JSON.stringify(mergedRequest);
 

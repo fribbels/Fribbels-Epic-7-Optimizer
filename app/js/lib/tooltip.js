@@ -1,9 +1,14 @@
 const tippy = require('tippy.js').default;
 
+tippy.setDefaultProps({
+    allowHTML: true,
+    placement: 'auto',
+    maxWidth: 550,
+});
+
 module.exports = {
     initialize: () => {
         tippy('#forceModeTooltip', {
-            allowHTML: true,
             content:
 `
 <p>
@@ -24,7 +29,6 @@ Force at least two: Atk / Atk % / Cr / Cd / Speed, for dps units.</br>
         });
 
         tippy('#accessoryMainStatsTooltip', {
-            allowHTML: true,
             content:
 `
 <p>
@@ -34,7 +38,6 @@ Choose the desired main stats for accessories. Multiple options can be selected 
         });
 
         tippy('#setsTooltip', {
-            allowHTML: true,
             content:
 `
 <p>
@@ -44,7 +47,6 @@ Choose the desired gear sets. Multiple options can be selected per slot. The fir
         });
 
         tippy('#excludeTooltip', {
-            allowHTML: true,
             content:
 `
 <p>
@@ -54,7 +56,6 @@ Choose any sets you don't want included in the search.
         });
 
         tippy('#forceTooltip', {
-            allowHTML: true,
             content:
 `
 <p>
@@ -72,7 +73,6 @@ Force filter is automatically disabled when no forced substats are specified.
         });
 
         tippy('#filterStatsTooltip', {
-            allowHTML: true,
             content:
 `
 <p>
@@ -82,7 +82,6 @@ Select substat filters to filter results by. Left column is min (inclusive) and 
         });
 
         tippy('#filterRatingsTooltip', {
-            allowHTML: true,
             content:
 `
 <p>Select rating filters to filter results by. Ratings are stats that aren't seen in the game, but are useful for comparing builds.  Left column is min (inclusive) and right column is max (inclusive).</p>
@@ -98,7 +97,6 @@ Select substat filters to filter results by. Left column is min (inclusive) and 
         });
 
         tippy('#substatPriorityTooltip', {
-            allowHTML: true,
             content:
 `
 <p><b>This is probably the most useful filter but please read before using it. Using this wrong can exclude good results from the search.</b></p>
@@ -120,7 +118,6 @@ Lowering the percent narrows down your best gears to make the search faster, but
         });
 
         tippy('#heroTooltip', {
-            allowHTML: true,
             content:
 `
 <p>Select the hero you want to optimize.</p>
@@ -133,7 +130,6 @@ Lowering the percent narrows down your best gears to make the search faster, but
         });
 
         tippy('#optionsTooltip', {
-            allowHTML: true,
             content:
 `
 <p><b>Use predicted stats - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate. </p>
@@ -145,7 +141,6 @@ Lowering the percent narrows down your best gears to make the search faster, but
         });
 
         tippy('#searchDetailsTooltip', {
-            allowHTML: true,
             content:
 `
 <p><b>Permutations - </b> Number of permutations of the filtered gear that need to be searched.
@@ -157,7 +152,6 @@ There is a maximum of 5,000,000 results before the search stops (for memory limi
         });
 
         tippy('#filterDetailsTooltip', {
-            allowHTML: true,
             content:
 `
 <p>Shows how many pieces of gear will be used in the search, after filters are applied.</p>
@@ -166,7 +160,6 @@ There is a maximum of 5,000,000 results before the search stops (for memory limi
         });
 
         tippy('#actionsTooltip', {
-            allowHTML: true,
             content:
 `
 <p><b>Equip/Unequip Items - </b> Equips/Unequip the current selected gears onto your hero. </p>
@@ -176,7 +169,6 @@ There is a maximum of 5,000,000 results before the search stops (for memory limi
         });
 
         tippy('#gearTableTooltip', {
-            allowHTML: true,
             content:
 `
 <p>View and edit gears here. Multiple gears can be selected with Ctrl + click or Shift + click.</p>
@@ -206,7 +198,6 @@ Score = Attack %</br>
         });
 
         tippy('#gearActionsTooltip', {
-            allowHTML: true,
             content:
 `
 <p>Edit Selected Item - Change an items stats, levels, or equip it onto someone. </p>
@@ -219,7 +210,6 @@ Score = Attack %</br>
         });
 
         tippy('#gearFiltersTooltip', {
-            allowHTML: true,
             content:
 `
 <p>Select filters to filter the gear table by, or hit the X to clear. Filters are: sets, item slot, and level. </p>

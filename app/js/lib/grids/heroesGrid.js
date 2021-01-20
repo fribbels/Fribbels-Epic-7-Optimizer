@@ -53,8 +53,7 @@ module.exports = {
         const selectedRow = module.exports.getSelectedRow();
         if (!selectedRow) return;
 
-
-        const useReforgedStats = $('#heroesTabUseReforgedStats').prop('checked');
+        const useReforgedStats = HeroesTab.getUseReforgedStats();
         Api.getHeroById(selectedRow.id, useReforgedStats).then(async (response) => {
             const hero = response.hero;
             updateCurrentAggregate(hero);
@@ -68,7 +67,6 @@ module.exports = {
             buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
 
             if (!selectedBuildNode) {
-                console.warn("NO SELECTED NODE");
                 return;
             }
 
@@ -140,7 +138,7 @@ function buildGrid(heroes) {
             {headerName: 'icon', field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
             {headerName: 'elem', field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: 'class', field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
-            {headerName: 'name', field: 'name', width: 100, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
+            {headerName: 'name', field: 'name', width: 110, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
             // {headerName: 'Stars', field: 'rarity', width: 50},
             // {headerName: 'Class', field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: 'sets', field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
@@ -459,7 +457,7 @@ function onHeroRowSelected(event) {
     if (event.node.selected) {
         const heroId = event.data.id;
 
-        const useReforgedStats = $('#heroesTabUseReforgedStats').prop('checked');
+        const useReforgedStats = HeroesTab.getUseReforgedStats();
         Api.getHeroById(heroId, useReforgedStats).then(async (response) => {
             const hero = response.hero;
             console.log("On hero row selected hero row", hero);

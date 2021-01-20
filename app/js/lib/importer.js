@@ -24,7 +24,7 @@ module.exports = {
             const filenames = dialog.showOpenDialogSync(currentWindow, options);
 
             if (!filenames || filenames.length < 1) {
-                return console.error("Invalid filename")
+                return console.warn("Invalid filename")
             };
 
             const path = filenames[0];
@@ -103,7 +103,7 @@ module.exports = {
             console.log(filenames);
 
             if (!filenames || filenames.length < 1) {
-                return console.error("Invalid filename")
+                return console.warn("Invalid filename")
             };
 
             const path = filenames[0];
@@ -125,7 +125,6 @@ module.exports = {
                 ItemAugmenter.augmentStats(items);
                 items.forEach(item => Reforge.getReforgeStats(item));
 
-                // Db.setItems(items);
                 await Api.setItems(items);
                 await Api.setHeroes([]);
 
@@ -146,7 +145,7 @@ module.exports = {
             console.log(filenames);
 
             if (!filenames || filenames.length < 1) {
-                return console.error("Invalid filename")
+                return console.warn("Invalid filename")
             };
 
             const path = filenames[0];
@@ -168,7 +167,6 @@ module.exports = {
                 ItemAugmenter.augmentStats(items);
                 items.forEach(item => Reforge.getReforgeStats(item));
 
-                // Db.setItems(items);
                 await Api.addItems(items);
 
                 $('#importAppendOutputText').text(`Appended ${items.length} items from ${path}`)
@@ -189,7 +187,7 @@ module.exports = {
             console.log(filenames);
 
             if (!filenames || filenames.length < 1) {
-                return console.error("Invalid filename")
+                return console.warn("Invalid filename")
             };
 
             const path = filenames[0];
@@ -211,7 +209,6 @@ module.exports = {
                 ItemAugmenter.augmentStats(items);
                 items.forEach(item => Reforge.getReforgeStats(item));
 
-                // Db.setItems(items);
                 await Api.mergeItems(items);
 
                 $('#importMergeOutputText').text(`Merged ${items.length} items from ${path}`)
@@ -231,7 +228,7 @@ module.exports = {
             console.log(filenames);
 
             if (!filenames || filenames.length < 1) {
-                return console.error("Invalid filename")
+                return console.warn("Invalid filename")
             };
 
             const data = await Files.readFile(filenames[0]);
@@ -251,7 +248,6 @@ module.exports = {
             ItemAugmenter.augmentStats(items);
 
             ZarrocConverter.attachItemsToHeroes(items, heroes);
-            // Db.setItems(items);
             await Api.setItems(items);
             await Api.setHeroes(heroes);
 

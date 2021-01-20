@@ -817,6 +817,10 @@ body.dark-theme input {
 .gearTabIcon {
   height: 100%;
 }
+.gearTabIconSet {
+  position: relative;
+  top: 1px;
+}
 .gearTabLongButton {
   width: 155px;
   min-width: 155px;
@@ -828,8 +832,8 @@ body.dark-theme input {
   height: 40px;
 }
 .gearTabSquareButton {
-  width: 44px;
-  min-width: 44px;
+  width: 42px;
+  min-width: 42px;
   height: 42px;
 }
 .gearTabButton {
@@ -843,7 +847,7 @@ body.dark-theme input {
   cursor: pointer;
 }
 .gearTabButtonSelected {
-  background: #EDF5FA;
+  background: #EDF5FA; /* #b7e4ff */
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.25);
 }
 .gearTabGearFilterIconsRow {
@@ -997,4 +1001,18 @@ body.dark-theme input {
   /*width: 32px;*/
   /*min-width: 32px;*/
   height: 32px;
+}
+.gearTabTopPanelLabel {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.gearTabTopPanelLabelLeft {
+  display:flex;
+  flex-direction: row;
+}
+.selectedCount {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
 }

@@ -6,6 +6,7 @@ module.exports = {
             hideOptgroupCheckboxes: true,
             minimumCountSelected: 99,
             displayTitle: true,
+            openOnHover: true,
             selectAll: false
         };
         $('#inputSet1').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"4 or 2 piece sets"}));

@@ -131,4 +131,7 @@ module.exports = {
     getStar: () => {
         return './assets/star.png';
     },
+    getCopy: () => {
+        return './assets/copy.png';
+    },
 }

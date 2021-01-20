@@ -36,12 +36,15 @@ public class Item {
 
     private String equippedById;
     private String equippedByName;
+    private String heroName;
 
     private boolean locked;
     private int wss;
     private int dpsWss;
     private int supportWss;
     private int combatWss;
+
+    private String duplicateId;
 
     public String toString() {
         return new Gson().toJson(this);
