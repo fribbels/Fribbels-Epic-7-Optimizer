@@ -160,6 +160,31 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             builds.removeAll(buildsToRemove);
         }
 
+        for (final Item item : newItems) {
+            final String equippedBy = item.getEquippedById();
+            final Hero hero = heroDb.getHeroById(equippedBy);
+
+            if (hero == null) {
+                item.setEquippedByName(null);
+                item.setEquippedById(null);
+                continue;
+            }
+
+            final Map<Gear, Item> equipment = hero.getEquipment();
+            if (!equipment.containsKey(item.getGear())) {
+                item.setEquippedByName(null);
+                item.setEquippedById(null);
+                continue;
+            }
+
+            final Item equippedItem = equipment.get(item.getGear());
+            if (!StringUtils.equals(equippedItem.getId(), item.getId())) {
+                item.setEquippedByName(null);
+                item.setEquippedById(null);
+                continue;
+            }
+        }
+
         itemDb.setItems(newItems);
 
         return "";

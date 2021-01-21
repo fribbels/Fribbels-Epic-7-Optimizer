@@ -11,6 +11,17 @@
     }
 })();
 
+// (function(){
+//     var original = console.warn;
+//     console.warn = function() {
+//         // console.warn(document.getElementsByTagName('script'))
+//         // if(!.includes('licenseManager.js')) {
+//         if (arguments.length > 0) {
+//             original.apply(console, arguments)
+//         }
+//     }
+// })();
+
 global.Assets = require('./assets');
 global.Path = window.require('path');
 global.Files = require('./files');

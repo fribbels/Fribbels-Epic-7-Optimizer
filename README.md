@@ -365,13 +365,14 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Reorder heroes list
  - Equipping build after sorting bricks
  - Duplicate filter
+ - Make Network Error less confusing
 
 **Working on:**
  - Dark mode
  - Show errors on invalid imports/missing main stat
- - Cancel ongoing request when start is clicked again
 
  **Medium priority:**
+ - Cancel ongoing request when start is clicked again
  - Option to equip gear from heroes page
  - Move save/load to File menu
  - Use main stat gear for priority filter
@@ -388,7 +389,6 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Customizeable # of 85 gear to filter, 0 - 6 lv 85s in results
 
 **Bugs**
- - Make Network Error less confusing
  - Comparison method violates its general contract
 
  **Low priority:**

@@ -55,11 +55,15 @@ module.exports = {
             console.log("editBuildSubmit");
             const row = HeroesGrid.getSelectedRow();
 
-            const editedBuild = await Dialog.editBuildDialog();
-
             const existingBuild = HeroesGrid.getSelectedBuildRow();
+            if (!existingBuild) {
+                Notifier.warn("Select a build to edit.");
+                return;
+            }
+
+            const editedBuild = await Dialog.editBuildDialog();
             console.warn("EDITBUILD", editedBuild, existingBuild);
-            if (!existingBuild) return;
+
             const buildName = editedBuild.buildName;
 
             existingBuild.name = buildName;

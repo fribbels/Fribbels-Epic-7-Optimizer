@@ -226,7 +226,7 @@ function post(api, request) {
         })
         .catch(error => {
             console.error("Api call", api, request, error);
-            Notifier.error("Failed call to " + api + " - " + error);
+            Notifier.error("Failed to call subprocess: " + api);
             reject(error);
         })
     })

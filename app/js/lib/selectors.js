@@ -9,13 +9,21 @@ module.exports = {
             openOnHover: true,
             selectAll: false
         };
+        const nonHoverMultipleSelectOptions = {
+            maxHeight: 450,
+            showClear: true,
+            hideOptgroupCheckboxes: true,
+            minimumCountSelected: 99,
+            displayTitle: true,
+            selectAll: false
+        };
         $('#inputSet1').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"4 or 2 piece sets"}));
         $('#inputSet2').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"2 piece sets"}));
         $('#inputSet3').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"2 piece sets"}));
         $('#inputNecklaceStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Necklace"}));
         $('#inputRingStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Ring"}));
         $('#inputBootsStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Boots"}));
-        $('#inputExcludeSet').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Exclude sets"}));
+        $('#inputExcludeSet').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Exclude sets"}));
     },
 
     getGearMainFilters: () => {

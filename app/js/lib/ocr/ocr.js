@@ -313,7 +313,7 @@ module.exports = {
             // });
             } catch (e) {
                 console.error(e);
-                Notifier.error("Failed to read screenshots - " + e);
+                Notifier.error("Failed to read a screenshot: " + e);
                 failed.push(filename);
             }
         }

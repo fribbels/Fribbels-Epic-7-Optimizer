@@ -195,6 +195,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 final String hash = build.getBuildHash();
                 if (buildHashes.contains(hash)) {
                     build.setProperty("star");
+                } else {
+                    build.setProperty("none");
                 }
             }
         }

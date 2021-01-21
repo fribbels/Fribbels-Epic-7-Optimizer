@@ -536,7 +536,7 @@ async function removeBuild() {
     console.log("REMOVE BUILD", row)
 
     await Api.removeBuild(heroId, row);
-    await Api.editResultRows(parseInt(rowId), "");
+    await Api.editResultRows(parseInt(rowId), "not star");
     OptimizerGrid.refresh()
 
     // const response = await Api.getHeroById(heroId);
@@ -556,8 +556,14 @@ async function equipSelectedGear() {
 
     await Api.equipItemsOnHero(heroId, selectedGear);
 
+    const row = OptimizerGrid.getSelectedRow()
+    const rowId = row.id;
+    await Api.addBuild(heroId, row);
+    await Api.editResultRows(parseInt(rowId), "star");
+
     const response = await Api.getHeroById(heroId);
     OptimizerGrid.setPinnedHero(response.hero);
+    OptimizerGrid.refresh()
 
     drawPreview()
     Saves.autoSave();

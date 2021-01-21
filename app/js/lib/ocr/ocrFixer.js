@@ -1,17 +1,22 @@
 module.exports = {
     fixOcr: (data) => {
-        return {
-            gearText: fixGearText(data),
-            gearName: fixGearName(data),
-            mainStatText: fixMainStatText(data),
-            subStatText: fixSubStatText(data),
-            setText: fixSetText(data),
-            subStatNumbers: fixSubStatNumbers(data),
-            mainStatNumbers: fixMainStatNumbers(data),
-            levelNumbers: fixLevelNumbers(data),
-            enhanceNumbers: fixEnhanceNumbers(data),
-            // hero: fixHeroText(data)
-        };
+        try {
+            return {
+                gearText: fixGearText(data),
+                gearName: fixGearName(data),
+                mainStatText: fixMainStatText(data),
+                subStatText: fixSubStatText(data),
+                setText: fixSetText(data),
+                subStatNumbers: fixSubStatNumbers(data),
+                mainStatNumbers: fixMainStatNumbers(data),
+                levelNumbers: fixLevelNumbers(data),
+                enhanceNumbers: fixEnhanceNumbers(data),
+                // hero: fixHeroText(data)
+            };
+        } catch (e) {
+            console.error(e);
+            throw "Could not read stats from screenshot. Make sure your screenshots are 1600x900, English, and with High Quality Support enabled.";
+        }
     }
 }
 /*

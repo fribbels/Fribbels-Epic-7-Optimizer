@@ -1,4 +1,4 @@
-const currentVersion = "v1.2.1t";
+const currentVersion = "v1.3.0";
 
 module.exports = {
     checkForUpdates: async () => {
