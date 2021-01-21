@@ -389,7 +389,17 @@ function setupEventListeners() {
 
     setupClearListener("clearOtherFilter", "duplicateFilter")
 
+    setupClearListener("clearAllFilter", "duplicateFilter")
 
+    document.getElementById('clearAllFilter').addEventListener('click', () => {
+        for (var key of Object.keys(elementsByFilter)) {
+            elementsByFilter[key].forEach(x => {
+                $('#' + x).removeClass("gearTabButtonSelected")
+            })
+            filters[key] = null;
+        }
+        ItemsGrid.refreshFilters(filters);
+    })
     // const sets = Object.keys(Assets.getAssetsBySet())
     // console.log("SETUP", sets);
     // for (var set of sets) {

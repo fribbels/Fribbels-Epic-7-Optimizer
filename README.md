@@ -366,10 +366,10 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Equipping build after sorting bricks
  - Duplicate filter
  - Make Network Error less confusing
+ - Show errors on invalid imports/missing main stat
 
 **Working on:**
  - Dark mode
- - Show errors on invalid imports/missing main stat
 
  **Medium priority:**
  - Cancel ongoing request when start is clicked again

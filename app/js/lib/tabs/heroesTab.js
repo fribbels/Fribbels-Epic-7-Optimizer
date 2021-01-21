@@ -61,7 +61,7 @@ module.exports = {
                 return;
             }
 
-            const editedBuild = await Dialog.editBuildDialog();
+            const editedBuild = await Dialog.editBuildDialog(existingBuild.name);
             console.warn("EDITBUILD", editedBuild, existingBuild);
 
             const buildName = editedBuild.buildName;

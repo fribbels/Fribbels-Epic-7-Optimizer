@@ -34,7 +34,7 @@ public class Main {
 
     public static void start() throws Exception {
         try {
-            server = HttpServer.create(new InetSocketAddress("localhost", 8120), 0);
+            server = HttpServer.create(new InetSocketAddress("localhost", 8130), 0);
         } catch (BindException e) {
             // Likely because the service already exists on that port
             System.out.println(e);

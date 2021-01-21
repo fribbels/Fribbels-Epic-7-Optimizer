@@ -7,21 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/../app/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/ocr/ocr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/ocr/ocr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/ocr/ocrFixer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/ocr/ocrFixer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/selectors.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/selectors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tooltip.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tooltip.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/backend_jar/backend.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/ItemsRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/ItemsRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/ItemsRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/ItemsRequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/jar/backend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../data/jar/backend.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/saves/autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/../data/saves/autosave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,25 +160,25 @@
     </state>
     <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608329135029" />
     <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109325925" />
-    <state width="2842" height="502" key="GridCell.Tab.0.bottom" timestamp="1611211726484">
+    <state width="2842" height="502" key="GridCell.Tab.0.bottom" timestamp="1611230074445">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611211726484" />
+    <state width="2842" height="502" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
     <state width="2842" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1610528432981" />
-    <state width="2842" height="502" key="GridCell.Tab.0.center" timestamp="1611211726484">
+    <state width="2842" height="502" key="GridCell.Tab.0.center" timestamp="1611230074445">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611211726484" />
+    <state width="2842" height="502" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
     <state width="2842" height="238" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1610528432981" />
-    <state width="2842" height="502" key="GridCell.Tab.0.left" timestamp="1611211726484">
+    <state width="2842" height="502" key="GridCell.Tab.0.left" timestamp="1611230074445">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611211726484" />
+    <state width="2842" height="502" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
     <state width="2842" height="238" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1610528432981" />
-    <state width="2842" height="502" key="GridCell.Tab.0.right" timestamp="1611211726484">
+    <state width="2842" height="502" key="GridCell.Tab.0.right" timestamp="1611230074445">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611211726484" />
+    <state width="2842" height="502" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
     <state width="2842" height="238" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1610528432981" />
     <state width="2842" height="242" key="GridCell.Tab.1.bottom" timestamp="1610978291848">
       <screen x="0" y="0" width="3440" height="1400" />

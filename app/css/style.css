@@ -846,6 +846,9 @@ body.dark-theme input {
   flex-direction: row;
   cursor: pointer;
 }
+.clearAllFilterButton:active {
+  background: #EDF5FA;
+}
 .gearTabButtonSelected {
   background: #EDF5FA; /* #b7e4ff */
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.25);

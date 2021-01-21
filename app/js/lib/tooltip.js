@@ -99,7 +99,7 @@ Select substat filters to filter results by. Left column is min (inclusive) and 
         tippy('#substatPriorityTooltip', {
             content:
 `
-<p><b>This is probably the most useful filter but please read before using it. Using this wrong can exclude good results from the search.</b></p>
+<p><b>This is the most useful filter but please read before using it. Using this wrong can exclude good results from the search.</b></p>
 
 <p>Assign a priority to each substat type from -1 to 3. This will go through every gear, and calculates the # of max rolls of each stat.
 
@@ -124,16 +124,17 @@ Lowering the percent narrows down your best gears to make the search faster, but
 <p><b>Start - </b> Start a search using the current settings. </p>
 <p><b>Filter - </b> Keep the current optimization results, but re-apply the stat and rating filters. Useful for narrowing down a search. </p>
 <p><b>Cancel - </b> Attempts to cancel an ongoing search. This won't always cancel immediately, if the process is busy. </p>
-<p><b>Load settings - </b> Loads the optimization settings from the last search for this hero. </p>
-<p><b>Reset settings - </b> Sets all optimization settings to their default values. </p>
+<p><b>Load filters - </b> Loads the optimization filters from the last search for this hero. </p>
+<p><b>Reset filters - </b> Resets all optimization filters to their default values. </p>
 `
         });
 
         tippy('#optionsTooltip', {
             content:
 `
-<p><b>Use predicted stats - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate. </p>
+<p><b>Use reforged stats - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate. </p>
 <p><b>At least one lv 85 - </b> Search only for builds that contain at least one level 85 gear. </p>
+<p><b>Only +15 gear - </b> Search only for builds that contain all +15 gear. </p>
 <p><b>Locked items - </b> Allow locked items in the search. </p>
 <p><b>Equipped items - </b> Allow items equipped by other heroes in the search. </p>
 <p><b>Keep current - </b> Keep any existing gears on the unit, and search only for the missing gear pieces. </p>
@@ -154,7 +155,8 @@ There is a maximum of 5,000,000 results before the search stops (for memory limi
         tippy('#filterDetailsTooltip', {
             content:
 `
-<p>Shows how many pieces of gear will be used in the search, after filters are applied.</p>
+<p>Shows how many pieces of gear will be used in the search, after filters are applied.
+<p>If you notice for example, you only have 2 rings being used, try expanding your filters to use more ring options. Or if you see too much gear being used, reduce your Top % filter to be more selective.</p>
 </p>
 `
         });
@@ -162,16 +164,17 @@ There is a maximum of 5,000,000 results before the search stops (for memory limi
         tippy('#actionsTooltip', {
             content:
 `
-<p><b>Equip/Unequip Items - </b> Equips/Unequip the current selected gears onto your hero. </p>
+<p><b>Equip/Unequip Items - </b> Equips/Unequip the current selected gears onto your hero. Automatically saves the build. </p>
 <p><b>Lock/Unlock Items - </b> Locks/Unlocks the current selected gears that you want to be excluded from other searches. </p>
 <p><b>Select/Deselect All - </b> Select/Deselects all the items. You can manually check/uncheck each checkbox as well. </p>
+<p><b>Save/Remove Build - </b> Saves/Removes the currently selected row as a build. This will mark it with a star, and the build will be visible on the Heroes tab. </p>
 `
         });
 
         tippy('#gearTableTooltip', {
             content:
 `
-<p>View and edit gears here. Multiple gears can be selected with Ctrl + click or Shift + click.</p>
+<p>View and edit gears here. Multiple gears can be selected with Ctrl + click or Shift + click. The number of selected gear can be found in the top right corner.</p>
 
 <p>Score - Gear score.
 This score measures how well your gear rolled, scaled by the max roll for 85 gear (assuming 4 for speed).
@@ -203,6 +206,7 @@ Score = Attack %</br>
 <p>Edit Selected Item - Change an items stats, levels, or equip it onto someone. </p>
 <p>Reforge Item - Only works on +15 level 85 gears, predicts the item's reforged stats and generates the edited version. </p>
 <p>Add New Item - Create a new item and fill in its stats. </p>
+<p>Duplicate Item - Create a copy of the selected item and lets you change its stats. </p>
 <p>Remove Items - Unequips and then deletes the items. Multiple selection enabled. </p>
 <p>Unequip Items - Unequips the items from their units. Multiple selection enabled. </p>
 <p>Lock/Unlock Items - Locks/Unlocks the items that you want to be excluded from searches. </p>
@@ -212,7 +216,8 @@ Score = Attack %</br>
         tippy('#gearFiltersTooltip', {
             content:
 `
-<p>Select filters to filter the gear table by, or hit the X to clear. Filters are: sets, item slot, and level. </p>
+<p>Select filters to filter the gear table by. Only one filter allowed per section for now. </p>
+<p>Use the Duplicates filter to find gear with the same stats, and remove if they were mistakenly added.</p>
 `
         });
     },

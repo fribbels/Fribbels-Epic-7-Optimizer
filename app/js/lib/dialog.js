@@ -128,7 +128,7 @@ module.exports = {
         });
     },
 
-    editBuildDialog: async () => {
+    editBuildDialog: async (name) => {
         return new Promise(async (resolve, reject) => {
             const { value: formValues } = await Swal.fire({
                 title: '',
@@ -137,7 +137,7 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <p>Build name</p>
-                        <input type="text" class="bonusStatInput" id="editBuildName" value="">
+                        <input type="text" class="bonusStatInput" id="editBuildName" value="${name}" autofocus="autofocus" onfocus="this.select()" style="width:200px !important">
                     </div>
                 `,
                 focusConfirm: false,
