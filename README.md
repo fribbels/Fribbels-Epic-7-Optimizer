@@ -261,23 +261,23 @@ Please read these instructions carefully!
 
 #### Windows
 
-1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
-    * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
+1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x-windows.zip``
     * Do not download the Source Code options, those won't work
 2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the offline installer
     * After installing, restart your computer (required!)
 3. Install an emulator to run Epic 7 on
-    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)
+    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See a solution for getting Bluestacks working [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)
 4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)
-5. Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
+5. Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
 6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)
 
 #### Mac OS/Bluestack
 
-1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x...``
-    * There should will be a Windows and Mac version, choose the one you're running on. Mac version is still experimental.
+1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x-mac.dmg``
+    * There is a dmg file and a zip file. Try the dmg first and if it doesn't work, try the zip. Mac version is still experimental.
     * Do not download the Source Code options, those won't work
 2. Install **Java 8 - 64 bit**
+    * Mac needs both JRE and JDK:
     * JRE: https://java.com/en/download/manual.jsp - Get the offline installer
     * JDK: https://www.oracle.com/java/technologies/javase-downloads.html
     * After installing, restart your computer (required!)
@@ -291,20 +291,19 @@ Please read these instructions carefully!
       * Menu Title: `Take screenshot` (any typo here will make it not work)
       * Keyboard Shortcut: Anything you want it to be
 5. Back to Bluestacks: Install E7 from the Play Store and launch the game
-   * Set Epic 7 to English and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
+   * Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
 6. Make sure to enter Full Screen Mode (Cmd+Shift+F) before starting your gear capture
 
 **Importing gear screenshots:**
 
 1. Open the Gear Management screen in Epic 7 and sort by Max Enhance<br><br>
-2. Click each of the gears that you want to import, and screenshot it. Every screenshot should be 1600x900 and look EXACTLY like this: https://i.imgur.com/68A8Uf0.jpg
+2. Click each of the gears that you want to import, and screenshot it with your emulator's hotkey. Every screenshot should be 1600x900 and look EXACTLY like this: https://i.imgur.com/68A8Uf0.jpg
 
 ![https://i.imgur.com/ny7uaa8.jpg](https://i.imgur.com/ny7uaa8.jpg)
 
-
 * Most emulators have a screenshot hotkey to make this easier: Ctrl + 0 for LDPlayer
-* I would recommend screenshotting just a few gears to start with, then testing the rest of the steps to make sure the screenshots work before doing them all. I usually only screenshot the +9 to +15 gears.
-3. Collect all your screenshots into a single folder.<br><br>
+* I would recommend screenshotting 10-20 gears to start with, then testing the rest of the steps to make sure the screenshots work before doing them all. I usually only screenshot the +9 to +15 gears for the optimizer.
+3. Create an empty folder and collect all your screenshots into that folder.<br><br>
 4. Go to the Importer tab, click on "Choose folder" under *Creating a new gear set from screenshots*, find your screenshots folder, and click Open Folder.<br><br>
 5. The app will start reading the screenshots and your progress will be displayed. Once it is done, click Export, and save the *gear.txt* file.<br><br>
 6. Under the *Importing a gear set from a file* section, click on Append data, and select your *gear.txt* file.<br><br>
