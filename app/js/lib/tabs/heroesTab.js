@@ -366,4 +366,18 @@ function setupEventListeners() {
     setupFilterListener("mageClassFilter", "classFilter", "mage");
     setupFilterListener("manauserClassFilter", "classFilter", "manauser");
     setupFilterListener("rangerClassFilter", "classFilter", "ranger");
+
+
+    document.getElementById('clearHeroFilter').addEventListener('click', () => {
+        const keys = Object.keys(elementsByFilter);
+        for (var key of keys) {
+            elementsByFilter[key].forEach(x => {
+                $('#' + x).removeClass("gearTabButtonSelected")
+            })
+            filters[key] = null;
+        }
+
+        HeroesGrid.refreshFilters(filters);
+    })
+
 }

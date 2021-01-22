@@ -15,9 +15,9 @@ module.exports = {
         })
     },
 
-    htmlInfo: (html) => {
+    htmlSuccess: (html) => {
         Swal.fire({
-          icon: 'info',
+          icon: 'success',
           html: html,
         })
     },
@@ -137,7 +137,7 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <p>Build name</p>
-                        <input type="text" class="bonusStatInput" id="editBuildName" value="${name}" autofocus="autofocus" onfocus="this.select()" style="width:200px !important">
+                        <input type="text" class="bonusStatInput" id="editBuildName" value="${name ? name : ""}" autofocus="autofocus" onfocus="this.select()" style="width:200px !important">
                     </div>
                 `,
                 focusConfirm: false,
