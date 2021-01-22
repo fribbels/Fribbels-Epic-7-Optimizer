@@ -211,6 +211,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private String handleEditResultRowsRequest(final EditResultRowsRequest request) {
         final HeroStats[] heroStats = optimizationDb.getRows(request.getIndex(), request.getIndex() + 1);
+        if (heroStats.length == 0) {
+            return "";
+        }
+
         final HeroStats heroStat = heroStats[0];
 
         heroStat.setProperty(request.getProperty());

@@ -173,44 +173,15 @@ module.exports = {
         });
 
         document.getElementById('submitOptimizerReset').addEventListener("click", () => {
-            $(".optimizer-number-input").val("")
+            clearRatings();
+            clearStats();
+            clearForce();
 
             Selectors.clearGearMainAndSets();
 
-            document.querySelector('#atkSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#atkSliderInput').setAttribute('value', 0)
+            clearSubstatPriority();
 
-            document.querySelector('#hpSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#hpSliderInput').setAttribute('value', 0)
-
-            document.querySelector('#defSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#defSliderInput').setAttribute('value', 0)
-
-            document.querySelector('#spdSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#spdSliderInput').setAttribute('value', 0)
-
-            document.querySelector('#crSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#crSliderInput').setAttribute('value', 0)
-
-            document.querySelector('#cdSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#cdSliderInput').setAttribute('value', 0)
-
-            document.querySelector('#effSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#effSliderInput').setAttribute('value', 0)
-
-            document.querySelector('#resSlider')['rangeslider-js'].update({value: 0})
-            document.querySelector('#resSliderInput').setAttribute('value', 0)
-
-            document.querySelector('#filterSlider')['rangeslider-js'].update({value: 100})
-            document.querySelector('#filterSliderInput').setAttribute('value', 100)
-
-            $("#inputPredictReforges").prop('checked', true);
-            $("#inputAllowLockedItems").prop('checked', false);
-            $("#inputAllowEquippedItems").prop('checked', false);
-            $("#inputKeepCurrentItems").prop('checked', false);
-            $("#inputCanReforge").prop('checked', false);
-            $("#inputOnlyPlus15Gear").prop('checked', false);
-            $('#forceNumberSelect').val(0)
+            clearOptions();
 
             recalculateFilters();
         });
@@ -279,6 +250,30 @@ module.exports = {
             recalculateFilters();
         });
 
+        document.getElementById('substatPriorityLabel').addEventListener("click", async () => {
+            clearSubstatPriority();
+            recalculateFilters();
+        });
+        document.getElementById('statsLabel').addEventListener("click", async () => {
+            clearStats();
+            recalculateFilters();
+        });
+        document.getElementById('ratingsLabel').addEventListener("click", async () => {
+            clearRatings();
+            recalculateFilters();
+        });
+        document.getElementById('forceLabel').addEventListener("click", async () => {
+            clearForce();
+            recalculateFilters();
+        });
+        document.getElementById('optionsLabel').addEventListener("click", async () => {
+            clearOptions();
+            recalculateFilters();
+        });
+        document.getElementById('accessorySetsLabel').addEventListener("click", async () => {
+            Selectors.clearGearMainAndSets();
+            recalculateFilters();
+        });
     },
 
     drawPreview: (gearIds) => {
@@ -322,7 +317,7 @@ module.exports = {
         const getAllHeroesResponse = await Api.getAllHeroes();
         const selectedId = $( "#inputHeroAdd option:selected" ).val()
 
-        clearOptions("inputHeroAdd");
+        clearHeroOptions("inputHeroAdd");
         const optimizerHeroSelector = document.getElementById('inputHeroAdd')
         const heroes = getAllHeroesResponse.heroes;
         Utils.sortByAttribute(heroes, "name");
@@ -342,6 +337,54 @@ module.exports = {
         redrawHeroImage();
         recalculateFilters();
     }
+}
+
+function clearSubstatPriority() {
+    document.querySelector('#atkSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#atkSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#hpSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#hpSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#defSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#defSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#spdSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#spdSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#crSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#crSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#cdSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#cdSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#effSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#effSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#resSlider')['rangeslider-js'].update({value: 0})
+    document.querySelector('#resSliderInput').setAttribute('value', 0)
+
+    document.querySelector('#filterSlider')['rangeslider-js'].update({value: 100})
+    document.querySelector('#filterSliderInput').setAttribute('value', 100)
+}
+
+function clearRatings() {
+    $(".optimizer-number-input").val("")
+}
+function clearStats() {
+    $(".stat-number-input").val("")
+}
+function clearForce() {
+    $(".force-number-input").val("")
+}
+function clearOptions() {
+    $("#inputPredictReforges").prop('checked', true);
+    $("#inputAllowLockedItems").prop('checked', false);
+    $("#inputAllowEquippedItems").prop('checked', false);
+    $("#inputKeepCurrentItems").prop('checked', false);
+    $("#inputCanReforge").prop('checked', false);
+    $("#inputOnlyPlus15Gear").prop('checked', false);
+    $('#forceNumberSelect').val(0);
 }
 
 async function editGearFromIcon(id) {
@@ -388,7 +431,7 @@ function redrawHeroImage() {
 
 }
 
-function clearOptions(id) {
+function clearHeroOptions(id) {
     var select = document.getElementById(id);
     var length = select.options.length;
     for (i = length-1; i >= 0; i--) {

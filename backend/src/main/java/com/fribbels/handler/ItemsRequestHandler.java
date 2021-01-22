@@ -242,6 +242,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             dbItem.setEquippedById(item.getEquippedById());
             dbItem.setLocked(item.isLocked());
             dbItem.setAugmentedStats(item.getAugmentedStats());
+            dbItem.setReforgedStats(item.getReforgedStats());
             dbItem.setEnhance(item.getEnhance());
             dbItem.setGear(item.getGear());
             dbItem.setLevel(item.getLevel());

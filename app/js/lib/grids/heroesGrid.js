@@ -138,7 +138,7 @@ function buildGrid(heroes) {
             {headerName: 'icon', field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
             {headerName: 'elem', field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: 'class', field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
-            {headerName: 'name', field: 'name', width: 110, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
+            {headerName: 'name', field: 'name', width: 170, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
             // {headerName: 'Stars', field: 'rarity', width: 50},
             // {headerName: 'Class', field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: 'sets', field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},

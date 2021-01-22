@@ -408,7 +408,6 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Select/interact with multiple heroes at once
  - Keyboard actions ctrl + a, ctrl + s, ctrl + arrows
  - Rage set damage calculation
- - Option to select a location to save zarroc import
  - Enable cross platform for Linux
  - Verify all imported screenshots are image files
  - Investigate decrypting network traffic for gear data

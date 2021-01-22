@@ -98,7 +98,7 @@ window.jQuery = $;
               <div class="horizontalSpace"></div>
 
               <div class="panelLabel">
-                <div class="panelLabelText">Options</div>
+                <div class="panelLabelText" id="optionsLabel">Options</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="optionsTooltip"></img>
               </div>
               <div>
@@ -140,78 +140,78 @@ window.jQuery = $;
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
-                <div class="panelLabelText">Stat filters</div>
+                <div class="panelLabelText" id="statsLabel">Stat filters</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="filterStatsTooltip"></img>
               </div>
-              <input type="number" id="inputMinAtkLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinAtkLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">Atk</div>
-              <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinHpLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinHpLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">Hp</div>
-              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinDefLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinDefLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">Def</div>
-              <input type="number" id="inputMaxDefLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxDefLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinSpdLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinSpdLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">Spd</div>
-              <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinCrLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinCrLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">CRate</div>
-              <input type="number" id="inputMaxCrLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxCrLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinCdLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinCdLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">CDmg</div>
-              <input type="number" id="inputMaxCdLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxCdLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinEffLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinEffLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">Eff</div>
-              <input type="number" id="inputMaxEffLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxEffLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinResLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinResLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel">Res</div>
-              <input type="number" id="inputMaxResLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxResLimit" class="optimizer-number-input stat-number-input"><br>
             </div>
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
-                <div class="panelLabelText">Rating filters</div>
+                <div class="panelLabelText" id="ratingsLabel">Rating filters</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="filterRatingsTooltip"></img>
               </div>
-              <input type="number" id="inputMinCpLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">Cp</div>
-              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input rating-number-input"><br>
 
-              <input type="number" id="inputMinHppsLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinHppsLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">HpS</div>
-              <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input rating-number-input"><br>
 
-              <input type="number" id="inputMinEhpLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinEhpLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">Ehp</div>
-              <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input rating-number-input"><br>
 
-              <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">EhpS</div>
-              <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input rating-number-input"><br>
 
-              <input type="number" id="inputMinDmgLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinDmgLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">Dmg</div>
-              <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input rating-number-input"><br>
 
-              <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">DmgS</div>
-              <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input rating-number-input"><br>
 
-              <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">Mcd</div>
-              <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input rating-number-input"><br>
 
-              <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input">
+              <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel">McdS</div>
-              <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input"><br>
+              <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input rating-number-input"><br>
             </div>
 
             <div class="vertical"></div>
@@ -219,7 +219,7 @@ window.jQuery = $;
             <div id="stat-priority-panel" class="constraints-panel-col">
 
                 <div class="panelLabel">
-                  <div class="panelLabelText">Substat Priority</div>
+                  <div class="panelLabelText" id="substatPriorityLabel">Substat priority (<u>clear</u>)</div>
                   <img src="./assets/tooltip.png" class="tooltipImage" id="substatPriorityTooltip"></img>
                 </div>
 
@@ -274,7 +274,7 @@ window.jQuery = $;
 
             <div id="constraints-focus-panel" class="constraints-panel-col">
               <div class="panelLabel">
-                <div class="panelLabelText">Accessory main stats</div>
+                <div class="panelLabelText" id="accessorySetsLabel">Accessory main stats</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="accessoryMainStatsTooltip"></img>
               </div>
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
@@ -399,52 +399,52 @@ window.jQuery = $;
             <div id="placeholder-panel" class="constraints-panel-col-small">
 
                 <div class="panelLabel">
-                  <div class="panelLabelText">Force</div>
+                  <div class="panelLabelText" id="forceLabel">Force</div>
                   <img src="./assets/tooltip.png" class="tooltipImage" id="forceTooltip"></img>
                 </div>
-                <input type="number" id="inputMinAtkForce" class="optimizer-number-input">
+                <input type="number" id="inputMinAtkForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Atk</div>
-                <input type="number" id="inputMaxAtkForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxAtkForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinAtkPercentForce" class="optimizer-number-input">
+                <input type="number" id="inputMinAtkPercentForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Atk %</div>
-                <input type="number" id="inputMaxAtkPercentForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxAtkPercentForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinSpdForce" class="optimizer-number-input">
+                <input type="number" id="inputMinSpdForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Spd</div>
-                <input type="number" id="inputMaxSpdForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxSpdForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinCrForce" class="optimizer-number-input">
+                <input type="number" id="inputMinCrForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">CRate</div>
-                <input type="number" id="inputMaxCrForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxCrForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinCdForce" class="optimizer-number-input">
+                <input type="number" id="inputMinCdForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">CDmg</div>
-                <input type="number" id="inputMaxCdForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxCdForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinHpForce" class="optimizer-number-input">
+                <input type="number" id="inputMinHpForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Hp</div>
-                <input type="number" id="inputMaxHpForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxHpForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinHpPercentForce" class="optimizer-number-input">
+                <input type="number" id="inputMinHpPercentForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Hp %</div>
-                <input type="number" id="inputMaxHpPercentForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxHpPercentForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinDefForce" class="optimizer-number-input">
+                <input type="number" id="inputMinDefForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Def</div>
-                <input type="number" id="inputMaxDefForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxDefForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinDefPercentForce" class="optimizer-number-input">
+                <input type="number" id="inputMinDefPercentForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Def %</div>
-                <input type="number" id="inputMaxDefPercentForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxDefPercentForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinEffForce" class="optimizer-number-input">
+                <input type="number" id="inputMinEffForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Eff</div>
-                <input type="number" id="inputMaxEffForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxEffForce" class="optimizer-number-input force-number-input"><br>
 
-                <input type="number" id="inputMinResForce" class="optimizer-number-input">
+                <input type="number" id="inputMinResForce" class="optimizer-number-input force-number-input">
                 <div class="inputStatLabel">Res</div>
-                <input type="number" id="inputMaxResForce" class="optimizer-number-input"><br>
+                <input type="number" id="inputMaxResForce" class="optimizer-number-input force-number-input"><br>
             </div>
 
           </div>
@@ -1165,18 +1165,23 @@ window.jQuery = $;
         <div class="heroesTabTopButtonRowRight">
           <div class="gearTabSetFilterIconsRow">
             <div class="heroTabButton">
-              <div class="gearTabButton" id="knightClassFilter">
-                <img class="gearTabIcon" src="./assets/classknight.png"></img>
-              </div>
-            </div>
-            <div class="heroTabButton">
               <div class="gearTabButton" id="warriorClassFilter">
                 <img class="gearTabIcon" src="./assets/classwarrior.png"></img>
               </div>
             </div>
             <div class="heroTabButton">
+              <div class="gearTabButton" id="knightClassFilter">
+                <img class="gearTabIcon" src="./assets/classknight.png"></img>
+              </div>
+            </div>
+            <div class="heroTabButton">
               <div class="gearTabButton" id="assassinClassFilter">
                 <img class="gearTabIcon" src="./assets/classassassin.png"></img>
+              </div>
+            </div>
+            <div class="heroTabButton">
+              <div class="gearTabButton" id="rangerClassFilter">
+                <img class="gearTabIcon" src="./assets/classranger.png"></img>
               </div>
             </div>
             <div class="heroTabButton">
@@ -1187,11 +1192,6 @@ window.jQuery = $;
             <div class="heroTabButton">
               <div class="gearTabButton" id="manauserClassFilter">
                 <img class="gearTabIcon" src="./assets/classmanauser.png"></img>
-              </div>
-            </div>
-            <div class="heroTabButton">
-              <div class="gearTabButton" id="rangerClassFilter">
-                <img class="gearTabIcon" src="./assets/classranger.png"></img>
               </div>
             </div>
           </div>

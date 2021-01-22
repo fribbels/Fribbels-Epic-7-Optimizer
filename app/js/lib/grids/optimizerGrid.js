@@ -1,7 +1,7 @@
 const tinygradient = require('tinygradient');
 var gradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
 
-var optimizerGrid;
+optimizerGrid = null;
 var currentSortModel;
 var currentAggregate = {};
 
@@ -209,8 +209,8 @@ function buildGrid() {
         rowSelection: 'single',
         onRowSelected: onRowSelected,
         pagination: true,
-        paginationPageSize: 1000,
-        cacheBlockSize: 1000,
+        paginationPageSize: 500,
+        cacheBlockSize: 500,
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
         datasource: datasource,

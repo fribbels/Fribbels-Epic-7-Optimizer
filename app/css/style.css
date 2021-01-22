@@ -461,7 +461,6 @@ input {
   font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
   font-size: 14px;
   font-weight: 600;
-  /*letter-spacing: -0.5px;*/
   text-align: center;
 }
 .ag-header-cell-text {
@@ -478,11 +477,10 @@ input {
 .ag-cell-value {
   font-weight: 400;
   text-align: center;
-  /*font-family: Helvetica Neue,Helvetica,Arial,sans-serif;*/
   font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
   font-size: 1em;
   display: flex;
-  justify-content: center; /* align horizontal */
+  justify-content: center;
   align-items: center;
 }
 
@@ -711,10 +709,10 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 400;
 }
 .heroesTabButtonRow {
-  padding-top: 10px;
-  padding-bottom: 12px;
-    display: flex;
-    align-items: center;
+  padding-top: 4px;
+  padding-bottom: 14px;
+  display: flex;
+  align-items: center;
 }
 .tooltipImage {
   height: 14px;
@@ -815,11 +813,24 @@ body.dark-theme input {
   height: 370px;
 }
 .gearTabIcon {
-  height: 100%;
+  display: block;
+  min-width: 3px;
+  min-height: 3px;
+  width: 37px;
+  height: 36px;
+  position: relative;
+  top: 4px;
+  left: 2px;
 }
 .gearTabIconSet {
+  display: block;
+  min-width: 3px;
+  min-height: 3px;
+  width: 37px;
+  height: 36px;
   position: relative;
-  top: 1px;
+  top: 4px;
+  left: 3px;
 }
 .gearTabLongButton {
   width: 155px;
@@ -845,12 +856,15 @@ body.dark-theme input {
   display: flex;
   flex-direction: row;
   cursor: pointer;
+  min-width: 42px;
+  height: 42px;
 }
 .clearAllFilterButton:active {
-  background: #EDF5FA;
+  background: #E1F4FF;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.25);
 }
 .gearTabButtonSelected {
-  background: #EDF5FA; /* #b7e4ff */
+  background: #E1F4FF; /* #b7e4ff */
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.25);
 }
 .gearTabGearFilterIconsRow {
@@ -1018,4 +1032,45 @@ body.dark-theme input {
   display: inline-block;
   width: 100px;
   text-align: right;
+}
+#substatPriorityLabel {
+  cursor: pointer;
+}
+#substatPriorityLabel:hover:after{
+  cursor: pointer;
+}
+#statsLabel {
+  cursor: pointer;
+}
+#statsLabel:hover:after {
+  cursor: pointer;
+  content: " (clear)";
+}
+#ratingsLabel {
+  cursor: pointer;
+}
+#ratingsLabel:hover:after {
+  cursor: pointer;
+  content: " (clear)";
+}
+#forceLabel {
+  cursor: pointer;
+}
+#forceLabel:hover:after {
+  cursor: pointer;
+  content: " (clear)";
+}
+#optionsLabel {
+  cursor: pointer;
+}
+#optionsLabel:hover:after {
+  cursor: pointer;
+  content: " (clear)";
+}
+#accessorySetsLabel {
+  cursor: pointer;
+}
+#accessorySetsLabel:hover:after {
+  cursor: pointer;
+  content: " (clear)";
 }

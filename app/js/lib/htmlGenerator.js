@@ -15,11 +15,11 @@ function statToText(stat, baseStats, item) {
 
     if (Reforge.isReforgeable(item)) {
         const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
-        const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : stat.reforgedValue;
+        const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : getPercentageEquivalent(stat, baseStats, true);
 
         value = unreforgedValue + " ➤ " + reforgedValue
     } else {
-        value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats);
+        value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats, false);
     }
 
 
@@ -39,21 +39,23 @@ function shortenStats(statType) {
     return statType;
 }
 
-function getPercentageEquivalent(stat, baseStats) {
+function getPercentageEquivalent(stat, baseStats, useReforged) {
+    const value = useReforged ? stat.reforgedValue : stat.value;
+
     if (stat.type == "Health") {
-        var num = stat.value/baseStats.hp*100;
-        return stat.value + ` (${Math.round(num)}%)`;
+        var num = value/baseStats.hp*100;
+        return value + ` (${Math.round(num)}%)`;
     }
     if (stat.type == "Defense") {
-        var num = stat.value/baseStats.def*100;
-        return stat.value + ` (${Math.round(num)}%)`;
+        var num = value/baseStats.def*100;
+        return value + ` (${Math.round(num)}%)`;
     }
     if (stat.type == "Attack") {
-        var num = stat.value/baseStats.atk*100;
-        return stat.value + ` (${Math.round(num)}%)`;
+        var num = value/baseStats.atk*100;
+        return value + ` (${Math.round(num)}%)`;
     }
     if (stat.type == "Speed") {
-        return stat.value;
+        return value;
     }
 }
 

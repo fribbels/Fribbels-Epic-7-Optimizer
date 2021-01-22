@@ -105,8 +105,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     console.log("Document initialized")
 
-    $(document).on('click','input[type=number]',function(){ this.select(); });;
-    $(document).on('click','input[type=text]',function(){ this.select(); });;
+    // $(document).on('click','input[type=number]',function(){ this.select(); });;
+    // $(document).on('click','input[type=text]',function(){ this.select(); });;
 
     HeroesTab.initialize();
     HeroesGrid.initialize();
