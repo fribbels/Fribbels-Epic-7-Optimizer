@@ -1,4 +1,5 @@
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -169,7 +170,7 @@ _________________
 
 ### Optimization Results
 
-![](https://i.imgur.com/4rv58Al.png)
+![](https://i.imgur.com/zF1xKlE.png)
 
 Here you can see all the results from the optimization, sort by stat, and equip/lock the results.
 - The top row shows your currently equipped gear stats
@@ -182,7 +183,7 @@ Here you can see all the results from the optimization, sort by stat, and equip/
 
 ## Gear Tab
 
-![](https://i.imgur.com/EejMOCl.png)
+![](https://i.imgur.com/W6bHn4Y.png)
 
 Here you can find a table of all your gears, and sort/filter them. The icons at the bottom enable filters for set and gear slot, and the X clears the filters.
 The **Score** column is a stat I made up which is similar to WSS, with the difference that it takes flat stats into consideration while WSS ignores them. The calculation is:
@@ -198,6 +199,7 @@ The **Score** column is a stat I made up which is similar to WSS, with the diffe
     + Flat Attack / 39 * 0.5
     + Flat Defense / 31 * 0.5
     + Flat Hp / 174 * 0.5
+
 Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and used that as a measure of how well the flat stats rolled. The 0.5 multiplier is completely arbitrary, but represents that flat stats are generally less desirable than percent stats.
 
 ![](https://i.imgur.com/fwqjtkF.png)
@@ -206,7 +208,7 @@ You can edit existing gears or add new gears with this page, and filling in the 
 
 ## Heroes Tab
 
-![](https://i.imgur.com/YBGNAwD.png)
+![](https://i.imgur.com/FnMbGWO.png)
 
 Here you can add new heroes and manage existing ones. I think most of the buttons are fairly self explanatory, the one thing worth noting is the **Add Bonus Stats** page, which lets you add artifact/imprint stats to the hero for optimization.
 
@@ -216,16 +218,16 @@ SSS Krau with +30 Aurius will have 91 Atk / 819 Hp / and 18% imprint Hp.
 
 ## Importer tab
 
-![](https://i.imgur.com/gbgjOgv.png)
+![](https://i.imgur.com/LyJq3Lr.png)
 
 This tab lets you do various things with importing/exporting files.
 _________________
 
-### Creating a new gear set from screenshots
+### Creating gear data from screenshots
 
 Select the folder you have your screenshots in and the app will start reading your screenshots. Make sure the folder only contains your screenshots and nothing else. This will then output your gear.txt file, and you can export it somewhere for the next step. If there are any errors reading the screenshots, the list of failed files will be shown.
 
-### Importing a gear set from a file
+### Importing gear data
 
 Once you have the gear.txt file from the OCR step, choose the file and it will import the gear into the optimizer.
 
@@ -240,7 +242,7 @@ If you have new screenshot files to add to a save, use the Append option.
 If you already have a save, and you've screenshotted all your gear again, use Merge to replace old items with new items.
 
 
-### Save/Load gear and heroes
+### Save/Load all optimizer data
 
 Once you make changes to your items/heroes, the changes should be saved before you close the app. You can choose a file to save it to, and then later on load that file to import the data back in.
 
@@ -303,9 +305,9 @@ Please read these instructions carefully!
 * Most emulators have a screenshot hotkey to make this easier: Ctrl + 0 for LDPlayer
 * I would recommend screenshotting 10-20 gears to start with, then testing the rest of the steps to make sure the screenshots work before doing them all. I usually only screenshot the +9 to +15 gears for the optimizer.
 3. Create an empty folder and collect all your screenshots into that folder.<br><br>
-4. Go to the Importer tab, click on "Choose folder" under *Creating a new gear set from screenshots*, find your screenshots folder, and click Open Folder.<br><br>
+4. Go to the Importer tab, click on "Choose folder" under *Creating gear data from screenshots*, find your screenshots folder, and click Open Folder.<br><br>
 5. The app will start reading the screenshots and your progress will be displayed. Once it is done, click Export, and save the *gear.txt* file.<br><br>
-6. Under the *Importing a gear set from a file* section, click on Append data, and select your *gear.txt* file.<br><br>
+6. Under the *Importing gear data* section, click on Append data, and select your *gear.txt* file.<br><br>
 7. Now you should see your imported gears under the Gears tab.
 
 **Optimizing a unit:**
@@ -324,47 +326,19 @@ Here's a video that covers most of the importing process: https://www.youtube.co
 
 **Tips to get good optimization results:**
 
-* Here's some quick tips on getting the best results. This is assuming you've read the [Optimization panel](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#optimizer-tab) descriptions
-* The goal is to add filters to narrow down results so the optimizer doesn't take forever, but keep the search range wide enough that you don't lose good options.
+Here's some quick tips on getting the best results. This is assuming you've read the [Optimization panel](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#optimizer-tab) descriptions.
+
 * **Input the sets and main stats whenever possible.** This is the easiest way to narrow down results.
-* Don't narrow down your results too much. If you see your # of permutations at like 10,000 or so, your filters might be too narrow, you can expand/remove some filters for more/better results.
-* **Make sure to set your stat priority correctly!** DPS units should have high priority on Atk / Cr / Cd / Speed. Tank units should have high priority on Hp / Def / Speed for example. Bad priorities will lead to bad results because good options get filtered out.
-* Adjust the Top n% bar on the priority filter to see what your results look like. Too high % will take a long time, but too low % will exclude good results. Most of the time I use 30-50%, sometimes lower if I want only my best gear on the unit.
+* **Use the substat priority filter and make sure to set your stat priority correctly!**
+  * DPS units should have high priority on Atk / Cr / Cd / Speed for example.
+  * Tank units should have high priority on Hp / Def / Speed for example.
+  * Bad priorities will lead to bad results because good options get filtered out.
+* **Lower the Top % to make the search faster, or increase Top % to search more results.** Most of the time I use 25-40%, sometimes lower if I want only my best gear on the unit.
 * If you want a certain piece of gear to stay on a hero, go to the Gear tab -> Edit Selected Item -> Equipped and equip it on them first. [Example](https://i.imgur.com/oNO9ivL.png) Then you can use the optimizer with "Keep current" checked to keep that piece on them.
 
 ## Closing thoughts
 
 Hopefully this is useful for anyone looking for an easier way to gear their units.  There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
-
-** v1.3.0 Release **
- - Invalid dpi error
- - Add info on which preset stats are auto-added
- - Warning if permutations are > 5 billion
- - Alphabetizing sets, hero selector
- - Note to add arti/ee/imprint on bonus stats
- - Clickable lock icon
- - Allow append json
- - Save filter preferences
- - Filter out abyss 85 lifesteal for reforge
- - Enhancement +3/6/9/12/15 filter
- - Main stat filter on gear page
- - +15 only filter on optimizer
- - Change 7Zip to Zip
- - Save Gear configurations, compare between them
- - Class/Element filter for Heroes tab
- - Gear enhance filters
- - Autocheck new version
- - Manual gear input improvements
- - Gear page: count of selected
- - Heatmap scores
- - Tooltips broken
- - Block when incorrect substat prio
- - Manual equip is bricked
- - Reorder heroes list
- - Equipping build after sorting bricks
- - Duplicate filter
- - Make Network Error less confusing
- - Show errors on invalid imports/missing main stat
 
 **Working on:**
  - v1.4.0
@@ -422,6 +396,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
    - Try moving your app and screenshot folder to a different location. (try the desktop)
   - If you're having trouble running the app after downloading:
     - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-x.x.x...' file (for your specific OS)
+    -   Error about a missing "ffmpeg.dll", you might have opened the file without unzipping it. Make sure to unzip/extract the .zip file after downloading it.
 - If you see a "Error: EPERM: operation not permitted" error pop up while importing, there are a couple potential fixes:
   - Restart your computer, especially if you installed Java recently
   - Your antivirus might be blocking the app, try disabling it. I've seen issues with Avast specifically, and disabling Avast temporarily solves it.
@@ -430,16 +405,16 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
   - Move the app and screenshots folder to a new file location
 - If you get a error that contains "Current relative path is C:\Windows\system32..."
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
-- If a hero is missing from the drop down list, the data is being pulled from Epic7DB API so it may be an issue with that. If the hero is available in the Epic7DB API but not in this app, then contact me.
 - If you're having trouble using it on Mac - "The application "FribbelsE7Optimizer" can't be opened":
   - Try unzipping the file using Unarchiver from the app store instead of Archive Utility. [Example](https://i.imgur.com/y9uGQcH.png)
   - Try downloading the .dmg file if you were using the zip/app file.
 - If you're having trouble with Bluestacks/unable to resize the screenshots to 1600x900:
   - Windows: See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268).
   - Mac: Resize to 1600x900 through Bluestacks options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900.
+- If a hero is missing from the drop down list, the data is being pulled from Epic7DB API so it may be an issue with that. If the hero is available in the Epic7DB API but not in this app, then contact me.
 
 ## Contact me
 
-Feel free to contact me on discord at fribbels#7526 with questions or comments or ideas. If you ran into any issues, please check out the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above.
+Feel free to contact me on discord at fribbels#7526 with questions or comments or ideas. If you ran into any issues, please check out the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
 
 If you want to show support for the optimizer, you can [buy me a coffee](https://www.buymeacoffee.com/fribbels) or come say hi on discord!
