@@ -1,7 +1,4 @@
 
-
-
-
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -22,7 +19,7 @@ Here's what it looks like currently:
 ![](https://i.imgur.com/dr0Gh1l.png)
 
 ## Requirements
-- Windows or MacOS, 64-bit
+- 64-bit Windows or MacOS
 - Java 8, 64-Bit installed (Please download if you don't yet have it: https://java.com/en/download/manual.jsp, use the offline installer)
 _________________
 
@@ -47,8 +44,6 @@ _________________
   * [Closing thoughts](#closing-thoughts)
   * [Troubleshooting](#troubleshooting)
   * [Contact me](#contact-me)
-
-
 
 ## Optimizer Tab
 
@@ -96,13 +91,13 @@ _________________
 
 This panel is similar to the primary stats panel, but applies for calculated stats. These stats you won't see in-game but are various ratings that can help decide between different builds.
 
-- **Hp*s** -- `Health * Speed` rating. Useful for optimizing units where you want a combination of speed and pure health.
+- **HpS** -- `Health * Speed` rating. Useful for optimizing units where you want a combination of speed and pure health.
 - **Ehp** -- Effective HP, calculated by: `HP * (Defense/300 + 1)`. EHP is a measure of how much damage your unit can take before dying and is useful for rating the tankiness of units.
-- **Ehp*s** -- `Effective HP * Speed` rating. Useful for optimizing units where you want a combination of speed and hp/def for tankiness.
+- **EhpS** -- `Effective HP * Speed` rating. Useful for optimizing units where you want a combination of speed and hp/def for tankiness.
 - **Dmg** --  Average damage, calculated by: `Attack * Crit Chance * Crit Damage`. Measures how much damage your unit will deal on average. Note that this takes crit chance into account, so lowering your crit chance impacts the Dmg rating because you'll crit less often, which lowers your average output.
-- **Dmg*s** -- DPS rating, calculated by: `Attack * Crit Chance * Crit Damage * Speed`. This measures how fast your unit can dish out damage.
-- **Mcdmg** -- Max Crit Damage, calculated by: `Attack * Crit Damage`. This does not take into account Crit Chance, as opposed to Dmg, and assumes your unit is at 100% Crit Chance. Useful for measuring damage of units like CDom that only need 50% Crit Chance, or PVE units that only need 85% with elemental advantage.
-- **Mcdmg*s** -- Max DPS rating, calculated by `Attack * Crit Damage * Speed`. Similar to Dmg*s, just without Crit Chance.
+- **DmgS** -- DPS rating, calculated by: `Attack * Crit Chance * Crit Damage * Speed`. This measures how fast your unit can dish out damage.
+- **Mcd** -- Max Crit Damage, calculated by: `Attack * Crit Damage`. This does not take into account Crit Chance, as opposed to Dmg, and assumes your unit is at 100% Crit Chance. Useful for measuring damage of units like CDom that only need 50% Crit Chance, or PVE units that only need 85% with elemental advantage.
+- **McdS** -- Max DPS rating, calculated by `Attack * Crit Damage * Speed`. Similar to Dmg*s, just without Crit Chance.
 - **CP** -- This is the CP you would see on the unit's stat page ingame, but doesn't take skill enhances into account. Useful for optimizing unused characters with leftover gear for world boss.
 
 In this example we're looking for Ruele builds with at least 200,000 Effective HP.
@@ -209,7 +204,6 @@ Its used as a measure of how well your gear rolled, scaled by the max roll for 8
 
 You can edit existing gears or add new gears with this page, and filling in the relevant fields.
 
-
 ## Heroes Tab
 
 ![](https://i.imgur.com/YBGNAwD.png)
@@ -237,8 +231,13 @@ Once you have the gear.txt file from the OCR step, choose the file and it will i
 
 * *Append data* will add the new gears to your existing gears.
 * *Overwrite data* will load in the new data, removing all previous items and heroes
+* *Merge data* will combine your new gear screenshots with your currently loaded gear while keeping your heroes' equipped gear and builds intact.
+
+If you want to wipe all your data and start clean with gear screenshots, use Overwrite.
 
 If you have new screenshot files to add to a save, use the Append option.
+
+If you already have a save, and you've screenshotted all your gear again, use Merge to replace old items with new items.
 
 
 ### Save/Load gear and heroes
@@ -250,7 +249,7 @@ The app also does autosave to an 'autosave.json' upon changes being made, and wi
 
 ### Import gear from Zarroc optimizer
 
-If you're already a user of Zarroc's gear optimizer, this lets you import your data directly from your existing save file. All gear, heroes, and artifacts will be imported.
+If were a user of Zarroc's gear optimizer, this lets you import your data directly from your existing Zarroc save file. All gear, heroes, and artifacts will be imported.
 
 
 ## Getting Started
@@ -335,9 +334,9 @@ Here's a video that covers most of the importing process: https://www.youtube.co
 
 ## Closing thoughts
 
-Hopefully this is useful for anyone looking for an easier way to gear their units. I know the [Zarroc optimizer](https://github.com/Zarroc2762/E7-Gear-Optimizer) does a lot of similar things but it has been pretty unmaintained and out of date, so I decided to build my own app with a different optimization algorithm. There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
+Hopefully this is useful for anyone looking for an easier way to gear their units.  There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features, and I welcome other contributors to the code as well.
 
-** Already done for 1.3.0 Release **
+** v1.3.0 Release **
  - Invalid dpi error
  - Add info on which preset stats are auto-added
  - Warning if permutations are > 5 billion
@@ -368,6 +367,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Show errors on invalid imports/missing main stat
 
 **Working on:**
+ - v1.4.0
  - Dark mode
 
  **Medium priority:**
@@ -413,29 +413,30 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 ## Troubleshooting
 
-- Restart your computer and retry first (there might be a child process still kicking around)
-- Try killing any java.exe processes in Task Manager that came from this app
-- Error message: 'java is not recognized as an internal or external command' upon opening the app. Install Java 8 64-bit version to fix.
-- After selecting a screenshot folder and pressing submit, nothing happens or gets stuck. Check if there are any invalid screenshots in your folder. They should all look like exactly like https://i.imgur.com/ny7uaa8.jpg in 1600x900 resolution
-- If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases
- And click on the 'FribbelsE7Optimizer-x.x.x...' file (for whatever the latest version is)
-- If you see a "Error: EPERM: operation not permitted" error in the dev console, there are a couple potential fixes:
+- If the optimizer doesn't work or doesn't load correctly:
+  - Try restarting your computer, and reopen the app (there might be a child process still kicking around)
+  - Try killing any java.exe processes in Task Manager that came from this app
+ - If you're having problems with importing screenshot files:
+   - Inspect your screenshots and make sure they are exactly **1600x900** resolution.
+   - Make sure your Epic 7 settings have **English** and **High Quality Support** enabled.
+   - Try moving your app and screenshot folder to a different location. (try the desktop)
+  - If you're having trouble running the app after downloading:
+    - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-x.x.x...' file (for your specific OS)
+- If you see a "Error: EPERM: operation not permitted" error pop up while importing, there are a couple potential fixes:
   - Restart your computer, especially if you installed Java recently
   - Your antivirus might be blocking the app, try disabling it. I've seen issues with Avast specifically, and disabling Avast temporarily solves it.
   - Your file or folder contents might be compressed, uncheck this box on the folder: https://i.imgur.com/kSzTqek.png
   - Run the app as administrator
   - Move the app and screenshots folder to a new file location
-- Gear shows up as +45 or i90 pieces show as i20, etc
-  - Make sure your screenshots are 1600x900, and on the correct page.
-  - Make sure Epic 7 has High Quality Support enabled, and the game language is English
 - If you get a error that contains "Current relative path is C:\Windows\system32..."
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
-- If your optimization suddenly stops working completely, check if you have one of these weird looking items in your gear tab: https://i.imgur.com/BzAgRjR.png. If one is there, edit it to fill in all the fields, but just leave the stats at 0. https://i.imgur.com/wDKDaE5.png
 - If a hero is missing from the drop down list, the data is being pulled from Epic7DB API so it may be an issue with that. If the hero is available in the Epic7DB API but not in this app, then contact me.
-- Mac - "The application "FribbelsE7Optimizer" can't be opened.
+- If you're having trouble using it on Mac - "The application "FribbelsE7Optimizer" can't be opened":
   - Try unzipping the file using Unarchiver from the app store instead of Archive Utility. [Example](https://i.imgur.com/y9uGQcH.png)
   - Try downloading the .dmg file if you were using the zip/app file.
-  - Can't resize Bluestacks to 1600x900. Resize to 1600x900 through options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900. See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268).
+- If you're having trouble with Bluestacks/unable to resize the screenshots to 1600x900:
+  - Windows: See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268).
+  - Mac: Resize to 1600x900 through Bluestacks options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900.
 
 ## Contact me
 
