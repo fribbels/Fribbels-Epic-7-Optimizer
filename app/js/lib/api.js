@@ -4,6 +4,10 @@ const endpoint = "http://localhost:8130";
 
 module.exports = {
 
+    setSettings: async(settings) => {
+        return post('/system/setSettings', settings);
+    },
+
     ocr: async(id) => {
         return post('/ocr', {
             id: id
@@ -55,7 +59,7 @@ module.exports = {
     },
 
     cancelOptimizationRequest: async () => {
-        return post('/system');
+        return post('/system/interrupt');
     },
 
     getOptimizationProgress: async () => {
@@ -69,6 +73,12 @@ module.exports = {
     getItemById: async (id) => {
         return post('/items/getItemById', {
             id: id
+        });
+    },
+
+    getItemsByIds: async (ids) => {
+        return post('/items/getItemsByIds', {
+            ids: ids
         });
     },
 
@@ -172,10 +182,11 @@ module.exports = {
         });
     },
 
-    equipItemsOnHero: async (heroId, itemIds) => {
+    equipItemsOnHero: async (heroId, itemIds, useReforgeStats) => {
         return post('/heroes/equipItemsOnHero', {
             heroId: heroId,
-            itemIds: itemIds
+            itemIds: itemIds,
+            useReforgeStats: useReforgeStats
         });
     },
 
@@ -221,6 +232,7 @@ function post(api, request) {
     return new Promise((resolve, reject) => {
         axios.post(endpoint + api, request)
         .then(response => {
+            // console.trace("Api call", api, request, response);
             console.log("Api call", api, request, response);
             resolve(response.data);
         })

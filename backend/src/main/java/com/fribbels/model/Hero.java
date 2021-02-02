@@ -41,6 +41,8 @@ public class Hero {
     private int mcdmg;
     private int mcdmgps;
 
+    private int score;
+
     private String id;
     private String name;
     private int rarity;
@@ -134,5 +136,7 @@ public class Hero {
         this.dmgps = heroStats.getDmgps();
         this.mcdmg = heroStats.getMcdmg();
         this.mcdmgps = heroStats.getMcdmgps();
+
+        this.score = heroStats.getScore();
     }
 }

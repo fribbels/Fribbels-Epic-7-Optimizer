@@ -7,6 +7,15 @@ tippy.setDefaultProps({
 });
 
 module.exports = {
+    displayItem: (element, html) => {
+        tippy('#' + element, {
+            allowHTML: true,
+            placement: 'auto',
+            maxWidth: 550,
+            content: html
+        })
+    },
+
     initialize: () => {
         tippy('#forceModeTooltip', {
             content:

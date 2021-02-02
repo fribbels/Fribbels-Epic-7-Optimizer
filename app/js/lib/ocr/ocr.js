@@ -232,14 +232,15 @@ module.exports = {
         const gear = [];
         var count = 1;
 
-        var length = filenames.filter(x => !x.includes('debug')).length;
+        var length = filenames.filter(x => !x.includes('debug'))
+                              .filter(x => !x.includes('.DS_Store')).length;
         var failed = [];
 
         for (var filename of filenames) {
             try {
                 $('#exportOutputText').val("Reading screenshots in progress...\nSucceeded: " + gear.length + " / " + length + "\nFailed: " + failed.length + " / " + length)
 
-                if (filename.includes("inverted") || filename.includes("debug")) {
+                if (filename.includes("inverted") || filename.includes("debug") || filename.includes(".DS_Store")) {
                     await fs.unlink(filename, err => {if (err) console.log(err)})
                     continue;
                 }

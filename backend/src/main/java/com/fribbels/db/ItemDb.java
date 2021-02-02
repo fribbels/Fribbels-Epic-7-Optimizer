@@ -1,5 +1,6 @@
 package com.fribbels.db;
 
+import com.fribbels.handler.HeroesRequestHandler;
 import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.Hero;
 import com.fribbels.model.Item;
@@ -49,18 +50,33 @@ public class ItemDb {
 
     public Item calculateWss(final Item item) {
         final AugmentedStats stats = item.getAugmentedStats();
+        final AugmentedStats reforgedStats = item.getReforgedStats() == null ? stats : item.getReforgedStats();
+
         double wssValue =
                 stats.getAttackPercent() +
-                stats.getDefensePercent() +
-                stats.getHealthPercent() +
-                stats.getEffectResistance() +
-                stats.getEffectiveness() +
-                stats.getSpeed() * (8.0/4.0) +
-                stats.getCritDamage() * (8.0/7.0) +
-                stats.getCritRate() * (8.0/5.0) +
-                stats.getAttack() / 39.0 * (1.0/2.0) +
-                stats.getDefense() / 31.0 * (1.0/2.0) +
-                stats.getHealth() / 174.0 * (1.0/2.0);
+                        stats.getDefensePercent() +
+                        stats.getHealthPercent() +
+                        stats.getEffectResistance() +
+                        stats.getEffectiveness() +
+                        stats.getSpeed() * (8.0/4.0) +
+                        stats.getCritDamage() * (8.0/7.0) +
+                        stats.getCritRate() * (8.0/5.0) +
+                        stats.getAttack() / 39.0 * (1.0/2.0) +
+                        stats.getDefense() / 31.0 * (1.0/2.0) +
+                        stats.getHealth() / 174.0 * (1.0/2.0);
+
+        double reforgedWssValue =
+                reforgedStats.getAttackPercent() +
+                        reforgedStats.getDefensePercent() +
+                        reforgedStats.getHealthPercent() +
+                        reforgedStats.getEffectResistance() +
+                        reforgedStats.getEffectiveness() +
+                        reforgedStats.getSpeed() * (8.0/4.0) +
+                        reforgedStats.getCritDamage() * (8.0/7.0) +
+                        reforgedStats.getCritRate() * (8.0/5.0) +
+                        reforgedStats.getAttack() / 39.0 * (1.0/2.0) +
+                        reforgedStats.getDefense() / 31.0 * (1.0/2.0) +
+                        reforgedStats.getHealth() / 174.0 * (1.0/2.0);
 
         double dpsWssValue =
                 stats.getAttackPercent() +
@@ -89,6 +105,7 @@ public class ItemDb {
                 stats.getHealth() / 174.0 * (1.0/2.0);
 
         item.setWss((int) Math.round(wssValue));
+        item.setReforgedWss((int) Math.round(reforgedWssValue));
         item.setDpsWss((int) Math.round(dpsWssValue));
         item.setSupportWss((int) Math.round(supportWssValue));
         item.setCombatWss((int) Math.round(combatWssValue));
@@ -132,6 +149,10 @@ public class ItemDb {
 
         existingItem.setEquippedById(null);
         existingItem.setEquippedByName(null);
+
+        if (HeroesRequestHandler.SETTING_UNLOCK_ON_UNEQUIP) {
+            existingItem.setLocked(false);
+        }
     }
 
     public void deleteItem(final String id) {

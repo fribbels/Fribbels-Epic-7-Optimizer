@@ -65,6 +65,9 @@ public class Sorter {
                     case MCDMGPS:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getMcdmgps));
                         break;
+                    case SCORE:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getScore));
+                        break;
                     default:
                         System.err.println("INVALID COLUMN " + column);
                 }
@@ -122,6 +125,9 @@ public class Sorter {
                         break;
                     case MCDMGPS:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getMcdmgps).reversed());
+                        break;
+                    case SCORE:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getScore).reversed());
                         break;
                     default:
                         System.err.println("INVALID COLUMN " + column);

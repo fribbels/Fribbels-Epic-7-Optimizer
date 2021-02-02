@@ -39,6 +39,7 @@ public class BaseStatsDb {
                 .dmgps(baseStats.getDmgps())
                 .mcdmg(baseStats.getMcdmg())
                 .mcdmgps(baseStats.getMcdmgps())
+                .score(baseStats.getScore())
                 .name(name)
                 .build();
 

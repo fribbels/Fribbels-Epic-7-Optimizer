@@ -46,9 +46,13 @@ window.jQuery = $;
   <input type="radio" name="tabset" id="tab5" >
   <label for="tab5" class="tabLabel">Importer</label>
   <!-- Tab 6 -->
+  <input type="radio" name="tabset" id="tab6" >
+  <label for="tab6" class="tabLabel">Settings</label>
+  <!-- Tab 6 -->
   <input type="radio" name="tabset" id="tab6" style="display: none">
   <label for="tab6" class="tabLabel" style="display: none">Subprocess Debugger</label>
 
+  <div id="hoverDiv"></div>
   <div class="tab-panels">
     <div id="optimizer-section" class="tab-panel">
       <div id="optimizer-tab" class="tab">
@@ -112,6 +116,11 @@ window.jQuery = $;
               </div>
 
               <div>
+                <input type="checkbox" id="inputOver85" class="optimizer-checkbox">
+                <label for="inputOver85">Only over lv 85 gear</label>
+              </div>
+
+              <div>
                 <input type="checkbox" id="inputOnlyPlus15Gear" class="optimizer-checkbox">
                 <label for="inputOnlyPlus15Gear">Only +15 gear</label>
               </div>
@@ -132,6 +141,9 @@ window.jQuery = $;
               </div>
               <div class="horizontalSpace"></div>
 
+
+              <select multiple="multiple" id="optionsExcludeGearFrom" class="optionsExcludeGearFrom">
+              </select><br>
 
             </div>
 
@@ -664,7 +676,7 @@ window.jQuery = $;
         <img src="./assets/tooltip.png" class="tooltipImage" id="gearActionsTooltip"></img>
       </div>
 
-      <input type="submit" value="Edit Selected Item" class="gearPreviewButton" id="editGear">
+      <input type="submit" value="Equip / Edit Item" class="gearPreviewButton" id="editGear">
       <input type="submit" value="Reforge Item" class="gearPreviewButton" id="reforgeGear">
       <input type="submit" value="Add New Item" class="gearPreviewButton" id="addGear">
       <input type="submit" value="Duplicate Item" class="gearPreviewButton" id="duplicateGear">
@@ -678,418 +690,427 @@ window.jQuery = $;
         <img src="./assets/tooltip.png" class="tooltipImage" id="gearFiltersTooltip"></img>
       </div>
 
-      <div class="gearTabFilters">
-        <div class="gearTabActionsRow">
+      <div class="gearTabBottomPanel">
+        <div class="gearTabPreview" id="gearTabPreview">
         </div>
 
-        <div class="gearTabGearSetFiltersRow">
-          <div class="gearTabGearFilter">
-            <div class="gearTabFilterLabel" id="clearGearFilter">
-              <b>Gear</b> (<u>clear</u>)
-            </div>
-            <div class="gearTabGearFilterIconsRow">
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="weaponFilter">
-                  <img class="gearTabIcon" src="./assets/gearweapon.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="helmetFilter">
-                  <img class="gearTabIcon" src="./assets/gearhelmet.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="armorFilter">
-                  <img class="gearTabIcon" src="./assets/geararmor.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="necklaceFilter">
-                  <img class="gearTabIcon" src="./assets/gearnecklace.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="ringFilter">
-                  <img class="gearTabIcon" src="./assets/gearring.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="bootsFilter">
-                  <img class="gearTabIcon" src="./assets/gearboots.png"></img>
-                </div>
-              </div>
-            </div>
+        <div class="vertical"></div>
+
+        <div class="gearTabFilters">
+          <div class="gearTabActionsRow">
           </div>
-          <div class="gearTabSetFilter">
-            <div class="gearTabFilterLabel" id="clearSetFilter">
-              <b>Sets</b> (<u>clear</u>)
-            </div>
-            <div class="gearTabSetFilterIconsRow">
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="speedSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setspeed.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="attackSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setattack.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="destructionSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setdestruction.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="lifestealSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setlifesteal.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="counterSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setcounter.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="rageSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setrage.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="revengeSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setrevenge.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="injurySetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setinjury.png"></img>
-                </div>
-              </div>
 
-              <div class="gearTabHorizontalSpace">
+          <div class="gearTabGearSetFiltersRow">
+            <div class="gearTabGearFilter">
+              <div class="gearTabFilterLabel" id="clearGearFilter">
+                <b>Gear</b> (<u>clear</u>)
+              </div>
+              <div class="gearTabGearFilterIconsRow">
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="weaponFilter">
+                    <img class="gearTabIcon" src="./assets/gearweapon.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="helmetFilter">
+                    <img class="gearTabIcon" src="./assets/gearhelmet.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="armorFilter">
+                    <img class="gearTabIcon" src="./assets/geararmor.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="necklaceFilter">
+                    <img class="gearTabIcon" src="./assets/gearnecklace.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="ringFilter">
+                    <img class="gearTabIcon" src="./assets/gearring.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="bootsFilter">
+                    <img class="gearTabIcon" src="./assets/gearboots.png"></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="gearTabSetFilter">
+              <div class="gearTabFilterLabel" id="clearSetFilter">
+                <b>Sets</b> (<u>clear</u>)
+              </div>
+              <div class="gearTabSetFilterIconsRow">
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="speedSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setspeed.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="attackSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setattack.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="destructionSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setdestruction.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="lifestealSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setlifesteal.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="counterSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setcounter.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="rageSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setrage.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="revengeSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setrevenge.png"></img>
+                  </div>
+                </div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="injurySetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setinjury.png"></img>
+                  </div>
+                </div>
 
-              </div>
+                <div class="gearTabHorizontalSpace">
 
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="criticalSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setcritical.png"></img>
                 </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="hitSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/sethit.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="healthSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/sethealth.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="defenseSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setdefense.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="resistSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setresist.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="immunitySetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setimmunity.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="unitySetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setunity.png"></img>
-                </div>
-              </div>
-              <div class="gearTabSquareButton">
-                <div class="gearTabButton" id="penetrationSetFilter">
-                  <img class="gearTabIcon gearTabIconSet" src="./assets/setpenetration.png"></img>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="gearTabOtherFiltersRow">
-          <div class="gearTabMainStatFilter">
-            <div class="gearTabFilterLabel" id="clearMainStatFilter">
-              <b>Main stats</b> (<u>clear</u>)
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatAttackPercentFilter">
-                  <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img>
-                  <div class="gearTabButtonLabel">Attack %</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="criticalSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setcritical.png"></img>
+                  </div>
                 </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatCdFilter">
-                  <img class="gearTabIcon" src="./assets/statcddark.png"></img>
-                  <div class="gearTabButtonLabel">Crit Damage</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="hitSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/sethit.png"></img>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatAttackFilter">
-                  <img class="gearTabIcon" src="./assets/statatkdark.png"></img>
-                  <div class="gearTabButtonLabel">Attack</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="healthSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/sethealth.png"></img>
+                  </div>
                 </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatCrFilter">
-                  <img class="gearTabIcon" src="./assets/statcrdark.png"></img>
-                  <div class="gearTabButtonLabel">Crit Chance</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="defenseSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setdefense.png"></img>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatHealthPercentFilter">
-                  <img class="gearTabIcon" src="./assets/stathppercentdark.png"></img>
-                  <div class="gearTabButtonLabel">Health %</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="resistSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setresist.png"></img>
+                  </div>
                 </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatEffFilter">
-                  <img class="gearTabIcon" src="./assets/stateffdark.png"></img>
-                  <div class="gearTabButtonLabel">Effectiveness</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="immunitySetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setimmunity.png"></img>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatHealthFilter">
-                  <img class="gearTabIcon" src="./assets/stathpdark.png"></img>
-                  <div class="gearTabButtonLabel">Health</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="unitySetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setunity.png"></img>
+                  </div>
                 </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatEffResFilter">
-                  <img class="gearTabIcon" src="./assets/statresdark.png"></img>
-                  <div class="gearTabButtonLabel">Effect Resist</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatDefencePercentFilter">
-                  <img class="gearTabIcon" src="./assets/statdefpercentdark.png"></img>
-                  <div class="gearTabButtonLabel">Defense %</div>
-                </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatSpeedFilter">
-                  <img class="gearTabIcon" src="./assets/statspddark.png"></img>
-                  <div class="gearTabButtonLabel">Speed</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="mainStatDefenseFilter">
-                  <img class="gearTabIcon" src="./assets/statdefdark.png"></img>
-                  <div class="gearTabButtonLabel">Defense</div>
+                <div class="gearTabSquareButton">
+                  <div class="gearTabButton" id="penetrationSetFilter">
+                    <img class="gearTabIcon gearTabIconSet" src="./assets/setpenetration.png"></img>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="gearTabSubstatFilter">
-            <div class="gearTabFilterLabel" id="clearSubStatFilter">
-              <b>Sub stats</b> (<u>clear</u>)
+          <div class="gearTabOtherFiltersRow">
+            <div class="gearTabMainStatFilter">
+              <div class="gearTabFilterLabel" id="clearMainStatFilter">
+                <b>Main stats</b> (<u>clear</u>)
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatAttackPercentFilter">
+                    <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img>
+                    <div class="gearTabButtonLabel">Attack %</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatCdFilter">
+                    <img class="gearTabIcon" src="./assets/statcddark.png"></img>
+                    <div class="gearTabButtonLabel">Crit Damage</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatAttackFilter">
+                    <img class="gearTabIcon" src="./assets/statatkdark.png"></img>
+                    <div class="gearTabButtonLabel">Attack</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatCrFilter">
+                    <img class="gearTabIcon" src="./assets/statcrdark.png"></img>
+                    <div class="gearTabButtonLabel">Crit Chance</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatHealthPercentFilter">
+                    <img class="gearTabIcon" src="./assets/stathppercentdark.png"></img>
+                    <div class="gearTabButtonLabel">Health %</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatEffFilter">
+                    <img class="gearTabIcon" src="./assets/stateffdark.png"></img>
+                    <div class="gearTabButtonLabel">Effectiveness</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatHealthFilter">
+                    <img class="gearTabIcon" src="./assets/stathpdark.png"></img>
+                    <div class="gearTabButtonLabel">Health</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatEffResFilter">
+                    <img class="gearTabIcon" src="./assets/statresdark.png"></img>
+                    <div class="gearTabButtonLabel">Effect Resist</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatDefencePercentFilter">
+                    <img class="gearTabIcon" src="./assets/statdefpercentdark.png"></img>
+                    <div class="gearTabButtonLabel">Defense %</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatSpeedFilter">
+                    <img class="gearTabIcon" src="./assets/statspddark.png"></img>
+                    <div class="gearTabButtonLabel">Speed</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="mainStatDefenseFilter">
+                    <img class="gearTabIcon" src="./assets/statdefdark.png"></img>
+                    <div class="gearTabButtonLabel">Defense</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatAttackPercentFilter">
-                  <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img>
-                  <div class="gearTabButtonLabel">Attack %</div>
+
+            <div class="gearTabSubstatFilter">
+              <div class="gearTabFilterLabel" id="clearSubStatFilter">
+                <b>Sub stats</b> (<u>clear</u>)
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatAttackPercentFilter">
+                    <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img>
+                    <div class="gearTabButtonLabel">Attack %</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatCdFilter">
+                    <img class="gearTabIcon" src="./assets/statcddark.png"></img>
+                    <div class="gearTabButtonLabel">Crit Damage</div>
+                  </div>
                 </div>
               </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatCdFilter">
-                  <img class="gearTabIcon" src="./assets/statcddark.png"></img>
-                  <div class="gearTabButtonLabel">Crit Damage</div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatAttackFilter">
+                    <img class="gearTabIcon" src="./assets/statatkdark.png"></img>
+                    <div class="gearTabButtonLabel">Attack</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatCrFilter">
+                    <img class="gearTabIcon" src="./assets/statcrdark.png"></img>
+                    <div class="gearTabButtonLabel">Crit Chance</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatHealthPercentFilter">
+                    <img class="gearTabIcon" src="./assets/stathppercentdark.png"></img>
+                    <div class="gearTabButtonLabel">Health %</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatEffFilter">
+                    <img class="gearTabIcon" src="./assets/stateffdark.png"></img>
+                    <div class="gearTabButtonLabel">Effectiveness</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatHealthFilter">
+                    <img class="gearTabIcon" src="./assets/stathpdark.png"></img>
+                    <div class="gearTabButtonLabel">Health</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatEffResFilter">
+                    <img class="gearTabIcon" src="./assets/statresdark.png"></img>
+                    <div class="gearTabButtonLabel">Effect Resist</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatDefencePercentFilter">
+                    <img class="gearTabIcon" src="./assets/statdefpercentdark.png"></img>
+                    <div class="gearTabButtonLabel">Defense %</div>
+                  </div>
+                </div>
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatSpeedFilter">
+                    <img class="gearTabIcon" src="./assets/statspddark.png"></img>
+                    <div class="gearTabButtonLabel">Speed</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="subStatDefenseFilter">
+                    <img class="gearTabIcon" src="./assets/statdefdark.png"></img>
+                    <div class="gearTabButtonLabel">Defense</div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatAttackFilter">
-                  <img class="gearTabIcon" src="./assets/statatkdark.png"></img>
-                  <div class="gearTabButtonLabel">Attack</div>
-                </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatCrFilter">
-                  <img class="gearTabIcon" src="./assets/statcrdark.png"></img>
-                  <div class="gearTabButtonLabel">Crit Chance</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatHealthPercentFilter">
-                  <img class="gearTabIcon" src="./assets/stathppercentdark.png"></img>
-                  <div class="gearTabButtonLabel">Health %</div>
-                </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatEffFilter">
-                  <img class="gearTabIcon" src="./assets/stateffdark.png"></img>
-                  <div class="gearTabButtonLabel">Effectiveness</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatHealthFilter">
-                  <img class="gearTabIcon" src="./assets/stathpdark.png"></img>
-                  <div class="gearTabButtonLabel">Health</div>
-                </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatEffResFilter">
-                  <img class="gearTabIcon" src="./assets/statresdark.png"></img>
-                  <div class="gearTabButtonLabel">Effect Resist</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatDefencePercentFilter">
-                  <img class="gearTabIcon" src="./assets/statdefpercentdark.png"></img>
-                  <div class="gearTabButtonLabel">Defense %</div>
-                </div>
-              </div>
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatSpeedFilter">
-                  <img class="gearTabIcon" src="./assets/statspddark.png"></img>
-                  <div class="gearTabButtonLabel">Speed</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="subStatDefenseFilter">
-                  <img class="gearTabIcon" src="./assets/statdefdark.png"></img>
-                  <div class="gearTabButtonLabel">Defense</div>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
 
-          <div class="gearTabLevelFilter">
-            <div class="gearTabFilterLabel" id="clearLevelFilter">
-              <b>Level</b> (<u>clear</u>)
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="level90Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">90</div>
+            <div class="gearTabLevelFilter">
+              <div class="gearTabFilterLabel" id="clearLevelFilter">
+                <b>Level</b> (<u>clear</u>)
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="level90Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">90</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="level88Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">88</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="level85Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">85</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="levelUnder85Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel"><85</div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="level88Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">88</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="level85Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">85</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="levelUnder85Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel"><85</div>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
 
-          <div class="gearTabEnhanceFilter">
-            <div class="gearTabFilterLabel" id="clearEnhanceFilter">
-              <b>Enhance</b> (<u>clear</u>)
+            <div class="gearTabEnhanceFilter">
+              <div class="gearTabFilterLabel" id="clearEnhanceFilter">
+                <b>Enhance</b> (<u>clear</u>)
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="plus15Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">+15</div>
+                  </div>
+                </div>
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="plus6Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">+6</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="plus12Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">+12</div>
+                  </div>
+                </div>
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="plus3Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">+3</div>
+                  </div>
+                </div>
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="plus9Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">+9</div>
+                  </div>
+                </div>
+                <div class="gearTabShortButton">
+                  <div class="gearTabButton" id="plus0Filter">
+                    <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                    <div class="gearTabButtonLabel shortLabel">+0</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="plus15Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">+15</div>
-                </div>
-              </div>
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="plus12Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">+12</div>
-                </div>
-              </div>
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="plus9Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">+9</div>
-                </div>
-              </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="plus6Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">+6</div>
-                </div>
-              </div>
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="plus3Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">+3</div>
-                </div>
-              </div>
-              <div class="gearTabShortButton">
-                <div class="gearTabButton" id="plus0Filter">
-                  <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
-                  <div class="gearTabButtonLabel shortLabel">+0</div>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
 
-          <div class="gearTabDuplicateFilter">
-            <div class="gearTabFilterLabel" id="clearOtherFilter">
-              <b>Other</b> (<u>clear</u>)
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton clearAllFilterButton" id="clearAllFilter">
-                  <img class="gearTabIcon" src="./assets/trash.png" style="opacity:0.7"></img>
-                  <div class="gearTabButtonLabel">Clear all</div>
+            <div class="gearTabDuplicateFilter">
+              <div class="gearTabFilterLabel" id="clearOtherFilter">
+                <b>Other</b> (<u>clear</u>)
+              </div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton clearAllFilterButton" id="clearAllFilter">
+                    <img class="gearTabIcon" src="./assets/trash.png" style="opacity:0.7"></img>
+                    <div class="gearTabButtonLabel">Clear all</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="gearTabFilterLongRow">
-              <div class="gearTabLongButton">
-                <div class="gearTabButton" id="duplicateFilter">
-                  <img class="gearTabIcon" src="./assets/copy.png" style="opacity:0.6"></img>
-                  <div class="gearTabButtonLabel">Duplicates</div>
+              <div class="gearTabFilterLongRow">
+                <div class="gearTabLongButton">
+                  <div class="gearTabButton" id="duplicateFilter">
+                    <img class="gearTabIcon" src="./assets/copy.png" style="opacity:0.6"></img>
+                    <div class="gearTabButtonLabel">Duplicates</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1298,19 +1319,19 @@ window.jQuery = $;
       <h2>Importing gear data</h2>
       <p>
       After the gear set is created, choose one of the following ways to import your gear, then select your "gear.txt" file.</br>
-      Use <b>overwrite</b> to completely replace any existing gear with your new gear screenshots. This will wipe existing heroes.</br>
-      Use <b>append</b> to add your new gear screenshots to your currently loaded gear. Does not wipe heroes.</br>
-      Use <b>merge</b> to combine your new gear screenshots with your currently loaded gear. (Experimental!) </br>
+      Use <b>replace</b> to completely replace any existing gear with your new gear screenshots. This will wipe existing heroes.</br>
+      Use <b>add</b> to add your new gear screenshots to your currently loaded gear. Does not wipe heroes.</br>
+      Use <b>merge</b> to combine your new gear screenshots with your currently loaded gear.</br>
       Merging replaces your old items with new items, while keeping your heroes' equipped gear and builds intact. </br>
       This is useful for people who re-screenshot all their gear, and want to keep all their hero settings.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Overwrite data" id="importFileSelect">
+      <input type="submit" class="gearPreviewButton" value="Replace data" id="importFileSelect">
       <text id="importOutputText">Waiting for file..</text>
 
       <br><br>
 
-      <input type="submit" class="gearPreviewButton" value="Append data" id="importAppendFileSelect">
+      <input type="submit" class="gearPreviewButton" value="Add new data" id="importAppendFileSelect">
       <text id="importAppendOutputText">Waiting for file..</text>
 
       <br><br>
@@ -1360,10 +1381,35 @@ window.jQuery = $;
 
 
 
-    <div id="subprocess-debugger-section" class="tab-panel">
-      <h2>subprocess-debugger</h2>
+    <div id="settingsTab" class="tab-panel">
+      <h2>Settings</h2>
 
-      <input type="submit" value="Debug" id="subprocessDebugButton">
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingUnlockOnUnequip" type="checkbox" class="switch-input" />
+            <label for="settingUnlockOnUnequip" class="switch-label"></label>
+          </div>
+          <div class="switchText">
+            Automaically unlock equipment after unequipping
+          </div>
+        </div>
+
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingRageSet" type="checkbox" class="switch-input" />
+            <label for="settingRageSet" class="switch-label"></label>
+          </div>
+          <div class="switchText">
+            Use rage set bonus for damage optimization
+          </div>
+        </div>
+
+        <div class="toggleRow">
+          <input type="number" id="settingMaxResults" class="settingsNumber">
+          <div class="switchText">
+            Maximum optimization results (Recommended: 5,000,000, Min 10k, Max 100m)
+          </div>
+        </div>
 
       <br>
       <br>

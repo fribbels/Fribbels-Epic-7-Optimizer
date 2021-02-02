@@ -35,6 +35,15 @@ module.exports = {
         });
     },
 
+    createFolder: (folder) => {
+        if (!fs.existsSync(folder)){
+            fs.mkdirSync(folder);
+
+            module.exports.saveFile(folder + "/empty-save.json", '{"heroes":[],"items":[]}');
+            module.exports.saveFile(folder + "/settings.ini", JSON.stringify(Settings.getDefaultSettings()));
+        }
+    },
+
     isMac: () => {
         return os.platform() == 'darwin';
     },

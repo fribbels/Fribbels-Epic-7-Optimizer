@@ -17,6 +17,14 @@ module.exports = {
             displayTitle: true,
             selectAll: false
         };
+        const allowGearFromMultipleSelectOptions = {
+            maxHeight: 450,
+            showClear: true,
+            hideOptgroupCheckboxes: true,
+            minimumCountSelected: 99,
+            displayTitle: true,
+            selectAll: false
+        };
         $('#inputSet1').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"4 or 2 piece sets"}));
         $('#inputSet2').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"2 piece sets"}));
         $('#inputSet3').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"2 piece sets"}));
@@ -24,6 +32,19 @@ module.exports = {
         $('#inputRingStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Ring"}));
         $('#inputBootsStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Boots"}));
         $('#inputExcludeSet').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Exclude sets"}));
+
+        $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Exclude gear from", selectAll: true}));
+    },
+
+    refreshAllowGearFrom: () => {
+        $('#optionsExcludeGearFrom').multipleSelect('refresh')
+    },
+
+    getExcludeGearFrom: () => {
+        const exclude = $('#optionsExcludeGearFrom').multipleSelect('getSelects')
+
+        console.log("Exclude", exclude);
+        return exclude;
     },
 
     getGearMainFilters: () => {

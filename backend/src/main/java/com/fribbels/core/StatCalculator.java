@@ -10,6 +10,8 @@ import java.util.Map;
 
 public class StatCalculator {
 
+    public static boolean SETTING_RAGE_SET = true;
+
     public static HeroStats addAccumulatorArrsToHero(final HeroStats base, final float[][] accs, final int[] sets, final Hero hero) {
         int atk = (int) (((base.getAtk() + mapAccumulatorArrsToFloat(0, accs)  + (sets[2] > 1 ? sets[2] / 4 * 0.35f * base.getAtk() : 0) + base.getAtk() * hero.getBonusAtkPercent() / 100f) + hero.getBonusAtk()) * (1 + base.getBonusMaxAtkPercent()/100f));
         int hp = (int) (((base.getHp()   + mapAccumulatorArrsToFloat(1, accs)  + (sets[0] > 1 ? sets[0] / 2 * 0.15f * base.getHp() : 0) + base.getHp() * hero.getBonusHpPercent() / 100f) + hero.getBonusHp()) * (1 + base.getBonusMaxHpPercent()/100f));
@@ -25,15 +27,19 @@ public class StatCalculator {
         float critDamage = Math.min(cd, 350) / 100f;
         int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
+        final float rageMultiplier = SETTING_RAGE_SET && sets[11] / 4 > 0 ? 1.3f : 1;
+
         int ehp = (int) (hp * ((float)def/300 + 1));
         int hpps = (int) ((float)hp*spd/1000);
         int ehpps = (int) ((float)ehp*spd/1000);
-        int dmg = (int) ((critRate * atk * critDamage) + (1-critRate) * atk);
+        int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier);
         int dmgps = (int) ((float)dmg*spd/1000);
-        int mcdmg = (int) ((float)atk * critDamage);
+        int mcdmg = (int) ((float)atk * critDamage * rageMultiplier);
         int mcdmgps = (int) ((float)mcdmg*spd/1000);
 
-        return new HeroStats(atk, hp, def, (int) cr, cd, eff, res, dac, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps,
+        int score = (int) mapAccumulatorArrsToFloat(11, accs);
+
+        return new HeroStats(atk, hp, def, (int) cr, cd, eff, res, dac, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, score,
                 base.getBonusMaxAtkPercent(), base.getBonusMaxDefPercent(), base.getBonusMaxHpPercent(), sets, null, null, null, null);
     }
 
@@ -93,6 +99,9 @@ public class StatCalculator {
         } else {
             statAccumulatorArr[mainTypeIndex] += stats.getMainValue();
         }
+
+        // Add scores
+        statAccumulatorArr[11] += useReforgeStats ? item.getReforgedWss() : item.getWss();
 
         return statAccumulatorArr;
     }

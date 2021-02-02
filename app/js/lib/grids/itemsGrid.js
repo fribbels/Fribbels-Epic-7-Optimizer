@@ -5,6 +5,7 @@ var scoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
 
 var itemsGrid;
 var currentAggregate = {};
+var selectedCell = null;
 
 
 module.exports = {
@@ -44,6 +45,7 @@ module.exports = {
                 {headerName: 'cScore', field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
                 {headerName: 'Equipped', field: 'equippedByName', width: 120},
                 {headerName: 'Locked', field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
+                {headerName: 'Actions', field: 'id', cellRenderer: renderActions},
                 {headerName: 'Duplicate', field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
             ],
             rowSelection: 'multiple',
@@ -51,6 +53,8 @@ module.exports = {
             paginationPageSize: 100000,
             rowData: getAllItemsResponse.items,
             onRowSelected: onRowSelected,
+            onCellMouseOver: cellMouseOver,
+            onCellMouseOut: cellMouseOut,
             suppressScrollOnNewData: true,
             // onRowSelected: onRowSelected,
         };
@@ -59,6 +63,8 @@ module.exports = {
         global.itemsGrid = itemsGrid;
         console.log("!!! itemsGrid", itemsGrid);
 
+
+        Tooltip.displayItem('item1', "asdf");
         // module.exports.redraw();
     },
 
@@ -343,6 +349,11 @@ module.exports = {
 //     }
 // }
 
+function renderActions(params) {
+    const id = params.value;
+    return '<img class="optimizerSetIcon" id="item1" src=' + Assets.getSetAsset("SpeedSet") + '></img>';
+}
+
 function columnGradient(params) {
     try {
         if (!params || params.value == undefined) return;
@@ -354,6 +365,12 @@ function columnGradient(params) {
 
         var percent = (value) / (agg.max + 1);
         const color = gradient.rgbAt(percent);
+
+        if (percent == 0) {
+            return {
+                backgroundColor: 'ffffff00'
+            }
+        }
 
         return {
             backgroundColor: color.toHexString()
@@ -444,8 +461,29 @@ function updateSelectedCount() {
     $('#selectedCount').html("Selected: " + count);
 }
 
+
+function cellMouseOver(event) {
+    const item = event.data;
+
+    const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", null)
+    document.getElementById("gearTabPreview").innerHTML = html;
+}
+
+function cellMouseOut(event) {
+    const item = selectedCell;
+
+    if (!item) return;
+
+    const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", null)
+    document.getElementById("gearTabPreview").innerHTML = html;
+}
+
 function onRowSelected(event) {
-    updateSelectedCount();
+    if (event.node.selected) {
+        selectedCell = event.data;
+        updateSelectedCount();
+    }
+
     return;
 
     if (event.node.selected) {

@@ -122,7 +122,7 @@ async function reforgeGear() {
         return;
     }
 
-    Reforge.getReforgeStats(editedItem);
+    Reforge.getReforgeStats(item);
     const editedItem = await Dialog.editGearDialog(item, true, true);
     console.warn("EDITITEMS", editedItem);
 
@@ -151,7 +151,7 @@ async function duplicateGear() {
 
     const item = items[0]
 
-    const editedItem = await Dialog.editGearDialog(item, false, true);
+    const editedItem = await Dialog.editGearDialog(item, false, false);
     console.warn("EDITITEMS", editedItem);
 
     await Api.editItems([editedItem]);

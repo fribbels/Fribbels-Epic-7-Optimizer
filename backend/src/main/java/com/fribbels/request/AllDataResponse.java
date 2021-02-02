@@ -1,5 +1,7 @@
 package com.fribbels.request;
 
+import com.fribbels.model.Hero;
+import com.fribbels.model.Item;
 import com.fribbels.model.Request;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,9 +14,8 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
-public class EquipItemsOnHeroRequest extends Request {
+public class AllDataResponse extends Request {
 
-    final String heroId;
-    final List<String> itemIds;
-    private boolean useReforgeStats; // Optional
+    private List<Hero> heroes;
+    private List<Item> items;
 }

@@ -25,4 +25,5 @@ public enum OptimizationColumn {
     @SerializedName("dmgps") DMGPS,
     @SerializedName("mcdmg") MCDMG,
     @SerializedName("mcdmgps") MCDMGPS,
+    @SerializedName("score") SCORE,
 }

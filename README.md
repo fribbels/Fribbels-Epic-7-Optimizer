@@ -346,31 +346,47 @@ Here's some quick tips on getting the best results. This is assuming you've read
 
 Hopefully this is useful for anyone looking for an easier way to gear their units.  There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
+**Done for v1.4.0**
+ - Fix: Duplicate 85 gear turns into 90
+ - Fix: Reforge button gear tab doesnt work
+ - Fix: Ignore .dsstore files
+ - Only warn about set filters on search
+ - Autosave after import
+ - Gear tab item preview on hover/select
+ - Exclude gear from filter
+ - Autocreate My Documents/FribbelsOptimizerSaves directory, save with date
+ - Zebra stripes/recolored rows/borderless rows
+ - Gear score column in optimizer results
+ - Auto load filters on switching heroes
+ - UI speed/api calls cleanup
+
+
 **Working on:**
  - v1.4.0
  - Dark mode
 
  **Medium priority:**
- - Cancel ongoing request when start is clicked again
- - Option to equip gear from heroes page
- - Move save/load to File menu
- - Use main stat gear for priority filter
- - Reapply all filters on Filter button press
- - Gear score column in optimizer results
- - Sum of substat priority column
  - Reforge non +15
- - When switching gears, popup asking to unlock the gears being unequipped
+ - When switching gears, popup asking to unlock the gears being unequipped (global setting)
  - Heroes page: average gear score for each unit
  - Date newly added gear
  - Copying rows to text
  - Popup gear card
  - Show conversion/reforge mats
- - Customizeable # of 85 gear to filter, 0 - 6 lv 85s in results
+ - # upgrade column
 
 **Bugs**
  - Comparison method violates its general contract
+ - Captain rikoris skill tree wrong https://cdn.discordapp.com/attachments/524407327902793741/802511212298240020/image0.png
+ - Hero filters dont apply switching tabs
 
  **Low priority:**
+ - Use main stat gear for priority filter
+ - Move save/load to File menu
+ - Option to equip gear from heroes page
+ - Customizeable # of 85 gear to filter, 0 - 6 lv 85s in results
+ - Reapply all filters on Filter button press
+ - Cancel ongoing request when start is clicked again
  - Check if any gear is an upgrade to a unit
  - Update permutations on 4 piece set
  - Add can reforge, can enhance columns

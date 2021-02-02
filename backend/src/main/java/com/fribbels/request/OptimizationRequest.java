@@ -42,6 +42,7 @@ public class OptimizationRequest extends Request {
     private Boolean inputAllowEquippedItems;
     private Boolean inputKeepCurrentItems;
     private Boolean inputCanReforge;
+    private Boolean inputOver85;
 
     private int atk;
     private int hp;

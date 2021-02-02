@@ -29,6 +29,14 @@ function statToText(stat, baseStats, item) {
     }
 }
 
+function wssToText(item) {
+    if (Reforge.isReforgeable(item)) {
+        return item.wss + " ➤ " + item.reforgedWss;
+    } else {
+        return item.wss
+    }
+}
+
 function shortenStats(statType) {
     if (statType == "Effect Resistance")
         return "Effect Resist"
@@ -41,6 +49,10 @@ function shortenStats(statType) {
 
 function getPercentageEquivalent(stat, baseStats, useReforged) {
     const value = useReforged ? stat.reforgedValue : stat.value;
+
+    if (!baseStats) {
+        return value;
+    }
 
     if (stat.type == "Health") {
         var num = value/baseStats.hp*100;
@@ -202,6 +214,8 @@ module.exports = {
         const substat2 = statToText(item.substats[2], baseStats, item);
         const substat3 = statToText(item.substats[3], baseStats, item);
 
+        const score = wssToText(item);
+
         const color = colorsByRank[item.rank];
         const gearImage = Assets.getGearAsset(item.gear);
         const setImage = Assets.getSetAsset(item.set);
@@ -243,6 +257,11 @@ module.exports = {
   <div class="itemDisplaySubstat">
     <div class="itemDisplaySubstatType">${substat3.type}</div>
     <div class="itemDisplaySubstatValue">${substat3.value}</div>
+  </div>
+  <div class="horizontalLine"></div>
+  <div class="itemDisplaySubstat">
+    <div class="itemDisplaySubstatType">Score</div>
+    <div class="itemDisplaySubstatValue">${score}</div>
   </div>
 </div>
 <div class="itemDisplayFooter">

@@ -2,17 +2,29 @@ const { remote } = require('electron')
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
+const documentsPath = remote.app.getPath('documents');
+const savesFolder = documentsPath + '\\FribbelsOptimizerSaves\\';
+
+// const defaultPath = Files.isMac() ?
+//                     (Files.getDataPath() + "/saves/").replace(/\//g, "/") :
+//                     (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
 const defaultPath = Files.isMac() ?
-                    (Files.getDataPath() + "/saves/").replace(/\//g, "/") :
-                    (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
+                    savesFolder.replace(/\//g, "/") :
+                    savesFolder.replace(/\//g, "/");
 
 module.exports = {
 
+    createFolder: () => {
+        Files.createFolder(savesFolder);
+    },
+
     autoSave: async () => {
+        module.exports.createFolder();
         module.exports.saveData(defaultPath + 'autosave.json');
     },
 
     saveData: async (filename) => {
+        module.exports.createFolder();
         const getAllHeroesResponse = await Api.getAllHeroes();
         const getAllItemsResponse = await Api.getAllItems();
 
@@ -34,16 +46,18 @@ module.exports = {
             module.exports.loadSavedData(JSON.parse(data));
             console.log(JSON.parse(data));
         } catch (e) {
-            Notifier.error("Failed to load autosave - " + e);
+            // Notifier.error("Failed to load autosave - " + e);
             console.error("Failed to load autosave -", e);
         }
     },
 
     initialize: async () => {
+        module.exports.createFolder();
+
         document.getElementById('saveDataSubmit').addEventListener("click", async () => {
             const options = {
                 title: "Save file",
-                defaultPath : defaultPath + 'export.json',
+                defaultPath : defaultPath + getDateString() + '-export.json',
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'JSON', extensions: ['json']},
@@ -78,10 +92,12 @@ module.exports = {
 
             const data = await Files.readFile(filenames[0]);
             const parsedData = JSON.parse(data);
-            module.exports.loadSavedData(parsedData);
+            await module.exports.loadSavedData(parsedData);
             console.log(parsedData);
 
             $('#loadDataSubmitOutputText').text(`Loaded ${parsedData.heroes.length} heroes and ${parsedData.items.length} items from ${filenames[0]}`)
+            module.exports.autoSave();
+
         })
     },
 
@@ -99,11 +115,18 @@ module.exports = {
         await Api.setItems(data.items);
         await Api.setHeroes(data.heroes);
 
-
         OptimizerTab.redrawHeroSelector();
         HeroesTab.redraw();
     },
 
     saveCurrentData: () => {
     },
+}
+
+function getDateString() {
+    const now = new Date();
+    const dateString = new Date(now.getTime() - (now.getTimezoneOffset() * 60000 ))
+                    .toISOString()
+                    .split("T")[0];
+    return dateString;
 }

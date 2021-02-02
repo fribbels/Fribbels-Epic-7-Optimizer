@@ -45,7 +45,7 @@ module.exports = {
         const selectedRows = optimizerGrid.gridOptions.api.getSelectedRows();
         if (selectedRows.length > 0) {
             const row = selectedRows[0];
-            console.log("SELECTED ROW", row)
+            console.log("getSelectedGearIds SELECTED ROW", row)
 
             return [
                 row.items[0],
@@ -63,9 +63,20 @@ module.exports = {
         const selectedRows = optimizerGrid.gridOptions.api.getSelectedRows();
         if (selectedRows.length > 0) {
             const row = selectedRows[0];
-            console.log("SELECTED ROW", row)
+            console.log("getSelectedRow SELECTED ROW", row)
 
             return row;
+        }
+        return null;
+    },
+
+    getSelectedNode: () => {
+        const selectedNodes = optimizerGrid.gridOptions.api.getSelectedNodes();
+        if (selectedNodes.length > 0) {
+            const node = selectedNodes[0];
+            console.log("selectedNode SELECTED NODE", node)
+
+            return node;
         }
         return null;
     },
@@ -127,7 +138,8 @@ function aggregateCurrentHeroStats(heroStats) {
         "dmg",
         "dmgps",
         "mcdmg",
-        "mcdmgps"
+        "mcdmgps",
+        "score"
     ]
 
     var count = heroStats.length;
@@ -202,6 +214,7 @@ function buildGrid() {
             {headerName: 'dmgs', field: 'dmgps', width: 50},
             {headerName: 'mcd', field: 'mcdmg', width: 55},
             {headerName: 'mcds', field: 'mcdmgps', width: 50},
+            {headerName: 'score', field: 'score', width: 50},
             {headerName: 'actions', field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
@@ -248,6 +261,8 @@ function columnGradient(params) {
 }
 
 function onRowSelected(event) {
+    if (!event.node.selected) return;
+
     const gearIds = module.exports.getSelectedGearIds();
     OptimizerTab.drawPreview(gearIds);
 }

@@ -41,6 +41,8 @@ import java.util.stream.Collectors;
 
 public class OptimizationRequestHandler extends RequestHandler implements HttpHandler {
 
+    public static int SETTING_MAXIMUM_RESULTS = 5_000_000;
+
     private OptimizationDb optimizationDb;
     private BaseStatsDb baseStatsDb;
     private HeroDb heroDb;
@@ -245,17 +247,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         priorityItems.addAll(otherItems);
         final List<Item> items = priorityItems;
 
-        final int MAXIMUM_RESULTS = 5_000_000;
+        final int MAXIMUM_RESULTS = SETTING_MAXIMUM_RESULTS;
         final HeroStats[] resultHeroStats = new HeroStats[MAXIMUM_RESULTS];
         final long[] resultInts = new long[MAXIMUM_RESULTS];
         System.out.println("MEMORY");
 
-        // 5/6/5/5/6/5
         final Map<Gear, List<Item>> itemsByGear = buildItemsByGear(items);
-        //        Duplicate items
-        //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
-        //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
-        //        itemsByGear.entrySet().forEach(x -> itemsByGear.get(x.getKey()).addAll(itemsByGear.get(x.getKey())));
 
         final Map<String, float[]> accumulatorArrsByItemId = new ConcurrentHashMap<>(new HashMap<>());
         final ExecutorService executorService = Executors.newFixedThreadPool(8);

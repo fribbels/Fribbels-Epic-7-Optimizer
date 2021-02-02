@@ -40,6 +40,7 @@ public class Item {
 
     private boolean locked;
     private int wss;
+    private int reforgedWss;
     private int dpsWss;
     private int supportWss;
     private int combatWss;

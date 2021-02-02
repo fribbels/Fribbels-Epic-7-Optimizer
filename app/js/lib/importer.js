@@ -3,9 +3,12 @@ const { remote } = require('electron')
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
+const documentsPath = remote.app.getPath('documents');
+const savesFolder = documentsPath + '\\FribbelsOptimizerSaves\\';
+
 const defaultPath = Files.isMac() ?
-                    (Files.getDataPath() + "/saves/").replace(/\//g, "/") :
-                    (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
+                    savesFolder.replace(/\//g, "/") :
+                    savesFolder.replace(/\//g, "/");
 
 module.exports = {
 

@@ -35,6 +35,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class HeroesRequestHandler extends RequestHandler implements HttpHandler {
 
+    public static boolean SETTING_UNLOCK_ON_UNEQUIP = false;
+
     private final HeroDb heroDb;
     private final BaseStatsDb baseStatsDb;
     private final ItemDb itemDb;
@@ -268,6 +270,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         build.setDmgps(finalStats.getDmgps());
         build.setMcdmg(finalStats.getMcdmg());
         build.setMcdmgps(finalStats.getMcdmgps());
+        build.setScore(finalStats.getScore());
     }
 
     public String getHeroById(final GetHeroByIdRequest request) {
@@ -276,9 +279,13 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final Hero hero = heroDb.getHeroById(request.getId());
         if (hero == null) return "";
 
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
+        if (baseStats == null) return "";
+
         addStatsToHero(hero, request.isUseReforgeStats());
         final GetHeroByIdResponse response = GetHeroByIdResponse.builder()
                 .hero(hero)
+                .baseStats(baseStats)
                 .build();
 
         return toJson(response);
@@ -319,6 +326,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
                 dbItem.setEquippedById(null);
                 dbItem.setEquippedByName(null);
+
+                if (SETTING_UNLOCK_ON_UNEQUIP) {
+                    dbItem.setLocked(false);
+                }
             }
             hero.setEquipment(new HashMap<>());
         }
@@ -358,6 +369,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
                 dbItem.setEquippedById(null);
                 dbItem.setEquippedByName(null);
+
+                if (SETTING_UNLOCK_ON_UNEQUIP) {
+                    dbItem.setLocked(false);
+                }
             }
             hero.setEquipment(new HashMap<>());
         }
@@ -412,6 +427,12 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
             itemDb.equipItemOnHero(item.getId(), heroId);
         }
 
-        return "";
+        final Hero hero = heroDb.getHeroById(heroId);
+        addStatsToHero(hero, request.isUseReforgeStats());
+        final GetHeroByIdResponse response = GetHeroByIdResponse.builder()
+                .hero(hero)
+                .build();
+
+        return toJson(response);
     }
 }

@@ -38,6 +38,8 @@ public class HeroStats {
     private int mcdmg;
     private int mcdmgps;
 
+    private int score;
+
     private int bonusMaxAtkPercent;
     private int bonusMaxDefPercent;
     private int bonusMaxHpPercent;

@@ -7,12 +7,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff2efb3-235a-47e7-b1c6-5fad9e571b6b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/../app/app.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../app/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/crtest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/files.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/files.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/gearCalculator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/grids/heroesGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/grids/heroesGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/grids/itemsGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/grids/itemsGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/grids/optimizerGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/grids/optimizerGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/heroManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/htmlGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/htmlGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/importer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/importer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/inputHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/inputHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/ocr/ocr.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/ocr/ocr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/ocr/ocrDebug.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/ocr/ocrDebug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/optimizer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/saves.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/saves.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/scoreCalculator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/selectors.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/selectors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/heroesTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/itemsTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/itemsTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tabs/optimizerTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/js/lib/tooltip.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/js/lib/tooltip.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/core/Sorter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/core/Sorter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/core/StatCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/db/BaseStatsDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/db/BaseStatsDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/db/ItemDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/db/ItemDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/enums/OptimizationColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/enums/OptimizationColumn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/HeroesRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/HeroesRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/ItemsRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/ItemsRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/OptimizationRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/SystemRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/handler/SystemRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/HeroStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/HeroStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/model/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/request/EquipItemsOnHeroRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/request/EquipItemsOnHeroRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/request/OptimizationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/request/OptimizationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fribbels/response/GetHeroByIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fribbels/response/GetHeroByIdResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/core/Sorter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/core/Sorter$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/core/Sorter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/core/Sorter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/core/StatCalculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/db/BaseStatsDb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/db/BaseStatsDb.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/db/ItemDb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/db/ItemDb.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/enums/OptimizationColumn.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/enums/OptimizationColumn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/HeroesRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/HeroesRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/OptimizationRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/handler/SystemRequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/handler/SystemRequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero$HeroBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Hero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats$HeroStatsBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats$HeroStatsBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/HeroStats.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/model/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/model/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/request/OptimizationRequest$OptimizationRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/request/OptimizationRequest$OptimizationRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fribbels/request/OptimizationRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fribbels/request/OptimizationRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../data/saves/autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/../data/saves/autosave.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="backend" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -140,10 +199,11 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1714" y="583" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1607990972337" />
-    <state x="1341" y="540" width="408" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1608372424214">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state x="4781" y="540" width="408" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1612146231931">
+      <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="1341" y="540" width="408" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608372424214" />
+    <state x="4781" y="540" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1612146231931" />
     <state x="1656" y="467" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1610691344474">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -157,45 +217,45 @@
     </state>
     <state x="1541" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1608329135029" />
     <state x="4981" y="409" key="FileChooserDialogImpl/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1608109325925" />
-    <state width="2842" height="493" key="GridCell.Tab.0.bottom" timestamp="1611314283422">
+    <state width="2842" height="249" key="GridCell.Tab.0.bottom" timestamp="1612260495810">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
-    <state width="2842" height="493" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283422" />
-    <state width="2842" height="493" key="GridCell.Tab.0.center" timestamp="1611314283422">
+    <state width="3235" height="249" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012891272" />
+    <state width="2842" height="249" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1612260495810" />
+    <state width="2842" height="249" key="GridCell.Tab.0.center" timestamp="1612260495810">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
-    <state width="2842" height="493" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283422" />
-    <state width="2842" height="493" key="GridCell.Tab.0.left" timestamp="1611314283421">
+    <state width="3235" height="249" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012891272" />
+    <state width="2842" height="249" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1612260495810" />
+    <state width="2842" height="249" key="GridCell.Tab.0.left" timestamp="1612260495810">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
-    <state width="2842" height="493" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283421" />
-    <state width="2842" height="493" key="GridCell.Tab.0.right" timestamp="1611314283422">
+    <state width="3235" height="249" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012891272" />
+    <state width="2842" height="249" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1612260495810" />
+    <state width="2842" height="249" key="GridCell.Tab.0.right" timestamp="1612260495810">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="502" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1611230074445" />
-    <state width="2842" height="493" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283422" />
-    <state width="2842" height="493" key="GridCell.Tab.1.bottom" timestamp="1611314283422">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="3235" height="249" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012891272" />
+    <state width="2842" height="249" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1612260495810" />
+    <state width="3235" height="493" key="GridCell.Tab.1.bottom" timestamp="1612012195597">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="242" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1610978291848" />
+    <state width="3235" height="493" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012195597" />
     <state width="2842" height="493" key="GridCell.Tab.1.bottom/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283422" />
-    <state width="2842" height="493" key="GridCell.Tab.1.center" timestamp="1611314283422">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="3235" height="493" key="GridCell.Tab.1.center" timestamp="1612012195597">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="242" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1610978291848" />
+    <state width="3235" height="493" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012195597" />
     <state width="2842" height="493" key="GridCell.Tab.1.center/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283422" />
-    <state width="2842" height="493" key="GridCell.Tab.1.left" timestamp="1611314283422">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="3235" height="493" key="GridCell.Tab.1.left" timestamp="1612012195597">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="242" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1610978291848" />
+    <state width="3235" height="493" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012195597" />
     <state width="2842" height="493" key="GridCell.Tab.1.left/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283422" />
-    <state width="2842" height="493" key="GridCell.Tab.1.right" timestamp="1611314283422">
-      <screen x="3440" y="0" width="3440" height="1400" />
+    <state width="3235" height="493" key="GridCell.Tab.1.right" timestamp="1612012195597">
+      <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="2842" height="242" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1610978291848" />
+    <state width="3235" height="493" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612012195597" />
     <state width="2842" height="493" key="GridCell.Tab.1.right/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611314283422" />
     <state x="1550" y="358" width="1337" height="850" key="SettingsEditor" timestamp="1610063145974">
       <screen x="0" y="0" width="3440" height="1400" />
@@ -233,16 +293,17 @@
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
     <state x="4560" y="344" key="run.anything.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1609386502963" />
-    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1611284869440">
+    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1612258663221">
       <screen x="3440" y="0" width="3440" height="1400" />
     </state>
-    <state x="1514" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1610955115001" />
-    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1611284869440" />
+    <state x="1514" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@0.0.3440.1400" timestamp="1612010913115" />
+    <state x="4954" y="371" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400/3440.0.3440.1400@3440.0.3440.1400" timestamp="1612258663221" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="Application">
         <watch expression="((HashMap.Node)((HashMap)itemsByGear).entrySet().toArray()[0]).getValue()" custom="java.util.HashMap.Node,java.util.HashMap" />
+        <watch expression="item.id" />
       </configuration>
     </watches-manager>
   </component>

@@ -63,6 +63,10 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     final IdRequest getItemByIdRequest = parseRequest(exchange, IdRequest.class);
                     sendResponse(exchange, getItemById(getItemByIdRequest));
                     return;
+                case "/items/getItemsByIds":
+                    final IdsRequest getItemsByIdsRequest = parseRequest(exchange, IdsRequest.class);
+                    sendResponse(exchange, getItemsByIds(getItemsByIdsRequest));
+                    return;
                 case "/items/lockItems":
                     final IdsRequest lockItemsRequest = parseRequest(exchange, IdsRequest.class);
                     sendResponse(exchange, lockItems(lockItemsRequest));
@@ -308,6 +312,23 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         System.out.println(item);
         final GetItemByIdResponse response = GetItemByIdResponse.builder()
                 .item(item)
+                .build();
+
+        return toJson(response);
+    }
+
+    public String getItemsByIds(final IdsRequest request) {
+        if (request.getIds() == null) {
+            return "";
+        }
+
+        final List<Item> items = request.getIds()
+                .stream()
+                .map(itemDb::getItemById)
+                .collect(Collectors.toList());
+
+        final GetAllItemsResponse response = GetAllItemsResponse.builder()
+                .items(items)
                 .build();
 
         return toJson(response);

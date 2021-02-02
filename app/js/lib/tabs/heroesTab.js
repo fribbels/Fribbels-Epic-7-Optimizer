@@ -289,6 +289,8 @@ function redrawGrid(id) {
     console.log("!!! 2");
     Api.getAllHeroes(useReforgedStats).then(response => {
         HeroesGrid.refresh(response.heroes, id);
+
+        HeroesGrid.refreshFilters(filters);
     });
 }
 

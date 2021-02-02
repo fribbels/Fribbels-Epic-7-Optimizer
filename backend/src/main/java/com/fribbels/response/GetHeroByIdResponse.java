@@ -14,4 +14,6 @@ import lombok.ToString;
 public class GetHeroByIdResponse extends Response {
 
     private Hero hero;
+    private HeroStats baseStats;
+
 }

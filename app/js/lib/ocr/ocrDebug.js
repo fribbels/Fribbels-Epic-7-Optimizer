@@ -3,7 +3,7 @@ async function readPaths(filename, regularPath, invertedPath) {
 
     const rawMainstatText    = await readPathRectangle(invertedPath, mainstatTextRectangle,   TEXT);
     console.log(rawMainstatText);
-    
+
     const rawSubstatText     = await readPathRectangle(invertedPath, substatTextRectangle,    TEXT);
     console.log(rawSubstatText);
 
@@ -37,7 +37,7 @@ function readOcrInputs() {
     // Sub stat number 240/360/90/100
     // Main stat name 70/300/150/50
     // Main stat number 230/300/100/50
-    // 
+    //
 
     read(parseInt(left), parseInt(top), parseInt(width), parseInt(height), path);
 }
@@ -48,8 +48,8 @@ function readOcrInputs() {
 
     // console.log("GUESSED: " + guessedSubstatNumbers);
     // console.log("ACTUAL:  " + realSubstatNumbers);
-    // console.log(guessedSubstatNumbers.toString() == realSubstatNumbers.toString() ? "CORRECT" : "WRONG");  
-    // if (guessedSubstatNumbers.toString() != realSubstatNumbers.toString()) throw "WRONG";  
+    // console.log(guessedSubstatNumbers.toString() == realSubstatNumbers.toString() ? "CORRECT" : "WRONG");
+    // if (guessedSubstatNumbers.toString() != realSubstatNumbers.toString()) throw "WRONG";
 
 
 
@@ -109,35 +109,35 @@ var fs = require('fs');
 module.exports = {
     addEventListenerToOcrTest: () => {
         document.getElementById('ocr-test-main-name').addEventListener("click", async () => {
-            await setText();        
+            await setText();
             read(85, 380, 220, 50);
         });
         document.getElementById('ocr-test-main-numbers').addEventListener("click", async () => {
-            await setNumbers();        
+            await setNumbers();
             read(300, 380, 100, 50);
         });
         document.getElementById('ocr-test-sub-name').addEventListener("click", async () => {
-            await setText();        
+            await setText();
             read(50, 450, 225, 150);
         });
         document.getElementById('ocr-test-sub-numbers').addEventListener("click", async () => {
-            await setNumbers();        
+            await setNumbers();
             read(300, 375, 85, 220);
         });
 
         document.getElementById('ocr-test-submit-number').addEventListener("click", async () => {
-            await setNumbers();        
+            await setNumbers();
             readOcrInputs();
         });
 
         document.getElementById('ocr-test-submit-text').addEventListener("click", async () => {
-            await setText();        
+            await setText();
             readOcrInputs();
         });
 
         document.getElementById('ocr-test-jimp').addEventListener("click", async () => {
             var path = document.getElementById('ocr-test-input-url').value;
-            const image = await Jimp.read(path); 
+            const image = await Jimp.read(path);
             console.log(image);
             await image.invert().contrast(0.5).writeAsync(path + "inverted.png")
             // var bitmap = await image.invert().getBase64Async(Jimp.AUTO);
@@ -147,25 +147,25 @@ module.exports = {
             const rectangle = { left: 305, top: 450, width: 85, height: 150};
 
             document.getElementById('ocr-test-crop').src = path+"inverted.png";
-            document.getElementById('ocr-test-crop').style = 
+            document.getElementById('ocr-test-crop').style =
             `  position: absolute;
                clip: rect(${rectangle.top}px, ${rectangle.width+rectangle.left}px, ${rectangle.top+rectangle.height}px, ${rectangle.left}px);
             `;
             console.log("Start");
-            await setNumbers();        
+            await setNumbers();
             const { data: { text } } = await worker.recognize(path+"inverted.png", { rectangle });
             console.log("result: \n" + text);
             console.log("Done");
         });
 
         // document.getElementById('ocr-test-all').addEventListener("click", async () => {
-        //     await setText();        
+        //     await setText();
         //     await read(85, 380, 220, 50);
-        //     await setNumbers();        
+        //     await setNumbers();
         //     await read(300, 380, 100, 50);
-        //     await setText();        
+        //     await setText();
         //     await read(50, 450, 225, 150);
-        //     await setNumbers();        
+        //     await setNumbers();
         //     await read(300, 450, 100, 150);
         // });
 
@@ -183,7 +183,7 @@ module.exports = {
 
                 const regularPath = folder + "/" + filename;
                 const invertedPath = regularPath + "_inverted.png";
-                const image = await Jimp.read(regularPath); 
+                const image = await Jimp.read(regularPath);
                 await image.invert().greyscale().brightness(-0.3).contrast(0.5).writeAsync(invertedPath);
 
                 console.log("Start")
@@ -208,7 +208,7 @@ module.exports = {
             // const path = document.getElementById('ocr-test-input-url').value;
             // const outPath = path + "test.png";
 
-            // const image = await Jimp.read(path); 
+            // const image = await Jimp.read(path);
             // const clone = image.clone();
             // clone.crop(20, 180, 400, 600)
 
@@ -273,7 +273,7 @@ async function drawDebugImage(path, left, top, width, height) {
     document.getElementById('ocr-test-input-height').value = height;
 
     document.getElementById('ocr-test-crop').src = path
-    document.getElementById('ocr-test-crop').style = 
+    document.getElementById('ocr-test-crop').style =
     `  position: absolute;
        clip: rect(${top}px, ${width+left}px, ${top+height}px, ${left}px);
     `;
@@ -292,7 +292,7 @@ async function read(left, top, width, height) {
     document.getElementById('ocr-test-input-height').value = height;
 
     document.getElementById('ocr-test-crop').src = path
-    document.getElementById('ocr-test-crop').style = 
+    document.getElementById('ocr-test-crop').style =
     `  position: absolute;
        clip: rect(${top}px, ${width+left}px, ${top+height}px, ${left}px);
     `;

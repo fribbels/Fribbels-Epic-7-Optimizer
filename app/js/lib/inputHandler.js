@@ -35,6 +35,7 @@ global.Utils = require('./utils');
 global.DarkMode = require('./darkmode');
 global.GridRenderer = require('./renderer/gridRenderer');
 global.Updater = require('./updater');
+global.Settings = require('./settings');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -70,8 +71,8 @@ global.Validator = require('./validator');
 global.Importer = require('./importer');
 global.ItemAugmenter = require('./itemAugmenter');
 global.Ocr = require('./ocr/ocr');
-global.Optimizer = require('./optimizer');
-global.GearCalculator = require('./gearCalculator');
+// global.Optimizer = require('./optimizer');
+// global.GearCalculator = require('./gearCalculator');
 global.ItemSerializer = require('./itemSerializer');
 global.Tooltip = require('./tooltip');
 // global.Backend = require('../backend');
@@ -92,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     DarkMode.initialize();
     await copyLang();
     HtmlGenerator.initialize();
-    GearCalculator.initialize();
+    // GearCalculator.initialize();
     await HeroData.initialize();
     Ocr.initialize();
     Assets.initialize();
@@ -113,6 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     OptimizerTab.initialize();
     OptimizerGrid.initialize();
     Tooltip.initialize();
+    Settings.initialize();
 
     Saves.loadAutoSave();
 
