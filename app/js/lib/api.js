@@ -232,8 +232,8 @@ function post(api, request) {
     return new Promise((resolve, reject) => {
         axios.post(endpoint + api, request)
         .then(response => {
-            // console.trace("Api call", api, request, response);
-            console.log("Api call", api, request, response);
+            console.trace("Api call", api, request, response);
+            // console.log("Api call", api, request, response);
             resolve(response.data);
         })
         .catch(error => {

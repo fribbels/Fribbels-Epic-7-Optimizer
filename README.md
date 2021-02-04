@@ -359,6 +359,8 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Gear score column in optimizer results
  - Auto load filters on switching heroes
  - UI speed/api calls cleanup
+ - When switching gears, popup asking to unlock the gears being unequipped (global setting)
+ - Heroes page: score per build/unit
 
 
 **Working on:**
@@ -367,13 +369,12 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
  **Medium priority:**
  - Reforge non +15
- - When switching gears, popup asking to unlock the gears being unequipped (global setting)
- - Heroes page: average gear score for each unit
  - Date newly added gear
  - Copying rows to text
  - Popup gear card
  - Show conversion/reforge mats
  - # upgrade column
+ - Partial name hero search
 
 **Bugs**
  - Comparison method violates its general contract

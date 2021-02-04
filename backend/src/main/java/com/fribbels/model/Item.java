@@ -19,10 +19,10 @@ public class Item {
 
     private Gear gear;
     private Rank rank;
-    private Set set;
+    public Set set;
 
     private Integer enhance;
-    private Integer level;
+    public Integer level;
 
     private Stat main;
     private List<Stat> substats;
@@ -32,7 +32,7 @@ public class Item {
     private AugmentedStats augmentedStats;
     private AugmentedStats reforgedStats;
 
-    private String id;
+    public String id;
 
     private String equippedById;
     private String equippedByName;

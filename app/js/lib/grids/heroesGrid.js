@@ -49,33 +49,38 @@ module.exports = {
         })
     },
 
-    refreshBuilds: () => {
+    refreshBuilds: async (response) => {
         const selectedRow = module.exports.getSelectedRow();
         if (!selectedRow) return;
 
-        const useReforgedStats = HeroesTab.getUseReforgedStats();
-        Api.getHeroById(selectedRow.id, useReforgedStats).then(async (response) => {
-            const hero = response.hero;
-            updateCurrentAggregate(hero);
-            console.log("Refresh build selected hero row", hero);
+        var hero;
+        if (response) {
+            hero = response.hero;
+        } else {
+            const useReforgedStats = HeroesTab.getUseReforgedStats();
+            hero = await Api.getHeroById(selectedRow.id, useReforgedStats);
+        }
 
-            const getMaybeSelectedRows = buildsGrid.gridOptions.api.getSelectedNodes()[0];
-            if (getMaybeSelectedRows) {
-                selectedBuildNode = getMaybeSelectedRows;
+        updateCurrentAggregate(hero);
+        console.log("Refresh build selected hero row", hero);
+
+        const getMaybeSelectedRows = buildsGrid.gridOptions.api.getSelectedNodes()[0];
+        if (getMaybeSelectedRows) {
+            selectedBuildNode = getMaybeSelectedRows;
+        }
+
+        buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
+
+        if (!selectedBuildNode) {
+            return;
+        }
+
+        buildsGrid.gridOptions.api.forEachNode((node) => {
+            if (JSON.stringify(node.data.items) == JSON.stringify(selectedBuildNode.data.items)) {
+                node.setSelected(true, false);
             }
-
-            buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
-
-            if (!selectedBuildNode) {
-                return;
-            }
-
-            buildsGrid.gridOptions.api.forEachNode((node) => {
-                if (JSON.stringify(node.data.items) == JSON.stringify(selectedBuildNode.data.items)) {
-                    node.setSelected(true, false);
-                }
-            })
         })
+        // })
     },
 
     getSelectedRow: () => {
@@ -413,16 +418,20 @@ async function onBuildRowSelected(event) {
     console.log("onBuildRowSelected", event);
     if (event.node.selected) {
         const hero = HeroesGrid.getSelectedRow();
-        const baseStatsResponse = await Api.getBaseStats(hero.name);
+        // const baseStatsResponse = await Api.getBaseStats(hero.name);
+        const heroResponse = await Api.getHeroById(hero.id);
+        const baseStats = heroResponse.baseStats;
         const itemIds = event.data.items;
+
+        const itemsResponse = await Api.getItemsByIds(itemIds);
+        const items = itemsResponse.items;
+
         for (var i = 0; i < 6; i++) {
-            const itemId = itemIds[i];
+            const item = items[i];
+            // const itemId = itemIds[i];
             const displayId = Constants.gearDisplayIdByIndex[i];
-            Api.getItemById(itemId).then(response => {
-                const item = response.item;
-                const html = HtmlGenerator.buildItemPanel(item, "heroesGrid", baseStatsResponse.heroStats)
-                document.getElementById(displayId).innerHTML = html;
-            })
+            const html = HtmlGenerator.buildItemPanel(item, "heroesGrid", baseStats)
+            document.getElementById(displayId).innerHTML = html;
         }
     }
 
@@ -451,12 +460,11 @@ async function onBuildRowSelected(event) {
 
 function onHeroRowClick(event) {
     selectedBuildNode = null;
-    onHeroRowSelected(event);
 }
 
 function onHeroRowSelected(event) {
-    console.log("onHeroRowSelected", event);
     if (event.node.selected) {
+        console.log("onHeroRowSelected", event);
         const heroId = event.data.id;
 
         const useReforgedStats = HeroesTab.getUseReforgedStats();
@@ -477,15 +485,16 @@ function onHeroRowSelected(event) {
                 equipmentMap["Boots"],
             ]
 
-            module.exports.refreshBuilds();
+            module.exports.refreshBuilds(response);
 
-            const baseStatsResponse = await Api.getBaseStats(hero.name);
+            // const baseStatsResponse = await Api.getBaseStats(hero.name);
+            const baseStats = response.baseStats;
 
             for (var i = 0; i < 6; i++) {
                 const gear = equipment[i];
                 const displayId = Constants.gearDisplayIdByIndex[i];
 
-                const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStatsResponse.heroStats)
+                const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStats)
                 document.getElementById(displayId).innerHTML = html;
             }
         })

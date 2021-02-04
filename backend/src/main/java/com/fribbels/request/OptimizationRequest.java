@@ -25,7 +25,7 @@ import java.util.List;
 public class OptimizationRequest extends Request {
 
     private String heroId;
-    private Hero hero;
+    public Hero hero;
     private List<Item> items;
 
     private List<Set> inputSetsOne;
@@ -41,7 +41,7 @@ public class OptimizationRequest extends Request {
     private Boolean inputAllowLockedItems;
     private Boolean inputAllowEquippedItems;
     private Boolean inputKeepCurrentItems;
-    private Boolean inputCanReforge;
+    public Boolean inputCanReforge;
     private Boolean inputOver85;
 
     private int atk;
@@ -54,38 +54,38 @@ public class OptimizationRequest extends Request {
     private int spd;
     private int dac;
 
-    private int inputAtkMinLimit;
-    private int inputAtkMaxLimit = Integer.MAX_VALUE;
-    private int inputHpMinLimit;
-    private int inputHpMaxLimit = Integer.MAX_VALUE;
-    private int inputDefMinLimit;
-    private int inputDefMaxLimit = Integer.MAX_VALUE;
-    private int inputSpdMinLimit;
-    private int inputSpdMaxLimit = Integer.MAX_VALUE;
-    private int inputCrMinLimit;
-    private int inputCrMaxLimit = Integer.MAX_VALUE;
-    private int inputCdMinLimit;
-    private int inputCdMaxLimit = Integer.MAX_VALUE;
-    private int inputEffMinLimit;
-    private int inputEffMaxLimit = Integer.MAX_VALUE;
-    private int inputResMinLimit;
-    private int inputResMaxLimit = Integer.MAX_VALUE;
-    private int inputMinCpLimit;
-    private int inputMaxCpLimit = Integer.MAX_VALUE;
-    private int inputMinHppsLimit;
-    private int inputMaxHppsLimit = Integer.MAX_VALUE;
-    private int inputMinEhpLimit;
-    private int inputMaxEhpLimit = Integer.MAX_VALUE;
-    private int inputMinEhppsLimit;
-    private int inputMaxEhppsLimit = Integer.MAX_VALUE;
-    private int inputMinDmgLimit;
-    private int inputMaxDmgLimit = Integer.MAX_VALUE;
-    private int inputMinDmgpsLimit;
-    private int inputMaxDmgpsLimit = Integer.MAX_VALUE;
-    private int inputMinMcdmgLimit;
-    private int inputMaxMcdmgLimit = Integer.MAX_VALUE;
-    private int inputMinMcdmgpsLimit;
-    private int inputMaxMcdmgpsLimit = Integer.MAX_VALUE;
+    public int inputAtkMinLimit;
+    public int inputAtkMaxLimit = Integer.MAX_VALUE;
+    public int inputHpMinLimit;
+    public int inputHpMaxLimit = Integer.MAX_VALUE;
+    public int inputDefMinLimit;
+    public int inputDefMaxLimit = Integer.MAX_VALUE;
+    public int inputSpdMinLimit;
+    public int inputSpdMaxLimit = Integer.MAX_VALUE;
+    public int inputCrMinLimit;
+    public int inputCrMaxLimit = Integer.MAX_VALUE;
+    public int inputCdMinLimit;
+    public int inputCdMaxLimit = Integer.MAX_VALUE;
+    public int inputEffMinLimit;
+    public int inputEffMaxLimit = Integer.MAX_VALUE;
+    public int inputResMinLimit;
+    public int inputResMaxLimit = Integer.MAX_VALUE;
+    public int inputMinCpLimit;
+    public int inputMaxCpLimit = Integer.MAX_VALUE;
+    public int inputMinHppsLimit;
+    public int inputMaxHppsLimit = Integer.MAX_VALUE;
+    public int inputMinEhpLimit;
+    public int inputMaxEhpLimit = Integer.MAX_VALUE;
+    public int inputMinEhppsLimit;
+    public int inputMaxEhppsLimit = Integer.MAX_VALUE;
+    public int inputMinDmgLimit;
+    public int inputMaxDmgLimit = Integer.MAX_VALUE;
+    public int inputMinDmgpsLimit;
+    public int inputMaxDmgpsLimit = Integer.MAX_VALUE;
+    public int inputMinMcdmgLimit;
+    public int inputMaxMcdmgLimit = Integer.MAX_VALUE;
+    public int inputMinMcdmgpsLimit;
+    public int inputMaxMcdmgpsLimit = Integer.MAX_VALUE;
 
     private Integer inputAtkMinForce;
     private Integer inputAtkMaxForce;
@@ -123,6 +123,6 @@ public class OptimizationRequest extends Request {
     private Integer inputResPriority;
 
     // calculated fields
-    private boolean[] boolArr;
+    public boolean[] boolArr;
     private int setFormat;
 }

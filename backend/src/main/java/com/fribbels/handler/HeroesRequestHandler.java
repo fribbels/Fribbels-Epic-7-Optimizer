@@ -219,7 +219,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                      equipment.put(x.getKey(), item);
                  });
 
-        if (equipment == null || equipment.values().size() != 6) {
+        if (equipment.values().size() != 6) {
             hero.setStats(new HeroStats());
             return;
         }
@@ -233,6 +233,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                 .collect(Collectors.toList());
         final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
+        StatCalculator.setBaseValues(baseStats, hero);
         final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero);
         hero.setStats(finalStats);
 
@@ -253,24 +254,25 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                 .collect(Collectors.toList());
         final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
+        StatCalculator.setBaseValues(baseStats, hero);
         final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero);
-        build.setAtk(finalStats.getAtk());
-        build.setHp(finalStats.getHp());
-        build.setDef(finalStats.getDef());
-        build.setCr(finalStats.getCr());
-        build.setCd(finalStats.getCd());
-        build.setEff(finalStats.getEff());
-        build.setRes(finalStats.getRes());
-        build.setSpd(finalStats.getSpd());
-        build.setCp(finalStats.getCp());
-        build.setEhp(finalStats.getEhp());
-        build.setHpps(finalStats.getHpps());
-        build.setEhpps(finalStats.getEhpps());
-        build.setDmg(finalStats.getDmg());
-        build.setDmgps(finalStats.getDmgps());
-        build.setMcdmg(finalStats.getMcdmg());
-        build.setMcdmgps(finalStats.getMcdmgps());
-        build.setScore(finalStats.getScore());
+        build.atk = finalStats.atk;
+        build.hp = finalStats.hp;
+        build.def = finalStats.def;
+        build.cr = finalStats.cr;
+        build.cd = finalStats.cd;
+        build.eff = finalStats.eff;
+        build.res = finalStats.res;
+        build.spd = finalStats.spd;
+        build.cp = finalStats.cp;
+        build.ehp = finalStats.ehp;
+        build.hpps = finalStats.hpps;
+        build.ehpps = finalStats.ehpps;
+        build.dmg = finalStats.dmg;
+        build.dmgps = finalStats.dmgps;
+        build.mcdmg = finalStats.mcdmg;
+        build.mcdmgps = finalStats.mcdmgps;
+        build.score = finalStats.score;
     }
 
     public String getHeroById(final GetHeroByIdRequest request) {

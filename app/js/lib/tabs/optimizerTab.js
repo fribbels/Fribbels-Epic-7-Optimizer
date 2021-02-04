@@ -155,7 +155,7 @@ async function loadPreviousHeroFilters() {
     $('#forceNumberSelect').val(inputDisplayNumberNumber(request.inputForceNumberSelect))
 
     Selectors.setGearMainAndSetsFromRequest(request);
-    recalculateFilters();
+    recalculateFilters(null, heroResponse);
 }
 
 module.exports = {
@@ -299,8 +299,6 @@ module.exports = {
             document.getElementById('optimizer-heroes-equipped-necklace').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[3], "optimizerGrid", baseStats);
             document.getElementById('optimizer-heroes-equipped-ring').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[4], "optimizerGrid", baseStats);
             document.getElementById('optimizer-heroes-equipped-boots').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[5], "optimizerGrid", baseStats);
-
-            HeroesTab.redraw();
         })
     },
 
@@ -462,7 +460,7 @@ function setSort4Piece(sets, arr) {
     })
 }
 
-function recalculateFilters(e) {
+async function recalculateFilters(e, heroResponse) {
     // Selects fire twice, we should only calculate once
     if (e && e.target.className.includes("offscreen")) {
         return;
@@ -474,8 +472,13 @@ function recalculateFilters(e) {
     }
 
     const params = getOptimizationRequestParams();
+    if (!heroResponse) {
+        heroResponse = await Api.getHeroById(heroId);
+    }
 
-    applyItemFilters(params, heroId).then(result => {
+    const allItemsResponse = await Api.getAllItems();
+
+    applyItemFilters(params, heroResponse, allItemsResponse).then(result => {
         // console.error("applyItemFilters", params);
 
         var items = result.items;
@@ -663,11 +666,13 @@ async function unlockSelectedGear() {
     Saves.autoSave();
 }
 
-async function applyItemFilters(params, heroId) {
+async function applyItemFilters(params, heroResponse, allItemsResponse) {
     const gearMainFilters = Selectors.getGearMainFilters();
-    const getAllItemsResponse = await Api.getAllItems();
-    const baseStats = await getHeroBaseStats(heroId);
-    const hero = (await Api.getHeroById(heroId)).hero;
+    const getAllItemsResponse = allItemsResponse;
+    // const heroResponse = await Api.getHeroById(heroId);
+    const hero = heroResponse.hero;
+    const baseStats = heroResponse.baseStats;
+    const heroId = hero.id;
     var allItems = getAllItemsResponse.items;
     var items = allItems;
 
@@ -838,37 +843,29 @@ async function submitOptimizationFilterRequest() {
     });
 }
 
-// Should not be used eventually
-async function getHeroBaseStats(heroId) {
-    const getHeroByIdResponse = await Api.getHeroById(heroId);
-    const hero = getHeroByIdResponse.hero;
-
-    const baseStats = HeroData.getBaseStatsByName(hero.name);
-    return baseStats;
-}
-
 async function submitOptimizationRequest() {
-    const getAllItemsResponse = await Api.getAllItems();
-
-    console.log(ItemSerializer.serializeToArr(getAllItemsResponse.items));
+    // console.log(ItemSerializer.serializeToArr(getAllItemsResponse.items));
     const params = getOptimizationRequestParams(true);
     const heroId = document.getElementById('inputHeroAdd').value;
-    const baseStats = await getHeroBaseStats(heroId);
-    const heroResponse = await Api.getHeroById(heroId);
 
-    var filterResult = await applyItemFilters(params, heroId);
+    const allItemsResponse = await Api.getAllItems();
+    const heroResponse = await Api.getHeroById(heroId);
+    const hero = heroResponse.hero;
+    const baseStats = heroResponse.baseStats;
+
+    var filterResult = await applyItemFilters(params, heroResponse, allItemsResponse);
     var items = filterResult.items;
 
-    console.log("OPTIMIZING HERO", heroResponse.hero);
+    console.log("OPTIMIZING HERO", hero);
 
-    OptimizerGrid.setPinnedHero(heroResponse.hero);
+    OptimizerGrid.setPinnedHero(hero);
     const request = {
         base: baseStats,
         requestType: "OptimizationRequest",
         items: items,
-        bonusHp: heroResponse.hero.bonusHp,
-        bonusAtk: heroResponse.hero.bonusAtk,
-        hero: heroResponse.hero
+        bonusHp: hero.bonusHp,
+        bonusAtk: hero.bonusAtk,
+        hero: hero
     }
 
     if (warnParams(params)) {

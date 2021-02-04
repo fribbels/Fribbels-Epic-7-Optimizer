@@ -19,37 +19,37 @@ import java.util.stream.Collectors;
 @ToString
 public class HeroStats {
 
-    private int atk;
-    private int hp;
-    private int def;
-    private int cr;
-    private int cd;
-    private int eff;
-    private int res;
-    private int dac;
-    private int spd;
-    private int cp;
+    public int atk;
+    public int hp;
+    public int def;
+    public int cr;
+    public int cd;
+    public int eff;
+    public int res;
+    public int dac;
+    public int spd;
+    public int cp;
 
-    private int ehp;
-    private int hpps;
-    private int ehpps;
-    private int dmg;
-    private int dmgps;
-    private int mcdmg;
-    private int mcdmgps;
+    public int ehp;
+    public int hpps;
+    public int ehpps;
+    public int dmg;
+    public int dmgps;
+    public int mcdmg;
+    public int mcdmgps;
 
-    private int score;
+    public int score;
 
-    private int bonusMaxAtkPercent;
-    private int bonusMaxDefPercent;
-    private int bonusMaxHpPercent;
+    public int bonusMaxAtkPercent;
+    public int bonusMaxDefPercent;
+    public int bonusMaxHpPercent;
 
-    private int[] sets;
+    public int[] sets;
 
-    private String id;
-    private String name;
-    private String property;
-    private List<String> items;
+    public String id;
+    public String name;
+    public String property;
+    public List<String> items;
 
     public String getBuildHash() {
         if (items == null || items.size() != 6) {

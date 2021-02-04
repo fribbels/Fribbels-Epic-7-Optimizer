@@ -23,7 +23,7 @@ module.exports = {
 
             gearArr.sort((a, b) => b.score - a.score);
 
-            console.log("SORTED", key, gearArr);
+            // console.log("SORTED", key, gearArr);
 
             const index = Math.round(params.inputFilterPriority / 100 * allItemsGroups[key].length);
             passed = passed.concat(gearArr.slice(0, index));

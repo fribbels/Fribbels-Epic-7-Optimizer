@@ -23,43 +23,43 @@ import java.util.Map;
 @ToString
 public class Hero {
 
-    private int atk;
-    private int hp;
-    private int def;
-    private int cr;
-    private int cd;
-    private int eff;
-    private int res;
-    private int dac;
-    private int spd;
+    public int atk;
+    public int hp;
+    public int def;
+    public int cr;
+    public int cd;
+    public int eff;
+    public int res;
+    public int dac;
+    public int spd;
 
-    private int ehp;
-    private int hpps;
-    private int ehpps;
-    private int dmg;
-    private int dmgps;
-    private int mcdmg;
-    private int mcdmgps;
+    public int ehp;
+    public int hpps;
+    public int ehpps;
+    public int dmg;
+    public int dmgps;
+    public int mcdmg;
+    public int mcdmgps;
 
-    private int score;
+    public int score;
 
     private String id;
-    private String name;
+    public String name;
     private int rarity;
     private String attribute;
     private String role;
 
-    private int bonusAtk;
-    private int bonusDef;
-    private int bonusHp;
-    private float bonusAtkPercent;
-    private float bonusDefPercent;
-    private float bonusHpPercent;
-    private int bonusSpeed;
-    private float bonusCr;
-    private float bonusCd;
-    private float bonusEff;
-    private float bonusRes;
+    public int bonusAtk;
+    public int bonusDef;
+    public int bonusHp;
+    public float bonusAtkPercent;
+    public float bonusDefPercent;
+    public float bonusHpPercent;
+    public int bonusSpeed;
+    public float bonusCr;
+    public float bonusCd;
+    public float bonusEff;
+    public float bonusRes;
 
     private int bonusMaxAtkPercent;
     private int bonusMaxDefPercent;

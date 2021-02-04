@@ -25,7 +25,7 @@ public enum Set {
     @SerializedName("RevengeSet")     REVENGE     (14, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0}, new int[]{14, 14, 14, 14}, "RevengeSet"),
     @SerializedName("InjurySet")      INJURY      (15, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4}, new int[]{15, 15, 15, 15}, "InjurySet");
 
-    private int index;
+    public int index;
     private int count;
     private int[] arr;
     private int[] indices;
