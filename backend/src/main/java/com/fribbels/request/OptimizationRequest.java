@@ -87,6 +87,9 @@ public class OptimizationRequest extends Request {
     public int inputMinMcdmgpsLimit;
     public int inputMaxMcdmgpsLimit = Integer.MAX_VALUE;
 
+    public int inputMinUpgradesLimit;
+    public int inputMaxUpgradesLimit = Integer.MAX_VALUE;
+
     private Integer inputAtkMinForce;
     private Integer inputAtkMaxForce;
     private Integer inputAtkPercentMinForce;

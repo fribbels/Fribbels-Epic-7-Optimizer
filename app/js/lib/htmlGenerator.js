@@ -282,7 +282,7 @@ module.exports = {
 }
 
 function editItemDisplay(item) {
-    if (Reforge.isReforgeable(item)) {
+    if (Reforge.isReforgeableNow(item)) {
         return `<img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
     }
     return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`

@@ -1,28 +1,15 @@
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
-    augmentStats: (items) => {
+    // final
+    augment: (items) => {
         for (var item of items) {
             augmentStats(item);
-
-            item.id = uuidv4();
-        }
-
-        console.log("Augmented items", items.length);
-    },
-
-    augmentReforge: (items) => {
-        for (var item of items) {
-            if (item.level == 85) {
-                augmentStats(item);
-            }
-        }
-        console.log("Augmented reforged items", items.length);
-    },
-
-    augmentReforgeStats: (items) => {
-        for (var item of items) {
             augmentReforgeStats(item);
+
+            if (!item.id) {
+                item.id = uuidv4();
+            }
         }
     }
 }
@@ -71,6 +58,7 @@ function augmentReforgeStats(item) {
         for (var subStat of item.substats) {
             item.reforgedStats[subStat.type] = subStat.reforgedValue;
         }
+        item.reforgeable = 1;
     } else {
         item.reforgedStats.mainType = item.main.type;
         item.reforgedStats.mainValue = item.main.value;
@@ -78,5 +66,6 @@ function augmentReforgeStats(item) {
         for (var subStat of item.substats) {
             item.reforgedStats[subStat.type] = subStat.value;
         }
+        item.reforgeable = 0;
     }
 }

@@ -94,6 +94,9 @@ async function loadPreviousHeroFilters() {
     $("#inputMinMcdmgpsLimit").val(inputDisplayNumber(request.inputMinMcdmgpsLimit));
     $("#inputMaxMcdmgpsLimit").val(inputDisplayNumber(request.inputMaxMcdmgpsLimit));
 
+    $("#inputMinUpgradesLimit").val(inputDisplayNumber(request.inputMinUpgradesLimit));
+    $("#inputMaxUpgradesLimit").val(inputDisplayNumber(request.inputMaxUpgradesLimit));
+
     $("#inputMinAtkForce").val(inputDisplayNumber(request.inputAtkMinForce));
     $("#inputMaxAtkForce").val(inputDisplayNumber(request.inputAtkMaxForce));
     $("#inputMinAtkPercentForce").val(inputDisplayNumber(request.inputAtkPercentMinForce));
@@ -754,7 +757,7 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
                 x.main.value = x.main.reforgedValue;
             }
         })
-        ItemAugmenter.augmentReforge(items);
+        ItemAugmenter.augment(items);
     }
 
 
@@ -1000,6 +1003,9 @@ function getOptimizationRequestParams(showError) {
     request.inputMaxMcdmgLimit = readNumber('inputMaxMcdmgLimit');
     request.inputMinMcdmgpsLimit = readNumber('inputMinMcdmgpsLimit');
     request.inputMaxMcdmgpsLimit = readNumber('inputMaxMcdmgpsLimit');
+
+    request.inputMinUpgradesLimit = readNumber('inputMinUpgradesLimit');
+    request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit');
 
     request.inputAtkMinForce = readNumber('inputMinAtkForce');
     request.inputAtkMaxForce = readNumber('inputMaxAtkForce');

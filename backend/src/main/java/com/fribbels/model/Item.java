@@ -39,6 +39,7 @@ public class Item {
     private String heroName;
 
     private boolean locked;
+    public int reforgeable;
     private int wss;
     private int reforgedWss;
     private int dpsWss;

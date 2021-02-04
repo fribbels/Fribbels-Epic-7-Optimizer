@@ -38,6 +38,7 @@ public class HeroStats {
     public int mcdmg;
     public int mcdmgps;
 
+    public int upgrades;
     public int score;
 
     public int bonusMaxAtkPercent;

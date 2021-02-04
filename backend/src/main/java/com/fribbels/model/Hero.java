@@ -41,6 +41,7 @@ public class Hero {
     public int mcdmg;
     public int mcdmgps;
 
+    public int upgrades;
     public int score;
 
     private String id;
@@ -137,6 +138,7 @@ public class Hero {
         this.mcdmg = heroStats.getMcdmg();
         this.mcdmgps = heroStats.getMcdmgps();
 
+        this.upgrades = heroStats.getUpgrades();
         this.score = heroStats.getScore();
     }
 }

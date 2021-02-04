@@ -125,7 +125,7 @@ module.exports = {
                 // const deserializedData = ItemSerializer.deserialize(data);
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
-                ItemAugmenter.augmentStats(items);
+                ItemAugmenter.augment(items);
                 items.forEach(item => Reforge.getReforgeStats(item));
 
                 await Api.setItems(items);
@@ -167,7 +167,7 @@ module.exports = {
                 // const deserializedData = ItemSerializer.deserialize(data);
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
-                ItemAugmenter.augmentStats(items);
+                ItemAugmenter.augment(items);
                 items.forEach(item => Reforge.getReforgeStats(item));
 
                 await Api.addItems(items);
@@ -209,7 +209,7 @@ module.exports = {
                 // const deserializedData = ItemSerializer.deserialize(data);
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
-                ItemAugmenter.augmentStats(items);
+                ItemAugmenter.augment(items);
                 items.forEach(item => Reforge.getReforgeStats(item));
 
                 await Api.mergeItems(items);
@@ -248,7 +248,7 @@ module.exports = {
             heroes = heroes.map(hero => ZarrocConverter.reverseConvertHero(hero))
             console.log("CONVERTEDITEMS", items);
             console.log("CONVERTEDHEROES", heroes);
-            ItemAugmenter.augmentStats(items);
+            ItemAugmenter.augment(items);
 
             ZarrocConverter.attachItemsToHeroes(items, heroes);
             await Api.setItems(items);

@@ -159,6 +159,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.getDmgps() < request.getInputMinDmgpsLimit() || heroStats.getDmgps() > request.getInputMaxDmgpsLimit()
                 ||  heroStats.getMcdmg() < request.getInputMinMcdmgLimit() || heroStats.getMcdmg() > request.getInputMaxMcdmgLimit()
                 ||  heroStats.getMcdmgps() < request.getInputMinMcdmgpsLimit() || heroStats.getMcdmgps() > request.getInputMaxMcdmgpsLimit()
+                ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
         ) {
             return false;
         }
@@ -324,11 +325,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                                         final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
                                         final int[] collectedSets = StatCalculator.buildSetsArr(collectedItems);
-                                        final HeroStats result = StatCalculator.addAccumulatorArrsToHero(base, new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr}, collectedSets, request.hero);
+                                        final int reforges = weapon.reforgeable + helmet.reforgeable + armor.reforgeable + necklace.reforgeable + ring.reforgeable + boots.reforgeable;
+                                        final HeroStats result = StatCalculator.addAccumulatorArrsToHero(base, new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr}, collectedSets, request.hero, reforges);
                                         final long index = searchedCounter.getAndIncrement();
                                         //                                        final boolean passesFilter = true;
-                                        final boolean canReforge = weapon.level == 85 || helmet.level == 85 || armor.level == 85 || necklace.level == 85 || ring.level == 85 || boots.level == 85;
-                                        final boolean passesFilter = passesFilter(result, request, collectedSets, canReforge);
+
+                                        final boolean passesFilter = passesFilter(result, request, collectedSets, reforges);
                                         result.setSets(collectedSets);
                                         if (passesFilter) {
                                             final long resultsIndex = resultsCounter.getAndIncrement();
@@ -340,12 +342,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                                 resultInts[(int) resultsIndex] = index1D;
 
                                                 result.setItems(ImmutableList.of(
-                                                        weapon.getId(),
-                                                        helmet.getId(),
-                                                        armor.getId(),
-                                                        necklace.getId(),
-                                                        ring.getId(),
-                                                        boots.getId()
+                                                        weapon.id,
+                                                        helmet.id,
+                                                        armor.id,
+                                                        necklace.id,
+                                                        ring.id,
+                                                        boots.id
                                                 ));
 
                                                 if (resultsIndex == MAXIMUM_RESULTS-1) {
@@ -416,7 +418,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return output;
     }
 
-    public boolean passesFilter(final HeroStats heroStats, final OptimizationRequest request, final int[] sets, final boolean canReforge) {
+    public boolean passesFilter(final HeroStats heroStats, final OptimizationRequest request, final int[] sets, final int reforges) {
         if (heroStats.atk < request.inputAtkMinLimit || heroStats.atk > request.inputAtkMaxLimit
                 ||  heroStats.hp  < request.inputHpMinLimit  || heroStats.hp > request.inputHpMaxLimit
                 ||  heroStats.def < request.inputDefMinLimit || heroStats.def > request.inputDefMaxLimit
@@ -433,6 +435,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.dmgps < request.inputMinDmgpsLimit || heroStats.dmgps > request.inputMaxDmgpsLimit
                 ||  heroStats.mcdmg < request.inputMinMcdmgLimit || heroStats.mcdmg > request.inputMaxMcdmgLimit
                 ||  heroStats.mcdmgps < request.inputMinMcdmgpsLimit || heroStats.mcdmgps > request.inputMaxMcdmgpsLimit
+                ||  heroStats.upgrades < request.inputMinUpgradesLimit || heroStats.upgrades > request.inputMaxUpgradesLimit
         ) {
             return false;
         }
@@ -442,10 +445,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         //        System.out.println(Arrays.toString(indexArray));
 
         if (request.boolArr[index] == false) {
-            return false;
-        }
-
-        if (request.inputCanReforge && !canReforge) {
             return false;
         }
 

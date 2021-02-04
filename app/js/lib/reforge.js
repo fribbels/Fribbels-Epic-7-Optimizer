@@ -1,12 +1,10 @@
 module.exports = {
     initialize: () => {
-        module.exports.buildFilterSetsBar();
-        module.exports.buildFilterGearBar();
     },
 
     getReforgeStats: (gear) => {
-        calc(gear);
-        ItemAugmenter.augmentReforgeStats([gear]);
+        getItemReforgedStats(gear);
+        ItemAugmenter.augment([gear]);
     },
 
     isGaveleets: (gear) => {
@@ -16,27 +14,28 @@ module.exports = {
         return Utils.stringDistance("Gaveleets", gear.name) > 0.4;
     },
 
+    // Allow only reforging of +15 gear
     isReforgeable: (gear) => {
+        return gear.level == 85 && !module.exports.isGaveleets(gear);
+    },
+
+    isReforgeableNow: (gear) => {
         return gear.level == 85 && gear.enhance == 15 && !module.exports.isGaveleets(gear);
     }
 }
 
-
-function calc(gear) {
-    if (gear.level == 85 && gear.enhance == 15 && !Reforge.isGaveleets(gear)) {
-        // if (stringSimilarity.compareTwoStrings("Gaveleets", gear.name)) {
-        //     Notifier.error("Abyss lifesteal set cannot be reforged: " + JSON.stringify(gear));
-        //     return;
-        // }
-
-        if (!gear.substats || gear.substats.length != 4) {
-            Notifier.error("Cannot calculate reforged stats, +15 item is missing a substat: " + JSON.stringify(gear));
+// We can get reforged stats of non +15 gear however
+function getItemReforgedStats(gear) {
+    if (gear.level == 85 && !Reforge.isGaveleets(gear)) {
+        if (!gear.substats) {
+            Notifier.error("Cannot calculate reforged stats. Find the item and fix it: " + JSON.stringify(gear));
             return;
         }
 
         gear.main.reforgedValue = mainStatValuesByStatType[gear.main.type]
+        const length = gear.substats.length;
 
-        for (var i = 0; i < gear.substats.length; i++) {
+        for (var i = 0; i < length; i++) {
             const substat = gear.substats[i];
             const value = substat.value;
             if (plainStats.includes(substat.type)) {
@@ -76,23 +75,72 @@ function calc(gear) {
             }
         }
 
-        if (gear.rank == "Heroic") {
-            gear.substats[3].max = Math.min(2, gear.substats[3].max);
-        }
-        if (gear.rank == "Rare") {
-            gear.substats[2].max = Math.min(2, gear.substats[2].max);
-            gear.substats[3].max = Math.min(2, gear.substats[3].max);
-        }
-        if (gear.rank == "Good") {
-            gear.substats[1].max = Math.min(2, gear.substats[1].max);
-            gear.substats[2].max = Math.min(2, gear.substats[2].max);
-            gear.substats[3].max = Math.min(2, gear.substats[3].max);
-        }
-        if (gear.rank == "Normal") {
-            gear.substats[0].max = Math.min(2, gear.substats[0].max);
-            gear.substats[1].max = Math.min(2, gear.substats[1].max);
-            gear.substats[2].max = Math.min(2, gear.substats[2].max);
-            gear.substats[3].max = Math.min(2, gear.substats[3].max);
+        if (gear.enhance == 15) {
+            if (gear.rank == "Heroic") {
+                gear.substats[3].max = Math.min(2, gear.substats[3].max);
+            } else if (gear.rank == "Rare") {
+                gear.substats[2].max = Math.min(2, gear.substats[2].max);
+                gear.substats[3].max = Math.min(2, gear.substats[3].max);
+            } else if (gear.rank == "Good") {
+                gear.substats[1].max = Math.min(2, gear.substats[1].max);
+                gear.substats[2].max = Math.min(2, gear.substats[2].max);
+                gear.substats[3].max = Math.min(2, gear.substats[3].max);
+            } else if (gear.rank == "Normal") {
+                gear.substats[0].max = Math.min(2, gear.substats[0].max);
+                gear.substats[1].max = Math.min(2, gear.substats[1].max);
+                gear.substats[2].max = Math.min(2, gear.substats[2].max);
+                gear.substats[3].max = Math.min(2, gear.substats[3].max);
+            }
+        } else if (gear.enhance >= 12) {
+            if (gear.rank == "Heroic") {
+                gear.substats[3].max = Math.min(1, gear.substats[3].max);
+            } else if (gear.rank == "Rare") {
+                gear.substats[2].max = Math.min(1, gear.substats[2].max);
+                gear.substats[3].max = Math.min(1, gear.substats[3].max);
+            } else if (gear.rank == "Good") {
+                gear.substats[1].max = Math.min(1, gear.substats[1].max);
+                gear.substats[2].max = Math.min(1, gear.substats[2].max);
+                gear.substats[3].max = Math.min(1, gear.substats[3].max);
+            } else if (gear.rank == "Normal") {
+                gear.substats[0].max = Math.min(1, gear.substats[0].max);
+                gear.substats[1].max = Math.min(1, gear.substats[1].max);
+                gear.substats[2].max = Math.min(1, gear.substats[2].max);
+                gear.substats[3].max = Math.min(1, gear.substats[3].max);
+            }
+        } else if (gear.enhance >= 9) {
+            if (gear.rank == "Heroic") {
+
+            } else if (gear.rank == "Rare") {
+                gear.substats[2].max = Math.min(1, gear.substats[2].max);
+            } else if (gear.rank == "Good") {
+                gear.substats[1].max = Math.min(1, gear.substats[1].max);
+                gear.substats[2].max = Math.min(1, gear.substats[2].max);
+            } else if (gear.rank == "Normal") {
+                gear.substats[0].max = Math.min(1, gear.substats[0].max);
+                gear.substats[1].max = Math.min(1, gear.substats[1].max);
+                gear.substats[2].max = Math.min(1, gear.substats[2].max);
+            }
+        } else if (gear.enhance >= 6) {
+            if (gear.rank == "Heroic") {
+
+            } else if (gear.rank == "Rare") {
+
+            } else if (gear.rank == "Good") {
+                gear.substats[1].max = Math.min(1, gear.substats[1].max);
+            } else if (gear.rank == "Normal") {
+                gear.substats[0].max = Math.min(1, gear.substats[0].max);
+                gear.substats[1].max = Math.min(1, gear.substats[1].max);
+            }
+        } else if (gear.enhance >= 3) {
+            if (gear.rank == "Heroic") {
+
+            } else if (gear.rank == "Rare") {
+
+            } else if (gear.rank == "Good") {
+
+            } else if (gear.rank == "Normal") {
+                gear.substats[0].max = Math.min(1, gear.substats[0].max);
+            }
         }
 
         var rolls = 0
@@ -104,7 +152,7 @@ function calc(gear) {
             rolls += substat.rolls;
         }
 
-        const maxRolls = maxRollsByRank[gear.rank];
+        const maxRolls = getMaxRolls(gear.rank, gear.enhance);
 
         if (rolls != maxRolls) {
             var missingRolls = maxRolls - rolls;
@@ -135,11 +183,6 @@ function calc(gear) {
 
             calculateReforgeValues(substat);
         }
-
-
-
-        // console.log(gear.rank);
-        // console.log(rolls);
     } else {
 
     }
@@ -220,10 +263,33 @@ const speedRollsToValue = {
     6: 4,
 }
 
-const maxRollsByRank = {
+const maxRolls15 = {
     "Epic": 9,
     "Heroic": 8,
     "Rare": 7,
     "Good": 6,
     "Normal": 5,
+}
+
+const maxRolls12 = {
+    "Epic": 9,
+    "Heroic": 8,
+    "Rare": 7,
+    "Good": 6,
+    "Normal": 5,
+}
+
+function getMaxRolls(rank, enhance) {
+    if (enhance == 15) {
+        return maxRolls15[rank];
+    } else if (enhance >= 12) {
+        return maxRolls15[rank] - 1;
+    } else if (enhance >= 9) {
+        return maxRolls15[rank] - 2;
+    } else if (enhance >= 6) {
+        return maxRolls15[rank] - 3;
+    } else if (enhance >= 3) {
+        return maxRolls15[rank] - 4;
+    }
+    return maxRolls15[rank] - 5;
 }

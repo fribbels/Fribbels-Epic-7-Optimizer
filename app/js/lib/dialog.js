@@ -178,7 +178,7 @@ module.exports = {
         }
 
         Reforge.getReforgeStats(item);
-        if (useReforgedStats && item.main.reforgedValue) {
+        if (useReforgedStats && Reforge.isReforgeableNow(item)) {
             item = JSON.parse(JSON.stringify(item));
             item.level = 90;
             item.main.value = item.main.reforgedValue;
@@ -334,7 +334,7 @@ module.exports = {
                         return false;
                     }
 
-                    ItemAugmenter.augmentStats([editedItem]);
+                    ItemAugmenter.augment([editedItem]);
                     Reforge.getReforgeStats(editedItem);
                     if (item.id && edit) {
                         editedItem.id = item.id;

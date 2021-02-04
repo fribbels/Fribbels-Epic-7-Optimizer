@@ -215,6 +215,7 @@ function buildGrid() {
             {headerName: 'mcd', field: 'mcdmg', width: 55},
             {headerName: 'mcds', field: 'mcdmgps', width: 50},
             {headerName: 'score', field: 'score', width: 50},
+            {headerName: 'upgrades', field: 'upgrades', width: 45},
             {headerName: 'actions', field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
