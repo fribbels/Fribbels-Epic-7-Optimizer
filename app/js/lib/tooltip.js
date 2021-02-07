@@ -17,25 +17,25 @@ module.exports = {
     },
 
     initialize: () => {
-        tippy('#forceModeTooltip', {
-            content:
-`
-<p>
-Choose how many substats you want to match the force filters.
-"Force at least 2 substats" means to search only gears matching at least 2 stat rows from the force panel.
-</p>
-<p>
-The substat priority filter should be doing most of the filtering for you. Only this when you have have a very specific substat requirement.
-</p>
+//         tippy('#forceModeTooltip', {
+//             content:
+// `
+// <p>
+// Choose how many substats you want to match the force filters.
+// "Force at least 2 substats" means to search only gears matching at least 2 stat rows from the force panel.
+// </p>
+// <p>
+// The substat priority filter should be doing most of the filtering for you. Only this when you have have a very specific substat requirement.
+// </p>
 
-<p>
-Examples:</br>
-Force at least one: Speed > 10 for speed units.</br>
-Force at least one: Hp % / Def % / Speed, for tanks.</br>
-Force at least two: Atk / Atk % / Cr / Cd / Speed, for dps units.</br>
-</p>
-`
-        });
+// <p>
+// Examples:</br>
+// Force at least one: Speed > 10 for speed units.</br>
+// Force at least one: Hp % / Def % / Speed, for tanks.</br>
+// Force at least two: Atk / Atk % / Cr / Cd / Speed, for dps units.</br>
+// </p>
+// `
+//         });
 
         tippy('#accessoryMainStatsTooltip', {
             content:
@@ -64,22 +64,22 @@ Choose any sets you don't want included in the search.
 `
         });
 
-        tippy('#forceTooltip', {
-            content:
-`
-<p>
-See the force mode tooltip for more info.
-</p>
+//         tippy('#forceTooltip', {
+//             content:
+// `
+// <p>
+// See the force mode tooltip for more info.
+// </p>
 
-<p>
-Select required substats to use with the force mode. Left column is min (inclusive) and right column is max (inclusive).
-</p>
+// <p>
+// Select required substats to use with the force mode. Left column is min (inclusive) and right column is max (inclusive).
+// </p>
 
-<p>
-Force filter is automatically disabled when no forced substats are specified.
-</p>
-`
-        });
+// <p>
+// Force filter is automatically disabled when no forced substats are specified.
+// </p>
+// `
+//         });
 
         tippy('#filterStatsTooltip', {
             content:
@@ -150,23 +150,17 @@ Lowering the percent narrows down your best gears to make the search faster, but
 `
         });
 
-        tippy('#searchDetailsTooltip', {
-            content:
-`
-<p><b>Permutations - </b> Number of permutations of the filtered gear that need to be searched.
-Make this number lower to make searches faster, but you will be searching less options. </p>
-<p><b>Searched - </b> Number permutations already searched. </p>
-<p><b>Results - </b> Number of search results that satisfy the stat filters.
-There is a maximum of 5,000,000 results before the search stops (for memory limitations). </p>
-`
-        });
-
         tippy('#filterDetailsTooltip', {
             content:
 `
 <p>Shows how many pieces of gear will be used in the search, after filters are applied.
 <p>If you notice for example, you only have 2 rings being used, try expanding your filters to use more ring options. Or if you see too much gear being used, reduce your Top % filter to be more selective.</p>
 </p>
+<p><b>Permutations - </b> Number of permutations of the filtered gear that need to be searched.
+Make this number lower to make searches faster, but you will be searching less options. </p>
+<p><b>Searched - </b> Number permutations already searched. </p>
+<p><b>Results - </b> Number of search results that satisfy the stat filters.
+There is a maximum of 5,000,000 results before the search stops (for memory limitations). </p>
 `
         });
 

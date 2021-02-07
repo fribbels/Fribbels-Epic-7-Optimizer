@@ -41,8 +41,9 @@ public class OptimizationRequest extends Request {
     private Boolean inputAllowLockedItems;
     private Boolean inputAllowEquippedItems;
     private Boolean inputKeepCurrentItems;
-    public Boolean inputCanReforge;
-    private Boolean inputOver85;
+//    public Boolean inputCanReforge;
+    //    private Boolean inputOver85;
+    private Boolean inputOnlyMaxedGear;
 
     private int atk;
     private int hp;
@@ -87,8 +88,12 @@ public class OptimizationRequest extends Request {
     public int inputMinMcdmgpsLimit;
     public int inputMaxMcdmgpsLimit = Integer.MAX_VALUE;
 
+    public int inputMinDmgHLimit;
+    public int inputMaxDmgHLimit = Integer.MAX_VALUE;
     public int inputMinUpgradesLimit;
     public int inputMaxUpgradesLimit = Integer.MAX_VALUE;
+    public int inputMinScoreLimit;
+    public int inputMaxScoreLimit = Integer.MAX_VALUE;
 
     private Integer inputAtkMinForce;
     private Integer inputAtkMaxForce;

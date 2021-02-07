@@ -1,8 +1,8 @@
 module.exports = {
 
     // [0, 0, 4, 2, 0, ...]
-    renderSets: (setCounters) => {
-        return renderSets(setCounters);
+    renderSets: (setCounters, iconClass) => {
+        return renderSets(setCounters, iconClass);
     },
 
     renderStar: (value) => {
@@ -14,8 +14,9 @@ module.exports = {
     }
 }
 
-function renderSets(setCounters) {
+function renderSets(setCounters, iconClass) {
     if (!setCounters) return;
+    if (!iconClass) iconClass = 'optimizerSetIcon';
 
     const sets = [];
     for (var i = 0; i < setCounters.length; i++) {
@@ -25,7 +26,7 @@ function renderSets(setCounters) {
         }
     }
 
-    const images = sets.map(x => '<img class="optimizerSetIcon" src=' + Assets.getSetAsset(x) + '></img>');
+    const images = sets.map(x => '<img class="' + iconClass + ' " src=' + Assets.getSetAsset(x) + '></img>');
     return images.join("");
 }
 

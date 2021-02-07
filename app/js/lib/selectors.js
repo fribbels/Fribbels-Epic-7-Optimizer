@@ -1,3 +1,5 @@
+var addHeroSelectorOpen = false;
+
 module.exports = {
     initialize: () => {
         const multipleSelectOptions = {
@@ -17,6 +19,23 @@ module.exports = {
             displayTitle: true,
             selectAll: false
         };
+        const heroSelectorOptions = {
+            filter: true,
+            customFilter: customFilter,
+            filterAcceptOnEnter: true
+        };
+        const addHeroSelectorOptions = {
+            filter: true,
+            customFilter: customFilter,
+            filterAcceptOnEnter: true,
+
+            onOpen: function () {
+                if (!addHeroSelectorOpen) {
+                    $('#addHeroesSelector').multipleSelect('refresh');
+                }
+                addHeroSelectorOpen = true;
+            },
+        };
         const allowGearFromMultipleSelectOptions = {
             maxHeight: 450,
             showClear: true,
@@ -25,19 +44,25 @@ module.exports = {
             displayTitle: true,
             selectAll: false
         };
-        $('#inputSet1').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"4 or 2 piece sets"}));
-        $('#inputSet2').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"2 piece sets"}));
-        $('#inputSet3').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"2 piece sets"}));
-        $('#inputNecklaceStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Necklace"}));
-        $('#inputRingStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Ring"}));
-        $('#inputBootsStat').multipleSelect(Object.assign({}, multipleSelectOptions, {placeholder:"Boots"}));
+        $('#inputSet1').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"4 or 2 piece sets"}));
+        $('#inputSet2').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"2 piece sets"}));
+        $('#inputSet3').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"2 piece sets"}));
+        $('#inputNecklaceStat').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Necklace"}));
+        $('#inputRingStat').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Ring"}));
+        $('#inputBootsStat').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Boots"}));
         $('#inputExcludeSet').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Exclude sets"}));
+        $('#inputHeroAdd').multipleSelect(Object.assign({}, heroSelectorOptions, {placeholder:"Hero"}))
+        $('#addHeroesSelector').multipleSelect(Object.assign({}, addHeroSelectorOptions, {placeholder:"Hero"}))
 
-        $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Exclude gear from", selectAll: true}));
+        $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Exclude equipped", selectAll: true}));
     },
 
     refreshAllowGearFrom: () => {
         $('#optionsExcludeGearFrom').multipleSelect('refresh')
+    },
+
+    refreshInputHeroAdd: () => {
+        $('#inputHeroAdd').multipleSelect('refresh')
     },
 
     getExcludeGearFrom: () => {
@@ -88,4 +113,51 @@ module.exports = {
         $('#inputBootsStat').multipleSelect('setSelects', request.inputBootsStat || [])
         $('#inputExcludeSet').multipleSelect('setSelects', request.inputExcludeSet || [])
     }
+}
+
+function customFilter(label, text, originalLabel, originalText) {
+    var index = 0;
+    var targetText = text;
+    var targetLabel = label;
+
+    if ($('input').prop('checked')) {
+        targetText = originalText;
+        targetLabel = originalLabel;
+    }
+
+    targetText = targetText.toLowerCase();
+    targetLabel = targetLabel.toLowerCase();
+
+    for (var i = 0; i < targetText.length; i++) { // x
+        const letter = targetText[i];
+        var found = false;
+
+        for (var j = i; j < targetLabel.length; j++) { // briar w
+            const letterMatch = targetLabel[j];
+
+            if (letter == letterMatch) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function respondToVisibility(element, callback) {
+    console.error("RESPOND");
+  var options = {
+    root: document.documentElement
+  }
+
+  var observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      callback(entry.intersectionRatio > 0);
+    });
+  }, options);
+
+  observer.observe(element);
 }

@@ -163,7 +163,9 @@ function buildGrid(heroes) {
             {headerName: 'dmgs', field: 'dmgps'},
             {headerName: 'mcd', field: 'mcdmg', width: 55},
             {headerName: 'mcds', field: 'mcdmgps', width: 55},
+            {headerName: 'dmgh', field: 'dmgh', width: 55},
             {headerName: 'score', field: 'score', width: 55},
+            {headerName: 'upg', field: 'upgrades', width: 55},
         ],
         rowSelection: 'single',
         rowData: heroes,
@@ -205,7 +207,9 @@ function buildGrid(heroes) {
             {headerName: 'dmgs', field: 'dmgps', width: 50},
             {headerName: 'mcd', field: 'mcdmg', width: 55},
             {headerName: 'mcds', field: 'mcdmgps', width: 50},
+            {headerName: 'dmgh', field: 'dmgh', width: 50},
             {headerName: 'score', field: 'score', width: 50},
+            {headerName: 'upg', field: 'upgrades', width: 50},
         ],
         rowHeight: 27,
         rowSelection: 'single',
@@ -531,6 +535,7 @@ function updateCurrentAggregate(hero) {
         "dmgps",
         "mcdmg",
         "mcdmgps",
+        "dmgh",
         "score"
     ]
 

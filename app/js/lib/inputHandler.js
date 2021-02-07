@@ -36,6 +36,7 @@ global.DarkMode = require('./darkmode');
 global.GridRenderer = require('./renderer/gridRenderer');
 global.Updater = require('./updater');
 global.Settings = require('./settings');
+global.StatPreview = require('./statPreview');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -91,7 +92,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     Subprocess.initialize();
     DarkMode.initialize();
-    await copyLang();
     HtmlGenerator.initialize();
     // GearCalculator.initialize();
     await HeroData.initialize();
@@ -104,11 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     Importer.addEventListener();
     ZarrocConverter.initialize();
 
-    console.log("Document initialized")
-
-    // $(document).on('click','input[type=number]',function(){ this.select(); });;
-    // $(document).on('click','input[type=text]',function(){ this.select(); });;
-
     HeroesTab.initialize();
     HeroesGrid.initialize();
     OptimizerTab.initialize();
@@ -119,20 +114,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     Saves.loadAutoSave();
 
     Updater.checkForUpdates();
+
+    console.log("Document initialized")
 });
 
-function copyLang() {
-    // return new Promise((resolve, reject) => {
-    //     console.log(__dirname)
-    //     fs.copyFile(Path.resolve(__dirname, '../../tessdata/eng.traineddata'), Path.resolve(__dirname, '../../eng.traineddata'), (err) => {
-    //         if (err) {
-    //             console.error(err)
-    //             reject(error);
-    //         }
-    //         resolve("Copied");
-    //     });
-    // })
-}
 
 function handleKey(e) {
     const key = e.key;
@@ -145,10 +130,6 @@ function handleKey(e) {
         handleEnter();
     }
 }
-
-// function handleEscape() {
-//     Backend.sendCommand('stop')
-// }
 
 function handleEnter() {
     const input = getValueFromId('input');

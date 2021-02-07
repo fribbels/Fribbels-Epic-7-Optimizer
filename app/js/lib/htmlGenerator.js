@@ -234,7 +234,6 @@ module.exports = {
       <div class="itemDisplayLevel" ${styleLevel(item.level)}>${item.level}</div>
     </div>
   </div>
-  ${editLockDisplay(item)}
   <img src="${heroImage}" class="itemDisplayEquippedHero"></img>
 </div>
 <div class="itemDisplayMainStat">
@@ -269,11 +268,11 @@ module.exports = {
       <input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>
       <div class="itemDisplayFooterSet">
         <img src="${setImage}" class="itemDisplaySetImg"></img>
-        <div class="itemDisplaySetType">${item.set.replace("Set", "")}</div>
       </div>
   </div>
   <div class="itemDisplayFooterIconContainer">
       ${editItemDisplay(item)}
+      ${editLockDisplay(item)}
   </div>
 </div>
         `
@@ -283,7 +282,8 @@ module.exports = {
 
 function editItemDisplay(item) {
     if (Reforge.isReforgeableNow(item)) {
-        return `<img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
+        return `<img src="${Assets.getEdit()}"    class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false)'></img>
+                <img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", true)'></img>`
     }
     return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
 }

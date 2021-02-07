@@ -40,6 +40,7 @@ public class Item {
 
     private boolean locked;
     public int reforgeable;
+    public int upgradeable;
     private int wss;
     private int reforgedWss;
     private int dpsWss;

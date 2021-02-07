@@ -66,6 +66,11 @@ function augmentReforgeStats(item) {
         for (var subStat of item.substats) {
             item.reforgedStats[subStat.type] = subStat.value;
         }
+
         item.reforgeable = 0;
+    }
+
+    if (item.reforgeable || item.enhance < 15) {
+        item.upgradeable = 1;
     }
 }

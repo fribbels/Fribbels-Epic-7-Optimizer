@@ -361,52 +361,52 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - UI speed/api calls cleanup
  - When switching gears, popup asking to unlock the gears being unequipped (global setting)
  - Heroes page: score per build/unit
-
+ - Added new optimizer columns: dmgh, score, upg
+ - Removed optimizer options: Only +15 gear, Only over lv 85 gear, At least one lv 85
+ - Replaced options with "Only maxed gear"
+ - Can reforge non +15 gear
+ - Fixed sliders being weird shapes
+ - Added stat preview panel
+ - Removed force filter
+ - Partial name hero search
+ - More responsive to resizes
+ - Remove set text, add edit/reforge button
+ - Fix: Hero filters dont apply switching tabs
+ - Added settings tab
 
 **Working on:**
  - v1.4.0
  - Dark mode
+ - Show conversion/reforge mats
 
  **Medium priority:**
- - Reforge non +15
  - Date newly added gear
- - Copying rows to text
- - Popup gear card
- - Show conversion/reforge mats
- - # upgrade column
- - Partial name hero search
 
 **Bugs**
  - Comparison method violates its general contract
  - Captain rikoris skill tree wrong https://cdn.discordapp.com/attachments/524407327902793741/802511212298240020/image0.png
- - Hero filters dont apply switching tabs
 
  **Low priority:**
+ - Change slider implementation http://ionden.com/a/plugins/ion.rangeSlider/start.html
+ - Copying rows to text
  - Use main stat gear for priority filter
  - Move save/load to File menu
  - Option to equip gear from heroes page
- - Customizeable # of 85 gear to filter, 0 - 6 lv 85s in results
  - Reapply all filters on Filter button press
  - Cancel ongoing request when start is clicked again
  - Check if any gear is an upgrade to a unit
  - Update permutations on 4 piece set
- - Add can reforge, can enhance columns
- - Customize result limit
  - Clear out item previews on refresh
  - Optimize multiple heroes at once
  - Optimize results with a missing piece(s)
  - Add different level/awakening options
- - Tools for optimizing HP scaling units/skill scaling
  - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
  - Gear page, option to use more than one set/gear filter at time
- - Score per roll column in gear
  - Have two windows open at once
  - Select/interact with multiple heroes at once
- - Keyboard actions ctrl + a, ctrl + s, ctrl + arrows
- - Rage set damage calculation
- - Enable cross platform for Linux
  - Verify all imported screenshots are image files
  - Investigate decrypting network traffic for gear data
+ - Enable cross platform for Linux
 
 ## Troubleshooting
 

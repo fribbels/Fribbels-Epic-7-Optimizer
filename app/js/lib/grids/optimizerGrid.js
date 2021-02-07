@@ -4,6 +4,17 @@ var gradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
 optimizerGrid = null;
 var currentSortModel;
 var currentAggregate = {};
+var selectedRow = null;
+var pinnedRow = {
+    atk: 0,
+    def: 0,
+    hp: 0,
+    spd: 0,
+    cr: 0,
+    cd: 0,
+    eff: 0,
+    res: 0
+};
 
 module.exports = {
 
@@ -12,7 +23,6 @@ module.exports = {
     },
 
     reloadData: (getResultRowsResponse) => {
-
         optimizerGrid.gridOptions.api.setDatasource(datasource);
     },
 
@@ -35,6 +45,8 @@ module.exports = {
 
     setPinnedHero: (hero) => {
         optimizerGrid.gridOptions.api.setPinnedTopRowData([hero]);
+        pinnedRow = hero;
+        StatPreview.draw(pinnedRow, pinnedRow)
     },
 
     showLoadingOverlay: () => {
@@ -139,6 +151,7 @@ function aggregateCurrentHeroStats(heroStats) {
         "dmgps",
         "mcdmg",
         "mcdmgps",
+        "dmgh",
         "score"
     ]
 
@@ -184,6 +197,12 @@ function getField(heroStats, stat) {
 
 function buildGrid() {
 
+    const DIGITS_2 = 35;
+    const DIGITS_3 = 43;
+    const DIGITS_4 = 48;
+    const DIGITS_5 = 50;
+    const DIGITS_6 = 55;
+
     const gridOptions = {
         defaultColDef: {
             width: 50,
@@ -197,25 +216,26 @@ function buildGrid() {
 
         columnDefs: [
             {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
-            {headerName: 'atk', field: 'atk'},
-            {headerName: 'hp', field: 'hp', width: 55},
-            {headerName: 'def', field: 'def'},
-            {headerName: 'spd', field: 'spd'},
-            {headerName: 'cr', field: 'cr'},
-            {headerName: 'cd', field: 'cd'},
-            {headerName: 'eff', field: 'eff'},
-            {headerName: 'res', field: 'res'},
+            {headerName: 'atk', field: 'atk', width: DIGITS_4},
+            {headerName: 'hp', field: 'hp', width: DIGITS_5},
+            {headerName: 'def', field: 'def', width: DIGITS_4},
+            {headerName: 'spd', field: 'spd', width: DIGITS_3},
+            {headerName: 'cr', field: 'cr', width: DIGITS_3},
+            {headerName: 'cd', field: 'cd', width: DIGITS_3},
+            {headerName: 'eff', field: 'eff', width: DIGITS_3},
+            {headerName: 'res', field: 'res', width: DIGITS_3},
             // {headerName: 'dac', field: 'dac'},
-            {headerName: 'cp', field: 'cp', width: 55},
-            {headerName: 'hps', field: 'hpps', width: 50},
-            {headerName: 'ehp', field: 'ehp', width: 55},
-            {headerName: 'ehps', field: 'ehpps', width: 50},
-            {headerName: 'dmg', field: 'dmg', width: 50},
-            {headerName: 'dmgs', field: 'dmgps', width: 50},
-            {headerName: 'mcd', field: 'mcdmg', width: 55},
-            {headerName: 'mcds', field: 'mcdmgps', width: 50},
-            {headerName: 'score', field: 'score', width: 50},
-            {headerName: 'upgrades', field: 'upgrades', width: 45},
+            {headerName: 'cp', field: 'cp', width: DIGITS_6},
+            {headerName: 'hps', field: 'hpps', width: DIGITS_4},
+            {headerName: 'ehp', field: 'ehp', width: DIGITS_6},
+            {headerName: 'ehps', field: 'ehpps', width: DIGITS_5},
+            {headerName: 'dmg', field: 'dmg', width: DIGITS_5},
+            {headerName: 'dmgs', field: 'dmgps', width: DIGITS_4},
+            {headerName: 'mcd', field: 'mcdmg', width: DIGITS_5},
+            {headerName: 'mcds', field: 'mcdmgps', width: DIGITS_4},
+            {headerName: 'dmgh', field: 'dmgh', width: DIGITS_5},
+            {headerName: 'score', field: 'score', width: DIGITS_3},
+            {headerName: 'upg', field: 'upgrades', width: DIGITS_2},
             {headerName: 'actions', field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
@@ -229,6 +249,8 @@ function buildGrid() {
         suppressPaginationPanel: false,
         datasource: datasource,
         suppressScrollOnNewData: true,
+        onCellMouseOver: cellMouseOver,
+        onCellMouseOut: cellMouseOut,
         navigateToNextCell: GridRenderer.arrowKeyNavigator().bind(this),
     };
 
@@ -262,10 +284,26 @@ function columnGradient(params) {
 }
 
 function onRowSelected(event) {
+    console.log("row selected")
     if (!event.node.selected) return;
+
+    selectedRow = event.data;
+    StatPreview.draw(pinnedRow, selectedRow);
 
     const gearIds = module.exports.getSelectedGearIds();
     OptimizerTab.drawPreview(gearIds);
 }
 
-// Figure out what set images to show on the grid
+function cellMouseOver(event) {
+    const row = event.data;
+    if (!row) return;
+
+    StatPreview.draw(pinnedRow, row);
+}
+
+function cellMouseOut(event) {
+    const row = selectedRow;
+    if (!row) return;
+
+    StatPreview.draw(pinnedRow, row);
+}

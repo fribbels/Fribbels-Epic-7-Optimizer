@@ -197,6 +197,7 @@ module.exports = {
         });
 
 
+
         console.log("!!! 1");
         Api.getAllHeroes(useReforgedStats).then(response => {
             console.log("Heroes response", response);

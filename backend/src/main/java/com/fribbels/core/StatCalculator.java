@@ -97,10 +97,11 @@ public class StatCalculator {
         final int dmgps = (int) ((float)dmg*spdDiv1000);
         final int mcdmg = (int) ((float)atk * critDamage * rageMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
+        final int dmgh = (dmg * hp)/100000;
 
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
-        return new HeroStats(atk, hp, def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, upgrades, score,
+        return new HeroStats(atk, hp, def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, upgrades, score,
                 base.bonusMaxAtkPercent, base.bonusMaxDefPercent, base.bonusMaxHpPercent, sets, null, null, null, null);
     }
 //

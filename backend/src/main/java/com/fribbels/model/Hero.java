@@ -40,6 +40,7 @@ public class Hero {
     public int dmgps;
     public int mcdmg;
     public int mcdmgps;
+    public int dmgh;
 
     public int upgrades;
     public int score;
@@ -137,6 +138,7 @@ public class Hero {
         this.dmgps = heroStats.getDmgps();
         this.mcdmg = heroStats.getMcdmg();
         this.mcdmgps = heroStats.getMcdmgps();
+        this.dmgh = heroStats.getDmgh();
 
         this.upgrades = heroStats.getUpgrades();
         this.score = heroStats.getScore();

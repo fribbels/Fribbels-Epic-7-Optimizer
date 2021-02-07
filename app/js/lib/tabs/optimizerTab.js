@@ -27,7 +27,6 @@ function buildTopSlider(slider) {
             recalculateFilters();
         },
         onSlide: val => {
-
             nrInput.setAttribute('value', Math.round(0.01 * Math.pow(val, 2)))
         },
     })
@@ -51,13 +50,19 @@ function inputDisplayNumberNumber(value, base) {
     return value;
 }
 
-async function loadPreviousHeroFilters() {
+async function loadPreviousHeroFilters(heroResponse) {
     const heroId = document.getElementById('inputHeroAdd').value;
-    const heroResponse = await Api.getHeroById(heroId);
+    if (!heroResponse) {
+        heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
+    }
+
     const hero = heroResponse.hero;
     const request = hero.optimizationRequest;
 
     if (!hero) return;
+    if (!request) return;
+
+    console.log(request);
 
     $("#inputMinAtkLimit").val(inputDisplayNumber(request.inputAtkMinLimit))
     $("#inputMaxAtkLimit").val(inputDisplayNumber(request.inputAtkMaxLimit))
@@ -94,39 +99,43 @@ async function loadPreviousHeroFilters() {
     $("#inputMinMcdmgpsLimit").val(inputDisplayNumber(request.inputMinMcdmgpsLimit));
     $("#inputMaxMcdmgpsLimit").val(inputDisplayNumber(request.inputMaxMcdmgpsLimit));
 
+    $("#inputMinDmgHLimit").val(inputDisplayNumber(request.inputMinDmgHLimit));
+    $("#inputMaxDmgHLimit").val(inputDisplayNumber(request.inputMaxDmgHLimit));
     $("#inputMinUpgradesLimit").val(inputDisplayNumber(request.inputMinUpgradesLimit));
     $("#inputMaxUpgradesLimit").val(inputDisplayNumber(request.inputMaxUpgradesLimit));
+    $("#inputMinScoreLimit").val(inputDisplayNumber(request.inputMinScoreLimit));
+    $("#inputMaxScoreLimit").val(inputDisplayNumber(request.inputMaxScoreLimit));
 
-    $("#inputMinAtkForce").val(inputDisplayNumber(request.inputAtkMinForce));
-    $("#inputMaxAtkForce").val(inputDisplayNumber(request.inputAtkMaxForce));
-    $("#inputMinAtkPercentForce").val(inputDisplayNumber(request.inputAtkPercentMinForce));
-    $("#inputMaxAtkPercentForce").val(inputDisplayNumber(request.inputAtkPercentMaxForce));
-    $("#inputMinSpdForce").val(inputDisplayNumber(request.inputSpdMinForce));
-    $("#inputMaxSpdForce").val(inputDisplayNumber(request.inputSpdMaxForce));
-    $("#inputMinCrForce").val(inputDisplayNumber(request.inputCrMinForce));
-    $("#inputMaxCrForce").val(inputDisplayNumber(request.inputCrMaxForce));
-    $("#inputMinCdForce").val(inputDisplayNumber(request.inputCdMinForce));
-    $("#inputMaxCdForce").val(inputDisplayNumber(request.inputCdMaxForce));
-    $("#inputMinHpForce").val(inputDisplayNumber(request.inputHpMinForce));
-    $("#inputMaxHpForce").val(inputDisplayNumber(request.inputHpMaxForce));
-    $("#inputMinHpPercentForce").val(inputDisplayNumber(request.inputHpPercentMinForce));
-    $("#inputMaxHpPercentForce").val(inputDisplayNumber(request.inputHpPercentMaxForce));
-    $("#inputMinDefForce").val(inputDisplayNumber(request.inputDefMinForce));
-    $("#inputMaxDefForce").val(inputDisplayNumber(request.inputDefMaxForce));
-    $("#inputMinDefPercentForce").val(inputDisplayNumber(request.inputDefPercentMinForce));
-    $("#inputMaxDefPercentForce").val(inputDisplayNumber(request.inputDefPercentMaxForce));
-    $("#inputMinEffForce").val(inputDisplayNumber(request.inputEffMinForce));
-    $("#inputMaxEffForce").val(inputDisplayNumber(request.inputEffMaxForce));
-    $("#inputMinResForce").val(inputDisplayNumber(request.inputResMinForce));
-    $("#inputMaxResForce").val(inputDisplayNumber(request.inputResMaxForce));
+    // $("#inputMinAtkForce").val(inputDisplayNumber(request.inputAtkMinForce));
+    // $("#inputMaxAtkForce").val(inputDisplayNumber(request.inputAtkMaxForce));
+    // $("#inputMinAtkPercentForce").val(inputDisplayNumber(request.inputAtkPercentMinForce));
+    // $("#inputMaxAtkPercentForce").val(inputDisplayNumber(request.inputAtkPercentMaxForce));
+    // $("#inputMinSpdForce").val(inputDisplayNumber(request.inputSpdMinForce));
+    // $("#inputMaxSpdForce").val(inputDisplayNumber(request.inputSpdMaxForce));
+    // $("#inputMinCrForce").val(inputDisplayNumber(request.inputCrMinForce));
+    // $("#inputMaxCrForce").val(inputDisplayNumber(request.inputCrMaxForce));
+    // $("#inputMinCdForce").val(inputDisplayNumber(request.inputCdMinForce));
+    // $("#inputMaxCdForce").val(inputDisplayNumber(request.inputCdMaxForce));
+    // $("#inputMinHpForce").val(inputDisplayNumber(request.inputHpMinForce));
+    // $("#inputMaxHpForce").val(inputDisplayNumber(request.inputHpMaxForce));
+    // $("#inputMinHpPercentForce").val(inputDisplayNumber(request.inputHpPercentMinForce));
+    // $("#inputMaxHpPercentForce").val(inputDisplayNumber(request.inputHpPercentMaxForce));
+    // $("#inputMinDefForce").val(inputDisplayNumber(request.inputDefMinForce));
+    // $("#inputMaxDefForce").val(inputDisplayNumber(request.inputDefMaxForce));
+    // $("#inputMinDefPercentForce").val(inputDisplayNumber(request.inputDefPercentMinForce));
+    // $("#inputMaxDefPercentForce").val(inputDisplayNumber(request.inputDefPercentMaxForce));
+    // $("#inputMinEffForce").val(inputDisplayNumber(request.inputEffMinForce));
+    // $("#inputMaxEffForce").val(inputDisplayNumber(request.inputEffMaxForce));
+    // $("#inputMinResForce").val(inputDisplayNumber(request.inputResMinForce));
+    // $("#inputMaxResForce").val(inputDisplayNumber(request.inputResMaxForce));
 
     $("#inputPredictReforges").prop('checked', request.inputPredictReforges);
     $("#inputAllowLockedItems").prop('checked', request.inputAllowLockedItems);
     $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems);
     $("#inputKeepCurrentItems").prop('checked', request.inputKeepCurrentItems);
-    $("#inputCanReforge").prop('checked', request.inputCanReforge);
-    $("#inputCanRefoinputOver85rge").prop('checked', request.inputOver85);
-    $("#inputOnlyPlus15Gear").prop('checked', request.inputOnlyPlus15Gear);
+    $("#inputOnlyMaxedGear").prop('checked', request.inputOnlyMaxedGear);
+    // $("#inputCanRefoinputOver85rge").prop('checked', request.inputOver85);
+    // $("#inputOnlyPlus15Gear").prop('checked', request.inputOnlyPlus15Gear);
 
     document.querySelector('#atkSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
     document.querySelector('#atkSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
@@ -155,7 +164,7 @@ async function loadPreviousHeroFilters() {
     document.querySelector('#filterSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputFilterPriority)})
     document.querySelector('#filterSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputFilterPriority, 100))
 
-    $('#forceNumberSelect').val(inputDisplayNumberNumber(request.inputForceNumberSelect))
+    // $('#forceNumberSelect').val(inputDisplayNumberNumber(request.inputForceNumberSelect))
 
     Selectors.setGearMainAndSetsFromRequest(request);
     recalculateFilters(null, heroResponse);
@@ -176,14 +185,14 @@ module.exports = {
             }
             Api.cancelOptimizationRequest();
         });
-        document.getElementById('submitOptimizerLoad').addEventListener("click", async () => {
-            loadPreviousHeroFilters();
-        });
+        // document.getElementById('submitOptimizerLoad').addEventListener("click", async () => {
+        //     loadPreviousHeroFilters();
+        // });
 
         document.getElementById('submitOptimizerReset').addEventListener("click", () => {
             clearRatings();
             clearStats();
-            clearForce();
+            // clearForce();
 
             Selectors.clearGearMainAndSets();
 
@@ -229,14 +238,19 @@ module.exports = {
         });
 
 
-        $('#inputHeroAdd').change(() => {
+        $('#inputHeroAdd').change(async () => {
+            const heroId = document.getElementById('inputHeroAdd').value;
+            const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
+
             recalculateFilters();
             redrawHeroImage();
             module.exports.redrawHeroSelector();
-            loadPreviousHeroFilters();
+            loadPreviousHeroFilters(heroResponse);
+            OptimizerGrid.setPinnedHero(heroResponse.hero);
+            StatPreview.draw(heroResponse.hero, heroResponse.hero)
         });
 
-        $('#forceNumberSelect').change(recalculateFilters);
+        // $('#forceNumberSelect').change(recalculateFilters);
         $('.optimizer-number-input').change(recalculateFilters);
         $('.optimizer-checkbox').change(recalculateFilters);
         $('.inputGearFilterSelect').change(recalculateFilters);
@@ -271,10 +285,10 @@ module.exports = {
             clearRatings();
             recalculateFilters();
         });
-        document.getElementById('forceLabel').addEventListener("click", async () => {
-            clearForce();
-            recalculateFilters();
-        });
+        // document.getElementById('forceLabel').addEventListener("click", async () => {
+        //     clearForce();
+        //     recalculateFilters();
+        // });
         document.getElementById('optionsLabel').addEventListener("click", async () => {
             clearOptions();
             recalculateFilters();
@@ -290,7 +304,7 @@ module.exports = {
             const selectedGear = response.items;
 
             const heroId = document.getElementById('inputHeroAdd').value;
-            const getHeroByIdResponse = await Api.getHeroById(heroId);
+            const getHeroByIdResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
             const hero = getHeroByIdResponse.hero;
             const baseStats = getHeroByIdResponse.baseStats;
 
@@ -309,8 +323,8 @@ module.exports = {
         return getOptimizationRequestParams();
     },
 
-    editGearFromIcon: (id) => {
-        editGearFromIcon(id);
+    editGearFromIcon: (id, reforge) => {
+        editGearFromIcon(id, reforge);
     },
 
     lockGearFromIcon: (id) => {
@@ -347,6 +361,7 @@ module.exports = {
         }
         redrawHeroImage();
         recalculateFilters();
+        Selectors.refreshInputHeroAdd();
     }
 }
 
@@ -385,24 +400,24 @@ function clearRatings() {
 function clearStats() {
     $(".stat-number-input").val("")
 }
-function clearForce() {
-    $(".force-number-input").val("")
-}
+// function clearForce() {
+//     $(".force-number-input").val("")
+// }
 function clearOptions() {
     $("#inputPredictReforges").prop('checked', true);
     $("#inputAllowLockedItems").prop('checked', false);
     $("#inputAllowEquippedItems").prop('checked', false);
     $("#inputKeepCurrentItems").prop('checked', false);
-    $("#inputCanReforge").prop('checked', false);
-    $("#inputOver85").prop('checked', false);
-    $("#inputOnlyPlus15Gear").prop('checked', false);
-    $('#forceNumberSelect').val(0);
+    $("#inputOnlyMaxedGear").prop('checked', false);
+    // $("#inputOver85").prop('checked', false);
+    // $("#inputOnlyPlus15Gear").prop('checked', false);
+    // $('#forceNumberSelect').val(0);
 }
 
-async function editGearFromIcon(id) {
+async function editGearFromIcon(id, reforge) {
     const result = await Api.getItemById(id);
     console.log(result.item);
-    const editedItem = await Dialog.editGearDialog(result.item, true, true);
+    const editedItem = await Dialog.editGearDialog(result.item, true, reforge);
     await Api.editItems([editedItem]);
     Notifier.quick("Edited item");
 
@@ -440,7 +455,6 @@ function redrawHeroImage() {
     const image = data.assets.thumbnail;
 
     $('#inputHeroImage').attr("src", image);
-
 }
 
 function clearHeroOptions(id) {
@@ -476,7 +490,7 @@ async function recalculateFilters(e, heroResponse) {
 
     const params = getOptimizationRequestParams();
     if (!heroResponse) {
-        heroResponse = await Api.getHeroById(heroId);
+        heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     }
 
     const allItemsResponse = await Api.getAllItems();
@@ -615,7 +629,7 @@ async function equipSelectedGear() {
     }
     const heroId = getSelectedHeroId();
 
-    const heroResult = await Api.equipItemsOnHero(heroId, selectedGear);
+    const heroResult = await Api.equipItemsOnHero(heroId, selectedGear, $('#inputPredictReforges').prop('checked'));
     const hero = heroResult.hero;
 
     const row = OptimizerGrid.getSelectedRow()
@@ -630,7 +644,6 @@ async function equipSelectedGear() {
 
     // const response = await Api.getHeroById(heroId);
     OptimizerGrid.setPinnedHero(hero);
-
     drawPreview()
     Saves.autoSave();
 }
@@ -642,6 +655,11 @@ async function unequipSelectedGear() {
     const heroId = getSelectedHeroId();
 
     await Api.unequipItems(selectedGear);
+
+    const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
+    const hero = heroResponse.hero;
+
+    OptimizerGrid.setPinnedHero(hero);
 
     drawPreview()
     Saves.autoSave();
@@ -689,12 +707,12 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
         items = items.filter(x => !params.excludeFilter.includes(x.equippedById));
     }
 
-    if (params.inputOnlyPlus15Gear) {
-        items = items.filter(x => x.enhance == 15);
-    }
+    // if (params.inputOnlyPlus15Gear) {
+    //     items = items.filter(x => x.enhance == 15);
+    // }
 
-    if (params.inputOver85) {
-        items = items.filter(x => x.level > 85);
+    if (params.inputOnlyMaxedGear) {
+        items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
     }
 
     if (isFourAndTwoPieceSets(params.inputSets) || isTwoAndTwoAndTwoPieceSets(params.inputSets)) {
@@ -761,7 +779,7 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
     }
 
 
-    items = ForceFilter.applyForceFilters(params, items)
+    // items = ForceFilter.applyForceFilters(params, items)
     items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems)
 
     items = items.sort((a, b) => {
@@ -817,6 +835,11 @@ function warnParams(params) {
         Notifier.info("No sets were selected. For best results, select at least one set.")
     }
 
+    if (params.inputDefMinLimit > 10000) {
+        Dialog.error("Your minimum defense filter is over 10,000, did you mean HP?");
+        return true;
+    }
+
     if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
     &&  params.inputRingStat && params.inputRingStat.length == 0
     &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
@@ -837,7 +860,7 @@ async function submitOptimizationFilterRequest() {
     }
 
     const heroId = document.getElementById('inputHeroAdd').value;
-    const heroResponse = await Api.getHeroById(heroId);
+    const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     params.hero = heroResponse.hero;
     OptimizerGrid.showLoadingOverlay();
     Api.submitOptimizationFilterRequest(params).then(response => {
@@ -852,7 +875,7 @@ async function submitOptimizationRequest() {
     const heroId = document.getElementById('inputHeroAdd').value;
 
     const allItemsResponse = await Api.getAllItems();
-    const heroResponse = await Api.getHeroById(heroId);
+    const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     const hero = heroResponse.hero;
     const baseStats = heroResponse.baseStats;
 
@@ -966,9 +989,9 @@ function getOptimizationRequestParams(showError) {
     request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems');
     request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems');
     request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems');
-    request.inputCanReforge   = readCheckbox('inputCanReforge');
-    request.inputOver85   = readCheckbox('inputOver85');
-    request.inputOnlyPlus15Gear   = readCheckbox('inputOnlyPlus15Gear');
+    request.inputOnlyMaxedGear   = readCheckbox('inputOnlyMaxedGear');
+    // request.inputOver85   = readCheckbox('inputOver85');
+    // request.inputOnlyPlus15Gear   = readCheckbox('inputOnlyPlus15Gear');
 
     request.inputAtkMinLimit = readNumber('inputMinAtkLimit');
     request.inputAtkMaxLimit = readNumber('inputMaxAtkLimit');
@@ -1004,31 +1027,35 @@ function getOptimizationRequestParams(showError) {
     request.inputMinMcdmgpsLimit = readNumber('inputMinMcdmgpsLimit');
     request.inputMaxMcdmgpsLimit = readNumber('inputMaxMcdmgpsLimit');
 
+    request.inputMinDmgHLimit = readNumber('inputMinDmgHLimit');
+    request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit');
     request.inputMinUpgradesLimit = readNumber('inputMinUpgradesLimit');
     request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit');
+    request.inputMinScoreLimit = readNumber('inputMinScoreLimit');
+    request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit');
 
-    request.inputAtkMinForce = readNumber('inputMinAtkForce');
-    request.inputAtkMaxForce = readNumber('inputMaxAtkForce');
-    request.inputAtkPercentMinForce = readNumber('inputMinAtkPercentForce');
-    request.inputAtkPercentMaxForce = readNumber('inputMaxAtkPercentForce');
-    request.inputSpdMinForce = readNumber('inputMinSpdForce');
-    request.inputSpdMaxForce = readNumber('inputMaxSpdForce');
-    request.inputCrMinForce = readNumber('inputMinCrForce');
-    request.inputCrMaxForce = readNumber('inputMaxCrForce');
-    request.inputCdMinForce = readNumber('inputMinCdForce');
-    request.inputCdMaxForce = readNumber('inputMaxCdForce');
-    request.inputHpMinForce = readNumber('inputMinHpForce');
-    request.inputHpMaxForce = readNumber('inputMaxHpForce');
-    request.inputHpPercentMinForce = readNumber('inputMinHpPercentForce');
-    request.inputHpPercentMaxForce = readNumber('inputMaxHpPercentForce');
-    request.inputDefMinForce = readNumber('inputMinDefForce');
-    request.inputDefMaxForce = readNumber('inputMaxDefForce');
-    request.inputDefPercentMinForce = readNumber('inputMinDefPercentForce');
-    request.inputDefPercentMaxForce = readNumber('inputMaxDefPercentForce');
-    request.inputEffMinForce = readNumber('inputMinEffForce');
-    request.inputEffMaxForce = readNumber('inputMaxEffForce');
-    request.inputResMinForce = readNumber('inputMinResForce');
-    request.inputResMaxForce = readNumber('inputMaxResForce');
+    // request.inputAtkMinForce = readNumber('inputMinAtkForce');
+    // request.inputAtkMaxForce = readNumber('inputMaxAtkForce');
+    // request.inputAtkPercentMinForce = readNumber('inputMinAtkPercentForce');
+    // request.inputAtkPercentMaxForce = readNumber('inputMaxAtkPercentForce');
+    // request.inputSpdMinForce = readNumber('inputMinSpdForce');
+    // request.inputSpdMaxForce = readNumber('inputMaxSpdForce');
+    // request.inputCrMinForce = readNumber('inputMinCrForce');
+    // request.inputCrMaxForce = readNumber('inputMaxCrForce');
+    // request.inputCdMinForce = readNumber('inputMinCdForce');
+    // request.inputCdMaxForce = readNumber('inputMaxCdForce');
+    // request.inputHpMinForce = readNumber('inputMinHpForce');
+    // request.inputHpMaxForce = readNumber('inputMaxHpForce');
+    // request.inputHpPercentMinForce = readNumber('inputMinHpPercentForce');
+    // request.inputHpPercentMaxForce = readNumber('inputMaxHpPercentForce');
+    // request.inputDefMinForce = readNumber('inputMinDefForce');
+    // request.inputDefMaxForce = readNumber('inputMaxDefForce');
+    // request.inputDefPercentMinForce = readNumber('inputMinDefPercentForce');
+    // request.inputDefPercentMaxForce = readNumber('inputMaxDefPercentForce');
+    // request.inputEffMinForce = readNumber('inputMinEffForce');
+    // request.inputEffMaxForce = readNumber('inputMaxEffForce');
+    // request.inputResMinForce = readNumber('inputMinResForce');
+    // request.inputResMaxForce = readNumber('inputMaxResForce');
 
     request.inputAtkPriority = readNumber('atkSliderInput');
     request.inputHpPriority = readNumber('hpSliderInput');
@@ -1040,7 +1067,7 @@ function getOptimizationRequestParams(showError) {
     request.inputResPriority = readNumber('resSliderInput');
     request.inputFilterPriority = readNumber('filterSliderInput');
 
-    request.inputForceNumberSelect = readNumber('forceNumberSelect')
+    // request.inputForceNumberSelect = readNumber('forceNumberSelect')
 
     request.inputSets = setFilters.sets;
 
@@ -1054,7 +1081,6 @@ function getOptimizationRequestParams(showError) {
     request.inputBootsStat = mainFilters[2];
 
     request.excludeFilter = excludeFilter;
-
 
     request.setFormat = setFormat;
 

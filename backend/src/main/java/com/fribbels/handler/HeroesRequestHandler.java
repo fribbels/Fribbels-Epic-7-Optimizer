@@ -234,8 +234,8 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
         StatCalculator.setBaseValues(baseStats, hero);
-        final int reforges = equipment.values().stream().mapToInt(Item::getReforgeable).sum();
-        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, reforges);
+        final int upgrades = equipment.values().stream().mapToInt(Item::getUpgradeable).sum();
+        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades);
         hero.setStats(finalStats);
 
         final List<HeroStats> builds = hero.getBuilds();
@@ -256,8 +256,8 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
         StatCalculator.setBaseValues(baseStats, hero);
-        final int reforges = items.stream().mapToInt(Item::getReforgeable).sum();
-        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, reforges);
+        final int upgrades = items.stream().mapToInt(Item::getUpgradeable).sum();
+        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades);
         build.atk = finalStats.atk;
         build.hp = finalStats.hp;
         build.def = finalStats.def;
@@ -274,6 +274,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         build.dmgps = finalStats.dmgps;
         build.mcdmg = finalStats.mcdmg;
         build.mcdmgps = finalStats.mcdmgps;
+        build.dmgh = finalStats.dmgh;
         build.upgrades = finalStats.upgrades;
         build.score = finalStats.score;
     }
