@@ -1,7 +1,6 @@
 backend/.idea/workspace.xml
 backend/.idea/workspace.xml~
 backend/target/classes/*
-*.class
 # Logs
 logs
 *.log
@@ -53,5 +52,4 @@ npm-debug.log.*
 *.sass.d.ts
 *.scss.d.ts
 
-data/saves/autosave.json
 # backend/lib
