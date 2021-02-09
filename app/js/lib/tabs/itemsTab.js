@@ -95,11 +95,11 @@ async function editGear() {
     const editedItem = await Dialog.editGearDialog(item, true, false);
     console.warn("EDITITEMS", editedItem);
 
-    Reforge.getReforgeStats(editedItem);
+    ItemAugmenter.augment([editedItem])
     await Api.editItems([editedItem]);
 
     Notifier.success("Edited item");
-    module.exports.redraw();
+    module.exports.redraw(editedItem);
     Saves.autoSave();
 }
 
@@ -122,14 +122,14 @@ async function reforgeGear() {
         return;
     }
 
-    Reforge.getReforgeStats(item);
+    ItemAugmenter.augment([item]);
     const editedItem = await Dialog.editGearDialog(item, true, true);
     console.warn("EDITITEMS", editedItem);
 
     await Api.editItems([editedItem]);
 
     Notifier.quick("Reforged item");
-    module.exports.redraw();
+    module.exports.redraw(editedItem);
     Saves.autoSave();
 }
 

@@ -4,7 +4,7 @@ module.exports = {
 
     getReforgeStats: (gear) => {
         getItemReforgedStats(gear);
-        ItemAugmenter.augment([gear]);
+        // ItemAugmenter.augment([gear]);
     },
 
     isGaveleets: (gear) => {
@@ -21,6 +21,150 @@ module.exports = {
 
     isReforgeableNow: (gear) => {
         return gear.level == 85 && gear.enhance == 15 && !module.exports.isGaveleets(gear);
+    },
+
+    augmentMaterial: (gear) => {
+        if (!gear || !gear.gear || !gear.set) return;
+        const name = gear.name;
+
+        const huntNameBySet = nameBySetByGear[gear.gear]
+        const huntName = huntNameBySet[gear.set]
+        const conversionName = conversionNameByGear[gear.gear]
+
+        gear.mconfidence = "test";
+        if (!module.exports.isReforgeable(gear)) {
+            gear.material = null;
+        } else if (!name || name.length < 2) {
+            gear.material = "Unknown";
+        } else if (Utils.stringDistance(name, huntName) > 0.35) {
+            gear.material = "Hunt";
+            gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, huntName));
+        } else if (Utils.stringDistance(name, conversionName) > 0.35) {
+            gear.material = "Conversion";
+            gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, conversionName))
+        } else {
+            gear.material = "Unknown";
+        }
+    },
+}
+
+const conversionNameByGear = {
+    Weapon: "Corinoa",
+    Helmet: "Elsquare",
+    Armor: "Corimescent",
+    Necklace: "Corselium",
+    Ring: "Seekers Ring",
+    Boots: "Practical Boots"
+}
+
+const nameBySetByGear = {
+    Weapon: {
+        HealthSet: "Dark Steel Saber",
+        DefenseSet: "Dark Steel Saber",
+        AttackSet: "Dark Steel Saber",
+        SpeedSet: "Abyss Drake Bonesword",
+        CriticalSet: "Abyss Drake Bonesword",
+        HitSet: "Abyss Drake Bonesword",
+        DestructionSet: "Hellish Essence Orb",
+        LifestealSet: "Hellish Essence Orb",
+        CounterSet: "Hellish Essence Orb",
+        ResistSet: "Hellish Essence Orb",
+        UnitySet: "Indomitable Spider Mace",
+        RageSet: "Indomitable Spider Mace",
+        ImmunitySet: "Indomitable Spider Mace",
+        RevengeSet: "Demons Cursed Double Edged Sword",
+        InjurySet: "Demons Cursed Double Edged Sword",
+        PenetrationSet: "Demons Cursed Double Edged Sword",
+    },
+    Helmet: {
+        HealthSet: "Dark Steel Helm",
+        DefenseSet: "Dark Steel Helm",
+        AttackSet: "Dark Steel Helm",
+        SpeedSet: "Abyss Drake Mask",
+        CriticalSet: "Abyss Drake Mask",
+        HitSet: "Abyss Drake Mask",
+        DestructionSet: "Hellish Essence Crown",
+        LifestealSet: "Hellish Essence Crown",
+        CounterSet: "Hellish Essence Crown",
+        ResistSet: "Hellish Essence Crown",
+        UnitySet: "Indomitable Spider Helm",
+        RageSet: "Indomitable Spider Helm",
+        ImmunitySet: "Indomitable Spider Helm",
+        RevengeSet: "Demon's Cursed Horned Helm",
+        InjurySet: "Demon's Cursed Horned Helm",
+        PenetrationSet: "Demon's Cursed Horned Helm",
+    },
+    Armor: {
+        HealthSet: "Dark Steel Armor",
+        DefenseSet: "Dark Steel Armor",
+        AttackSet: "Dark Steel Armor",
+        SpeedSet: "Abyss Drake Hide Tunic",
+        CriticalSet: "Abyss Drake Hide Tunic",
+        HitSet: "Abyss Drake Hide Tunic",
+        DestructionSet: "Hellish Essence Robe",
+        LifestealSet: "Hellish Essence Robe",
+        CounterSet: "Hellish Essence Robe",
+        ResistSet: "Hellish Essence Robe",
+        UnitySet: "Indomitable Spider Breastplate",
+        RageSet: "Indomitable Spider Breastplate",
+        ImmunitySet: "Indomitable Spider Breastplate",
+        RevengeSet: "Demons Cursed Heavy Armor",
+        InjurySet: "Demons Cursed Heavy Armor",
+        PenetrationSet: "Demons Cursed Heavy Armor",
+    },
+    Necklace: {
+        HealthSet: "Dark Steel Warmer",
+        DefenseSet: "Dark Steel Warmer",
+        AttackSet: "Dark Steel Warmer",
+        SpeedSet: "Abyss Blade Necklace",
+        CriticalSet: "Abyss Blade Necklace",
+        HitSet: "Abyss Blade Necklace",
+        DestructionSet: "Obsidian Amulet",
+        LifestealSet: "Obsidian Amulet",
+        CounterSet: "Obsidian Amulet",
+        ResistSet: "Obsidian Amulet",
+        UnitySet: "Indomitable Spider Pendant",
+        RageSet: "Indomitable Spider Pendant",
+        ImmunitySet: "Indomitable Spider Pendant",
+        RevengeSet: "Demons Cursed Necklace",
+        InjurySet: "Demons Cursed Necklace",
+        PenetrationSet: "Demons Cursed Necklace",
+    },
+    Ring: {
+        HealthSet: "Dark Steel Gauntlet",
+        DefenseSet: "Dark Steel Gauntlet",
+        AttackSet: "Dark Steel Gauntlet",
+        SpeedSet: "Awakened Dragon Gem",
+        CriticalSet: "Awakened Dragon Gem",
+        HitSet: "Awakened Dragon Gem",
+        DestructionSet: "Obsidian Ring",
+        LifestealSet: "Obsidian Ring",
+        CounterSet: "Obsidian Ring",
+        ResistSet: "Obsidian Ring",
+        UnitySet: "Indomitable Spider Ring",
+        RageSet: "Indomitable Spider Ring",
+        ImmunitySet: "Indomitable Spider Ring",
+        RevengeSet: "Demons Cursed Ring",
+        InjurySet: "Demons Cursed Ring",
+        PenetrationSet: "Demons Cursed Ring",
+    },
+    Boots: {
+        HealthSet: "Dark Steel Boots",
+        DefenseSet: "Dark Steel Boots",
+        AttackSet: "Dark Steel Boots",
+        SpeedSet: "Abyss Drake Boots",
+        CriticalSet: "Abyss Drake Boots",
+        HitSet: "Abyss Drake Boots",
+        DestructionSet: "Hellish Essence Treads",
+        LifestealSet: "Hellish Essence Treads",
+        CounterSet: "Hellish Essence Treads",
+        ResistSet: "Hellish Essence Treads",
+        UnitySet: "Indomitable Spider Boots",
+        RageSet: "Indomitable Spider Boots",
+        ImmunitySet: "Indomitable Spider Boots",
+        RevengeSet: "Demons Cursed Fine Boots",
+        InjurySet: "Demons Cursed Fine Boots",
+        PenetrationSet: "Demons Cursed Fine Boots",
     }
 }
 

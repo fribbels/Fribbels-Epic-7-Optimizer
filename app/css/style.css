@@ -163,7 +163,7 @@ body {
 #myGrid {
   height: 100%;
   flex-grow: 2;
-  min-width: 700px;
+  min-width: 1075px;
 }
 
 .optimizer-equipped-section {
@@ -290,7 +290,7 @@ input {
 #heroes-equipped-section {
   display: flex;
   flex-direction: row;
-  height: 230px;
+  min-height: 230px;
   margin-bottom: 10px
 }
 
@@ -359,9 +359,9 @@ input {
 .itemDisplayHeaderData {
   display: flex;
   flex-direction: column;
-  width: 90px;
+  width: 44px;
   line-height: 16px;
-  padding-right: 45px;
+  padding-right: 0px;
 }
 
 .itemDisplayHeaderDataTop {
@@ -1244,14 +1244,20 @@ body.dark-theme input {
 }
 .heroesTableContainer {
   min-height: 370px;
+  height: 370px;
   flex-grow: 1;
 }
 .buildsTableContainer {
   min-height: 165px;
+  height: 165px;
   flex-grow: 1;
   margin-bottom: 5px;
 }
 #heroes-table {
   height: 100%;
   width: 100%;
+}
+.itemDisplayMaterial {
+  height: 34px;
+  padding-right: 12px;
 }

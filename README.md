@@ -373,11 +373,13 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Remove set text, add edit/reforge button
  - Fix: Hero filters dont apply switching tabs
  - Added settings tab
+ - Show conversion/reforge mats
+ - Fix score
 
 **Working on:**
  - v1.4.0
  - Dark mode
- - Show conversion/reforge mats
+ - Fix: gear/hero tab preview doesnt update on un/lock/equip/remove
 
  **Medium priority:**
  - Date newly added gear

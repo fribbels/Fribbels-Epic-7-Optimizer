@@ -423,7 +423,8 @@ async function onBuildRowSelected(event) {
     if (event.node.selected) {
         const hero = HeroesGrid.getSelectedRow();
         // const baseStatsResponse = await Api.getBaseStats(hero.name);
-        const heroResponse = await Api.getHeroById(hero.id);
+        const useReforgeStats = HeroesTab.getUseReforgedStats();
+        const heroResponse = await Api.getHeroById(hero.id, useReforgeStats);
         const baseStats = heroResponse.baseStats;
         const itemIds = event.data.items;
 

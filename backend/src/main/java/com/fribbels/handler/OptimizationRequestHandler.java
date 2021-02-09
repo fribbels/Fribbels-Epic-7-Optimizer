@@ -332,7 +332,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         final long index = searchedCounter.getAndIncrement();
                                         //                                        final boolean passesFilter = true;
 
-                                        final boolean passesFilter = passesFilter(result, request, collectedSets, reforges);
+                                        final boolean passesFilter = passesFilter(result, request, collectedSets);
                                         result.setSets(collectedSets);
                                         if (passesFilter) {
                                             final long resultsIndex = resultsCounter.getAndIncrement();
@@ -361,10 +361,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                                 break;
                                             }
                                         }
-
-                                        if (index % 1000000 == 1) {
-                                            System.out.println("PROGRESS: [" + index + "]");
-                                        }
                                     }
                                 }
                             }
@@ -378,7 +374,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         try {
             executorService.shutdown();
-            executorService.awaitTermination(500, TimeUnit.SECONDS);
+            executorService.awaitTermination(50000000, TimeUnit.SECONDS);
 
             try {
                 final long size = maxReached.get() == MAXIMUM_RESULTS-1 ? MAXIMUM_RESULTS : resultsCounter.get();
@@ -420,7 +416,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return output;
     }
 
-    public boolean passesFilter(final HeroStats heroStats, final OptimizationRequest request, final int[] sets, final int reforges) {
+    public boolean passesFilter(final HeroStats heroStats, final OptimizationRequest request, final int[] sets) {
         if (heroStats.atk < request.inputAtkMinLimit || heroStats.atk > request.inputAtkMaxLimit
                 ||  heroStats.hp  < request.inputHpMinLimit  || heroStats.hp > request.inputHpMaxLimit
                 ||  heroStats.def < request.inputDefMinLimit || heroStats.def > request.inputDefMaxLimit

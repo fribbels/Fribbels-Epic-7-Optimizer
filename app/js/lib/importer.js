@@ -126,7 +126,6 @@ module.exports = {
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
                 ItemAugmenter.augment(items);
-                items.forEach(item => Reforge.getReforgeStats(item));
 
                 await Api.setItems(items);
                 await Api.setHeroes([]);
@@ -168,7 +167,6 @@ module.exports = {
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
                 ItemAugmenter.augment(items);
-                items.forEach(item => Reforge.getReforgeStats(item));
 
                 await Api.addItems(items);
 
@@ -210,7 +208,6 @@ module.exports = {
                 // const items = deserializedData.items;
                 console.log("ITEMS", items);
                 ItemAugmenter.augment(items);
-                items.forEach(item => Reforge.getReforgeStats(item));
 
                 await Api.mergeItems(items);
 

@@ -1,6 +1,7 @@
 package com.fribbels.model;
 
 import com.fribbels.enums.Gear;
+import com.fribbels.enums.Material;
 import com.fribbels.enums.Rank;
 import com.fribbels.enums.Set;
 import com.google.gson.Gson;
@@ -31,6 +32,8 @@ public class Item {
 
     private AugmentedStats augmentedStats;
     private AugmentedStats reforgedStats;
+    private Material material;
+    private String mconfidence;
 
     public String id;
 

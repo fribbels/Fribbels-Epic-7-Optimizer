@@ -44,6 +44,8 @@ module.exports = {
                 {headerName: 'sScore', field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
                 {headerName: 'cScore', field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
                 {headerName: 'Equipped', field: 'equippedByName', width: 120},
+                {headerName: 'Mconf', field: 'mconfidence', width: 50},
+                {headerName: 'Material', field: 'material', width: 120},
                 {headerName: 'Locked', field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
                 // {headerName: 'Actions', field: 'id', cellRenderer: renderActions},
                 {headerName: 'Duplicate', field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
@@ -88,11 +90,13 @@ module.exports = {
             aggregateCurrentGearStats(getAllItemsResponse.items);
             itemsGrid.gridOptions.api.setRowData(getAllItemsResponse.items)
 
+            var refreshedItem;
             if (newItem) {
                 itemsGrid.gridOptions.api.forEachNode((node) => {
                     if (node.data.id == newItem.id) {
                         node.setSelected(true, false);
                         itemsGrid.gridOptions.api.ensureNodeVisible(node);
+                        refreshedItem = node.data;
                     }
                 })
             } else if (selectedNode) {
@@ -100,9 +104,13 @@ module.exports = {
                     if (node.data.id == selectedNode.data.id) {
                         node.setSelected(true, false);
                         itemsGrid.gridOptions.api.ensureNodeVisible(node);
+                        refreshedItem = node.data;
                     }
                 })
+            } else {
+
             }
+            drawPreview(refreshedItem)
             updateSelectedCount();
         });
     },
@@ -465,8 +473,7 @@ function updateSelectedCount() {
 function cellMouseOver(event) {
     const item = event.data;
 
-    const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", null)
-    document.getElementById("gearTabPreview").innerHTML = html;
+    drawPreview(item);
 }
 
 function cellMouseOut(event) {
@@ -474,6 +481,13 @@ function cellMouseOut(event) {
 
     if (!item) return;
 
+    drawPreview(item);
+}
+
+function drawPreview(item) {
+    if (!item) {
+        document.getElementById("gearTabPreview").innerHTML = "";
+    }
     const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", null)
     document.getElementById("gearTabPreview").innerHTML = html;
 }

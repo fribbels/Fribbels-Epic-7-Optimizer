@@ -221,6 +221,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
         if (equipment.values().size() != 6) {
             hero.setStats(new HeroStats());
+            clearNullBuilds(hero, useReforgeStats);
             return;
         }
 
@@ -237,17 +238,35 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final int upgrades = equipment.values().stream().mapToInt(Item::getUpgradeable).sum();
         final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades);
         hero.setStats(finalStats);
+        clearNullBuilds(hero, useReforgeStats);
 
+    }
+
+    private void clearNullBuilds(final Hero hero, final boolean useReforgeStats) {
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
         final List<HeroStats> builds = hero.getBuilds();
-        for (final HeroStats build : builds) {
-            addStatsToBuild(hero, baseStats, build, useReforgeStats);
+        for (int i = 0; i < builds.size(); i++) {
+            final HeroStats build = builds.get(i);
+            if (!addStatsToBuild(hero, baseStats, build, useReforgeStats)) {
+                final String buildHash = build.getBuildHash();
+                final List<HeroStats> changedBuilds = builds.stream()
+                        .filter(x -> !StringUtils.equals(x.getBuildHash(), buildHash))
+                        .collect(Collectors.toList());
+
+                hero.setBuilds(changedBuilds);
+                i--;
+            }
         }
     }
 
-    private void addStatsToBuild(final Hero hero, final HeroStats baseStats, final HeroStats build, final boolean useReforgeStats) {
+    private boolean addStatsToBuild(final Hero hero, final HeroStats baseStats, final HeroStats build, final boolean useReforgeStats) {
         final List<String> itemIds = build.getItems();
         final List<Item> items = itemDb.getItemsById(itemIds);
-
+        for (final Item item : items) {
+            if (item == null) {
+                return false;
+            }
+        }
         final int[] setsArr = StatCalculator.buildSetsArr(items.toArray(new Item[0]));
         final List<float[]> statAccumulators = items
                 .stream()
@@ -277,6 +296,8 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         build.dmgh = finalStats.dmgh;
         build.upgrades = finalStats.upgrades;
         build.score = finalStats.score;
+
+        return true;
     }
 
     public String getHeroById(final GetHeroByIdRequest request) {

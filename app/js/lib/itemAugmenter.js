@@ -4,6 +4,8 @@ module.exports = {
     // final
     augment: (items) => {
         for (var item of items) {
+            Reforge.getReforgeStats(item);
+            Reforge.augmentMaterial(item);
             augmentStats(item);
             augmentReforgeStats(item);
 

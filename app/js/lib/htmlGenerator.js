@@ -206,7 +206,7 @@ module.exports = {
             `
         }
 
-        Reforge.getReforgeStats(item);
+        ItemAugmenter.augment([item])
 
         const main = statToText(item.main, baseStats, item);
         const substat0 = statToText(item.substats[0], baseStats, item);
@@ -222,6 +222,7 @@ module.exports = {
 
         const heroImage = getHeroImage(item);
 
+        const materialImage = getMaterialImage(item);
 
         const html = `
 <div class="itemDisplayHeader">
@@ -234,6 +235,7 @@ module.exports = {
       <div class="itemDisplayLevel" ${styleLevel(item.level)}>${item.level}</div>
     </div>
   </div>
+  <img src="${materialImage}" class="itemDisplayMaterial"></img>
   <img src="${heroImage}" class="itemDisplayEquippedHero"></img>
 </div>
 <div class="itemDisplayMainStat">
@@ -279,6 +281,42 @@ module.exports = {
         return html;
     }
 }
+
+function getMaterialImage(item) {
+    if (!item.material || item.material == "Unknown") {
+        return Assets.getBlank();
+    }
+
+    if (item.material == "Conversion") {
+        return "./assets/reforgeConversion.png";
+    }
+
+    if (item.material == "Hunt") {
+        return huntImageBySet[item.set]
+    }
+
+    return Assets.getBlank();
+}
+
+const huntImageBySet = {
+    HealthSet: "./assets/reforgeG.png",
+    DefenseSet: "./assets/reforgeG.png",
+    AttackSet: "./assets/reforgeG.png",
+    SpeedSet: "./assets/reforgeW.png",
+    CriticalSet: "./assets/reforgeW.png",
+    HitSet: "./assets/reforgeW.png",
+    DestructionSet: "./assets/reforgeB.png",
+    LifestealSet: "./assets/reforgeB.png",
+    CounterSet: "./assets/reforgeB.png",
+    ResistSet: "./assets/reforgeB.png",
+    UnitySet: "./assets/reforgeA.png",
+    RageSet: "./assets/reforgeA.png",
+    ImmunitySet: "./assets/reforgeA.png",
+    RevengeSet: "./assets/reforgeC.png",
+    InjurySet: "./assets/reforgeC.png",
+    PenetrationSet: "./assets/reforgeC.png",
+}
+
 
 function editItemDisplay(item) {
     if (Reforge.isReforgeableNow(item)) {

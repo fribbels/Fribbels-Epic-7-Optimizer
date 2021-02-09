@@ -31,7 +31,6 @@ module.exports = {
 
         $('#setBefore').html(GridRenderer.renderSets(before.sets, 'previewSet'));
         $('#setAfter').html(GridRenderer.renderSets(after.sets, 'previewSet'));
-        console.log("DRAW", before);
     },
 }
 

@@ -58,7 +58,9 @@ module.exports = {
     },
 
     refreshAllowGearFrom: () => {
+        const selects = $('#optionsExcludeGearFrom').multipleSelect('getSelects');
         $('#optionsExcludeGearFrom').multipleSelect('refresh')
+        $('#optionsExcludeGearFrom').multipleSelect('setSelects', selects)
     },
 
     refreshInputHeroAdd: () => {
@@ -128,15 +130,17 @@ function customFilter(label, text, originalLabel, originalText) {
     targetText = targetText.toLowerCase();
     targetLabel = targetLabel.toLowerCase();
 
-    for (var i = 0; i < targetText.length; i++) { // x
+    var index = 0;
+    for (var i = 0; i < targetText.length; i++) { //
         const letter = targetText[i];
         var found = false;
 
-        for (var j = i; j < targetLabel.length; j++) { // briar w
+        for (var j = index; j < targetLabel.length; j++) { // briar w
             const letterMatch = targetLabel[j];
 
             if (letter == letterMatch) {
                 found = true;
+                index = j + 1;
                 break;
             }
         }

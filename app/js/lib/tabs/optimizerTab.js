@@ -352,7 +352,6 @@ module.exports = {
 
             optimizerHeroSelector.add(option);
             optimizerAllowGearFromSelector.add(option2);
-            Selectors.refreshAllowGearFrom();
 
             if (selectedId && selectedId == hero.id) {
                 optimizerHeroSelector.value = selectedId
@@ -362,6 +361,7 @@ module.exports = {
         redrawHeroImage();
         recalculateFilters();
         Selectors.refreshInputHeroAdd();
+        Selectors.refreshAllowGearFrom();
     }
 }
 
@@ -421,7 +421,7 @@ async function editGearFromIcon(id, reforge) {
     await Api.editItems([editedItem]);
     Notifier.quick("Edited item");
 
-    ItemsTab.redraw();
+    ItemsTab.redraw(editedItem);
     drawPreview();
     Saves.autoSave();
 }
@@ -439,7 +439,7 @@ async function lockGearFromIcon(id) {
     }
 
 
-    ItemsTab.redraw();
+    ItemsTab.redraw(result.item);
     drawPreview();
     Saves.autoSave();
 }
@@ -642,7 +642,6 @@ async function equipSelectedGear() {
     row.property = "star";
     node.updateData(row);
 
-    // const response = await Api.getHeroById(heroId);
     OptimizerGrid.setPinnedHero(hero);
     drawPreview()
     Saves.autoSave();
@@ -761,7 +760,6 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
             items = items.filter(x => filter.includes(x.main.type) && x.gear == "Boots" || x.gear != "Boots")
     }
 
-    items.forEach(x => Reforge.getReforgeStats(x));
     if (params.inputPredictReforges) {
         console.log("Predict reforges enabled")
         items.forEach(x => {

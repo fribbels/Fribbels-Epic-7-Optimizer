@@ -52,6 +52,10 @@ public class ItemDb {
         final AugmentedStats stats = item.getAugmentedStats();
         final AugmentedStats reforgedStats = item.getReforgedStats() == null ? stats : item.getReforgedStats();
 
+        final double atkValue = 3.46 / 39;
+        final double defValue = 4.99 / 31;
+        final double hpValue = 3.09 / 174;
+
         double wssValue =
                 stats.getAttackPercent() +
                         stats.getDefensePercent() +
@@ -61,9 +65,9 @@ public class ItemDb {
                         stats.getSpeed() * (8.0/4.0) +
                         stats.getCritDamage() * (8.0/7.0) +
                         stats.getCritRate() * (8.0/5.0) +
-                        stats.getAttack() / 39.0 * (1.0/2.0) +
-                        stats.getDefense() / 31.0 * (1.0/2.0) +
-                        stats.getHealth() / 174.0 * (1.0/2.0);
+                        stats.getAttack() * atkValue +
+                        stats.getDefense() * defValue +
+                        stats.getHealth() * hpValue;
 
         double reforgedWssValue =
                 reforgedStats.getAttackPercent() +
@@ -74,24 +78,24 @@ public class ItemDb {
                         reforgedStats.getSpeed() * (8.0/4.0) +
                         reforgedStats.getCritDamage() * (8.0/7.0) +
                         reforgedStats.getCritRate() * (8.0/5.0) +
-                        reforgedStats.getAttack() / 39.0 * (1.0/2.0) +
-                        reforgedStats.getDefense() / 31.0 * (1.0/2.0) +
-                        reforgedStats.getHealth() / 174.0 * (1.0/2.0);
+                        reforgedStats.getAttack() * atkValue +
+                        reforgedStats.getDefense() * defValue +
+                        reforgedStats.getHealth() * hpValue;
 
         double dpsWssValue =
                 stats.getAttackPercent() +
                 stats.getSpeed() * (8.0/4.0) +
                 stats.getCritDamage() * (8.0/7.0) +
                 stats.getCritRate() * (8.0/5.0) +
-                stats.getAttack() / 39.0 * (1.0/2.0);
+                stats.getAttack() * atkValue;
 
         double supportWssValue =
                 stats.getDefensePercent() +
                 stats.getHealthPercent() +
                 stats.getEffectResistance() +
                 stats.getSpeed() * (8.0/4.0) +
-                stats.getDefense() / 31.0 * (1.0/2.0) +
-                stats.getHealth() / 174.0 * (1.0/2.0);
+                stats.getDefense() * defValue +
+                stats.getHealth() * hpValue;
 
         double combatWssValue =
                 stats.getAttackPercent() +
@@ -100,9 +104,9 @@ public class ItemDb {
                 stats.getSpeed() * (8.0/4.0) +
                 stats.getCritDamage() * (8.0/7.0) +
                 stats.getCritRate() * (8.0/5.0) +
-                stats.getAttack() / 39.0 * (1.0/2.0) +
-                stats.getDefense() / 31.0 * (1.0/2.0) +
-                stats.getHealth() / 174.0 * (1.0/2.0);
+                stats.getAttack() * atkValue +
+                stats.getDefense() * defValue +
+                stats.getHealth() * hpValue;
 
         item.setWss((int) Math.round(wssValue));
         item.setReforgedWss((int) Math.round(reforgedWssValue));

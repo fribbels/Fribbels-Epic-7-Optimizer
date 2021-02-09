@@ -1,5 +1,9 @@
 const tinygradient = require('tinygradient');
-var gradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
+var gradient = tinygradient([
+    {color: '#F5A191', pos: 0},
+    {color: '#ffffe5', pos: 0.5},
+    {color: '#77e246', pos: 1}
+]);
 
 optimizerGrid = null;
 var currentSortModel;
