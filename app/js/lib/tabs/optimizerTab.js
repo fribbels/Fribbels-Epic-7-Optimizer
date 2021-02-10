@@ -424,6 +424,7 @@ async function editGearFromIcon(id, reforge) {
     ItemsTab.redraw(editedItem);
     drawPreview();
     Saves.autoSave();
+    HeroesGrid.redrawPreview();
 }
 
 async function lockGearFromIcon(id) {

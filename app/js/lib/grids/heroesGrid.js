@@ -58,18 +58,18 @@ module.exports = {
             hero = response.hero;
         } else {
             const useReforgedStats = HeroesTab.getUseReforgedStats();
-            hero = await Api.getHeroById(selectedRow.id, useReforgedStats);
+            hero = (await Api.getHeroById(selectedRow.id, useReforgedStats)).hero;
         }
 
         updateCurrentAggregate(hero);
         console.log("Refresh build selected hero row", hero);
+        buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
 
         const getMaybeSelectedRows = buildsGrid.gridOptions.api.getSelectedNodes()[0];
         if (getMaybeSelectedRows) {
             selectedBuildNode = getMaybeSelectedRows;
         }
 
-        buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
 
         if (!selectedBuildNode) {
             return;
@@ -128,7 +128,36 @@ module.exports = {
         }
 
         heroesGrid.gridOptions.api.onFilterChanged();
-    }
+    },
+
+    redrawPreview: async () => {
+        const heroRow = module.exports.getSelectedRow();
+        const buildRow = module.exports.getSelectedBuildRow();
+        if (buildRow) {
+            const itemIds = buildRow.items;
+
+            const itemsResponse = await Api.getItemsByIds(itemIds);
+            const items = itemsResponse.items;
+
+            const useReforgeStats = HeroesTab.getUseReforgedStats();
+            const heroResponse = await Api.getHeroById(heroRow.id, useReforgeStats);
+            const baseStats = heroResponse.baseStats;
+
+            for (var i = 0; i < 6; i++) {
+                const item = items[i];
+                // const itemId = itemIds[i];
+                const displayId = Constants.gearDisplayIdByIndex[i];
+                const html = HtmlGenerator.buildItemPanel(item, "heroesGrid", baseStats)
+                document.getElementById(displayId).innerHTML = html;
+            }
+            return;
+        }
+
+
+        if (heroRow) {
+            redrawPreviewHero(heroRow.id);
+        }
+    },
 }
 
 function buildGrid(heroes) {
@@ -472,38 +501,76 @@ function onHeroRowSelected(event) {
         console.log("onHeroRowSelected", event);
         const heroId = event.data.id;
 
-        const useReforgedStats = HeroesTab.getUseReforgedStats();
-        Api.getHeroById(heroId, useReforgedStats).then(async (response) => {
-            const hero = response.hero;
-            console.log("On hero row selected hero row", hero);
+        redrawPreviewHero(heroId);
 
-            updateCurrentAggregate(hero);
-            buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
+        // const useReforgedStats = HeroesTab.getUseReforgedStats();
+        // console.log("Use reforge", useReforgedStats)
+        // Api.getHeroById(heroId, useReforgedStats).then(async (response) => {
+        //     const hero = response.hero;
+        //     console.log("On hero row selected hero row", hero);
 
-            const equipmentMap = hero.equipment ? hero.equipment : {};
-            const equipment = [
-                equipmentMap["Weapon"],
-                equipmentMap["Helmet"],
-                equipmentMap["Armor"],
-                equipmentMap["Necklace"],
-                equipmentMap["Ring"],
-                equipmentMap["Boots"],
-            ]
+        //     updateCurrentAggregate(hero);
+        //     buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
 
-            module.exports.refreshBuilds(response);
+        //     const equipmentMap = hero.equipment ? hero.equipment : {};
+        //     const equipment = [
+        //         equipmentMap["Weapon"],
+        //         equipmentMap["Helmet"],
+        //         equipmentMap["Armor"],
+        //         equipmentMap["Necklace"],
+        //         equipmentMap["Ring"],
+        //         equipmentMap["Boots"],
+        //     ]
 
-            // const baseStatsResponse = await Api.getBaseStats(hero.name);
-            const baseStats = response.baseStats;
+        //     module.exports.refreshBuilds(response);
 
-            for (var i = 0; i < 6; i++) {
-                const gear = equipment[i];
-                const displayId = Constants.gearDisplayIdByIndex[i];
+        //     // const baseStatsResponse = await Api.getBaseStats(hero.name);
+        //     const baseStats = response.baseStats;
 
-                const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStats)
-                document.getElementById(displayId).innerHTML = html;
-            }
-        })
+        //     for (var i = 0; i < 6; i++) {
+        //         const gear = equipment[i];
+        //         const displayId = Constants.gearDisplayIdByIndex[i];
+
+        //         const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStats)
+        //         document.getElementById(displayId).innerHTML = html;
+        //     }
+        // })
     }
+}
+
+function redrawPreviewHero(heroId) {
+    const useReforgedStats = HeroesTab.getUseReforgedStats();
+    console.log("Use reforge", useReforgedStats)
+    Api.getHeroById(heroId, useReforgedStats).then(async (response) => {
+        const hero = response.hero;
+        console.log("On hero row selected hero row", hero);
+
+        updateCurrentAggregate(hero);
+        buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
+
+        const equipmentMap = hero.equipment ? hero.equipment : {};
+        const equipment = [
+            equipmentMap["Weapon"],
+            equipmentMap["Helmet"],
+            equipmentMap["Armor"],
+            equipmentMap["Necklace"],
+            equipmentMap["Ring"],
+            equipmentMap["Boots"],
+        ]
+
+        module.exports.refreshBuilds(response);
+
+        // const baseStatsResponse = await Api.getBaseStats(hero.name);
+        const baseStats = response.baseStats;
+
+        for (var i = 0; i < 6; i++) {
+            const gear = equipment[i];
+            const displayId = Constants.gearDisplayIdByIndex[i];
+
+            const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStats)
+            document.getElementById(displayId).innerHTML = html;
+        }
+    })
 }
 
 function getField(heroStats, stat) {

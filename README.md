@@ -375,20 +375,20 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Added settings tab
  - Show conversion/reforge mats
  - Fix score
+ - Fix: gear/hero tab preview doesnt update on un/lock/equip/remove
 
 **Working on:**
  - v1.4.0
- - Dark mode
- - Fix: gear/hero tab preview doesnt update on un/lock/equip/remove
 
  **Medium priority:**
- - Date newly added gear
+ - Dark mode
 
 **Bugs**
  - Comparison method violates its general contract
  - Captain rikoris skill tree wrong https://cdn.discordapp.com/attachments/524407327902793741/802511212298240020/image0.png
 
  **Low priority:**
+ - Date newly added gear
  - Change slider implementation http://ionden.com/a/plugins/ion.rangeSlider/start.html
  - Copying rows to text
  - Use main stat gear for priority filter

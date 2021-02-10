@@ -245,18 +245,20 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     private void clearNullBuilds(final Hero hero, final boolean useReforgeStats) {
         final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
         final List<HeroStats> builds = hero.getBuilds();
+        List<HeroStats> changedBuilds = builds.stream()
+                .collect(Collectors.toList());
         for (int i = 0; i < builds.size(); i++) {
             final HeroStats build = builds.get(i);
             if (!addStatsToBuild(hero, baseStats, build, useReforgeStats)) {
                 final String buildHash = build.getBuildHash();
-                final List<HeroStats> changedBuilds = builds.stream()
+                changedBuilds = changedBuilds.stream()
                         .filter(x -> !StringUtils.equals(x.getBuildHash(), buildHash))
                         .collect(Collectors.toList());
 
-                hero.setBuilds(changedBuilds);
-                i--;
             }
         }
+
+        hero.setBuilds(changedBuilds);
     }
 
     private boolean addStatsToBuild(final Hero hero, final HeroStats baseStats, final HeroStats build, final boolean useReforgeStats) {
