@@ -19,6 +19,15 @@ module.exports = {
             displayTitle: true,
             selectAll: false
         };
+        const excludeEquippedSelectOptions = {
+            maxHeight: 450,
+            showClear: true,
+            hideOptgroupCheckboxes: true,
+            minimumCountSelected: 99,
+            displayTitle: true,
+            selectAll: false,
+            filter: true,
+        };
         const heroSelectorOptions = {
             filter: true,
             customFilter: customFilter,
@@ -54,7 +63,7 @@ module.exports = {
         $('#inputHeroAdd').multipleSelect(Object.assign({}, heroSelectorOptions, {placeholder:"Hero"}))
         $('#addHeroesSelector').multipleSelect(Object.assign({}, addHeroSelectorOptions, {placeholder:"Hero"}))
 
-        $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, nonHoverMultipleSelectOptions, {placeholder:"Exclude equipped", selectAll: true}));
+        $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder:"Exclude equipped", selectAll: true}));
     },
 
     refreshAllowGearFrom: () => {

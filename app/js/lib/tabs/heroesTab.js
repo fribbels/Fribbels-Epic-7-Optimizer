@@ -92,7 +92,6 @@ module.exports = {
             const row = HeroesGrid.getSelectedRow();
             const existingBuild = HeroesGrid.getSelectedBuildRow()
 
-            console.warn("EQUIP BUILD", row, existingBuild);
             if (!existingBuild || !existingBuild.items || !row || existingBuild.items.includes(undefined) || existingBuild.items.includes(null)) {
                 return;
             }

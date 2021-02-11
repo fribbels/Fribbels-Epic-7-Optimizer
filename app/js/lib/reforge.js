@@ -27,21 +27,25 @@ module.exports = {
         if (!gear || !gear.gear || !gear.set) return;
         const name = gear.name;
 
+        if (!name || name.length < 2) {
+            return;
+        }
+
         const huntNameBySet = nameBySetByGear[gear.gear]
         const huntName = huntNameBySet[gear.set]
         const conversionName = conversionNameByGear[gear.gear]
 
-        gear.mconfidence = "test";
+        const huntDistance = Utils.stringDistance(name, huntName)
+        const conversionDistance = Utils.stringDistance(name, conversionName)
+
         if (!module.exports.isReforgeable(gear)) {
             gear.material = null;
-        } else if (!name || name.length < 2) {
-            gear.material = "Unknown";
-        } else if (Utils.stringDistance(name, huntName) > 0.35) {
-            gear.material = "Hunt";
-            gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, huntName));
-        } else if (Utils.stringDistance(name, conversionName) > 0.35) {
+        } else if (conversionDistance > huntDistance && conversionDistance > 0.2) {
             gear.material = "Conversion";
             gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, conversionName))
+        } else if (huntDistance > conversionDistance && huntDistance > 0.2) {
+            gear.material = "Hunt";
+            gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, huntName));
         } else {
             gear.material = "Unknown";
         }

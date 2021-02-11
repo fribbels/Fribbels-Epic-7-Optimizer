@@ -385,7 +385,6 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
 
 **Bugs**
  - Comparison method violates its general contract
- - Captain rikoris skill tree wrong https://cdn.discordapp.com/attachments/524407327902793741/802511212298240020/image0.png
 
  **Low priority:**
  - Date newly added gear

@@ -354,6 +354,7 @@ input {
   display: flex;
   flex-direction: row;
   height:30px;
+  justify-content: space-between;
 }
 
 .itemDisplayHeaderData {

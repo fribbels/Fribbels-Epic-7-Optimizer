@@ -14,9 +14,9 @@ public class SpecialStats {
         }
 
         if (StringUtils.equals("Captain Rikoris", hero.getName())) {
-            hero.setHp(5985); // 4677 * (1.09 + 0.1) + (60*3 + 80*3)
+            hero.setHp(6453); // 4677 * (1.09 + 0.2) + (60*3 + 80*3)
             hero.setEff(hero.getEff() + 10);
-            hero.setDef(1024); // 735 * (1.09 + 0.1) + (20*3 + 30*3)
+            hero.setDef(665); // 550 * (1.06 + 0.15)
 
             return hero;
         }
