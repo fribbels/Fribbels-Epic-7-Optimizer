@@ -7,7 +7,7 @@ module.exports = {
     listFilesInFolder: (path) => {
         console.log("Finding files in " + path + ": ");
 
-        var files = fs.readdirSync(path);
+        var files = fs.readdirSync(module.exports.path(path));
         files.forEach(file => {
           console.log(file);
         });
@@ -17,7 +17,7 @@ module.exports = {
 
     readFile: (path) => {
         return new Promise((resolve, reject) => {
-            fs.readFile(path, 'utf8', function read(err, data) {
+            fs.readFile(module.exports.path(path), 'utf8', function read(err, data) {
                 if (err) {
                     reject(err);
                 }
@@ -28,7 +28,7 @@ module.exports = {
     },
 
     saveFile: (path, text) => {
-        fs.writeFile(path, text, (err) => {
+        fs.writeFile(module.exports.path(path), text, (err) => {
             if (err)
                 return console.log(err);
             console.log('Exported text to: ', path);
@@ -36,8 +36,8 @@ module.exports = {
     },
 
     createFolder: (folder) => {
-        if (!fs.existsSync(folder)){
-            fs.mkdirSync(folder);
+        if (!fs.existsSync(module.exports.path(folder))) {
+            fs.mkdirSync(module.exports.path(folder));
 
             module.exports.saveFile(folder + "/empty-save.json", '{"heroes":[],"items":[]}');
             module.exports.saveFile(folder + "/settings.ini", JSON.stringify(Settings.getDefaultSettings()));
@@ -46,6 +46,12 @@ module.exports = {
 
     isMac: () => {
         return os.platform() == 'darwin';
+    },
+
+    path: (path) => {
+        return module.exports.isMac() ?
+                path.replace(/\//g, "/") :
+                path.replace(/\//g, "\\");
     },
 
     getRootPath: () => {

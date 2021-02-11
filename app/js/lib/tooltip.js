@@ -102,6 +102,9 @@ Select substat filters to filter results by. Left column is min (inclusive) and 
 <p><b>DmgS - </b> Average damage * Speed rating, measures average damage vs speed. </p>
 <p><b>Mcd - </b> Max crit damage rating, measures damage at 100% crit chance. Example units: Arby, JKise. </p>
 <p><b>McdS - </b> Max crit damage * Speed rating, measures damage at 100% crit chance vs speed. </p>
+<p><b>DmgH - </b> Dmg * Hp rating, average damage rating, scaled by your units health. Useful for HP scaling bruisers. </p>
+<p><b>Score - </b> Sum of gear score of all 6 pieces. </p>
+<p><b>Upg - </b> Number items to upgrade - including reforges and enhances. </p>
 `
         });
 
@@ -133,8 +136,14 @@ Lowering the percent narrows down your best gears to make the search faster, but
 <p><b>Start - </b> Start a search using the current settings. </p>
 <p><b>Filter - </b> Keep the current optimization results, but re-apply the stat and rating filters. Useful for narrowing down a search. </p>
 <p><b>Cancel - </b> Attempts to cancel an ongoing search. This won't always cancel immediately, if the process is busy. </p>
-<p><b>Load filters - </b> Loads the optimization filters from the last search for this hero. </p>
 <p><b>Reset filters - </b> Resets all optimization filters to their default values. </p>
+`
+        });
+
+        tippy('#previewTooltip', {
+            content:
+`
+<p>The left shows your unit's current stats. The middle shows the stats after the stat change. Right side shows the difference.</p>
 `
         });
 
@@ -142,11 +151,11 @@ Lowering the percent narrows down your best gears to make the search faster, but
             content:
 `
 <p><b>Use reforged stats - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate. </p>
-<p><b>At least one lv 85 - </b> Search only for builds that contain at least one level 85 gear. </p>
-<p><b>Only +15 gear - </b> Search only for builds that contain all +15 gear. </p>
+<p><b>Only maxed gear - </b> Search only for builds that contain all +15 and reforged gear. </p>
 <p><b>Locked items - </b> Allow locked items in the search. </p>
 <p><b>Equipped items - </b> Allow items equipped by other heroes in the search. </p>
 <p><b>Keep current - </b> Keep any existing gears on the unit, and search only for the missing gear pieces. </p>
+<p><b>Exclude equipped - </b> Ignores the dropdown selected units' currently equipped gear in optimization. Only works when "Equipped items" is checked. </p>
 `
         });
 
@@ -181,7 +190,8 @@ There is a maximum of 5,000,000 results before the search stops (for memory limi
 
 <p>Score - Gear score.
 This score measures how well your gear rolled, scaled by the max roll for 85 gear (assuming 4 for speed).
-Similar to WSS, except flat stats rolls are included, with a 50% score penalty.</p>
+Similar to WSS, except flat stats rolls are included. Flat stats account to percentage equivalent was determined using the average stats of 5* units divided by the average flat roll.
+By this metric, a single flat roll corresponds to ~3.5 Atk %, ~5.0 Def %, ~3.1 Hp %.</p>
 
 <code>
 Score = Attack %</br>
@@ -192,9 +202,9 @@ Score = Attack %</br>
 + Speed * (8/4)</br>
 + Crit Damage * (8/7)</br>
 + Crit Chance * (8/5)</br>
-+ Flat Attack / 39 * 0.5</br>
-+ Flat Defense / 31 * 0.5</br>
-+ Flat Hp / 174 * 0.5</br>
++ Flat Attack * 3.46 / 39</br>
++ Flat Defense * 4.99 / 31</br>
++ Flat Hp * 3.09 / 174</br>
 </code>
 
 <p>dScore - DPS Score. This is the Score formula but only counting Attack/%, Crit Chance, Crit Damage, and Speed. </p>

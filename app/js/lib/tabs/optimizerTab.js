@@ -443,6 +443,7 @@ async function lockGearFromIcon(id) {
     ItemsTab.redraw(result.item);
     drawPreview();
     Saves.autoSave();
+    HeroesGrid.redrawPreview();
 }
 
 function redrawHeroImage() {

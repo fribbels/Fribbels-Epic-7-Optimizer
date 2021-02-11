@@ -216,7 +216,7 @@ input {
 
 .constraints-panel-col-med {
   padding: 5px 4px 4px 4px;
-  width: 205px;
+  width: 210px;
   flex-grow: 0;
   flex-shrink: 0;
   line-height: 14px;
@@ -1183,7 +1183,7 @@ body.dark-theme input {
   display: inline-block;
   vertical-align: middle;
   text-align: right;
-  width: 55px;
+  width: 60px;
 }
 .setPreviewBefore {
   display: inline-block;

@@ -1,11 +1,9 @@
 const { remote } = require('electron')
 
 const documentsPath = remote.app.getPath('documents');
-const savesFolder = documentsPath + '\\FribbelsOptimizerSaves\\';
+const savesFolder = documentsPath + '/FribbelsOptimizerSaves';
 
-const defaultPath = Files.isMac() ?
-                    savesFolder.replace(/\//g, "/") :
-                    savesFolder.replace(/\//g, "/");
+const defaultPath = savesFolder;
 
 const settingsPath = defaultPath + "/settings.ini";
 
@@ -28,7 +26,7 @@ module.exports = {
 
     getDefaultSettings: () => {
         return {
-            settingUnlockOnUnequip: false,
+            settingUnlockOnUnequip: true,
             settingRageSet: true,
             settingMaxResults: 5_000_000
         }
@@ -36,7 +34,7 @@ module.exports = {
 
     loadSettings: async () => {
         console.log("LOAD SETTINGS");
-        const text = await Files.readFile(settingsPath);
+        const text = await Files.readFile(Files.path(settingsPath));
         const settings = JSON.parse(text);
 
         document.getElementById('settingUnlockOnUnequip').checked = settings.settingUnlockOnUnequip;
@@ -57,7 +55,7 @@ module.exports = {
             settingMaxResults: parseInt(document.getElementById('settingMaxResults').value || 5_000_000)
         };
 
-        Files.saveFile(settingsPath, JSON.stringify(settings, null, 2))
+        Files.saveFile(Files.path(settingsPath), JSON.stringify(settings, null, 2))
         Api.setSettings(settings);
     },
 }

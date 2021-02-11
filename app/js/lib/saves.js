@@ -3,14 +3,12 @@ const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
 const documentsPath = remote.app.getPath('documents');
-const savesFolder = documentsPath + '\\FribbelsOptimizerSaves\\';
+const savesFolder = documentsPath + '/FribbelsOptimizerSaves';
 
 // const defaultPath = Files.isMac() ?
 //                     (Files.getDataPath() + "/saves/").replace(/\//g, "/") :
 //                     (Files.getDataPath() + "/saves/").replace(/\//g, "\\");
-const defaultPath = Files.isMac() ?
-                    savesFolder.replace(/\//g, "/") :
-                    savesFolder.replace(/\//g, "/");
+const defaultPath = savesFolder;
 
 module.exports = {
 
@@ -20,7 +18,7 @@ module.exports = {
 
     autoSave: async () => {
         module.exports.createFolder();
-        module.exports.saveData(defaultPath + 'autosave.json');
+        module.exports.saveData(Files.path(defaultPath + '/autosave.json'));
     },
 
     saveData: async (filename) => {
@@ -34,15 +32,15 @@ module.exports = {
         }
 
         const stringified = JSON.stringify(data);
-        Files.saveFile(filename, stringified);
+        Files.saveFile(Files.path(filename), stringified);
         return data;
     },
 
     loadAutoSave: async () => {
-        const autoSavePath = defaultPath + 'autosave.json';
+        const autoSavePath = defaultPath + '/autosave.json';
 
         try {
-            const data = await Files.readFile(autoSavePath);
+            const data = await Files.readFile(Files.path(autoSavePath));
             module.exports.loadSavedData(JSON.parse(data));
             console.log(JSON.parse(data));
         } catch (e) {
@@ -55,9 +53,10 @@ module.exports = {
         module.exports.createFolder();
 
         document.getElementById('saveDataSubmit').addEventListener("click", async () => {
+            console.error(defaultPath + "/" + getDateString() + '-export.json')
             const options = {
                 title: "Save file",
-                defaultPath : defaultPath + getDateString() + '-export.json',
+                defaultPath : Files.path(defaultPath + "/" + getDateString() + '-export.json'),
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'JSON', extensions: ['json']},
@@ -68,7 +67,7 @@ module.exports = {
 
             if (!filename) return;
 
-            const data = await module.exports.saveData(filename);
+            const data = await module.exports.saveData(Files.path(filename));
             await module.exports.autoSave();
             console.log("DATA", data);
             $('#saveDataSubmitOutputText').text(`Saved ${data.heroes.length} heroes and ${data.items.length} items to ${filename}`)
@@ -77,7 +76,7 @@ module.exports = {
         document.getElementById('loadDataSubmit').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : defaultPath,
+                defaultPath : Files.path(defaultPath),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'JSON', extensions: ['json']},
