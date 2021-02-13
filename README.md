@@ -367,6 +367,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Clear out item previews on refresh
  - See unit stats for whatever gear they have currently, not just for 6 pieces
  - Select/interact with multiple heroes at once
+ - Make Gaveleets level not show up green
 
  **Low priority:**
  - Dark mode
