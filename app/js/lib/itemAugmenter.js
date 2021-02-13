@@ -4,6 +4,7 @@ module.exports = {
     // final
     augment: (items) => {
         for (var item of items) {
+            fixProblemItem(item);
             Reforge.getReforgeStats(item);
             Reforge.augmentMaterial(item);
             augmentStats(item);
@@ -13,6 +14,29 @@ module.exports = {
                 item.id = uuidv4();
             }
         }
+    }
+}
+
+const substatsByRankAndEnhance = {
+}
+
+function fixProblemItem(item) {
+    var fixNeeded = false;
+
+    if (item.enhance >= 12 && item.substats.length < 4) {
+        fixNeeded = true;
+    } else if (item.enhance >= 9 && item.substats.length < 3) {
+        fixNeeded = true;
+    } else if (item.enhance >= 6 && item.substats.length < 2) {
+        fixNeeded = true;
+    } else if (item.enhance >= 3 && item.substats.length < 1) {
+        fixNeeded = true;
+    } else if (item.enhance == 0 && item.rank != "Normal" && item.substats.length == 0) {
+        fixNeeded = true;
+    }
+
+    if (fixNeeded) {
+        item.level = 0;
     }
 }
 
@@ -39,6 +63,8 @@ function augmentStats(item) {
 }
 
 function augmentReforgeStats(item) {
+    item.upgradeable = 0;
+    item.reforgeable = 0;
     item.reforgedStats = {
         AttackPercent: 0,
         HealthPercent: 0,

@@ -425,6 +425,7 @@ async function editGearFromIcon(id, reforge) {
     drawPreview();
     Saves.autoSave();
     HeroesGrid.redrawPreview();
+    HeroesGrid.refresh();
 }
 
 async function lockGearFromIcon(id) {
@@ -765,7 +766,7 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
     if (params.inputPredictReforges) {
         console.log("Predict reforges enabled")
         items.forEach(x => {
-            if (x.level == 85 && x.enhance == 15) {
+            if (Reforge.isReforgeableNow(x)) {
                 x.substats.forEach(substat => {
                     if (substat.reforgedValue) {
                         substat.value = substat.reforgedValue;
@@ -777,7 +778,6 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
         })
         ItemAugmenter.augment(items);
     }
-
 
     // items = ForceFilter.applyForceFilters(params, items)
     items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems)

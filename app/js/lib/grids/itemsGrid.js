@@ -487,8 +487,18 @@ function cellMouseOut(event) {
 function drawPreview(item) {
     if (!item) {
         document.getElementById("gearTabPreview").innerHTML = "";
+        return;
     }
-    const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", null)
+
+    var baseStats = null;
+
+    if (!item.equippedByName) {
+
+    } else {
+        baseStats = HeroData.getBaseStatsByName(item.equippedByName)
+    }
+
+    const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", baseStats)
     document.getElementById("gearTabPreview").innerHTML = html;
 }
 

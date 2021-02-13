@@ -346,68 +346,47 @@ Here's some quick tips on getting the best results. This is assuming you've read
 
 Hopefully this is useful for anyone looking for an easier way to gear their units.  There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**Done for v1.4.0**
- - Fix: Duplicate 85 gear turns into 90
- - Fix: Reforge button gear tab doesnt work
- - Fix: Ignore .dsstore files
- - Only warn about set filters on search
- - Autosave after import
- - Gear tab item preview on hover/select
- - Exclude gear from filter
- - Autocreate My Documents/FribbelsOptimizerSaves directory, save with date
- - Zebra stripes/recolored rows/borderless rows
- - Gear score column in optimizer results
- - Auto load filters on switching heroes
- - UI speed/api calls cleanup
- - When switching gears, popup asking to unlock the gears being unequipped (global setting)
- - Heroes page: score per build/unit
- - Added new optimizer columns: dmgh, score, upg
- - Removed optimizer options: Only +15 gear, Only over lv 85 gear, At least one lv 85
- - Replaced options with "Only maxed gear"
- - Can reforge non +15 gear
- - Fixed sliders being weird shapes
- - Added stat preview panel
- - Removed force filter
- - Partial name hero search
- - More responsive to resizes
- - Remove set text, add edit/reforge button
- - Fix: Hero filters dont apply switching tabs
- - Added settings tab
- - Show conversion/reforge mats
- - Fix score
- - Fix: gear/hero tab preview doesnt update on un/lock/equip/remove
+**Done for v1.4.1**
+ - Flat -> % missing on items page
+ - Handle impossible substat length on reforge
+ - Update hero grid on reforge item
+ - Fix Gaveleets gear messing up stats
 
 **Working on:**
- - v1.4.0
-
- **Medium priority:**
- - Dark mode
+ - v1.5.0
 
 **Bugs**
  - Comparison method violates its general contract
+ - Fix hp/atk off by 1
+
+ **Medium priority:**
+ - Investigate decrypting network traffic for gear data
+ - Add different level/awakening options
+ - Select artifact/ee stats
+ - Use main stat gear for priority filter
+ - Clear out item previews on refresh
+ - See unit stats for whatever gear they have currently, not just for 6 pieces
+ - Select/interact with multiple heroes at once
 
  **Low priority:**
- - Date newly added gear
+ - Dark mode
  - Change slider implementation http://ionden.com/a/plugins/ion.rangeSlider/start.html
- - Copying rows to text
- - Use main stat gear for priority filter
  - Move save/load to File menu
- - Option to equip gear from heroes page
- - Reapply all filters on Filter button press
  - Cancel ongoing request when start is clicked again
- - Check if any gear is an upgrade to a unit
  - Update permutations on 4 piece set
- - Clear out item previews on refresh
  - Optimize multiple heroes at once
- - Optimize results with a missing piece(s)
- - Add different level/awakening options
- - Fix: See unit stats for whatever gear they have currently, not just for 6 pieces
  - Gear page, option to use more than one set/gear filter at time
- - Have two windows open at once
- - Select/interact with multiple heroes at once
  - Verify all imported screenshots are image files
- - Investigate decrypting network traffic for gear data
+ - Auto copy gear image
+
+ **Probably not doing:**
+ - Date newly added gear
  - Enable cross platform for Linux
+ - Have two windows open at once
+ - Optimize results with a missing piece(s)
+ - Reapply all filters on Filter button press
+ - Check if any gear is an upgrade to a unit
+ - Option to equip gear from heroes page
 
 ## Troubleshooting
 

@@ -13,7 +13,11 @@ module.exports = {
         buildGrid();
     },
 
-    refresh: (heroes, id) => {
+    refresh: async (heroes, id) => {
+        if (!heroes) {
+            const response = await Api.getAllHeroes();
+            heroes = response.heroes;
+        }
         const selectedNode = heroesGrid.gridOptions.api.getSelectedNodes()[0]
 
         currentHeroes = heroes;

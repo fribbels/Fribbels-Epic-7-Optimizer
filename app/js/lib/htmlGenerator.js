@@ -317,7 +317,6 @@ const huntImageBySet = {
     PenetrationSet: "./assets/reforgeC.png",
 }
 
-
 function editItemDisplay(item) {
     if (Reforge.isReforgeableNow(item)) {
         return `<img src="${Assets.getEdit()}"    class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false)'></img>
@@ -337,7 +336,6 @@ function editLockDisplay(item) {
         return `<img src="${Assets.getLock()}" style="opacity:0.1" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
     }
     return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
-
 }
 
 function styleLevel(level) {

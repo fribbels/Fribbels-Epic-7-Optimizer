@@ -4,14 +4,13 @@ module.exports = {
 
     getReforgeStats: (gear) => {
         getItemReforgedStats(gear);
-        // ItemAugmenter.augment([gear]);
     },
 
     isGaveleets: (gear) => {
         if (!gear || !gear.name) {
             return false;
         }
-        return Utils.stringDistance("Gaveleets", gear.name) > 0.4;
+        return Utils.stringDistance("Gaveleets", gear.name) > 0.4 && gear.level == 85;
     },
 
     // Allow only reforging of +15 gear
@@ -174,7 +173,7 @@ const nameBySetByGear = {
 
 // We can get reforged stats of non +15 gear however
 function getItemReforgedStats(gear) {
-    if (gear.level == 85 && !Reforge.isGaveleets(gear)) {
+    if (module.exports.isReforgeable(gear)) {
         if (!gear.substats) {
             Notifier.error("Cannot calculate reforged stats. Find the item and fix it: " + JSON.stringify(gear));
             return;

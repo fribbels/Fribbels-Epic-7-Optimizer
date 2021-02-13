@@ -254,6 +254,8 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             dbItem.setRank(item.getRank());
             dbItem.setSet(item.getSet());
             dbItem.setSubstats(item.getSubstats());
+            dbItem.setReforgeable(item.getReforgeable());
+            dbItem.setUpgradeable(item.getUpgradeable());
             itemDb.calculateWss(dbItem);
             System.out.println("EDITED ITEM");
         }
