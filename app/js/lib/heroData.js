@@ -5,6 +5,10 @@ var eesByName = {};
 module.exports = {
 
     initialize: async () => {
+        const heroOverride = fetchOverride(HERO_OVERRIDE);
+        const eeOverride = fetchOverride(EE_OVERRIDE);
+        const artifactOverride = fetchOverride(ARTIFACT_OVERRIDE);
+
         var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbherodata.json');
         heroesByName = JSON.parse(heroesByNameStr);
         const heroNameList = Object.keys(heroesByName);
@@ -47,6 +51,8 @@ module.exports = {
                     heroesByName[result.name] = result;
                 }
 
+                Object.assign(heroesByName, heroOverride);
+
                 if (newHeroesList.length >= heroNameList.length) {
                     Files.saveFile(Files.getDataPath() + '/e7db/e7dbherodata.json', JSON.stringify(heroesByName));
                 }
@@ -82,6 +88,8 @@ module.exports = {
                 for (var result of results) {
                     artifactsByName[result.name] = result;
                 }
+
+                Object.assign(artifactsByName, artifactOverride);
 
                 if (newArtifactsList.length >= artifactNameList.length) {
                     Files.saveFile(Files.getDataPath() + '/e7db/e7dbartifactdata.json', JSON.stringify(artifactsByName));
@@ -119,6 +127,8 @@ module.exports = {
                 for (var result of results) {
                     eesByName[result.name] = result;
                 }
+
+                Object.assign(eeByName, eeOverride);
 
                 if (newEesList.length >= eeNameList.length) {
                     Files.saveFile(Files.getDataPath() + '/e7db/e7dbeedata.json', JSON.stringify(eesByName));
@@ -182,6 +192,18 @@ module.exports = {
             dac: Math.round(stats.dac * 100),
         }
     }
+}
+
+const HERO_OVERRIDE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/override/herooverride.json";
+const EE_OVERRIDE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/override/eeoverride.json";
+const ARTIFACT_OVERRIDE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/override/artifactoverride.json";
+const TEST_OVERRIDE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/override/testoverride.json";
+async function fetchOverride(url) {
+    const response = await fetch(url);
+    const text = await response.text();
+    const json = JSON.parse(text);
+
+    return json;
 }
 
 function manualFetchData() {

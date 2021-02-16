@@ -1,1 +1,79 @@
-{}
+{
+    "Achates": {
+      "_id": "achates",
+      "id": "c1017",
+      "base_id": null,
+      "specialty_id": null,
+      "name": "Achates",
+      "moonlight": false,
+      "rarity": 4,
+      "attribute": "ice",
+      "role": "manauser",
+      "zodiac": "twins",
+      "description": "A faithful healer following a sacred oath",
+      "story": "Second daughter of Rosvalt, an adviser to the former king of Ezera, Achates joined the Holy Order of the Blue Cross with the wish to save the world through the Goddess's mercy. She has little to do with her older sister, heir to the family name, and seems to be holding some discontent within her heart.",
+      "get_line": "I want to save the world with the mercy of healing.",
+      "stats": {
+        "bra": 50,
+        "int": 67,
+        "fai": 89,
+        "des": 60
+      },
+      "assets": {
+        "icon": "https://assets.epicsevendb.com/_source/face/c1017_s.png",
+        "image": "https://assets.epicsevendb.com/_source/face/c1017_su.png",
+        "thumbnail": "https://assets.epicsevendb.com/_source/face/c1017_l.png"
+      },
+      "calculatedStatus": {
+        "lv50FiveStarNoAwaken": {
+          "cp": 9723,
+          "atk": 364,
+          "hp": 3302,
+          "spd": 97,
+          "def": 534,
+          "chc": 0.15,
+          "chd": 1.5,
+          "dac": 0.05,
+          "eff": 0,
+          "efr": 0
+        },
+        "lv50FiveStarFullyAwakened": {
+          "cp": 11200,
+          "atk": 484,
+          "hp": 3741,
+          "spd": 101,
+          "def": 534,
+          "chc": 0.15,
+          "chd": 1.5,
+          "dac": 0.05,
+          "eff": 0,
+          "efr": 0.18
+        },
+        "lv60SixStarNoAwaken": {
+          "cp": 12119,
+          "atk": 453,
+          "hp": 4152,
+          "spd": 97,
+          "def": 662,
+          "chc": 0.15,
+          "chd": 1.5,
+          "dac": 0.05,
+          "eff": 0,
+          "efr": 0
+        },
+        "lv60SixStarFullyAwakened": {
+          "cp": 14219,
+          "atk": 603,
+          "hp": 4945,
+          "spd": 101,
+          "def": 662,
+          "chc": 0.15,
+          "chd": 1.5,
+          "dac": 0.05,
+          "eff": 0,
+          "efr": 0.18
+        }
+      }
+    }
+
+}
