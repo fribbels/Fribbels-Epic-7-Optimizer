@@ -5,9 +5,9 @@ var eesByName = {};
 module.exports = {
 
     initialize: async () => {
-        const heroOverride = fetchOverride(HERO_OVERRIDE);
-        const eeOverride = fetchOverride(EE_OVERRIDE);
-        const artifactOverride = fetchOverride(ARTIFACT_OVERRIDE);
+        const heroOverride = await fetchOverride(HERO_OVERRIDE);
+        const eeOverride = await fetchOverride(EE_OVERRIDE);
+        const artifactOverride = await fetchOverride(ARTIFACT_OVERRIDE);
 
         var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbherodata.json');
         heroesByName = JSON.parse(heroesByNameStr);
@@ -51,8 +51,6 @@ module.exports = {
                     heroesByName[result.name] = result;
                 }
 
-                Object.assign(heroesByName, heroOverride);
-
                 if (newHeroesList.length >= heroNameList.length) {
                     Files.saveFile(Files.getDataPath() + '/e7db/e7dbherodata.json', JSON.stringify(heroesByName));
                 }
@@ -88,8 +86,6 @@ module.exports = {
                 for (var result of results) {
                     artifactsByName[result.name] = result;
                 }
-
-                Object.assign(artifactsByName, artifactOverride);
 
                 if (newArtifactsList.length >= artifactNameList.length) {
                     Files.saveFile(Files.getDataPath() + '/e7db/e7dbartifactdata.json', JSON.stringify(artifactsByName));
@@ -128,12 +124,18 @@ module.exports = {
                     eesByName[result.name] = result;
                 }
 
-                Object.assign(eeByName, eeOverride);
-
                 if (newEesList.length >= eeNameList.length) {
                     Files.saveFile(Files.getDataPath() + '/e7db/e7dbeedata.json', JSON.stringify(eesByName));
                 }
             }
+
+            Object.assign(heroesByName, heroOverride);
+            Object.assign(artifactsByName, artifactOverride);
+            Object.assign(eesByName, eeOverride);
+
+            console.log("Used hero overrides:", heroOverride);
+            console.log("Used artifact overrides:", artifactOverride);
+            console.log("Used ee overrides:", eeOverride);
 
             console.log("Finished loading from E7DB");
         } catch (e) {

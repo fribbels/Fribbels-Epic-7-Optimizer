@@ -1,14 +1,14 @@
 {
-    "Achates": {
-      "_id": "achates",
+    "Fake Achates": {
+      "_id": "fake_achates",
       "id": "c1017",
       "base_id": null,
       "specialty_id": null,
-      "name": "Achates",
+      "name": "Fake Achates",
       "moonlight": false,
       "rarity": 4,
       "attribute": "ice",
-      "role": "manauser",
+      "role": "warrior",
       "zodiac": "twins",
       "description": "A faithful healer following a sacred oath",
       "story": "Second daughter of Rosvalt, an adviser to the former king of Ezera, Achates joined the Holy Order of the Blue Cross with the wish to save the world through the Goddess's mercy. She has little to do with her older sister, heir to the family name, and seems to be holding some discontent within her heart.",
@@ -65,7 +65,7 @@
           "cp": 14219,
           "atk": 603,
           "hp": 4945,
-          "spd": 101,
+          "spd": 1101,
           "def": 662,
           "chc": 0.15,
           "chd": 1.5,
