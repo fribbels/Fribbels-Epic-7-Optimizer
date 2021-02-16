@@ -352,6 +352,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Exclude equipped exclude self
  - Make Gaveleets level not show up green
  - Set permutation on submit
+ - E7db override for new heroes
 
 **Working on:**
  - v1.5.0
@@ -368,7 +369,6 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Clear out item previews on refresh
  - See unit stats for whatever gear they have currently, not just for 6 pieces
  - Select/interact with multiple heroes at once
- - E7db override for new heroes
 
  **Low priority:**
  - Dark mode
