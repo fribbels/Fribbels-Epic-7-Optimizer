@@ -18,7 +18,7 @@ module.exports = {
 
     autoSave: async () => {
         module.exports.createFolder();
-        module.exports.saveData(Files.path(defaultPath + '/autosave.json'));
+        module.exports.saveData(Settings.getDefaultPath() + '/autosave.json');
     },
 
     saveData: async (filename) => {
@@ -37,7 +37,7 @@ module.exports = {
     },
 
     loadAutoSave: async () => {
-        const autoSavePath = defaultPath + '/autosave.json';
+        const autoSavePath = Settings.getDefaultPath() + '/autosave.json';
 
         try {
             const data = await Files.readFile(Files.path(autoSavePath));
@@ -53,10 +53,10 @@ module.exports = {
         module.exports.createFolder();
 
         document.getElementById('saveDataSubmit').addEventListener("click", async () => {
-            console.error(defaultPath + "/" + getDateString() + '-export.json')
+            console.error(Settings.getDefaultPath() + "/" + getDateString() + '-export.json')
             const options = {
                 title: "Save file",
-                defaultPath : Files.path(defaultPath + "/" + getDateString() + '-export.json'),
+                defaultPath : Files.path(Settings.getDefaultPath() + "/" + getDateString() + '-export.json'),
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'JSON', extensions: ['json']},
@@ -76,7 +76,7 @@ module.exports = {
         document.getElementById('loadDataSubmit').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(defaultPath),
+                defaultPath : Files.path(Settings.getDefaultPath()),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'JSON', extensions: ['json']},

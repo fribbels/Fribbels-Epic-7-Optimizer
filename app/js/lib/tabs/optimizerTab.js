@@ -258,6 +258,11 @@ module.exports = {
         $('.icon-close').click(recalculateFilters)
         // $('#filterSliderInput').change(recalculateFilters);
 
+        $('.optionsExcludeGearFrom').change(() => {
+            // Doesnt work without explicit function call for some reason
+            recalculateFilters();
+        })
+
         buildSlider('#atkSlider')
         buildSlider('#hpSlider')
         buildSlider('#defSlider')
@@ -706,7 +711,7 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
     }
 
     if (params.excludeFilter.length > 0) {
-        items = items.filter(x => !params.excludeFilter.includes(x.equippedById));
+        items = items.filter(x => !params.excludeFilter.includes(x.equippedById) || x.equippedById == heroId);
     }
 
     // if (params.inputOnlyPlus15Gear) {
@@ -870,6 +875,7 @@ async function submitOptimizationFilterRequest() {
 }
 
 async function submitOptimizationRequest() {
+    recalculateFilters();
     // console.log(ItemSerializer.serializeToArr(getAllItemsResponse.items));
     const params = getOptimizationRequestParams(true);
     const heroId = document.getElementById('inputHeroAdd').value;
@@ -978,7 +984,6 @@ function hasTwoPieceSet(set) {
 function getOptimizationRequestParams(showError) {
     const request = new OptimizationRequest();
 
-    const hero = document.getElementById('submitOptimizerRequest').value;
     const setFilters = Selectors.getSetFilters();
     const mainFilters = Selectors.getGearMainFilters();
     const excludeFilter = Selectors.getExcludeGearFrom();

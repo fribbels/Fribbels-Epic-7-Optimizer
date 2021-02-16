@@ -196,11 +196,11 @@ The **Score** column is a stat I made up which is similar to WSS, with the diffe
     + Speed * (8/4)
     + Crit Damage * (8/7)
     + Crit Chance * (8/5)
-    + Flat Attack / 39 * 0.5
-    + Flat Defense / 31 * 0.5
-    + Flat Hp / 174 * 0.5
+    + Flat Attack * 3.46 / 39
+    + Flat Defense * 4.99 / 31
+    + Flat Hp * 3.09 / 174
 
-Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and used that as a measure of how well the flat stats rolled. The 0.5 multiplier is completely arbitrary, but represents that flat stats are generally less desirable than percent stats.
+Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and compared it to the average stats of a 5* unit, and used that as a measure of how well the flat stats rolled.
 
 ![](https://i.imgur.com/fwqjtkF.png)
 
@@ -344,13 +344,14 @@ Here's some quick tips on getting the best results. This is assuming you've read
 
 ## TODO List
 
-Hopefully this is useful for anyone looking for an easier way to gear their units.  There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
+There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**Done for v1.4.1**
- - Flat -> % missing on items page
- - Handle impossible substat length on reforge
- - Update hero grid on reforge item
- - Fix Gaveleets gear messing up stats
+**Done for v1.5.0**
+ - Default file path option
+ - Order sets by 4 -> 2
+ - Exclude equipped exclude self
+ - Make Gaveleets level not show up green
+ - Set permutation on submit
 
 **Working on:**
  - v1.5.0
@@ -367,7 +368,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Clear out item previews on refresh
  - See unit stats for whatever gear they have currently, not just for 6 pieces
  - Select/interact with multiple heroes at once
- - Make Gaveleets level not show up green
+ - E7db override for new heroes
 
  **Low priority:**
  - Dark mode
@@ -379,6 +380,7 @@ Hopefully this is useful for anyone looking for an easier way to gear their unit
  - Gear page, option to use more than one set/gear filter at time
  - Verify all imported screenshots are image files
  - Auto copy gear image
+ - Recolor on filter
 
  **Probably not doing:**
  - Date newly added gear

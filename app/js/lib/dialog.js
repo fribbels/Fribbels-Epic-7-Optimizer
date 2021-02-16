@@ -33,6 +33,28 @@ module.exports = {
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
+                        <div class="editGearFormRow">
+                            <div class="editGearStatLabel">Artifact</div>
+                            <select id="editArtifact" class="editGearStatSelect">
+                                ${getArtifactHtml()}
+                            </select>
+                        </div>
+
+                        <div class="editGearFormRow">
+                            <div class="editGearStatLabel">EE</div>
+                            <select id="editArtifact" class="editGearStatSelect">
+                                ${getArtifactHtml()}
+                            </select>
+                        </div>
+
+
+                        <div class="editGearFormRow">
+                            <div class="editGearStatLabel">Imprint</div>
+                            <select id="editArtifact" class="editGearStatSelect">
+                                ${getArtifactHtml()}
+                            </select>
+                        </div>
+
                         <p>Add stats from Artifact, EE, and Imprint</p>
                         <br>
 
@@ -372,6 +394,20 @@ function getEquippedHtml(item, heroes) {
 
     for (var hero of heroes) {
         html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${hero.name}</option>`
+    }
+
+    return html;
+}
+
+
+function getArtifactHtml() {
+    var html = `<option value="None">None</option>`;
+
+    const artifactsJson = HeroData.getAllArtifactData();
+    const artifacts = Object.values(artifactsJson);
+
+    for (var artifact of artifacts) {
+        html += `<option value="${artifact._id}"}>${artifact.name}</option>`
     }
 
     return html;

@@ -1,12 +1,21 @@
 var heroesByName = {};
-var currentAggregate = {};
+var artifactsByName = {};
+var eesByName = {};
 
 module.exports = {
 
     initialize: async () => {
-        var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/e7dbherodata.json');
+        var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbherodata.json');
         heroesByName = JSON.parse(heroesByNameStr);
         const heroNameList = Object.keys(heroesByName);
+
+        var artifactsByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbartifactdata.json');
+        artifactsByName = JSON.parse(artifactsByNameStr);
+        const artifactNameList = Object.keys(artifactsByName);
+
+        var eesByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbeedata.json');
+        eesByName = JSON.parse(eesByNameStr);
+        const eeNameList = Object.keys(eesByName);
 
         try {
             const newHeroListResults = await fetch('https://api.epicsevendb.com/hero');
@@ -17,7 +26,7 @@ module.exports = {
             const newHeroesByName = newHeroesList.reduce((map, obj) => (map[obj.name] = obj, map), {});
 
             const diff = newHeroNameList.filter(x => !heroNameList.includes(x)).filter(x => !x.includes("MISSING_TRANSLATION_VALUE"))
-            console.log("DIFF", diff);
+            console.log("HERO DIFF", diff);
 
             if (diff.length != 0) {
                 const ids = diff.map(x => newHeroesByName[x]).map(x => x._id);
@@ -39,9 +48,83 @@ module.exports = {
                 }
 
                 if (newHeroesList.length >= heroNameList.length) {
-                    Files.saveFile(Files.getDataPath() + '/e7dbherodata.json', JSON.stringify(heroesByName));
+                    Files.saveFile(Files.getDataPath() + '/e7db/e7dbherodata.json', JSON.stringify(heroesByName));
                 }
             }
+
+            // Artifacts
+
+            const newArtifactResults = await fetch('https://api.epicsevendb.com/artifact');
+            const newArtifactListStr = await newArtifactResults.text();
+            const newArtifactsList = JSON.parse(newArtifactListStr).results;
+            const newArtifactIdList = newArtifactsList.map(x => x._id);
+            const newArtifactNameList = newArtifactsList.map(x => x.name)
+            const newArtifactsByName = newArtifactsList.reduce((map, obj) => (map[obj.name] = obj, map), {});
+
+            const artifactDiff = newArtifactNameList.filter(x => !artifactNameList.includes(x));
+            console.log("ARTIFACT DIFF", artifactDiff);
+
+            if (artifactDiff.length != 0) {
+                const ids = artifactDiff.map(x => newArtifactsByName[x]).map(x => x._id);
+                const promises = Promise.allSettled(ids.map(x => 'https://api.epicsevendb.com/artifact/' + x)
+                                                       .map(x => fetch(x)));
+                var results = await promises;
+
+                console.warn(results);
+
+                results = results.filter(x => x.status != 'rejected');
+                results = results.map(x => x.value.json())
+                results = await Promise.allSettled(results);
+
+                results = results.filter(x => x.status != 'rejected' && !x.value.error);
+                results = results.map(x => x.value.results[0])
+
+                for (var result of results) {
+                    artifactsByName[result.name] = result;
+                }
+
+                if (newArtifactsList.length >= artifactNameList.length) {
+                    Files.saveFile(Files.getDataPath() + '/e7db/e7dbartifactdata.json', JSON.stringify(artifactsByName));
+                }
+            }
+
+
+            // EE
+
+            const newEeResults = await fetch('https://api.epicsevendb.com/ex_equip');
+            const newEeListStr = await newEeResults.text();
+            const newEesList = JSON.parse(newEeListStr).results;
+            const newEeIdList = newEesList.map(x => x._id);
+            const newEeNameList = newEesList.map(x => x.name)
+            const newEesByName = newEesList.reduce((map, obj) => (map[obj.name] = obj, map), {});
+
+            const eeDiff = newEeNameList.filter(x => !eeNameList.includes(x));
+            console.log("EE DIFF", eeDiff);
+
+            if (eeDiff.length != 0) {
+                const ids = eeDiff.map(x => newEesByName[x]).map(x => x._id);
+                const promises = Promise.allSettled(ids.map(x => 'https://api.epicsevendb.com/ex_equip/' + x)
+                                                       .map(x => fetch(x)));
+                var results = await promises;
+
+                console.warn(results);
+
+                results = results.filter(x => x.status != 'rejected');
+                results = results.map(x => x.value.json())
+                results = await Promise.allSettled(results);
+
+                results = results.filter(x => x.status != 'rejected' && !x.value.error);
+                results = results.map(x => x.value.results[0])
+
+                for (var result of results) {
+                    eesByName[result.name] = result;
+                }
+
+                if (newEesList.length >= eeNameList.length) {
+                    Files.saveFile(Files.getDataPath() + '/e7db/e7dbeedata.json', JSON.stringify(eesByName));
+                }
+            }
+
             console.log("Finished loading from E7DB");
         } catch (e) {
             console.error("Unable to finish loading from E7DB");
@@ -66,6 +149,22 @@ module.exports = {
     getHeroExtraInfo: (name) => {
         const heroInfo = heroesByName[name];
         return heroInfo;
+    },
+
+    getAllArtifactData: () => {
+        return artifactsByName;
+    },
+
+    getArtifactByName: (name) => {
+        return artifactsByName[name]
+    },
+
+    getAllEeData: () => {
+        return eesByName;
+    },
+
+    getEeByName: (name) => {
+        return eesByName[name]
     },
 
     getBaseStatsByName: (name) => {

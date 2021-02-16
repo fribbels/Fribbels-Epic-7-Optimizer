@@ -232,7 +232,7 @@ module.exports = {
       <div class="itemDisplayLevel" ${styleEnhance(item.enhance)}>+${item.enhance}</div>
     </div>
     <div class="itemDisplayHeaderDataTop">
-      <div class="itemDisplayLevel" ${styleLevel(item.level)}>${item.level}</div>
+      <div class="itemDisplayLevel" ${styleLevel(item)}>${item.level}</div>
     </div>
   </div>
   <img src="${materialImage}" class="itemDisplayMaterial"></img>
@@ -338,8 +338,8 @@ function editLockDisplay(item) {
     return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
 }
 
-function styleLevel(level) {
-    if (level == "85") {
+function styleLevel(item) {
+    if (Reforge.isReforgeable(item)) {
         return 'style="color: #00b306;font-weight: bold;"'
     }
 }

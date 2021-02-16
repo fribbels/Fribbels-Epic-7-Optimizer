@@ -26,9 +26,30 @@ function renderSets(setCounters, iconClass) {
         }
     }
 
+    sets.sort((a, b) => {
+        if (fourPieceSets.includes(a)) {
+            return -1;
+        } else if (fourPieceSets.includes(b)) {
+            return 1;
+        } else {
+            return a.localeCompare(b);
+        }
+    })
+
     const images = sets.map(x => '<img class="' + iconClass + ' " src=' + Assets.getSetAsset(x) + '></img>');
     return images.join("");
 }
+
+const fourPieceSets = [
+    "AttackSet",
+    "SpeedSet",
+    "DestructionSet",
+    "LifestealSet",
+    "CounterSet",
+    "RageSet",
+    "RevengeSet",
+    "InjurySet"
+]
 
 function renderStar(value) {
     if (!value) return;

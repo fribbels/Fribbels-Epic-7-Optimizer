@@ -15,7 +15,7 @@ module.exports = {
         document.getElementById('fileReadSubmit').addEventListener("click", async () => {
             const options = {
                 title: "Open folder",
-                defaultPath : Files.path(defaultPath + 'gear.txt'),
+                defaultPath : Files.path(Settings.getDefaultPath() + 'gear.txt'),
                 buttonLabel : "Open folder",
                 properties: ['openDirectory'],
                 // filters :[
@@ -70,7 +70,7 @@ module.exports = {
 
             const options = {
                 title: "Save file",
-                defaultPath : Files.path(defaultPath + '/gear.txt'),
+                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -93,7 +93,7 @@ module.exports = {
         document.getElementById('importFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(defaultPath + '/gear.txt'),
+                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'TEXT/JSON', extensions: ['txt', 'json']},
@@ -134,7 +134,7 @@ module.exports = {
         document.getElementById('importAppendFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(defaultPath + '/gear.txt'),
+                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'TEXT/JSON', extensions: ['txt', 'json']},
@@ -175,7 +175,7 @@ module.exports = {
         document.getElementById('importMergeFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(defaultPath + '/gear.txt'),
+                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'TEXT/JSON', extensions: ['txt', 'json']},

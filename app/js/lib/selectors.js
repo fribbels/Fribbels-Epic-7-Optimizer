@@ -139,6 +139,10 @@ function customFilter(label, text, originalLabel, originalText) {
     targetText = targetText.toLowerCase();
     targetLabel = targetLabel.toLowerCase();
 
+    if (targetText[0] != targetLabel[0]) {
+        return false;
+    }
+
     var index = 0;
     for (var i = 0; i < targetText.length; i++) { //
         const letter = targetText[i];
