@@ -298,28 +298,6 @@ Please read these instructions carefully!
 6. Make sure to enter Full Screen Mode (Cmd+Shift+F) before starting your gear capture
 
 
-### Importing gear automatically from the game:
-NOT RELEASED YET
-##### First time  setup for the automatic importer on Windows:
-1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe)
-2. Install [Npcap 1.10](https://nmap.org/npcap/#download). Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe)
-3. Restart your computer
-##### First time  setup for the automatic importer on Mac:
-1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/)
-3. Restart your computer
-##### Using the automatic importer:
-1. Open your emulator
-2. Close Epic 7
-3. On the *Importer* tab, click *Start scanning*
-4. Open Epic 7
-5. Load into the lobby and click to open your equipment inventory
-6. On the *Importer* tab, click *Stop scanning*
-7. Wait about 3-5 minutes for the gear to be processed
-8. Once it is done, click Export, and save the *gear.txt* file.
-9. Under the *Importing gear data* section, click on Append data, and select your *gear.txt* file.
-10. Now you should see your imported gears under the Gears tab.
-11. Use the Level = 0 filter to find level 0 items (most likely recent event items). Manually edit those items to fix their info.
-
 ### Importing gear from screenshots:
 
 1. Open the Gear Management screen in Epic 7 and sort by Max Enhance<br><br>
@@ -388,6 +366,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - v1.5.0
  - Add reforge type in item edit
  - Persist exclude equipped
+ - Create own db
 
 **Bugs**
  - Comparison method violates its general contract
