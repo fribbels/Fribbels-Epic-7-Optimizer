@@ -1,5 +1,6 @@
 
 
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -272,6 +273,7 @@ Please read these instructions carefully!
 5. Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
 6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)
 
+
 #### Mac OS/Bluestacks
 
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x-mac.dmg``
@@ -295,10 +297,33 @@ Please read these instructions carefully!
    * Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
 6. Make sure to enter Full Screen Mode (Cmd+Shift+F) before starting your gear capture
 
-**Importing gear screenshots:**
+
+### Importing gear automatically from the game:
+NOT RELEASED YET
+##### First time  setup for the automatic importer on Windows:
+1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe)
+2. Install [Npcap 1.10](https://nmap.org/npcap/#download). Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe)
+3. Restart your computer
+##### First time  setup for the automatic importer on Mac:
+1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/)
+3. Restart your computer
+##### Using the automatic importer:
+1. Open your emulator
+2. Close Epic 7
+3. On the *Importer* tab, click *Start scanning*
+4. Open Epic 7
+5. Load into the lobby and click to open your equipment inventory
+6. On the *Importer* tab, click *Stop scanning*
+7. Wait about 3-5 minutes for the gear to be processed
+8. Once it is done, click Export, and save the *gear.txt* file.
+9. Under the *Importing gear data* section, click on Append data, and select your *gear.txt* file.
+10. Now you should see your imported gears under the Gears tab.
+11. Use the Level = 0 filter to find level 0 items (most likely recent event items). Manually edit those items to fix their info.
+
+### Importing gear from screenshots:
 
 1. Open the Gear Management screen in Epic 7 and sort by Max Enhance<br><br>
-2. Click each of the gears that you want to import, and screenshot it with your emulator's hotkey. Every screenshot should be **1600x900** and look **EXACTLY** like this: https://i.imgur.com/68A8Uf0.jpg
+5. Click each of the gears that you want to import, and screenshot it with your emulator's hotkey. Every screenshot should be **1600x900** and look **EXACTLY** like this: https://i.imgur.com/68A8Uf0.jpg
 
 ![https://i.imgur.com/ny7uaa8.jpg](https://i.imgur.com/ny7uaa8.jpg)
 
@@ -310,7 +335,7 @@ Please read these instructions carefully!
 6. Under the *Importing gear data* section, click on Append data, and select your *gear.txt* file.<br><br>
 7. Now you should see your imported gears under the Gears tab.
 
-**Optimizing a unit:**
+### Optimizing a unit:
 
 1. Add a unit on the Heroes tab, by selecting their name and clicking Add New Hero.
 2. Select the new hero and click Add Bonus Stats. Here add any stats from your artifact, imprint, or EE. [Example](https://i.imgur.com/2aC22mN.png)
@@ -324,13 +349,13 @@ Please read these instructions carefully!
 Here's a video that covers most of the importing process: https://www.youtube.com/watch?v=i_QW4INcZIE
 
 
-**Updating the optimizer with new gear:**
+### Updating the optimizer with new gear:
 
 * It helps to update the optimizer as you enhance/reforge gear. Add new pieces manually on the Gear screen or click the reforge icon to update 85 -> 90 gear.
 * To import a bunch of new gear at once, screenshot only the new gear, then use the screenshot tool to generate another gear.txt file. Then use the *Append* option to add the gear.txt to your existing save file.
 * If you want to re-screenshot all your gear, you can use the screenshot tool to generate the gear.txt again, and then either *Overwrite* your data to erase previous gear + heroes, or *Merge* the new gear.txt to replace old items and keep heroes/builds.
 
-**Tips to get good optimization results:**
+### Tips to get good optimization results:
 
 Here's some quick tips on getting the best results. This is assuming you've read the [Optimization panel](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#optimizer-tab) descriptions.
 
@@ -353,25 +378,30 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Make Gaveleets level not show up green
  - Set permutation on submit
  - E7db override for new heroes
+ - Investigate decrypting network traffic for gear data
+ - Save current gear as build
+ - Alphabetize hero selector on edit gear popup
+ - Select all button for sets/accs
+ - Select artifact/ee stats
 
 **Working on:**
  - v1.5.0
+ - Add reforge type in item edit
+ - Persist exclude equipped
 
 **Bugs**
  - Comparison method violates its general contract
  - Fix hp/atk off by 1
 
  **Medium priority:**
- - Investigate decrypting network traffic for gear data
  - Add different level/awakening options
- - Select artifact/ee stats
  - Use main stat gear for priority filter
  - Clear out item previews on refresh
- - See unit stats for whatever gear they have currently, not just for 6 pieces
- - Select/interact with multiple heroes at once
 
  **Low priority:**
  - Dark mode
+ - Select/interact with multiple heroes at once
+ - See unit stats for whatever gear they have currently, not just for 6 pieces
  - Change slider implementation http://ionden.com/a/plugins/ion.rangeSlider/start.html
  - Move save/load to File menu
  - Cancel ongoing request when start is clicked again
@@ -432,3 +462,4 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 Feel free to contact me on discord at fribbels#7526 for questions or comments or ideas/suggestions. If you ran into any issues, please check the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
 
 If you want to show support for the optimizer, you can [buy me a coffee](https://www.buymeacoffee.com/fribbels) or come say hi on discord!
+
