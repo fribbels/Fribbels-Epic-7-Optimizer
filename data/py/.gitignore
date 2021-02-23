@@ -1,0 +1,13 @@
+*.pyc
+*.pyo
+dist/
+build/
+MANIFEST
+*.egg-info/
+scapy/VERSION
+test/*.html
+.tox
+.ipynb_checkpoints
+.mypy_cache
+doc/scapy/_build
+doc/scapy/api

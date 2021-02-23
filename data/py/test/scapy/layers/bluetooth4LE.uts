@@ -1,0 +1,337 @@
+% Regression tests for the bluetooth4LE layer
+
+##################################
+#### Bluetooth 4.0 Low Energy ####
+##################################
+
++ BTLE tests
+
+= Default build
+
+a = BTLE()/BTLE_ADV()/BTLE_ADV_IND()
+assert raw(a) == b'\xd6\xbe\x89\x8e\x00\x06\x00\x00\x00\x00\x00\x00Z9`'
+
+= Basic dissection
+
+b = BTLE(raw(a))
+assert b.crc == 0x5a3960
+assert b[BTLE_ADV_IND].AdvA == '00:00:00:00:00:00'
+
+= BTLE_DATA build
+
+a = BTLE(access_addr=0)/BTLE_DATA()/"toto"
+a = BTLE(raw(a))
+assert a[BTLE_DATA].len == 4
+assert a[Raw].load == b"toto"
+
+= BTLE_DATA + EIR_ShortenedLocalName
+
+test1 = BTLE() / BTLE_ADV() / BTLE_ADV_IND() / EIR_Hdr() / EIR_ShortenedLocalName(local_name= 'wussa')
+test1e = BTLE(raw(test1))
+assert test1e[EIR_ShortenedLocalName].local_name == b"wussa"
+
+= LL_CONNECTION_UPDATE_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+        LL_CONNECTION_UPDATE_IND(win_size=2, win_offset=5, interval=0x400, timeout=500, instant=0xFEFE)
+test = BTLE(raw(test))
+assert test[LL_CONNECTION_UPDATE_IND].win_size == 2
+assert test[LL_CONNECTION_UPDATE_IND].win_offset == 5
+assert test[LL_CONNECTION_UPDATE_IND].interval == 0x400
+assert test[LL_CONNECTION_UPDATE_IND].timeout == 500
+assert test[LL_CONNECTION_UPDATE_IND].instant == 0xFEFE
+
+= LL_CHANNEL_MAP_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+        LL_CHANNEL_MAP_IND(chM=0x1A1B1C1D1E, instant=0xFEFE)
+test = BTLE(raw(test))
+assert test[LL_CHANNEL_MAP_IND].chM == 0x1A1B1C1D1E
+assert test[LL_CHANNEL_MAP_IND].instant == 0xFEFE
+
+= LL_TERMINATE_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+        LL_TERMINATE_IND(code=0x16)
+test = BTLE(raw(test))
+assert test[LL_TERMINATE_IND].code == 0x16
+
+= LL_ENC_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+        LL_ENC_REQ(rand=0x1112131415161718, ediv=0x4321, 
+                   skdm=0x1817161514131211, ivm=0x87654321)
+test = BTLE(raw(test))
+assert test[LL_ENC_REQ].rand == 0x1112131415161718
+assert test[LL_ENC_REQ].ediv == 0x4321
+assert test[LL_ENC_REQ].skdm == 0x1817161514131211
+assert test[LL_ENC_REQ].ivm == 0x87654321
+
+= LL_ENC_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+        LL_ENC_RSP(skds=0x1817161514131211, ivs=0x87654321)
+test = BTLE(raw(test))
+assert test[LL_ENC_RSP].skds == 0x1817161514131211
+assert test[LL_ENC_RSP].ivs == 0x87654321
+
+= LL_START_ENC_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_START_ENC_REQ()
+test = BTLE(raw(test))
+assert test[BTLE_CTRL].opcode == 5
+
+= LL_START_ENC_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_START_ENC_RSP()
+test = BTLE(raw(test))
+assert test[BTLE_CTRL].opcode == 6
+
+= LL_UNKNOWN_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_UNKNOWN_RSP(code=4)
+test = BTLE(raw(test))
+assert test[LL_UNKNOWN_RSP].code == 4
+
+= LL_FEATURE_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_FEATURE_REQ(feature_set=0x1234)
+test = BTLE(raw(test))
+assert test[LL_FEATURE_REQ].feature_set == \
+    "ext_reject_ind+le_ping+le_data_len_ext+tx_mod_idx+le_ext_adv"
+
+= LL_FEATURE_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_FEATURE_RSP(feature_set=0x4321)
+test = BTLE(raw(test))
+assert test[LL_FEATURE_RSP].feature_set == \
+    "le_encryption+le_data_len_ext+le_2m_phy+tx_mod_idx+ch_sel_alg"
+
+= LL_PAUSE_ENC_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_PAUSE_ENC_REQ()
+test = BTLE(raw(test))
+assert test[BTLE_CTRL].opcode == 10
+
+= LL_PAUSE_ENC_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_PAUSE_ENC_RSP()
+test = BTLE(raw(test))
+assert test[BTLE_CTRL].opcode == 11
+
+= LL_VERSION_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_VERSION_IND(version=7, company=0x59, subversion=1)
+test = BTLE(raw(test))
+assert test[LL_VERSION_IND].version == 7
+assert test[LL_VERSION_IND].company == 0x59
+assert test[LL_VERSION_IND].subversion == 1
+
+= LL_REJECT_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_REJECT_IND(code=4)
+test = BTLE(raw(test))
+assert test[LL_REJECT_IND].code == 4
+
+= LL_SLAVE_FEATURE_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_SLAVE_FEATURE_REQ(feature_set=0x1234)
+test = BTLE(raw(test))
+assert test[LL_SLAVE_FEATURE_REQ].feature_set == \
+    "ext_reject_ind+le_ping+le_data_len_ext+tx_mod_idx+le_ext_adv"
+
+= LL_CONNECTION_PARAM_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_CONNECTION_PARAM_REQ(interval_min=10, interval_max=12, latency=1, timeout=2,
+                            preferred_periodicity=3, reference_conn_evt_count=4,
+                            offset0=5, offset1=6, offset2=7, offset3=8, offset4=9, offset5=10)
+test = BTLE(raw(test))
+assert test[LL_CONNECTION_PARAM_REQ].interval_min == 10
+assert test[LL_CONNECTION_PARAM_REQ].interval_max == 12
+assert test[LL_CONNECTION_PARAM_REQ].latency == 1
+assert test[LL_CONNECTION_PARAM_REQ].timeout == 2
+assert test[LL_CONNECTION_PARAM_REQ].preferred_periodicity == 3
+assert test[LL_CONNECTION_PARAM_REQ].reference_conn_evt_count == 4
+assert test[LL_CONNECTION_PARAM_REQ].offset0 == 5
+assert test[LL_CONNECTION_PARAM_REQ].offset1 == 6
+assert test[LL_CONNECTION_PARAM_REQ].offset2 == 7
+assert test[LL_CONNECTION_PARAM_REQ].offset3 == 8
+assert test[LL_CONNECTION_PARAM_REQ].offset4 == 9
+assert test[LL_CONNECTION_PARAM_REQ].offset5 == 10
+
+= LL_CONNECTION_PARAM_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_CONNECTION_PARAM_RSP(interval_min=10, interval_max=12, latency=1, timeout=2,
+                            preferred_periodicity=3, reference_conn_evt_count=4,
+                            offset0=5, offset1=6, offset2=7, offset3=8, offset4=9, offset5=10)
+test = BTLE(raw(test))
+assert test[LL_CONNECTION_PARAM_RSP].interval_min == 10
+assert test[LL_CONNECTION_PARAM_RSP].interval_max == 12
+assert test[LL_CONNECTION_PARAM_RSP].latency == 1
+assert test[LL_CONNECTION_PARAM_RSP].timeout == 2
+assert test[LL_CONNECTION_PARAM_RSP].preferred_periodicity == 3
+assert test[LL_CONNECTION_PARAM_RSP].reference_conn_evt_count == 4
+assert test[LL_CONNECTION_PARAM_RSP].offset0 == 5
+assert test[LL_CONNECTION_PARAM_RSP].offset1 == 6
+assert test[LL_CONNECTION_PARAM_RSP].offset2 == 7
+assert test[LL_CONNECTION_PARAM_RSP].offset3 == 8
+assert test[LL_CONNECTION_PARAM_RSP].offset4 == 9
+assert test[LL_CONNECTION_PARAM_RSP].offset5 == 10
+
+= LL_REJECT_EXT_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_REJECT_EXT_IND(reject_opcode=2, error_code=4)
+test = BTLE(raw(test))
+assert test[LL_REJECT_EXT_IND].reject_opcode == 2
+assert test[LL_REJECT_EXT_IND].error_code == 4
+
+= LL_PING_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_PING_REQ()
+test = BTLE(raw(test))
+assert test[BTLE_CTRL].opcode == 18
+
+= LL_PING_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / LL_PING_RSP()
+test = BTLE(raw(test))
+assert test[BTLE_CTRL].opcode == 19
+
+= LL_LENGTH_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_LENGTH_REQ(max_rx_bytes=28, max_rx_time=329, max_tx_bytes=29, max_tx_time=330)
+test = BTLE(raw(test))
+assert test[LL_LENGTH_REQ].max_rx_bytes == 28
+assert test[LL_LENGTH_REQ].max_rx_time == 329
+assert test[LL_LENGTH_REQ].max_tx_bytes == 29
+assert test[LL_LENGTH_REQ].max_tx_time == 330
+
+= LL_LENGTH_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_LENGTH_RSP(max_tx_bytes=28, max_tx_time=329, max_rx_bytes=29, max_rx_time=330)
+test = BTLE(raw(test))
+assert test[LL_LENGTH_RSP].max_tx_bytes == 28
+assert test[LL_LENGTH_RSP].max_tx_time == 329
+assert test[LL_LENGTH_RSP].max_rx_bytes == 29
+assert test[LL_LENGTH_RSP].max_rx_time == 330
+
+= LL_PHY_REQ
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_PHY_REQ(tx_phys="phy_1m+phy_2m", rx_phys="phy_coded")
+test = BTLE(raw(test))
+assert test[LL_PHY_REQ].tx_phys == "phy_1m+phy_2m"
+assert test[LL_PHY_REQ].rx_phys == "phy_coded"
+
+= LL_PHY_RSP
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_PHY_RSP(tx_phys="phy_1m+phy_2m", rx_phys="phy_coded")
+test = BTLE(raw(test))
+assert test[LL_PHY_RSP].tx_phys == "phy_1m+phy_2m"
+assert test[LL_PHY_RSP].rx_phys == "phy_coded"
+
+= LL_PHY_UPDATE_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_PHY_UPDATE_IND(tx_phy="phy_2m", rx_phy="phy_coded", instant=1234)
+test = BTLE(raw(test))
+assert test[LL_PHY_UPDATE_IND].tx_phy == "phy_2m"
+assert test[LL_PHY_UPDATE_IND].rx_phy == "phy_coded"
+assert test[LL_PHY_UPDATE_IND].instant == 1234
+
+# LL_MIN_USED_CHANNELS_IND
+
+test = BTLE(access_addr=1) / BTLE_DATA() / BTLE_CTRL() / \
+    LL_MIN_USED_CHANNELS_IND(phys="phy_1m+phy_2m", min_used_channels=3)
+test = BTLE(raw(test))
+assert test[LL_MIN_USED_CHANNELS_IND].phys == "phy_1m+phy_2m"
+assert test[LL_MIN_USED_CHANNELS_IND].min_used_channels == 3
+
+= BTLE_DATA + BTLE_EMPTY_PDU
+
+test = BTLE(access_addr=1)/BTLE_DATA(LLID=1, len=0)/BTLE_EMPTY_PDU()
+a = BTLE(raw(test))
+print(dir(a))
+print(a.layers)
+print(a[BTLE_DATA].len, a[BTLE_DATA].LLID)
+assert a[BTLE_DATA].len == 0
+
+= BTLE_DATA + ATT_PrepareWriteReq
+
+test3 = BTLE(access_addr=1) / BTLE_DATA() / L2CAP_Hdr() / ATT_Hdr() / ATT_Prepare_Write_Request(gatt_handle = 0xa, data="test")
+test3e = BTLE(raw(test3))
+assert test3e[ATT_Prepare_Write_Request].data == b"test"
+assert test3e[ATT_Prepare_Write_Request].gatt_handle == 0xa
+assert test3e[ATT_Hdr].opcode == 0x16
+
+
+= BTLE layers
+# a crazy packet with all classes in it!
+pkt = BTLE()/BTLE_ADV()/BTLE_ADV_DIRECT_IND()/BTLE_ADV_IND()/BTLE_ADV_NONCONN_IND()/BTLE_ADV_SCAN_IND()/BTLE_CONNECT_REQ()/BTLE_DATA()/BTLE_PPI()/BTLE_SCAN_REQ()/BTLE_SCAN_RSP()
+assert BTLE in pkt.layers()
+assert BTLE_ADV in pkt.layers()
+assert BTLE_ADV_DIRECT_IND in pkt.layers()
+assert BTLE_ADV_IND in pkt.layers()
+assert BTLE_ADV_NONCONN_IND in pkt.layers()
+assert BTLE_ADV_SCAN_IND in pkt.layers()
+assert BTLE_CONNECT_REQ in pkt.layers()
+assert BTLE_DATA in pkt.layers()
+assert BTLE_PPI in pkt.layers()
+assert BTLE_SCAN_REQ in pkt.layers()
+assert BTLE_SCAN_RSP in pkt.layers()
+
+= BTLE_RF link
+
+a = BTLE_RF()/BTLE()/BTLE_ADV()/BTLE_SCAN_REQ()
+a.ScanA = "aa:aa:aa:aa:aa:aa"
+a.AdvA = "bb:bb:bb:bb:bb:bb"
+a.reference_access_address_valid = 1
+a.reference_access_address = 0x8e89bed6
+a.phy = 3
+a.type = 5
+a.noise = -90
+a.signal = -75
+a.rf_channel = 6
+a.access_address_offenses = 10
+assert raw(a) == b'\x06\xb5\xa6\n\xd6\xbe\x89\x8e\x90\xc2\xd6\xbe\x89\x8e\x03\x0c\xaa\xaa\xaa\xaa\xaa\xaa\xbb\xbb\xbb\xbb\xbb\xbb\x07\xb2a'
+
+a = BTLE_RF(raw(a))
+
+assert a.noise == -90
+assert a.signal == -75
+assert a.phy == 3
+assert a.type == 5
+assert a.reference_access_address_valid == 1
+assert a[BTLE_SCAN_REQ].ScanA == "aa:aa:aa:aa:aa:aa"
+
++ Specific tests after issue GH#1673
+
+= DLT_USER0 with PPI
+
+pkt = PPI(b'\x00\x00\x18\x00\x93\x00\x00\x006u\x0c\x00\x00b\t\x00\xe1\xcf\x01\x00\xf1\xe3\x92\x00\xd6\xbe\x89\x8e@\x14M\x95P\x16\xfev\x02\x01\x1a\n\xffL\x00\x10\x05\x0b\x1c\x0e\xa86Z\xf0\x04')
+assert BTLE_PPI in pkt.headers[0].payload
+
+# We MUST NOT detect the BLTE link-layer at this point. This is intentionally
+# counter to issue 1673 -- Ubertooth One emits incorrect PCAP files.
+assert BTLE not in pkt
+
+= DLT_BLUETOOTH_LE_LL with PPI
+
+pkt = PPI(b'\x00\x00\x18\x00\xfb\x00\x00\x006u\x0c\x00\x00b\t\x00\xe1\xcf\x01\x00\xf1\xe3\x92\x00\xd6\xbe\x89\x8e@\x14M\x95P\x16\xfev\x02\x01\x1a\n\xffL\x00\x10\x05\x0b\x1c\x0e\xa86Z\xf0\x04')
+assert BTLE_PPI in pkt.headers[0].payload
+
+# Only now must we detect BTLE.
+assert BTLE in pkt
+
+= DLT_BLUETOOTH_LE_LL without PPI
+
+pkt = BTLE_RF(b'\x00\xc6\x80\x00\xd6\xbe\x89\x8e7\x00\xd6\xbe\x89\x8e@\x14\x03g\xa6+\xcbi\x00\x01\x1a\n\xffL\x00\x12E\x03\x18y\x9e\x96\x07\xfa%')
+assert BTLE_RF in pkt
+assert BTLE in pkt

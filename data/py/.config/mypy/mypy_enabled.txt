@@ -1,0 +1,43 @@
+# This file registers all files that have already been processed as part of
+# https://github.com/secdev/scapy/issues/2158, and therefore will be enforced
+# with unit tests in future development.
+
+# Style cheet: https://mypy.readthedocs.io/en/latest/cheat_sheet.html
+
+# CORE
+scapy/__init__.py
+scapy/arch/__init__.py
+scapy/arch/common.py
+scapy/arch/linux.py
+scapy/arch/unix.py
+scapy/asn1/mib.py
+scapy/base_classes.py
+scapy/compat.py
+scapy/config.py
+scapy/dadict.py
+scapy/data.py
+scapy/error.py
+scapy/extlib.py
+scapy/fields.py
+scapy/interfaces.py
+scapy/main.py
+scapy/packet.py
+scapy/plist.py
+scapy/pton_ntop.py
+scapy/route.py
+scapy/route6.py
+scapy/sessions.py
+scapy/supersocket.py
+scapy/utils.py
+scapy/utils6.py
+
+# LAYERS
+scapy/layers/can.py
+scapy/layers/l2.py
+
+# CONTRIB
+#scapy/contrib/http2.py  # needs to be fixed
+scapy/contrib/roce.py
+scapy/contrib/automotive/gm/gmlanutils.py
+scapy/contrib/automotive/bmw/hsfz.py
+scapy/contrib/automotive/doip.py

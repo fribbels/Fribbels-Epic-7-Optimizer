@@ -1,0 +1,39 @@
+{
+  "testfiles": [
+    "test\\*.uts",
+    "test\\scapy\\layers\\*.uts",
+    "test\\tls\\tests_tls_netaccess.uts",
+    "test\\contrib\\automotive\\obd\\*.uts",
+    "test\\contrib\\automotive\\gm\\*.uts",
+    "test\\contrib\\automotive\\bmw\\*.uts",
+    "test\\contrib\\automotive\\xcp\\*.uts",
+    "test\\contrib\\automotive\\*.uts",
+    "test\\contrib\\*.uts"
+  ],
+  "remove_testfiles": [
+    "test\\bpf.uts",
+    "test\\linux.uts"
+  ],
+  "breakfailed": true,
+  "onlyfailed": true,
+  "preexec": {
+    "test\\contrib\\*.uts": "load_contrib(\"%name%\")",
+    "test\\cert.uts": "load_layer(\"tls\")",
+    "test\\sslv2.uts": "load_layer(\"tls\")",
+    "test\\tls*.uts": "load_layer(\"tls\")"
+  },
+  "kw_ko": [
+    "brotli",
+    "crypto_advanced",
+    "ipv6",
+    "linux",
+    "mock_read_routes_bsd",
+    "open_ssl_client",
+    "osx",
+    "require_gui",
+    "tap",
+    "tun",
+    "vcan_socket",
+    "zstd"
+  ]
+}

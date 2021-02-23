@@ -1,0 +1,2103 @@
+% Regression tests for Scapy regarding fields
+
+############
+############
++ Tests on basic fields
+
+#= Field class
+#~ core field
+#Field("foo", None, fmt="H").i2m(None,0xabcdef)
+#assert( _ == b"\xcd\xef" )
+#Field("foo", None, fmt="<I").i2m(None,0x12cdef)
+#assert( _ == b"\xef\xcd\x12\x00" )
+#Field("foo", None, fmt="B").addfield(None, "FOO", 0x12)
+#assert( _ == b"FOO\x12" )
+#Field("foo", None, fmt="I").getfield(None, b"\x12\x34\x56\x78ABCD")
+#assert( _ == ("ABCD",0x12345678) )
+
+
+= ConditionnalField class
+~ core field
+
+# Test equality with conditional fields
+
+class TEST_COND(Packet):
+    fields_desc = [
+        IntField("A", 0),
+        ConditionalField(IntField("A0",0), lambda pkt:pkt.A == 0),
+        ConditionalField(IntField("A1",0), lambda pkt:pkt.A != 0),
+        IntField("B", 0),
+        ConditionalField(IntField("B0",0), lambda pkt:pkt.B == 0),
+        ConditionalField(IntField("B1",0), lambda pkt:pkt.B != 0),
+        ]
+
+print(TEST_COND(TEST_COND().build()).fields)
+
+a = TEST_COND()
+b = TEST_COND(raw(TEST_COND()))
+assert raw(a) == raw(b)
+assert a == b
+
+# Test ConditionalField dependencies
+
+class TEST_COND(Packet):
+    fields_desc = [
+        ByteField('A', 0),
+        ConditionalField(ByteField('B', 0),
+            lambda pkt:pkt.A != 0),
+        ConditionalField(ByteField('C', 0),
+            lambda pkt:pkt.B == 0),
+        ]
+
+assert TEST_COND().build() == b'\x00'
+
+# Test MultipleTypeField in ConditionalField
+
+class TEST_INNER(Packet):
+    fields_desc = [
+        ByteField('A', 0),
+        ByteField('B', 0),
+        ConditionalField(
+            MultipleTypeField(
+                [
+                    (ByteField('C', 1), lambda pkt: pkt.B == 1), 
+                    (ByteField('C', 2), lambda pkt: pkt.B == 2), 
+                ],
+                ByteField('C', 0),
+            ),
+            lambda pkt: pkt.A,
+        )
+    ]
+
+pkt = TEST_INNER()
+pkt.A = 1
+pkt.B = 1
+assert pkt.C == 1
+
+= Simple tests
+
+assert LongField("test", None).addfield(None, b"", 0x44434241) == b'\x00\x00\x00\x00DCBA'
+assert SignedLongField("test", None).addfield(None, b"", -2) == b'\xff\xff\xff\xff\xff\xff\xff\xfe'
+
+assert LELongField("test", None).addfield(None, b"", 0x44434241) == b'ABCD\x00\x00\x00\x00'
+assert LESignedLongField("test", None).addfield(None, b"", -2) == b'\xfe\xff\xff\xff\xff\xff\xff\xff'
+
+= MACField class
+~ core field
+m = MACField("foo", None)
+r = m.i2m(None, None)
+r
+assert r == b"\x00\x00\x00\x00\x00\x00"
+r = m.getfield(None, b"\xc0\x01\xbe\xef\xba\xbeABCD")
+r
+assert r == (b"ABCD","c0:01:be:ef:ba:be") 
+r = m.addfield(None, b"FOO", "c0:01:be:ef:ba:be")
+r
+assert(r == b"FOO\xc0\x01\xbe\xef\xba\xbe" )
+
+= SourceMACField
+conf.route.add(net="1.2.3.4/32", dev=conf.iface)
+p = Ether() / ARP(pdst="1.2.3.4")
+assert p.src == p.hwsrc == p[ARP].hwsrc == get_if_hwaddr(conf.iface)
+p = Dot3() / LLC() / SNAP() / ARP(pdst="1.2.3.4")
+assert p.src == p.hwsrc == p[ARP].hwsrc == get_if_hwaddr(conf.iface)
+conf.route.delt(net="1.2.3.4/32")
+
+= IPField class
+~ core field
+
+i = IPField("foo", None)
+r = i.i2m(None, "1.2.3.4")
+r
+assert r == b"\x01\x02\x03\x04"
+r = i.i2m(None, "255.255.255.255")
+r
+assert r == b"\xff\xff\xff\xff"
+r = i.m2i(None, b"\x01\x02\x03\x04")
+r
+assert r == "1.2.3.4"
+r = i.getfield(None, b"\x01\x02\x03\x04ABCD")
+r
+assert r == (b"ABCD","1.2.3.4")
+r = i.addfield(None, b"FOO", "1.2.3.4")
+r
+assert r == b"FOO\x01\x02\x03\x04"
+
+= SourceIPField
+~ core field
+defaddr = conf.route.route('0.0.0.0')[1]
+class Test(Packet): fields_desc = [SourceIPField("sourceip", None)]
+
+assert Test().sourceip == defaddr
+assert Test(raw(Test())).sourceip == defaddr
+
+assert IP(dst="0.0.0.0").src == defaddr
+assert IP(raw(IP(dst="0.0.0.0"))).src == defaddr
+assert IP(dst="0.0.0.0/31").src == defaddr
+assert IP(raw(IP(dst="0.0.0.0/31"))).src == defaddr
+
+
+#= ByteField
+#~ core field
+#b = ByteField("foo", None)
+#b.i2m("
+#b.getfield
+
+= ThreeBytesField
+~ field threebytesfield
+
+class TestThreeBytesField(Packet):
+    fields_desc = [ 
+        X3BytesField('test1', None),
+        ThreeBytesField('test2', None),
+        LEX3BytesField('test3', None),
+        LEThreeBytesField('test4', None),
+    ]
+
+p = TestThreeBytesField(test1=0x123456, test2=123456, test3=0xfedbca, test4=567890)
+assert(raw(p) == b'\x12\x34\x56\x01\xe2\x40\xca\xdb\xfe\x52\xaa\x08')
+print(p.sprintf('%test1% %test2% %test3% %test4%'))
+assert(p.sprintf('%test1% %test2% %test3% %test4%') == '0x123456 123456 0xfedbca 567890')
+assert(repr(p.test1) == '1193046')
+
+
+= NBytesField
+~ field nbytesfield
+
+class TestNBytesField(Packet):
+    fields_desc = [
+        NBytesField('test1', None, 7),
+        XNBytesField('test2', None, 5),
+        XNBytesField('test3', None, 11),
+        NBytesField('test4', None, 11),
+    ]
+
+p = TestNBytesField(test1=0x00112233445566, test2=824650445619, test3=0xffeeddccbbaa9988776655, test4=0xffeeddccbbaa9988776655)
+print(raw(p))
+assert(raw(p) == b'\x00\x11\x22\x33\x44\x55\x66\xc0\x00\xff\x33\x33\xff\xee\xdd\xcc\xbb\xaa\x99\x88\x77\x66\x55\xff\xee\xdd\xcc\xbb\xaa\x99\x88\x77\x66\x55')
+print(p.sprintf('%test1% %test2% %test3% %test4%'))
+assert(p.sprintf('%test1% %test2% %test3% %test4%') == '18838586676582 0xc000ff3333 0xffeeddccbbaa9988776655 309404098707666285700277845')
+assert(p.test1 == 0x112233445566)
+assert(p.test2 == 0xc000ff3333)
+assert(p.test3 == 0xffeeddccbbaa9988776655)
+assert(p.test4 == 309404098707666285700277845)
+
+
+= StrField
+~ field strfield
+~ field strlenfield
+
+class TestStrField(Packet):
+    fields_desc = [
+        LEFieldLenField('slen', None, length_of="s1"),
+        StrLenField('s1', None, length_from=lambda pkt: pkt.slen),
+        StrField('s2', None),
+    ]
+
+p = TestStrField(s1="cafe", s2="deadbeef")
+assert(raw(p) == b'\x04\x00cafedeadbeef')
+print(p.sprintf("%s1% %s2%"))
+assert(p.sprintf("%s1% %s2%") == "'cafe' 'deadbeef'")
+
+
+= StrFieldUtf16
+~ field strfieldutf16
+~ field strlenfieldutf16
+
+class TestStrLenFieldUtf16(Packet):
+    fields_desc = [
+        LEFieldLenField('slen', None, length_of="s1"),
+        StrLenFieldUtf16('s1', None, length_from=lambda pkt: pkt.slen),
+    ]
+
+p = TestStrLenFieldUtf16(s1='cafe')
+assert(raw(p) == b'\x08\x00c\x00a\x00f\x00e\x00')
+assert(p.sprintf("%s1%") == 'cafe')
+
+= StrFieldUtf16
+~ field strfieldutf16
+~ field strlenfieldutf16
+
+class TestStrFieldUtf16(Packet):
+    fields_desc = [
+        StrFieldUtf16('s1', None),
+    ]
+
+p = TestStrFieldUtf16(s1='cafe')
+assert(raw(p) == b'c\x00a\x00f\x00e\x00')
+assert(p.sprintf("%s1%") == 'cafe')
+
+############
+############
++ Tests on ActionField
+
+= Creation of a layer with ActionField
+~ field actionfield
+
+from __future__ import print_function
+
+class TestAction(Packet):
+    __slots__ = ["_val", "_fld", "_priv1", "_priv2"]
+    name = "TestAction"
+    fields_desc = [ ActionField(ByteField("tst", 3), "my_action", priv1=1, priv2=2) ]
+    def __init__(self, *args, **kargs):
+        self._val, self._fld, self._priv1, self._priv2 = None, None, None, None
+        super(TestAction, self).__init__(*args, **kargs)
+    def my_action(self, val, fld, priv1, priv2):
+        print("Action (%i)!" % val)
+        self._val, self._fld, self._priv1, self._priv2 = val, fld, priv1, priv2
+
+= Triggering action
+~ field actionfield
+
+t = TestAction()
+assert(t._val == t._fld == t._priv1 == t._priv2 == None)
+t.tst=42
+assert(t._priv1 == 1)
+assert(t._priv2 == 2)
+assert(t._val == 42)
+
+
+############
+############
++ Tests on FieldLenField
+
+= Creation of a layer with FieldLenField
+~ field 
+class TestFLenF(Packet):
+    fields_desc = [ FieldLenField("len", None, length_of="str", fmt="B", adjust=lambda pkt,x:x+1),
+                    StrLenField("str", "default", length_from=lambda pkt:pkt.len-1,) ]
+
+= Assembly of an empty packet
+~ field
+p = TestFLenF()
+p
+r = raw(p)
+r
+r == b"\x08default"
+
+= Assembly of non empty packet
+~ field
+p = TestFLenF(str="123")
+p
+r = raw(p)
+r
+r == b"\x04123"
+
+= Disassembly
+~ field
+p = TestFLenF(b"\x04ABCDEFGHIJKL")
+p
+p.len == 4 and p.str == b"ABC" and Raw in p
+
+
+= BitFieldLenField test
+~ field
+class TestBFLenF(Packet):
+    fields_desc = [ BitFieldLenField("len", None, 4, length_of="str" , adjust=lambda pkt,x:x+1),
+                    BitField("nothing",0xfff, 12),
+                    StrLenField("str", "default", length_from=lambda pkt:pkt.len-1, ) ]
+
+a=TestBFLenF()
+r = raw(a)
+r
+assert r == b"\x8f\xffdefault"
+
+a.str=""
+r = raw(a)
+r
+assert r == b"\x1f\xff"
+
+p = TestBFLenF(b"\x1f\xff@@")
+p
+assert p.len == 1 and p.str == b"" and Raw in p and p[Raw].load == b"@@"
+
+p = TestBFLenF(b"\x6f\xffabcdeFGH")
+p
+assert p.len == 6 and p.str == b"abcde" and Raw in p and p[Raw].load == b"FGH"
+
+
+
+############
+############
++ Tests on FieldListField
+
+= Creation of a layer
+~ field
+class TestFLF(Packet):
+    name="test"
+    fields_desc = [ FieldLenField("len", None, count_of="lst", fmt="B"),
+                    FieldListField("lst", None, IntField("elt",0), count_from=lambda pkt:pkt.len)
+                   ]
+
+= Assembly of an empty packet
+~ field
+a = TestFLF()
+raw(a)
+
+= Assembly of a non-empty packet
+~ field
+a = TestFLF()
+a.lst = [7,65539]
+ls(a)
+r = raw(a)
+r
+import struct
+r == struct.pack("!BII", 2,7,65539)
+
+= Disassemble
+~ field
+import struct
+p = TestFLF(b"\x00\x11\x12")
+p
+assert p.len == 0 and Raw in p and p[Raw].load == b"\x11\x12"
+p = TestFLF(struct.pack("!BIII",3,1234,2345,12345678))
+p
+assert p.len == 3 and p.lst == [1234,2345,12345678]
+
+= Manipulate
+~ field
+a = TestFLF(lst=[4])
+r = raw(a)
+r
+assert r == b"\x01\x00\x00\x00\x04"
+a.lst.append(1234)
+TestFLF(raw(a))
+a.show2()
+a.len=7
+r = raw(a)
+assert r == b"\x07\x00\x00\x00\x04\x00\x00\x04\xd2"
+a.len=2
+a.lst=[1,2,3,4,5]
+p = TestFLF(raw(a))
+p
+assert Raw in p and p[Raw].load == b'\x00\x00\x00\x03\x00\x00\x00\x04\x00\x00\x00\x05'
+
+= Test mutability of the default values
+~ field
+class X(Packet):
+    fields_desc = [ FieldListField("f", [], ByteField("", 0)) ]
+
+m = X()
+m.f.append(3)
+assert raw(m) == b"\x03"
+assert m.default_fields['f'] == []
+assert m.fields['f'] == [3]
+
+
+############
+############
++ PacketListField 
+
+= Create a layer
+~ field lengthfield
+class TestPLF(Packet):
+    name="test"
+    fields_desc=[ FieldLenField("len", None, count_of="plist"),
+                  PacketListField("plist", None, IP, count_from=lambda pkt:pkt.len,) ]
+
+= Test the PacketListField assembly
+~ field lengthfield
+x=TestPLF()
+r = raw(x)
+r
+r == b"\x00\x00"
+
+= Test the PacketListField assembly 2
+~ field lengthfield
+x=TestPLF()
+x.plist=[IP()/TCP(), IP()/UDP()]
+r = raw(x)
+r
+r.startswith(b'\x00\x02E')
+
+= Test disassembly
+~ field lengthfield
+x=TestPLF(plist=[IP()/TCP(seq=1234567), IP()/UDP()])
+p = TestPLF(raw(x))
+p
+p.show()
+IP in p and TCP in p and UDP in p and p[TCP].seq == 1234567
+
+= Nested PacketListField
+~ field lengthfield
+y=IP()/TCP(seq=111111)/TestPLF(plist=[IP()/TCP(seq=222222),IP()/UDP()])
+p = TestPLF(plist=[y,IP()/TCP(seq=333333)])
+p
+p.show()
+IP in p and TCP in p and UDP in p and p[TCP].seq == 111111 and p[TCP:2].seq==222222 and p[TCP:3].seq == 333333
+
+############
+############
++ PacketListField tests
+
+= Create a layer
+~ field lengthfield
+class TestPLF(Packet):
+    name="test"
+    fields_desc=[ FieldLenField("len", None, count_of="plist"),
+                  PacketListField("plist", None, IP, count_from=lambda pkt:pkt.len) ]
+
+= Test the PacketListField assembly
+~ field lengthfield
+x=TestPLF()
+r = raw(x)
+r
+r == b"\x00\x00"
+
+= Test the PacketListField assembly 2
+~ field lengthfield
+x=TestPLF()
+x.plist=[IP()/TCP(), IP()/UDP()]
+r = raw(x)
+r
+r.startswith(b'\x00\x02E')
+
+= Test disassembly
+~ field lengthfield
+x=TestPLF(plist=[IP()/TCP(seq=1234567), IP()/UDP()])
+p = TestPLF(raw(x))
+p
+p.show()
+IP in p and TCP in p and UDP in p and p[TCP].seq == 1234567
+
+= Nested PacketListField
+~ field lengthfield
+y=IP()/TCP(seq=111111)/TestPLF(plist=[IP()/TCP(seq=222222),IP()/UDP()])
+p = TestPLF(plist=[y,IP()/TCP(seq=333333)])
+p
+p.show()
+IP in p and TCP in p and UDP in p and p[TCP].seq == 111111 and p[TCP:2].seq==222222 and p[TCP:3].seq == 333333
+
+= Complex packet
+~ field lengthfield ccc
+class TestPkt(Packet):
+    fields_desc = [ ByteField("f1",65),
+                    ShortField("f2",0x4244) ]
+    def extract_padding(self, p):
+        return "", p
+
+class TestPLF2(Packet):
+    fields_desc = [ FieldLenField("len1", None, count_of="plist", fmt="H",
+                                  adjust=lambda pkt, x: x + 2),
+                    FieldLenField("len2", None, length_of="plist", fmt="I",
+                                  adjust=lambda pkt, x: (x + 1) // 2),
+                    PacketListField("plist", None, TestPkt,
+                                    length_from=lambda x: (x.len2 * 2) // 3 * 3) ]
+
+a=TestPLF2()
+r = raw(a)
+r
+assert r == b"\x00\x02\x00\x00\x00\x00"
+
+a.plist=[TestPkt(),TestPkt(f1=100)] 
+r = raw(a)
+r
+assert r == b'\x00\x04\x00\x00\x00\x03ABDdBD'
+
+a /= "123456"
+b = TestPLF2(raw(a))
+b.show()
+assert(b.len1 == 4 and b.len2 == 3)
+assert(b[TestPkt].f1 == 65 and b[TestPkt].f2 == 0x4244)
+assert(b[TestPkt:2].f1 == 100)
+assert(Raw in b and b[Raw].load == b"123456")
+
+a.plist.append(TestPkt(f1=200))
+b = TestPLF2(raw(a))
+b.show()
+assert(b.len1 == 5 and b.len2 == 5)
+assert(b[TestPkt].f1 == 65 and b[TestPkt].f2 == 0x4244)
+assert(b[TestPkt:2].f1 == 100)
+assert(b[TestPkt:3].f1 == 200)
+assert(b.getlayer(TestPkt,4) is None)
+assert(Raw in b and b[Raw].load == b"123456")
+hexdiff(a,b)
+assert( raw(a) == raw(b) )
+
+############
+############
++ Tests on TCPOptionsField
+
+= Test calls on TCPOptionsField.getfield
+
+assert TCPOptionsField("test", "").getfield(TCP(dataofs=0), "") == ('', [])
+
+
+############
+############
++ PacketListField tests
+
+= Create a layer
+~ field lengthfield
+class TestPLF(Packet):
+    name="test"
+    fields_desc=[ FieldLenField("len", None, count_of="plist"),
+                  PacketListField("plist", None, IP, count_from=lambda pkt:pkt.len) ]
+
+= Test the PacketListField assembly
+~ field lengthfield
+x=TestPLF()
+r = raw(x)
+r
+r == b"\x00\x00"
+
+= Test the PacketListField assembly 2
+~ field lengthfield
+x=TestPLF()
+x.plist=[IP()/TCP(), IP()/UDP()]
+r = raw(x)
+r
+r.startswith(b'\x00\x02E')
+
+= Test disassembly
+~ field lengthfield
+x=TestPLF(plist=[IP()/TCP(seq=1234567), IP()/UDP()])
+p = TestPLF(raw(x))
+p
+p.show()
+IP in p and TCP in p and UDP in p and p[TCP].seq == 1234567
+
+= Nested PacketListField
+~ field lengthfield
+y=IP()/TCP(seq=111111)/TestPLF(plist=[IP()/TCP(seq=222222),IP()/UDP()])
+p = TestPLF(plist=[y,IP()/TCP(seq=333333)])
+p
+p.show()
+IP in p and TCP in p and UDP in p and p[TCP].seq == 111111 and p[TCP:2].seq==222222 and p[TCP:3].seq == 333333
+
+= Complex packet
+~ field lengthfield ccc
+class TestPkt(Packet):
+    fields_desc = [ ByteField("f1",65),
+                    ShortField("f2",0x4244) ]
+    def extract_padding(self, p):
+        return "", p
+
+class TestPLF2(Packet):
+    fields_desc = [ FieldLenField("len1", None, count_of="plist",fmt="H",
+                                  adjust=lambda pkt,x: x + 2),
+                    FieldLenField("len2", None, length_of="plist", fmt="I",
+                                  adjust=lambda pkt, x: (x + 1) // 2),
+                    PacketListField("plist", None, TestPkt,
+                                    length_from=lambda x: (x.len2 * 2) // 3 *3) ]
+
+a=TestPLF2()
+r = raw(a)
+r
+assert r == b"\x00\x02\x00\x00\x00\x00"
+
+a.plist=[TestPkt(),TestPkt(f1=100)] 
+r = raw(a)
+r
+assert r == b'\x00\x04\x00\x00\x00\x03ABDdBD'
+
+a /= "123456"
+b = TestPLF2(raw(a))
+b.show()
+assert(b.len1 == 4 and b.len2 == 3)
+assert(b[TestPkt].f1 == 65 and b[TestPkt].f2 == 0x4244)
+assert(b[TestPkt:2].f1 == 100)
+assert(Raw in b and b[Raw].load == b"123456")
+
+a.plist.append(TestPkt(f1=200))
+b = TestPLF2(raw(a))
+b.show()
+assert(b.len1 == 5 and b.len2 == 5)
+assert(b[TestPkt].f1 == 65 and b[TestPkt].f2 == 0x4244)
+assert(b[TestPkt:2].f1 == 100)
+assert(b[TestPkt:3].f1 == 200)
+assert(b.getlayer(TestPkt,4) is None)
+assert(Raw in b and b[Raw].load == b"123456")
+hexdiff(a,b)
+assert( raw(a) == raw(b) )
+
+= Create layers for heterogeneous PacketListField
+~ field lengthfield
+TestPLFH1 = type('TestPLFH1', (Packet,), {
+    'name': 'test1',
+    'fields_desc': [ByteField('data', 0)],
+    'guess_payload_class': lambda self, p: conf.padding_layer,
+    }
+)
+TestPLFH2 = type('TestPLFH2', (Packet,), {
+    'name': 'test2',
+    'fields_desc': [ShortField('data', 0)],
+    'guess_payload_class': lambda self, p: conf.padding_layer,
+    }
+)
+class TestPLFH3(Packet):
+    name = 'test3'
+    fields_desc = [
+        PacketListField(
+            'data', [],
+            next_cls_cb=lambda pkt, lst, p, remain: pkt.detect_next_packet(lst, p, remain)
+        )
+    ]
+    def detect_next_packet(self, lst, p, remain):
+        if len(remain) < 3:
+            return None
+        if isinstance(p, type(None)):
+            return TestPLFH1
+        if p.data & 3 == 1:
+            return TestPLFH1
+        if p.data & 3 == 2:
+            return TestPLFH2
+        return None
+
+= Test heterogeneous PacketListField
+~ field lengthfield
+
+p = TestPLFH3(b'\x02\x01\x01\xc1\x02\x80\x04toto')
+assert(isinstance(p.data[0], TestPLFH1))
+assert(p.data[0].data == 0x2)
+assert(isinstance(p.data[1], TestPLFH2))
+assert(p.data[1].data == 0x101)
+assert(isinstance(p.data[2], TestPLFH1))
+assert(p.data[2].data == 0xc1)
+assert(isinstance(p.data[3], TestPLFH1))
+assert(p.data[3].data == 0x2)
+assert(isinstance(p.data[4], TestPLFH2))
+assert(p.data[4].data == 0x8004)
+assert(isinstance(p.payload, conf.raw_layer))
+assert(p.payload.load == b'toto')
+
+p = TestPLFH3(b'\x02\x01\x01\xc1\x02\x80\x02to')
+assert(isinstance(p.data[0], TestPLFH1))
+assert(p.data[0].data == 0x2)
+assert(isinstance(p.data[1], TestPLFH2))
+assert(p.data[1].data == 0x101)
+assert(isinstance(p.data[2], TestPLFH1))
+assert(p.data[2].data == 0xc1)
+assert(isinstance(p.data[3], TestPLFH1))
+assert(p.data[3].data == 0x2)
+assert(isinstance(p.data[4], TestPLFH2))
+assert(p.data[4].data == 0x8002)
+assert(isinstance(p.payload, conf.raw_layer))
+assert(p.payload.load == b'to')
+
+= Create layers for heterogeneous PacketListField with memory
+~ field lengthfield
+TestPLFH4 = type('TestPLFH4', (Packet,), {
+    'name': 'test4',
+    'fields_desc': [ByteField('data', 0)],
+    'guess_payload_class': lambda self, p: conf.padding_layer,
+    }
+)
+TestPLFH5 = type('TestPLFH5', (Packet,), {
+    'name': 'test5',
+    'fields_desc': [ShortField('data', 0)],
+    'guess_payload_class': lambda self, p: conf.padding_layer,
+    }
+)
+class TestPLFH6(Packet):
+    __slots__ = ['_memory']
+    name = 'test6'
+    fields_desc = [
+        PacketListField(
+            'data', [],
+            next_cls_cb=lambda pkt, lst, p, remain: pkt.detect_next_packet(lst, p, remain)
+        )
+    ]
+    def detect_next_packet(self, lst, p, remain):
+        if isinstance(p, type(None)):
+            self._memory = [TestPLFH4] * 3 + [TestPLFH5]
+        try:
+            return self._memory.pop(0)
+        except IndexError:
+            return None
+
+= Test heterogeneous PacketListField with memory
+~ field lengthfield
+
+p = TestPLFH6(b'\x01\x02\x03\xc1\x02toto')
+assert(isinstance(p.data[0], TestPLFH4))
+assert(p.data[0].data == 0x1)
+assert(isinstance(p.data[1], TestPLFH4))
+assert(p.data[1].data == 0x2)
+assert(isinstance(p.data[2], TestPLFH4))
+assert(p.data[2].data == 0x3)
+assert(isinstance(p.data[3], TestPLFH5))
+assert(p.data[3].data == 0xc102)
+assert(isinstance(p.payload, conf.raw_layer))
+assert(p.payload.load == b'toto')
+
+
+############
+############
++ Tests on MultiFlagsField
+
+= Test calls on MultiFlagsField.any2i
+~ multiflagsfield
+
+import collections
+MockPacket = collections.namedtuple('MockPacket', ['type'])
+
+f = MultiFlagsField('flags', set(), 3, {
+        0: {
+            0: MultiFlagsEntry('A', 'OptionA'),
+            1: MultiFlagsEntry('B', 'OptionB'),
+        },
+        1: {
+            0: MultiFlagsEntry('+', 'Plus'),
+            1: MultiFlagsEntry('*', 'Star'),
+        },
+    },
+    depends_on=lambda x: x.type
+)
+
+mp = MockPacket(0)
+x = f.any2i(mp, set())
+assert(isinstance(x, set))
+assert(len(x) == 0)
+x = f.any2i(mp, {'A'})
+assert(isinstance(x, set))
+assert(len(x) == 1)
+assert('A' in x)
+assert('B' not in x)
+assert('+' not in x)
+x = f.any2i(mp, {'A', 'B'})
+assert(isinstance(x, set))
+assert(len(x) == 2)
+assert('A' in x)
+assert('B' in x)
+assert('+' not in x)
+assert('*' not in x)
+x = f.any2i(mp, 3)
+assert(isinstance(x, set))
+assert(len(x) == 2)
+assert('A' in x)
+assert('B' in x)
+assert('+' not in x)
+assert('*' not in x)
+x = f.any2i(mp, 7)
+assert(isinstance(x, set))
+assert(len(x) == 3)
+assert('A' in x)
+assert('B' in x)
+assert('bit 2' in x)
+assert('+' not in x)
+assert('*' not in x)
+mp = MockPacket(1)
+x = f.any2i(mp, {'+', '*'})
+assert(isinstance(x, set))
+assert(len(x) == 2)
+assert('+' in x)
+assert('*' in x)
+assert('A' not in x)
+assert('B' not in x)
+try:
+    x = f.any2i(mp, {'A'})
+    ret = False
+except AssertionError:
+    ret = True
+
+assert(ret)
+#Following test demonstrate a non-sensical yet acceptable usage :(
+x = f.any2i(None, {'Toto'})
+assert('Toto' in x)
+
+= Test calls on MultiFlagsField.i2m
+~ multiflagsfield
+
+import collections
+MockPacket = collections.namedtuple('MockPacket', ['type'])
+
+f = MultiFlagsField('flags', set(), 3, {
+        0: {
+            0: MultiFlagsEntry('A', 'OptionA'),
+            1: MultiFlagsEntry('B', 'OptionB'),
+        },
+        1: {
+            0: MultiFlagsEntry('+', 'Plus'),
+            1: MultiFlagsEntry('*', 'Star'),
+        },
+    },
+    depends_on=lambda x: x.type
+)
+
+mp = MockPacket(0)
+x = f.i2m(mp, set())
+assert(isinstance(x, six.integer_types))
+assert(x == 0)
+x = f.i2m(mp, {'A'})
+assert(isinstance(x, six.integer_types))
+assert(x == 1)
+x = f.i2m(mp, {'A', 'B'})
+assert(isinstance(x, six.integer_types))
+assert(x == 3)
+x = f.i2m(mp, {'A', 'B', 'bit 2'})
+assert(isinstance(x, six.integer_types))
+assert(x == 7)
+try:
+    x = f.i2m(mp, {'+'})
+    ret = False
+except:
+    ret = True
+
+assert(ret)
+
+= Test calls on MultiFlagsField.m2i
+~ multiflagsfield
+
+import collections
+MockPacket = collections.namedtuple('MockPacket', ['type'])
+
+f = MultiFlagsField('flags', set(), 3, {
+        0: {
+            0: MultiFlagsEntry('A', 'OptionA'),
+            1: MultiFlagsEntry('B', 'OptionB'),
+        },
+        1: {
+            0: MultiFlagsEntry('+', 'Plus'),
+            1: MultiFlagsEntry('*', 'Star'),
+        },
+    },
+    depends_on=lambda x: x.type
+)
+
+mp = MockPacket(0)
+x = f.m2i(mp, 2)
+assert(isinstance(x, set))
+assert(len(x) == 1)
+assert('B' in x)
+assert('A' not in x)
+assert('*' not in x)
+
+x = f.m2i(mp, 7)
+assert(isinstance(x, set))
+assert('B' in x)
+assert('A' in x)
+assert('bit 2' in x)
+assert('*' not in x)
+assert('+' not in x)
+x = f.m2i(mp, 0)
+assert(len(x) == 0)
+mp = MockPacket(1)
+x = f.m2i(mp, 2)
+assert(isinstance(x, set))
+assert(len(x) == 1)
+assert('*' in x)
+assert('+' not in x)
+assert('B' not in x)
+
+= Test calls on MultiFlagsField.i2repr
+~ multiflagsfield
+
+import collections, re
+MockPacket = collections.namedtuple('MockPacket', ['type'])
+
+f = MultiFlagsField('flags', set(), 3, {
+        0: {
+            0: MultiFlagsEntry('A', 'OptionA'),
+            1: MultiFlagsEntry('B', 'OptionB'),
+        },
+        1: {
+            0: MultiFlagsEntry('+', 'Plus'),
+            1: MultiFlagsEntry('*', 'Star'),
+        },
+    },
+    depends_on=lambda x: x.type
+)
+
+mp = MockPacket(0)
+x = f.i2repr(mp, {'A', 'B'})
+assert(re.match(r'^.*OptionA \(A\).*$', x) is not None)
+assert(re.match(r'^.*OptionB \(B\).*$', x) is not None)
+mp = MockPacket(1)
+x = f.i2repr(mp, {'*', '+', 'bit 2'})
+assert(re.match(r'^.*Star \(\*\).*$', x) is not None)
+assert(re.match(r'^.*Plus \(\+\).*$', x) is not None)
+assert(re.match(r'^.*bit 2.*$', x) is not None)
+
+############
+############
++ EnumField tests
+
+= EnumField tests initialization
+
+# Basic EnumField
+f = EnumField('test', 0, {0: 'Foo', 1: 'Bar'})
+# Reverse i2s/s2i
+rf = EnumField('test', 0, {'Foo': 0, 'Bar': 1})
+# EnumField initialized with a list
+lf = EnumField('test', 0, ['Foo', 'Bar'])
+# EnumField with i2s_cb/s2i_cb
+fcb = EnumField('test', 0, (
+        lambda x: 'Foo' if x == 0 else 'Bar' if 1 <= x <= 10 else repr(x),
+        lambda x: 0 if x == 'Foo' else 1 if x == 'Bar' else int(x),
+    )
+)
+
+def expect_exception(e, c):
+    try:
+        eval(c)
+        return False
+    except e:
+        return True
+
+
+= EnumField.any2i_one
+~ field enumfield
+
+assert(f.any2i_one(None, 'Foo') == 0)
+assert(f.any2i_one(None, 'Bar') == 1)
+assert(f.any2i_one(None, 2) == 2)
+expect_exception(KeyError, 'f.any2i_one(None, "Baz")')
+
+assert(rf.any2i_one(None, 'Foo') == 0)
+assert(rf.any2i_one(None, 'Bar') == 1)
+assert(rf.any2i_one(None, 2) == 2)
+expect_exception(KeyError, 'rf.any2i_one(None, "Baz")')
+
+assert(lf.any2i_one(None, 'Foo') == 0)
+assert(lf.any2i_one(None, 'Bar') == 1)
+assert(lf.any2i_one(None, 2) == 2)
+expect_exception(KeyError, 'lf.any2i_one(None, "Baz")')
+
+assert(fcb.any2i_one(None, 'Foo') == 0)
+assert(fcb.any2i_one(None, 'Bar') == 1)
+assert(fcb.any2i_one(None, 5) == 5)
+expect_exception(ValueError, 'fcb.any2i_one(None, "Baz")')
+
+True
+
+= EnumField.any2i
+~ field enumfield
+
+assert(f.any2i(None, 'Foo') == 0)
+assert(f.any2i(None, 'Bar') == 1)
+assert(f.any2i(None, 2) == 2)
+expect_exception(KeyError, 'f.any2i(None, "Baz")')
+assert(f.any2i(None, ['Foo', 'Bar', 2]) == [0, 1, 2])
+
+assert(rf.any2i(None, 'Foo') == 0)
+assert(rf.any2i(None, 'Bar') == 1)
+assert(rf.any2i(None, 2) == 2)
+expect_exception(KeyError, 'rf.any2i(None, "Baz")')
+assert(rf.any2i(None, ['Foo', 'Bar', 2]) == [0, 1, 2])
+
+assert(lf.any2i(None, 'Foo') == 0)
+assert(lf.any2i(None, 'Bar') == 1)
+assert(lf.any2i(None, 2) == 2)
+expect_exception(KeyError, 'lf.any2i(None, "Baz")')
+assert(lf.any2i(None, ['Foo', 'Bar', 2]) == [0, 1, 2])
+
+assert(fcb.any2i(None, 'Foo') == 0)
+assert(fcb.any2i(None, 'Bar') == 1)
+assert(fcb.any2i(None, 5) == 5)
+expect_exception(ValueError, 'fcb.any2i(None, "Baz")')
+assert(f.any2i(None, ['Foo', 'Bar', 5]) == [0, 1, 5])
+
+True
+
+= EnumField.i2repr_one
+~ field enumfield
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+expect_exception(KeyError, 'f.i2repr_one(None, 2)')
+
+assert(rf.i2repr_one(None, 0) == 'Foo')
+assert(rf.i2repr_one(None, 1) == 'Bar')
+expect_exception(KeyError, 'rf.i2repr_one(None, 2)')
+
+assert(lf.i2repr_one(None, 0) == 'Foo')
+assert(lf.i2repr_one(None, 1) == 'Bar')
+expect_exception(KeyError, 'lf.i2repr_one(None, 2)')
+
+assert(fcb.i2repr_one(None, 0) == 'Foo')
+assert(fcb.i2repr_one(None, 1) == 'Bar')
+assert(fcb.i2repr_one(None, 5) == 'Bar')
+assert(fcb.i2repr_one(None, 11) == repr(11))
+
+conf.noenum.add(f, rf, lf, fcb)
+
+assert(f.i2repr_one(None, 0) == repr(0))
+assert(f.i2repr_one(None, 1) == repr(1))
+assert(f.i2repr_one(None, 2) == repr(2))
+
+assert(rf.i2repr_one(None, 0) == repr(0))
+assert(rf.i2repr_one(None, 1) == repr(1))
+assert(rf.i2repr_one(None, 2) == repr(2))
+
+assert(lf.i2repr_one(None, 0) == repr(0))
+assert(lf.i2repr_one(None, 1) == repr(1))
+assert(lf.i2repr_one(None, 2) == repr(2))
+
+assert(fcb.i2repr_one(None, 0) == repr(0))
+assert(fcb.i2repr_one(None, 1) == repr(1))
+assert(fcb.i2repr_one(None, 5) == repr(5))
+assert(fcb.i2repr_one(None, 11) == repr(11))
+
+conf.noenum.remove(f, rf, lf, fcb)
+
+assert(f.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+assert(rf.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+assert(lf.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+assert(fcb.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+
+True
+
+= EnumField.i2repr
+~ field enumfield
+
+assert(f.i2repr(None, 0) == 'Foo')
+assert(f.i2repr(None, 1) == 'Bar')
+expect_exception(KeyError, 'f.i2repr(None, 2)')
+assert(f.i2repr(None, [0, 1]) == ['Foo', 'Bar'])
+
+assert(rf.i2repr(None, 0) == 'Foo')
+assert(rf.i2repr(None, 1) == 'Bar')
+expect_exception(KeyError, 'rf.i2repr(None, 2)')
+assert(rf.i2repr(None, [0, 1]) == ['Foo', 'Bar'])
+
+assert(lf.i2repr(None, 0) == 'Foo')
+assert(lf.i2repr(None, 1) == 'Bar')
+expect_exception(KeyError, 'lf.i2repr(None, 2)')
+assert(lf.i2repr(None, [0, 1]) == ['Foo', 'Bar'])
+
+assert(fcb.i2repr(None, 0) == 'Foo')
+assert(fcb.i2repr(None, 1) == 'Bar')
+assert(fcb.i2repr(None, 5) == 'Bar')
+assert(fcb.i2repr(None, 11) == repr(11))
+assert(fcb.i2repr(None, [0, 1, 5, 11]) == ['Foo', 'Bar', 'Bar', repr(11)])
+
+conf.noenum.add(f, rf, lf, fcb)
+
+assert(f.i2repr(None, 0) == repr(0))
+assert(f.i2repr(None, 1) == repr(1))
+assert(f.i2repr(None, 2) == repr(2))
+assert(f.i2repr(None, [0, 1, 2]) == [repr(0), repr(1), repr(2)])
+
+assert(rf.i2repr(None, 0) == repr(0))
+assert(rf.i2repr(None, 1) == repr(1))
+assert(rf.i2repr(None, 2) == repr(2))
+assert(rf.i2repr(None, [0, 1, 2]) == [repr(0), repr(1), repr(2)])
+
+assert(lf.i2repr(None, 0) == repr(0))
+assert(lf.i2repr(None, 1) == repr(1))
+assert(lf.i2repr(None, 2) == repr(2))
+assert(lf.i2repr(None, [0, 1, 2]) == [repr(0), repr(1), repr(2)])
+
+assert(fcb.i2repr(None, 0) == repr(0))
+assert(fcb.i2repr(None, 1) == repr(1))
+assert(fcb.i2repr(None, 5) == repr(5))
+assert(fcb.i2repr(None, 11) == repr(11))
+assert(fcb.i2repr(None, [0, 1, 5, 11]) == [repr(0), repr(1), repr(5), repr(11)])
+
+conf.noenum.remove(f, rf, lf, fcb)
+
+assert(f.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+assert(rf.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+assert(lf.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+assert(fcb.i2repr_one(None, RandNum(0, 10)) == '<RandNum>')
+
+True
+
+############
+############
++ CharEnumField tests
+
+= Building expect_exception handler
+~ field charenumfield
+
+def expect_exception(e, c):
+    try:
+        eval(c)
+        return False
+    except e:
+        return True
+
+
+= CharEnumField tests initialization
+~ field charenumfield
+
+fc = CharEnumField('test', 'f', {'f': 'Foo', 'b': 'Bar'})
+fcb = CharEnumField('test', 'a', (
+    lambda x: 'Foo' if x == 'a' else 'Bar' if x == 'b' else 'Baz',
+    lambda x: 'a' if x == 'Foo' else 'b' if x == 'Bar' else ''
+))
+
+True
+
+= CharEnumField.any2i_one
+~ field charenumfield
+
+assert(fc.any2i_one(None, 'Foo') == 'f')
+assert(fc.any2i_one(None, 'Bar') == 'b')
+expect_exception(KeyError, 'fc.any2i_one(None, "Baz")')
+
+assert(fcb.any2i_one(None, 'Foo') == 'a')
+assert(fcb.any2i_one(None, 'Bar') == 'b')
+assert(fcb.any2i_one(None, 'Baz') == '')
+
+True
+
+############
+############
++ XByteEnumField tests
+
+= Building expect_exception handler
+~ field xbyteenumfield
+
+def expect_exception(e, c):
+    try:
+        eval(c)
+        return False
+    except e:
+        return True
+
+
+= XByteEnumField tests initialization
+~ field xbyteenumfield
+
+f = XByteEnumField('test', 0, {0: 'Foo', 1: 'Bar'})
+fcb = XByteEnumField('test', 0, (
+    lambda x: 'Foo' if x == 0 else 'Bar' if x == 1 else lhex(x),
+    lambda x: x
+))
+
+True
+
+= XByteEnumField.i2repr_one
+~ field xbyteenumfield
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+True
+
+= XByteEnumField update tests initialization
+~ field xbyteenumfield
+enum = ObservableDict({0: 'Foo', 1: 'Bar'})
+f = XByteEnumField('test', 0, enum)
+fcb = XByteEnumField('test', 0, (
+    lambda x: 'Foo' if x == 0 else 'Bar' if x == 1 else lhex(x),
+    lambda x: x
+))
+
+True
+
+= XByteEnumField.i2repr_one with update
+~ field xbyteenumfield
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 2) == '0x2')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 2) == '0x2')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+del enum[1]
+enum[2] = 'Baz'
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == '0x1')
+assert(f.i2repr_one(None, 2) == 'Baz')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == '0x1')
+assert(f.i2repr_one(None, 2) == 'Baz')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+True
+
+############
+############
++ XShortEnumField tests
+
+= Building expect_exception handler
+~ field xshortenumfield
+
+def expect_exception(e, c):
+    try:
+        eval(c)
+        return False
+    except e:
+        return True
+
+
+= XShortEnumField tests initialization
+~ field xshortenumfield
+
+f = XShortEnumField('test', 0, {0: 'Foo', 1: 'Bar'})
+fcb = XShortEnumField('test', 0, (
+    lambda x: 'Foo' if x == 0 else 'Bar' if x == 1 else lhex(x),
+    lambda x: x
+))
+
+True
+
+= XShortEnumField.i2repr_one
+~ field xshortenumfield
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+True
+
+= XShortEnumField update tests initialization
+~ field xshortenumfield
+enum = ObservableDict({0: 'Foo', 1: 'Bar'})
+f = XShortEnumField('test', 0, enum)
+fcb = XShortEnumField('test', 0, (
+    lambda x: 'Foo' if x == 0 else 'Bar' if x == 1 else lhex(x),
+    lambda x: x
+))
+
+True
+
+= XShortEnumField.i2repr_one with update
+~ field xshortenumfield
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 2) == '0x2')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == 'Bar')
+assert(f.i2repr_one(None, 2) == '0x2')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+del enum[1]
+enum[2] = 'Baz'
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == '0x1')
+assert(f.i2repr_one(None, 2) == 'Baz')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+assert(f.i2repr_one(None, 0) == 'Foo')
+assert(f.i2repr_one(None, 1) == '0x1')
+assert(f.i2repr_one(None, 2) == 'Baz')
+assert(f.i2repr_one(None, 0xff) == '0xff')
+
+True
+
+############
+############
++ DNSStrField tests
+
+= Raise exception - test data
+
+dnsf = DNSStrField("test", "")
+assert(dnsf.getfield(None, b"\x01x\x00") == (b"", b"x."))
+
+try:
+    dnsf.getfield(None, b"\xc0\xff")
+    assert(False)
+except (Scapy_Exception, IndexError):
+    pass
+
++ YesNoByteField
+
+= default usage
+
+yn_bf = YesNoByteField('test', 0x00)
+assert(yn_bf.i2repr(None, 0x00) == 'no')
+assert(yn_bf.i2repr(None, 0x01) == 'yes')
+assert(yn_bf.i2repr(None, 0x02) == 'yes')
+assert(yn_bf.i2repr(None, 0xff) == 'yes')
+
+= inverted yes - no (scalar config)
+yn_bf = YesNoByteField('test', 0x00, config={'yes': 0x00, 'no': 0x01})
+assert(yn_bf.i2repr(None, 0x00) == 'yes')
+assert(yn_bf.i2repr(None, 0x01) == 'no')
+assert(yn_bf.i2repr(None, 0x02) == 2)
+assert(yn_bf.i2repr(None, 0xff) == 255)
+
+= inverted yes - no (range config)
+yn_bf = YesNoByteField('test', 0x00, config={'yes': 0x00, 'no': (0x01, 0xff)})
+assert(yn_bf.i2repr(None, 0x00) == 'yes')
+assert(yn_bf.i2repr(None, 0x01) == 'no')
+assert(yn_bf.i2repr(None, 0x02) == 'no')
+assert(yn_bf.i2repr(None, 0xff) == 'no')
+
+= yes - no (using sets)
+yn_bf = YesNoByteField('test', 0x00, config={'yes': [0x00, 0x02], 'no': [0x01, 0x04, 0xff]})
+assert(yn_bf.i2repr(None, 0x00) == 'yes')
+assert(yn_bf.i2repr(None, 0x01) == 'no')
+assert(yn_bf.i2repr(None, 0x02) == 'yes')
+assert(yn_bf.i2repr(None, 0x03) == 3)
+assert(yn_bf.i2repr(None, 0x04) == 'no')
+assert(yn_bf.i2repr(None, 0x05) == 5)
+assert(yn_bf.i2repr(None, 0xff) == 'no')
+
+= yes, no and invalid
+yn_bf = YesNoByteField('test', 0x00, config={'no': 0x00, 'yes': 0x01, 'invalid': (0x02, 0xff)})
+assert(yn_bf.i2repr(None, 0x00) == 'no')
+assert(yn_bf.i2repr(None, 0x01) == 'yes')
+assert(yn_bf.i2repr(None, 0x02) == 'invalid')
+assert(yn_bf.i2repr(None, 0xff) == 'invalid')
+
+= invalid scalar spec
+
+try:
+    YesNoByteField('test', 0x00, config={'no': 0x00, 'yes': 256})
+    assert(False)
+except FieldValueRangeException:
+    pass
+
+= invalid range spec - invalid length
+
+try:
+    YesNoByteField('test', 0x00, config={'no': 0x00, 'yes': (0x00, 0x02, 0x02)})
+    assert(False)
+except FieldAttributeException:
+    pass
+
+= invalid range spec - invalid value
+
+try:
+    YesNoByteField('test', 0x00, config={'no': 0x00, 'yes': (0x100, 0x01)})
+    assert(False)
+except FieldValueRangeException:
+    pass
+
+try:
+    YesNoByteField('test', 0x00, config={'no': 0x00, 'yes': (0x00, 0x100)})
+    assert(False)
+except FieldValueRangeException:
+    pass
+
+= invalid set spec - invalid value
+
+try:
+    YesNoByteField('test', 0x00, config={'no': 0x00, 'yes': [0x01, 0x101]})
+    assert(False)
+except FieldValueRangeException:
+    pass
+
+= FlasgField - Python incompatible name
+
+assert Dot11().FCfield.to_DS is False
+
+########
+########
++ MultipleTypeField
+~ mtf
+
+= Test initialization order
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ByteEnumField("atyp", 0x1, {0x1: "IPv4", 0x3: "DNS", 0x4: "IPv6"}),
+        MultipleTypeField(
+            [
+                # IPv4
+                (IPField("addr", "0.0.0.0"), lambda pkt: pkt.atyp == 0x1),
+                # DNS
+                (DNSStrField("addr", ""), lambda pkt: pkt.atyp == 0x3),
+                # IPv6
+                (IP6Field("addr", "::"), lambda pkt: pkt.atyp == 0x4),
+            ],
+            StrField("addr", "")
+        ),
+    ]
+
+= Default order
+
+a = DebugPacket(atyp=0x3, addr="scapy.net")
+a = DebugPacket(raw(a))
+assert a.addr == b"scapy.net."
+
+= Reversed order
+
+a = DebugPacket(addr="scapy.net", atyp=0x3)
+a = DebugPacket(raw(a))
+assert a.addr == b"scapy.net."
+
+= Test default values auto-update
+
+class SweetPacket(Packet):
+    name = 'Sweet Celestian Packet'
+    fields_desc = [
+        IntField('switch', 0),
+        MultipleTypeField([
+            (XShortField('subfield', 0xDEAD), lambda pkt: pkt.switch == 1),
+            (XIntField('subfield',  0xBEEFBEEF), lambda pkt: pkt.switch == 2)],
+            XByteField('subfield', 0x88)
+        )
+    ]
+
+o = SweetPacket()
+assert o.subfield == 0x88
+
+o = SweetPacket(switch=1)
+assert o.subfield == 0xDEAD
+
+o = SweetPacket(switch=2)
+assert o.subfield == 0xBEEFBEEF
+
+o = SweetPacket()
+assert o.subfield == 0x88
+o.switch = 1
+assert o.subfield == 0xDEAD
+o.switch = 2
+assert o.subfield == 0xBEEFBEEF
+
+o = SweetPacket(switch=1, subfield=0x88)
+assert o.subfield == 0x88
+
+= MultipleTypeField - syntax error
+
+import warnings
+
+with warnings.catch_warnings(record=True) as w:
+    warnings.simplefilter("always")
+    class MTFPacket(Packet):
+        fields_desc = [ByteField("a", 0),
+                       MultipleTypeField([
+                           (ByteField("b", 0), lambda pkt: pkt.a == 0),
+                           (ShortField("not_b", 0), lambda: pkt.a != 0),
+                       ], IntField("b", 0))]
+    assert len(w) == 1
+    assert issubclass(w[-1].category, SyntaxWarning)
+
+
+########
+########
++ FlagsField
+
+= Test Flags Field Iterator
+
+class FlagsTest(Packet):
+    fields_desc = [FlagsField("flags", 0, 8,
+                              ["f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7"])]
+
+= Test upper nibble
+
+a = FlagsTest(b"\xf0")
+flags = list(a.flags)
+
+assert len(flags) == 4
+assert "f4" in flags
+assert "f5" in flags
+assert "f6" in flags
+assert "f7" in flags
+
+= Test lower nibble
+
+a = FlagsTest(b"\x0f")
+flags = list(a.flags)
+
+assert len(flags) == 4
+assert "f3" in flags
+assert "f2" in flags
+assert "f1" in flags
+assert "f0" in flags
+
+= Test single flag 1
+
+a = FlagsTest(b"\x01")
+flags = list(a.flags)
+
+assert len(flags) == 1
+assert "f0" in flags
+
+= Test single flag 2
+
+a = FlagsTest(b"\x02")
+flags = list(a.flags)
+
+assert len(flags) == 1
+assert "f1" in flags
+
+= Test single flag 0x80
+
+a = FlagsTest(b"\x80")
+flags = list(a.flags)
+
+assert len(flags) == 1
+assert "f7" in flags
+
+= Test pattern 0x55
+
+a = FlagsTest(b"\x55")
+flags = list(a.flags)
+
+assert len(flags) == 4
+assert "f6" in flags
+assert "f2" in flags
+assert "f4" in flags
+assert "f0" in flags
+
+= Test pattern 0xAA
+
+a = FlagsTest(b"\xAA")
+flags = list(a.flags)
+
+assert len(flags) == 4
+assert "f7" in flags
+assert "f3" in flags
+assert "f5" in flags
+assert "f1" in flags
+
+= Test pattern 0x00
+
+a = FlagsTest(b"\x00")
+flags = list(a.flags)
+
+assert len(flags) == 0
+
+= Test pattern 0xFF
+
+a = FlagsTest(b"\xFF")
+flags = list(a.flags)
+
+assert len(flags) == 8
+assert "f7" in flags
+assert "f3" in flags
+assert "f5" in flags
+assert "f1" in flags
+assert "f6" in flags
+assert "f2" in flags
+assert "f4" in flags
+assert "f0" in flags
+
+= FlagsField with str
+
+class TCPTest(Packet):
+    fields_desc = [
+        BitField("reserved", 0, 7),
+        FlagsField("flags", 0x2, 9, "FSRPAUECN")
+    ]
+
+a = TCPTest(flags=3)
+assert a.flags.F
+assert a.flags.S
+assert a.sprintf("%flags%") == "FS"
+
+= FlagsField with dict
+
+class FlagsTest2(Packet):
+    fields_desc = [
+        FlagsField("flags", 0x2, 16, {
+            0: "A",  # 0 bit
+            7: "B"   # 7 bit
+        })
+    ]
+
+a = FlagsTest2(flags=255)
+a.sprintf("%flags%")
+assert a.flags.A
+assert a.flags.B
+assert a.sprintf("%flags%") == "A+bit_1+bit_2+bit_3+bit_4+bit_5+bit_6+B"
+
+
+########
+########
++ ScalingField
+
+= ScalingField Test default behaviour
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0)
+    ]
+
+x = DebugPacket()
+assert len(x) == 1
+assert x.data == 0
+
+x.data = 1
+assert x.data == 1
+
+= ScalingField Test string assignment
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1)
+    ]
+
+x = DebugPacket()
+
+x.data = '\x01'
+assert x.data == 0.1
+x.data = 2.0
+assert x.data == 2.0
+assert bytes(x) == b"\x14"
+x.data = b'\xff'
+assert x.data == 25.5
+x.data = '\x7f'
+assert x.data == 12.7
+
+
+= ScalingField Test scaling
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1)
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+assert x.data == 0.1
+x.data = 2.0
+assert x.data == 2.0
+assert bytes(x) == b"\x14"
+x.data = b'\xff'
+assert x.data == 25.5
+
+= ScalingField Test scaling signed
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, fmt="b")
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+assert x.data == 0.1
+x.data = 12.7
+assert x.data == 12.7
+assert bytes(x) == b"\x7f"
+x.data = b'\x80'
+assert x.data == -12.8
+x.data = -0.1
+assert x.data == -0.1
+assert bytes(x) == b"\xff"
+
+= ScalingField Test scaling signed offset
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, offset=-1, fmt="b")
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+assert x.data == -0.9
+x.data = 11.7
+assert x.data == 11.7
+assert bytes(x) == b"\x7f"
+x.data = b'\x80'
+assert x.data == -13.8
+x.data = -1.1
+assert x.data == -1.1
+assert bytes(x) == b"\xff"
+
+= ScalingField Test scaling offset
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, offset=-1)
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+assert x.data == -0.9
+x.data = 11.7
+assert x.data == 11.7
+assert bytes(x) == b"\x7f"
+x.data = b'\x80'
+assert x.data == 11.8
+x.data = 24.5
+assert x.data == 24.5
+assert bytes(x) == b"\xff"
+
+= ScalingField Test unit
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, unit="V")
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+assert x.data == 1
+assert ScalingField.i2repr(x.fields_desc[0],x, x.data) == '1 V'
+
+= ScalingField Test unit and ndigits
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.123456, unit="V", ndigits=1)
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+assert x.data == 0.1
+assert ScalingField.i2repr(x.fields_desc[0],x, x.data) == '0.1 V'
+
+= ScalingField Test unit and ndigits 2
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.123456, unit="V", ndigits=3)
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+print(x.__repr__())
+assert x.data == 0.123
+assert ScalingField.i2repr(x.fields_desc[0],x, x.data) == '0.123 V'
+
+= ScalingField Test unit and ndigits 3
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.123456, unit="V", ndigits=5)
+    ]
+
+x = DebugPacket()
+
+x.data = b'\x01'
+print(x.__repr__())
+assert x.data == 0.12346
+assert ScalingField.i2repr(x.fields_desc[0],x, x.data) == '0.12346 V'
+
+= ScalingField randval byte
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, offset=-5)
+    ]
+
+x = DebugPacket()
+
+r = x.fields_desc[0].randval()
+val = r._fix()
+assert r.min == -5.0
+assert r.max == 20.5
+
+
+= ScalingField randval byte 2
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=-0.1, offset=-5)
+    ]
+
+x = DebugPacket()
+
+r = x.fields_desc[0].randval()
+val = r._fix()
+assert r.min == -30.5
+assert r.max == -5
+
+
+= ScalingField signed randval byte
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=-0.1, offset=-5, fmt="b")
+    ]
+
+x = DebugPacket()
+
+r = x.fields_desc[0].randval()
+val = r._fix()
+assert r.min == -17.7
+assert r.max == 7.8
+
+
+= ScalingField signed randval byte 2
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, offset=-5, fmt="b")
+    ]
+
+x = DebugPacket()
+
+r = x.fields_desc[0].randval()
+val = r._fix()
+assert r.min == -17.8
+assert r.max == 7.7
+
+
+= ScalingField signed randval short
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, offset=-5, fmt="h")
+    ]
+
+x = DebugPacket()
+
+r = x.fields_desc[0].randval()
+val = r._fix()
+assert r.min == -3281.8
+assert r.max == 3271.7
+
+
+= ScalingField signed randval int
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, offset=-5, fmt="i")
+    ]
+
+x = DebugPacket()
+
+r = x.fields_desc[0].randval()
+val = r._fix()
+assert r.min == -214748369.8
+assert r.max == 214748359.7
+
+
+= ScalingField signed randval long
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ScalingField('data', 0, scaling=0.1, offset=-5, fmt="q")
+    ]
+
+x = DebugPacket()
+
+r = x.fields_desc[0].randval()
+val = r._fix()
+assert r.min == -922337203685477585.8
+assert r.max == 922337203685477575.7
+
+= ScalingField signed randval long
+
+y = fuzz(x)
+assert bytes(y) != bytes(y)
+
+############
+############
++ BitExtendedField
+
+= BitExtendedField: simple test
+
+class DebugPacket(Packet):
+    fields_desc = [
+        BitExtendedField("val", None, extension_bit=0)
+    ]
+
+a = DebugPacket(val=1234)
+assert(a.val == 1234)
+
+= BitExtendedField i2m: corner values
+* 7 bits of data = 0
+import codecs
+for i in range(8):
+    m = BitExtendedField("foo", None, extension_bit=i)
+    r = m.i2m(None, 0)
+    r = int(codecs.encode(r, 'hex'), 16)
+    assert(r == 0)
+
+* 7 bits of data = 1
+for i in range(8):
+    m = BitExtendedField("foo", None, extension_bit=i)
+    r = m.i2m(None, 0b1111111)
+    r = int(codecs.encode(r, 'hex'), 16)
+    assert(r == 0xff - 2**i)
+
+= BitExtendedField i2m: field expansion
+* If there is 8 bits of data, we need to add a byte
+m = BitExtendedField("foo", None, extension_bit=0)
+r = m.i2m(None, 0b10000000)
+r = int(codecs.encode(r, 'hex'), 16)
+assert(r == 0x0300)
+
+= BitExtendedField i2m: test all FX bit positions
+* Data is 0b10000001 (129) and all str values are precomputed
+data_129 = {
+    "extended": 129,
+    "int_with_fx": [770, 769, 1281, 2305, 4353, 8449, 16641, 33025],
+    "str_with_fx" : []
+}
+for i in range(8):
+    m = BitExtendedField("foo", None, extension_bit=i)
+    r = m.i2m(None, data_129["extended"])
+    data_129["str_with_fx"].append(r)
+    r = int(codecs.encode(r, 'hex'), 16)
+    assert(r == data_129["int_with_fx"][i])
+
+= BitExtendedField m2i: test all FX bit positions
+* Data is 0b10000001 (129) and all str values are precomputed
+for i in range(8):
+    m = BitExtendedField("foo", None, extension_bit=i)
+    r = m.m2i(None, data_129["str_with_fx"][i])
+    assert(r == data_129["extended"])
+
+= BitExtendedField m2i: stop at FX zero
+* 1 byte of zeroes (FX stop) then 1 byte of ones : ignore 2nd byte
+for i in range(8):
+    m = BitExtendedField("foo", None, extension_bit=i)
+    r = m.m2i(None, b'\x00\xff')
+    assert(r == 0)
+
+= BitExtendedField m2i: multiple bytes
+* 0b00000011 0b11111110 --> 0xff
+data_254 = {
+    "extended": 0xff,
+    "str_with_fx" : [b'\x03\xfe', b'\x03\xfd', b'\x05\xfb', b'\x09\xf7', b'\x11\xef', b'\x21\xdf', b'\x41\xbf', b'\x81\x7f']
+}
+for i in range(len(data_254['str_with_fx'])):
+    m = BitExtendedField("foo", None, extension_bit=i)
+    r = m.m2i(None, data_254["str_with_fx"][i])
+    assert(r == data_254['extended'])
+
+= BitExtendedField m2i: invalid field with no stopping bit
+* 1 byte of one (no FX stop) shall return an error
+for i in range(8):
+    m = BitExtendedField("foo", None, extension_bit=i)
+    r = m.m2i(None, b'\xff')
+    assert(r == None)
+
+= LSBExtendedField
+* Test i2m and m2i
+data_129 = {
+    "extended": 129,
+    "int_with_fx": 770,
+    "str_with_fx" : None
+}
+m = LSBExtendedField("foo", None)
+r = m.i2m(None, data_129["extended"])
+data_129["str_with_fx"] = r
+r = int(codecs.encode(r, 'hex'), 16)
+assert(r == data_129["int_with_fx"])
+
+m = LSBExtendedField("foo", None)
+r = m.m2i(None, data_129["str_with_fx"])
+assert(r == data_129["extended"])
+
+= MSBExtendedField
+* Test i2m and m2i
+data_129 = {
+    "extended": 129,
+    "int_with_fx": 33025,
+    "str_with_fx" : None
+}
+m = MSBExtendedField("foo", None)
+r = m.i2m(None, data_129["extended"])
+data_129["str_with_fx"] = r
+r = int(codecs.encode(r, 'hex'), 16)
+assert(r == data_129["int_with_fx"])
+
+m = MSBExtendedField("foo", None)
+r = m.m2i(None, data_129["str_with_fx"])
+assert(r == data_129["extended"])
+
+
+############
+############
++ Deprecated fields in Packet
+~ deprecated
+
+= Field Deprecation test
+
+class TestPacket(Packet):
+    fields_desc = [
+        ByteField("a", 0),
+        LEShortField("b", 15),
+    ]
+    deprecated_fields = {
+        "dpr": ("a", "1.0"),
+        "B": ("b", "1.0"),
+    }
+
+try:
+    pkt = TestPacket(a=2, B=3)
+    assert pkt.B == 3
+    assert pkt.b == 3
+    assert pkt.a == 2
+    
+    import warnings
+    
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter("always")
+        assert pkt.dpr == 2
+        assert len(w) == 1
+        assert issubclass(w[-1].category, DeprecationWarning)
+except DeprecationWarning:
+    # -Werror is used
+    pass
+
+
+############
+############
++ FCSField
+
+= FCSField: basic test
+
+class TestPacket(Packet):
+    fields_desc = [
+        ByteField("a", 0),
+        LEShortField("b", 15),
+        LEIntField("c", 7),
+        FCSField("fcs", None),
+        IntField("bottom", 0)
+    ]
+
+bind_layers(TestPacket, Ether)
+
+pkt = TestPacket(a=12, fcs=0xbeef, bottom=123)/Ether(src="aa:aa:aa:aa:aa:aa", dst="bb:bb:bb:bb:bb:bb")/IP(src="127.0.0.1", dst="127.0.0.1")
+
+assert raw(pkt) == b'\x0c\x0f\x00\x07\x00\x00\x00\x00\x00\x00{\xbb\xbb\xbb\xbb\xbb\xbb\xaa\xaa\xaa\xaa\xaa\xaa\x08\x00E\x00\x00\x14\x00\x01\x00\x00@\x00|\xe7\x7f\x00\x00\x01\x7f\x00\x00\x01\xbe\xef'
+# Test that it is consistent
+assert raw(pkt) == b'\x0c\x0f\x00\x07\x00\x00\x00\x00\x00\x00{\xbb\xbb\xbb\xbb\xbb\xbb\xaa\xaa\xaa\xaa\xaa\xaa\x08\x00E\x00\x00\x14\x00\x01\x00\x00@\x00|\xe7\x7f\x00\x00\x01\x7f\x00\x00\x01\xbe\xef'
+
+pkt = TestPacket(raw(pkt))
+assert pkt.fcs == 0xbeef
+
+
+############
+############
++ PacketField
+
+= PacketField: randval()
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ShortField('short', 0),
+        ByteField('byte', 0),
+        LongField('long', 0)
+    ]
+
+p = PacketField('packet', b'', DebugPacket).randval()
+
+assert isinstance(p.short, RandShort)
+assert isinstance(p.byte, RandByte)
+assert isinstance(p.long, RandLong)
+
+
+= PacketField: randval(), PacketField in PacketField
+
+class DebugPacket(Packet):
+    fields_desc = [
+        ShortField('short1', 0),
+        ByteField('byte', 0),
+        LongField('long', 0)
+    ]
+
+class DummyPacket(Packet):
+    fields_desc = [
+        PacketField('packet', b'', DebugPacket),
+        ShortField('short2', 0)
+    ]
+
+
+p = PacketField('packet', b'', DummyPacket).randval()
+
+assert isinstance(p.packet.short1, RandShort)
+assert isinstance(p.packet.byte, RandByte)
+assert isinstance(p.packet.long, RandLong)
+assert isinstance(p.short2, RandShort)
