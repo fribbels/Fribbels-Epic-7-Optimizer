@@ -94,7 +94,7 @@
     "role": "warrior",
     "stats": {
       "attack": 9,
-      "health": 117
+      "health": 76
     }
   },
   "Alexa's Basket": {
@@ -1018,7 +1018,7 @@
     "role": "warrior",
     "stats": {
       "attack": 18,
-      "health": 2
+      "health": 27
     }
   },
   "Hilag Lance": {
@@ -1087,7 +1087,7 @@
     "rarity": 4,
     "role": "ranger",
     "stats": {
-      "attack": 4,
+      "attack": 18,
       "health": 27
     }
   },
@@ -1293,7 +1293,7 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
     },
-    "name": "ReplaceNameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "name": "Moonlight’s Vestige",
     "rarity": 4,
     "role": "",
     "stats": {
@@ -1731,8 +1731,8 @@
     "rarity": 5,
     "role": "warrior",
     "stats": {
-      "attack": 29,
-      "health": 44
+      "attack": 21,
+      "health": 32
     }
   },
   "Song of Stars": {
@@ -1845,6 +1845,20 @@
     "stats": {
       "attack": 8,
       "health": 67
+    }
+  },
+  "Super Duper Water Gun Shooter": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Super Duper Water Gun Shooter",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 18,
+      "health": 27
     }
   },
   "Sword of Ezera": {
@@ -2181,20 +2195,6 @@
     "stats": {
       "attack": 12,
       "health": 45
-    }
-  },
-  "XIV. Temperance": {
-    "assets": {
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
-      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
-    },
-    "name": "XIV. Temperance",
-    "rarity": 4,
-    "role": "",
-    "stats": {
-      "attack": 7,
-      "health": 63
     }
   },
   "XVI. The Tower": {
