@@ -423,6 +423,8 @@ async function editGearFromIcon(id, reforge) {
     const result = await Api.getItemById(id);
     console.log(result.item);
     const editedItem = await Dialog.editGearDialog(result.item, true, reforge);
+
+    ItemAugmenter.augment([editedItem])
     await Api.editItems([editedItem]);
     Notifier.quick("Edited item");
 

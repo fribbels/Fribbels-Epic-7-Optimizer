@@ -1,5 +1,34 @@
 const Swal = require('sweetalert2');
 
+const e7StatToOptimizerStat = {
+    "att_rate": "AttackPercent",
+    "max_hp_rate": "HealthPercent",
+    "def_rate": "DefensePercent",
+    "att": "Attack",
+    "max_hp": "Health",
+    "def": "Defense",
+    "speed": "Speed",
+    "res": "EffectResistancePercent",
+    "cri": "CriticalHitChancePercent",
+    "cri_dmg": "CriticalHitDamagePercent",
+    "acc": "EffectivenessPercent",
+    "coop": "DualAttackChancePercent"
+}
+
+const e7StatToDisplayStat = {
+    "att_rate": "% Attack",
+    "max_hp_rate": "% Health",
+    "def_rate": "% Defense",
+    "att": " Attack",
+    "max_hp": " Health",
+    "def": " Defense",
+    "speed": " Speed",
+    "res": "% Res",
+    "cri": "% Crit rate",
+    "acc": "% Eff",
+    "coop": " Dual Attack"
+}
+
 module.exports = {
     error: (text) => {
         Swal.fire({
@@ -22,10 +51,28 @@ module.exports = {
         })
     },
 
+    changeArtifact: (level) => {
+        const name = $('#editArtifact').val();
+
+        var html = ``;
+
+//${level == i ? "selected" : ""}
+        for (var i = 30; i >= 0; i--) {
+            var stats = Artifact.getStats(name, i)
+            html += `<option value="${i}" >${i} - (${stats.attack.toFixed(1)} atk, ${stats.health.toFixed(1)} hp)</option>`
+        }
+
+        $("select[id='editArtifactLevel']").find('option').remove().end().append(html);
+    },
+
     editHeroDialog: async (hero) => {
         return new Promise(async (resolve, reject) => {
             const getAllHeroesResponse = await Api.getAllHeroes();
+            const heroData = HeroData.getAllHeroData();
             const heroes = getAllHeroesResponse.heroes;
+
+            const heroInfo = heroData[hero.name];
+            const ee = heroInfo.ex_equip[0];
 
             const { value: formValues } = await Swal.fire({
                 title: '',
@@ -35,25 +82,37 @@ module.exports = {
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Artifact</div>
-                            <select id="editArtifact" class="editGearStatSelect">
-                                ${getArtifactHtml()}
+                            <select id="editArtifact" class="editGearStatSelect" onchange="Dialog.changeArtifact()">
+                                ${getArtifactHtml(hero)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">EE</div>
-                            <select id="editArtifact" class="editGearStatSelect">
-                                ${getArtifactHtml()}
+                            <div class="editGearStatLabel">Level</div>
+                            <select id="editArtifactLevel" class="editGearStatSelect">
+                                ${getArtifactEnhanceHtml(hero)}
                             </select>
                         </div>
 
+                        <div class="horizontalLineWithMoreSpace"></div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel">Imprint</div>
-                            <select id="editArtifact" class="editGearStatSelect">
-                                ${getArtifactHtml()}
+                            ${getImprintHtml(hero, heroInfo)}
+                        </div>
+
+                        <div class="horizontalLineWithMoreSpace"></div>
+
+                        <div class="editGearFormRow">
+                            <div class="editGearStatLabel">EE</div>
+
+                            <select id="editEe" class="editGearStatSelect">
+                                ${getEeEnhanceHtml(hero, ee)}
                             </select>
                         </div>
+
+
+                        <div class="horizontalLineWithMoreSpace"></div>
 
                         <p>Add stats from Artifact, EE, and Imprint</p>
                         <br>
@@ -127,9 +186,25 @@ module.exports = {
                         </div>
                     </div>
                 `,
+                didOpen: async () => {
+                    const options = {
+                        filter: true,
+                        maxHeight: 400,
+                        // customFilter: Utils.customFilter,
+                        filterAcceptOnEnter: true
+                    }
+
+                    $('#editArtifact').multipleSelect(options)
+                    $('#editArtifact').change(module.exports.changeArtifact)
+                },
                 focusConfirm: false,
                 showCancelButton: true,
                 preConfirm: async () => {
+                    const artifactName = $('#editArtifact').val();
+                    const artifactLevel = $('#editArtifactLevel').val();
+                    const imprintNumber = $('#editImprint').val();
+                    const eeNumber = $('#editEe').val()
+
                     const editedHero = {
                         attack: parseInt(document.getElementById('editHeroBonusAttack').value),
                         defense: parseInt(document.getElementById('editHeroBonusDefense').value),
@@ -142,6 +217,25 @@ module.exports = {
                         critDamage: parseFloat(document.getElementById('editHeroBonusCritDamage').value),
                         effectiveness: parseFloat(document.getElementById('editHeroBonusEffectiveness').value),
                         effectResistance: parseFloat(document.getElementById('editHeroBonusEffectResistance').value),
+
+                        aeiAttack: 0,
+                        aeiDefense: 0,
+                        aeiHealth: 0,
+                        aeiAttackPercent: 0,
+                        aeiDefensePercent: 0,
+                        aeiHealthPercent: 0,
+                        aeiSpeedPercent: 0,
+                        aeiCritChance: 0,
+                        aeiCritDamage: 0,
+                        aeiEffectiveness: 0,
+                        aeiEffectResistance: 0,
+
+                        artifactName: artifactName,
+                        artifactLevel: artifactLevel,
+                        imprintNumber: imprintNumber,
+                        eeNumber: eeNumber,
+                        ee: ee,
+                        heroInfo: heroInfo
                     }
 
                     resolve(editedHero);
@@ -241,6 +335,13 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
+                            <div class="editGearStatLabel">Reforge</div>
+                            <select id="editGearMaterial" class="editGearStatSelect">
+                                ${getGearMaterialOptionsHtml(item)}
+                            </select>
+                        </div>
+
+                        <div class="editGearFormRow">
                             <div class="editGearStatLabel">Rank</div>
                             <select id="editGearRank" class="editGearStatSelect">
                                 ${getGearRankOptionsHtml(item)}
@@ -305,6 +406,16 @@ module.exports = {
                         </div>
                     </div>
                 `,
+                didOpen: async () => {
+                    const options = {
+                        filter: true,
+                        filterAcceptOnEnter: true,
+                        // customFilter: Utils.customFilter,
+                        maxHeight: 250
+                    }
+
+                    $('#editGearEquipped').multipleSelect(options)
+                },
                 focusConfirm: false,
                 showCancelButton: true,
                 preConfirm: async () => {
@@ -312,6 +423,7 @@ module.exports = {
                         rank: document.getElementById('editGearRank').value,
                         set: document.getElementById('editGearSet').value,
                         gear: document.getElementById('editGearType').value,
+                        material: document.getElementById('editGearMaterial').value,
                         main: {
                             type: document.getElementById('editGearMainStatType').value,
                             value: parseInt(document.getElementById('editGearMainStatValue').value),
@@ -389,8 +501,60 @@ module.exports = {
     }
 }
 
+
+
+function getEeHtml(hero, ee) {
+    const statType = ee ? ee.stat.type : "None";
+    const statValue = ee ? ee.stat.value : 0;
+    const percentValue = Math.round(statValue * 100);
+    const initialValue = hero.eeStat || 0
+    // const labelText = ee ?  + " (" + percentValue + " - " + percentValue * 2 + ")": "None";
+    const labelText = ee ? `${e7StatToDisplayStat[statType]} (${percentValue} - ${percentValue*2})` : "None";
+
+    return `
+        <div class="valuePadding input-holder">
+            <input type="number" class="bonusStatInput" id="editHeroBonusEeStat" value="${initialValue}">
+        </div>
+    `
+        // <div class="smallBlankFormSpace"></div>
+        // <div class="editEeStatLabel">${labelText}</div>
+}
+
+function getImprintHtml(hero, heroInfo) {
+    const imprintType = heroInfo.self_devotion.type;
+    const displayText = e7StatToDisplayStat[imprintType];
+    const imprintValues = heroInfo.self_devotion.grades;
+    const fixedImprintValues = [];
+
+    const isFlat = imprintType == "max_hp" || imprintType == "speed" || imprintType == "att" || imprintType == "def";
+
+    for (var grade of Object.keys(imprintValues)) {
+        if (!isFlat) {
+            fixedImprintValues[grade] = Utils.round10ths(imprintValues[grade] * 100);
+        } else {
+            fixedImprintValues[grade] = imprintValues[grade];
+        }
+    }
+
+    var html = `<select class="editGearStatSelect" id="editImprint"><option value="None">None</option>`;
+
+    for (var grade of Object.keys(fixedImprintValues)) {
+        html += `<option value="${fixedImprintValues[grade]}" ${hero.imprintNumber == fixedImprintValues[grade] ? "selected" : ""}>${fixedImprintValues[grade]}${displayText} - ${grade}</option>`
+        // html += `<option value="${imprintValues[grade]}"}>${grade + " - " + imprintValues[grade]} ${displayText}</option>`
+    }
+
+    html += `</select>
+            `
+            // <div class="smallBlankFormSpace"></div>
+            // <div class="editEeStatLabel">${displayText}</div>
+    return html;
+}
+
+
 function getEquippedHtml(item, heroes) {
     var html = `<option value="None">Nobody</option>`;
+
+    Utils.sortByAttribute(heroes, 'name');
 
     for (var hero of heroes) {
         html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${hero.name}</option>`
@@ -400,14 +564,57 @@ function getEquippedHtml(item, heroes) {
 }
 
 
-function getArtifactHtml() {
+function getArtifactHtml(hero) {
     var html = `<option value="None">None</option>`;
 
     const artifactsJson = HeroData.getAllArtifactData();
     const artifacts = Object.values(artifactsJson);
 
     for (var artifact of artifacts) {
-        html += `<option value="${artifact._id}"}>${artifact.name}</option>`
+        // console.log(hero, artifact.name);
+        html += `<option value="${artifact.name}" ${hero.artifactName == artifact.name ? "selected" : ""}>${artifact.name}</option>`
+
+
+    }
+
+    return html;
+}
+
+
+function getArtifactEnhanceHtml(hero) {
+    var html = `<option value="None">None</option>`;
+
+    const artifactName = hero.artifactName
+    if (artifactName && artifactName != "None") {
+        const artifactLevel = hero.artifactLevel;
+        if (artifactLevel && artifactLevel != "None") {
+            for (var i = 30; i >= 0; i--) {
+                var stats = Artifact.getStats(artifactName, i)
+                html += `<option value="${i}" ${artifactLevel == i ? "selected" : ""}>${i} - (${stats.attack.toFixed(1)} atk, ${stats.health.toFixed(1)} hp)</option>`
+            }
+
+        }
+    }
+
+    return html;
+}
+
+function getEeEnhanceHtml(hero, ee) {
+    var html = `<option value="None">None</option>`;
+    if (!ee) {
+        return html;
+    }
+    const statType = ee.stat.type;
+    const isFlat = statType == "max_hp" || statType == "speed" || statType == "att" || statType == "def";
+
+    const baseValue = isFlat ? ee.stat.value : Math.round(ee.stat.value * 100);
+    const maxValue = baseValue * 2;
+
+
+    const displayText = e7StatToDisplayStat[statType];
+
+    for (var i = baseValue; i <= maxValue; i++) {
+        html += `<option value="${i}" ${hero.eeNumber == i ? "selected" : ""}>${i}${displayText}</option>`
     }
 
     return html;
@@ -476,5 +683,14 @@ function getGearRankOptionsHtml(item) {
 <option value="Rare" ${rank == "Rare" ? "selected" : ""}>Rare</option>
 <option value="Good" ${rank == "Good" ? "selected" : ""}>Good</option>
 <option value="Normal" ${rank == "Normal" ? "selected" : ""}>Normal</option>
+`
+}
+
+function getGearMaterialOptionsHtml(item) {
+    const material = item.material;
+    return  `
+<option value="None">None</option>
+<option value="Hunt" ${material == "Hunt" ? "selected" : ""}>Hunt</option>
+<option value="Conversion" ${material == "Conversion" ? "selected" : ""}>Conversion</option>
 `
 }

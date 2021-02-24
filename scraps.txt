@@ -1,0 +1,83 @@
+CREATE TABLE item_info_1 AS
+SELECT
+    *
+FROM text_en
+INNER JOIN equip_item ON equip_item.name = text_en.id
+
+
+### Importing gear automatically from the game:
+NOT RELEASED YET
+##### First time  setup for the automatic importer on Windows:
+1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). Use default settings
+2. Install [Npcap 1.10](https://nmap.org/npcap/#download). Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe). Use default settings
+3. Restart your computer
+
+##### First time  setup for the automatic importer on Mac:
+1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/)
+3. Restart your computer
+
+##### Using the automatic importer:
+1. Open your emulator
+2. Close Epic 7 if it's open
+3. On the *Importer* tab, click *Start scanning*
+4. Open Epic 7
+5. Load into the lobby and click to open your equipment inventory
+6. On the *Importer* tab, click *Stop scanning*
+7. Wait about 3-5 minutes for the gear to be processed
+8. Once it is done, click Export, and save the *gear.txt* file.
+9. Under the *Importing gear data* section, click on Append/Replace/Merge data, and select your *gear.txt* file.
+10. Now you should see your imported gears under the Gears tab.
+11. Use the Level = 0 filter to find level 0 items (most likely recent event items). Manually edit those items to fix their info.
+
+
+Object.values(a).forEach(x => {
+    delete x._id;
+    delete x.description;
+    delete x.identifier;
+    delete x.limited;
+    delete x.skill;
+})
+
+
+  "ReplaceNameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0105.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0105_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0105_l.jpg"
+    },
+    "name": "ReplaceNameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
+
+
+const ordered = Object.keys(h).sort().reduce(
+  (obj, key) => {
+    obj[key] = h[key];
+    return obj;
+  },
+  {}
+);
+
+
+Object.values(ordered).forEach(x => {
+    delete x.id;
+    delete x.base_id;
+    delete x.specialty_id;
+    delete x.description;
+    delete x.story;
+    delete x.get_line;
+    delete x.stats;
+    delete x.relationships;
+    delete x.specialty;
+    delete x.camping;
+    delete x.zodiac_tree;
+    delete x.buffs;
+    delete x.debuffs;
+    delete x.common;
+    delete x.skills;
+})

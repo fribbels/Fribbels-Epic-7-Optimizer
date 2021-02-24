@@ -267,7 +267,11 @@ input {
 
 #exportOutputText {
   width: 75%;
-  height: 100px;
+  height: 70px;
+}
+#loadFromGameExportOutputText {
+  width: 75%;
+  height: 70px;
 }
 
 #example-table .tabulator-row {
@@ -446,6 +450,13 @@ input {
   margin-bottom: 3px;
 }
 
+.horizontalLineWithMoreSpace {
+  min-height: 0px;
+  border-top: 1px solid #d2d2d2;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .itemDisplayFooterSet {
   margin-top: 3px;
   margin-right: 14px;
@@ -583,16 +594,28 @@ input[type=number]::-webkit-outer-spin-button {
 .editGearFormRow {
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .editGearStatLabel {
   width: 100px;
   text-align: left;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.editEeStatLabel {
+  width: 200px;
+  text-align: left;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .editGearStatSelect {
-  width: 150px;
+  width: 210px;
+  /*border: 1px solid black;*/
+  text-align: left;
   margin-right: 5px;
 }
 
@@ -629,6 +652,9 @@ input[type=number]::-webkit-outer-spin-button {
 .blankFormSpace {
   width: 40px;
 }
+.smallBlankFormSpace {
+  width: 10px;
+}
 
 .input-holder {
   border: 1px solid black;
@@ -658,13 +684,18 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   text-align: left;
   padding-left: 4px !important;
-  width: 70px !important;
+  width: 80px !important;
+}
+.bonusStatSelect {
+  /*2 px extra for border */
+  width: 102px;
+  border: 1px solid black;
 }
 .bonusStatInputPercent {
   height: 100%;
   text-align: left;
   padding-left: 4px !important;
-  width: 55px !important;
+  width: 60px !important;
 }
 
 .gridLeftPanel {
@@ -1130,6 +1161,10 @@ body.dark-theme input {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+}
+.toggleRowSpace {
+  height: 1px;
+  width: 10px;
 }
 .switch {
   margin-right: 10px

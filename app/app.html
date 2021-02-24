@@ -1155,6 +1155,14 @@ window.jQuery = $;
                     </div>
                   </div>
                 </div>
+                <div class="gearTabFilterLongRow">
+                  <div class="gearTabShortButton">
+                    <div class="gearTabButton" id="level0Filter">
+                      <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                      <div class="gearTabButtonLabel shortLabel">0</div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
 
@@ -1366,6 +1374,7 @@ window.jQuery = $;
 
           <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit">
           <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit">
+          <input type="submit" value="Save As Build" class="gearPreviewButton" id="saveAsBuildSubmit">
           <input type="submit" value="Remove Build" class="gearPreviewButton" id="removeBuildSubmit">
 
         </div>
@@ -1411,31 +1420,43 @@ window.jQuery = $;
 
 
     <div id="importer-section" class="tab-panel">
-      <h2>Creating gear data from screenshots</h2>
-      <p>
-      Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)</br>
-      </p>
-      <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
 
-      <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
-
-
-      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit">
-      <span id="fileReadSubmitOutputText">Waiting for folder..</span>
-
-      <br>
-      <br>
-
-      <textarea type="text" id="exportOutputText" value="" readonly></textarea>
-
-      <br>
+      <h2>Loading gear from the game</h2>
 
       <p>
-        Once results are printed, hit 'Export'. This will output a "gear.txt" in the folder where you installed this app.
+        Close Epic 7, then click "Start scanning". Open Epic 7 and wait for the loading screen, load into the lobby, and open your equipment inventory. Then click "Stop scanning".
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput">
-      <text id="screenshotExportOutputText">Waiting for file..</text>
+      <select id="importLimitEnhance" class="gearPreviewButton">
+        <option value=0>All</option>
+        <option value=3>+3 and up</option>
+        <option value=6 selected>+6 and up</option>
+        <option value=9>+9 and up</option>
+        <option value=12>+12 and up</option>
+        <option value=15>+15</option>
+      </select>
+
+      <br>
+      <br>
+
+
+      <input type="submit" class="gearPreviewButton" value="Start scanning" id="loadIngameGearStart">
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Stop scanning" id="loadIngameGearEnd">
+
+      <br>
+      <br>
+
+      <textarea type="text" id="loadFromGameExportOutputText" value="" readonly></textarea>
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveLoadFromGameExportOutput">
+      <text id="loadFromGameExportOutputText"></text>
 
       <br>
       <br>
@@ -1488,6 +1509,35 @@ window.jQuery = $;
       <br>
       <hr>
 
+      <h2>Creating gear data from screenshots</h2>
+      <p>
+      Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)</br>
+      </p>
+      <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
+
+      <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
+
+
+      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit">
+      <span id="fileReadSubmitOutputText">Waiting for folder..</span>
+
+      <br>
+      <br>
+
+      <textarea type="text" id="exportOutputText" value="" readonly></textarea>
+
+      <br>
+
+      <p>
+        Once results are printed, hit 'Export'. This will output a "gear.txt" in the folder where you installed this app.
+      </p>
+
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput">
+      <text id="screenshotExportOutputText"></text>
+
+      <br>
+      <br>      <hr>
+
       <h2>Import gear from Zarroc optimizer</h2>
       <p>
       Select the Zarroc optimizer file here.
@@ -1536,9 +1586,27 @@ window.jQuery = $;
           </div>
         </div>
 
+        <div class="toggleRow">
+          <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit">
+          <div class="toggleRowSpace"></div>
+          <text id="selectDefaultFolderSubmitOutputText">Select default folder</text>
+        </div>
 
-        <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit">
-        <text id="selectDefaultFolderSubmitOutputText">Select default folder</text>
+<!--
+        <div class="toggleRow">
+          <input type="color" class="gearPreviewButton" id="backgroundColorPicker">
+          <div class="toggleRowSpace"></div>
+          <text>Select background color</text>
+        </div>
+
+        <div class="toggleRow">
+          <input type="color" class="gearPreviewButton" id="textColorPicker">
+          <div class="toggleRowSpace"></div>
+          <text>Select text color</text>
+        </div> -->
+
+
+
 
       <br>
       <br>

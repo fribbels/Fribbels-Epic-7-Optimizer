@@ -23,6 +23,23 @@ public class BonusStatsRequest extends Request {
     private float cd;
     private float eff;
     private float res;
+
+    private int aeiAtk;
+    private int aeiDef;
+    private int aeiHp;
+    private float aeiAtkPercent;
+    private float aeiDefPercent;
+    private float aeiHpPercent;
+    private int aeiSpeed;
+    private float aeiCr;
+    private float aeiCd;
+    private float aeiEff;
+    private float aeiRes;
+
+    private String artifactName;
+    private String artifactLevel;
+    private String imprintNumber;
+    private String eeNumber;
     private String heroId;
 }
 

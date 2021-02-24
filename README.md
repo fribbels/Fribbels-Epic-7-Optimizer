@@ -361,12 +361,12 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Alphabetize hero selector on edit gear popup
  - Select all button for sets/accs
  - Select artifact/ee stats
-
-**Working on:**
- - v1.5.0
  - Add reforge type in item edit
  - Persist exclude equipped
  - Create own db
+
+**Working on:**
+ - v1.5.0
 
 **Bugs**
  - Comparison method violates its general contract
@@ -376,6 +376,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Add different level/awakening options
  - Use main stat gear for priority filter
  - Clear out item previews on refresh
+ - Conversion filter
 
  **Low priority:**
  - Dark mode

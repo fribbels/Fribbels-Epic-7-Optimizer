@@ -114,6 +114,16 @@ module.exports = {
         await Api.setItems(data.items);
         await Api.setHeroes(data.heroes);
 
+        const heroData = HeroData.getAllHeroData();
+        const heroNames = Object.keys(heroData);
+
+        // Remove bad overrides
+        for (var hero of data.heroes) {
+            if (!heroNames.includes(hero.name)) {
+                await Api.removeHeroById(hero.id);
+            }
+        }
+
         OptimizerTab.redrawHeroSelector();
         HeroesTab.redraw();
     },

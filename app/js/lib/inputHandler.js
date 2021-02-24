@@ -35,8 +35,8 @@ global.Utils = require('./utils');
 global.DarkMode = require('./darkmode');
 global.GridRenderer = require('./renderer/gridRenderer');
 global.Updater = require('./updater');
-global.Settings = require('./settings');
 global.StatPreview = require('./statPreview');
+global.Artifact = require('./artifact');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -50,6 +50,7 @@ global.ItemsGrid = require('./grids/itemsGrid');
 
 global.Subprocess = require('./subprocess');
 global.Selectors = require('./selectors');
+global.Settings = require('./settings');
 global.ForceFilter = require('./forceFilter');
 global.PriorityFilter = require('./priorityFilter');
 global.ZarrocConverter = require('./zarrocConverter');
@@ -84,10 +85,10 @@ global.HtmlGenerator = require('./htmlGenerator');
 global.fs = require('fs');
 global.Notifier = require('./notifier');
 global.Saves = require('./saves');
+global.Scanner = require('./scanner');
 const Jimp = require('jimp');
 
 document.addEventListener("DOMContentLoaded", async () => {
-    Selectors.initialize();
     console.log("DOMContentLoaded")
 
     Subprocess.initialize();
@@ -95,6 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     HtmlGenerator.initialize();
     // GearCalculator.initialize();
     await HeroData.initialize();
+    Selectors.initialize();
     Ocr.initialize();
     Assets.initialize();
     Saves.initialize();
@@ -109,9 +111,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     OptimizerTab.initialize();
     OptimizerGrid.initialize();
     Tooltip.initialize();
-    Settings.initialize();
 
     Saves.loadAutoSave();
+    Settings.initialize();
 
     Updater.checkForUpdates();
 

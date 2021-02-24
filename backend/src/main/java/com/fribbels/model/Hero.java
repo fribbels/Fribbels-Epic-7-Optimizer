@@ -63,6 +63,23 @@ public class Hero {
     public float bonusEff;
     public float bonusRes;
 
+    public int aeiAtk;
+    public int aeiDef;
+    public int aeiHp;
+    public float aeiAtkPercent;
+    public float aeiDefPercent;
+    public float aeiHpPercent;
+    public int aeiSpeed;
+    public float aeiCr;
+    public float aeiCd;
+    public float aeiEff;
+    public float aeiRes;
+
+    public String artifactName;
+    public String artifactLevel;
+    public String imprintNumber;
+    public String eeNumber;
+
     private int bonusMaxAtkPercent;
     private int bonusMaxDefPercent;
     private int bonusMaxHpPercent;
@@ -107,6 +124,23 @@ public class Hero {
         this.bonusCd = bonusStats.getCd();
         this.bonusEff = bonusStats.getEff();
         this.bonusRes = bonusStats.getRes();
+
+        this.aeiAtk = bonusStats.getAeiAtk();
+        this.aeiDef = bonusStats.getAeiDef();
+        this.aeiHp = bonusStats.getAeiHp();
+        this.aeiAtkPercent = bonusStats.getAeiAtkPercent();
+        this.aeiDefPercent = bonusStats.getAeiDefPercent();
+        this.aeiHpPercent = bonusStats.getAeiHpPercent();
+        this.aeiSpeed = bonusStats.getAeiSpeed();
+        this.aeiCr = bonusStats.getAeiCr();
+        this.aeiCd = bonusStats.getAeiCd();
+        this.aeiEff = bonusStats.getAeiEff();
+        this.aeiRes = bonusStats.getAeiRes();
+
+        this.artifactName = bonusStats.getArtifactName();
+        this.artifactLevel = bonusStats.getArtifactLevel();
+        this.imprintNumber = bonusStats.getImprintNumber();
+        this.eeNumber = bonusStats.getEeNumber();
     }
 
     public Map<Gear, Item> getEquipment() {

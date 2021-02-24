@@ -40,7 +40,23 @@ module.exports = {
             cd: bonusStats.critDamage,
             eff: bonusStats.effectiveness,
             res: bonusStats.effectResistance,
-            scRes: bonusStats.scRes,
+
+            aeiAtk: bonusStats.aeiAttack,
+            aeiDef: bonusStats.aeiDefense,
+            aeiHp: bonusStats.aeiHealth,
+            aeiAtkPercent: bonusStats.aeiAttackPercent,
+            aeiDefPercent: bonusStats.aeiDefensePercent,
+            aeiHpPercent: bonusStats.aeiHealthPercent,
+            aeiSpeed: bonusStats.aeiSpeed,
+            aeiCr: bonusStats.aeiCritChance,
+            aeiCd: bonusStats.aeiCritDamage,
+            aeiEff: bonusStats.aeiEffectiveness,
+            aeiRes: bonusStats.aeiEffectResistance,
+
+            artifactName: bonusStats.artifactName,
+            artifactLevel: bonusStats.artifactLevel,
+            imprintNumber: bonusStats.imprintNumber,
+            eeNumber: bonusStats.eeNumber,
 
             heroId: heroId
         });

@@ -40,6 +40,19 @@ public class ItemDb {
         items = validItems;
     }
 
+    public void replaceItems(final Item newItem) {
+        final List<Item> replacing = items.stream()
+                .filter(item -> !StringUtils.equals(item.getId(), newItem.getId()))
+                .collect(Collectors.toList());
+        replacing.add(newItem);
+
+        replacing.stream()
+                 .filter(this::isValid)
+                 .map(this::calculateWss);
+
+        items = replacing;
+    }
+
     public List<Item> getAllItems() {
         return items;
     }

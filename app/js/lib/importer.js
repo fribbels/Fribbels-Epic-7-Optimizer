@@ -12,6 +12,14 @@ module.exports = {
 
     addEventListener: () => {
 
+        document.getElementById('loadIngameGearStart').addEventListener("click", async () => {
+            Scanner.start();
+        });
+
+        document.getElementById('loadIngameGearEnd').addEventListener("click", async () => {
+            Scanner.end();
+        });
+
         document.getElementById('fileReadSubmit').addEventListener("click", async () => {
             const options = {
                 title: "Open folder",
@@ -87,6 +95,41 @@ module.exports = {
                 }
                 console.log('Exported gear.txt');
                 $('#screenshotExportOutputText').text(`Exported data to ${filename}`)
+            });
+        });
+
+        document.getElementById('saveLoadFromGameExportOutput').addEventListener("click", async () => {
+            const output = document.getElementById('loadFromGameExportOutputText').value;
+
+            if (!output || output.length == 0) {
+                Notifier.error("Nothing to export yet, please follow the steps to import gear");
+                return;
+            }
+
+            if (output.includes('Started scanning') || output.includes('Reading items')) {
+                Notifier.error("Item reading in progress, please wait");
+                return;
+            }
+
+            const options = {
+                title: "Save file",
+                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                buttonLabel : "Save file",
+                filters :[
+                    {name: 'TEXT', extensions: ['txt']},
+                ]
+            }
+            const filename = dialog.showSaveDialogSync(currentWindow, options);
+            if (!filename) return;
+
+            fs.writeFile(Files.path(filename), output, (err) => {
+                if (err) {
+                    console.error(err)
+                    Notifier.error("Unable to write file " + filename + " - " + err);
+                    return;
+                }
+                console.log('Exported gear.txt');
+                $('#loadFromGameExportOutputText').text(`Exported data to ${filename}`)
             });
         });
 

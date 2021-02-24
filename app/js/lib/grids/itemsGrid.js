@@ -182,6 +182,12 @@ module.exports = {
                     filter: 85
                 });
             }
+            if (levelFilter == "0") {
+                levelFilterComponent.setModel({
+                    type: 'equals',
+                    filter: 0
+                });
+            }
         }
 
         const enhanceFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('enhance');

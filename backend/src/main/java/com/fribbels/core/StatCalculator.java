@@ -34,9 +34,9 @@ public class StatCalculator {
         speedSetBonus = 0.25f * base.spd;
         revengeSetBonus = 0.1f * base.spd;
 
-        bonusBaseAtk = base.atk + base.atk * hero.bonusAtkPercent / 100f + hero.bonusAtk;
-        bonusBaseHp = base.hp + base.hp * hero.bonusHpPercent / 100f + hero.bonusHp;
-        bonusBaseDef = base.def + base.def * hero.bonusDefPercent / 100f + hero.bonusDef;
+        bonusBaseAtk = base.atk + base.atk * (hero.bonusAtkPercent + hero.aeiAtkPercent) / 100f + hero.bonusAtk + hero.aeiAtk;
+        bonusBaseHp = base.hp + base.hp * (hero.bonusHpPercent + hero.aeiHpPercent) / 100f + hero.bonusHp + hero.aeiHp;
+        bonusBaseDef = base.def + base.def * (hero.bonusDefPercent + hero.aeiDefPercent) / 100f + hero.bonusDef + hero.aeiDef;
 
         bonusMaxAtk = 1 + base.bonusMaxAtkPercent/100f;
         bonusMaxHp = 1 + base.bonusMaxHpPercent/100f;
@@ -54,11 +54,11 @@ public class StatCalculator {
         final float atk =  ((bonusBaseAtk + accs0[0]+accs1[0]+accs2[0]+accs3[0]+accs4[0]+accs5[0] + (sets[2] > 3 ? atkSetBonus : 0)) * bonusMaxAtk);
         final float hp =   ((bonusBaseHp  + accs0[1]+accs1[1]+accs2[1]+accs3[1]+accs4[1]+accs5[1] + (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0)) * bonusMaxHp);
         final float def =  ((bonusBaseDef + accs0[2]+accs1[2]+accs2[2]+accs3[2]+accs4[2]+accs5[2] + (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) * bonusMaxDef);
-        final float cr =         (base.cr  + accs0[6]+accs1[6]+accs2[6]+accs3[6]+accs4[6]+accs5[6] + (sets[4] > 1 ? sets[4] / 2 * 12 : 0) + hero.bonusCr);
-        final int cd =   (int) (base.cd    + accs0[7]+accs1[7]+accs2[7]+accs3[7]+accs4[7]+accs5[7] + (sets[6] > 3 ? 40 : 0) + hero.bonusCd);
-        final int eff =  (int) (base.eff   + accs0[8]+accs1[8]+accs2[8]+accs3[8]+accs4[8]+accs5[8] + (sets[5] > 1 ? sets[5] / 2 * 20 : 0) + hero.bonusEff);
-        final int res =  (int) (base.res   + accs0[9]+accs1[9]+accs2[9]+accs3[9]+accs4[9]+accs5[9] + (sets[9] > 1 ? sets[9] / 2 * 20 : 0) + hero.bonusRes);
-        final int spd =  (int) (base.spd   + accs0[10]+accs1[10]+accs2[10]+accs3[10]+accs4[10]+accs5[10] + (sets[3] > 3 ? speedSetBonus : 0) + (sets[14] > 3 ? revengeSetBonus : 0) + hero.bonusSpeed);
+        final float cr =         (base.cr  + accs0[6]+accs1[6]+accs2[6]+accs3[6]+accs4[6]+accs5[6] + (sets[4] > 1 ? sets[4] / 2 * 12 : 0) + hero.bonusCr + hero.aeiCr);
+        final int cd =   (int) (base.cd    + accs0[7]+accs1[7]+accs2[7]+accs3[7]+accs4[7]+accs5[7] + (sets[6] > 3 ? 40 : 0) + hero.bonusCd + hero.aeiCd);
+        final int eff =  (int) (base.eff   + accs0[8]+accs1[8]+accs2[8]+accs3[8]+accs4[8]+accs5[8] + (sets[5] > 1 ? sets[5] / 2 * 20 : 0) + hero.bonusEff + hero.aeiEff);
+        final int res =  (int) (base.res   + accs0[9]+accs1[9]+accs2[9]+accs3[9]+accs4[9]+accs5[9] + (sets[9] > 1 ? sets[9] / 2 * 20 : 0) + hero.bonusRes + hero.aeiRes);
+        final int spd =  (int) (base.spd   + accs0[10]+accs1[10]+accs2[10]+accs3[10]+accs4[10]+accs5[10] + (sets[3] > 3 ? speedSetBonus : 0) + (sets[14] > 3 ? revengeSetBonus : 0) + hero.bonusSpeed + hero.aeiSpeed);
 
 //        final int atk = (int) (((base.atk + mapAccumulatorArrsToFloat(0, accs)  + (sets[2] > 1 ? sets[2] / 4 * 0.35f * base.atk : 0) + base.atk * hero.bonusAtkPercent / 100f) + hero.bonusAtk) * (1 + base.bonusMaxAtkPercent/100f));
 //        final int hp = (int) (((base.hp   + mapAccumulatorArrsToFloat(1, accs)  + (sets[0] > 1 ? sets[0] / 2 * 0.15f * base.hp : 0) + base.hp * hero.bonusHpPercent / 100f) + hero.bonusHp) * (1 + base.bonusMaxHpPercent/100f));
@@ -97,7 +97,7 @@ public class StatCalculator {
         final int dmgps = (int) ((float)dmg*spdDiv1000);
         final int mcdmg = (int) ((float)atk * critDamage * rageMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-        final int dmgh = (int) ((dmg * hp)/100000);
+        final int dmgh = (int) ((cd * hp)/1000);
 
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 

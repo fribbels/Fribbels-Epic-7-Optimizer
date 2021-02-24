@@ -9,6 +9,8 @@ const defaultPath = savesFolder;
 const settingsPath = defaultPath + "/settings.ini";
 var pathOverride;
 
+var excludeSelects = [];
+
 module.exports = {
     initialize: () => {
         module.exports.loadSettings();
@@ -16,8 +18,11 @@ module.exports = {
         const settingsIds = [
             'settingUnlockOnUnequip',
             'settingMaxResults',
-            'settingRageSet'
+            'settingRageSet',
         ];
+
+        $('#optionsExcludeGearFrom').change(module.exports.saveSettings)
+
 
         for (var id of settingsIds) {
             document.getElementById(id).addEventListener('change', (event) => {
@@ -53,19 +58,26 @@ module.exports = {
         return Files.path(pathOverride || defaultPath);
     },
 
+    getExcludeSelects: () => {
+        return excludeSelects;
+    },
+
     getDefaultSettings: () => {
         return {
             settingUnlockOnUnequip: true,
             settingRageSet: true,
             settingMaxResults: 5_000_000,
-            defaultPath: defaultPath
+            settingDefaultPath: defaultPath,
+            settingExcludeEquipped: []
         }
     },
 
     loadSettings: async () => {
-        console.log("LOAD SETTINGS");
+        console.log("LOAD SETTINGS", settingsPath);
         const text = await Files.readFile(Files.path(settingsPath));
         const settings = JSON.parse(text);
+        console.log("LOADING SETTINGS", settings);
+
 
         document.getElementById('settingUnlockOnUnequip').checked = settings.settingUnlockOnUnequip;
         document.getElementById('settingRageSet').checked = settings.settingRageSet;
@@ -73,6 +85,14 @@ module.exports = {
 
         if (settings.settingMaxResults) {
             document.getElementById('settingMaxResults').value = settings.settingMaxResults;
+        }
+
+        if (settings.settingExcludeEquipped) {
+            console.log("BEFORE", $('#optionsExcludeGearFrom').multipleSelect('getOptions'))
+            console.log("BEFORE", $('#optionsExcludeGearFrom').multipleSelect('getSelects'))
+            $('#optionsExcludeGearFrom').multipleSelect('setSelects', settings.settingExcludeEquipped)
+            console.log("AFTER", $('#optionsExcludeGearFrom').multipleSelect('getSelects'))
+            excludeSelects = settings.settingExcludeEquipped;
         }
 
         $('#selectDefaultFolderSubmitOutputText').text(settings.settingDefaultPath || defaultPath);
@@ -85,10 +105,13 @@ module.exports = {
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
             settingMaxResults: parseInt(document.getElementById('settingMaxResults').value || 5_000_000),
-            settingDefaultPath: pathOverride ? pathOverride : defaultPath
+            settingDefaultPath: pathOverride ? pathOverride : defaultPath,
+            settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects')
         };
 
-        Files.saveFile(Files.path(settingsPath), JSON.stringify(settings, null, 2))
+        excludeSelects = settings.settingExcludeEquipped;
+
+        Files.saveFile(settingsPath, JSON.stringify(settings, null, 2))
         Api.setSettings(settings);
     },
 }

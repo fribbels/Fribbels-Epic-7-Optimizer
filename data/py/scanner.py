@@ -50,4 +50,5 @@ while loop:
                 try_buffer(ack)
             loop = False
             print("DONE")
+            sys.stdout.flush()
     time.sleep(1)

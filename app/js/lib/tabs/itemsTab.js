@@ -292,6 +292,7 @@ const elementsByFilter = {
         "level88Filter",
         "level85Filter",
         "levelUnder85Filter",
+        "level0Filter",
     ],
     enhanceFilter: [
         "plus15Filter",
@@ -372,6 +373,7 @@ function setupEventListeners() {
     setupFilterListener("level88Filter", "levelFilter", "88")
     setupFilterListener("level85Filter", "levelFilter", "85")
     setupFilterListener("levelUnder85Filter", "levelFilter", "under85")
+    setupFilterListener("level0Filter", "levelFilter", "0")
 
     setupClearListener("clearLevelFilter", "levelFilter")
 
