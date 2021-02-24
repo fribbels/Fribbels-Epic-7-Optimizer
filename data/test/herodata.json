@@ -9103,6 +9103,99 @@
       }
     }
   },
+  "Designer Lilibet": {
+    "manual": true,
+    "_id": "designer-lilibet",
+    "name": "Designer Lilibet",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "warrior",
+    "zodiac": "crab",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11960,
+        "atk": 662,
+        "hp": 4588,
+        "spd": 106,
+        "def": 483,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13640,
+        "atk": 782,
+        "hp": 5616,
+        "spd": 106,
+        "def": 497,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14929,
+        "atk": 825,
+        "hp": 5769,
+        "spd": 106,
+        "def": 599,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17360,
+        "atk": 975,
+        "hp": 7054,
+        "spd": 106,
+        "def": 652,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Destina": {
     "_id": "destina",
     "name": "Destina",
@@ -16085,6 +16178,101 @@
       }
     }
   },
+  "Lucy": {
+    "_id": "lucy",
+    "name": "Lucy",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "manauser",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11710,
+        "atk": 880,
+        "hp": 3045,
+        "spd": 106,
+        "def": 520,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13169,
+        "atk": 1079,
+        "hp": 3385,
+        "spd": 112,
+        "def": 520,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14604,
+        "atk": 1098,
+        "hp": 3828,
+        "spd": 106,
+        "def": 645,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16722,
+        "atk": 558,
+        "hp": 4725,
+        "spd": 100,
+        "def": 624,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Ludwig": {
     "_id": "ludwig",
     "name": "Ludwig",
@@ -19436,7 +19624,7 @@
     "name": "Politis",
     "moonlight": false,
     "rarity": 5,
-    "attribute": "ice",
+    "attribute": "fire",
     "role": "mage",
     "zodiac": "twins",
     "self_devotion": {
