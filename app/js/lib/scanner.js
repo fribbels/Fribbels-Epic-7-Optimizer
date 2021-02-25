@@ -58,6 +58,8 @@ module.exports = {
                 child.kill()
             }
 
+            let bufferArray= []
+
             try {
                 child = childProcess.spawn("python", [Files.path(Files.getDataPath() + '/py/scanner.py')])
             } catch (e) {
@@ -78,13 +80,18 @@ module.exports = {
                 message = message.toString()
                 console.log(message)
 
+                bufferArray.push(message)
+
                 if (message.includes('DONE')) {
+                    console.log(bufferArray.join('').split('&').filter(x => !x.includes('DONE')))
+                    data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replace(/\s/g,''))
+                    // data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replaceAll('↵', '')).map(x => x.replaceAll('\n', '')).map(x => x.replaceAll('\r', ''))
                     finishedReading(data);
                 } else {
                     data.push(message);
                 }
             });
-            console.log("Started scanning")
+            console.log("Started scanning3")
             document.getElementById('loadFromGameExportOutputText').value = "Started scanning...";
         } catch (e) {
             console.error(e);

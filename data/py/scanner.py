@@ -1,5 +1,5 @@
 from scapy.all import *
-import sys,json
+import io,sys,json
 import threading
 import time
 
@@ -13,8 +13,14 @@ def try_buffer(currAck):
     for i in buffers:
         finalBuffer += i['data']
 
-    hexStr = finalBuffer.hex();
+    hexStr = ''
+    try:
+        hexStr = finalBuffer.hex();
+    except:
+        hexStr = ''.join(x.encode('hex') for x in finalBuffer);
+
     print(hexStr);
+    print('&');
 
 def check_packet(packet, index):
     if IP in packet:
@@ -22,6 +28,8 @@ def check_packet(packet, index):
             currAck = packet.ack
             currSeq = packet[TCP].seq
             packet_bytes = bytes(packet[Raw].load)
+
+            # packet.show()
 
             if currAck in acks:
                 acks[currAck].append({'data': packet_bytes, 'seq': currSeq})
@@ -32,20 +40,26 @@ def check_packet(packet, index):
             #     try_buffer(currAck)
 
 def thread_sniff(i, index):
-    sniff(iface=i, prn=lambda x: check_packet(x, index), filter="tcp and ( port 3333 )")
+    try:
+        sniff(iface=i, prn=lambda x: check_packet(x, index), filter="tcp and ( port 3333 )")
+    except:
+        pass
 
 index = 0
 for i in list(conf.ifaces.data.values()):
-    x = threading.Thread(target=thread_sniff, args=(i, index,))
-    x.daemon = True;
-    x.start()
+    try:
+        x = threading.Thread(target=thread_sniff, args=(i, index,))
+        x.daemon = True;
+        x.start()
 
-    index = index + 1
+        index = index + 1
+    except:
+        pass
 
 loop = True
 while loop:
     line = sys.stdin.readline()
-    if "END" in line:
+    if "E" in line:
         for ack in acks:
             try_buffer(ack)
         loop = False

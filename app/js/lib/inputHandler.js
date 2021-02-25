@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         HeroesTab.initialize();
         HeroesGrid.initialize();
 
+        Settings.initialize();
         Saves.loadAutoSave();
     });
     Updater.checkForUpdates();
@@ -112,8 +113,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     Importer.addEventListener();
 
     Tooltip.initialize();
-
-    Settings.initialize();
 
 
     console.log("Document initialized")
