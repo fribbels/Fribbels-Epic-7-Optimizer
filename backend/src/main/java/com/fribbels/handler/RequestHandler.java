@@ -3,6 +3,7 @@ package com.fribbels.handler;
 import com.fribbels.model.Request;
 import com.fribbels.response.Response;
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableList;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
@@ -53,7 +54,8 @@ public class RequestHandler {
 
     protected void sendResponse(final HttpExchange exchange, final String response) throws IOException {
         final OutputStream outputStream = exchange.getResponseBody();
-        exchange.sendResponseHeaders(200, response.length());
+        exchange.sendResponseHeaders(200, response.getBytes().length);
+        exchange.getResponseHeaders().put("Content-Type", ImmutableList.of("application/json"));
         outputStream.write(response.getBytes());
         outputStream.flush();
         outputStream.close();
