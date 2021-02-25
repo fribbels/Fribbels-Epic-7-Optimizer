@@ -63,9 +63,9 @@ public class Hero {
     public float bonusEff;
     public float bonusRes;
 
-    public int aeiAtk;
-    public int aeiDef;
-    public int aeiHp;
+    public float aeiAtk;
+    public float aeiDef;
+    public float aeiHp;
     public float aeiAtkPercent;
     public float aeiDefPercent;
     public float aeiHpPercent;

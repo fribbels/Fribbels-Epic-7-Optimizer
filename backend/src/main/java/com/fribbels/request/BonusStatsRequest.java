@@ -24,9 +24,9 @@ public class BonusStatsRequest extends Request {
     private float eff;
     private float res;
 
-    private int aeiAtk;
-    private int aeiDef;
-    private int aeiHp;
+    private float aeiAtk;
+    private float aeiDef;
+    private float aeiHp;
     private float aeiAtkPercent;
     private float aeiDefPercent;
     private float aeiHpPercent;

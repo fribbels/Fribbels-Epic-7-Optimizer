@@ -44,11 +44,10 @@ for i in list(conf.ifaces.data.values()):
 
 loop = True
 while loop:
-    for line in sys.stdin:
-        if "END" in line:
-            for ack in acks:
-                try_buffer(ack)
-            loop = False
-            print("DONE")
-            sys.stdout.flush()
-    time.sleep(1)
+    line = sys.stdin.readline()
+    if "END" in line:
+        for ack in acks:
+            try_buffer(ack)
+        loop = False
+        print("DONE\n")
+        sys.stdout.flush()

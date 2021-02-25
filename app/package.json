@@ -31,7 +31,6 @@
     "tree-kill": "latest",
     "uuid": "latest",
     "tippy.js": "^6.2.7",
-    "awesome-notifications": "^3.1.1",
-    "python-shell": "2.0.3"
+    "awesome-notifications": "^3.1.1"
   }
 }

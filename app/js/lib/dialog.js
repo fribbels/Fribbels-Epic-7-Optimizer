@@ -44,6 +44,13 @@ module.exports = {
         })
     },
 
+    success: (text) => {
+        Swal.fire({
+          icon: 'success',
+          text: text,
+        })
+    },
+
     htmlSuccess: (html) => {
         Swal.fire({
           icon: 'success',
@@ -114,7 +121,7 @@ module.exports = {
 
                         <div class="horizontalLineWithMoreSpace"></div>
 
-                        <p>Add stats from Artifact, EE, and Imprint</p>
+                        <p>Add any other stats not included above</p>
                         <br>
 
                         <div class="editGearFormRow">

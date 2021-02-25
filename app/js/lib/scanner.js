@@ -1,5 +1,6 @@
-var {PythonShell} = require('python-shell');
+var childProcess = require('child_process')
 
+global.child = null;
 var pyshell;
 var data = [];
 var intervals = [];
@@ -22,17 +23,29 @@ async function finishedReading(data) {
             const equips = response.data;
             var rawItems = equips.filter(x => !!x.f)
 
+            if (rawItems.length == 0) {
+                document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
+                Notifier.error("Failed reading items");
+                return
+            }
+
             var convertedItems = convertItems(rawItems);
+            var lv0items = convertedItems.filter(x => x.level == 0);
             console.log(convertedItems);
+
+            const failedItemsText = lv0items.length > 0 ? `<br><br>There were <b>${lv0items.length}</b> items with issues.<br>Use the Level=0 filter to fix them on the Heroes Tab.` : ""
+            Dialog.htmlSuccess(`Finished scanning <b>${convertedItems.length}</b> items. ${failedItemsText}`)
 
             var serializedStr = "{\"items\":" + ItemSerializer.serialize(convertedItems) + "}";
             document.getElementById('loadFromGameExportOutputText').value = serializedStr;
         } else {
             document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
+            Notifier.error("Failed reading items");
         }
     } catch (e) {
         console.error(e);
         document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
+        Notifier.error(e);
     }
 }
 
@@ -41,33 +54,56 @@ module.exports = {
         try {
             data = [];
 
-            if (pyshell) {
-                pyshell.kill()
+            if (child) {
+                child.kill()
             }
 
-            pyshell = new PythonShell(Files.path(Files.getDataPath() + '/py/scanner.py'));
-            pyshell.on('message', async function(message) {
-                if (message == 'DONE') {
+            try {
+                child = childProcess.spawn("python", [Files.path(Files.getDataPath() + '/py/scanner.py')])
+            } catch (e) {
+                console.error(e)
+                Notifier.error("Unable to start python script " + e)
+            }
+
+            child.on('close', (code) => {
+                console.log(`Python child process exited with code ${code}`);
+            });
+
+            child.stderr.on('data', (data) => {
+                const str = data.toString()
+                console.error(str);
+            })
+
+            child.stdout.on('data', (message) => {
+                message = message.toString()
+                console.log(message)
+
+                if (message.includes('DONE')) {
                     finishedReading(data);
                 } else {
                     data.push(message);
                 }
-            })
-
+            });
             console.log("Started scanning")
             document.getElementById('loadFromGameExportOutputText').value = "Started scanning...";
         } catch (e) {
             console.error(e);
             document.getElementById('loadFromGameExportOutputText').value = "Failed to start scanning, make sure you have Python and pcap installed.";
+            Notifier.error(e);
         }
     },
 
     end: async () => {
-        document.getElementById('loadFromGameExportOutputText').value = "Reading items, this may take up to 30 seconds...";
-        if (!pyshell) return
+        if (!child) {
+            console.error("No scan was started");
+            Notifier.error("No scan was started");
+            return
+        }
+        document.getElementById('loadFromGameExportOutputText').value = "Reading items, this may take up to 30 seconds...\nData will appear here after it is done.";
 
         console.log("Stop scanning")
-        pyshell.send('END');
+        child.stdin.write('END\n');
+        // pyshell.send('END');
     }
 }
 

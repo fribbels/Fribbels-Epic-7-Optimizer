@@ -100,6 +100,15 @@ module.exports = {
                 return;
             }
 
+            row.items = [
+                row.equipment.Weapon.id,
+                row.equipment.Helmet.id,
+                row.equipment.Armor.id,
+                row.equipment.Necklace.id,
+                row.equipment.Ring.id,
+                row.equipment.Boots.id,
+            ]
+
             Api.addBuild(row.id, row).then(x => {
                 HeroesGrid.refreshBuilds();
                 Saves.autoSave();
@@ -160,7 +169,7 @@ module.exports = {
             if (imprintNumberText != "None") {
                 const imprintNumber = parseFloat(imprintNumberText)
 
-                console.error("ADDING AEI IMPRINT", imprintNumber, imprintBonusType)
+                console.log("ADDING AEI IMPRINT", imprintNumber, imprintBonusType)
 
                 bonusStats[imprintBonusType] += imprintNumber;
             }
@@ -173,9 +182,9 @@ module.exports = {
                     const artifactLevel = parseInt(artifactLevelText);
                     const artifactStats = Artifact.getStats(artifactName, artifactLevel);
 
-                    console.error("ADDING AEI ARTIFACT", artifactLevel)
-                    console.error("ADDING AEI ARTIFACT", artifactLevelText)
-                    console.error("ADDING AEI ARTIFACT", artifactName)
+                    console.log("ADDING AEI ARTIFACT", artifactLevel)
+                    console.log("ADDING AEI ARTIFACT", artifactLevelText)
+                    console.log("ADDING AEI ARTIFACT", artifactName)
 
                     bonusStats.aeiHealth += artifactStats.health;
                     bonusStats.aeiAttack += artifactStats.attack;
@@ -189,7 +198,7 @@ module.exports = {
                 const eeIngameType = bonusStats.ee.stat.type;
                 const eeBonusType = e7StatToBonusStat[eeIngameType];
 
-                console.error("ADDING AEI EE", eeBonusType, eeNumber)
+                console.log("ADDING AEI EE", eeBonusType, eeNumber)
 
                 bonusStats[eeBonusType] += eeNumber;
             }
