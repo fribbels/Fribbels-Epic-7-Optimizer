@@ -74,10 +74,6 @@ const assetsByStat = {
 
 module.exports = {
 
-    initialize: () => {
-
-    },
-
     getAssetsBySet: () => {
         return assetsBySet;
     },

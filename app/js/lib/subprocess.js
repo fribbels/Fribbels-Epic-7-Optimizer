@@ -11,10 +11,11 @@ const ipc = electron.ipcRenderer;
 
 var errors = "";
 var killed = false;
+var initialized = false;
 
 module.exports = {
 
-    initialize: () => {
+    initialize: (callback) => {
         javaversion(function(err, notRecognized, notCorrectVersion, not64Bit){
             if (err) {
                 Notifier.warn("Unable to detect java version");
@@ -53,9 +54,13 @@ module.exports = {
         })
 
         child.stdout.on('data', (data) => {
+            if (!initialized) {
+                callback()
+                initialized = true;
+                // var str = data.toString();
+                // console.log(str);
+            }
             // try {
-            // var str = data.toString();
-            // console.log(str);
 
             // if (str.includes("PROGRESS:")) {
             //     var progressStr = Number(str.split('[').pop().split(']')[0]).toLocaleString();

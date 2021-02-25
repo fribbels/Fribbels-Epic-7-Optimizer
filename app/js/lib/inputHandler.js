@@ -91,31 +91,30 @@ const Jimp = require('jimp');
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOMContentLoaded")
 
-    Subprocess.initialize();
+    Subprocess.initialize(async () => {
+        await HeroData.initialize();
+        ZarrocConverter.initialize();
+        OptimizerTab.initialize();
+        OptimizerGrid.initialize();
+        ItemsTab.initialize();
+        ItemsGrid.initialize();
+        HeroesTab.initialize();
+        HeroesGrid.initialize();
+
+        Saves.loadAutoSave();
+    });
+    Updater.checkForUpdates();
     DarkMode.initialize();
-    HtmlGenerator.initialize();
     // GearCalculator.initialize();
-    await HeroData.initialize();
     Selectors.initialize();
-    Ocr.initialize();
-    Assets.initialize();
     Saves.initialize();
-    ItemsTab.initialize();
-    ItemsGrid.initialize();
 
     Importer.addEventListener();
-    ZarrocConverter.initialize();
 
-    HeroesTab.initialize();
-    HeroesGrid.initialize();
-    OptimizerTab.initialize();
-    OptimizerGrid.initialize();
     Tooltip.initialize();
 
-    Saves.loadAutoSave();
     Settings.initialize();
 
-    Updater.checkForUpdates();
 
     console.log("Document initialized")
 });

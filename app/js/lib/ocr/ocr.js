@@ -125,9 +125,6 @@ function splitByFirstNumber(str) {
 }
 
 module.exports = {
-    initialize: async () => {
-        // setupWorkers();
-    },
     workerDebug: async (filename) => {
         return await numberWorker.recognize(filename);
     },

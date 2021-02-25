@@ -106,13 +106,6 @@ function getHeroImage(item) {
 }
 
 module.exports = {
-    initialize: () => {
-        // module.exports.buildFilterSetsBar();
-        // module.exports.buildFilterStatBar();
-        // module.exports.buildFilterGearBar();
-        // module.exports.buildFilterEnhanceBar();
-        // module.exports.buildFilterLevelBar();
-    },
 
     buildFilterSetsBar: () => {
         const clearUrl = Assets.getX(); // black x
