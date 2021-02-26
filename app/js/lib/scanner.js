@@ -1,12 +1,33 @@
 var childProcess = require('child_process')
 
 global.child = null;
-var pyshell;
 global.data = [];
-var intervals = [];
 
 // global.api = "http://127.0.0.1:5000";
 global.api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
+
+global.command = 'python'
+var findCommandSpawn = null;
+function findcommand() {
+    if (Files.isMac()) {
+        console.log("Detecting python on mac, using python");
+        return;
+    } else {
+        command = 'py'
+    }
+
+    console.log("Detecting python, using py for now");
+    try {
+        findCommandSpawn = childProcess.spawn('py');
+        findCommandSpawn.on('error', function(err){
+            console.warn("Error spawning python detector, using python instead", err)
+            command = 'python'
+        })
+    } catch (e) {
+        console.warn("Error trying to detect py, using python instead", e)
+        command = 'python';
+    }
+}
 
 async function finishedReading(data) {
     try {
@@ -51,55 +72,68 @@ async function finishedReading(data) {
 
 global.finishedReading = finishedReading;
 
-module.exports = {
-    start: () => {
-        try {
-            data = [];
+function launchScanner(command) {
+    try {
+        data = [];
 
-            if (child) {
-                child.kill()
-            }
-
-            let bufferArray= []
-
-            try {
-                child = childProcess.spawn("python", [Files.path(Files.getDataPath() + '/py/scanner.py')])
-            } catch (e) {
-                console.error(e)
-                Notifier.error("Unable to start python script " + e)
-            }
-
-            child.on('close', (code) => {
-                console.log(`Python child process exited with code ${code}`);
-            });
-
-            child.stderr.on('data', (data) => {
-                const str = data.toString()
-                console.error(str);
-            })
-
-            child.stdout.on('data', (message) => {
-                message = message.toString()
-                console.log(message)
-
-                bufferArray.push(message)
-
-                if (message.includes('DONE')) {
-                    console.log(bufferArray.join('').split('&').filter(x => !x.includes('DONE')))
-                    data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replace(/\s/g,''))
-                    // data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replaceAll('↵', '')).map(x => x.replaceAll('\n', '')).map(x => x.replaceAll('\r', ''))
-                    finishedReading(data);
-                } else {
-                    data.push(message);
-                }
-            });
-            console.log("Started scanning")
-            document.getElementById('loadFromGameExportOutputText').value = "Started scanning...";
-        } catch (e) {
-            console.error(e);
-            document.getElementById('loadFromGameExportOutputText').value = "Failed to start scanning, make sure you have Python and pcap installed.";
-            Notifier.error(e);
+        if (child) {
+            child.kill()
         }
+
+        if (findCommandSpawn) {
+            findCommandSpawn.kill()
+            findCommandSpawn = null;
+        }
+
+        let bufferArray = []
+
+        try {
+            child = childProcess.spawn(command, [Files.path(Files.getDataPath() + '/py/scanner.py')])
+        } catch (e) {
+            console.error(e)
+            Notifier.error("Unable to start python script " + e)
+        }
+
+        child.on('close', (code) => {
+            console.log(`Python child process exited with code ${code}`);
+        });
+
+        child.stderr.on('data', (data) => {
+            const str = data.toString()
+            console.error(str);
+        })
+
+        child.stdout.on('data', (message) => {
+            message = message.toString()
+            console.log(message)
+
+            bufferArray.push(message)
+
+            if (message.includes('DONE')) {
+                console.log(bufferArray.join('').split('&').filter(x => !x.includes('DONE')))
+                data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replace(/\s/g,''))
+                // data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replaceAll('↵', '')).map(x => x.replaceAll('\n', '')).map(x => x.replaceAll('\r', ''))
+                finishedReading(data);
+            } else {
+                data.push(message);
+            }
+        });
+        console.log("Started scanning")
+        document.getElementById('loadFromGameExportOutputText').value = "Started scanning...";
+    } catch (e) {
+        console.error(e);
+        document.getElementById('loadFromGameExportOutputText').value = "Failed to start scanning, make sure you have Python and pcap installed.";
+        Notifier.error(e);
+    }
+}
+
+module.exports = {
+    initialize: () => {
+        findcommand();
+    },
+
+    start: () => {
+        launchScanner(command)
     },
 
     end: async () => {
@@ -113,16 +147,6 @@ module.exports = {
         console.log("Stop scanning")
         child.stdin.write('END\n');
     }
-}
-
-function clearAllIntervals() {
-    for (var interval of intervals) {
-        if (interval) {
-            clearInterval(inverval);
-        }
-    }
-
-    intervals = [];
 }
 
 function convertItems(rawItems) {

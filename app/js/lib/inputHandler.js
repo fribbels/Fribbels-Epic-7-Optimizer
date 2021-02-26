@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         Settings.initialize();
         Saves.loadAutoSave();
     });
+    Scanner.initialize();
     Updater.checkForUpdates();
     DarkMode.initialize();
     // GearCalculator.initialize();
