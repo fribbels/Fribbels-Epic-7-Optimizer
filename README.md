@@ -296,7 +296,7 @@ There are two import options, one fully automatic gear importer and one using sc
 
 ##### First time  setup for the automatic importer on Windows:
 1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). **IMPORTANT: Enable the option to add Python to PATH**
-2. Install [Npcap 1.10](https://nmap.org/npcap/#download). Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe). Use default settings
+2. Install [Npcap 1.10](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe). Use default settings
 3. Restart your computer
 
 ##### First time  setup for the automatic importer on Mac:
