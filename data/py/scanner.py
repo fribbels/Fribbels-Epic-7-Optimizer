@@ -1,5 +1,5 @@
 from scapy.all import *
-import io,sys,json
+import io,sys,json,os
 import threading
 import time
 
@@ -55,6 +55,12 @@ for i in list(conf.ifaces.data.values()):
         index = index + 1
     except:
         pass
+
+def terminate():
+    os._exit(0)
+
+t = threading.Timer(600.0, terminate)
+t.start()
 
 loop = True
 while loop:
