@@ -1,6 +1,3 @@
-
-
-
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -8,9 +5,9 @@ This is a tool for organizing gear and optimizing gear and unit builds for Epic 
 Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#getting-started) section for instructions on how to use it.
 
 Features include:
- - Built in image recognition to import gear from screenshots
+ - Automatically import gear from the game
  - Filter gear optimizer with main stats/sub stats/sets/etc
- - Automatic data updates from EpicSevenDB for new heroes
+ - Automatic data updates for new heroes
  - Hero bonus stats for imprints/artifacts/EEs
  - Gear substat efficiency scoring
  - Reforged stat prediction & editing
@@ -26,6 +23,8 @@ Here's what it looks like currently:
 _________________
 
 **Table of Contents**:
+
+- [Fribbels Epic 7 Gear Optimizer](#fribbels-epic-7-gear-optimizer)
   * [Requirements](#requirements)
   * [Optimizer Tab](#optimizer-tab)
     + [Settings panel](#settings-panel)
@@ -33,19 +32,32 @@ _________________
     + [Rating filters](#rating-filters)
     + [Substat priority filter](#substat-priority-filter)
     + [Main stat and set filters](#main-stat-and-set-filters)
-    + [Substat force filter](#substat-force-filter)
     + [Optimization Results](#optimization-results)
   * [Gear Tab](#gear-tab)
   * [Heroes Tab](#heroes-tab)
   * [Importer tab](#importer-tab)
-    + [Creating a new gear set from screenshots](#creating-a-new-gear-set-from-screenshots)
-    + [Importing a gear set from a file](#importing-a-gear-set-from-a-file)
-    + [Save/Load gear and heroes](#save-load-gear-and-heroes)
+    + [Creating gear data from screenshots](#creating-gear-data-from-screenshots)
+    + [Importing gear data](#importing-gear-data)
+    + [Save/Load all optimizer data](#save-load-all-optimizer-data)
     + [Import gear from Zarroc optimizer](#import-gear-from-zarroc-optimizer)
   * [Getting Started](#getting-started)
-  * [Closing thoughts](#closing-thoughts)
+    + [Installing the app](#installing-the-app)
+      - [Windows](#windows)
+      - [Mac OS/Bluestacks](#mac-os-bluestacks)
+    + [Installing the automatic gear importer](#installing-the-automatic-gear-importer)
+        * [First time  setup for the automatic importer on Windows:](#first-time--setup-for-the-automatic-importer-on-windows-)
+        * [First time  setup for the automatic importer on Mac:](#first-time--setup-for-the-automatic-importer-on-mac-)
+        * [Using the automatic importer:](#using-the-automatic-importer-)
+    + [Importing gear from screenshots:](#importing-gear-from-screenshots-)
+    + [Optimizing a unit:](#optimizing-a-unit-)
+    + [Updating the optimizer with new gear:](#updating-the-optimizer-with-new-gear-)
+    + [Tips to get good optimization results:](#tips-to-get-good-optimization-results-)
+  * [TODO List](#todo-list)
   * [Troubleshooting](#troubleshooting)
+    + [Automatic importer](#automatic-importer)
+    + [Optimizer](#optimizer)
   * [Contact me](#contact-me)
+
 
 ## Optimizer Tab
 
@@ -78,7 +90,7 @@ _________________
 
 ![](https://i.imgur.com/tVgubaV.png)
 
-This panel defines the stats to filter your optimization results by. The left boxes represent the minimum (inclusive) and the right boxes represent the maximum (inclusive). In this example, we're looking for a Ruele build with:
+This panel defines the stats to filter your optimization results by. The left boxes are the minimum (inclusive) and the right boxes are the maximum (inclusive). In this example, we're looking for a Ruele build with:
 - At least 20,000 HP
 - At least 2,400 def
 - Between 180 and 200 speed
@@ -100,9 +112,8 @@ This panel is similar to the primary stats panel, but applies for calculated sta
 - **DmgS** -- DPS rating, calculated by: `Attack * Crit Chance * Crit Damage * Speed`. This measures how fast your unit can dish out damage.
 - **Mcd** -- Max Crit Damage, calculated by: `Attack * Crit Damage`. This does not take into account Crit Chance, as opposed to Dmg, and assumes your unit is at 100% Crit Chance. Useful for measuring damage of units like CDom that only need 50% Crit Chance, or PVE units that only need 85% with elemental advantage.
 - **McdS** -- Max DPS rating, calculated by `Attack * Crit Damage * Speed`. Similar to DmgS, just without Crit Chance.
+ - **DmgH** -- Bruiser rating, calculated by `Health * Crit Damage`. Useful for health scaling bruisers.
 - **CP** -- This is the CP you would see on the unit's stat page ingame, but doesn't take skill enhances into account. Useful for optimizing unused characters with leftover gear for world boss.
-
-In this example we're looking for Ruele builds with at least 200,000 Effective HP.
 _________________
 
 ### Substat priority filter
@@ -152,23 +163,6 @@ If we don't care about sets as much for a tanky/damage ML Ken or something, this
 
 _________________
 
-### Substat force filter
-
-![](https://i.imgur.com/R8XjYhk.png)
-
-Note that in the settings panel previously we set Force mode to "At least 2 stats". Here we have 3 substats we want to force, and with the force mode, we're only optimizing with gear that match at least 2 of these substats:
-- At least 3 Speed
-- At least 1 Hp %
-- At least 1 Def %
-
-For example:
-- A gear with substats: 4 Speed / 8% Atk / 16% Hp / 8% Res would pass this filter because it matches at least 2 stats: Hp% and Speed.
-- A gear with substats: 2 Speed / 8% Atk / 16% HP / 8% Res would fail this filter, because only 1 substat matches the filter: Hp% . This gear will not be used in the optimizations.
-
-Setting the substat force filter is useful for narrowing down the search space for the optimizer, and reducing the number of permutations it needs to go calculate will make it go faster. Do be careful about filters you set, because an overly aggressive filter could exclude good gears that are useable for this unit. You could have a gear with 2 Speed/ 40% Hp / 100 flat Def / 200 flat HP, and it would fail this filter because only Hp% matches, even though the gear would still be useful.
-
-_________________
-
 ### Optimization Results
 
 ![](https://i.imgur.com/zF1xKlE.png)
@@ -203,7 +197,7 @@ The **Score** column is a stat I made up which is similar to WSS, with the diffe
 
 Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and compared it to the average stats of a 5* unit, and used that as a measure of how well the flat stats rolled.
 
-![](https://i.imgur.com/fwqjtkF.png)
+![](https://i.imgur.com/ms6HybN.png)
 
 You can edit existing gears or add new gears with this page, and filling in the relevant fields.
 
@@ -213,7 +207,7 @@ You can edit existing gears or add new gears with this page, and filling in the 
 
 Here you can add new heroes and manage existing ones. I think most of the buttons are fairly self explanatory, the one thing worth noting is the **Add Bonus Stats** page, which lets you add artifact/imprint stats to the hero for optimization.
 
-![](https://i.imgur.com/tAytvsb.png)
+![](https://i.imgur.com/x40j3um.png)
 
 SSS Krau with +30 Aurius will have 91 Atk / 819 Hp / and 18% imprint Hp.
 
@@ -259,7 +253,7 @@ If were a user of Zarroc's gear optimizer, this lets you import your data direct
 
 Please read these instructions carefully!
 
-**Installation:**
+### Installing the app
 
 #### Windows
 
@@ -297,20 +291,43 @@ Please read these instructions carefully!
    * Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
 6. Make sure to enter Full Screen Mode (Cmd+Shift+F) before starting your gear capture
 
+### Installing the automatic gear importer
+There are two import options, one fully automatic gear importer and one using screenshots. The fully automatic one requires these additional steps:
+
+##### First time  setup for the automatic importer on Windows:
+1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). **IMPORTANT: Enable the option to add Python to PATH**
+2. Install [Npcap 1.10](https://nmap.org/npcap/#download). Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe). Use default settings
+3. Restart your computer
+
+##### First time  setup for the automatic importer on Mac:
+1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/)
+2. Install [Wireshark](https://www.wireshark.org/download.html)
+3. During the Wireshark installation, also install ChmodBPF.pkg: [See image](https://i.imgur.com/FqV0BA5.png)
+
+##### Using the automatic importer:
+1. Install requirements from the instructions above
+2. Leave your emulator open, and close Epic 7
+3. Click Start scanning
+4. Open Epic 7, and load into the lobby
+5. Click Stop scanning
+6. Wait up to 30 secs, then once the data appears, click Export to save it to a "gear.txt"
+7. Import the "gear.txt" with the Replace/Add/Merge options below
+8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items
 
 ### Importing gear from screenshots:
+If you cannot use the automatic importer, or would prefer to use screenshots, follow the following steps.
 
-1. Open the Gear Management screen in Epic 7 and sort by Max Enhance<br><br>
+1. Open the Gear Management screen in Epic 7 and sort by Max Enhance<br>
 5. Click each of the gears that you want to import, and screenshot it with your emulator's hotkey. Every screenshot should be **1600x900** and look **EXACTLY** like this: https://i.imgur.com/68A8Uf0.jpg
 
 ![https://i.imgur.com/ny7uaa8.jpg](https://i.imgur.com/ny7uaa8.jpg)
 
 * Most emulators have a screenshot hotkey to make this easier: Ctrl + 0 for LDPlayer
 * I would recommend screenshotting 10-20 gears to start with, then testing the rest of the steps to make sure the screenshots work before doing them all. I usually only screenshot the +9 to +15 gears for the optimizer.
-3. Create an empty folder and collect all your screenshots into that folder.<br><br>
-4. Go to the Importer tab, click on "Choose folder" under *Creating gear data from screenshots*, find your screenshots folder, and click Open Folder.<br><br>
-5. The app will start reading the screenshots and your progress will be displayed. Once it is done, click Export, and save the *gear.txt* file.<br><br>
-6. Under the *Importing gear data* section, click on Append data, and select your *gear.txt* file.<br><br>
+3. Create an empty folder and collect all your screenshots into that folder.<br>
+4. Go to the Importer tab, click on "Choose folder" under *Creating gear data from screenshots*, find your screenshots folder, and click Open Folder.<br>
+5. The app will start reading the screenshots and your progress will be displayed. Once it is done, click Export, and save the *gear.txt* file.<br>
+6. Under the *Importing gear data* section, click on Append data, and select your *gear.txt* file.<br>
 7. Now you should see your imported gears under the Gears tab.
 
 ### Optimizing a unit:
@@ -330,8 +347,8 @@ Here's a video that covers most of the importing process: https://www.youtube.co
 ### Updating the optimizer with new gear:
 
 * It helps to update the optimizer as you enhance/reforge gear. Add new pieces manually on the Gear screen or click the reforge icon to update 85 -> 90 gear.
-* To import a bunch of new gear at once, screenshot only the new gear, then use the screenshot tool to generate another gear.txt file. Then use the *Append* option to add the gear.txt to your existing save file.
-* If you want to re-screenshot all your gear, you can use the screenshot tool to generate the gear.txt again, and then either *Overwrite* your data to erase previous gear + heroes, or *Merge* the new gear.txt to replace old items and keep heroes/builds.
+* To import a bunch of new gear at once, screenshot only the new gear, then use the screenshot tool to generate another gear.txt file.  Then use the *Append* option to add the new gear.txt to your existing save file.
+* If you want to reimport all your gear, you can either run the automatic importer again, or use the screenshot tool to generate the gear.txt again, and then either *Overwrite* your data to erase previous gear + heroes, or *Merge* the new gear.txt to replace old items and keep heroes/builds.
 
 ### Tips to get good optimization results:
 
@@ -402,6 +419,19 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Option to equip gear from heroes page
 
 ## Troubleshooting
+
+
+### Automatic importer
+* If it takes longer than 30 seconds and no error shows up.
+  * Make sure the requirements are installed (Python and Npcap for Windows, Python and Wireshark for Mac), or try reinstalling them.
+  * Restart your computer
+  * Open the dev tools to check the errors
+  * I'm not sure of all the error cases yet, contact me so I can help and add the solution here
+
+* Shows an error
+  * Try it again a couple times, it does fail occasionally
+
+### Optimizer
 
 - If the optimizer doesn't work or doesn't load correctly:
   - Try restarting your computer, and reopen the app (there might be a child process still kicking around)

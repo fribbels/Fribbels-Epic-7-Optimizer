@@ -46,7 +46,7 @@ async function finishedReading(data) {
 
             if (rawItems.length == 0) {
                 document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
-                Notifier.error("Failed reading items, please try again");
+                Notifier.error("Failed reading items, please try again. No items were found.");
                 return
             }
 
@@ -61,12 +61,12 @@ async function finishedReading(data) {
             document.getElementById('loadFromGameExportOutputText').value = serializedStr;
         } else {
             document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
-            Notifier.error("Failed reading items, please try again");
+            Notifier.error("Failed reading items, please try again. Unable to read items.");
         }
     } catch (e) {
         console.error(e);
         document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
-        Notifier.error(e);
+        Notifier.error("Failed reading items, please try again. " + e);
     }
 }
 
