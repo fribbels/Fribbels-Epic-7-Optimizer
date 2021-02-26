@@ -12,6 +12,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @AllArgsConstructor
+@EqualsAndHashCode
 public class AugmentedStats {
 
     @SerializedName("Attack") private int attack;

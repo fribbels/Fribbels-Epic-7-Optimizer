@@ -25,7 +25,7 @@ public class HashItem {
     private Integer level;
 
     private Stat main;
-    private List<Stat> substats;
+    private AugmentedStats augmentedStats;
 
     public String toString() {
         return new Gson().toJson(this);

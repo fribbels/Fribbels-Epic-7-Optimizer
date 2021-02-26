@@ -2,7 +2,7 @@ var childProcess = require('child_process')
 
 global.child = null;
 var pyshell;
-var data = [];
+global.data = [];
 var intervals = [];
 
 // global.api = "http://127.0.0.1:5000";
@@ -25,7 +25,7 @@ async function finishedReading(data) {
 
             if (rawItems.length == 0) {
                 document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
-                Notifier.error("Failed reading items");
+                Notifier.error("Failed reading items, please try again");
                 return
             }
 
@@ -40,7 +40,7 @@ async function finishedReading(data) {
             document.getElementById('loadFromGameExportOutputText').value = serializedStr;
         } else {
             document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
-            Notifier.error("Failed reading items");
+            Notifier.error("Failed reading items, please try again");
         }
     } catch (e) {
         console.error(e);
@@ -48,6 +48,8 @@ async function finishedReading(data) {
         Notifier.error(e);
     }
 }
+
+global.finishedReading = finishedReading;
 
 module.exports = {
     start: () => {
@@ -91,7 +93,7 @@ module.exports = {
                     data.push(message);
                 }
             });
-            console.log("Started scanning3")
+            console.log("Started scanning")
             document.getElementById('loadFromGameExportOutputText').value = "Started scanning...";
         } catch (e) {
             console.error(e);
@@ -110,7 +112,6 @@ module.exports = {
 
         console.log("Stop scanning")
         child.stdin.write('END\n');
-        // pyshell.send('END');
     }
 }
 
@@ -179,10 +180,10 @@ function convertSubStats(item) {
 function convertMainStat(item) {
     const mainOp = item.op[0];
     const mainOpType = mainOp[0];
-    const mainOpValue = mainOp[1];
+    const mainOpValue = item.mainStatValue;
     const mainType = statByIngameStat[mainOpType];
     const mainValue = isFlat(mainOpType) ? mainOpValue : Utils.round10ths(mainOpValue * 100);
-    const fixedMainValue = fixMainStatValue(item, mainType, mainValue);
+    const fixedMainValue = mainValue;
 
     item.main = new Stat(mainType, fixedMainValue);
 }
@@ -334,6 +335,10 @@ function fixMainStatValue(item, mainType, mainValue) {
     const stat = mainType;
     const level = item.level;
     const gear = item.gear;
+
+    if (item.enhance >= 15) {
+        return mainValue;
+    }
 
     if (level < 15) {
         if (isCritChance(stat))

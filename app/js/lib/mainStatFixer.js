@@ -9,9 +9,9 @@ module.exports = {
         if (level < 15) {
             if (isCritChance(stat))
                 return "5%";
-            if (isCritDamage(stat)) 
+            if (isCritDamage(stat))
                 return "15%";
-            if (isSpeed(stat)) 
+            if (isSpeed(stat))
                 return "15";
             if (isAccessory(stat))
                 return "10%";
@@ -20,9 +20,9 @@ module.exports = {
         if (level >= 15 && level < 30) {
             if (isCritChance(stat))
                 return "15%";
-            if (isCritDamage(stat)) 
+            if (isCritDamage(stat))
                 return "25%";
-            if (isSpeed(stat)) 
+            if (isSpeed(stat))
                 return "20";
             if (isAccessory(gear))
                 return "20%";
@@ -31,9 +31,9 @@ module.exports = {
         if (level >= 30 && level < 44) {
             if (isCritChance(stat))
                 return "25%";
-            if (isCritDamage(stat)) 
+            if (isCritDamage(stat))
                 return "35%";
-            if (isSpeed(stat)) 
+            if (isSpeed(stat))
                 return "25";
             if (isAccessory(gear))
                 return "30%";
@@ -42,9 +42,9 @@ module.exports = {
         if (level >= 44 && level < 58) {
             if (isCritChance(stat))
                 return "35%";
-            if (isCritDamage(stat)) 
+            if (isCritDamage(stat))
                 return "45%";
-            if (isSpeed(stat)) 
+            if (isSpeed(stat))
                 return "30";
             if (isAccessory(gear))
                 return "40%";
@@ -53,9 +53,9 @@ module.exports = {
         if (level >= 58 && level < 72) {
             if (isCritChance(stat))
                 return "45%";
-            if (isCritDamage(stat)) 
+            if (isCritDamage(stat))
                 return "55%";
-            if (isSpeed(stat)) 
+            if (isSpeed(stat))
                 return "35";
             if (isAccessory(gear) && isPercent(data.mainStatNumbers))
                 return "50%";
@@ -70,9 +70,9 @@ module.exports = {
         if (level >= 72 && level < 86) {
             if (isCritChance(stat))
                 return "55%";
-            if (isCritDamage(stat)) 
+            if (isCritDamage(stat))
                 return "65%";
-            if (isSpeed(stat)) 
+            if (isSpeed(stat))
                 return "40";
             if (isAccessory(gear) && isPercent(data.mainStatNumbers))
                 return "60%";
@@ -87,9 +87,9 @@ module.exports = {
         if (level >= 86 && level < 100) {
             if (isCritChance(stat))
                 return "60%";
-            if (isCritDamage(stat)) 
+            if (isCritDamage(stat))
                 return "70%";
-            if (isSpeed(stat)) 
+            if (isSpeed(stat))
                 return "45";
             if (isAccessory(gear) && isPercent(data.mainStatNumbers))
                 return "65%";
