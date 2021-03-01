@@ -259,16 +259,16 @@ Please read these instructions carefully!
 
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x-windows.zip``
     * Do not download the Source Code options, those won't work
-2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the offline installer
+2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the Windows Offline (64-bit) installer
     * After installing, restart your computer (required!)
 3. Install an emulator to run Epic 7 on
-    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks has issues with screen resolution, would recommend an alternative. See a solution for getting Bluestacks working [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)
+    * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks works fine with the automatic importer, but has issues with screen resolution for the screenshot importer. See a solution for getting Bluestacks screenshots working [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)
 4. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)
 5. Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
 6. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)
 
 
-#### Mac OS/Bluestacks
+#### Mac OS
 
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x-mac.dmg``
     * There is a dmg file and a zip file. Try the dmg first and if it doesn't work, try the zip. Mac version is still experimental.
@@ -291,8 +291,10 @@ Please read these instructions carefully!
    * Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
 6. Make sure to enter Full Screen Mode (Cmd+Shift+F) before starting your gear capture
 
-### Installing the automatic gear importer
-There are two import options, one fully automatic gear importer and one using screenshots. The fully automatic one requires these additional steps:
+_________________
+
+### Importing gear directly from the game
+There are two importer options, one that automatically imports gear directly from your game, and one using screenshots. The automatic one requires these additional steps:
 
 ##### First time  setup for the automatic importer on Windows:
 1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). **IMPORTANT: Enable the option to add Python to PATH**
@@ -314,6 +316,8 @@ There are two import options, one fully automatic gear importer and one using sc
 7. Import the "gear.txt" with the Replace/Add/Merge options below
 8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items
 
+_________________
+
 ### Importing gear from screenshots:
 If you cannot use the automatic importer, or would prefer to use screenshots, follow the following steps.
 
@@ -330,6 +334,8 @@ If you cannot use the automatic importer, or would prefer to use screenshots, fo
 6. Under the *Importing gear data* section, click on Append data, and select your *gear.txt* file.<br>
 7. Now you should see your imported gears under the Gears tab.
 
+_________________
+
 ### Optimizing a unit:
 
 1. Add a unit on the Heroes tab, by selecting their name and clicking Add New Hero.
@@ -343,12 +349,15 @@ If you cannot use the automatic importer, or would prefer to use screenshots, fo
 
 Here's a video that covers most of the importing process: https://www.youtube.com/watch?v=i_QW4INcZIE
 
+_________________
 
 ### Updating the optimizer with new gear:
 
 * It helps to update the optimizer as you enhance/reforge gear. Add new pieces manually on the Gear screen or click the reforge icon to update 85 -> 90 gear.
 * To import a bunch of new gear at once, screenshot only the new gear, then use the screenshot tool to generate another gear.txt file.  Then use the *Append* option to add the new gear.txt to your existing save file.
 * If you want to reimport all your gear, you can either run the automatic importer again, or use the screenshot tool to generate the gear.txt again, and then either *Overwrite* your data to erase previous gear + heroes, or *Merge* the new gear.txt to replace old items and keep heroes/builds.
+
+_________________
 
 ### Tips to get good optimization results:
 
@@ -361,6 +370,8 @@ Here's some quick tips on getting the best results. This is assuming you've read
   * Bad priorities will lead to bad results because good options get filtered out.
 * **Lower the Top % to make the search faster, or increase Top % to search more results.** Most of the time I use 25-40%, sometimes lower if I want only my best gear on the unit.
 * If you want a certain piece of gear to stay on a hero, go to the Gear tab -> Edit Selected Item -> Equipped and equip it on them first. [Example](https://i.imgur.com/oNO9ivL.png) Then you can use the optimizer with "Keep current" checked to keep that piece on them.
+
+_________________
 
 ## TODO List
 
@@ -381,13 +392,10 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Add reforge type in item edit
  - Persist exclude equipped
  - Create own db
+ - Fix hp/atk off by 1
 
 **Working on:**
  - v1.5.0
-
-**Bugs**
- - Comparison method violates its general contract
- - Fix hp/atk off by 1
 
  **Medium priority:**
  - Add different level/awakening options
@@ -397,6 +405,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 
  **Low priority:**
  - Dark mode
+ - Bug: Comparison method violates its general contract
  - Select/interact with multiple heroes at once
  - See unit stats for whatever gear they have currently, not just for 6 pieces
  - Change slider implementation http://ionden.com/a/plugins/ion.rangeSlider/start.html
