@@ -8,7 +8,10 @@ window.jQuery = $;
 <script>
   window.i18nextify.init({
     backend: {
-          loadPath: 'locales/{{lng}}.json'
+          loadPath: 'locales/{{lng}}/{{ns}}.json',
+          saveMissing: 'true',
+          preload: ['zh-CN', 'zh-TW'],
+          saveMissingTo:'current'
         }
   });
 </script>
