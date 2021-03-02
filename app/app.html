@@ -7,11 +7,13 @@ window.jQuery = $;
 <script src="js/lib/i18n/i18nextify.min.js"></script>
 <script>
   window.i18nextify.init({
+    debug: 'true',
+    cleanIndent: 'true',
+    ignoreCleanIndentFor: ['PRE', 'CODE'],
+    saveMissing: 'true',
     backend: {
           loadPath: 'locales/{{lng}}/{{ns}}.json',
-          saveMissing: 'true',
-          preload: ['zh-CN', 'zh-TW'],
-          saveMissingTo:'current'
+          addPath: 'locales/{{lng}}/{{ns}}.missing.json',
         }
   });
 </script>
