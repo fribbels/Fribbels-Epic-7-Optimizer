@@ -4,6 +4,14 @@ global.$ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 </script>
+<script src="js/lib/i18n/i18nextify.min.js"></script>
+<script>
+  window.i18nextify.init({
+    backend: {
+          loadPath: 'locales/{{lng}}.json'
+        }
+  });
+</script>
 
 <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
 
@@ -1421,11 +1429,11 @@ window.jQuery = $;
       <p>
         1. Install requirements from the instructions on Github</br>
         2. Leave your emulator open, and close Epic 7</br>
-        3. Click <b>Start scanning</b></br>
+        3. <a>Click</a> <b>Start scanning</b></br>
         4. Open Epic 7, and load into the lobby</br>
-        5. Click <b>Stop scanning</b></br>
-        6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a "gear.txt"</br>
-        7. Import the "gear.txt" with the <b>Replace/Add/Merge</b> options below</br>
+        5. <a>Click</a> <b>Stop scanning</b></br>
+        6. <a>Wait up to 30 secs, then once the data appears, click </a><b>Export</b> <a>to save it to a 'gear.txt'</a></br>
+        7. <a>Import the 'gear.txt' with the</a> <b>Replace/Add/Merge</b> <a></a>options below</a></br>
         8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items</br>
 
       </p>
@@ -1532,7 +1540,7 @@ window.jQuery = $;
       <br>
 
       <p>
-        Once results are printed, hit 'Export'. This will output a "gear.txt" in the folder where you installed this app.
+        Once results are printed, hit 'Export'. This will output a 'gear.txt' in the folder where you installed this app.
       </p>
 
       <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput">
@@ -1561,6 +1569,20 @@ window.jQuery = $;
 
     <div id="settingsTab" class="tab-panel">
       <h2>Settings</h2>
+
+      <div>
+            <a>Languages</a>
+      </div>
+
+       <div>
+        <a href='app.html?lng=en-US'>English</a>
+        <span> | </span>
+         <a href='app.html?lng=zh-CN'>简体中文</a>
+         <span> | </span>
+         <a href='app.html?lng=zh-TW'>繁體中文</a>
+       </div>
+
+       <div class="toggleRowSpace"></div>
 
         <div class="toggleRow">
           <div class="switch">

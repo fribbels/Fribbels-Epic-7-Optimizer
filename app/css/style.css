@@ -313,7 +313,7 @@ input {
 .inputStatLabel {
   font-size:12px;
   display: inline-block;
-  width: 35px;
+  width: 40px;
   text-align: center;
 
 }
@@ -501,10 +501,12 @@ input {
 }
 .ag-header-cell-text {
   text-overflow: clip;
+  width: 40px;
 }
 .ag-header-cell-label, .ag-header-group-cell-label {
   justify-content: space-around;
   text-overflow: clip;
+  width: 40px;
 }
 .ag-theme-balham .ag-icon {
   font-size: 14px;
