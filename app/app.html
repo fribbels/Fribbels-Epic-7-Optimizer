@@ -9,6 +9,7 @@ window.jQuery = $;
   window.i18nextify.init({
     debug: 'true',
     ignoreIds: ['loadFromGameExportOutputText','exportOutputText'],
+    translateAttributes: ['placeholder', 'title', 'alt', 'value#input.type=button', 'value#input.type=submit','data-content'],
     cleanIndent: 'true',
     ignoreCleanIndentFor: ['PRE', 'CODE'],
     saveMissing: 'true',
@@ -102,7 +103,7 @@ window.jQuery = $;
 
             <div id="preview-panel" class="constraints-panel-col-med">
               <div class="panelLabel">
-                <div class="panelLabelText" id="optionsLabel">Stats</div>
+                <div class="panelLabelText" id="optionsLabel" data-content="(clear)">Stats</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="previewTooltip"></img>
               </div>
 
@@ -253,7 +254,7 @@ window.jQuery = $;
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
-                <div class="panelLabelText" id="statsLabel">Stat filters</div>
+                <div class="panelLabelText" id="statsLabel" data-content="(clear)">Stat filters</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="filterStatsTooltip"></img>
               </div>
               <input type="number" id="inputMinAtkLimit" class="optimizer-number-input stat-number-input">
@@ -291,7 +292,7 @@ window.jQuery = $;
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
-                <div class="panelLabelText" id="ratingsLabel">Rating filters</div>
+                <div class="panelLabelText" id="ratingsLabel" data-content="(clear)">Rating filters</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="filterRatingsTooltip"></img>
               </div>
               <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
@@ -415,7 +416,7 @@ window.jQuery = $;
 
             <div id="constraints-focus-panel" class="constraints-panel-col">
               <div class="panelLabel">
-                <div class="panelLabelText" id="accessorySetsLabel">Accessory main stats</div>
+                <div class="panelLabelText" id="accessorySetsLabel" data-content="(clear)">Accessory main stats</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="accessoryMainStatsTooltip"></img>
               </div>
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
@@ -539,7 +540,7 @@ window.jQuery = $;
             <div id="placeholder-panel" class="constraints-panel-col-small">
 
                 <div class="panelLabel">
-                  <div class="panelLabelText" id="forceLabel">Force</div>
+                  <div class="panelLabelText" id="forceLabel" data-content="(clear)">Force</div>
                   <img src="./assets/tooltip.png" class="tooltipImage" id="forceTooltip"></img>
                 </div>
                 <input type="number" id="inputMinAtkForce" class="optimizer-number-input force-number-input">

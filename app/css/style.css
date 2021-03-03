@@ -1113,35 +1113,35 @@ body.dark-theme input {
 }
 #statsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #ratingsLabel {
   cursor: pointer;
 }
 #ratingsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #forceLabel {
   cursor: pointer;
 }
 #forceLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #optionsLabel {
   cursor: pointer;
 }
 #optionsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #accessorySetsLabel {
   cursor: pointer;
 }
 #accessorySetsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 
 .gearTabBottomPanel {
