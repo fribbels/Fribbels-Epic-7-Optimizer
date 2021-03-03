@@ -1097,9 +1097,16 @@ body.dark-theme input {
   display:flex;
   flex-direction: row;
 }
-.selectedCount {
+.selectedCountLabel {
   display: inline-block;
   width: 100px;
+  text-align: right;
+  position:absolute;
+  right: 75px;
+}
+.selectedCount {
+  display: inline-block;
+  width: 70px;
   text-align: right;
 }
 #substatPriorityLabel {

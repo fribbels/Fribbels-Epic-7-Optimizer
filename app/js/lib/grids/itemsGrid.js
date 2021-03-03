@@ -472,7 +472,7 @@ function renderStat(name) {
 
 function updateSelectedCount() {
     const count = module.exports.getSelectedGear().length;
-    $('#selectedCount').html("Selected: " + count);
+    $('#selectedCount').html(count);
 }
 
 
