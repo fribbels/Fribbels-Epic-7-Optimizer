@@ -19,6 +19,7 @@ module.exports = {
             'settingUnlockOnUnequip',
             'settingMaxResults',
             'settingRageSet',
+            'settingUseReforgeStats',
         ];
 
         $('#optionsExcludeGearFrom').change(module.exports.saveSettings)
@@ -66,6 +67,7 @@ module.exports = {
         return {
             settingUnlockOnUnequip: true,
             settingRageSet: true,
+            settingUseReforgeStats: true,
             settingMaxResults: 5_000_000,
             settingDefaultPath: defaultPath,
             settingExcludeEquipped: []
@@ -81,6 +83,7 @@ module.exports = {
 
         document.getElementById('settingUnlockOnUnequip').checked = settings.settingUnlockOnUnequip;
         document.getElementById('settingRageSet').checked = settings.settingRageSet;
+        document.getElementById('settingUseReforgeStats').checked = settings.settingUseReforgeStats;
         pathOverride = settings.settingDefaultPath;
 
         if (settings.settingMaxResults) {
@@ -104,6 +107,7 @@ module.exports = {
         const settings = {
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
+            settingUseReforgeStats: document.getElementById('settingUseReforgeStats').checked,
             settingMaxResults: parseInt(document.getElementById('settingMaxResults').value || 5_000_000),
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects')

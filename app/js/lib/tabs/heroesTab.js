@@ -42,8 +42,8 @@ module.exports = {
             addHero(id);
         });
 
-        document.getElementById('heroesTabUseReforgedStats').addEventListener("change", async () => {
-            useReforgedStats = document.getElementById('heroesTabUseReforgedStats').checked;
+        document.getElementById('settingUseReforgeStats').addEventListener("change", async () => {
+            useReforgedStats = document.getElementById('settingUseReforgeStats').checked;
             console.log("REFORGE CHANGE TO " + useReforgedStats);
             redrawGrid();
             clearPreview();

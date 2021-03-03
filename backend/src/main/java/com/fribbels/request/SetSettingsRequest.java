@@ -20,5 +20,6 @@ public class SetSettingsRequest extends Request {
 
     private boolean settingUnlockOnUnequip;
     private boolean settingRageSet;
+    private boolean settingUseReforgeStats;
     private Integer settingMaxResults;
 }
