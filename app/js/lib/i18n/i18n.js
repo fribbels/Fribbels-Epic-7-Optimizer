@@ -1,6 +1,6 @@
 window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLanguageDetector).init({
   debug: 'true',
-  preload:['dev','zh','zh-TW'],
+  //preload:['en','zh','zh-TW','dev'],
   detection: {
     // order and from where user language should be detected
     order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
@@ -43,10 +43,18 @@ window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLangua
 window.i18next.on('languageChanged initialized', function() {
   if (!i18next.isInitialized) return;
   var text = document.querySelectorAll('[data-t]');
-  console.log(i18next.language);
+  var lang = i18next.language;
   console.log(text);
+  if (lang != 'en'){
   text.forEach(
     function(currentValue, currentIndex, listObj) {
       currentValue.innerHTML=i18next.t(currentValue.innerHTML)
     })
+  } else {
+    if (!text_en){
+      var text_en = text
+    } else {
+       text = text_en
+    }
+  }
 });
