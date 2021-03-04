@@ -4,21 +4,13 @@ global.$ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 </script>
-<script src="js/lib/i18n/i18nextify.min.js"></script>
-<script>
-  window.i18nextify.init({
-    //debug: 'true',
-    ignoreIds: ['loadFromGameExportOutputText','exportOutputText'],
-    translateAttributes: ['placeholder', 'title', 'alt', 'value#input.type=button', 'value#input.type=submit','data-content'],
-    cleanIndent: 'true',
-    ignoreCleanIndentFor: ['PRE', 'CODE'],
-    //saveMissing: 'true',
-    backend: {
-          loadPath: 'locales/{{lng}}/{{ns}}.json',
-          addPath: 'locales/{{lng}}/{{ns}}.missing.json',
-        }
-  });
-</script>
+<script src="node_modules/i18next/i18next.min.js"></script>
+<script src="node_modules/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+<script src="node_modules/i18next-localstorage-backend/i18nextLocalStorageBackend.min.js"></script>
+<script src="node_modules/i18next-http-backend/i18nextHttpBackend.min.js"></script>
+<script src="node_modules/i18next-chained-backend/i18nextChainedBackend.min.js"></script>
+
+<script src="js/lib/i18n/i18n.js"></script>
 
 <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
 
@@ -47,25 +39,25 @@ window.jQuery = $;
 <div class="tabset">
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" checked>
-  <label for="tab1" class="tabLabel" id="tab1label">Optimizer</label>
+  <label for="tab1" class="tabLabel" id="tab1label" data-t>Optimizer</label>
   <!-- Tab 2 -->
   <input type="radio" name="tabset" id="tab2" style="display: none">
-  <label for="tab2" class="tabLabel" style="display: none">Ocr Debugger</label>
+  <label for="tab2" class="tabLabel" style="display: none" data-t>Ocr Debugger</label>
   <!-- Tab 3 -->
   <input type="radio" name="tabset" id="tab3" >
-  <label for="tab3" class="tabLabel" id="tab3label">Gear</label>
+  <label for="tab3" class="tabLabel" id="tab3label" data-t>Gear</label>
   <!-- Tab 4 -->
   <input type="radio" name="tabset" id="tab4" >
-  <label for="tab4" class="tabLabel" id="tab4label">Heroes</label>
+  <label for="tab4" class="tabLabel" id="tab4label" data-t>Heroes</label>
   <!-- Tab 5 -->
   <input type="radio" name="tabset" id="tab5" >
-  <label for="tab5" class="tabLabel">Importer</label>
+  <label for="tab5" class="tabLabel" data-t>Importer</label>
   <!-- Tab 6 -->
   <input type="radio" name="tabset" id="tab6" >
-  <label for="tab6" class="tabLabel">Settings</label>
+  <label for="tab6" class="tabLabel" data-t>Settings</label>
   <!-- Tab 6 -->
   <input type="radio" name="tabset" id="tab6" style="display: none">
-  <label for="tab6" class="tabLabel" style="display: none">Subprocess Debugger</label>
+  <label for="tab6" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
 
   <div id="hoverDiv"></div>
   <div class="tab-panels">
@@ -76,7 +68,7 @@ window.jQuery = $;
             <div id="constaints-options-panel" class="constraints-panel-col-small">
 
               <div class="panelLabel">
-                <div class="panelLabelText">Hero</div>
+                <div class="panelLabelText" data-t>Hero</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="heroTooltip"></img>
               </div>
               <select id="inputHeroAdd" class="gearPreviewButton"></select>
@@ -103,7 +95,7 @@ window.jQuery = $;
 
             <div id="preview-panel" class="constraints-panel-col-med">
               <div class="panelLabel">
-                <div class="panelLabelText" id="optionsLabel" data-content="(clear)">Stats</div>
+                <div class="panelLabelText" id="optionsLabel" data-content="(clear)" data-t>Stats</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="previewTooltip"></img>
               </div>
 
@@ -204,42 +196,42 @@ window.jQuery = $;
               <div class="horizontalSpace"></div>
  -->
               <div class="panelLabel">
-                <div class="panelLabelText" id="optionsLabel">Options</div>
+                <div class="panelLabelText" id="optionsLabel" data-t>Options</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="optionsTooltip"></img>
               </div>
               <div>
                 <input type="checkbox" id="inputPredictReforges" class="optimizer-checkbox" checked>
-                <label for="inputPredictReforges">Use reforged stats</label>
+                <label for="inputPredictReforges" data-t>Use reforged stats</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputOnlyMaxedGear" class="optimizer-checkbox">
-                <label for="inputOnlyMaxedGear">Only maxed gear</label>
+                <label for="inputOnlyMaxedGear" data-t>Only maxed gear</label>
               </div>
 <!--
               <div>
                 <input type="checkbox" id="inputOver85" class="optimizer-checkbox">
-                <label for="inputOver85">Only over lv 85 gear</label>
+                <label for="inputOver85" data-t>Only over lv 85 gear</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputOnlyPlus15Gear" class="optimizer-checkbox">
-                <label for="inputOnlyPlus15Gear">Only +15 gear</label>
+                <label for="inputOnlyPlus15Gear" data-t>Only +15 gear</label>
               </div>
  -->
               <div>
                 <input type="checkbox" id="inputAllowLockedItems" class="optimizer-checkbox">
-                <label for="inputAllowLockedItems">Locked items</label>
+                <label for="inputAllowLockedItems" data-t>Locked items</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputAllowEquippedItems" class="optimizer-checkbox">
-                <label for="inputAllowEquippedItems">Equipped items</label>
+                <label for="inputAllowEquippedItems" data-t>Equipped items</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputKeepCurrentItems" class="optimizer-checkbox">
-                <label for="inputKeepCurrentItems">Keep current</label>
+                <label for="inputKeepCurrentItems" data-t>Keep current</label>
               </div>
               <div class="horizontalSpace"></div>
 
@@ -254,89 +246,89 @@ window.jQuery = $;
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
-                <div class="panelLabelText" id="statsLabel" data-content="(clear)">Stat filters</div>
+                <div class="panelLabelText" id="statsLabel" data-content="(clear)" data-t>Stat filters</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="filterStatsTooltip"></img>
               </div>
               <input type="number" id="inputMinAtkLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Atk</div>
+              <div class="inputStatLabel" data-t>Atk</div>
               <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinHpLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Hp</div>
+              <div class="inputStatLabel" data-t>Hp</div>
               <input type="number" id="inputMaxHpLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinDefLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Def</div>
+              <div class="inputStatLabel" data-t>Def</div>
               <input type="number" id="inputMaxDefLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinSpdLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Spd</div>
+              <div class="inputStatLabel" data-t>Spd</div>
               <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinCrLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">CRate</div>
+              <div class="inputStatLabel" data-t>CRate</div>
               <input type="number" id="inputMaxCrLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinCdLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">CDmg</div>
+              <div class="inputStatLabel" data-t>CDmg</div>
               <input type="number" id="inputMaxCdLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinEffLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Eff</div>
+              <div class="inputStatLabel" data-t>Eff</div>
               <input type="number" id="inputMaxEffLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinResLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Res</div>
+              <div class="inputStatLabel" data-t>Res</div>
               <input type="number" id="inputMaxResLimit" class="optimizer-number-input stat-number-input"><br>
             </div>
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
-                <div class="panelLabelText" id="ratingsLabel" data-content="(clear)">Rating filters</div>
+                <div class="panelLabelText" id="ratingsLabel" data-content="(clear)" data-t>Rating filters</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="filterRatingsTooltip"></img>
               </div>
               <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Cp</div>
+              <div class="inputStatLabel" data-t>Cp</div>
               <input type="number" id="inputMaxCpLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinHppsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">HpS</div>
+              <div class="inputStatLabel" data-t>HpS</div>
               <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinEhpLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Ehp</div>
+              <div class="inputStatLabel" data-t>Ehp</div>
               <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">EhpS</div>
+              <div class="inputStatLabel" data-t>EhpS</div>
               <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinDmgLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Dmg</div>
+              <div class="inputStatLabel" data-t>Dmg</div>
               <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">DmgS</div>
+              <div class="inputStatLabel" data-t>DmgS</div>
               <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Mcd</div>
+              <div class="inputStatLabel" data-t>Mcd</div>
               <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">McdS</div>
+              <div class="inputStatLabel" data-t>McdS</div>
               <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinDmgHLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">DmgH</div>
+              <div class="inputStatLabel" data-t>DmgH</div>
               <input type="number" id="inputMaxDmgHLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinScoreLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Score</div>
+              <div class="inputStatLabel" data-t>Score</div>
               <input type="number" id="inputMaxScoreLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinUpgradesLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Upg</div>
+              <div class="inputStatLabel" data-t>Upg</div>
               <input type="number" id="inputMaxUpgradesLimit" class="optimizer-number-input rating-number-input"><br>
             </div>
 
@@ -345,58 +337,58 @@ window.jQuery = $;
             <div id="stat-priority-panel" class="constraints-panel-col">
 
               <div class="panelLabel">
-                <div class="panelLabelText" id="substatPriorityLabel">Substat priority (<u>clear</u>)</div>
+                <div class="panelLabelText" id="substatPriorityLabel" data-t>Substat priority (<u data-t>clear</u data-t>)</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="substatPriorityTooltip"></img>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Atk</div>
+                <div class="sliderLabel" data-t>Atk</div>
                 <input class="sliderInput" id="atkSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Hp</div>
+                <div class="sliderLabel" data-t>Hp</div>
                 <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Def</div>
+                <div class="sliderLabel" data-t>Def</div>
                 <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Spd</div>
+                <div class="sliderLabel" data-t>Spd</div>
                 <input class="sliderInput" id="spdSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="spdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Cr</div>
+                <div class="sliderLabel" data-t>Cr</div>
                 <input class="sliderInput" id="crSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="crSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Cd</div>
+                <div class="sliderLabel" data-t>Cd</div>
                 <input class="sliderInput" id="cdSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="cdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Eff</div>
+                <div class="sliderLabel" data-t>Eff</div>
                 <input class="sliderInput" id="effSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="effSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Res</div>
+                <div class="sliderLabel" data-t>Res</div>
                 <input class="sliderInput" id="resSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="resSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
@@ -406,7 +398,7 @@ window.jQuery = $;
               <div class="horizontalSpace" ></div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Top %</div>
+                <div class="sliderLabel" data-t>Top %</div>
                 <input class="sliderInput" id="filterSliderInput" type="number" value="100" readonly>
                 <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="10" max="100" value="100" step="1"></div><!--
                 <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="0" max="100" value="100" step="5"></div> -->
@@ -416,122 +408,122 @@ window.jQuery = $;
 
             <div id="constraints-focus-panel" class="constraints-panel-col">
               <div class="panelLabel">
-                <div class="panelLabelText" id="accessorySetsLabel" data-content="(clear)">Accessory main stats</div>
+                <div class="panelLabelText" id="accessorySetsLabel" data-content="(clear)" data-t>Accessory main stats</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="accessoryMainStatsTooltip"></img>
               </div>
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
-                <option value="CriticalHitChancePercent">Crit Chance</option>
-                <option value="CriticalHitDamagePercent">Crit Damage</option>
-                <option value="AttackPercent">Attack %</option>
-                <option value="Attack">Attack</option>
-                <option value="HealthPercent">Health %</option>
-                <option value="Health">Health</option>
-                <option value="DefensePercent">Defense %</option>
-                <option value="Defense">Defense</option>
+                <option value="CriticalHitChancePercent" data-t>Crit Chance</option>
+                <option value="CriticalHitDamagePercent" data-t>Crit Damage</option>
+                <option value="AttackPercent" data-t>Attack %</option>
+                <option value="Attack" data-t>Attack</option>
+                <option value="HealthPercent" data-t>Health %</option>
+                <option value="Health" data-t>Health</option>
+                <option value="DefensePercent" data-t>Defense %</option>
+                <option value="Defense" data-t>Defense</option>
               </select><br>
 
               <select multiple="multiple" id="inputRingStat" class="inputGearFilterSelect">
-                <option value="EffectivenessPercent">Effectiveness</option>
-                <option value="EffectResistancePercent">Effect Resistance</option>
-                <option value="AttackPercent">Attack %</option>
-                <option value="Attack">Attack</option>
-                <option value="HealthPercent">Health %</option>
-                <option value="Health">Health</option>
-                <option value="DefensePercent">Defense %</option>
-                <option value="Defense">Defense</option>
+                <option value="EffectivenessPercent" data-t>Effectiveness</option>
+                <option value="EffectResistancePercent" data-t>Effect Resistance</option>
+                <option value="AttackPercent" data-t>Attack %</option>
+                <option value="Attack" data-t>Attack</option>
+                <option value="HealthPercent" data-t>Health %</option>
+                <option value="Health" data-t>Health</option>
+                <option value="DefensePercent" data-t>Defense %</option>
+                <option value="Defense" data-t>Defense</option>
               </select><br>
 
               <select multiple="multiple" id="inputBootsStat" class="inputGearFilterSelect">
-                <option value="Speed">Speed</option>
-                <option value="AttackPercent">Attack %</option>
-                <option value="Attack">Attack</option>
-                <option value="HealthPercent">Health %</option>
-                <option value="Health">Health</option>
-                <option value="DefensePercent">Defense %</option>
-                <option value="Defense">Defense</option>
+                <option value="Speed" data-t>Speed</option>
+                <option value="AttackPercent" data-t>Attack %</option>
+                <option value="Attack" data-t>Attack</option>
+                <option value="HealthPercent" data-t>Health %</option>
+                <option value="Health" data-t>Health</option>
+                <option value="DefensePercent" data-t>Defense %</option>
+                <option value="Defense" data-t>Defense</option>
               </select><br>
 
               <div class="panelLabel">
-                <div class="panelLabelText">Sets</div>
+                <div class="panelLabelText" data-t>Sets</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="setsTooltip"></img>
               </div>
               <select multiple="multiple" id="inputSet1" class="inputSetFilterSelect">
-                <!-- <option value="None">None</option> -->
+                <!-- <option value="None" data-t>None</option> -->
                 <optgroup label="4 Piece">
-                  <option value="AttackSet">Attack</option>
-                  <option value="CounterSet">Counter</option>
-                  <option value="DestructionSet">Destruction</option>
-                  <option value="InjurySet">Injury</option>
-                  <option value="LifestealSet">Lifesteal</option>
-                  <option value="RageSet">Rage</option>
-                  <option value="RevengeSet">Revenge</option>
-                  <option value="SpeedSet">Speed</option>
+                  <option value="AttackSet" data-t>Attack</option>
+                  <option value="CounterSet" data-t>Counter</option>
+                  <option value="DestructionSet" data-t>Destruction</option>
+                  <option value="InjurySet" data-t>Injury</option>
+                  <option value="LifestealSet" data-t>Lifesteal</option>
+                  <option value="RageSet" data-t>Rage</option>
+                  <option value="RevengeSet" data-t>Revenge</option>
+                  <option value="SpeedSet" data-t>Speed</option>
                 </optgroup>
                 <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select><br>
 
               <select multiple="multiple" id="inputSet2" class="inputSetFilterSelect">
-                <!-- <option value="None">None</option> -->
+                <!-- <option value="None" data-t>None</option> -->
                 <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select><br>
 
               <select multiple="multiple" id="inputSet3" class="inputSetFilterSelect">
                 <!-- <option value="None">None</option> -->
                 <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select>
 
               <div class="panelLabel">
-                <div class="panelLabelText">Exclude</div>
+                <div class="panelLabelText" data-t>Exclude</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="excludeTooltip"></img>
               </div>
               <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
                 <!-- <option value="None">None</option> -->
                 <optgroup label="4 Piece">
-                  <option value="AttackSet">Attack</option>
-                  <option value="CounterSet">Counter</option>
-                  <option value="DestructionSet">Destruction</option>
-                  <option value="InjurySet">Injury</option>
-                  <option value="LifestealSet">Lifesteal</option>
-                  <option value="RageSet">Rage</option>
-                  <option value="RevengeSet">Revenge</option>
-                  <option value="SpeedSet">Speed</option>
+                  <option value="AttackSet" data-t>Attack</option>
+                  <option value="CounterSet" data-t>Counter</option>
+                  <option value="DestructionSet" data-t>Destruction</option>
+                  <option value="InjurySet" data-t>Injury</option>
+                  <option value="LifestealSet" data-t>Lifesteal</option>
+                  <option value="RageSet" data-t>Rage</option>
+                  <option value="RevengeSet" data-t>Revenge</option>
+                  <option value="SpeedSet" data-t>Speed</option>
                 </optgroup>
                 <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select><br>
             </div>
@@ -1584,12 +1576,10 @@ window.jQuery = $;
        <div>
         <a href='app.html?lng=en-US'>English</a>
         <span> | </span>
-         <a href='app.html?lng=zh-CN'>简体中文</a>
+         <a href='app.html?lng=zh'>简体中文</a>
          <span> | </span>
          <a href='app.html?lng=zh-TW'>繁體中文</a>
        </div>
-
-       <div class="toggleRowSpace"></div>
 
         <div class="toggleRow">
           <div class="switch">
