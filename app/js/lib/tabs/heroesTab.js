@@ -14,7 +14,8 @@ module.exports = {
         for (var name of names) {
             const hero = allHeroData[name];
             const option = document.createElement('option');
-            option.innerHTML = name;
+            option.innerHTML = i18next.t(hero.name);
+            option.label = hero.name;
             option.value = name;
             selector.add(option);
         }

@@ -69,7 +69,8 @@ module.exports = {
 
             // console.log("DEBUG", hero)
             const option = document.createElement('option');
-            option.innerHTML = hero.name;
+            option.innerHTML = i18next.t(hero.name);
+            option.label = hero.name;
             option.value = hero.id;
 
             optimizerHeroSelector.add(option);

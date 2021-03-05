@@ -350,9 +350,11 @@ module.exports = {
         for (var hero of heroes) {
             const option = document.createElement('option');
             const option2 = document.createElement('option');
-            option.innerHTML = hero.name;
+            option.innerHTML = i18next.t(hero.name);
+            option.label = hero.name;
             option.value = hero.id;
-            option2.innerHTML = hero.name;
+            option2.innerHTML = i18next.t(hero.name);
+            option2.label = hero.name;
             option2.value = hero.id;
 
             optimizerHeroSelector.add(option);
@@ -455,7 +457,9 @@ async function lockGearFromIcon(id) {
 }
 
 function redrawHeroImage() {
-    const name = $( "#inputHeroAdd option:selected" ).text()
+    const name = $( "#inputHeroAdd option:selected" ).attr("label")
+    console.log($( "#inputHeroAdd option:selected" ));
+    console.log("name:"+name);
     if (!name || name.length == 0) {
         $('#inputHeroImage').attr("src", Assets.getBlank());
         return;

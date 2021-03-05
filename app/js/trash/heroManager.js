@@ -15,7 +15,7 @@ function onRowSelected(event) {
             const gear = equipped[i];
             const displayId = gearDisplayIdByIndex[i];
             if (!gear) {
-                document.getElementById(displayId).innerHTML = "";    
+                document.getElementById(displayId).innerHTML = "";
                 continue;
             }
 
@@ -54,9 +54,9 @@ module.exports = {
                 const previousHero = heroesById[previousHeroId]
                 console.log("Previous Gear", previousGear)
                 console.log("Previous Hero", previousHero)
-                previousHero.equipped[gearIndex] = null;     
+                previousHero.equipped[gearIndex] = null;
                 console.log("Previous Gear", previousGear)
-                console.log("Previous Hero", previousHero)               
+                console.log("Previous Hero", previousHero)
             }
 
             // Equip
@@ -92,9 +92,10 @@ module.exports = {
 
             console.log("DEBUG", hero)
             const option = document.createElement('option');
-            option.innerHTML = hero.name;
+            option.innerHTML = i18next.t(hero.name);
+            option.label = hero.name;
             option.value = hero.id;
-                
+
             optimizerHeroSelector.add(option);
         }
     },
@@ -197,7 +198,7 @@ function clearOptions(id) {
       select.options[i] = null;
     }
 }
- 
+
 
 function filterTest(params) {
     console.log(params);
