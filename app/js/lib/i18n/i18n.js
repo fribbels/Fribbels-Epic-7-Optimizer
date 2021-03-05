@@ -92,4 +92,5 @@ window.i18next.on('languageChanged initialized', function() {
 function clearlocalCache(){
   console.log('Language Cache Cleared!');
   localStorage.clear();
+  i18next.reloadResources();
 };
