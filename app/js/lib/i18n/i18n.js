@@ -15,21 +15,19 @@ window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLangua
     lookupFromSubdomainIndex: 0,
 
     // cache user language on
-    caches: ['localStorage', 'cookie'],
-    excludeCacheFor: ['cimode'],
+    //caches: ['localStorage', 'cookie'],
+    //excludeCacheFor: ['cimode'],
     htmlTag: document.documentElement,
   },
   ignoreIds: ['loadFromGameExportOutputText','exportOutputText'],
   translateAttributes: ['placeholder', 'title', 'alt', 'value#input.type=button', 'value#input.type=submit','data-content'],
-  cleanIndent: true,
-  ignoreCleanIndentFor: ['PRE', 'CODE'],
   saveMissing: true,
   saveMissingTo: "current",
-  fallbackLng: 'en',
+  fallbackLng: false,
   keySeparator: false,
-  nsSeparator: '::',
-  pluralSeparator: '__',
-  contextSeparator: '___',
+  nsSeparator: false,
+  pluralSeparator: false,
+  contextSeparator: false,
   backend: {
     backends: [
     window.i18nextLocalStorageBackend,  // primary
@@ -62,7 +60,8 @@ window.i18next.on('languageChanged initialized', function() {
         currentValue.innerText=i18next.t(textkey)
       } else if (['P'].includes(currentValue.nodeName)){
         var textkey = (currentValue.innerHTML.replace(/(\r\n|\n|\r)/gm, "")).trim();
-        console.log('true!'+textkey);
+        console.log('true! key='+textkey);
+        console.log('translation='+i18next.t(textkey));
         currentValue.innerHTML=i18next.t(textkey)
       }
     })
