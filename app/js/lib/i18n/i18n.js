@@ -3,7 +3,7 @@ const { functions } = require("electron-log");
 /* eslint-disable */
 window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLanguageDetector).init({
   debug: 'true',
-  //preload:['en','zh','zh-TW','dev'],
+  preload:['en','zh','zh-TW','dev'],
   detection: {
     // order and from where user language should be detected
     order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
@@ -51,7 +51,7 @@ window.i18next.on('languageChanged initialized', function() {
   if (!i18next.isInitialized) return;
   var text = document.querySelectorAll('[data-t]');
   var lang = i18next.language;
-  console.log(text);
+  //console.log(text);
   //localStorage.clear();
   if (lang != 'en'){
   text.forEach(
@@ -59,7 +59,7 @@ window.i18next.on('languageChanged initialized', function() {
       console.log(currentValue.nodeName);
       if (['LABEL','A','TEXT','H2','U','B','DIV','SPAN','OPTION','BUTTON'].includes(currentValue.nodeName)){
         var textkey = (currentValue.innerText).trim();
-        console.log('true!'+textkey);
+        // console.log('true!'+textkey);
         currentValue.innerText=i18next.t(textkey)
         if (currentValue.getAttribute("data-content")){
           var datacontent=currentValue.getAttribute("data-content")
@@ -67,16 +67,16 @@ window.i18next.on('languageChanged initialized', function() {
         }
       } else if (['P'].includes(currentValue.nodeName)){
         var textkey = (currentValue.innerHTML.replace(/(\r\n|\n|\r)/gm, "")).trim();
-        console.log('true! key='+textkey);
-        console.log('translation='+i18next.t(textkey));
+        // console.log('true! key='+textkey);
+        // console.log('translation='+i18next.t(textkey));
         currentValue.innerHTML=i18next.t(textkey)
       } else if (['INPUT'].includes(currentValue.nodeName)) {
         var textkey = (currentValue.getAttribute("value")).trim();
-        console.log('true! key='+textkey);
+        // console.log('true! key='+textkey);
         currentValue.setAttribute("value", i18next.t(textkey));
       } else if (['OPTGROUP'].includes(currentValue.nodeName)) {
         var textkey = (currentValue.getAttribute("label")).trim();
-        console.log('true! key='+textkey);
+        // console.log('true! key='+textkey);
         currentValue.setAttribute("label", i18next.t(textkey));
       }
     })
