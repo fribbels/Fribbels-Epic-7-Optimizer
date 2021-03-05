@@ -1,3 +1,4 @@
+/* eslint-disable */
 window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLanguageDetector).init({
   debug: 'true',
   //preload:['en','zh','zh-TW','dev'],
@@ -20,9 +21,15 @@ window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLangua
   },
   ignoreIds: ['loadFromGameExportOutputText','exportOutputText'],
   translateAttributes: ['placeholder', 'title', 'alt', 'value#input.type=button', 'value#input.type=submit','data-content'],
-  cleanIndent: 'true',
+  cleanIndent: true,
   ignoreCleanIndentFor: ['PRE', 'CODE'],
-  //saveMissing: 'true',
+  saveMissing: true,
+  saveMissingTo: "current",
+  fallbackLng: 'en',
+  keySeparator: false,
+  nsSeparator: '::',
+  pluralSeparator: '__',
+  contextSeparator: '___',
   backend: {
     backends: [
     window.i18nextLocalStorageBackend,  // primary
@@ -48,7 +55,16 @@ window.i18next.on('languageChanged initialized', function() {
   if (lang != 'en'){
   text.forEach(
     function(currentValue, currentIndex, listObj) {
-      currentValue.innerHTML=i18next.t(currentValue.innerHTML)
+      console.log(currentValue.nodeName);
+      if (['LABEL','A','TEXT','H2','U','B','DIV','OPTION'].includes(currentValue.nodeName)){
+        var textkey = (currentValue.innerText).trim();
+        console.log('true!'+textkey);
+        currentValue.innerText=i18next.t(textkey)
+      } else if (['P'].includes(currentValue.nodeName)){
+        var textkey = (currentValue.innerHTML.replace(/(\r\n|\n|\r)/gm, "")).trim();
+        console.log('true!'+textkey);
+        currentValue.innerHTML=i18next.t(textkey)
+      }
     })
   } else {
     if (!text_en){
