@@ -20,6 +20,9 @@ module.exports = {
         }
         const selectedNode = heroesGrid.gridOptions.api.getSelectedNodes()[0]
 
+        // heroes.forEach(element => {
+        //   element.name = i18next.t(element.name)
+        // });
         currentHeroes = heroes;
         heroesGrid.gridOptions.api.setRowData(heroes)
         heroesGrid.gridOptions.api.redrawRows();
@@ -198,7 +201,7 @@ function buildGrid(heroes) {
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 55},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: 55},
             {headerName: i18next.t('score'), field: 'score', width: 55},
-            {headerName: i18next.t('upg'), field: 'upgrades', width: 55},
+            {headerName: i18next.t('upg'), field: 'upgrades', width: 65},
         ],
         rowSelection: 'single',
         rowData: heroes,
@@ -242,7 +245,7 @@ function buildGrid(heroes) {
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 50},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: 50},
             {headerName: i18next.t('score'), field: 'score', width: 50},
-            {headerName: i18next.t('upg'), field: 'upgrades', width: 50},
+            {headerName: i18next.t('upg'), field: 'upgrades', width: 65},
         ],
         rowHeight: 27,
         rowSelection: 'single',

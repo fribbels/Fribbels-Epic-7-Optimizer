@@ -16,17 +16,17 @@ const e7StatToOptimizerStat = {
 }
 
 const e7StatToDisplayStat = {
-    "att_rate": "% Attack",
-    "max_hp_rate": "% Health",
-    "def_rate": "% Defense",
-    "att": " Attack",
-    "max_hp": " Health",
-    "def": " Defense",
-    "speed": " Speed",
-    "res": "% Res",
-    "cri": "% Crit rate",
-    "acc": "% Eff",
-    "coop": " Dual Attack"
+    "att_rate": i18next.t("% Attack"),
+    "max_hp_rate": i18next.t("% Health"),
+    "def_rate": i18next.t("% Defense"),
+    "att": i18next.t("Attack"),
+    "max_hp": i18next.t("Health"),
+    "def": i18next.t("Defense"),
+    "speed": i18next.t("Speed"),
+    "res": i18next.t("% Res"),
+    "cri": i18next.t("% Crit rate"),
+    "acc": i18next.t("% Eff"),
+    "coop": i18next.t("Dual Attack")
 }
 
 module.exports = {
@@ -65,8 +65,10 @@ module.exports = {
 
 //${level == i ? "selected" : ""}
         for (var i = 30; i >= 0; i--) {
+            console.log(name)
+            if (name == i18next.t("None")){ name = "None"};
             var stats = Artifact.getStats(name, i)
-            html += `<option value="${i}" >${i} - (${stats.attack.toFixed(1)} atk, ${stats.health.toFixed(1)} hp)</option>`
+            html += `<option value="${i}" >${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")})</option>`
         }
 
         $("select[id='editArtifactLevel']").find('option').remove().end().append(html);
@@ -88,14 +90,14 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Artifact</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Artifact")}</div>
                             <select id="editArtifact" class="editGearStatSelect" onchange="Dialog.changeArtifact()">
                                 ${getArtifactHtml(hero)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Level</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Level")}</div>
                             <select id="editArtifactLevel" class="editGearStatSelect">
                                 ${getArtifactEnhanceHtml(hero)}
                             </select>
@@ -104,14 +106,14 @@ module.exports = {
                         <div class="horizontalLineWithMoreSpace"></div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Imprint</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Imprint")}</div>
                             ${getImprintHtml(hero, heroInfo)}
                         </div>
 
                         <div class="horizontalLineWithMoreSpace"></div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">EE</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("EE")}</div>
 
                             <select id="editEe" class="editGearStatSelect">
                                 ${getEeEnhanceHtml(hero, ee)}
@@ -121,11 +123,11 @@ module.exports = {
 
                         <div class="horizontalLineWithMoreSpace"></div>
 
-                        <p>Add any other stats not included above</p>
+                        <p data-t>${i18next.t("Add any other stats not included above")}</p>
                         <br>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Attack</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Attack")}</div>
                             <div class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
                             </div>
@@ -136,7 +138,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Defense</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Defense")}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
                             </span>
@@ -147,7 +149,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Health</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Health")}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
                             </span>
@@ -158,35 +160,35 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Speed</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Speed")}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Rate</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Crit Rate")}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Dmg</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Crit Dmg")}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Eff</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Eff")}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Res</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Res")}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
                             </span>
@@ -321,59 +323,59 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Equipped</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Equipped")}</div>
                             <select id="editGearEquipped" class="editGearStatSelect">
                                 ${getEquippedHtml(item, heroes)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Type</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Type")}</div>
                             <select id="editGearType" class="editGearStatSelect" onchange="Dialog.changeEditGearMainStat()">
                                 ${getGearTypeOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Set</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Set")}</div>
                             <select id="editGearSet" class="editGearStatSelect">
                                 ${getGearSetOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Reforge</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Reforge")}</div>
                             <select id="editGearMaterial" class="editGearStatSelect">
                                 ${getGearMaterialOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Rank</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Rank")}</div>
                             <select id="editGearRank" class="editGearStatSelect">
                                 ${getGearRankOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Level</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Level")}</div>
                             <input type="number" class="editGearStatNumber" id="editGearLevel" value="${item.level}">
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Enhance</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Enhance")}</div>
                             <input type="number" class="editGearStatNumber" id="editGearEnhance" value="${item.enhance}">
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Locked</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Locked")}</div>
                             <input type="checkbox" id="editGearLocked" ${item.locked ? "checked" : ""}>
                         </div>
 
                         </br>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Main Stat</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Main Stat")}</div>
                             <select id="editGearMainStatType" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.main)}
                             </select>
@@ -381,7 +383,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 1</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Substat 1")}</div>
                             <select id="editGearStat1Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[0])}
                             </select>
@@ -389,7 +391,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 2</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Substat 2")}</div>
                             <select id="editGearStat2Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[1])}
                             </select>
@@ -397,7 +399,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 3</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Substat 3")}</div>
                             <select id="editGearStat3Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[2])}
                             </select>
@@ -405,7 +407,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 4</div>
+                            <div class="editGearStatLabel" data-t>${i18next.t("Substat 4")}</div>
                             <select id="editGearStat4Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[3])}
                             </select>
@@ -444,7 +446,7 @@ module.exports = {
                         !editedItem.set  || editedItem.set == "None"  ||
                         !editedItem.gear || editedItem.gear == "None" ||
                         !editedItem.main || !editedItem.main.type || editedItem.main.type == "None" || !editedItem.main.value) {
-                        module.exports.error("Please make sure Type / Set / Rank / Level / Enhance / Main stat are not empty");
+                        module.exports.error(i18next.t("Please make sure Type / Set / Rank / Level / Enhance / Main stat are not empty"));
                         console.error("FAIL", editedItem)
                         return false;
                     }
@@ -456,20 +458,20 @@ module.exports = {
                     const subStatType3 = document.getElementById('editGearStat3Type').value;
                     const subStatType4 = document.getElementById('editGearStat4Type').value;
 
-                    if (subStatType1 != "None") substats.push({type: subStatType1, value: parseInt(document.getElementById('editGearStat1Value').value || 0)})
-                    if (subStatType2 != "None") substats.push({type: subStatType2, value: parseInt(document.getElementById('editGearStat2Value').value || 0)})
-                    if (subStatType3 != "None") substats.push({type: subStatType3, value: parseInt(document.getElementById('editGearStat3Value').value || 0)})
-                    if (subStatType4 != "None") substats.push({type: subStatType4, value: parseInt(document.getElementById('editGearStat4Value').value || 0)})
+                    if (subStatType1 !="None") substats.push({type: subStatType1, value: parseInt(document.getElementById('editGearStat1Value').value || 0)})
+                    if (subStatType2 !="None") substats.push({type: subStatType2, value: parseInt(document.getElementById('editGearStat2Value').value || 0)})
+                    if (subStatType3 !="None") substats.push({type: subStatType3, value: parseInt(document.getElementById('editGearStat3Value').value || 0)})
+                    if (subStatType4 !="None") substats.push({type: subStatType4, value: parseInt(document.getElementById('editGearStat4Value').value || 0)})
 
                     editedItem.substats = substats;
 
                     if (editedItem.enhance == 15 && editedItem.substats.length != 4) {
-                        module.exports.error("Please make sure +15 items have 4 substats");
+                        module.exports.error(i18next.t("Please make sure +15 items have 4 substats"));
                         console.error("FAIL", editedItem)
                         return false;
                     }
                     if (editedItem.enhance < 0 ||  editedItem.enhance > 15) {
-                        module.exports.error("Item enhance can only be 0 - 15");
+                        module.exports.error(i18next.t("Item enhance can only be 0 - 15"));
                         console.error("FAIL", editedItem)
                         return false;
                     }
@@ -543,7 +545,7 @@ function getImprintHtml(hero, heroInfo) {
         }
     }
 
-    var html = `<select class="editGearStatSelect" id="editImprint"><option value="None">None</option>`;
+    var html = `<select class="editGearStatSelect" id="editImprint"><option value="None">${i18next.t("None")}</option>`;
 
     for (var grade of Object.keys(fixedImprintValues)) {
         html += `<option value="${fixedImprintValues[grade]}" ${hero.imprintNumber == fixedImprintValues[grade] ? "selected" : ""}>${fixedImprintValues[grade]}${displayText} - ${grade}</option>`
@@ -559,7 +561,7 @@ function getImprintHtml(hero, heroInfo) {
 
 
 function getEquippedHtml(item, heroes) {
-    var html = `<option value="None">Nobody</option>`;
+    var html = `<option value="None">${i18next.t("Nobody")}</option>`;
 
     Utils.sortByAttribute(heroes, 'name');
 
@@ -572,14 +574,14 @@ function getEquippedHtml(item, heroes) {
 
 
 function getArtifactHtml(hero) {
-    var html = `<option value="None">None</option>`;
+    var html = `<option value="None">${i18next.t("None")}</option>`;
 
     const artifactsJson = HeroData.getAllArtifactData();
     const artifacts = Object.values(artifactsJson);
 
     for (var artifact of artifacts) {
         // console.log(hero, artifact.name);
-        html += `<option value="${artifact.name}" ${hero.artifactName == artifact.name ? "selected" : ""}>${artifact.name}</option>`
+        html += `<option value="${artifact.name}" ${hero.artifactName == artifact.name ? "selected" : ""}>${i18next.t(artifact.name)}</option>`
 
 
     }
@@ -589,15 +591,15 @@ function getArtifactHtml(hero) {
 
 
 function getArtifactEnhanceHtml(hero) {
-    var html = `<option value="None">None</option>`;
+    var html = `<option value="None">${i18next.t("None")}</option>`;
 
     const artifactName = hero.artifactName
-    if (artifactName && artifactName != "None") {
+    if (artifactName && artifactName !="None") {
         const artifactLevel = hero.artifactLevel;
-        if (artifactLevel && artifactLevel != "None") {
+        if (artifactLevel && artifactLevel !="None") {
             for (var i = 30; i >= 0; i--) {
                 var stats = Artifact.getStats(artifactName, i)
-                html += `<option value="${i}" ${artifactLevel == i ? "selected" : ""}>${i} - (${stats.attack.toFixed(1)} atk, ${stats.health.toFixed(1)} hp)</option>`
+                html += `<option value="${i}" ${artifactLevel == i ? "selected" : ""}>${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")})</option>`
             }
 
         }
@@ -607,7 +609,7 @@ function getArtifactEnhanceHtml(hero) {
 }
 
 function getEeEnhanceHtml(hero, ee) {
-    var html = `<option value="None">None</option>`;
+    var html = `<option value="None">${i18next.t("None")}</option>`;
     if (!ee) {
         return html;
     }
@@ -696,7 +698,7 @@ function getGearRankOptionsHtml(item) {
 function getGearMaterialOptionsHtml(item) {
     const material = item.material;
     return  `
-<option value="None">None</option>
+<option value="None">${i18next.t("None")}</option>
 <option value="Hunt" ${material == "Hunt" ? "selected" : ""}>Hunt</option>
 <option value="Conversion" ${material == "Conversion" ? "selected" : ""}>Conversion</option>
 `
