@@ -1,6 +1,8 @@
 {
   "Optimizer": "配裝器",
   "Ocr Debugger": "Ocr 配置器",
+  "Subprocess Debugger":"子進程調試",
+  "Clear language cache":"清空語言緩存",
   "Gear": "裝備",
   "Heroes": "英雄",
   "Hero": "英雄",

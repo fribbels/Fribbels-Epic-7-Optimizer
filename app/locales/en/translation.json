@@ -1,6 +1,8 @@
 {
   "Optimizer":"Optimizer",
   "Ocr Debugger":"Ocr Debugger",
+  "Subprocess Debugger":"Subprocess Debugger",
+  "Clear language cache":"Clear language cache",
   "Gear":"Gear",
   "Heroes":"Heroes",
   "Hero":"Hero",

@@ -735,25 +735,25 @@ window.jQuery = $;
       <a  data-t>Height:</a><br>
       <input type="number" id="ocr-test-input-height" value="20"><br>
 
-      <input type="submit" value="Submit" id="ocr-test-submit-number" data-t>Submit Number<br>
-      <input type="submit" value="Submit" id="ocr-test-submit-text" data-t>Submit Text<br>
+      <input type="submit" value="Submit" id="ocr-test-submit-number" data-t><a data-t>Submit Number</a><br>
+      <input type="submit" value="Submit" id="ocr-test-submit-text" data-t><a data-t>Submit Text</a><br>
 
-      <input type="submit" value="Submit" id="ocr-test-file-scan" data-t>File Scan<br>
+      <input type="submit" value="Submit" id="ocr-test-file-scan" data-t><a data-t>File Scan</a><br>
 
       <br><br>
 
-      <input type="submit" value="Submit" id="ocr-test-main-name" data-t>Main Stat name<br>
-      <input type="submit" value="Submit" id="ocr-test-main-numbers" data-t>Main Stat numbers<br>
-      <input type="submit" value="Submit" id="ocr-test-sub-name" data-t>Sub Stat name<br>
-      <input type="submit" value="Submit" id="ocr-test-sub-numbers" data-t>Sub Stat numbers<br>
-      <input type="submit" value="Submit" id="ocr-test-all" data-t>All<br>
-      <input type="submit" value="Submit" id="ocr-test-jimp" data-t>Jimp<br>
-      <input type="submit" value="Submit" id="ocr-test-full-scan" data-t>Full scan<br>
-      <input type="submit" value="Submit" id="ocr-test-lib" data-t>Lib<br>
+      <input type="submit" value="Submit" id="ocr-test-main-name" data-t><a data-t>Main Stat name</a><br>
+      <input type="submit" value="Submit" id="ocr-test-main-numbers" data-t><a data-t>Main Stat numbers</a><br>
+      <input type="submit" value="Submit" id="ocr-test-sub-name" data-t><a data-t>Sub Stat name</a><br>
+      <input type="submit" value="Submit" id="ocr-test-sub-numbers" data-t><a data-t>Sub Stat numbers</a><br>
+      <input type="submit" value="Submit" id="ocr-test-all" data-t><a data-t>All</a><br>
+      <input type="submit" value="Submit" id="ocr-test-jimp" data-t><a data-t>Jimp</a><br>
+      <input type="submit" value="Submit" id="ocr-test-full-scan" data-t><a data-t>Full scan</a><br>
+      <input type="submit" value="Submit" id="ocr-test-lib" data-t><a data-t>Lib</a><br>
 
       <br>
 
-      <input type="submit" value="Submit" id="ocr-test-debug1" data-t>Debug1<br>
+      <input type="submit" value="Submit" id="ocr-test-debug1" data-t><a data-t>Debug1</a><br>
       <img src="" id="ocr-test-crop"/>
       <br>
       <img src="" id="ocr-test-crop1"/>
@@ -1578,8 +1578,10 @@ window.jQuery = $;
         <span> | </span>
          <a href='app.html?lng=zh'>简体中文</a>
          <span> | </span>
-         <a href='app.html?lng=zh-TW'>繁體中文</a>
+         <a href='app.html?lng=zh-TW'>繁體中文</a><br>
        </div>
+
+       <button class="Button" id="clearlocalCache" onclick="clearlocalCache()" data-t>Clear language cache</button>
 
         <div class="toggleRow">
           <div class="switch">

@@ -1,3 +1,5 @@
+const { functions } = require("electron-log");
+
 /* eslint-disable */
 window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLanguageDetector).init({
   debug: 'true',
@@ -15,8 +17,8 @@ window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLangua
     lookupFromSubdomainIndex: 0,
 
     // cache user language on
-    //caches: ['localStorage', 'cookie'],
-    //excludeCacheFor: ['cimode'],
+    caches: ['localStorage', 'cookie'],
+    excludeCacheFor: ['cimode'],
     htmlTag: document.documentElement,
   },
   ignoreIds: ['loadFromGameExportOutputText','exportOutputText'],
@@ -50,11 +52,12 @@ window.i18next.on('languageChanged initialized', function() {
   var text = document.querySelectorAll('[data-t]');
   var lang = i18next.language;
   console.log(text);
+  //localStorage.clear();
   if (lang != 'en'){
   text.forEach(
     function(currentValue, currentIndex, listObj) {
       console.log(currentValue.nodeName);
-      if (['LABEL','A','TEXT','H2','U','B','DIV','OPTION'].includes(currentValue.nodeName)){
+      if (['LABEL','A','TEXT','H2','U','B','DIV','SPAN','OPTION','BUTTON'].includes(currentValue.nodeName)){
         var textkey = (currentValue.innerText).trim();
         console.log('true!'+textkey);
         currentValue.innerText=i18next.t(textkey)
@@ -73,3 +76,8 @@ window.i18next.on('languageChanged initialized', function() {
     }
   }
 });
+
+function clearlocalCache(){
+  console.log('Language Cache Cleared!');
+  localStorage.clear();
+};
