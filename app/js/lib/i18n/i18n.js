@@ -66,6 +66,14 @@ window.i18next.on('languageChanged initialized', function() {
         console.log('true! key='+textkey);
         console.log('translation='+i18next.t(textkey));
         currentValue.innerHTML=i18next.t(textkey)
+      } else if (['INPUT'].includes(currentValue.nodeName)) {
+        var textkey = (currentValue.getAttribute("value")).trim();
+        console.log('true! key='+textkey);
+        currentValue.setAttribute("value", i18next.t(textkey));
+      } else if (['OPTGROUP'].includes(currentValue.nodeName)) {
+        var textkey = (currentValue.getAttribute("label")).trim();
+        console.log('true! key='+textkey);
+        currentValue.setAttribute("label", i18next.t(textkey));
       }
     })
   } else {

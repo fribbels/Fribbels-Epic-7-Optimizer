@@ -84,11 +84,11 @@ window.jQuery = $;
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
 
-              <input type="submit" value="Start" class="gearPreviewButton" id="submitOptimizerRequest"><br>
-              <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter"><br>
-              <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel"><br>
-              <!-- <input type="submit" value="Load filters" class="gearPreviewButton" id="submitOptimizerLoad"><br> -->
-              <input type="submit" value="Reset filters" class="gearPreviewButton" id="submitOptimizerReset">
+              <input type="submit" value="Start" class="gearPreviewButton" id="submitOptimizerRequest" data-t ><br>
+              <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter" data-t ><br>
+              <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel" data-t ><br>
+              <!-- <input type="submit" value="Load filters" class="gearPreviewButton" id="submitOptimizerLoad" data-t ><br> -->
+              <input type="submit" value="Reset filters" class="gearPreviewButton" id="submitOptimizerReset" data-t >
 
             </div>
             <div class="vertical"></div>
@@ -180,7 +180,7 @@ window.jQuery = $;
             <div id="options-panel" class="constraints-panel-col-small">
 <!--
               <div class="panelLabel">
-                <div class="panelLabelText">Force mode</div>
+                <div class="panelLabelText" data-t>Force mode</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="forceModeTooltip"></img>
               </div>
 
@@ -449,7 +449,7 @@ window.jQuery = $;
               </div>
               <select multiple="multiple" id="inputSet1" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
-                <optgroup label="4 Piece">
+                <optgroup label="4 Piece" data-t>
                   <option value="AttackSet" data-t>Attack</option>
                   <option value="CounterSet" data-t>Counter</option>
                   <option value="DestructionSet" data-t>Destruction</option>
@@ -459,7 +459,7 @@ window.jQuery = $;
                   <option value="RevengeSet" data-t>Revenge</option>
                   <option value="SpeedSet" data-t>Speed</option>
                 </optgroup>
-                <optgroup label="2 Piece">
+                <optgroup label="2 Piece" data-t>
                   <option value="CriticalSet" data-t>Critical</option>
                   <option value="DefenseSet" data-t>Defense</option>
                   <option value="HealthSet" data-t>Health</option>
@@ -473,7 +473,7 @@ window.jQuery = $;
 
               <select multiple="multiple" id="inputSet2" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
-                <optgroup label="2 Piece">
+                <optgroup label="2 Piece" data-t>
                   <option value="CriticalSet" data-t>Critical</option>
                   <option value="DefenseSet" data-t>Defense</option>
                   <option value="HealthSet" data-t>Health</option>
@@ -487,7 +487,7 @@ window.jQuery = $;
 
               <select multiple="multiple" id="inputSet3" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
-                <optgroup label="2 Piece">
+                <optgroup label="2 Piece" data-t>
                   <option value="CriticalSet" data-t>Critical</option>
                   <option value="DefenseSet" data-t>Defense</option>
                   <option value="HealthSet" data-t>Health</option>
@@ -505,7 +505,7 @@ window.jQuery = $;
               </div>
               <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
-                <optgroup label="4 Piece">
+                <optgroup label="4 Piece" data-t>
                   <option value="AttackSet" data-t>Attack</option>
                   <option value="CounterSet" data-t>Counter</option>
                   <option value="DestructionSet" data-t>Destruction</option>
@@ -515,7 +515,7 @@ window.jQuery = $;
                   <option value="RevengeSet" data-t>Revenge</option>
                   <option value="SpeedSet" data-t>Speed</option>
                 </optgroup>
-                <optgroup label="2 Piece">
+                <optgroup label="2 Piece" data-t>
                   <option value="CriticalSet" data-t>Critical</option>
                   <option value="DefenseSet" data-t>Defense</option>
                   <option value="HealthSet" data-t>Health</option>
@@ -778,7 +778,7 @@ window.jQuery = $;
       <div class="gearSectionContainer">
       <!-- <h2>gear-section</h2> -->
 
-      <!-- <input type="submit" value="Update" class="gearPreviewButton" id="updateGear"> -->
+      <!-- <input type="submit" value="Update" class="gearPreviewButton" id="updateGear" data-t> -->
 
         <div class="panelLabel gearTabTopPanelLabel">
           <div class="gearTabTopPanelLabelLeft">
@@ -1373,16 +1373,16 @@ window.jQuery = $;
           <div id="builds-table" class="ag-theme-balham"></div>
         </div>
         <div class="heroesTabButtonRow">
-          <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit">
-          <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit">
+          <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit" data-t>
+          <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit" data-t>
   <!--
         </div>
         <div class="heroesTabButtonRow"> -->
 
-          <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit">
-          <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit">
-          <input type="submit" value="Save As Build" class="gearPreviewButton" id="saveAsBuildSubmit">
-          <input type="submit" value="Remove Build" class="gearPreviewButton" id="removeBuildSubmit">
+          <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit" data-t>
+          <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit" data-t>
+          <input type="submit" value="Save As Build" class="gearPreviewButton" id="saveAsBuildSubmit" data-t>
+          <input type="submit" value="Remove Build" class="gearPreviewButton" id="removeBuildSubmit" data-t>
 
         </div>
 
@@ -1407,11 +1407,11 @@ window.jQuery = $;
         </div>
 
         <div class="heroesTabButtonRow">
-          <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipHeroesSubmit">
-          <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockHeroesSubmit">
-          <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockHeroesSubmit">
-          <input type="submit" value="Select All" class="gearPreviewButton" id="heroPreviewSelectAll">
-          <input type="submit" value="Deselect All" class="gearPreviewButton" id="heroPreviewDeselectAll">
+          <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipHeroesSubmit" data-t>
+          <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockHeroesSubmit" data-t>
+          <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockHeroesSubmit" data-t>
+          <input type="submit" value="Select All" class="gearPreviewButton" id="heroPreviewSelectAll" data-t>
+          <input type="submit" value="Deselect All" class="gearPreviewButton" id="heroPreviewDeselectAll" data-t>
         </div>
 
       </div>
@@ -1450,12 +1450,12 @@ window.jQuery = $;
       <br>
 
 
-      <input type="submit" class="gearPreviewButton" value="Start scanning" id="loadIngameGearStart">
+      <input type="submit" class="gearPreviewButton" value="Start scanning" id="loadIngameGearStart" data-t>
 
       <br>
       <br>
 
-      <input type="submit" class="gearPreviewButton" value="Stop scanning" id="loadIngameGearEnd">
+      <input type="submit" class="gearPreviewButton" value="Stop scanning" id="loadIngameGearEnd" data-t>
 
       <br>
       <br>
@@ -1465,7 +1465,7 @@ window.jQuery = $;
       <br>
       <br>
 
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveLoadFromGameExportOutput">
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveLoadFromGameExportOutput" data-t>
       <text id="loadFromGameExportOutputText"></text>
 
       <br>
@@ -1482,20 +1482,20 @@ window.jQuery = $;
       This is useful for people who re-screenshot all their gear, and want to keep all their hero settings.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Replace data" id="importFileSelect">
+      <input type="submit" class="gearPreviewButton" value="Replace data" id="importFileSelect" data-t>
       <text id="importOutputText" data-t>Waiting for file..</text>
 
       <br><br>
 
-      <input type="submit" class="gearPreviewButton" value="Add new data" id="importAppendFileSelect">
+      <input type="submit" class="gearPreviewButton" value="Add new data" id="importAppendFileSelect" data-t>
       <text id="importAppendOutputText" data-t>Waiting for file..</text>
 
       <br><br>
 
-      <input type="submit" class="gearPreviewButton" value="Merge data" id="importMergeFileSelect">
+      <input type="submit" class="gearPreviewButton" value="Merge data" id="importMergeFileSelect" data-t>
       <text id="importMergeOutputText" data-t>Waiting for file..</text>
 
-      <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit"> -->
+      <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit" data-t> -->
 
       <br>
       <br>
@@ -1506,13 +1506,13 @@ window.jQuery = $;
       You can load/save your hero + gear configuration here.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Save data" id="saveDataSubmit">
+      <input type="submit" class="gearPreviewButton" value="Save data" id="saveDataSubmit" data-t>
       <text id="saveDataSubmitOutputText" data-t>Waiting for file..</text>
 
       <br>
       <br>
 
-      <input type="submit" class="gearPreviewButton" value="Load data" id="loadDataSubmit">
+      <input type="submit" class="gearPreviewButton" value="Load data" id="loadDataSubmit" data-t>
       <text id="loadDataSubmitOutputText" data-t>Waiting for file..</text>
 
       <br>
@@ -1528,7 +1528,7 @@ window.jQuery = $;
       <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
 
 
-      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit">
+      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit" data-t>
       <span id="fileReadSubmitOutputText" data-t>Waiting for folder..</span>
 
       <br>
@@ -1542,7 +1542,7 @@ window.jQuery = $;
         Once results are printed, hit 'Export'. This will output a 'gear.txt' in the folder where you installed this app.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput">
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput" data-t>
       <text id="screenshotExportOutputText"></text>
 
       <br>
@@ -1553,7 +1553,7 @@ window.jQuery = $;
       Select the Zarroc optimizer file here.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect">
+      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect" data-t>
       <text id="importZarrocSaveFileSelectOutputText" data-t>Waiting for file..</text>
 
     </div>
@@ -1611,7 +1611,7 @@ window.jQuery = $;
         </div>
 
         <div class="toggleRow">
-          <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit">
+          <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit" data-t>
           <div class="toggleRowSpace"></div>
           <text id="selectDefaultFolderSubmitOutputText" data-t>Select default folder</text>
         </div>
