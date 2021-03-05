@@ -269,7 +269,7 @@
   "Choose any sets you don't want included in the search.": "选择你不想要在搜寻中包含的套装",
   "Select substat filters to filter results by. Left column is min (inclusive) and right column is max (inclusive).": "填入希望筛选的副属数值。左边栏位是最小值（包含），右边栏位是最大值（包含）",
   "Select rating filters to filter results by. Ratings are stats that aren't seen in the game, but are useful for comparing builds.  Left column is min (inclusive) and right column is max (inclusive).": "填入希望筛选的评分值。评分值不会在游戏中显示，但有助于比较配置。左边栏位是最小值（包含），右边栏位是最大值（包含）",
-  "Combat power, as you would find it ingame, but without factoring in skill enhances. Useful for workd boss units.": "CP，同游戏中的CP一样，不过不计算技能加点。通常对世界王的角色有用",
+  "<b>Cp - </b> Combat power, as you would find it ingame, but without factoring in skill enhances. Useful for workd boss units.": "<b>战斗力 - </b> CP，同游戏中的CP一样，不过不计算技能加点。通常对世界王的角色有用",
   "Hp * Speed rating, for comparing fast/health builds, disregaring defense. Example health scaling units: Krau, Fceci.": "血量*速度，比较速度跟血量时的指标，不计防御。 血量相关的角色，如：克劳乌、暗赛西.",
   "Effective Hp, for comparing how much damage a unit can take. Formula: HP * (Defense/300 + 1).": "有效血量，计算公式：血量 * (防御/300 + 1)，这个指标用来评估你的角色可以承受多少伤害",
   "Effective Hp * Speed rating, for comparing fast/tanky builds.": "有效血量*速度，用以比较速度/坦度的配置。",
