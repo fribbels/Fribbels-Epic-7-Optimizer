@@ -20,9 +20,9 @@ module.exports = {
         }
         const selectedNode = heroesGrid.gridOptions.api.getSelectedNodes()[0]
 
-        // heroes.forEach(element => {
-        //   element.name = i18next.t(element.name)
-        // });
+        heroes.forEach(element => {
+          element.label = i18next.t(element.name)
+        });
         currentHeroes = heroes;
         heroesGrid.gridOptions.api.setRowData(heroes)
         heroesGrid.gridOptions.api.redrawRows();
@@ -179,7 +179,8 @@ function buildGrid(heroes) {
             {headerName: i18next.t('icon'), field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
             {headerName: i18next.t('elem'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: i18next.t('class'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
-            {headerName: i18next.t('name'), field: 'name', width: 170, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
+            //{headerName: i18next.t('name'), field: 'name', width: 0, wrapText: true, cellStyle: {'display':'none'}},
+            {headerName: i18next.t('name'), field: 'label', width: 170, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
             // {headerName: i18next.t('Stars'), field: 'rarity', width: 50},
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
