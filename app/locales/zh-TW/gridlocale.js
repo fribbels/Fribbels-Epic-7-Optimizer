@@ -2,45 +2,45 @@
 
 const AG_GRID_LOCALE_ZH_TW = {
     // Set Filter
-    selectAll: '(Select All)',
-    selectAllSearchResults: '(Select All Search Results)',
-    searchOoo: 'Search...',
-    blanks: '(Blanks)',
-    noMatches: 'No matches',
+    selectAll: '(全選)',
+    selectAllSearchResults: '(選擇全部搜索結果)',
+    searchOoo: '搜索...',
+    blanks: '(空白)',
+    noMatches: '無結果',
 
     // Number Filter & Text Filter
-    filterOoo: 'Filter...',
-    equals: 'Equals',
-    notEqual: 'Not equal',
-    empty: 'Choose One',
+    filterOoo: '篩選...',
+    equals: '等於',
+    notEqual: '不等於',
+    empty: '請選擇',
 
     // Number Filter
-    lessThan: 'Less than',
-    greaterThan: 'Greater than',
-    lessThanOrEqual: 'Less than or equal',
-    greaterThanOrEqual: 'Greater than or equal',
-    inRange: 'In range',
-    inRangeStart: 'to',
-    inRangeEnd: 'from',
+    lessThan: '小於',
+    greaterThan: '大於',
+    lessThanOrEqual: '小於等於',
+    greaterThanOrEqual: '大於等於',
+    inRange: '範圍',
+    inRangeStart: '從',
+    inRangeEnd: '到',
 
     // Text Filter
-    contains: 'Contains',
-    notContains: 'Not contains',
-    startsWith: 'Starts with',
-    endsWith: 'Ends with',
+    contains: '包含',
+    notContains: '不包含',
+    startsWith: '開始於',
+    endsWith: '結束於',
 
     // Date Filter
     dateFormatOoo: 'yyyy-mm-dd',
 
     // Filter Conditions
-    andCondition: 'AND',
-    orCondition: 'OR',
+    andCondition: '與',
+    orCondition: '或',
 
     // Filter Buttons
-    applyFilter: 'Apply',
-    resetFilter: 'Reset',
-    clearFilter: 'Clear',
-    cancelFilter: 'Cancel',
+    applyFilter: '應用',
+    resetFilter: '重置',
+    clearFilter: '清空',
+    cancelFilter: '取消',
 
     // Filter Titles
     textFilter: 'Text Filter',
@@ -49,8 +49,8 @@ const AG_GRID_LOCALE_ZH_TW = {
     setFilter: 'Set Filter',
 
     // Side Bar
-    columns: 'Columns',
-    filters: 'Filters',
+    columns: '列',
+    filters: '篩選',
 
     // columns tool panel
     pivotMode: 'Pivot Mode',
@@ -65,9 +65,9 @@ const AG_GRID_LOCALE_ZH_TW = {
     group: 'Group',
 
     // Other
-    loadingOoo: 'Loading...',
-    noRowsToShow: 'No Rows To Show',
-    enabled: 'Enabled',
+    loadingOoo: '加載中...',
+    noRowsToShow: '暫無數據',
+    enabled: '啓用',
 
     // Menu
     pinColumn: 'Pin Column',
@@ -103,14 +103,14 @@ const AG_GRID_LOCALE_ZH_TW = {
     selectedRows: 'Selected',
     totalRows: 'Total Rows',
     totalAndFilteredRows: 'Rows',
-    more: 'More',
-    to: 'to',
-    of: 'of',
-    page: 'Page',
-    nextPage: 'Next Page',
-    lastPage: 'Last Page',
-    firstPage: 'First Page',
-    previousPage: 'Previous Page',
+    more: '更多',
+    to: '-',
+    of: '/',
+    page: '頁碼',
+    nextPage: '下一頁',
+    lastPage: '末頁',
+    firstPage: '首頁',
+    previousPage: '上一頁',
 
     // Enterprise Menu (Charts)
     pivotChartAndPivotMode: 'Pivot Chart & Pivot Mode',
