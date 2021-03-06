@@ -208,6 +208,8 @@ module.exports = {
                 },
                 focusConfirm: false,
                 showCancelButton: true,
+                confirmButtonText: i18next.t("OK"),
+                cancelButtonText: i18next.t("Cancel"),
                 preConfirm: async () => {
                     const artifactName = $('#editArtifact').val();
                     const artifactLevel = $('#editArtifactLevel').val();
@@ -261,12 +263,14 @@ module.exports = {
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
-                        <p>Build name</p>
+                        <p>${i18next.t("Build name")}</p>
                         <input type="text" class="bonusStatInput" id="editBuildName" value="${name ? name : ""}" autofocus="autofocus" onfocus="this.select()" style="width:200px !important">
                     </div>
                 `,
                 focusConfirm: false,
                 showCancelButton: true,
+                confirmButtonText: i18next.t("OK"),
+                cancelButtonText: i18next.t("Cancel"),
                 preConfirm: async () => {
                     const buildInfo = {
                         buildName: document.getElementById('editBuildName').value,
@@ -427,6 +431,8 @@ module.exports = {
                 },
                 focusConfirm: false,
                 showCancelButton: true,
+                confirmButtonText: i18next.t("OK"),
+                cancelButtonText: i18next.t("Cancel"),
                 preConfirm: async () => {
                     const editedItem = {
                         rank: document.getElementById('editGearRank').value,
@@ -566,7 +572,7 @@ function getEquippedHtml(item, heroes) {
     Utils.sortByAttribute(heroes, 'name');
 
     for (var hero of heroes) {
-        html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${hero.name}</option>`
+        html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${i18next.t(hero.name)}</option>`
     }
 
     return html;
@@ -633,17 +639,17 @@ function getStatOptionsHtml(stat) {
     const type = stat ? stat.type : null;
     return  `
 <option value="None"></option>
-<option value="AttackPercent" ${type == "AttackPercent" ? "selected" : ""}>Attack %</option>
-<option value="Attack" ${type == "Attack" ? "selected" : ""}>Attack</option>
-<option value="HealthPercent" ${type == "HealthPercent" ? "selected" : ""}>Health %</option>
-<option value="Health" ${type == "Health" ? "selected" : ""}>Health</option>
-<option value="DefensePercent" ${type == "DefensePercent" ? "selected" : ""}>Defense %</option>
-<option value="Defense" ${type == "Defense" ? "selected" : ""}>Defense</option>
-<option value="Speed" ${type == "Speed" ? "selected" : ""}>Speed</option>
-<option value="CriticalHitChancePercent" ${type == "CriticalHitChancePercent" ? "selected" : ""}>Crit Chance</option>
-<option value="CriticalHitDamagePercent" ${type == "CriticalHitDamagePercent" ? "selected" : ""}>Crit Damage</option>
-<option value="EffectivenessPercent" ${type == "EffectivenessPercent" ? "selected" : ""}>Effectiveness</option>
-<option value="EffectResistancePercent" ${type == "EffectResistancePercent" ? "selected" : ""}>Effect Resistance</option>
+<option value="AttackPercent" ${type == "AttackPercent" ? "selected" : ""}>${i18next.t("Attack %")}</option>
+<option value="Attack" ${type == "Attack" ? "selected" : ""}>${i18next.t("Attack")}</option>
+<option value="HealthPercent" ${type == "HealthPercent" ? "selected" : ""}>${i18next.t("Health %")}</option>
+<option value="Health" ${type == "Health" ? "selected" : ""}>${i18next.t("Health")}</option>
+<option value="DefensePercent" ${type == "DefensePercent" ? "selected" : ""}>${i18next.t("Defense %")}</option>
+<option value="Defense" ${type == "Defense" ? "selected" : ""}>${i18next.t("Defense")}</option>
+<option value="Speed" ${type == "Speed" ? "selected" : ""}>${i18next.t("Speed")}</option>
+<option value="CriticalHitChancePercent" ${type == "CriticalHitChancePercent" ? "selected" : ""}>${i18next.t("Crit Chance")}</option>
+<option value="CriticalHitDamagePercent" ${type == "CriticalHitDamagePercent" ? "selected" : ""}>${i18next.t("Crit Damage")}</option>
+<option value="EffectivenessPercent" ${type == "EffectivenessPercent" ? "selected" : ""}>${i18next.t("Effectiveness")}</option>
+<option value="EffectResistancePercent" ${type == "EffectResistancePercent" ? "selected" : ""}>${i18next.t("Effect Resistance")}</option>
 `
 }
 
@@ -651,12 +657,12 @@ function getGearTypeOptionsHtml(item) {
     const gear = item.gear;
     return  `
 <option value="None"></option>
-<option value="Weapon" ${gear == "Weapon" ? "selected" : ""}>Weapon</option>
-<option value="Helmet" ${gear == "Helmet" ? "selected" : ""}>Helmet</option>
-<option value="Armor" ${gear == "Armor" ? "selected" : ""}>Armor</option>
-<option value="Necklace" ${gear == "Necklace" ? "selected" : ""}>Necklace</option>
-<option value="Ring" ${gear == "Ring" ? "selected" : ""}>Ring</option>
-<option value="Boots" ${gear == "Boots" ? "selected" : ""}>Boots</option>
+<option value="Weapon" ${gear == "Weapon" ? "selected" : ""}>${i18next.t("Weapon")}</option>
+<option value="Helmet" ${gear == "Helmet" ? "selected" : ""}>${i18next.t("Helmet")}</option>
+<option value="Armor" ${gear == "Armor" ? "selected" : ""}>${i18next.t("Armor")}</option>
+<option value="Necklace" ${gear == "Necklace" ? "selected" : ""}>${i18next.t("Necklace")}</option>
+<option value="Ring" ${gear == "Ring" ? "selected" : ""}>${i18next.t("Ring")}</option>
+<option value="Boots" ${gear == "Boots" ? "selected" : ""}>${i18next.t("Boots")}</option>
 `
 }
 
@@ -664,22 +670,22 @@ function getGearSetOptionsHtml(item) {
     const set = item.set;
     return  `
 <option value="None"></option>
-<option value="SpeedSet" ${set == "SpeedSet" ? "selected" : ""}>Speed</option>
-<option value="AttackSet" ${set == "AttackSet" ? "selected" : ""}>Attack</option>
-<option value="DestructionSet" ${set == "DestructionSet" ? "selected" : ""}>Destruction</option>
-<option value="LifestealSet" ${set == "LifestealSet" ? "selected" : ""}>Lifesteal</option>
-<option value="CounterSet" ${set == "CounterSet" ? "selected" : ""}>Counter</option>
-<option value="RageSet" ${set == "RageSet" ? "selected" : ""}>Rage</option>
-<option value="HealthSet" ${set == "HealthSet" ? "selected" : ""}>Health</option>
-<option value="DefenseSet" ${set == "DefenseSet" ? "selected" : ""}>Defense</option>
-<option value="CriticalSet" ${set == "CriticalSet" ? "selected" : ""}>Critical</option>
-<option value="HitSet" ${set == "HitSet" ? "selected" : ""}>Hit</option>
-<option value="ResistSet" ${set == "ResistSet" ? "selected" : ""}>Resist</option>
-<option value="UnitySet" ${set == "UnitySet" ? "selected" : ""}>Unity</option>
-<option value="ImmunitySet" ${set == "ImmunitySet" ? "selected" : ""}>Immunity</option>
-<option value="PenetrationSet" ${set == "PenetrationSet" ? "selected" : ""}>Penetration</option>
-<option value="InjurySet" ${set == "InjurySet" ? "selected" : ""}>Injury</option>
-<option value="RevengeSet" ${set == "RevengeSet" ? "selected" : ""}>Revenge</option>
+<option value="SpeedSet" ${set == "SpeedSet" ? "selected" : ""}>${i18next.t("Speed")}</option>
+<option value="AttackSet" ${set == "AttackSet" ? "selected" : ""}>${i18next.t("Attack")}</option>
+<option value="DestructionSet" ${set == "DestructionSet" ? "selected" : ""}>${i18next.t("Destruction")}</option>
+<option value="LifestealSet" ${set == "LifestealSet" ? "selected" : ""}>${i18next.t("Lifesteal")}</option>
+<option value="CounterSet" ${set == "CounterSet" ? "selected" : ""}>${i18next.t("Counter")}</option>
+<option value="RageSet" ${set == "RageSet" ? "selected" : ""}>${i18next.t("Rage")}</option>
+<option value="HealthSet" ${set == "HealthSet" ? "selected" : ""}>${i18next.t("Health")}</option>
+<option value="DefenseSet" ${set == "DefenseSet" ? "selected" : ""}>${i18next.t("Defense")}</option>
+<option value="CriticalSet" ${set == "CriticalSet" ? "selected" : ""}>${i18next.t("Critical")}</option>
+<option value="HitSet" ${set == "HitSet" ? "selected" : ""}>${i18next.t("Hit")}</option>
+<option value="ResistSet" ${set == "ResistSet" ? "selected" : ""}>${i18next.t("Resist")}</option>
+<option value="UnitySet" ${set == "UnitySet" ? "selected" : ""}>${i18next.t("Unity")}</option>
+<option value="ImmunitySet" ${set == "ImmunitySet" ? "selected" : ""}>${i18next.t("Immunity")}</option>
+<option value="PenetrationSet" ${set == "PenetrationSet" ? "selected" : ""}>${i18next.t("Penetration")}</option>
+<option value="InjurySet" ${set == "InjurySet" ? "selected" : ""}>${i18next.t("Injury")}</option>
+<option value="RevengeSet" ${set == "RevengeSet" ? "selected" : ""}>${i18next.t("Revenge")}</option>
 `
 }
 
@@ -687,11 +693,11 @@ function getGearRankOptionsHtml(item) {
     const rank = item.rank;
     return  `
 <option value="None"></option>
-<option value="Epic" ${rank == "Epic" ? "selected" : ""}>Epic</option>
-<option value="Heroic" ${rank == "Heroic" ? "selected" : ""}>Heroic</option>
-<option value="Rare" ${rank == "Rare" ? "selected" : ""}>Rare</option>
-<option value="Good" ${rank == "Good" ? "selected" : ""}>Good</option>
-<option value="Normal" ${rank == "Normal" ? "selected" : ""}>Normal</option>
+<option value="Epic" ${rank == "Epic" ? "selected" : ""}>${i18next.t("Epic")}</option>
+<option value="Heroic" ${rank == "Heroic" ? "selected" : ""}>${i18next.t("Heroic")}</option>
+<option value="Rare" ${rank == "Rare" ? "selected" : ""}>${i18next.t("Rare")}</option>
+<option value="Good" ${rank == "Good" ? "selected" : ""}>${i18next.t("Good")}</option>
+<option value="Normal" ${rank == "Normal" ? "selected" : ""}>${i18next.t("Normal")}</option>
 `
 }
 
@@ -699,7 +705,7 @@ function getGearMaterialOptionsHtml(item) {
     const material = item.material;
     return  `
 <option value="None">${i18next.t("None")}</option>
-<option value="Hunt" ${material == "Hunt" ? "selected" : ""}>Hunt</option>
-<option value="Conversion" ${material == "Conversion" ? "selected" : ""}>Conversion</option>
+<option value="Hunt" ${material == "Hunt" ? "selected" : ""}>${i18next.t("Hunt")}</option>
+<option value="Conversion" ${material == "Conversion" ? "selected" : ""}>${i18next.t("Conversion")}</option>
 `
 }

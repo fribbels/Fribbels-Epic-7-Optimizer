@@ -9,19 +9,19 @@ const AG_GRID_LOCALE_ZH = {
     noMatches: '无结果',
 
     // Number Filter & Text Filter
-    filterOoo: 'Filter...',
+    filterOoo: '筛选...',
     equals: '等于',
-    notEqual: 'Not equal',
-    empty: 'Choose One',
+    notEqual: '不等于',
+    empty: '请选择',
 
     // Number Filter
-    lessThan: 'Less than',
-    greaterThan: 'Greater than',
-    lessThanOrEqual: 'Less than or equal',
-    greaterThanOrEqual: 'Greater than or equal',
-    inRange: 'In range',
-    inRangeStart: 'to',
-    inRangeEnd: 'from',
+    lessThan: '小于',
+    greaterThan: '大于',
+    lessThanOrEqual: '小于等于',
+    greaterThanOrEqual: '大于等于',
+    inRange: '范围',
+    inRangeStart: '从',
+    inRangeEnd: '到',
 
     // Text Filter
     contains: '包含',
