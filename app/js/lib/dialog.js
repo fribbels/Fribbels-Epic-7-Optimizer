@@ -65,8 +65,6 @@ module.exports = {
 
 //${level == i ? "selected" : ""}
         for (var i = 30; i >= 0; i--) {
-            console.log(name)
-            if (name == i18next.t("None")){ name = "None"};
             var stats = Artifact.getStats(name, i)
             html += `<option value="${i}" >${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")})</option>`
         }
