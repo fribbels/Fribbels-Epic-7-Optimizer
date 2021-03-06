@@ -207,6 +207,15 @@ function buildGrid() {
     const DIGITS_5 = 50;
     const DIGITS_6 = 55;
 
+    if (i18next.language == 'zh') {
+      var localeText = AG_GRID_LOCALE_ZH;
+    } else if (i18next.language == 'zh-TW') {
+      var localeText = AG_GRID_LOCALE_ZH_TW;
+    } else {
+      var localeText = AG_GRID_LOCALE_EN;
+    }
+    console.log('localeText:'+localeText);
+
     const gridOptions = {
         defaultColDef: {
             width: 50,
@@ -248,6 +257,7 @@ function buildGrid() {
         onRowSelected: onRowSelected,
         pagination: true,
         paginationPageSize: 500,
+        localeText: localeText,
         cacheBlockSize: 500,
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,

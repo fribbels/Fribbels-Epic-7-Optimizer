@@ -7,6 +7,14 @@ var itemsGrid;
 var currentAggregate = {};
 var selectedCell = null;
 
+if (i18next.language == 'zh') {
+  var localeText = AG_GRID_LOCALE_ZH;
+} else if (i18next.language == 'zh-TW') {
+  var localeText = AG_GRID_LOCALE_ZH_TW;
+} else {
+  var localeText = AG_GRID_LOCALE_EN;
+}
+console.log('localeText:'+localeText);
 
 module.exports = {
     initialize: async () => {
@@ -53,6 +61,7 @@ module.exports = {
             rowSelection: 'multiple',
             pagination: true,
             paginationPageSize: 100000,
+            localeText: localeText,
             rowData: getAllItemsResponse.items,
             onRowSelected: onRowSelected,
             onCellMouseOver: cellMouseOver,

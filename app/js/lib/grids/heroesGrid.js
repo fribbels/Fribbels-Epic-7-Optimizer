@@ -6,6 +6,15 @@ global.buildsGrid = null;
 var currentHeroes = [];
 var selectedBuildNode = null;
 
+if (i18next.language == 'zh') {
+  var localeText = AG_GRID_LOCALE_ZH;
+} else if (i18next.language == 'zh-TW') {
+  var localeText = AG_GRID_LOCALE_ZH_TW;
+} else {
+  var localeText = AG_GRID_LOCALE_EN;
+}
+console.log('localeText:'+localeText);
+
 var currentAggregate = {};
 module.exports = {
 
@@ -210,6 +219,7 @@ function buildGrid(heroes) {
         rowHeight: 45,
         pagination: true,
         paginationPageSize: 100000,
+        localeText:localeText,
         onRowSelected: onHeroRowSelected,
         onRowClicked: onHeroRowClick,
     };
@@ -252,6 +262,7 @@ function buildGrid(heroes) {
         rowSelection: 'single',
         onRowSelected: onBuildRowSelected,
         suppressScrollOnNewData: true,
+        localeText:localeText,
         rowData: [],
         cacheBlockSize: 1000,
         maxBlocksInCache: 1,
