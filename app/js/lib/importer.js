@@ -43,14 +43,14 @@ module.exports = {
 
             console.log("FILENAMES", fullFilenames);
 
-            $('#fileReadSubmitOutputText').text(`Reading data from ${fullFilenames.length} screenshots..`)
+            $('#fileReadSubmitOutputText').text(`${i18next.t('Reading data from')} ${fullFilenames.length} ${i18next.t('screenshots.')}.`)
 
             Ocr.readGearFiles(fullFilenames).then((data) => {
                 const items = data.items;
                 const failed = data.failed;
 
                 Notifier.success("Finished reading screenshots");
-                $('#fileReadSubmitOutputText').html(`Finished reading ${fullFilenames.length} screenshots. \n${items.length} screenshots succeded, ${failed.length} failed. ${failed.length > 0 ? "Failed files are:<br>" + failed.join("<br>") : ""} `)
+                $('#fileReadSubmitOutputText').html(` ${i18next.t('Finished reading')} ${fullFilenames.length} ${i18next.t('screenshots.')} \n${items.length} ${i18next.t('screenshots succeded')}, ${failed.length} ${i18next.t('failed')}. ${failed.length > 0 ? i18next.t("Failed files are:")+ "<br>" + failed.join("<br>") : ""} `)
 
                 console.log("SERIALIZING");
                 var serializedStr = "{\"items\":" + ItemSerializer.serialize(items) + "}";
@@ -58,7 +58,7 @@ module.exports = {
                 document.getElementById('exportOutputText').value = serializedStr;
             }).catch(e => {
                 console.error(e)
-                Dialog.error("Error occurred while reading screenshots\n" + e);
+                Dialog.error(i18next.t("Error occurred while reading screenshots")+"\n" + e);
             });
         });
 
@@ -90,11 +90,11 @@ module.exports = {
             fs.writeFile(Files.path(filename), output, (err) => {
                 if (err) {
                     console.error(err)
-                    Notifier.error("Unable to write file " + filename + " - " + err);
+                    Notifier.error(i18next.t("Unable to write file") + filename + " - " + err);
                     return;
                 }
                 console.log('Exported gear.txt');
-                $('#screenshotExportOutputText').text(`Exported data to ${filename}`)
+                $('#screenshotExportOutputText').text(` ${i18next.t('Exported data to')} ${filename}`)
             });
         });
 
@@ -129,7 +129,7 @@ module.exports = {
                     return;
                 }
                 console.log('Exported gear.txt');
-                $('#loadFromGameExportOutputText').text(`Exported data to ${filename}`)
+                $('#loadFromGameExportOutputText').text(` ${i18next.t('Exported data to')} ${filename}`)
             });
         });
 
@@ -156,7 +156,7 @@ module.exports = {
                     throw err;
                 }
 
-                $('#importOutputText').text('Parsing data..')
+                $('#importOutputText').text(i18next.t('Parsing data..'))
 
                 const parsedData = JSON.parse(data);
                 console.log("PARSEDDATA", parsedData);
@@ -170,7 +170,7 @@ module.exports = {
                 await Api.setItems(items);
                 await Api.setHeroes([]);
 
-                $('#importOutputText').text(`Imported ${items.length} items from ${path}`)
+                $('#importOutputText').text(`${i18next.t('Imported')} ${items.length} ${i18next.t('items from')} ${path}`)
             });
         })
 
@@ -197,7 +197,7 @@ module.exports = {
                     throw err;
                 }
 
-                $('#importAppendOutputText').text('Parsing data..')
+                $('#importAppendOutputText').text(i18next.t('Parsing data..'))
 
                 const parsedData = JSON.parse(data);
                 console.log("PARSEDDATA", parsedData);
@@ -210,7 +210,7 @@ module.exports = {
 
                 await Api.addItems(items);
 
-                $('#importAppendOutputText').text(`Appended ${items.length} items from ${path}`)
+                $('#importAppendOutputText').text(` ${i18next.t('Appended')} ${items.length} ${i18next.t('items from')} ${path}`)
             });
         })
 
@@ -238,7 +238,7 @@ module.exports = {
                     throw err;
                 }
 
-                $('#importMergeOutputText').text('Parsing data..')
+                $('#importMergeOutputText').text(i18next.t('Parsing data..'))
 
                 const parsedData = JSON.parse(data);
                 console.log("PARSEDDATA", parsedData);
@@ -251,7 +251,7 @@ module.exports = {
 
                 await Api.mergeItems(items);
 
-                $('#importMergeOutputText').text(`Merged ${items.length} items from ${path}`)
+                $('#importMergeOutputText').text(` ${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
             });
         })
 
@@ -293,7 +293,7 @@ module.exports = {
 
             HeroesTab.redrawHeroInputSelector();
 
-            $('#importZarrocSaveFileSelectOutputText').text(`Loaded ${heroes.length} heroes and ${items.length} items from ${filenames[0]}`)
+            $('#importZarrocSaveFileSelectOutputText').text(` ${i18next.t('Loaded')} ${heroes.length} ${i18next.t('heroes and')} ${items.length} ${i18next.t('items from')} ${filenames[0]}`)
         })
     }
 }
