@@ -47,7 +47,7 @@ window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLangua
 });
 
 
-window.i18next.on('languageChanged initialized', function() {
+window.i18next.on('languageChanged initialized reloadResources', function() {
   if (!i18next.isInitialized) return;
   var text = document.querySelectorAll('[data-t]');
   var lang = i18next.language;
@@ -56,7 +56,7 @@ window.i18next.on('languageChanged initialized', function() {
   if (lang != 'en'){
   text.forEach(
     function(currentValue, currentIndex, listObj) {
-      console.log(currentValue.nodeName);
+      // console.log(currentValue.nodeName);
       if (['LABEL','A','TEXT','H2','U','B','DIV','SPAN','OPTION','BUTTON'].includes(currentValue.nodeName)){
         var textkey = (currentValue.innerText).trim();
         // console.log('true!'+textkey);

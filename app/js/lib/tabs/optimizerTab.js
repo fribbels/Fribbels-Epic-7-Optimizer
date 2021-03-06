@@ -458,8 +458,8 @@ async function lockGearFromIcon(id) {
 
 function redrawHeroImage() {
     const name = $( "#inputHeroAdd option:selected" ).attr("label")
-    console.log($( "#inputHeroAdd option:selected" ));
-    console.log("name:"+name);
+    // console.log($( "#inputHeroAdd option:selected" ));
+    // console.log("name:"+name);
     if (!name || name.length == 0) {
         $('#inputHeroImage').attr("src", Assets.getBlank());
         return;

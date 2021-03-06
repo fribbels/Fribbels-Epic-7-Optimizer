@@ -232,29 +232,29 @@ module.exports = {
   <img src="${heroImage}" class="itemDisplayEquippedHero"></img>
 </div>
 <div class="itemDisplayMainStat">
-  <div class="itemDisplayMainType">${main.type}</div>
+  <div class="itemDisplayMainType">${i18next.t(main.type)}</div>
   <div class="itemDisplayMainValue">${main.value}</div>
 </div>
 <div class="itemDisplaySubstats">
   <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${substat0.type}</div>
+    <div class="itemDisplaySubstatType">${i18next.t(substat0.type)}</div>
     <div class="itemDisplaySubstatValue">${substat0.value}</div>
   </div>
   <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${substat1.type}</div>
+    <div class="itemDisplaySubstatType">${i18next.t(substat1.type)}</div>
     <div class="itemDisplaySubstatValue">${substat1.value}</div>
   </div>
   <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${substat2.type}</div>
+    <div class="itemDisplaySubstatType">${i18next.t(substat2.type)}</div>
     <div class="itemDisplaySubstatValue">${substat2.value}</div>
   </div>
   <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${substat3.type}</div>
+    <div class="itemDisplaySubstatType">${i18next.t(substat3.type)}</div>
     <div class="itemDisplaySubstatValue">${substat3.value}</div>
   </div>
   <div class="horizontalLine"></div>
   <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">Score</div>
+    <div class="itemDisplaySubstatType">${i18next.t("Score")}</div>
     <div class="itemDisplaySubstatValue">${score}</div>
   </div>
 </div>
