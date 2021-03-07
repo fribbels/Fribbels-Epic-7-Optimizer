@@ -27,7 +27,7 @@ window.jQuery = $;
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-theme-material.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/rangeslider.css">
-<link rel="stylesheet" type="text/css" href="css/darktheme.css">
+<link rel="stylesheet" type="text/css" id="darkThemeCss" disabled href="css/darktheme.css">
 
 <link
   rel="stylesheet"
@@ -36,7 +36,15 @@ window.jQuery = $;
 <link rel="stylesheet" type="text/css" href="css/awn.css"></link>
 </head>
 <body>
-<img class="darkModeToggle" style="display:none" id="darkModeToggle" src="./assets/elementdark.png"></img>
+<div class="darkModeToggleContainer">
+  <!-- <img class="darkModeToggle" id="darkModeToggle" src="./assets/elementdark.png"></img> -->
+
+  <label id="darkSwitch" class="darkSwitch">
+    <input type="checkbox" id="darkSlider">
+    <span class="darkSlider round"></span>
+  </label>
+</div>
+
 <div class="tabset">
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" checked>
@@ -70,7 +78,7 @@ window.jQuery = $;
 
               <div class="panelLabel">
                 <div class="panelLabelText" data-t>Hero</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="heroTooltip"></img>
+                <img src="./assets/tooltip.png" class="tooltipImageRight" id="heroTooltip"></img>
               </div>
               <select id="inputHeroAdd" class="gearPreviewButton"></select>
 
@@ -96,8 +104,8 @@ window.jQuery = $;
 
             <div id="preview-panel" class="constraints-panel-col-med">
               <div class="panelLabel">
-                <div class="panelLabelText" id="optionsLabel" data-content="(clear)" data-t>Stats</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="previewTooltip"></img>
+                <div class="panelLabelText" id="statsPreviewLabel" data-content="(clear)" data-t>Stats</div>
+                <img src="./assets/tooltip.png" class="tooltipImageRight" id="previewTooltip"></img>
               </div>
 
               <div class="statPreviewContainer">
@@ -179,26 +187,9 @@ window.jQuery = $;
             <div class="vertical"></div>
 
             <div id="options-panel" class="constraints-panel-col-small">
-<!--
               <div class="panelLabel">
-                <div class="panelLabelText" data-t>Force mode</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="forceModeTooltip"></img>
-              </div>
-
-              <select id="forceNumberSelect" class="gearPreviewButton">
-                <option value=0 selected data-t>Disabled</option>
-                <option value=1 data-t>At least 1 stat</option>
-                <option value=2 data-t>At least 2 stats</option>
-                <option value=3 data-t>At least 3 stats</option>
-                <option value=4 data-t>All 4 stats</option>
-              </select>
-
-
-              <div class="horizontalSpace"></div>
- -->
-              <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="optionsTooltip"></img>
                 <div class="panelLabelText" id="optionsLabel" data-t>Options</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="optionsTooltip"></img>
               </div>
               <div>
                 <input type="checkbox" id="inputPredictReforges" class="optimizer-checkbox" checked>
@@ -209,17 +200,7 @@ window.jQuery = $;
                 <input type="checkbox" id="inputOnlyMaxedGear" class="optimizer-checkbox">
                 <label for="inputOnlyMaxedGear" data-t>Only maxed gear</label>
               </div>
-<!--
-              <div>
-                <input type="checkbox" id="inputOver85" class="optimizer-checkbox">
-                <label for="inputOver85" data-t>Only over lv 85 gear</label>
-              </div>
 
-              <div>
-                <input type="checkbox" id="inputOnlyPlus15Gear" class="optimizer-checkbox">
-                <label for="inputOnlyPlus15Gear" data-t>Only +15 gear</label>
-              </div>
- -->
               <div>
                 <input type="checkbox" id="inputAllowLockedItems" class="optimizer-checkbox">
                 <label for="inputAllowLockedItems" data-t>Locked items</label>
@@ -247,8 +228,8 @@ window.jQuery = $;
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterStatsTooltip"></img>
                 <div class="panelLabelText" id="statsLabel" data-content="(clear)" data-t>Stat filters</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="filterStatsTooltip"></img>
               </div>
               <input type="number" id="inputMinAtkLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel" data-t>Atk</div>
@@ -285,8 +266,8 @@ window.jQuery = $;
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterRatingsTooltip"></img>
                 <div class="panelLabelText" id="ratingsLabel" data-content="(clear)" data-t>Rating filters</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="filterRatingsTooltip"></img>
               </div>
               <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel" data-t>Cp</div>
@@ -338,8 +319,8 @@ window.jQuery = $;
             <div id="stat-priority-panel" class="constraints-panel-col">
 
               <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="substatPriorityTooltip"></img>
                 <div class="panelLabelText" id="substatPriorityLabel" data-t>Substat priority (clear)</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="substatPriorityTooltip"></img>
               </div>
 
               <div class="sliderRow">
@@ -409,8 +390,8 @@ window.jQuery = $;
 
             <div id="constraints-focus-panel" class="constraints-panel-col">
               <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="accessoryMainStatsTooltip"></img>
                 <div class="panelLabelText" id="accessorySetsLabel" data-content="(clear)" data-t>Accessory main stats</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="accessoryMainStatsTooltip"></img>
               </div>
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
                 <option value="CriticalHitChancePercent" data-t>Crit Chance</option>
@@ -445,8 +426,8 @@ window.jQuery = $;
               </select><br>
 
               <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="setsTooltip"></img>
                 <div class="panelLabelText" data-t>Sets</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="setsTooltip"></img>
               </div>
               <select multiple="multiple" id="inputSet1" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
@@ -501,8 +482,8 @@ window.jQuery = $;
               </select>
 
               <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="excludeTooltip"></img>
                 <div class="panelLabelText" data-t>Exclude</div>
-                <img src="./assets/tooltip.png" class="tooltipImage" id="excludeTooltip"></img>
               </div>
               <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
@@ -528,59 +509,6 @@ window.jQuery = $;
                 </optgroup>
               </select><br>
             </div>
-
-<!--
-            <div id="placeholder-panel" class="constraints-panel-col-small">
-
-                <div class="panelLabel">
-                  <div class="panelLabelText" id="forceLabel" data-content="(clear)" data-t>Force</div>
-                  <img src="./assets/tooltip.png" class="tooltipImage" id="forceTooltip"></img>
-                </div>
-                <input type="number" id="inputMinAtkForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Atk</div>
-                <input type="number" id="inputMaxAtkForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinAtkPercentForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Atk %</div>
-                <input type="number" id="inputMaxAtkPercentForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinSpdForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Spd</div>
-                <input type="number" id="inputMaxSpdForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinCrForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>CRate</div>
-                <input type="number" id="inputMaxCrForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinCdForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>CDmg</div>
-                <input type="number" id="inputMaxCdForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinHpForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Hp</div>
-                <input type="number" id="inputMaxHpForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinHpPercentForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Hp %</div>
-                <input type="number" id="inputMaxHpPercentForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinDefForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Def</div>
-                <input type="number" id="inputMaxDefForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinDefPercentForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Def %</div>
-                <input type="number" id="inputMaxDefPercentForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinEffForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Eff</div>
-                <input type="number" id="inputMaxEffForce" class="optimizer-number-input force-number-input"><br>
-
-                <input type="number" id="inputMinResForce" class="optimizer-number-input force-number-input">
-                <div class="inputStatLabel" data-t>Res</div>
-                <input type="number" id="inputMaxResForce" class="optimizer-number-input force-number-input"><br>
-            </div>
- -->
           </div>
 
 
@@ -593,7 +521,7 @@ window.jQuery = $;
               <div class="topHalfRightPanel">
                 <div class="panelLabel">
                   <div class="panelLabelText" data-t>Filter/Search details</div>
-                  <img src="./assets/tooltip.png" class="tooltipImage" id="filterDetailsTooltip"></img>
+                  <img src="./assets/tooltip.png" class="tooltipImageRight" id="filterDetailsTooltip"></img>
                 </div>
 
                 <div class="leftRightText">
@@ -640,7 +568,7 @@ window.jQuery = $;
               <div class="optimizerActionButtons">
                 <div class="panelLabel" style="margin: auto;">
                   <div class="panelLabelText" data-t>Actions</div>
-                  <img src="./assets/tooltip.png" class="tooltipImage" id="actionsTooltip"></img>
+                  <img src="./assets/tooltip.png" class="tooltipImageRight" id="actionsTooltip"></img>
                 </div>
                 <div class="optimizerActionButtonsRow">
                   <input type="submit" class="gearActionButton" value="Equip" id="gearPreviewEquip" data-t>
@@ -784,7 +712,7 @@ window.jQuery = $;
         <div class="panelLabel gearTabTopPanelLabel">
           <div class="gearTabTopPanelLabelLeft">
             <div class="panelLabelText" data-t>Gear table</div>
-            <img src="./assets/tooltip.png" class="tooltipImage" id="gearTableTooltip"></img>
+            <img src="./assets/tooltip.png" class="tooltipImageRight" id="gearTableTooltip"></img>
           </div>
 
           <span class="selectedCountLabel" data-t>Selected:</span><div class="selectedCount" id="selectedCount">0</div>
@@ -795,7 +723,7 @@ window.jQuery = $;
         </div>
         <div class="panelLabel">
           <div class="panelLabelText" data-t>Actions</div>
-          <img src="./assets/tooltip.png" class="tooltipImage" id="gearActionsTooltip"></img>
+          <img src="./assets/tooltip.png" class="tooltipImageRight" id="gearActionsTooltip"></img>
         </div>
 
         <div class="gearPanelButtonRow">
@@ -811,7 +739,7 @@ window.jQuery = $;
 
         <div class="panelLabel">
           <div class="panelLabelText" data-t>Filters</div>
-          <img src="./assets/tooltip.png" class="tooltipImage" id="gearFiltersTooltip"></img>
+          <img src="./assets/tooltip.png" class="tooltipImageRight" id="gearFiltersTooltip"></img>
         </div>
 
         <div class="gearTabBottomPanel">
@@ -964,13 +892,13 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatAttackPercentFilter">
-                      <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatAttackPercentFilterIcon" src="./assets/statatkpercentdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Attack %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatCdFilter">
-                      <img class="gearTabIcon" src="./assets/statcddark.png"></img>
+                      <img class="gearTabIcon" id="mainStatCdFilterIcon" src="./assets/statcddark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Crit Damage</div>
                     </div>
                   </div>
@@ -978,13 +906,13 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatAttackFilter">
-                      <img class="gearTabIcon" src="./assets/statatkdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatAttackFilterIcon" src="./assets/statatkdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Attack</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatCrFilter">
-                      <img class="gearTabIcon" src="./assets/statcrdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatCrFilterIcon" src="./assets/statcrdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Crit Chance</div>
                     </div>
                   </div>
@@ -992,13 +920,13 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatHealthPercentFilter">
-                      <img class="gearTabIcon" src="./assets/stathppercentdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatHealthPercentFilterIcon" src="./assets/stathppercentdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Health %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatEffFilter">
-                      <img class="gearTabIcon" src="./assets/stateffdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatEffFilterIcon" src="./assets/stateffdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Effectiveness</div>
                     </div>
                   </div>
@@ -1006,27 +934,27 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatHealthFilter">
-                      <img class="gearTabIcon" src="./assets/stathpdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatHealthFilterIcon" src="./assets/stathpdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Health</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatEffResFilter">
-                      <img class="gearTabIcon" src="./assets/statresdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatEffResFilterIcon" src="./assets/statresdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Effect Resist</div>
                     </div>
                   </div>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
-                    <div class="gearTabButton" id="mainStatDefencePercentFilter">
-                      <img class="gearTabIcon" src="./assets/statdefpercentdark.png"></img>
+                    <div class="gearTabButton" id="mainStatDefensePercentFilter">
+                      <img class="gearTabIcon" id="mainStatDefensePercentFilterIcon" src="./assets/statdefpercentdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Defense %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatSpeedFilter">
-                      <img class="gearTabIcon" src="./assets/statspddark.png"></img>
+                      <img class="gearTabIcon" id="mainStatSpeedFilterIcon" src="./assets/statspddark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Speed</div>
                     </div>
                   </div>
@@ -1034,7 +962,7 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatDefenseFilter">
-                      <img class="gearTabIcon" src="./assets/statdefdark.png"></img>
+                      <img class="gearTabIcon" id="mainStatDefenseFilterIcon" src="./assets/statdefdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Defense</div>
                     </div>
                   </div>
@@ -1048,13 +976,13 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatAttackPercentFilter">
-                      <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img>
+                      <img class="gearTabIcon" id="subStatAttackPercentFilterIcon" src="./assets/statatkpercentdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Attack %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatCdFilter">
-                      <img class="gearTabIcon" src="./assets/statcddark.png"></img>
+                      <img class="gearTabIcon" id="subStatCdFilterIcon" src="./assets/statcddark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Crit Damage</div>
                     </div>
                   </div>
@@ -1062,13 +990,13 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatAttackFilter">
-                      <img class="gearTabIcon" src="./assets/statatkdark.png"></img>
+                      <img class="gearTabIcon" id="subStatAttackFilterIcon" src="./assets/statatkdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Attack</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatCrFilter">
-                      <img class="gearTabIcon" src="./assets/statcrdark.png"></img>
+                      <img class="gearTabIcon" id="subStatCrFilterIcon" src="./assets/statcrdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Crit Chance</div>
                     </div>
                   </div>
@@ -1076,13 +1004,13 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatHealthPercentFilter">
-                      <img class="gearTabIcon" src="./assets/stathppercentdark.png"></img>
+                      <img class="gearTabIcon" id="subStatHealthPercentFilterIcon" src="./assets/stathppercentdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Health %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatEffFilter">
-                      <img class="gearTabIcon" src="./assets/stateffdark.png"></img>
+                      <img class="gearTabIcon" id="subStatEffFilterIcon" src="./assets/stateffdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Effectiveness</div>
                     </div>
                   </div>
@@ -1090,27 +1018,27 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatHealthFilter">
-                      <img class="gearTabIcon" src="./assets/stathpdark.png"></img>
+                      <img class="gearTabIcon" id="subStatHealthFilterIcon" src="./assets/stathpdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Health</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatEffResFilter">
-                      <img class="gearTabIcon" src="./assets/statresdark.png"></img>
+                      <img class="gearTabIcon" id="subStatEffResFilterIcon" src="./assets/statresdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Effect Resist</div>
                     </div>
                   </div>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
-                    <div class="gearTabButton" id="subStatDefencePercentFilter">
-                      <img class="gearTabIcon" src="./assets/statdefpercentdark.png"></img>
+                    <div class="gearTabButton" id="subStatDefensePercentFilter">
+                      <img class="gearTabIcon" id="subStatDefensePercentFilterIcon" src="./assets/statdefpercentdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Defense %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatSpeedFilter">
-                      <img class="gearTabIcon" src="./assets/statspddark.png"></img>
+                      <img class="gearTabIcon" id="subStatSpeedFilterIcon" src="./assets/statspddark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Speed</div>
                     </div>
                   </div>
@@ -1118,7 +1046,7 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatDefenseFilter">
-                      <img class="gearTabIcon" src="./assets/statdefdark.png"></img>
+                      <img class="gearTabIcon" id="subStatDefenseFilterIcon" src="./assets/statdefdark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Defense</div>
                     </div>
                   </div>
@@ -1232,7 +1160,7 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton clearAllFilterButton" id="clearAllFilter">
-                      <img class="gearTabIcon" src="./assets/trash.png" style="opacity:0.7"></img>
+                      <img class="gearTabIcon" id="clearAllFilterIcon" src="./assets/trash.png" style="opacity:0.7"></img>
                       <div class="gearTabButtonLabel" data-t>Clear all</div>
                     </div>
                   </div>
@@ -1240,7 +1168,7 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="duplicateFilter">
-                      <img class="gearTabIcon" src="./assets/copy.png" style="opacity:0.6"></img>
+                      <img class="gearTabIcon" id="duplicateFilterIcon" src="./assets/copy.png" style="opacity:0.6"></img>
                       <div class="gearTabButtonLabel" data-t>Duplicates</div>
                     </div>
                   </div>

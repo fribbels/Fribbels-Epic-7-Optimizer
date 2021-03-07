@@ -22,6 +22,7 @@ module.exports = {
         ];
 
         $('#optionsExcludeGearFrom').change(module.exports.saveSettings)
+        $('#darkSlider').change(module.exports.saveSettings)
 
 
         for (var id of settingsIds) {
@@ -68,7 +69,8 @@ module.exports = {
             settingRageSet: true,
             settingMaxResults: 5_000_000,
             settingDefaultPath: defaultPath,
-            settingExcludeEquipped: []
+            settingExcludeEquipped: [],
+            settingDarkMode: false,
         }
     },
 
@@ -85,6 +87,11 @@ module.exports = {
 
         if (settings.settingMaxResults) {
             document.getElementById('settingMaxResults').value = settings.settingMaxResults;
+        }
+
+        if (settings.settingDarkMode) {
+            document.getElementById('darkSlider').checked = true;
+            DarkMode.toggle();
         }
 
         if (settings.settingExcludeEquipped) {
@@ -106,7 +113,8 @@ module.exports = {
             settingRageSet: document.getElementById('settingRageSet').checked,
             settingMaxResults: parseInt(document.getElementById('settingMaxResults').value || 5_000_000),
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
-            settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects')
+            settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
+            settingDarkMode: document.getElementById('darkSlider').checked,
         };
 
         excludeSelects = settings.settingExcludeEquipped;

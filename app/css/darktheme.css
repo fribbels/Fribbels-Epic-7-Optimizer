@@ -1,31 +1,34 @@
 :root {
-    --bg-color: #212529; 
-    --font-color: #ffffff;
+    --bg-color: #212529;
+    --font-color: #e2e2e2;
     --inactive-color: #5d646d;
     --border-color: #2D3136;
     --input-color: #2D3136;
     --accent-red: #F84C48;
     --outline-color: #f84b4860;
     --btn-color: #2D3136;
+    --accent-green: #00BE9B;
+    --scrollbar-grey: #5a5a5a;
 }
 
 /* scrollbar */
 
 ::-webkit-scrollbar {
-    width: 3px;
+    width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-color); 
+    background: var(--bg-color);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--accent-red); 
+    background: var(--scrollbar-grey);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-red); 
+    background: var(--scrollbar-grey);
 }
 
 /* global layout */
@@ -54,15 +57,15 @@ body {
     border: none;
 }
 
-.tabset > label:hover, 
-.tabset > input:focus + label, 
+.tabset > label:hover,
+.tabset > input:focus + label,
 .tabset > input:checked + label {
     color: var(--font-color);
     border: none;
 }
 
-.tabset > label:hover::after, 
-.tabset > input:focus + label::after, 
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
 .tabset > input:checked + label::after {
     background: var(--accent-red);
 }
@@ -85,11 +88,11 @@ body {
     border: none;
 }
 
-.ms-drop ul>li.hide-radio:focus, 
+.ms-drop ul>li.hide-radio:focus,
 .ms-drop ul>li.hide-radio:hover {
     background-color: var(--outline-color);
 }
- 
+
 .ms-drop ul>li.hide-radio.selected {
     background-color: var(--accent-red);
 }
@@ -105,7 +108,7 @@ input {
     color: var(--font-color);
     border: none;
     margin-bottom: 1px;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 textarea {
@@ -203,9 +206,9 @@ input[type=checkbox]:checked:after {
     background-color: var(--input-color);
 }
 
-.ag-theme-balham .ag-filter-toolpanel-header, 
-.ag-theme-balham .ag-filter-toolpanel-search, 
-.ag-theme-balham .ag-header-row, 
+.ag-theme-balham .ag-filter-toolpanel-header,
+.ag-theme-balham .ag-filter-toolpanel-search,
+.ag-theme-balham .ag-header-row,
 .ag-theme-balham .ag-status-bar {
     color: var(--font-color);
 }
@@ -215,7 +218,7 @@ input[type=checkbox]:checked:after {
 }
 
 .ag-theme-balham .ag-paging-panel {
-    color: var(--inactive-color);
+    color: var(--font-color);
 }
 
 /* Popup */
@@ -235,4 +238,17 @@ input[type=checkbox]:checked:after {
 
 .swal2-popup .swal2-styled.swal2-cancel {
     background-color: var(--input-color);
+}
+
+.statPreviewDiff.down {
+    color: var(--accent-red);
+}
+
+.statPreviewDiff.up {
+    color: var(--accent-green);
+}
+
+.ag-theme-balham .ag-icon-menu:before,
+.ag-theme-balham .ag-icon-desc:before {
+    color: var(--font-color);
 }

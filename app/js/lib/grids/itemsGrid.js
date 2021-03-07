@@ -1,7 +1,17 @@
 const stringSimilarity = require('string-similarity');
 const tinygradient = require('tinygradient');
-var gradient = tinygradient('#ffffff', '#8fed78');
-var scoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
+
+var lightGradient = tinygradient('#ffffff', '#8fed78');
+var lightScoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
+
+var darkGradient = tinygradient('#212529', '#107162');
+var darkScoreGradient = tinygradient('#5A1A06', '#343127', '#38821F');
+var darkScoreGradient2 = tinygradient('#7B3B3E', '#212529', '#107162');
+
+
+var gradient = lightGradient;
+var scoreGradient = lightScoreGradient;
+
 
 var itemsGrid;
 var currentAggregate = {};
@@ -17,6 +27,19 @@ if (i18next.language == 'zh') {
 console.log('localeText:'+localeText);
 
 module.exports = {
+
+    toggleDarkMode(enabled) {
+        if (enabled) {
+            gradient = darkGradient;
+            scoreGradient = darkScoreGradient2;
+        } else {
+            gradient = lightGradient;
+            scoreGradient = lightScoreGradient;
+        }
+
+        itemsGrid.gridOptions.api.refreshView()
+    },
+
     initialize: async () => {
         const getAllItemsResponse = await Api.getAllItems();
         const gridOptions = {
