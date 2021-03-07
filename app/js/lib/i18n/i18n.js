@@ -1,5 +1,3 @@
-const { functions } = require("electron-log");
-
 /* eslint-disable */
 window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLanguageDetector).init({
   debug: 'true',
