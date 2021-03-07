@@ -33,21 +33,27 @@ module.exports = {
     error: (text) => {
         Swal.fire({
           icon: 'error',
-          text: text,
+          text: i18next.t(text),
+          confirmButtonText: i18next.t("OK"),
+          cancelButtonText: i18next.t("Cancel")
         })
     },
 
     info: (text) => {
         Swal.fire({
           icon: 'info',
-          text: text,
+          text: i18next.t(text),
+          confirmButtonText: i18next.t("OK"),
+          cancelButtonText: i18next.t("Cancel")
         })
     },
 
     success: (text) => {
         Swal.fire({
           icon: 'success',
-          text: text,
+          text: i18next.t(text),
+          confirmButtonText: i18next.t("OK"),
+          cancelButtonText: i18next.t("Cancel")
         })
     },
 
@@ -55,6 +61,8 @@ module.exports = {
         Swal.fire({
           icon: 'success',
           html: html,
+          confirmButtonText: i18next.t("OK"),
+          cancelButtonText: i18next.t("Cancel")
         })
     },
 
