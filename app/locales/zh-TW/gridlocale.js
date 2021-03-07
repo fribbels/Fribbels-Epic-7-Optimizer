@@ -67,7 +67,7 @@ const AG_GRID_LOCALE_ZH_TW = {
     // Other
     loadingOoo: '加載中...',
     noRowsToShow: '暫無數據',
-    enabled: '啓用',
+    enabled: '啟用',
 
     // Menu
     pinColumn: 'Pin Column',
