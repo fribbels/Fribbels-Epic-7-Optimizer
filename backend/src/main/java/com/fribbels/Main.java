@@ -48,7 +48,7 @@ public class Main {
         server.createContext("/heroes", new HeroesRequestHandler(heroDb, baseStatsDb, itemDb));
         server.createContext("/ocr", new OcrRequestHandler());
 
-        System.out.println("START");
+        System.out.println("START BACKEND");
         server.setExecutor(executorService);
         server.start();
     }

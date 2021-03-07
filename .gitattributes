@@ -5,3 +5,6 @@
 *.jpeg  binary
 *.ico   binary
 *.icns  binary
+
+*.jar   binary
+*.traineddata  binary
