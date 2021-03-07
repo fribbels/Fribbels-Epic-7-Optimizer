@@ -1,0 +1,238 @@
+:root {
+    --bg-color: #212529; 
+    --font-color: #ffffff;
+    --inactive-color: #5d646d;
+    --border-color: #2D3136;
+    --input-color: #2D3136;
+    --accent-red: #F84C48;
+    --outline-color: #f84b4860;
+    --btn-color: #2D3136;
+}
+
+/* scrollbar */
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color); 
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-red); 
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-red); 
+}
+
+/* global layout */
+
+:focus {
+    outline: var(--outline-color) auto 1px;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
+
+.vertical {
+    border-color: var(--border-color);
+}
+
+/* top navigation */
+
+.tab-panel {
+    border-color: var(--border-color);
+}
+
+.tabset > input + label {
+    color: var(--inactive-color);
+    border: none;
+}
+
+.tabset > label:hover, 
+.tabset > input:focus + label, 
+.tabset > input:checked + label {
+    color: var(--font-color);
+    border: none;
+}
+
+.tabset > label:hover::after, 
+.tabset > input:focus + label::after, 
+.tabset > input:checked + label::after {
+    background: var(--accent-red);
+}
+
+/* data input */
+
+.ms-choice {
+    background-color: var(--input-color);
+    color: var(--font-color);
+    border: none;
+}
+
+.ms-choice>span.placeholder {
+    color: var(--font-color);
+}
+
+.ms-drop {
+    background: var(--input-color);
+    color: var(--font-color);
+    border: none;
+}
+
+.ms-drop ul>li.hide-radio:focus, 
+.ms-drop ul>li.hide-radio:hover {
+    background-color: var(--outline-color);
+}
+ 
+.ms-drop ul>li.hide-radio.selected {
+    background-color: var(--accent-red);
+}
+
+select {
+    color: var(--font-color);
+    background-color: var(--input-color);
+    border: none;
+}
+
+input {
+    background-color: var(--input-color);
+    color: var(--font-color);
+    border: none;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+textarea {
+    background-color: var(--input-color);
+    color: var(--font-color);
+}
+
+.switch-input:checked + .switch-label::before {
+    background-color: var(--outline-color);
+}
+
+.itemPreviewCheckbox {
+    width: auto;
+    height: auto;
+}
+
+input[type=checkbox] {
+    position: relative;
+      cursor: pointer;
+}
+input[type=checkbox]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: -1px;
+    left: -1px;
+    border: 1px solid var(--accent-red);
+    border-radius: 3px;
+    background-color: var(--bg-color);
+}
+input[type=checkbox]:checked:after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-red);
+    border-radius: 2px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+/* Buttons */
+
+.gearTabButton {
+    border: none;
+    background-color: var(--btn-color);
+}
+
+.gearTabButtonLabel {
+    color: var(--font-color);
+}
+
+.gearTabButtonSelected {
+    background-color: var(--outline-color);
+}
+
+/* slider */
+
+.rangeslider__fill,
+.rangeslider__fill__bg {
+    background: var(--accent-red);
+}
+.rangeslider__handle {
+    background: var(--accent-red);
+    border: none;
+}
+.rangeslider__handle:active {
+    background: var(--accent-red);
+}
+.rangeslider__fill__bg {
+    background: var(--inactive-color);
+}
+
+/* AG-Grid-Theme */
+
+.ag-theme-balham {
+    color: var(--font-color);
+}
+
+.ag-theme-balham .ag-root-wrapper {
+    background-color: var(--bg-color);
+    border-color: var(--bg-color);
+}
+
+.ag-theme-balham .ag-row,
+.ag-theme-balham .ag-header {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
+
+.ag-theme-balham .ag-row-odd {
+    background-color: var(--input-color);
+}
+
+.ag-theme-balham .ag-filter-toolpanel-header, 
+.ag-theme-balham .ag-filter-toolpanel-search, 
+.ag-theme-balham .ag-header-row, 
+.ag-theme-balham .ag-status-bar {
+    color: var(--font-color);
+}
+
+.ag-theme-balham .ag-row-selected {
+    background-color: var(--outline-color);
+}
+
+.ag-theme-balham .ag-paging-panel {
+    color: var(--inactive-color);
+}
+
+/* Popup */
+
+.swal2-container .swal2-popup {
+    background: var(--bg-color);
+}
+
+.swal2-content,
+.editGearStatLabel {
+    color: var(--font-color);
+}
+
+.swal2-popup .swal2-styled.swal2-confirm {
+    background-color: var(--accent-red);
+}
+
+.swal2-popup .swal2-styled.swal2-cancel {
+    background-color: var(--input-color);
+}
