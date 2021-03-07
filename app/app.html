@@ -1502,15 +1502,15 @@ window.jQuery = $;
             <b>Languages</b><br><br>
       </div>
 
-       <div>
-        <a href='app.html?lng=en'>English</a>
-        <span> | </span>
-         <a href='app.html?lng=zh'>简体中文</a>
-         <span> | </span>
-         <a href='app.html?lng=zh-TW'>繁體中文</a><br><br>
+       <div class="toggleRow">
+        <div class="switchText" onclick="location.href='app.html?lng=en';" style="cursor: pointer;">English</div>
+        <span class="switchText"> | </span>
+         <div class="switchText" onclick="location.href='app.html?lng=zh';" style="cursor: pointer;">简体中文</div>
+         <span class="switchText"> | </span>
+         <div class="switchText" onclick="location.href='app.html?lng=zh-TW';" style="cursor: pointer;">繁體中文</div><br><br>
        </div>
 
-       <button class="gearPreviewButton" id="clearlocalCache" onclick="clearlocalCache()" data-t>Clear language cache</button><br><br>
+       <input type="submit" id="clearlocalCache" onclick="clearlocalCache()" value="Clear language cache" data-t><br><br>
 
         <div class="toggleRow">
           <div class="switch">
