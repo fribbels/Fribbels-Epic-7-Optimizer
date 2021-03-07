@@ -116,18 +116,18 @@ module.exports = {
         return './assets/blackx.png';
     },
     getLock: () => {
-        return './assets/lock.png';
+        return DarkMode.isDark() ? './assets/lock_dt.png' : './assets/lock.png';
     },
     getEdit: () => {
-        return './assets/edit.png';
+        return DarkMode.isDark() ? './assets/edit_dt.png' : './assets/edit.png';
     },
     getReforge: () => {
-        return './assets/reforge.png';
+        return DarkMode.isDark() ? './assets/reforge_dt.png' : './assets/reforge.png';
     },
     getStar: () => {
-        return './assets/star.png';
+        return DarkMode.isDark() ? './assets/star_dt.png' : './assets/star.png';
     },
     getCopy: () => {
-        return './assets/copy.png';
+        return DarkMode.isDark() ? './assets/copy_dt.png' : './assets/copy.png';
     },
 }

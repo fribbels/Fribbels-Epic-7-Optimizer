@@ -474,13 +474,13 @@ input {
 }
 .itemDisplayLockImg {
   height: 21px;
-  opacity: 0.6;
+  opacity: 0.75;
   cursor: pointer;
   padding-left: 3px;
 }
 .itemDisplayLockImgTransparent {
   height: 21px;
-  opacity: 0.1;
+  opacity: 0.5;
   cursor: pointer;
   padding-left: 3px;
 }
@@ -518,6 +518,15 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.ag-theme-balham .ag-overlay-loading-wrapper {
+  background-color: var(--ag-modal-overlay-background-color,hsla(0,0%,100%,.05));
+}
+
+.optgroup {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .gear-preview-panel-wrapper {
@@ -769,7 +778,14 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   align-items: center;
 }
-.tooltipImage {
+.tooltipImageLeft {
+  height: 14px;
+  margin-top: auto;
+  margin-bottom: 4px;
+  margin-right: 7px;
+  opacity: 0.5;
+}
+.tooltipImageRight {
   height: 14px;
   margin-top: auto;
   margin-bottom: 4px;
@@ -827,11 +843,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
-.darkModeToggle {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-}
 body.dark-theme {
   color: #eee;
   background: #121212;
@@ -1297,3 +1308,105 @@ body.dark-theme input {
   height: 34px;
   padding-right: 12px;
 }
+
+/* START dark mode toggle */
+
+
+.darkModeToggleContainer {
+  display: flex;
+  background: var(--color-secondary);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+
+}
+.darkModeToggleContainer h1 {
+  color: var(--font-color);
+  font-family: sans-serif;
+}
+.darkModeToggleContainer button {
+  color: var(--font-color);
+  background: var(--color-primary);
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* The switch - the box around the slider */
+.darkSwitch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.darkSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.darkSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.darkSlider:before {
+  position: absolute;
+  content: "";
+  height: 30px;
+  width: 30px;
+  left: 0px;
+  bottom: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  box-shadow: 0 0px 15px #2020203d;
+  background: white url('../assets/sunny.png');
+  /*background: white url('https://i.ibb.co/FxzBYR9/night.png');*/
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input:checked + .darkSlider {
+  background-color: #444444;
+}
+
+input:focus + .darkSlider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .darkSlider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+  /*background: white url('https://i.ibb.co/7JfqXxB/sunny.png');*/
+  background: #ddbeff url(../assets/night2.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Rounded sliders */
+.darkSlider.round {
+  border-radius: 34px;
+}
+
+.darkSlider.round:before {
+  border-radius: 50%;
+}
+
+/* END dark mode toggle */

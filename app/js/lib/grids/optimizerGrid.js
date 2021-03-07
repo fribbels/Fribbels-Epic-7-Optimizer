@@ -1,9 +1,17 @@
 const tinygradient = require('tinygradient');
-var gradient = tinygradient([
-    {color: '#F5A191', pos: 0},
+var lightGradient = tinygradient([
+    {color: '#F5A191', pos: 0}, // red
     {color: '#ffffe5', pos: 0.5},
-    {color: '#77e246', pos: 1}
+    {color: '#77e246', pos: 1} // green
 ]);
+
+var darkGradient = tinygradient([
+    {color: '#5A1A06', pos: 0}, // red
+    {color: '#343127', pos: 0.5},
+    {color: '#38821F', pos: 1} // green
+]);
+
+var gradient = lightGradient;
 
 optimizerGrid = null;
 var currentSortModel;
@@ -21,6 +29,16 @@ var pinnedRow = {
 };
 
 module.exports = {
+
+    toggleDarkMode(enabled) {
+        if (enabled) {
+            gradient = darkGradient;
+        } else {
+            gradient = lightGradient;
+        }
+
+        optimizerGrid.gridOptions.api.refreshView()
+    },
 
     initialize: () => {
         buildGrid();

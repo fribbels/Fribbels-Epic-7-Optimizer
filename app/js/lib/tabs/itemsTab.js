@@ -264,7 +264,7 @@ const elementsByFilter = {
     statFilter: [
         "mainStatAttackFilter",
         "mainStatAttackPercentFilter",
-        "mainStatDefencePercentFilter",
+        "mainStatDefensePercentFilter",
         "mainStatDefenseFilter",
         "mainStatHealthPercentFilter",
         "mainStatHealthFilter",
@@ -277,7 +277,7 @@ const elementsByFilter = {
     substatFilter: [
         "subStatAttackFilter",
         "subStatAttackPercentFilter",
-        "subStatDefencePercentFilter",
+        "subStatDefensePercentFilter",
         "subStatDefenseFilter",
         "subStatHealthPercentFilter",
         "subStatHealthFilter",
@@ -341,7 +341,7 @@ function setupEventListeners() {
     // Main
     setupFilterListener("mainStatAttackPercentFilter", "statFilter", "AttackPercent")
     setupFilterListener("mainStatAttackFilter", "statFilter", "Attack")
-    setupFilterListener("mainStatDefencePercentFilter", "statFilter", "DefensePercent")
+    setupFilterListener("mainStatDefensePercentFilter", "statFilter", "DefensePercent")
     setupFilterListener("mainStatDefenseFilter", "statFilter", "Defense")
     setupFilterListener("mainStatHealthPercentFilter", "statFilter", "HealthPercent")
     setupFilterListener("mainStatHealthFilter", "statFilter", "Health")
@@ -356,7 +356,7 @@ function setupEventListeners() {
     // Sub
     setupFilterListener("subStatAttackPercentFilter", "substatFilter", "AttackPercent")
     setupFilterListener("subStatAttackFilter", "substatFilter", "Attack")
-    setupFilterListener("subStatDefencePercentFilter", "substatFilter", "DefensePercent")
+    setupFilterListener("subStatDefensePercentFilter", "substatFilter", "DefensePercent")
     setupFilterListener("subStatDefenseFilter", "substatFilter", "Defense")
     setupFilterListener("subStatHealthPercentFilter", "substatFilter", "HealthPercent")
     setupFilterListener("subStatHealthFilter", "substatFilter", "Health")

@@ -326,7 +326,7 @@ function styleEnhance(enhance) {
 
 function editLockDisplay(item) {
     if (!item.locked) {
-        return `<img src="${Assets.getLock()}" style="opacity:0.1" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
+        return `<img src="${Assets.getLock()}" style="opacity:0.12" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
     }
     return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
 }

@@ -1,5 +1,18 @@
 const tinygradient = require('tinygradient');
-var gradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
+
+var lightGradient = tinygradient([
+    {color: '#ffa8a8', pos: 0}, // red
+    {color: '#ffffe5', pos: 0.5},
+    {color: '#8fed78', pos: 1} // green
+]);
+
+var darkGradient = tinygradient([
+    {color: '#5A1A06', pos: 0}, // red
+    {color: '#343127', pos: 0.5},
+    {color: '#38821F', pos: 1} // green
+]);
+
+var gradient = lightGradient;
 
 global.heroesGrid = null;
 global.buildsGrid = null;
@@ -8,6 +21,16 @@ var selectedBuildNode = null;
 
 var currentAggregate = {};
 module.exports = {
+
+    toggleDarkMode(enabled) {
+        if (enabled) {
+            gradient = darkGradient;
+        } else {
+            gradient = lightGradient;
+        }
+
+        buildsGrid.gridOptions.api.refreshView()
+    },
 
     initialize: () => {
         buildGrid();
