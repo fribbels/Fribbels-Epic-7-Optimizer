@@ -19,18 +19,23 @@
     "@ag-grid-community/core": "25.0.0",
     "@ag-grid-community/infinite-row-model": "25.0.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
+    "awesome-notifications": "^3.1.1",
     "axios": "^0.21.0",
-    "jquery": "^3.5.1",
-    "jimp": "latest",
     "fs": "latest",
+    "i18next": "^19.9.1",
+    "i18next-browser-languagedetector": "^6.0.1",
+    "i18next-chained-backend": "^2.0.1",
+    "i18next-http-backend": "^1.1.1",
+    "i18next-localstorage-backend": "^3.1.2",
+    "jimp": "latest",
+    "jquery": "^3.5.1",
     "node-fetch": "^2.6.1",
     "rangeslider-js": "^3.2.5",
     "string-similarity": "latest",
     "sweetalert2": "^10.10.4",
     "tinygradient": "^1.1.2",
-    "tree-kill": "latest",
-    "uuid": "latest",
     "tippy.js": "^6.2.7",
-    "awesome-notifications": "^3.1.1"
+    "tree-kill": "latest",
+    "uuid": "latest"
   }
 }

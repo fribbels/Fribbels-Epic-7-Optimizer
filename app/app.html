@@ -4,6 +4,13 @@ global.$ = require('jquery');
 window.$ = $;
 window.jQuery = $;
 </script>
+<script src="node_modules/i18next/i18next.min.js"></script>
+<script src="node_modules/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+<script src="node_modules/i18next-localstorage-backend/i18nextLocalStorageBackend.min.js"></script>
+<script src="node_modules/i18next-http-backend/i18nextHttpBackend.min.js"></script>
+<script src="node_modules/i18next-chained-backend/i18nextChainedBackend.min.js"></script>
+
+<script src="js/lib/i18n/i18n.js"></script>
 
 <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
 
@@ -41,25 +48,25 @@ window.jQuery = $;
 <div class="tabset">
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" checked>
-  <label for="tab1" class="tabLabel" id="tab1label">Optimizer</label>
+  <label for="tab1" class="tabLabel" id="tab1label" data-t>Optimizer</label>
   <!-- Tab 2 -->
   <input type="radio" name="tabset" id="tab2" style="display: none">
-  <label for="tab2" class="tabLabel" style="display: none">Ocr Debugger</label>
+  <label for="tab2" class="tabLabel" style="display: none" data-t>Ocr Debugger</label>
   <!-- Tab 3 -->
   <input type="radio" name="tabset" id="tab3" >
-  <label for="tab3" class="tabLabel" id="tab3label">Gear</label>
+  <label for="tab3" class="tabLabel" id="tab3label" data-t>Gear</label>
   <!-- Tab 4 -->
   <input type="radio" name="tabset" id="tab4" >
-  <label for="tab4" class="tabLabel" id="tab4label">Heroes</label>
+  <label for="tab4" class="tabLabel" id="tab4label" data-t>Heroes</label>
   <!-- Tab 5 -->
   <input type="radio" name="tabset" id="tab5" >
-  <label for="tab5" class="tabLabel">Importer</label>
+  <label for="tab5" class="tabLabel" data-t>Importer</label>
   <!-- Tab 6 -->
   <input type="radio" name="tabset" id="tab6" >
-  <label for="tab6" class="tabLabel">Settings</label>
+  <label for="tab6" class="tabLabel" data-t>Settings</label>
   <!-- Tab 6 -->
   <input type="radio" name="tabset" id="tab6" style="display: none">
-  <label for="tab6" class="tabLabel" style="display: none">Subprocess Debugger</label>
+  <label for="tab6" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
 
   <div id="hoverDiv"></div>
   <div class="tab-panels">
@@ -70,7 +77,7 @@ window.jQuery = $;
             <div id="constaints-options-panel" class="constraints-panel-col-small">
 
               <div class="panelLabel">
-                <div class="panelLabelText">Hero</div>
+                <div class="panelLabelText" data-t>Hero</div>
                 <img src="./assets/tooltip.png" class="tooltipImageRight" id="heroTooltip"></img>
               </div>
               <select id="inputHeroAdd" class="gearPreviewButton"></select>
@@ -86,18 +93,18 @@ window.jQuery = $;
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
 
-              <input type="submit" value="Start" class="gearPreviewButton" id="submitOptimizerRequest"><br>
-              <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter"><br>
-              <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel"><br>
-              <!-- <input type="submit" value="Load filters" class="gearPreviewButton" id="submitOptimizerLoad"><br> -->
-              <input type="submit" value="Reset filters" class="gearPreviewButton" id="submitOptimizerReset">
+              <input type="submit" value="Start" class="gearPreviewButton" id="submitOptimizerRequest" data-t ><br>
+              <input type="submit" value="Filter" class="gearPreviewButton" id="submitOptimizerFilter" data-t ><br>
+              <input type="submit" value="Cancel" class="gearPreviewButton" id="submitOptimizerCancel" data-t ><br>
+              <!-- <input type="submit" value="Load filters" class="gearPreviewButton" id="submitOptimizerLoad" data-t ><br> -->
+              <input type="submit" value="Reset filters" class="gearPreviewButton" id="submitOptimizerReset" data-t >
 
             </div>
             <div class="vertical"></div>
 
             <div id="preview-panel" class="constraints-panel-col-med">
               <div class="panelLabel">
-                <div class="panelLabelText" id="statsPreviewLabel">Stats</div>
+                <div class="panelLabelText" id="statsPreviewLabel" data-content="(clear)" data-t>Stats</div>
                 <img src="./assets/tooltip.png" class="tooltipImageRight" id="previewTooltip"></img>
               </div>
 
@@ -182,31 +189,31 @@ window.jQuery = $;
             <div id="options-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="optionsTooltip"></img>
-                <div class="panelLabelText" id="optionsLabel">Options</div>
+                <div class="panelLabelText" id="optionsLabel" data-t>Options</div>
               </div>
               <div>
                 <input type="checkbox" id="inputPredictReforges" class="optimizer-checkbox" checked>
-                <label for="inputPredictReforges">Use reforged stats</label>
+                <label for="inputPredictReforges" data-t>Use reforged stats</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputOnlyMaxedGear" class="optimizer-checkbox">
-                <label for="inputOnlyMaxedGear">Only maxed gear</label>
+                <label for="inputOnlyMaxedGear" data-t>Only maxed gear</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputAllowLockedItems" class="optimizer-checkbox">
-                <label for="inputAllowLockedItems">Locked items</label>
+                <label for="inputAllowLockedItems" data-t>Locked items</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputAllowEquippedItems" class="optimizer-checkbox">
-                <label for="inputAllowEquippedItems">Equipped items</label>
+                <label for="inputAllowEquippedItems" data-t>Equipped items</label>
               </div>
 
               <div>
                 <input type="checkbox" id="inputKeepCurrentItems" class="optimizer-checkbox">
-                <label for="inputKeepCurrentItems">Keep current</label>
+                <label for="inputKeepCurrentItems" data-t>Keep current</label>
               </div>
               <div class="horizontalSpace"></div>
 
@@ -222,88 +229,88 @@ window.jQuery = $;
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterStatsTooltip"></img>
-                <div class="panelLabelText" id="statsLabel">Stat filters</div>
+                <div class="panelLabelText" id="statsLabel" data-content="(clear)" data-t>Stat filters</div>
               </div>
               <input type="number" id="inputMinAtkLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Atk</div>
+              <div class="inputStatLabel" data-t>Atk</div>
               <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinHpLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Hp</div>
+              <div class="inputStatLabel" data-t>Hp</div>
               <input type="number" id="inputMaxHpLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinDefLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Def</div>
+              <div class="inputStatLabel" data-t>Def</div>
               <input type="number" id="inputMaxDefLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinSpdLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Spd</div>
+              <div class="inputStatLabel" data-t>Spd</div>
               <input type="number" id="inputMaxSpdLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinCrLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">CRate</div>
+              <div class="inputStatLabel" data-t>CRate</div>
               <input type="number" id="inputMaxCrLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinCdLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">CDmg</div>
+              <div class="inputStatLabel" data-t>CDmg</div>
               <input type="number" id="inputMaxCdLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinEffLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Eff</div>
+              <div class="inputStatLabel" data-t>Eff</div>
               <input type="number" id="inputMaxEffLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinResLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel">Res</div>
+              <div class="inputStatLabel" data-t>Res</div>
               <input type="number" id="inputMaxResLimit" class="optimizer-number-input stat-number-input"><br>
             </div>
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterRatingsTooltip"></img>
-                <div class="panelLabelText" id="ratingsLabel">Rating filters</div>
+                <div class="panelLabelText" id="ratingsLabel" data-content="(clear)" data-t>Rating filters</div>
               </div>
               <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Cp</div>
+              <div class="inputStatLabel" data-t>Cp</div>
               <input type="number" id="inputMaxCpLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinHppsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">HpS</div>
+              <div class="inputStatLabel" data-t>HpS</div>
               <input type="number" id="inputMaxHppsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinEhpLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Ehp</div>
+              <div class="inputStatLabel" data-t>Ehp</div>
               <input type="number" id="inputMaxEhpLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinEhppsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">EhpS</div>
+              <div class="inputStatLabel" data-t>EhpS</div>
               <input type="number" id="inputMaxEhppsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinDmgLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Dmg</div>
+              <div class="inputStatLabel" data-t>Dmg</div>
               <input type="number" id="inputMaxDmgLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinDmgpsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">DmgS</div>
+              <div class="inputStatLabel" data-t>DmgS</div>
               <input type="number" id="inputMaxDmgpsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinMcdmgLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Mcd</div>
+              <div class="inputStatLabel" data-t>Mcd</div>
               <input type="number" id="inputMaxMcdmgLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinMcdmgpsLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">McdS</div>
+              <div class="inputStatLabel" data-t>McdS</div>
               <input type="number" id="inputMaxMcdmgpsLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinDmgHLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">DmgH</div>
+              <div class="inputStatLabel" data-t>DmgH</div>
               <input type="number" id="inputMaxDmgHLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinScoreLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Score</div>
+              <div class="inputStatLabel" data-t>Score</div>
               <input type="number" id="inputMaxScoreLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinUpgradesLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel">Upg</div>
+              <div class="inputStatLabel" data-t>Upg</div>
               <input type="number" id="inputMaxUpgradesLimit" class="optimizer-number-input rating-number-input"><br>
             </div>
 
@@ -313,57 +320,57 @@ window.jQuery = $;
 
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="substatPriorityTooltip"></img>
-                <div class="panelLabelText" id="substatPriorityLabel">Substat priority (<u>clear</u>)</div>
+                <div class="panelLabelText" id="substatPriorityLabel" data-t>Substat priority (clear)</div>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Atk</div>
+                <div class="sliderLabel" data-t>Atk</div>
                 <input class="sliderInput" id="atkSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Hp</div>
+                <div class="sliderLabel" data-t>Hp</div>
                 <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Def</div>
+                <div class="sliderLabel" data-t>Def</div>
                 <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Spd</div>
+                <div class="sliderLabel" data-t>Spd</div>
                 <input class="sliderInput" id="spdSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="spdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Cr</div>
+                <div class="sliderLabel" data-t>Cr</div>
                 <input class="sliderInput" id="crSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="crSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Cd</div>
+                <div class="sliderLabel" data-t>Cd</div>
                 <input class="sliderInput" id="cdSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="cdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Eff</div>
+                <div class="sliderLabel" data-t>Eff</div>
                 <input class="sliderInput" id="effSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="effSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
 
               <div class="sliderRow">
-                <div class="sliderLabel">Res</div>
+                <div class="sliderLabel" data-t>Res</div>
                 <input class="sliderInput" id="resSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="resSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
@@ -373,7 +380,7 @@ window.jQuery = $;
               <div class="horizontalSpace" ></div>
 
               <div class="sliderRow">
-                <div class="sliderLabel">Top %</div>
+                <div class="sliderLabel" data-t>Top %</div>
                 <input class="sliderInput" id="filterSliderInput" type="number" value="100" readonly>
                 <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="10" max="100" value="100" step="1"></div><!--
                 <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="0" max="100" value="100" step="5"></div> -->
@@ -384,121 +391,121 @@ window.jQuery = $;
             <div id="constraints-focus-panel" class="constraints-panel-col">
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="accessoryMainStatsTooltip"></img>
-                <div class="panelLabelText" id="accessorySetsLabel">Accessory main stats</div>
+                <div class="panelLabelText" id="accessorySetsLabel" data-content="(clear)" data-t>Accessory main stats</div>
               </div>
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
-                <option value="CriticalHitChancePercent">Crit Chance</option>
-                <option value="CriticalHitDamagePercent">Crit Damage</option>
-                <option value="AttackPercent">Attack %</option>
-                <option value="Attack">Attack</option>
-                <option value="HealthPercent">Health %</option>
-                <option value="Health">Health</option>
-                <option value="DefensePercent">Defense %</option>
-                <option value="Defense">Defense</option>
+                <option value="CriticalHitChancePercent" data-t>Crit Chance</option>
+                <option value="CriticalHitDamagePercent" data-t>Crit Damage</option>
+                <option value="AttackPercent" data-t>Attack %</option>
+                <option value="Attack" data-t>Attack</option>
+                <option value="HealthPercent" data-t>Health %</option>
+                <option value="Health" data-t>Health</option>
+                <option value="DefensePercent" data-t>Defense %</option>
+                <option value="Defense" data-t>Defense</option>
               </select><br>
 
               <select multiple="multiple" id="inputRingStat" class="inputGearFilterSelect">
-                <option value="EffectivenessPercent">Effectiveness</option>
-                <option value="EffectResistancePercent">Effect Resistance</option>
-                <option value="AttackPercent">Attack %</option>
-                <option value="Attack">Attack</option>
-                <option value="HealthPercent">Health %</option>
-                <option value="Health">Health</option>
-                <option value="DefensePercent">Defense %</option>
-                <option value="Defense">Defense</option>
+                <option value="EffectivenessPercent" data-t>Effectiveness</option>
+                <option value="EffectResistancePercent" data-t>Effect Resistance</option>
+                <option value="AttackPercent" data-t>Attack %</option>
+                <option value="Attack" data-t>Attack</option>
+                <option value="HealthPercent" data-t>Health %</option>
+                <option value="Health" data-t>Health</option>
+                <option value="DefensePercent" data-t>Defense %</option>
+                <option value="Defense" data-t>Defense</option>
               </select><br>
 
               <select multiple="multiple" id="inputBootsStat" class="inputGearFilterSelect">
-                <option value="Speed">Speed</option>
-                <option value="AttackPercent">Attack %</option>
-                <option value="Attack">Attack</option>
-                <option value="HealthPercent">Health %</option>
-                <option value="Health">Health</option>
-                <option value="DefensePercent">Defense %</option>
-                <option value="Defense">Defense</option>
+                <option value="Speed" data-t>Speed</option>
+                <option value="AttackPercent" data-t>Attack %</option>
+                <option value="Attack" data-t>Attack</option>
+                <option value="HealthPercent" data-t>Health %</option>
+                <option value="Health" data-t>Health</option>
+                <option value="DefensePercent" data-t>Defense %</option>
+                <option value="Defense" data-t>Defense</option>
               </select><br>
 
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="setsTooltip"></img>
-                <div class="panelLabelText">Sets</div>
+                <div class="panelLabelText" data-t>Sets</div>
               </div>
               <select multiple="multiple" id="inputSet1" class="inputSetFilterSelect">
-                <!-- <option value="None">None</option> -->
-                <optgroup label="4 Piece">
-                  <option value="AttackSet">Attack</option>
-                  <option value="CounterSet">Counter</option>
-                  <option value="DestructionSet">Destruction</option>
-                  <option value="InjurySet">Injury</option>
-                  <option value="LifestealSet">Lifesteal</option>
-                  <option value="RageSet">Rage</option>
-                  <option value="RevengeSet">Revenge</option>
-                  <option value="SpeedSet">Speed</option>
+                <!-- <option value="None" data-t>None</option> -->
+                <optgroup label="4 Piece" data-t>
+                  <option value="AttackSet" data-t>Attack</option>
+                  <option value="CounterSet" data-t>Counter</option>
+                  <option value="DestructionSet" data-t>Destruction</option>
+                  <option value="InjurySet" data-t>Injury</option>
+                  <option value="LifestealSet" data-t>Lifesteal</option>
+                  <option value="RageSet" data-t>Rage</option>
+                  <option value="RevengeSet" data-t>Revenge</option>
+                  <option value="SpeedSet" data-t>Speed</option>
                 </optgroup>
-                <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                <optgroup label="2 Piece" data-t>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select><br>
 
               <select multiple="multiple" id="inputSet2" class="inputSetFilterSelect">
-                <!-- <option value="None">None</option> -->
-                <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                <!-- <option value="None" data-t>None</option> -->
+                <optgroup label="2 Piece" data-t>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select><br>
 
               <select multiple="multiple" id="inputSet3" class="inputSetFilterSelect">
-                <!-- <option value="None">None</option> -->
-                <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                <!-- <option value="None" data-t>None</option> -->
+                <optgroup label="2 Piece" data-t>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select>
 
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="excludeTooltip"></img>
-                <div class="panelLabelText">Exclude</div>
+                <div class="panelLabelText" data-t>Exclude</div>
               </div>
               <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
-                <!-- <option value="None">None</option> -->
-                <optgroup label="4 Piece">
-                  <option value="AttackSet">Attack</option>
-                  <option value="CounterSet">Counter</option>
-                  <option value="DestructionSet">Destruction</option>
-                  <option value="InjurySet">Injury</option>
-                  <option value="LifestealSet">Lifesteal</option>
-                  <option value="RageSet">Rage</option>
-                  <option value="RevengeSet">Revenge</option>
-                  <option value="SpeedSet">Speed</option>
+                <!-- <option value="None" data-t>None</option> -->
+                <optgroup label="4 Piece" data-t>
+                  <option value="AttackSet" data-t>Attack</option>
+                  <option value="CounterSet" data-t>Counter</option>
+                  <option value="DestructionSet" data-t>Destruction</option>
+                  <option value="InjurySet" data-t>Injury</option>
+                  <option value="LifestealSet" data-t>Lifesteal</option>
+                  <option value="RageSet" data-t>Rage</option>
+                  <option value="RevengeSet" data-t>Revenge</option>
+                  <option value="SpeedSet" data-t>Speed</option>
                 </optgroup>
-                <optgroup label="2 Piece">
-                  <option value="CriticalSet">Critical</option>
-                  <option value="DefenseSet">Defense</option>
-                  <option value="HealthSet">Health</option>
-                  <option value="HitSet">Hit</option>
-                  <option value="ImmunitySet">Immunity</option>
-                  <option value="PenetrationSet">Penetration</option>
-                  <option value="ResistSet">Resist</option>
-                  <option value="UnitySet">Unity</option>
+                <optgroup label="2 Piece" data-t>
+                  <option value="CriticalSet" data-t>Critical</option>
+                  <option value="DefenseSet" data-t>Defense</option>
+                  <option value="HealthSet" data-t>Health</option>
+                  <option value="HitSet" data-t>Hit</option>
+                  <option value="ImmunitySet" data-t>Immunity</option>
+                  <option value="PenetrationSet" data-t>Penetration</option>
+                  <option value="ResistSet" data-t>Resist</option>
+                  <option value="UnitySet" data-t>Unity</option>
                 </optgroup>
               </select><br>
             </div>
@@ -513,74 +520,74 @@ window.jQuery = $;
 
               <div class="topHalfRightPanel">
                 <div class="panelLabel">
-                  <div class="panelLabelText">Filter/Search details</div>
+                  <div class="panelLabelText" data-t>Filter/Search details</div>
                   <img src="./assets/tooltip.png" class="tooltipImageRight" id="filterDetailsTooltip"></img>
                 </div>
 
                 <div class="leftRightText">
-                  <text id="" class="leftRightTextContent">Filtered weapons</text>
+                  <text id="" class="leftRightTextContent" data-t>Filtered weapons</text>
                   <text id="filteredWeaponsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="l1" class="leftRightTextContent">Filtered helmets</text>
+                  <text id="l1" class="leftRightTextContent" data-t>Filtered helmets</text>
                   <text id="filteredHelmetsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="l1" class="leftRightTextContent">Filtered armors</text>
+                  <text id="l1" class="leftRightTextContent" data-t>Filtered armors</text>
                   <text id="filteredArmorsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="l1" class="leftRightTextContent">Filtered necklaces</text>
+                  <text id="l1" class="leftRightTextContent" data-t>Filtered necklaces</text>
                   <text id="filteredNecklacesNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="a1" class="leftRightTextContent">Filtered rings</text>
+                  <text id="a1" class="leftRightTextContent" data-t>Filtered rings</text>
                   <text id="filteredRingsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="a1" class="leftRightTextContent">Filtered boots</text>
+                  <text id="a1" class="leftRightTextContent" data-t>Filtered boots</text>
                   <text id="filteredBootsNum" class="leftRightTextContent">0</text>
                 </div>
 
                 <div class=horizontalSpace></div>
 
                 <div class="leftRightText">
-                  <text id="permutationsText" class="leftRightTextContent">Permutations</text>
+                  <text id="permutationsText" class="leftRightTextContent" data-t>Permutations</text>
                   <text id="maxPermutationsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="searchedText" class="leftRightTextContent">Searched</text>
+                  <text id="searchedText" class="leftRightTextContent" data-t>Searched</text>
                   <text id="searchedPermutationsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="resultsText" class="leftRightTextContent">Results</text>
+                  <text id="resultsText" class="leftRightTextContent" data-t>Results</text>
                   <text id="resultsFoundNum" class="leftRightTextContent">0</text>
                 </div>
               </div>
 
               <div class="optimizerActionButtons">
                 <div class="panelLabel" style="margin: auto;">
-                  <div class="panelLabelText">Actions</div>
+                  <div class="panelLabelText" data-t>Actions</div>
                   <img src="./assets/tooltip.png" class="tooltipImageRight" id="actionsTooltip"></img>
                 </div>
                 <div class="optimizerActionButtonsRow">
-                  <input type="submit" class="gearActionButton" value="Equip" id="gearPreviewEquip">
-                  <input type="submit" class="gearActionButton" value="Unequip" id="gearPreviewUnequip">
+                  <input type="submit" class="gearActionButton" value="Equip" id="gearPreviewEquip" data-t>
+                  <input type="submit" class="gearActionButton" value="Unequip" id="gearPreviewUnequip" data-t>
                 </div>
                 <div id="buttonSpace"></div>
                 <div class="optimizerActionButtonsRow">
-                  <input type="submit" class="gearActionButton" value="Lock" id="gearPreviewLock">
-                  <input type="submit" class="gearActionButton" value="Unlock" id="gearPreviewUnlock">
+                  <input type="submit" class="gearActionButton" value="Lock" id="gearPreviewLock" data-t>
+                  <input type="submit" class="gearActionButton" value="Unlock" id="gearPreviewUnlock" data-t>
                 </div>
                 <div id="buttonSpace"></div>
                 <div class="optimizerActionButtonsRow">
-                  <input type="submit" class="gearActionButton" value="Select All" id="gearPreviewSelectAll">
-                  <input type="submit" class="gearActionButton" value="Deselect All" id="gearPreviewDeselectAll">
+                  <input type="submit" class="gearActionButton" value="Select All" id="gearPreviewSelectAll" data-t>
+                  <input type="submit" class="gearActionButton" value="Deselect All" id="gearPreviewDeselectAll" data-t>
                 </div>
                 <div id="buttonSpace"></div>
                 <div class="optimizerActionButtonsRow">
-                  <input type="submit" class="gearActionButton" value="Save Build" id="gearPreviewAddBuild">
-                  <input type="submit" class="gearActionButton" value="Remove Build" id="gearPreviewRemoveBuild">
+                  <input type="submit" class="gearActionButton" value="Save Build" id="gearPreviewAddBuild" data-t>
+                  <input type="submit" class="gearActionButton" value="Remove Build" id="gearPreviewRemoveBuild" data-t>
                 </div>
               </div>
             </div>
@@ -644,38 +651,38 @@ window.jQuery = $;
 
 
     <div id="ocr-debugger-section" class="tab-panel">
-      Url:<br>
+      <a>Url:</a><br>
       <input type="text" id="ocr-test-input-url" value="" style="width:800px"><br>
-      Folder:<br>
+      <a  data-t>Folder:</a><br>
       <input type="text" id="ocr-test-input-folder" value="" style="width:800px"><br>
-      Left:<br>
+      <a  data-t>Left:</a><br>
       <input type="number" id="ocr-test-input-left" value="65"><br>
-      Top:<br>
+      <a  data-t>Top:</a><br>
       <input type="number" id="ocr-test-input-top" value="214"><br>
-      Width:<br>
+      <a  data-t>Width:</a><br>
       <input type="number" id="ocr-test-input-width" value="27"><br>
-      Height:<br>
+      <a  data-t>Height:</a><br>
       <input type="number" id="ocr-test-input-height" value="20"><br>
 
-      <input type="submit" value="Submit" id="ocr-test-submit-number">Submit Number<br>
-      <input type="submit" value="Submit" id="ocr-test-submit-text">Submit Text<br>
+      <input type="submit" value="Submit" id="ocr-test-submit-number" data-t><a data-t>Submit Number</a><br>
+      <input type="submit" value="Submit" id="ocr-test-submit-text" data-t><a data-t>Submit Text</a><br>
 
-      <input type="submit" value="Submit" id="ocr-test-file-scan">File Scan<br>
+      <input type="submit" value="Submit" id="ocr-test-file-scan" data-t><a data-t>File Scan</a><br>
 
       <br><br>
 
-      <input type="submit" value="Submit" id="ocr-test-main-name">Main Stat name<br>
-      <input type="submit" value="Submit" id="ocr-test-main-numbers">Main Stat numbers<br>
-      <input type="submit" value="Submit" id="ocr-test-sub-name">Sub Stat name<br>
-      <input type="submit" value="Submit" id="ocr-test-sub-numbers">Sub Stat numbers<br>
-      <input type="submit" value="Submit" id="ocr-test-all">All<br>
-      <input type="submit" value="Submit" id="ocr-test-jimp">Jimp<br>
-      <input type="submit" value="Submit" id="ocr-test-full-scan">Full scan<br>
-      <input type="submit" value="Submit" id="ocr-test-lib">Lib<br>
+      <input type="submit" value="Submit" id="ocr-test-main-name" data-t><a data-t>Main Stat name</a><br>
+      <input type="submit" value="Submit" id="ocr-test-main-numbers" data-t><a data-t>Main Stat numbers</a><br>
+      <input type="submit" value="Submit" id="ocr-test-sub-name" data-t><a data-t>Sub Stat name</a><br>
+      <input type="submit" value="Submit" id="ocr-test-sub-numbers" data-t><a data-t>Sub Stat numbers</a><br>
+      <input type="submit" value="Submit" id="ocr-test-all" data-t><a data-t>All</a><br>
+      <input type="submit" value="Submit" id="ocr-test-jimp" data-t><a data-t>Jimp</a><br>
+      <input type="submit" value="Submit" id="ocr-test-full-scan" data-t><a data-t>Full scan</a><br>
+      <input type="submit" value="Submit" id="ocr-test-lib" data-t><a data-t>Lib</a><br>
 
       <br>
 
-      <input type="submit" value="Submit" id="ocr-test-debug1">Debug1<br>
+      <input type="submit" value="Submit" id="ocr-test-debug1" data-t><a data-t>Debug1</a><br>
       <img src="" id="ocr-test-crop"/>
       <br>
       <img src="" id="ocr-test-crop1"/>
@@ -700,38 +707,38 @@ window.jQuery = $;
       <div class="gearSectionContainer">
       <!-- <h2>gear-section</h2> -->
 
-      <!-- <input type="submit" value="Update" class="gearPreviewButton" id="updateGear"> -->
+      <!-- <input type="submit" value="Update" class="gearPreviewButton" id="updateGear" data-t> -->
 
         <div class="panelLabel gearTabTopPanelLabel">
           <div class="gearTabTopPanelLabelLeft">
-            <div class="panelLabelText">Gear table</div>
+            <div class="panelLabelText" data-t>Gear table</div>
             <img src="./assets/tooltip.png" class="tooltipImageRight" id="gearTableTooltip"></img>
           </div>
 
-          <div class="selectedCount" id="selectedCount">Selected: 0</div>
+          <span class="selectedCountLabel" data-t>Selected:</span><div class="selectedCount" id="selectedCount">0</div>
         </div>
 
         <div class="gearGridContainer">
           <div id="gear-grid" class="ag-theme-balham"></div>
         </div>
         <div class="panelLabel">
-          <div class="panelLabelText">Actions</div>
+          <div class="panelLabelText" data-t>Actions</div>
           <img src="./assets/tooltip.png" class="tooltipImageRight" id="gearActionsTooltip"></img>
         </div>
 
         <div class="gearPanelButtonRow">
-          <input type="submit" value="Equip / Edit Item" class="gearPreviewButton" id="editGear">
-          <input type="submit" value="Reforge Item" class="gearPreviewButton" id="reforgeGear">
-          <input type="submit" value="Add New Item" class="gearPreviewButton" id="addGear">
-          <input type="submit" value="Duplicate Item" class="gearPreviewButton" id="duplicateGear">
-          <input type="submit" value="Remove Items" class="gearPreviewButton" id="removeGear">
-          <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipGear">
-          <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockGear">
-          <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockGear"><br><br>
+          <input type="submit" value="Equip / Edit Item" class="gearPreviewButton" id="editGear" data-t>
+          <input type="submit" value="Reforge Item" class="gearPreviewButton" id="reforgeGear" data-t>
+          <input type="submit" value="Add New Item" class="gearPreviewButton" id="addGear" data-t>
+          <input type="submit" value="Duplicate Item" class="gearPreviewButton" id="duplicateGear" data-t>
+          <input type="submit" value="Remove Items" class="gearPreviewButton" id="removeGear" data-t>
+          <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipGear" data-t>
+          <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockGear" data-t>
+          <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockGear" data-t><br><br>
         </div>
 
         <div class="panelLabel">
-          <div class="panelLabelText">Filters</div>
+          <div class="panelLabelText" data-t>Filters</div>
           <img src="./assets/tooltip.png" class="tooltipImageRight" id="gearFiltersTooltip"></img>
         </div>
 
@@ -748,7 +755,7 @@ window.jQuery = $;
             <div class="gearTabGearSetFiltersRow">
               <div class="gearTabGearFilter">
                 <div class="gearTabFilterLabel" id="clearGearFilter">
-                  <b>Gear</b> (<u>clear</u>)
+                  <b data-t>Gear</b> (<u data-t>clear</u>)
                 </div>
                 <div class="gearTabGearFilterIconsRow">
                   <div class="gearTabSquareButton">
@@ -785,7 +792,7 @@ window.jQuery = $;
               </div>
               <div class="gearTabSetFilter">
                 <div class="gearTabFilterLabel" id="clearSetFilter">
-                  <b>Sets</b> (<u>clear</u>)
+                  <b data-t>Sets</b> (<u data-t>clear</u>)
                 </div>
                 <div class="gearTabSetFilterIconsRow">
                   <div class="gearTabSquareButton">
@@ -880,19 +887,19 @@ window.jQuery = $;
             <div class="gearTabOtherFiltersRow">
               <div class="gearTabMainStatFilter">
                 <div class="gearTabFilterLabel" id="clearMainStatFilter">
-                  <b>Main stats</b> (<u>clear</u>)
+                  <b data-t>Main stats</b> (<u data-t>clear</u>)
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatAttackPercentFilter">
                       <img class="gearTabIcon" id="mainStatAttackPercentFilterIcon" src="./assets/statatkpercentdark.png"></img>
-                      <div class="gearTabButtonLabel">Attack %</div>
+                      <div class="gearTabButtonLabel" data-t>Attack %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatCdFilter">
                       <img class="gearTabIcon" id="mainStatCdFilterIcon" src="./assets/statcddark.png"></img>
-                      <div class="gearTabButtonLabel">Crit Damage</div>
+                      <div class="gearTabButtonLabel" data-t>Crit Damage</div>
                     </div>
                   </div>
                 </div>
@@ -900,13 +907,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatAttackFilter">
                       <img class="gearTabIcon" id="mainStatAttackFilterIcon" src="./assets/statatkdark.png"></img>
-                      <div class="gearTabButtonLabel">Attack</div>
+                      <div class="gearTabButtonLabel" data-t>Attack</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatCrFilter">
                       <img class="gearTabIcon" id="mainStatCrFilterIcon" src="./assets/statcrdark.png"></img>
-                      <div class="gearTabButtonLabel">Crit Chance</div>
+                      <div class="gearTabButtonLabel" data-t>Crit Chance</div>
                     </div>
                   </div>
                 </div>
@@ -914,13 +921,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatHealthPercentFilter">
                       <img class="gearTabIcon" id="mainStatHealthPercentFilterIcon" src="./assets/stathppercentdark.png"></img>
-                      <div class="gearTabButtonLabel">Health %</div>
+                      <div class="gearTabButtonLabel" data-t>Health %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatEffFilter">
                       <img class="gearTabIcon" id="mainStatEffFilterIcon" src="./assets/stateffdark.png"></img>
-                      <div class="gearTabButtonLabel">Effectiveness</div>
+                      <div class="gearTabButtonLabel" data-t>Effectiveness</div>
                     </div>
                   </div>
                 </div>
@@ -928,13 +935,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatHealthFilter">
                       <img class="gearTabIcon" id="mainStatHealthFilterIcon" src="./assets/stathpdark.png"></img>
-                      <div class="gearTabButtonLabel">Health</div>
+                      <div class="gearTabButtonLabel" data-t>Health</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatEffResFilter">
                       <img class="gearTabIcon" id="mainStatEffResFilterIcon" src="./assets/statresdark.png"></img>
-                      <div class="gearTabButtonLabel">Effect Resist</div>
+                      <div class="gearTabButtonLabel" data-t>Effect Resist</div>
                     </div>
                   </div>
                 </div>
@@ -942,13 +949,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatDefensePercentFilter">
                       <img class="gearTabIcon" id="mainStatDefensePercentFilterIcon" src="./assets/statdefpercentdark.png"></img>
-                      <div class="gearTabButtonLabel">Defense %</div>
+                      <div class="gearTabButtonLabel" data-t>Defense %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatSpeedFilter">
                       <img class="gearTabIcon" id="mainStatSpeedFilterIcon" src="./assets/statspddark.png"></img>
-                      <div class="gearTabButtonLabel">Speed</div>
+                      <div class="gearTabButtonLabel" data-t>Speed</div>
                     </div>
                   </div>
                 </div>
@@ -956,7 +963,7 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="mainStatDefenseFilter">
                       <img class="gearTabIcon" id="mainStatDefenseFilterIcon" src="./assets/statdefdark.png"></img>
-                      <div class="gearTabButtonLabel">Defense</div>
+                      <div class="gearTabButtonLabel" data-t>Defense</div>
                     </div>
                   </div>
                 </div>
@@ -964,19 +971,19 @@ window.jQuery = $;
 
               <div class="gearTabSubstatFilter">
                 <div class="gearTabFilterLabel" id="clearSubStatFilter">
-                  <b>Sub stats</b> (<u>clear</u>)
+                  <b data-t>Sub stats</b> (<u data-t>clear</u>)
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatAttackPercentFilter">
                       <img class="gearTabIcon" id="subStatAttackPercentFilterIcon" src="./assets/statatkpercentdark.png"></img>
-                      <div class="gearTabButtonLabel">Attack %</div>
+                      <div class="gearTabButtonLabel" data-t>Attack %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatCdFilter">
                       <img class="gearTabIcon" id="subStatCdFilterIcon" src="./assets/statcddark.png"></img>
-                      <div class="gearTabButtonLabel">Crit Damage</div>
+                      <div class="gearTabButtonLabel" data-t>Crit Damage</div>
                     </div>
                   </div>
                 </div>
@@ -984,13 +991,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatAttackFilter">
                       <img class="gearTabIcon" id="subStatAttackFilterIcon" src="./assets/statatkdark.png"></img>
-                      <div class="gearTabButtonLabel">Attack</div>
+                      <div class="gearTabButtonLabel" data-t>Attack</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatCrFilter">
                       <img class="gearTabIcon" id="subStatCrFilterIcon" src="./assets/statcrdark.png"></img>
-                      <div class="gearTabButtonLabel">Crit Chance</div>
+                      <div class="gearTabButtonLabel" data-t>Crit Chance</div>
                     </div>
                   </div>
                 </div>
@@ -998,13 +1005,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatHealthPercentFilter">
                       <img class="gearTabIcon" id="subStatHealthPercentFilterIcon" src="./assets/stathppercentdark.png"></img>
-                      <div class="gearTabButtonLabel">Health %</div>
+                      <div class="gearTabButtonLabel" data-t>Health %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatEffFilter">
                       <img class="gearTabIcon" id="subStatEffFilterIcon" src="./assets/stateffdark.png"></img>
-                      <div class="gearTabButtonLabel">Effectiveness</div>
+                      <div class="gearTabButtonLabel" data-t>Effectiveness</div>
                     </div>
                   </div>
                 </div>
@@ -1012,13 +1019,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatHealthFilter">
                       <img class="gearTabIcon" id="subStatHealthFilterIcon" src="./assets/stathpdark.png"></img>
-                      <div class="gearTabButtonLabel">Health</div>
+                      <div class="gearTabButtonLabel" data-t>Health</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatEffResFilter">
                       <img class="gearTabIcon" id="subStatEffResFilterIcon" src="./assets/statresdark.png"></img>
-                      <div class="gearTabButtonLabel">Effect Resist</div>
+                      <div class="gearTabButtonLabel" data-t>Effect Resist</div>
                     </div>
                   </div>
                 </div>
@@ -1026,13 +1033,13 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatDefensePercentFilter">
                       <img class="gearTabIcon" id="subStatDefensePercentFilterIcon" src="./assets/statdefpercentdark.png"></img>
-                      <div class="gearTabButtonLabel">Defense %</div>
+                      <div class="gearTabButtonLabel" data-t>Defense %</div>
                     </div>
                   </div>
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatSpeedFilter">
                       <img class="gearTabIcon" id="subStatSpeedFilterIcon" src="./assets/statspddark.png"></img>
-                      <div class="gearTabButtonLabel">Speed</div>
+                      <div class="gearTabButtonLabel" data-t>Speed</div>
                     </div>
                   </div>
                 </div>
@@ -1040,7 +1047,7 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="subStatDefenseFilter">
                       <img class="gearTabIcon" id="subStatDefenseFilterIcon" src="./assets/statdefdark.png"></img>
-                      <div class="gearTabButtonLabel">Defense</div>
+                      <div class="gearTabButtonLabel" data-t>Defense</div>
                     </div>
                   </div>
                 </div>
@@ -1050,7 +1057,7 @@ window.jQuery = $;
 
               <div class="gearTabLevelFilter">
                 <div class="gearTabFilterLabel" id="clearLevelFilter">
-                  <b>Level</b> (<u>clear</u>)
+                  <b data-t>Level</b> (<u data-t>clear</u>)
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabShortButton">
@@ -1098,7 +1105,7 @@ window.jQuery = $;
 
               <div class="gearTabEnhanceFilter">
                 <div class="gearTabFilterLabel" id="clearEnhanceFilter">
-                  <b>Enhance</b> (<u>clear</u>)
+                  <b data-t>Enhance</b> (<u data-t>clear</u>)
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabShortButton">
@@ -1148,13 +1155,13 @@ window.jQuery = $;
 
               <div class="gearTabDuplicateFilter">
                 <div class="gearTabFilterLabel" id="clearOtherFilter">
-                  <b>Other</b> (<u>clear</u>)
+                  <b data-t>Other</b> (<u data-t>clear</u>)
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton clearAllFilterButton" id="clearAllFilter">
                       <img class="gearTabIcon" id="clearAllFilterIcon" src="./assets/trash.png" style="opacity:0.7"></img>
-                      <div class="gearTabButtonLabel">Clear all</div>
+                      <div class="gearTabButtonLabel" data-t>Clear all</div>
                     </div>
                   </div>
                 </div>
@@ -1162,7 +1169,7 @@ window.jQuery = $;
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="duplicateFilter">
                       <img class="gearTabIcon" id="duplicateFilterIcon" src="./assets/copy.png" style="opacity:0.6"></img>
-                      <div class="gearTabButtonLabel">Duplicates</div>
+                      <div class="gearTabButtonLabel" data-t>Duplicates</div>
                     </div>
                   </div>
                 </div>
@@ -1193,14 +1200,14 @@ window.jQuery = $;
           <div class="heroesTabTopButtonRowLeft">
             <select id="addHeroesSelector" class="gearPreviewButton"></select>
 
-            <input type="submit" value="Add New Hero" class="gearPreviewButton" id="addHeroesSubmit">
+            <input type="submit" value="Add New Hero" class="gearPreviewButton" id="addHeroesSubmit" data-t>
           </div>
 
 
           <div class="heroesTabTopButtonRowRight">
             <div class="heroTabButton">
               <div class="gearTabButton" id="clearHeroFilter">
-                <div class="gearTabButtonLabel" style="margin-right:5px">Clear</div>
+                <div class="gearTabButtonLabel" style="margin-right:5px" data-t>Clear</div>
               </div>
             </div>
           </div>
@@ -1274,7 +1281,7 @@ window.jQuery = $;
           </div>
 
           <div class="reforgeSwitch">
-            Use reforged stats
+            <a data-t>Use reforged stats</a>
             <div class="switch">
               <input id="heroesTabUseReforgedStats" type="checkbox" class="switch-input" checked />
               <label for="heroesTabUseReforgedStats" class="switch-label"></label>
@@ -1295,16 +1302,16 @@ window.jQuery = $;
           <div id="builds-table" class="ag-theme-balham"></div>
         </div>
         <div class="heroesTabButtonRow">
-          <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit">
-          <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit">
+          <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit" data-t>
+          <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit" data-t>
   <!--
         </div>
         <div class="heroesTabButtonRow"> -->
 
-          <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit">
-          <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit">
-          <input type="submit" value="Save As Build" class="gearPreviewButton" id="saveAsBuildSubmit">
-          <input type="submit" value="Remove Build" class="gearPreviewButton" id="removeBuildSubmit">
+          <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit" data-t>
+          <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit" data-t>
+          <input type="submit" value="Save As Build" class="gearPreviewButton" id="saveAsBuildSubmit" data-t>
+          <input type="submit" value="Remove Build" class="gearPreviewButton" id="removeBuildSubmit" data-t>
 
         </div>
 
@@ -1329,11 +1336,11 @@ window.jQuery = $;
         </div>
 
         <div class="heroesTabButtonRow">
-          <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipHeroesSubmit">
-          <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockHeroesSubmit">
-          <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockHeroesSubmit">
-          <input type="submit" value="Select All" class="gearPreviewButton" id="heroPreviewSelectAll">
-          <input type="submit" value="Deselect All" class="gearPreviewButton" id="heroPreviewDeselectAll">
+          <input type="submit" value="Unequip Items" class="gearPreviewButton" id="unequipHeroesSubmit" data-t>
+          <input type="submit" value="Lock Items" class="gearPreviewButton" id="lockHeroesSubmit" data-t>
+          <input type="submit" value="Unlock Items" class="gearPreviewButton" id="unlockHeroesSubmit" data-t>
+          <input type="submit" value="Select All" class="gearPreviewButton" id="heroPreviewSelectAll" data-t>
+          <input type="submit" value="Deselect All" class="gearPreviewButton" id="heroPreviewDeselectAll" data-t>
         </div>
 
       </div>
@@ -1345,39 +1352,39 @@ window.jQuery = $;
 
     <div id="importer-section" class="tab-panel">
 
-      <h2>Loading gear automatically from the game</h2>
+      <h2 data-t>Loading gear automatically from the game</h2>
 
-      <p>
+      <p data-t>
         1. Install requirements from the instructions on Github</br>
         2. Leave your emulator open, and close Epic 7</br>
         3. Click <b>Start scanning</b></br>
         4. Open Epic 7, and load into the lobby</br>
         5. Click <b>Stop scanning</b></br>
-        6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a "gear.txt"</br>
-        7. Import the "gear.txt" with the <b>Replace/Add/Merge</b> options below</br>
+        6. Wait up to 30 secs, then once the data appears, click<b>Export</b> to save it to a 'gear.txt'</br>
+        7.Import the 'gear.txt' with the <b>Replace/Add/Merge</b> options below</br>
         8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items</br>
 
       </p>
 
       <select id="importLimitEnhance" class="gearPreviewButton">
-        <option value=0>All</option>
-        <option value=3>+3 and up</option>
-        <option value=6 selected>+6 and up</option>
-        <option value=9>+9 and up</option>
-        <option value=12>+12 and up</option>
-        <option value=15>+15</option>
+        <option value=0 data-t>All</option>
+        <option value=3 data-t>+3 and up</option>
+        <option value=6 selected data-t>+6 and up</option>
+        <option value=9 data-t>+9 and up</option>
+        <option value=12 data-t>+12 and up</option>
+        <option value=15 >+15</option>
       </select>
 
       <br>
       <br>
 
 
-      <input type="submit" class="gearPreviewButton" value="Start scanning" id="loadIngameGearStart">
+      <input type="submit" class="gearPreviewButton" value="Start scanning" id="loadIngameGearStart" data-t>
 
       <br>
       <br>
 
-      <input type="submit" class="gearPreviewButton" value="Stop scanning" id="loadIngameGearEnd">
+      <input type="submit" class="gearPreviewButton" value="Stop scanning" id="loadIngameGearEnd" data-t>
 
       <br>
       <br>
@@ -1387,62 +1394,62 @@ window.jQuery = $;
       <br>
       <br>
 
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveLoadFromGameExportOutput">
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveLoadFromGameExportOutput" data-t>
       <text id="loadFromGameExportOutputText"></text>
 
       <br>
       <br>
       <hr>
 
-      <h2>Importing gear data</h2>
-      <p>
-      After the "gear.txt" is created, choose one of the following ways to import your gear, then select your "gear.txt" file.</br>
+      <h2 data-t>Importing gear data</h2>
+      <p data-t>
+      After the 'gear.txt' is created, choose one of the following ways to import your gear, then select your 'gear.txt' file.</br>
       Use <b>replace</b> to completely replace any existing gear with your new gear screenshots. This will wipe existing heroes.</br>
-      Use <b>add</b> to add your new gear screenshots to your currently loaded gear. Does not wipe heroes.</br>
+      Use  <b>add</b> to add your new gear screenshots to your currently loaded gear. Does not wipe heroes.</br>
       Use <b>merge</b> to combine your new gear screenshots with your currently loaded gear.</br>
-      Merging replaces your old items with new items, while keeping your heroes' equipped gear and builds intact. </br>
+      Merging replaces your old items with new items, while keeping your heroes' equipped gear and builds intact.</br>
       This is useful for people who re-screenshot all their gear, and want to keep all their hero settings.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Replace data" id="importFileSelect">
-      <text id="importOutputText">Waiting for file..</text>
+      <input type="submit" class="gearPreviewButton" value="Replace data" id="importFileSelect" data-t>
+      <text id="importOutputText" data-t>Waiting for file..</text>
 
       <br><br>
 
-      <input type="submit" class="gearPreviewButton" value="Add new data" id="importAppendFileSelect">
-      <text id="importAppendOutputText">Waiting for file..</text>
+      <input type="submit" class="gearPreviewButton" value="Add new data" id="importAppendFileSelect" data-t>
+      <text id="importAppendOutputText" data-t>Waiting for file..</text>
 
       <br><br>
 
-      <input type="submit" class="gearPreviewButton" value="Merge data" id="importMergeFileSelect">
-      <text id="importMergeOutputText">Waiting for file..</text>
+      <input type="submit" class="gearPreviewButton" value="Merge data" id="importMergeFileSelect" data-t>
+      <text id="importMergeOutputText" data-t>Waiting for file..</text>
 
-      <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit"> -->
+      <!-- <input type="submit" class="gearPreviewButton" value="Import" id="importFileSubmit" data-t> -->
 
       <br>
       <br>
       <hr>
 
-      <h2>Save/Load all optimizer data</h2>
-      <p>
+      <h2 data-t>Save/Load all optimizer data</h2>
+      <p data-t>
       You can load/save your hero + gear configuration here.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Save data" id="saveDataSubmit">
-      <text id="saveDataSubmitOutputText">Waiting for file..</text>
+      <input type="submit" class="gearPreviewButton" value="Save data" id="saveDataSubmit" data-t>
+      <text id="saveDataSubmitOutputText" data-t>Waiting for file..</text>
 
       <br>
       <br>
 
-      <input type="submit" class="gearPreviewButton" value="Load data" id="loadDataSubmit">
-      <text id="loadDataSubmitOutputText">Waiting for file..</text>
+      <input type="submit" class="gearPreviewButton" value="Load data" id="loadDataSubmit" data-t>
+      <text id="loadDataSubmitOutputText" data-t>Waiting for file..</text>
 
       <br>
       <br>
       <hr>
 
-      <h2>Creating gear data from screenshots</h2>
-      <p>
+      <h2 data-t>Creating gear data from screenshots</h2>
+      <p data-t>
       Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)</br>
       </p>
       <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
@@ -1450,8 +1457,8 @@ window.jQuery = $;
       <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
 
 
-      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit">
-      <span id="fileReadSubmitOutputText">Waiting for folder..</span>
+      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit" data-t>
+      <span id="fileReadSubmitOutputText" data-t>Waiting for folder..</span>
 
       <br>
       <br>
@@ -1460,23 +1467,23 @@ window.jQuery = $;
 
       <br>
 
-      <p>
-        Once results are printed, hit 'Export'. This will output a "gear.txt" in the folder where you installed this app.
+      <p data-t>
+        Once results are printed, hit 'Export'. This will output a 'gear.txt' in the folder where you installed this app.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput">
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput" data-t>
       <text id="screenshotExportOutputText"></text>
 
       <br>
       <br>      <hr>
 
-      <h2>Import gear from Zarroc optimizer</h2>
-      <p>
+      <h2 data-t>Import gear from Zarroc optimizer</h2>
+      <p data-t>
       Select the Zarroc optimizer file here.
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect">
-      <text id="importZarrocSaveFileSelectOutputText">Waiting for file..</text>
+      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect" data-t>
+      <text id="importZarrocSaveFileSelectOutputText" data-t>Waiting for file..</text>
 
     </div>
 
@@ -1489,14 +1496,28 @@ window.jQuery = $;
 
 
     <div id="settingsTab" class="tab-panel">
-      <h2>Settings</h2>
+      <h2 data-t>Settings</h2>
+
+      <div>
+            <b>Languages</b><br><br>
+      </div>
+
+       <div class="toggleRow">
+        <div class="switchText" onclick="location.href='app.html?lng=en';" style="cursor: pointer;">English</div>
+        <span class="switchText"> | </span>
+         <div class="switchText" onclick="location.href='app.html?lng=zh';" style="cursor: pointer;">简体中文</div>
+         <span class="switchText"> | </span>
+         <div class="switchText" onclick="location.href='app.html?lng=zh-TW';" style="cursor: pointer;">繁體中文</div><br><br>
+       </div>
+
+       <input type="submit" id="clearlocalCache" onclick="clearlocalCache()" value="Clear language cache" data-t><br><br>
 
         <div class="toggleRow">
           <div class="switch">
             <input id="settingUnlockOnUnequip" type="checkbox" class="switch-input" />
             <label for="settingUnlockOnUnequip" class="switch-label"></label>
           </div>
-          <div class="switchText">
+          <div class="switchText" data-t>
             Automatically unlock equipment after unequipping
           </div>
         </div>
@@ -1506,35 +1527,35 @@ window.jQuery = $;
             <input id="settingRageSet" type="checkbox" class="switch-input" />
             <label for="settingRageSet" class="switch-label"></label>
           </div>
-          <div class="switchText">
+          <div class="switchText" data-t>
             Use rage set bonus for damage optimization
           </div>
         </div>
 
         <div class="toggleRow">
           <input type="number" id="settingMaxResults" class="settingsNumber">
-          <div class="switchText">
+          <div class="switchText" data-t>
             Maximum optimization results (Recommended: 5,000,000, Min 10k, Max 100m)
           </div>
         </div>
 
         <div class="toggleRow">
-          <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit">
+          <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit" data-t>
           <div class="toggleRowSpace"></div>
-          <text id="selectDefaultFolderSubmitOutputText">Select default folder</text>
+          <text id="selectDefaultFolderSubmitOutputText" data-t>Select default folder</text>
         </div>
 
 <!--
         <div class="toggleRow">
           <input type="color" class="gearPreviewButton" id="backgroundColorPicker">
           <div class="toggleRowSpace"></div>
-          <text>Select background color</text>
+          <text data-t>Select background color</text>
         </div>
 
         <div class="toggleRow">
           <input type="color" class="gearPreviewButton" id="textColorPicker">
           <div class="toggleRowSpace"></div>
-          <text>Select text color</text>
+          <text data-t>Select text color</text>
         </div> -->
 
 
@@ -1547,5 +1568,8 @@ window.jQuery = $;
 
   </div>
 </div>
+<script src="./locales/en/gridlocale.js"></script>
+<script src="./locales/zh/gridlocale.js"></script>
+<script src="./locales/zh-TW/gridlocale.js"></script>
 <script type="module" src="./js/init.js"></script>
 </body>

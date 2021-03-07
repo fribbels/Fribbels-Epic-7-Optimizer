@@ -225,6 +225,15 @@ function buildGrid() {
     const DIGITS_5 = 50;
     const DIGITS_6 = 55;
 
+    if (i18next.language == 'zh') {
+      var localeText = AG_GRID_LOCALE_ZH;
+    } else if (i18next.language == 'zh-TW') {
+      var localeText = AG_GRID_LOCALE_ZH_TW;
+    } else {
+      var localeText = AG_GRID_LOCALE_EN;
+    }
+    console.log('localeText:'+localeText);
+
     const gridOptions = {
         defaultColDef: {
             width: 50,
@@ -237,28 +246,28 @@ function buildGrid() {
         },
 
         columnDefs: [
-            {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
-            {headerName: 'atk', field: 'atk', width: DIGITS_4},
-            {headerName: 'hp', field: 'hp', width: DIGITS_5},
-            {headerName: 'def', field: 'def', width: DIGITS_4},
-            {headerName: 'spd', field: 'spd', width: DIGITS_3},
-            {headerName: 'cr', field: 'cr', width: DIGITS_3},
-            {headerName: 'cd', field: 'cd', width: DIGITS_3},
-            {headerName: 'eff', field: 'eff', width: DIGITS_3},
-            {headerName: 'res', field: 'res', width: DIGITS_3},
-            // {headerName: 'dac', field: 'dac'},
-            {headerName: 'cp', field: 'cp', width: DIGITS_6},
-            {headerName: 'hps', field: 'hpps', width: DIGITS_4},
-            {headerName: 'ehp', field: 'ehp', width: DIGITS_6},
-            {headerName: 'ehps', field: 'ehpps', width: DIGITS_5},
-            {headerName: 'dmg', field: 'dmg', width: DIGITS_5},
-            {headerName: 'dmgs', field: 'dmgps', width: DIGITS_4},
-            {headerName: 'mcd', field: 'mcdmg', width: DIGITS_5},
-            {headerName: 'mcds', field: 'mcdmgps', width: DIGITS_4},
-            {headerName: 'dmgh', field: 'dmgh', width: DIGITS_5},
-            {headerName: 'score', field: 'score', width: DIGITS_3},
-            {headerName: 'upg', field: 'upgrades', width: DIGITS_2},
-            {headerName: 'actions', field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
+            {headerName: i18next.t('sets'), field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
+            {headerName: i18next.t('atk'), field: 'atk', width: DIGITS_4},
+            {headerName: i18next.t('hp'), field: 'hp', width: DIGITS_5},
+            {headerName: i18next.t('def'), field: 'def', width: DIGITS_4},
+            {headerName: i18next.t('spd'), field: 'spd', width: DIGITS_3},
+            {headerName: i18next.t('cr'), field: 'cr', width: DIGITS_3},
+            {headerName: i18next.t('cd'), field: 'cd', width: DIGITS_3},
+            {headerName: i18next.t('eff'), field: 'eff', width: DIGITS_3},
+            {headerName: i18next.t('res'), field: 'res', width: DIGITS_3},
+            // {headerName: i18next.t('dac'), field: 'dac'},
+            {headerName: i18next.t('cp'), field: 'cp', width: DIGITS_6},
+            {headerName: i18next.t('hps'), field: 'hpps', width: DIGITS_4},
+            {headerName: i18next.t('ehp'), field: 'ehp', width: DIGITS_6},
+            {headerName: i18next.t('ehps'), field: 'ehpps', width: DIGITS_5},
+            {headerName: i18next.t('dmg'), field: 'dmg', width: DIGITS_5},
+            {headerName: i18next.t('dmgs'), field: 'dmgps', width: DIGITS_4},
+            {headerName: i18next.t('mcd'), field: 'mcdmg', width: DIGITS_5},
+            {headerName: i18next.t('mcds'), field: 'mcdmgps', width: DIGITS_4},
+            {headerName: i18next.t('dmgh'), field: 'dmgh', width: DIGITS_5},
+            {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
+            {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2, width: 65},
+            {headerName: i18next.t('actions'), field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',
@@ -266,6 +275,7 @@ function buildGrid() {
         onRowSelected: onRowSelected,
         pagination: true,
         paginationPageSize: 500,
+        localeText: localeText,
         cacheBlockSize: 500,
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,

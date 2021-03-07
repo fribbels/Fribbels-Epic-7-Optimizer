@@ -2,7 +2,11 @@ var AWN = require('awesome-notifications').default
 var globalOptions = {
     icons: {enabled: true},
     labels: {
-        warning: "Warning",
+        warning: i18next.t("Warning"),
+        alert: i18next.t("Alert"),
+        info: i18next.t("Info"),
+        success: i18next.t("Success"),
+        error: i18next.t("Error"),
     },
     durations: {
         alert: 20000,
@@ -16,22 +20,22 @@ var notifier = new AWN(globalOptions)
 module.exports = {
 
     info: (text) => {
-        notifier.info(text);
+        notifier.info(i18next.t(text));
     },
 
     success: (text) => {
-        notifier.success(text);
+        notifier.success(i18next.t(text));
     },
 
     quick: (text) => {
-        notifier.success(text, {durations: {success: 2000}});
+        notifier.success(i18next.t(text), {durations: {success: 2000}});
     },
 
     error: (text) => {
-        notifier.alert(text);
+        notifier.alert(i18next.t(text));
     },
 
     warn: (text) => {
-        notifier.warning(text);
+        notifier.warning(i18next.t(text));
     },
 }

@@ -1,5 +1,6 @@
 var addHeroSelectorOpen = false;
 
+
 module.exports = {
     initialize: () => {
         const multipleSelectOptions = {
@@ -61,17 +62,17 @@ module.exports = {
             displayTitle: true,
             selectAll: false
         };
-        $('#inputSet1').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder:"4 or 2 piece sets"}));
-        $('#inputSet2').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder:"2 piece sets"}));
-        $('#inputSet3').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder:"2 piece sets"}));
-        $('#inputNecklaceStat').multipleSelect(Object.assign({}, selectAllMultipleSelectOptions, {placeholder:"Necklace"}));
-        $('#inputRingStat').multipleSelect(Object.assign({}, selectAllMultipleSelectOptions, {placeholder:"Ring"}));
-        $('#inputBootsStat').multipleSelect(Object.assign({}, selectAllMultipleSelectOptions, {placeholder:"Boots"}));
-        $('#inputExcludeSet').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder:"Exclude sets"}));
-        $('#inputHeroAdd').multipleSelect(Object.assign({}, heroSelectorOptions, {placeholder:"Hero"}))
-        $('#addHeroesSelector').multipleSelect(Object.assign({}, addHeroSelectorOptions, {placeholder:"Hero"}))
+        $('#inputSet1').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder: i18next.t("4 or 2 piece sets")}));
+        $('#inputSet2').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder: i18next.t("2 piece sets")}));
+        $('#inputSet3').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder: i18next.t("2 piece sets")}));
+        $('#inputNecklaceStat').multipleSelect(Object.assign({}, selectAllMultipleSelectOptions, {placeholder: i18next.t("Necklace")},{formatSelectAll () {return i18next.t('[Select all]')}}));
+        $('#inputRingStat').multipleSelect(Object.assign({}, selectAllMultipleSelectOptions, {placeholder: i18next.t("Ring")},{formatSelectAll () {return i18next.t('[Select all]')}}));
+        $('#inputBootsStat').multipleSelect(Object.assign({}, selectAllMultipleSelectOptions, {placeholder: i18next.t("Boots")},{formatSelectAll () {return i18next.t('[Select all]')}}));
+        $('#inputExcludeSet').multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder: i18next.t("Exclude sets")}));
+        $('#inputHeroAdd').multipleSelect(Object.assign({}, heroSelectorOptions, {placeholder: i18next.t("Hero")}))
+        $('#addHeroesSelector').multipleSelect(Object.assign({}, addHeroSelectorOptions, {placeholder: i18next.t("Hero")}))
 
-        $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder:"Exclude equipped", selectAll: true}));
+        $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder: i18next.t("Exclude equipped"), selectAll: true}));
 
         console.log("DONE INITIALIZING SELECTORS");
     },

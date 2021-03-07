@@ -17,6 +17,14 @@ var itemsGrid;
 var currentAggregate = {};
 var selectedCell = null;
 
+if (i18next.language == 'zh') {
+  var localeText = AG_GRID_LOCALE_ZH;
+} else if (i18next.language == 'zh-TW') {
+  var localeText = AG_GRID_LOCALE_ZH_TW;
+} else {
+  var localeText = AG_GRID_LOCALE_EN;
+}
+console.log('localeText:'+localeText);
 
 module.exports = {
 
@@ -44,38 +52,39 @@ module.exports = {
             },
 
             columnDefs: [
-                {headerName: 'Set', field: 'set', filter: 'agTextColumnFilter', cellRenderer: (params) => renderSets(params.value)},
-                {headerName: 'Gear', field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
-                {headerName: 'Rank', field: 'rank'},
-                {headerName: 'Level', field: 'level', filter: 'agNumberColumnFilter'},
-                {headerName: 'Enhance', field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
-                {headerName: 'Main', field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(params.value)},
-                {headerName: 'Value', field: 'main.value', width: 60},
-                {headerName: 'Atk%', field: 'augmentedStats.AttackPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Atk', field: 'augmentedStats.Attack', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Spd', field: 'augmentedStats.Speed', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Cr', field: 'augmentedStats.CriticalHitChancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Cd', field: 'augmentedStats.CriticalHitDamagePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Hp%', field: 'augmentedStats.HealthPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Hp', field: 'augmentedStats.Health', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Def%', field: 'augmentedStats.DefensePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Def', field: 'augmentedStats.Defense', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Eff', field: 'augmentedStats.EffectivenessPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Res', field: 'augmentedStats.EffectResistancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Score', field: 'wss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'dScore', field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'sScore', field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'cScore', field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'Equipped', field: 'equippedByName', width: 120},
-                // {headerName: 'Mconf', field: 'mconfidence', width: 50},
-                // {headerName: 'Material', field: 'material', width: 120},
-                {headerName: 'Locked', field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
-                // {headerName: 'Actions', field: 'id', cellRenderer: renderActions},
-                {headerName: 'Duplicate', field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
+                {headerName: i18next.t('Set'), field: 'set', filter: 'agTextColumnFilter', cellRenderer: (params) => renderSets(params.value)},
+                {headerName: i18next.t('Gear'), field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
+                {headerName: i18next.t('Rank'), field: 'rank', cellRenderer: (params) => i18next.t(params.value), width: 100},
+                {headerName: i18next.t('Level'), field: 'level', filter: 'agNumberColumnFilter'},
+                {headerName: i18next.t('Enhance'), field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
+                {headerName: i18next.t('Main'), field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(i18next.t(params.value))},
+                {headerName: i18next.t('Value'), field: 'main.value', width: 60},
+                {headerName: i18next.t('Atk%'), field: 'augmentedStats.AttackPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Atk'), field: 'augmentedStats.Attack', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Spd'), field: 'augmentedStats.Speed', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Cr'), field: 'augmentedStats.CriticalHitChancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Cd'), field: 'augmentedStats.CriticalHitDamagePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Hp%'), field: 'augmentedStats.HealthPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Hp'), field: 'augmentedStats.Health', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Def%'), field: 'augmentedStats.DefensePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Def'), field: 'augmentedStats.Defense', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Eff'), field: 'augmentedStats.EffectivenessPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Res'), field: 'augmentedStats.EffectResistancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: i18next.t('Score'), field: 'wss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: i18next.t('dScore'), field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: i18next.t('sScore'), field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: i18next.t('cScore'), field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: i18next.t('Equipped'), field: 'equippedByName', width: 120, cellRenderer: (params) => renderStat(i18next.t(params.value))},
+                // {headerName: i18next.t('Mconf'), field: 'mconfidence', width: 50},
+                // {headerName: i18next.t('Material'), field: 'material', width: 120},
+                {headerName: i18next.t('Locked'), field: 'locked', cellRenderer: (params) => params.value == true ? i18next.t('yes') : i18next.t('no')},
+                // {headerName: i18next.t('Actions'), field: 'id', cellRenderer: renderActions},
+                {headerName: i18next.t('Duplicate'), field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
             ],
             rowSelection: 'multiple',
             pagination: true,
             paginationPageSize: 100000,
+            localeText: localeText,
             rowData: getAllItemsResponse.items,
             onRowSelected: onRowSelected,
             onCellMouseOver: cellMouseOver,
@@ -495,7 +504,7 @@ function renderStat(name) {
 
 function updateSelectedCount() {
     const count = module.exports.getSelectedGear().length;
-    $('#selectedCount').html("Selected: " + count);
+    $('#selectedCount').html(count);
 }
 
 

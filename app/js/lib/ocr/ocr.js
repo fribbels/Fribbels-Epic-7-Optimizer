@@ -3,7 +3,7 @@ const OcrConverter = require('./ocrConverter');
 const Jimp = require('jimp');
 
 function handleError(error) {
-    Notifier.error("OCR error " + error);
+    Notifier.error(i18next.t("OCR error ") + error);
     console.error(error);
 }
 
@@ -235,7 +235,7 @@ module.exports = {
 
         for (var filename of filenames) {
             try {
-                $('#exportOutputText').val("Reading screenshots in progress...\nSucceeded: " + gear.length + " / " + length + "\nFailed: " + failed.length + " / " + length)
+                $('#exportOutputText').val(i18next.t("Reading screenshots in progress...\nSucceeded: ") + gear.length + " / " + length + i18next.t("\nFailed: ") + failed.length + " / " + length)
 
                 if (filename.includes("inverted") || filename.includes("debug") || filename.includes(".DS_Store")) {
                     await fs.unlink(filename, err => {if (err) console.log(err)})
@@ -311,7 +311,7 @@ module.exports = {
             // });
             } catch (e) {
                 console.error(e);
-                Notifier.error("Failed to read a screenshot: " + e);
+                Notifier.error(i18next.t("Failed to read a screenshot: ") + e);
                 failed.push(filename);
             }
         }

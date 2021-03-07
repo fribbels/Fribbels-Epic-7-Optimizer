@@ -61,6 +61,7 @@
       "css/",
       "assets/",
       "js/",
+      "locales/",
       "main.prod.js",
       "main.prod.js.map",
       "package.json"
@@ -239,11 +240,16 @@
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
     "@reduxjs/toolkit": "^1.4.0",
+    "chokidar": "^3.5.1",
     "connected-react-router": "^6.6.1",
     "electron-debug": "^3.1.0",
     "electron-log": "^4.2.4",
     "electron-updater": "^4.3.4",
     "history": "^4.7.2",
+    "i18next": "^19.9.1",
+    "i18next-browser-languagedetector": "^6.0.1",
+    "i18next-electron-language-detector": "^0.0.10",
+    "i18nextify": "^2.5.11",
     "network": "^0.5.0",
     "python-shell": "^2.0.3",
     "react": "^16.13.1",
@@ -254,7 +260,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.5",
-    "source-map-support": "^0.5.19"
+    "source-map-support": "^0.5.19",
+    "watchpack": "^1.7.4"
   },
   "devEngines": {
     "node": ">=7.x",

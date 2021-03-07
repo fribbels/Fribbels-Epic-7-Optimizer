@@ -313,7 +313,7 @@ input {
 .inputStatLabel {
   font-size:12px;
   display: inline-block;
-  width: 35px;
+  width: 40px;
   text-align: center;
 
 }
@@ -501,10 +501,12 @@ input {
 }
 .ag-header-cell-text {
   text-overflow: clip;
+  width: 40px;
 }
 .ag-header-cell-label, .ag-header-group-cell-label {
   justify-content: space-around;
   text-overflow: clip;
+  width: 40px;
 }
 .ag-theme-balham .ag-icon {
   font-size: 14px;
@@ -1106,9 +1108,16 @@ body.dark-theme input {
   display:flex;
   flex-direction: row;
 }
-.selectedCount {
+.selectedCountLabel {
   display: inline-block;
   width: 100px;
+  text-align: right;
+  position:absolute;
+  right: 75px;
+}
+.selectedCount {
+  display: inline-block;
+  width: 70px;
   text-align: right;
 }
 #substatPriorityLabel {
@@ -1122,35 +1131,35 @@ body.dark-theme input {
 }
 #statsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #ratingsLabel {
   cursor: pointer;
 }
 #ratingsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #forceLabel {
   cursor: pointer;
 }
 #forceLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #optionsLabel {
   cursor: pointer;
 }
 #optionsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 #accessorySetsLabel {
   cursor: pointer;
 }
 #accessorySetsLabel:hover:after {
   cursor: pointer;
-  content: " (clear)";
+  content: attr(data-content);
 }
 
 .gearTabBottomPanel {
@@ -1308,6 +1317,7 @@ body.dark-theme input {
   height: 34px;
   padding-right: 12px;
 }
+
 
 /* START dark mode toggle */
 
