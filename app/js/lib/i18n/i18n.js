@@ -1,21 +1,21 @@
 /* eslint-disable */
-window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLanguageDetector).init({
-  debug: 'true',
+window.i18next.use(window.i18nextHttpBackend).use(window.i18nextBrowserLanguageDetector).init({
+  // debug: 'true',
   preload:['en','zh','zh-TW','dev'],
   detection: {
     // order and from where user language should be detected
-    order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+    order: ['querystring', 'cookie', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
 
     // keys or params to lookup language from
     lookupQuerystring: 'lng',
     lookupCookie: 'i18next',
-    lookupLocalStorage: 'i18nextLng',
+    // lookupLocalStorage: 'i18nextLng',
     lookupSessionStorage: 'i18nextLng',
     lookupFromPathIndex: 0,
     lookupFromSubdomainIndex: 0,
 
     // cache user language on
-    caches: ['localStorage', 'cookie'],
+    caches: ['cookie'],
     excludeCacheFor: ['cimode'],
     htmlTag: document.documentElement,
   },
@@ -29,18 +29,18 @@ window.i18next.use(window.i18nextChainedBackend).use(window.i18nextBrowserLangua
   pluralSeparator: false,
   contextSeparator: false,
   backend: {
-    backends: [
-    window.i18nextLocalStorageBackend,  // primary
-    window.i18nextHttpBackend               // fallback
-    ],backendOptions: [{
-      prefix: 'i18next_res_',
-      // expiration
-      expirationTime: 7*24*60*60*1000,
-      store: window.localStorage
-    }, {
+    // backends: [
+    // window.i18nextLocalStorageBackend,  // primary
+    // window.i18nextHttpBackend               // fallback
+    // ],backendOptions: [{
+    //   // prefix: 'i18next_res_',
+    //   // expiration
+    //   // expirationTime: 7*24*60*60*1000,
+    //   // store: window.localStorage
+    // }, {
         loadPath: 'locales/{{lng}}/{{ns}}.json',
         addPath: 'locales/{{lng}}/{{ns}}.missing.json',
-      }]
+      // }]
       }
 });
 

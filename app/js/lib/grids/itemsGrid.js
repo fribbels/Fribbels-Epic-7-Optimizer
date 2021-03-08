@@ -54,7 +54,7 @@ module.exports = {
             columnDefs: [
                 {headerName: i18next.t('Set'), field: 'set', filter: 'agTextColumnFilter', cellRenderer: (params) => renderSets(params.value)},
                 {headerName: i18next.t('Gear'), field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
-                {headerName: i18next.t('Rank'), field: 'rank', cellRenderer: (params) => i18next.t(params.value), width: 100},
+                {headerName: i18next.t('Rank'), field: 'rank', cellRenderer: (params) => i18next.t(params.value), width: 50},
                 {headerName: i18next.t('Level'), field: 'level', filter: 'agNumberColumnFilter'},
                 {headerName: i18next.t('Enhance'), field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
                 {headerName: i18next.t('Main'), field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(i18next.t(params.value))},
