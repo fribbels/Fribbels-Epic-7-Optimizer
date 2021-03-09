@@ -136,6 +136,15 @@ module.exports = {
         launchScanner(command)
     },
 
+    switchApi: () => {
+        if (api == "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev") {
+            api = "http://127.0.0.1:5000";
+        } else {
+            api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
+        }
+        console.log("Switched to: " + api)
+    },
+
     end: async () => {
         if (!child) {
             console.error("No scan was started");
@@ -388,32 +397,4 @@ function isPercent(stat) {
     ||     stat == "DefensePercent"
     ||     stat == "EffectivenessPercent"
     ||     stat == "EffectResistancePercent";
-}
-
-function isAccessory(gear) {
-    return gear == "Necklace" || gear == "Ring" || gear == "Boots";
-}
-
-function isCritChance(stat) {
-    return stat == "CriticalHitChancePercent";
-}
-
-function isCritDamage(stat) {
-    return stat == "CriticalHitDamagePercent";
-}
-
-function isSpeed(stat) {
-    return stat == "Speed";
-}
-
-function isHealth(stat) {
-    return stat == "Health";
-}
-
-function isDefense(stat) {
-    return stat == "Defense";
-}
-
-function isAttack(stat) {
-    return stat == "Attack";
 }

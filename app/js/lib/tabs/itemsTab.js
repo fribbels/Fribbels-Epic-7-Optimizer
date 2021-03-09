@@ -15,6 +15,11 @@ const enhanceCheckboxes = [];
 var statFilter;
 const statCheckboxes = [];
 
+var modifyGreater = true;
+var modifyFilter;
+const modifyCheckboxes = [];
+
+
 const filters = {
     setFilter: null,
     gearFilter: null,
@@ -22,7 +27,8 @@ const filters = {
     enhanceFilter: null,
     statFilter: null,
     substatFilter: null,
-    duplicateFilter: null
+    duplicateFilter: null,
+    modifyFilter: null,
 }
 
 module.exports = {
@@ -65,19 +71,8 @@ module.exports = {
     },
 
     redraw: (newItem) => {
-
         ItemsGrid.redraw(newItem).then(x => {
-
             ItemsGrid.refreshFilters(filters)
-
-            // setFilter = null;
-            // for (var checkbox of setCheckboxes) {
-            //     checkbox.checked = false;
-            // }
-            // gearFilter = null;
-            // for (var checkbox of gearCheckboxes) {
-            //     checkbox.checked = false;
-            // }
         });
     }
 }
@@ -304,6 +299,19 @@ const elementsByFilter = {
     ],
     duplicateFilter: [
         "duplicateFilter",
+    ],
+    modifyFilter: [
+        "modifyAtkFilter",
+        "modifyAtkPercentFilter",
+        "modifyDefFilter",
+        "modifyDefPercentFilter",
+        "modifyHpFilter",
+        "modifyHpPercentFilter",
+        "modifyCrFilter",
+        "modifyCdFilter",
+        "modifyEffFilter",
+        "modifyResFilter",
+        "modifySpeedFilter",
     ]
 }
 
@@ -387,6 +395,22 @@ function setupEventListeners() {
 
     setupClearListener("clearEnhanceFilter", "enhanceFilter")
 
+    // Modify
+    setupFilterListener("modifyAtkFilter", "modifyFilter", "Attack")
+    setupFilterListener("modifyAtkPercentFilter", "modifyFilter", "AttackPercent")
+    setupFilterListener("modifyDefFilter", "modifyFilter", "Defense")
+    setupFilterListener("modifyDefPercentFilter", "modifyFilter", "DefensePercent")
+    setupFilterListener("modifyHpFilter", "modifyFilter", "Health")
+    setupFilterListener("modifyHpPercentFilter", "modifyFilter", "HealthPercent")
+    setupFilterListener("modifyCrFilter", "modifyFilter", "CriticalHitChancePercent")
+    setupFilterListener("modifyCdFilter", "modifyFilter", "CriticalHitDamagePercent")
+    setupFilterListener("modifyEffFilter", "modifyFilter", "EffectivenessPercent")
+    setupFilterListener("modifyResFilter", "modifyFilter", "EffectResistancePercent")
+    setupFilterListener("modifySpeedFilter", "modifyFilter", "Speed")
+
+    setupClearListener("clearModifyFilter", "modifyFilter")
+
+    // Other
     setupFilterListener("duplicateFilter", "duplicateFilter", "duplicate")
 
     setupClearListener("clearOtherFilter", "duplicateFilter")
@@ -402,186 +426,38 @@ function setupEventListeners() {
         }
         ItemsGrid.refreshFilters(filters);
     })
-    // const sets = Object.keys(Assets.getAssetsBySet())
-    // console.log("SETUP", sets);
-    // for (var set of sets) {
-    //     const checkbox = document.getElementById('checkboxImage' + set);
-    //     checkbox.addEventListener('change', function(event) {
-    //         var eventSet = event.target.id.split("checkboxImage")[1];
-    //         if (event.target.checked) {
-    //             setFilter = eventSet
-    //             for (var checkbox of setCheckboxes) {
-    //                 if (checkbox != event.target)
-    //                     checkbox.checked = false;
-    //             }
-    //         } else {
-    //             setFilter = null;
-    //         }
 
-    //         ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    //     });
-    //     setCheckboxes.push(checkbox);
-    // }
+    document.getElementById('modifySwitch').addEventListener('click', () => {
+        if (modifyGreater) {
+            modifyGreater = false;
 
-    // document.getElementById('checkboxImageClearSets').addEventListener('change', function(event) {
-    //     console.log(event);
-    //     if (event.target.checked) {
-    //         setFilter = null;
-    //         for (var checkbox of setCheckboxes) {
-    //             checkbox.checked = false;
-    //         }
-    //     } else {
+            $('#modifyAtkIcon').attr("src", "./assets/lesseratk.png");
+            $('#modifyAtkPercentIcon').attr("src", "./assets/lesseratkpercent.png");
+            $('#modifyDefIcon').attr("src", "./assets/lesserdef.png");
+            $('#modifyDefPercentIcon').attr("src", "./assets/lesserdefpercent.png");
+            $('#modifyHpIcon').attr("src", "./assets/lesserhp.png");
+            $('#modifyHpPercentIcon').attr("src", "./assets/lesserhppercent.png");
+            $('#modifyCrIcon').attr("src", "./assets/lessercr.png");
+            $('#modifyCdIcon').attr("src", "./assets/lessercd.png");
+            $('#modifyEffIcon').attr("src", "./assets/lessereff.png");
+            $('#modifyResIcon').attr("src", "./assets/lesserres.png");
+            $('#modifySpeedIcon').attr("src", "./assets/lesserspeed.png");
+            $('#modifySwitchIcon').attr("src", "./assets/greater.png");
+        } else {
+            modifyGreater = true;
 
-    //     }
-
-    //     ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    // });
-
-    // Gear
-
-    // const gears = Object.keys(Assets.getAssetsByGear())
-    // console.log("SETUP", gears);
-    // for (var gear of gears) {
-    //     const checkbox = document.getElementById('checkboxImage' + gear);
-    //     checkbox.addEventListener('change', function(event) {
-    //         var eventGear = event.target.id.split("checkboxImage")[1];
-    //         if (event.target.checked) {
-    //             gearFilter = eventGear
-    //             for (var checkbox of gearCheckboxes) {
-    //                 if (checkbox != event.target)
-    //                     checkbox.checked = false;
-    //             }
-    //         } else {
-    //             gearFilter = null;
-    //         }
-
-    //         ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    //     });
-    //     gearCheckboxes.push(checkbox);
-    // }
-
-    // document.getElementById('checkboxImageClearGears').addEventListener('change', function(event) {
-    //     console.log(event);
-    //     if (event.target.checked) {
-    //         gearFilter = null;
-    //         for (var checkbox of gearCheckboxes) {
-    //             checkbox.checked = false;
-    //         }
-    //     } else {
-
-    //     }
-
-    //     ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    // });
-
-    // Level
-
-    // const levels = Object.keys(Assets.getAssetsByLevel())
-    // console.log("SETUP", levels);
-    // for (var level of levels) {
-    //     const checkbox = document.getElementById('checkboxImage' + level);
-    //     checkbox.addEventListener('change', function(event) {
-    //         var eventLevel = event.target.id.split("checkboxImage")[1];
-    //         if (event.target.checked) {
-    //             levelFilter = eventLevel
-    //             for (var checkbox of levelCheckboxes) {
-    //                 if (checkbox != event.target)
-    //                     checkbox.checked = false;
-    //             }
-    //         } else {
-    //             levelFilter = null;
-    //         }
-
-    //         ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    //     });
-    //     levelCheckboxes.push(checkbox);
-    // }
-
-    // document.getElementById('checkboxImageClearLevels').addEventListener('change', function(event) {
-    //     console.log(event);
-    //     if (event.target.checked) {
-    //         levelFilter = null;
-    //         for (var checkbox of levelCheckboxes) {
-    //             checkbox.checked = false;
-    //         }
-    //     } else {
-
-    //     }
-
-    //     ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    // });
-
-    // // Enhance
-
-    // const enhances = Object.keys(Assets.getAssetsByEnhance())
-    // console.log("SETUP", enhances);
-    // for (var enhance of enhances) {
-    //     const checkbox = document.getElementById('checkboxImage' + enhance);
-    //     checkbox.addEventListener('change', function(event) {
-    //         var eventEnhance = event.target.id.split("checkboxImage")[1];
-    //         if (event.target.checked) {
-    //             enhanceFilter = eventEnhance
-    //             for (var checkbox of enhanceCheckboxes) {
-    //                 if (checkbox != event.target)
-    //                     checkbox.checked = false;
-    //             }
-    //         } else {
-    //             enhanceFilter = null;
-    //         }
-
-    //         ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    //     });
-    //     enhanceCheckboxes.push(checkbox);
-    // }
-
-    // document.getElementById('checkboxImageClearEnhances').addEventListener('change', function(event) {
-    //     console.log(event);
-    //     if (event.target.checked) {
-    //         enhanceFilter = null;
-    //         for (var checkbox of enhanceCheckboxes) {
-    //             checkbox.checked = false;
-    //         }
-    //     } else {
-
-    //     }
-
-    //     ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    // });
-
-    // // Stat
-
-    // const stats = Object.keys(Assets.getAssetsByStat())
-    // console.log("SETUP", stats);
-    // for (var stat of stats) {
-    //     const checkbox = document.getElementById('checkboxImage' + stat);
-    //     checkbox.addEventListener('change', function(event) {
-    //         var eventStat = event.target.id.split("checkboxImage")[1];
-    //         if (event.target.checked) {
-    //             statFilter = eventStat
-    //             for (var checkbox of statCheckboxes) {
-    //                 if (checkbox != event.target)
-    //                     checkbox.checked = false;
-    //             }
-    //         } else {
-    //             statFilter = null;
-    //         }
-
-    //         ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    //     });
-    //     statCheckboxes.push(checkbox);
-    // }
-
-    // document.getElementById('checkboxImageClearStats').addEventListener('change', function(event) {
-    //     console.log(event);
-    //     if (event.target.checked) {
-    //         statFilter = null;
-    //         for (var checkbox of statCheckboxes) {
-    //             checkbox.checked = false;
-    //         }
-    //     } else {
-
-    //     }
-
-    //     ItemsGrid.refreshFilters(setFilter, gearFilter, levelFilter, enhanceFilter, statFilter);
-    // });
+            $('#modifyAtkIcon').attr("src", "./assets/greateratk.png");
+            $('#modifyAtkPercentIcon').attr("src", "./assets/greateratkpercent.png");
+            $('#modifyDefIcon').attr("src", "./assets/greaterdef.png");
+            $('#modifyDefPercentIcon').attr("src", "./assets/greaterdefpercent.png");
+            $('#modifyHpIcon').attr("src", "./assets/greaterhp.png");
+            $('#modifyHpPercentIcon').attr("src", "./assets/greaterhppercent.png");
+            $('#modifyCrIcon').attr("src", "./assets/greatercr.png");
+            $('#modifyCdIcon').attr("src", "./assets/greatercd.png");
+            $('#modifyEffIcon').attr("src", "./assets/greatereff.png");
+            $('#modifyResIcon').attr("src", "./assets/greaterres.png");
+            $('#modifySpeedIcon').attr("src", "./assets/greaterspeed.png");
+            $('#modifySwitchIcon').attr("src", "./assets/lesser.png");
+        }
+    })
 }

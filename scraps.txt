@@ -14,7 +14,7 @@ NOT RELEASED YET
 
 ##### First time  setup for the automatic importer on Mac:
 1. Install [Python 3.9+](https://www.python.org/downloads/release/python-392/)
-3. Restart your computer
+2. Install [Wireshark](https://www.wireshark.org/download.html)
 
 ##### Using the automatic importer:
 1. Open your emulator
@@ -81,3 +81,43 @@ Object.values(ordered).forEach(x => {
     delete x.common;
     delete x.skills;
 })
+
+d = -- log.txt --
+
+m = []
+
+for (var x of d) {
+    if (x.ipFlags == "") {
+        //continue;
+    }
+    if (x.tcpAck in m) {
+        m[x.tcpAck].push(x)
+    } else {
+        m[x.tcpAck] = [x]
+    }
+}
+
+n = Object.values(m)
+duplicates = {}
+
+function combine(index) {
+    arr = n[index]
+    Utils.sortByAttribute(arr, 'tcpSeq')
+
+    data = ""
+    for (var packet of arr) {
+        if (!Object.keys(duplicates).includes(packet.tcpSeq)) {
+            data += packet.data
+        }
+        duplicates[packet.tcpSeq] = true;
+    }
+
+    return data;
+}
+
+finishedReading([combine(0)])
+
+x=""; for (var i= 0; i < 107; i++) {if(i!=13)x+=n[12][i].data} finishedReading([x])
+00\xabpersonality\xaapet_pers_8\xaaadditional\x80\xa3tip\x85\xa4type\xa5gacha\xa2tm\xce`>\xd9\xf9\xa7user_id\xce\x00\xedYm\xa4name\xacepic7#vhldwg\xa4info\x82\xa4type\xa5equip\xa4code\xa5efh07'
+
+00\xabpersonality\xaapet_pers_2\xaaadditional\x80\xa3tip\x85\xa4type\xa5gacha\xa2tm\xce`>\xce\xc8\xa7user_id\xce\x00&\x05\'\xa4name\xaaMaxedcrew7\xa4info\x82\xa4type\xa4unit\xa4code\xa5c2002'

@@ -135,4 +135,7 @@ module.exports = {
     getCopy: () => {
         return DarkMode.isDark() ? './assets/copy_dt.png' : './assets/copy.png';
     },
+    getCycle: () => {
+        return './assets/cycle.png';
+    },
 }

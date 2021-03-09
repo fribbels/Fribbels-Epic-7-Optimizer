@@ -156,6 +156,7 @@ module.exports = {
         const statFilter = filters.statFilter;
         const substatFilter = filters.substatFilter;
         const duplicateFilter = filters.duplicateFilter;
+        const modifyFilter = filters.modifyFilter;
 
         const setFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('set');
         if (!setFilter) {
@@ -323,19 +324,33 @@ module.exports = {
         }
         if (substatFilter) {
             const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
-            if (!substatFilter) {
-                // document.getElementById('checkboxImageClearStats').checked = true;
-                substatFilterComponent.setModel(null);
-            } else {
-                // document.getElementById('checkboxImageClearStats').checked = false;
 
-                substatFilterComponent.setModel({
-                    type: 'notEqual',
-                    filter: 0
-                });
-            }
+            substatFilterComponent.setModel({
+                // filterType: 'number',
+                // operator: 'OR',
+                // condition1: {
+                //     filterType: 'number',
+                //     type: 'equals',
+                //     filter: 5
+                // },
+                // condition2: {
+                //     filterType: 'number',
+                //     type: 'equals',
+                //     filter: 6
+                // }
+
+                type: 'notEqual',
+                filter: 0
+            });
         }
+        if (modifyFilter) {
+            const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + modifyFilter);
 
+            substatFilterComponent.setModel({
+                type: 'equals',
+                filter: 0
+            });
+        }
 
         const duplicateFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('duplicateId');
         if (!duplicateFilter) {

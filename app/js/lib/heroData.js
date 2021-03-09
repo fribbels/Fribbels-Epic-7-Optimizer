@@ -8,7 +8,7 @@ const ARTIFACT_TEST_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels
 var HERO_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cache/herodata.json";
 var ARTIFACT_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cache/artifactdata.json";
 
-const TEST = true;
+global.TEST = false;
 if (TEST) {
     HERO_CACHE = HERO_TEST_CACHE;
     ARTIFACT_CACHE = ARTIFACT_TEST_CACHE;

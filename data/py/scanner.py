@@ -5,13 +5,17 @@ import time
 
 acks = {}
 prevAcks = [-1 for i in range(len(list(conf.ifaces.data.values())))];
+existingIpIds = {}
+existingTcpSeqs = {}
 
 def try_buffer(currAck):
     buffers = acks[currAck];
 
+    buffers = sorted(buffers, key=lambda x: x['seq'])
     finalBuffer = b''
     for i in buffers:
         finalBuffer += i['data']
+
 
     hexStr = ''
     try:
@@ -31,17 +35,27 @@ def check_packet(packet, index):
 
             # packet.show()
 
-            if currAck in acks:
-                acks[currAck].append({'data': packet_bytes, 'seq': currSeq})
+            if existingIpIds.get(packet[IP].id) == None:
+                existingIpIds[packet[IP].id] = True
             else:
-                acks[currAck] = [{'data': packet_bytes, 'seq': currSeq}]
+                return
 
-            # if 'F' in packet[TCP].flags:
-            #     try_buffer(currAck)
+            if existingTcpSeqs.get(packet[TCP].seq) == None:
+                existingTcpSeqs[packet[TCP].seq] = True
+            else:
+                return
+
+            if currAck in acks:
+                acks[currAck].append({'data': packet_bytes, 'seq': packet[TCP].seq})
+            else:
+                acks[currAck] = [{'data': packet_bytes, 'seq': packet[TCP].seq}]
+
+                # if 'F' in packet[TCP].flags:
+                #     try_buffer(currAck)
 
 def thread_sniff(i, index):
     try:
-        sniff(iface=i, prn=lambda x: check_packet(x, index), filter="tcp and ( port 3333 )")
+        sniff(iface=i, prn=lambda x: check_packet(x, index), filter="tcp and ( port 3333 )", session=TCPSession)
     except:
         pass
 

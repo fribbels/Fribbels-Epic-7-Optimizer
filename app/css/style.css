@@ -898,6 +898,14 @@ body.dark-theme input {
   top: 4px;
   left: 2px;
 }
+.gearTabModifyIcon {
+  min-width: 3px;
+  min-height: 3px;
+  width: 45px;
+  height: 45px;
+  margin-top: -2px;
+  margin-bottom: 0px;
+}
 .gearTabIconSet {
   display: block;
   min-width: 3px;
@@ -1006,11 +1014,21 @@ body.dark-theme input {
   margin-left: auto;
 }
 .gearTabLevelFilter {
-  width: 100px;
-  min-width: 100px;
+  width: 90px;
+  min-width: 90px;
   margin-right: 10px;
 }
 .gearTabEnhanceFilter {
+  width: 125px;
+  min-width: 125px;
+  margin-right: 10px;
+}
+.gearTabDuplicateFilter {
+  width: 165px;
+  min-width: 165px;
+  margin-right: 10px;
+}
+.gearTabModifyFilter {
   width: 145px;
   min-width: 145px;
   margin-right: 10px;
@@ -1318,9 +1336,7 @@ body.dark-theme input {
   padding-right: 12px;
 }
 
-
 /* START dark mode toggle */
-
 
 .darkModeToggleContainer {
   display: flex;
@@ -1420,3 +1436,12 @@ input:checked + .darkSlider:before {
 }
 
 /* END dark mode toggle */
+
+.itemDisplaySubstatValueAndConversion {
+  display: flex;
+}
+.substatConvertedImage {
+  height: 18px;
+  width: 18px;
+  margin-left: 5px;
+}

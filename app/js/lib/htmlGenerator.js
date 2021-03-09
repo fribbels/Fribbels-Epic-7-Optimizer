@@ -272,19 +272,31 @@ module.exports = {
 </div>
 <div class="itemDisplaySubstats">
   <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat0.modifiedStat}', '${substat0.modifiedValue}', 0)" onmouseout="HtmlGenerator.modify(false, '${substat0.type}', '${substat0.value}', 0)">
-    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType0">${i18next.t(substat0.type)}</div>
+    <div class="itemDisplaySubstatValueAndConversion">
+        <div class="itemDisplaySubstatType" id="itemDisplaySubstatType0">${i18next.t(substat0.type)}</div>
+        ${generateSubstatConversionImage(item, 0)}
+    </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue0">${substat0.value}</div>
   </div>
   <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat1.modifiedStat}', '${substat1.modifiedValue}', 1)" onmouseout="HtmlGenerator.modify(false, '${substat1.type}', '${substat1.value}', 1)">
-    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType1">${i18next.t(substat1.type)}</div>
+    <div class="itemDisplaySubstatValueAndConversion">
+        <div class="itemDisplaySubstatType" id="itemDisplaySubstatType1">${i18next.t(substat1.type)}</div>
+        ${generateSubstatConversionImage(item, 1)}
+    </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue1">${substat1.value}</div>
   </div>
   <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat2.modifiedStat}', '${substat2.modifiedValue}', 2)" onmouseout="HtmlGenerator.modify(false, '${substat2.type}', '${substat2.value}', 2)">
-    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType2">${i18next.t(substat2.type)}</div>
+    <div class="itemDisplaySubstatValueAndConversion">
+        <div class="itemDisplaySubstatType" id="itemDisplaySubstatType2">${i18next.t(substat2.type)}</div>
+        ${generateSubstatConversionImage(item, 2)}
+    </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue2">${substat2.value}</div>
   </div>
   <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat3.modifiedStat}', '${substat3.modifiedValue}', 3)" onmouseout="HtmlGenerator.modify(false, '${substat3.type}', '${substat3.value}', 3)">
-    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType3">${i18next.t(substat3.type)}</div>
+    <div class="itemDisplaySubstatValueAndConversion">
+        <div class="itemDisplaySubstatType" id="itemDisplaySubstatType3">${i18next.t(substat3.type)}</div>
+        ${generateSubstatConversionImage(item, 3)}
+    </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue3">${substat3.value}</div>
   </div>
   <div class="horizontalLine"></div>
@@ -384,6 +396,17 @@ function styleForImage(rank) {
     if (rank == "Normal")
         return 'style="border: solid 2px #616161;background: #d2d4d2ab;"'
     return "";
+}
+
+function generateSubstatConversionImage(item, index) {
+    const substat = item.substats[index];
+    // if (substat.isConverted) {
+    if (index == 1) {
+        return `<img src="${Assets.getCycle()}" class="substatConvertedImage"></img>`;
+    } else {
+        // return `<img src="${Assets.getCycle()}" class="substatConvertedImage" style='opacity:0.25'></img> `;
+        return ''
+    }
 }
 
 const modValues = {
