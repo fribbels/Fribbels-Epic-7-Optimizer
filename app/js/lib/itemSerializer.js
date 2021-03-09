@@ -22,5 +22,7 @@ module.exports = {
 }
 
 function buildStat(obj) {
-    return new Stat(obj.type, parseInt(obj.value));
+    const rolls = parseInt(obj.rolls);
+    return new Stat(obj.type, parseInt(obj.value), isNaN(rolls) ? undefined : rolls, obj.modified);
 }
+

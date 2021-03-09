@@ -1,3 +1,7 @@
+/*
+    Contains all the api paths that the java backend uses.
+*/
+
 const axios = require('axios')
 
 const endpoint = "http://localhost:8130";

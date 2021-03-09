@@ -536,7 +536,8 @@ function drawPreview(item) {
         baseStats = HeroData.getBaseStatsByName(item.equippedByName)
     }
 
-    const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", baseStats)
+    // TODO ADD STAT SELECTOR
+    const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", baseStats, "Speed")
     document.getElementById("gearTabPreview").innerHTML = html;
 }
 

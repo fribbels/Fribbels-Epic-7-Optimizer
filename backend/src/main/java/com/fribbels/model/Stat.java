@@ -15,4 +15,8 @@ public class Stat {
     private StatType type;
 
     private Integer value;
+
+    private Integer rolls;
+
+    private Boolean modified;
 }

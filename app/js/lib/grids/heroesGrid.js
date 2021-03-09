@@ -510,28 +510,6 @@ async function onBuildRowSelected(event) {
             document.getElementById(displayId).innerHTML = html;
         }
     }
-
-    // const equipmentMap = hero.equipment ? hero.equipment : {};
-    // const equipment = [
-    //     equipmentMap["Weapon"],
-    //     equipmentMap["Helmet"],
-    //     equipmentMap["Armor"],
-    //     equipmentMap["Necklace"],
-    //     equipmentMap["Ring"],
-    //     equipmentMap["Boots"],
-    // ]
-
-    // module.exports.refreshBuilds();
-
-    // const baseStatsResponse = await Api.getBaseStats(hero.name);
-
-    // for (var i = 0; i < 6; i++) {
-    //     const gear = equipment[i];
-    //     const displayId = Constants.gearDisplayIdByIndex[i];
-
-    //     const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStatsResponse.heroStats)
-    //     document.getElementById(displayId).innerHTML = html;
-    // }
 }
 
 function onHeroRowClick(event) {
@@ -544,39 +522,6 @@ function onHeroRowSelected(event) {
         const heroId = event.data.id;
 
         redrawPreviewHero(heroId);
-
-        // const useReforgedStats = HeroesTab.getUseReforgedStats();
-        // console.log("Use reforge", useReforgedStats)
-        // Api.getHeroById(heroId, useReforgedStats).then(async (response) => {
-        //     const hero = response.hero;
-        //     console.log("On hero row selected hero row", hero);
-
-        //     updateCurrentAggregate(hero);
-        //     buildsGrid.gridOptions.api.setRowData(hero.builds == null ? [] : hero.builds)
-
-        //     const equipmentMap = hero.equipment ? hero.equipment : {};
-        //     const equipment = [
-        //         equipmentMap["Weapon"],
-        //         equipmentMap["Helmet"],
-        //         equipmentMap["Armor"],
-        //         equipmentMap["Necklace"],
-        //         equipmentMap["Ring"],
-        //         equipmentMap["Boots"],
-        //     ]
-
-        //     module.exports.refreshBuilds(response);
-
-        //     // const baseStatsResponse = await Api.getBaseStats(hero.name);
-        //     const baseStats = response.baseStats;
-
-        //     for (var i = 0; i < 6; i++) {
-        //         const gear = equipment[i];
-        //         const displayId = Constants.gearDisplayIdByIndex[i];
-
-        //         const html = HtmlGenerator.buildItemPanel(gear, "heroesGrid", baseStats)
-        //         document.getElementById(displayId).innerHTML = html;
-        //     }
-        // })
     }
 }
 

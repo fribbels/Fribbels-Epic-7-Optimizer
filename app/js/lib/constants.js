@@ -1,3 +1,8 @@
+/*
+Defines basic constants in the game. This isn't used as much as it should be,
+need to move other reused constants into here.
+*/
+
 module.exports = {
 
     setsByIndex: [

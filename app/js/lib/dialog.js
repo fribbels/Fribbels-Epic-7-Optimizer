@@ -1,4 +1,9 @@
+/*
+
+*/
+
 const Swal = require('sweetalert2');
+
 
 const e7StatToOptimizerStat = {
     "att_rate": "AttackPercent",

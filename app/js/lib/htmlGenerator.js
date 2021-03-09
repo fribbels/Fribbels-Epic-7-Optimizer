@@ -1,14 +1,13 @@
 const stringSimilarity = require('string-similarity');
 
-function statToText(stat, baseStats, item) {
+
+function statToText(stat, baseStats, item, modifyStat) {
     if (!stat) {
         return {
             type: '',
             value: ''
         }
     }
-
-// ${substat3.reforgedValue ? " [" + substat3.reforgedValue + "]" : ""}
 
     const unpercentedStat = shortenStats(stat.type.match(/[A-Z][a-z]+/g).filter(x => x != 'Percent').join(' '));
     var value;
@@ -22,10 +21,37 @@ function statToText(stat, baseStats, item) {
         value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats, false);
     }
 
+    // Keep the modified text the same for basic case
+    var modifiedStat = unpercentedStat;
+    var modifiedValue = value;
+
+    // Unless the modified text needs to be displayed
+    if (modifyStat) {
+        var mod;
+        modifiedStat = modifyStat;
+        console.log(stat)
+        console.log(modifiedStat)
+        console.log(modValues['reforged']['greater'])
+        console.log(modValues['reforged']['greater'][modifiedStat])
+        console.log(modValues['reforged']['greater'][modifiedStat][stat.rolls])
+
+        // Need to adjust backend to use these values so grid can pull them
+
+        if (Reforge.isReforgeable(item)) {
+            mod = modValues['reforged']['greater'][modifiedStat][stat.rolls];
+        } else {
+            mod = modValues['unreforged']['greater'][modifiedStat][stat.rolls];
+        }
+
+        console.log(item)
+        modifiedValue = "" + mod[0] + "-" + mod[1];
+    }
 
     return {
         type: unpercentedStat,
-        value: value
+        value: value,
+        modifiedStat: modifiedStat,
+        modifiedValue: modifiedValue
     }
 }
 
@@ -107,6 +133,15 @@ function getHeroImage(item) {
 
 module.exports = {
 
+    modify: (hover, stat, value, index) => {
+        $('#itemDisplaySubstatType' + index).html(stat);
+        $('#itemDisplaySubstatValue' + index).html(value);
+
+        if (hover) {
+            console.log("" + stat + " " + value)
+        }
+    },
+
     buildFilterSetsBar: () => {
         const clearUrl = Assets.getX(); // black x
         const html = buildFilter("ClearSets", clearUrl, true);
@@ -178,7 +213,7 @@ module.exports = {
         }
     },
 
-    buildItemPanel(item, checkboxPrefix, baseStats) {
+    buildItemPanel(item, checkboxPrefix, baseStats, modifyStat) {
         if (!item) {
             return `
 
@@ -202,10 +237,10 @@ module.exports = {
         ItemAugmenter.augment([item])
 
         const main = statToText(item.main, baseStats, item);
-        const substat0 = statToText(item.substats[0], baseStats, item);
-        const substat1 = statToText(item.substats[1], baseStats, item);
-        const substat2 = statToText(item.substats[2], baseStats, item);
-        const substat3 = statToText(item.substats[3], baseStats, item);
+        const substat0 = statToText(item.substats[0], baseStats, item, modifyStat);
+        const substat1 = statToText(item.substats[1], baseStats, item, modifyStat);
+        const substat2 = statToText(item.substats[2], baseStats, item, modifyStat);
+        const substat3 = statToText(item.substats[3], baseStats, item, modifyStat);
 
         const score = wssToText(item);
 
@@ -236,21 +271,21 @@ module.exports = {
   <div class="itemDisplayMainValue">${main.value}</div>
 </div>
 <div class="itemDisplaySubstats">
-  <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${i18next.t(substat0.type)}</div>
-    <div class="itemDisplaySubstatValue">${substat0.value}</div>
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat0.modifiedStat}', '${substat0.modifiedValue}', 0)" onmouseout="HtmlGenerator.modify(false, '${substat0.type}', '${substat0.value}', 0)">
+    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType0">${i18next.t(substat0.type)}</div>
+    <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue0">${substat0.value}</div>
   </div>
-  <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${i18next.t(substat1.type)}</div>
-    <div class="itemDisplaySubstatValue">${substat1.value}</div>
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat1.modifiedStat}', '${substat1.modifiedValue}', 1)" onmouseout="HtmlGenerator.modify(false, '${substat1.type}', '${substat1.value}', 1)">
+    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType1">${i18next.t(substat1.type)}</div>
+    <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue1">${substat1.value}</div>
   </div>
-  <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${i18next.t(substat2.type)}</div>
-    <div class="itemDisplaySubstatValue">${substat2.value}</div>
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat2.modifiedStat}', '${substat2.modifiedValue}', 2)" onmouseout="HtmlGenerator.modify(false, '${substat2.type}', '${substat2.value}', 2)">
+    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType2">${i18next.t(substat2.type)}</div>
+    <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue2">${substat2.value}</div>
   </div>
-  <div class="itemDisplaySubstat">
-    <div class="itemDisplaySubstatType">${i18next.t(substat3.type)}</div>
-    <div class="itemDisplaySubstatValue">${substat3.value}</div>
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat3.modifiedStat}', '${substat3.modifiedValue}', 3)" onmouseout="HtmlGenerator.modify(false, '${substat3.type}', '${substat3.value}', 3)">
+    <div class="itemDisplaySubstatType" id="itemDisplaySubstatType3">${i18next.t(substat3.type)}</div>
+    <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue3">${substat3.value}</div>
   </div>
   <div class="horizontalLine"></div>
   <div class="itemDisplaySubstat">
@@ -349,4 +384,372 @@ function styleForImage(rank) {
     if (rank == "Normal")
         return 'style="border: solid 2px #616161;background: #d2d4d2ab;"'
     return "";
+}
+
+const modValues = {
+    reforged: {
+        lesser: {
+            Speed: [
+                [2, 3],
+                [3, 5],
+                [5, 7],
+                [7, 9],
+                [9, 11],
+                [10, 12],
+            ],
+            Health: [
+                [190, 228],
+                [312, 397],
+                [442, 527],
+                [545, 616],
+                [650, 771],
+                [813, 896],
+            ],
+            Defense: [
+                [33, 39],
+                [45, 70],
+                [70, 92],
+                [87, 104],
+                [107, 127],
+                [134, 148],
+            ],
+            Attack: [
+                [39, 51],
+                [64, 87],
+                [91, 119],
+                [111, 137],
+                [135, 165],
+                [175, 194],
+            ],
+            CriticalHitChancePercent: [
+                [3, 4],
+                [4, 6],
+                [6, 8],
+                [8, 11],
+                [11, 13],
+                [13, 15],
+            ],
+            CriticalHitDamagePercent: [
+                [4, 5],
+                [6, 8],
+                [9, 12],
+                [13, 16],
+                [17, 19],
+                [19, 21],
+            ],
+            AttackPercent: [
+                [4, 6],
+                [8, 11],
+                [12, 15],
+                [16, 19],
+                [20, 22],
+                [22, 24],
+            ],
+            DefensePercent: [
+                [4, 6],
+                [8, 11],
+                [12, 15],
+                [16, 19],
+                [20, 22],
+                [22, 24],
+            ],
+            HealthPercent: [
+                [4, 6],
+                [8, 11],
+                [12, 15],
+                [16, 19],
+                [20, 22],
+                [22, 24],
+            ],
+            EffectivenessPercent: [
+                [4, 6],
+                [8, 11],
+                [12, 15],
+                [16, 19],
+                [20, 22],
+                [22, 24],
+            ],
+            EffectResistancePercent: [
+                [4, 6],
+                [8, 11],
+                [12, 15],
+                [16, 19],
+                [20, 22],
+                [22, 24],
+            ],
+        },
+        greater: {
+            Speed: [
+                [2, 4],
+                [4, 6],
+                [6, 8],
+                [8, 11],
+                [10, 13],
+                [11, 14],
+            ],
+            Health: [
+                [214, 259],
+                [347, 448],
+                [490, 590],
+                [602, 685],
+                [715, 858],
+                [897, 995],
+            ],
+            Defense: [
+                [37, 44],
+                [50, 79],
+                [78, 103],
+                [96, 116],
+                [118, 142],
+                [148, 165],
+            ],
+            Attack: [
+                [44, 58],
+                [72, 99],
+                [101, 134],
+                [123, 153],
+                [149, 184],
+                [194, 217],
+            ],
+            CriticalHitChancePercent: [
+                [3, 5],
+                [5, 8],
+                [8, 11],
+                [11, 14],
+                [14, 16],
+                [16, 18],
+            ],
+            CriticalHitDamagePercent: [
+                [5, 8],
+                [8, 11],
+                [11, 15],
+                [15, 19],
+                [19, 22],
+                [21, 24],
+            ],
+            AttackPercent: [
+                [5, 9],
+                [10, 14],
+                [14, 18],
+                [18, 22],
+                [22, 25],
+                [24, 27],
+            ],
+            DefensePercent: [
+                [5, 9],
+                [10, 14],
+                [14, 18],
+                [18, 22],
+                [22, 25],
+                [24, 27],
+            ],
+            HealthPercent: [
+                [5, 9],
+                [10, 14],
+                [14, 18],
+                [18, 22],
+                [22, 25],
+                [24, 27],
+            ],
+            EffectivenessPercent: [
+                [5, 9],
+                [10, 14],
+                [14, 18],
+                [18, 22],
+                [22, 25],
+                [24, 27],
+            ],
+            EffectResistancePercent: [
+                [5, 9],
+                [10, 14],
+                [14, 18],
+                [18, 22],
+                [22, 25],
+                [24, 27],
+            ],
+        }
+    },
+
+    unreforged: {
+        lesser: {
+            Speed: [
+                [2, 3],
+                [2, 4],
+                [3, 5],
+                [4, 6],
+                [5, 7],
+                [6, 8],
+            ],
+            Health: [
+                [134, 172],
+                [200, 285],
+                [274, 359],
+                [321, 392],
+                [370, 491],
+                [477, 560],
+            ],
+            Defense: [
+                [24, 30],
+                [27, 52],
+                [43, 65],
+                [51, 68],
+                [62, 82],
+                [80, 94],
+            ],
+            Attack: [
+                [28, 40],
+                [42, 65],
+                [58, 86],
+                [67, 93],
+                [80, 110],
+                [109, 128],
+            ],
+            CriticalHitChancePercent: [
+                [2, 3],
+                [2, 4],
+                [3, 5],
+                [4, 7],
+                [6, 8],
+                [7, 9],
+            ],
+            CriticalHitDamagePercent: [
+                [3, 4],
+                [4, 6],
+                [6, 9],
+                [9, 12],
+                [11, 13],
+                [12, 14],
+            ],
+            AttackPercent: [
+                [3, 5],
+                [5, 8],
+                [8, 11],
+                [11, 14],
+                [13, 15],
+                [14, 16],
+            ],
+            DefensePercent: [
+                [3, 5],
+                [5, 8],
+                [8, 11],
+                [11, 14],
+                [13, 15],
+                [14, 16],
+            ],
+            HealthPercent: [
+                [3, 5],
+                [5, 8],
+                [8, 11],
+                [11, 14],
+                [13, 15],
+                [14, 16],
+            ],
+            EffectivenessPercent: [
+                [3, 5],
+                [5, 8],
+                [8, 11],
+                [11, 14],
+                [13, 15],
+                [14, 16],
+            ],
+            EffectResistancePercent: [
+                [3, 5],
+                [5, 8],
+                [8, 11],
+                [11, 14],
+                [13, 15],
+                [14, 16],
+            ],
+        },
+        greater: {
+            Speed: [
+                [2, 4],
+                [3, 5],
+                [4, 6],
+                [5, 8],
+                [6, 9],
+                [7, 10],
+            ],
+            Health: [
+                [158, 203],
+                [235, 336],
+                [322, 422],
+                [378, 461],
+                [435, 578],
+                [561, 659],
+            ],
+            Defense: [
+                [28, 35],
+                [32, 61],
+                [51, 76],
+                [60, 80],
+                [73, 97],
+                [94, 111],
+            ],
+            Attack: [
+                [33, 47],
+                [50, 77],
+                [68, 101],
+                [79, 109],
+                [94, 129],
+                [128, 151],
+            ],
+            CriticalHitChancePercent: [
+                [2, 4],
+                [3, 6],
+                [5, 8],
+                [7, 10],
+                [9, 11],
+                [10, 12],
+            ],
+            CriticalHitDamagePercent: [
+                [4, 7],
+                [6, 9],
+                [8, 12],
+                [11, 15],
+                [13, 16],
+                [14, 17],
+            ],
+            AttackPercent: [
+                [4, 8],
+                [7, 11],
+                [10, 14],
+                [13, 17],
+                [15, 18],
+                [16, 19],
+            ],
+            DefensePercent: [
+                [4, 8],
+                [7, 11],
+                [10, 14],
+                [13, 17],
+                [15, 18],
+                [16, 19],
+            ],
+            HealthPercent: [
+                [4, 8],
+                [7, 11],
+                [10, 14],
+                [13, 17],
+                [15, 18],
+                [16, 19],
+            ],
+            EffectivenessPercent: [
+                [4, 8],
+                [7, 11],
+                [10, 14],
+                [13, 17],
+                [15, 18],
+                [16, 19],
+            ],
+            EffectResistancePercent: [
+                [4, 8],
+                [7, 11],
+                [10, 14],
+                [13, 17],
+                [15, 18],
+                [16, 19],
+            ],
+        }
+    }
 }

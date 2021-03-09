@@ -955,12 +955,6 @@ function updateProgress() {
     })
 }
 
-function drawPreviewForGearId(id, elementId, baseStats) {
-    // Api.getItemById(id).then(response => {
-    //     document.getElementById(elementId).innerHTML = HtmlGenerator.buildItemPanel(response.item, "optimizerGrid", baseStats);
-    // })
-}
-
 async function drawPreview() {
     const selectedGear = OptimizerGrid.getSelectedGearIds();
     module.exports.drawPreview(selectedGear);

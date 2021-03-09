@@ -377,25 +377,13 @@ _________________
 
 There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**Done for v1.5.0**
- - Default file path option
- - Order sets by 4 -> 2
- - Exclude equipped exclude self
- - Make Gaveleets level not show up green
- - Set permutation on submit
- - E7db override for new heroes
- - Investigate decrypting network traffic for gear data
- - Save current gear as build
- - Alphabetize hero selector on edit gear popup
- - Select all button for sets/accs
- - Select artifact/ee stats
- - Add reforge type in item edit
- - Persist exclude equipped
- - Create own db
- - Fix hp/atk off by 1
+**Done for v1.6.0**
+ - Dark mode
+ - Chinese translation
 
 **Working on:**
- - v1.5.0
+ - v1.6.0
+ - Update autosaves (upon adding gear, etc)
 
  **Medium priority:**
  - Add different level/awakening options
@@ -405,6 +393,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 
  **Low priority:**
  - Dark mode
+ - Add material filter
  - Bug: Comparison method violates its general contract
  - Select/interact with multiple heroes at once
  - See unit stats for whatever gear they have currently, not just for 6 pieces

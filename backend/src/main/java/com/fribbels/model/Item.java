@@ -36,6 +36,7 @@ public class Item {
     private String mconfidence;
 
     public String id;
+    public String ingameId;
 
     private String equippedById;
     private String equippedByName;

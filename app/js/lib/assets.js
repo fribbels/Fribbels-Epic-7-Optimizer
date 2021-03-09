@@ -1,3 +1,8 @@
+/*
+Defines most of the asset paths and their dark mode versions.
+Some assets are still being called directly from outside this class.
+*/
+
 const assetsBySet = {
     "HealthSet": "./assets/sethealth.png",
     "DefenseSet": "./assets/setdefense.png",

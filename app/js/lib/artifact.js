@@ -1,3 +1,9 @@
+/*
+    Calculates artifact hp/atk numbers - which technically have a tenths decimal
+    value but that value isn't shown ingame. Using the ingame value will
+    cause an off-by-one bug on HP/ATK calculations
+*/
+
 module.exports = {
     getStats: (name, level) => {
         const allData = HeroData.getAllArtifactData();

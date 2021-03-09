@@ -10,11 +10,6 @@ class Item {
         this.substats = substats;
         this.name = name;
         this.heroName = heroName;
-
-        // Validator.isEnum(gear, Gears);
-        // Validator.isEnum(rank, Ranks);
-        // Validator.isEnum(set, Sets);
-        // Validator.isArray(substats);
     }
 }
 
