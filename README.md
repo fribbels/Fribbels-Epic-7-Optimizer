@@ -380,6 +380,9 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 **Done for v1.6.0**
  - Dark mode
  - Chinese translation
+ - Can now merge scanned items with enhance/reforge/modifications
+ - Modification filter panel
+ - Modification previews
 
 **Working on:**
  - v1.6.0
@@ -392,7 +395,6 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Conversion filter
 
  **Low priority:**
- - Dark mode
  - Add material filter
  - Bug: Comparison method violates its general contract
  - Select/interact with multiple heroes at once
@@ -403,11 +405,11 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Update permutations on 4 piece set
  - Optimize multiple heroes at once
  - Gear page, option to use more than one set/gear filter at time
- - Verify all imported screenshots are image files
  - Auto copy gear image
  - Recolor on filter
 
  **Probably not doing:**
+ - Verify all imported screenshots are image files
  - Date newly added gear
  - Enable cross platform for Linux
  - Have two windows open at once

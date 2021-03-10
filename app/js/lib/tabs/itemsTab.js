@@ -33,6 +33,13 @@ const filters = {
 
 module.exports = {
 
+    getCurrentModifier: () => {
+        return {
+            grade: modifyGreater ? 'greater' : 'lesser',
+            stat: filters.modifyFilter
+        }
+    },
+
     initialize: () => {
         setupEventListeners();
 

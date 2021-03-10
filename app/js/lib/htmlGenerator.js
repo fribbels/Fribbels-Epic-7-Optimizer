@@ -9,7 +9,7 @@ function statToText(stat, baseStats, item, modifyStat) {
         }
     }
 
-    const unpercentedStat = shortenStats(stat.type.match(/[A-Z][a-z]+/g).filter(x => x != 'Percent').join(' '));
+    const unpercentedStat = shortenStats(stat.type);
     var value;
 
     if (Reforge.isReforgeable(item)) {
@@ -23,35 +23,34 @@ function statToText(stat, baseStats, item, modifyStat) {
 
     // Keep the modified text the same for basic case
     var modifiedStat = unpercentedStat;
-    var modifiedValue = value;
+    var reforge = false;
+    var rolls = stat.rolls;
+
+    const modifier = ItemsTab.getCurrentModifier();
 
     // Unless the modified text needs to be displayed
-    if (modifyStat) {
-        var mod;
-        modifiedStat = modifyStat;
-        console.log(stat)
-        console.log(modifiedStat)
-        console.log(modValues['reforged']['greater'])
-        console.log(modValues['reforged']['greater'][modifiedStat])
-        console.log(modValues['reforged']['greater'][modifiedStat][stat.rolls])
-
-        // Need to adjust backend to use these values so grid can pull them
-
+    if (modifier.grade && modifier.stat && stat.rolls) {
+        // console.log(stat)
+        // console.log(modifiedStat)
+        // console.log(modValues['reforged'][modifier.grade])
+        // console.log(modValues['reforged'][modifier.grade][modifiedStat])
+        // console.log(modValues['reforged'][modifier.grade][modifiedStat][stat.rolls])
         if (Reforge.isReforgeable(item)) {
-            mod = modValues['reforged']['greater'][modifiedStat][stat.rolls];
+            reforge = true;
         } else {
-            mod = modValues['unreforged']['greater'][modifiedStat][stat.rolls];
+
         }
 
-        console.log(item)
-        modifiedValue = "" + mod[0] + "-" + mod[1];
+        // Make it easier to read
+        modifiedStat = shortenStats(modifier.stat);
     }
 
     return {
         type: unpercentedStat,
         value: value,
         modifiedStat: modifiedStat,
-        modifiedValue: modifiedValue
+        reforge: reforge,
+        rolls: rolls
     }
 }
 
@@ -63,7 +62,9 @@ function wssToText(item) {
     }
 }
 
-function shortenStats(statType) {
+function shortenStats(stat) {
+    const statType = stat.match(/[A-Z][a-z]+/g).filter(x => x != 'Percent').join(' ');
+
     if (statType == "Effect Resistance")
         return "Effect Resist"
     if (statType == "Critical Hit Chance")
@@ -133,13 +134,29 @@ function getHeroImage(item) {
 
 module.exports = {
 
-    modify: (hover, stat, value, index) => {
-        $('#itemDisplaySubstatType' + index).html(stat);
-        $('#itemDisplaySubstatValue' + index).html(value);
+    modify: (hover, originalStat, originalValue, reforge, rolls, index) => {
+        const modifier = ItemsTab.getCurrentModifier();
+        var displayStat = originalStat;
+        var displayValue = originalValue;
 
-        if (hover) {
-            console.log("" + stat + " " + value)
+        reforge = reforge ? 'reforged' : 'unreforged'
+
+        if (hover && rolls && modifier.stat) {
+            // console.log(modifier, hover, originalStat, originalValue, reforge, rolls, index)
+            var mod = modValues[reforge][modifier.grade][modifier.stat][rolls];
+            var isPercent = modifier.stat.includes('Percent');
+            var start = "" + mod[0] + (isPercent ? "%" : "")
+            var end = "" + mod[1] + (isPercent ? "%" : "")
+
+            displayStat = hover ? shortenStats(modifier.stat) : originalStat;
+            displayValue = "" + start + " - " + end;
+        } else {
+
         }
+
+
+        $('#itemDisplaySubstatType' + index).html(displayStat);
+        $('#itemDisplaySubstatValue' + index).html(displayValue);
     },
 
     buildFilterSetsBar: () => {
@@ -271,28 +288,28 @@ module.exports = {
   <div class="itemDisplayMainValue">${main.value}</div>
 </div>
 <div class="itemDisplaySubstats">
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat0.modifiedStat}', '${substat0.modifiedValue}', 0)" onmouseout="HtmlGenerator.modify(false, '${substat0.type}', '${substat0.value}', 0)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat0.modifiedStat}', '${substat0.value}', ${substat0.reforge}, ${substat0.rolls}, 0)" onmouseout="HtmlGenerator.modify(false, '${substat0.type}', '${substat0.value}', '${substat0.value}', '${substat0.value}', 0)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType0">${i18next.t(substat0.type)}</div>
         ${generateSubstatConversionImage(item, 0)}
     </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue0">${substat0.value}</div>
   </div>
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat1.modifiedStat}', '${substat1.modifiedValue}', 1)" onmouseout="HtmlGenerator.modify(false, '${substat1.type}', '${substat1.value}', 1)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat1.modifiedStat}', '${substat1.value}', ${substat1.reforge}, ${substat1.rolls}, 1)" onmouseout="HtmlGenerator.modify(false, '${substat1.type}', '${substat1.value}', '${substat1.value}', '${substat1.value}', 1)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType1">${i18next.t(substat1.type)}</div>
         ${generateSubstatConversionImage(item, 1)}
     </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue1">${substat1.value}</div>
   </div>
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat2.modifiedStat}', '${substat2.modifiedValue}', 2)" onmouseout="HtmlGenerator.modify(false, '${substat2.type}', '${substat2.value}', 2)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat2.modifiedStat}', '${substat2.value}', ${substat2.reforge}, ${substat2.rolls}, 2)" onmouseout="HtmlGenerator.modify(false, '${substat2.type}', '${substat2.value}', '${substat2.value}', '${substat2.value}', 2)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType2">${i18next.t(substat2.type)}</div>
         ${generateSubstatConversionImage(item, 2)}
     </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue2">${substat2.value}</div>
   </div>
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat3.modifiedStat}', '${substat3.modifiedValue}', 3)" onmouseout="HtmlGenerator.modify(false, '${substat3.type}', '${substat3.value}', 3)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat3.modifiedStat}', '${substat3.value}', ${substat3.reforge}, ${substat3.rolls}, 3)" onmouseout="HtmlGenerator.modify(false, '${substat3.type}', '${substat3.value}', '${substat3.value}', '${substat3.value}', 3)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType3">${i18next.t(substat3.type)}</div>
         ${generateSubstatConversionImage(item, 3)}
@@ -401,7 +418,7 @@ function styleForImage(rank) {
 function generateSubstatConversionImage(item, index) {
     const substat = item.substats[index];
     // if (substat.isConverted) {
-    if (index == 1) {
+    if (substat.modified) {
         return `<img src="${Assets.getCycle()}" class="substatConvertedImage"></img>`;
     } else {
         // return `<img src="${Assets.getCycle()}" class="substatConvertedImage" style='opacity:0.25'></img> `;

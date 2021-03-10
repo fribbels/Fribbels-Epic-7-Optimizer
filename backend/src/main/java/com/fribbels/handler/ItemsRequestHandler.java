@@ -104,9 +104,22 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         final List<Item> existingItems = itemDb.getAllItems();
 
         final Map<Integer, List<Item>> itemsByHash = new HashMap<>();
+        final Map<String, Item> itemsByIngameId = new HashMap<>();
 
         // Note down matching items
         for (final Item item : existingItems) {
+            // First check ingameId
+            final String ingameId = item.getIngameId();
+
+            if (ingameId != null && itemsByIngameId.containsKey(ingameId)) {
+                final List<Item> matchingItems = itemsByHash.get(ingameId);
+                matchingItems.add(item);
+                continue;
+            } else {
+                itemsByIngameId.put(ingameId, item);
+            }
+
+            // Then check stats
             final int hash = item.getHash();
 
             if (itemsByHash.containsKey(hash)) {
@@ -119,15 +132,59 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
 
         // Replace matching new items with their existing versions
         for (int i = 0; i < newItems.size(); i++) {
-            final Item item = newItems.get(i);
-            final int hash = item.getHash();
+            final Item newItem = newItems.get(i);
+
+            // Check for ingameId matches first
+            final String ingameId = newItem.getIngameId();
+
+            if (ingameId != null && itemsByIngameId.containsKey(ingameId)) {
+                final Item matchingExistingItem = itemsByIngameId.get(ingameId);
+
+                matchingExistingItem.setIngameId(newItem.getIngameId());
+                matchingExistingItem.setName(newItem.getName());
+                matchingExistingItem.setSubstats(newItem.getSubstats());
+                matchingExistingItem.setMain(newItem.getMain());
+                matchingExistingItem.setSubstats(newItem.getSubstats());
+                matchingExistingItem.setAugmentedStats(newItem.getAugmentedStats());
+                matchingExistingItem.setReforgedStats(newItem.getReforgedStats());
+                matchingExistingItem.setEnhance(newItem.getEnhance());
+                matchingExistingItem.setLevel(newItem.getLevel());
+                matchingExistingItem.setUpgradeable(newItem.getUpgradeable());
+                matchingExistingItem.setReforgeable(newItem.getReforgeable());
+                matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
+
+                newItems.set(i, matchingExistingItem);
+                continue;
+            }
+
+            // Then check stat matches
+            final int hash = newItem.getHash();
 
             if (itemsByHash.containsKey(hash)) {
                 final List<Item> matchingItems = itemsByHash.get(hash);
 
                 if (!matchingItems.isEmpty()) {
-                    final Item removedItem = matchingItems.remove(0);
-                    newItems.set(i, removedItem);
+                    final Item matchingExistingItem = matchingItems.remove(0);
+
+//                    newItem.setEquippedById(matchingExistingItem.getEquippedById());
+//                    newItem.setEquippedByName(matchingExistingItem.getEquippedByName());
+//                    newItem.setHeroName(matchingExistingItem.getHeroName());
+//                    newItem.setLocked(matchingExistingItem.isLocked());
+//                    newItem.setDuplicateId(matchingExistingItem.getDuplicateId());
+                    newItems.set(i, matchingExistingItem);
+
+                    matchingExistingItem.setIngameId(newItem.getIngameId());
+                    matchingExistingItem.setName(newItem.getName());
+                    matchingExistingItem.setSubstats(newItem.getSubstats());
+                    matchingExistingItem.setMain(newItem.getMain());
+                    matchingExistingItem.setSubstats(newItem.getSubstats());
+                    matchingExistingItem.setAugmentedStats(newItem.getAugmentedStats());
+                    matchingExistingItem.setReforgedStats(newItem.getReforgedStats());
+                    matchingExistingItem.setEnhance(newItem.getEnhance());
+                    matchingExistingItem.setLevel(newItem.getLevel());
+                    matchingExistingItem.setUpgradeable(newItem.getUpgradeable());
+                    matchingExistingItem.setReforgeable(newItem.getReforgeable());
+                    matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
                 }
             }
         }

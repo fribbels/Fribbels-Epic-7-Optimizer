@@ -58,7 +58,7 @@ public class Item {
     }
 
     public int getHash() {
-        final HashItem hashItem = new HashItem(gear, rank, set, enhance, level, main, augmentedStats);
+        final HashItem hashItem = new HashItem(gear, rank, set, 0, level, main, augmentedStats);
         return hashItem.hashCode();
     }
 }

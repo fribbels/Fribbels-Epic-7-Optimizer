@@ -7,6 +7,7 @@
         // if(!.includes('licenseManager.js')) {
         if (arguments.length > 0) {
             original.apply(console, arguments)
+            console.trace()
         }
     }
 })();
