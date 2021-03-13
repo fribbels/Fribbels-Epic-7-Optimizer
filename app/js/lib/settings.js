@@ -12,8 +12,8 @@ var pathOverride;
 var excludeSelects = [];
 
 module.exports = {
-    initialize: () => {
-        module.exports.loadSettings();
+    initialize: async () => {
+        await module.exports.loadSettings();
 
         const settingsIds = [
             'settingUnlockOnUnequip',
@@ -84,6 +84,8 @@ module.exports = {
         document.getElementById('settingUnlockOnUnequip').checked = settings.settingUnlockOnUnequip;
         document.getElementById('settingRageSet').checked = settings.settingRageSet;
         pathOverride = settings.settingDefaultPath;
+
+        console.warn("changing path override to: " + pathOverride);
 
         if (settings.settingMaxResults) {
             document.getElementById('settingMaxResults').value = settings.settingMaxResults;

@@ -24,14 +24,14 @@ const e7StatToDisplayStat = {
     "att_rate": i18next.t("% Attack"),
     "max_hp_rate": i18next.t("% Health"),
     "def_rate": i18next.t("% Defense"),
-    "att": i18next.t("Attack"),
-    "max_hp": i18next.t("Health"),
-    "def": i18next.t("Defense"),
-    "speed": i18next.t("Speed"),
+    "att": i18next.t(" Attack"),
+    "max_hp": i18next.t(" Health"),
+    "def": i18next.t(" Defense"),
+    "speed": i18next.t(" Speed"),
     "res": i18next.t("% Res"),
     "cri": i18next.t("% Crit rate"),
     "acc": i18next.t("% Eff"),
-    "coop": i18next.t("Dual Attack")
+    "coop": i18next.t(" Dual Attack")
 }
 
 module.exports = {
@@ -134,7 +134,7 @@ module.exports = {
 
                         <div class="horizontalLineWithMoreSpace"></div>
 
-                        <p data-t>${i18next.t("Add any other stats not included above")}</p>
+                        <p style="color: var(--font-color)" data-t>${i18next.t("Add any other stats not included above")}</p>
                         <br>
 
                         <div class="editGearFormRow">
@@ -246,7 +246,7 @@ module.exports = {
                         aeiAttackPercent: 0,
                         aeiDefensePercent: 0,
                         aeiHealthPercent: 0,
-                        aeiSpeedPercent: 0,
+                        aeiSpeed: 0,
                         aeiCritChance: 0,
                         aeiCritDamage: 0,
                         aeiEffectiveness: 0,
@@ -274,7 +274,7 @@ module.exports = {
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
-                        <p>${i18next.t("Build name")}</p>
+                        <p style="color: var(--font-color)">${i18next.t("Build name")}</p>
                         <input type="text" class="bonusStatInput" id="editBuildName" value="${name ? name : ""}" autofocus="autofocus" onfocus="this.select()" style="width:200px !important">
                     </div>
                 `,

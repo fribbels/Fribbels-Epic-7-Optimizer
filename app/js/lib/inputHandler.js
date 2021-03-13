@@ -8,6 +8,7 @@
         if (arguments.length > 0) {
             original.apply(console, arguments)
             console.trace()
+            Notifier.error(arguments[0]);
         }
     }
 })();
@@ -99,7 +100,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         HeroesTab.initialize();
         HeroesGrid.initialize();
 
-        Settings.initialize();
+        await Settings.initialize();
+        Saves.initialize();
         Saves.loadAutoSave();
     });
     Scanner.initialize();
@@ -107,7 +109,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     DarkMode.initialize();
     // GearCalculator.initialize();
     Selectors.initialize();
-    Saves.initialize();
 
     Importer.addEventListener();
 

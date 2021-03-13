@@ -134,7 +134,10 @@ function getHeroImage(item) {
 
 module.exports = {
 
-    modify: (hover, originalStat, originalValue, reforge, rolls, index) => {
+    modify: (location, hover, originalStat, originalValue, reforge, rolls, index) => {
+        if (location != 'itemsGrid') {
+            return;
+        }
         const modifier = ItemsTab.getCurrentModifier();
         var displayStat = originalStat;
         var displayValue = originalValue;
@@ -288,28 +291,28 @@ module.exports = {
   <div class="itemDisplayMainValue">${main.value}</div>
 </div>
 <div class="itemDisplaySubstats">
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat0.modifiedStat}', '${substat0.value}', ${substat0.reforge}, ${substat0.rolls}, 0)" onmouseout="HtmlGenerator.modify(false, '${substat0.type}', '${substat0.value}', '${substat0.value}', '${substat0.value}', 0)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify('${checkboxPrefix}', true, '${substat0.modifiedStat}', '${substat0.value}', ${substat0.reforge}, ${substat0.rolls}, 0)" onmouseout="HtmlGenerator.modify('${checkboxPrefix}', false, '${substat0.type}', '${substat0.value}', '${substat0.value}', '${substat0.value}', 0)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType0">${i18next.t(substat0.type)}</div>
         ${generateSubstatConversionImage(item, 0)}
     </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue0">${substat0.value}</div>
   </div>
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat1.modifiedStat}', '${substat1.value}', ${substat1.reforge}, ${substat1.rolls}, 1)" onmouseout="HtmlGenerator.modify(false, '${substat1.type}', '${substat1.value}', '${substat1.value}', '${substat1.value}', 1)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify('${checkboxPrefix}', true, '${substat1.modifiedStat}', '${substat1.value}', ${substat1.reforge}, ${substat1.rolls}, 1)" onmouseout="HtmlGenerator.modify('${checkboxPrefix}', false, '${substat1.type}', '${substat1.value}', '${substat1.value}', '${substat1.value}', 1)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType1">${i18next.t(substat1.type)}</div>
         ${generateSubstatConversionImage(item, 1)}
     </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue1">${substat1.value}</div>
   </div>
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat2.modifiedStat}', '${substat2.value}', ${substat2.reforge}, ${substat2.rolls}, 2)" onmouseout="HtmlGenerator.modify(false, '${substat2.type}', '${substat2.value}', '${substat2.value}', '${substat2.value}', 2)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify('${checkboxPrefix}', true, '${substat2.modifiedStat}', '${substat2.value}', ${substat2.reforge}, ${substat2.rolls}, 2)" onmouseout="HtmlGenerator.modify('${checkboxPrefix}', false, '${substat2.type}', '${substat2.value}', '${substat2.value}', '${substat2.value}', 2)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType2">${i18next.t(substat2.type)}</div>
         ${generateSubstatConversionImage(item, 2)}
     </div>
     <div class="itemDisplaySubstatValue" id="itemDisplaySubstatValue2">${substat2.value}</div>
   </div>
-  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify(true, '${substat3.modifiedStat}', '${substat3.value}', ${substat3.reforge}, ${substat3.rolls}, 3)" onmouseout="HtmlGenerator.modify(false, '${substat3.type}', '${substat3.value}', '${substat3.value}', '${substat3.value}', 3)">
+  <div class="itemDisplaySubstat" onmouseover="HtmlGenerator.modify('${checkboxPrefix}', true, '${substat3.modifiedStat}', '${substat3.value}', ${substat3.reforge}, ${substat3.rolls}, 3)" onmouseout="HtmlGenerator.modify('${checkboxPrefix}', false, '${substat3.type}', '${substat3.value}', '${substat3.value}', '${substat3.value}', 3)">
     <div class="itemDisplaySubstatValueAndConversion">
         <div class="itemDisplaySubstatType" id="itemDisplaySubstatType3">${i18next.t(substat3.type)}</div>
         ${generateSubstatConversionImage(item, 3)}
@@ -418,7 +421,7 @@ function styleForImage(rank) {
 function generateSubstatConversionImage(item, index) {
     const substat = item.substats[index];
     // if (substat.isConverted) {
-    if (substat.modified) {
+    if (substat && substat.modified) {
         return `<img src="${Assets.getCycle()}" class="substatConvertedImage"></img>`;
     } else {
         // return `<img src="${Assets.getCycle()}" class="substatConvertedImage" style='opacity:0.25'></img> `;

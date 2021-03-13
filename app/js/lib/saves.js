@@ -39,13 +39,16 @@ module.exports = {
     loadAutoSave: async () => {
         const autoSavePath = Settings.getDefaultPath() + '/autosave.json';
 
+        console.warn("Loading autosave: " + autoSavePath);
+        console.trace("asdf")
+
         try {
             const data = await Files.readFile(Files.path(autoSavePath));
             module.exports.loadSavedData(JSON.parse(data));
             console.log(JSON.parse(data));
         } catch (e) {
             // Notifier.error("Failed to load autosave - " + e);
-            console.error("Failed to load autosave -", e);
+            console.warn("Failed to load autosave -", e);
         }
     },
 
@@ -53,7 +56,6 @@ module.exports = {
         module.exports.createFolder();
 
         document.getElementById('saveDataSubmit').addEventListener("click", async () => {
-            console.error(Settings.getDefaultPath() + "/" + getDateString() + '-export.json')
             const options = {
                 title: "Save file",
                 defaultPath : Files.path(Settings.getDefaultPath() + "/" + getDateString() + '-export.json'),
@@ -86,7 +88,7 @@ module.exports = {
             console.log(filenames);
 
             if (!filenames || filenames.length < 1) {
-                return console.error("Invalid filename")
+                return console.warn("Invalid filename")
             };
 
             const data = await Files.readFile(filenames[0]);
@@ -103,7 +105,7 @@ module.exports = {
     loadSavedData: async (data) => {
         if (!data || !data.items || !data.heroes) {
             Notifier.error("Invalid save data");
-            return console.error("Invalid data", data);
+            return console.error("Invalid loaded data", data);
         }
 
         ItemAugmenter.augment(data.items);

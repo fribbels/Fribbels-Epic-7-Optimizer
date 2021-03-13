@@ -383,6 +383,9 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Can now merge scanned items with enhance/reforge/modifications
  - Modification filter panel
  - Modification previews
+ - Fix Yuna speed
+ - Fix speed EEs not being saved
+ - Fix autosave loading not working from custom location
 
 **Working on:**
  - v1.6.0
