@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     console.log("Document initialized")
+
 });
 
 

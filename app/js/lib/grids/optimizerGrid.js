@@ -1,13 +1,13 @@
 const tinygradient = require('tinygradient');
 var lightGradient = tinygradient([
     {color: '#F5A191', pos: 0}, // red
-    {color: '#ffffe5', pos: 0.5},
+    {color: '#ffffe5', pos: 0.4},
     {color: '#77e246', pos: 1} // green
 ]);
 
 var darkGradient = tinygradient([
     {color: '#5A1A06', pos: 0}, // red
-    {color: '#343127', pos: 0.5},
+    {color: '#343127', pos: 0.4},
     {color: '#38821F', pos: 1} // green
 ]);
 
@@ -37,7 +37,11 @@ module.exports = {
             gradient = lightGradient;
         }
 
-        optimizerGrid.gridOptions.api.refreshView()
+        try {
+            optimizerGrid.gridOptions.api.refreshView()
+        } catch (e) {
+
+        }
     },
 
     initialize: () => {
@@ -266,7 +270,7 @@ function buildGrid() {
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: DIGITS_5},
             {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
-            {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2, width: 65},
+            {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2, width: 48},
             {headerName: i18next.t('actions'), field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,

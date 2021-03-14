@@ -37,7 +37,11 @@ module.exports = {
             scoreGradient = lightScoreGradient;
         }
 
-        itemsGrid.gridOptions.api.refreshView()
+        try {
+            itemsGrid.gridOptions.api.refreshView()
+        } catch (e) {
+
+        }
     },
 
     initialize: async () => {

@@ -38,7 +38,11 @@ module.exports = {
             gradient = lightGradient;
         }
 
-        buildsGrid.gridOptions.api.refreshView()
+        try {
+            buildsGrid.gridOptions.api.refreshView()
+        } catch (e) {
+
+        }
     },
 
     initialize: () => {

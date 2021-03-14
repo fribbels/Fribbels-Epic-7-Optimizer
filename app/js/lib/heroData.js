@@ -17,17 +17,17 @@ if (TEST) {
 module.exports = {
 
     initialize: async () => {
-        var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/cache/herodata.json');
+        var heroesByNameStr = await Files.readFileSync(Files.getDataPath() + '/cache/herodata.json');
         heroesByName = JSON.parse(heroesByNameStr);
         const heroNameList = Object.keys(heroesByName);
 
-        var artifactsByNameStr = await Files.readFile(Files.getDataPath() + '/cache/artifactdata.json');
+        var artifactsByNameStr = await Files.readFileSync(Files.getDataPath() + '/cache/artifactdata.json');
         artifactsByName = JSON.parse(artifactsByNameStr);
         const artifactNameList = Object.keys(artifactsByName);
 
         try {
             if (TEST) {
-                const heroOverride = JSON.parse(await Files.readFile(Files.getDataPath() + "/test/herodata.json"));
+                const heroOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/test/herodata.json"));
                 heroesByName = heroOverride;
             } else {
                 const heroOverride = await fetchCache(HERO_CACHE);
@@ -41,7 +41,7 @@ module.exports = {
 
         try {
             if (TEST) {
-                const artifactOverride = JSON.parse(await Files.readFile(Files.getDataPath() + "/test/artifactdata.json"));
+                const artifactOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/test/artifactdata.json"));
                 artifactsByName = artifactOverride;
             } else {
                 const artifactOverride = await fetchCache(ARTIFACT_CACHE);
@@ -68,15 +68,15 @@ module.exports = {
         const eeOverride = await fetchOverride(EE_OVERRIDE);
         const artifactOverride = await fetchOverride(ARTIFACT_OVERRIDE);
 
-        var heroesByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbherodata.json');
+        var heroesByNameStr = await Files.readFileSync(Files.getDataPath() + '/e7db/e7dbherodata.json');
         heroesByName = JSON.parse(heroesByNameStr);
         const heroNameList = Object.keys(heroesByName);
 
-        var artifactsByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbartifactdata.json');
+        var artifactsByNameStr = await Files.readFileSync(Files.getDataPath() + '/e7db/e7dbartifactdata.json');
         artifactsByName = JSON.parse(artifactsByNameStr);
         const artifactNameList = Object.keys(artifactsByName);
 
-        var eesByNameStr = await Files.readFile(Files.getDataPath() + '/e7db/e7dbeedata.json');
+        var eesByNameStr = await Files.readFileSync(Files.getDataPath() + '/e7db/e7dbeedata.json');
         eesByName = JSON.parse(eesByNameStr);
         const eeNameList = Object.keys(eesByName);
 

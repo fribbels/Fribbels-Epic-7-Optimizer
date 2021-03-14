@@ -108,7 +108,6 @@ input {
     color: var(--font-color);
     border: none;
     margin-bottom: 1px;
-    /*text-align: center;*/
 }
 
 textarea {
@@ -176,7 +175,7 @@ input[type=checkbox]:checked:after {
 }
 .rangeslider__handle {
     background: var(--accent-red);
-    border: none;
+    border: solid 2px var(--bg-color);
 }
 .rangeslider__handle:active {
     background: var(--accent-red);

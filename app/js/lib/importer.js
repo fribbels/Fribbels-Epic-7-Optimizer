@@ -271,7 +271,7 @@ module.exports = {
                 return console.warn("Invalid filename")
             };
 
-            const data = await Files.readFile(filenames[0]);
+            const data = await Files.readFileSync(filenames[0]);
 
             const parsedData = JSON.parse(data);
             console.log("PARSEDDATA", parsedData);

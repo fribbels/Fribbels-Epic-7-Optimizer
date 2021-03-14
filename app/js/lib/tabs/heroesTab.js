@@ -281,9 +281,6 @@ module.exports = {
             module.exports.redraw();
         });
 
-
-
-        console.log("!!! 1");
         Api.getAllHeroes(useReforgedStats).then(response => {
             console.log("Heroes response", response);
 

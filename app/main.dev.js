@@ -74,16 +74,16 @@ const createWindow = async () => {
     height: 1000,
     icon: getAssetPath('icon.png'),
     webPreferences:
-      (process.env.NODE_ENV === 'development' ||
-        process.env.E2E_BUILD === 'true') &&
-      process.env.ERB_SECURE !== 'true'
-        ? {
-            nodeIntegration: true,
-          }
-        : {
-            preload: path.join(__dirname, 'dist/renderer.prod.js'),
-            nodeIntegration: true
-          },
+      (process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true') && process.env.ERB_SECURE !== 'true' ?
+      {
+        nodeIntegration: true,
+        enableRemoteModule: true
+      } :
+      {
+        preload: path.join(__dirname, 'dist/renderer.prod.js'),
+        nodeIntegration: true,
+        enableRemoteModule: true
+      },
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -105,6 +105,14 @@ const createWindow = async () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+  });
+
+  mainWindow.on('resize', () => {
+    mainWindow.webContents.send('resize');
+  });
+
+  mainWindow.on('resized', () => {
+    mainWindow.webContents.send('resized');
   });
 
   mainWindow.on('close', (e) => {

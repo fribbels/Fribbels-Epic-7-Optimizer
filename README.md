@@ -386,23 +386,24 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Fix Yuna speed
  - Fix speed EEs not being saved
  - Fix autosave loading not working from custom location
+ - Multiple pages of results are back
+ - Fix sliders being weird shapes
+ - Conversion filter
+ - Update autosaves (upon adding gear, etc)
 
 **Working on:**
  - v1.6.0
- - Update autosaves (upon adding gear, etc)
 
  **Medium priority:**
  - Add different level/awakening options
  - Use main stat gear for priority filter
  - Clear out item previews on refresh
- - Conversion filter
 
  **Low priority:**
  - Add material filter
  - Bug: Comparison method violates its general contract
  - Select/interact with multiple heroes at once
  - See unit stats for whatever gear they have currently, not just for 6 pieces
- - Change slider implementation http://ionden.com/a/plugins/ion.rangeSlider/start.html
  - Move save/load to File menu
  - Cancel ongoing request when start is clicked again
  - Update permutations on 4 piece set

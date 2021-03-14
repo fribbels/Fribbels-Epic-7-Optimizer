@@ -2,6 +2,10 @@ const rangesliderJs = require('rangeslider-js');
 var permutations = 0;
 var progressTimer;
 var currentFilteredItems = [];
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
+
+var resized = false;
 
 function buildSlider(slider) {
     var sliderEl = document.querySelector(slider);
@@ -48,6 +52,25 @@ function inputDisplayNumberNumber(value, base) {
         return 0;
     }
     return value;
+}
+
+function fixSliders() {
+    // if (!resized) {
+    //     console.log("NOT FIXING")
+    //     return;
+    // }
+    console.log("FIXING")
+    document.querySelector('#atkSlider')['rangeslider-js'].update()
+    document.querySelector('#hpSlider')['rangeslider-js'].update()
+    document.querySelector('#defSlider')['rangeslider-js'].update()
+    document.querySelector('#spdSlider')['rangeslider-js'].update()
+    document.querySelector('#crSlider')['rangeslider-js'].update()
+    document.querySelector('#cdSlider')['rangeslider-js'].update()
+    document.querySelector('#effSlider')['rangeslider-js'].update()
+    document.querySelector('#resSlider')['rangeslider-js'].update()
+    document.querySelector('#filterSlider')['rangeslider-js'].update()
+
+    resized = false;
 }
 
 async function loadPreviousHeroFilters(heroResponse) {
@@ -106,36 +129,11 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputMinScoreLimit").val(inputDisplayNumber(request.inputMinScoreLimit));
     $("#inputMaxScoreLimit").val(inputDisplayNumber(request.inputMaxScoreLimit));
 
-    // $("#inputMinAtkForce").val(inputDisplayNumber(request.inputAtkMinForce));
-    // $("#inputMaxAtkForce").val(inputDisplayNumber(request.inputAtkMaxForce));
-    // $("#inputMinAtkPercentForce").val(inputDisplayNumber(request.inputAtkPercentMinForce));
-    // $("#inputMaxAtkPercentForce").val(inputDisplayNumber(request.inputAtkPercentMaxForce));
-    // $("#inputMinSpdForce").val(inputDisplayNumber(request.inputSpdMinForce));
-    // $("#inputMaxSpdForce").val(inputDisplayNumber(request.inputSpdMaxForce));
-    // $("#inputMinCrForce").val(inputDisplayNumber(request.inputCrMinForce));
-    // $("#inputMaxCrForce").val(inputDisplayNumber(request.inputCrMaxForce));
-    // $("#inputMinCdForce").val(inputDisplayNumber(request.inputCdMinForce));
-    // $("#inputMaxCdForce").val(inputDisplayNumber(request.inputCdMaxForce));
-    // $("#inputMinHpForce").val(inputDisplayNumber(request.inputHpMinForce));
-    // $("#inputMaxHpForce").val(inputDisplayNumber(request.inputHpMaxForce));
-    // $("#inputMinHpPercentForce").val(inputDisplayNumber(request.inputHpPercentMinForce));
-    // $("#inputMaxHpPercentForce").val(inputDisplayNumber(request.inputHpPercentMaxForce));
-    // $("#inputMinDefForce").val(inputDisplayNumber(request.inputDefMinForce));
-    // $("#inputMaxDefForce").val(inputDisplayNumber(request.inputDefMaxForce));
-    // $("#inputMinDefPercentForce").val(inputDisplayNumber(request.inputDefPercentMinForce));
-    // $("#inputMaxDefPercentForce").val(inputDisplayNumber(request.inputDefPercentMaxForce));
-    // $("#inputMinEffForce").val(inputDisplayNumber(request.inputEffMinForce));
-    // $("#inputMaxEffForce").val(inputDisplayNumber(request.inputEffMaxForce));
-    // $("#inputMinResForce").val(inputDisplayNumber(request.inputResMinForce));
-    // $("#inputMaxResForce").val(inputDisplayNumber(request.inputResMaxForce));
-
     $("#inputPredictReforges").prop('checked', request.inputPredictReforges);
     $("#inputAllowLockedItems").prop('checked', request.inputAllowLockedItems);
     $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems);
     $("#inputKeepCurrentItems").prop('checked', request.inputKeepCurrentItems);
     $("#inputOnlyMaxedGear").prop('checked', request.inputOnlyMaxedGear);
-    // $("#inputCanRefoinputOver85rge").prop('checked', request.inputOver85);
-    // $("#inputOnlyPlus15Gear").prop('checked', request.inputOnlyPlus15Gear);
 
     document.querySelector('#atkSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
     document.querySelector('#atkSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
@@ -161,18 +159,24 @@ async function loadPreviousHeroFilters(heroResponse) {
     document.querySelector('#resSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputResPriority)})
     document.querySelector('#resSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputResPriority))
 
-    document.querySelector('#filterSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputFilterPriority)})
+    document.querySelector('#filterSlider')['rangeslider-js'].update({value: Math.sqrt(inputDisplayNumberNumber(request.inputFilterPriority) / 0.01)})
     document.querySelector('#filterSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputFilterPriority, 100))
 
     // $('#forceNumberSelect').val(inputDisplayNumberNumber(request.inputForceNumberSelect))
 
     Selectors.setGearMainAndSetsFromRequest(request);
     recalculateFilters(null, heroResponse);
+    fixSliders()
 }
 
 module.exports = {
 
     initialize: () => {
+        ipc.on('resized', () => {
+            resized = true;
+            fixSliders()
+        });
+
         document.getElementById('submitOptimizerRequest').addEventListener("click", () => {
             submitOptimizationRequest()
         });
@@ -263,19 +267,10 @@ module.exports = {
             recalculateFilters();
         })
 
-        buildSlider('#atkSlider')
-        buildSlider('#hpSlider')
-        buildSlider('#defSlider')
-        buildSlider('#spdSlider')
-        buildSlider('#crSlider')
-        buildSlider('#cdSlider')
-        buildSlider('#effSlider')
-        buildSlider('#resSlider')
-        buildTopSlider('#filterSlider')
-
         document.getElementById('tab1label').addEventListener("click", async () => {
             await module.exports.redrawHeroSelector();
             recalculateFilters();
+            fixSliders()
         });
 
         document.getElementById('substatPriorityLabel').addEventListener("click", async () => {
@@ -302,6 +297,16 @@ module.exports = {
             Selectors.clearGearMainAndSets();
             recalculateFilters();
         });
+
+        buildSlider('#atkSlider')
+        buildSlider('#hpSlider')
+        buildSlider('#defSlider')
+        buildSlider('#spdSlider')
+        buildSlider('#crSlider')
+        buildSlider('#cdSlider')
+        buildSlider('#effSlider')
+        buildSlider('#resSlider')
+        buildTopSlider('#filterSlider')
     },
 
     drawPreview: (gearIds) => {
@@ -528,24 +533,6 @@ async function recalculateFilters(e, heroResponse) {
         const allNecklaces = allItems.filter(x => x.gear == "Necklace");
         const allRings = allItems.filter(x => x.gear == "Ring");
         const allBoots = allItems.filter(x => x.gear == "Boots");
-
-        // const fourPieces = params.inputSetsOne.filter(x => fourPieceSets.includes(x));
-
-        // setSort4Piece(fourPieces, allWeapons);
-        // setSort4Piece(fourPieces, allHelmets);
-        // setSort4Piece(fourPieces, allArmors);
-
-
-        // console.log("W", allWeapons.filter(x => fourPieces.includes(x.set)).length)
-        // console.log("H", allHelmets.filter(x => fourPieces.includes(x.set)).length)
-        // console.log("A", allArmors.filter(x => fourPieces.includes(x.set)).length)
-        // console.log("N", allNecklaces.length)
-        // console.log("R", allRings.length)
-        // console.log("B", allBoots.length)
-
-        // console.error("allWeapons", allWeapons.map(x => x.set));
-
-
 
         permutations = weapons.length
                 * helmets.length
@@ -928,7 +915,7 @@ async function submitOptimizationRequest() {
         var searchedStr = Number(searchedCount).toLocaleString();
         var resultsStr = Number(resultsCounter).toLocaleString();
 
-        var maxResults = parseInt(document.getElementById('settingMaxResults').value || 0);
+        var maxResults = parseInt(Settings.parseMaxResults() || 0);
         if (result.results >= maxResults) {
             Dialog.info('Search terminated after the result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
         } else {

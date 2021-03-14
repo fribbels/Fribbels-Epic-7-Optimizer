@@ -136,6 +136,6 @@ module.exports = {
         return DarkMode.isDark() ? './assets/copy_dt.png' : './assets/copy.png';
     },
     getCycle: () => {
-        return './assets/cycle.png';
+        return DarkMode.isDark() ? './assets/cycle_dt.png' : './assets/cycle.png';
     },
 }

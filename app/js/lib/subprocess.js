@@ -33,6 +33,7 @@ module.exports = {
             }
         })
 
+        console.log(1)
 
         child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
 
@@ -87,6 +88,8 @@ module.exports = {
                 console.log("Terminated child");
             });
         };
+
+        console.log(2)
 
         return child;
     },

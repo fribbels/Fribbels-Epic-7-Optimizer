@@ -9,6 +9,7 @@ window.jQuery = $;
 <script src="node_modules/i18next-localstorage-backend/i18nextLocalStorageBackend.min.js"></script>
 <script src="node_modules/i18next-http-backend/i18nextHttpBackend.min.js"></script>
 <script src="node_modules/i18next-chained-backend/i18nextChainedBackend.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.js"></script>
 
 <script src="js/lib/i18n/i18n.js"></script>
 
@@ -28,6 +29,9 @@ window.jQuery = $;
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/rangeslider.css">
 <link rel="stylesheet" type="text/css" id="darkThemeCss" disabled href="css/darktheme.css">
+
+
+
 
 <link
   rel="stylesheet"
@@ -104,7 +108,7 @@ window.jQuery = $;
 
             <div id="preview-panel" class="constraints-panel-col-med">
               <div class="panelLabel">
-                <div class="panelLabelText" id="statsPreviewLabel" data-content="(clear)" data-t>Stats</div>
+                <div class="panelLabelText" id="statsPreviewLabel" data-content=" (clear)" data-t>Stats</div>
                 <img src="./assets/tooltip.png" class="tooltipImageRight" id="previewTooltip"></img>
               </div>
 
@@ -229,7 +233,7 @@ window.jQuery = $;
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterStatsTooltip"></img>
-                <div class="panelLabelText" id="statsLabel" data-content="(clear)" data-t>Stat filters</div>
+                <div class="panelLabelText" id="statsLabel" data-content=" (clear)" data-t>Stat filters</div>
               </div>
               <input type="number" id="inputMinAtkLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel" data-t>Atk</div>
@@ -267,7 +271,7 @@ window.jQuery = $;
             <div id="placeholder-panel" class="constraints-panel-col-small">
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterRatingsTooltip"></img>
-                <div class="panelLabelText" id="ratingsLabel" data-content="(clear)" data-t>Rating filters</div>
+                <div class="panelLabelText" id="ratingsLabel" data-content=" (clear)" data-t>Rating filters</div>
               </div>
               <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel" data-t>Cp</div>
@@ -391,7 +395,7 @@ window.jQuery = $;
             <div id="constraints-focus-panel" class="constraints-panel-col">
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="accessoryMainStatsTooltip"></img>
-                <div class="panelLabelText" id="accessorySetsLabel" data-content="(clear)" data-t>Accessory main stats</div>
+                <div class="panelLabelText" id="accessorySetsLabel" data-content=" (clear)" data-t>Accessory main stats</div>
               </div>
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
                 <option value="CriticalHitChancePercent" data-t>Crit Chance</option>
@@ -755,7 +759,7 @@ window.jQuery = $;
             <div class="gearTabGearSetFiltersRow">
               <div class="gearTabGearFilter">
                 <div class="gearTabFilterLabel" id="clearGearFilter">
-                  <b data-t>Gear</b> (<u data-t>clear</u>)
+                  <b data-t>Gear</b>
                 </div>
                 <div class="gearTabGearFilterIconsRow">
                   <div class="gearTabSquareButton">
@@ -792,7 +796,7 @@ window.jQuery = $;
               </div>
               <div class="gearTabSetFilter">
                 <div class="gearTabFilterLabel" id="clearSetFilter">
-                  <b data-t>Sets</b> (<u data-t>clear</u>)
+                  <b data-t>Sets</b>
                 </div>
                 <div class="gearTabSetFilterIconsRow">
                   <div class="gearTabSquareButton">
@@ -887,7 +891,7 @@ window.jQuery = $;
             <div class="gearTabOtherFiltersRow">
               <div class="gearTabMainStatFilter">
                 <div class="gearTabFilterLabel" id="clearMainStatFilter">
-                  <b data-t>Main stats</b> (<u data-t>clear</u>)
+                  <b data-t>Main stats</b>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
@@ -971,7 +975,7 @@ window.jQuery = $;
 
               <div class="gearTabSubstatFilter">
                 <div class="gearTabFilterLabel" id="clearSubStatFilter">
-                  <b data-t>Sub stats</b> (<u data-t>clear</u>)
+                  <b data-t>Sub stats</b>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
@@ -1057,7 +1061,7 @@ window.jQuery = $;
 
               <div class="gearTabLevelFilter">
                 <div class="gearTabFilterLabel" id="clearLevelFilter">
-                  <b data-t>Level</b> (<u data-t>clear</u>)
+                  <b data-t>Level</b>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabShortButton">
@@ -1105,7 +1109,7 @@ window.jQuery = $;
 
               <div class="gearTabEnhanceFilter">
                 <div class="gearTabFilterLabel" id="clearEnhanceFilter">
-                  <b data-t>Enhance</b> (<u data-t>clear</u>)
+                  <b data-t>Enhance</b>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabShortButton">
@@ -1155,7 +1159,7 @@ window.jQuery = $;
 
               <div class="gearTabDuplicateFilter">
                 <div class="gearTabFilterLabel" id="clearOtherFilter">
-                  <b data-t>Other</b> (<u data-t>clear</u>)
+                  <b data-t>Other</b>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
@@ -1179,7 +1183,7 @@ window.jQuery = $;
 
               <div class="gearTabModifyFilter">
                 <div class="gearTabFilterLabel" id="clearModifyFilter">
-                  <b data-t>Modification</b> (<u data-t>clear</u>)
+                  <b data-t>Modification</b>
                 </div>
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabShortButton">
@@ -1578,19 +1582,8 @@ window.jQuery = $;
     <div id="settingsTab" class="tab-panel">
       <h2 data-t>Settings</h2>
 
-      <div>
-            <b>Languages</b><br><br>
-      </div>
 
-       <div class="toggleRow">
-        <div class="switchText" onclick="location.href='app.html?lng=en';" style="cursor: pointer;">English</div>
-        <span class="switchText"> | </span>
-         <div class="switchText" onclick="location.href='app.html?lng=zh';" style="cursor: pointer;">简体中文</div>
-         <span class="switchText"> | </span>
-         <div class="switchText" onclick="location.href='app.html?lng=zh-TW';" style="cursor: pointer;">繁體中文</div><br><br>
-       </div>
-
-       <input type="submit" id="clearlocalCache" onclick="clearlocalCache()" value="Clear language cache" data-t><br><br>
+       <input type="submit" style="display:none" id="clearlocalCache" onclick="clearlocalCache()" value="Clear language cache" data-t>
 
         <div class="toggleRow">
           <div class="switch">
@@ -1613,7 +1606,7 @@ window.jQuery = $;
         </div>
 
         <div class="toggleRow">
-          <input type="number" id="settingMaxResults" class="settingsNumber">
+          <input type="text" id="settingMaxResults" class="settingsNumber">
           <div class="switchText" data-t>
             Maximum optimization results (Recommended: 5,000,000, Min 10k, Max 100m)
           </div>
@@ -1625,6 +1618,18 @@ window.jQuery = $;
           <text id="selectDefaultFolderSubmitOutputText" data-t>Select default folder</text>
         </div>
 
+       <div>
+            <b>Languages: </b><br>
+       </div>
+
+       <div class="toggleRow">
+        <div class="switchText languageToggle" onclick="location.href='app.html?lng=en';" style="cursor: pointer;">English</div>
+        <span class="switchText"> | </span>
+        <div class="switchText languageToggle" onclick="location.href='app.html?lng=zh';" style="cursor: pointer;">简体中文</div>
+        <span class="switchText"> | </span>
+        <div class="switchText languageToggle" onclick="location.href='app.html?lng=zh-TW';" style="cursor: pointer;">繁體中文</div>
+        <br><br>
+       </div>
 <!--
         <div class="toggleRow">
           <input type="color" class="gearPreviewButton" id="backgroundColorPicker">

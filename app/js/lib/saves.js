@@ -43,7 +43,7 @@ module.exports = {
         console.trace("asdf")
 
         try {
-            const data = await Files.readFile(Files.path(autoSavePath));
+            const data = await Files.readFileSync(Files.path(autoSavePath));
             module.exports.loadSavedData(JSON.parse(data));
             console.log(JSON.parse(data));
         } catch (e) {
@@ -91,7 +91,7 @@ module.exports = {
                 return console.warn("Invalid filename")
             };
 
-            const data = await Files.readFile(filenames[0]);
+            const data = await Files.readFileSync(filenames[0]);
             const parsedData = JSON.parse(data);
             await module.exports.loadSavedData(parsedData);
             console.log(parsedData);

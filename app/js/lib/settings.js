@@ -1,5 +1,4 @@
-const { remote } = require('electron')
-const dialog = remote.dialog;
+const { remote, dialog } = require('electron')
 const currentWindow = remote.getCurrentWindow();
 const documentsPath = remote.app.getPath('documents');
 const savesFolder = documentsPath + '/FribbelsOptimizerSaves';
@@ -14,6 +13,27 @@ var excludeSelects = [];
 module.exports = {
     initialize: async () => {
         await module.exports.loadSettings();
+
+        // Format numbers
+        $("#settingMaxResults").on("keyup", function(event ) {
+            // When user select text in the document, also abort.
+            var selection = window.getSelection().toString();
+            if (selection !== '') {
+                return;
+            }
+            // When the arrow keys are pressed, abort.
+            if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                return;
+            }
+            var $this = $(this);
+            // Get the value.
+            var input = $this.val();
+            input = input.replace(/[\D\s\._\-]+/g, "");
+            input = input?parseInt(input, 10):0;
+            $this.val(function () {
+                return (input === 0)?"":input.toLocaleString("en-US");
+            });
+        });
 
         const settingsIds = [
             'settingUnlockOnUnequip',
@@ -74,9 +94,17 @@ module.exports = {
         }
     },
 
+
+    parseMaxResults: () => {
+        var value = document.getElementById('settingMaxResults').value;
+        value = value.replace(/,/g, "")
+
+        return parseInt(value);
+    },
+
     loadSettings: async () => {
         console.log("LOAD SETTINGS", settingsPath);
-        const text = await Files.readFile(Files.path(settingsPath));
+        const text = await Files.readFileSync(Files.path(settingsPath));
         const settings = JSON.parse(text);
         console.log("LOADING SETTINGS", settings);
 
@@ -88,7 +116,7 @@ module.exports = {
         console.warn("changing path override to: " + pathOverride);
 
         if (settings.settingMaxResults) {
-            document.getElementById('settingMaxResults').value = settings.settingMaxResults;
+            document.getElementById('settingMaxResults').value = settings.settingMaxResults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         if (settings.settingDarkMode) {
@@ -113,7 +141,7 @@ module.exports = {
         const settings = {
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
-            settingMaxResults: parseInt(document.getElementById('settingMaxResults').value || 5_000_000),
+            settingMaxResults: parseInt(module.exports.parseMaxResults() || 5_000_000),
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
             settingDarkMode: document.getElementById('darkSlider').checked,
