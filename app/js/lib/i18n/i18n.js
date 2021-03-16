@@ -61,7 +61,7 @@ window.i18next.on('languageChanged initialized reloadResources', function() {
         currentValue.innerText=i18next.t(textkey)
         if (currentValue.getAttribute("data-content")){
           var datacontent=currentValue.getAttribute("data-content")
-          currentValue.setAttribute("data-content", i18next.t(datacontent));
+          currentValue.setAttribute("data-content", i18next.t(datacontent.trim()));
         }
       } else if (['P'].includes(currentValue.nodeName)){
         var textkey = (currentValue.innerHTML.replace(/(\r\n|\n|\r)/gm, "")).trim();
