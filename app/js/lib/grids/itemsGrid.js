@@ -4,9 +4,9 @@ const tinygradient = require('tinygradient');
 var lightGradient = tinygradient('#ffffff', '#8fed78');
 var lightScoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
 
-var darkGradient = tinygradient('#212529', '#107162');
+var darkGradient = tinygradient('#212529', '#38821F');
 var darkScoreGradient = tinygradient('#5A1A06', '#343127', '#38821F');
-var darkScoreGradient2 = tinygradient('#7B3B3E', '#212529', '#107162');
+var darkScoreGradient2 = tinygradient('#5A1A06', '#343127', '#38821F');
 
 
 var gradient = lightGradient;

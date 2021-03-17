@@ -1,6 +1,9 @@
 const currentVersion = "v1.5.0";
 
+global.TEST = false;
+
 module.exports = {
+
     checkForUpdates: async () => {
         //
         try {

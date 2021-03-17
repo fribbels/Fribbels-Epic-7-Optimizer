@@ -2,17 +2,8 @@ var heroesByName = {};
 var artifactsByName = {};
 var eesByName = {};
 
-const HERO_TEST_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/test/herodata.json";
-const ARTIFACT_TEST_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/test/artifactdata.json";
-
 var HERO_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cache/herodata.json";
 var ARTIFACT_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cache/artifactdata.json";
-
-global.TEST = false;
-if (TEST) {
-    HERO_CACHE = HERO_TEST_CACHE;
-    ARTIFACT_CACHE = ARTIFACT_TEST_CACHE;
-}
 
 module.exports = {
 
@@ -26,8 +17,8 @@ module.exports = {
         const artifactNameList = Object.keys(artifactsByName);
 
         try {
-            if (TEST) {
-                const heroOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/test/herodata.json"));
+            if (global.TEST) {
+                const heroOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/cache/herodata.json"));
                 heroesByName = heroOverride;
             } else {
                 const heroOverride = await fetchCache(HERO_CACHE);
@@ -40,8 +31,8 @@ module.exports = {
         }
 
         try {
-            if (TEST) {
-                const artifactOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/test/artifactdata.json"));
+            if (global.TEST) {
+                const artifactOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/cache/artifactdata.json"));
                 artifactsByName = artifactOverride;
             } else {
                 const artifactOverride = await fetchCache(ARTIFACT_CACHE);

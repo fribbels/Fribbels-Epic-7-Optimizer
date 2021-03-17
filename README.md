@@ -390,9 +390,11 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Fix sliders being weird shapes
  - Conversion filter
  - Update autosaves (upon adding gear, etc)
+ - Fix loading cache
 
 **Working on:**
  - v1.6.0
+ - Swap gear main stat positions
 
  **Medium priority:**
  - Add different level/awakening options
