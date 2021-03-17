@@ -10376,6 +10376,98 @@
       }
     }
   },
+  "Eda": {
+    "_id": "eda",
+    "name": "Eda",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "mage",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.090,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": false,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1111_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1111_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1111_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10356,
+        "atk": 400,
+        "hp": 3527,
+        "spd": 99,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11883,
+        "atk": 520,
+        "hp": 3972,
+        "spd": 103,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12923,
+        "atk": 499,
+        "hp": 4435,
+        "spd": 99,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 18123,
+        "atk": 1255,
+        "hp": 5016,
+        "spd": 106,
+        "def": 652,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Elena": {
     "_id": "elena",
     "name": "Elena",
@@ -12373,6 +12465,100 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
+  "Great Chief Khawana": {
+    "_id": "great-chief-khawana",
+    "name": "Great Chief Khawana",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "light",
+    "role": "mage",
+    "zodiac": "crab",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "C": 0.068,
+        "B": 0.102,
+        "A": 0.136,
+        "S": 0.17,
+        "SS": 0.204,
+        "SSS": 0.238
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "C": 0.029,
+        "B": 0.044,
+        "A": 0.058,
+        "S": 0.073,
+        "SS": 0.087,
+        "SSS": 0.102
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2086_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2086_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2086_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11328,
+        "atk": 749,
+        "hp": 3334,
+        "spd": 107,
+        "def": 506,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12997,
+        "atk": 958,
+        "hp": 3674,
+        "spd": 107,
+        "def": 506,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14123,
+        "atk": 934,
+        "hp": 4192,
+        "spd": 107,
+        "def": 627,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 11111,
+        "atk": 1138,
+        "hp": 5421,
+        "spd": 106,
+        "def": 536,
+        "chc": 0.43,
+        "chd": 1.65,
+        "dac": 0.05,
+        "eff": 0,
         "efr": 0
       }
     }
@@ -16218,9 +16404,9 @@
     },
     "specialty_change": {},
     "assets": {
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
-      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3113_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3113_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3113_l.png"
     },
     "ex_equip": [],
     "calculatedStatus": {
