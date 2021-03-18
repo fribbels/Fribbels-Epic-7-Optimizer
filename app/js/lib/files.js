@@ -17,18 +17,10 @@ module.exports = {
 
     readFile: (path) => {
         return new Promise((resolve, reject) => {
-            console.log(11)
-
             fs.readFile(module.exports.path(path), 'utf8', function read(err, data) {
-                console.log(12)
-
                 if (err) {
-                    console.log(13)
-
                     reject(err);
                 }
-
-                console.log(14)
 
                 resolve(data);
             });
@@ -36,10 +28,8 @@ module.exports = {
     },
 
     readFileSync: (path) => {
-        console.log(33)
         data = fs.readFileSync(module.exports.path(path), 'utf8')
 
-        console.log(34)
         return data;
     },
 
@@ -62,14 +52,10 @@ module.exports = {
     },
 
     isMac: () => {
-        console.log(22)
-
         return os.platform() == 'darwin';
     },
 
     path: (path) => {
-        console.log(21)
-
         return module.exports.isMac() ?
                 path.replace(/\//g, "/") :
                 path.replace(/\//g, "\\");

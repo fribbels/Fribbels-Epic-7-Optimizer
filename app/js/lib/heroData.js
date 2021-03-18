@@ -2,8 +2,8 @@ var heroesByName = {};
 var artifactsByName = {};
 var eesByName = {};
 
-var HERO_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cache/herodata.json";
-var ARTIFACT_CACHE = "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cache/artifactdata.json";
+var HERO_CACHE = "https://e7-optimizer-game-data.s3-us-west-2.amazonaws.com/herodata.json";
+var ARTIFACT_CACHE = "https://e7-optimizer-game-data.s3-us-west-2.amazonaws.com/artifactdata.json";
 
 module.exports = {
 
@@ -247,9 +247,11 @@ module.exports = {
 }
 
 async function fetchCache(url) {
+    console.log("Fetching from url: " + url);
     const response = await fetch(url);
     const text = await response.text();
     const json = JSON.parse(text);
+    console.log("Finished fetching from url: " + url);
 
     return json;
 }

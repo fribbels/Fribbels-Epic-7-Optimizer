@@ -509,7 +509,7 @@ input {
 }
 .ag-header-cell-text {
   text-overflow: clip;
-  width: 40px;
+  min-width: 40px;
 }
 .ag-header-cell-label, .ag-header-group-cell-label {
   justify-content: space-around;

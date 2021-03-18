@@ -1,9 +1,9 @@
 const tinygradient = require('tinygradient');
 
 var lightGradient = tinygradient([
-    {color: '#ffa8a8', pos: 0}, // red
+    {color: '#F5A191', pos: 0}, // red
     {color: '#ffffe5', pos: 0.5},
-    {color: '#8fed78', pos: 1} // green
+    {color: '#77e246', pos: 1} // green
 ]);
 
 var darkGradient = tinygradient([

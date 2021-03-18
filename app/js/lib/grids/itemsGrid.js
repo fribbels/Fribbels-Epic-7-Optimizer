@@ -6,7 +6,12 @@ var lightScoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
 
 var darkGradient = tinygradient('#212529', '#38821F');
 var darkScoreGradient = tinygradient('#5A1A06', '#343127', '#38821F');
-var darkScoreGradient2 = tinygradient('#5A1A06', '#343127', '#38821F');
+var darkScoreGradient2 = tinygradient([
+    {color: '#5A1A06', pos: 0}, // red
+    {color: '#343127', pos: 0.4},
+    {color: '#38821F', pos: 1} // green
+]);
+
 
 
 var gradient = lightGradient;
@@ -56,12 +61,12 @@ module.exports = {
             },
 
             columnDefs: [
-                {headerName: i18next.t('Set'), field: 'set', filter: 'agTextColumnFilter', cellRenderer: (params) => renderSets(params.value)},
-                {headerName: i18next.t('Gear'), field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
+                {headerName: i18next.t('Set'), field: 'set', cellRenderer: (params) => renderSets(params.value)},
+                {headerName: i18next.t('Gear'), field: 'gear', cellRenderer: (params) => renderGear(params.value)},
                 {headerName: i18next.t('Rank'), field: 'rank', cellRenderer: (params) => i18next.t(params.value), width: 50},
-                {headerName: i18next.t('Level'), field: 'level', filter: 'agNumberColumnFilter'},
-                {headerName: i18next.t('Enhance'), field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
-                {headerName: i18next.t('Main'), field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(i18next.t(params.value))},
+                {headerName: i18next.t('Level'), field: 'level'},
+                {headerName: i18next.t('Enhance'), field: 'enhance', width: 60},
+                {headerName: i18next.t('Main'), field: 'main.type', width: 100, cellRenderer: (params) => renderStat(i18next.t(params.value))},
                 {headerName: i18next.t('Value'), field: 'main.value', width: 60},
                 {headerName: i18next.t('Atk%'), field: 'augmentedStats.AttackPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
                 {headerName: i18next.t('Atk'), field: 'augmentedStats.Attack', cellRenderer: (params) => params.value == 0 ? "" : params.value},
@@ -83,7 +88,7 @@ module.exports = {
                 // {headerName: i18next.t('Material'), field: 'material', width: 120},
                 {headerName: i18next.t('Locked'), field: 'locked', cellRenderer: (params) => params.value == true ? i18next.t('yes') : i18next.t('no')},
                 // {headerName: i18next.t('Actions'), field: 'id', cellRenderer: renderActions},
-                {headerName: i18next.t('Duplicate'), field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
+                {headerName: i18next.t('Duplicate'), field: 'duplicateId', hide: true},
             ],
             rowSelection: 'multiple',
             pagination: true,
@@ -153,6 +158,10 @@ module.exports = {
 
     // refreshFilters: (setFilter, gearFilter, levelFilter, enhanceFilter, statFilter) => {
     refreshFilters: (filters) => {
+        if (!itemsGrid) {
+            return;
+        }
+
         const setFilter = filters.setFilter;
         const gearFilter = filters.gearFilter;
         const levelFilter = filters.levelFilter;
@@ -330,30 +339,45 @@ module.exports = {
             const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
 
             substatFilterComponent.setModel({
-                // filterType: 'number',
-                // operator: 'OR',
-                // condition1: {
-                //     filterType: 'number',
-                //     type: 'equals',
-                //     filter: 5
-                // },
-                // condition2: {
-                //     filterType: 'number',
-                //     type: 'equals',
-                //     filter: 6
-                // }
-
                 type: 'notEqual',
                 filter: 0
             });
         }
+
         if (modifyFilter) {
             const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + modifyFilter);
+            const statFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('main.type');
+            const gearFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('gear');
 
             substatFilterComponent.setModel({
                 type: 'equals',
                 filter: 0
             });
+            statFilterComponent.setModel({
+                type: 'notEqual',
+                filter: modifyFilter
+            });
+
+            if (!gearFilter) {
+                if (modifyFilter == "Attack" || modifyFilter == "AttackPercent") {
+                    gearFilterComponent.setModel({
+                        type: 'notEqual',
+                        filter: 'Armor'
+                    });
+                }
+                if (modifyFilter == "Health") {
+                    gearFilterComponent.setModel({
+                        type: 'notEqual',
+                        filter: 'Helmet'
+                    });
+                }
+                if (modifyFilter == "Defense" || modifyFilter == "DefensePercent") {
+                    gearFilterComponent.setModel({
+                        type: 'notEqual',
+                        filter: 'Weapon'
+                    });
+                }
+            }
         }
 
         const duplicateFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('duplicateId');

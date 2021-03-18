@@ -80,8 +80,8 @@ public class SpecialStats {
         }
 
         if (StringUtils.equals("All-Rounder Wanda", hero.getName())) {
-            hero.setEff(hero.getEff() + 12);
             hero.setHp(5590); // 4273 * (1.06 + 0.15) + (60*3 + 80*3)
+            hero.setEff(hero.getEff() + 12);
 
             return hero;
         }
@@ -96,6 +96,21 @@ public class SpecialStats {
         if (StringUtils.equals("Adventurer Ras", hero.getName())) {
             hero.setHp(6818); // 4960 * (1.09 + 0.2) + (60*3 + 80*3)
             hero.setSpd(hero.getSpd() + 6);
+            hero.setEff(hero.getEff() + 25);
+
+            return hero;
+        }
+
+        if (StringUtils.equals("Zealot Carmainerose", hero.getName())) {
+            hero.setHp(4367); // 3262 * (1.06 + 0.15) + (60*3 + 80*3)
+            hero.setDef(1152); // 666 * (1.00 + 0.1) + (60*3 + 80*3)
+            hero.setCd(hero.getCd() + 10);
+
+            return hero;
+        }
+
+        if (StringUtils.equals("Muse Rima", hero.getName())) {
+            hero.setHp(5120); // 4273 * (1.00 + 0.1) + (60*3 + 80*3)
             hero.setEff(hero.getEff() + 25);
 
             return hero;

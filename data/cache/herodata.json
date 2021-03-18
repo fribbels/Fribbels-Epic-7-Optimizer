@@ -19309,6 +19309,102 @@
       }
     }
   },
+  "Muse Rima": {
+    "_id": "muse-rima",
+    "name": "Muse Rima",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "ice",
+    "role": "ranger",
+    "zodiac": "waterbearer",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "def",
+      "grades": {
+        "D": 12,
+        "C": 18,
+        "B": 24,
+        "A": 30,
+        "S": 36,
+        "SS": 42,
+        "SSS": 48
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/face/c3062_s.png",
+      "image": "https://assets.epicsevendb.com/_source/face/c3062_su.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/face/c3062_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 9892,
+        "atk": 495,
+        "hp": 3399,
+        "spd": 113,
+        "def": 452,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11248,
+        "atk": 659,
+        "hp": 3739,
+        "spd": 117,
+        "def": 452,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12344,
+        "atk": 617,
+        "hp": 4273,
+        "spd": 113,
+        "def": 561,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14419,
+        "atk": 822,
+        "hp": 4693,
+        "spd": 117,
+        "def": 561,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Nemunas": {
     "_id": "nemunas",
     "name": "Nemunas",

@@ -383,20 +383,21 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Can now merge scanned items with enhance/reforge/modifications
  - Modification filter panel
  - Modification previews
- - Fix Yuna speed
- - Fix speed EEs not being saved
+ - Fix speed EE bugs (Yuna, Rose)
  - Fix autosave loading not working from custom location
- - Multiple pages of results are back
+ - Multiple pages of results for the optimizer
  - Fix sliders being weird shapes
- - Conversion filter
- - Update autosaves (upon adding gear, etc)
  - Fix loading cache
+ - Added artifact data for Twilight Calamity and XIV. Temperance
+ - Added hero images for Lucy + Designer Lilibet, hero data for Eda, Great Chief Khawana
+ - Added specialty change data for Muse Rime and Zealot Carmainerose
+ - Swap gear stat filter positions
 
 **Working on:**
  - v1.6.0
- - Swap gear main stat positions
 
  **Medium priority:**
+ - Conversion filter
  - Add different level/awakening options
  - Use main stat gear for priority filter
  - Clear out item previews on refresh

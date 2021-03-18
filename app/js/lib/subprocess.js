@@ -4,7 +4,7 @@ const { remote } = require('electron');
 const { exec } = require('child_process');
 const { spawn } = require('child_process');
 const treekill  = require('tree-kill');
-var child;
+global.child = null;
 
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
@@ -31,9 +31,8 @@ module.exports = {
                 Notifier.error("Java is installed but not the 64-Bit version. Please install the 64-Bit version of Java 8")
                 return;
             }
-        })
 
-        console.log(1)
+        })
 
         child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
 
@@ -60,6 +59,8 @@ module.exports = {
                 initialized = true;
                 // var str = data.toString();
                 // console.log(str);
+            } else {
+
             }
             // try {
 
@@ -89,8 +90,6 @@ module.exports = {
             });
         };
 
-        console.log(2)
-
         return child;
     },
 
@@ -110,13 +109,17 @@ module.exports = {
 
 function javaversion(callback) {
     var spawn = require('child_process').spawn('java', ['-version']);
+
     spawn.on('error', function(err){
         return callback(err, null);
     })
+
     spawn.stderr.on('data', function(data) {
+
         data = data.toString()
 
         console.log("Detecting java:", data);
+
 
         if (data && data.includes("VM") && !data.includes("64-Bit")) {
             return callback(null, false, false, true);

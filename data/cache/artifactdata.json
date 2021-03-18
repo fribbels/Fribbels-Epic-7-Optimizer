@@ -2043,6 +2043,20 @@
       "health": 76
     }
   },
+  "Twilight Calamity": {
+    "assets": {
+      "icon": "",
+      "image": "",
+      "thumbnail": ""
+    },
+    "name": "Twilight Calamity",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Uberius's Tooth": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0030.png",
@@ -2195,6 +2209,20 @@
     "stats": {
       "attack": 12,
       "health": 45
+    }
+  },
+  "XIV. Temperance": {
+    "assets": {
+      "icon": "",
+      "image": "",
+      "thumbnail": ""
+    },
+    "name": "XIV. Temperance",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
     }
   },
   "XVI. The Tower": {

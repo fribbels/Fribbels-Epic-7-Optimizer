@@ -19,7 +19,6 @@ var modifyGreater = true;
 var modifyFilter;
 const modifyCheckboxes = [];
 
-
 const filters = {
     setFilter: null,
     gearFilter: null,
