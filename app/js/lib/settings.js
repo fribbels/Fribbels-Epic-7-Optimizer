@@ -1,4 +1,5 @@
-const { remote, dialog } = require('electron')
+const { remote } = require('electron')
+const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 const documentsPath = remote.app.getPath('documents');
 const savesFolder = documentsPath + '/FribbelsOptimizerSaves';
@@ -90,7 +91,7 @@ module.exports = {
             settingMaxResults: 5_000_000,
             settingDefaultPath: defaultPath,
             settingExcludeEquipped: [],
-            settingDarkMode: false,
+            settingDarkMode: true,
         }
     },
 

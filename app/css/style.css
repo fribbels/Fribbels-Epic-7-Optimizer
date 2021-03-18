@@ -1049,13 +1049,16 @@ body.dark-theme input {
   display: inline-block;
   cursor: pointer;
 }
-
-
 .reforgeSwitch {
   min-width: 180px;
   display: inline-block;
   float: right;
   margin-left: auto;
+  display: flex;
+  flex-direction: row;
+}
+.reforgeSwitchLabel {
+  margin-right: 5px;
 }
 .switch {
   position: relative;
@@ -1461,4 +1464,16 @@ input:checked + .darkSlider:before {
 }
 .rangeslider {
   height: 18px !important;
+}
+.ag-row {
+      border-bottom-style: unset !important;
+}
+.swal2-success-circular-line-left {
+  display: none;
+}
+.swal2-success-circular-line-right {
+  display: none;
+}
+.swal2-success-fix {
+  display: none;
 }
