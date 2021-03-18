@@ -2,8 +2,8 @@ var heroesByName = {};
 var artifactsByName = {};
 var eesByName = {};
 
-var HERO_CACHE = "https://e7-optimizer-game-data.s3-us-west-2.amazonaws.com/herodata.json";
-var ARTIFACT_CACHE = "https://e7-optimizer-game-data.s3-us-west-2.amazonaws.com/artifactdata.json";
+var HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
+var ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
 
 module.exports = {
 
