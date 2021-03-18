@@ -17,12 +17,12 @@ function UrlExists(url, cb){
 var HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
 var ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
 
-UrlExists('https://e7-optimizer-game-data.s3-us-west-2.amazonaws.com/herodata.json', function(status){
+UrlExists('http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json', function(status){
     if(status === 200){
        // file was found
        console.log('Amazon is available, using aws');
-       HERO_CACHE = "https://e7-optimizer-game-data.s3-us-west-2.amazonaws.com/herodata.json";
-       ARTIFACT_CACHE = "https://e7-optimizer-game-data.s3-us-west-2.amazonaws.com/artifactdata.json";
+       HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
+       ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
     }
     else {
        // file not found
