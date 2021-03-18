@@ -228,7 +228,6 @@ function convertSubStats(item) {
         const acc = statAcc[key];
         const value = acc.value;
         const stat = new Stat(key, value, acc.rolls, acc.modified);
-        console.log(stat)
         substats.push(stat);
     }
 

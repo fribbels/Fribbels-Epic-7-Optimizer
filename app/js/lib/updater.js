@@ -1,4 +1,4 @@
-const currentVersion = "v1.5.0";
+const currentVersion = "v1.6.0";
 
 global.TEST = false;
 
