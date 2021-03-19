@@ -89,6 +89,7 @@ module.exports = {
                 {headerName: i18next.t('Locked'), field: 'locked', cellRenderer: (params) => params.value == true ? i18next.t('yes') : i18next.t('no')},
                 // {headerName: i18next.t('Actions'), field: 'id', cellRenderer: renderActions},
                 {headerName: i18next.t('Duplicate'), field: 'duplicateId', hide: true},
+                {headerName: 'AllowedMods', field: 'allowedMods', hide: true},
             ],
             rowSelection: 'multiple',
             pagination: true,
@@ -348,15 +349,34 @@ module.exports = {
             const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + modifyFilter);
             const statFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('main.type');
             const gearFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('gear');
+            const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');
 
-            substatFilterComponent.setModel({
-                type: 'equals',
-                filter: 0
-            });
             statFilterComponent.setModel({
                 type: 'notEqual',
                 filter: modifyFilter
             });
+            allowedModsFilterComponent.setModel({
+                type: 'contains',
+                filter: "|" + modifyFilter + "|"
+            });
+
+            // SAMPLE OR FILTER
+            // statFilterComponent.setModel({
+            //     // filterType: 'string',
+            //     // operator: 'OR',
+            //     // condition1: {
+            //     //     filterType: 'string',
+            //     //     type: 'notEqual',
+            //     //     filter: modifyFilter
+            //     // },
+            //     // condition2: {
+            //     //     filterType: 'string',
+            //     //     type: 'equals',
+            //     //     filter: 6
+            //     // }
+            //     type: 'notEqual',
+            //     filter: modifyFilter
+            // });
 
             if (!gearFilter) {
                 if (modifyFilter == "Attack" || modifyFilter == "AttackPercent") {
@@ -378,6 +398,9 @@ module.exports = {
                     });
                 }
             }
+        } else {
+            const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');
+            allowedModsFilterComponent.setModel(null);
         }
 
         const duplicateFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('duplicateId');
@@ -387,9 +410,6 @@ module.exports = {
             duplicateFilterComponent.setModel({
                 type: 'startsWith',
                 filter: "DUPLICATE"
-
-                // type: 'notEqual',
-                // filter: ""
             });
         }
 
@@ -397,46 +417,6 @@ module.exports = {
         updateSelectedCount();
     }
 }
-
-// function onRowSelected(event) {
-//     const row = module.exports.getSelectedGear();
-//     // OptimizerTab.drawPreview(gearIds);
-// }
-
-// const filterParams = {
-//   filterOptions: ['notBlank'],
-//   defaultOption: 'notBlank',
-//   comparator: myComparator,
-//   textCustomComparator: myComparator
-// }
-
-// function myComparator(filter, value, filterText) {
-//     console.error("1");
-//     var filterTextLowerCase = filterText.toLowerCase();
-//     var valueLowerCase = value.toString().toLowerCase();
-
-//     switch (filter) {
-//         case 'contains':
-//             return valueLowerCase.indexOf(filterTextLowerCase) >= 0;
-//         case 'notContains':
-//             return valueLowerCase.indexOf(filterTextLowerCase) === -1;
-//         case 'equals':
-//             return valueLowerCase === filterTextLowerCase;
-//         case 'notEqual':
-//             return valueLowerCase != filterTextLowerCase;
-//         case 'startsWith':
-//             return valueLowerCase.indexOf(filterTextLowerCase) === 0;
-//         case 'notBlank':
-//             return valueLowerCase && valueLowerCase.length > 0;
-//         case 'endsWith':
-//             var index = valueLowerCase.lastIndexOf(filterTextLowerCase);
-//             return index >= 0 && index === (valueLowerCase.length - filterTextLowerCase.length);
-//         default:
-//             // should never happen
-//             console.warn('invalid filter type ' + filter);
-//             return false;
-//     }
-// }
 
 function renderActions(params) {
     const id = params.value;

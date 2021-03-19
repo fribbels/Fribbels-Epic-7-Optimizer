@@ -103,6 +103,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         await Settings.initialize();
         Saves.initialize();
         Saves.loadAutoSave();
+
+        Tooltip.initialize();
     });
     Scanner.initialize();
     Updater.checkForUpdates();
@@ -111,8 +113,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     Selectors.initialize();
 
     Importer.addEventListener();
-
-    Tooltip.initialize();
 
 
     console.log("Document initialized")

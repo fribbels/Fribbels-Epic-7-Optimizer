@@ -35,7 +35,7 @@ function statToText(stat, baseStats, item, modifyStat) {
         // console.log(modValues['reforged'][modifier.grade])
         // console.log(modValues['reforged'][modifier.grade][modifiedStat])
         // console.log(modValues['reforged'][modifier.grade][modifiedStat][stat.rolls])
-        if (Reforge.isReforgeable(item)) {
+        if (Reforge.isReforgeable(item) || item.level == 90) {
             reforge = true;
         } else {
 
@@ -146,11 +146,14 @@ module.exports = {
         const needsChange = hover && rolls && modifier.stat;
 
         if (needsChange) {
-            // console.log(modifier, hover, originalStat, originalValue, reforge, rolls, index)
-            var mod = Constants.modValues[reforge][modifier.grade][modifier.stat][rolls];
+            console.log(modifier, hover, originalStat, originalValue, reforge, rolls, index)
+            const rollIndex = rolls ? rolls - 1 : 0;
+            var mod = Constants.modValues[reforge][modifier.grade][modifier.stat][rollIndex];
             var isPercent = modifier.stat.includes('Percent');
             var start = "" + mod[0] + (isPercent ? "%" : "")
             var end = "" + mod[1] + (isPercent ? "%" : "")
+
+
 
             displayStat = hover ? shortenStats(modifier.stat) : originalStat;
             displayValue = "" + start + " - " + end;

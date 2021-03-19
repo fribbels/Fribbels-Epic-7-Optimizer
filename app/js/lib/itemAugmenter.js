@@ -56,10 +56,41 @@ function augmentStats(item) {
     };
     item.augmentedStats.mainType = item.main.type;
     item.augmentedStats.mainValue = item.main.value;
+    item.allowedMods = [
+        "Attack",
+        "AttackPercent",
+        "Defense",
+        "DefensePercent",
+        "Health",
+        "HealthPercent",
+        "Speed",
+        "CriticalHitChancePercent",
+        "CriticalHitDamagePercent",
+        "EffectivenessPercent",
+        "EffectResistancePercent"
+    ]
+
+    item.allowedMods.splice(item.allowedMods.indexOf(item.main.type), 1)
 
     for (var subStat of item.substats) {
         item.augmentedStats[subStat.type] = subStat.value;
+
+        if (!subStat.modified) {
+            item.allowedMods.splice(item.allowedMods.indexOf(subStat.type), 1)
+        }
     }
+
+    if (item.gear == "Weapon") {
+        item.allowedMods.splice(item.allowedMods.indexOf("Defense"), 1)
+        item.allowedMods.splice(item.allowedMods.indexOf("DefensePercent"), 1)
+    }
+
+    if (item.gear == "Armor") {
+        item.allowedMods.splice(item.allowedMods.indexOf("Attack"), 1)
+        item.allowedMods.splice(item.allowedMods.indexOf("AttackPercent"), 1)
+    }
+
+    item.allowedMods = "|" + item.allowedMods.join("|") + "|";
 }
 
 function augmentReforgeStats(item) {
