@@ -3,7 +3,7 @@
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
 
-Come join the Fribbels E7 Optimizer Discord server for announcements, troubleshooting, or ideas and suggestions! https://discord.gg/gCSK2cJNcK
+Come join the Fribbels E7 Optimizer Discord server for announcements, troubleshooting, or ideas and suggestions! https://discord.gg/rDmB4Un7qg
 
 Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#getting-started) section for instructions on how to use the optimizer.
 
@@ -455,7 +455,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 * Shows an error
   * Try it again a couple times, it does fail occasionally
 
-* Drop by the Discord server for help debugging other issues: https://discord.gg/gCSK2cJNcK
+* Drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
 
 ### Optimizer
 
@@ -493,10 +493,10 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 - If you see a bunch of optimization result rows with the same stats, you probably have duplicate gear. [Example](https://i.imgur.com/hUcyN1I.png)
   - Use the Duplicates filter on the Gear screen to find and fix your duplicate gear. Alternatively Overwrite/Merge your gear data to start over. Be careful when using the Append option, because that can result in duplicate gear being added. Most of the time you'll want to use Merge.
 
-* Drop by the Discord server for help debugging other issues: https://discord.gg/gCSK2cJNcK
+* Drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
 
 ## Contact me
 
-Come join the Fribbels E7 Optimizer Discord server for questions or comments or ideas/suggestions: https://discord.gg/gCSK2cJNcK. If you ran into any issues, please check the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
+Come join the Fribbels E7 Optimizer Discord server for questions or comments or ideas/suggestions: https://discord.gg/rDmB4Un7qg. If you ran into any issues, please check the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
 
 If you want to show support for the optimizer, you can [buy me a coffee](https://www.buymeacoffee.com/fribbels) or come say hi on Discord!
