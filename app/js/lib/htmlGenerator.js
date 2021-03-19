@@ -23,7 +23,7 @@ function statToText(stat, baseStats, item, modifyStat) {
 
     // Keep the modified text the same for basic case
     var modifiedStat = unpercentedStat;
-    var reforge = false;
+    var reforge = Reforge.isReforgeable(item) || item.level == 90;
     var rolls = stat.rolls;
 
     const modifier = ItemsTab.getCurrentModifier();
@@ -35,15 +35,12 @@ function statToText(stat, baseStats, item, modifyStat) {
         // console.log(modValues['reforged'][modifier.grade])
         // console.log(modValues['reforged'][modifier.grade][modifiedStat])
         // console.log(modValues['reforged'][modifier.grade][modifiedStat][stat.rolls])
-        if (Reforge.isReforgeable(item) || item.level == 90) {
-            reforge = true;
-        } else {
 
-        }
 
         // Make it easier to read
         modifiedStat = shortenStats(modifier.stat);
     }
+    console.log(modifier.grade, modifier.stat, stat.rolls, item, item.level)
 
     return {
         type: unpercentedStat,
