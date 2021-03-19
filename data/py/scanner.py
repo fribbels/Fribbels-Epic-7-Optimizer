@@ -3,12 +3,13 @@ import io,sys,json,os
 import threading
 import time
 
-acks = [{} for i in range(len(list(conf.ifaces.data.values())))];
+acks = {}
+prevAcks = [-1 for i in range(len(list(conf.ifaces.data.values())))];
 existingIpIds = {}
 existingTcpSeqs = {}
 
-def try_buffer(currAck, index):
-    buffers = index[currAck];
+def try_buffer(currAck):
+    buffers = acks[currAck];
 
     buffers = sorted(buffers, key=lambda x: x['seq'])
     finalBuffer = b''
@@ -44,10 +45,10 @@ def check_packet(packet, index):
             else:
                 return
 
-            if currAck in acks[index]:
-                acks[index][currAck].append({'data': packet_bytes, 'seq': packet[TCP].seq})
+            if currAck in acks:
+                acks[currAck].append({'data': packet_bytes, 'seq': packet[TCP].seq})
             else:
-                acks[index][currAck] = [{'data': packet_bytes, 'seq': packet[TCP].seq}]
+                acks[currAck] = [{'data': packet_bytes, 'seq': packet[TCP].seq}]
 
                 # if 'F' in packet[TCP].flags:
                 #     try_buffer(currAck)
@@ -79,9 +80,8 @@ loop = True
 while loop:
     line = sys.stdin.readline()
     if "E" in line:
-        for index in acks:
-            for ack in index:
-                try_buffer(ack, index)
+        for ack in acks:
+            try_buffer(ack)
         loop = False
         print("DONE\n")
         sys.stdout.flush()
