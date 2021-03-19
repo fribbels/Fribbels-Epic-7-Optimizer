@@ -34,12 +34,12 @@ module.exports = {
     },
 
     saveFile: (path, text) => {
-        // fs.writeFileSync(module.exports.path(path), text);
-        fs.writeFile(module.exports.path(path), text, (err) => {
-            if (err)
-                return console.log(err);
-            console.log('Exported text to: ', path);
-        });
+        fs.writeFileSync(module.exports.path(path), text);
+        // fs.writeFile(module.exports.path(path), text, (err) => {
+        //     if (err)
+        //         return console.log(err);
+        //     console.log('Exported text to: ', path);
+        // });
     },
 
     createFolder: (folder) => {

@@ -345,61 +345,14 @@ module.exports = {
             });
         }
 
+        const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');
         if (modifyFilter) {
-            const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + modifyFilter);
-            const statFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('main.type');
-            const gearFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('gear');
-            const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');
 
-            statFilterComponent.setModel({
-                type: 'notEqual',
-                filter: modifyFilter
-            });
             allowedModsFilterComponent.setModel({
                 type: 'contains',
                 filter: "|" + modifyFilter + "|"
             });
-
-            // SAMPLE OR FILTER
-            // statFilterComponent.setModel({
-            //     // filterType: 'string',
-            //     // operator: 'OR',
-            //     // condition1: {
-            //     //     filterType: 'string',
-            //     //     type: 'notEqual',
-            //     //     filter: modifyFilter
-            //     // },
-            //     // condition2: {
-            //     //     filterType: 'string',
-            //     //     type: 'equals',
-            //     //     filter: 6
-            //     // }
-            //     type: 'notEqual',
-            //     filter: modifyFilter
-            // });
-
-            if (!gearFilter) {
-                if (modifyFilter == "Attack" || modifyFilter == "AttackPercent") {
-                    gearFilterComponent.setModel({
-                        type: 'notEqual',
-                        filter: 'Armor'
-                    });
-                }
-                if (modifyFilter == "Health") {
-                    gearFilterComponent.setModel({
-                        type: 'notEqual',
-                        filter: 'Helmet'
-                    });
-                }
-                if (modifyFilter == "Defense" || modifyFilter == "DefensePercent") {
-                    gearFilterComponent.setModel({
-                        type: 'notEqual',
-                        filter: 'Weapon'
-                    });
-                }
-            }
         } else {
-            const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');
             allowedModsFilterComponent.setModel(null);
         }
 
@@ -417,6 +370,23 @@ module.exports = {
         updateSelectedCount();
     }
 }
+            // SAMPLE OR FILTER
+            // statFilterComponent.setModel({
+            //     // filterType: 'string',
+            //     // operator: 'OR',
+            //     // condition1: {
+            //     //     filterType: 'string',
+            //     //     type: 'notEqual',
+            //     //     filter: modifyFilter
+            //     // },
+            //     // condition2: {
+            //     //     filterType: 'string',
+            //     //     type: 'equals',
+            //     //     filter: 6
+            //     // }
+            //     type: 'notEqual',
+            //     filter: modifyFilter
+            // });
 
 function renderActions(params) {
     const id = params.value;

@@ -314,6 +314,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             dbItem.setReforgeable(item.getReforgeable());
             dbItem.setUpgradeable(item.getUpgradeable());
             dbItem.setMaterial(item.getMaterial());
+            dbItem.setAllowedMods(item.getAllowedMods());
             itemDb.calculateWss(dbItem);
             System.out.println("EDITED ITEM");
         }

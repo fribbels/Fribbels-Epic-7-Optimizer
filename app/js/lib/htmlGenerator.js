@@ -40,7 +40,7 @@ function statToText(stat, baseStats, item, modifyStat) {
         // Make it easier to read
         modifiedStat = shortenStats(modifier.stat);
     }
-    console.log(modifier.grade, modifier.stat, stat.rolls, item, item.level)
+    // console.log(modifier.grade, modifier.stat, stat.rolls, item, item.level)
 
     return {
         type: unpercentedStat,
@@ -143,7 +143,7 @@ module.exports = {
         const needsChange = hover && rolls && modifier.stat;
 
         if (needsChange) {
-            console.log(modifier, hover, originalStat, originalValue, reforge, rolls, index)
+            // console.log(modifier, hover, originalStat, originalValue, reforge, rolls, index)
             const rollIndex = rolls ? rolls - 1 : 0;
             var mod = Constants.modValues[reforge][modifier.grade][modifier.stat][rollIndex];
             var isPercent = modifier.stat.includes('Percent');

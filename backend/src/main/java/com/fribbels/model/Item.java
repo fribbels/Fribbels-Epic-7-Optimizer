@@ -52,6 +52,7 @@ public class Item {
     private int combatWss;
 
     private String duplicateId;
+    private String allowedMods;
 
     public String toString() {
         return new Gson().toJson(this);
