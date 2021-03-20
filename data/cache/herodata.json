@@ -19938,12 +19938,9 @@
     },
     "specialty_change": {},
     "assets": {
-      "tempIcon": "https://assets.epicsevendb.com/_source/face/c1112_s.png",
-      "tempImage": "https://assets.epicsevendb.com/_source/face/c1112_su.png",
-      "tempThumbnail": "https://assets.epicsevendb.com/_source/face/c1112_l.png",
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
-      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1112_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1112_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1112_l.png"
     },
     "ex_equip": [],
     "calculatedStatus": {

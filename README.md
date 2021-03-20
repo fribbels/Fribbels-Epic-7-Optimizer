@@ -418,6 +418,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Add different level/awakening options
  - Use main stat gear for priority filter
  - Clear out item previews on refresh
+ - Prio column + filter
 
  **Low priority:**
  - Add material filter
