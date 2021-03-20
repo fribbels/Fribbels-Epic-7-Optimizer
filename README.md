@@ -284,7 +284,7 @@ There are two importer options, one that automatically imports gear directly fro
 
 ##### First time  setup for the automatic importer on Windows
 1. Install [Python 3.4+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link to 3.9.2](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). **IMPORTANT: Enable the option to add Python to PATH**
-2. Install [Npcap 1.10](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe). Use default settings
+2. Install [Npcap 1.10](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe). During installation ,enable the setting to "Support raw 802.11 traffic (and monitor mode) for wireless adapters".
 3. Restart your computer
 
 ##### First time  setup for the automatic importer on Mac
@@ -412,6 +412,8 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 
 **Working on:**
  - v1.7.0
+ - Make "0" bonus stats show up as blank
+ - Priority score column
 
  **Medium priority:**
  - Conversion filter
@@ -495,6 +497,14 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
   - Use the Duplicates filter on the Gear screen to find and fix your duplicate gear. Alternatively Overwrite/Merge your gear data to start over. Be careful when using the Append option, because that can result in duplicate gear being added. Most of the time you'll want to use Merge.
 
 * Drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
+
+## Contributing to the project
+
+If you want to contribute, come by the discord server to have a chat about what you want to do. There's a huge list of todo items and I'm happy to have people add to the code.
+
+We also have an ongoing translation project to translate the optimizer into various languages.
+
+To run the code locally,
 
 ## Contact me
 
