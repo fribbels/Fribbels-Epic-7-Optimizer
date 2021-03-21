@@ -48,7 +48,9 @@ module.exports = {
                 const heroOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/cache/herodata.json"));
                 heroesByName = heroOverride;
             } else {
+                console.log(1)
                 const heroOverride = await fetchCache(HERO_CACHE);
+                console.log(2)
                 heroesByName = heroOverride;
             }
             console.warn("HERO OVERRIDES")

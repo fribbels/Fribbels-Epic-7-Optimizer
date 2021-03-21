@@ -45,7 +45,16 @@ module.exports = {
     },
 
     initialize: () => {
-        buildGrid();
+        if (i18next.language == 'zh') {
+          var localeText = AG_GRID_LOCALE_ZH;
+        } else if (i18next.language == 'zh-TW') {
+          var localeText = AG_GRID_LOCALE_ZH_TW;
+        } else {
+          var localeText = AG_GRID_LOCALE_EN;
+        }
+        console.log('localeText:'+localeText);
+
+        buildGrid(localeText);
     },
 
     reloadData: (getResultRowsResponse) => {
@@ -221,22 +230,13 @@ function getField(heroStats, stat) {
     return heroStats.map(x => x[stat]);
 }
 
-function buildGrid() {
+function buildGrid(localeText) {
 
     const DIGITS_2 = 35;
     const DIGITS_3 = 43;
     const DIGITS_4 = 48;
     const DIGITS_5 = 50;
     const DIGITS_6 = 55;
-
-    if (i18next.language == 'zh') {
-      var localeText = AG_GRID_LOCALE_ZH;
-    } else if (i18next.language == 'zh-TW') {
-      var localeText = AG_GRID_LOCALE_ZH_TW;
-    } else {
-      var localeText = AG_GRID_LOCALE_EN;
-    }
-    console.log('localeText:'+localeText);
 
     const gridOptions = {
         defaultColDef: {

@@ -257,8 +257,8 @@ function post(api, request) {
             resolve(response.data);
         })
         .catch(error => {
-            console.error("Api call", api, request, error);
-            Notifier.error("Failed to call subprocess: " + api);
+            console.error("Java process failed. Please try restarting your app and check that you've installed the correct version of Java.", api, request, error);
+            Notifier.error("Java process failed. Please try restarting your app and check that you've installed the correct version of Java");
             reject(error);
         })
     })

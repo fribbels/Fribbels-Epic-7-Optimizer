@@ -272,7 +272,7 @@ Please read these instructions carefully!
     * Do not download the Source Code options, those won't work
 2. Install **Java 8 - 64 bit**
     * Mac needs both JRE and JDK:
-    * JRE: https://java.com/en/download/manual.jsp - Get the offline installer
+    * JRE: https://java.com/en/download/manual.jsp - Get the 64-bit offline installer
     * JDK: https://www.oracle.com/java/technologies/javase-downloads.html
     * After installing, restart your computer (required!)
   3. Follow the steps to use either the auto importer or screenshot importer
@@ -394,21 +394,11 @@ _________________
 
 There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**Done for v1.6.0**
- - Dark mode
- - Chinese translation
- - Can now merge scanned items with enhance/reforge/modifications
- - Modification filter panel
- - Modification previews
- - Fix speed EE bugs (Yuna, Rose)
- - Fix autosave loading not working from custom location
- - Multiple pages of results for the optimizer
- - Fix sliders being weird shapes
- - Fix loading cache
- - Added artifact data for Twilight Calamity and XIV. Temperance
- - Added hero images for Lucy + Designer Lilibet, hero data for Eda, Great Chief Khawana
- - Added specialty change data for Muse Rime and Zealot Carmainerose
- - Swap gear stat filter positions
+**Done for v1.6.1**
+ - Fixed saves folder not being initialized
+ - Fixed Mac scan errors
+ - Clarified java error instructions
+ - Made links open in browser instead of app
 
 **Working on:**
  - v1.7.0

@@ -22,15 +22,6 @@ var itemsGrid;
 var currentAggregate = {};
 var selectedCell = null;
 
-if (i18next.language == 'zh') {
-  var localeText = AG_GRID_LOCALE_ZH;
-} else if (i18next.language == 'zh-TW') {
-  var localeText = AG_GRID_LOCALE_ZH_TW;
-} else {
-  var localeText = AG_GRID_LOCALE_EN;
-}
-console.log('localeText:'+localeText);
-
 module.exports = {
 
     toggleDarkMode(enabled) {
@@ -50,6 +41,15 @@ module.exports = {
     },
 
     initialize: async () => {
+        if (i18next.language == 'zh') {
+          var localeText = AG_GRID_LOCALE_ZH;
+        } else if (i18next.language == 'zh-TW') {
+          var localeText = AG_GRID_LOCALE_ZH_TW;
+        } else {
+          var localeText = AG_GRID_LOCALE_EN;
+        }
+        console.log('localeText:'+localeText);
+
         const getAllItemsResponse = await Api.getAllItems();
         const gridOptions = {
             defaultColDef: {
@@ -64,8 +64,8 @@ module.exports = {
                 {headerName: i18next.t('Set'), field: 'set', cellRenderer: (params) => renderSets(params.value)},
                 {headerName: i18next.t('Gear'), field: 'gear', cellRenderer: (params) => renderGear(params.value)},
                 {headerName: i18next.t('Rank'), field: 'rank', cellRenderer: (params) => i18next.t(params.value), width: 50},
-                {headerName: i18next.t('Level'), field: 'level'},
-                {headerName: i18next.t('Enhance'), field: 'enhance', width: 60},
+                {headerName: i18next.t('Level'), field: 'level', filter: 'agNumberColumnFilter'},
+                {headerName: i18next.t('Enhance'), field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
                 {headerName: i18next.t('Main'), field: 'main.type', width: 100, cellRenderer: (params) => renderStat(i18next.t(params.value))},
                 {headerName: i18next.t('Value'), field: 'main.value', width: 60},
                 {headerName: i18next.t('Atk%'), field: 'augmentedStats.AttackPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
@@ -239,11 +239,8 @@ module.exports = {
 
         const enhanceFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('enhance');
         if (!enhanceFilter) {
-            // document.getElementById('checkboxImageClearEnhances').checked = true;
             enhanceFilterComponent.setModel(null);
         } else {
-            // document.getElementById('checkboxImageClearEnhances').checked = false;
-
             if (enhanceFilter == "plus0") {
                 enhanceFilterComponent.setModel({
                     filterType: 'number',

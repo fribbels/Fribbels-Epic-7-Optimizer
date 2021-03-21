@@ -40,7 +40,7 @@ module.exports = {
           icon: 'error',
           text: i18next.t(text),
           confirmButtonText: i18next.t("OK"),
-          cancelButtonText: i18next.t("Cancel")
+          // cancelButtonText: i18next.t("Cancel")
         })
     },
 
@@ -49,7 +49,7 @@ module.exports = {
           icon: 'info',
           text: i18next.t(text),
           confirmButtonText: i18next.t("OK"),
-          cancelButtonText: i18next.t("Cancel")
+          // cancelButtonText: i18next.t("Cancel")
         })
     },
 
@@ -58,7 +58,7 @@ module.exports = {
           icon: 'success',
           text: i18next.t(text),
           confirmButtonText: i18next.t("OK"),
-          cancelButtonText: i18next.t("Cancel")
+          // cancelButtonText: i18next.t("Cancel")
         })
     },
 
@@ -66,8 +66,17 @@ module.exports = {
         Swal.fire({
           icon: 'success',
           html: html,
-          confirmButtonText: i18next.t("OK"),
-          cancelButtonText: i18next.t("Cancel")
+          confirmButtonText: i18next.t("OK")
+          // cancelButtonText: i18next.t("Cancel")
+        })
+    },
+
+    htmlError: (html) => {
+        Swal.fire({
+          icon: 'error',
+          html: html,
+          confirmButtonText: i18next.t("OK")
+          // cancelButtonText: i18next.t("Cancel")
         })
     },
 

@@ -35,6 +35,15 @@ async function finishedReading(data) {
         console.warn(data.map(x => x.length).sort((a, b) => a - b))
         console.warn(data.map(x => x.length).sort((a, b) => a - b).reduce((a, b) => a + b, 0)/1000)
 
+        if (data.length == 0) {
+            if (Files.isMac()) {
+                Dialog.htmlError("The scanner did not find any data. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Npcap installed</a> correctly, then try again.")
+            } else {
+                Dialog.htmlError("The scanner did not find any data. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again.")
+            }
+            return;
+        }
+
         const response = await postData(api + '/getItems', {
             data: data
         });
@@ -100,6 +109,13 @@ function launchScanner(command) {
 
         child.stderr.on('data', (data) => {
             const str = data.toString()
+
+            if (str.includes("Failed to execute")
+            || (str.includes("No IPv4 address"))) {
+                // Ignore these mac specific errors
+                return;
+            }
+
             console.error(str);
         })
 

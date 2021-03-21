@@ -1,6 +1,6 @@
 // Example locale file for English, give this to your locale team to translate
 
-const AG_GRID_LOCALE_ZH_TW = {
+global.AG_GRID_LOCALE_ZH_TW = {
     // Set Filter
     selectAll: '(全選)',
     selectAllSearchResults: '(選擇全部搜索結果)',

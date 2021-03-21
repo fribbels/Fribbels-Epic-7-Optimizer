@@ -503,13 +503,17 @@ input {
   font-weight: 600;
   text-align: center;
 }
+.ag-header-label-icon {
+  margin-left: -3px !important;
+}
 .ag-paging-button {
   opacity: 1 !important;
   position: unset !important;
 }
 .ag-header-cell-text {
-  text-overflow: clip;
-  min-width: 40px;
+  overflow: initial;
+  text-overflow: initial;
+  min-width: unset !important;
 }
 .ag-header-cell-label, .ag-header-group-cell-label {
   justify-content: space-around;

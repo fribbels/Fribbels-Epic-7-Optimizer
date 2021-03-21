@@ -13,6 +13,8 @@
     }
 })();
 
+
+
 // (function(){
 //     var original = console.warn;
 //     console.warn = function() {
@@ -23,6 +25,8 @@
 //         }
 //     }
 // })();
+
+global.I18n = require('./i18n/i18n');
 
 global.Assets = require('./assets');
 global.Path = window.require('path');
@@ -59,6 +63,7 @@ const {ClientSideRowModelModule} = require('@ag-grid-community/client-side-row-m
 const {InfiniteRowModelModule} = require('@ag-grid-community/infinite-row-model');
 ModuleRegistry.registerModules([ClientSideRowModelModule, InfiniteRowModelModule]);
 global.Grid = Grid;
+global.electron = require("electron");
 const Enums = require('./enums');
 global.Gears = Enums.Gears;
 global.Sets = Enums.Sets;
@@ -88,7 +93,11 @@ global.Scanner = require('./scanner');
 const Jimp = require('jimp');
 
 document.addEventListener("DOMContentLoaded", async () => {
+    setupLinks();
+
     console.log("DOMContentLoaded")
+
+    await I18n.initialize();
 
     Subprocess.initialize(async () => {
         await HeroData.initialize();
@@ -109,7 +118,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     Scanner.initialize();
     Updater.checkForUpdates();
     DarkMode.initialize();
-    // GearCalculator.initialize();
     Selectors.initialize();
 
     Importer.addEventListener();
@@ -118,6 +126,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Document initialized")
 
 });
+
+function setupLinks() {
+    $('body').on('click', 'a', (event) => {
+        event.preventDefault();
+        let link = event.target.href;
+        electron.shell.openExternal(link);
+    });
+}
 
 
 function handleKey(e) {

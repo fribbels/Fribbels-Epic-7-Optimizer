@@ -104,6 +104,13 @@ module.exports = {
     },
 
     loadSettings: async () => {
+        try {
+            Saves.createFolder();
+        } catch (e) {
+            Notifier.error("Unable to create the Documents/FribbelsOptimizerSaves folder. Try disabling running the app as admin and disabling your virus scan");
+            return;
+        }
+
         console.log("LOAD SETTINGS", settingsPath);
         const text = await Files.readFileSync(Files.path(settingsPath));
         const settings = JSON.parse(text);
@@ -138,6 +145,13 @@ module.exports = {
     },
 
     saveSettings: async () => {
+        try {
+            Saves.createFolder();
+        } catch (e) {
+            Notifier.error("Unable to create the Documents/FribbelsOptimizerSaves folder. Try disabling running the app as admin and disabling your virus scan");
+            return;
+        }
+
         console.log("SAVE SETTINGS");
         const settings = {
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,

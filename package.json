@@ -101,7 +101,8 @@
       "./resources/**"
     ],
     "extraFiles": [
-      "./data/**"
+      "./data/**",
+      "./app/locales/**"
     ],
     "publish": {
       "provider": "github",

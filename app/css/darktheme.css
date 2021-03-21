@@ -224,7 +224,9 @@ input[type=checkbox]:checked:after {
 .ag-theme-balham .ag-paging-panel {
     color: var(--font-color);
 }
-
+.ag-icon {
+    color: var(--font-color);
+}
 /* Popup */
 
 .swal2-container .swal2-popup {

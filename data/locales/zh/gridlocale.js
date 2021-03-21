@@ -1,46 +1,46 @@
 // Example locale file for English, give this to your locale team to translate
 
-const AG_GRID_LOCALE_EN = {
+global.AG_GRID_LOCALE_ZH = {
     // Set Filter
-    selectAll: '(Select All)',
-    selectAllSearchResults: '(Select All Search Results)',
-    searchOoo: 'Search...',
-    blanks: '(Blanks)',
-    noMatches: 'No matches',
+    selectAll: '(全选)',
+    selectAllSearchResults: '(选择全部搜索结果)',
+    searchOoo: '搜索...',
+    blanks: '(空白)',
+    noMatches: '无结果',
 
     // Number Filter & Text Filter
-    filterOoo: 'Filter...',
-    equals: 'Equals',
-    notEqual: 'Not equal',
-    empty: 'Choose One',
+    filterOoo: '筛选...',
+    equals: '等于',
+    notEqual: '不等于',
+    empty: '请选择',
 
     // Number Filter
-    lessThan: 'Less than',
-    greaterThan: 'Greater than',
-    lessThanOrEqual: 'Less than or equal',
-    greaterThanOrEqual: 'Greater than or equal',
-    inRange: 'In range',
-    inRangeStart: 'to',
-    inRangeEnd: 'from',
+    lessThan: '小于',
+    greaterThan: '大于',
+    lessThanOrEqual: '小于等于',
+    greaterThanOrEqual: '大于等于',
+    inRange: '范围',
+    inRangeStart: '从',
+    inRangeEnd: '到',
 
     // Text Filter
-    contains: 'Contains',
-    notContains: 'Not contains',
-    startsWith: 'Starts with',
-    endsWith: 'Ends with',
+    contains: '包含',
+    notContains: '不包含',
+    startsWith: '开始于',
+    endsWith: '结束于',
 
     // Date Filter
     dateFormatOoo: 'yyyy-mm-dd',
 
     // Filter Conditions
-    andCondition: 'AND',
-    orCondition: 'OR',
+    andCondition: '与',
+    orCondition: '或',
 
     // Filter Buttons
-    applyFilter: 'Apply',
-    resetFilter: 'Reset',
-    clearFilter: 'Clear',
-    cancelFilter: 'Cancel',
+    applyFilter: '应用',
+    resetFilter: '重置',
+    clearFilter: '清空',
+    cancelFilter: '取消',
 
     // Filter Titles
     textFilter: 'Text Filter',
@@ -49,8 +49,8 @@ const AG_GRID_LOCALE_EN = {
     setFilter: 'Set Filter',
 
     // Side Bar
-    columns: 'Columns',
-    filters: 'Filters',
+    columns: '列',
+    filters: '筛选',
 
     // columns tool panel
     pivotMode: 'Pivot Mode',
@@ -65,9 +65,9 @@ const AG_GRID_LOCALE_EN = {
     group: 'Group',
 
     // Other
-    loadingOoo: 'Loading...',
-    noRowsToShow: 'No Rows To Show',
-    enabled: 'Enabled',
+    loadingOoo: '加载中...',
+    noRowsToShow: '暂无数据',
+    enabled: '启用',
 
     // Menu
     pinColumn: 'Pin Column',
@@ -103,14 +103,14 @@ const AG_GRID_LOCALE_EN = {
     selectedRows: 'Selected',
     totalRows: 'Total Rows',
     totalAndFilteredRows: 'Rows',
-    more: 'More',
-    to: 'to',
-    of: 'of',
-    page: 'Page',
-    nextPage: 'Next Page',
-    lastPage: 'Last Page',
-    firstPage: 'First Page',
-    previousPage: 'Previous Page',
+    more: '更多',
+    to: '-',
+    of: '/',
+    page: '页码',
+    nextPage: '下一页',
+    lastPage: '末页',
+    firstPage: '首页',
+    previousPage: '上一页',
 
     // Enterprise Menu (Charts)
     pivotChartAndPivotMode: 'Pivot Chart & Pivot Mode',

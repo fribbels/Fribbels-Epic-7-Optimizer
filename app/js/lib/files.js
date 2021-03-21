@@ -45,8 +45,17 @@ module.exports = {
     createFolder: (folder) => {
         if (!fs.existsSync(module.exports.path(folder))) {
             fs.mkdirSync(module.exports.path(folder));
+        }
 
+        if (!fs.existsSync(module.exports.path(folder + "/empty-save.json"))) {
             module.exports.saveFile(folder + "/empty-save.json", '{"heroes":[],"items":[]}');
+        }
+
+        if (!fs.existsSync(module.exports.path(folder + "/autosave.json"))) {
+            module.exports.saveFile(folder + "/autosave.json", '{"heroes":[],"items":[]}');
+        }
+
+        if (!fs.existsSync(module.exports.path(folder + "/settings.ini"))) {
             module.exports.saveFile(folder + "/settings.ini", JSON.stringify(Settings.getDefaultSettings()));
         }
     },

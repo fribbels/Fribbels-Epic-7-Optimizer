@@ -1,6 +1,5 @@
 var fs = require('fs');
 const { remote } = require('electron');
-// var exec = require('child_process').exec, child;
 const { exec } = require('child_process');
 const { spawn } = require('child_process');
 const treekill  = require('tree-kill');
@@ -13,6 +12,8 @@ var errors = "";
 var killed = false;
 var initialized = false;
 
+const defaultJavaError = `Unable to load Java. Please check that you have the <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and restart your computer.`;
+
 module.exports = {
 
     initialize: (callback) => {
@@ -23,12 +24,12 @@ module.exports = {
             }
 
             if (notRecognized) {
-                Notifier.error("Java is not installed. Please install Java 8, 64-Bit version")
+                Dialog.htmlError(defaultJavaError);
                 return;
             }
 
             if (not64Bit) {
-                Notifier.error("Java is installed but not the 64-Bit version. Please install the 64-Bit version of Java 8")
+                Dialog.htmlError(defaultJavaError);
                 return;
             }
 
@@ -43,7 +44,8 @@ module.exports = {
                 return;
             }
 
-            Dialog.error(`Java child process exited with code ${code}\nCheck the development tools console (Ctrl + Shift + I) for details.\nErrors: ${errors}\n`);
+            Notifier.error(`Java subprocess errors: ${errors}`)
+                Dialog.htmlError(defaultJavaError);
         });
 
         child.stderr.on('data', (data) => {
@@ -62,17 +64,6 @@ module.exports = {
             } else {
 
             }
-            // try {
-
-            // if (str.includes("PROGRESS:")) {
-            //     var progressStr = Number(str.split('[').pop().split(']')[0]).toLocaleString();
-            //     var estimationStr = $('#estimatedPermutations').text();
-            //     var estimationStrArr = estimationStr.split('/');
-            //     var estimationNumStr = estimationStrArr[estimationStrArr.length - 1];
-            //     var finalStr = progressStr + " / " + estimationNumStr;
-
-            //     $('#estimatedPermutations').text(finalStr);
-            // }
         });
 
         ipc.on('app-close', _ => {
@@ -115,11 +106,9 @@ function javaversion(callback) {
     })
 
     spawn.stderr.on('data', function(data) {
-
         data = data.toString()
 
         console.log("Detecting java:", data);
-
 
         if (data && data.includes("VM") && !data.includes("64-Bit")) {
             return callback(null, false, false, true);
