@@ -1,6 +1,5 @@
 var addHeroSelectorOpen = false;
 
-
 module.exports = {
     initialize: () => {
         const multipleSelectOptions = {

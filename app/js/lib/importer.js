@@ -119,6 +119,7 @@ module.exports = {
                     {name: 'TEXT', extensions: ['txt']},
                 ]
             }
+
             const filename = dialog.showSaveDialogSync(currentWindow, options);
             if (!filename) return;
 
@@ -133,46 +134,46 @@ module.exports = {
             });
         });
 
-        document.getElementById('importFileSelect').addEventListener("click", async () => {
-            const options = {
-                title: "Load file",
-                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
-                buttonLabel : "Load file",
-                filters :[
-                    {name: 'TEXT/JSON', extensions: ['txt', 'json']},
-                ]
-            }
-            const filenames = dialog.showOpenDialogSync(currentWindow, options);
-            console.log(filenames);
+        // document.getElementById('importFileSelect').addEventListener("click", async () => {
+        //     const options = {
+        //         title: "Load file",
+        //         defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+        //         buttonLabel : "Load file",
+        //         filters :[
+        //             {name: 'TEXT/JSON', extensions: ['txt', 'json']},
+        //         ]
+        //     }
+        //     const filenames = dialog.showOpenDialogSync(currentWindow, options);
+        //     console.log(filenames);
 
-            if (!filenames || filenames.length < 1) {
-                return console.warn("Invalid filename")
-            };
+        //     if (!filenames || filenames.length < 1) {
+        //         return console.warn("Invalid filename")
+        //     };
 
-            const path = filenames[0];
+        //     const path = filenames[0];
 
-            fs.readFile(Files.path(path), 'utf8', async function read(err, data) {
-                if (err) {
-                    throw err;
-                }
+        //     fs.readFile(Files.path(path), 'utf8', async function read(err, data) {
+        //         if (err) {
+        //             throw err;
+        //         }
 
-                $('#importOutputText').text(i18next.t('Parsing data..'))
+        //         $('#importOutputText').text(i18next.t('Parsing data..'))
 
-                const parsedData = JSON.parse(data);
-                console.log("PARSEDDATA", parsedData);
-                const items = parsedData.items;
-                const heroes = parsedData.heroes;
-                // const deserializedData = ItemSerializer.deserialize(data);
-                // const items = deserializedData.items;
-                console.log("ITEMS", items);
-                ItemAugmenter.augment(items);
+        //         const parsedData = JSON.parse(data);
+        //         console.log("PARSEDDATA", parsedData);
+        //         const items = parsedData.items;
+        //         const heroes = parsedData.heroes;
+        //         // const deserializedData = ItemSerializer.deserialize(data);
+        //         // const items = deserializedData.items;
+        //         console.log("ITEMS", items);
+        //         ItemAugmenter.augment(items);
 
-                await Api.setItems(items);
-                await Api.setHeroes([]);
+        //         await Api.setItems(items);
+        //         await Api.setHeroes([]);
 
-                $('#importOutputText').text(`${i18next.t('Imported')} ${items.length} ${i18next.t('items from')} ${path}`)
-            });
-        })
+        //         $('#importOutputText').text(`${i18next.t('Imported')} ${items.length} ${i18next.t('items from')} ${path}`)
+        //     });
+        // })
 
         document.getElementById('importAppendFileSelect').addEventListener("click", async () => {
             const options = {
@@ -180,7 +181,7 @@ module.exports = {
                 defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
-                    {name: 'TEXT/JSON', extensions: ['txt', 'json']},
+                    {name: 'TEXT', extensions: ['txt']},
                 ]
             }
             const filenames = dialog.showOpenDialogSync(currentWindow, options);
@@ -197,20 +198,24 @@ module.exports = {
                     throw err;
                 }
 
-                $('#importAppendOutputText').text(i18next.t('Parsing data..'))
+                try {
+                    $('#importAppendOutputText').text(i18next.t('Parsing data..'))
 
-                const parsedData = JSON.parse(data);
-                console.log("PARSEDDATA", parsedData);
-                const items = parsedData.items;
-                const heroes = parsedData.heroes;
-                // const deserializedData = ItemSerializer.deserialize(data);
-                // const items = deserializedData.items;
-                console.log("ITEMS", items);
-                ItemAugmenter.augment(items);
+                    const parsedData = JSON.parse(data);
+                    console.log("PARSEDDATA", parsedData);
+                    const items = parsedData.items;
+                    const heroes = parsedData.heroes;
+                    // const deserializedData = ItemSerializer.deserialize(data);
+                    // const items = deserializedData.items;
+                    console.log("ITEMS", items);
+                    ItemAugmenter.augment(items);
 
-                await Api.addItems(items);
+                    await Api.addItems(items);
 
-                $('#importAppendOutputText').text(` ${i18next.t('Appended')} ${items.length} ${i18next.t('items from')} ${path}`)
+                    $('#importAppendOutputText').text(` ${i18next.t('Appended')} ${items.length} ${i18next.t('items from')} ${path}`)
+                } catch (e) {
+                    Dialog.error(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                }
             });
         })
 
@@ -221,7 +226,7 @@ module.exports = {
                 defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
-                    {name: 'TEXT/JSON', extensions: ['txt', 'json']},
+                    {name: 'TEXT', extensions: ['txt']},
                 ]
             }
             const filenames = dialog.showOpenDialogSync(currentWindow, options);
@@ -238,20 +243,25 @@ module.exports = {
                     throw err;
                 }
 
-                $('#importMergeOutputText').text(i18next.t('Parsing data..'))
+                try {
+                    $('#importMergeOutputText').text(i18next.t('Parsing data..'))
 
-                const parsedData = JSON.parse(data);
-                console.log("PARSEDDATA", parsedData);
-                const items = parsedData.items;
-                const heroes = parsedData.heroes;
-                // const deserializedData = ItemSerializer.deserialize(data);
-                // const items = deserializedData.items;
-                console.log("ITEMS", items);
-                ItemAugmenter.augment(items);
+                    const parsedData = JSON.parse(data);
+                    console.log("PARSEDDATA", parsedData);
+                    const items = parsedData.items;
+                    const heroes = parsedData.heroes;
+                    // const deserializedData = ItemSerializer.deserialize(data);
+                    // const items = deserializedData.items;
+                    console.log("ITEMS", items);
+                    ItemAugmenter.augment(items);
 
-                await Api.mergeItems(items);
+                    await Api.mergeItems(items);
 
-                $('#importMergeOutputText').text(` ${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
+                    $('#importMergeOutputText').text(` ${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
+
+                } catch (e) {
+                    Dialog.error(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                }
             });
         })
 

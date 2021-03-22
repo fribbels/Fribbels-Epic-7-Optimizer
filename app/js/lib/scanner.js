@@ -41,6 +41,7 @@ async function finishedReading(data) {
             } else {
                 Dialog.htmlError("The scanner did not find any data. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again.")
             }
+            document.getElementById('loadFromGameExportOutputText').value = i18next.t("The scanner did not find any data.");
             return;
         }
 
@@ -53,7 +54,7 @@ async function finishedReading(data) {
             const equips = response.data;
             var rawItems = equips.filter(x => !!x.f)
 
-            if (rawItems.length == 0) {
+            if (rawItems.length == 0) { // This case is impossible?
                 document.getElementById('loadFromGameExportOutputText').value = i18next.t("Item reading failed, please try again.");
                 Notifier.error("Failed reading items, please try again. No items were found.");
                 return
@@ -63,19 +64,20 @@ async function finishedReading(data) {
             var lv0items = convertedItems.filter(x => x.level == 0);
             console.log(convertedItems);
 
-            const failedItemsText = lv0items.length > 0 ? `${i18next.t('<br><br>There were <b>')}${lv0items.length}${i18next.t('</b> items with issues.<br>Use the Level=0 filter to fix them on the Heroes Tab.')}` : ""
+            const failedItemsText = lv0items.length > 0 ? `${i18next.t('<br><br>There were <b>')}${lv0items.length}${i18next.t('</b> items with issues.<br>Use the Level=0 filter to fix them on the Gear Tab.')}` : ""
             Dialog.htmlSuccess(`${i18next.t('Finished scanning <b>')}${convertedItems.length}${i18next.t('</b> items.')} ${failedItemsText}`)
 
             var serializedStr = "{\"items\":" + ItemSerializer.serialize(convertedItems) + "}";
             document.getElementById('loadFromGameExportOutputText').value = serializedStr;
         } else {
             document.getElementById('loadFromGameExportOutputText').value = i18next.t("Item reading failed, please try again.");
-            Notifier.error("Failed reading items, please try again. Unable to read items.");
+            Notifier.error("Failed reading items, please try again.");
+            Dialog.htmlError("Scanner found data, but could not read the gear. Try following the scan instructions again, or visit the <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#contact-me'>Discord server</a> for help.")
         }
     } catch (e) {
-        console.error(e);
+        console.error("Failed reading items, please try again " + e);
         document.getElementById('loadFromGameExportOutputText').value = i18next.t("Item reading failed, please try again.");
-        Notifier.error(i18next.t("Failed reading items, please try again. ") + e);
+        Dialog.htmlError(i18next.t("Unexpected error while scanning items. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again. Error: ") + e);
     }
 }
 
@@ -162,15 +164,19 @@ module.exports = {
     },
 
     end: async () => {
-        if (!child) {
-            console.error("No scan was started");
-            Notifier.error("No scan was started");
-            return
-        }
-        document.getElementById('loadFromGameExportOutputText').value = i18next.t("Reading items, this may take up to 30 seconds...\nData will appear here after it is done.");
+        try {
+            if (!child) {
+                console.error("No scan was started");
+                Notifier.error("No scan was started");
+                return
+            }
+            document.getElementById('loadFromGameExportOutputText').value = i18next.t("Reading items, this may take up to 30 seconds...\nData will appear here after it is done.");
 
-        console.log("Stop scanning")
-        child.stdin.write('END\n');
+            console.log("Stop scanning")
+            child.stdin.write('END\n');
+        } catch (e) {
+            Dialog.htmlError(i18next.t("Unexpected error while scanning items. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again. Error: ") + e);
+        }
     }
 }
 

@@ -22,25 +22,29 @@ module.exports = {
     },
 
     saveData: async (filename) => {
-        module.exports.createFolder();
-        const getAllHeroesResponse = await Api.getAllHeroes();
-        const getAllItemsResponse = await Api.getAllItems();
+        try {
+            module.exports.createFolder();
+            const getAllHeroesResponse = await Api.getAllHeroes();
+            const getAllItemsResponse = await Api.getAllItems();
 
-        const data = {
-            heroes: getAllHeroesResponse.heroes,
-            items: getAllItemsResponse.items
+            const data = {
+                heroes: getAllHeroesResponse.heroes,
+                items: getAllItemsResponse.items
+            }
+
+            const stringified = JSON.stringify(data);
+            Files.saveFile(Files.path(filename), stringified);
+
+            return data;
+        } catch (e) {
+            Dialog.error("Failed to save file. Please try restarting the app in admin mode, and disable your virus scan or add the app as an exception.")
         }
-
-        const stringified = JSON.stringify(data);
-        Files.saveFile(Files.path(filename), stringified);
-        return data;
     },
 
     loadAutoSave: async () => {
         const autoSavePath = Settings.getDefaultPath() + '/autosave.json';
 
         console.warn("Loading autosave: " + autoSavePath);
-        console.trace("asdf")
 
         try {
             const data = await Files.readFileSync(Files.path(autoSavePath));

@@ -45,7 +45,7 @@ module.exports = {
             }
 
             Notifier.error(`Java subprocess errors: ${errors}`)
-                Dialog.htmlError(defaultJavaError);
+            Dialog.htmlError(defaultJavaError);
         });
 
         child.stderr.on('data', (data) => {
