@@ -5,33 +5,10 @@
 const Swal = require('sweetalert2');
 
 
-const e7StatToOptimizerStat = {
-    "att_rate": "AttackPercent",
-    "max_hp_rate": "HealthPercent",
-    "def_rate": "DefensePercent",
-    "att": "Attack",
-    "max_hp": "Health",
-    "def": "Defense",
-    "speed": "Speed",
-    "res": "EffectResistancePercent",
-    "cri": "CriticalHitChancePercent",
-    "cri_dmg": "CriticalHitDamagePercent",
-    "acc": "EffectivenessPercent",
-    "coop": "DualAttackChancePercent"
+var e7StatToOptimizerStat = {
 }
 
-const e7StatToDisplayStat = {
-    "att_rate": i18next.t("% Attack"),
-    "max_hp_rate": i18next.t("% Health"),
-    "def_rate": i18next.t("% Defense"),
-    "att": i18next.t(" Attack"),
-    "max_hp": i18next.t(" Health"),
-    "def": i18next.t(" Defense"),
-    "speed": i18next.t(" Speed"),
-    "res": i18next.t("% Res"),
-    "cri": i18next.t("% Crit rate"),
-    "acc": i18next.t("% Eff"),
-    "coop": i18next.t(" Dual Attack")
+var e7StatToDisplayStat = {
 }
 
 function outsideClickDisable() {
@@ -47,6 +24,38 @@ function outsideClickDisable() {
 }
 
 module.exports = {
+    initialize: () => {
+
+        e7StatToDisplayStat = {
+            "att_rate": i18next.t("% Attack"),
+            "max_hp_rate": i18next.t("% Health"),
+            "def_rate": i18next.t("% Defense"),
+            "att": i18next.t(" Attack"),
+            "max_hp": i18next.t(" Health"),
+            "def": i18next.t(" Defense"),
+            "speed": i18next.t(" Speed"),
+            "res": i18next.t("% Res"),
+            "cri": i18next.t("% Crit rate"),
+            "acc": i18next.t("% Eff"),
+            "coop": i18next.t(" Dual Attack")
+        }
+
+        e7StatToOptimizerStat = {
+            "att_rate": "AttackPercent",
+            "max_hp_rate": "HealthPercent",
+            "def_rate": "DefensePercent",
+            "att": "Attack",
+            "max_hp": "Health",
+            "def": "Defense",
+            "speed": "Speed",
+            "res": "EffectResistancePercent",
+            "cri": "CriticalHitChancePercent",
+            "cri_dmg": "CriticalHitDamagePercent",
+            "acc": "EffectivenessPercent",
+            "coop": "DualAttackChancePercent"
+        }
+    },
+
     error: (text) => {
         Swal.fire({
           icon: 'error',
@@ -100,6 +109,10 @@ module.exports = {
         var html = ``;
 
 //${level == i ? "selected" : ""}
+        if (name == "None") {
+            return;
+        }
+
         for (var i = 30; i >= 0; i--) {
             var stats = Artifact.getStats(name, i)
             html += `<option value="${i}" >${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")})</option>`
@@ -163,68 +176,68 @@ module.exports = {
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Attack")}</div>
                             <div class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || ""}">
                             </div>
                             <div class="blankFormSpace"></div>
                             <span class="valuePadding input-holder-percent">
-                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || 0}">
+                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || ""}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Defense")}</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || ""}">
                             </span>
                             <div class="blankFormSpace"></div>
                             <span class="valuePadding input-holder-percent">
-                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || 0}">
+                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || ""}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Health")}</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || ""}">
                             </span>
                             <div class="blankFormSpace"></div>
                             <span class="valuePadding input-holder-percent">
-                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || 0}">
+                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || ""}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Speed")}</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || ""}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Crit Rate")}</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || ""}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Crit Dmg")}</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || ""}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Eff")}</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || ""}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
                             <div class="editGearStatLabel" data-t>${i18next.t("Res")}</div>
                             <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
+                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || ""}">
                             </span>
                         </div>
                     </div>

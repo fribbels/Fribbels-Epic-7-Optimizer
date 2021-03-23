@@ -100,6 +100,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     await I18n.initialize();
 
     Subprocess.initialize(async () => {
+        Selectors.initialize();
+        Dialog.initialize();
         await HeroData.initialize();
         ZarrocConverter.initialize();
         OptimizerTab.initialize();
@@ -118,7 +120,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     Scanner.initialize();
     Updater.checkForUpdates();
     DarkMode.initialize();
-    Selectors.initialize();
 
     Importer.addEventListener();
 

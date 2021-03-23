@@ -402,7 +402,6 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 
 **Working on:**
  - v1.7.0
- - Make "0" bonus stats show up as blank
  - Priority score column
 
  **Medium priority:**

@@ -335,7 +335,7 @@ module.exports = {
 </div>
 <div class="itemDisplayFooter">
   <div class="itemDisplayFooterIconContainer">
-      <input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>
+      ${checkboxPrefix == "itemsGrid" ? "" : `<input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>`}
       <div class="itemDisplayFooterSet">
         <img src="${setImage}" class="itemDisplaySetImg"></img>
       </div>
