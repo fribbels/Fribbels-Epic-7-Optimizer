@@ -21,7 +21,7 @@ module.exports = {
                     shell.openExternal(this.href);
                 });
 
-                Dialog.htmlSuccess(i18next.t("New version available: <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases'>") + latestVersion + "<a>");
+                Dialog.htmlSuccessDisableOutsideClick(i18next.t("New version available: <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases'>") + latestVersion + "<a>");
             }
 
             // console.error(latestDataJson);
