@@ -496,9 +496,9 @@ We also have an ongoing translation project to translate the optimizer into vari
 To run the code locally,
 
 1. Install requirements
-  a. Install node.js: https://nodejs.org/
-  b. Install python2 and python3: https://www.python.org/downloads/
-  c. Install yarn: ``npm install --global yarn``
+  1. Install node.js: https://nodejs.org/
+  2. Install python2 and python3: https://www.python.org/downloads/
+  3. Install yarn: ``npm install --global yarn``
 2. Check out the code
 3. Run ``npm install`` in the app's root directory
 4. To run the development version locally: ``yarn dev``
