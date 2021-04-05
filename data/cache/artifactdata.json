@@ -69,6 +69,20 @@
       "health": 63
     }
   },
+  "Air-to-Surface Missile: MISHA": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0089.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0089_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0089_l.jpg"
+    },
+    "name": "Air-to-Surface Missile: MISHA",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Alabastron": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0089.png",
@@ -2153,6 +2167,20 @@
     "stats": {
       "attack": 21,
       "health": 32
+    }
+  },
+  "War Horn": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0107.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0107_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0107_l.jpg"
+    },
+    "name": "War Horn",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
     }
   },
   "Water's Origin": {
