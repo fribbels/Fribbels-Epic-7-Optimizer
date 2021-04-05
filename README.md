@@ -495,6 +495,15 @@ We also have an ongoing translation project to translate the optimizer into vari
 
 To run the code locally,
 
+1. Install requirements
+  a. Install node.js: https://nodejs.org/
+  b. Install python2 and python3: https://www.python.org/downloads/
+  c. Install yarn: ``npm install --global yarn``
+2. Check out the code
+3. Run ``npm install`` in the app's root directory
+4. To run the development version locally: ``yarn dev``
+5. To build and package the production executables: ``yarn package``
+
 ## Contact me
 
 Come join the Fribbels E7 Optimizer Discord server for questions or comments or ideas/suggestions: https://discord.gg/rDmB4Un7qg. If you ran into any issues, please check the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
