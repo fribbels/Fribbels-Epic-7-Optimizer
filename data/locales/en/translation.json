@@ -242,7 +242,7 @@
  "Crit Dmg": "Crit Dmg",
  "OK": "OK",
  "Crit rate": "Crit rate",
- "Dual Attack": "협공",
+ "Dual Attack": "Dual Attack",
  "Add any other stats not included above": "Add any other stats not included above",
  "Loading gear automatically from the game": "Loading gear automatically from the game",
  "1. Install requirements from the instructions on Github<br>        2. Leave your emulator open, and close Epic 7<br>        3. Click <b>Start scanning</b><br>        4. Open Epic 7, and load into the lobby<br>        5. Click <b>Stop scanning</b><br>        6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'<br>        7. Import the 'gear.txt' with the <b>Replace/Add/Merge</b> options below<br>        8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items<br>": "1. Install requirements from the instructions on Github<br>        2. Leave your emulator open, and close Epic 7<br>        3. Click <b>Start scanning</b><br>        4. Open Epic 7, and load into the lobby<br>        5. Click <b>Stop scanning</b><br>        6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'<br>        7. Import the 'gear.txt' with the <b>Replace/Add/Merge</b> options below<br>        8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items<br>",
