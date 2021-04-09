@@ -18762,6 +18762,100 @@
       }
     }
   },
+  "Mighty Scout": {
+    "_id": "mighty-scout",
+    "name": "Mighty Scout",
+    "moonlight": false,
+    "rarity": 2,
+    "attribute": "wind",
+    "role": "warrior",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "max_hp",
+      "grades": {
+        "C": 0.0,
+        "B": 0.0,
+        "A": 0.0,
+        "S": 0.0,
+        "SS": 0.0,
+        "SSS": 0.0
+      }
+    },
+    "devotion": {
+      "type": "speed",
+      "grades": {
+        "C": 3,
+        "B": 4,
+        "A": 6,
+        "S": 7,
+        "SS": 9,
+        "SSS": 10
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0063_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0063_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0063_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10941,
+        "atk": 604,
+        "hp": 4138,
+        "spd": 106,
+        "def": 449,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12452,
+        "atk": 778,
+        "hp": 4726,
+        "spd": 106,
+        "def": 449,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13659,
+        "atk": 753,
+        "hp": 5203,
+        "spd": 106,
+        "def": 557,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15955,
+        "atk": 970,
+        "hp": 5935,
+        "spd": 106,
+        "def": 557,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Mirsa": {
     "_id": "mirsa",
     "name": "Mirsa",
@@ -26170,6 +26264,100 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Wild Angara": {
+    "_id": "wild-angara",
+    "name": "Wild Angara",
+    "moonlight": false,
+    "rarity": 2,
+    "attribute": "fire",
+    "role": "warrior",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "max_hp",
+      "grades": {
+        "C": 0.0,
+        "B": 0.0,
+        "A": 0.0,
+        "S": 0.0,
+        "SS": 0.0,
+        "SSS": 0.0
+      }
+    },
+    "devotion": {
+      "type": "speed",
+      "grades": {
+        "C": 3,
+        "B": 4,
+        "A": 6,
+        "S": 7,
+        "SS": 9,
+        "SSS": 10
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0171_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0171_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0171_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10941,
+        "atk": 604,
+        "hp": 4138,
+        "spd": 106,
+        "def": 449,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12452,
+        "atk": 778,
+        "hp": 4726,
+        "spd": 106,
+        "def": 449,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13659,
+        "atk": 753,
+        "hp": 5203,
+        "spd": 106,
+        "def": 557,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15955,
+        "atk": 1089,
+        "hp": 5237,
+        "spd": 106,
+        "def": 525,
+        "chc": 0.23,
+        "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0.0,
         "efr": 0
       }
     }
