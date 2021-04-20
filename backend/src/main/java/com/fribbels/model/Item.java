@@ -6,14 +6,17 @@ import com.fribbels.enums.Rank;
 import com.fribbels.enums.Set;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Wither;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Wither
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Item {
@@ -27,6 +30,7 @@ public class Item {
 
     private Stat main;
     private List<Stat> substats;
+    private Mod mod;
 
     private String name;
 
@@ -36,6 +40,7 @@ public class Item {
     private String mconfidence;
 
     public String id;
+    public String modId;
     public String ingameId;
 
     private String equippedById;
@@ -43,6 +48,7 @@ public class Item {
     private String heroName;
 
     private boolean locked;
+    private boolean alreadyPredictedReforge;
     public int reforgeable;
     public int upgradeable;
     private int wss;

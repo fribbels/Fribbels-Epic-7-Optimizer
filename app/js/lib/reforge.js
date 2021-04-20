@@ -173,7 +173,12 @@ const nameBySetByGear = {
 
 // We can get reforged stats of non +15 gear however
 function getItemReforgedStats(gear) {
+
     if (module.exports.isReforgeable(gear)) {
+        if (gear.alreadyPredictedReforge) {
+            return;
+        }
+
         if (!gear.substats) {
             Notifier.error("Cannot calculate reforged stats. Find the item and fix it: " + JSON.stringify(gear));
             return;

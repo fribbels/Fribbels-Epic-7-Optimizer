@@ -49,7 +49,6 @@ module.exports = {
             redrawGrid();
             clearPreview();
             HeroesGrid.refreshBuilds();
-
         });
 
         document.getElementById('editBuildSubmit').addEventListener("click", async () => {
@@ -130,6 +129,21 @@ module.exports = {
                 module.exports.redraw();
                 Saves.autoSave();
             })
+        });
+
+        document.getElementById('addSubstatModsSubmit').addEventListener("click", async () => {
+            const row = HeroesGrid.getSelectedRow();
+            if (!row) return;
+            console.log("addSubstatModsSubmit", row);
+
+            showEditHeroInfoPopups(row.name)
+            const modStats = await Dialog.editModStatsDialog(row);
+
+            // mods
+
+            await Api.setModStats(modStats, row.id).then(module.exports.redraw);
+            Notifier.success("Saved mod stats");
+            Saves.autoSave();
         });
 
         document.getElementById('addHeroStatsSubmit').addEventListener("click", async () => {
@@ -336,7 +350,16 @@ function showEditHeroInfoPopups(name) {
 }
 
 function getSelectedGear() {
-    const row = HeroesGrid.getSelectedRow()
+    const buildRow = HeroesGrid.getSelectedBuildRow()
+    if (buildRow) {
+        return buildRow.items.map(x => {
+            return {
+                id: x
+            }
+        })
+    }
+
+    const row = HeroesGrid.getSelectedRow();
     if (!row || !row.equipment) return [];
 
     var results = [];

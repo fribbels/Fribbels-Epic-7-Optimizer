@@ -38,11 +38,10 @@ public class OptimizationRequest extends Request {
     private List<StatType> inputBootsStat;
 
     private Boolean inputPredictReforges;
+    private Boolean inputSubstatMods;
     private Boolean inputAllowLockedItems;
     private Boolean inputAllowEquippedItems;
     private Boolean inputKeepCurrentItems;
-//    public Boolean inputCanReforge;
-    //    private Boolean inputOver85;
     private Boolean inputOnlyMaxedGear;
 
     private int atk;

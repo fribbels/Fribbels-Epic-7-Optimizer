@@ -5,9 +5,11 @@ import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
 import com.fribbels.enums.Gear;
+import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
+import com.fribbels.model.Mod;
 import com.fribbels.request.BaseStatsRequest;
 import com.fribbels.request.BonusStatsRequest;
 import com.fribbels.request.BuildsRequest;
@@ -17,6 +19,7 @@ import com.fribbels.request.GetHeroByIdRequest;
 import com.fribbels.request.HeroesRequest;
 import com.fribbels.request.IdRequest;
 import com.fribbels.request.IdsRequest;
+import com.fribbels.request.ModStatsRequest;
 import com.fribbels.response.GetAllHeroesResponse;
 import com.fribbels.response.GetHeroByIdResponse;
 import com.fribbels.response.HeroStatsResponse;
@@ -27,6 +30,7 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,6 +104,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                 case "/heroes/setBonusStats":
                     final BonusStatsRequest bonusStatsRequest = parseRequest(exchange, BonusStatsRequest.class);
                     sendResponse(exchange, setBonusStats(bonusStatsRequest));
+                    return;
+                case "/heroes/setModStats":
+                    final ModStatsRequest modStatsRequest = parseRequest(exchange, ModStatsRequest.class);
+                    sendResponse(exchange, setModStats(modStatsRequest));
                     return;
                 case "/heroes/addBuild":
                     final BuildsRequest addBuildRequest = parseRequest(exchange, BuildsRequest.class);
@@ -180,6 +188,15 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         return "";
     }
 
+    public String setModStats(final ModStatsRequest request) {
+        final Hero hero = heroDb.getHeroById(request.getHeroId());
+        if (hero == null) return "";
+
+        hero.setModStats(request);
+
+        return "";
+    }
+
     public String addHeroes(final HeroesRequest request) {
         heroDb.addHeroes(request.getHeroes());
         return "";
@@ -192,7 +209,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
     public String getAllHeroes(final GetAllHeroesRequest request) {
         final List<Hero> heroes = heroDb.getAllHeroes();
-        System.out.println("Heroes" + heroes);
+//        System.out.println("Heroes" + heroes);
 
         for (final Hero hero : heroes) {
             addStatsToHero(hero, request.isUseReforgeStats());
@@ -245,8 +262,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     private void clearNullBuilds(final Hero hero, final boolean useReforgeStats) {
         final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
         final List<HeroStats> builds = hero.getBuilds();
-        List<HeroStats> changedBuilds = builds.stream()
-                .collect(Collectors.toList());
+        List<HeroStats> changedBuilds = new ArrayList<>(builds);
         for (int i = 0; i < builds.size(); i++) {
             final HeroStats build = builds.get(i);
             if (!addStatsToBuild(hero, baseStats, build, useReforgeStats)) {
@@ -261,7 +277,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         hero.setBuilds(changedBuilds);
     }
 
-    private boolean addStatsToBuild(final Hero hero, final HeroStats baseStats, final HeroStats build, final boolean useReforgeStats) {
+    public boolean addStatsToBuild(final Hero hero, final HeroStats baseStats, final HeroStats build, final boolean useReforgeStats) {
         final List<String> itemIds = build.getItems();
         final List<Item> items = itemDb.getItemsById(itemIds);
         for (final Item item : items) {
@@ -270,11 +286,37 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
             }
         }
         final int[] setsArr = StatCalculator.buildSetsArr(items.toArray(new Item[0]));
-        final List<float[]> statAccumulators = items
-                .stream()
-                .map(item -> StatCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats))
-                .collect(Collectors.toList());
-        final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
+
+        final float[][] statAccumulatorArrs = new float[6][];
+        for (int i = 0; i < 6; i++) {
+            final Item item = items.get(i);
+            final Mod mod = build.getMods() == null ? null : build.getMods().get(i);
+
+            if (mod != null) {
+                final AugmentedStats clonedReforgedStats = item.getReforgedStats().withAttack(-1);
+                clonedReforgedStats.setAttack(item.getReforgedStats().getAttack());
+                final Item clonedItem = item.withReforgedStats(clonedReforgedStats);
+
+                mod.modifyAugmentedStats(clonedReforgedStats);
+
+                final float[] acc = StatCalculator.buildStatAccumulatorArr(baseStats, clonedItem, useReforgeStats);
+                statAccumulatorArrs[i] = acc;
+            } else {
+                final float[] acc = StatCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats);
+                statAccumulatorArrs[i] = acc;
+            }
+
+        }
+
+//        final List<float[]> statAccumulators = items
+//                .stream()
+//                .map(item -> {
+//                    //                    final Item cloned = item.
+//                    build.mods
+//                    return acc;
+//                })
+//                .collect(Collectors.toList());
+//        final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
         StatCalculator.setBaseValues(baseStats, hero);
         final int upgrades = items.stream().mapToInt(Item::getUpgradeable).sum();

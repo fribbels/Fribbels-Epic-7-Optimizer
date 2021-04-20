@@ -66,6 +66,18 @@ module.exports = {
         });
     },
 
+    setModStats: async (modStats, heroId) => {
+        return post('/heroes/setModStats', {
+            discardStats: modStats.discardStats,
+            keepStats: modStats.keepStats,
+            modGrade: modStats.modGrade,
+            rollQuality: modStats.rollQuality,
+            limitRolls: modStats.limitRolls,
+
+            heroId: heroId
+        });
+    },
+
     setBaseStats: async (baseStatsByName) => {
         return post('/heroes/setBaseStats', {
             baseStatsByName: baseStatsByName
@@ -86,6 +98,10 @@ module.exports = {
         return post('/optimization/getProgress');
     },
 
+    getOptimizationInProgress: async () => {
+        return post('/optimization/inProgress');
+    },
+
     getAllItems: async () => {
         return post('/items/getAllItems');
     },
@@ -98,6 +114,12 @@ module.exports = {
 
     getItemsByIds: async (ids) => {
         return post('/items/getItemsByIds', {
+            ids: ids
+        });
+    },
+
+    getModItems: async (ids) => {
+        return post('/optimization/getModItems', {
             ids: ids
         });
     },

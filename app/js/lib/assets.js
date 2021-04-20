@@ -77,6 +77,20 @@ const assetsByStat = {
     "EffectResistancePercent": "./assets/statresdark.png",
 }
 
+const assetsByStatDt = {
+    "Attack": "./assets/statatk_dt.png",
+    "AttackPercent": "./assets/statatkpercent_dt.png",
+    "Defense": "./assets/statdef_dt.png",
+    "DefensePercent": "./assets/statdefpercent_dt.png",
+    "Health": "./assets/stathp_dt.png",
+    "HealthPercent": "./assets/stathppercent_dt.png",
+    "Speed": "./assets/statspd_dt.png",
+    "CriticalHitChancePercent": "./assets/statcr_dt.png",
+    "CriticalHitDamagePercent": "./assets/statcd_dt.png",
+    "EffectivenessPercent": "./assets/stateff_dt.png",
+    "EffectResistancePercent": "./assets/statres_dt.png",
+}
+
 module.exports = {
 
     getAssetsBySet: () => {
@@ -85,6 +99,10 @@ module.exports = {
 
     getAssetsByStat: () => {
         return assetsByStat;
+    },
+
+    getAssetByStat: (stat) => {
+        return DarkMode.isDark() ? assetsByStatDt[stat] : assetsByStat[stat];
     },
 
     getAssetsByGear: () => {

@@ -106,6 +106,24 @@ module.exports = {
         return [];
     },
 
+    getSelectedGearMods: () => {
+        const selectedRows = optimizerGrid.gridOptions.api.getSelectedRows();
+        if (selectedRows.length > 0) {
+            const row = selectedRows[0];
+            console.log("getSelectedGearModIds SELECTED ROW", row)
+
+            return [
+                row.mods[0],
+                row.mods[1],
+                row.mods[2],
+                row.mods[3],
+                row.mods[4],
+                row.mods[5]
+            ];
+        }
+        return [];
+    },
+
     getSelectedRow: () => {
         const selectedRows = optimizerGrid.gridOptions.api.getSelectedRows();
         if (selectedRows.length > 0) {
@@ -252,8 +270,8 @@ function buildGrid(localeText) {
         columnDefs: [
             {headerName: i18next.t('sets'), field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
             {headerName: i18next.t('atk'), field: 'atk', width: DIGITS_4},
-            {headerName: i18next.t('hp'), field: 'hp', width: DIGITS_5},
             {headerName: i18next.t('def'), field: 'def', width: DIGITS_4},
+            {headerName: i18next.t('hp'), field: 'hp', width: DIGITS_5},
             {headerName: i18next.t('spd'), field: 'spd', width: DIGITS_3},
             {headerName: i18next.t('cr'), field: 'cr', width: DIGITS_3},
             {headerName: i18next.t('cd'), field: 'cd', width: DIGITS_3},
@@ -295,7 +313,6 @@ function buildGrid(localeText) {
     console.log("Built optimizergrid", optimizerGrid);
 }
 
-
 function columnGradient(params) {
     try {
         if (!params || params.value == undefined) return;
@@ -327,7 +344,8 @@ function onRowSelected(event) {
     StatPreview.draw(pinnedRow, selectedRow);
 
     const gearIds = module.exports.getSelectedGearIds();
-    OptimizerTab.drawPreview(gearIds);
+    const mods = module.exports.getSelectedGearMods();
+    OptimizerTab.drawPreview(gearIds, mods);
 }
 
 function cellMouseOver(event) {

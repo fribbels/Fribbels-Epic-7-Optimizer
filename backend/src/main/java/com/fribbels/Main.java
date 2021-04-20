@@ -42,10 +42,12 @@ public class Main {
             return;
         }
 
+        final HeroesRequestHandler heroesRequestHandler = new HeroesRequestHandler(heroDb, baseStatsDb, itemDb);
+
         server.createContext("/system", new SystemRequestHandler());
-        server.createContext("/items", new ItemsRequestHandler(itemDb, heroDb));
+        server.createContext("/items", new ItemsRequestHandler(itemDb, heroDb, baseStatsDb, heroesRequestHandler));
         server.createContext("/optimization", new OptimizationRequestHandler(optimizationDb, baseStatsDb, heroDb));
-        server.createContext("/heroes", new HeroesRequestHandler(heroDb, baseStatsDb, itemDb));
+        server.createContext("/heroes", heroesRequestHandler);
         server.createContext("/ocr", new OcrRequestHandler());
 
         System.out.println("START BACKEND");

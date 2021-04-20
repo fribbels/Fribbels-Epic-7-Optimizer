@@ -1,5 +1,6 @@
 package com.fribbels.handler;
 
+import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
 import com.fribbels.enums.Gear;
@@ -24,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +34,8 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
 
     private final ItemDb itemDb;
     private final HeroDb heroDb;
+    private final BaseStatsDb baseStatsDb;
+    private final HeroesRequestHandler heroesRequestHandler;
 
     private static final Gson GSON = new Gson();
 
@@ -219,6 +223,15 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 }
             }
             builds.removeAll(buildsToRemove);
+
+            for (final HeroStats build : hero.getBuilds()) {
+                final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
+                if (build.getMods() != null && build.getMods().stream().anyMatch(Objects::nonNull)) {
+                    heroesRequestHandler.addStatsToBuild(hero, baseStats, build, true);
+                } else {
+                    heroesRequestHandler.addStatsToBuild(hero, baseStats, build, false);
+                }
+            }
         }
 
         for (final Item item : newItems) {

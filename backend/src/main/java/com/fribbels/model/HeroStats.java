@@ -9,6 +9,7 @@ import lombok.ToString;
 
 import java.security.MessageDigest;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Getter
@@ -52,6 +53,8 @@ public class HeroStats {
     public String name;
     public String property;
     public List<String> items;
+    public List<String> modIds;
+    public List<Mod> mods;
 
     public String getBuildHash() {
         if (items == null || items.size() != 6) {
@@ -60,12 +63,21 @@ public class HeroStats {
 
         try {
             final MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            final String combinedItems = String.join("", items);
+            final String combinedItems = String.join("", items) + (mods == null ? "" : mods.stream()
+                                                                      .filter(Objects::nonNull)
+                                                                      .map(Mod::toString)
+                                                                      .collect(Collectors.joining("")));
             messageDigest.update(combinedItems.getBytes());
             final String stringHash = new String(messageDigest.digest());
 
+//            System.out.println("!!!!!!!!!!!!!!!!!");
+//            System.out.println(mods.stream()
+//                    .map(x -> x == null ? "{}" : x.toString())
+//                    .collect(Collectors.joining("")));
+
             return stringHash;
         } catch (final Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

@@ -98,7 +98,10 @@ public class HeroDb {
                  .collect(Collectors.toSet())
                  .contains(build.getBuildHash())) {
             hero.getBuilds().add(build);
+            System.out.println("Found new build. Adding to hero: " + hero);
         }
+
+        System.out.println("Done adding");
     }
 }
 

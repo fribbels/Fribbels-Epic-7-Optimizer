@@ -130,6 +130,7 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputMaxScoreLimit").val(inputDisplayNumber(request.inputMaxScoreLimit));
 
     $("#inputPredictReforges").prop('checked', request.inputPredictReforges);
+    $("#inputSubstatMods").prop('checked', request.inputSubstatMods);
     $("#inputAllowLockedItems").prop('checked', request.inputAllowLockedItems);
     $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems);
     $("#inputKeepCurrentItems").prop('checked', request.inputKeepCurrentItems);
@@ -309,7 +310,13 @@ module.exports = {
         buildTopSlider('#filterSlider')
     },
 
-    drawPreview: (gearIds) => {
+    drawPreview: (gearIds, mods) => {
+        console.trace();
+        console.warn("Draw preview", gearIds, mods)
+
+        const moddedGear = ModificationFilter.getModsByIds(gearIds, mods);
+        console.warn("Modded gear results", moddedGear)
+
         Api.getItemsByIds(gearIds).then(async (response) => {
             const selectedGear = response.items;
 
@@ -319,6 +326,30 @@ module.exports = {
             const baseStats = getHeroByIdResponse.baseStats;
 
             if (!hero || !baseStats) return;
+
+            for (var i = 0; i < 6; i++) {
+                if (moddedGear[i]) {
+                    var equippedById = selectedGear[i].equippedById;
+                    var equippedByName = selectedGear[i].equippedByName;
+
+                    selectedGear[i] = moddedGear[i];
+                    selectedGear[i].equippedById = equippedById;
+                    selectedGear[i].equippedByName = equippedByName;
+                    continue;
+                }
+
+                console.log("?????", selectedGear[i], moddedGear[i])
+                selectedGear[i].substats = moddedGear[i].substats;
+                for (var j = 0; j < selectedGear[i].substats.length; j++) {
+                    selectedGear[i].substats[j].modified = moddedGear[i].substats[j].modified;
+                    selectedGear[i].substats[j].value = moddedGear[i].substats[j].value;
+                    selectedGear[i].substats[j].reforgedValue = moddedGear[i].substats[j].reforgedValue;
+                    selectedGear[i].substats[j].reforged = true;
+                }
+                // selectedGear[i].augmentedStats = moddedGear[i].augmentedStats;
+                // selectedGear[i].reforgedStats = moddedGear[i].reforgedStats;
+                console.log("??????????", selectedGear[i], moddedGear[i])
+            }
 
             document.getElementById('optimizer-heroes-equipped-weapon').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[0], "optimizerGrid", baseStats);
             document.getElementById('optimizer-heroes-equipped-helmet').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[1], "optimizerGrid", baseStats);
@@ -417,6 +448,7 @@ function clearStats() {
 // }
 function clearOptions() {
     $("#inputPredictReforges").prop('checked', true);
+    $("#inputSubstatMods").prop('checked', true);
     $("#inputAllowLockedItems").prop('checked', false);
     $("#inputAllowEquippedItems").prop('checked', false);
     $("#inputKeepCurrentItems").prop('checked', false);
@@ -588,6 +620,10 @@ async function addBuild() {
 
     console.log("ADD BUILD", row)
 
+    if (row.mods.filter(x => x).length > 0) {
+        row.name = "MODIFIED"
+    }
+
     await Api.addBuild(heroId, row);
     await Api.editResultRows(parseInt(rowId), "star");
 
@@ -636,6 +672,11 @@ async function equipSelectedGear() {
     const row = OptimizerGrid.getSelectedRow()
     const node = OptimizerGrid.getSelectedNode()
     const rowId = row.id;
+
+
+    if (row.mods.filter(x => x).length > 0) {
+        row.name = "MOD: " + (!hero.modGrade ? "" : (hero.modGrade == "greater" ? "Greater" : "Lesser")) + " " + (hero.rollQuality || "") + "%";
+    }
 
     await Api.addBuild(heroId, row);
     await Api.editResultRows(parseInt(rowId), "star");
@@ -687,7 +728,7 @@ async function unlockSelectedGear() {
     Saves.autoSave();
 }
 
-async function applyItemFilters(params, heroResponse, allItemsResponse) {
+async function applyItemFilters(params, heroResponse, allItemsResponse, submit) {
     const gearMainFilters = Selectors.getGearMainFilters();
     const getAllItemsResponse = allItemsResponse;
     // const heroResponse = await Api.getHeroById(heroId);
@@ -706,10 +747,6 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
     if (params.excludeFilter.length > 0) {
         items = items.filter(x => !params.excludeFilter.includes(x.equippedById) || x.equippedById == heroId);
     }
-
-    // if (params.inputOnlyPlus15Gear) {
-    //     items = items.filter(x => x.enhance == 15);
-    // }
 
     if (params.inputOnlyMaxedGear) {
         items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
@@ -763,6 +800,7 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
 
     if (params.inputPredictReforges) {
         console.log("Predict reforges enabled")
+        ItemAugmenter.augment(items);
         items.forEach(x => {
             if (Reforge.isReforgeableNow(x)) {
                 x.substats.forEach(substat => {
@@ -774,8 +812,9 @@ async function applyItemFilters(params, heroResponse, allItemsResponse) {
                 x.main.value = x.main.reforgedValue;
             }
         })
-        ItemAugmenter.augment(items);
     }
+
+    items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit);
 
     // items = ForceFilter.applyForceFilters(params, items)
     items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems)
@@ -869,6 +908,13 @@ async function submitOptimizationFilterRequest() {
 
 async function submitOptimizationRequest() {
     recalculateFilters();
+
+    const inProgressResponse = await Api.getOptimizationInProgress();
+    if (inProgressResponse.inProgress) {
+        Notifier.warn("Optimization already in progress. Please cancel before starting a new search.")
+        return;
+    }
+
     // console.log(ItemSerializer.serializeToArr(getAllItemsResponse.items));
     const params = getOptimizationRequestParams(true);
     const heroId = document.getElementById('inputHeroAdd').value;
@@ -878,7 +924,7 @@ async function submitOptimizationRequest() {
     const hero = heroResponse.hero;
     const baseStats = heroResponse.baseStats;
 
-    var filterResult = await applyItemFilters(params, heroResponse, allItemsResponse);
+    var filterResult = await applyItemFilters(params, heroResponse, allItemsResponse, true);
     var items = filterResult.items;
 
     console.log("OPTIMIZING HERO", hero);
@@ -944,7 +990,8 @@ function updateProgress() {
 
 async function drawPreview() {
     const selectedGear = OptimizerGrid.getSelectedGearIds();
-    module.exports.drawPreview(selectedGear);
+    const selectedMods = OptimizerGrid.getSelectedGearMods();
+    module.exports.drawPreview(selectedGear, selectedMods);
 }
 
 const fourPieceSets = [
@@ -978,6 +1025,7 @@ function getOptimizationRequestParams(showError) {
     console.log("SETFORMAT", setFormat);
 
     request.inputPredictReforges   = readCheckbox('inputPredictReforges');
+    request.inputSubstatMods   = readCheckbox('inputSubstatMods');
     request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems');
     request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems');
     request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems');

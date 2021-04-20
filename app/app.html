@@ -200,6 +200,11 @@ window.jQuery = $;
               </div>
 
               <div>
+                <input type="checkbox" id="inputSubstatMods" class="optimizer-checkbox">
+                <label for="inputSubstatMods" data-t>Use substat mods</label>
+              </div>
+
+              <div>
                 <input type="checkbox" id="inputOnlyMaxedGear" class="optimizer-checkbox">
                 <label for="inputOnlyMaxedGear" data-t>Only maxed gear</label>
               </div>
@@ -238,13 +243,13 @@ window.jQuery = $;
               <div class="inputStatLabel" data-t>Atk</div>
               <input type="number" id="inputMaxAtkLimit" class="optimizer-number-input stat-number-input"><br>
 
-              <input type="number" id="inputMinHpLimit" class="optimizer-number-input stat-number-input">
-              <div class="inputStatLabel" data-t>Hp</div>
-              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input stat-number-input"><br>
-
               <input type="number" id="inputMinDefLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel" data-t>Def</div>
               <input type="number" id="inputMaxDefLimit" class="optimizer-number-input stat-number-input"><br>
+
+              <input type="number" id="inputMinHpLimit" class="optimizer-number-input stat-number-input">
+              <div class="inputStatLabel" data-t>Hp</div>
+              <input type="number" id="inputMaxHpLimit" class="optimizer-number-input stat-number-input"><br>
 
               <input type="number" id="inputMinSpdLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel" data-t>Spd</div>
@@ -332,20 +337,17 @@ window.jQuery = $;
                 <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
-
-              <div class="sliderRow">
-                <div class="sliderLabel" data-t>Hp</div>
-                <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
-                <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
-              </div>
-
-
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Def</div>
                 <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
+              <div class="sliderRow">
+                <div class="sliderLabel" data-t>Hp</div>
+                <input class="sliderInput" id="hpSliderInput" type="number" value="0" readonly>
+                <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
+              </div>
 
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Spd</div>
@@ -1375,9 +1377,6 @@ window.jQuery = $;
 
 
 
-
-        <!-- style="height: 370px" -->
-        <!-- style="height: 165px"  -->
         <div class="heroesTableContainer">
           <div id="heroes-table" class="ag-theme-balham"></div>
         </div>
@@ -1386,16 +1385,13 @@ window.jQuery = $;
         </div>
         <div class="heroesTabButtonRow">
           <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit" data-t>
-          <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit" data-t>
-  <!--
-        </div>
-        <div class="heroesTabButtonRow"> -->
+          <input type="submit" value="Add Substat Mods" class="gearPreviewButton" id="addSubstatModsSubmit" data-t>
 
           <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit" data-t>
           <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit" data-t>
           <input type="submit" value="Save As Build" class="gearPreviewButton" id="saveAsBuildSubmit" data-t>
           <input type="submit" value="Remove Build" class="gearPreviewButton" id="removeBuildSubmit" data-t>
-
+          <input type="submit" value="Remove Hero" class="gearPreviewButton" id="removeHeroesSubmit" data-t>
         </div>
 
         <div id="heroes-equipped-section">

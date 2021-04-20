@@ -59,6 +59,8 @@ public class RequestHandler {
         outputStream.write(response.getBytes());
         outputStream.flush();
         outputStream.close();
+
+        System.out.println("Finished " + exchange.getRequestURI().getPath());
     }
 
     protected <T extends Request> T parseRequest(final HttpExchange exchange, final Class<T> type) throws IOException {

@@ -52,6 +52,7 @@ global.HeroesGrid = require('./grids/heroesGrid');
 global.OptimizerGrid = require('./grids/optimizerGrid');
 global.ItemsGrid = require('./grids/itemsGrid');
 
+global.ModificationFilter = require('./modificationFilter');
 global.Subprocess = require('./subprocess');
 global.Selectors = require('./selectors');
 global.Settings = require('./settings');

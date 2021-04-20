@@ -621,8 +621,19 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 5px;
 }
 
+.editGearFormHalf {
+  width: 50%;
+}
+.editGearFormVertical {
+  border-left: 1px solid #e8e8e8;
+  height: 275px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
 .editGearStatLabel {
-  width: 100px;
+  width: 110px;
   text-align: left;
   margin-top: auto;
   margin-bottom: auto;
@@ -1480,4 +1491,40 @@ input:checked + .darkSlider:before {
 }
 .swal2-success-fix {
   display: none;
+}
+
+.swal2-actions {
+  z-index: 0 !important;
+}
+.groupContainer {
+  display: flex;
+  flex-direction: row;
+}
+.groupColumn {
+  width: 160px;
+  margin-right: 25px;
+}
+.list-group-item {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  background-color: var(--input-color);
+  color: var(--font-color);
+  border-radius: 1rem;
+  border-radius: 5px;
+  margin-top: 5px;
+  height: 30px;
+  text-align: left;
+  padding-left: 8px;
+  line-height: 30px;
+}
+.dragOrderList {
+  font-size: 14px;
+  border: 1px solid;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  background: #7d7d7d;
+  min-height: 385px;
 }

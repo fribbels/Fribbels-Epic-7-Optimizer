@@ -1,7 +1,7 @@
 const stringSimilarity = require('string-similarity');
 
 
-function statToText(stat, baseStats, item, modifyStat) {
+function statToText(stat, baseStats, item) {
     if (!stat) {
         return {
             type: '',
@@ -12,13 +12,13 @@ function statToText(stat, baseStats, item, modifyStat) {
     const unpercentedStat = shortenStats(stat.type);
     var value;
 
-    if (Reforge.isReforgeable(item)) {
+    if (item.alreadyPredictedReforge || !Reforge.isReforgeable(item)) {
+        value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats, false);
+    } else {
         const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
         const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : getPercentageEquivalent(stat, baseStats, true);
 
         value = unreforgedValue + " ➤ " + reforgedValue
-    } else {
-        value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats, false);
     }
 
     // Keep the modified text the same for basic case
@@ -241,7 +241,7 @@ module.exports = {
         }
     },
 
-    buildItemPanel(item, checkboxPrefix, baseStats, modifyStat) {
+    buildItemPanel(item, checkboxPrefix, baseStats) {
         if (!item) {
             return `
 
@@ -262,13 +262,19 @@ module.exports = {
             `
         }
 
+        if (Reforge.isReforgeable(item)) {
+            console.warn("^^^^^^^^^^^", JSON.parse(JSON.stringify(item)));
+        }
         ItemAugmenter.augment([item])
+        if (Reforge.isReforgeable(item)) {
+            console.warn("!!!!!!!!!!!!!!!!!!", item);
+        }
 
         const main = statToText(item.main, baseStats, item);
-        const substat0 = statToText(item.substats[0], baseStats, item, modifyStat);
-        const substat1 = statToText(item.substats[1], baseStats, item, modifyStat);
-        const substat2 = statToText(item.substats[2], baseStats, item, modifyStat);
-        const substat3 = statToText(item.substats[3], baseStats, item, modifyStat);
+        const substat0 = statToText(item.substats[0], baseStats, item);
+        const substat1 = statToText(item.substats[1], baseStats, item);
+        const substat2 = statToText(item.substats[2], baseStats, item);
+        const substat3 = statToText(item.substats[3], baseStats, item);
 
         const score = wssToText(item);
 
@@ -430,6 +436,9 @@ function generateSubstatConversionImage(item, index) {
     const substat = item.substats[index];
     // if (substat.isConverted) {
     if (substat && substat.modified) {
+        if (substat.originalType) {
+            return `<img src="${Assets.getAssetByStat(substat.originalType)}" class="substatConvertedImage"></img>`;
+        }
         return `<img src="${Assets.getCycle()}" class="substatConvertedImage"></img>`;
     } else {
         // return `<img src="${Assets.getCycle()}" class="substatConvertedImage" style='opacity:0.25'></img> `;

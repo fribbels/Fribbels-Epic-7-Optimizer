@@ -222,8 +222,8 @@ function buildGrid(localeText) {
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
             {headerName: i18next.t('atk'), field: 'atk'},
-            {headerName: i18next.t('hp'), field: 'hp'},
             {headerName: i18next.t('def'), field: 'def'},
+            {headerName: i18next.t('hp'), field: 'hp'},
             {headerName: i18next.t('spd'), field: 'spd'},
             {headerName: i18next.t('cr'), field: 'cr'},
             {headerName: i18next.t('cd'), field: 'cd'},
@@ -295,7 +295,7 @@ function buildGrid(localeText) {
         cacheBlockSize: 1000,
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
-        navigateToNextCell: navigateToNextCell.bind(this),
+        // navigateToNextCell: navigateToNextCell.bind(this),
     };
 
     const gridDiv = document.getElementById('heroes-table');
@@ -506,9 +506,27 @@ async function onBuildRowSelected(event) {
 
         const itemsResponse = await Api.getItemsByIds(itemIds);
         const items = itemsResponse.items;
+        const mods = event.data.mods || [];
 
         for (var i = 0; i < 6; i++) {
             const item = items[i];
+            const mod = mods[i];
+
+            console.warn("modding", items, mods, event.data);
+
+            if (mod) {
+                for (var j = 0; j < item.substats.length; j++) {
+                    const substat = item.substats[j];
+                    if (j == mod.index) {
+                        substat.type = mod.type;
+                        substat.value = mod.value;
+                        substat.originalType = mod.originalType;
+                        substat.originalValue = mod.originalValue;
+                        substat.modified = true;
+                    }
+                }
+            }
+
             // const itemId = itemIds[i];
             const displayId = Constants.gearDisplayIdByIndex[i];
             const html = HtmlGenerator.buildItemPanel(item, "heroesGrid", baseStats)

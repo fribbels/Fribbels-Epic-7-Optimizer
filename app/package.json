@@ -36,6 +36,7 @@
     "node-fetch": "^2.6.1",
     "pretty-checkbox": "^3.0.3",
     "rangeslider-js": "^3.2.5",
+    "sortablejs": "latest",
     "string-similarity": "latest",
     "sweetalert2": "^10.10.4",
     "tinygradient": "^1.1.2",

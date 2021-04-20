@@ -3,12 +3,17 @@
 */
 
 const Swal = require('sweetalert2');
+const Sortable = require('sortablejs');
+
 
 
 var e7StatToOptimizerStat = {
 }
 
 var e7StatToDisplayStat = {
+}
+
+var optimizerStatToDisplayStat = {
 }
 
 function outsideClickDisable() {
@@ -53,6 +58,21 @@ module.exports = {
             "cri_dmg": "CriticalHitDamagePercent",
             "acc": "EffectivenessPercent",
             "coop": "DualAttackChancePercent"
+        }
+
+        optimizerStatToDisplayStat = {
+            "AttackPercent": "Attack %",
+            "HealthPercent": "Health %",
+            "DefensePercent": "Defense %",
+            "Attack": "Attack",
+            "Health": "Health",
+            "Defense": "Defense",
+            "Speed": "Speed",
+            "EffectResistancePercent": "Effect Resistance",
+            "CriticalHitChancePercent": "Crit Chance",
+            "CriticalHitDamagePercent": "Crit Damage",
+            "EffectivenessPercent": "Effectiveness",
+            "DualAttackChancePercent": "DualAttackChancePercent"
         }
     },
 
@@ -142,113 +162,121 @@ module.exports = {
 
             const { value: formValues } = await Swal.fire({
                 title: '',
+                width: 900,
                 html: `
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Artifact")}</div>
-                            <select id="editArtifact" class="editGearStatSelect" onchange="Dialog.changeArtifact()">
-                                ${getArtifactHtml(hero)}
-                            </select>
-                        </div>
+                            <div class="editGearFormHalf">
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Level")}</div>
-                            <select id="editArtifactLevel" class="editGearStatSelect">
-                                ${getArtifactEnhanceHtml(hero)}
-                            </select>
-                        </div>
+                                <p style="color: var(--font-color)" data-t>${i18next.t("Add Artifact/EE/Imprint bonus stats")}</p>
 
-                        <div class="horizontalLineWithMoreSpace"></div>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Artifact")}</div>
+                                    <select id="editArtifact" class="editGearStatSelect" onchange="Dialog.changeArtifact()">
+                                        ${getArtifactHtml(hero)}
+                                    </select>
+                                </div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Imprint")}</div>
-                            ${getImprintHtml(hero, heroInfo)}
-                        </div>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Level")}</div>
+                                    <select id="editArtifactLevel" class="editGearStatSelect">
+                                        ${getArtifactEnhanceHtml(hero)}
+                                    </select>
+                                </div>
 
-                        <div class="horizontalLineWithMoreSpace"></div>
+                                <div class="horizontalLineWithMoreSpace"></div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("EE")}</div>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Imprint")}</div>
+                                    ${getImprintHtml(hero, heroInfo)}
+                                </div>
 
-                            <select id="editEe" class="editGearStatSelect">
-                                ${getEeEnhanceHtml(hero, ee)}
-                            </select>
-                        </div>
+                                <div class="horizontalLineWithMoreSpace"></div>
 
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("EE")}</div>
 
-                        <div class="horizontalLineWithMoreSpace"></div>
-
-                        <p style="color: var(--font-color)" data-t>${i18next.t("Add any other stats not included above")}</p>
-                        <br>
-
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Attack")}</div>
-                            <div class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || ""}">
+                                    <select id="editEe" class="editGearStatSelect">
+                                        ${getEeEnhanceHtml(hero, ee)}
+                                    </select>
+                                </div>
                             </div>
-                            <div class="blankFormSpace"></div>
-                            <span class="valuePadding input-holder-percent">
-                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || ""}">
-                            </span>
-                        </div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Defense")}</div>
-                            <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || ""}">
-                            </span>
-                            <div class="blankFormSpace"></div>
-                            <span class="valuePadding input-holder-percent">
-                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || ""}">
-                            </span>
-                        </div>
+                            <div class="editGearFormVertical"></div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Health")}</div>
-                            <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || ""}">
-                            </span>
-                            <div class="blankFormSpace"></div>
-                            <span class="valuePadding input-holder-percent">
-                                <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || ""}">
-                            </span>
-                        </div>
+                            <div class="editGearFormHalf">
+                                <p style="color: var(--font-color)" data-t>${i18next.t("Add any other stats")}</p>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Speed")}</div>
-                            <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || ""}">
-                            </span>
-                        </div>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Attack")}</div>
+                                    <div class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
+                                    </div>
+                                    <div class="blankFormSpace"></div>
+                                    <span class="valuePadding input-holder-percent">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || 0}">
+                                    </span>
+                                </div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Crit Rate")}</div>
-                            <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || ""}">
-                            </span>
-                        </div>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Defense")}</div>
+                                    <span class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
+                                    </span>
+                                    <div class="blankFormSpace"></div>
+                                    <span class="valuePadding input-holder-percent">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || 0}">
+                                    </span>
+                                </div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Crit Dmg")}</div>
-                            <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || ""}">
-                            </span>
-                        </div>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Health")}</div>
+                                    <span class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
+                                    </span>
+                                    <div class="blankFormSpace"></div>
+                                    <span class="valuePadding input-holder-percent">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || 0}">
+                                    </span>
+                                </div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Eff")}</div>
-                            <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || ""}">
-                            </span>
-                        </div>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Speed")}</div>
+                                    <span class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || 0}">
+                                    </span>
+                                </div>
 
-                        <div class="editGearFormRow">
-                            <div class="editGearStatLabel" data-t>${i18next.t("Res")}</div>
-                            <span class="valuePadding input-holder">
-                                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || ""}">
-                            </span>
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Crit Rate")}</div>
+                                    <span class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
+                                    </span>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Crit Dmg")}</div>
+                                    <span class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
+                                    </span>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Eff")}</div>
+                                    <span class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
+                                    </span>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Res")}</div>
+                                    <span class="valuePadding input-holder">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `,
@@ -258,6 +286,10 @@ module.exports = {
                         maxHeight: 400,
                         // customFilter: Utils.customFilter,
                         filterAcceptOnEnter: true
+                    }
+                    const statSelectOptions = {
+                        maxHeight: 500,
+                        // customFilter: Utils.customFilter,
                     }
 
                     $('#editArtifact').multipleSelect(options)
@@ -303,6 +335,130 @@ module.exports = {
                         imprintNumber: imprintNumber,
                         eeNumber: eeNumber,
                         ee: ee,
+                        heroInfo: heroInfo
+                    }
+
+                    resolve(editedHero);
+                }
+            });
+        });
+    },
+
+    editModStatsDialog: async (hero) => {
+        return new Promise(async (resolve, reject) => {
+            const getAllHeroesResponse = await Api.getAllHeroes();
+            const heroData = HeroData.getAllHeroData();
+            const heroes = getAllHeroesResponse.heroes;
+
+            const heroInfo = heroData[hero.name];
+            const ee = heroInfo.ex_equip[0];
+
+            const { value: formValues } = await Swal.fire({
+                title: '',
+                width: 900,
+                html: `
+                    <div class="editGearForm">
+                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
+
+                        <p style="color: var(--font-color)" data-t>${i18next.t("Substat modification priority")}</p>
+
+                        <div class="editGearFormRow">
+
+                            <div class="editGearFormHalf">
+                                <p style="color: var(--font-color)" data-t>${i18next.t("Options")}</p>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Limit Rolls")}</div>
+                                    <select id="limitRolls" class="gearPreviewButton">
+                                        <option value=1 ${hero.limitRolls == 1 ? "selected" : ""}>1</option>
+                                        <option value=2 ${(hero.limitRolls == 2 || !hero.limitRolls) ? "selected" : ""}>2</option>
+                                        <option value=3 ${hero.limitRolls == 3 ? "selected" : ""}>3</option>
+                                        <option value=4 ${hero.limitRolls == 4 ? "selected" : ""}>4</option>
+                                        <option value=5 ${hero.limitRolls == 5 ? "selected" : ""}>5</option>
+                                        <option value=6 ${hero.limitRolls == 6 ? "selected" : ""}>6</option>
+                                    </select>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Mod grade")}</div>
+                                    <select id="modGrade" class="gearPreviewButton">
+                                        <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>Lesser</option>
+                                        <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>Greater</option>
+                                    </select>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Roll Quality")}</div>
+                                    <select id="rollQuality" class="gearPreviewButton">
+                                        <option value=0 ${hero.rollQuality == 0 ? "selected" : ""}>Min</option>
+                                        <option value=10 ${hero.rollQuality == 10 ? "selected" : ""}>10%</option>
+                                        <option value=20 ${hero.rollQuality == 20 ? "selected" : ""}>20%</option>
+                                        <option value=30 ${hero.rollQuality == 30 ? "selected" : ""}>30%</option>
+                                        <option value=40 ${hero.rollQuality == 40 ? "selected" : ""}>40%</option>
+                                        <option value=50 ${(hero.rollQuality == 50 || hero.rollQuality == undefined) ? "selected" : ""}>50%</option>
+                                        <option value=60 ${hero.rollQuality == 60 ? "selected" : ""}>60%</option>
+                                        <option value=70 ${hero.rollQuality == 70 ? "selected" : ""}>70%</option>
+                                        <option value=80 ${hero.rollQuality == 80 ? "selected" : ""}>80%</option>
+                                        <option value=90 ${hero.rollQuality == 90 ? "selected" : ""}>90%</option>
+                                        <option value=100 ${hero.rollQuality == 100 ? "selected" : ""}>Max</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="editGearFormVertical"></div>
+
+                            <div class="groupContainer editGearFormHalf">
+                                <div class="groupColumn">
+                                    <p style="color: var(--font-color)" data-t>${i18next.t("Keep")}</p>
+                                    <div id="keepGroup" class="dragOrderList">
+                                        ${generateStatList(hero, true)}
+                                    </div>
+                                </div>
+                                <div class="groupColumn">
+                                    <p style="color: var(--font-color)" data-t>${i18next.t("Discard")}</p>
+                                    <div id="modifyGroup" class="dragOrderList">
+                                        ${generateStatList(hero, false)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                didOpen: async () => {
+                    const options = {
+                        filter: true,
+                        maxHeight: 400,
+                        // customFilter: Utils.customFilter,
+                        filterAcceptOnEnter: true
+                    }
+                    const statSelectOptions = {
+                        maxHeight: 500,
+                        // customFilter: Utils.customFilter,
+                    }
+
+                    global.keepGroup = Sortable.create(document.getElementById('keepGroup'), {
+                        group: "nested",
+                        animation: 100,
+                        fallbackOnBody: true,
+                    });
+                    global.modifyGroup = Sortable.create(document.getElementById('modifyGroup'), {
+                        group: "nested",
+                        animation: 100,
+                        fallbackOnBody: true,
+                    });
+                },
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: i18next.t("OK"),
+                cancelButtonText: i18next.t("Cancel"),
+                preConfirm: async () => {
+                    const editedHero = {
+                        discardStats: modifyGroup.toArray(),
+                        keepStats: keepGroup.toArray(),
+
+                        modGrade: document.getElementById('modGrade').value,
+                        rollQuality: parseFloat(document.getElementById('rollQuality').value),
+                        limitRolls: parseInt(document.getElementById('limitRolls').value),
                         heroInfo: heroInfo
                     }
 
@@ -765,4 +921,36 @@ function getGearMaterialOptionsHtml(item) {
 <option value="Hunt" ${material == "Hunt" ? "selected" : ""}>${i18next.t("Hunt")}</option>
 <option value="Conversion" ${material == "Conversion" ? "selected" : ""}>${i18next.t("Conversion")}</option>
 `
+}
+
+function generateStatList(hero, keep) {
+    var list;
+    if (!keep) {
+        const stats = [
+            "Attack",
+            "Health",
+            "Defense",
+            "CriticalHitDamagePercent",
+            "CriticalHitChancePercent",
+            "HealthPercent",
+            "DefensePercent",
+            "AttackPercent",
+            "EffectivenessPercent",
+            "EffectResistancePercent",
+            "Speed"
+        ]
+
+        const keepStats = hero.keepStats || [];
+        const discardDiff = stats.filter(x => !keepStats.includes(x));
+        list = discardDiff;
+    } else {
+        list = hero.keepStats || []
+    }
+
+    var result = "";
+    for (var i = 0; i < list.length; i++) {
+        const stat = list[i];
+        result += `<div class="list-group-item" data-id="${stat}">${optimizerStatToDisplayStat[stat]}</div>`
+    }
+    return result;
 }
