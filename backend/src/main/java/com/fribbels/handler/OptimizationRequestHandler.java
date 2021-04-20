@@ -186,6 +186,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.getDmgh() < request.getInputMinDmgHLimit() || heroStats.getDmgh() > request.getInputMaxDmgHLimit()
                 ||  heroStats.getScore() < request.getInputMinScoreLimit() || heroStats.getScore() > request.getInputMaxScoreLimit()
                 ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
+                ||  heroStats.getConversions() < request.getInputMinConversionsLimit() || heroStats.getConversions() > request.getInputMaxConversionsLimit()
         ) {
             return false;
         }
@@ -356,7 +357,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
                                         final int[] collectedSets = StatCalculator.buildSetsArr(collectedItems);
                                         final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
-                                        final HeroStats result = StatCalculator.addAccumulatorArrsToHero(base, new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr}, collectedSets, request.hero, reforges);
+                                        final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                        final HeroStats result = StatCalculator.addAccumulatorArrsToHero(base, new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr}, collectedSets, request.hero, reforges, conversions);
                                         searchedCounter.getAndIncrement();
                                         //                                        final boolean passesFilter = true;
 
@@ -483,6 +485,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.dmgh < request.inputMinDmgHLimit || heroStats.dmgh > request.inputMaxDmgHLimit
                 ||  heroStats.score < request.inputMinScoreLimit || heroStats.score > request.inputMaxScoreLimit
                 ||  heroStats.upgrades < request.inputMinUpgradesLimit || heroStats.upgrades > request.inputMaxUpgradesLimit
+                ||  heroStats.conversions < request.inputMinConversionsLimit || heroStats.conversions > request.inputMaxConversionsLimit
         ) {
             return false;
         }

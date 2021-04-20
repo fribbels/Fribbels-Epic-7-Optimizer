@@ -18,7 +18,7 @@ var moddedItems = {}
 
 module.exports = {
     getModsByIds: (gearIds, mods) => {
-        console.warn(moddedItems)
+        console.log(moddedItems)
 
         const result = []
         for (var i = 0; i < mods.length; i++) {
@@ -60,11 +60,6 @@ module.exports = {
                 Dialog.error("Substat mods are enabled, but the hero's 'Keep' substat list is empty. Please use 'Add Substat Mods' button on the Heroes tab to adjust your mod preferences");
                 throw 'Substat mods must be set before optimizing';
             }
-            // for (var item of items) {
-            //     item.modId = item.id;
-            //     moddedItems[item.id] = item;
-            // }
-            // return items;
         }
 
         if (!enableMods || !hero.limitRolls || !hero.rollQuality) {
@@ -100,13 +95,7 @@ module.exports = {
 
         const newItems = []
 
-        // console.log("MOD1", items)
         for (item of items) {
-
-                        // originalType: substatCopy.originalType,
-                        // originalValue: substatCopy.originalValue,
-                        // type: substatCopy.type,
-                        // value: substatCopy.value,
             item.modId = item.id;
             moddedItems[item.id] = item;
             newItems.push(item);
@@ -115,23 +104,11 @@ module.exports = {
             var elegibleSubstats = item.substats.filter(x => (x.rolls <= limitRolls && discardList.includes(x.type))
                                                              || x.modified);
 
-            // console.log("E", elegibleSubstats)
             if (item.enhance != 15) {
                 continue;
             }
 
             const tempNewItems = []
-            // var substatModified = false;
-            // for (var i = 0; i < item.substats.length; i++) {
-            //     const substat = item.substats[i];
-            //     if (substat.modified && !keepList.includes()) {
-            //         substatModified = true;
-            //     }
-            // }
-
-            // if (substatModified) {
-            //     continue;
-            // }
 
             const alreadyModifiedStatTypeArr = item.substats.filter(x => x.modified).map(x => x.type)
 
@@ -179,19 +156,8 @@ module.exports = {
                     }
 
                     if (!existingSubstats.includes(replacementStat) || substat.type == replacementStat) {
-                        // if (substat.modified && existingSubstats.filter(x => !x.modified).includes(replacementStat)) {
-                        //     continue;
-                        // }
                         substatPass = true;
-                         // !substat.modified && !alreadyModifiedStatTypeArr.includes(replacementStat)) {
-                        // if (item.id == "300e23d3-c29c-4a63-90b4-44432a7f0ad2") {
-                        //     console.log("5", substat.modified, replacementStat, item, substat)
-                        // }
                     }
-
-                    // if (!existingSubstats.filter(x => x.modified).map(x => x.type).contains(replacementStat)) {
-
-                    // }
 
                     if (!substatPass) {
                         continue;
@@ -211,9 +177,6 @@ module.exports = {
                     const valueQuality = Math.round(valueRange[0] + (valueRange[1] - valueRange[0]) * rollQuality);
 
                     if (substat.type == replacementStat && substat.value >= valueQuality) {
-                        // if (item.id == "300e23d3-c29c-4a63-90b4-44432a7f0ad2") {
-                        //     console.log("8", substat, valueQuality)
-                        // }
                         continue;
                     }
 
@@ -237,16 +200,13 @@ module.exports = {
                     }
                     moddedItems[itemCopy.modId] = itemCopy;
 
-                    // tempNewItems.push(itemCopy);
                     newItems.push(itemCopy)
-                    // console.log("mod")
                 }
             }
 
             // console.log(item);
             // console.log(tempNewItems);
             // newItems.push.apply(newItems, tempNewItems)
-            // console.log("====================");
         }
 
         console.warn(newItems);

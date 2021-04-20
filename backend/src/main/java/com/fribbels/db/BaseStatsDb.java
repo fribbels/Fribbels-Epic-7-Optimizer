@@ -42,6 +42,7 @@ public class BaseStatsDb {
                 .dmgh(baseStats.getDmgh())
                 .upgrades(baseStats.getUpgrades())
                 .score(baseStats.getScore())
+                .conversions(baseStats.getConversions())
                 .name(name)
                 .build();
 

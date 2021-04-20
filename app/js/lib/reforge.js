@@ -23,6 +23,7 @@ module.exports = {
     },
 
     augmentMaterial: (gear) => {
+        gear.convertable = 0;
         if (!gear || !gear.gear || !gear.set) return;
         const name = gear.name;
 
@@ -42,6 +43,7 @@ module.exports = {
         } else if (conversionDistance > huntDistance && conversionDistance > 0.2) {
             gear.material = "Conversion";
             gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, conversionName))
+            gear.convertable = 1;
         } else if (huntDistance > conversionDistance && huntDistance > 0.2) {
             gear.material = "Hunt";
             gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, huntName));

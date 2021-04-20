@@ -394,37 +394,40 @@ _________________
 
 There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**Done for v1.6.1**
- - Fixed saves folder not being initialized
- - Fixed Mac scan errors
- - Clarified java error instructions
- - Made links open in browser instead of app
+**New discord suggestions**
+ - Customizable optimization column formulas
+ - Auto updater
+ - Set priority
+ - Hero priority equipping
+ - Arrow keys on heroes/items
+ - Auto import equipped units
+ - Different pinned builds
 
 **Working on:**
  - v1.7.0
  - Priority score column
+ - Optimization with substat mods
+ - Drag and drop hero sorting
+ - Conversion filter
 
  **Medium priority:**
- - Conversion filter
  - Add different level/awakening options
  - Use main stat gear for priority filter
  - Clear out item previews on refresh
- - Prio column + filter
 
  **Low priority:**
- - Add material filter
  - Bug: Comparison method violates its general contract
- - Select/interact with multiple heroes at once
- - See unit stats for whatever gear they have currently, not just for 6 pieces
  - Move save/load to File menu
- - Cancel ongoing request when start is clicked again
- - Update permutations on 4 piece set
  - Optimize multiple heroes at once
  - Gear page, option to use more than one set/gear filter at time
  - Auto copy gear image
  - Recolor on filter
 
  **Probably not doing:**
+ - See unit stats for whatever gear they have currently, not just for 6 pieces
+ - Cancel ongoing request when start is clicked again
+ - Update permutations on 4 piece set
+ - Select/interact with multiple heroes at once
  - Verify all imported screenshots are image files
  - Date newly added gear
  - Enable cross platform for Linux

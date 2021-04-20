@@ -41,6 +41,7 @@ public class HeroStats {
     public int dmgh;
 
     public int upgrades;
+    public int conversions;
     public int score;
 
     public int bonusMaxAtkPercent;
@@ -69,11 +70,6 @@ public class HeroStats {
                                                                       .collect(Collectors.joining("")));
             messageDigest.update(combinedItems.getBytes());
             final String stringHash = new String(messageDigest.digest());
-
-//            System.out.println("!!!!!!!!!!!!!!!!!");
-//            System.out.println(mods.stream()
-//                    .map(x -> x == null ? "{}" : x.toString())
-//                    .collect(Collectors.joining("")));
 
             return stringHash;
         } catch (final Exception e) {

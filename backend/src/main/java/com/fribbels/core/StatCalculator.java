@@ -43,7 +43,12 @@ public class StatCalculator {
         bonusMaxDef = 1 + base.bonusMaxDefPercent/100f;
     }
 
-    public static HeroStats addAccumulatorArrsToHero(final HeroStats base, final float[][] accs, final int[] sets, final Hero hero, final int upgrades) {
+    public static HeroStats addAccumulatorArrsToHero(final HeroStats base,
+                                                     final float[][] accs,
+                                                     final int[] sets,
+                                                     final Hero hero,
+                                                     final int upgrades,
+                                                     final int conversions) {
         final float[] accs0 = accs[0];
         final float[] accs1 = accs[1];
         final float[] accs2 = accs[2];
@@ -101,18 +106,9 @@ public class StatCalculator {
 
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
-        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, upgrades, score,
+        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, upgrades, conversions, score,
                 base.bonusMaxAtkPercent, base.bonusMaxDefPercent, base.bonusMaxHpPercent, sets, null, null, null, null, null, null);
     }
-//
-//    public static float mapAccumulatorArrsToFloat(final int index, final float[][] accs) {
-//        return accs[0][index]
-//                + accs[1][index]
-//                + accs[2][index]
-//                + accs[3][index]
-//                + accs[4][index]
-//                + accs[5][index];
-//    }
 
     public static float[] getStatAccumulatorArr(final HeroStats base,
                                                 final Item item,

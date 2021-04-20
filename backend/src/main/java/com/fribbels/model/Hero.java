@@ -45,6 +45,7 @@ public class Hero {
 
     public int upgrades;
     public int score;
+    public int conversions;
 
     private String id;
     public String name;
@@ -191,5 +192,6 @@ public class Hero {
 
         this.upgrades = heroStats.getUpgrades();
         this.score = heroStats.getScore();
+        this.conversions = heroStats.getConversions();
     }
 }

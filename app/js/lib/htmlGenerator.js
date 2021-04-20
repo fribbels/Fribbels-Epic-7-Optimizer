@@ -262,13 +262,7 @@ module.exports = {
             `
         }
 
-        if (Reforge.isReforgeable(item)) {
-            console.warn("^^^^^^^^^^^", JSON.parse(JSON.stringify(item)));
-        }
         ItemAugmenter.augment([item])
-        if (Reforge.isReforgeable(item)) {
-            console.warn("!!!!!!!!!!!!!!!!!!", item);
-        }
 
         const main = statToText(item.main, baseStats, item);
         const substat0 = statToText(item.substats[0], baseStats, item);

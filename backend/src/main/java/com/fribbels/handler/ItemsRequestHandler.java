@@ -154,6 +154,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 matchingExistingItem.setEnhance(newItem.getEnhance());
                 matchingExistingItem.setLevel(newItem.getLevel());
                 matchingExistingItem.setUpgradeable(newItem.getUpgradeable());
+                matchingExistingItem.setConvertable(newItem.getConvertable());
                 matchingExistingItem.setReforgeable(newItem.getReforgeable());
                 matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
 
@@ -187,6 +188,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     matchingExistingItem.setEnhance(newItem.getEnhance());
                     matchingExistingItem.setLevel(newItem.getLevel());
                     matchingExistingItem.setUpgradeable(newItem.getUpgradeable());
+                    matchingExistingItem.setConvertable(newItem.getConvertable());
                     matchingExistingItem.setReforgeable(newItem.getReforgeable());
                     matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
                 }
@@ -326,6 +328,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             dbItem.setSubstats(item.getSubstats());
             dbItem.setReforgeable(item.getReforgeable());
             dbItem.setUpgradeable(item.getUpgradeable());
+            dbItem.setConvertable(item.getConvertable());
             dbItem.setMaterial(item.getMaterial());
             dbItem.setAllowedMods(item.getAllowedMods());
             itemDb.calculateWss(dbItem);

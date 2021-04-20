@@ -51,6 +51,7 @@ public class Item {
     private boolean alreadyPredictedReforge;
     public int reforgeable;
     public int upgradeable;
+    public int convertable;
     private int wss;
     private int reforgedWss;
     private int dpsWss;

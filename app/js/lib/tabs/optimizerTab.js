@@ -126,6 +126,8 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputMaxDmgHLimit").val(inputDisplayNumber(request.inputMaxDmgHLimit));
     $("#inputMinUpgradesLimit").val(inputDisplayNumber(request.inputMinUpgradesLimit));
     $("#inputMaxUpgradesLimit").val(inputDisplayNumber(request.inputMaxUpgradesLimit));
+    $("#inputMinConversionsLimit").val(inputDisplayNumber(request.inputMinConversionsLimit));
+    $("#inputMaxConversionsLimit").val(inputDisplayNumber(request.inputMaxConversionsLimit));
     $("#inputMinScoreLimit").val(inputDisplayNumber(request.inputMinScoreLimit));
     $("#inputMaxScoreLimit").val(inputDisplayNumber(request.inputMaxScoreLimit));
 
@@ -311,11 +313,10 @@ module.exports = {
     },
 
     drawPreview: (gearIds, mods) => {
-        console.trace();
-        console.warn("Draw preview", gearIds, mods)
+        console.log("Draw preview", gearIds, mods)
 
         const moddedGear = ModificationFilter.getModsByIds(gearIds, mods);
-        console.warn("Modded gear results", moddedGear)
+        console.log("Modded gear results", moddedGear)
 
         Api.getItemsByIds(gearIds).then(async (response) => {
             const selectedGear = response.items;
@@ -338,7 +339,6 @@ module.exports = {
                     continue;
                 }
 
-                console.log("?????", selectedGear[i], moddedGear[i])
                 selectedGear[i].substats = moddedGear[i].substats;
                 for (var j = 0; j < selectedGear[i].substats.length; j++) {
                     selectedGear[i].substats[j].modified = moddedGear[i].substats[j].modified;
@@ -346,9 +346,6 @@ module.exports = {
                     selectedGear[i].substats[j].reforgedValue = moddedGear[i].substats[j].reforgedValue;
                     selectedGear[i].substats[j].reforged = true;
                 }
-                // selectedGear[i].augmentedStats = moddedGear[i].augmentedStats;
-                // selectedGear[i].reforgedStats = moddedGear[i].reforgedStats;
-                console.log("??????????", selectedGear[i], moddedGear[i])
             }
 
             document.getElementById('optimizer-heroes-equipped-weapon').innerHTML = HtmlGenerator.buildItemPanel(selectedGear[0], "optimizerGrid", baseStats);
@@ -1071,6 +1068,8 @@ function getOptimizationRequestParams(showError) {
     request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit');
     request.inputMinUpgradesLimit = readNumber('inputMinUpgradesLimit');
     request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit');
+    request.inputMinConversionsLimit = readNumber('inputMinConversionsLimit');
+    request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit');
     request.inputMinScoreLimit = readNumber('inputMinScoreLimit');
     request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit');
 
