@@ -50,6 +50,10 @@ module.exports = {
         buildGrid(localeText);
     },
 
+    resetSort: () => {
+        heroesGrid.gridOptions.columnApi.resetColumnState()
+    },
+
     refresh: async (heroes, id) => {
         if (!heroes) {
             const response = await Api.getAllHeroes();
@@ -213,6 +217,7 @@ function buildGrid(localeText) {
         },
 
         columnDefs: [
+            {width: 40, rowDrag: true},
             {headerName: i18next.t('icon'), field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
             {headerName: i18next.t('elem'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: i18next.t('class'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
@@ -250,6 +255,11 @@ function buildGrid(localeText) {
         localeText:localeText,
         onRowSelected: onHeroRowSelected,
         onRowClicked: onHeroRowClick,
+        onRowDragEnter: onRowDragEnter,
+        onRowDragEnd: onRowDragEnd,
+        onRowDragMove: onRowDragMove,
+        onRowDragLeave: onRowDragLeave,
+        suppressMoveWhenRowDragging: true,
     };
 
     const buildsGridOptions = {
@@ -645,4 +655,25 @@ function updateCurrentAggregate(hero) {
     }
 
     console.log("Aggregated", currentAggregate);
+}
+
+function onRowDragEnter(e) {
+  // console.log('onRowDragEnter', e);
+}
+
+async function onRowDragEnd(e) {
+    console.log('onRowDragEnd', e);
+    const dragged = e.node.data;
+    const destination = e.overNode.data;
+
+    await Api.reorderHeroes(dragged.id, destination.id);
+    HeroesTab.redraw();
+}
+
+function onRowDragMove(e) {
+  // console.log('onRowDragMove', e);
+}
+
+function onRowDragLeave(e) {
+  // console.log('onRowDragLeave', e);
 }

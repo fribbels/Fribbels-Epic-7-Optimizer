@@ -90,6 +90,13 @@ module.exports = {
         });
     },
 
+    reorderHeroes: async (id, destinationId) => {
+        return post('/heroes/reorderHeroes', {
+            id: id,
+            destinationId: destinationId
+        });
+    },
+
     cancelOptimizationRequest: async () => {
         return post('/system/interrupt');
     },

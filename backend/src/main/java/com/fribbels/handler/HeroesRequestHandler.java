@@ -20,6 +20,7 @@ import com.fribbels.request.HeroesRequest;
 import com.fribbels.request.IdRequest;
 import com.fribbels.request.IdsRequest;
 import com.fribbels.request.ModStatsRequest;
+import com.fribbels.request.ReorderRequest;
 import com.fribbels.response.GetAllHeroesResponse;
 import com.fribbels.response.GetHeroByIdResponse;
 import com.fribbels.response.HeroStatsResponse;
@@ -121,6 +122,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                     final BuildsRequest removeBuildRequest = parseRequest(exchange, BuildsRequest.class);
                     sendResponse(exchange, removeBuild(removeBuildRequest));
                     return;
+                case "/heroes/reorderHeroes":
+                    final ReorderRequest reorderRequest = parseRequest(exchange, ReorderRequest.class);
+                    sendResponse(exchange, reorderHeroes(reorderRequest));
+                    return;
 
                 default:
                     System.out.println("No handler found for " + path);
@@ -170,6 +175,22 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
         hero.setBuilds(changedBuilds);
 
+        return "";
+    }
+
+    public String reorderHeroes(final ReorderRequest request) {
+        final List<Hero> heroes = heroDb.getAllHeroes();
+        final Hero dragHero = heroDb.getHeroById(request.getId());
+        final Hero destinationHero = heroDb.getHeroById(request.getDestinationId());
+        if (dragHero == null || destinationHero == null || dragHero == destinationHero) {
+            return "";
+        }
+
+        heroes.remove(dragHero);
+        final int destinationIndex = heroes.indexOf(destinationHero);
+        heroes.add(destinationIndex, dragHero);
+
+        heroDb.setHeroes(heroes);
         return "";
     }
 

@@ -485,6 +485,7 @@ function setupEventListeners() {
             filters[key] = null;
         }
 
+        HeroesGrid.resetSort();
         HeroesGrid.refreshFilters(filters);
     })
 
