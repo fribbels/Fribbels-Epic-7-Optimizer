@@ -8030,7 +8030,49 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1028_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1028_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101601",
+        "id": "exc101601",
+        "name": "Azure Dragon's Spirit",
+        "description": "A ribbon with special powers that allows the wearer to harness their innate dragon powers.",
+        "unit": "c1016",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "35% chance to extend the caster's buff durations by 1 turn when using Double Slash.",
+            "skill_description": "Attacks by swinging their weapon, with a {{variable}} chance to decrease Defense for 2 turns, before a 35% chance to extend the caster's buff durations by 1 turn.",
+            "values": [
+              18
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 1,
+            "description": "Damage dealt is increased by 30% when using Double Slash.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Increases chance of inflicting silence with Dragon's Roar by 15%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1016.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11219,
@@ -14960,7 +15002,49 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1006_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1006_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101601",
+        "id": "exc101601",
+        "name": "Azure Dragon's Spirit",
+        "description": "A ribbon with special powers that allows the wearer to harness their innate dragon powers.",
+        "unit": "c1016",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "35% chance to extend the caster's buff durations by 1 turn when using Double Slash.",
+            "skill_description": "Attacks by swinging their weapon, with a {{variable}} chance to decrease Defense for 2 turns, before a 35% chance to extend the caster's buff durations by 1 turn.",
+            "values": [
+              18
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 1,
+            "description": "Damage dealt is increased by 30% when using Double Slash.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Increases chance of inflicting silence with Dragon's Roar by 15%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1016.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11324,
@@ -16592,7 +16676,49 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1069_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1069_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101601",
+        "id": "exc101601",
+        "name": "Azure Dragon's Spirit",
+        "description": "A ribbon with special powers that allows the wearer to harness their innate dragon powers.",
+        "unit": "c1016",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "35% chance to extend the caster's buff durations by 1 turn when using Double Slash.",
+            "skill_description": "Attacks by swinging their weapon, with a {{variable}} chance to decrease Defense for 2 turns, before a 35% chance to extend the caster's buff durations by 1 turn.",
+            "values": [
+              18
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 1,
+            "description": "Damage dealt is increased by 30% when using Double Slash.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Increases chance of inflicting silence with Dragon's Roar by 15%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1016.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11710,
@@ -18844,14 +18970,14 @@
       },
       "lv60SixStarFullyAwakened": {
         "cp": 15955,
-        "atk": 970,
-        "hp": 5935,
-        "spd": 106,
-        "def": 557,
-        "chc": 0.27,
+        "atk": 919,
+        "hp": 5237,
+        "spd": 116,
+        "def": 525,
+        "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
-        "eff": 0,
+        "eff": 0.12,
         "efr": 0
       }
     }
@@ -19915,7 +20041,49 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1080_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1080_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101601",
+        "id": "exc101601",
+        "name": "Azure Dragon's Spirit",
+        "description": "A ribbon with special powers that allows the wearer to harness their innate dragon powers.",
+        "unit": "c1016",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "35% chance to extend the caster's buff durations by 1 turn when using Double Slash.",
+            "skill_description": "Attacks by swinging their weapon, with a {{variable}} chance to decrease Defense for 2 turns, before a 35% chance to extend the caster's buff durations by 1 turn.",
+            "values": [
+              18
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 1,
+            "description": "Damage dealt is increased by 30% when using Double Slash.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Increases chance of inflicting silence with Dragon's Roar by 15%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1016.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11419,
@@ -24106,7 +24274,7 @@
     "name": "Solitaria of the Snow",
     "moonlight": true,
     "rarity": 5,
-    "attribute": "dark",
+    "attribute": "light",
     "role": "mage",
     "zodiac": "bull",
     "self_devotion": {
