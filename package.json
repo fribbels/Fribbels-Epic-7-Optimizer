@@ -1,6 +1,9 @@
 {
   "name": "fribbels-e7-optimizer",
   "productName": "FribbelsE7Optimizer",
+  "author": {
+    "name": "Fribbels"
+  },
   "version": "1.0.0",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "scripts": {
@@ -82,8 +85,13 @@
     },
     "win": {
       "target": [
-        "zip"
+        "nsis"
       ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
     },
     "linux": {
       "target": [
@@ -189,6 +197,8 @@
     "electron": "^11",
     "electron-builder": "^22.3.6",
     "electron-devtools-installer": "^2.2.4",
+    "electron-installer-windows": "^3.0.0",
+    "electron-packager": "^15.2.0",
     "electron-rebuild": "^1.11.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.3",

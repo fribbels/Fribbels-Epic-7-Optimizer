@@ -400,11 +400,12 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Conversion filter
  - Arrow keys on heroes/items
  - Use main stat gear for priority filter
+ - Add 5 star base stats
+ - Windows installer
 
 **Working on:**
  - v1.7.0
  - Priority score column
- - Add different level/awakening options
  - Auto updater
 
  **Medium priority:**

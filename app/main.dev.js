@@ -129,12 +129,19 @@ const createWindow = async () => {
     }
   });
 
+
   // const menuBuilder = new MenuBuilder(mainWindow);
   // menuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
+
+  require('update-electron-app')({
+    repo: 'fribbels/Fribbels-Epic-7-Optimizer',
+    updateInterval: '5 minutes',
+    // logger: require('electron-log')
+  })
 };
 
 /**
