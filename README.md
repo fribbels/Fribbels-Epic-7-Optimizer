@@ -394,28 +394,28 @@ _________________
 
 There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**New discord suggestions**
- - Customizable optimization column formulas
- - Auto updater
- - Set priority
- - Hero priority equipping
+**Done for 1.7.0**
+ - Optimization with substat mods
+ - Drag and drop hero sorting
+ - Conversion filter
  - Arrow keys on heroes/items
- - Auto import equipped units
- - Different pinned builds
 
 **Working on:**
  - v1.7.0
  - Priority score column
- - Optimization with substat mods
- - Drag and drop hero sorting
- - Conversion filter
+ - Auto updater
 
  **Medium priority:**
+ - Auto import equipped units
  - Add different level/awakening options
  - Use main stat gear for priority filter
- - Clear out item previews on refresh
 
  **Low priority:**
+ - Customizable optimization column formulas
+ - Clear out item previews on refresh
+ - Optimizer broken set priority
+ - Hero priority equipping
+ - Different pinned builds
  - Bug: Comparison method violates its general contract
  - Move save/load to File menu
  - Optimize multiple heroes at once

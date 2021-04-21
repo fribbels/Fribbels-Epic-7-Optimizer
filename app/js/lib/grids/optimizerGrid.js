@@ -13,7 +13,7 @@ var darkGradient = tinygradient([
 
 var gradient = lightGradient;
 
-optimizerGrid = null;
+global.optimizerGrid = null;
 var currentSortModel;
 var currentAggregate = {};
 var selectedRow = null;
@@ -305,7 +305,7 @@ function buildGrid(localeText) {
         suppressScrollOnNewData: true,
         onCellMouseOver: cellMouseOver,
         onCellMouseOut: cellMouseOut,
-        navigateToNextCell: GridRenderer.arrowKeyNavigator().bind(this),
+        navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "optimizerGrid"),
     };
 
     const gridDiv = document.getElementById('myGrid');

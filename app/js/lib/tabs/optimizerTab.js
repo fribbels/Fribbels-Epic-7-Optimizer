@@ -618,7 +618,7 @@ async function addBuild() {
     console.log("ADD BUILD", row)
 
     if (row.mods.filter(x => x).length > 0) {
-        row.name = "MODIFIED"
+        row.name = "MOD: " + (!hero.modGrade ? "" : (hero.modGrade == "greater" ? "Greater" : "Lesser")) + " " + (hero.rollQuality || "") + "%";
     }
 
     await Api.addBuild(heroId, row);

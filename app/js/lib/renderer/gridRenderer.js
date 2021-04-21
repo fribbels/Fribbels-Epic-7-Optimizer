@@ -9,8 +9,8 @@ module.exports = {
         return renderStar(value);
     },
 
-    arrowKeyNavigator: () => {
-        return navigateToNextCell;
+    arrowKeyNavigator: (binding, gridName) => {
+        return navigateToNextCell(binding, gridName);
     }
 }
 
@@ -65,44 +65,63 @@ var KEY_UP = 38;
 var KEY_RIGHT = 39;
 var KEY_DOWN = 40;
 
-function navigateToNextCell(params) {
-  var previousCell = params.previousCellPosition,
-    suggestedNextCell = params.nextCellPosition,
-    nextRowIndex,
-    renderedRowCount;
+function navigateToNextCell(params, gridName) {
+  return function(params) {
+    var grid;
+    if (gridName == "heroesGrid") {
+      grid = heroesGrid;
+    } else if (gridName == "optimizerGrid") {
+      grid = optimizerGrid;
+    } else if (gridName == "buildsGrid") {
+      grid = buildsGrid;
+    } else if (gridName == "itemsGrid") {
+      grid = itemsGrid;
+    }
+    if (!grid) {
+      console.warn("!GRID", params, grid);
 
-  switch (params.key) {
-    case KEY_DOWN:
-      // return the cell below
-      nextRowIndex = previousCell.rowIndex + 1;
-      renderedRowCount = optimizerGrid.gridOptions.api.getModel().getRowCount();
-      if (nextRowIndex >= renderedRowCount) {
-        return null;
-      } // returning null means don't navigate
+      return;
+    }
+    console.log(params, grid);
 
-      optimizerGrid.gridOptions.api.selectNode(optimizerGrid.gridOptions.api.getRowNode("" + nextRowIndex))
-      return {
-        rowIndex: nextRowIndex,
-        column: previousCell.column,
-        floating: previousCell.floating,
-      };
-    case KEY_UP:
-      // return the cell above
-      nextRowIndex = previousCell.rowIndex - 1;
-      if (nextRowIndex <= -1) {
-        return null;
-      } // returning null means don't navigate
+    var previousCell = params.previousCellPosition,
+      suggestedNextCell = params.nextCellPosition,
+      nextRowIndex,
+      renderedRowCount;
 
-      optimizerGrid.gridOptions.api.selectNode(optimizerGrid.gridOptions.api.getRowNode("" + nextRowIndex))
-      return {
-        rowIndex: nextRowIndex,
-        column: previousCell.column,
-        floating: previousCell.floating,
-      };
-    case KEY_LEFT:
-    case KEY_RIGHT:
-      return suggestedNextCell;
-    default:
-      throw 'this will never happen, navigation is always one of the 4 keys above';
+    switch (params.key) {
+      case KEY_DOWN:
+        // return the cell below
+        nextRowIndex = previousCell.rowIndex + 1;
+        renderedRowCount = grid.gridOptions.api.getModel().getRowCount();
+        if (nextRowIndex >= renderedRowCount) {
+          return null;
+        } // returning null means don't navigate
+
+        grid.gridOptions.api.selectNode(grid.gridOptions.api.getRowNode("" + nextRowIndex))
+        return {
+          rowIndex: nextRowIndex,
+          column: previousCell.column,
+          floating: previousCell.floating,
+        };
+      case KEY_UP:
+        // return the cell above
+        nextRowIndex = previousCell.rowIndex - 1;
+        if (nextRowIndex <= -1) {
+          return null;
+        } // returning null means don't navigate
+
+        grid.gridOptions.api.selectNode(grid.gridOptions.api.getRowNode("" + nextRowIndex))
+        return {
+          rowIndex: nextRowIndex,
+          column: previousCell.column,
+          floating: previousCell.floating,
+        };
+      case KEY_LEFT:
+      case KEY_RIGHT:
+        return suggestedNextCell;
+      default:
+        throw 'this will never happen, navigation is always one of the 4 keys above';
+    }
   }
 }

@@ -18,7 +18,7 @@ var gradient = lightGradient;
 var scoreGradient = lightScoreGradient;
 
 
-var itemsGrid;
+global.itemsGrid = null;
 var currentAggregate = {};
 var selectedCell = null;
 
@@ -100,6 +100,8 @@ module.exports = {
             onCellMouseOver: cellMouseOver,
             onCellMouseOut: cellMouseOut,
             suppressScrollOnNewData: true,
+            navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "itemsGrid"),
+
             // onRowSelected: onRowSelected,
         };
         let gridDiv = document.getElementById('gear-grid');

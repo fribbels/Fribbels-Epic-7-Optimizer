@@ -260,6 +260,7 @@ function buildGrid(localeText) {
         onRowDragMove: onRowDragMove,
         onRowDragLeave: onRowDragLeave,
         suppressMoveWhenRowDragging: true,
+        navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "heroesGrid"),
     };
 
     const buildsGridOptions = {
@@ -305,6 +306,8 @@ function buildGrid(localeText) {
         cacheBlockSize: 1000,
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
+        navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "buildsGrid"),
+
         // navigateToNextCell: navigateToNextCell.bind(this),
     };
 
@@ -312,8 +315,6 @@ function buildGrid(localeText) {
     const buildsGridDiv = document.getElementById('builds-table');
     heroesGrid = new Grid(gridDiv, gridOptions);
     buildsGrid = new Grid(buildsGridDiv, buildsGridOptions);
-    // console.log("HeroesGrid", heroesGrid);
-    // console.log("HeroesGrid", heroesGrid);
 }
 
 
