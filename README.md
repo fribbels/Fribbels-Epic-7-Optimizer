@@ -399,16 +399,16 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Drag and drop hero sorting
  - Conversion filter
  - Arrow keys on heroes/items
+ - Use main stat gear for priority filter
 
 **Working on:**
  - v1.7.0
  - Priority score column
+ - Add different level/awakening options
  - Auto updater
 
  **Medium priority:**
  - Auto import equipped units
- - Add different level/awakening options
- - Use main stat gear for priority filter
 
  **Low priority:**
  - Customizable optimization column formulas

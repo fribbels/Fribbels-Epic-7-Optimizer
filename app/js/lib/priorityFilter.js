@@ -1,6 +1,6 @@
 module.exports = {
 
-    applyPriorityFilters: (params, items, baseStats, allItems) => {
+    applyPriorityFilters: (params, items, baseStats, allItems, reforge) => {
         var passed = [];
 
         if (filterDisabled(params)) {
@@ -18,7 +18,7 @@ module.exports = {
         for (var key of Object.keys(groups)) {
             var gearArr = groups[key];
             for (var gear of gearArr) {
-                calculateScore(gear, params, baseStats);
+                calculateScore(gear, params, baseStats, reforge);
             }
 
             gearArr.sort((a, b) => b.score - a.score);
@@ -40,15 +40,24 @@ var groupBy = function(xs, key) {
   }, {});
 };
 
-function calculateScore(item, params, baseStats) {
-    const atkRolls = item.augmentedStats.AttackPercent/9 + item.augmentedStats.Attack/baseStats.atk*100/9;
-    const hpRolls = item.augmentedStats.HealthPercent/9 + item.augmentedStats.Health/baseStats.hp*100/9;
-    const defRolls = item.augmentedStats.DefensePercent/9 + item.augmentedStats.Defense/baseStats.def*100/9;
-    const spdRolls = item.augmentedStats.Speed/5;
-    const crRolls = item.augmentedStats.CriticalHitChancePercent/6;
-    const cdRolls = item.augmentedStats.CriticalHitDamagePercent/8;
-    const effRolls = item.augmentedStats.EffectivenessPercent/9;
-    const resRolls = item.augmentedStats.EffectResistancePercent/9;
+function mainTypeValue(stats, statType) {
+    if (statType == stats.mainType) {
+        return stats.mainValue
+    }
+    return 0;
+}
+
+function calculateScore(item, params, baseStats, reforge) {
+    const stats = reforge ? item.reforgedStats : item.augmentedStats;
+
+    const atkRolls = (stats.AttackPercent + mainTypeValue(stats, "AttackPercent") + (stats.Attack + mainTypeValue(stats, "Attack"))/baseStats.atk*100) / 8;
+    const hpRolls = (stats.HealthPercent + mainTypeValue(stats, "HealthPercent") + (stats.Health + mainTypeValue(stats, "Health"))/baseStats.hp*100) / 8;
+    const defRolls = (stats.DefensePercent + mainTypeValue(stats, "DefensePercent") + (stats.Defense + mainTypeValue(stats, "Defense"))/baseStats.def*100) / 8;
+    const spdRolls = (stats.Speed + mainTypeValue(stats, "Speed")) / 4;
+    const crRolls = (stats.CriticalHitChancePercent + mainTypeValue(stats, "CriticalHitChancePercent")) / 5;
+    const cdRolls = (stats.CriticalHitDamagePercent + mainTypeValue(stats, "CriticalHitDamagePercent")) / 7;
+    const effRolls = (stats.EffectivenessPercent + mainTypeValue(stats, "EffectivenessPercent")) / 8;
+    const resRolls = (stats.EffectResistancePercent + mainTypeValue(stats, "EffectResistancePercent")) / 8;
 
     const score = atkRolls * params.inputAtkPriority +
                   hpRolls * params.inputHpPriority +

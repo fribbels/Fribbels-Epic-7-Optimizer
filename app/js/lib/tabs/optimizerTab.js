@@ -814,7 +814,7 @@ async function applyItemFilters(params, heroResponse, allItemsResponse, submit) 
     items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit);
 
     // items = ForceFilter.applyForceFilters(params, items)
-    items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems)
+    items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems, params.inputPredictReforges)
 
     items = items.sort((a, b) => {
         return a.set-b.set;
