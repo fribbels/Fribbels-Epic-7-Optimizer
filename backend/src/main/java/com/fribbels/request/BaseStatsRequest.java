@@ -1,5 +1,6 @@
 package com.fribbels.request;
 
+import com.fribbels.model.BaseStats;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Request;
 import lombok.Builder;
@@ -15,5 +16,5 @@ import java.util.Map;
 @ToString
 public class BaseStatsRequest extends Request {
 
-    final Map<String, HeroStats> baseStatsByName;
+    final Map<String, BaseStats> baseStatsByName;
 }

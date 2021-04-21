@@ -6,6 +6,7 @@ import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.model.AugmentedStats;
+import com.fribbels.model.BaseStats;
 import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
@@ -25,6 +26,7 @@ import com.fribbels.response.GetAllHeroesResponse;
 import com.fribbels.response.GetHeroByIdResponse;
 import com.fribbels.response.HeroStatsResponse;
 import com.google.common.collect.Iterables;
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import lombok.AllArgsConstructor;
@@ -244,7 +246,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     private void addStatsToHero(final Hero hero, final boolean useReforgeStats) {
-        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
 
         // Update equipment
         final Map<Gear, Item> equipment = hero.getEquipment();
@@ -282,7 +284,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     private void clearNullBuilds(final Hero hero, final boolean useReforgeStats) {
-        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
         final List<HeroStats> builds = hero.getBuilds();
         List<HeroStats> changedBuilds = new ArrayList<>(builds);
         for (int i = 0; i < builds.size(); i++) {
@@ -374,7 +376,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final Hero hero = heroDb.getHeroById(request.getId());
         if (hero == null) return "";
 
-        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
         if (baseStats == null) return "";
 
         addStatsToHero(hero, request.isUseReforgeStats());
@@ -389,15 +391,16 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     public String getBaseStats(final IdRequest request) {
         if (request.getId() == null) return "";
 
-        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(request.getId());
+        final BaseStats baseStats = baseStatsDb.getBaseStatsByName(request.getId());
+        final HeroStats heroStats = baseStats.getLv50FiveStarFullyAwakened();
 
         if (baseStats == null) return "";
 
         final HeroStatsResponse response = HeroStatsResponse.builder()
-                .heroStats(baseStats)
+                .heroStats(heroStats)
                 .build();
 
-        return toJson(response);
+        return new Gson().toJson(baseStats);
     }
 
     public String removeHeroById(final IdRequest request) {

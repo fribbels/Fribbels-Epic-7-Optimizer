@@ -227,7 +227,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             builds.removeAll(buildsToRemove);
 
             for (final HeroStats build : hero.getBuilds()) {
-                final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName());
+                final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
                 if (build.getMods() != null && build.getMods().stream().anyMatch(Objects::nonNull)) {
                     heroesRequestHandler.addStatsToBuild(hero, baseStats, build, true);
                 } else {

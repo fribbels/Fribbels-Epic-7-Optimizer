@@ -514,7 +514,7 @@ function cellMouseOut(event) {
     drawPreview(item);
 }
 
-function drawPreview(item) {
+async function drawPreview(item) {
     if (!item) {
         document.getElementById("gearTabPreview").innerHTML = "";
         return;
@@ -525,7 +525,7 @@ function drawPreview(item) {
     if (!item.equippedByName) {
 
     } else {
-        baseStats = HeroData.getBaseStatsByName(item.equippedByName)
+        baseStats = (await Api.getHeroById(item.equippedById, true)).baseStats;
     }
 
     // TODO ADD STAT SELECTOR

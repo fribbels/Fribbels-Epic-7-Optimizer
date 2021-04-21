@@ -50,6 +50,7 @@ public class Hero {
     private String id;
     public String name;
     private int rarity;
+    private int stars;
     private String attribute;
     private String role;
 
@@ -157,6 +158,8 @@ public class Hero {
         this.artifactLevel = bonusStats.getArtifactLevel();
         this.imprintNumber = bonusStats.getImprintNumber();
         this.eeNumber = bonusStats.getEeNumber();
+
+        this.stars = bonusStats.getStars();
     }
 
     public Map<Gear, Item> getEquipment() {

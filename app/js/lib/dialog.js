@@ -202,6 +202,16 @@ module.exports = {
                                         ${getEeEnhanceHtml(hero, ee)}
                                     </select>
                                 </div>
+
+                                <div class="horizontalLineWithMoreSpace"></div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Stars")}</div>
+
+                                    <select id="editStars" class="editGearStatSelect">
+                                        ${getStarsHtml(hero, heroInfo)}
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="editGearFormVertical"></div>
@@ -304,6 +314,7 @@ module.exports = {
                     const artifactLevel = $('#editArtifactLevel').val();
                     const imprintNumber = $('#editImprint').val();
                     const eeNumber = $('#editEe').val()
+                    const stars = $('#editStars').val()
 
                     const editedHero = {
                         attack: parseInt(document.getElementById('editHeroBonusAttack').value),
@@ -334,6 +345,7 @@ module.exports = {
                         artifactLevel: artifactLevel,
                         imprintNumber: imprintNumber,
                         eeNumber: eeNumber,
+                        stars: stars,
                         ee: ee,
                         heroInfo: heroInfo
                     }
@@ -778,6 +790,13 @@ function getImprintHtml(hero, heroInfo) {
     return html;
 }
 
+function getStarsHtml(hero, heroInfo) {
+    var html = `<option value=6>6</option>
+                <option value=5 ${hero.stars == 5 ? "selected" : ""}>5</option>`;
+
+    return html;
+}
+
 
 function getEquippedHtml(item, heroes) {
     var html = `<option value="None">${i18next.t("Nobody")}</option>`;
@@ -842,7 +861,7 @@ function getEeEnhanceHtml(hero, ee) {
     const displayText = e7StatToDisplayStat[statType];
 
     for (var i = baseValue; i <= maxValue; i++) {
-        html += `<option value="${i}" ${hero.eeNumber == i ? "selected" : ""}>${i}${displayText}</option>`
+        html += `<option value="${i}" ${(hero.eeNumber == i) ? "selected" : ""}>${i}${displayText}</option>`
     }
 
     return html;

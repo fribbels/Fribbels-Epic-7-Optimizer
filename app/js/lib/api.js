@@ -62,6 +62,8 @@ module.exports = {
             imprintNumber: bonusStats.imprintNumber,
             eeNumber: bonusStats.eeNumber,
 
+            stars: bonusStats.stars,
+
             heroId: heroId
         });
     },

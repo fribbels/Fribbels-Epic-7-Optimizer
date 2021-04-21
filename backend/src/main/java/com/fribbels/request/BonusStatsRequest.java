@@ -41,5 +41,7 @@ public class BonusStatsRequest extends Request {
     private String imprintNumber;
     private String eeNumber;
     private String heroId;
+
+    private int stars;
 }
 

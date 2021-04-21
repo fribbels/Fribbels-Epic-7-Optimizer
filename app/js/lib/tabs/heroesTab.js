@@ -383,6 +383,7 @@ function addHero(heroName, isBuild) {
     newHero.attribute = newHero.data.attribute;
     newHero.role = newHero.data.role;
     newHero.path = heroName;
+    newHero.stars = 6;
 
     Api.addHeroes([newHero]).then(x => {
         module.exports.redrawHeroInputSelector();

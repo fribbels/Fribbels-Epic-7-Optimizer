@@ -153,6 +153,7 @@ body {
   cursor: pointer;
   margin-bottom: 1px;
   margin-left: 1px;
+  margin-right: 5px;
 }
 
 .optimization-results-panel {

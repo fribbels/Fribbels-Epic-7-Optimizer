@@ -77,23 +77,6 @@ module.exports = {
         }
     },
 
-    processResults: (data) => {
-        const heroId = document.getElementById('inputHeroAdd').value;
-        console.log("DEBUG1", heroId);
-        const hero = HeroManager.getHeroById(heroId);
-        console.log("DEBUG1", hero);
-        const heroBaseStats = HeroData.getBaseStatsByName(hero.name);
-        resultStats = GearCalculator.parseResults(data, heroBaseStats, currentFilteredItems);
-
-        console.log("RESULTSPARSED")
-
-        console.log(resultStats.length);
-        // console.log(resultStats);
-
-        grid.gridOptions.api.infiniteRowModel.purgeCache();
-        console.log("TABLE DONE")
-    },
-
     getOptimizationRequestParams: () => {
         const request = new OptimizationRequest();
 

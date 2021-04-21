@@ -260,7 +260,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     public String optimize(final OptimizationRequest request, final HeroStats unused) {
         inProgress = true;
-        final HeroStats base = baseStatsDb.getBaseStatsByName(request.hero.name);
+        final HeroStats base = baseStatsDb.getBaseStatsByName(request.hero.name, request.hero.getStars());
         System.out.println("Started optimization request");
         addCalculatedFields(request);
         final List<Item> rawItems = request.getItems();

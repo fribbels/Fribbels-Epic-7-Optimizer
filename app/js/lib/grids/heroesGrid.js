@@ -509,7 +509,6 @@ async function onBuildRowSelected(event) {
     console.log("onBuildRowSelected", event);
     if (event.node.selected) {
         const hero = HeroesGrid.getSelectedRow();
-        // const baseStatsResponse = await Api.getBaseStats(hero.name);
         const useReforgeStats = HeroesTab.getUseReforgedStats();
         const heroResponse = await Api.getHeroById(hero.id, useReforgeStats);
         const baseStats = heroResponse.baseStats;
@@ -581,7 +580,6 @@ function redrawPreviewHero(heroId) {
 
         module.exports.refreshBuilds(response);
 
-        // const baseStatsResponse = await Api.getBaseStats(hero.name);
         const baseStats = response.baseStats;
 
         for (var i = 0; i < 6; i++) {
