@@ -43,6 +43,7 @@ public class HeroStats {
     public int upgrades;
     public int conversions;
     public int score;
+    public int priority;
 
     public int bonusMaxAtkPercent;
     public int bonusMaxDefPercent;

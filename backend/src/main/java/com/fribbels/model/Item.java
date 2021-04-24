@@ -53,6 +53,7 @@ public class Item {
     public int reforgeable;
     public int upgradeable;
     public int convertable;
+    public int priority;
     private int wss;
     private int reforgedWss;
     private int dpsWss;

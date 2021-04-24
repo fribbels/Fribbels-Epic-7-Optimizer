@@ -48,7 +48,8 @@ public class StatCalculator {
                                                      final int[] sets,
                                                      final Hero hero,
                                                      final int upgrades,
-                                                     final int conversions) {
+                                                     final int conversions,
+                                                     final int priority) {
         final float[] accs0 = accs[0];
         final float[] accs1 = accs[1];
         final float[] accs2 = accs[2];
@@ -106,7 +107,7 @@ public class StatCalculator {
 
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
-        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, upgrades, conversions, score,
+        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, upgrades, conversions, score, priority,
                 base.bonusMaxAtkPercent, base.bonusMaxDefPercent, base.bonusMaxHpPercent, sets, null, null, null, null, null, null);
     }
 

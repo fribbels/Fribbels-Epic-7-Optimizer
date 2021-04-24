@@ -288,6 +288,7 @@ function buildGrid(localeText) {
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: DIGITS_5},
             {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
+            {headerName: i18next.t('prio'), field: 'priority', width: DIGITS_3},
             {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2, width: 48},
             {headerName: i18next.t('actions'), field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],

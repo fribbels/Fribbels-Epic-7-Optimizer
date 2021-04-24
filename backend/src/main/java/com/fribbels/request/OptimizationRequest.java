@@ -95,6 +95,8 @@ public class OptimizationRequest extends Request {
     public int inputMaxConversionsLimit = Integer.MAX_VALUE;
     public int inputMinScoreLimit;
     public int inputMaxScoreLimit = Integer.MAX_VALUE;
+    public int inputMinPriorityLimit;
+    public int inputMaxPriorityLimit = Integer.MAX_VALUE;
 
     private Integer inputAtkMinForce;
     private Integer inputAtkMaxForce;

@@ -404,12 +404,13 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Windows installer
  - Double reforge bug
  - Auto import equipped units
+ - Priority score column
 
 **Working on:**
  - v1.7.0
- - Priority score column
  - Auto updater
  - Merge bug
+ - Read file sync
 
  **Medium priority:**
 

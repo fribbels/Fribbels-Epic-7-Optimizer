@@ -45,6 +45,7 @@ public class Hero {
 
     public int upgrades;
     public int score;
+    public int priority;
     public int conversions;
 
     private String id;
@@ -197,6 +198,7 @@ public class Hero {
 
         this.upgrades = heroStats.getUpgrades();
         this.score = heroStats.getScore();
+        this.priority = heroStats.getPriority();
         this.conversions = heroStats.getConversions();
     }
 }

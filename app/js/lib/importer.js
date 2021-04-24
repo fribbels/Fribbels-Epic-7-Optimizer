@@ -267,31 +267,27 @@ module.exports = {
 
             const path = filenames[0];
 
-            fs.readFile(Files.path(path), 'utf8', async function read(err, data) {
-                if (err) {
-                    throw err;
-                }
 
-                try {
-                    $('#importMergeOutputText').text(i18next.t('Parsing data..'))
+            try {
+                const data = Files.readFileSync(Files.path(path));
+                $('#importMergeOutputText').text(i18next.t('Parsing data..'))
 
-                    const parsedData = JSON.parse(data);
-                    console.log("PARSEDDATA", parsedData);
-                    const items = parsedData.items;
-                    const heroes = parsedData.heroes;
+                const parsedData = JSON.parse(data);
+                console.log("PARSEDDATA", parsedData);
+                const items = parsedData.items;
+                const heroes = parsedData.heroes;
 
-                    console.log("ITEMS", items);
-                    ItemAugmenter.augment(items);
+                console.log("ITEMS", items);
+                ItemAugmenter.augment(items);
 
-                    await Api.mergeItems(items, enhanceLimit);
+                await Api.mergeItems(items, enhanceLimit);
 
-                    $('#importMergeOutputText').text(`${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
+                $('#importMergeOutputText').text(`${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
 
-                } catch (e) {
-                    Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
-                    console.error(e);
-                }
-            });
+            } catch (e) {
+                Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                console.error(e);
+            }
         })
 
         document.getElementById('importMergeHeroesFileSelect').addEventListener("click", async () => {

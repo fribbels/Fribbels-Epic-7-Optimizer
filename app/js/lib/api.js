@@ -296,6 +296,11 @@ function post(api, request) {
         .then(response => {
             // console.trace("Api call", api, request, response);
             console.log("Api call", api, request, response);
+
+            if (response.data == "ERROR") {
+                console.error("Subprocess error: " + api);
+            }
+
             resolve(response.data);
         })
         .catch(error => {

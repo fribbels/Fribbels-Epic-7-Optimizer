@@ -277,7 +277,8 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         StatCalculator.setBaseValues(baseStats, hero);
         final int upgrades = equipment.values().stream().mapToInt(Item::getUpgradeable).sum();
         final int conversions = equipment.values().stream().mapToInt(Item::getConvertable).sum();
-        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions);
+        final int priority = equipment.values().stream().mapToInt(Item::getPriority).sum();
+        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions, priority);
         hero.setStats(finalStats);
         clearNullBuilds(hero, useReforgeStats);
 
@@ -345,7 +346,8 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         StatCalculator.setBaseValues(baseStats, hero);
         final int upgrades = items.stream().mapToInt(Item::getUpgradeable).sum();
         final int conversions = items.stream().mapToInt(Item::getConvertable).sum();
-        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions);
+        final int priority = items.stream().mapToInt(Item::getPriority).sum();
+        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions, priority);
         build.atk = finalStats.atk;
         build.hp = finalStats.hp;
         build.def = finalStats.def;
@@ -365,6 +367,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         build.dmgh = finalStats.dmgh;
         build.upgrades = finalStats.upgrades;
         build.score = finalStats.score;
+        build.priority = finalStats.priority;
         build.conversions = finalStats.conversions;
 
         return true;

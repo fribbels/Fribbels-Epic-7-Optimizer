@@ -7,6 +7,7 @@ import com.fribbels.db.HeroDb;
 import com.fribbels.db.OptimizationDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.enums.Set;
+import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
 import com.fribbels.request.EditResultRowsRequest;
@@ -185,6 +186,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.getMcdmgps() < request.getInputMinMcdmgpsLimit() || heroStats.getMcdmgps() > request.getInputMaxMcdmgpsLimit()
                 ||  heroStats.getDmgh() < request.getInputMinDmgHLimit() || heroStats.getDmgh() > request.getInputMaxDmgHLimit()
                 ||  heroStats.getScore() < request.getInputMinScoreLimit() || heroStats.getScore() > request.getInputMaxScoreLimit()
+                ||  heroStats.getPriority() < request.getInputMinPriorityLimit() || heroStats.getPriority() > request.getInputMaxPriorityLimit()
                 ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
                 ||  heroStats.getConversions() < request.getInputMinConversionsLimit() || heroStats.getConversions() > request.getInputMaxConversionsLimit()
         ) {
@@ -263,6 +265,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final HeroStats base = baseStatsDb.getBaseStatsByName(request.hero.name, request.hero.getStars());
         System.out.println("Started optimization request");
         addCalculatedFields(request);
+        final boolean useReforgeStats = request.getInputPredictReforges();
         final List<Item> rawItems = request.getItems();
 
         final List<Set> firstSets = request.getInputSetsOne();
@@ -301,7 +304,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final AtomicInteger maxReached = new AtomicInteger();
 
-        final boolean useReforgeStats = request.getInputPredictReforges();
         final boolean isShortCircuitable4PieceSet = request.getSetFormat() == 1 || request.getSetFormat() == 2;
 
         System.out.println("OUTPUTSTART");
@@ -358,7 +360,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         final int[] collectedSets = StatCalculator.buildSetsArr(collectedItems);
                                         final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
                                         final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
-                                        final HeroStats result = StatCalculator.addAccumulatorArrsToHero(base, new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr}, collectedSets, request.hero, reforges, conversions);
+                                        final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
+                                        final HeroStats result = StatCalculator.addAccumulatorArrsToHero(
+                                                base,
+                                                new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr},
+                                                collectedSets,
+                                                request.hero,
+                                                reforges,
+                                                conversions,
+                                                priority);
                                         searchedCounter.getAndIncrement();
                                         //                                        final boolean passesFilter = true;
 
@@ -484,6 +494,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.mcdmgps < request.inputMinMcdmgpsLimit || heroStats.mcdmgps > request.inputMaxMcdmgpsLimit
                 ||  heroStats.dmgh < request.inputMinDmgHLimit || heroStats.dmgh > request.inputMaxDmgHLimit
                 ||  heroStats.score < request.inputMinScoreLimit || heroStats.score > request.inputMaxScoreLimit
+                ||  heroStats.priority < request.inputMinPriorityLimit || heroStats.priority > request.inputMaxPriorityLimit
                 ||  heroStats.upgrades < request.inputMinUpgradesLimit || heroStats.upgrades > request.inputMaxUpgradesLimit
                 ||  heroStats.conversions < request.inputMinConversionsLimit || heroStats.conversions > request.inputMaxConversionsLimit
         ) {

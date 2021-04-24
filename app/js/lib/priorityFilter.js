@@ -72,6 +72,7 @@ function calculateScore(item, params, baseStats, reforge) {
         console.error(item, params, baseStats);
     }
     item.score = score;
+    item.priority = Math.round(score);
 }
 
 function filterDisabled(params) {

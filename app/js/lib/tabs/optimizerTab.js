@@ -130,6 +130,8 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputMaxConversionsLimit").val(inputDisplayNumber(request.inputMaxConversionsLimit));
     $("#inputMinScoreLimit").val(inputDisplayNumber(request.inputMinScoreLimit));
     $("#inputMaxScoreLimit").val(inputDisplayNumber(request.inputMaxScoreLimit));
+    $("#inputMinPriorityLimit").val(inputDisplayNumber(request.inputMinPriorityLimit));
+    $("#inputMaxPriorityLimit").val(inputDisplayNumber(request.inputMaxPriorityLimit));
 
     $("#inputPredictReforges").prop('checked', request.inputPredictReforges);
     $("#inputSubstatMods").prop('checked', request.inputSubstatMods);
@@ -1062,6 +1064,8 @@ function getOptimizationRequestParams(showError) {
     request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit');
     request.inputMinScoreLimit = readNumber('inputMinScoreLimit');
     request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit');
+    request.inputMinPriorityLimit = readNumber('inputMinPriorityLimit');
+    request.inputMaxPriorityLimit = readNumber('inputMaxPriorityLimit');
 
     // request.inputAtkMinForce = readNumber('inputMinAtkForce');
     // request.inputAtkMaxForce = readNumber('inputMaxAtkForce');
