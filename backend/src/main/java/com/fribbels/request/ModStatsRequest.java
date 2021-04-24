@@ -19,6 +19,7 @@ public class ModStatsRequest extends Request {
     private Float rollQuality;
     private Integer limitRolls;
     private List<StatType> keepStats;
+    private List<StatType> ignoreStats;
     private List<StatType> discardStats;
     private String heroId;
 }

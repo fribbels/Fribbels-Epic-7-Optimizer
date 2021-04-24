@@ -91,6 +91,7 @@ public class Hero {
     private Float rollQuality;
     private Integer limitRolls;
     private List<StatType> keepStats;
+    private List<StatType> ignoreStats;
     private List<StatType> discardStats;
 
     private int[] sets;
@@ -126,6 +127,7 @@ public class Hero {
         this.rollQuality = modStatsRequest.getRollQuality();
         this.limitRolls = modStatsRequest.getLimitRolls();
         this.keepStats = modStatsRequest.getKeepStats();
+        this.ignoreStats = modStatsRequest.getIgnoreStats();
         this.discardStats = modStatsRequest.getDiscardStats();
     }
 

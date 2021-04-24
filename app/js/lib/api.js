@@ -71,6 +71,7 @@ module.exports = {
     setModStats: async (modStats, heroId) => {
         return post('/heroes/setModStats', {
             discardStats: modStats.discardStats,
+            ignoreStats: modStats.ignoreStats,
             keepStats: modStats.keepStats,
             modGrade: modStats.modGrade,
             rollQuality: modStats.rollQuality,

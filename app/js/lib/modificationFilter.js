@@ -75,21 +75,9 @@ module.exports = {
 
         moddedItems = {}
 
-        var keepList = [
-            "Defense",
-            "DefensePercent",
-            "Health",
-            "HealthPercent",
-            "Speed",
-        ];
-        var discardList = [
-            "Attack",
-            "AttackPercent",
-            "CriticalHitChancePercent",
-            "CriticalHitDamagePercent",
-            "EffectivenessPercent",
-            "EffectResistancePercent"
-        ];
+        var keepList = hero.keepStats || [];
+        var ignoreList = hero.ignoreStats || [];
+        var discardList = hero.discardStats || [];
 
         const limitRolls = hero.limitRolls;
         const rollQuality = hero.rollQuality / 100;
@@ -127,6 +115,9 @@ module.exports = {
             for (var i = 0; i < item.substats.length; i++) {
                 const substat = item.substats[i];
 
+                if (ignoreList.includes(substat.type)) {
+                    continue;
+                }
 
                 if (moddedIndex > -1 && moddedIndex != i) {
                     continue;
@@ -163,6 +154,10 @@ module.exports = {
                     }
 
                     if (!substatPass) {
+                        continue;
+                    }
+
+                    if (ignoreList.includes(replacementStat)) {
                         continue;
                     }
 

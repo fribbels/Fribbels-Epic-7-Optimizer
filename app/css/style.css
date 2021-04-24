@@ -635,7 +635,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .editGearFormVertical {
   border-left: 1px solid #e8e8e8;
-  height: 275px;
+  height: 400px;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 25px;
@@ -1523,19 +1523,20 @@ input:checked + .darkSlider:before {
   margin-top: 5px;
   height: 30px;
   text-align: left;
-  padding-left: 8px;
+  padding-left: 6px;
   line-height: 30px;
 }
 .dragOrderList {
   font-size: 14px;
   border: 1px solid;
   border-radius: 10px;
-  padding-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
+  padding-top: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 6px;
   background: #7d7d7d;
   min-height: 385px;
+  width: 120px;
 }
 
 :root {

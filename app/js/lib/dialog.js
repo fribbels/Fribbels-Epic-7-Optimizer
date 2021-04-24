@@ -367,7 +367,7 @@ module.exports = {
 
             const { value: formValues } = await Swal.fire({
                 title: '',
-                width: 900,
+                width: 1000,
                 html: `
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
@@ -423,13 +423,19 @@ module.exports = {
                                 <div class="groupColumn">
                                     <p style="color: var(--font-color)" data-t>${i18next.t("Keep")}</p>
                                     <div id="keepGroup" class="dragOrderList">
-                                        ${generateStatList(hero, true)}
+                                        ${generateStatList(hero, "keep")}
+                                    </div>
+                                </div>
+                                <div class="groupColumn">
+                                    <p style="color: var(--font-color)" data-t>${i18next.t("Ignore")}</p>
+                                    <div id="ignoreGroup" class="dragOrderList">
+                                        ${generateStatList(hero, "ignore")}
                                     </div>
                                 </div>
                                 <div class="groupColumn">
                                     <p style="color: var(--font-color)" data-t>${i18next.t("Discard")}</p>
                                     <div id="modifyGroup" class="dragOrderList">
-                                        ${generateStatList(hero, false)}
+                                        ${generateStatList(hero, "discard")}
                                     </div>
                                 </div>
                             </div>
@@ -453,6 +459,11 @@ module.exports = {
                         animation: 100,
                         fallbackOnBody: true,
                     });
+                    global.ignoreGroup = Sortable.create(document.getElementById('ignoreGroup'), {
+                        group: "nested",
+                        animation: 100,
+                        fallbackOnBody: true,
+                    });
                     global.modifyGroup = Sortable.create(document.getElementById('modifyGroup'), {
                         group: "nested",
                         animation: 100,
@@ -466,6 +477,7 @@ module.exports = {
                 preConfirm: async () => {
                     const editedHero = {
                         discardStats: modifyGroup.toArray(),
+                        ignoreStats: ignoreGroup.toArray(),
                         keepStats: keepGroup.toArray(),
 
                         modGrade: document.getElementById('modGrade').value,
@@ -942,9 +954,16 @@ function getGearMaterialOptionsHtml(item) {
 `
 }
 
-function generateStatList(hero, keep) {
+function generateStatList(hero, state) {
+    const keepStats = hero.keepStats || [];
+    const discardStats = hero.discardStats || [];
     var list;
-    if (!keep) {
+
+    if (state == "keep") {
+        list = keepStats
+    } else if (state == "discard") {
+        list = discardStats
+    } else {
         const stats = [
             "Attack",
             "Health",
@@ -959,11 +978,9 @@ function generateStatList(hero, keep) {
             "Speed"
         ]
 
-        const keepStats = hero.keepStats || [];
-        const discardDiff = stats.filter(x => !keepStats.includes(x));
-        list = discardDiff;
-    } else {
-        list = hero.keepStats || []
+
+        const ignoreList = stats.filter(x => !keepStats.includes(x) && !discardStats.includes(x))
+        list = ignoreList;
     }
 
     var result = "";
