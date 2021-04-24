@@ -3,8 +3,8 @@ var childProcess = require('child_process')
 global.child = null;
 global.data = [];
 
-// global.api = "http://127.0.0.1:5000";
-global.api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
+global.api = "http://127.0.0.1:5000";
+// global.api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
 
 global.command = 'python'
 var findCommandSpawn = null;
@@ -29,7 +29,7 @@ function findcommand() {
     }
 }
 
-async function finishedReading(data) {
+async function finishedReading(data, scanType) {
     try {
         console.warn(data)
         console.warn(data.map(x => x.length).sort((a, b) => a - b))
@@ -41,7 +41,7 @@ async function finishedReading(data) {
             } else {
                 Dialog.htmlError("The scanner did not find any data. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Npcap installed</a> correctly, then try again.")
             }
-            document.getElementById('loadFromGameExportOutputText').value = i18next.t("The scanner did not find any data.");
+            document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("The scanner did not find any data."));
             return;
         }
 
@@ -52,38 +52,45 @@ async function finishedReading(data) {
 
         if (response.status == "SUCCESS") {
             const equips = response.data;
+            const units = response.units;
             var rawItems = equips.filter(x => !!x.f)
+            const lengths = units.map(a => a.length);
+            const index = lengths.indexOf(Math.max(...lengths));
+            var rawUnits = units[index];
 
             if (rawItems.length == 0) { // This case is impossible?
-                document.getElementById('loadFromGameExportOutputText').value = i18next.t("Item reading failed, please try again.");
+                document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Item reading failed, please try again."));
                 Notifier.error("Failed reading items, please try again. No items were found.");
                 return
             }
 
-            var convertedItems = convertItems(rawItems);
+            var convertedItems = convertItems(rawItems, scanType);
             var lv0items = convertedItems.filter(x => x.level == 0);
             console.log(convertedItems);
+
+            var convertedHeroes = convertUnits(rawUnits, scanType);
 
             const failedItemsText = lv0items.length > 0 ? `${i18next.t('<br><br>There were <b>')}${lv0items.length}${i18next.t('</b> items with issues.<br>Use the Level=0 filter to fix them on the Gear Tab.')}` : ""
             Dialog.htmlSuccess(`${i18next.t('Finished scanning <b>')}${convertedItems.length}${i18next.t('</b> items.')} ${failedItemsText}`)
 
-            var serializedStr = "{\"items\":" + ItemSerializer.serialize(convertedItems) + "}";
-            document.getElementById('loadFromGameExportOutputText').value = serializedStr;
+            var serializedStr = "{\"items\":" + ItemSerializer.serialize(convertedItems) + ", \"heroes\":" + JSON.stringify(convertedHeroes) + "}";
+            document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = serializedStr);
         } else {
-            document.getElementById('loadFromGameExportOutputText').value = i18next.t("Item reading failed, please try again.");
+            document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Item reading failed, please try again."));
             Notifier.error("Failed reading items, please try again.");
             Dialog.htmlError("Scanner found data, but could not read the gear. Try following the scan instructions again, or visit the <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#contact-me'>Discord server</a> for help.")
         }
     } catch (e) {
         console.error("Failed reading items, please try again " + e);
-        document.getElementById('loadFromGameExportOutputText').value = i18next.t("Item reading failed, please try again.");
+        console.trace();
+        document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Item reading failed, please try again."));
         Dialog.htmlError(i18next.t("Unexpected error while scanning items. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again. Error: ") + e);
     }
 }
 
 global.finishedReading = finishedReading;
 
-function launchScanner(command) {
+function launchScanner(command, scanType) {
     try {
         data = [];
 
@@ -131,16 +138,16 @@ function launchScanner(command) {
                 console.log(bufferArray.join('').split('&').filter(x => !x.includes('DONE')))
                 data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replace(/\s/g,''))
                 // data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replaceAll('↵', '')).map(x => x.replaceAll('\n', '')).map(x => x.replaceAll('\r', ''))
-                finishedReading(data);
+                finishedReading(data, scanType);
             } else {
                 data.push(message);
             }
         });
         console.log("Started scanning")
-        document.getElementById('loadFromGameExportOutputText').value = i18next.t("Started scanning...");
+        document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Started scanning..."));
     } catch (e) {
         console.error(e);
-        document.getElementById('loadFromGameExportOutputText').value = i18next.t("Failed to start scanning, make sure you have Python and pcap installed.");
+        document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Failed to start scanning, make sure you have Python and pcap installed."));
         Notifier.error(e);
     }
 }
@@ -150,8 +157,8 @@ module.exports = {
         findcommand();
     },
 
-    start: () => {
-        launchScanner(command)
+    start: (scanType) => {
+        launchScanner(command, scanType)
     },
 
     switchApi: () => {
@@ -170,7 +177,7 @@ module.exports = {
                 Notifier.error("No scan was started");
                 return
             }
-            document.getElementById('loadFromGameExportOutputText').value = i18next.t("Reading items, this may take up to 30 seconds...\nData will appear here after it is done.");
+            document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Reading items, this may take up to 30 seconds...\nData will appear here after it is done."));
 
             console.log("Stop scanning")
             child.stdin.write('END\n');
@@ -180,7 +187,33 @@ module.exports = {
     }
 }
 
-function convertItems(rawItems) {
+function convertUnits(rawUnits, scanType) {
+    console.warn(rawUnits);
+    for (var rawUnit of rawUnits) {
+        try {
+            if (!rawUnit.name || !rawUnit.id) {
+                continue;
+            }
+
+            rawUnit.stars = rawUnit.g;
+            rawUnit.awaken = rawUnit.z;
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    var filterType = "optimizer"
+    if (scanType == "heroes") {
+        filterType = $('#importHeroesLimitHeroes').val();
+    }
+
+    var filteredUnits = rawUnits.filter(x => !!x.data);
+    console.log(filteredUnits);
+
+    return filteredUnits;
+}
+
+function convertItems(rawItems, scanType) {
     for (var rawItem of rawItems) {
         convertGear(rawItem);
         convertRank(rawItem);
@@ -191,21 +224,31 @@ function convertItems(rawItems) {
         convertMainStat(rawItem);
         convertSubStats(rawItem);
         convertId(rawItem);
+        convertEquippedId(rawItem);
     }
 
-    const filteredItems = filterItems(rawItems);
+    const filteredItems = filterItems(rawItems, scanType);
 
     return filteredItems;
 }
 
-function filterItems(rawItems) {
-    const enhanceLimit = parseInt($('#importLimitEnhance').val());
+function filterItems(rawItems, scanType) {
+    var enhanceLimit = 6;
+    if (scanType == "heroes") {
+        enhanceLimit = parseInt($('#importHeroesLimitEnhance').val());
+    } else if (scanType == "items") {
+        enhanceLimit = parseInt($('#importLimitEnhance').val());
+    }
 
     return rawItems.filter(x => x.enhance >= enhanceLimit);
 }
 
 function convertId(item) {
     item.ingameId = item.id;
+}
+
+function convertEquippedId(item) {
+    item.ingameEquippedId = "" + item.p;
 }
 
 // temp1.filter(x => x.id == "4229824545")[0]

@@ -402,14 +402,16 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Use main stat gear for priority filter
  - Add 5 star base stats
  - Windows installer
+ - Double reforge bug
+ - Auto import equipped units
 
 **Working on:**
  - v1.7.0
  - Priority score column
  - Auto updater
+ - Merge bug
 
  **Medium priority:**
- - Auto import equipped units
 
  **Low priority:**
  - Customizable optimization column formulas

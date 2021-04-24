@@ -11,14 +11,42 @@ const defaultPath = savesFolder;
 module.exports = {
 
     addEventListener: () => {
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
 
-        document.getElementById('loadIngameGearStart').addEventListener("click", async () => {
-            Scanner.start();
-        });
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                var disable = document.getElementsByClassName("collapsible");
+                for (var j = 0; j < disable.length; j++) {
+                    if (disable[j] == this) {
+                        continue;
+                    }
+                    disable[j].classList.remove('active')
+                    var content = disable[j].nextElementSibling;
+                    content.style.display = "none";
+                }
 
-        document.getElementById('loadIngameGearEnd').addEventListener("click", async () => {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+
+        document.querySelectorAll('[id=loadIngameGearStart]').forEach(x => x.addEventListener("click", async () => {
+            Scanner.start("items");
+        }));
+
+        document.querySelectorAll('[id=loadIngameGearHeroesStart]').forEach(x => x.addEventListener("click", async () => {
+            Scanner.start("heroes");
+        }));
+
+        document.querySelectorAll('[id=loadIngameGearEnd]').forEach(x => x.addEventListener("click", async () => {
             Scanner.end();
-        });
+        }));
 
         document.getElementById('fileReadSubmit').addEventListener("click", async () => {
             const options = {
@@ -50,7 +78,7 @@ module.exports = {
                 const failed = data.failed;
 
                 Notifier.success("Finished reading screenshots");
-                $('#fileReadSubmitOutputText').html(` ${i18next.t('Finished reading')} ${fullFilenames.length} ${i18next.t('screenshots.')} \n${items.length} ${i18next.t('screenshots succeded')}, ${failed.length} ${i18next.t('failed')}. ${failed.length > 0 ? i18next.t("Failed files are:")+ "<br>" + failed.join("<br>") : ""} `)
+                $('#fileReadSubmitOutputText').html(`${i18next.t('Finished reading')} ${fullFilenames.length} ${i18next.t('screenshots.')} \n${items.length} ${i18next.t('screenshots succeded')}, ${failed.length} ${i18next.t('failed')}. ${failed.length > 0 ? i18next.t("Failed files are:")+ "<br>" + failed.join("<br>") : ""} `)
 
                 console.log("SERIALIZING");
                 var serializedStr = "{\"items\":" + ItemSerializer.serialize(items) + "}";
@@ -94,11 +122,11 @@ module.exports = {
                     return;
                 }
                 console.log('Exported gear.txt');
-                $('#screenshotExportOutputText').text(` ${i18next.t('Exported data to')} ${filename}`)
+                $('#screenshotExportOutputText').text(`${i18next.t('Exported data to')} ${filename}`)
             });
         });
 
-        document.getElementById('saveLoadFromGameExportOutput').addEventListener("click", async () => {
+        document.querySelectorAll('[id=saveLoadFromGameExportOutput]').forEach(x => x.addEventListener("click", async () => {
             const output = document.getElementById('loadFromGameExportOutputText').value;
 
             if (!output || output.length == 0) {
@@ -130,9 +158,9 @@ module.exports = {
                     return;
                 }
                 console.log('Exported gear.txt');
-                $('#loadFromGameExportOutputText').text(` ${i18next.t('Exported data to')} ${filename}`)
+                document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = `${i18next.t('Exported data to')} ${filename}`);
             });
-        });
+        }));
 
         // document.getElementById('importFileSelect').addEventListener("click", async () => {
         //     const options = {
@@ -150,7 +178,7 @@ module.exports = {
         //         return console.warn("Invalid filename")
         //     };
 
-        //     const path = filenames[0];
+        //     const path = filenames[0];pps":0,"dmg":0,"
 
         //     fs.readFile(Files.path(path), 'utf8', async function read(err, data) {
         //         if (err) {
@@ -205,22 +233,23 @@ module.exports = {
                     console.log("PARSEDDATA", parsedData);
                     const items = parsedData.items;
                     const heroes = parsedData.heroes;
-                    // const deserializedData = ItemSerializer.deserialize(data);
-                    // const items = deserializedData.items;
+
                     console.log("ITEMS", items);
                     ItemAugmenter.augment(items);
 
                     await Api.addItems(items);
 
-                    $('#importAppendOutputText').text(` ${i18next.t('Appended')} ${items.length} ${i18next.t('items from')} ${path}`)
+                    $('#importAppendOutputText').text(`${i18next.t('Appended')} ${items.length} ${i18next.t('items from')} ${path}`)
                 } catch (e) {
-                    Dialog.error(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                    Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                    console.error(e)
                 }
             });
         })
 
 
         document.getElementById('importMergeFileSelect').addEventListener("click", async () => {
+            const enhanceLimit = parseInt($('#importHeroesLimitEnhance').val());
             const options = {
                 title: "Load file",
                 defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
@@ -250,20 +279,84 @@ module.exports = {
                     console.log("PARSEDDATA", parsedData);
                     const items = parsedData.items;
                     const heroes = parsedData.heroes;
-                    // const deserializedData = ItemSerializer.deserialize(data);
-                    // const items = deserializedData.items;
+
                     console.log("ITEMS", items);
                     ItemAugmenter.augment(items);
 
-                    await Api.mergeItems(items);
+                    await Api.mergeItems(items, enhanceLimit);
 
-                    $('#importMergeOutputText').text(` ${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
+                    $('#importMergeOutputText').text(`${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
 
                 } catch (e) {
-                    Dialog.error(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                    Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                    console.error(e);
                 }
             });
         })
+
+        document.getElementById('importMergeHeroesFileSelect').addEventListener("click", async () => {
+            const enhanceLimit = parseInt($('#importHeroesLimitEnhance').val());
+            const heroFilter = $('#importHeroesLimitHeroes').val();
+
+            const options = {
+                title: "Load file",
+                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                buttonLabel : "Load file",
+                filters :[
+                    {name: 'TEXT', extensions: ['txt']},
+                ]
+            }
+            const filenames = dialog.showOpenDialogSync(currentWindow, options);
+            console.log(filenames);
+
+            if (!filenames || filenames.length < 1) {
+                return console.warn("Invalid filename")
+            };
+
+            const path = filenames[0];
+
+            var data = fs.readFileSync(Files.path(path), {encoding:'utf8', flag:'r'});
+
+            $('#importMergeHeroesOutputText').text(i18next.t('Opening file..'))
+
+            try {
+                $('#importMergeHeroesOutputText').text(i18next.t('Parsing data..'))
+
+                const parsedData = JSON.parse(data);
+                console.log("PARSEDDATA", parsedData);
+                const items = parsedData.items;
+                const heroes = parsedData.heroes || [];
+                const filteredHeroes = []
+
+
+                for (var hero of heroes) {
+                    const heroName = hero.name;
+                    const newHero = HeroesTab.getNewHeroByName(heroName);
+                    if (!newHero) {
+                        continue;
+                    }
+
+                    newHero.rarity = newHero.data.rarity;
+                    newHero.attribute = newHero.data.attribute;
+                    newHero.role = newHero.data.role;
+                    newHero.path = heroName;
+
+                    hero.data = newHero;
+                    filteredHeroes.push(hero);
+                }
+
+                console.log("ITEMS", items);
+                ItemAugmenter.augment(items);
+
+                await Api.mergeHeroes(items, filteredHeroes, enhanceLimit, heroFilter);
+
+                $('#importMergeHeroesOutputText').text(`${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
+
+            } catch (e) {
+                Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                console.error(e)
+            }
+        });
 
         document.getElementById('importZarrocSaveFileSelect').addEventListener("click", async () => {
             const options = {
@@ -287,8 +380,7 @@ module.exports = {
             console.log("PARSEDDATA", parsedData);
             var items = parsedData.items || [];
             var heroes = parsedData.heroes || [];
-            // const deserializedData = ItemSerializer.deserialize(data);
-            // const items = deserializedData.items;
+
             console.log("ITEMS", items);
 
             items = items.map(item => ZarrocConverter.reverseConvertItem(item))
@@ -303,7 +395,7 @@ module.exports = {
 
             HeroesTab.redrawHeroInputSelector();
 
-            $('#importZarrocSaveFileSelectOutputText').text(` ${i18next.t('Loaded')} ${heroes.length} ${i18next.t('heroes and')} ${items.length} ${i18next.t('items from')} ${filenames[0]}`)
+            $('#importZarrocSaveFileSelectOutputText').text(`${i18next.t('Loaded')} ${heroes.length} ${i18next.t('heroes and')} ${items.length} ${i18next.t('items from')} ${filenames[0]}`)
         })
     }
 }

@@ -336,15 +336,14 @@ module.exports = {
                     selectedGear[i] = moddedGear[i];
                     selectedGear[i].equippedById = equippedById;
                     selectedGear[i].equippedByName = equippedByName;
+                    selectedGear[i].substats = moddedGear[i].substats;
+                    for (var j = 0; j < selectedGear[i].substats.length; j++) {
+                        selectedGear[i].substats[j].modified = moddedGear[i].substats[j].modified;
+                        selectedGear[i].substats[j].value = moddedGear[i].substats[j].value;
+                        selectedGear[i].substats[j].reforgedValue = moddedGear[i].substats[j].reforgedValue;
+                        selectedGear[i].substats[j].reforged = true;
+                    }
                     continue;
-                }
-
-                selectedGear[i].substats = moddedGear[i].substats;
-                for (var j = 0; j < selectedGear[i].substats.length; j++) {
-                    selectedGear[i].substats[j].modified = moddedGear[i].substats[j].modified;
-                    selectedGear[i].substats[j].value = moddedGear[i].substats[j].value;
-                    selectedGear[i].substats[j].reforgedValue = moddedGear[i].substats[j].reforgedValue;
-                    selectedGear[i].substats[j].reforged = true;
                 }
             }
 
@@ -440,9 +439,7 @@ function clearRatings() {
 function clearStats() {
     $(".stat-number-input").val("")
 }
-// function clearForce() {
-//     $(".force-number-input").val("")
-// }
+
 function clearOptions() {
     $("#inputPredictReforges").prop('checked', true);
     $("#inputSubstatMods").prop('checked', true);
@@ -450,9 +447,6 @@ function clearOptions() {
     $("#inputAllowEquippedItems").prop('checked', false);
     $("#inputKeepCurrentItems").prop('checked', false);
     $("#inputOnlyMaxedGear").prop('checked', false);
-    // $("#inputOver85").prop('checked', false);
-    // $("#inputOnlyPlus15Gear").prop('checked', false);
-    // $('#forceNumberSelect').val(0);
 }
 
 async function editGearFromIcon(id, reforge) {
@@ -492,8 +486,6 @@ async function lockGearFromIcon(id) {
 
 function redrawHeroImage() {
     const name = $( "#inputHeroAdd option:selected" ).attr("label")
-    // console.log($( "#inputHeroAdd option:selected" ));
-    // console.log("name:"+name);
     if (!name || name.length == 0) {
         $('#inputHeroImage').attr("src", Assets.getBlank());
         return;
@@ -544,8 +536,6 @@ async function recalculateFilters(e, heroResponse) {
     const allItemsResponse = await Api.getAllItems();
 
     applyItemFilters(params, heroResponse, allItemsResponse).then(result => {
-        // console.error("applyItemFilters", params);
-
         var items = result.items;
         var allItems = result.allItems;
 

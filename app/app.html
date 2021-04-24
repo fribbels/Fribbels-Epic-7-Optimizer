@@ -1435,137 +1435,214 @@ window.jQuery = $;
 
     <div id="importer-section" class="tab-panel">
 
-      <h2 data-t>Loading gear automatically from the game</h2>
 
-      <p data-t>
-        1. Install requirements from the <a href="https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer">instructions on Github</a></br>
-        2. Leave your emulator open, and close Epic 7</br>
-        3. Click the <b>Start scanning</b> button below</br>
-        4. Open Epic 7, and load into the lobby</br>
-        5. Click the <b>Stop scanning</b> button below</br>
-        6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'</br>
-        7. Import the 'gear.txt' with the <b>Merge</b> option</br>
-        8. If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab</br>
-      </p>
+      <button type="button" class="collapsible" id="importCollapseButton1" data-t>Save / Load optimizer data</button>
+      <div class="content" id="importCollapseContent1">
+        <p data-t>
+        You can load/save your hero + gear configuration here.
+        </p>
 
-      <select id="importLimitEnhance" class="gearPreviewButton">
-        <option value=0 data-t>All</option>
-        <option value=3 data-t>+3 and up</option>
-        <option value=6 selected data-t>+6 and up</option>
-        <option value=9 data-t>+9 and up</option>
-        <option value=12 data-t>+12 and up</option>
-        <option value=15 >+15</option>
-      </select>
+        <input type="submit" class="importerButton" value="Save data" id="saveDataSubmit" data-t>
+        <text id="saveDataSubmitOutputText" data-t>Waiting for file..</text>
 
-      <br>
-      <br>
+        <br>
+        <br>
+
+        <input type="submit" class="importerButton" value="Load data" id="loadDataSubmit" data-t>
+        <text id="loadDataSubmitOutputText" data-t>Waiting for file..</text>
+
+        <br>
+        <br>
+      </div>
 
 
-      <input type="submit" class="gearPreviewButton" value="Start scanning" id="loadIngameGearStart" data-t>
+      <button type="button" class="collapsible" id="importCollapseButton1" data-t>Import gear automatically</button>
+      <div class="content" id="importCollapseContent1">
+        <p data-t>
+          1. Install requirements from the <a href="https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer">instructions on Github</a></br>
+          2. Leave your emulator open, and close Epic 7</br>
+          3. Click the <b>Start scanning</b> button below</br>
+          4. Open Epic 7, and load into the lobby</br>
+          5. Click the <b>Stop scanning</b> button below</br>
+          6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'</br>
+          7. Import the 'gear.txt' with the <b>Merge</b> option</br>
+          8. If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab</br>
+        </p>
 
-      <br>
-      <br>
+        <select id="importLimitEnhance" class="importerButton">
+          <option value=0 data-t>All</option>
+          <option value=3 data-t>+3 and up</option>
+          <option value=6 selected data-t>+6 and up</option>
+          <option value=9 data-t>+9 and up</option>
+          <option value=12 data-t>+12 and up</option>
+          <option value=15 >+15</option>
+        </select>
 
-      <input type="submit" class="gearPreviewButton" value="Stop scanning" id="loadIngameGearEnd" data-t>
-
-      <br>
-      <br>
-
-      <textarea type="text" id="loadFromGameExportOutputText" value="" readonly></textarea>
-
-      <br>
-      <br>
-
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveLoadFromGameExportOutput" data-t>
-      <text id="loadFromGameExportOutputText"></text>
-
-      <br>
-      <br>
-      <hr>
-
-      <h2 data-t>Importing gear data</h2>
-
-      <text data-t>
-        Use <b>merge</b> to update all your gear after using the scanner or screenshot tool.</br>
-      </text>
-      <div class="horizontalSpace"></div>
-
-      <input type="submit" class="gearPreviewButton" value="Merge data" id="importMergeFileSelect" data-t>
-      <text id="importMergeOutputText" data-t>Waiting for file..</text>
-
-      <br>
-      <br>
-      <hr>
-
-      <h2 data-t>Save/Load all optimizer data</h2>
-      <p data-t>
-      You can load/save your hero + gear configuration here.
-      </p>
-
-      <input type="submit" class="gearPreviewButton" value="Save data" id="saveDataSubmit" data-t>
-      <text id="saveDataSubmitOutputText" data-t>Waiting for file..</text>
-
-      <br>
-      <br>
-
-      <input type="submit" class="gearPreviewButton" value="Load data" id="loadDataSubmit" data-t>
-      <text id="loadDataSubmitOutputText" data-t>Waiting for file..</text>
-
-      <br>
-      <br>
-      <hr>
-
-      <h2 data-t>Creating gear data from screenshots</h2>
-      <p data-t>
-      Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)
-      </p>
-      <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
-
-      <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
+        <br>
+        <br>
 
 
-      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit" data-t>
-      <span id="fileReadSubmitOutputText" data-t>Waiting for folder..</span>
+        <input type="submit" class="importerButton" value="Start scanning" id="loadIngameGearStart" data-t>
 
-      <br>
-      <br>
+        <br>
+        <br>
 
-      <textarea type="text" id="exportOutputText" value="" readonly></textarea>
+        <input type="submit" class="importerButton" value="Stop scanning" id="loadIngameGearEnd" data-t>
 
-      <br>
+        <br>
+        <br>
 
-      <p data-t>
-        Once results are printed, hit 'Export'. This will output a 'gear.txt' in the folder where you installed this app.
-      </p>
+        <textarea type="text" id="loadFromGameExportOutputText" value="" readonly></textarea>
 
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput" data-t>
-      <text id="screenshotExportOutputText"></text>
+        <br>
+        <br>
 
-      <br>
-      <br>
+        <input type="submit" class="importerButton" value="Export" id="saveLoadFromGameExportOutput" data-t>
+        <text id="loadFromGameExportOutputText"></text>
+
+
+        <text data-t>
+          Use <b>merge</b> to update all your gear after using the scanner or screenshot tool.</br>
+        </text>
+
+        <br>
+        <br>
+
+
+        <input type="submit" class="importerButton" value="Merge data" id="importMergeFileSelect" data-t>
+        <text id="importMergeOutputText" data-t>Waiting for file..</text>
+
+        </br></br>
+      </div>
 
 
 
-      <text data-t>
-        Use <b>add</b> only if you're using screenshots and want to update a small number of gears.</br>
-      </text>
-      <div class="horizontalSpace"></div>
 
-      <input type="submit" class="gearPreviewButton" value="Add new data" id="importAppendFileSelect" data-t>
-      <text id="importAppendOutputText" data-t>Waiting for file..</text>
-      </br></br>
+      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Importing heroes automatically</button>
+      <div class="content" id="importCollapseContent2">
+        <p data-t>
+          1. Install requirements from the <a href="https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer">instructions on Github</a></br>
+          2. Leave your emulator open, and close Epic 7</br>
+          3. Click the <b>Start scanning</b> button below</br>
+          4. Open Epic 7, and load into the lobby</br>
+          5. Click the <b>Stop scanning</b> button below</br>
+          6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'</br>
+          7. Import the 'gear.txt' with the <b>Merge</b> option</br>
+          8. If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab</br>
+        </p>
+
+        <select id="importHeroesLimitEnhance" class="importerButton">
+          <option value=0 data-t>All</option>
+          <option value=3 data-t>+3 and up</option>
+          <option value=6 selected data-t>+6 and up</option>
+          <option value=9 data-t>+9 and up</option>
+          <option value=12 data-t>+12 and up</option>
+          <option value=15 >+15</option>
+        </select>
+
+        <br>
+        <br>
+
+        <select id="importHeroesLimitHeroes" class="importerButton">
+          <option value="optimizer" selected data-t>Only import optimizer heroes</option>
+          <option value="sixstar" data-t>Import all 6 star heroes</option>
+        </select>
+
+        <br>
+        <br>
 
 
-      <hr>
+        <input type="submit" class="importerButton" value="Start scanning" id="loadIngameGearHeroesStart" data-t>
 
-      <h2 data-t>Import gear from Zarroc optimizer</h2>
-      <p data-t>
-      Select the Zarroc optimizer file here.
-      </p>
+        <br>
+        <br>
 
-      <input type="submit" class="gearPreviewButton" value="Import Zarroc data" id="importZarrocSaveFileSelect" data-t>
-      <text id="importZarrocSaveFileSelectOutputText" data-t>Waiting for file..</text>
+        <input type="submit" class="importerButton" value="Stop scanning" id="loadIngameGearEnd" data-t>
 
+        <br>
+        <br>
+
+        <textarea type="text" id="loadFromGameExportOutputText" value="" readonly></textarea>
+
+        <br>
+        <br>
+
+        <input type="submit" class="importerButton" value="Export" id="saveLoadFromGameExportOutput" data-t>
+        <text id="loadFromGameExportOutputText"></text>
+
+
+        <text data-t>
+          Use <b>merge</b> to update all your gear after using the scanner or screenshot tool.</br>
+        </text>
+
+        <br>
+        <br>
+
+
+        <input type="submit" class="importerButton" value="Merge data" id="importMergeHeroesFileSelect" data-t>
+        <text id="importMergeHeroesOutputText" data-t>Waiting for file..</text>
+
+        </br></br>
+      </div>
+
+
+
+      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Importing gear from screenshots</button>
+      <div class="content" id="importCollapseContent2">
+        <p data-t>
+        Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)
+        </p>
+        <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
+
+        <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
+
+        <input type="submit" class="importerButton" value="Choose folder" id="fileReadSubmit" data-t>
+        <span id="fileReadSubmitOutputText" data-t>Waiting for folder..</span>
+
+        <br>
+        <br>
+
+        <textarea type="text" id="exportOutputText" value="" readonly></textarea>
+
+        <br>
+
+        <p data-t>
+          Once results are printed, hit 'Export'. This will output a 'gear.txt' in the folder where you installed this app.
+        </p>
+
+        <input type="submit" class="importerButton" value="Export" id="saveExportOutput" data-t>
+        <text id="screenshotExportOutputText"></text>
+
+        <br>
+        <br>
+
+        <text data-t>
+          Use <b>add</b> only if you're using screenshots and want to update a small number of gears.</br>
+        </text>
+        <div class="horizontalSpace"></div>
+
+        <input type="submit" class="importerButton" value="Add new data" id="importAppendFileSelect" data-t>
+        <text id="importAppendOutputText" data-t>Waiting for file..</text>
+        </br></br>
+
+      </div>
+
+
+
+
+
+
+      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Import gear from Zarroc optimizer</button>
+      <div class="content" id="importCollapseContent2">
+
+        Select the Zarroc optimizer file here.
+        </p>
+
+        <input type="submit" class="importerButton" value="Import Zarroc data" id="importZarrocSaveFileSelect" data-t>
+        <text id="importZarrocSaveFileSelectOutputText" data-t>Waiting for file..</text>
+        </br></br>
+
+      </div>
     </div>
 
 

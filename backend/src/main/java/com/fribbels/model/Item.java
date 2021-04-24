@@ -42,13 +42,14 @@ public class Item {
     public String id;
     public String modId;
     public String ingameId;
+    public String ingameEquippedId;
 
     private String equippedById;
     private String equippedByName;
     private String heroName;
 
     private boolean locked;
-    private boolean alreadyPredictedReforge;
+//    private boolean alreadyPredictedReforge;
     public int reforgeable;
     public int upgradeable;
     public int convertable;

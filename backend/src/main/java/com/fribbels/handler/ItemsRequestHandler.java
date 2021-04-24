@@ -4,14 +4,20 @@ import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
 import com.fribbels.enums.Gear;
+import com.fribbels.enums.HeroFilter;
 import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
+import com.fribbels.model.MergeHero;
+import com.fribbels.request.EquipItemsOnHeroRequest;
+import com.fribbels.request.HeroesRequest;
 import com.fribbels.request.IdRequest;
 import com.fribbels.request.IdsRequest;
 import com.fribbels.request.ItemsRequest;
+import com.fribbels.request.MergeRequest;
 import com.fribbels.response.GetAllItemsResponse;
 import com.fribbels.response.GetItemByIdResponse;
+import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -20,9 +26,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -53,8 +59,12 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     sendResponse(exchange, addItems(addItemsRequest));
                     return;
                 case "/items/mergeItems":
-                    final ItemsRequest mergeItemsRequest = parseRequest(exchange, ItemsRequest.class);
+                    final MergeRequest mergeItemsRequest = parseRequest(exchange, MergeRequest.class);
                     sendResponse(exchange, mergeItems(mergeItemsRequest));
+                    return;
+                case "/items/mergeHeroes":
+                    final MergeRequest mergeHeroesRequest = parseRequest(exchange, MergeRequest.class);
+                    sendResponse(exchange, mergeHeroes(mergeHeroesRequest));
                     return;
                 case "/items/setItems":
                     final ItemsRequest setItemsRequest = parseRequest(exchange, ItemsRequest.class);
@@ -103,8 +113,11 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return "";
     }
 
-    public String mergeItems(final ItemsRequest request) {
-        final List<Item> newItems = request.getItems();
+    public String mergeItems(final MergeRequest request) {
+        final List<Item> newItems = request.getItems()
+                .stream()
+                .filter(x -> x.getEnhance() >= request.getEnhanceLimit())
+                .collect(Collectors.toList());
         final List<Item> existingItems = itemDb.getAllItems();
 
         final Map<Integer, List<Item>> itemsByHash = new HashMap<>();
@@ -157,6 +170,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 matchingExistingItem.setConvertable(newItem.getConvertable());
                 matchingExistingItem.setReforgeable(newItem.getReforgeable());
                 matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
+                matchingExistingItem.setIngameEquippedId(newItem.getIngameEquippedId());
 
                 newItems.set(i, matchingExistingItem);
                 continue;
@@ -191,6 +205,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     matchingExistingItem.setConvertable(newItem.getConvertable());
                     matchingExistingItem.setReforgeable(newItem.getReforgeable());
                     matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
+                    matchingExistingItem.setIngameEquippedId(newItem.getIngameEquippedId());
                 }
             }
         }
@@ -262,6 +277,97 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         }
 
         itemDb.setItems(newItems);
+
+        return "";
+    }
+
+    public String mergeHeroes(final MergeRequest request) {
+        mergeItems(request);
+
+        final List<Item> existingItems = itemDb.getAllItems();
+        final Map<String, List<Item>> itemsByIngameEquippedId = existingItems.stream()
+                .peek(System.out::println)
+                .collect(Collectors.groupingBy(
+                        Item::getIngameEquippedId,
+                        Collectors.toList()));
+
+        final List<MergeHero> mergeHeroes = request.getMergeHeroes();
+        final Map<String, MergeHero> mergeHeroesByName = mergeHeroes
+                .stream()
+                .collect(Collectors.toMap(
+                        MergeHero::getName,
+                        x -> x,
+                        (x, y) -> x));
+
+
+        final List<Hero> existingHeroes = heroDb.getAllHeroes();
+        final Map<String, Hero> existingHeroesByName = existingHeroes
+                .stream()
+                .collect(Collectors.toMap(
+                        Hero::getName,
+                        x -> x,
+                        (x, y) -> x));
+
+        if (request.getHeroFilter() == HeroFilter.OPTIMIZER) {
+            existingHeroes
+                    .stream()
+                    .forEach(hero -> {
+                        final String name = hero.getName();
+
+                        final MergeHero mergeHero = mergeHeroesByName.getOrDefault(name, null);
+                        if (mergeHero == null) return;
+
+                        final String ingameHeroId = mergeHero.getId();
+                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId.getOrDefault(ingameHeroId, ImmutableList.of());
+
+                        heroesRequestHandler.equipItemsOnHero(EquipItemsOnHeroRequest.builder()
+                                .heroId(hero.getId())
+                                .itemIds(itemsEquippedByIngameHeroId
+                                        .stream()
+                                        .map(Item::getId)
+                                        .collect(Collectors.toList()))
+                                .useReforgeStats(true)
+                                .build());
+                    });
+        }
+
+        if (request.getHeroFilter() == HeroFilter.SIX_STAR) {
+            final Set<String> alreadyMergedNames = new HashSet<>();
+            mergeHeroes
+                    .stream()
+                    .filter(x -> x.getStars() == 6)
+                    .forEach(mergeHero -> {
+                        final String name = mergeHero.getName();
+                        if (alreadyMergedNames.contains(name)) return;
+                        alreadyMergedNames.add(name);
+
+                        final Hero hero;
+                        if (existingHeroesByName.containsKey(name)) {
+                            hero = existingHeroesByName.get(name);
+                            System.out.println("EXISTING HERO");
+                        } else {
+                            heroesRequestHandler.addHeroes(HeroesRequest
+                                    .builder()
+                                    .heroes(ImmutableList.of(mergeHero.getData()))
+                                    .build());
+
+                            hero = heroDb.getHeroById(mergeHero.getData().getId());
+                            System.out.println("ADDED HERO" + hero);
+                        }
+
+                        final String ingameHeroId = mergeHero.getId();
+                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId.getOrDefault(ingameHeroId, ImmutableList.of());
+
+                        heroesRequestHandler.equipItemsOnHero(EquipItemsOnHeroRequest.builder()
+                                .heroId(hero.getId())
+                                .itemIds(itemsEquippedByIngameHeroId
+                                        .stream()
+                                        .map(Item::getId)
+                                        .collect(Collectors.toList()))
+                                .useReforgeStats(true)
+                                .build());
+                    });
+        }
 
         return "";
     }

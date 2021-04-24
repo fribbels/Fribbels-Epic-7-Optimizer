@@ -322,6 +322,11 @@ module.exports = {
     getNewHeroByName: (heroName) => {
         const allHeroData = HeroData.getAllHeroData();
         const heroData = allHeroData[heroName];
+
+        if (!heroData) {
+            return null;
+        }
+
         const id = uuidv4();
         const data = JSON.parse(JSON.stringify(heroData));
 

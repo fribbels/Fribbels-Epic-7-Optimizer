@@ -156,6 +156,14 @@ body {
   margin-right: 5px;
 }
 
+.importerButton {
+  width: 200px;
+  cursor: pointer;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  margin-right: 5px;
+}
+
 .optimization-results-panel {
   flex-grow: 2;
   min-height: 340px;
@@ -1528,4 +1536,50 @@ input:checked + .darkSlider:before {
   padding-bottom: 10px;
   background: #7d7d7d;
   min-height: 385px;
+}
+
+:root {
+    --input-color: #e0e0e0;
+    --inactive-color: #d0d0d0;
+
+/*
+    --bg-color: #212529;
+    --font-color: #e2e2e2;
+    --border-color: #2D3136;
+    --accent-red: #F84C48;
+    --outline-color: #f84b4860;
+    --btn-color: #2D3136;
+    --accent-green: #00BE9B;
+    --scrollbar-grey: #5a5a5a;
+    --link-blue: #1e90ff;*/
+}
+
+/* Collapse */
+/* Style the button that is used to open and close the collapsible content */
+
+.collapsible {
+  background-color: var(--input-color);
+  color: var(--font-color);
+  cursor: pointer;
+  padding: 20px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  margin-bottom: 10px;
+  outline: none !important;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: var(--inactive-color);
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  /*background-color: #f1f1f1;*/
 }

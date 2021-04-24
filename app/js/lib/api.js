@@ -139,9 +139,19 @@ module.exports = {
         });
     },
 
-    mergeItems: async (items) => {
+    mergeItems: async (items, enhanceLimit) => {
         return post('/items/mergeItems', {
-            items: items
+            items: items,
+            enhanceLimit: enhanceLimit
+        });
+    },
+
+    mergeHeroes: async (items, mergeHeroes, enhanceLimit, heroFilter) => {
+        return post('/items/mergeHeroes', {
+            items: items,
+            mergeHeroes: mergeHeroes,
+            enhanceLimit: enhanceLimit,
+            heroFilter: heroFilter
         });
     },
 
