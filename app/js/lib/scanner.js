@@ -3,8 +3,8 @@ var childProcess = require('child_process')
 global.child = null;
 global.data = [];
 
-global.api = "http://127.0.0.1:5000";
-// global.api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
+// global.api = "http://127.0.0.1:5000";
+global.api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
 
 global.command = 'python'
 var findCommandSpawn = null;
@@ -51,12 +51,13 @@ async function finishedReading(data, scanType) {
         console.log(response);
 
         if (response.status == "SUCCESS") {
-            const equips = response.data;
-            const units = response.units;
+            const equips = response.data || [];
+            const units = response.units || [];
             var rawItems = equips.filter(x => !!x.f)
             const lengths = units.map(a => a.length);
             const index = lengths.indexOf(Math.max(...lengths));
-            var rawUnits = units[index];
+
+            var rawUnits = index == -1 ? [] : units[index];
 
             if (rawItems.length == 0) { // This case is impossible?
                 document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Item reading failed, please try again."));
