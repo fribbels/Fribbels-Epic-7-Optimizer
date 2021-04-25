@@ -203,6 +203,46 @@ module.exports = {
         //     });
         // })
 
+        document.getElementById('importScreenshotsFileSelect').addEventListener("click", async () => {
+            const options = {
+                title: "Load file",
+                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                buttonLabel : "Load file",
+                filters :[
+                    {name: 'TEXT', extensions: ['txt']},
+                ]
+            }
+            const filenames = dialog.showOpenDialogSync(currentWindow, options);
+            console.log(filenames);
+
+            if (!filenames || filenames.length < 1) {
+                return console.warn("Invalid filename")
+            };
+
+            const path = filenames[0];
+
+            const data = await Files.readFileSync(Files.path(path));
+
+            try {
+                $('#importScreenshotsOutputText').text(i18next.t('Parsing data..'))
+
+                const parsedData = JSON.parse(data);
+                console.log("PARSEDDATA", parsedData);
+                const items = parsedData.items;
+                const heroes = parsedData.heroes;
+
+                console.log("ITEMS", items);
+                ItemAugmenter.augment(items);
+
+                await Api.mergeItems(items, 0);
+
+                $('#importScreenshotsOutputText').text(`${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
+            } catch (e) {
+                Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                console.error(e)
+            }
+        })
+
         document.getElementById('importAppendFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
@@ -221,30 +261,31 @@ module.exports = {
 
             const path = filenames[0];
 
-            fs.readFile(Files.path(path), 'utf8', async function read(err, data) {
-                if (err) {
-                    throw err;
+            const data = await Files.readFileSync(Files.path(path));
+
+            try {
+                $('#importAppendOutputText').text(i18next.t('Parsing data..'))
+
+                const parsedData = JSON.parse(data);
+                console.log("PARSEDDATA", parsedData);
+                const items = parsedData.items;
+                const heroes = parsedData.heroes;
+
+                console.log("ITEMS", items);
+                ItemAugmenter.augment(items);
+
+                const confirm = await Dialog.confirmation("Add new items to your existing items? This can cause duplicate items if screenshots include existing gear. Use this only for the screenshot importer. If you want to update your existing gear with new screenshots, use the Merge option instead.");
+                if (!confirm) {
+                    return;
                 }
 
-                try {
-                    $('#importAppendOutputText').text(i18next.t('Parsing data..'))
+                await Api.addItems(items);
 
-                    const parsedData = JSON.parse(data);
-                    console.log("PARSEDDATA", parsedData);
-                    const items = parsedData.items;
-                    const heroes = parsedData.heroes;
-
-                    console.log("ITEMS", items);
-                    ItemAugmenter.augment(items);
-
-                    await Api.addItems(items);
-
-                    $('#importAppendOutputText').text(`${i18next.t('Appended')} ${items.length} ${i18next.t('items from')} ${path}`)
-                } catch (e) {
-                    Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
-                    console.error(e)
-                }
-            });
+                $('#importAppendOutputText').text(`${i18next.t('Appended')} ${items.length} ${i18next.t('items from')} ${path}`)
+            } catch (e) {
+                Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
+                console.error(e)
+            }
         })
 
 
@@ -343,6 +384,11 @@ module.exports = {
 
                 console.log("ITEMS", items);
                 ItemAugmenter.augment(items);
+
+                const confirm = await Dialog.confirmation("Are you sure you want to overwrite the optimizer's hero data with ingame hero data?");
+                if (!confirm) {
+                    return;
+                }
 
                 await Api.mergeHeroes(items, filteredHeroes, enhanceLimit, heroFilter);
 

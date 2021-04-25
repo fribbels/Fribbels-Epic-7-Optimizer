@@ -160,7 +160,7 @@ module.exports = {
             const heroInfo = heroData[hero.name];
             const ee = heroInfo.ex_equip[0];
 
-            const { value: formValues } = await Swal.fire({
+            const result = await Swal.fire({
                 title: '',
                 width: 900,
                 html: `
@@ -350,9 +350,28 @@ module.exports = {
                         heroInfo: heroInfo
                     }
 
-                    resolve(editedHero);
+                    return editedHero;
+                    // resolve(editedHero);
                 }
             });
+
+            resolve(result.value);
+        });
+    },
+
+    confirmation: async (text) => {
+        return new Promise(async (resolve, reject) => {
+            const result = await Swal.fire({
+                title: '',
+                icon: 'question',
+                text: text,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: i18next.t("OK"),
+                cancelButtonText: i18next.t("Cancel")
+            });
+
+            resolve(result.value);
         });
     },
 

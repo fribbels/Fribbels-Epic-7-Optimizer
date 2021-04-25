@@ -284,7 +284,7 @@ There are two importer options, one that automatically imports gear directly fro
 
 ##### First time  setup for the automatic importer on Windows
 1. Install [Python 3.4+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link to 3.9.2](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). **IMPORTANT: Enable the option to add Python to PATH**
-2. Install [Npcap 1.10](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.10.exe). During installation ,enable the setting to "Support raw 802.11 traffic (and monitor mode) for wireless adapters".
+2. Install [Npcap](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.31.exe). During installation ,enable the setting to "Support raw 802.11 traffic (and monitor mode) for wireless adapters".
 3. Restart your computer
 
 ##### First time  setup for the automatic importer on Mac
@@ -405,16 +405,19 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Double reforge bug
  - Auto import equipped units
  - Priority score column
+ - Merge bug
+ - Add bonus stats
+ - Confirmation dialog
 
 **Working on:**
  - v1.7.0
  - Auto updater
- - Merge bug
- - Read file sync
 
  **Medium priority:**
+ - Safer autosave folder loading https://cdn.discordapp.com/attachments/819494928077553684/831868290019229726/unknown.png
 
  **Low priority:**
+ - Read file sync everything
  - Customizable optimization column formulas
  - Clear out item previews on refresh
  - Optimizer broken set priority
@@ -448,28 +451,25 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 * If it takes longer than 30 seconds and no error shows up.
   * Make sure the requirements are installed (Python and Npcap for Windows, Python and Wireshark for Mac), or try reinstalling them.
   * Restart your computer
-  * Open the dev tools to check the errors
-  * I'm not sure of all the error cases yet, contact me so I can help and add the solution here
-
+  * If you're on VPN, either disable it or change encryption to UDP
+  * If you have Hyper-V enabled, there's a couple options:
+    * Open the View Network Connections menu, and disable the Hyper-V Bluestacks network adapter, then use the mobile hotspot import option.
+    * Or modify the scanner code to hardcode your network interface: https://github.com/fribbels/Fribbels-Epic-7-Optimizer/issues/50#issuecomment-804275567
 * Shows an error
   * Try it again a couple times, it does fail occasionally
 
-* Drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
+* Feel free to drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
 
 ### Optimizer
 
-- If the optimizer doesn't work or doesn't load correctly:
-  - Try restarting your computer, and reopen the app (there might be a child process still kicking around)
-  - Try killing any java.exe processes in Task Manager that came from this app
+- If you're seeing Java issues:
+  - Make sure Java 8 - 64 bit is installed.
+  - Make sure that Java is in your path environment variable: https://mkyong.com/java/how-to-set-java_home-on-windows-10/
+  - Try restarting your computer, and reopen the app (there might be a subprocess still kicking around)
 
- - If you're having problems with importing screenshot files:
-   - Inspect your screenshots and make sure they are exactly **1600x900** resolution.
-   - Make sure your Epic 7 settings have **English** and **High Quality Support** enabled.
-   - Try moving your app and screenshot folder to a different location. (try the desktop)
-
-  - If you're having trouble running the app after downloading:
-    - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-x.x.x...' file (for your specific OS)
-    -   Error about a missing "ffmpeg.dll", you might have opened the file without unzipping it. Make sure to unzip/extract the .zip file after downloading it.
+- If you're having trouble running the app after downloading:
+  - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-x.x.x...' file (for your specific OS), not the Souce code
+  - Error about a missing "ffmpeg.dll", you might have opened the file without unzipping it. Make sure to unzip/extract the .zip file after downloading it.
 
 - If you see a "Error: EPERM: operation not permitted" error pop up while importing, there are a couple potential fixes:
   - Restart your computer, especially if you installed Java recently
@@ -477,6 +477,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
   - Your file or folder contents might be compressed, uncheck this box on the folder: https://i.imgur.com/kSzTqek.png
   - Run the app as administrator
   - Move the app and screenshots folder to a new file location
+  - Disable Windows security randomware protection: https://www.majorgeeks.com/content/page/how_to_enable_or_disable_windows_defender_exploit_guard_controlled_folder_access.html
 
 - If you get a error that contains "Current relative path is C:\Windows\system32..."
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
@@ -489,8 +490,14 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
   - Mac: Resize to 1600x900 through Bluestacks options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900.
 
 - If a hero is missing from the drop down list, contact me to add it.
+
 - If you see a bunch of optimization result rows with the same stats, you probably have duplicate gear. [Example](https://i.imgur.com/hUcyN1I.png)
   - Use the Duplicates filter on the Gear screen to find and fix your duplicate gear. Alternatively Overwrite/Merge your gear data to start over. Be careful when using the Append option, because that can result in duplicate gear being added. Most of the time you'll want to use Merge.
+
+- If you're having problems with importing screenshot files:
+ - Inspect your screenshots and make sure they are exactly **1600x900** resolution.
+ - Make sure your Epic 7 settings have **English** and **High Quality Support** enabled.
+ - Try moving your app and screenshot folder to a different location. (try the desktop)
 
 * Drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
 

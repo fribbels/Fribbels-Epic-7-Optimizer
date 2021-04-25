@@ -27,8 +27,9 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
     private TessBaseAPI tessBaseAPI;
 
+    private static boolean initialized = false;
+
     public OcrRequestHandler() throws Exception {
-        initialize();
     }
 
     private void initialize() throws Exception {
@@ -46,6 +47,7 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         tessBaseAPI.SetVariable("load_freq_dawg", "false");
         tessBaseAPI.SetVariable("classify_enable_learning", "0");
         tessBaseAPI.SetVariable("user_defined_dpi", "70");
+        initialized = true;
     }
 
     @Override
@@ -56,6 +58,10 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         System.out.println("Path: " + path);
 
         try {
+            if (!initialized) {
+                initialize();
+            }
+
             switch (path) {
                 case "/ocr":
                     final IdRequest ocrRequest = parseRequest(exchange, IdRequest.class);
@@ -68,7 +74,7 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
                 default:
                     System.out.println("No handler found for " + path);
             }
-        } catch (final RuntimeException e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
