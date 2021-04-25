@@ -222,68 +222,68 @@ module.exports = {
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Attack")}</div>
                                     <div class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || ""}">
                                     </div>
                                     <div class="blankFormSpace"></div>
                                     <span class="valuePadding input-holder-percent">
-                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || 0}">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusAttackPercent" value="${hero.bonusAtkPercent || ""}">
                                     </span>
                                 </div>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Defense")}</div>
                                     <span class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || ""}">
                                     </span>
                                     <div class="blankFormSpace"></div>
                                     <span class="valuePadding input-holder-percent">
-                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || 0}">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusDefensePercent" value="${hero.bonusDefPercent || ""}">
                                     </span>
                                 </div>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Health")}</div>
                                     <span class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || ""}">
                                     </span>
                                     <div class="blankFormSpace"></div>
                                     <span class="valuePadding input-holder-percent">
-                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || 0}">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroBonusHealthPercent" value="${hero.bonusHpPercent || ""}">
                                     </span>
                                 </div>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Speed")}</div>
                                     <span class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || ""}">
                                     </span>
                                 </div>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Crit Rate")}</div>
                                     <span class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || ""}">
                                     </span>
                                 </div>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Crit Dmg")}</div>
                                     <span class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || ""}">
                                     </span>
                                 </div>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Eff")}</div>
                                     <span class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || ""}">
                                     </span>
                                 </div>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Res")}</div>
                                     <span class="valuePadding input-holder">
-                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
+                                        <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || ""}">
                                     </span>
                                 </div>
                             </div>

@@ -141,7 +141,6 @@ body {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  margin-bottom: 5px;
 }
 
 .tab {
@@ -181,9 +180,9 @@ body {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  min-height: 210px;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  min-height: 225px;
+  margin-top: 2px;
+  margin-bottom: 14px;
 }
 
 .optimizerActionButtons {
@@ -256,18 +255,34 @@ input {
 }
 
 .gear-preview-row {
-  padding: 0px 24px 5px;
-  margin-top: 5px;
+  padding: 12px 12px 5px;
   font-size: 13px;
   width: 170px;
-  height: 195px;
+  height: 230px;
+  border: 1px solid var(--inactive-color);
+  margin-right: 10px;
+  border-radius: 7px;
 }
 
 .tab {
   display: flex;
   flex-direction: row;
 }
-.
+.ag-body-horizontal-scroll {
+  min-height: 5px !important;
+  max-height: 5px !important;
+  height: 5px !important;
+}
+.ag-body-horizontal-scroll-viewport {
+  min-height: 5px !important;
+  max-height: 5px !important;
+  height: 5px !important;
+}
+.ag-body-horizontal-scroll-container {
+  min-height: 5px !important;
+  max-height: 5px !important;
+  height: 5px !important;
+}
 /*
  Demo purposes only
 */
@@ -305,8 +320,8 @@ input {
 #heroes-equipped-section {
   display: flex;
   flex-direction: row;
-  min-height: 230px;
-  margin-bottom: 10px
+  min-height: 250px;
+  margin-bottom: 8px
 }
 
 .heroes-equipped-item {
@@ -512,6 +527,36 @@ input {
   font-weight: 600;
   text-align: center;
 }
+
+.ag-header-cell {
+  padding-top: 2px !important;
+}
+.ag-header-cell:after {
+  top: 5% !important;
+}
+
+.ag-header-cell-label {
+    align-items: baseline !important;
+}
+
+.ag-icon {
+    line-height: 14px !important;
+    font-weight: 400 !important;
+}
+
+.ag-header-row .ag-header-row-column {
+    height: 24px !important;
+}
+
+.ag-header {
+      height: 24px !important;
+    min-height: 24px !important;
+}
+
+.ag-theme-balham .ag-paging-panel {
+  height: 24px !important;
+}
+
 .ag-header-label-icon {
   margin-left: -3px !important;
 }
@@ -808,7 +853,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 400;
 }
 .heroesTabButtonRow {
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   display: flex;
   align-items: center;
 }
@@ -963,6 +1008,7 @@ body.dark-theme input {
   min-width: 42px;
   height: 42px;
   margin-right: 3px;
+
 }
 .gearTabButton {
   /* Table/Selection B */
@@ -1355,6 +1401,7 @@ body.dark-theme input {
   min-height: 370px;
   height: 370px;
   flex-grow: 1;
+  margin-top: 6px;
 }
 .buildsTableContainer {
   min-height: 165px;
@@ -1516,7 +1563,7 @@ input:checked + .darkSlider:before {
 .list-group-item {
   cursor: move;
   cursor: -webkit-grabbing;
-  background-color: var(--input-color);
+  background-color: var(--inactive-color);
   color: var(--font-color);
   border-radius: 1rem;
   border-radius: 5px;
@@ -1534,14 +1581,14 @@ input:checked + .darkSlider:before {
   padding-left: 6px;
   padding-right: 6px;
   padding-bottom: 6px;
-  background: #7d7d7d;
+  background: var(--input-color);
   min-height: 385px;
   width: 120px;
 }
 
 :root {
     --input-color: #e0e0e0;
-    --inactive-color: #d0d0d0;
+    --inactive-color: #cacaca;
 
 /*
     --bg-color: #212529;
@@ -1559,7 +1606,7 @@ input:checked + .darkSlider:before {
 /* Style the button that is used to open and close the collapsible content */
 
 .collapsible {
-  background-color: var(--input-color);
+  background-color: var(--inactive-color);
   color: var(--font-color);
   cursor: pointer;
   padding: 20px;
@@ -1574,7 +1621,7 @@ input:checked + .darkSlider:before {
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .collapsible:hover {
-  background-color: var(--inactive-color);
+  background-color: var(--input-color);
 }
 
 /* Style the collapsible content. Note: hidden by default */
