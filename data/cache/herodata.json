@@ -23297,6 +23297,100 @@
       }
     }
   },
+  "Senya": {
+    "_id": "Senya",
+    "name": "Senya",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "knight",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "acc",
+      "grades": {
+        "C": 0.036,
+        "B": 0.054,
+        "A": 0.072,
+        "S": 0.09,
+        "SS": 0.108,
+        "SSS": 0.126
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1106_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1106_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1106_l.png"
+    },
+    "ex_equip": [
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11621,
+        "atk": 786,
+        "hp": 3077,
+        "spd": 106,
+        "def": 551,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13166,
+        "atk": 976,
+        "hp": 3601,
+        "spd": 106,
+        "def": 551,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.06,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14485,
+        "atk": 980,
+        "hp": 3869,
+        "spd": 106,
+        "def": 683,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16900,
+        "atk": 1445,
+        "hp": 6321,
+        "spd": 100,
+        "def": 645,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Serila": {
     "_id": "serila",
     "name": "Serila",
