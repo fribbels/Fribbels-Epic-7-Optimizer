@@ -1763,6 +1763,20 @@
       "health": 54
     }
   },
+  "Spear of a New Dawn": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0049.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0049_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0049_l.jpg"
+    },
+    "name": "Spear of a New Dawn",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Spirit's Breath": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0049.png",
