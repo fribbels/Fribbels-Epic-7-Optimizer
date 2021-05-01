@@ -12609,7 +12609,7 @@
     "moonlight": true,
     "rarity": 4,
     "attribute": "light",
-    "role": "mage",
+    "role": "warrior",
     "zodiac": "crab",
     "self_devotion": {
       "type": "acc",
