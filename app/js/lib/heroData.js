@@ -35,22 +35,28 @@ UrlExists('http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.js
 module.exports = {
 
     initialize: async () => {
-        var heroesByNameStr = await Files.readFileSync(Files.getDataPath() + '/cache/herodata.json');
-        heroesByName = JSON.parse(heroesByNameStr);
-        const heroNameList = Object.keys(heroesByName);
+        try {
+            var heroesByNameStr = await Files.readFileSync(Files.getDataPath() + '/cache/herodata.json');
+            heroesByName = JSON.parse(heroesByNameStr);
+            // const heroNameList = Object.keys(heroesByName);
+        } catch (e) {
+            console.warn("Error loading hero data from file", e)
+        }
 
-        var artifactsByNameStr = await Files.readFileSync(Files.getDataPath() + '/cache/artifactdata.json');
-        artifactsByName = JSON.parse(artifactsByNameStr);
-        const artifactNameList = Object.keys(artifactsByName);
+        try {
+            var artifactsByNameStr = await Files.readFileSync(Files.getDataPath() + '/cache/artifactdata.json');
+            artifactsByName = JSON.parse(artifactsByNameStr);
+            // const artifactNameList = Object.keys(artifactsByName);
+        } catch (e) {
+            console.warn("Error loading artifact data from file", e)
+        }
 
         try {
             if (global.TEST) {
                 const heroOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/cache/herodata.json"));
                 heroesByName = heroOverride;
             } else {
-                console.log(1)
                 const heroOverride = await fetchCache(HERO_CACHE);
-                console.log(2)
                 heroesByName = heroOverride;
             }
             console.warn("HERO OVERRIDES")
@@ -60,6 +66,7 @@ module.exports = {
         }
 
         try {
+
             if (global.TEST) {
                 const artifactOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/cache/artifactdata.json"));
                 artifactsByName = artifactOverride;
