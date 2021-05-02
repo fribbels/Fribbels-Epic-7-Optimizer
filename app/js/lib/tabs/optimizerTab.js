@@ -607,10 +607,12 @@ async function addBuild() {
     const rowId = row.id;
     const heroId = getSelectedHeroId();
 
+    const hero = (await Api.getHeroById(heroId)).hero;
+
     console.log("ADD BUILD", row)
 
     if (row.mods.filter(x => x).length > 0) {
-        row.name = "MOD: " + (!hero.modGrade ? "" : (hero.modGrade == "greater" ? "Greater" : "Lesser")) + " " + (hero.rollQuality || "") + "%";
+        row.name = "MOD: " + (!hero.modGrade ? "" : (hero.modGrade == "greater" ? "Greater" : "Lesser")) + " " + (hero.rollQuality || "0") + "%";
     }
 
     await Api.addBuild(heroId, row);
@@ -664,7 +666,7 @@ async function equipSelectedGear() {
 
 
     if (row.mods.filter(x => x).length > 0) {
-        row.name = "MOD: " + (!hero.modGrade ? "" : (hero.modGrade == "greater" ? "Greater" : "Lesser")) + " " + (hero.rollQuality || "") + "%";
+        row.name = "MOD: " + (!hero.modGrade ? "" : (hero.modGrade == "greater" ? "Greater" : "Lesser")) + " " + (hero.rollQuality || "0") + "%";
     }
 
     await Api.addBuild(heroId, row);

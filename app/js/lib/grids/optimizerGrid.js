@@ -205,7 +205,8 @@ function aggregateCurrentHeroStats(heroStats) {
         "mcdmg",
         "mcdmgps",
         "dmgh",
-        "score"
+        "score",
+        "priority"
     ]
 
     var count = heroStats.length;
