@@ -208,7 +208,7 @@ function convertUnits(rawUnits, scanType) {
         filterType = $('#importHeroesLimitHeroes').val();
     }
 
-    var filteredUnits = rawUnits.filter(x => !!x.data);
+    var filteredUnits = rawUnits.filter(x => !!x.name);
     console.log(filteredUnits);
 
     return filteredUnits;

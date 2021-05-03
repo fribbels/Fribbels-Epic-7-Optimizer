@@ -56,7 +56,7 @@ public class BaseStatsDb {
                 .name(name)
                 .build();
 
-        SpecialStats.setScBonusStats(response);
+        SpecialStats.setScBonusStats(response, stars);
 
         return response;
     }
