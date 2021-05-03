@@ -22,6 +22,7 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "ag-grid-community": "^25.1.0",
     "animate.css": "^4.1.1",
+    "animate.min.css": "^0.0.3",
     "awesome-notifications": "^3.1.1",
     "axios": "^0.21.0",
     "fs": "latest",

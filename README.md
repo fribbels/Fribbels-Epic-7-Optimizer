@@ -1,6 +1,8 @@
 
 # Fribbels Epic 7 Gear Optimizer
 
+[![Discord](https://img.shields.io/discord/591914197219016707.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/rDmB4Un7qg)
+
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
 
 Come join the Fribbels E7 Optimizer Discord server for announcements, troubleshooting, or ideas and suggestions! https://discord.gg/rDmB4Un7qg

@@ -31,7 +31,7 @@ module.exports = {
         }
 
         try {
-            buildsGrid.gridOptions.api.refreshView()
+            buildsGrid.gridOptions.api.refreshCells()
         } catch (e) {
 
         }
@@ -42,7 +42,13 @@ module.exports = {
           var localeText = AG_GRID_LOCALE_ZH;
         } else if (i18next.language == 'zh-TW') {
           var localeText = AG_GRID_LOCALE_ZH_TW;
-        } else {
+        } else if (i18next.language == 'fr') {
+          var localeText = AG_GRID_LOCALE_FR;
+        } else if (i18next.language == 'ko') {
+          var localeText = AG_GRID_LOCALE_KO;
+        } else if (i18next.language == 'es') {
+          var localeText = AG_GRID_LOCALE_ES;
+        }  else {
           var localeText = AG_GRID_LOCALE_EN;
         }
         console.log('localeText:'+localeText);

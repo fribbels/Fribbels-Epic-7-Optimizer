@@ -61,18 +61,18 @@ module.exports = {
         }
 
         optimizerStatToDisplayStat = {
-            "AttackPercent": "Attack %",
-            "HealthPercent": "Health %",
-            "DefensePercent": "Defense %",
-            "Attack": "Attack",
-            "Health": "Health",
-            "Defense": "Defense",
-            "Speed": "Speed",
-            "EffectResistancePercent": "Effect Resistance",
-            "CriticalHitChancePercent": "Crit Chance",
-            "CriticalHitDamagePercent": "Crit Damage",
-            "EffectivenessPercent": "Effectiveness",
-            "DualAttackChancePercent": "DualAttackChancePercent"
+            "AttackPercent": i18next.t("Attack %"),
+            "HealthPercent": i18next.t("Health %"),
+            "DefensePercent": i18next.t("Defense %"),
+            "Attack": i18next.t("Attack"),
+            "Health": i18next.t("Health"),
+            "Defense": i18next.t("Defense"),
+            "Speed": i18next.t("Speed"),
+            "EffectResistancePercent": i18next.t("Effect Resistance"),
+            "CriticalHitChancePercent": i18next.t("Crit Chance"),
+            "CriticalHitDamagePercent": i18next.t("Crit Damage"),
+            "EffectivenessPercent": i18next.t("Effectiveness"),
+            "DualAttackChancePercent": i18next.t("DualAttackChancePercent")
         }
     },
 
@@ -413,8 +413,8 @@ module.exports = {
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Mod grade")}</div>
                                     <select id="modGrade" class="gearPreviewButton">
-                                        <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>Lesser</option>
-                                        <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>Greater</option>
+                                        <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>${i18next.t("Lesser")}</option>
+                                        <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>${i18next.t("Greater")}</option>
                                     </select>
                                 </div>
 

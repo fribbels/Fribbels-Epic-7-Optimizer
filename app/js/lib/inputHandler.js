@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ItemsGrid.initialize();
         HeroesTab.initialize();
         HeroesGrid.initialize();
+        //Selectors.initialize();
 
         await Settings.initialize();
         Saves.initialize();
