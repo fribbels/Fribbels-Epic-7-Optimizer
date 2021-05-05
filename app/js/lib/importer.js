@@ -377,6 +377,7 @@ module.exports = {
                     newHero.attribute = newHero.data.attribute;
                     newHero.role = newHero.data.role;
                     newHero.path = heroName;
+                    newHero.stars = hero.stars;
 
                     hero.data = newHero;
                     filteredHeroes.push(hero);

@@ -248,6 +248,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     private void addStatsToHero(final Hero hero, final boolean useReforgeStats) {
         final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
 
+        if ("Achates".equals(hero.getName())) {
+            System.out.println("p");
+        }
+
         // Update equipment
         final Map<Gear, Item> equipment = hero.getEquipment();
         equipment.entrySet()

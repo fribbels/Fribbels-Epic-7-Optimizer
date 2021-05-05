@@ -82,7 +82,7 @@ module.exports = {
         const limitRolls = hero.limitRolls;
         const rollQuality = hero.rollQuality / 100;
         const grade = hero.modGrade
-
+        const keepStatOptions = hero.keepStatOptions
 
         const newItems = []
 
@@ -158,6 +158,10 @@ module.exports = {
                     }
 
                     if (ignoreList.includes(replacementStat)) {
+                        continue;
+                    }
+
+                    if (keepList.includes(substat.type) && keepStatOptions == "neverReplace") {
                         continue;
                     }
 

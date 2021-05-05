@@ -16,6 +16,7 @@ import java.util.List;
 public class ModStatsRequest extends Request {
 
     private String modGrade;
+    private String keepStatOptions;
     private Float rollQuality;
     private Integer limitRolls;
     private List<StatType> keepStats;

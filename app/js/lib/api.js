@@ -74,6 +74,7 @@ module.exports = {
             ignoreStats: modStats.ignoreStats,
             keepStats: modStats.keepStats,
             modGrade: modStats.modGrade,
+            keepStatOptions: modStats.keepStatOptions,
             rollQuality: modStats.rollQuality,
             limitRolls: modStats.limitRolls,
 

@@ -46,7 +46,7 @@ module.exports = {
         document.getElementById('heroesTabUseReforgedStats').addEventListener("change", async () => {
             useReforgedStats = document.getElementById('heroesTabUseReforgedStats').checked;
             console.log("REFORGE CHANGE TO " + useReforgedStats);
-            redrawGrid();
+            await redrawGrid();
             clearPreview();
             HeroesGrid.refreshBuilds();
         });
@@ -164,10 +164,10 @@ module.exports = {
             const row = HeroesGrid.getSelectedRow();
             if (!row) return;
 
-            Api.removeHeroById(row.id).then(response => {
+            Api.removeHeroById(row.id).then(async response => {
                 console.log("RESPONSE", response)
                 module.exports.redrawHeroInputSelector();
-                redrawGrid();
+                await redrawGrid();
                 Saves.autoSave();
             });
         });
@@ -177,9 +177,9 @@ module.exports = {
             const row = HeroesGrid.getSelectedRow();
             if (!row) return;
 
-            Api.unequipItems(getSelectedGearIds()).then(response => {
+            Api.unequipItems(getSelectedGearIds()).then(async response => {
                 console.log("RESPONSE", response)
-                redrawGrid();
+                await redrawGrid();
                 clearPreview();
                 Saves.autoSave();
             })
@@ -198,9 +198,9 @@ module.exports = {
             //     Saves.autoSave();
             // })
 
-            Api.unlockItems(getSelectedGearIds()).then(response => {
+            Api.unlockItems(getSelectedGearIds()).then(async response => {
                 console.log("RESPONSE", response)
-                redrawGrid();
+                await redrawGrid();
                 clearPreview();
                 Saves.autoSave();
             })
@@ -219,9 +219,9 @@ module.exports = {
             //     Saves.autoSave();
             // })
 
-            Api.lockItems(getSelectedGearIds()).then(response => {
+            Api.lockItems(getSelectedGearIds()).then(async response => {
                 console.log("RESPONSE", response)
-                redrawGrid();
+                await redrawGrid();
                 clearPreview();
                 Saves.autoSave();
             })
@@ -247,8 +247,8 @@ module.exports = {
         OptimizerTab.redrawHeroSelector();
     },
 
-    redraw: () => {
-        redrawGrid();
+    redraw: async () => {
+        await redrawGrid();
     },
 
     getUseReforgedStats: () => {
@@ -393,9 +393,9 @@ function addHero(heroName, isBuild) {
     newHero.path = heroName;
     newHero.stars = 6;
 
-    Api.addHeroes([newHero]).then(x => {
+    Api.addHeroes([newHero]).then(async x => {
         module.exports.redrawHeroInputSelector();
-        redrawGrid(newHero.id);
+        await redrawGrid(newHero.id);
 
         Api.getHeroById(newHero.id).then(async y => {
             const createdHero = y.hero;
@@ -405,12 +405,11 @@ function addHero(heroName, isBuild) {
     })
 }
 
-function redrawGrid(id) {
-    Api.getAllHeroes(useReforgedStats).then(response => {
-        HeroesGrid.refresh(response.heroes, id);
+async function redrawGrid(id) {
+    const response = await Api.getAllHeroes(useReforgedStats)
+    HeroesGrid.refresh(response.heroes, id);
 
-        HeroesGrid.refreshFilters(filters);
-    });
+    HeroesGrid.refreshFilters(filters);
 }
 
 function clearPreview() {

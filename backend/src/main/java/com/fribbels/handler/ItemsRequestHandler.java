@@ -369,6 +369,44 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     });
         }
 
+        if (request.getHeroFilter() == HeroFilter.FIVE_STAR) {
+            final Set<String> alreadyMergedNames = new HashSet<>();
+            mergeHeroes
+                    .stream()
+                    .filter(x -> x.getStars() == 6 || x.getStars() == 5)
+                    .forEach(mergeHero -> {
+                        final String name = mergeHero.getName();
+                        if (alreadyMergedNames.contains(name)) return;
+                        alreadyMergedNames.add(name);
+
+                        final Hero hero;
+                        if (existingHeroesByName.containsKey(name)) {
+                            hero = existingHeroesByName.get(name);
+                            System.out.println("EXISTING HERO");
+                        } else {
+                            heroesRequestHandler.addHeroes(HeroesRequest
+                                    .builder()
+                                    .heroes(ImmutableList.of(mergeHero.getData()))
+                                    .build());
+
+                            hero = heroDb.getHeroById(mergeHero.getData().getId());
+                            System.out.println("ADDED HERO" + hero);
+                        }
+
+                        final String ingameHeroId = mergeHero.getId();
+                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId.getOrDefault(ingameHeroId, ImmutableList.of());
+
+                        heroesRequestHandler.equipItemsOnHero(EquipItemsOnHeroRequest.builder()
+                                .heroId(hero.getId())
+                                .itemIds(itemsEquippedByIngameHeroId
+                                        .stream()
+                                        .map(Item::getId)
+                                        .collect(Collectors.toList()))
+                                .useReforgeStats(true)
+                                .build());
+                    });
+        }
+
         return "";
     }
 

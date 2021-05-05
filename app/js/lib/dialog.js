@@ -138,7 +138,6 @@ module.exports = {
 
         var html = ``;
 
-//${level == i ? "selected" : ""}
         if (name == "None") {
             return;
         }
@@ -400,7 +399,7 @@ module.exports = {
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Limit Rolls")}</div>
-                                    <select id="limitRolls" class="gearPreviewButton">
+                                    <select id="limitRolls" class="editGearStatSelect">
                                         <option value=1 ${hero.limitRolls == 1 ? "selected" : ""}>1</option>
                                         <option value=2 ${(hero.limitRolls == 2 || !hero.limitRolls) ? "selected" : ""}>2</option>
                                         <option value=3 ${hero.limitRolls == 3 ? "selected" : ""}>3</option>
@@ -411,8 +410,8 @@ module.exports = {
                                 </div>
 
                                 <div class="editGearFormRow">
-                                    <div class="editGearStatLabel" data-t>${i18next.t("Mod grade")}</div>
-                                    <select id="modGrade" class="gearPreviewButton">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Mod Grade")}</div>
+                                    <select id="modGrade" class="editGearStatSelect">
                                         <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>Lesser</option>
                                         <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>Greater</option>
                                     </select>
@@ -420,7 +419,7 @@ module.exports = {
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Roll Quality")}</div>
-                                    <select id="rollQuality" class="gearPreviewButton">
+                                    <select id="rollQuality" class="editGearStatSelect">
                                         <option value=0 ${hero.rollQuality == 0 ? "selected" : ""}>Min</option>
                                         <option value=10 ${hero.rollQuality == 10 ? "selected" : ""}>10%</option>
                                         <option value=20 ${hero.rollQuality == 20 ? "selected" : ""}>20%</option>
@@ -432,6 +431,14 @@ module.exports = {
                                         <option value=80 ${hero.rollQuality == 80 ? "selected" : ""}>80%</option>
                                         <option value=90 ${hero.rollQuality == 90 ? "selected" : ""}>90%</option>
                                         <option value=100 ${hero.rollQuality == 100 ? "selected" : ""}>Max</option>
+                                    </select>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Keep Stats")}</div>
+                                    <select id="keepStatOptions" class="editGearStatSelect">
+                                        <option value="neverReplace" ${(hero.keepStatOptions == "noReplace" || !hero.keepStatOptions) ? "selected" : ""}>Never replace keep stats</option>
+                                        <option value="replace" ${hero.keepStatOptions == "replace" ? "selected" : ""}>Allow replacing keeps with keeps</option>
                                     </select>
                                 </div>
                             </div>
@@ -500,6 +507,7 @@ module.exports = {
                         keepStats: keepGroup.toArray(),
 
                         modGrade: document.getElementById('modGrade').value,
+                        keepStatOptions: document.getElementById('keepStatOptions').value,
                         rollQuality: parseFloat(document.getElementById('rollQuality').value),
                         limitRolls: parseInt(document.getElementById('limitRolls').value),
                         heroInfo: heroInfo

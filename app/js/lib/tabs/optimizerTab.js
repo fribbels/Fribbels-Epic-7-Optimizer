@@ -59,7 +59,7 @@ function fixSliders() {
     //     console.log("NOT FIXING")
     //     return;
     // }
-    console.log("FIXING")
+    console.log("Fixing sliders")
     document.querySelector('#atkSlider')['rangeslider-js'].update()
     document.querySelector('#hpSlider')['rangeslider-js'].update()
     document.querySelector('#defSlider')['rangeslider-js'].update()

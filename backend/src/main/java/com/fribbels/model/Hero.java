@@ -89,6 +89,7 @@ public class Hero {
     private int bonusMaxHpPercent;
 
     private String modGrade;
+    private String keepStatOptions;
     private Float rollQuality;
     private Integer limitRolls;
     private List<StatType> keepStats;
@@ -125,6 +126,7 @@ public class Hero {
 
     public void setModStats(final ModStatsRequest modStatsRequest) {
         this.modGrade = modStatsRequest.getModGrade();
+        this.keepStatOptions = modStatsRequest.getKeepStatOptions();
         this.rollQuality = modStatsRequest.getRollQuality();
         this.limitRolls = modStatsRequest.getLimitRolls();
         this.keepStats = modStatsRequest.getKeepStats();

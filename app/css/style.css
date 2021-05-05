@@ -701,7 +701,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .editGearStatSelect {
-  width: 210px;
+  width: 220px;
   /*border: 1px solid black;*/
   text-align: left;
   margin-right: 5px;
@@ -1406,7 +1406,7 @@ body.dark-theme input {
 .buildsTableContainer {
   min-height: 165px;
   height: 165px;
-  flex-grow: 1;
+  flex-grow: 0.4;
   margin-bottom: 5px;
 }
 #heroes-table {
