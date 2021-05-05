@@ -23444,7 +23444,7 @@
         "rarity": 5,
         "stat": {
           "type": "att_rate",
-          "value": 0.14
+          "value": 0.07
         },
         "skills": [
           {
