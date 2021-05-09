@@ -252,8 +252,8 @@ function getField(heroStats, stat) {
 function buildGrid(localeText) {
 
     const DIGITS_2 = 35;
-    const DIGITS_3 = 43;
-    const DIGITS_4 = 48;
+    const DIGITS_3 = 41;
+    const DIGITS_4 = 45;
     const DIGITS_5 = 50;
     const DIGITS_6 = 55;
 

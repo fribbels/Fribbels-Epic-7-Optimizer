@@ -89,10 +89,14 @@ body {
   font-weight: 300;
 }
 
+input[type=submit] {
+  height: 23px;
+}
+
 .tabset > label {
   position: relative;
   display: inline-block;
-  padding: 5px 15px 15px;
+  padding: 5px 15px 10px;
   border: 1px solid transparent;
   border-bottom: 0;
   cursor: pointer;
@@ -103,9 +107,9 @@ body {
   content: "";
   position: absolute;
   left: 15px;
-  bottom: 10px;
+  bottom: 6px;
   width: 22px;
-  height: 4px;
+  height: 3px;
   background: #8d8d8d;
 }
 
@@ -152,7 +156,7 @@ body {
   cursor: pointer;
   margin-bottom: 1px;
   margin-left: 1px;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .importerButton {
@@ -161,6 +165,10 @@ body {
   margin-bottom: 1px;
   margin-left: 1px;
   margin-right: 5px;
+}
+
+.importer-section {
+  padding-top: 10px;
 }
 
 .optimization-results-panel {
@@ -468,7 +476,7 @@ input {
 }
 
 .horizontalSpace {
-  height: 5px;
+  height: 3px;
 }
 
 .horizontalLine {
@@ -683,11 +691,11 @@ input[type=number]::-webkit-outer-spin-button {
   height: 400px;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 .editGearStatLabel {
-  width: 110px;
+  width: 120px;
   text-align: left;
   margin-top: auto;
   margin-bottom: auto;
@@ -701,7 +709,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .editGearStatSelect {
-  width: 220px;
+  width: 235px;
   /*border: 1px solid black;*/
   text-align: left;
   margin-right: 5px;
@@ -709,6 +717,13 @@ input[type=number]::-webkit-outer-spin-button {
 
 .editGearStatNumber {
   width: 80px;
+}
+
+.draggableColumnLabel {
+  height: 45px;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 45px;
 }
 
 /*https://stackoverflow.com/questions/50862009/how-to-disable-selection-of-cells-in-ag-grid*/
@@ -1253,13 +1268,13 @@ body.dark-theme input {
   cursor: pointer;
   content: attr(data-content);
 }
-#accessorySetsLabel {
+/*#accessorySetsLabel {
   cursor: pointer;
 }
 #accessorySetsLabel:hover:after {
   cursor: pointer;
   content: attr(data-content);
-}
+}*/
 
 .gearTabBottomPanel {
   display: flex;
@@ -1404,9 +1419,9 @@ body.dark-theme input {
   margin-top: 6px;
 }
 .buildsTableContainer {
-  min-height: 165px;
-  height: 165px;
-  flex-grow: 0.4;
+  min-height: 160px;
+  height: 160px;
+  flex-grow: 0.2;
   margin-bottom: 5px;
 }
 #heroes-table {
@@ -1582,7 +1597,7 @@ input:checked + .darkSlider:before {
   padding-right: 6px;
   padding-bottom: 6px;
   background: var(--input-color);
-  min-height: 385px;
+  min-height: 430px;
   width: 120px;
 }
 

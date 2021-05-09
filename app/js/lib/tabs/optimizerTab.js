@@ -298,10 +298,10 @@ module.exports = {
             clearOptions();
             recalculateFilters();
         });
-        document.getElementById('accessorySetsLabel').addEventListener("click", async () => {
-            Selectors.clearGearMainAndSets();
-            recalculateFilters();
-        });
+        // document.getElementById('accessorySetsLabel').addEventListener("click", async () => {
+        //     Selectors.clearGearMainAndSets();
+        //     recalculateFilters();
+        // });
 
         buildSlider('#atkSlider')
         buildSlider('#hpSlider')
@@ -444,7 +444,7 @@ function clearStats() {
 
 function clearOptions() {
     $("#inputPredictReforges").prop('checked', true);
-    $("#inputSubstatMods").prop('checked', true);
+    $("#inputSubstatMods").prop('checked', false);
     $("#inputAllowLockedItems").prop('checked', false);
     $("#inputAllowEquippedItems").prop('checked', false);
     $("#inputKeepCurrentItems").prop('checked', false);

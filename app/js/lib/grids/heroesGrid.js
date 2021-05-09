@@ -209,6 +209,12 @@ module.exports = {
 }
 
 function buildGrid(localeText) {
+    const DIGITS_2 = 35;
+    const DIGITS_3 = 40;
+    const DIGITS_4 = 48;
+    const DIGITS_5 = 53;
+    const DIGITS_6 = 60;
+
     const gridOptions = {
         defaultColDef: {
             width: 47,
@@ -226,25 +232,25 @@ function buildGrid(localeText) {
             // {headerName: i18next.t('Stars'), field: 'rarity', width: 50},
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
-            {headerName: i18next.t('atk'), field: 'atk'},
-            {headerName: i18next.t('def'), field: 'def'},
-            {headerName: i18next.t('hp'), field: 'hp'},
-            {headerName: i18next.t('spd'), field: 'spd'},
-            {headerName: i18next.t('cr'), field: 'cr'},
-            {headerName: i18next.t('cd'), field: 'cd'},
-            {headerName: i18next.t('eff'), field: 'eff'},
-            {headerName: i18next.t('res'), field: 'res'},
-            {headerName: i18next.t('cp'), field: 'cp'},
-            {headerName: i18next.t('hps'), field: 'hpps'},
-            {headerName: i18next.t('ehp'), field: 'ehp'},
-            {headerName: i18next.t('ehps'), field: 'ehpps'},
-            {headerName: i18next.t('dmg'), field: 'dmg'},
-            {headerName: i18next.t('dmgs'), field: 'dmgps'},
-            {headerName: i18next.t('mcd'), field: 'mcdmg', width: 55},
-            {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 55},
-            {headerName: i18next.t('dmgh'), field: 'dmgh', width: 55},
-            {headerName: i18next.t('score'), field: 'score', width: 55},
-            {headerName: i18next.t('upg'), field: 'upgrades', width: 65},
+            {headerName: i18next.t('atk'), field: 'atk', width: DIGITS_4},
+            {headerName: i18next.t('def'), field: 'def', width: DIGITS_4},
+            {headerName: i18next.t('hp'), field: 'hp', width: DIGITS_5},
+            {headerName: i18next.t('spd'), field: 'spd', width: DIGITS_3},
+            {headerName: i18next.t('cr'), field: 'cr', width: DIGITS_3},
+            {headerName: i18next.t('cd'), field: 'cd', width: DIGITS_3},
+            {headerName: i18next.t('eff'), field: 'eff', width: DIGITS_3},
+            {headerName: i18next.t('res'), field: 'res', width: DIGITS_3},
+            {headerName: i18next.t('cp'), field: 'cp', width: DIGITS_6},
+            {headerName: i18next.t('hps'), field: 'hpps', width: DIGITS_4},
+            {headerName: i18next.t('ehp'), field: 'ehp', width: DIGITS_6},
+            {headerName: i18next.t('ehps'), field: 'ehpps', width: DIGITS_5},
+            {headerName: i18next.t('dmg'), field: 'dmg', width: DIGITS_5},
+            {headerName: i18next.t('dmgs'), field: 'dmgps', width: DIGITS_4},
+            {headerName: i18next.t('mcd'), field: 'mcdmg', width: 55, width: DIGITS_3},
+            {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 55, width: DIGITS_4},
+            {headerName: i18next.t('dmgh'), field: 'dmgh', width: 55, width: DIGITS_5},
+            {headerName: i18next.t('score'), field: 'score', width: 55, width: DIGITS_3},
+            {headerName: i18next.t('upg'), field: 'upgrades', width: 65, width: DIGITS_2},
         ],
         rowSelection: 'single',
         rowData: [],

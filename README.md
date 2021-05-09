@@ -411,10 +411,9 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 
 **Working on:**
  - v1.7.0
- - Auto updater
- - Serila EE
 
  **Medium priority:**
+ - Auto updater
  - Safer autosave folder loading https://cdn.discordapp.com/attachments/819494928077553684/831868290019229726/unknown.png
  - Save subprocess ids in settings and kill at startup
 

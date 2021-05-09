@@ -128,8 +128,11 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             // First check ingameId
             final String ingameId = item.getIngameId();
 
-            if (ingameId != null && itemsByIngameId.containsKey(ingameId)) {
+            if (ingameId != null && itemsByIngameId.containsKey(ingameId) && itemsByHash.containsKey(item.getHash())) {
                 final List<Item> matchingItems = itemsByHash.get(item.getHash());
+                if (matchingItems == null) {
+                    System.out.println("1");
+                }
                 matchingItems.add(item);
                 continue;
             } else {

@@ -84,7 +84,9 @@ module.exports = {
 +'<p>'+i18next.t("<b>McdS - </b> Max crit damage * Speed rating, measures damage at 100% crit chance vs speed.")+'</p>'
 +'<p>'+i18next.t("<b>DmgH - </b> Dmg * Hp rating, average damage rating, scaled by your units health. Useful for HP scaling bruisers.")+'</p>'
 +'<p>'+i18next.t("<b>Score - </b> Sum of gear score of all 6 pieces.")+'</p>'
-+'<p>'+i18next.t("<b>Upg - </b> Number items to upgrade - including reforges and enhances.")+'</p>'
++'<p>'+i18next.t("<b>Prio - </b> Sum of priority score of all 6 pieces, calculated using the Substat Priority filter values.")+'</p>'
++'<p>'+i18next.t("<b>Upg - </b> Number of items to upgrade - including reforges and enhances. When substat mods are enabled, modified gear is considered upgradable.")+'</p>'
++'<p>'+i18next.t("<b>Conv - </b> Number of conversion reforges in the results.")+'</p>'
 
         });
 
@@ -125,6 +127,7 @@ module.exports = {
             content:
 
 '<p>'+i18next.t("<b>Use reforged stats - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate.")+'</p>'
++'<p>'+i18next.t("<b>Use substat mods - </b> Run the optimization using substat modification stones. Each hero's optimization settings must first be selected on the heroes tab before this can be used.")+'</p>'
 +'<p>'+i18next.t("<b>Only maxed gear - </b> Search only for builds that contain all +15 and reforged gear.")+'</p>'
 +'<p>'+i18next.t("<b>Locked items - </b> Allow locked items in the search.")+'</p>'
 +'<p>'+i18next.t("<b>Equipped items - </b> Allow items equipped by other heroes in the search.")+'</p>'

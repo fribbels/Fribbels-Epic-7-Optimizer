@@ -111,8 +111,8 @@ select {
 input {
     background-color: var(--input-color);
     color: var(--font-color);
-    border: none;
-    margin-bottom: 1px;
+    border: 2px solid #ffffff00;
+    margin-bottom: 2px;
 }
 
 textarea {

@@ -290,7 +290,7 @@ module.exports = {
 
 
         document.getElementById('importMergeFileSelect').addEventListener("click", async () => {
-            const enhanceLimit = parseInt($('#importHeroesLimitEnhance').val());
+            const enhanceLimit = parseInt($('#importLimitEnhance').val());
             const options = {
                 title: "Load file",
                 defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),

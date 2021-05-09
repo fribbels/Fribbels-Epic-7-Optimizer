@@ -4,7 +4,27 @@
 
 const Swal = require('sweetalert2');
 const Sortable = require('sortablejs');
+const tippy = require('tippy.js').default;
 
+tippy.setDefaultProps({
+    allowHTML: true,
+    placement: 'auto',
+    maxWidth: 550,
+});
+
+const stats = [
+    "Attack",
+    "Health",
+    "Defense",
+    "CriticalHitDamagePercent",
+    "CriticalHitChancePercent",
+    "HealthPercent",
+    "DefensePercent",
+    "AttackPercent",
+    "EffectivenessPercent",
+    "EffectResistancePercent",
+    "Speed"
+]
 
 
 var e7StatToOptimizerStat = {
@@ -398,7 +418,7 @@ module.exports = {
                                 <p style="color: var(--font-color)" data-t>${i18next.t("Options")}</p>
 
                                 <div class="editGearFormRow">
-                                    <div class="editGearStatLabel" data-t>${i18next.t("Limit Rolls")}</div>
+                                    <div class="editGearStatLabel" id="limitRollsLabel" data-t>${i18next.t("Limit Rolls")}</div>
                                     <select id="limitRolls" class="editGearStatSelect">
                                         <option value=1 ${hero.limitRolls == 1 ? "selected" : ""}>1</option>
                                         <option value=2 ${(hero.limitRolls == 2 || !hero.limitRolls) ? "selected" : ""}>2</option>
@@ -410,7 +430,7 @@ module.exports = {
                                 </div>
 
                                 <div class="editGearFormRow">
-                                    <div class="editGearStatLabel" data-t>${i18next.t("Mod Grade")}</div>
+                                    <div class="editGearStatLabel" id="modGradeLabel"  data-t>${i18next.t("Mod Grade")}</div>
                                     <select id="modGrade" class="editGearStatSelect">
                                         <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>Lesser</option>
                                         <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>Greater</option>
@@ -418,7 +438,7 @@ module.exports = {
                                 </div>
 
                                 <div class="editGearFormRow">
-                                    <div class="editGearStatLabel" data-t>${i18next.t("Roll Quality")}</div>
+                                    <div class="editGearStatLabel" id="rollQualityLabel"  data-t>${i18next.t("Roll Quality")}</div>
                                     <select id="rollQuality" class="editGearStatSelect">
                                         <option value=0 ${hero.rollQuality == 0 ? "selected" : ""}>Min</option>
                                         <option value=10 ${hero.rollQuality == 10 ? "selected" : ""}>10%</option>
@@ -435,33 +455,39 @@ module.exports = {
                                 </div>
 
                                 <div class="editGearFormRow">
-                                    <div class="editGearStatLabel" data-t>${i18next.t("Keep Stats")}</div>
+                                    <div class="editGearStatLabel" id="keepStatsLabel" data-t>${i18next.t("Wanted Stats")}</div>
                                     <select id="keepStatOptions" class="editGearStatSelect">
-                                        <option value="neverReplace" ${(hero.keepStatOptions == "noReplace" || !hero.keepStatOptions) ? "selected" : ""}>Never replace keep stats</option>
-                                        <option value="replace" ${hero.keepStatOptions == "replace" ? "selected" : ""}>Allow replacing keeps with keeps</option>
+                                        <option value="neverReplace" ${(hero.keepStatOptions == "noReplace" || !hero.keepStatOptions) ? "selected" : ""}>Never replace wanted stats</option>
+                                        <option value="replace" ${hero.keepStatOptions == "replace" ? "selected" : ""}>Allow replacing wanted with wanted</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="editGearFormVertical"></div>
 
-                            <div class="groupContainer editGearFormHalf">
-                                <div class="groupColumn">
-                                    <p style="color: var(--font-color)" data-t>${i18next.t("Keep")}</p>
-                                    <div id="keepGroup" class="dragOrderList">
-                                        ${generateStatList(hero, "keep")}
-                                    </div>
+                            <div class="editGearFormHalf">
+                                <div>
+                                    <p style="color: var(--font-color)" data-t>${i18next.t("Substat selections")}</p>
                                 </div>
-                                <div class="groupColumn">
-                                    <p style="color: var(--font-color)" data-t>${i18next.t("Ignore")}</p>
-                                    <div id="ignoreGroup" class="dragOrderList">
-                                        ${generateStatList(hero, "ignore")}
+
+                                <div class="groupContainer editGearFormHalf">
+                                    <div class="groupColumn">
+                                        <div id="keepGroup" class="dragOrderList">
+                                            <div class="draggableColumnLabel" style="color: var(--font-color)" id="keepColumnLabel" data-t>${i18next.t("Wanted substats")}</div>
+                                            ${generateStatList(hero, "keep")}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="groupColumn">
-                                    <p style="color: var(--font-color)" data-t>${i18next.t("Discard")}</p>
-                                    <div id="modifyGroup" class="dragOrderList">
-                                        ${generateStatList(hero, "discard")}
+                                    <div class="groupColumn">
+                                        <div id="ignoreGroup" class="dragOrderList">
+                                            <div class="draggableColumnLabel" style="color: var(--font-color)" id="ignoreColumnLabel" data-t>${i18next.t("Don't change")}</div>
+                                            ${generateStatList(hero, "ignore")}
+                                        </div>
+                                    </div>
+                                    <div class="groupColumn">
+                                        <div id="modifyGroup" class="dragOrderList">
+                                            <div class="draggableColumnLabel" style="color: var(--font-color)" id="discardColumnLabel" data-t>${i18next.t("Unwanted substats")}</div>
+                                            ${generateStatList(hero, "discard")}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -482,19 +508,57 @@ module.exports = {
 
                     global.keepGroup = Sortable.create(document.getElementById('keepGroup'), {
                         group: "nested",
+                        filter: ".draggableColumnLabel",
                         animation: 100,
                         fallbackOnBody: true,
                     });
                     global.ignoreGroup = Sortable.create(document.getElementById('ignoreGroup'), {
                         group: "nested",
+                        filter: ".draggableColumnLabel",
                         animation: 100,
                         fallbackOnBody: true,
                     });
                     global.modifyGroup = Sortable.create(document.getElementById('modifyGroup'), {
                         group: "nested",
+                        filter: ".draggableColumnLabel",
                         animation: 100,
                         fallbackOnBody: true,
                     });
+
+                    tippy('#limitRollsLabel', {
+                        placement: 'bottom',
+                        content: '<p>'+i18next.t("Choose the maximum number of rolls to replace. For example, limit rolls = 1 would only replace base stats that didn't get enhanced. It is generally not a good idea to replace more than 2 rolls, and the higher this number is, the more permutations will be generated.")+'</p>'
+                    })
+
+                    tippy('#modGradeLabel', {
+                        placement: 'bottom',
+                        content: '<p>'+i18next.t("Choose whether to use Greater or Lesser gem stats.")+'</p>'
+                    })
+
+                    tippy('#rollQualityLabel', {
+                        placement: 'bottom',
+                        content: '<p>'+i18next.t("Choose the modified substat's roll value, from min roll to max roll. The actual value ingame will be random. Values will be rounded to the nearest whole number.")+'</p>'
+                    })
+
+                    tippy('#keepStatsLabel', {
+                        placement: 'bottom',
+                        content: '<p>'+i18next.t("Choose whether wanted stats should be allowed to be replaced with wanted stats when optimizing. For example, when allowed, a min speed roll could be replaced by a max speed roll. When not allowed, the speed will be left unmodified.")+'</p>'
+                    })
+
+                    tippy('#keepColumnLabel', {
+                        placement: 'top',
+                        content: '<p>'+i18next.t("Choose the substats that you want to modify for. Substats in the unwanted column will be replaced by substats in wanted column.")+'</p>'
+                    })
+
+                    tippy('#ignoreColumnLabel', {
+                        placement: 'top',
+                        content: '<p>'+i18next.t("Choose the substats to not modify. Substats in this column will not get replaced, and will also not be selected for.")+'</p>'
+                    })
+
+                    tippy('#discardColumnLabel', {
+                        placement: 'top',
+                        content: '<p>'+i18next.t("Choose the substats that you want to discard when modifying. Substats in the unwanted column will be replaced by substats in wanted column.")+'</p>'
+                    })
                 },
                 focusConfirm: false,
                 showCancelButton: true,
@@ -502,9 +566,9 @@ module.exports = {
                 cancelButtonText: i18next.t("Cancel"),
                 preConfirm: async () => {
                     const editedHero = {
-                        discardStats: modifyGroup.toArray(),
-                        ignoreStats: ignoreGroup.toArray(),
-                        keepStats: keepGroup.toArray(),
+                        discardStats: modifyGroup.toArray().filter(x => stats.includes(x)),
+                        ignoreStats: ignoreGroup.toArray().filter(x => stats.includes(x)),
+                        keepStats: keepGroup.toArray().filter(x => stats.includes(x)),
 
                         modGrade: document.getElementById('modGrade').value,
                         keepStatOptions: document.getElementById('keepStatOptions').value,
@@ -982,8 +1046,10 @@ function getGearMaterialOptionsHtml(item) {
 }
 
 function generateStatList(hero, state) {
-    const keepStats = hero.keepStats || [];
-    const discardStats = hero.discardStats || [];
+    var keepStats = hero.keepStats || [];
+    var discardStats = hero.discardStats || [];
+    keepStats = keepStats.filter(x => !!x && x != 'undefined');
+    discardStats = discardStats.filter(x => !!x && x != 'undefined');
     var list;
 
     if (state == "keep") {
@@ -991,19 +1057,6 @@ function generateStatList(hero, state) {
     } else if (state == "discard") {
         list = discardStats
     } else {
-        const stats = [
-            "Attack",
-            "Health",
-            "Defense",
-            "CriticalHitDamagePercent",
-            "CriticalHitChancePercent",
-            "HealthPercent",
-            "DefensePercent",
-            "AttackPercent",
-            "EffectivenessPercent",
-            "EffectResistancePercent",
-            "Speed"
-        ]
 
 
         const ignoreList = stats.filter(x => !keepStats.includes(x) && !discardStats.includes(x))
