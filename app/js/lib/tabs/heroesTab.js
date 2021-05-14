@@ -41,6 +41,7 @@ module.exports = {
             console.log("addHeroesSubmit");
             const id = selector.value;
             addHero(id);
+            HeroesGrid.redrawPreview();
         });
 
         document.getElementById('heroesTabUseReforgedStats').addEventListener("change", async () => {
@@ -49,6 +50,7 @@ module.exports = {
             await redrawGrid();
             clearPreview();
             HeroesGrid.refreshBuilds();
+            HeroesGrid.redrawPreview();
         });
 
         document.getElementById('editBuildSubmit').addEventListener("click", async () => {
@@ -127,6 +129,7 @@ module.exports = {
             Api.equipItemsOnHero(row.id, existingBuild.items).then(x => {
                 HeroesGrid.refreshBuilds();
                 module.exports.redraw();
+                HeroesGrid.redrawPreview();
                 Saves.autoSave();
             })
         });
@@ -142,6 +145,20 @@ module.exports = {
 
             await Api.setModStats(modStats, row.id).then(module.exports.redraw);
             Notifier.success("Saved mod stats");
+            Saves.autoSave();
+        });
+
+        document.getElementById('setHeroRankSubmit').addEventListener("click", async () => {
+            const row = HeroesGrid.getSelectedRow();
+            if (!row) return;
+            console.log("setHeroRankSubmit", row);
+
+            const rankInfo = await Dialog.editRankDialog(row.index);
+
+            // mods
+
+            await Api.reorderHeroes(row.id, rankInfo.rank).then(module.exports.redraw);
+            // Notifier.success("Changed rank");
             Saves.autoSave();
         });
 
@@ -168,6 +185,7 @@ module.exports = {
                 console.log("RESPONSE", response)
                 module.exports.redrawHeroInputSelector();
                 await redrawGrid();
+                HeroesGrid.redrawPreview();
                 Saves.autoSave();
             });
         });
@@ -181,6 +199,7 @@ module.exports = {
                 console.log("RESPONSE", response)
                 await redrawGrid();
                 clearPreview();
+                HeroesGrid.redrawPreview();
                 Saves.autoSave();
             })
         });
@@ -202,6 +221,7 @@ module.exports = {
                 console.log("RESPONSE", response)
                 await redrawGrid();
                 clearPreview();
+                HeroesGrid.redrawPreview();
                 Saves.autoSave();
             })
         });
@@ -223,6 +243,7 @@ module.exports = {
                 console.log("RESPONSE", response)
                 await redrawGrid();
                 clearPreview();
+                HeroesGrid.redrawPreview();
                 Saves.autoSave();
             })
         });
@@ -240,6 +261,7 @@ module.exports = {
                 module.exports.redrawHeroInputSelector();
             }
             HeroesGrid.refresh(response.heroes);
+            HeroesGrid.redrawPreview();
         })
     },
 

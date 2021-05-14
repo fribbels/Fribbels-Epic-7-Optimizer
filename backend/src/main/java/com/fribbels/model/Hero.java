@@ -50,6 +50,7 @@ public class Hero {
 
     private String id;
     public String name;
+    private int index;
     private int rarity;
     private int stars;
     private String attribute;

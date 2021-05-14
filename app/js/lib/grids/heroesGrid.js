@@ -219,16 +219,19 @@ function buildGrid(localeText) {
         defaultColDef: {
             width: 47,
             sortable: true,
-            sortingOrder: ['asc', 'desc'],
+            sortingOrder: ['desc', 'asc', null],
         },
 
         columnDefs: [
-            {width: 40, rowDrag: true},
-            {headerName: i18next.t('icon'), field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
+            {headerName: i18next.t('rank'), sortable: false, width: 65, field: 'index', rowDrag: true, rowDragText: (params, dragItemCount) => {
+                console.log(params)
+                return params.rowNode.data.name;
+            }},
+            {headerName: i18next.t('icon'), sortable: false, field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
             {headerName: i18next.t('elem'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: i18next.t('class'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
             //{headerName: i18next.t('name'), field: 'name', width: 0, wrapText: true, cellStyle: {'display':'none'}},
-            {headerName: i18next.t('name'), field: 'label', width: 170, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
+            {headerName: i18next.t('name'), field: 'label', width: 170, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
             // {headerName: i18next.t('Stars'), field: 'rarity', width: 50},
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
@@ -265,7 +268,15 @@ function buildGrid(localeText) {
         onRowDragEnd: onRowDragEnd,
         onRowDragMove: onRowDragMove,
         onRowDragLeave: onRowDragLeave,
+        onSortChanged: onSortChanged,
+        onFilterChanged: onFilterChanged,
         suppressMoveWhenRowDragging: true,
+        animateRows: true,
+        immutableData: true,
+        getRowNodeId: (data) => {
+            return data.id;
+        },
+        // suppressMoveWhenRowDragging: true,
         navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "heroesGrid"),
     };
 
@@ -280,7 +291,7 @@ function buildGrid(localeText) {
             // valueFormatter: numberFormatter,
         },
         columnDefs: [
-            {headerName: i18next.t('name'), field: 'name', width: 150},
+            {headerName: i18next.t('name'), field: 'name', sortingOrder: ['asc', 'desc', null], width: 150},
             {headerName: i18next.t('sets'), field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
             {headerName: i18next.t('atk'), field: 'atk'},
             {headerName: i18next.t('hp'), field: 'hp', width: 55},
@@ -312,6 +323,11 @@ function buildGrid(localeText) {
         cacheBlockSize: 1000,
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
+        // animateRows: true,
+        // immutableData: true,
+        // getRowNodeId: (data) => {
+        //     return data.id;
+        // },
         navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "buildsGrid"),
 
         // navigateToNextCell: navigateToNextCell.bind(this),
@@ -663,22 +679,96 @@ function updateCurrentAggregate(hero) {
 }
 
 function onRowDragEnter(e) {
-  // console.log('onRowDragEnter', e);
+  console.warn('onRowDragEnter', e);
+  heroesGrid.gridOptions.api.selectNode(e.node)
 }
 
 async function onRowDragEnd(e) {
-    console.log('onRowDragEnd', e);
+    console.log('onRowDragEnd', e, e.overIndex);
+
     const dragged = e.node.data;
     const destination = e.overNode.data;
 
-    await Api.reorderHeroes(dragged.id, destination.id);
+    await Api.reorderHeroes(dragged.id, e.overIndex + 1);
     HeroesTab.redraw();
 }
 
-function onRowDragMove(e) {
-  // console.log('onRowDragMove', e);
-}
+// function onRowDragMove(e) {
+//   // console.log('onRowDragMove', e);
+// }
 
 function onRowDragLeave(e) {
   // console.log('onRowDragLeave', e);
+}
+
+var lastOverNode = undefined;
+var toReplace = undefined;
+
+function onRowDragMove(event) {
+    var movingNode = event.node;
+    var overNode = event.overNode;
+
+    var rowNeedsToMove = overNode.data.id != lastOverNode?.data.id &&
+                         overNode.data.id != lastOverNode?.data.id &&
+                         overNode.data.id != movingNode.data.id;
+
+    if (rowNeedsToMove) {
+        console.log('onRowDragMove', overNode.data.id, lastOverNode?.data.id, movingNode.data.id, rowNeedsToMove);
+    }
+    lastOverNode = overNode;
+
+    if (rowNeedsToMove) {
+        // the list of rows we have is data, not row nodes, so extract the data
+        var movingData = movingNode.data;
+        var overData = overNode.data;
+
+        var fromIndex = currentHeroes.indexOf(movingData);
+        var toIndex = currentHeroes.indexOf(overData);
+
+        var newStore = currentHeroes.slice();
+        moveInArray(newStore, fromIndex, toIndex);
+
+        currentHeroes = newStore;
+        heroesGrid.gridOptions.api.setRowData(newStore);
+
+        heroesGrid.gridOptions.api.clearFocusedCell();
+    }
+}
+
+function moveInArray(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
+}
+
+
+var filterActive = false;
+var sortActive = false;
+function onSortChanged() {
+  var sortModel = heroesGrid.gridOptions.api.getSortModel();
+  sortActive = sortModel && sortModel.length > 0;
+  // suppress row drag if either sort or filter is active
+  var suppressRowDrag = sortActive || filterActive;
+  console.log(
+    'sortActive = ' +
+      sortActive +
+      ', allowRowDrag = ' +
+      suppressRowDrag
+  );
+  heroesGrid.gridOptions.api.setSuppressRowDrag(suppressRowDrag);
+}
+// listen for changes on filter changed
+function onFilterChanged() {
+  filterActive = heroesGrid.gridOptions.api.isAnyFilterPresent();
+  // suppress row drag if either sort or filter is active
+  var suppressRowDrag = sortActive || filterActive;
+  console.log(
+    'sortActive = ' +
+      sortActive +
+      ', filterActive = ' +
+      filterActive +
+      ', allowRowDrag = ' +
+      suppressRowDrag
+  );
+  heroesGrid.gridOptions.api.setSuppressRowDrag(suppressRowDrag);
 }

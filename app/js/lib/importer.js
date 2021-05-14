@@ -90,6 +90,10 @@ module.exports = {
             });
         });
 
+        function isEpermError(e) {
+            return e != null && JSON.stringify(e).includes('EPERM');
+        }
+
 
         document.getElementById('saveExportOutput').addEventListener("click", async () => {
             const output = document.getElementById('exportOutputText').value;
@@ -118,7 +122,11 @@ module.exports = {
             fs.writeFile(Files.path(filename), output, (err) => {
                 if (err) {
                     console.error(err)
-                    Notifier.error(i18next.t("Unable to write file") + filename + " - " + err);
+                    if (isEpermError(err)) {
+                        Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.")
+                    } else {
+                        Notifier.error(i18next.t("Unable to write file") + filename + " - " + err);
+                    }
                     return;
                 }
                 console.log('Exported gear.txt');
@@ -154,7 +162,11 @@ module.exports = {
             fs.writeFile(Files.path(filename), output, (err) => {
                 if (err) {
                     console.error(err)
-                    Notifier.error("Unable to write file " + filename + " - " + err);
+                    if (isEpermError(err)) {
+                        Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.")
+                    } else {
+                        Notifier.error(i18next.t("Unable to write file") + filename + " - " + err);
+                    }
                     return;
                 }
                 console.log('Exported gear.txt');

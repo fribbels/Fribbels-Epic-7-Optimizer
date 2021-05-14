@@ -9,8 +9,8 @@ module.exports = {
         return renderStar(value);
     },
 
-    arrowKeyNavigator: (binding, gridName) => {
-        return navigateToNextCell(binding, gridName);
+    arrowKeyNavigator: (binding, gridName, callback) => {
+        return navigateToNextCell(binding, gridName, callback);
     }
 }
 
@@ -65,7 +65,7 @@ var KEY_UP = 38;
 var KEY_RIGHT = 39;
 var KEY_DOWN = 40;
 
-function navigateToNextCell(params, gridName) {
+function navigateToNextCell(params, gridName, callback) {
   return function(params) {
     var grid;
     if (gridName == "heroesGrid") {
@@ -98,7 +98,12 @@ function navigateToNextCell(params, gridName) {
           return null;
         } // returning null means don't navigate
 
-        grid.gridOptions.api.selectNode(grid.gridOptions.api.getRowNode("" + nextRowIndex))
+        var newSelectedNode = grid.gridOptions.api.getDisplayedRowAtIndex(nextRowIndex);
+        grid.gridOptions.api.selectNode(newSelectedNode)
+
+        if (callback) {
+          callback(newSelectedNode);
+        }
         return {
           rowIndex: nextRowIndex,
           column: previousCell.column,
@@ -111,7 +116,12 @@ function navigateToNextCell(params, gridName) {
           return null;
         } // returning null means don't navigate
 
-        grid.gridOptions.api.selectNode(grid.gridOptions.api.getRowNode("" + nextRowIndex))
+        var newSelectedNode = grid.gridOptions.api.getDisplayedRowAtIndex(nextRowIndex);
+        grid.gridOptions.api.selectNode(newSelectedNode)
+
+        if (callback) {
+          callback(newSelectedNode);
+        }
         return {
           rowIndex: nextRowIndex,
           column: previousCell.column,

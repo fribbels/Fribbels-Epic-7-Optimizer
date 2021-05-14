@@ -40,11 +40,7 @@ public class SpecialStats {
             return setScBonusStatsFiveStar(hero);
         }
 
-        if (stars == 6) {
-            return setScBonusStatsSixStar(hero);
-        }
-
-        return hero;
+        return setScBonusStatsSixStar(hero);
     }
 
     public static HeroStats setScBonusStatsSixStar(final HeroStats hero) {
@@ -93,8 +89,9 @@ public class SpecialStats {
         }
 
         if (StringUtils.equals("Researcher Carrot", hero.getName())) {
-            hero.setAtk(1243); // 816 * (1.09 + 0.25) + (20*3 + 30*3)
+            hero.setAtk(1161); // 816 * (1.09 + 0.15) + (20*3 + 30*3)
             hero.setHp(4801); // 3505 * (1.0 + 0.25) + (60*3 + 80*3)
+            hero.setDef(666); // 606 * (1.0 + 0.1)
 
             return hero;
         }
@@ -208,8 +205,9 @@ public class SpecialStats {
         }
 
         if (StringUtils.equals("Researcher Carrot", hero.getName())) {
-            hero.setAtk(997); // 655 * (1.09 + 0.25) + (20*3 + 30*2)
+            hero.setAtk(932); // 655 * (1.09 + 0.15) + (20*3 + 30*2)
             hero.setHp(3825); // 2788 * (1.0 + 0.25) + (60*3 + 80*2)
+            hero.setDef(537); // 489 * (1.0 + 0.1)
 
             return hero;
         }

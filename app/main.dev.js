@@ -18,10 +18,15 @@ import log from 'electron-log';
 
 var closed = false;
 
+// Match build.appId
+app.setAppUserModelId("fribbelse7optimizer");
+app.setAsDefaultProtocolClient('fribbelse7optimizer');
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
     autoUpdater.logger = log;
+    autoUpdater.allowDowngrade = true;
     autoUpdater.checkForUpdatesAndNotify();
   }
 }
@@ -129,12 +134,17 @@ const createWindow = async () => {
     }
   });
 
+  mainWindow.once("ready-to-show", () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
+
 
   // const menuBuilder = new MenuBuilder(mainWindow);
   // menuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
+
   new AppUpdater();
 
   require('update-electron-app')({
@@ -167,4 +177,38 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
+});
+
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
+
+ipcMain.on('test', async (event) => {
+  const updates = await autoUpdater.checkForUpdates()
+  console.log("TEST UPDATES")
+  console.log(updates)
+  event.sender.send('test', JSON.stringify(updates));
+});
+
+ipcMain.on('check', async (event) => {
+  const updates = await autoUpdater.checkForUpdatesAndNotify()
+  console.log(updates)
+  event.sender.send('check', updates);
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
+
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', (data) => {
+  console.log("DOWNLOADED");
+  console.log(data);
+  mainWindow.webContents.send('update_downloaded', data);
+});
+autoUpdater.on('update-not-available', () => {
+  mainWindow.webContents.send('update_not_available');
 });

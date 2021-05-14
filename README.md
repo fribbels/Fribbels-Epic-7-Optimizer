@@ -408,12 +408,15 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Merge bug
  - Add bonus stats
  - Confirmation dialog
+ - Kill subprocess
+ - Hero priority filter
+ - Pinned row now clickable
+ - Auto updater
 
 **Working on:**
  - v1.7.0
 
  **Medium priority:**
- - Auto updater
  - Safer autosave folder loading https://cdn.discordapp.com/attachments/819494928077553684/831868290019229726/unknown.png
  - Save subprocess ids in settings and kill at startup
 
@@ -422,7 +425,6 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Customizable optimization column formulas
  - Clear out item previews on refresh
  - Optimizer broken set priority
- - Hero priority equipping
  - Different pinned builds
  - Bug: Comparison method violates its general contract
  - Move save/load to File menu

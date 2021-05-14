@@ -40,8 +40,6 @@ window.jQuery = $;
 </head>
 <body>
 <div class="darkModeToggleContainer">
-  <!-- <img class="darkModeToggle" id="darkModeToggle" src="./assets/elementdark.png"></img> -->
-
   <label id="darkSwitch" class="darkSwitch">
     <input type="checkbox" id="darkSlider">
     <span class="darkSlider round"></span>
@@ -67,9 +65,12 @@ window.jQuery = $;
   <!-- Tab 6 -->
   <input type="radio" name="tabset" id="tab6" >
   <label for="tab6" class="tabLabel" data-t>Settings</label>
-  <!-- Tab 6 -->
-  <input type="radio" name="tabset" id="tab6" style="display: none">
-  <label for="tab6" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
+  <!-- Tab 7 -->
+  <input type="radio" name="tabset" id="tab7" >
+  <label for="tab7" class="tabLabel" data-t>Information</label>
+  <!-- Tab 10 -->
+  <input type="radio" name="tabset" id="tab10" style="display: none">
+  <label for="tab10" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
 
   <div id="hoverDiv"></div>
   <div class="tab-panels">
@@ -204,6 +205,11 @@ window.jQuery = $;
               </div>
 
               <div>
+                <input type="checkbox" id="inputOrderedHeroPriority" class="optimizer-checkbox">
+                <label for="inputOrderedHeroPriority" data-t>Use hero priority</label>
+              </div>
+
+              <div style="display:none">
                 <input type="checkbox" id="inputOnlyMaxedGear" class="optimizer-checkbox">
                 <label for="inputOnlyMaxedGear" data-t>Only maxed gear</label>
               </div>
@@ -609,25 +615,6 @@ window.jQuery = $;
               </div>
             </div>
             </div>
-<!--             <div id="gridRightPanel" class="gridRightPanel">
-              <div id="girdRightPanelLeftColumn">
-                <div id="optimizer-heroes-equipped-weapon" class="gear-preview-row">
-                </div>
-                <div id="optimizer-heroes-equipped-helmet" class="gear-preview-row">
-                </div>
-                <div id="optimizer-heroes-equipped-armor" class="gear-preview-row">
-                </div>
-              </div>
-              <div class="vertical"></div>
-              <div id="girdRightPanelRightColumn">
-                <div id="optimizer-heroes-equipped-necklace" class="gear-preview-row">
-                </div>
-                <div id="optimizer-heroes-equipped-ring" class="gear-preview-row">
-                </div>
-                <div id="optimizer-heroes-equipped-boots" class="gear-preview-row">
-                </div>
-              </div>
-            </div> -->
 
           </div>
 
@@ -1177,7 +1164,7 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton clearAllFilterButton" id="clearAllFilter">
-                      <img class="gearTabIcon" id="clearAllFilterIcon" src="./assets/trash.png" style="opacity:0.7"></img>
+                      <img class="gearTabIcon" id="clearAllFilterIcon" src="./assets/trash.png" style="opacity:0.8"></img>
                       <div class="gearTabButtonLabel" data-t>Clear all</div>
                     </div>
                   </div>
@@ -1185,8 +1172,24 @@ window.jQuery = $;
                 <div class="gearTabFilterLongRow">
                   <div class="gearTabLongButton">
                     <div class="gearTabButton" id="duplicateFilter">
-                      <img class="gearTabIcon" id="duplicateFilterIcon" src="./assets/copy.png" style="opacity:0.6"></img>
+                      <img class="gearTabIcon" id="duplicateFilterIcon" src="./assets/copy.png" style="opacity:0.7"></img>
                       <div class="gearTabButtonLabel" data-t>Duplicates</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="gearTabFilterLongRow">
+                  <div class="gearTabLongButton">
+                    <div class="gearTabButton" id="equippedFilter">
+                      <img class="gearTabIcon" id="equippedFilterIcon" src="./assets/geararmor.png" style="opacity:1"></img>
+                      <div class="gearTabButtonLabel" data-t>Equipped</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="gearTabFilterLongRow">
+                  <div class="gearTabLongButton">
+                    <div class="gearTabButton" id="unequippedFilter">
+                      <img class="gearTabIcon" id="unequippedFilterIcon" src="./assets/unequipped.png" style="opacity:1"></img>
+                      <div class="gearTabButtonLabel" data-t>Unequipped</div>
                     </div>
                   </div>
                 </div>
@@ -1398,6 +1401,7 @@ window.jQuery = $;
         <div class="heroesTabButtonRow">
           <input type="submit" value="Add Bonus Stats" class="gearPreviewButton" id="addHeroStatsSubmit" data-t>
           <input type="submit" value="Add Substat Mods" class="gearPreviewButton" id="addSubstatModsSubmit" data-t>
+          <input type="submit" value="Set Hero Rank" class="gearPreviewButton" id="setHeroRankSubmit" data-t>
 
           <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit" data-t>
           <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit" data-t>
@@ -1725,6 +1729,50 @@ window.jQuery = $;
       <br>
       <br>
 
+    </div>
+
+
+    <div id="aboutTab" class="tab-panel">
+
+      <h1 data-t>Links</h1>
+      <img class="badgeIcon" id="discordBadge" src="./assets/badgediscord.png"></img>
+      <p>Join the optimizer Discord server for tech support, suggestions, and announcements.</p>
+
+      <div class="horizontalSpace" ></div>
+      <div class="horizontalSpace" ></div>
+      <div class="horizontalSpace" ></div>
+      <div class="horizontalSpace" ></div>
+      <img class="badgeIcon" id="githubBadge" src="./assets/badgegithub.png"></img>
+      <p>Instructions and guides can be found on the GitHub page, along with new version downloads.</p>
+      <div class="horizontalSpace" ></div>
+      <div class="horizontalSpace" ></div>
+      <div class="horizontalSpace" ></div>
+      <div class="horizontalSpace" ></div>
+      <img class="badgeIcon" id="donateBadge" src="./assets/badgedonate.png"></img>
+      <p>Support the optimizer and future updates!</p>
+
+      </br>
+
+      <h1 data-t>Thank you</h1>
+      <p class="thankYouContainer">
+        I want to thank the entire community for all the love and support that you've shown for the optimizer. This project has been a bunch of fun to build, and I hope you find it just as enjoyable to optimize and gear your favorite characters. Please feel free to reach out to me on the Discord server for setup help, ideas and suggestions, signing up as beta tester, or just come by to chat!
+      </p>
+      <p>
+        A special thank you to the wonderful people that have contributed and helped make the optimizer possible:
+      </p>
+      <ul>
+        <li>Taokonn - for the user interface design and user experience guidance, and choosing the underwear icon</li>
+        <li>TriATK - for all your contributions to the codebase and making translations possible</li>
+        <li>Somax - for creating the dark mode and making the optimizer usable at night</li>
+        <li>Translation team - for helping to make the optimizer accessible for multiple languages</li>
+        <li>Beta testers - for helping to find bugs and providing valuable feedback</li>
+      </ul>
+
+      </br>
+
+      <h1 id="version">Current version: ?</h1>
+
+      <input type="submit" value="Check for updates" class="gearPreviewButton" id="checkForUpdatesSubmit" data-t>
     </div>
 
   </div>

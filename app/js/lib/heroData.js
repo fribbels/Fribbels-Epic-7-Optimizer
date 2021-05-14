@@ -2,6 +2,10 @@ var heroesByName = {};
 var artifactsByName = {};
 var eesByName = {};
 
+var HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
+var ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
+
+
 function UrlExists(url, cb){
     jQuery.ajax({
         url:      url,
@@ -14,23 +18,23 @@ function UrlExists(url, cb){
     });
 }
 
-var HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
-var ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
-
-UrlExists('http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json', function(status){
-    if(status === 200){
-       // file was found
-       console.log('Amazon is available, using aws');
-       HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
-       ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
-    }
-    else {
-       // file not found
-       console.log('Amazon is not available, using gitee');
-       HERO_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/herodata.json";
-       ARTIFACT_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/artifactdata.json";
-    }
-});
+try {
+    UrlExists('http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json', function(status) {
+        if(status === 200) {
+           // file was found
+           console.log('Amazon is available, using aws');
+           HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
+           ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
+        } else {
+           // file not found
+           console.log('Amazon is not available, using gitee');
+           HERO_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/herodata.json";
+           ARTIFACT_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/artifactdata.json";
+        }
+    });
+} catch (e) {
+    console.log("Error checking url, using aws", e);
+}
 
 module.exports = {
 

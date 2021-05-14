@@ -124,6 +124,26 @@ module.exports = {
         })
     },
 
+    updatePrompt: (text) => {
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+              icon: 'success',
+              text: i18next.t(text),
+              showCancelButton: true,
+              confirmButtonText: i18next.t("Yes"),
+              cancelButtonText: i18next.t("Later"),
+              confirmButtonColor: '#51A259',
+              allowOutsideClick: outsideClickDisable
+            }).then((result) => {
+              if (result.isConfirmed) {
+                resolve("restart");
+              } else if (result.isDenied) {
+                reject("skip");
+              }
+            })
+        })
+    },
+
     htmlSuccess: (html) => {
         Swal.fire({
           icon: 'success',
@@ -474,19 +494,25 @@ module.exports = {
                                     <div class="groupColumn">
                                         <div id="keepGroup" class="dragOrderList">
                                             <div class="draggableColumnLabel" style="color: var(--font-color)" id="keepColumnLabel" data-t>${i18next.t("Wanted substats")}</div>
-                                            ${generateStatList(hero, "keep")}
+                                            <div id="keepContainer" class="draggableMovableContainer">
+                                                ${generateStatList(hero, "keep")}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="groupColumn">
                                         <div id="ignoreGroup" class="dragOrderList">
                                             <div class="draggableColumnLabel" style="color: var(--font-color)" id="ignoreColumnLabel" data-t>${i18next.t("Don't change")}</div>
-                                            ${generateStatList(hero, "ignore")}
+                                            <div id="ignoreContainer" class="draggableMovableContainer">
+                                                ${generateStatList(hero, "ignore")}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="groupColumn">
                                         <div id="modifyGroup" class="dragOrderList">
                                             <div class="draggableColumnLabel" style="color: var(--font-color)" id="discardColumnLabel" data-t>${i18next.t("Unwanted substats")}</div>
-                                            ${generateStatList(hero, "discard")}
+                                            <div id="modifyContainer" class="draggableMovableContainer">
+                                                ${generateStatList(hero, "discard")}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -506,19 +532,19 @@ module.exports = {
                         // customFilter: Utils.customFilter,
                     }
 
-                    global.keepGroup = Sortable.create(document.getElementById('keepGroup'), {
+                    global.keepGroup = Sortable.create(document.getElementById('keepContainer'), {
                         group: "nested",
                         filter: ".draggableColumnLabel",
                         animation: 100,
                         fallbackOnBody: true,
                     });
-                    global.ignoreGroup = Sortable.create(document.getElementById('ignoreGroup'), {
+                    global.ignoreGroup = Sortable.create(document.getElementById('ignoreContainer'), {
                         group: "nested",
                         filter: ".draggableColumnLabel",
                         animation: 100,
                         fallbackOnBody: true,
                     });
-                    global.modifyGroup = Sortable.create(document.getElementById('modifyGroup'), {
+                    global.modifyGroup = Sortable.create(document.getElementById('modifyContainer'), {
                         group: "nested",
                         filter: ".draggableColumnLabel",
                         animation: 100,
@@ -526,37 +552,56 @@ module.exports = {
                     });
 
                     tippy('#limitRollsLabel', {
-                        placement: 'bottom',
+                        placement: 'top',
+                        content: '<p>'+i18next.t("Choose the maximum number of rolls to replace. For example, limit rolls = 1 would only replace base stats that didn't get enhanced. It is generally not a good idea to replace more than 2 rolls, and the higher this number is, the more permutations will be generated.")+'</p>'
+                    })
+                    tippy('#limitRolls', {
+                        placement: 'top',
                         content: '<p>'+i18next.t("Choose the maximum number of rolls to replace. For example, limit rolls = 1 would only replace base stats that didn't get enhanced. It is generally not a good idea to replace more than 2 rolls, and the higher this number is, the more permutations will be generated.")+'</p>'
                     })
 
                     tippy('#modGradeLabel', {
-                        placement: 'bottom',
+                        placement: 'top',
+                        content: '<p>'+i18next.t("Choose whether to use Greater or Lesser gem stats.")+'</p>'
+                    })
+                    tippy('#modGrade', {
+                        placement: 'top',
                         content: '<p>'+i18next.t("Choose whether to use Greater or Lesser gem stats.")+'</p>'
                     })
 
                     tippy('#rollQualityLabel', {
-                        placement: 'bottom',
+                        placement: 'top',
+                        content: '<p>'+i18next.t("Choose the modified substat's roll value, from min roll to max roll. The actual value ingame will be random. Values will be rounded to the nearest whole number.")+'</p>'
+                    })
+                    tippy('#rollQuality', {
+                        placement: 'top',
                         content: '<p>'+i18next.t("Choose the modified substat's roll value, from min roll to max roll. The actual value ingame will be random. Values will be rounded to the nearest whole number.")+'</p>'
                     })
 
                     tippy('#keepStatsLabel', {
-                        placement: 'bottom',
+                        placement: 'top',
+                        content: '<p>'+i18next.t("Choose whether wanted stats should be allowed to be replaced with wanted stats when optimizing. For example, when allowed, a min speed roll could be replaced by a max speed roll. When not allowed, the speed will be left unmodified.")+'</p>'
+                    })
+                    tippy('#keepStatOptions', {
+                        placement: 'top',
                         content: '<p>'+i18next.t("Choose whether wanted stats should be allowed to be replaced with wanted stats when optimizing. For example, when allowed, a min speed roll could be replaced by a max speed roll. When not allowed, the speed will be left unmodified.")+'</p>'
                     })
 
-                    tippy('#keepColumnLabel', {
+                    tippy('#keepGroup', {
                         placement: 'top',
+                        delay: [500, null],
                         content: '<p>'+i18next.t("Choose the substats that you want to modify for. Substats in the unwanted column will be replaced by substats in wanted column.")+'</p>'
                     })
 
-                    tippy('#ignoreColumnLabel', {
+                    tippy('#ignoreGroup', {
                         placement: 'top',
+                        delay: [500, null],
                         content: '<p>'+i18next.t("Choose the substats to not modify. Substats in this column will not get replaced, and will also not be selected for.")+'</p>'
                     })
 
-                    tippy('#discardColumnLabel', {
+                    tippy('#modifyGroup', {
                         placement: 'top',
+                        delay: [500, null],
                         content: '<p>'+i18next.t("Choose the substats that you want to discard when modifying. Substats in the unwanted column will be replaced by substats in wanted column.")+'</p>'
                     })
                 },
@@ -605,6 +650,33 @@ module.exports = {
                     }
 
                     resolve(buildInfo);
+                }
+            });
+        });
+    },
+
+    editRankDialog: async (startRank) => {
+        return new Promise(async (resolve, reject) => {
+            const { value: formValues } = await Swal.fire({
+                title: '',
+                html: `
+                    <div class="editGearForm">
+                        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
+
+                        <p style="color: var(--font-color)">${i18next.t("Rank #")}</p>
+                        <input type="number" class="bonusStatInput" id="editRank" value="${""}" autofocus="autofocus" onfocus="this.select()" style="width:100px !important">
+                    </div>
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: i18next.t("OK"),
+                cancelButtonText: i18next.t("Cancel"),
+                preConfirm: async () => {
+                    const rankInfo = {
+                        rank: document.getElementById('editRank').value,
+                    }
+
+                    resolve(rankInfo);
                 }
             });
         });

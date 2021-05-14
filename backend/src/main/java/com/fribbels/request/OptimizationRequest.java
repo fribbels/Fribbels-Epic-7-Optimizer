@@ -41,6 +41,7 @@ public class OptimizationRequest extends Request {
     private Boolean inputSubstatMods;
     private Boolean inputAllowLockedItems;
     private Boolean inputAllowEquippedItems;
+    private Boolean inputOrderedHeroPriority;
     private Boolean inputKeepCurrentItems;
     private Boolean inputOnlyMaxedGear;
 

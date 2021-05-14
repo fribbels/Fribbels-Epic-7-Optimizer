@@ -87,6 +87,7 @@ module.exports = {
 
         request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems');
         request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems');
+        request.inputOrderedHeroPriority = readCheckbox('inputOrderedHeroPriority');
         request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems');
 
         request.inputAtkMinLimit = readNumber('inputMinAtkLimit');

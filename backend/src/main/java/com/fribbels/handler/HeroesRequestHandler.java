@@ -49,7 +49,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     private final ItemDb itemDb;
 
     @Override
-    public void handle(final HttpExchange exchange) throws IOException {
+    public synchronized void handle(final HttpExchange exchange) throws IOException {
         System.out.println("===================== HeroesRequestHandler =====================");
         final String path = exchange.getRequestURI().getPath();
 
@@ -183,13 +183,24 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     public String reorderHeroes(final ReorderRequest request) {
         final List<Hero> heroes = heroDb.getAllHeroes();
         final Hero dragHero = heroDb.getHeroById(request.getId());
-        final Hero destinationHero = heroDb.getHeroById(request.getDestinationId());
-        if (dragHero == null || destinationHero == null || dragHero == destinationHero) {
-            return "";
+        Integer destinationIndex = request.getDestinationIndex();
+        // Rank is 1 indexed on the UI
+        if (destinationIndex == null) return "";
+        if (destinationIndex >= heroes.size()) {
+            destinationIndex = heroes.size();
         }
+        if (destinationIndex <= 0) {
+            destinationIndex = 1;
+        }
+        destinationIndex--;
+
+        final Hero destinationHero = heroes.get(destinationIndex);
+
+        System.out.println(destinationHero.getName());
+
+        if (dragHero == null || destinationHero == null || dragHero == destinationHero) return "";
 
         heroes.remove(dragHero);
-        final int destinationIndex = heroes.indexOf(destinationHero);
         heroes.add(destinationIndex, dragHero);
 
         heroDb.setHeroes(heroes);
@@ -231,7 +242,9 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     public String getAllHeroes(final GetAllHeroesRequest request) {
-        final List<Hero> heroes = heroDb.getAllHeroes();
+        final List<Hero> rawHeroes = heroDb.getAllHeroes();
+        final List<Hero> heroes = rawHeroes.stream().map(x -> x.withCp(x.getCp())).collect(Collectors.toList());
+
 //        System.out.println("Heroes" + heroes);
 
         for (final Hero hero : heroes) {
@@ -246,11 +259,12 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     private void addStatsToHero(final Hero hero, final boolean useReforgeStats) {
-        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
-
-        if ("Achates".equals(hero.getName())) {
+        if ("Angelic Montmorancy".equals(hero.getName())) {
             System.out.println("p");
         }
+
+        final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
+
 
         // Update equipment
         final Map<Gear, Item> equipment = hero.getEquipment();

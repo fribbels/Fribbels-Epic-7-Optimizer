@@ -261,7 +261,7 @@ function buildGrid(localeText) {
         defaultColDef: {
             width: 50,
             sortable: true,
-            sortingOrder: ['desc', 'asc'],
+            sortingOrder: ['desc', 'asc', null],
             cellStyle: columnGradient,
             // suppressNavigable: true,
             cellClass: 'no-border'
@@ -296,6 +296,7 @@ function buildGrid(localeText) {
         rowHeight: 27,
         rowModelType: 'infinite',
         rowSelection: 'single',
+        onRowClicked: onRowClicked,
         onRowSelected: onRowSelected,
         pagination: true,
         paginationPageSize: 500,
@@ -339,8 +340,8 @@ function columnGradient(params) {
 }
 
 function onRowSelected(event) {
-    console.log("row selected")
-    if (!event.node.selected) return;
+    console.log("row selected", event)
+    if (!event.node.selected || event.rowPinned == "top") return;
 
     selectedRow = event.data;
     StatPreview.draw(pinnedRow, selectedRow);
@@ -348,6 +349,27 @@ function onRowSelected(event) {
     const gearIds = module.exports.getSelectedGearIds();
     const mods = module.exports.getSelectedGearMods();
     OptimizerTab.drawPreview(gearIds, mods);
+}
+
+
+function onRowClicked(event) {
+    console.log("row clicked", event)
+    if (event.rowPinned != "top") return;
+
+    selectedRow = event.data;
+    StatPreview.draw(pinnedRow, selectedRow);
+
+    optimizerGrid.gridOptions.api.deselectAll();
+    const gearIds = [
+        event.data.equipment.Weapon?.id,
+        event.data.equipment.Helmet?.id,
+        event.data.equipment.Armor?.id,
+        event.data.equipment.Necklace?.id,
+        event.data.equipment.Ring?.id,
+        event.data.equipment.Boots?.id,
+    ];
+    const mods = module.exports.getSelectedGearMods();
+    OptimizerTab.drawPreview(gearIds, []);
 }
 
 function cellMouseOver(event) {

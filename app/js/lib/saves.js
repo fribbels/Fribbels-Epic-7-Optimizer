@@ -37,7 +37,7 @@ module.exports = {
 
             return data;
         } catch (e) {
-            Dialog.error("Failed to save file. Please try restarting the app in admin mode, and disable your virus scan or add the app as an exception.")
+            Dialog.error("Unable to save file. Please try disabling your virus scan, or add the app as an exception, then restarting the app in admin mode.")
         }
     },
 

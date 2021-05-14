@@ -20,4 +20,5 @@ public class ReorderRequest extends Request {
 
     private String id;
     private String destinationId;
+    private Integer destinationIndex;
 }

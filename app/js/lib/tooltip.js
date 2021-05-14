@@ -74,7 +74,7 @@ module.exports = {
             content:
 
 '<p>'+i18next.t("Select rating filters to filter results by. Ratings are stats that aren't seen in the game, but are useful for comparing builds.  Left column is min (inclusive) and right column is max (inclusive).")+'</p>'
-+'<p>'+i18next.t("<b>Cp - </b> Combat power, as you would find it ingame, but without factoring in skill enhances. Useful for workd boss units.")+'</p>'
++'<p>'+i18next.t("<b>Cp - </b> Combat power, as you would find it ingame, but without factoring in skill enhances. Useful for world boss units.")+'</p>'
 +'<p>'+i18next.t("<b>HpS - </b> Hp * Speed rating, for comparing fast/health builds, disregaring defense. Example health scaling units: Krau, Fceci.")+'</p>'
 +'<p>'+i18next.t("<b>Ehp - </b> Effective Hp, for comparing how much damage a unit can take. Formula: HP * (Defense/300 + 1).")+'</p>'
 +'<p>'+i18next.t("<b>EhpS - </b> Effective Hp * Speed rating, for comparing fast/tanky builds.")+'</p>'
@@ -128,7 +128,8 @@ module.exports = {
 
 '<p>'+i18next.t("<b>Use reforged stats - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate.")+'</p>'
 +'<p>'+i18next.t("<b>Use substat mods - </b> Run the optimization using substat modification stones. Each hero's optimization settings must first be selected on the heroes tab before this can be used.")+'</p>'
-+'<p>'+i18next.t("<b>Only maxed gear - </b> Search only for builds that contain all +15 and reforged gear.")+'</p>'
++'<p>'+i18next.t("<b>Use hero priority - </b> Only use gear from lower priority heroes. Hero priority is defined by the unfiltered/unsorted order of heroes on the Hero tab. When enabled, your hero will only take gear from heroes that are below them on the list.")+'</p>'
+// +'<p>'+i18next.t("<b>Only maxed gear - </b> Search only for builds that contain all +15 and reforged gear.")+'</p>'
 +'<p>'+i18next.t("<b>Locked items - </b> Allow locked items in the search.")+'</p>'
 +'<p>'+i18next.t("<b>Equipped items - </b> Allow items equipped by other heroes in the search.")+'</p>'
 +'<p>'+i18next.t("<b>Keep current - </b> Keep any existing gears on the unit, and search only for the missing gear pieces.")+'</p>'

@@ -45,7 +45,11 @@ public class HeroDb {
             heroes = new ArrayList<>();
             return;
         }
-        newHeroes.forEach(this::sanitizeHero);
+        for (int i = 0 ; i < newHeroes.size(); i++) {
+            final Hero newHero = newHeroes.get(i);
+            sanitizeHero(newHero);
+            newHero.setIndex(i + 1);
+        }
         heroes = newHeroes;
     }
 

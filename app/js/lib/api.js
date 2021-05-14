@@ -94,10 +94,10 @@ module.exports = {
         });
     },
 
-    reorderHeroes: async (id, destinationId) => {
+    reorderHeroes: async (id, destinationIndex) => {
         return post('/heroes/reorderHeroes', {
             id: id,
-            destinationId: destinationId
+            destinationIndex: destinationIndex
         });
     },
 
