@@ -2,7 +2,7 @@ const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
 const currentVersion = "1.6.6";
 
-global.TEST = true;
+global.TEST = false;
 
 module.exports = {
 
