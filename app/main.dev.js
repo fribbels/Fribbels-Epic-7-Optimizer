@@ -11,16 +11,89 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, MenuItem } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 // import MenuBuilder from './menu';
 
+const isMac = process.platform === 'darwin'
 var closed = false;
 
 // Match build.appId
 app.setAppUserModelId("fribbelse7optimizer");
 app.setAsDefaultProtocolClient('fribbelse7optimizer');
+
+const template = [
+   {
+      label: 'File',
+      submenu: [
+         isMac ? { role: 'close' } : { role: 'quit' }
+      ]
+   },
+
+   {
+      label: 'View',
+      submenu: [
+         {
+            role: 'toggledevtools'
+         },
+         {
+            type: 'separator'
+         },
+         {
+            role: 'reload'
+         },
+         {
+            role: 'forcereload'
+         },
+         {
+            type: 'separator'
+         },
+         {
+            role: 'resetzoom'
+         },
+         {
+            role: 'zoomin'
+         },
+         {
+            role: 'zoomout'
+         },
+         {
+            type: 'separator'
+         },
+         {
+            role: 'togglefullscreen'
+         }
+      ]
+   },
+   {
+      role: 'window',
+      submenu: [
+         {
+            role: 'minimize'
+         },
+         {
+            role: 'close'
+         }
+      ]
+   },
+
+   {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Learn More',
+          click: async () => {
+            const { shell } = require('electron')
+            await shell.openExternal('https://github.com/fribbels/Fribbels-Epic-7-Optimizer')
+          }
+        }
+      ]
+   }
+]
+
+const menu = Menu.buildFromTemplate(template)
+Menu.setApplicationMenu(menu)
 
 export default class AppUpdater {
   constructor() {

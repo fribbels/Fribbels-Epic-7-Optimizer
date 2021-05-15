@@ -1670,3 +1670,10 @@ input:checked + .darkSlider:before {
 #settingsTab {
   padding-left: 10px;
 }
+.newFeatures {
+  text-align: left;
+  line-height: 28px;
+}
+.awn-toast.awn-toast-warning {
+    color: #8e4b00 !important;
+}

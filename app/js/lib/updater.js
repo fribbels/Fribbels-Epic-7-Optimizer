@@ -1,10 +1,37 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.6.5";
+const currentVersion = "1.6.6";
 
-global.TEST = false;
+global.TEST = true;
 
 module.exports = {
+
+    getCurrentVersion: () => {
+        return currentVersion;
+    },
+
+    showNewFeatures: (text) => {
+        Dialog.showNewFeatures(
+`
+<h2>
+    New in v1.7.0
+</h2>
+<ul class="newFeatures">
+    <li>Hero importer can now load your ingame units with their ingame gear</li>
+    <li>Optimization with substat modification stones</li>
+    <li>Drag-and-drop hero priority sorting</li>
+    <li>New filter: Hero priority - to allow taking gear from lower priority units</li>
+    <li>New filter: Number of conversion reforges</li>
+    <li>New priority score column and filter</li>
+    <li>Stat priority filter now also considers main stats</li>
+    <li>Added 5 star hero stats under bonus stats</li>
+    <li>Updated stats for Senya, Researcher Carrot, Chaos Sect Axe</li>
+    <li>Windows installer and automatic updates</li>
+    <li>New Information tab for updates and links</li>
+</ul>
+`
+        );
+    },
 
     checkForUpdates: async () => {
         //
@@ -71,6 +98,7 @@ module.exports = {
             var response = await Dialog.updatePrompt("Update downloaded. It will be installed on restart. Restart app now?")
 
             if (response == 'restart') {
+                await Subprocess.kill();
                 restartApp();
             }
         });

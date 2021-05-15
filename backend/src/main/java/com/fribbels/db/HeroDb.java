@@ -23,6 +23,10 @@ public class HeroDb {
     public void addHeroes(final List<Hero> newHeroes) {
         newHeroes.forEach(this::sanitizeHero);
         heroes.addAll(newHeroes);
+        for (int i = 0 ; i < heroes.size(); i++) {
+            final Hero hero = heroes.get(i);
+            hero.setIndex(i + 1);
+        }
     }
 
     private void sanitizeHero(final Hero hero) {

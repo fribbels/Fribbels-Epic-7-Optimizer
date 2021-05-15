@@ -16,7 +16,7 @@ module.exports = {
             },
             durations: {
                 alert: 20000,
-                warning: 5000,
+                warning: 20000,
                 info: 7500,
             },
             position: 'top-right'

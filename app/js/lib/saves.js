@@ -37,7 +37,7 @@ module.exports = {
 
             return data;
         } catch (e) {
-            Dialog.error("Unable to save file. Please try disabling your virus scan, or add the app as an exception, then restarting the app in admin mode.")
+            Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.")
         }
     },
 
@@ -132,9 +132,6 @@ module.exports = {
 
         OptimizerTab.redrawHeroSelector();
         HeroesTab.redraw();
-    },
-
-    saveCurrentData: () => {
     },
 }
 

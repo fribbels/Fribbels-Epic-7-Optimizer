@@ -8,7 +8,6 @@ module.exports = {
             return items;
         }
 
-
         console.log("Priority filter enabled")
 
         const groups = groupBy(items, 'gear');
@@ -31,7 +30,7 @@ module.exports = {
                 groupLength = groups[key].length
             }
 
-            const index = Math.round(params.inputFilterPriority / 100 * groupLength);
+            const index = Math.ceil(params.inputFilterPriority / 100 * groupLength);
             passed = passed.concat(gearArr.slice(0, index));
         }
 

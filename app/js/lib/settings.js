@@ -45,7 +45,6 @@ module.exports = {
         $('#optionsExcludeGearFrom').change(module.exports.saveSettings)
         $('#darkSlider').change(module.exports.saveSettings)
 
-
         for (var id of settingsIds) {
             document.getElementById(id).addEventListener('change', (event) => {
                 module.exports.saveSettings();
@@ -95,7 +94,6 @@ module.exports = {
         }
     },
 
-
     parseMaxResults: () => {
         var value = document.getElementById('settingMaxResults').value;
         value = value.replace(/,/g, "")
@@ -140,6 +138,18 @@ module.exports = {
             excludeSelects = settings.settingExcludeEquipped;
         }
 
+        const currentVersion = Updater.getCurrentVersion();
+        if (settings.settingVersion) {
+            if (currentVersion != settings.settingVersion) {
+
+                Updater.showNewFeatures(currentVersion);
+                module.exports.saveSettings();
+            }
+        } else {
+            Updater.showNewFeatures(currentVersion);
+            module.exports.saveSettings();
+        }
+
         $('#selectDefaultFolderSubmitOutputText').text(settings.settingDefaultPath || defaultPath);
         Api.setSettings(settings);
     },
@@ -160,6 +170,7 @@ module.exports = {
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
             settingDarkMode: document.getElementById('darkSlider').checked,
+            settingVersion: Updater.getCurrentVersion()
         };
 
         excludeSelects = settings.settingExcludeEquipped;

@@ -377,6 +377,9 @@ function showEditHeroInfoPopups(name) {
     if (name == "Apocalypse Ravi") {
         Notifier.info("Apocalypse Ravi's 30% Crit Chance bonus from S2 is already automatically added.")
     }
+    if (name == "Senya") {
+        Notifier.info("Senya's 30% total Attack bonus from S2 is already automatically added.")
+    }
 }
 
 function getSelectedGear() {

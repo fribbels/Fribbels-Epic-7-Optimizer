@@ -960,6 +960,10 @@ async function submitOptimizationRequest() {
         hero: hero
     }
 
+    if (!hero.artifactName || hero.artifactName == "None") {
+        Notifier.warn("Your hero does not have an artifact equipped, use the 'Add Bonus Stats' button on the Heroes page to add artifact stats");
+    }
+
     if (warnParams(params)) {
         return;
     }

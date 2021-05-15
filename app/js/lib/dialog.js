@@ -124,26 +124,6 @@ module.exports = {
         })
     },
 
-    updatePrompt: (text) => {
-        return new Promise((resolve, reject) => {
-            Swal.fire({
-              icon: 'success',
-              text: i18next.t(text),
-              showCancelButton: true,
-              confirmButtonText: i18next.t("Yes"),
-              cancelButtonText: i18next.t("Later"),
-              confirmButtonColor: '#51A259',
-              allowOutsideClick: outsideClickDisable
-            }).then((result) => {
-              if (result.isConfirmed) {
-                resolve("restart");
-              } else if (result.isDenied) {
-                reject("skip");
-              }
-            })
-        })
-    },
-
     htmlSuccess: (html) => {
         Swal.fire({
           icon: 'success',
@@ -170,6 +150,37 @@ module.exports = {
             confirmButtonText: i18next.t("OK"),
             allowOutsideClick: outsideClickDisable
           // cancelButtonText: i18next.t("Cancel")
+        })
+    },
+
+    updatePrompt: (text) => {
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+              icon: 'success',
+              text: i18next.t(text),
+              showCancelButton: true,
+              confirmButtonText: i18next.t("Yes"),
+              cancelButtonText: i18next.t("Later"),
+              confirmButtonColor: '#51A259',
+              allowOutsideClick: outsideClickDisable
+            }).then((result) => {
+              if (result.isConfirmed) {
+                resolve("restart");
+              } else if (result.isDenied) {
+                reject("skip");
+              }
+            })
+        })
+    },
+
+    showNewFeatures: (html) => {
+        Swal.fire({
+            icon: 'success',
+            html: html,
+            width: 700,
+            confirmButtonText: i18next.t("OK"),
+            allowOutsideClick: outsideClickDisable
+            // cancelButtonText: i18next.t("Cancel")
         })
     },
 

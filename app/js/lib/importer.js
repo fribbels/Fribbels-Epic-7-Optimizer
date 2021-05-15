@@ -337,6 +337,7 @@ module.exports = {
 
                 $('#importMergeOutputText').text(`${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
 
+                Saves.autoSave()
             } catch (e) {
                 Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
                 console.error(e);
@@ -407,6 +408,7 @@ module.exports = {
 
                 $('#importMergeHeroesOutputText').text(`${i18next.t('Merged')} ${items.length} ${i18next.t('items from')} ${path}`)
 
+                Saves.autoSave()
             } catch (e) {
                 Dialog.htmlError(i18next.t("Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.") + e);
                 console.error(e)

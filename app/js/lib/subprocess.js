@@ -18,6 +18,14 @@ var initialized = false;
 const defaultJavaError = `Unable to load Java. Please check that you have the <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and restart your computer.`;
 
 module.exports = {
+    kill: async() => {
+        try {
+            const killPortOutput = await killPort(8130, 'tcp')
+            console.log(killPortOutput);
+        } catch (e) {
+            console.warn("Error killing existing subprocess", e);
+        }
+    },
 
     initialize: async (callback) => {
         javaversion(function(err, notRecognized, notCorrectVersion, not64Bit) {
@@ -37,12 +45,7 @@ module.exports = {
             }
         })
 
-        // try {
-        //     const killPortOutput = await killPort(8130, 'tcp')
-        //     console.log(killPortOutput);
-        // } catch (e) {
-        //     console.warn("Error killing existing subprocess", e);
-        // }
+        await module.exports.kill();
 
         child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
         pid = child.pid;
