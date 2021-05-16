@@ -83,9 +83,16 @@ async function loadPreviousHeroFilters(heroResponse) {
     const request = hero.optimizationRequest;
 
     if (!hero) return;
-    if (!request) return;
-
-    console.log(request);
+    if (!request) {
+        $("#inputPredictReforges").prop('checked', true);
+        $("#inputSubstatMods").prop('checked', false);
+        $("#inputAllowLockedItems").prop('checked', false);
+        $("#inputAllowEquippedItems").prop('checked', false);
+        $("#inputKeepCurrentItems").prop('checked', false);
+        $("#inputOrderedHeroPriority").prop('checked', false);
+        $("#inputOnlyMaxedGear").prop('checked', false);
+        return;
+    }
 
     $("#inputMinAtkLimit").val(inputDisplayNumber(request.inputAtkMinLimit))
     $("#inputMaxAtkLimit").val(inputDisplayNumber(request.inputAtkMaxLimit))
@@ -136,7 +143,7 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputPredictReforges").prop('checked', request.inputPredictReforges || true);
     $("#inputSubstatMods").prop('checked', request.inputSubstatMods || false);
     $("#inputAllowLockedItems").prop('checked', request.inputAllowLockedItems || false);
-    $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems || true);
+    $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems || false);
     $("#inputKeepCurrentItems").prop('checked', request.inputKeepCurrentItems || false);
     $("#inputOrderedHeroPriority").prop('checked', request.inputOrderedHeroPriority || false);
     $("#inputOnlyMaxedGear").prop('checked', request.inputOnlyMaxedGear || false);

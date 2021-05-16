@@ -274,7 +274,7 @@ ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
 
-autoUpdater.on('update-available', () => {
+autoUpdater.on('update-available', (data) => {
   mainWindow.webContents.send('update_available');
 });
 autoUpdater.on('update-downloaded', (data) => {

@@ -86,7 +86,7 @@ module.exports = {
 +'<p>'+i18next.t("<b>Score - </b> Sum of gear score of all 6 pieces.")+'</p>'
 +'<p>'+i18next.t("<b>Prio - </b> Sum of priority score of all 6 pieces, calculated using the Substat Priority filter values.")+'</p>'
 +'<p>'+i18next.t("<b>Upg - </b> Number of items to upgrade - including reforges and enhances. When substat mods are enabled, modified gear is considered upgradable.")+'</p>'
-+'<p>'+i18next.t("<b>Conv - </b> Number of conversion reforges in the results.")+'</p>'
++'<p>'+i18next.t("<b>Conv - </b> Number of conversion material reforges in the results.")+'</p>'
 
         });
 
@@ -127,8 +127,8 @@ module.exports = {
             content:
 
 '<p>'+i18next.t("<b>Use reforged stats - </b> Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not always accurate.")+'</p>'
-+'<p>'+i18next.t("<b>Use substat mods - </b> Run the optimization using substat modification stones. Each hero's optimization settings must first be selected on the heroes tab before this can be used.")+'</p>'
 +'<p>'+i18next.t("<b>Use hero priority - </b> Only use gear from lower priority heroes. Hero priority is defined by the unfiltered/unsorted order of heroes on the Hero tab. When enabled, your hero will only take gear from heroes that are below them on the list.")+'</p>'
++'<p>'+i18next.t("<b>Use substat mods - </b> Run the optimization using substat modification stones. Each hero's optimization settings must first be selected on the heroes tab before this can be used.")+'</p>'
 // +'<p>'+i18next.t("<b>Only maxed gear - </b> Search only for builds that contain all +15 and reforged gear.")+'</p>'
 +'<p>'+i18next.t("<b>Locked items - </b> Allow locked items in the search.")+'</p>'
 +'<p>'+i18next.t("<b>Equipped items - </b> Allow items equipped by other heroes in the search.")+'</p>'

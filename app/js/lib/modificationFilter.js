@@ -214,7 +214,7 @@ module.exports = {
             // newItems.push.apply(newItems, tempNewItems)
         }
 
-        console.warn("newItems", newItems);
+        console.warn("newItems", items, newItems);
 
         return newItems;
     }

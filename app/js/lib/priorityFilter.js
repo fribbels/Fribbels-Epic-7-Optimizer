@@ -8,12 +8,13 @@ module.exports = {
             return items;
         }
 
-        console.log("Priority filter enabled")
+        console.log("Priority filter enabled", items)
 
         const groups = groupBy(items, 'gear');
         const allItemsGroups = groupBy(allItems, 'gear');
 
         console.log("Grouped gears", groups);
+        console.log("AllItems grouped gears", allItemsGroups);
 
         for (var key of Object.keys(groups)) {
             var gearArr = groups[key];
@@ -27,7 +28,7 @@ module.exports = {
 
             var groupLength = allItemsGroups[key].length
             if (inputSubstatMods) {
-                groupLength = groups[key].length
+                groupLength = Math.max(groups[key].length, allItemsGroups[key].length);
             }
 
             const index = Math.ceil(params.inputFilterPriority / 100 * groupLength);

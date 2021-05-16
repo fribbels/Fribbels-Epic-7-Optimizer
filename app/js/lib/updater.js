@@ -3,6 +3,13 @@ global.ipcRenderer = ipcRenderer;
 const currentVersion = "1.6.6";
 
 global.TEST = false;
+/********************************************************************************************
+    Release checklist:
+    - set TEST = false
+    - package jar
+    - update version here + package.json
+    - update repo in package.json
+*********************************************************************************************/
 
 module.exports = {
 
