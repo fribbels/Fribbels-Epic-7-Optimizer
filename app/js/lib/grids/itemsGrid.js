@@ -575,5 +575,8 @@ function onRowSelected(event) {
     if (event.node.selected) {
         selectedCell = event.data;
         updateSelectedCount();
+
+        // Testing purposes
+        // Reforge.calculateMaxes(event.data);
     }
 }

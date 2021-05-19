@@ -419,6 +419,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 
  **Medium priority:**
  - Safer autosave folder loading https://cdn.discordapp.com/attachments/819494928077553684/831868290019229726/unknown.png
+ - Unequipped units ingame with gear in optimizer dont get unequipped on hero merge
 
  **Low priority:**
  - Read file sync everything

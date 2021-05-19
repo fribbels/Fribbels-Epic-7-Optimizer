@@ -51,7 +51,68 @@ module.exports = {
             gear.material = "Unknown";
         }
     },
+
+    calculateMaxes: (gear) => {
+        const powers = {
+            "Normal": 0.8,
+            "Good": 0.85,
+            "Rare": 0.9,
+            "Heroic": 0.95,
+            "Epic": 1
+        }
+
+        const substats = gear.substats;
+        const power = gear.rank;
+
+        for (var i = 0; i < substats.length; i++) {
+            const substat = substats[i];
+
+            if (plainStats.includes(substat.type)) {
+                substat.min = substat.rolls * 4;
+                substat.max = substat.rolls * 8;
+            }
+            if (substat.type == "CriticalHitChancePercent") {
+                substat.min = substat.rolls * 3;
+                substat.max = substat.rolls * 5;
+            }
+            if (substat.type == "CriticalHitDamagePercent") {
+                substat.min = substat.rolls * 4;
+                substat.max = substat.rolls * 7;
+            }
+            if (substat.type == "Attack") {
+                substat.min = substat.rolls * 14 * 2.37 * power; // 33.18 * power
+                substat.max = substat.rolls * 28 * 1.67 * power; // 66.36
+            }
+            if (substat.type == "Defense") {
+                substat.min = substat.rolls * 7 * 4 * power; // 28
+                substat.max = substat.rolls * 14 * 2.5 * power; // 56
+            }
+            if (substat.type == "Health") {
+                substat.min = substat.rolls * 45 * 3.5 * power; // 157.5
+                substat.max = substat.rolls * 90 * 2.25 * power; // 315
+            }
+            if (substat.type == "Speed") {
+                substat.min = substat.rolls * 1; // 157.5
+                substat.max = substat.rolls * 4; // 315
+            }
+
+            const reforgedMin = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.min, substat.rolls);
+            const reforgedMax = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.max, substat.rolls);
+            const reforgedValue = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.value, substat.rolls);
+
+            substat.reforgedMin = reforgedMin;
+            substat.reforgedMax = reforgedMax;
+
+            const potential = (reforgedValue - reforgedMin) / (reforgedMax - reforgedMin)
+            substat.potential = potential;
+        }
+
+        console.warn(substats);
+    }
 }
+                // substat.multi = 39;
+                // substat.multi = 31;
+                // substat.multi = 174;
 
 const conversionNameByGear = {
     Weapon: "Corinoa",
@@ -302,7 +363,9 @@ function getItemReforgedStats(gear) {
             const value = substat.value;
 
             substat.scaledDiff = 0;
-            substat.rolls = substat.min;
+            if (substat.rolls == undefined || substat.rolls == null) {
+                substat.rolls = substat.min;
+            }
             rolls += substat.rolls;
         }
 
@@ -336,6 +399,8 @@ function getItemReforgedStats(gear) {
             const value = substat.value;
 
             calculateReforgeValues(substat);
+
+
         }
     } else {
 
@@ -364,7 +429,31 @@ function calculateReforgeValues(substat) {
     if (substat.type == "Speed") {
         substat.reforgedValue = substat.value + speedRollsToValue[substat.rolls];
     }
+}
 
+function calculateReforgeValuesTypeValueAndRolls(type, value, rolls) {
+    if (plainStats.includes(type)) {
+        return value + plainStatRollsToValue[rolls];
+    }
+    if (type == "CriticalHitChancePercent") {
+        return value + rolls;
+    }
+    if (type == "CriticalHitDamagePercent") {
+        return value + critDamageRollsToValue[rolls];
+    }
+    if (type == "Attack") {
+        return value + 11 * rolls;
+    }
+    if (type == "Defense") {
+        return value + 9 * rolls;
+    }
+    if (type == "Health") {
+        return value + 56 * rolls;
+    }
+    if (type == "Speed") {
+        return value + speedRollsToValue[rolls];
+    }
+    return 0;
 }
 
 const plainStats = [
