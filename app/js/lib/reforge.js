@@ -63,6 +63,11 @@ module.exports = {
 
         const substats = gear.substats;
         const power = gear.rank;
+        var tMax = 0;
+        var tMin = 0;
+        var tValue = 0;
+        var tPot = 0;
+        var tRolls = 0;
 
         for (var i = 0; i < substats.length; i++) {
             const substat = substats[i];
@@ -102,12 +107,20 @@ module.exports = {
 
             substat.reforgedMin = reforgedMin;
             substat.reforgedMax = reforgedMax;
+            substat.reforgedValue = reforgedValue;
 
             const potential = (reforgedValue - reforgedMin) / (reforgedMax - reforgedMin)
             substat.potential = potential;
+
+            tMax += reforgedMax;
+            tMin += reforgedMin;
+            tValue += reforgedValue;
+            tPot += potential * substat.rolls;
+            tRolls += substat.rolls;
         }
 
         console.warn(substats);
+        console.warn(tPot / tRolls)
     }
 }
                 // substat.multi = 39;

@@ -577,6 +577,6 @@ function onRowSelected(event) {
         updateSelectedCount();
 
         // Testing purposes
-        // Reforge.calculateMaxes(event.data);
+        Reforge.calculateMaxes(event.data);
     }
 }
