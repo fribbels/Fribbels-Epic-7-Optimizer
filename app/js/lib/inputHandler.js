@@ -40,6 +40,7 @@ global.GridRenderer = require('./renderer/gridRenderer');
 global.Updater = require('./updater');
 global.StatPreview = require('./statPreview');
 global.Artifact = require('./artifact');
+global.ColorPicker = require('./colorPicker');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -119,6 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         Saves.loadAutoSave();
 
         Tooltip.initialize();
+        ColorPicker.initialize();
     });
     Scanner.initialize();
     Updater.checkForUpdates();

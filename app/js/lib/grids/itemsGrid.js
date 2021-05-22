@@ -1,16 +1,19 @@
 const stringSimilarity = require('string-similarity');
 const tinygradient = require('tinygradient');
+const colorPicker = require('../colorPicker');
 
-var lightGradient = tinygradient('#ffffff', '#8fed78');
-var lightScoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
+var lightGradient = {gradient:tinygradient('#ffffff', '#8fed78')};
+var lightScoreGradient = {gradient:tinygradient('#ffa8a8', '#ffffe5', '#8fed78')};
 
-var darkGradient = tinygradient('#212529', '#38821F');
-var darkScoreGradient = tinygradient('#5A1A06', '#343127', '#38821F');
-var darkScoreGradient2 = tinygradient([
-    {color: '#5A1A06', pos: 0}, // red
-    {color: '#343127', pos: 0.4},
-    {color: '#38821F', pos: 1} // green
-]);
+var darkGradient = colorPicker.get2Colors();
+// var darkGradient = tinygradient('#5A1A06', '#38821F');//Item Grid: Values
+var darkScoreGradient = tinygradient('#5A1A06', '#343127', '#38821F'); //Not used?
+var darkScoreGradient2 = colorPicker.getColors();
+// var darkScoreGradient2 = tinygradient([
+//     {color: '#5A1A06', pos: 0}, // red
+//     {color: '#343127', pos: 0.4},
+//     {color: '#38821F', pos: 1} // green
+// ]); //Item Grid: Score
 
 var gradient = lightGradient;
 var scoreGradient = lightScoreGradient;
@@ -427,7 +430,7 @@ function columnGradient(params) {
         if (!agg) return;
 
         var percent = (value) / (agg.max + 1);
-        const color = gradient.rgbAt(percent);
+        const color = gradient.gradient.rgbAt(percent);
 
         if (percent == 0) {
             return {
@@ -453,7 +456,7 @@ function scoreColumnGradient(params) {
         percent = Math.min(1, percent);
         percent = Math.max(0, percent);
 
-        const color = scoreGradient.rgbAt(percent);
+        const color = scoreGradient.gradient.rgbAt(percent);
 
         return {
             backgroundColor: color.toHexString()

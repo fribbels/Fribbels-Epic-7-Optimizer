@@ -1,16 +1,18 @@
 const tinygradient = require('tinygradient');
+const colorPicker = require('../colorPicker');
 
-var lightGradient = tinygradient([
+var lightGradient = {gradient:tinygradient([
     {color: '#F5A191', pos: 0}, // red
     {color: '#ffffe5', pos: 0.5},
     {color: '#77e246', pos: 1} // green
-]);
+])};
 
-var darkGradient = tinygradient([
-    {color: '#5A1A06', pos: 0}, // red
-    {color: '#343127', pos: 0.5},
-    {color: '#38821F', pos: 1} // green
-]);
+var darkGradient = colorPicker.getColors();
+// var darkGradient = tinygradient([
+//     {color: '#5A1A06', pos: 0}, // red
+//     {color: '#343127', pos: 0.5},
+//     {color: '#38821F', pos: 1} // green
+// ]);
 
 var gradient = lightGradient;
 
@@ -411,17 +413,17 @@ function columnGradient(params) {
         if (value > agg.avg) {
             var percent = 0.5 * ((value - agg.avg) / (agg.max - agg.avg)) + 0.5
             percent = Math.min(1, Math.max(0, percent))
-            color = gradient.rgbAt(percent);
+            color = gradient.gradient.rgbAt(percent);
         }
 
         if (value == agg.avg) {
-            color = gradient.rgbAt(0.5)
+            color = gradient.gradient.rgbAt(0.5)
         }
 
         if (value < agg.avg) {
             var percent = (1 - (agg.avg - value) / (agg.avg - agg.min))*0.5
             percent = Math.min(1, Math.max(0, percent))
-            color = gradient.rgbAt(percent);
+            color = gradient.gradient.rgbAt(percent);
         }
 
         // if (agg.min == 0 && agg.max == 0) {
