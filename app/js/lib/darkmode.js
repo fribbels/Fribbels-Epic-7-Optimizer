@@ -46,7 +46,7 @@ module.exports = {
             $("img.tooltipImageLeft").attr("src", "./assets/tooltip_dt.png")
             $("img.tooltipImageRight").attr("src", "./assets/tooltip_dt.png")
 
-            $("#donateBadge").attr("src", "./assets/badgedonate_dt.png")
+            // $("#donateBadge").attr("src", "./assets/badgedonate_dt.png")
 
             OptimizerGrid.toggleDarkMode(true);
             ItemsGrid.toggleDarkMode(true);
@@ -85,7 +85,7 @@ module.exports = {
             $("img.tooltipImageLeft").attr("src", "./assets/tooltip.png")
             $("img.tooltipImageRight").attr("src", "./assets/tooltip.png")
 
-            $("#donateBadge").attr("src", "./assets/badgedonate.png")
+            // $("#donateBadge").attr("src", "./assets/badgedonate.png")
 
             OptimizerGrid.toggleDarkMode(false);
             ItemsGrid.toggleDarkMode(false);

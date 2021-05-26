@@ -1,6 +1,6 @@
 var childProcess = require('child_process')
 
-global.child = null;
+global.scannerChild = null;
 global.data = [];
 
 // global.api = "http://127.0.0.1:5000";
@@ -95,8 +95,8 @@ function launchScanner(command, scanType) {
     try {
         data = [];
 
-        if (child) {
-            child.kill()
+        if (scannerChild) {
+            scannerChild.kill()
         }
 
         if (findCommandSpawn) {
@@ -107,17 +107,17 @@ function launchScanner(command, scanType) {
         let bufferArray = []
 
         try {
-            child = childProcess.spawn(command, [Files.path(Files.getDataPath() + '/py/scanner.py')])
+            scannerChild = childProcess.spawn(command, [Files.path(Files.getDataPath() + '/py/scanner.py')])
         } catch (e) {
             console.error(e)
             Notifier.error(i18next.t("Unable to start python script ") + e)
         }
 
-        child.on('close', (code) => {
+        scannerChild.on('close', (code) => {
             console.log(`Python child process exited with code ${code}`);
         });
 
-        child.stderr.on('data', (data) => {
+        scannerChild.stderr.on('data', (data) => {
             const str = data.toString()
 
             if (str.includes("Failed to execute")
@@ -129,7 +129,7 @@ function launchScanner(command, scanType) {
             console.error(str);
         })
 
-        child.stdout.on('data', (message) => {
+        scannerChild.stdout.on('data', (message) => {
             message = message.toString()
             console.log(message)
 
@@ -173,7 +173,7 @@ module.exports = {
 
     end: async () => {
         try {
-            if (!child) {
+            if (!scannerChild) {
                 console.error("No scan was started");
                 Notifier.error("No scan was started");
                 return
@@ -181,7 +181,7 @@ module.exports = {
             document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Reading items, this may take up to 30 seconds...\nData will appear here after it is done."));
 
             console.log("Stop scanning")
-            child.stdin.write('END\n');
+            scannerChild.stdin.write('END\n');
         } catch (e) {
             Dialog.htmlError(i18next.t("Unexpected error while scanning items. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again. Error: ") + e);
         }
