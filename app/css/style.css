@@ -1441,6 +1441,12 @@ body.dark-theme input {
 
 /* START dark mode toggle */
 
+.donateIcon {
+  cursor: pointer;
+  height: 30px;
+  border-radius: 6px;
+  margin-right: 20px;
+}
 .badgeIcon {
   cursor: pointer;
   height: 60px;
