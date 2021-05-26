@@ -578,5 +578,6 @@ function onRowSelected(event) {
 
         // Testing purposes
         Reforge.calculateMaxes(event.data);
+        GearRating.rate(event.data);
     }
 }

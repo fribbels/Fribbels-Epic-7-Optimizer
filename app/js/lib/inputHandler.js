@@ -73,6 +73,7 @@ global.Heroes = Enums.Heroes;
 global.Stat = require('../models/stat').Stat;
 global.Item = require('../models/item').Item;
 global.MainStatFixer = require('./mainStatFixer');
+global.GearRating = require('./gearRating');
 global.OptimizationRequest = require('../models/optimizationRequest').OptimizationRequest;
 global.Importer = require('./importer');
 global.ItemAugmenter = require('./itemAugmenter');

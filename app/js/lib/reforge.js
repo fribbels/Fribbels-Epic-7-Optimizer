@@ -54,51 +54,165 @@ module.exports = {
 
     calculateMaxes: (gear) => {
         const powers = {
-            "Normal": 0.8,
-            "Good": 0.85,
-            "Rare": 0.9,
+            Normal: 0.8,
+            Good: 0.85,
+            Rare: 0.9,
             "Heroic": 0.95,
             "Epic": 1
         }
 
+        const modifiers = {
+            Health: {
+                min: 3.5,
+                max: 2.25
+            },
+            Attack: {
+                min: 2.37,
+                max: 1.67
+            },
+            Defense: {
+                min: 4,
+                max: 2.5
+            },
+        }
+
+        const flatsByLevel = {
+            "88": {
+                Health: {
+                    min: 51,
+                    max: 102
+                },
+                Attack: {
+                    min: 16,
+                    max: 32
+                },
+                Defense: {
+                    min: 8,
+                    max: 16
+                },
+            },
+            "85": {
+                Health: {
+                    min: 45,
+                    max: 90
+                },
+                Attack: {
+                    min: 14,
+                    max: 28
+                },
+                Defense: {
+                    min: 7,
+                    max: 14
+                },
+            }
+        }
+
+        const plainStatsByLevel = {
+            "88": {
+                Plain: {
+                    min: 5,
+                    max: 9
+                },
+                CriticalHitChancePercent: {
+                    min: 3,
+                    max: 6
+                },
+                CriticalHitDamagePercent: {
+                    min: 4,
+                    max: 8
+                },
+                Speed: {
+                    min: 3,
+                    max: 5
+                }
+            },
+            "85": {
+                Plain: {
+                    min: 4,
+                    max: 8
+                },
+                CriticalHitChancePercent: {
+                    min: 3,
+                    max: 5
+                },
+                CriticalHitDamagePercent: {
+                    min: 4,
+                    max: 7
+                },
+                Speed: {
+                    min: 1,
+                    max: 4
+                }
+            }
+        }
+
+/*
+            min   max   t1   t2   t3   t4   t5  t6  t7
+max_hp      3.5   2.25  0.6  0.7  0.8  0.9  1   1   1
+att         2.37  1.67  0.6  0.7  0.8  0.9  1   1   1
+def         4     2.5   0.6  0.7  0.8  0.9  1   1   1
+
+grade  power
+1      0.8
+2      0.85
+3      0.9
+4      0.95
+5      1.0
+6      9.99
+
+// 88 FLAT
+// HP 51 - 102
+// ATT 16 - 32
+// DEF 8 - 16
+
+// 85 FLAT
+// HP 45 - 90
+// DEF 7 - 14
+// ATT 14 - 28
+*/
+
         const substats = gear.substats;
-        const power = gear.rank;
         var tMax = 0;
         var tMin = 0;
         var tValue = 0;
         var tPot = 0;
         var tRolls = 0;
 
+        const power = powers[gear.rank];
+        const flats = flatsByLevel[gear.level == 88 ? 88 : 85]
+        const statRanges = plainStatsByLevel[gear.level == 88 ? 88 : 85]
+
         for (var i = 0; i < substats.length; i++) {
             const substat = substats[i];
+            const statTypeChanged = plainStats.includes(substat.type) ? "Plain" : substat.type;
 
-            if (plainStats.includes(substat.type)) {
-                substat.min = substat.rolls * 4;
-                substat.max = substat.rolls * 8;
+            if (statTypeChanged == "Plain") {
+                substat.min = substat.rolls * statRanges["Plain"].min;
+                substat.max = substat.rolls * statRanges["Plain"].max;
             }
             if (substat.type == "CriticalHitChancePercent") {
-                substat.min = substat.rolls * 3;
-                substat.max = substat.rolls * 5;
+                substat.min = substat.rolls * statRanges["CriticalHitChancePercent"].min;
+                substat.max = substat.rolls * statRanges["CriticalHitChancePercent"].max;
             }
             if (substat.type == "CriticalHitDamagePercent") {
-                substat.min = substat.rolls * 4;
-                substat.max = substat.rolls * 7;
+                substat.min = substat.rolls * statRanges["CriticalHitDamagePercent"].min;
+                substat.max = substat.rolls * statRanges["CriticalHitDamagePercent"].max;
             }
             if (substat.type == "Attack") {
-                substat.min = substat.rolls * 14 * 2.37 * power; // 33.18 * power
-                substat.max = substat.rolls * 28 * 1.67 * power; // 66.36
+                substat.min = substat.rolls * flats.Attack.min * modifiers.Attack.min * power;
+                substat.max = substat.rolls * flats.Attack.max * modifiers.Attack.max * power;
             }
             if (substat.type == "Defense") {
-                substat.min = substat.rolls * 7 * 4 * power; // 28
-                substat.max = substat.rolls * 14 * 2.5 * power; // 56
+                substat.min = substat.rolls * flats.Defense.min * modifiers.Defense.min * power;
+                substat.max = substat.rolls * flats.Defense.max * modifiers.Defense.max * power;
             }
             if (substat.type == "Health") {
-                substat.min = substat.rolls * 45 * 3.5 * power; // 157.5
-                substat.max = substat.rolls * 90 * 2.25 * power; // 315
+                substat.min = substat.rolls * flats.Health.min * modifiers.Health.min * power;
+                substat.max = substat.rolls * flats.Health.max * modifiers.Health.max * power;
             }
             if (substat.type == "Speed") {
-                substat.min = substat.rolls * 1; // 157.5
-                substat.max = substat.rolls * 4; // 315
+                substat.min = substat.rolls * statRanges["Speed"].min;
+                substat.max = substat.rolls * statRanges["Speed"].max;
             }
 
             const reforgedMin = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.min, substat.rolls);
@@ -118,9 +232,20 @@ module.exports = {
             tPot += potential * substat.rolls;
             tRolls += substat.rolls;
         }
+        const maxRolls15 = {
+            "Epic": 9,
+            "Heroic": 8,
+            "Rare": 7,
+            "Good": 6,
+            "Normal": 5,
+        }
+
+        const lostRolls = Math.ceil((15 - gear.enhance)/3);
 
         console.warn(substats);
-        console.warn(tPot / tRolls)
+        console.warn(tPot / tRolls) // possible pot
+        console.warn(tPot / 9)      // max pot
+        // console.warn(tPot / maxRolls15[gear.rank])
     }
 }
                 // substat.multi = 39;

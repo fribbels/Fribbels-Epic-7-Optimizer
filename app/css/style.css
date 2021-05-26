@@ -1443,7 +1443,13 @@ body.dark-theme input {
 
 .badgeIcon {
   cursor: pointer;
-  height: 60px;
+  height: 30px;
+  border-radius: 6px;
+  margin-right: 20px;
+}
+.donateIcon {
+  cursor: pointer;
+  height: 30px;
   border-radius: 6px;
 }
 .darkModeToggleContainer {
