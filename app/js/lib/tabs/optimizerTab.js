@@ -140,13 +140,13 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputMinPriorityLimit").val(inputDisplayNumber(request.inputMinPriorityLimit));
     $("#inputMaxPriorityLimit").val(inputDisplayNumber(request.inputMaxPriorityLimit));
 
-    $("#inputPredictReforges").prop('checked', request.inputPredictReforges || true);
-    $("#inputSubstatMods").prop('checked', request.inputSubstatMods || false);
-    $("#inputAllowLockedItems").prop('checked', request.inputAllowLockedItems || false);
-    $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems || false);
-    $("#inputKeepCurrentItems").prop('checked', request.inputKeepCurrentItems || false);
-    $("#inputOrderedHeroPriority").prop('checked', request.inputOrderedHeroPriority || false);
-    $("#inputOnlyMaxedGear").prop('checked', request.inputOnlyMaxedGear || false);
+    $("#inputPredictReforges").prop('checked', isNullUndefined(request.inputPredictReforges) ? true : request.inputPredictReforges);
+    $("#inputSubstatMods").prop('checked', isNullUndefined(request.inputSubstatMods) ? true : request.inputSubstatMods);
+    $("#inputAllowLockedItems").prop('checked', isNullUndefined(request.inputAllowLockedItems) ? false : request.inputAllowLockedItems);
+    $("#inputAllowEquippedItems").prop('checked', isNullUndefined(request.inputAllowEquippedItems) ? false : request.inputAllowEquippedItems);
+    $("#inputKeepCurrentItems").prop('checked', isNullUndefined(request.inputKeepCurrentItems) ? false : request.inputKeepCurrentItems);
+    $("#inputOrderedHeroPriority").prop('checked', isNullUndefined(request.inputOrderedHeroPriority) ? false : request.inputOrderedHeroPriority);
+    $("#inputOnlyMaxedGear").prop('checked', isNullUndefined(request.inputOnlyMaxedGear) ? false : request.inputOnlyMaxedGear);
 
     document.querySelector('#atkSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
     document.querySelector('#atkSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
@@ -180,6 +180,10 @@ async function loadPreviousHeroFilters(heroResponse) {
     Selectors.setGearMainAndSetsFromRequest(request);
     recalculateFilters(null, heroResponse);
     fixSliders()
+}
+
+function isNullUndefined(x) {
+    return x === null || x === undefined;
 }
 
 module.exports = {

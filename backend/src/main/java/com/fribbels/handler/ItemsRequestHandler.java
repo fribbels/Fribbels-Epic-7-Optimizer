@@ -527,7 +527,35 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 .items(items)
                 .build();
 
+        // clean up items equipped state
+//        final List<Hero> heroes = heroDb.getAllHeroes();
+//        for (final Item item : items) {
+//            final String equippedById = item.getEquippedById();
+//            final Hero hero = heroDb.getHeroById(equippedById);
+//
+//            if (hero == null || hero.getEquipment() == null) {
+//                clearItemEquipped(item);
+//                continue;
+//            }
+//
+//            final Item itemOnHero = hero.getEquipment().getOrDefault(item.getGear(), null);
+//            if (itemOnHero == null) {
+//                clearItemEquipped(item);
+//                continue;
+//            }
+//
+//            if (!StringUtils.equals(item.getId(), itemOnHero.getId())) {
+//                clearItemEquipped(item);
+//                continue;
+//            }
+//        }
+
         return toJson(response);
+    }
+
+    private void clearItemEquipped(final Item item) {
+        item.setEquippedByName(null);
+        item.setEquippedById(null);
     }
 
     public String getItemById(final IdRequest request) {
