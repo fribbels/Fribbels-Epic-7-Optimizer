@@ -13625,6 +13625,193 @@
       }
     }
   },
+  "Ilynav": {
+    "_id": "ilynav",
+    "name": "Ilynav",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "knight",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.048,
+        "A": 0.072,
+        "S": 0.096,
+        "SS": 0.12,
+        "SSS": 0.144
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1113_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1113_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1113_l.png"
+    },
+    "ex_equip": [
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11895,
+        "atk": 611,
+        "hp": 4556,
+        "spd": 103,
+        "def": 511,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13243,
+        "atk": 767,
+        "hp": 4896,
+        "spd": 109,
+        "def": 511,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14850,
+        "atk": 762,
+        "hp": 5728,
+        "spd": 103,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16949,
+        "atk": 957,
+        "hp": 6148,
+        "spd": 109,
+        "def": 634,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Inferno Khawazu": {
+    "_id": "inferno-khawazu",
+    "name": "Inferno Khawazu",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "dark",
+    "role": "warrior",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "C": 0.04,
+        "B": 0.06,
+        "A": 0.08,
+        "S": 0.1,
+        "SS": 0.12,
+        "SSS": 0.14
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "C": 0.024,
+        "B": 0.036,
+        "A": 0.048,
+        "S": 0.06,
+        "SS": 0.072,
+        "SSS": 0.084
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2085_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2085_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2085_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11276,
+        "atk": 713,
+        "hp": 4138,
+        "spd": 100,
+        "def": 452,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12819,
+        "atk": 854,
+        "hp": 4850,
+        "spd": 100,
+        "def": 479,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14079,
+        "atk": 889,
+        "hp": 5203,
+        "spd": 100,
+        "def": 561,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 1119,
+        "hp": 6091,
+        "spd": 100,
+        "def": 594,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Iseria": {
     "_id": "iseria",
     "name": "Iseria",
