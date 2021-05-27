@@ -1,4 +1,6 @@
 
+
+
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -8,13 +10,14 @@ Come join the Fribbels E7 Optimizer Discord server for announcements, troublesho
 Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#getting-started) section for instructions on how to use the optimizer.
 
 Features include:
- - Automatically import gear from the game
+ - Automatically import gear and heroes from the game
  - Filter gear optimizer with main stats/sub stats/sets/etc
  - Automatic data updates for new heroes
  - Hero bonus stats for imprints/artifacts/EEs
  - Gear substat efficiency scoring
  - Reforged stat prediction & editing
  - Color coded results sorting
+ - Substat modification optimization
 
 Here's what it looks like currently:
 
@@ -35,7 +38,10 @@ _________________
     + [Main stat and set filters](#main-stat-and-set-filters)
     + [Optimization Results](#optimization-results)
   * [Gear Tab](#gear-tab)
+    + [Gear score](#gear-score)
   * [Heroes Tab](#heroes-tab)
+    + [Adding bonus stats](#adding-bonus-stats)
+    + [Substat modification options](#substat-modification-options)
   * [Importer tab](#importer-tab)
     + [Creating gear data from screenshots](#creating-gear-data-from-screenshots)
     + [Importing gear data](#importing-gear-data)
@@ -45,10 +51,11 @@ _________________
     + [Installing the app](#installing-the-app)
       - [Windows](#windows)
       - [Mac OS](#mac-os)
-    + [Using the auto importer](#using-the-auto-importer)
+    + [Setting up the auto importer](#setting-up-the-auto-importer)
         * [First time  setup for the automatic importer on Windows](#first-time--setup-for-the-automatic-importer-on-windows)
         * [First time  setup for the automatic importer on Mac](#first-time--setup-for-the-automatic-importer-on-mac)
-        * [Running the automatic importer from an emulator](#running-the-automatic-importer-from-an-emulator)
+    + [Using the auto importer](#using-the-auto-importer)
+        * [Running the automatic importer from an emulator/M1 macbook](#running-the-automatic-importer-from-an-emulator-m1-macbook)
         * [Running the automatic importer from a phone](#running-the-automatic-importer-from-a-phone)
     + [Using the screenshot importer](#using-the-screenshot-importer)
         * [First time setup for the screenshot importer on Windows](#first-time-setup-for-the-screenshot-importer-on-windows)
@@ -59,8 +66,9 @@ _________________
     + [Tips to get good optimization results:](#tips-to-get-good-optimization-results-)
   * [TODO List](#todo-list)
   * [Troubleshooting](#troubleshooting)
-    + [Automatic importer](#automatic-importer)
-    + [Optimizer](#optimizer)
+    + [Automatic importer troubleshooting](#automatic-importer-troubleshooting)
+    + [Optimizer troubleshooting](#optimizer-troubleshooting)
+  * [Contributing to the project](#contributing-to-the-project)
   * [Contact me](#contact-me)
 
 
@@ -72,41 +80,43 @@ _________________
 
 ### Settings panel
 
-![](https://i.imgur.com/oOz9b55.png)
+![](https://i.imgur.com/eIWkJ09.png)
 
 This panel tracks settings for the other panels to use.
 
 - **Hero**: Select the hero you want to optimize for from the drop down.
-- **Force mode**: Selects the number of substats to enforce from the options selected in the force panel. (See force panel for more details).
-- **Predict reforges**: Predict the reforged stats on +15 level 85 gear to use in the search. Warning: the substat prediction is not 100% accurate so be ready to adjust their stats.
-- **At least one lv 85**: Search only for builds that contain at least one level 85 gear.
-- **Locked items**: When checked, locked items will be used in the optimization. When unchecked, locked items are ignored.
-- **Equipped items**: When checked, equipped items will be used in the optimization. When unchecked, equipped items are ignored EXCEPT for the unit's own equipped items.
-- **Keep current**: When checked, the unit will be forced to use the gear that it currently has, and the optimizer will only try to optimize the gear slots that the unit has unequipped.
-- **Start**: Click to start to optimization request.
-- **Filter**: Once an optimization is complete, click to filter the results by the stats on the filter panels.
-- **Cancel**: Interrupts and cancels an ongoing optimization request.
-- **Load settings**: Loads the optimization settings from the last search for this hero.
-- **Reset settings**: Sets all optimization settings to their default values.
+  - **Start**: Click to start to optimization request.
+  - **Filter**: Once an optimization is complete, click to filter the results by the stats on the filter panels.
+  - **Cancel**: Interrupts and cancels an ongoing optimization request.
+  - **Load settings**: Loads the optimization settings from the last search for this hero.
+  - **Reset settings**: Sets all optimization settings to their default values.
+- **Stats**: Preview the hero's current stats on the left vs the new stats on the right.
+- **Options**: Change options for optimizing your hero
+  - **Use reforged stats**: Predict the reforged stats on +15 level 85 gear to use in the search.
+  - **Use substat mods**: Run the optimization using substat modification stones. Each hero's optimization settings must first be selected on the heroes tab before this can be used.
+  - **Only maxed gear**: When checked, only use +15 gear that cannot be further upgraded/reforged.
+   - **Locked items**: When checked, locked items will be used in the optimization. When unchecked, locked items are ignored.
+  - **Equipped items**: When checked, equipped items will be used in the optimization. When unchecked, equipped items are ignored EXCEPT for the unit's own equipped items.
+  - **Keep current**: When checked, the unit will be forced to use the gear that it currently has, and the optimizer will only try to optimize the gear slots that the unit has unequipped.
+  - **Exclude Equipped**: Select the heroes whose gear you want to be ignored in the optimization search. Add finished heroes to this list so other heroes can't steal their gear. Only works when 'Equipped items' is checked.
 
 _________________
 
 ### Stat filters
 
-![](https://i.imgur.com/tVgubaV.png)
+![](https://i.imgur.com/9VPlYjo.png)
 
-This panel defines the stats to filter your optimization results by. The left boxes are the minimum (inclusive) and the right boxes are the maximum (inclusive). In this example, we're looking for a Ruele build with:
+This panel defines the stats to filter your optimization results by. The left boxes are the minimum (inclusive) and the right boxes are the maximum (inclusive). In this example, we're looking for a build with:
 - At least 20,000 HP
 - At least 2,400 def
 - Between 180 and 200 speed
 
 The filter will apply on your optimization results after you click Submit. Once the results have been generated, you can apply more restrictive filters by changing the numbers here, then clicking the **Filter** button. This will narrow down your results without having to do another search.
-
 _________________
 
 ### Rating filters
 
-![](https://i.imgur.com/xmhk8ml.png)
+![](https://i.imgur.com/VvNA4ca.png)
 
 This panel is similar to the primary stats panel, but applies for calculated stats. These stats you won't see in-game but are various ratings that can help decide between different builds.
 
@@ -123,7 +133,7 @@ _________________
 
 ### Substat priority filter
 
-![](https://i.imgur.com/i60uzCg.png)
+![](https://i.imgur.com/w55RbpG.png)
 
 **This is probably the most useful filter but please read before using it. Using this wrong can exclude good results from the search.**
 
@@ -141,11 +151,11 @@ Then, we set the Top % slider to 30%. This will take all your weapons, score the
 
 An example priority filter for a DPS unit like Arby could be something like this, where you only want damage stats:
 
-![](https://i.imgur.com/sdIG6xQ.png)
+![](https://i.imgur.com/iy4A8d2.png)
 
 Or for a tanky Champion Zerato, where you want a mix of tankiness, damage, and effectiveness, but NOT resistance, you can set resistance to -1 to decrease the gear rating if it has resist substats:
 
-![](https://i.imgur.com/CF3KmxT.png)
+![](https://i.imgur.com/idsnxVW.png)
 
 Choosing a good priority filter makes the optimization a lot easier since you won't have to consider irrelevant or low-rolled gears.
 
@@ -153,7 +163,7 @@ _________________
 
 ### Main stat and set filters
 
-![](https://i.imgur.com/fYOaDPB.png)
+![](https://i.imgur.com/NPsmTVw.png)
 
 This one's fairly straightforward, we're looking for:
 - Necklaces with Health % OR Defense %
@@ -164,13 +174,13 @@ This one's fairly straightforward, we're looking for:
 
 If we don't care about sets as much for a tanky/damage ML Ken or something, this allows for broken sets as well. Here we only care that he has an immunity set, and no preference for any other sets, so they're left blank.
 
-![](https://i.imgur.com/8HEsbvY.png)
+![](https://i.imgur.com/zDcMb1A.png)
 
 _________________
 
 ### Optimization Results
 
-![](https://i.imgur.com/zF1xKlE.png)
+![](https://i.imgur.com/qxzV1HS.png)
 
 Here you can see all the results from the optimization, sort by stat, and equip/lock the results.
 - The top row shows your currently equipped gear stats
@@ -183,9 +193,12 @@ Here you can see all the results from the optimization, sort by stat, and equip/
 
 ## Gear Tab
 
-![](https://i.imgur.com/W6bHn4Y.png)
+![](https://i.imgur.com/hEjsPOJ.png)
 
 Here you can find a table of all your gears, and sort/filter them. The icons at the bottom enable filters for set and gear slot, and the X clears the filters.
+
+### Gear score
+
 The **Score** column is a stat I made up which is similar to WSS, with the difference that it takes flat stats into consideration while WSS ignores them. The calculation is:
 
     Score = Attack %
@@ -200,23 +213,53 @@ The **Score** column is a stat I made up which is similar to WSS, with the diffe
     + Flat Defense * 4.99 / 31
     + Flat Hp * 3.09 / 174
 
-Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and compared it to the average stats of a 5* unit, and used that as a measure of how well the flat stats rolled.
+Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and compared it to the average stats of a base 5* unit at max level, and used that as a measure of how well the flat stats rolled. (For example, average roll flat def is 31, while the average flat def roll is worth 4.99% def on the average unit)
 
-![](https://i.imgur.com/ms6HybN.png)
+The other scores on this page are defined as:
+* dScore - DPS Score. This is the Score formula but only counting Attack/%, Crit Chance, Crit Damage, and Speed
+* sScore - Support Score. This is the Score formula but only counting Hp/%, Defense/%, Effect Resist, and Speed
+* cScore - Combat Score. This is the Score formula excluding Effectiveness and Effect Resist
 
-You can edit existing gears or add new gears with this page, and filling in the relevant fields.
+
+![](https://i.imgur.com/L3pbMp6.png)
+
+You can edit existing gears or add new gears with the *Equip / Edit Item* button, and filling in the relevant fields on this page.
 
 ## Heroes Tab
 
-![](https://i.imgur.com/FnMbGWO.png)
+![](https://i.imgur.com/B7tupLX.png)
 
-Here you can add new heroes and manage existing ones. I think most of the buttons are fairly self explanatory, the one thing worth noting is the **Add Bonus Stats** page, which lets you add artifact/imprint stats to the hero for optimization.
+Here you can add new heroes and manage existing ones. The second grid saves a history of your past builds. The bottom shows your currently selected builds on the hero.
 
-![](https://i.imgur.com/x40j3um.png)
+### Adding bonus stats
+
+The **Add Bonus Stats** button lets you add artifact/imprint/exclusive equipment stats to the hero for optimization.
+
+![](https://i.imgur.com/0yFNcBK.png)
+
+### Substat modification options
+
+The **Add Substat Mods** button lets you customize the hero's settings when optimizing with substat mods enabled.
+
+![](https://i.imgur.com/wxUsDWI.png)
+
+The substat selections menu allows you to drag substats from the *Don't change* column to either *Wanted* or *Unwanted*. Unwanted substats will be converted into Wanted substats, which the Don't change ones will not be modified or selected for in the results.
+
+* **Options**
+  * Limit rolls - Choose the maximum number of rolls to replace. For example, limit rolls = 1 would only replace base stats that didn't get enhanced. It is generally not a good idea to replace more than 2 rolls, and the higher this number is, the more permutations will be generated.
+  * Mod grade - Choose whether to use Greater or Lesser gem stats.
+  * Roll quality - Choose the modified substat's roll value, from min roll to max roll. The actual value ingame will be random. Values will be rounded to the nearest whole number.
+  * Wanted stats - Choose whether wanted stats should be allowed to be replaced with wanted stats when optimizing. For example, when allowed, a min speed roll could be replaced by a max speed roll. When not allowed, the speed will be left unmodified.
+- **Tips for using substat mods**
+  - Each substat change is considered as a new item, so you will have to increase your Top % and wait longer for good results
+  - Selecting fewer "wanted substats" and "unwanted substats" will make the optimization faster because it generates less permutations
+  - Searching multiple billion permutations is not uncommon when substats mods are enabled. Locking items and using the hero priority filter/etc can help reduce the search space
+  - The optimizer is only meant to show modification possibilities, but its not always a good idea to modify certain items for a specific build. Choose wisely
+  - Each substat change is considered an upgrade, and can be filtered for with the "Upg" filter, if you only want to modify 1-2 items for example**
 
 ## Importer tab
 
-![](https://i.imgur.com/LyJq3Lr.png)
+![](https://i.imgur.com/Ze2db9H.png)
 
 This tab lets you do various things with importing/exporting files.
 _________________
@@ -259,7 +302,7 @@ Please read these instructions carefully!
 
 #### Windows
 
-1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x-windows.zip``
+1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-Setup-1.x.x.exe`` then run the installer
     * Do not download the Source Code options, those won't work
 2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the Windows Offline (64-bit) installer
     * After installing, restart your computer (required!)
@@ -268,7 +311,6 @@ Please read these instructions carefully!
 #### Mac OS
 
 1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-x.x.x-mac.dmg``
-    * There is a dmg file and a zip file. Try the dmg first and if it doesn't work, try the zip.
     * Do not download the Source Code options, those won't work
 2. Install **Java 8 - 64 bit**
     * Mac needs both JRE and JDK:
@@ -279,12 +321,12 @@ Please read these instructions carefully!
 
 _________________
 
-### Using the auto importer
+### Setting up the auto importer
 There are two importer options, one that automatically imports gear directly from your game, and one using screenshots. The automatic importer is recommended and requires these additional steps:
 
 ##### First time  setup for the automatic importer on Windows
 1. Install [Python 3.4+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link to 3.9.2](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). **IMPORTANT: Enable the option to add Python to PATH**
-2. Install [Npcap](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.31.exe). During installation ,enable the setting to "Support raw 802.11 traffic (and monitor mode) for wireless adapters".
+2. Install [Npcap](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.31.exe). During installation, enable the setting to "Support raw 802.11 traffic (and monitor mode) for wireless adapters".
 3. Restart your computer
 
 ##### First time  setup for the automatic importer on Mac
@@ -293,33 +335,36 @@ There are two importer options, one that automatically imports gear directly fro
 3. During the Wireshark installation, also install ChmodBPF.pkg: [See image](https://i.imgur.com/FqV0BA5.png)
 3. Restart your computer
 
-##### Running the automatic importer from an emulator
+### Using the auto importer
+You can use the auto importer with an emulator, a phone, or M1 chip Macbook.
+
+##### Running the automatic importer from an emulator/M1 macbook
 1. Install requirements from the instructions above
 2. Leave your emulator open, and close Epic 7
 3. Click Start scanning
 4. Open Epic 7, and load into the lobby
 5. Click Stop scanning
 6. Wait up to 30 secs, then once the data appears, click Export to save it to a "gear.txt"
-7. Import the "gear.txt" with the Replace/Add/Merge options below
+7. Import the "gear.txt" with the Merge button
 8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items
 
 ##### Running the automatic importer from a phone
-1. On Windows 10 machines, enable Mobile Hotspot: [See image](https://i.imgur.com/89o8NfG.png)
-  2. On Mac, enable Internet Sharing in preferences. (May not be available for all machines)
-2. Connect to the mobile hotspot from your phone
+1. On Windows 10 machines, enable the Mobile Hotspot setting: [See image](https://i.imgur.com/89o8NfG.png)
+  2. On Mac, enable Internet Sharing in preferences. (May not be available for all machines depending on hardware)
+2. Connect to the mobile hotspot from your phone (The computer must be the one providing the hotspot, and the phone connects to the computer's hotspot)
 3. Follow steps 3-8 in the previous 'Running the automatic importer from an emulator' section, using your phone instead of the emulator
 
 _________________
 
 ### Using the screenshot importer
-If you cannot use the automatic importer, or would prefer to use screenshots, follow the following steps.
+If you cannot use the automatic importer, or would prefer to use screenshots, follow the following steps to import gear by screenshotting each item.
 
 ##### First time setup for the screenshot importer on Windows
 1. Install an emulator to run Epic 7 on
     * I used LDPlayer, but others have worked as well: MeMu, Nox, etc. Bluestacks works fine with the automatic importer, but has issues with screen resolution for the screenshot importer. See a solution for getting Bluestacks screenshots working [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268)
 2. Set the emulator's screen resolution to **1600 x 900**. [Example](https://i.imgur.com/kyUQ86a.png)
 3. Set Epic 7 to **English** and enable **High Quality Support** in settings. [Example](https://i.imgur.com/iEbfVN3.png)
-4. Unzip the downloaded file, and run FribbelsE7Optimizer.exe (or FribbelsE7Optimizer.dmg/app on Mac) [Example](https://i.imgur.com/jltdg0U.png)
+4. Install and run the optimizer
 
 ##### First time setup for the screenshot importer on Mac
 
@@ -372,7 +417,7 @@ _________________
 
 * After enhancing/reforging/modifying your gear, you'll need to update it in the optimizer
 * Run the auto importer again, or use the screenshot importer, to generate a new gear.txt
-* Use the Merge (or other options) button on the Importer tab to update your existing save with the new gear
+* Use the Merge button on the Importer tab to update your existing save with the new gear
 
 _________________
 
@@ -385,7 +430,7 @@ Here's some quick tips on getting the best results. This is assuming you've read
   * DPS units should have high priority on Atk / Cr / Cd / Speed for example.
   * Tank units should have high priority on Hp / Def / Speed for example.
   * Bad priorities will lead to bad results because good options get filtered out.
-* **Lower the Top % to make the search faster, or increase Top % to search more results.** Most of the time I use 25-40%, sometimes lower if I want only my best gear on the unit.
+* **Lower the Top % to make the search faster, or increase Top % to search more results.** Most of the time I use 20-30%, sometimes lower if I want only my best gear on the unit.
 * If you want a certain piece of gear to stay on a hero, go to the Gear tab -> Edit Selected Item -> Equipped and equip it on them first. [Example](https://i.imgur.com/oNO9ivL.png) Then you can use the optimizer with "Keep current" checked to keep that piece on them.
 
 _________________
@@ -394,32 +439,16 @@ _________________
 
 There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**Done for 1.7.0**
- - Optimization with substat mods
- - Drag and drop hero sorting
- - Conversion filter
- - Arrow keys on heroes/items
- - Use main stat gear for priority filter
- - Add 5 star base stats
- - Windows installer
- - Double reforge bug
- - Auto import equipped units
- - Priority score column
- - Merge bug
- - Add bonus stats
- - Confirmation dialog
- - Kill subprocess
- - Hero priority filter
- - Pinned row now clickable
- - Auto updater
- - Save subprocess ids in settings and kill at startup
+**Done for 1.8.0**
+- TBD
 
 **Working on:**
- - v1.7.0
+ - v1.8.0
 
  **Medium priority:**
- - Safer autosave folder loading https://cdn.discordapp.com/attachments/819494928077553684/831868290019229726/unknown.png
+ - Safer autosave folder loading
  - Unequipped units ingame with gear in optimizer dont get unequipped on hero merge
+ - Save subprocess ids in settings and kill at startup
  - Cancel search -> stop search
 
  **Low priority:**
@@ -427,6 +456,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
  - Customizable optimization column formulas
  - Clear out item previews on refresh
  - Optimizer broken set priority
+ - Hero priority equipping
  - Different pinned builds
  - Bug: Comparison method violates its general contract
  - Move save/load to File menu
@@ -452,29 +482,29 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
 ## Troubleshooting
 
 
-### Automatic importer
-* If it takes longer than 30 seconds and no error shows up.
+### Automatic importer troubleshooting
+* If it takes longer than 30 seconds or no error shows up:
   * Make sure the requirements are installed (Python and Npcap for Windows, Python and Wireshark for Mac), or try reinstalling them.
   * Restart your computer
-  * If you're on VPN, either disable it or change encryption to UDP
-  * If you have Hyper-V enabled, there's a couple options:
-    * Open the View Network Connections menu, and disable the Hyper-V Bluestacks network adapter, then use the mobile hotspot import option.
-    * Or modify the scanner code to hardcode your network interface: https://github.com/fribbels/Fribbels-Epic-7-Optimizer/issues/50#issuecomment-804275567
 * Shows an error
   * Try it again a couple times, it does fail occasionally
+  * If you're on VPN, either disable it or change encryption to UDP
+  * If you have Hyper-V enabled, there's a couple options:
+    * Try importing on a non Hyper-V machine
+    * Open the View Network Connections menu, and disable the Hyper-V Bluestacks network adapter, then use the mobile hotspot import option.
+    * Or modify the scanner code to hardcode your network interface: https://github.com/fribbels/Fribbels-Epic-7-Optimizer/issues/50#issuecomment-804275567
 
 * Feel free to drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
 
-### Optimizer
+### Optimizer troubleshooting
 
 - If you're seeing Java issues:
   - Make sure Java 8 - 64 bit is installed.
   - Make sure that Java is in your path environment variable: https://mkyong.com/java/how-to-set-java_home-on-windows-10/
-  - Try restarting your computer, and reopen the app (there might be a subprocess still kicking around)
+  - Try restarting your computer, and reopen the app (there might be an old subprocess still kicking around)
 
 - If you're having trouble running the app after downloading:
-  - If you don't see the .exe file, you might have downloaded the Source code instead of the binaries. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-x.x.x...' file (for your specific OS), not the Souce code
-  - Error about a missing "ffmpeg.dll", you might have opened the file without unzipping it. Make sure to unzip/extract the .zip file after downloading it.
+  - You might have downloaded the Source code instead of the the installer. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-Setup-1.x.x.exe' file (for Windows, use the dmg for mac), not the Source code
 
 - If you see a "Error: EPERM: operation not permitted" error pop up while importing, there are a couple potential fixes:
   - Restart your computer, especially if you installed Java recently
@@ -488,8 +518,8 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
   - I don't actually know the cause of this one, but one way to fix it is copying the data/tessdata/eng.traineddata/eng.traineddata file into the system32 path that its looking for
 
 - If you're having trouble using it on Mac - "The application "FribbelsE7Optimizer" can't be opened":
+  - Right click the app and click Open from the menu
   - Try unzipping the file using Unarchiver from the app store instead of Archive Utility. [Example](https://i.imgur.com/y9uGQcH.png)
-  - Try downloading the .dmg file if you were using the zip/app file.
 - If you're having trouble with Bluestacks/unable to resize the screenshots to 1600x900:
   - Windows: See possible Bluestacks workaround [here](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/commit/94b8730e94e6323b278265ab46f6602ed7822c22#r45552268).
   - Mac: Resize to 1600x900 through Bluestacks options, then restart Bluestacks, then click the green button to fullscreen Bluestacks. After its fullscreened, screenshots will come out as 1600x900.
@@ -500,9 +530,9 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
   - Use the Duplicates filter on the Gear screen to find and fix your duplicate gear. Alternatively Overwrite/Merge your gear data to start over. Be careful when using the Append option, because that can result in duplicate gear being added. Most of the time you'll want to use Merge.
 
 - If you're having problems with importing screenshot files:
- - Inspect your screenshots and make sure they are exactly **1600x900** resolution.
- - Make sure your Epic 7 settings have **English** and **High Quality Support** enabled.
- - Try moving your app and screenshot folder to a different location. (try the desktop)
+  - Inspect your screenshots and make sure they are exactly **1600x900** resolution.
+  - Make sure your Epic 7 settings have **English** and **High Quality Support** enabled.
+  - Try moving your app and screenshot folder to a different location. (try the desktop)
 
 * Drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
 
@@ -512,7 +542,7 @@ If you want to contribute, come by the discord server to have a chat about what 
 
 We also have an ongoing translation project to translate the optimizer into various languages.
 
-To run the code locally,
+To run the frontend code locally,
 
 1. Install requirements
   1. Install node.js: https://nodejs.org/
@@ -523,6 +553,7 @@ To run the code locally,
 4. To run the development version locally: ``yarn dev``
 5. To build and package the production executables: ``yarn package``
 
+To run the backend code requires some more setup, contact me for more info.
 ## Contact me
 
 Come join the Fribbels E7 Optimizer Discord server for questions or comments or ideas/suggestions: https://discord.gg/rDmB4Un7qg. If you ran into any issues, please check the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
