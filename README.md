@@ -302,11 +302,11 @@ Please read these instructions carefully!
 
 #### Windows
 
-1. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-Setup-1.x.x.exe`` then run the installer
-    * Do not download the Source Code options, those won't work
-2. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the Windows Offline (64-bit) installer
+1. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the Windows Offline (64-bit) installer
     * After installing, restart your computer (required!)
-  3. Follow the steps to use either the auto importer or screenshot importer
+2. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-Setup-1.x.x.exe`` then run the installer
+    * Do not download the Source Code options, those won't work
+3. Follow the steps to use either the auto importer or screenshot importer
 
 #### Mac OS
 
