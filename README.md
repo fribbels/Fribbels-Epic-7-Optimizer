@@ -26,6 +26,9 @@ Here's what it looks like currently:
 ## Requirements
 - 64-bit Windows or MacOS
 - Java 8, 64-Bit installed (Please download if you don't yet have it: https://java.com/en/download/manual.jsp. For Windows, use the 'Windows Offline (64-bit)' installer)
+
+Check out the step-by-step video guide on how to install the app: https://www.youtube.com/watch?v=bDjP5eiOfK0
+
 _________________
 
 - [Fribbels Epic 7 Gear Optimizer](#fribbels-epic-7-gear-optimizer)
@@ -296,7 +299,7 @@ If were a user of Zarroc's gear optimizer, this lets you import your data direct
 
 ## Getting Started
 
-Please read these instructions carefully!
+Please read these instructions carefully! Here is a step by step video guide to go along with the instructions: https://www.youtube.com/watch?v=bDjP5eiOfK0
 
 ### Installing the app
 
@@ -322,9 +325,13 @@ Please read these instructions carefully!
 _________________
 
 ### Setting up the auto importer
+
 There are two importer options, one that automatically imports gear directly from your game, and one using screenshots. The automatic importer is recommended and requires these additional steps:
 
-##### First time  setup for the automatic importer on Windows
+##### First time setup for the automatic importer on Windows
+
+Check out the step-by-step video guide to follow along with instructions: https://youtu.be/bDjP5eiOfK0?t=182
+
 1. Install [Python 3.4+](https://www.python.org/downloads/release/python-392/) using the Windows installer (64-bit) option. Click for [direct download link to 3.9.2](https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe). **IMPORTANT: Enable the option to add Python to PATH**
 2. Install [Npcap](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.31.exe). During installation, enable the setting to "Support raw 802.11 traffic (and monitor mode) for wireless adapters".
 3. Restart your computer
@@ -339,6 +346,9 @@ There are two importer options, one that automatically imports gear directly fro
 You can use the auto importer with an emulator, a phone, or M1 chip Macbook.
 
 ##### Running the automatic importer from an emulator/M1 macbook
+
+Check out the step-by-step video guide to follow along with instructions: https://youtu.be/bDjP5eiOfK0?t=357
+
 1. Install requirements from the instructions above
 2. Leave your emulator open, and close Epic 7
 3. Click Start scanning
