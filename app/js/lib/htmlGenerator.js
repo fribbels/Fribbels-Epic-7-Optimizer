@@ -280,7 +280,7 @@ module.exports = {
 
         const materialImage = getMaterialImage(item);
 
-        const html = `
+        var html = `
 <div class="itemDisplayHeader">
   <img src="${gearImage}" class="gearTypeImg" ${styleForImage(item.rank)}></img>
   <div class="itemDisplayHeaderData">
@@ -346,6 +346,16 @@ module.exports = {
   </div>
 </div>
         `
+
+        if (checkboxPrefix == "itemsGrid") {
+            html +=
+`
+Possible score range: 10 - 22</br>
+Actual score: 15</br>
+Percentage: 56%</br>
+`
+        }
+
         return html;
     }
 }

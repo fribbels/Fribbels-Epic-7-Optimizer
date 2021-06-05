@@ -27,14 +27,19 @@ function buildTopSlider(slider) {
     var nrInput = document.querySelector(slider + 'Input');
     rangesliderJs.create(sliderEl, {
         onSlideEnd: val => {
-            nrInput.setAttribute('value', Math.round(0.01 * Math.pow(val, 2)))
+            const value = Math.round(0.01 * Math.pow(val, 2));
+            sliderEl['rangeslider-js'].update({value: val})
+            nrInput.value = value
             recalculateFilters();
         },
         onSlide: val => {
             nrInput.setAttribute('value', Math.round(0.01 * Math.pow(val, 2)))
         },
     })
-    nrInput.addEventListener('input',  ev => sliderEl['rangeslider-js'].update({value: ev.target.value}))
+    nrInput.addEventListener('input',  ev => {
+        sliderEl['rangeslider-js'].update({value: Math.sqrt(ev.target.value / 0.01)})
+        recalculateFilters();
+    })
 }
 
 function inputDisplayNumber(value) {

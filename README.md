@@ -394,25 +394,8 @@ _________________
 
 There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
-**Done for 1.7.0**
- - Optimization with substat mods
- - Drag and drop hero sorting
- - Conversion filter
- - Arrow keys on heroes/items
- - Use main stat gear for priority filter
- - Add 5 star base stats
- - Windows installer
- - Double reforge bug
- - Auto import equipped units
- - Priority score column
- - Merge bug
- - Add bonus stats
- - Confirmation dialog
- - Kill subprocess
- - Hero priority filter
- - Pinned row now clickable
- - Auto updater
- - Save subprocess ids in settings and kill at startup
+**Done for 1.8.0**
+ - Top % now input-able
 
 **Working on:**
  - v1.7.0

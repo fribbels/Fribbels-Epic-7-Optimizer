@@ -577,7 +577,8 @@ function onRowSelected(event) {
         updateSelectedCount();
 
         // Testing purposes
-        Reforge.calculateMaxes(event.data);
-        GearRating.rate(event.data);
+        // Reforge.calculateMaxes(event.data);
+        Reforge.unreforgeItem(event.data);
+        // GearRating.rate(event.data);
     }
 }
