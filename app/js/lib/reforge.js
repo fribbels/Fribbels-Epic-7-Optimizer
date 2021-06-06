@@ -243,7 +243,7 @@ function getItemReforgedStats(gear) {
         }
 
         if (!gear.substats) {
-            Notifier.error("Cannot calculate reforged stats. Find the item and fix it: " + JSON.stringify(gear));
+            Notifier.error(i18next.t("Cannot calculate reforged stats. Find the item and fix it: ") + JSON.stringify(gear));
             return;
         }
 

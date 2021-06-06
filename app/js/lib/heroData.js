@@ -189,7 +189,7 @@ function manualFetchData() {
             heroesByName[name] = fullData;
         } catch (e) {
             console.error(e);
-            Notifier.error("Unable to load data from Epic7DB - " + e);
+            Notifier.error(i18next.t("Unable to load data from Epic7DB - ") + e);
         }
     })
 

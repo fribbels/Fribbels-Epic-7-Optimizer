@@ -9,7 +9,8 @@ global.pid = null;
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
-const killPort = require('kill-port')
+const killPort = require('kill-port');
+const { default: i18next } = require('i18next');
 
 var errors = "";
 var killed = false;
@@ -57,7 +58,7 @@ module.exports = {
                 return;
             }
 
-            Notifier.error(`Java subprocess errors: ${errors}`)
+            Notifier.error(`${i18next.t("Java subprocess errors")}: ${errors}`)
             Dialog.htmlError(defaultJavaError);
         });
 
