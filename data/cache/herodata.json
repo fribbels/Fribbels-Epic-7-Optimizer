@@ -23611,14 +23611,14 @@
       },
       "lv50FiveStarFullyAwakened": {
         "cp": 13166,
-        "atk": 853,
-        "hp": 3601,
-        "spd": 106,
-        "def": 551,
+        "atk": 852,
+        "hp": 5032,
+        "spd": 100,
+        "def": 520,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
-        "eff": 0.06,
+        "eff": 0,
         "efr": 0
       },
       "lv60SixStarNoAwaken": {
@@ -24987,6 +24987,99 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.3,
+        "efr": 0
+      }
+    }
+  },
+  "Straze": {
+    "_id": "straze",
+    "name": "Straze",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "warrior",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1034_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1034_su.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1034_l.png"
+    },
+    "ex_equip": [
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11958,
+        "atk": 793,
+        "hp": 4267,
+        "spd": 109,
+        "def": 446,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13624,
+        "atk": 984,
+        "hp": 4607,
+        "spd": 109,
+        "def": 446,
+        "chc": 0.22999999999999998,
+        "chd": 1.55,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14926,
+        "atk": 989,
+        "hp": 5364,
+        "spd": 109,
+        "def": 553,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17106,
+        "atk": 1228,
+        "hp": 5784,
+        "spd": 109,
+        "def": 553,
+        "chc": 0.22999999999999998,
+        "chd": 1.65,
+        "dac": 0.05,
+        "eff": 0,
         "efr": 0
       }
     }
