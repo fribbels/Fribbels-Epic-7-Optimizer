@@ -28,11 +28,11 @@ public class StatCalculator {
 
 
     public static void setBaseValues(final HeroStats base, final Hero hero) {
-        atkSetBonus = 0.35f * base.atk;
-        hpSetBonus = 0.15f * base.hp;
-        defSetBonus = 0.15f * base.def;
+        atkSetBonus = 0.45f * base.atk;
+        hpSetBonus = 0.20f * base.hp;
+        defSetBonus = 0.20f * base.def;
         speedSetBonus = 0.25f * base.spd;
-        revengeSetBonus = 0.1f * base.spd;
+        revengeSetBonus = 0.12f * base.spd;
 
         bonusBaseAtk = base.atk + base.atk * (hero.bonusAtkPercent + hero.aeiAtkPercent) / 100f + hero.bonusAtk + hero.aeiAtk;
         bonusBaseHp = base.hp + base.hp * (hero.bonusHpPercent + hero.aeiHpPercent) / 100f + hero.bonusHp + hero.aeiHp;

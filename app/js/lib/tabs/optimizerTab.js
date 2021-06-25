@@ -755,9 +755,9 @@ async function applyItemFilters(params, heroResponse, allItemsResponse, submit) 
         items = items.filter(x => !params.excludeFilter.includes(x.equippedById) || x.equippedById == heroId);
     }
 
-    if (params.inputOnlyMaxedGear) {
-        items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
-    }
+    // if (params.inputOnlyMaxedGear) {
+    //     items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
+    // }
 
     if (isFourAndTwoPieceSets(params.inputSets) || isTwoAndTwoAndTwoPieceSets(params.inputSets)) {
         const possibleSets = params.inputSets.flat();

@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.7.0";
+const currentVersion = "1.7.1";
 
 global.TEST = false;
 /********************************************************************************************
@@ -20,6 +20,12 @@ module.exports = {
     showNewFeatures: (text) => {
         Dialog.showNewFeatures(
 `
+<h2>
+    New in v1.7.1
+</h2>
+<ul class="newFeatures">
+    <li>Updated stats for Health / Defense / Attack / Revenge sets</li>
+</ul>
 <h2>
     New in v1.7.0
 </h2>
