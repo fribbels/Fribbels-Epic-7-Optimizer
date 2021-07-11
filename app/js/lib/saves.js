@@ -37,6 +37,7 @@ module.exports = {
 
             return data;
         } catch (e) {
+            log.error(e);
             Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.")
         }
     },

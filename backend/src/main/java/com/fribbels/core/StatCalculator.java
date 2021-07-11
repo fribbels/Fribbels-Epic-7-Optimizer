@@ -12,22 +12,25 @@ public class StatCalculator {
 
     public static boolean SETTING_RAGE_SET = true;
 
-    private static float atkSetBonus;
-    private static float hpSetBonus;
-    private static float defSetBonus;
-    private static float speedSetBonus;
-    private static float revengeSetBonus;
+    private float atkSetBonus;
+    private float hpSetBonus;
+    private float defSetBonus;
+    private float speedSetBonus;
+    private float revengeSetBonus;
 
-    private static float bonusBaseAtk;
-    private static float bonusBaseHp;
-    private static float bonusBaseDef;
+    private float bonusBaseAtk;
+    private float bonusBaseHp;
+    private float bonusBaseDef;
 
-    private static float bonusMaxAtk;
-    private static float bonusMaxHp;
-    private static float bonusMaxDef;
+    private float bonusMaxAtk;
+    private float bonusMaxHp;
+    private float bonusMaxDef;
 
+    public StatCalculator() {
 
-    public static void setBaseValues(final HeroStats base, final Hero hero) {
+    }
+
+    public void setBaseValues(final HeroStats base, final Hero hero) {
         atkSetBonus = 0.45f * base.atk;
         hpSetBonus = 0.20f * base.hp;
         defSetBonus = 0.20f * base.def;
@@ -43,7 +46,7 @@ public class StatCalculator {
         bonusMaxDef = 1 + base.bonusMaxDefPercent/100f;
     }
 
-    public static HeroStats addAccumulatorArrsToHero(final HeroStats base,
+    public HeroStats addAccumulatorArrsToHero(final HeroStats base,
                                                      final float[][] accs,
                                                      final int[] sets,
                                                      final Hero hero,
@@ -111,7 +114,7 @@ public class StatCalculator {
                 base.bonusMaxAtkPercent, base.bonusMaxDefPercent, base.bonusMaxHpPercent, sets, null, null, null, null, null, null);
     }
 
-    public static float[] getStatAccumulatorArr(final HeroStats base,
+    public float[] getStatAccumulatorArr(final HeroStats base,
                                                 final Item item,
                                                 final Map<String, float[]> accumulatorsByItemId,
                                                 final boolean useReforgeStats) {
@@ -124,7 +127,7 @@ public class StatCalculator {
         return accumulator;
     }
 
-    public static float[] buildStatAccumulatorArr(final HeroStats base, final Item item, final boolean useReforgeStats) {
+    public float[] buildStatAccumulatorArr(final HeroStats base, final Item item, final boolean useReforgeStats) {
         final AugmentedStats stats;
         if (useReforgeStats) {
             stats = item.getReforgedStats();
@@ -165,7 +168,7 @@ public class StatCalculator {
         return statAccumulatorArr;
     }
 
-    public static int[] buildSetsArr(final Item[] items) {
+    public int[] buildSetsArr(final Item[] items) {
         final int[] sets = new int[16];
         sets[items[0].set.index]++;
         sets[items[1].set.index]++;

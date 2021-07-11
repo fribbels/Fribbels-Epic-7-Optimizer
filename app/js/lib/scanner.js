@@ -278,12 +278,14 @@ function convertSubStats(item) {
                 statAcc[type].modified = true;
             } else {
                 statAcc[type].rolls += 1;
+                statAcc[type].ingameRolls += 1;
             }
         } else {
             // New stat
             statAcc[type] = {
                 value: value,
-                rolls: 1
+                rolls: 1,
+                ingameRolls: 1
             };
         }
     }

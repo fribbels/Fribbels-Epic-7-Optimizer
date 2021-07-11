@@ -2194,7 +2194,49 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1062_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1062_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100801",
+        "id": "exc100801",
+        "name": "Golden Cat's Treasure",
+        "description": "An ear-protecting ornament that was passed down in Armin's family and brings wealth and honor.",
+        "unit": "c1008",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Takedown's chance of stunning is increased by 25%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 3,
+            "description": "Shield Wall's barrier strength is increased by 50%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Dispels one debuff from all allies when using Shield Wall.",
+            "skill_description": "Covers all allies with the Shield of Light and grants a barrier for 3 turns, recovering Health and dispelling one debuff. Barrier strength is proportional to the caster's Defense, and amount recovered is proportional to the target's max Health. Decreases damage suffered by allies by 10% when this skill is unavailable.",
+            "values": [
+              5
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1008.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10060,
@@ -7464,7 +7506,49 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1009_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1009_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101701",
+        "id": "exc101701",
+        "name": "Untainted Heart",
+        "description": "A staff decorated with a bright red orb that encapsulates both the spirit of charity, and the unwavering determination of Achates.",
+        "unit": "c1017",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "max_hp_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Increases the chance to decrease Attack when using Magic Design by 25%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Amount recovered is increased by 67% when using Rapid Cure.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Increases Effect Resistance of the caster for 2 turns when using Curing Prayer.",
+            "skill_description": "Dispels debuffs from all allies before healing them. Increases Effect Resistance of the caster for 2 turns. Healing increases proportional to the caster's max Health.",
+            "values": [
+              57
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1017.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11992,
@@ -19591,7 +19675,49 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1104_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1104_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101701",
+        "id": "exc101701",
+        "name": "Untainted Heart",
+        "description": "A staff decorated with a bright red orb that encapsulates both the spirit of charity, and the unwavering determination of Achates.",
+        "unit": "c1017",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "max_hp_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Increases the chance to decrease Attack when using Magic Design by 25%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Amount recovered is increased by 67% when using Rapid Cure.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Increases Effect Resistance of the caster for 2 turns when using Curing Prayer.",
+            "skill_description": "Dispels debuffs from all allies before healing them. Increases Effect Resistance of the caster for 2 turns. Healing increases proportional to the caster's max Health.",
+            "values": [
+              57
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1017.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11895,

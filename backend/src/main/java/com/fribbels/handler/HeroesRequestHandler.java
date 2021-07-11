@@ -47,6 +47,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     private final HeroDb heroDb;
     private final BaseStatsDb baseStatsDb;
     private final ItemDb itemDb;
+    private StatCalculator statCalculator;
 
     @Override
     public synchronized void handle(final HttpExchange exchange) throws IOException {
@@ -285,18 +286,18 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
         final Item[] items = Iterables.toArray(equipment.values(), Item.class);
 
-        final int[] setsArr = StatCalculator.buildSetsArr(items);
+        final int[] setsArr = statCalculator.buildSetsArr(items);
         final List<float[]> statAccumulators = equipment.values()
                 .stream()
-                .map(item -> StatCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats))
+                .map(item -> statCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats))
                 .collect(Collectors.toList());
         final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
-        StatCalculator.setBaseValues(baseStats, hero);
+        statCalculator.setBaseValues(baseStats, hero);
         final int upgrades = equipment.values().stream().mapToInt(Item::getUpgradeable).sum();
         final int conversions = equipment.values().stream().mapToInt(Item::getConvertable).sum();
         final int priority = equipment.values().stream().mapToInt(Item::getPriority).sum();
-        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions, priority);
+        final HeroStats finalStats = statCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions, priority);
         hero.setStats(finalStats);
         clearNullBuilds(hero, useReforgeStats);
 
@@ -328,7 +329,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                 return false;
             }
         }
-        final int[] setsArr = StatCalculator.buildSetsArr(items.toArray(new Item[0]));
+        final int[] setsArr = statCalculator.buildSetsArr(items.toArray(new Item[0]));
 
         final float[][] statAccumulatorArrs = new float[6][];
         for (int i = 0; i < 6; i++) {
@@ -342,10 +343,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
                 mod.modifyAugmentedStats(clonedReforgedStats);
 
-                final float[] acc = StatCalculator.buildStatAccumulatorArr(baseStats, clonedItem, useReforgeStats);
+                final float[] acc = statCalculator.buildStatAccumulatorArr(baseStats, clonedItem, useReforgeStats);
                 statAccumulatorArrs[i] = acc;
             } else {
-                final float[] acc = StatCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats);
+                final float[] acc = statCalculator.buildStatAccumulatorArr(baseStats, item, useReforgeStats);
                 statAccumulatorArrs[i] = acc;
             }
 
@@ -361,11 +362,11 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 //                .collect(Collectors.toList());
 //        final float[][] statAccumulatorArrs = Iterables.toArray(statAccumulators, float[].class);
 
-        StatCalculator.setBaseValues(baseStats, hero);
+        statCalculator.setBaseValues(baseStats, hero);
         final int upgrades = items.stream().mapToInt(Item::getUpgradeable).sum();
         final int conversions = items.stream().mapToInt(Item::getConvertable).sum();
         final int priority = items.stream().mapToInt(Item::getPriority).sum();
-        final HeroStats finalStats = StatCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions, priority);
+        final HeroStats finalStats = statCalculator.addAccumulatorArrsToHero(baseStats, statAccumulatorArrs, setsArr, hero, upgrades, conversions, priority);
         build.atk = finalStats.atk;
         build.hp = finalStats.hp;
         build.def = finalStats.def;

@@ -307,7 +307,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final boolean isShortCircuitable4PieceSet = request.getSetFormat() == 1 || request.getSetFormat() == 2;
 
         System.out.println("OUTPUTSTART");
-        StatCalculator.setBaseValues(base, request.hero);
+//        StatCalculator.setBaseValues(base, request.hero);
+        final StatCalculator statCalculator = new StatCalculator();
+        statCalculator.setBaseValues(base, request.hero);
 
         for (int w = 0; w < wSize; w++) {
             final Item weapon = itemsByGear.get(Gear.WEAPON).get(w);
@@ -317,15 +319,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 boolean exit = false;
                 try {
 
-                    final float[] weaponAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, weapon, accumulatorArrsByItemId, useReforgeStats);
+                    final float[] weaponAccumulatorArr = statCalculator.getStatAccumulatorArr(base, weapon, accumulatorArrsByItemId, useReforgeStats);
 
                     for (int h = 0; h < hSize; h++) {
                         final Item helmet = itemsByGear.get(Gear.HELMET).get(h);
-                        final float[] helmetAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, helmet, accumulatorArrsByItemId, useReforgeStats);
+                        final float[] helmetAccumulatorArr = statCalculator.getStatAccumulatorArr(base, helmet, accumulatorArrsByItemId, useReforgeStats);
 
                         for (int a = 0; a < aSize; a++) {
                             final Item armor = itemsByGear.get(Gear.ARMOR).get(a);
-                            final float[] armorAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, armor, accumulatorArrsByItemId, useReforgeStats);
+                            final float[] armorAccumulatorArr = statCalculator.getStatAccumulatorArr(base, armor, accumulatorArrsByItemId, useReforgeStats);
 
                             // For 4 piece sets, we can short circuit if the first 3 pieces don't match possible sets,
                             // but only if the items are sorted & prioritized by set.
@@ -340,11 +342,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                             for (int n = 0; n < nSize; n++) {
                                 final Item necklace = itemsByGear.get(Gear.NECKLACE).get(n);
-                                final float[] necklaceAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, necklace, accumulatorArrsByItemId, useReforgeStats);
+                                final float[] necklaceAccumulatorArr = statCalculator.getStatAccumulatorArr(base, necklace, accumulatorArrsByItemId, useReforgeStats);
 
                                 for (int r = 0; r < rSize; r++) {
                                     final Item ring = itemsByGear.get(Gear.RING).get(r);
-                                    final float[] ringAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, ring, accumulatorArrsByItemId, useReforgeStats);
+                                    final float[] ringAccumulatorArr = statCalculator.getStatAccumulatorArr(base, ring, accumulatorArrsByItemId, useReforgeStats);
 
                                     for (int b = 0; b < bSize; b++) {
                                         if (Main.interrupt) {
@@ -354,14 +356,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         if (exit) return;
 
                                         final Item boots = itemsByGear.get(Gear.BOOTS).get(b);
-                                        final float[] bootsAccumulatorArr = StatCalculator.getStatAccumulatorArr(base, boots, accumulatorArrsByItemId, useReforgeStats);
+                                        final float[] bootsAccumulatorArr = statCalculator.getStatAccumulatorArr(base, boots, accumulatorArrsByItemId, useReforgeStats);
 
                                         final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
-                                        final int[] collectedSets = StatCalculator.buildSetsArr(collectedItems);
+                                        final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
                                         final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
                                         final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
                                         final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
-                                        final HeroStats result = StatCalculator.addAccumulatorArrsToHero(
+                                        final HeroStats result = statCalculator.addAccumulatorArrsToHero(
                                                 base,
                                                 new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr},
                                                 collectedSets,
