@@ -36,6 +36,12 @@ public class SpecialStats {
             return hero;
         }
 
+        if (StringUtils.equals("Martial Artist Ken", hero.getName())) {
+            hero.setRes(30);
+
+            return hero;
+        }
+
         if (stars == 5) {
             return setScBonusStatsFiveStar(hero);
         }
