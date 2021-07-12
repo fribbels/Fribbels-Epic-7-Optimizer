@@ -1683,3 +1683,10 @@ input:checked + .darkSlider:before {
 .awn-toast.awn-toast-warning {
     color: #8e4b00 !important;
 }
+.subModCheckbox {
+  margin-left: 20px;
+}
+.editGearCycle {
+  margin-left: 16px;
+  height: 20px;
+}

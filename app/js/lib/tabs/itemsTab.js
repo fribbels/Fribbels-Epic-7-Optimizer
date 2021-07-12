@@ -84,7 +84,6 @@ module.exports = {
     }
 }
 
-
 async function editGear() {
     const items = ItemsGrid.getSelectedGear();
     if (!items || items.length != 1) {
@@ -99,6 +98,8 @@ async function editGear() {
 
     ItemAugmenter.augment([editedItem])
     await Api.editItems([editedItem]);
+
+    await ItemsGrid.editedItem();
 
     Notifier.success("Edited item");
     module.exports.redraw(editedItem);
@@ -131,6 +132,7 @@ async function reforgeGear() {
     await Api.editItems([editedItem]);
 
     Notifier.quick("Reforged item");
+    await ItemsGrid.editedItem();
     module.exports.redraw(editedItem);
     Saves.autoSave();
 }
@@ -140,6 +142,7 @@ async function addGear() {
     console.warn("NEWITEM", newItem);
 
     Notifier.quick("Added item");
+    await ItemsGrid.editedItem();
     module.exports.redraw(newItem);
     Saves.autoSave();
 }
@@ -159,6 +162,7 @@ async function duplicateGear() {
     await Api.editItems([editedItem]);
 
     Notifier.quick("Added item");
+    await ItemsGrid.editedItem();
     module.exports.redraw(editedItem);
     Saves.autoSave();
 }

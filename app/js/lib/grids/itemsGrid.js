@@ -21,6 +21,13 @@ var currentAggregate = {};
 var selectedCell = null;
 
 module.exports = {
+    async editedItem() {
+        if (selectedCell) {
+            response = await Api.getItemById(selectedCell.id);
+            selectedCell = response.item;
+            module.exports.redraw();
+        }
+    },
 
     toggleDarkMode(enabled) {
         if (enabled) {

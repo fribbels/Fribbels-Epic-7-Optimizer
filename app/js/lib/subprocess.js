@@ -20,7 +20,7 @@ const defaultJavaError = `Unable to load Java. Please check that you have the <a
 module.exports = {
     kill: async() => {
         try {
-            const killPortOutput = await killPort(8130, 'tcp')
+            // const killPortOutput = await killPort(8130, 'tcp')
             console.log(killPortOutput);
         } catch (e) {
             console.warn("Error killing existing subprocess", e);

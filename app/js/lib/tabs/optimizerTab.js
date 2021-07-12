@@ -472,6 +472,7 @@ async function editGearFromIcon(id, reforge) {
     ItemAugmenter.augment([editedItem])
     await Api.editItems([editedItem]);
     Notifier.quick("Edited item");
+    await ItemsGrid.editedItem();
 
     ItemsTab.redraw(editedItem);
     drawPreview();
