@@ -1685,8 +1685,10 @@ input:checked + .darkSlider:before {
 }
 .subModCheckbox {
   margin-left: 20px;
+  display: none;
 }
 .editGearCycle {
   margin-left: 16px;
   height: 20px;
+  display: none;
 }

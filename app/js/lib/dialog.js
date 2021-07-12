@@ -733,7 +733,7 @@ module.exports = {
 
             const { value: formValues } = await Swal.fire({
                 title: '',
-                width: 600,
+                width: 550,
                 html: `
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
