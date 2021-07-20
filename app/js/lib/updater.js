@@ -72,7 +72,8 @@ module.exports = {
         // }
 
         const version = document.getElementById('version');
-        version.innerText = 'Current version: v' + currentVersion;
+        const versionPrefixText = i18next.t("Current version");
+        version.innerText = versionPrefixText + ": v" + currentVersion;
 
         ipcRenderer.on('update_available', () => {
             Notifier.info(i18next.t("New version available, downloading now"));

@@ -172,7 +172,7 @@ async function removeGear() {
 
     await Api.deleteItems(items.map(x => x.id));
 
-    Notifier.quick("Removed " + items.length + " item(s).")
+    Notifier.quick(`${i18next.t("Removed ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();
@@ -183,7 +183,7 @@ async function unequipGear() {
 
     await Api.unequipItems(items.map(x => x.id));
 
-    Notifier.quick("Unequipped " + items.length + " item(s).")
+    Notifier.quick(`${i18next.t("Unequipped ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();
@@ -194,7 +194,7 @@ async function lockGear() {
 
     await Api.lockItems(items.map(x => x.id));
 
-    Notifier.quick("Locked " + items.length + " item(s).")
+    Notifier.quick(`${i18next.t("Locked ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();
@@ -204,8 +204,8 @@ async function unlockGear() {
     const items = ItemsGrid.getSelectedGear();
 
     await Api.unlockItems(items.map(x => x.id));
-
-    Notifier.quick("Unlocked " + items.length + " item(s).")
+const hintString = `${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" item(s).")}`;console.log("unlock item hint string", hintString);
+    Notifier.quick(`${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();

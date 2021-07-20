@@ -463,8 +463,8 @@ module.exports = {
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" id="modGradeLabel"  data-t>${i18next.t("Mod Grade")}</div>
                                     <select id="modGrade" class="editGearStatSelect">
-                                        <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>Lesser</option>
-                                        <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>Greater</option>
+                                        <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>${i18next.t("Lesser")}</option>
+                                        <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>${i18next.t("Greater")}</option>
                                     </select>
                                 </div>
 
@@ -488,8 +488,8 @@ module.exports = {
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" id="keepStatsLabel" data-t>${i18next.t("Wanted Stats")}</div>
                                     <select id="keepStatOptions" class="editGearStatSelect">
-                                        <option value="neverReplace" ${(hero.keepStatOptions == "noReplace" || !hero.keepStatOptions) ? "selected" : ""}>Never replace wanted stats</option>
-                                        <option value="replace" ${hero.keepStatOptions == "replace" ? "selected" : ""}>Allow replacing wanted with wanted</option>
+                                        <option value="neverReplace" ${(hero.keepStatOptions == "noReplace" || !hero.keepStatOptions) ? "selected" : ""}>${i18next.t("Never replace wanted stats")}</option>
+                                        <option value="replace" ${hero.keepStatOptions == "replace" ? "selected" : ""}>${i18next.t("Allow replacing wanted with wanted")}</option>
                                     </select>
                                 </div>
                             </div>
@@ -1168,7 +1168,7 @@ function generateStatList(hero, state) {
     var result = "";
     for (var i = 0; i < list.length; i++) {
         const stat = list[i];
-        result += `<div class="list-group-item" data-id="${stat}">${optimizerStatToDisplayStat[stat]}</div>`
+        result += `<div class="list-group-item" data-id="${stat}">${i18next.t(optimizerStatToDisplayStat[stat])}</div>`
     }
     return result;
 }
