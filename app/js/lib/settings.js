@@ -10,6 +10,14 @@ const settingsPath = defaultPath + "/settings.ini";
 var pathOverride;
 
 var excludeSelects = [];
+var defaultOptimizerSettings = {
+    settingDefaultUseReforgedStats: true,
+    settingDefaultUseHeroPriority: false,
+    settingDefaultUseSubstatMods: false,
+    settingDefaultLockedItems: false,
+    settingDefaultEquippedItems: false,
+    settingDefaultKeepCurrent: false,
+}
 
 module.exports = {
     initialize: async () => {
@@ -40,6 +48,12 @@ module.exports = {
             'settingUnlockOnUnequip',
             'settingMaxResults',
             'settingRageSet',
+            'settingDefaultUseReforgedStats',
+            'settingDefaultUseHeroPriority',
+            'settingDefaultUseSubstatMods',
+            'settingDefaultLockedItems',
+            'settingDefaultEquippedItems',
+            'settingDefaultKeepCurrent',
         ];
 
         $('#optionsExcludeGearFrom').change(module.exports.saveSettings)
@@ -83,6 +97,10 @@ module.exports = {
         return excludeSelects;
     },
 
+    getOptimizerOptions: () => {
+        return defaultOptimizerSettings;
+    },
+
     getDefaultSettings: () => {
         return {
             settingUnlockOnUnequip: true,
@@ -91,6 +109,12 @@ module.exports = {
             settingDefaultPath: defaultPath,
             settingExcludeEquipped: [],
             settingDarkMode: true,
+            settingDefaultUseReforgedStats: true,
+            settingDefaultUseHeroPriority: false,
+            settingDefaultUseSubstatMods: false,
+            settingDefaultLockedItems: false,
+            settingDefaultEquippedItems: false,
+            settingDefaultKeepCurrent: false,
         }
     },
 
@@ -114,9 +138,26 @@ module.exports = {
         const settings = JSON.parse(text);
         console.log("LOADING SETTINGS", settings);
 
+        function isNullUndefined(x) {
+            return x === null || x === undefined;
+        }
 
         document.getElementById('settingUnlockOnUnequip').checked = settings.settingUnlockOnUnequip;
         document.getElementById('settingRageSet').checked = settings.settingRageSet;
+        document.getElementById('settingDefaultUseReforgedStats').checked = isNullUndefined(settings.settingDefaultUseReforgedStats) ? true : settings.settingDefaultUseReforgedStats;
+        document.getElementById('settingDefaultUseHeroPriority').checked = settings.settingDefaultUseHeroPriority;
+        document.getElementById('settingDefaultUseSubstatMods').checked = settings.settingDefaultUseSubstatMods;
+        document.getElementById('settingDefaultLockedItems').checked = settings.settingDefaultLockedItems;
+        document.getElementById('settingDefaultEquippedItems').checked = settings.settingDefaultEquippedItems;
+        document.getElementById('settingDefaultKeepCurrent').checked = settings.settingDefaultKeepCurrent;
+        defaultOptimizerSettings = {
+            settingDefaultUseReforgedStats: isNullUndefined(settings.settingDefaultUseReforgedStats) ? true : settings.settingDefaultUseReforgedStats,
+            settingDefaultUseHeroPriority: settings.settingDefaultUseHeroPriority,
+            settingDefaultUseSubstatMods: settings.settingDefaultUseSubstatMods,
+            settingDefaultLockedItems: settings.settingDefaultLockedItems,
+            settingDefaultEquippedItems: settings.settingDefaultEquippedItems,
+            settingDefaultKeepCurrent: settings.settingDefaultKeepCurrent
+        }
         pathOverride = settings.settingDefaultPath;
 
         console.warn("changing path override to: " + pathOverride);
@@ -166,12 +207,26 @@ module.exports = {
         const settings = {
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
+            settingDefaultUseReforgedStats: document.getElementById('settingDefaultUseReforgedStats').checked,
+            settingDefaultUseHeroPriority: document.getElementById('settingDefaultUseHeroPriority').checked,
+            settingDefaultUseSubstatMods: document.getElementById('settingDefaultUseSubstatMods').checked,
+            settingDefaultLockedItems: document.getElementById('settingDefaultLockedItems').checked,
+            settingDefaultEquippedItems: document.getElementById('settingDefaultEquippedItems').checked,
+            settingDefaultKeepCurrent: document.getElementById('settingDefaultKeepCurrent').checked,
             settingMaxResults: parseInt(module.exports.parseMaxResults() || 5_000_000),
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
             settingDarkMode: document.getElementById('darkSlider').checked,
             settingVersion: Updater.getCurrentVersion()
         };
+        defaultOptimizerSettings = {
+            settingDefaultUseReforgedStats: settings.settingDefaultUseReforgedStats,
+            settingDefaultUseHeroPriority: settings.settingDefaultUseHeroPriority,
+            settingDefaultUseSubstatMods: settings.settingDefaultUseSubstatMods,
+            settingDefaultLockedItems: settings.settingDefaultLockedItems,
+            settingDefaultEquippedItems: settings.settingDefaultEquippedItems,
+            settingDefaultKeepCurrent: settings.settingDefaultKeepCurrent
+        }
 
         excludeSelects = settings.settingExcludeEquipped;
 

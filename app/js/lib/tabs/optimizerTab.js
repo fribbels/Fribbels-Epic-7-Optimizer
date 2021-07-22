@@ -84,13 +84,14 @@ async function loadPreviousHeroFilters(heroResponse) {
 
     if (!hero) return;
     if (!request) {
-        $("#inputPredictReforges").prop('checked', true);
-        $("#inputSubstatMods").prop('checked', false);
-        $("#inputAllowLockedItems").prop('checked', false);
-        $("#inputAllowEquippedItems").prop('checked', false);
-        $("#inputKeepCurrentItems").prop('checked', false);
-        $("#inputOrderedHeroPriority").prop('checked', false);
-        $("#inputOnlyMaxedGear").prop('checked', false);
+        const optimizerSettings = Settings.getOptimizerOptions();
+
+        $("#inputPredictReforges").prop('checked', optimizerSettings.settingDefaultUseReforgedStats);
+        $("#inputSubstatMods").prop('checked', optimizerSettings.settingDefaultUseSubstatMods);
+        $("#inputAllowLockedItems").prop('checked', optimizerSettings.settingDefaultLockedItems);
+        $("#inputAllowEquippedItems").prop('checked', optimizerSettings.settingDefaultEquippedItems);
+        $("#inputOrderedHeroPriority").prop('checked', optimizerSettings.settingDefaultUseHeroPriority);
+        $("#inputKeepCurrentItems").prop('checked', optimizerSettings.settingDefaultKeepCurrent);
         return;
     }
 
@@ -140,13 +141,14 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputMinPriorityLimit").val(inputDisplayNumber(request.inputMinPriorityLimit));
     $("#inputMaxPriorityLimit").val(inputDisplayNumber(request.inputMaxPriorityLimit));
 
-    $("#inputPredictReforges").prop('checked', isNullUndefined(request.inputPredictReforges) ? true : request.inputPredictReforges);
-    $("#inputSubstatMods").prop('checked', isNullUndefined(request.inputSubstatMods) ? true : request.inputSubstatMods);
-    $("#inputAllowLockedItems").prop('checked', isNullUndefined(request.inputAllowLockedItems) ? false : request.inputAllowLockedItems);
-    $("#inputAllowEquippedItems").prop('checked', isNullUndefined(request.inputAllowEquippedItems) ? false : request.inputAllowEquippedItems);
-    $("#inputKeepCurrentItems").prop('checked', isNullUndefined(request.inputKeepCurrentItems) ? false : request.inputKeepCurrentItems);
-    $("#inputOrderedHeroPriority").prop('checked', isNullUndefined(request.inputOrderedHeroPriority) ? false : request.inputOrderedHeroPriority);
-    $("#inputOnlyMaxedGear").prop('checked', isNullUndefined(request.inputOnlyMaxedGear) ? false : request.inputOnlyMaxedGear);
+    const optimizerSettings = Settings.getOptimizerOptions();
+
+    $("#inputPredictReforges").prop('checked',     isNullUndefined(request.inputPredictReforges)     ? optimizerSettings.settingDefaultUseReforgedStats : request.inputPredictReforges);
+    $("#inputSubstatMods").prop('checked',         isNullUndefined(request.inputSubstatMods)         ? optimizerSettings.settingDefaultUseSubstatMods   : request.inputSubstatMods);
+    $("#inputAllowLockedItems").prop('checked',    isNullUndefined(request.inputAllowLockedItems)    ? optimizerSettings.settingDefaultLockedItems      : request.inputAllowLockedItems);
+    $("#inputAllowEquippedItems").prop('checked',  isNullUndefined(request.inputAllowEquippedItems)  ? optimizerSettings.settingDefaultEquippedItems    : request.inputAllowEquippedItems);
+    $("#inputKeepCurrentItems").prop('checked',    isNullUndefined(request.inputKeepCurrentItems)    ? optimizerSettings.settingDefaultKeepCurrent      : request.inputKeepCurrentItems);
+    $("#inputOrderedHeroPriority").prop('checked', isNullUndefined(request.inputOrderedHeroPriority) ? optimizerSettings.settingDefaultUseHeroPriority  : request.inputOrderedHeroPriority);
 
     document.querySelector('#atkSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
     document.querySelector('#atkSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
@@ -455,13 +457,14 @@ function clearStats() {
 }
 
 function clearOptions() {
-    $("#inputPredictReforges").prop('checked', true);
-    $("#inputSubstatMods").prop('checked', false);
-    $("#inputAllowLockedItems").prop('checked', false);
-    $("#inputAllowEquippedItems").prop('checked', false);
-    $("#inputOrderedHeroPriority").prop('checked', false);
-    $("#inputKeepCurrentItems").prop('checked', false);
-    $("#inputOnlyMaxedGear").prop('checked', false);
+    const optimizerSettings = Settings.getOptimizerOptions();
+
+    $("#inputPredictReforges").prop('checked', optimizerSettings.settingDefaultUseReforgedStats);
+    $("#inputSubstatMods").prop('checked', optimizerSettings.settingDefaultUseSubstatMods);
+    $("#inputAllowLockedItems").prop('checked', optimizerSettings.settingDefaultLockedItems);
+    $("#inputAllowEquippedItems").prop('checked', optimizerSettings.settingDefaultEquippedItems);
+    $("#inputOrderedHeroPriority").prop('checked', optimizerSettings.settingDefaultUseHeroPriority);
+    $("#inputKeepCurrentItems").prop('checked', optimizerSettings.settingDefaultKeepCurrent);
 }
 
 async function editGearFromIcon(id, reforge) {

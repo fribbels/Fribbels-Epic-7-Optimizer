@@ -46,7 +46,9 @@ module.exports = {
             }
         })
 
-        await module.exports.kill();
+        if (TEST == false) {
+            await module.exports.kill();
+        }
 
         child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
         pid = child.pid;

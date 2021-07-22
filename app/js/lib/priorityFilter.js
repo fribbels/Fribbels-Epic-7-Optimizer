@@ -75,10 +75,10 @@ function calculateScore(item, params, baseStats, reforge) {
                   resRolls * params.inputResPriority;
 
     if (isNaN(score)) {
-        console.error(item, params, baseStats);
+        console.error("Error while parsing item data, go to the Items tab to fix the stats on any Level 0 items or other corrupted items. This is most likely caused by new Arena / Event / Automaton tower gear.", item, params, baseStats);
     }
-    item.score = score;
-    item.priority = Math.round(score);
+    item.score = isNaN(score) ? 0 : score;
+    item.priority = isNaN(score) ? 0 : Math.round(score);
 }
 
 function filterDisabled(params) {

@@ -1,14 +1,17 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.7.1";
+const currentVersion = "1.7.2";
 
 global.TEST = false;
 /********************************************************************************************
     Release checklist:
+    - update changelog
     - set TEST = false
     - package jar
-    - update version here + package.json
-    - update repo in package.json
+    - update version here
+    - update version in app package.json
+    - update repo in project package.json
+    - yarn package
 *********************************************************************************************/
 
 module.exports = {
@@ -20,6 +23,13 @@ module.exports = {
     showNewFeatures: (text) => {
         Dialog.showNewFeatures(
 `
+<h2>
+    New in v1.7.2
+</h2>
+<ul class="newFeatures">
+    <li>Updated ML Ken's +30% eff res buff</li>
+    <li>Added new default optimizer settings to Settings tab</li>
+</ul>
 <h2>
     New in v1.7.1
 </h2>

@@ -67,7 +67,7 @@ async function finishedReading(data, scanType) {
 
             var convertedItems = convertItems(rawItems, scanType);
             var lv0items = convertedItems.filter(x => x.level == 0);
-            console.log(convertedItems);
+            console.error(convertedItems);
 
             var convertedHeroes = convertUnits(rawUnits, scanType);
 
