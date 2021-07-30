@@ -67,7 +67,7 @@ async function finishedReading(data, scanType) {
 
             var convertedItems = convertItems(rawItems, scanType);
             var lv0items = convertedItems.filter(x => x.level == 0);
-            console.error(convertedItems);
+            console.log(convertedItems);
 
             var convertedHeroes = convertUnits(rawUnits, scanType);
 
@@ -307,7 +307,10 @@ function convertMainStat(item) {
     const mainOpType = mainOp[0];
     const mainOpValue = item.mainStatValue;
     const mainType = statByIngameStat[mainOpType];
-    const mainValue = isFlat(mainOpType) ? mainOpValue : Utils.round10ths(mainOpValue * 100);
+    var mainValue = isFlat(mainOpType) ? mainOpValue : Utils.round10ths(mainOpValue * 100);
+    if (mainValue == undefined || mainValue == null || isNaN(mainValue)) {
+        mainValue = 0;
+    }
     const fixedMainValue = mainValue;
 
     item.main = new Stat(mainType, fixedMainValue);

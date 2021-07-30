@@ -805,7 +805,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[0])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat1Value" value="${item.substats[0] ? item.substats[0].value : ""}">
-                            <input type="checkbox" class="subModCheckbox" id="subMod1" ${item.substats[0].modified ? "checked" : ""}>
+                            <input type="checkbox" class="subModCheckbox" id="subMod1" ${item.substats[0]?.modified ? "checked" : ""}>
                         </div>
 
                         <div class="editGearFormRow">
@@ -814,7 +814,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[1])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat2Value" value="${item.substats[1] ? item.substats[1].value : ""}">
-                            <input type="checkbox" class="subModCheckbox" id="subMod2" ${item.substats[1].modified ? "checked" : ""}>
+                            <input type="checkbox" class="subModCheckbox" id="subMod2" ${item.substats[1]?.modified ? "checked" : ""}>
                         </div>
 
                         <div class="editGearFormRow">
@@ -823,7 +823,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[2])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat3Value" value="${item.substats[2] ? item.substats[2].value : ""}">
-                            <input type="checkbox" class="subModCheckbox" id="subMod3" ${item.substats[2].modified ? "checked" : ""}>
+                            <input type="checkbox" class="subModCheckbox" id="subMod3" ${item.substats[2]?.modified ? "checked" : ""}>
                         </div>
 
                         <div class="editGearFormRow">
@@ -832,7 +832,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[3])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat4Value" value="${item.substats[3] ? item.substats[3].value : ""}">
-                            <input type="checkbox" class="subModCheckbox" id="subMod4" ${item.substats[3].modified ? "checked" : ""}>
+                            <input type="checkbox" class="subModCheckbox" id="subMod4" ${item.substats[3]?.modified ? "checked" : ""}>
                         </div>
                     </div>
                 `,

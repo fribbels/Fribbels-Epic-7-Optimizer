@@ -184,7 +184,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     matchingExistingItem.setLevel(newItem.getLevel());
                 }
 
-                if (newItem.getMain().getValue() == null) {
+                if (newItem.getMain().getValue() == null || newItem.getMain().getValue() == 0) {
                     if (matchingExistingItem.getMain().getValue() == null) {
                         matchingExistingItem.setMain(newItem.getMain());
                     } else {
