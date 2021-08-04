@@ -2930,7 +2930,51 @@
       "image": "https://assets.epicsevendb.com/_source/face/c2013_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c2013_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107101",
+        "id": "exc107101",
+        "name": "Citrine Treasure",
+        "description": "A beautiful brooch made by the world's greatest artisan using only the highest-grade materials.",
+        "unit": "c1071",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "skills": [
+          {
+            "skill": 2,
+            "description": "Dispels one buff each from all enemies when using Butterfly Fan.",
+            "skill_description": "Attacks all enemies by waving a fan, dispelling one buff each. Damage dealt increases with more enemies. Grants the caster immunity for 1 turn after attacking.",
+            "values": [
+              12
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 3,
+            "description": "Increases decrease Defense chance by 20% when using Razorwind Fan.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases Combat Readiness of all enemies by 15% when using Razorwind Fan.",
+            "skill_description": "Attacks all enemies by creating a powerful gust of wind, with a {{variable}} chance to decrease Defense for 2 turns, before decreasing Combat Readiness by 15%. Effect chance increases by 20% when Razorwind Fan is triggered by Windbreak Fan.",
+            "values": [
+              18
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1071.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11276,
@@ -4733,6 +4777,101 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Camilla": {
+    "_id": "camilla",
+    "name": "Camilla",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "light",
+    "role": "warrior",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "D": 0.028,
+        "C": 0.042,
+        "B": 0.056,
+        "A": 0.07,
+        "S": 0.084,
+        "SS": 0.098,
+        "SSS": 0.112
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "C": 0.024,
+        "B": 0.036,
+        "A": 0.048,
+        "S": 0.06,
+        "SS": 0.072,
+        "SSS": 0.084
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/camillaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/camillaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 16298,
+        "atk": 885,
+        "hp": 4733,
+        "spd": 110,
+        "def": 571,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16298,
+        "atk": 885,
+        "hp": 4733,
+        "spd": 110,
+        "def": 571,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 16298,
+        "atk": 885,
+        "hp": 4733,
+        "spd": 110,
+        "def": 571,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16298,
+        "atk": 885,
+        "hp": 4733,
+        "spd": 110,
+        "def": 571,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
         "efr": 0
       }
     }
@@ -7781,7 +7920,52 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1101_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1101_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100301",
+        "id": "exc100301",
+        "name": "Valkyrie Wing",
+        "description": "A mysterious circlet that symbolizes strength and beauty, and is the source of Rose's Fighting Spirit.",
+        "unit": "c1003",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Activates each effect regardless of current Health when using Sequential Cutter.",
+            "skill_description": "Attacks with a sword, with a {{variable}} chance to provoke for 1 turn, before increasing Defense of the caster for 1 turn. Damage dealt increases proportional to the caster's Defense.",
+            "values": [
+              25,
+              2
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Applies the same effect to the caster when using Shield of Light.",
+            "skill_description": "Covers an ally and the caster with the Shield of Light, dispelling two debuffs and granting a barrier for 2 turns before increasing Combat Readiness by {{variable}}. Barrier strength is proportional to the caster's Defense.",
+            "values": [
+              5
+            ],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases skill cooldown of Goddess of Victory by 1 turn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1003.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 12050,
@@ -7830,6 +8014,102 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0
+      }
+    }
+  },
+  "Christy": {
+    "_id": "christy",
+    "name": "Christy",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "knight",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp",
+      "grades": {
+        "D": 120,
+        "C": 180,
+        "B": 240,
+        "A": 300,
+        "S": 360,
+        "SS": 420,
+        "SSS": 480
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/christyPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/christyPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10626,
+        "atk": 414,
+        "hp": 4202,
+        "spd": 90,
+        "def": 525,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12320,
+        "atk": 534,
+        "hp": 4542,
+        "spd": 90,
+        "def": 603,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.06
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13272,
+        "atk": 517,
+        "hp": 5284,
+        "spd": 90,
+        "def": 652,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15835,
+        "atk": 667,
+        "hp": 5704,
+        "spd": 90,
+        "def": 749,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
       }
     }
   },
@@ -8176,6 +8456,98 @@
         "hp": 5219,
         "spd": 103,
         "def": 564,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Closer Charles": {
+    "_id": "closer-charles",
+    "name": "Closer Charles",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "assassin",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/closerCharlesPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/closerCharlesPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11478,
+        "atk": 793,
+        "hp": 4267,
+        "spd": 113,
+        "def": 381,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13275,
+        "atk": 984,
+        "hp": 4735,
+        "spd": 113,
+        "def": 381,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14337,
+        "atk": 989,
+        "hp": 5364,
+        "spd": 113,
+        "def": 473,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16901,
+        "atk": 1228,
+        "hp": 6266,
+        "spd": 113,
+        "def": 473,
         "chc": 0.22999999999999998,
         "chd": 1.5,
         "dac": 0.05,
@@ -10942,6 +11314,98 @@
       }
     }
   },
+  "Emilia": {
+    "_id": "emilia",
+    "name": "Emilia",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "manauser",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/emiliaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/emiliaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10356,
+        "atk": 400,
+        "hp": 3527,
+        "spd": 99,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11883,
+        "atk": 520,
+        "hp": 3972,
+        "spd": 103,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12923,
+        "atk": 499,
+        "hp": 4435,
+        "spd": 99,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15106,
+        "atk": 649,
+        "hp": 5254,
+        "spd": 103,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
+      }
+    }
+  },
   "Enott": {
     "_id": "enott",
     "name": "Enott",
@@ -13304,6 +13768,102 @@
       }
     }
   },
+  "Helen": {
+    "_id": "helen",
+    "name": "Helen",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "ice",
+    "role": "knight",
+    "zodiac": "crab",
+    "self_devotion": {
+      "type": "def",
+      "grades": {
+        "D": 18,
+        "C": 27,
+        "B": 36,
+        "A": 45,
+        "S": 54,
+        "SS": 63,
+        "SSS": 72
+      }
+    },
+    "devotion": {
+      "type": "def",
+      "grades": {
+        "D": 12,
+        "C": 18,
+        "B": 24,
+        "A": 30,
+        "S": 36,
+        "SS": 42,
+        "SSS": 48
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/helenPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/helenPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10588,
+        "atk": 429,
+        "hp": 4138,
+        "spd": 91,
+        "def": 520,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12139,
+        "atk": 549,
+        "hp": 5098,
+        "spd": 91,
+        "def": 535,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13214,
+        "atk": 535,
+        "hp": 5203,
+        "spd": 91,
+        "def": 645,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15518,
+        "atk": 685,
+        "hp": 6403,
+        "spd": 91,
+        "def": 703,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Helga": {
     "_id": "helga",
     "name": "Helga",
@@ -15385,7 +15945,47 @@
       "image": "https://assets.epicsevendb.com/_source/face/c2028_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c2028_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc202201",
+        "id": "exc202201",
+        "name": "Ruele's Sad Promise",
+        "description": "A mysterious concoction of life created by combining the laws of light and nature and the love of a noble soul.",
+        "unit": "c2022",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "res",
+          "value": 0.08
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Dispels one debuff from the ally with the lowest Health when using Key to an Oath.",
+            "skill_description": "Attacks the enemy with a staff and heals the ally with the lowest Health, before dispelling one debuff. Healing increases proportional to the target's max Health.",
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Has a 30% chance to reset skill cooldown of Regen when using Regen.",
+            "skill_description": "Blesses an ally, recovering their Health and increasing their Combat Readiness by 50%. Healing increases proportional to the caster's max Health. When this skill is used, has a 30% chance to reset this skill's cooldown.",
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases skill cooldown of Destina's Grace by 1 turn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2022.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10990,
@@ -18583,6 +19183,102 @@
       }
     }
   },
+  "Melany": {
+    "_id": "melany",
+    "name": "Melany",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "fire",
+    "role": "warrior",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/melanyPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/melanyPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10356,
+        "atk": 589,
+        "hp": 3720,
+        "spd": 104,
+        "def": 443,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11788,
+        "atk": 762,
+        "hp": 4171,
+        "spd": 104,
+        "def": 469,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12932,
+        "atk": 735,
+        "hp": 4677,
+        "spd": 104,
+        "def": 550,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15002,
+        "atk": 951,
+        "hp": 5517,
+        "spd": 104,
+        "def": 583,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Melissa": {
     "_id": "melissa",
     "name": "Melissa",
@@ -20638,6 +21334,102 @@
       }
     }
   },
+  "Penelope": {
+    "_id": "penelope",
+    "name": "Penelope",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "dark",
+    "role": "assassin",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "D": 0.028,
+        "C": 0.042,
+        "B": 0.056,
+        "A": 0.07,
+        "S": 0.084,
+        "SS": 0.098,
+        "SSS": 0.112
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/penelopePortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/penelopePanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10006,
+        "atk": 655,
+        "hp": 3720,
+        "spd": 108,
+        "def": 364,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11607,
+        "atk": 833,
+        "hp": 4171,
+        "spd": 108,
+        "def": 364,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12495,
+        "atk": 816,
+        "hp": 4677,
+        "spd": 108,
+        "def": 452,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14773,
+        "atk": 1039,
+        "hp": 5517,
+        "spd": 108,
+        "def": 452,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Politis": {
     "_id": "politis",
     "name": "Politis",
@@ -20916,6 +21708,98 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Ram": {
+    "_id": "ram",
+    "name": "Ram",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "mage",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ramPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ramPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11781,
+        "atk": 771,
+        "hp": 3302,
+        "spd": 106,
+        "def": 551,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13525,
+        "atk": 960,
+        "hp": 3642,
+        "spd": 106,
+        "def": 551,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14685,
+        "atk": 961,
+        "hp": 4152,
+        "spd": 106,
+        "def": 683,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17342,
+        "atk": 1197,
+        "hp": 4572,
+        "spd": 106,
+        "def": 683,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.3,
         "efr": 0
       }
     }
@@ -21267,6 +22151,99 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0.3
+      }
+    }
+  },
+  "Rem": {
+    "_id": "rem",
+    "name": "Rem",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "warrior",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "def_rate",
+      "grades": {
+        "C": 0.024,
+        "B": 0.036,
+        "A": 0.048,
+        "S": 0.06,
+        "SS": 0.072,
+        "SSS": 0.084
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/remPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/remPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
