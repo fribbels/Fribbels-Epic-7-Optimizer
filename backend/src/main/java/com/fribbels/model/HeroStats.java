@@ -45,9 +45,7 @@ public class HeroStats {
     public int score;
     public int priority;
 
-    public int bonusMaxAtkPercent;
-    public int bonusMaxDefPercent;
-    public int bonusMaxHpPercent;
+    public BonusStats bonusStats;
 
     public int[] sets;
 

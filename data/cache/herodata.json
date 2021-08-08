@@ -638,7 +638,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0.12
+        "efr": 0.12,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5429,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 6,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 13081,
@@ -662,7 +673,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0.12
+        "efr": 0.12,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 6818,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 6,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -1573,7 +1595,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4248,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.12,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12545,
@@ -1597,7 +1630,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5590,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.12,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -2124,7 +2168,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4231,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.4
       },
       "lv60SixStarNoAwaken": {
         "cp": 11520,
@@ -2148,7 +2203,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5312,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 2.4
       }
     }
   },
@@ -2352,7 +2418,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.3,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 14929,
@@ -2376,7 +2453,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.3,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -5307,7 +5395,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4915,
+        "overrideDef": 536,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.1,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12932,
@@ -5331,7 +5430,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 6453,
+        "overrideDef": 665,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.1,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -6981,7 +7091,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4467,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 13054,
@@ -7005,7 +7126,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5609,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -7440,7 +7572,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4788,
+        "overrideDef": 503,
+        "overrideAdditionalCr": 0.05,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 13027,
@@ -7464,7 +7607,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 6013,
+        "overrideDef": 624,
+        "overrideAdditionalCr": 0.05,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -9081,7 +9235,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 891,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0.02,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 13027,
@@ -9105,7 +9270,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 1161,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0.02,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -10603,7 +10779,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.06,
-        "efr": 0.18
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4572,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.15,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 13718,
@@ -10627,7 +10814,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0.18
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5742,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.15,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -10914,7 +11112,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 20,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 13214,
@@ -10938,7 +11147,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 20,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -12209,7 +12429,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.06,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 504,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 9,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12881,
@@ -12233,7 +12464,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 625,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 9,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -13409,6 +13651,9 @@
     },
     "ex_equip": [],
     "calculatedStatus": {
+      "bonusMaxAtkPercent": 75,
+      "bonusMaxDefPercent": 0,
+      "bonusMaxHpPercent": 0,
       "lv50FiveStarNoAwaken": {
         "cp": 10356,
         "atk": 589,
@@ -13431,7 +13676,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 75,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12932,
@@ -13455,7 +13711,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 75,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -16596,7 +16863,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.5,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12932,
@@ -16620,7 +16898,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.5,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -18325,7 +18614,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4368,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.25
       },
       "lv60SixStarNoAwaken": {
         "cp": 11737,
@@ -18349,7 +18649,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5734,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.25
       }
     }
   },
@@ -18509,7 +18820,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.3
       },
       "lv60SixStarNoAwaken": {
         "cp": 14982,
@@ -18533,7 +18855,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.3
       }
     }
   },
@@ -19896,7 +20229,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 896,
+        "overrideHp": 4717,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12808,
@@ -19907,7 +20251,7 @@
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
-        "eff": 0,
+        "eff": 0.25,
         "efr": 0
       },
       "lv60SixStarFullyAwakened": {
@@ -19920,7 +20264,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 1117,
+        "overrideHp": 5924,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -20767,7 +21122,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4078,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12344,
@@ -20791,7 +21157,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5120,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -22866,7 +23243,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 932,
+        "overrideHp": 3825,
+        "overrideDef": 537,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 12691,
@@ -22890,7 +23278,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 1161,
+        "overrideHp": 4801,
+        "overrideDef": 666,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -23325,7 +23724,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.12,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4109,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 8,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 10892,
@@ -23349,7 +23759,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.12,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5160,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 8,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -24700,6 +25121,10 @@
     "ex_equip": [
     ],
     "calculatedStatus": {
+      "bonusMaxAtkPercent": 30,
+      "bonusMaxDefPercent": 0,
+      "bonusMaxHpPercent": 0,
+      "overrideAtk": 0,
       "lv50FiveStarNoAwaken": {
         "cp": 11621,
         "atk": 786,
@@ -24722,7 +25147,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 14485,
@@ -24746,7 +25182,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -28777,7 +29224,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.06,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 3479,
+        "overrideDef": 590,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0.1,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 13336,
@@ -28801,7 +29259,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4367,
+        "overrideDef": 732,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0.1,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },

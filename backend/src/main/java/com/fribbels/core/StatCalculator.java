@@ -41,9 +41,15 @@ public class StatCalculator {
         bonusBaseHp = base.hp + base.hp * (hero.bonusHpPercent + hero.aeiHpPercent) / 100f + hero.bonusHp + hero.aeiHp;
         bonusBaseDef = base.def + base.def * (hero.bonusDefPercent + hero.aeiDefPercent) / 100f + hero.bonusDef + hero.aeiDef;
 
-        bonusMaxAtk = 1 + base.bonusMaxAtkPercent/100f;
-        bonusMaxHp = 1 + base.bonusMaxHpPercent/100f;
-        bonusMaxDef = 1 + base.bonusMaxDefPercent/100f;
+        if (base.bonusStats == null) {
+            bonusMaxAtk = 1;
+            bonusMaxHp = 1;
+            bonusMaxDef = 1;
+        } else {
+            bonusMaxAtk = 1 + base.bonusStats.bonusMaxAtkPercent/100f;
+            bonusMaxHp = 1 + base.bonusStats.bonusMaxHpPercent/100f;
+            bonusMaxDef = 1 + base.bonusStats.bonusMaxDefPercent/100f;
+        }
     }
 
     public HeroStats addAccumulatorArrsToHero(final HeroStats base,
@@ -111,7 +117,7 @@ public class StatCalculator {
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
         return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, upgrades, conversions, score, priority,
-                base.bonusMaxAtkPercent, base.bonusMaxDefPercent, base.bonusMaxHpPercent, sets, null, null, null, null, null, null);
+                base.bonusStats, null, null, null, null, null, null, null);
     }
 
     public float[] getStatAccumulatorArr(final HeroStats base,

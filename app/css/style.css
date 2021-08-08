@@ -701,7 +701,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin-right: 40px;
 }
 .editGearStatLabel {
-  width: 120px;
+  min-width: 140px;
   text-align: left;
   margin-top: auto;
   margin-bottom: auto;
@@ -804,7 +804,7 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   text-align: left;
   padding-left: 4px !important;
-  width: 60px !important;
+  width: 55px !important;
 }
 
 .gridLeftPanel {
@@ -1685,10 +1685,8 @@ input:checked + .darkSlider:before {
 }
 .subModCheckbox {
   margin-left: 20px;
-  display: none;
 }
 .editGearCycle {
   margin-left: 16px;
   height: 20px;
-  display: none;
 }

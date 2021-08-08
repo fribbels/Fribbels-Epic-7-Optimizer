@@ -916,7 +916,7 @@ function warnParams(params) {
     if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
     &&  params.inputRingStat && params.inputRingStat.length == 0
     &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
-        Notifier.info("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
+        Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
     }
 
     if (permutations >= 5_000_000_000) {
