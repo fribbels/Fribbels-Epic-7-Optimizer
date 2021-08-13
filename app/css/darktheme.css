@@ -263,3 +263,12 @@ input[type=checkbox]:checked:after {
 .ag-theme-balham .ag-icon-desc:before {
     color: var(--font-color);
 }
+
+
+.collapsible {
+  background-color: var(--input-color);
+  color: var(--font-color);
+}
+.active, .collapsible:hover {
+  background-color: var(--inactive-color);
+}

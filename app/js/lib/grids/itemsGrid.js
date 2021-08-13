@@ -95,6 +95,7 @@ module.exports = {
                 // {headerName: i18next.t('Mconf'), field: 'mconfidence', width: 50},
                 // {headerName: i18next.t('Material'), field: 'material', width: 120},
                 {headerName: i18next.t('Locked'), field: 'locked', cellRenderer: (params) => params.value == true ? i18next.t('yes') : i18next.t('no')},
+                {headerName: i18next.t('Mods'), field: 'disableMods', cellRenderer: (params) => params.value == true ? i18next.t('no') : i18next.t('yes')},
                 // {headerName: i18next.t('Actions'), field: 'id', cellRenderer: renderActions},
                 {headerName: i18next.t('Duplicate'), field: 'duplicateId', hide: true},
                 {headerName: 'AllowedMods', field: 'allowedMods', hide: true},

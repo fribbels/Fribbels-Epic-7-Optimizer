@@ -19,13 +19,27 @@ module.exports = {
             displayTitle: true,
             selectAll: true
         };
+
+
+        const assetsBySet = Assets.getAssetsBySet();
         const groupSelectMultipleSelectOptions = {
-            maxHeight: 450,
+            maxHeight: 500,
             showClear: true,
             // hideOptgroupCheckboxes: true,
             minimumCountSelected: 99,
             displayTitle: true,
-            selectAll: false
+            selectAll: false,
+            textTemplate: function (el) {
+                const val = el.html();
+                const assetKey = val + "Set";
+
+                if (Object.keys(assetsBySet).includes(assetKey)) {
+                    const asset = assetsBySet[assetKey];
+                    return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
+                }
+
+                return el.html()
+            }
         };
         const excludeEquippedSelectOptions = {
             maxHeight: 450,

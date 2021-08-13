@@ -73,7 +73,7 @@ module.exports = {
             document.getElementById('greenColorPicker').value = settings.settingGreenColorPicker;
             // darkUserGradient.gradient = tinygradient(LightenDarkenColor(myColors.good, 60), myColors.good);
 
-            darkUserGradient.gradient = tinygradient(myColors.good, myColors.neutral);
+            darkUserGradient.gradient = tinygradient(myColors.neutral, myColors.good);
 
             redraw();
         }
@@ -183,7 +183,7 @@ module.exports = {
             document.getElementById('greenColorPicker').value = "#38821F";
             // darkUserGradient.gradient = tinygradient(LightenDarkenColor(myColors.good, 60), myColors.good);
 
-            darkUserGradient.gradient = tinygradient(myColors.good, myColors.neutral);
+            darkUserGradient.gradient = tinygradient(myColors.neutral, myColors.good);
 
             redraw();
             Settings.saveSettings();

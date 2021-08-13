@@ -1643,8 +1643,8 @@ input:checked + .darkSlider:before {
 /* Style the button that is used to open and close the collapsible content */
 
 .collapsible {
-  background-color: var(--input-color);
-  color: var(--font-color);
+  background-color: #e0e0e0;
+  color: #333;
   cursor: pointer;
   padding: 20px;
   width: 100%;
@@ -1658,7 +1658,7 @@ input:checked + .darkSlider:before {
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .collapsible:hover {
-  background-color: var(--inactive-color);
+  background-color: #cacaca;
 }
 
 /* Style the collapsible content. Note: hidden by default */
@@ -1705,4 +1705,16 @@ input:checked + .darkSlider:before {
 .colorPickerText:hover:after {
   cursor: pointer;
   content: attr(data-content);
+}
+
+.selectorSetImage {
+  height: 26px;
+  margin-right: 2px;
+}
+.selectorSetText {
+  height: 26px;
+}
+.selectorSetContainer {
+  display: flex;
+  flex-direction: row;
 }
