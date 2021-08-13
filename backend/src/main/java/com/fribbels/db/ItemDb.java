@@ -96,30 +96,30 @@ public class ItemDb {
                         reforgedStats.getHealth() * hpValue;
 
         double dpsWssValue =
-                stats.getAttackPercent() +
-                stats.getSpeed() * (8.0/4.0) +
-                stats.getCritDamage() * (8.0/7.0) +
-                stats.getCritRate() * (8.0/5.0) +
-                stats.getAttack() * atkValue;
+                reforgedStats.getAttackPercent() +
+                        reforgedStats.getSpeed() * (8.0/4.0) +
+                        reforgedStats.getCritDamage() * (8.0/7.0) +
+                        reforgedStats.getCritRate() * (8.0/5.0) +
+                        reforgedStats.getAttack() * atkValue;
 
         double supportWssValue =
-                stats.getDefensePercent() +
-                stats.getHealthPercent() +
-                stats.getEffectResistance() +
-                stats.getSpeed() * (8.0/4.0) +
-                stats.getDefense() * defValue +
-                stats.getHealth() * hpValue;
+                reforgedStats.getDefensePercent() +
+                        reforgedStats.getHealthPercent() +
+                        reforgedStats.getEffectResistance() +
+                        reforgedStats.getSpeed() * (8.0/4.0) +
+                        reforgedStats.getDefense() * defValue +
+                        reforgedStats.getHealth() * hpValue;
 
         double combatWssValue =
-                stats.getAttackPercent() +
-                stats.getDefensePercent() +
-                stats.getHealthPercent() +
-                stats.getSpeed() * (8.0/4.0) +
-                stats.getCritDamage() * (8.0/7.0) +
-                stats.getCritRate() * (8.0/5.0) +
-                stats.getAttack() * atkValue +
-                stats.getDefense() * defValue +
-                stats.getHealth() * hpValue;
+                reforgedStats.getAttackPercent() +
+                        reforgedStats.getDefensePercent() +
+                        reforgedStats.getHealthPercent() +
+                        reforgedStats.getSpeed() * (8.0/4.0) +
+                        reforgedStats.getCritDamage() * (8.0/7.0) +
+                        reforgedStats.getCritRate() * (8.0/5.0) +
+                        reforgedStats.getAttack() * atkValue +
+                        reforgedStats.getDefense() * defValue +
+                        reforgedStats.getHealth() * hpValue;
 
         item.setWss((int) Math.round(wssValue));
         item.setReforgedWss((int) Math.round(reforgedWssValue));
