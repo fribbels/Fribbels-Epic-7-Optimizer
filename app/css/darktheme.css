@@ -1,6 +1,7 @@
 :root {
     --bg-color: #212529;
     --font-color: #e2e2e2;
+    --grid-font-color: #e2e2e2;
     --inactive-color: #5d646d;
     --border-color: #2D3136;
     --input-color: #2D3136;
@@ -192,7 +193,7 @@ input[type=checkbox]:checked:after {
 /* AG-Grid-Theme */
 
 .ag-theme-balham {
-    color: var(--font-color);
+    color: var(--grid-font-color);
 }
 
 .ag-theme-balham .ag-root-wrapper {
@@ -203,7 +204,7 @@ input[type=checkbox]:checked:after {
 .ag-theme-balham .ag-row,
 .ag-theme-balham .ag-header {
     background-color: var(--bg-color);
-    color: var(--font-color);
+    color: var(--grid-font-color);
 }
 
 .ag-theme-balham .ag-row-odd {
