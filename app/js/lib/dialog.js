@@ -807,6 +807,11 @@ module.exports = {
                             <input type="checkbox" id="editGearLocked" ${item.locked ? "checked" : ""}>
                         </div>
 
+                        <div class="editGearFormRow">
+                            <div class="editGearStatLabel" data-t>${i18next.t("Disable mods")}</div>
+                            <input type="checkbox" id="editGearDisableMods" ${item.disableMods ? "checked" : ""}>
+                        </div>
+
                         </br>
 
                         <div class="editGearFormRow">
@@ -895,6 +900,7 @@ module.exports = {
                         enhance: parseInt(document.getElementById('editGearEnhance').value) || 0,
                         level: parseInt(document.getElementById('editGearLevel').value) || 0,
                         locked: document.getElementById('editGearLocked').checked,
+                        disableMods: document.getElementById('editGearDisableMods').checked,
                     }
 
                     if (!editedItem.rank || editedItem.rank == "None" ||
@@ -1015,8 +1021,8 @@ function getImprintHtml(hero, heroInfo) {
 }
 
 function getStarsHtml(hero, heroInfo) {
-    var html = `<option value=6>6</option>
-                <option value=5 ${hero.stars == 5 ? "selected" : ""}>5</option>`;
+    var html = `<option value=6>6 stars max awaken</option>
+                <option value=5 ${hero.stars == 5 ? "selected" : ""}>5 stars max awaken</option>`;
 
     return html;
 }

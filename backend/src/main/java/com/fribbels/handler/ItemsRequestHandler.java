@@ -483,6 +483,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             dbItem.setEquippedByName(item.getEquippedByName());
             dbItem.setEquippedById(item.getEquippedById());
             dbItem.setLocked(item.isLocked());
+            dbItem.setDisableMods(item.isDisableMods());
             dbItem.setAugmentedStats(item.getAugmentedStats());
             dbItem.setReforgedStats(item.getReforgedStats());
             dbItem.setEnhance(item.getEnhance());

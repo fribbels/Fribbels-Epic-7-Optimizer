@@ -49,6 +49,7 @@ public class Item {
     private String heroName;
 
     private boolean locked;
+    private boolean disableMods;
 //    private boolean alreadyPredictedReforge;
     public int reforgeable;
     public int upgradeable;

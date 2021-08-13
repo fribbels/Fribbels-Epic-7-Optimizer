@@ -92,6 +92,10 @@ module.exports = {
             item.upgradeable = 0;
             newItems.push(item);
 
+            if (item.disableMods) {
+                continue;
+            }
+
             const existingSubstats = item.substats.map(x => x.type);
             var elegibleSubstats = item.substats.filter(x => (x.rolls <= limitRolls && discardList.includes(x.type))
                                                              || x.modified);
