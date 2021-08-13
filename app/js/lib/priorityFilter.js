@@ -74,11 +74,12 @@ function calculateScore(item, params, baseStats, reforge) {
                   effRolls * params.inputEffPriority +
                   resRolls * params.inputResPriority;
 
-    if (isNaN(score)) {
-        console.error(item, params, baseStats);
+    if (isNaN(score) || item.main.value == 0 || item.main.value == null || item.main.value == undefined || isNaN(item.main.value)) {
+        console.error("There's an unknown item in your gear data, go to the Gear tab to fix the stats on any Level 0 or Main stat 0 items. This is most likely caused by new Arena / Event / Automaton tower gear.", item, params, baseStats);
     }
-    item.score = score;
-    item.priority = Math.round(score);
+
+    item.score = isNaN(score) ? 0 : score;
+    item.priority = isNaN(score) ? 0 : Math.round(score);
 }
 
 function filterDisabled(params) {

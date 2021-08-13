@@ -84,13 +84,14 @@ async function loadPreviousHeroFilters(heroResponse) {
 
     if (!hero) return;
     if (!request) {
-        $("#inputPredictReforges").prop('checked', true);
-        $("#inputSubstatMods").prop('checked', false);
-        $("#inputAllowLockedItems").prop('checked', false);
-        $("#inputAllowEquippedItems").prop('checked', false);
-        $("#inputKeepCurrentItems").prop('checked', false);
-        $("#inputOrderedHeroPriority").prop('checked', false);
-        $("#inputOnlyMaxedGear").prop('checked', false);
+        const optimizerSettings = Settings.getOptimizerOptions();
+
+        $("#inputPredictReforges").prop('checked', optimizerSettings.settingDefaultUseReforgedStats);
+        $("#inputSubstatMods").prop('checked', optimizerSettings.settingDefaultUseSubstatMods);
+        $("#inputAllowLockedItems").prop('checked', optimizerSettings.settingDefaultLockedItems);
+        $("#inputAllowEquippedItems").prop('checked', optimizerSettings.settingDefaultEquippedItems);
+        $("#inputOrderedHeroPriority").prop('checked', optimizerSettings.settingDefaultUseHeroPriority);
+        $("#inputKeepCurrentItems").prop('checked', optimizerSettings.settingDefaultKeepCurrent);
         return;
     }
 
@@ -140,13 +141,14 @@ async function loadPreviousHeroFilters(heroResponse) {
     $("#inputMinPriorityLimit").val(inputDisplayNumber(request.inputMinPriorityLimit));
     $("#inputMaxPriorityLimit").val(inputDisplayNumber(request.inputMaxPriorityLimit));
 
-    $("#inputPredictReforges").prop('checked', request.inputPredictReforges || true);
-    $("#inputSubstatMods").prop('checked', request.inputSubstatMods || false);
-    $("#inputAllowLockedItems").prop('checked', request.inputAllowLockedItems || false);
-    $("#inputAllowEquippedItems").prop('checked', request.inputAllowEquippedItems || false);
-    $("#inputKeepCurrentItems").prop('checked', request.inputKeepCurrentItems || false);
-    $("#inputOrderedHeroPriority").prop('checked', request.inputOrderedHeroPriority || false);
-    $("#inputOnlyMaxedGear").prop('checked', request.inputOnlyMaxedGear || false);
+    const optimizerSettings = Settings.getOptimizerOptions();
+
+    $("#inputPredictReforges").prop('checked',     isNullUndefined(request.inputPredictReforges)     ? optimizerSettings.settingDefaultUseReforgedStats : request.inputPredictReforges);
+    $("#inputSubstatMods").prop('checked',         isNullUndefined(request.inputSubstatMods)         ? optimizerSettings.settingDefaultUseSubstatMods   : request.inputSubstatMods);
+    $("#inputAllowLockedItems").prop('checked',    isNullUndefined(request.inputAllowLockedItems)    ? optimizerSettings.settingDefaultLockedItems      : request.inputAllowLockedItems);
+    $("#inputAllowEquippedItems").prop('checked',  isNullUndefined(request.inputAllowEquippedItems)  ? optimizerSettings.settingDefaultEquippedItems    : request.inputAllowEquippedItems);
+    $("#inputKeepCurrentItems").prop('checked',    isNullUndefined(request.inputKeepCurrentItems)    ? optimizerSettings.settingDefaultKeepCurrent      : request.inputKeepCurrentItems);
+    $("#inputOrderedHeroPriority").prop('checked', isNullUndefined(request.inputOrderedHeroPriority) ? optimizerSettings.settingDefaultUseHeroPriority  : request.inputOrderedHeroPriority);
 
     document.querySelector('#atkSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
     document.querySelector('#atkSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
@@ -180,6 +182,10 @@ async function loadPreviousHeroFilters(heroResponse) {
     Selectors.setGearMainAndSetsFromRequest(request);
     recalculateFilters(null, heroResponse);
     fixSliders()
+}
+
+function isNullUndefined(x) {
+    return x === null || x === undefined;
 }
 
 module.exports = {
@@ -451,13 +457,14 @@ function clearStats() {
 }
 
 function clearOptions() {
-    $("#inputPredictReforges").prop('checked', true);
-    $("#inputSubstatMods").prop('checked', false);
-    $("#inputAllowLockedItems").prop('checked', false);
-    $("#inputAllowEquippedItems").prop('checked', false);
-    $("#inputOrderedHeroPriority").prop('checked', false);
-    $("#inputKeepCurrentItems").prop('checked', false);
-    $("#inputOnlyMaxedGear").prop('checked', false);
+    const optimizerSettings = Settings.getOptimizerOptions();
+
+    $("#inputPredictReforges").prop('checked', optimizerSettings.settingDefaultUseReforgedStats);
+    $("#inputSubstatMods").prop('checked', optimizerSettings.settingDefaultUseSubstatMods);
+    $("#inputAllowLockedItems").prop('checked', optimizerSettings.settingDefaultLockedItems);
+    $("#inputAllowEquippedItems").prop('checked', optimizerSettings.settingDefaultEquippedItems);
+    $("#inputOrderedHeroPriority").prop('checked', optimizerSettings.settingDefaultUseHeroPriority);
+    $("#inputKeepCurrentItems").prop('checked', optimizerSettings.settingDefaultKeepCurrent);
 }
 
 async function editGearFromIcon(id, reforge) {
@@ -468,6 +475,7 @@ async function editGearFromIcon(id, reforge) {
     ItemAugmenter.augment([editedItem])
     await Api.editItems([editedItem]);
     Notifier.quick("Edited item");
+    await ItemsGrid.editedItem();
 
     ItemsTab.redraw(editedItem);
     drawPreview();
@@ -751,9 +759,9 @@ async function applyItemFilters(params, heroResponse, allItemsResponse, submit) 
         items = items.filter(x => !params.excludeFilter.includes(x.equippedById) || x.equippedById == heroId);
     }
 
-    if (params.inputOnlyMaxedGear) {
-        items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
-    }
+    // if (params.inputOnlyMaxedGear) {
+    //     items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
+    // }
 
     if (isFourAndTwoPieceSets(params.inputSets) || isTwoAndTwoAndTwoPieceSets(params.inputSets)) {
         const possibleSets = params.inputSets.flat();
@@ -908,7 +916,7 @@ function warnParams(params) {
     if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
     &&  params.inputRingStat && params.inputRingStat.length == 0
     &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
-        Notifier.info("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
+        Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
     }
 
     if (permutations >= 5_000_000_000) {

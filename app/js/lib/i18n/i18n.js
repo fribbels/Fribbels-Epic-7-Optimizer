@@ -55,35 +55,60 @@ module.exports = {
             if (!i18next.isInitialized) return;
             var text = document.querySelectorAll('[data-t]');
             var lang = i18next.language;
+            var untransTexts = [];
             //console.log(text);
             //localStorage.clear();
             if (lang != 'en') {
                 text.forEach(
                     function(currentValue, currentIndex, listObj) {
                         // console.log(currentValue.nodeName);
+                        let tmpText = {untransString: []};
                         if (['LABEL', 'A', 'TEXT', 'H2', 'U', 'B', 'DIV', 'SPAN', 'OPTION', 'BUTTON'].includes(currentValue.nodeName)) {
                             var textkey = (currentValue.innerText).trim();
                             // console.log('true!'+textkey);
                             currentValue.innerText = i18next.t(textkey)
+                            if(currentValue.innerText === textkey){
+                                tmpText.untransString.push(textkey);
+                            }
                             if (currentValue.getAttribute("data-content")) {
-                                var datacontent = currentValue.getAttribute("data-content")
+                                const datacontent = currentValue.getAttribute("data-content")
+                                const trimedDatacontent = datacontent.trim();
+                                const transText = i18next.t(datacontent.trim());
+                                if(transText === trimedDatacontent){
+                                    tmpText.push(trimedDatacontent);
+                                }
                                 currentValue.setAttribute("data-content", i18next.t(datacontent.trim()));
                             }
                         } else if (['P'].includes(currentValue.nodeName)) {
-                            var textkey = (currentValue.innerHTML.replace(/(\r\n|\n|\r)/gm, "")).trim();
+                            const textkey = (currentValue.innerHTML.replace(/(\r\n|\n|\r)/gm, "")).trim();
                             // console.log('true! key='+textkey);
                             // console.log('translation='+i18next.t(textkey));
                             currentValue.innerHTML = i18next.t(textkey)
+                            if(currentValue.innerHTML === textkey){
+                                tmpText.untransString.push(textkey);
+                            }
                         } else if (['INPUT'].includes(currentValue.nodeName)) {
-                            var textkey = (currentValue.getAttribute("value")).trim();
+                            const textkey = (currentValue.getAttribute("value")).trim();
+                            const transText = i18next.t(textkey);
+                            if(transText === textkey){
+                                tmpText.untransString.push(textkey);
+                            }
                             // console.log('true! key='+textkey);
                             currentValue.setAttribute("value", i18next.t(textkey));
                         } else if (['OPTGROUP'].includes(currentValue.nodeName)) {
-                            var textkey = (currentValue.getAttribute("label")).trim();
+                            const textkey = (currentValue.getAttribute("label")).trim();
+                            const transText = i18next.t(textkey);
+                            if(transText === textkey){
+                                tmpText.untransString.push(textkey);
+                            }
                             // console.log('true! key='+textkey);
                             currentValue.setAttribute("label", i18next.t(textkey));
                         }
-                    })
+                        if(tmpText.untransString.length !== 0){
+                            untransTexts.push(tmpText);
+                        }
+                    });
+                    console.log("there has untranslated strings in data-t type", untransTexts);
             } else {
                 if (!text_en) {
                     var text_en = text

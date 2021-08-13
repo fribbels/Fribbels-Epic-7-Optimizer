@@ -251,6 +251,20 @@
       "health": 63
     }
   },
+  "Azure Comet": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Azure Comet",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Barthez's Orbuculum": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0066.png",
@@ -1007,6 +1021,34 @@
       "health": 21
     }
   },
+  "Guardian Ice Crystals": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+    },
+    "name": "Guardian Ice Crystals",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
+  "Guide to a Decision": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0107.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0107_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0107_l.jpg"
+    },
+    "name": "Guide to a Decision",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Guiding Light": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0086.png",
@@ -1651,6 +1693,20 @@
       "health": 45
     }
   },
+  "Severed Horn Wand": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Severed Horn Wand",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Shepherd of the Hollow": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0109.png",
@@ -2220,6 +2276,20 @@
     "name": "Wind Rider",
     "rarity": 5,
     "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
+  "Wings of Light and Shadow": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Wings of Light and Shadow",
+    "rarity": 5,
+    "role": "knight",
     "stats": {
       "attack": 21,
       "health": 32

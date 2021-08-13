@@ -24,6 +24,13 @@ var currentAggregate = {};
 var selectedCell = null;
 
 module.exports = {
+    async editedItem() {
+        if (selectedCell) {
+            response = await Api.getItemById(selectedCell.id);
+            selectedCell = response.item;
+            module.exports.redraw();
+        }
+    },
 
     toggleDarkMode(enabled) {
         if (enabled) {
@@ -387,8 +394,22 @@ module.exports = {
 
             if (equippedOrNotFilter == "unequipped") {
                 equippedOrNotFilterComponent.setModel({
-                    type: 'notContains',
-                    filter: '-'
+                    filterType: 'string',
+                    operator: 'AND',
+                    condition1: {
+                        filterType: 'string',
+                        type: 'notContains',
+                        filter: '-'
+                    },
+                    condition2: {
+                        filterType: 'string',
+                        type: 'notContains',
+                        filter: '1'
+                    }
+
+
+                    // type: 'notContains',
+                    // filter: '-'
                 });
             }
         }

@@ -163,17 +163,36 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 matchingExistingItem.setIngameId(newItem.getIngameId());
                 matchingExistingItem.setName(newItem.getName());
                 matchingExistingItem.setSubstats(newItem.getSubstats());
-                matchingExistingItem.setMain(newItem.getMain());
                 matchingExistingItem.setSubstats(newItem.getSubstats());
                 matchingExistingItem.setAugmentedStats(newItem.getAugmentedStats());
                 matchingExistingItem.setReforgedStats(newItem.getReforgedStats());
                 matchingExistingItem.setEnhance(newItem.getEnhance());
-                matchingExistingItem.setLevel(newItem.getLevel());
                 matchingExistingItem.setUpgradeable(newItem.getUpgradeable());
                 matchingExistingItem.setConvertable(newItem.getConvertable());
                 matchingExistingItem.setReforgeable(newItem.getReforgeable());
                 matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
                 matchingExistingItem.setIngameEquippedId(newItem.getIngameEquippedId());
+
+                // Special cases for merging unknown items
+                if (newItem.getLevel() == 0) {
+                    if (matchingExistingItem.getLevel() == null) {
+                        matchingExistingItem.setLevel(newItem.getLevel());
+                    } else {
+                        // Keep the existing level
+                    }
+                } else {
+                    matchingExistingItem.setLevel(newItem.getLevel());
+                }
+
+                if (newItem.getMain().getValue() == null || newItem.getMain().getValue() == 0) {
+                    if (matchingExistingItem.getMain().getValue() == null) {
+                        matchingExistingItem.setMain(newItem.getMain());
+                    } else {
+                        // Keep the existing main
+                    }
+                } else {
+                    matchingExistingItem.setMain(newItem.getMain());
+                }
 
                 newItems.set(i, matchingExistingItem);
                 continue;
@@ -527,7 +546,35 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 .items(items)
                 .build();
 
+        // clean up items equipped state
+//        final List<Hero> heroes = heroDb.getAllHeroes();
+//        for (final Item item : items) {
+//            final String equippedById = item.getEquippedById();
+//            final Hero hero = heroDb.getHeroById(equippedById);
+//
+//            if (hero == null || hero.getEquipment() == null) {
+//                clearItemEquipped(item);
+//                continue;
+//            }
+//
+//            final Item itemOnHero = hero.getEquipment().getOrDefault(item.getGear(), null);
+//            if (itemOnHero == null) {
+//                clearItemEquipped(item);
+//                continue;
+//            }
+//
+//            if (!StringUtils.equals(item.getId(), itemOnHero.getId())) {
+//                clearItemEquipped(item);
+//                continue;
+//            }
+//        }
+
         return toJson(response);
+    }
+
+    private void clearItemEquipped(final Item item) {
+        item.setEquippedByName(null);
+        item.setEquippedById(null);
     }
 
     public String getItemById(final IdRequest request) {

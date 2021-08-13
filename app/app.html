@@ -29,9 +29,6 @@ window.jQuery = $;
 <link rel="stylesheet" type="text/css" href="css/rangeslider.css">
 <link rel="stylesheet" type="text/css" id="darkThemeCss" disabled href="css/darktheme.css">
 
-
-
-
 <link
   rel="stylesheet"
   href="node_modules/tippy.js/dist/tippy.css"
@@ -1443,8 +1440,8 @@ window.jQuery = $;
     <div id="importer-section" class="tab-panel">
 
 
-      <button type="button" class="collapsible" id="importCollapseButton1" data-t>Save / Load optimizer data</button>
-      <div class="content" id="importCollapseContent1">
+      <button type="button" class="collapsible active" id="importCollapseButton1" data-t>Save / Load optimizer data</button>
+      <div class="content" style="display:block" id="importCollapseContent1">
         <p data-t>
         You can load/save your hero + gear configuration here.
         </p>
@@ -1468,16 +1465,32 @@ window.jQuery = $;
         <p data-t>
           This importer will scan for only your gear. Instructions:
         </p>
-        <p data-t>
-          1. Install requirements from the <a href="https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer">instructions on Github</a></br>
-          2. Leave your emulator open, and close Epic 7</br>
-          3. Click the <b>Start scanning</b> button below</br>
-          4. Open Epic 7, and load into the lobby</br>
-          5. Click the <b>Stop scanning</b> button below</br>
-          6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'</br>
-          7. Import the 'gear.txt' with the <b>Merge</b> option</br>
-          8. If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab</br>
-        </p>
+        <ol>
+          <li>
+            <p data-t>Install requirements from the <a href="https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer">instructions on Github</a></p>
+          </li>
+          <li>
+            <p data-t>Leave your emulator open, and close Epic 7</p>
+          </li>
+          <li>
+            <p data-t>Click the <b>Start scanning</b> button below</p>
+          </li>
+          <li>
+            <p data-t>Open Epic 7, and load into the lobby</p>
+          </li>
+          <li>
+            <p data-t>Click the <b>Stop scanning</b> button below</p>
+          </li>
+          <li>
+            <p data-t>Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'</p>
+          </li>
+          <li>
+            <p data-t>Import the 'gear.txt' with the <b>Merge</b> option</p>
+          </li>
+          <li>
+            <p data-t>If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab</p>
+          </li>
+        </ol>
 
         <select id="importLimitEnhance" class="importerButton">
           <option value=0 data-t>All</option>
@@ -1528,22 +1541,37 @@ window.jQuery = $;
 
 
 
-      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Importing heroes automatically</button>
+      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Import heroes and gear automatically</button>
       <div class="content" id="importCollapseContent2">
         <p data-t>
           This importer will scan for your gears and the heroes that they're equipped on. Your build in the optimizer will be replaced with your ingame build. Instructions:
         </p>
-
-        <p data-t>
-          1. Install requirements from the <a href="https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer">instructions on Github</a></br>
-          2. Leave your emulator open, and close Epic 7</br>
-          3. Click the <b>Start scanning</b> button below</br>
-          4. Open Epic 7, and load into the lobby</br>
-          5. Click the <b>Stop scanning</b> button below</br>
-          6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'</br>
-          7. Import the 'gear.txt' with the <b>Merge</b> option</br>
-          8. If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab</br>
-        </p>
+        <ol>
+          <li>
+            <p data-t>Install requirements from the <a href="https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer">instructions on Github</a></p>
+          </li>
+          <li>
+            <p data-t>Leave your emulator open, and close Epic 7</p>
+          </li>
+          <li>
+            <p data-t>Click the <b>Start scanning</b> button below</p>
+          </li>
+          <li>
+            <p data-t>Open Epic 7, and load into the lobby</p>
+          </li>
+          <li>
+            <p data-t>Click the <b>Stop scanning</b> button below</p>
+          </li>
+          <li>
+            <p data-t>Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'</p>
+          </li>
+          <li>
+            <p data-t>Import the 'gear.txt' with the <b>Merge</b> option</p>
+          </li>
+          <li>
+            <p data-t>If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab</p>
+          </li>
+        </ol>
 
         <select id="importHeroesLimitEnhance" class="importerButton">
           <option value=0 data-t>All</option>
@@ -1602,8 +1630,12 @@ window.jQuery = $;
 
 
 
-      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Importing gear from screenshots</button>
+      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Import gear from screenshots</button>
       <div class="content" id="importCollapseContent2">
+        <p><h2>
+          NOTE: The screenshot tool has some issues importing data accurately since the item backgrounds were changed. The automatic importer is recommended.
+        </h2></p>
+
         <p data-t>
         Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)
         </p>
@@ -1632,10 +1664,9 @@ window.jQuery = $;
         <br>
 
 
-        <text data-t>
-          Use <b>merge</b> to update all your gear with new screenshots.</br>
-        </text>
+        <text id="screenshotImportInstruction2" data-t>Use <b>merge</b> to update all your gear with new screenshots.</text>
 
+        <br>
         <br>
 
         <input type="submit" class="importerButton" value="Merge data" id="importScreenshotsFileSelect" data-t>
@@ -1644,9 +1675,8 @@ window.jQuery = $;
         <br>
         <br>
 
-        <text data-t>
-          Use <b>add</b> only if you're using screenshots and want to update a small number of gears. Can cause duplicate gear if the screenshots include existing gear.</br>
-        </text>
+        <text id="screenshotImportInstruction3" data-t>Use <b>add</b> only if you're using screenshots and want to update a small number of gears. Can cause duplicate gear if the screenshots include existing gear.</br></text>
+        <br>
         <br>
 
         <input type="submit" class="importerButton" value="Add new data" id="importAppendFileSelect" data-t>
@@ -1662,7 +1692,7 @@ window.jQuery = $;
 
       <button type="button" class="collapsible" id="importCollapseButton2" data-t>Import gear from Zarroc optimizer</button>
       <div class="content" id="importCollapseContent2">
-
+        <p data-t>
         Select the Zarroc optimizer file here.
         </p>
 
@@ -1720,6 +1750,71 @@ window.jQuery = $;
           <text id="selectDefaultFolderSubmitOutputText" data-t>Select default folder</text>
         </div>
 
+       </br>
+       <div>
+            <b>Default Optimizer Settings: </b><br>
+       </div>
+
+        <div class="horizontalSpace"></div>
+        <div class="horizontalSpace"></div>
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingDefaultUseReforgedStats" type="checkbox" class="switch-input" />
+            <label for="settingDefaultUseReforgedStats" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Use reforged stats
+          </div>
+        </div>
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingDefaultUseHeroPriority" type="checkbox" class="switch-input" />
+            <label for="settingDefaultUseHeroPriority" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Use hero priority
+          </div>
+        </div>
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingDefaultUseSubstatMods" type="checkbox" class="switch-input" />
+            <label for="settingDefaultUseSubstatMods" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Use substat mods
+          </div>
+        </div>
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingDefaultLockedItems" type="checkbox" class="switch-input" />
+            <label for="settingDefaultLockedItems" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Locked items
+          </div>
+        </div>
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingDefaultEquippedItems" type="checkbox" class="switch-input" />
+            <label for="settingDefaultEquippedItems" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Equipped items
+          </div>
+        </div>
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingDefaultKeepCurrent" type="checkbox" class="switch-input" />
+            <label for="settingDefaultKeepCurrent" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Keep current
+          </div>
+        </div>
+
+
+
+       </br>
        <div>
             <b>Languages: </b><br>
        </div>
@@ -1730,6 +1825,8 @@ window.jQuery = $;
         <div class="switchText languageToggle" onclick="location.href='app.html?lng=zh';" style="cursor: pointer;">简体中文</div>
         <span class="switchText"> | </span>
         <div class="switchText languageToggle" onclick="location.href='app.html?lng=zh-TW';" style="cursor: pointer;">繁體中文</div>
+        <span class="switchText"> | </span>
+        <div class="switchText languageToggle" onclick="location.href='app.html?lng=fr';" style="cursor: pointer;">Français</div>
         <br><br>
        </div>
 
@@ -1810,41 +1907,49 @@ window.jQuery = $;
 
       <h1 data-t>Links</h1>
       <img class="badgeIcon" id="discordBadge" src="./assets/badgediscord.png"></img>
-      <p>Join the optimizer Discord server for tech support, suggestions, and announcements.</p>
+      <p data-t>Join the optimizer Discord server for tech support, suggestions, and announcements.</p>
 
       <div class="horizontalSpace" ></div>
       <div class="horizontalSpace" ></div>
       <div class="horizontalSpace" ></div>
       <div class="horizontalSpace" ></div>
       <img class="badgeIcon" id="githubBadge" src="./assets/badgegithub.png"></img>
-      <p>Instructions and guides can be found on the GitHub page, along with new version downloads.</p>
+      <p data-t>Instructions and guides can be found on the GitHub page, along with new version downloads.</p>
       <div class="horizontalSpace" ></div>
       <div class="horizontalSpace" ></div>
       <div class="horizontalSpace" ></div>
       <div class="horizontalSpace" ></div>
-      <img class="badgeIcon" id="donateBadge" src="./assets/badgedonate.png"></img>
-      <p>Support the optimizer and future updates!</p>
-
-      </br>
+      <img class="badgeIcon" id="donateBadge" src="./assets/badgedonate_dt.png"></img>
+      <p data-t>Support the optimizer and future updates!</p>
 
       <h1 data-t>Thank you</h1>
-      <p class="thankYouContainer">
+      <p class="thankYouContainer" data-t>
         I want to thank the entire community for all the love and support that you've shown for the optimizer. This project has been a bunch of fun to build, and I hope you find it just as enjoyable to optimize and gear your favorite characters. Please feel free to reach out to me on the Discord server for setup help, ideas and suggestions, signing up as beta tester, or just come by to chat!
       </p>
-      <p>
+      <p data-t>
         A special thank you to the wonderful people that have contributed and helped make the optimizer possible:
       </p>
       <ul>
-        <li>Taokonn - for the user interface design and user experience guidance, and choosing the underwear icon</li>
-        <li>TriATK - for all your contributions to the codebase and making translations possible</li>
-        <li>Somax - for creating the dark mode and making the optimizer usable at night</li>
-        <li>Translation team - for helping to make the optimizer accessible for multiple languages</li>
-        <li>Beta testers - for helping to find bugs and providing valuable feedback</li>
+        <li>
+          <p data-t>Taokonn - for the user interface design and user experience research and guidance</p>
+        </li>
+        <li>
+          <p data-t>TriATK - for all your contributions to the codebase and making translations possible</p>
+        </li>
+        <li>
+          <p data-t>Somax - for creating the dark mode and making the optimizer usable at night</p>
+        </li>
+        <li>
+          <p data-t>Translation team - for helping to make the optimizer accessible for multiple languages</p>
+        </li>
+        <li>
+          <p data-t>Beta testers - for helping to find bugs and providing valuable feedback</p>
+        </li>
       </ul>
 
       </br>
 
-      <h1 id="version">Current version: ?</h1>
+      <h1 id="version" data-t>Current version</h1>
 
       <input type="submit" value="Check for updates" class="gearPreviewButton" id="checkForUpdatesSubmit" data-t>
     </div>

@@ -9,7 +9,8 @@ global.pid = null;
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
-const killPort = require('kill-port')
+const killPort = require('kill-port');
+const { default: i18next } = require('i18next');
 
 var errors = "";
 var killed = false;
@@ -20,7 +21,7 @@ const defaultJavaError = `Unable to load Java. Please check that you have the <a
 module.exports = {
     kill: async() => {
         try {
-            const killPortOutput = await killPort(8130, 'tcp')
+            // const killPortOutput = await killPort(8130, 'tcp')
             console.log(killPortOutput);
         } catch (e) {
             console.warn("Error killing existing subprocess", e);
@@ -45,7 +46,9 @@ module.exports = {
             }
         })
 
-        await module.exports.kill();
+        if (TEST == false) {
+            await module.exports.kill();
+        }
 
         child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
         pid = child.pid;
@@ -57,7 +60,7 @@ module.exports = {
                 return;
             }
 
-            Notifier.error(`Java subprocess errors: ${errors}`)
+            Notifier.error(`${i18next.t("Java subprocess errors")}: ${errors}`)
             Dialog.htmlError(defaultJavaError);
         });
 

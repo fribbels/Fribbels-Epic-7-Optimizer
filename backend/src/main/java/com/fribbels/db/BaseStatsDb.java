@@ -41,6 +41,7 @@ public class BaseStatsDb {
                 .res(heroStats.getRes())
                 .dac(heroStats.getDac())
                 .spd(heroStats.getSpd())
+                .bonusStats(heroStats.getBonusStats())
 //                .cp(heroStats.getCp())
 //                .ehp(heroStats.getEhp())
 //                .hpps(heroStats.getHpps())
@@ -53,6 +54,9 @@ public class BaseStatsDb {
 //                .upgrades(heroStats.getUpgrades())
 //                .score(heroStats.getScore())
 //                .conversions(heroStats.getConversions())
+//                .bonusMaxAtkPercent(baseStats.getBonusMaxAtkPercent())
+//                .bonusMaxDefPercent(baseStats.getBonusMaxDefPercent())
+//                .bonusMaxHpPercent(baseStats.getBonusMaxHpPercent())
                 .name(name)
                 .build();
 

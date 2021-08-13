@@ -2,8 +2,8 @@ var heroesByName = {};
 var artifactsByName = {};
 var eesByName = {};
 
-var HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
-var ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
+var HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json?";
+var ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json?";
 
 
 function UrlExists(url, cb){
@@ -19,17 +19,17 @@ function UrlExists(url, cb){
 }
 
 try {
-    UrlExists('http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json', function(status) {
+    UrlExists('http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json?', function(status) {
         if(status === 200) {
            // file was found
            console.log('Amazon is available, using aws');
-           HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json";
-           ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json";
+           HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json?";
+           ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json?";
         } else {
            // file not found
            console.log('Amazon is not available, using gitee');
-           HERO_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/herodata.json";
-           ARTIFACT_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/artifactdata.json";
+           HERO_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/herodata.json?";
+           ARTIFACT_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/artifactdata.json?";
         }
     });
 } catch (e) {
@@ -131,6 +131,19 @@ module.exports = {
                 res: Math.round(stats.efr * 100),
                 spd: stats.spd,
                 dac: Math.round(stats.dac * 100),
+                bonusStats: {
+                    bonusMaxAtkPercent: stats.bonusMaxAtkPercent,
+                    bonusMaxDefPercent: stats.bonusMaxDefPercent,
+                    bonusMaxHpPercent: stats.bonusMaxHpPercent,
+                    overrideAtk: stats.overrideAtk,
+                    overrideHp: stats.overrideHp,
+                    overrideDef: stats.overrideDef,
+                    overrideAdditionalCr: Math.round(stats.overrideAdditionalCr * 100),
+                    overrideAdditionalCd: Math.round(stats.overrideAdditionalCd * 100),
+                    overrideAdditionalSpd: stats.overrideAdditionalSpd,
+                    overrideAdditionalEff: Math.round(stats.overrideAdditionalEff * 100),
+                    overrideAdditionalRes: Math.round(stats.overrideAdditionalRes * 100),
+                }
             }
         }
 
@@ -189,7 +202,7 @@ function manualFetchData() {
             heroesByName[name] = fullData;
         } catch (e) {
             console.error(e);
-            Notifier.error("Unable to load data from Epic7DB - " + e);
+            Notifier.error(i18next.t("Unable to load data from Epic7DB - ") + e);
         }
     })
 

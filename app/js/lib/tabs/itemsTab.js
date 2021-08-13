@@ -84,7 +84,6 @@ module.exports = {
     }
 }
 
-
 async function editGear() {
     const items = ItemsGrid.getSelectedGear();
     if (!items || items.length != 1) {
@@ -99,6 +98,8 @@ async function editGear() {
 
     ItemAugmenter.augment([editedItem])
     await Api.editItems([editedItem]);
+
+    await ItemsGrid.editedItem();
 
     Notifier.success("Edited item");
     module.exports.redraw(editedItem);
@@ -131,6 +132,7 @@ async function reforgeGear() {
     await Api.editItems([editedItem]);
 
     Notifier.quick("Reforged item");
+    await ItemsGrid.editedItem();
     module.exports.redraw(editedItem);
     Saves.autoSave();
 }
@@ -140,6 +142,7 @@ async function addGear() {
     console.warn("NEWITEM", newItem);
 
     Notifier.quick("Added item");
+    await ItemsGrid.editedItem();
     module.exports.redraw(newItem);
     Saves.autoSave();
 }
@@ -159,6 +162,7 @@ async function duplicateGear() {
     await Api.editItems([editedItem]);
 
     Notifier.quick("Added item");
+    await ItemsGrid.editedItem();
     module.exports.redraw(editedItem);
     Saves.autoSave();
 }
@@ -168,7 +172,7 @@ async function removeGear() {
 
     await Api.deleteItems(items.map(x => x.id));
 
-    Notifier.quick("Removed " + items.length + " item(s).")
+    Notifier.quick(`${i18next.t("Removed ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();
@@ -179,7 +183,7 @@ async function unequipGear() {
 
     await Api.unequipItems(items.map(x => x.id));
 
-    Notifier.quick("Unequipped " + items.length + " item(s).")
+    Notifier.quick(`${i18next.t("Unequipped ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();
@@ -190,7 +194,7 @@ async function lockGear() {
 
     await Api.lockItems(items.map(x => x.id));
 
-    Notifier.quick("Locked " + items.length + " item(s).")
+    Notifier.quick(`${i18next.t("Locked ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();
@@ -200,8 +204,8 @@ async function unlockGear() {
     const items = ItemsGrid.getSelectedGear();
 
     await Api.unlockItems(items.map(x => x.id));
-
-    Notifier.quick("Unlocked " + items.length + " item(s).")
+const hintString = `${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" item(s).")}`;console.log("unlock item hint string", hintString);
+    Notifier.quick(`${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
     Saves.autoSave();

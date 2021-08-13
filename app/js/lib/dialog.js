@@ -463,8 +463,8 @@ module.exports = {
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" id="modGradeLabel"  data-t>${i18next.t("Mod Grade")}</div>
                                     <select id="modGrade" class="editGearStatSelect">
-                                        <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>Lesser</option>
-                                        <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>Greater</option>
+                                        <option value="lesser" ${hero.modGrade == "lesser" ? "selected" : ""}>${i18next.t("Lesser")}</option>
+                                        <option value="greater" ${(hero.modGrade == "greater" || !hero.modGrade) ? "selected" : ""}>${i18next.t("Greater")}</option>
                                     </select>
                                 </div>
 
@@ -488,8 +488,8 @@ module.exports = {
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" id="keepStatsLabel" data-t>${i18next.t("Wanted Stats")}</div>
                                     <select id="keepStatOptions" class="editGearStatSelect">
-                                        <option value="neverReplace" ${(hero.keepStatOptions == "noReplace" || !hero.keepStatOptions) ? "selected" : ""}>Never replace wanted stats</option>
-                                        <option value="replace" ${hero.keepStatOptions == "replace" ? "selected" : ""}>Allow replacing wanted with wanted</option>
+                                        <option value="neverReplace" ${(hero.keepStatOptions == "noReplace" || !hero.keepStatOptions) ? "selected" : ""}>${i18next.t("Never replace wanted stats")}</option>
+                                        <option value="replace" ${hero.keepStatOptions == "replace" ? "selected" : ""}>${i18next.t("Allow replacing wanted with wanted")}</option>
                                     </select>
                                 </div>
                             </div>
@@ -733,6 +733,7 @@ module.exports = {
 
             const { value: formValues } = await Swal.fire({
                 title: '',
+                width: 550,
                 html: `
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
@@ -795,6 +796,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.main)}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearMainStatValue" value="${item.main.value}">
+                            <img class="editGearCycle" src=${Assets.getCycle()}></img>
                         </div>
 
                         <div class="editGearFormRow">
@@ -803,6 +805,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[0])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat1Value" value="${item.substats[0] ? item.substats[0].value : ""}">
+                            <input type="checkbox" class="subModCheckbox" id="subMod1" ${item.substats[0]?.modified ? "checked" : ""}>
                         </div>
 
                         <div class="editGearFormRow">
@@ -811,6 +814,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[1])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat2Value" value="${item.substats[1] ? item.substats[1].value : ""}">
+                            <input type="checkbox" class="subModCheckbox" id="subMod2" ${item.substats[1]?.modified ? "checked" : ""}>
                         </div>
 
                         <div class="editGearFormRow">
@@ -819,6 +823,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[2])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat3Value" value="${item.substats[2] ? item.substats[2].value : ""}">
+                            <input type="checkbox" class="subModCheckbox" id="subMod3" ${item.substats[2]?.modified ? "checked" : ""}>
                         </div>
 
                         <div class="editGearFormRow">
@@ -827,6 +832,7 @@ module.exports = {
                                 ${getStatOptionsHtml(item.substats[3])}
                             </select>
                             <input type="number" class="editGearStatNumber" id="editGearStat4Value" value="${item.substats[3] ? item.substats[3].value : ""}">
+                            <input type="checkbox" class="subModCheckbox" id="subMod4" ${item.substats[3]?.modified ? "checked" : ""}>
                         </div>
                     </div>
                 `,
@@ -839,6 +845,19 @@ module.exports = {
                     }
 
                     $('#editGearEquipped').multipleSelect(options)
+
+                    const checkboxes = ["#subMod1", "#subMod2", "#subMod3", "#subMod4"]
+
+                    for (var checkbox of checkboxes) {
+                        $(checkbox).change(function() {
+                            for (var toUncheck of checkboxes) {
+                                console.log(this);
+                                if (!toUncheck.includes(this.id)) {
+                                    $(toUncheck).prop('checked', false);
+                                }
+                            }
+                        });
+                    }
                 },
                 focusConfirm: false,
                 showCancelButton: true,
@@ -875,10 +894,10 @@ module.exports = {
                     const subStatType3 = document.getElementById('editGearStat3Type').value;
                     const subStatType4 = document.getElementById('editGearStat4Type').value;
 
-                    if (subStatType1 !="None") substats.push({type: subStatType1, value: parseInt(document.getElementById('editGearStat1Value').value || 0)})
-                    if (subStatType2 !="None") substats.push({type: subStatType2, value: parseInt(document.getElementById('editGearStat2Value').value || 0)})
-                    if (subStatType3 !="None") substats.push({type: subStatType3, value: parseInt(document.getElementById('editGearStat3Value').value || 0)})
-                    if (subStatType4 !="None") substats.push({type: subStatType4, value: parseInt(document.getElementById('editGearStat4Value').value || 0)})
+                    if (subStatType1 !="None") substats.push({type: subStatType1, value: parseInt(document.getElementById('editGearStat1Value').value || 0), modified: $('#subMod1').prop('checked')})
+                    if (subStatType2 !="None") substats.push({type: subStatType2, value: parseInt(document.getElementById('editGearStat2Value').value || 0), modified: $('#subMod2').prop('checked')})
+                    if (subStatType3 !="None") substats.push({type: subStatType3, value: parseInt(document.getElementById('editGearStat3Value').value || 0), modified: $('#subMod3').prop('checked')})
+                    if (subStatType4 !="None") substats.push({type: subStatType4, value: parseInt(document.getElementById('editGearStat4Value').value || 0), modified: $('#subMod4').prop('checked')})
 
                     editedItem.substats = substats;
 
@@ -1149,7 +1168,7 @@ function generateStatList(hero, state) {
     var result = "";
     for (var i = 0; i < list.length; i++) {
         const stat = list[i];
-        result += `<div class="list-group-item" data-id="${stat}">${optimizerStatToDisplayStat[stat]}</div>`
+        result += `<div class="list-group-item" data-id="${stat}">${i18next.t(optimizerStatToDisplayStat[stat])}</div>`
     }
     return result;
 }

@@ -1,14 +1,17 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.6.6";
+const currentVersion = "1.7.2";
 
-global.TEST = false;
+global.TEST = true;
 /********************************************************************************************
     Release checklist:
+    - update changelog
     - set TEST = false
     - package jar
-    - update version here + package.json
-    - update repo in package.json
+    - update version here
+    - update version in app package.json
+    - update repo in project package.json
+    - yarn package
 *********************************************************************************************/
 
 module.exports = {
@@ -21,20 +24,25 @@ module.exports = {
         Dialog.showNewFeatures(
 `
 <h2>
-    New in v1.7.0
+    New in v1.7.3
 </h2>
 <ul class="newFeatures">
-    <li>Hero importer can now load your ingame units with their ingame gear</li>
-    <li>Optimization with substat modification stones</li>
-    <li>Drag-and-drop hero priority sorting</li>
-    <li>New filter: Hero priority - to allow taking gear from lower priority units</li>
-    <li>New filter: Number of conversion reforges</li>
-    <li>New priority score column and filter</li>
-    <li>Stat priority filter now also considers main stats</li>
-    <li>Added 5 star hero stats under bonus stats</li>
-    <li>Updated stats for Senya, Researcher Carrot, Chaos Sect Axe</li>
-    <li>Windows installer and automatic updates</li>
-    <li>New Information tab for updates and links</li>
+    <li>Updated Ram's +30% atk passive</li>
+    <li>Added editing of substat modded flag</li>
+    <li>Added French translation</li>
+</ul>
+<h2>
+    New in v1.7.2
+</h2>
+<ul class="newFeatures">
+    <li>Updated ML Ken's +30% eff res buff</li>
+    <li>Added new default optimizer settings to Settings tab</li>
+</ul>
+<h2>
+    New in v1.7.1
+</h2>
+<ul class="newFeatures">
+    <li>Updated stats for Health / Defense / Attack / Revenge sets</li>
 </ul>
 `
         );
@@ -66,7 +74,8 @@ module.exports = {
         // }
 
         const version = document.getElementById('version');
-        version.innerText = 'Current version: v' + currentVersion;
+        const versionPrefixText = i18next.t("Current version");
+        version.innerText = versionPrefixText + ": v" + currentVersion;
 
         ipcRenderer.on('update_available', () => {
             Notifier.info(i18next.t("New version available, downloading now"));
@@ -117,6 +126,13 @@ module.exports = {
 
         document.getElementById('checkForUpdatesSubmit').addEventListener("click", async () => {
             Notifier.info(i18next.t("Checking for updates"));
+
+            try {
+                await HeroData.initialize();
+            } catch (e) {
+                console.error("Error refreshing hero data " + e)
+            }
+
             ipcRenderer.send('check');
         });
     }
