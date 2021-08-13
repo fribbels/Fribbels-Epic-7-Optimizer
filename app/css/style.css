@@ -76,7 +76,8 @@
 .tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
 .tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
 .tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6),
-.tabset > input:nth-child(13):checked ~ .tab-panels > .tab-panel:nth-child(7) {
+.tabset > input:nth-child(13):checked ~ .tab-panels > .tab-panel:nth-child(7),
+.tabset > input:nth-child(15):checked ~ .tab-panels > .tab-panel:nth-child(8) {
   display: block;
 }
 
@@ -701,7 +702,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin-right: 40px;
 }
 .editGearStatLabel {
-  min-width: 140px;
+  width: 140px;
   text-align: left;
   margin-top: auto;
   margin-bottom: auto;
@@ -1689,4 +1690,19 @@ input:checked + .darkSlider:before {
 .editGearCycle {
   margin-left: 16px;
   height: 20px;
+}
+
+#enhanceTabPreview {
+  width: 200px;
+}
+
+.colorPickerText {
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+}
+
+.colorPickerText:hover:after {
+  cursor: pointer;
+  content: attr(data-content);
 }

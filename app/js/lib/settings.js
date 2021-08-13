@@ -115,6 +115,14 @@ module.exports = {
             settingDefaultLockedItems: false,
             settingDefaultEquippedItems: false,
             settingDefaultKeepCurrent: false,
+            settingBackgroundColor: '#212529',
+            settingTextColorPicker: '#E2E2E2',
+            settingAccentColorPicker: '#F84C48',
+            settingInputColorPicker: '#2D3136',
+            settingGridTextColorPicker: '#E2E2E2',
+            settingRedColorPicker: '#5A1A06',
+            settingNeutralColorPicker: '#343127',
+            settingGreenColorPicker: '#38821F'
         }
     },
 
@@ -179,6 +187,18 @@ module.exports = {
             excludeSelects = settings.settingExcludeEquipped;
         }
 
+  // "settingBackgroundColor": "#212529",
+  // "settingTextColorPicker": "#e2e2e2",
+  // "settingAccentColorPicker": "#f84c48",
+  // "settingInputColorPicker": "#2d3136",
+  // "settingGridTextColorPicker": "#ffffff",
+  // "settingRedColorPicker": "#ff430a",
+  // "settingNeutralColorPicker": "#343127",
+  // "settingGreenColorPicker": "#38821f"
+
+        console.warn(settings);
+        ColorPicker.loadColorSettings(settings)
+
         const currentVersion = Updater.getCurrentVersion();
         if (settings.settingVersion) {
             if (currentVersion != settings.settingVersion) {
@@ -217,7 +237,15 @@ module.exports = {
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
             settingDarkMode: document.getElementById('darkSlider').checked,
-            settingVersion: Updater.getCurrentVersion()
+            settingVersion: Updater.getCurrentVersion(),
+            settingBackgroundColor: document.getElementById('backgroundColorPicker').value,
+            settingTextColorPicker: document.getElementById('textColorPicker').value,
+            settingAccentColorPicker: document.getElementById('accentColorPicker').value,
+            settingInputColorPicker: document.getElementById('inputColorPicker').value,
+            settingGridTextColorPicker: document.getElementById('gridTextColorPicker').value,
+            settingRedColorPicker: document.getElementById('redColorPicker').value,
+            settingNeutralColorPicker: document.getElementById('neutralColorPicker').value,
+            settingGreenColorPicker: document.getElementById('greenColorPicker').value
         };
         defaultOptimizerSettings = {
             settingDefaultUseReforgedStats: settings.settingDefaultUseReforgedStats,

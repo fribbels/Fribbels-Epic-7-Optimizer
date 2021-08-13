@@ -2,9 +2,9 @@ const tinygradient = require('tinygradient');
 const colorPicker = require('../colorPicker');
 
 var lightGradient = {gradient:tinygradient([
-    {color: '#F5A191', pos: 0}, // red
-    {color: '#ffffe5', pos: 0.4},
-    {color: '#77e246', pos: 1} // green
+    {color: '#5A1A06', pos: 0}, // red
+    {color: '#343127', pos: 0.4},
+    {color: '#38821F', pos: 1} // green
 ])};
 
 var darkGradient = colorPicker.getColors();

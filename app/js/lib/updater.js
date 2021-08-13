@@ -107,6 +107,7 @@ module.exports = {
                 }
             } catch (e) {
                 console.warn("Failed to parse IPC response", e)
+                Notifier.info(i18next.t("No new updates found"));
             }
         });
         ipcRenderer.on('update_downloaded', async (arg1, arg2) => {
