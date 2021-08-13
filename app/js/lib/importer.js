@@ -147,6 +147,11 @@ module.exports = {
                 return;
             }
 
+            if (output.includes('Exported data to')) {
+                Notifier.error("The gear data was already exported. Please use the 'Merge data' button to import, or scan again.");
+                return;
+            }
+
             const options = {
                 title: "Save file",
                 defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
@@ -453,6 +458,19 @@ module.exports = {
             HeroesTab.redrawHeroInputSelector();
 
             $('#importZarrocSaveFileSelectOutputText').text(`${i18next.t('Loaded')} ${heroes.length} ${i18next.t('heroes and')} ${items.length} ${i18next.t('items from')} ${filenames[0]}`)
+        })
+
+        document.getElementById('eraseButton').addEventListener("click", async () => {
+            var response = await Dialog.erasePrompt("Erase all heroes/gear/builds from optimizer?")
+
+            console.warn("response", response);
+
+            if (response == 'yes') {
+                await Api.setItems([]);
+                await Api.setHeroes([]);
+
+                Notifier.info("Finished erasing data");
+            }
         })
     }
 }

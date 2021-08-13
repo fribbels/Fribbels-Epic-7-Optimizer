@@ -26,7 +26,6 @@ const stats = [
     "Speed"
 ]
 
-
 var e7StatToOptimizerStat = {
 }
 
@@ -168,6 +167,26 @@ module.exports = {
                 resolve("restart");
               } else if (result.isDenied) {
                 reject("skip");
+              }
+            })
+        })
+    },
+
+    erasePrompt: (text) => {
+        return new Promise((resolve, reject) => {
+            Swal.fire({
+              icon: 'info',
+              text: i18next.t(text),
+              showCancelButton: true,
+              confirmButtonText: i18next.t("Yes"),
+              cancelButtonText: i18next.t("No"),
+              confirmButtonColor: '#51A259',
+              allowOutsideClick: outsideClickDisable
+            }).then((result) => {
+              if (result.isConfirmed) {
+                resolve("yes");
+              } else if (result.isDenied) {
+                reject("no");
               }
             })
         })
