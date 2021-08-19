@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.7.2";
+const currentVersion = "1.7.3";
 
-global.TEST = true;
+global.TEST = false;
 /********************************************************************************************
     Release checklist:
     - update changelog
@@ -27,7 +27,7 @@ module.exports = {
     New in v1.7.3
 </h2>
 <ul class="newFeatures">
-    <li>Updated Ram's +30% atk passive</li>
+    <li>Updated Ram's +30% atk passive and Summertime Iseria +30% atk passive</li>
     <li>Added editing of substat modded flag</li>
     <li>Added French translation</li>
 </ul>

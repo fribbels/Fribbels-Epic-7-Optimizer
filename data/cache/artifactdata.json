@@ -1427,6 +1427,20 @@
       "health": 28
     }
   },
+  "Official Levulin Beach Volleyball": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Official Levulin Beach Volleyball",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    }
+  },
   "One Year of Gratitude": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0064.png",
@@ -1872,6 +1886,20 @@
     "role": "",
     "stats": {
       "attack": 9,
+      "health": 32
+    }
+  },
+  "Star of the Deep Sea": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Star of the Deep Sea",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
       "health": 32
     }
   },
