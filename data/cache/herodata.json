@@ -22247,7 +22247,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 14685,
@@ -22271,7 +22282,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.3,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
