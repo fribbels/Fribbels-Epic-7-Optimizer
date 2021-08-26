@@ -823,7 +823,7 @@
     "The Guardian Star’s Blessing": "守护星的祝福",
     "Venus Orb": "金星宝珠",
     "Victorious Flag": "胜战旗帜",
-  
+
     "Information": "信息",
     "rank": "优先度",
     "Use hero priority": "使用英雄优先度",
@@ -853,7 +853,7 @@
     "<b>Prio - </b> Sum of priority score of all 6 pieces, calculated using the Substat Priority filter values.": "<b>装优分 - </b> 六件装备的优先性分数总合，由副属优先性筛选器的值来计算",
     "<b>Upg - </b> Number of items to upgrade - including reforges and enhances. When substat mods are enabled, modified gear is considered upgradable.": "<b>需+ - </b> 包括重铸与强化在内，当副属转换开启时，需转换的装备也会被视为可升级的",
     "<b>Conv - </b> Number of conversion material reforges in the results.": "<b>转换次 - </b> 结果中的转换重铸次数",
-  
+
     "Substat modification priority": "副属性变更优先性",
     "Limit Rolls": "限制强化次数",
     "Mod Grade": "变更石等级",
@@ -874,7 +874,7 @@
     "Choose the substats that you want to modify for. Substats in the unwanted column will be replaced by substats in wanted column.": "选择你想要调整的副属性。在嫌恶副属栏中的副属性将会被偏好副属栏中的副属性取代。",
     "Choose the substats to not modify. Substats in this column will not get replaced, and will also not be selected for.": "选择不要转换的副属性。此栏的副属性不会取代/被取代",
     "Choose the substats that you want to discard when modifying. Substats in the unwanted column will be replaced by substats in wanted column.": "选择嫌恶副属。在嫌恶副属字段中的副属性会被偏好副属字段中的副属性取代",
-  
+
     "Bomb Model Kanna": "爆击型卡农",
     "Ilynav": "伊莉娜芙",
     "Inferno Khawazu": "烈焰的卡瓦朱",
@@ -883,9 +883,21 @@
     "Senya": "赛娜",
     "Solitaria of the Snow": "雪国的苏莉塔妮亚",
     "Wild Angara": "野生安卡拉",
-  
+    "Closer Charles": "末日指挥官查尔斯",
+    "Camila": "卡蜜拉",
+    "Christy": "克莉丝媞",
+    "Helen": "海伦",
+    "Melany": "玫拉妮",
+    "Penelope": "潘尼罗佩",
+    "Rem":"雷姆",
+    "Ram":"拉姆",
+    "Emilia":"爱蜜莉雅",
+    "Summertime Iseria":"南国的伊赛丽亚",
+    "Straze":"史瑞杰思",
+    "Angel of Light Angelica": "光之天使安洁莉卡",
+
     "Senya's 30% total Attack bonus from S2 is already automatically added.": "赛娜被动的30%攻击已自动添加",
-  
+
     "Air-to-Surface Missile: MISHA": "空地导弹：美莎 ",
     "Spear of a New Dawn": "开辟之枪",
     "Twilight Calamity": "落日之灾",
@@ -894,7 +906,7 @@
     "XIII. Death": "XIII. Death",
     "XIV. Temperance": "XIV. Temperance",
     "XVIII. The Moon": "XVIII. The Moon",
-  
+
     "Current version": "当前版本",
     "Links": "连结",
     "Join the optimizer Discord server for tech support, suggestions, and announcements.": "加入配装器的Discord服务器以提供技术支持、建议，以及获得公告",
@@ -908,10 +920,10 @@
     "Somax - for creating the dark mode and making the optimizer usable at night": "Somax - 感谢你设计黑暗模式，让配装器在晚上的时候得以使用",
     "Translation team - for helping to make the optimizer accessible for multiple languages": "翻译小组 - 感谢你们的协助让配装器得以以多语言呈现",
     "Beta testers - for helping to find bugs and providing valuable feedback": "Beta测试员 - 感谢你们协助抓虫，以及提供有建设性的回馈",
-    
+
     "Use <b>merge</b> to update all your gear with new screenshots.": "使用 <b>合并数据</b> 来使用新的截图更新你所有的装备",
     "Use <b>add</b> only if you're using screenshots and want to update a small number of gears. Can cause duplicate gear if the screenshots include existing gear.": "当你是使用截图汇入时，若只需要更新少量装备，请使用 <b>新增数据</b> 。使用时请注意，若截图中存在已汇入过的装备，会导致装备复制",
-  
+
     "Install requirements from the <a href=\"https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer\">instructions on Github</a>": "根据 <a href=\"https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer\">Github 上的说明</a>安装所需的运行环境",
     "Leave your emulator open, and close Epic 7": "保持你的仿真器开启, 退出第七史诗",
     "Click the <b>Start scanning</b> button below": "点击 <b>开始扫描</b>",
@@ -920,7 +932,7 @@
     "Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a 'gear.txt'": "等待 30 秒左右, 直到数据出现, 点击<b>导出</b> 将装备数据保存到 'gear.txt'",
     "Import the 'gear.txt' with the <b>Merge</b> option": "使用下方的 <b>添加/合并</b> 选项导入 'gear.txt'",
     "If the message tells you to, use the Level = 0 filter to manually fix any level 0 items on the Gear tab": "前往装备列表, 使用 等级 = 0 过滤器手动解决等级为0的装备导入问题",
-  
+
     "Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.": "无法储存档案。请尝试暂停你的防病毒软件，或是关闭此程序，将此程序加入防病毒软件的例外列表后，以系统管理员的身份重新开启此程序",
     "Nothing to export yet, please select a folder": "没有可以导出的数据，请选择一个文件夹",
     "Error occurred while parsing gear. Check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and try again.": "解析装备时发生错误，请砍认你已安装正确版本的 <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> 后，再次进行尝试",

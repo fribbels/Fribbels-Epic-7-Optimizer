@@ -883,6 +883,18 @@
     "Senya": "賽娜",
     "Solitaria of the Snow": "雪國的蘇莉塔妮亞",
     "Wild Angara": "野生安卡拉",
+    "Closer Charles": "末日指揮官查爾斯",
+    "Camila": "卡蜜拉",
+    "Christy": "克莉絲媞",
+    "Helen": "海倫",
+    "Melany": "玫拉妮",
+    "Penelope": "潘尼羅佩",
+    "Rem":"雷姆",
+    "Ram":"拉姆",
+    "Emilia":"愛蜜莉雅",
+    "Summertime Iseria":"南國的伊賽麗亞",
+    "Straze":"史瑞杰思",
+    "Angel of Light Angelica": "光之天使安潔莉卡",
 
     "Senya's 30% total Attack bonus from S2 is already automatically added.": "賽娜被動的30%攻擊已自動添加",
 
@@ -908,7 +920,7 @@
     "Somax - for creating the dark mode and making the optimizer usable at night": "Somax - 感謝你設計黑暗模式，讓配裝器在晚上的時候得以使用",
     "Translation team - for helping to make the optimizer accessible for multiple languages": "翻譯小組 - 感謝你們的協助讓配裝器得以以多語言呈現",
     "Beta testers - for helping to find bugs and providing valuable feedback": "Beta測試員 - 感謝你們協助抓蟲，以及提供有建設性的回饋",
-    
+
     "Use <b>merge</b> to update all your gear with new screenshots.": "使用 <b>合併資料</b> 來使用新的截圖更新你所有的裝備",
     "Use <b>add</b> only if you're using screenshots and want to update a small number of gears. Can cause duplicate gear if the screenshots include existing gear.": "當你是使用截圖匯入時，若只需要更新少量裝備，請使用 <b>新增資料</b> 。使用時請注意，若截圖中存在已匯入過的裝備，會導致裝備複製",
 
