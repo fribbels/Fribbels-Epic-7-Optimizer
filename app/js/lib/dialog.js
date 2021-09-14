@@ -1021,8 +1021,8 @@ function getImprintHtml(hero, heroInfo) {
 }
 
 function getStarsHtml(hero, heroInfo) {
-    var html = `<option value=6>6 stars max awaken</option>
-                <option value=5 ${hero.stars == 5 ? "selected" : ""}>5 stars max awaken</option>`;
+    var html = `<option value=6>${i18next.t("6 stars max awaken")}</option>
+                <option value=5 ${hero.stars == 5 ? "selected" : ""}>${i18next.t("5 stars max awaken")}</option>`;
 
     return html;
 }
