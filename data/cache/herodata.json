@@ -4102,6 +4102,141 @@
       }
     }
   },
+  "Belian": {
+    "_id": "belian",
+    "name": "Belian",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "knight",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "def_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/belianPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/belianPanel.png"
+    },
+    "ex_equip": [
+      {
+        "_id": "exc100201",
+        "id": "exc100201",
+        "name": "Black Winter Spear",
+        "description": "\"A requiem for the fallen heroes of Wintenberg.\" These are the words the blacksmith spoke as he offered this weapon to Cecilia.",
+        "unit": "c1002",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Increases decrease Defense chance by 10% when using Deliverance.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Dispels one buff from all enemies after using Steel Cloudburst.",
+            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to dispel one buff. Damage dealt increases proportional to the caster's max Health.",
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Makes all enemies unhealable for 2 turns when using Steel Cloudburst.",
+            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to make them unhealable for 2 turns. Damage dealt increases proportional to the caster's max Health.",
+            "values": [
+              17,
+              27
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1002.png"
+        }
+      }
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11824,
+        "atk": 538,
+        "hp": 4620,
+        "spd": 106,
+        "def": 523,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13403,
+        "atk": 658,
+        "hp": 5375,
+        "spd": 110,
+        "def": 523,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.06,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14755,
+        "atk": 671,
+        "hp": 5809,
+        "spd": 106,
+        "def": 648,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17219,
+        "atk": 821,
+        "hp": 6751,
+        "spd": 110,
+        "def": 648,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Bellona": {
     "_id": "bellona",
     "name": "Bellona",
