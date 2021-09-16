@@ -4107,7 +4107,7 @@
     "name": "Belian",
     "moonlight": true,
     "rarity": 5,
-    "attribute": "dark",
+    "attribute": "light",
     "role": "knight",
     "zodiac": "ram",
     "self_devotion": {
