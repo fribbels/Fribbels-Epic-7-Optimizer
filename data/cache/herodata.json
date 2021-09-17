@@ -4143,48 +4143,6 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/belianPanel.png"
     },
     "ex_equip": [
-      {
-        "_id": "exc100201",
-        "id": "exc100201",
-        "name": "Black Winter Spear",
-        "description": "\"A requiem for the fallen heroes of Wintenberg.\" These are the words the blacksmith spoke as he offered this weapon to Cecilia.",
-        "unit": "c1002",
-        "role": "knight",
-        "rarity": 5,
-        "stat": {
-          "type": "acc",
-          "value": 0.08
-        },
-        "skills": [
-          {
-            "skill": 1,
-            "description": "Increases decrease Defense chance by 10% when using Deliverance.",
-            "skill_description": null,
-            "values": [],
-            "_id": 0
-          },
-          {
-            "skill": 2,
-            "description": "Dispels one buff from all enemies after using Steel Cloudburst.",
-            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to dispel one buff. Damage dealt increases proportional to the caster's max Health.",
-            "values": [],
-            "_id": 1
-          },
-          {
-            "skill": 2,
-            "description": "Makes all enemies unhealable for 2 turns when using Steel Cloudburst.",
-            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to make them unhealable for 2 turns. Damage dealt increases proportional to the caster's max Health.",
-            "values": [
-              17,
-              27
-            ],
-            "_id": 2
-          }
-        ],
-        "assets": {
-          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1002.png"
-        }
-      }
     ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
@@ -17965,14 +17923,14 @@
       },
       "lv50FiveStarFullyAwakened": {
         "cp": 13169,
-        "atk": 1079,
-        "hp": 3385,
-        "spd": 112,
-        "def": 520,
+        "atk": 447,
+        "hp": 3763,
+        "spd": 100,
+        "def": 503,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
-        "eff": 0,
+        "eff": 0.06,
         "efr": 0
       },
       "lv60SixStarNoAwaken": {
@@ -19530,7 +19488,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 611,
+        "overrideHp": 3926,
+        "overrideDef": 533,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 10,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 11585,
@@ -19554,7 +19523,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 762,
+        "overrideHp": 5150,
+        "overrideDef": 661,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 10,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
