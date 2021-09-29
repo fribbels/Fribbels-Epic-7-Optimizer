@@ -4102,6 +4102,99 @@
       }
     }
   },
+  "Belian": {
+    "_id": "belian",
+    "name": "Belian",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "knight",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "def_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/belianPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/belianPanel.png"
+    },
+    "ex_equip": [
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11824,
+        "atk": 538,
+        "hp": 4620,
+        "spd": 106,
+        "def": 523,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13403,
+        "atk": 658,
+        "hp": 5375,
+        "spd": 110,
+        "def": 523,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.06,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14755,
+        "atk": 671,
+        "hp": 5809,
+        "spd": 106,
+        "def": 648,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17219,
+        "atk": 821,
+        "hp": 6751,
+        "spd": 110,
+        "def": 648,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Bellona": {
     "_id": "bellona",
     "name": "Bellona",
@@ -17830,14 +17923,14 @@
       },
       "lv50FiveStarFullyAwakened": {
         "cp": 13169,
-        "atk": 1079,
-        "hp": 3385,
-        "spd": 112,
-        "def": 520,
+        "atk": 447,
+        "hp": 3763,
+        "spd": 100,
+        "def": 503,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
-        "eff": 0,
+        "eff": 0.06,
         "efr": 0
       },
       "lv60SixStarNoAwaken": {
@@ -18245,7 +18338,7 @@
         "hp": 4735,
         "spd": 109,
         "def": 505,
-        "chc": 0.15,
+        "chc": 0.45,
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
@@ -18269,7 +18362,7 @@
         "hp": 6266,
         "spd": 109,
         "def": 627,
-        "chc": 0.15,
+        "chc": 0.45,
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
@@ -19395,7 +19488,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 611,
+        "overrideHp": 3926,
+        "overrideDef": 533,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 10,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 11585,
@@ -19419,7 +19523,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 762,
+        "overrideHp": 5150,
+        "overrideDef": 661,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 10,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -22247,7 +22362,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarNoAwaken": {
         "cp": 14685,
@@ -22271,7 +22397,18 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.3,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -26794,7 +26931,7 @@
         "dac": 0.05,
         "eff": 0.18,
         "efr": 0,
-        "bonusMaxAtkPercent": 20,
+        "bonusMaxAtkPercent": 50,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -26829,7 +26966,7 @@
         "dac": 0.05,
         "eff": 0.3,
         "efr": 0,
-        "bonusMaxAtkPercent": 20,
+        "bonusMaxAtkPercent": 50,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,

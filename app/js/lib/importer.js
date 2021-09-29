@@ -461,7 +461,7 @@ module.exports = {
         })
 
         document.getElementById('eraseButton').addEventListener("click", async () => {
-            var response = await Dialog.erasePrompt("Erase all heroes/gear/builds from optimizer?")
+            var response = await Dialog.erasePrompt(i18next.t("Erase all heroes/gear/builds from optimizer?"))
 
             console.warn("response", response);
 
@@ -469,7 +469,7 @@ module.exports = {
                 await Api.setItems([]);
                 await Api.setHeroes([]);
 
-                Notifier.info("Finished erasing data");
+                Notifier.info(i18next.t("Finished erasing data"));
             }
         })
     }

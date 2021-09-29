@@ -4,9 +4,10 @@ module.exports = {
         require(Files.path(Files.getDataPath() + '/locales/en/gridlocale.js'))
         require(Files.path(Files.getDataPath() + '/locales/zh/gridlocale.js'))
         require(Files.path(Files.getDataPath() + '/locales/zh-TW/gridlocale.js'))
+        require(Files.path(Files.getDataPath() + '/locales/fr/gridlocale.js'))
 
         window.i18next.use(window.i18nextHttpBackend).use(window.i18nextBrowserLanguageDetector).init({
-            // debug: 'true',
+            debug: 'true',
             preload: ['en', 'zh', 'zh-TW', 'dev'],
             detection: {
                 // order and from where user language should be detected
