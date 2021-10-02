@@ -15424,7 +15424,50 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1011_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1011_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc104601",
+        "id": "exc104601",
+        "name": "Eternal Rose",
+        "description": "A rose that Lidica picked when she was excommunicated from the Rose Apostles. It has been specially treated to ensure it never withers but also lost its scent in the process.",
+        "unit": "c1046",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Damage dealt is increased by 20% when using Wild Rose.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 1,
+            "description": "Increases base Combat Readiness reduction by 5% when using Wild Rose.",
+            "skill_description": "Attacks with a sword, decreasing Combat Readiness by 15%. When the enemy is debuffed, decreases Combat Readiness by an additional 10%.",
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Dispels an additional buff when using Thornbush.",
+            "skill_description": "Attacks all enemies, with a {{variable}} chance each to decrease Hit Chance for 1 turn, make them unhealable for 1 turn, and dispel two buffs.",
+            "values": [
+              22,
+              27
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1046.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10596,
@@ -25350,6 +25393,47 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1106_l.png"
     },
     "ex_equip": [
+      {
+        "_id": "exc101701",
+        "id": "exc101701",
+        "name": "Untainted Heart",
+        "description": "A staff decorated with a bright red orb that encapsulates both the spirit of charity, and the unwavering determination of Achates.",
+        "unit": "c1017",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "max_hp_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Increases the chance to decrease Attack when using Magic Design by 25%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Amount recovered is increased by 67% when using Rapid Cure.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Increases Effect Resistance of the caster for 2 turns when using Curing Prayer.",
+            "skill_description": "Dispels debuffs from all allies before healing them. Increases Effect Resistance of the caster for 2 turns. Healing increases proportional to the caster's max Health.",
+            "values": [
+              57
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1017.png"
+        }
+      }
     ],
     "calculatedStatus": {
       "bonusMaxAtkPercent": 30,
@@ -28143,7 +28227,53 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1007_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1007_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc106601",
+        "id": "exc106601",
+        "name": "Dragon Emerald",
+        "description": "Jewelry that Luna's father passed on to her. It is the only thing her mother left behind when she left.",
+        "unit": "c1066",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Increases the caster's Combat Readiness by 15% after using Infinity Slash.",
+            "skill_description": "Stabs the target a random number of times, before increasing Combat Readiness of the caster by 15%. Skill cooldown decreases by 1-3 turns and damage dealt increases according to the number of attacks.",
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 3,
+            "description": "Decreases the enemy's Attack for 2 turns after using Ragnar Spear.",
+            "skill_description": "Soars into the air and hits the enemy with a spear, with a {{variable}} chance to decrease Defense for 2 turns and a 100% chance to decrease Attack for 2 turns. Attacks using an advantageous element.",
+            "values": [
+              18,
+              17
+            ],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Grants an extra turn to the caster when the enemy is defeated by Ragnar Spear.",
+            "skill_description": "Soars into the air and hits the enemy with a spear, with a {{variable}} chance to decrease Defense for 2 turns. Attacks using an advantageous element. Grants an extra turn to the caster when the enemy is defeated.",
+            "values": [
+              18,
+              35
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1066.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11324,
