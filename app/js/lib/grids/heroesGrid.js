@@ -235,7 +235,7 @@ function buildGrid(localeText) {
             {headerName: i18next.t('elem'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: i18next.t('class'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
             //{headerName: i18next.t('name'), field: 'name', width: 0, wrapText: true, cellStyle: {'display':'none'}},
-            {headerName: i18next.t('name'), field: 'label', width: 170, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
+            {headerName: i18next.t('name'), field: 'label', width: 160, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}, cellRenderer: (params) => renderName(params)},
             // {headerName: i18next.t('Stars'), field: 'rarity', width: 50},
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
@@ -275,8 +275,10 @@ function buildGrid(localeText) {
         onSortChanged: onSortChanged,
         onFilterChanged: onFilterChanged,
         suppressMoveWhenRowDragging: true,
+        onRowDoubleClicked: onRowDoubleClicked,
         animateRows: true,
         immutableData: true,
+        suppressDragLeaveHidesColumns: true,
         getRowNodeId: (data) => {
             return data.id;
         },
@@ -327,6 +329,7 @@ function buildGrid(localeText) {
         cacheBlockSize: 1000,
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
+        suppressDragLeaveHidesColumns: true,
         // animateRows: true,
         // immutableData: true,
         // getRowNodeId: (data) => {
@@ -344,6 +347,16 @@ function buildGrid(localeText) {
 }
 
 
+const fourPieceSets = [
+    "AttackSet",
+    "SpeedSet",
+    "DestructionSet",
+    "LifestealSet",
+    "CounterSet",
+    "RageSet",
+    "RevengeSet",
+    "InjurySet"
+]
 function renderSets(equipment) {
     if (!equipment) return;
 
@@ -374,6 +387,16 @@ function renderSets(equipment) {
             sets.push(Constants.setsByIndex[i]);
         }
     }
+
+    sets.sort((a, b) => {
+        if (fourPieceSets.includes(a)) {
+            return -1;
+        } else if (fourPieceSets.includes(b)) {
+            return 1;
+        } else {
+            return a.localeCompare(b);
+        }
+    })
 
     const images = sets.map(x => '<img class="optimizerSetIcon" src=' + Assets.getSetAsset(x) + '></img>');
     // console.log("RenderSets images", images);
@@ -494,17 +517,16 @@ function renderElement(element) {
     // }[element];
 }
 
+
+function renderName(params) {
+    var stars = params.data.stars
+    var name = i18next.t(params.data.name)
+    return stars == 5 ? name + " - 5 ★" : name;
+}
+
 function renderClass(role) {
     var file = Assets.getClassAsset(role);
     return `<img class='optimizerSetIcon' src='${file}'></img>`;
-
-    // return {
-    //     "light": "<img class='optimizerSetIcon' src='https://assets.epicsevendb.com/attribute/cm_icon_promlight.png'></img>",
-    //     "fire": "<img class='optimizerSetIcon' src='https://assets.epicsevendb.com/attribute/cm_icon_profire.png'></img>",
-    //     "ice": "<img class='optimizerSetIcon' src='https://assets.epicsevendb.com/attribute/cm_icon_proice.png'></img>",
-    //     "wind": "<img class='optimizerSetIcon' src='https://assets.epicsevendb.com/attribute/cm_icon_proearth.png'></img>",
-    //     "dark": "<img class='optimizerSetIcon' src='https://assets.epicsevendb.com/attribute/cm_icon_promdark.png'></img>",
-    // }[element];
 }
 
 
@@ -775,4 +797,16 @@ function onFilterChanged() {
       suppressRowDrag
   );
   heroesGrid.gridOptions.api.setSuppressRowDrag(suppressRowDrag);
+}
+
+function onRowDoubleClicked(e) {
+    if (!e.data || !e.data.id) {
+        return
+    }
+
+    var heroId = e.data.id
+
+    console.log("Double clicked hero row", e)
+    $("#inputHeroAdd").val(heroId).change();
+    $('#tab1').trigger('click');
 }

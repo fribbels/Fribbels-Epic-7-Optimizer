@@ -77,7 +77,8 @@
 .tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
 .tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6),
 .tabset > input:nth-child(13):checked ~ .tab-panels > .tab-panel:nth-child(7),
-.tabset > input:nth-child(15):checked ~ .tab-panels > .tab-panel:nth-child(8) {
+.tabset > input:nth-child(15):checked ~ .tab-panels > .tab-panel:nth-child(8),
+.tabset > input:nth-child(17):checked ~ .tab-panels > .tab-panel:nth-child(9) {
   display: block;
 }
 
@@ -1382,7 +1383,7 @@ body.dark-theme input {
   padding-right: 0px;
 }
 .statPreviewDiff.up {
-    color: #5bcc3f;
+    color: #00BE9B;
     /*color: #00adff; blue*/
 }
 .statPreviewDiff.down {
@@ -1626,6 +1627,7 @@ input:checked + .darkSlider:before {
 :root {
     --input-color: #e0e0e0;
     --inactive-color: #cacaca;
+    --bg-color: #ffffff;
 
 /*
     --bg-color: #212529;
@@ -1694,6 +1696,70 @@ input:checked + .darkSlider:before {
 
 #enhanceTabPreview {
   width: 200px;
+  margin-left: 50px;
+}
+.enhanceChart {
+  width: 340px;
+  height:  340px;
+}
+
+.enhanceContainer {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+}
+
+.bars {
+  width: 1000px;
+  height:  60px;
+}
+
+.radarChart {
+  margin-left: 50px;
+  width: 420px;
+  height:  320px;
+}
+
+.enhanceSecondRow {
+  display: flex;
+  flex-direction: row;
+}
+.stats {
+  min-width:  150px;
+  display: flex;
+  flex-direction: row;
+}
+#statsRight {
+  min-width:  30px;
+}
+#statsLeft {
+  margin-left: 10px;
+  min-width:  200px;
+}
+.barsContainer {
+  margin-top: 30px;
+  margin-left: 70px;
+}
+#detectorStatus {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 60px;
+}
+#startCompanion {
+  margin-left: 60px;
+}
+#statusSymbol{
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  border: 1px;
+  border-radius: 25px;
+}
+#statusText {
+    line-height: 26px;
+    margin-left: 10px;
 }
 
 .colorPickerText {
@@ -1715,6 +1781,34 @@ input:checked + .darkSlider:before {
   height: 26px;
 }
 .selectorSetContainer {
+/*  display: flex;
+  flex-direction: row;*/
+}
+.importerRadioLabel {
+  margin-right: 20px;
+}
+
+.multiInfoPanel {
+  padding: 5px 8px 5px 8px;
+  width: 150px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  line-height: 14px;
+}
+
+.multiTopRow {
   display: flex;
   flex-direction: row;
+  height: 300px;
+}
+
+.multiGrid {
+  width: 1200px;
+}
+
+.editFiltersDialog {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  font-size: 14px;
 }

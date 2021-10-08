@@ -21,6 +21,15 @@ module.exports = {
         return Math.round(number * 10) / 10
     },
 
+    round100ths: (number) => {
+        return Math.round(number * 100) / 100
+    },
+
+
+
+    isFlat:(text) => {
+        return text == "Health" || text == "Defense" || text == "Attack";
+    },
 
     customFilter: (label, text, originalLabel, originalText) => {
         var index = 0;

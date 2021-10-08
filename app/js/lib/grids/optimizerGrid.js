@@ -175,6 +175,8 @@ const datasource = {
             optimizationRequest: optimizationRequest
         }
 
+        request.executionId = OptimizerTab.getCurrentExecutionId();
+
         const getResultRowsResponse = Api.getResultRows(request).then(getResultRowsResponse => {
             console.log("GetResultRowsResponse", getResultRowsResponse);
             aggregateCurrentHeroStats(getResultRowsResponse.heroStats)
@@ -314,6 +316,7 @@ function buildGrid(localeText) {
         onCellMouseOver: cellMouseOver,
         onCellMouseOut: cellMouseOut,
         navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "optimizerGrid"),
+        suppressDragLeaveHidesColumns: true,
     };
 
     const gridDiv = document.getElementById('myGrid');

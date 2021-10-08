@@ -252,11 +252,11 @@ input[type=checkbox]:checked:after {
 }
 
 .statPreviewDiff.down {
-    color: var(--accent-red);
+    /*color: var(--accent-red);*/
 }
 
 .statPreviewDiff.up {
-    color: var(--accent-green);
+    /*color: var(--accent-green);*/
 }
 
 .ag-theme-balham .ag-icon-menu:before,

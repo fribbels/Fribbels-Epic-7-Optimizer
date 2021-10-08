@@ -87,6 +87,12 @@ module.exports = {
             treekill(child.pid, 'SIGTERM', () => {
                 ipc.send('closed');
             });
+            if (scannerChild)
+                scannerChild.kill()
+            if (itemTrackerChild)
+                itemTrackerChild.kill()
+            if(findCommandSpawn)
+                findCommandSpawn.kill()
         });
 
         window.onbeforeunload = (e) => {
@@ -95,6 +101,13 @@ module.exports = {
             treekill(child.pid, 'SIGTERM', () => {
                 console.log("Terminated child");
             });
+            if (scannerChild)
+                scannerChild.kill()
+            if (itemTrackerChild)
+                itemTrackerChild.kill()
+            if(findCommandSpawn)
+                findCommandSpawn.kill()
+            Scanner.end();
         };
 
         return child;

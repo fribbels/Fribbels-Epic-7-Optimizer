@@ -47,7 +47,7 @@ public class Main {
 
         server.createContext("/system", new SystemRequestHandler());
         server.createContext("/items", new ItemsRequestHandler(itemDb, heroDb, baseStatsDb, heroesRequestHandler));
-        server.createContext("/optimization", new OptimizationRequestHandler(optimizationDb, baseStatsDb, heroDb));
+        server.createContext("/optimization", new OptimizationRequestHandler(baseStatsDb, heroDb));
         server.createContext("/heroes", heroesRequestHandler);
         server.createContext("/ocr", new OcrRequestHandler());
 

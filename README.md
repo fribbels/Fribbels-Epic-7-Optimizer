@@ -450,7 +450,7 @@ _________________
 There's still a lot of room to improve and I plan on adding new stuff as feedback comes in. I only work on this in my spare time, so please be patient with new features.
 
 **Done for 1.8.0**
-- TBD
+ - Top % now input-able
 
 **Working on:**
  - v1.8.0

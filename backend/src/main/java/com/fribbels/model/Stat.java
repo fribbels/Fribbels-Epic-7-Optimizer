@@ -18,7 +18,7 @@ public class Stat {
 
     private Integer rolls;
 
-    private Boolean modified;
-
     private Integer ingameRolls;
+
+    private Boolean modified;
 }

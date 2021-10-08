@@ -10,7 +10,7 @@ module.exports = {
         if (!gear || !gear.name) {
             return false;
         }
-        return Utils.stringDistance("Gaveleets", gear.name) > 0.4 && gear.level == 85;
+        return Utils.stringDistance("Gaveleets", gear.name) > 0.25 && gear.level == 85;
     },
 
     // Allow only reforging of +15 gear
@@ -38,9 +38,10 @@ module.exports = {
         const huntDistance = Utils.stringDistance(name, huntName)
         const conversionDistance = Utils.stringDistance(name, conversionName)
 
-        if (!module.exports.isReforgeable(gear)) {
-            gear.material = null;
-        } else if (conversionDistance > huntDistance && conversionDistance > 0.2) {
+        // if (!module.exports.isReforgeable(gear)) {
+        //     gear.material = null;
+        // } else
+        if (conversionDistance > huntDistance && conversionDistance > 0.2) {
             gear.material = "Conversion";
             gear.mconfidence = "" + Math.round(100 * Utils.stringDistance(name, conversionName))
             gear.convertable = 1;
@@ -52,62 +53,249 @@ module.exports = {
         }
     },
 
-    calculateMaxes: (gear) => {
-        const powers = {
-            "Normal": 0.8,
-            "Good": 0.85,
-            "Rare": 0.9,
-            "Heroic": 0.95,
-            "Epic": 1
+    unreforgeItem: (gear) => {
+        const substats = gear.substats;
+
+        if (gear.level == 90) {
+            for (var i = 0; i < substats.length; i++) {
+                const substat = substats[i];
+                const statTypeChanged = plainStats.includes(substat.type) ? "Plain" : substat.type;
+
+                if (statTypeChanged == "Plain") {
+                    const added = plainStatRollsToValue[substat.rolls];
+                    substat.unreforgedValue = substat.value - added;
+                }
+                if (substat.type == "CriticalHitChancePercent") {
+                    const added = substat.rolls;
+                    substat.unreforgedValue = substat.value - added;
+                }
+                if (substat.type == "CriticalHitDamagePercent") {
+                    const added = critDamageRollsToValue[substat.rolls];
+                    substat.unreforgedValue = substat.value - added;
+                }
+                if (substat.type == "Attack") {
+                    const added = 11 * substat.rolls;
+                    substat.unreforgedValue = substat.value - added;
+                }
+                if (substat.type == "Defense") {
+                    const added = 9 * substat.rolls;
+                    substat.unreforgedValue = substat.value - added;
+                }
+                if (substat.type == "Health") {
+                    const added = 56 * substat.rolls;
+                    substat.unreforgedValue = substat.value - added;
+                }
+                if (substat.type == "Speed") {
+                    const added = speedRollsToValue[substat.rolls];
+                    substat.unreforgedValue = substat.value - added;
+                }
+            }
         }
 
-        const substats = gear.substats;
-        const power = gear.rank;
+        const power = powers[gear.rank];
+        const flats = flatsByLevel[gear.level == 88 ? 88 : 85]
+        const statRanges = plainStatsByLevel[gear.level == 88 ? 88 : 85]
+
+        // const power = powers[gear.rank];
+        // const flats = flatsByLevel[gear.level == 88 ? 88 : 85]
+        // const statRanges = plainStatsByLevel[gear.level == 88 ? 88 : 85]
+
+        for (var i = 0; i < substats.length; i++) {
+            const substat = substats[i];
+            const statTypeChanged = plainStats.includes(substat.type) ? "Plain" : substat.type;
+
+            if (gear.level != 90) {
+                substat.unreforgedValue = substat.value;
+            }
+
+            if (statTypeChanged == "Plain") {
+                substat.unreforgedMin = substat.rolls * statRanges["Plain"].min;
+                substat.unreforgedMax = substat.rolls * statRanges["Plain"].max;
+            }
+            if (substat.type == "CriticalHitChancePercent") {
+                substat.unreforgedMin = substat.rolls * statRanges["CriticalHitChancePercent"].min;
+                substat.unreforgedMax = substat.rolls * statRanges["CriticalHitChancePercent"].max;
+            }
+            if (substat.type == "CriticalHitDamagePercent") {
+                substat.unreforgedMin = substat.rolls * statRanges["CriticalHitDamagePercent"].min;
+                substat.unreforgedMax = substat.rolls * statRanges["CriticalHitDamagePercent"].max;
+            }
+            if (substat.type == "Attack") {
+                substat.unreforgedMin = substat.rolls * flats.Attack.min * modifiers.Attack.min * power;
+                substat.unreforgedMax = substat.rolls * flats.Attack.max * modifiers.Attack.max * power;
+            }
+            if (substat.type == "Defense") {
+                substat.unreforgedMin = substat.rolls * flats.Defense.min * modifiers.Defense.min * power;
+                substat.unreforgedMax = substat.rolls * flats.Defense.max * modifiers.Defense.max * power;
+            }
+            if (substat.type == "Health") {
+                substat.unreforgedMin = substat.rolls * flats.Health.min * modifiers.Health.min * power;
+                substat.unreforgedMax = substat.rolls * flats.Health.max * modifiers.Health.max * power;
+            }
+            if (substat.type == "Speed") {
+                substat.unreforgedMin = substat.rolls * statRanges["Speed"].min;
+                substat.unreforgedMax = substat.rolls * statRanges["Speed"].max;
+            }
+        }
+
+        var maxPossibleUnreforgedScore = 0;
+        var minPossibleUnreforgedScore = 0;
+        var actualUnreforgedScore = 0;
 
         for (var i = 0; i < substats.length; i++) {
             const substat = substats[i];
 
-            if (plainStats.includes(substat.type)) {
-                substat.min = substat.rolls * 4;
-                substat.max = substat.rolls * 8;
-            }
-            if (substat.type == "CriticalHitChancePercent") {
-                substat.min = substat.rolls * 3;
-                substat.max = substat.rolls * 5;
-            }
-            if (substat.type == "CriticalHitDamagePercent") {
-                substat.min = substat.rolls * 4;
-                substat.max = substat.rolls * 7;
-            }
-            if (substat.type == "Attack") {
-                substat.min = substat.rolls * 14 * 2.37 * power; // 33.18 * power
-                substat.max = substat.rolls * 28 * 1.67 * power; // 66.36
-            }
-            if (substat.type == "Defense") {
-                substat.min = substat.rolls * 7 * 4 * power; // 28
-                substat.max = substat.rolls * 14 * 2.5 * power; // 56
-            }
-            if (substat.type == "Health") {
-                substat.min = substat.rolls * 45 * 3.5 * power; // 157.5
-                substat.max = substat.rolls * 90 * 2.25 * power; // 315
-            }
-            if (substat.type == "Speed") {
-                substat.min = substat.rolls * 1; // 157.5
-                substat.max = substat.rolls * 4; // 315
+            const statTypeChanged = plainStats.includes(substat.type) ? "Plain" : substat.type;
+            const plainStatRanges = gear.level == 88 ? plainStatsByLevel["88"] : plainStatsByLevel["85"];
+
+            var minMultiplier;
+            var maxMultiplier;
+            if (flatStats.includes(substat.type)) {
+                const flatMultiplier = flatMultipliersByLevel[gear.level == 88 ? "88" : "85"];
+                minMultiplier = flatMultiplier[substat.type].min;
+                maxMultiplier = flatMultiplier[substat.type].max;
+            } else {
+                minMultiplier = plainStatRanges[statTypeChanged].min;
+                maxMultiplier = plainStatRanges[statTypeChanged].max;
             }
 
-            const reforgedMin = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.min, substat.rolls);
-            const reforgedMax = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.max, substat.rolls);
-            const reforgedValue = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.value, substat.rolls);
+            minPossibleUnreforgedScore += substat.rolls * minMultiplier * substatWeights[substat.type];
+            maxPossibleUnreforgedScore += substat.rolls * maxMultiplier * substatWeights[substat.type];
+
+            console.log("--")
+            console.log(maxMultiplier)
+            console.log(minMultiplier)
+            console.log(statTypeChanged)
+
+            actualUnreforgedScore += substat.unreforgedValue * substatWeights[substat.type];
+        }
+
+        console.warn(JSON.stringify(gear.substats, null, 2));
+        console.warn("range: " + minPossibleUnreforgedScore + " - " + maxPossibleUnreforgedScore);
+        console.warn("actual", actualUnreforgedScore);
+        console.warn("percent", (actualUnreforgedScore - minPossibleUnreforgedScore) / (maxPossibleUnreforgedScore - minPossibleUnreforgedScore) * 100);
+    },
+
+    calculateMaxes: (gear) => {
+        getItemReforgedStats(gear)
+
+/*
+            min   max   t1   t2   t3   t4   t5  t6  t7
+max_hp      3.5   2.25  0.6  0.7  0.8  0.9  1   1   1
+att         2.37  1.67  0.6  0.7  0.8  0.9  1   1   1
+def         4     2.5   0.6  0.7  0.8  0.9  1   1   1
+
+grade  power
+1      0.8
+2      0.85
+3      0.9
+4      0.95
+5      1.0
+6      9.99
+
+// 88 FLAT
+// HP 51 - 102
+// ATT 16 - 32
+// DEF 8 - 16
+
+// 85 FLAT
+// HP 45 - 90
+// DEF 7 - 14
+// ATT 14 - 28
+
+max atk = 1.67 * 28 * 1 = 46.76
+max hp = 2.25 * 90 * 1 = 202.5
+max def = 2.5 * 14 * 1 = 35
+11/9/56
+346.56
+1551
+264
+
+*/
+
+        const substats = gear.substats;
+        var tMax = 0;
+        var tMin = 0;
+        var tValue = 0;
+        var tPot = 0;
+        var tRolls = 0;
+
+        const power = powers[gear.rank];
+        const flats = flatsByLevel[gear.level == 88 ? 88 : 85]
+        const statRanges = plainStatsByLevel[gear.level == 88 ? 88 : 85]
+
+        for (var i = 0; i < substats.length; i++) {
+            const substat = substats[i];
+            const statTypeChanged = plainStats.includes(substat.type) ? "Plain" : substat.type;
+
+            if (statTypeChanged == "Plain") {
+                substat.min = substat.rolls * statRanges["Plain"].min;
+                substat.max = substat.rolls * statRanges["Plain"].max;
+            }
+            if (substat.type == "CriticalHitChancePercent") {
+                substat.min = substat.rolls * statRanges["CriticalHitChancePercent"].min;
+                substat.max = substat.rolls * statRanges["CriticalHitChancePercent"].max;
+            }
+            if (substat.type == "CriticalHitDamagePercent") {
+                substat.min = substat.rolls * statRanges["CriticalHitDamagePercent"].min;
+                substat.max = substat.rolls * statRanges["CriticalHitDamagePercent"].max;
+            }
+            if (substat.type == "Attack") {
+                substat.min = substat.rolls * flats.Attack.min * modifiers.Attack.min * power;
+                substat.max = substat.rolls * flats.Attack.max * modifiers.Attack.max * power;
+            }
+            if (substat.type == "Defense") {
+                substat.min = substat.rolls * flats.Defense.min * modifiers.Defense.min * power;
+                substat.max = substat.rolls * flats.Defense.max * modifiers.Defense.max * power;
+            }
+            if (substat.type == "Health") {
+                substat.min = substat.rolls * flats.Health.min * modifiers.Health.min * power;
+                substat.max = substat.rolls * flats.Health.max * modifiers.Health.max * power;
+            }
+            if (substat.type == "Speed") {
+                substat.min = substat.rolls * statRanges["Speed"].min;
+                substat.max = substat.rolls * statRanges["Speed"].max;
+
+                if (substat.min == 1 && (gear.rank == "Epic")) {
+                    substat.min = 2;
+                }
+            }
+
+            const reforgedMin = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.min, substat.rolls, gear.level);
+            const reforgedMax = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.max, substat.rolls, gear.level);
+            const reforgedValue = calculateReforgeValuesTypeValueAndRolls(substat.type, substat.value, substat.rolls, gear.level);
 
             substat.reforgedMin = reforgedMin;
             substat.reforgedMax = reforgedMax;
+            substat.reforgedValue = reforgedValue;
 
             const potential = (reforgedValue - reforgedMin) / (reforgedMax - reforgedMin)
             substat.potential = potential;
+
+            tMax += reforgedMax;
+            tMin += reforgedMin;
+            tValue += reforgedValue;
+            tPot += potential * substat.rolls;
+            tRolls += substat.rolls;
+        }
+        const maxRolls15 = {
+            "Epic": 9,
+            "Heroic": 8,
+            "Rare": 7,
+            "Good": 6,
+            "Normal": 5,
         }
 
+        const lostRolls = Math.ceil((15 - gear.enhance)/3);
+
         console.warn(substats);
+        console.warn("tmax", tMax);
+        console.warn("tmin", tMin);
+        console.warn("tvalue", tValue);
+        console.warn("tpot", tPot);
+        console.warn("possible pot", tPot / tRolls) // possible pot
+        console.warn("max pot", tPot / 9)      // max pot
+        // console.warn(tPot / maxRolls15[gear.rank])
     }
 }
                 // substat.multi = 39;
@@ -431,7 +619,11 @@ function calculateReforgeValues(substat) {
     }
 }
 
-function calculateReforgeValuesTypeValueAndRolls(type, value, rolls) {
+function calculateReforgeValuesTypeValueAndRolls(type, value, rolls, level) {
+    if (level != 85 && level != 90) {
+        return value;
+    }
+
     if (plainStats.includes(type)) {
         return value + plainStatRollsToValue[rolls];
     }
@@ -463,6 +655,20 @@ const plainStats = [
     "EffectivenessPercent",
     "EffectResistancePercent",
 ]
+
+const substatWeights = {
+    "AttackPercent": 1,
+    "DefensePercent": 1,
+    "HealthPercent": 1,
+    "EffectivenessPercent": 1,
+    "EffectResistancePercent": 1,
+    "Attack": (3.46 / 39),
+    "Health": (3.09 / 174),
+    "Defense": (4.99 / 31),
+    "CriticalHitDamagePercent": (8/7),
+    "CriticalHitChancePercent": (8/5),
+    "Speed": (8/4),
+}
 
 const mainStatValuesByStatType = {
     "Attack": 525,
@@ -536,3 +742,240 @@ function getMaxRolls(rank, enhance) {
     }
     return maxRolls15[rank] - 5;
 }
+
+const powers = {
+    Normal: 0.8,
+    Good: 0.85,
+    Rare: 0.9,
+    "Heroic": 0.95,
+    "Epic": 1
+}
+
+const modifiers = {
+    Health: {
+        min: 3.5,
+        max: 2.25
+    },
+    Attack: {
+        min: 2.37,
+        max: 1.67
+    },
+    Defense: {
+        min: 4,
+        max: 2.5
+    },
+}
+
+const flatsByLevel = {
+    "88": {
+        Health: {
+            min: 51,
+            max: 102
+        },
+        Attack: {
+            min: 16,
+            max: 32
+        },
+        Defense: {
+            min: 8,
+            max: 16
+        },
+    },
+    "85": {
+        Health: {
+            min: 45,
+            max: 90
+        },
+        Attack: {
+            min: 14,
+            max: 28
+        },
+        Defense: {
+            min: 7,
+            max: 14
+        },
+    }
+}
+
+const flatStats = [
+    "Attack",
+    "Defense",
+    "Health"
+]
+
+const flatMultipliersByLevel = {
+    "88": {
+        Attack: {
+            min: flatsByLevel["88"].Attack.min * modifiers.Attack.min,
+            max: flatsByLevel["88"].Attack.max * modifiers.Attack.max,
+        },
+        Health: {
+            min: flatsByLevel["88"].Health.min * modifiers.Health.min,
+            max: flatsByLevel["88"].Health.max * modifiers.Health.max,
+        },
+        Defense: {
+            min: flatsByLevel["88"].Defense.min * modifiers.Defense.min,
+            max: flatsByLevel["88"].Defense.max * modifiers.Defense.max,
+        }
+    },
+    "85": {
+        Attack: {
+            min: flatsByLevel["85"].Attack.min * modifiers.Attack.min,
+            max: flatsByLevel["85"].Attack.max * modifiers.Attack.max,
+        },
+        Health: {
+            min: flatsByLevel["85"].Health.min * modifiers.Health.min,
+            max: flatsByLevel["85"].Health.max * modifiers.Health.max,
+        },
+        Defense: {
+            min: flatsByLevel["85"].Defense.min * modifiers.Defense.min,
+            max: flatsByLevel["85"].Defense.max * modifiers.Defense.max,
+        }
+    }
+}
+
+const plainStatsByLevel = {
+    "88": {
+        Plain: {
+            min: 5,
+            max: 9
+        },
+        CriticalHitChancePercent: {
+            min: 3,
+            max: 6
+        },
+        CriticalHitDamagePercent: {
+            min: 4,
+            max: 8
+        },
+        Speed: {
+            min: 3,
+            max: 5
+        }
+    },
+    "85": {
+        Plain: {
+            min: 4,
+            max: 8
+        },
+        CriticalHitChancePercent: {
+            min: 3,
+            max: 5
+        },
+        CriticalHitDamagePercent: {
+            min: 4,
+            max: 7
+        },
+        Speed: {
+            min: 1,
+            max: 4
+        }
+    }
+}
+
+/*
+
+        if (gear.enhance < 15 && gear.enhance >= 0) {
+            const rollsLeft = Math.ceil(15 - gear.enhance);
+
+            const permutations = [];
+            permutations.push()
+
+            for (var rollCount = 0; rollCount < rollsLeft; rollCount++) {
+                var copies = []
+                for (var copyN = 0; copyN <= permutations.length; copyN++) {
+                    copies.push(JSON.parse(JSON.stringify(permutations[copyN])))
+                }
+                permuations.concat(copies);
+
+
+                for (var subN = 0; subN < 4; subN++) {
+                    if (gear.rank == "Heroic") {
+                        if (subN == 3 && gear.enhance <= 9) {
+                            continue;
+                        }
+                    }
+
+                    if (gear.rank == "Rare") {
+                        if (subN == 2 && gear.enhance <= 6) {
+                            continue;
+                        }
+                        if (subN == 3 && gear.enhance <= 9) {
+                            continue;
+                        }
+                    }
+
+                    if (gear.rank == "Good") {
+                        if (subN == 1 && gear.enhance <= 3) {
+                            continue;
+                        }
+                        if (subN == 2 && gear.enhance <= 6) {
+                            continue;
+                        }
+                        if (subN == 3 && gear.enhance <= 9) {
+                            continue;
+                        }
+                    }
+
+                    if (gear.rank == "Normal") {
+                        if (subN == 0 && gear.enhance <= 0) {
+                            continue;
+                        }
+                        if (subN == 1 && gear.enhance <= 3) {
+                            continue;
+                        }
+                        if (subN == 2 && gear.enhance <= 6) {
+                            continue;
+                        }
+                        if (subN == 3 && gear.enhance <= 9) {
+                            continue;
+                        }
+                    }
+
+                    if (subN >= gear.substats.length) {
+                        console.error("Error predicting item substats");
+                        return;
+                    }
+
+                    const substat = gear.substats[subN];
+
+                    // statRanges
+                    const statTypeChanged = plainStats.includes(substat.type) ? "Plain" : substat.type;
+                    var minRoll;
+                    var maxRoll;
+
+                    const isFlat = false;
+                    if (substat.type == "Attack") {
+                        isFlat = true;
+                        minRoll = flats.Attack.min * modifiers.Attack.min * power;
+                        maxRoll = flats.Attack.max * modifiers.Attack.max * power;
+                    } else if (substat.type == "Defense") {
+                        isFlat = true;
+                        minRoll = flats.Health.min * modifiers.Health.min * power;
+                        maxRoll = flats.Health.max * modifiers.Health.max * power;
+                    } else if (substat.type == "Health") {
+                        isFlat = true;
+                        minRoll = flats.Defense.min * modifiers.Defense.min * power;
+                        maxRoll = flats.Defense.max * modifiers.Defense.max * power;
+                    } else {
+                        minRoll = Math.floor(statRanges[statTypeChanged].min);
+                        maxRoll = Math.ceil(statRanges[statTypeChanged].max);
+                    }
+
+                    console.warn(minRoll)
+                    console.warn(maxRoll)
+
+                    var increment = 0;
+                    if (isFlat) {
+                        increment = Math.floor((minRoll - maxRoll) / 5)
+                    } else {
+                        increment = 1
+                    }
+
+                    for (var subRoll = minRoll; subRoll <= maxRoll; subRoll += increment) {
+                        // subRoll +
+                    }
+                }
+            }
+        }
+*/

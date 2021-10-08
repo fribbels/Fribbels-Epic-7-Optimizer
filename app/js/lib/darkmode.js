@@ -46,13 +46,15 @@ module.exports = {
             $("img.tooltipImageLeft").attr("src", "./assets/tooltip_dt.png")
             $("img.tooltipImageRight").attr("src", "./assets/tooltip_dt.png")
 
-            // $("#donateBadge").attr("src", "./assets/badgedonate_dt.png")
+            $("#donateBadge").attr("src", "./assets/badgedonate_dt.png")
 
             OptimizerGrid.toggleDarkMode(true);
             ItemsGrid.toggleDarkMode(true);
             HeroesGrid.toggleDarkMode(true);
         } else {
             $("#darkThemeCss").attr("disabled", true);
+            // document.querySelector(':root').style.setProperty('--bg-color', 'white');
+
             dark = false;
 
             $("#mainStatAttackPercentFilterIcon").attr("src", "./assets/statatkpercentdark.png")
@@ -85,7 +87,7 @@ module.exports = {
             $("img.tooltipImageLeft").attr("src", "./assets/tooltip.png")
             $("img.tooltipImageRight").attr("src", "./assets/tooltip.png")
 
-            // $("#donateBadge").attr("src", "./assets/badgedonate.png")
+            $("#donateBadge").attr("src", "./assets/badgedonate.png")
 
             OptimizerGrid.toggleDarkMode(false);
             ItemsGrid.toggleDarkMode(false);

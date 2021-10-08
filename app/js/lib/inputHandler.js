@@ -45,7 +45,9 @@ global.ColorPicker = require('./colorPicker');
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
 global.OptimizerTab = require('./tabs/optimizerTab');
+global.MultiOptimizerTab = require('./tabs/multiOptimizerTab');
 global.ItemsTab = require('./tabs/itemsTab');
+global.EnhancingTab = require('./tabs/enhancingTab');
 
 // Grid
 global.HeroesGrid = require('./grids/heroesGrid');
@@ -74,6 +76,7 @@ global.Heroes = Enums.Heroes;
 global.Stat = require('../models/stat').Stat;
 global.Item = require('../models/item').Item;
 global.MainStatFixer = require('./mainStatFixer');
+global.GearRating = require('./gearRating');
 global.OptimizationRequest = require('../models/optimizationRequest').OptimizationRequest;
 global.Importer = require('./importer');
 global.ItemAugmenter = require('./itemAugmenter');
@@ -110,6 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ZarrocConverter.initialize();
         OptimizerTab.initialize();
         OptimizerGrid.initialize();
+        MultiOptimizerTab.initialize();
         ItemsTab.initialize();
         ItemsGrid.initialize();
         HeroesTab.initialize();
@@ -117,10 +121,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         await Settings.initialize();
         Saves.initialize();
-        Saves.loadAutoSave();
+        await Saves.loadAutoSave();
 
         Tooltip.initialize();
         ColorPicker.initialize();
+        EnhancingTab.initialize();
     });
     Scanner.initialize();
     Updater.checkForUpdates();

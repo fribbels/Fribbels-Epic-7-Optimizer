@@ -34,6 +34,7 @@ public class StatCalculator {
         atkSetBonus = 0.45f * base.atk;
         hpSetBonus = 0.20f * base.hp;
         defSetBonus = 0.20f * base.def;
+
         speedSetBonus = 0.25f * base.spd;
         revengeSetBonus = 0.12f * base.spd;
 

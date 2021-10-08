@@ -20,7 +20,6 @@ module.exports = {
             selectAll: true
         };
 
-
         const assetsBySet = Assets.getAssetsBySet();
         const groupSelectMultipleSelectOptions = {
             maxHeight: 500,
@@ -29,17 +28,17 @@ module.exports = {
             minimumCountSelected: 99,
             displayTitle: true,
             selectAll: false,
-            textTemplate: function (el) {
-                const val = el.html();
-                const assetKey = val + "Set";
+            // textTemplate: function (el) {
+            //     const val = el.html();
+            //     const assetKey = val + "Set";
 
-                if (Object.keys(assetsBySet).includes(assetKey)) {
-                    const asset = assetsBySet[assetKey];
-                    return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
-                }
+            //     if (Object.keys(assetsBySet).includes(assetKey)) {
+            //         const asset = assetsBySet[assetKey];
+            //         return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
+            //     }
 
-                return el.html()
-            }
+            //     return el.html()
+            // }
         };
         const excludeEquippedSelectOptions = {
             maxHeight: 450,
@@ -90,11 +89,23 @@ module.exports = {
         console.log("DONE INITIALIZING SELECTORS");
     },
 
-    refreshAllowGearFrom: () => {
+    refreshMultiHeroSelector: (id) => {
+        const heroSelectorOptions = {
+            filter: true,
+            // customFilter: Utils.customFilter,
+            filterAcceptOnEnter: true
+        };
+        $('#' + id).multipleSelect(Object.assign({}, heroSelectorOptions, {placeholder: i18next.t("Hero")}))
+    },
+
+    refreshAllowGearFrom: (index) => {
+        if (index == null || index == undefined) {
+            index = '';
+        }
         const selects = Settings.getExcludeSelects();
         // const selects = $('#optionsExcludeGearFrom').multipleSelect('getSelects');
-        $('#optionsExcludeGearFrom').multipleSelect('refresh')
-        $('#optionsExcludeGearFrom').multipleSelect('setSelects', selects)
+        $('#optionsExcludeGearFrom' + index).multipleSelect('refresh')
+        $('#optionsExcludeGearFrom' + index).multipleSelect('setSelects', selects)
         console.log("DONE REFRESH EXCLUDE", selects);
     },
 
@@ -102,27 +113,36 @@ module.exports = {
         $('#inputHeroAdd').multipleSelect('refresh')
     },
 
-    getExcludeGearFrom: () => {
-        const exclude = $('#optionsExcludeGearFrom').multipleSelect('getSelects')
+    getExcludeGearFrom: (index) => {
+        if (index == null || index == undefined) {
+            index = '';
+        }
+        const exclude = $('#optionsExcludeGearFrom' + index).multipleSelect('getSelects')
 
         console.log("Exclude", exclude);
         return exclude;
     },
 
-    getGearMainFilters: () => {
-        const inputNecklaceStat = $('#inputNecklaceStat').multipleSelect('getSelects')
-        const inputRingStat = $('#inputRingStat').multipleSelect('getSelects')
-        const inputBootsStat = $('#inputBootsStat').multipleSelect('getSelects')
+    getGearMainFilters: (index) => {
+        if (index == null || index == undefined) {
+            index = '';
+        }
+        const inputNecklaceStat = $('#inputNecklaceStat' + index).multipleSelect('getSelects')
+        const inputRingStat = $('#inputRingStat' + index).multipleSelect('getSelects')
+        const inputBootsStat = $('#inputBootsStat' + index).multipleSelect('getSelects')
 
         console.log("Main stat selectors", inputNecklaceStat, inputRingStat, inputBootsStat);
         return [inputNecklaceStat, inputRingStat, inputBootsStat];
     },
 
-    getSetFilters: () => {
-        const inputSet1 = $('#inputSet1').multipleSelect('getSelects')
-        const inputSet2 = $('#inputSet2').multipleSelect('getSelects')
-        const inputSet3 = $('#inputSet3').multipleSelect('getSelects')
-        const inputExcludeSet = $('#inputExcludeSet').multipleSelect('getSelects')
+    getSetFilters: (index) => {
+        if (index == null || index == undefined) {
+            index = '';
+        }
+        const inputSet1 = $('#inputSet1' + index).multipleSelect('getSelects')
+        const inputSet2 = $('#inputSet2' + index).multipleSelect('getSelects')
+        const inputSet3 = $('#inputSet3' + index).multipleSelect('getSelects')
+        const inputExcludeSet = $('#inputExcludeSet' + index).multipleSelect('getSelects')
 
         console.log("Set selectors", inputSet1, inputSet2, inputSet3, inputExcludeSet);
         return {
@@ -141,14 +161,15 @@ module.exports = {
         const inputExcludeSet = $('#inputExcludeSet').multipleSelect('uncheckAll')
     },
 
-    setGearMainAndSetsFromRequest: (request) => {
-        $('#inputSet1').multipleSelect('setSelects', request.inputSetsOne || [])
-        $('#inputSet2').multipleSelect('setSelects', request.inputSetsTwo || [])
-        $('#inputSet3').multipleSelect('setSelects', request.inputSetsThree || [])
-        $('#inputNecklaceStat').multipleSelect('setSelects', request.inputNecklaceStat || [])
-        $('#inputRingStat').multipleSelect('setSelects', request.inputRingStat || [])
-        $('#inputBootsStat').multipleSelect('setSelects', request.inputBootsStat || [])
-        $('#inputExcludeSet').multipleSelect('setSelects', request.inputExcludeSet || [])
+    setGearMainAndSetsFromRequest: (request, index) => {
+        console.warn("SETS", request, index);
+        $('#inputSet1' + index).multipleSelect('setSelects', request.inputSetsOne || [])
+        $('#inputSet2' + index).multipleSelect('setSelects', request.inputSetsTwo || [])
+        $('#inputSet3' + index).multipleSelect('setSelects', request.inputSetsThree || [])
+        $('#inputNecklaceStat' + index).multipleSelect('setSelects', request.inputNecklaceStat || [])
+        $('#inputRingStat' + index).multipleSelect('setSelects', request.inputRingStat || [])
+        $('#inputBootsStat' + index).multipleSelect('setSelects', request.inputBootsStat || [])
+        $('#inputExcludeSet' + index).multipleSelect('setSelects', request.inputExcludeSet || [])
     }
 }
 

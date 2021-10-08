@@ -109,6 +109,7 @@ module.exports = {
             settingDefaultPath: defaultPath,
             settingExcludeEquipped: [],
             settingDarkMode: true,
+            settingArchetypes: GearRating.getDefaultArchetypes(),
             settingDefaultUseReforgedStats: true,
             settingDefaultUseHeroPriority: false,
             settingDefaultUseSubstatMods: false,
@@ -143,6 +144,11 @@ module.exports = {
 
         console.log("LOAD SETTINGS", settingsPath);
         const text = await Files.readFileSync(Files.path(settingsPath));
+        try {
+            JSON.parse(text)
+        } catch (e) {
+            Notifier.error(`There was an error parsing the ${Files.path(settingsPath)} file. Please repair the file or delete it.`)
+        }
         const settings = JSON.parse(text);
         console.log("LOADING SETTINGS", settings);
 
@@ -211,6 +217,10 @@ module.exports = {
             module.exports.saveSettings();
         }
 
+        if (settings.settingArchetypes) {
+            GearRating.setArchetypes(settings.settingArchetypes)
+        }
+
         $('#selectDefaultFolderSubmitOutputText').text(settings.settingDefaultPath || defaultPath);
         Api.setSettings(settings);
     },
@@ -238,6 +248,7 @@ module.exports = {
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
             settingDarkMode: document.getElementById('darkSlider').checked,
             settingVersion: Updater.getCurrentVersion(),
+            settingArchetypes: GearRating.getArchetypes(),
             settingBackgroundColor: document.getElementById('backgroundColorPicker').value,
             settingTextColorPicker: document.getElementById('textColorPicker').value,
             settingAccentColorPicker: document.getElementById('accentColorPicker').value,

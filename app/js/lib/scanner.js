@@ -1,13 +1,265 @@
 var childProcess = require('child_process')
 
 global.scannerChild = null;
+global.itemTrackerChild = null;
 global.data = [];
 
 // global.api = "http://127.0.0.1:5000";
 global.api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
 
 global.command = 'python'
-var findCommandSpawn = null;
+global.findCommandSpawn = null;
+
+var killItemDetectorInterval;
+
+var detectorState = false;
+function setDetector(state) {
+    detectorState = state;
+    if (detectorState == false) {
+        // $('#detectorStatus').html("Off");
+        $('#statusText').html("Status: Off");
+        $('#statusSymbol').css("background-color", "red");
+    }
+    if (detectorState == true) {
+        // $('#detectorStatus').html("On");
+        $('#statusText').html("Status: On");
+        $('#statusSymbol').css("background-color", "green");
+    }
+}
+
+var net = require('net');
+
+var HOST = '127.0.0.1';
+var PORT = 8129;
+
+// const http = require('http');
+
+// http.createServer(async function (req, res) {
+//     res.socket.setNoDelay(true);
+
+//     const buffers = [];
+
+//     for await (const chunk of req) {
+//         buffers.push(chunk);
+//     }
+
+//     const data = Buffer.concat(buffers).toString();
+
+//     console.log(data); // 'Buy the milk'
+//     res.end();
+// }).listen(8081);
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+var app;
+var processes = [];
+
+// Create a server instance, and chain the listen function to it
+// net.createServer(function(socket) {
+//     console.log('CONNECTED: ' + socket.remoteAddress +':'+ socket.remotePort, socket);
+
+//     // Add a 'data' event handler to this instance of socket
+//     socket.on('data', function(data) {
+//         // console.log('DATA ' + socket.remoteAddress + ': ' + data);
+//         // socket.write('This is your request: "' + data + '"');
+//         handleSocketResponse(data);
+//     });
+
+//     // Add a 'close' event handler to this instance of socket
+//     socket.on('close', async function(data) {
+//         console.log('Socket connection closed... ');
+//         // await itemTrackerChild.stdin.pause();
+//         // await itemTrackerChild.kill();
+
+//         // for (p of processes) {
+//         //     await p.kill();
+//         // }
+//         setDetector(false);
+//     });
+
+//     socket.on('error', function (error) {
+//         console.warn(error);
+//     });
+
+
+//     socket.on('timeout',function(){
+//       console.log('Socket timed out !');
+//       socket.end('Timed out!');
+//       // can call socket.destroy() here too.
+//     });
+
+
+//     socket.on('end',function(data){
+//       console.log('Socket ended from other end!');
+//       console.log('End data : ' + data);
+//     });
+
+//     socket.on('drain',function(){
+//       console.log('write buffer is empty now .. u can resume the writable stream');
+//       socket.resume();
+//     });
+
+//     setDetector(true);
+// }).listen(PORT, HOST);
+
+console.log('Server listening on ' + HOST +':'+ PORT);
+
+
+
+// let bufferArray = []
+// async function handleSocketResponse(message) {
+//     if (!message) {
+//         return;
+//     }
+//     message = message.toString()
+
+//     bufferArray = [];
+//     console.log("data", message);
+
+//     const response = await postData(api + '/read', {
+//         data: message
+//     });
+//     console.log(response);
+
+//     if (!response || response.status == "ERROR" || !response.event) {
+//         return;
+//     }
+
+//     if (response.event == "lockunlock") {
+//         const result = await Api.getItemByIngameId(response.equip);
+//         console.log(result.item);
+//         const item = result.item;
+
+//         if (!item) {
+//             return;
+//         }
+
+
+//         EnhancingTab.redrawEnhanceGuide(item);
+
+//         console.warn(response.equip)
+//     }
+
+//     if (response.event == "remove") {
+//         for (var toRemove of response.removed) {
+//             const result = await Api.getItemByIngameId(toRemove);
+//             console.log(result.item);
+//             const item = result.item;
+
+//             if (!item) {
+//                 continue;
+//             }
+//             Api.deleteItems([item.id])
+//         }
+
+//         ItemsGrid.redraw()
+//     }
+
+//     if (response.event == "craft1") {
+//         console.log(response.item);
+//         const items = response.items;
+//         if (!items || items.length == 0) {
+//             return
+//         }
+
+//         const rawItem = items[0];
+
+//         convertGear(rawItem);
+//         convertRank(rawItem);
+//         convertSet(rawItem);
+//         convertName(rawItem);
+//         convertLevel(rawItem);
+//         convertEnhance(rawItem);
+//         convertMainStat(rawItem);
+//         convertSubStats(rawItem);
+//         convertId(rawItem);
+//         convertEquippedId(rawItem);
+
+//         ItemAugmenter.augment([rawItem]);
+//         await Api.addItems([rawItem])
+
+//         const result = await Api.getItemByIngameId(rawItem.ingameId);
+
+//         EnhancingTab.redrawEnhanceGuide(result.item);
+
+//         ItemsGrid.redraw()
+//     }
+
+//     if (response.event == "craft10") {
+//         console.log(response.item);
+//         const items = response.items;
+//         if (!items || items.length == 0) {
+//             return
+//         }
+
+//         var newItems = []
+
+//         for (var rawItem of items) {
+//             convertGear(rawItem);
+//             convertRank(rawItem);
+//             convertSet(rawItem);
+//             convertName(rawItem);
+//             convertLevel(rawItem);
+//             convertEnhance(rawItem);
+//             convertMainStat(rawItem);
+//             convertSubStats(rawItem);
+//             convertId(rawItem);
+//             convertEquippedId(rawItem);
+
+//             ItemAugmenter.augment([rawItem]);
+
+//             newItems.push(rawItem)
+//         }
+
+//         await Api.addItems(newItems)
+
+//         ItemsGrid.redraw()
+//     }
+
+//     if (response.event == "enhance") {
+//         const result = await Api.getItemByIngameId(response.equip);
+//         console.log(result.item);
+//         const item = result.item;
+
+//         if (!item) {
+//             return;
+//         }
+
+//         var tempItem = {
+//             op: response.data,
+//             rank: item.rank
+//         }
+
+//         convertSubStats(tempItem)
+//         convertEnhance(tempItem)
+
+//         console.error("TEMPITEM", tempItem);
+
+//         item.substats = tempItem.substats;
+//         item.enhance = tempItem.enhance;
+
+//         EnhancingTab.redrawEnhanceGuide(item);
+
+//         Api.editItems([item])
+
+//         console.warn(response.equip)
+
+//         for (var toRemove of response.removed) {
+//             const result = await Api.getItemByIngameId(toRemove);
+//             console.log(result.item);
+//             const item = result.item;
+
+//             if (!item) {
+//                 continue;
+//             }
+//             Api.deleteItems([item.id])
+//         }
+
+//         ItemsGrid.redraw()
+//     }
+// }
+
 function findcommand() {
     if (Files.isMac()) {
         console.log("Detecting python on mac, using python");
@@ -91,6 +343,87 @@ async function finishedReading(data, scanType) {
 
 global.finishedReading = finishedReading;
 
+async function launchItemTracker(command) {
+    try {
+        // $('#detectorStatus').html("Loading");
+        $('#statusText').html("Status: Loading");
+        $('#statusSymbol').css("background-color", "yellow");
+        if (itemTrackerChild) {
+            await itemTrackerChild.stdin.pause();
+            await itemTrackerChild.kill();
+        }
+
+        for (p of processes) {
+            if (p) {
+                processes = processes.filter(x => x != p)
+                await p.kill();
+            }
+        }
+        processes = []
+
+        try {
+            itemTrackerChild = await childProcess.spawn(command, [Files.path(Files.getDataPath() + '/py/itemscanner.py')], {
+            })
+            // itemTrackerChild = await childProcess.spawn(command, ['--version'], {
+            // })
+            processes.push(itemTrackerChild);
+            setDetector(true);
+            Notifier.info("Item detector has launched and will deactivate after an hour.")
+
+            console.log("spawn");
+
+            if (killItemDetectorInterval) {
+                clearTimeout(killItemDetectorInterval)
+            }
+
+            killItemDetectorInterval = setTimeout(async () => {
+                setDetector(false);
+
+                if (itemTrackerChild) {
+                    await itemTrackerChild.stdin.pause();
+                    await itemTrackerChild.kill();
+                }
+
+                Notifier.warn("Item detector has been deactivated after an hour. Please restart the detector if needed.")
+            }, 60 * 60 * 1000)
+        } catch (e) {
+            console.error(e)
+            Notifier.error(i18next.t("Unable to start python script ") + e)
+        }
+
+        // itemTrackerChild.on('close', (code) => {
+        //     console.log(`Python child process exited with code ${code}`);
+        // });
+
+        // itemTrackerChild.stderr.on('data', (data) => {
+        //     const str = data.toString()
+
+        //     if (str.includes("Failed to execute")
+        //     || (str.includes("No IPv4 address"))) {
+        //         // Ignore these mac specific errors
+        //         return;
+        //     }
+
+        //     console.error(str);
+        // })
+
+
+        // // let bufferArray = []
+        itemTrackerChild.stdout.on('data', async (message) => {
+            console.warn("scanner", message);
+
+            message = message.toString()
+
+            console.warn("scanner", message);
+
+        });
+        console.log("Started tracking")
+    } catch (e) {
+        console.error(e);
+        Notifier.error(e);
+    }
+}
+
 function launchScanner(command, scanType) {
     try {
         data = [];
@@ -155,7 +488,28 @@ function launchScanner(command, scanType) {
 
 module.exports = {
     initialize: () => {
+        const server = require('server');
+        const { get, post } = server.router;
+        const { render, redirect } = server.reply;
+
+        // server(8129, ctx => {
+        //     console.log("data", ctx.data)
+        //     handleSocketResponse(ctx.data.data);
+        //     return 'Hello world'
+        // });
         findcommand();
+
+        // document.getElementById('startCompanion').addEventListener("click", () => {
+        //     module.exports.startItemTracker();
+        // });
+        // document.getElementById('stopCompanion').addEventListener("click", () => {
+        //     console.log("Stopping companion")
+        //     // itemTrackerChild.stdin.write('END\n');
+        //     itemTrackerChild.stdin.pause();
+        //     itemTrackerChild.kill();
+
+        //     setDetector(false);
+        // });
     },
 
     start: (scanType) => {
@@ -171,8 +525,14 @@ module.exports = {
         console.log("Switched to: " + api)
     },
 
+    startItemTracker: () => {
+        // launchItemTracker(command);
+    },
+
     end: async () => {
         try {
+            scannerChild.stdin.write('END\n');
+
             if (!scannerChild) {
                 console.error("No scan was started");
                 Notifier.error("No scan was started");
@@ -205,7 +565,7 @@ function convertUnits(rawUnits, scanType) {
 
     var filterType = "optimizer"
     if (scanType == "heroes") {
-        filterType = $('#importHeroesLimitHeroes').val();
+        filterType = document.querySelector('input[name="heroImporterHeroRadio"]:checked').value;
     }
 
     var filteredUnits = rawUnits.filter(x => !!x.name);
@@ -236,9 +596,9 @@ function convertItems(rawItems, scanType) {
 function filterItems(rawItems, scanType) {
     var enhanceLimit = 6;
     if (scanType == "heroes") {
-        enhanceLimit = parseInt($('#importHeroesLimitEnhance').val());
+        enhanceLimit = parseInt(document.querySelector('input[name="heroImporterEnhanceRadio"]:checked').value);
     } else if (scanType == "items") {
-        enhanceLimit = parseInt($('#importLimitEnhance').val());
+        enhanceLimit = parseInt(document.querySelector('input[name="gearImporterEnhanceRadio"]:checked').value);
     }
 
     return rawItems.filter(x => x.enhance >= enhanceLimit);
