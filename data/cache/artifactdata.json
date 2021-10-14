@@ -2057,6 +2057,20 @@
       "health": 15
     }
   },
+  "Sword of Winter Shadow": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0036.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0036_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0036_l.jpg"
+    },
+    "name": "Sword of Winter Shadow",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Tagehel's Ancient Book": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art5_19.png",
