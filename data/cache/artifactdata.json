@@ -195,6 +195,20 @@
       "health": 27
     }
   },
+  "Anti-Magic Mask": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0036.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0036_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0036_l.jpg"
+    },
+    "name": "Anti-Magic Mask",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Aqua Rose": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art3_14.png",
@@ -949,6 +963,20 @@
     "stats": {
       "attack": 2,
       "health": 41
+    }
+  },
+  "Flawless Garments": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+    },
+    "name": "Flawless Garments",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
     }
   },
   "Flower Shower": {
@@ -2237,6 +2265,20 @@
     "stats": {
       "attack": 9,
       "health": 76
+    }
+  },
+  "Upgraded Dragon Knuckles": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art5_5_l.jpg"
+    },
+    "name": "Upgraded Dragon Knuckles",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
     }
   },
   "Venus Orb": {

@@ -20625,6 +20625,98 @@
       }
     }
   },
+  "Milim": {
+    "_id": "milim",
+    "name": "Milim",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "mage",
+    "zodiac": "crab",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.048,
+        "A": 0.072,
+        "S": 0.096,
+        "SS": 0.12,
+        "SSS": 0.144
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/milimPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/milimPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 12147,
+        "atk": 822,
+        "hp": 3559,
+        "spd": 110,
+        "def": 525,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13929,
+        "atk": 1040,
+        "hp": 3899,
+        "spd": 110,
+        "def": 525,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 15159,
+        "atk": 1025,
+        "hp": 4475,
+        "spd": 110,
+        "def": 652,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17685,
+        "atk": 1359,
+        "hp": 4895,
+        "spd": 110,
+        "def": 652,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Mirsa": {
     "_id": "mirsa",
     "name": "Mirsa",
@@ -24358,6 +24450,98 @@
       }
     }
   },
+  "Rimuru": {
+    "_id": "rimuru",
+    "name": "Rimuru",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "warrior",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/rimuruPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/rimuruPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11889,
+        "atk": 713,
+        "hp": 4267,
+        "spd": 109,
+        "def": 477,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13440,
+        "atk": 897,
+        "hp": 4735,
+        "spd": 109,
+        "def": 505,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14842,
+        "atk": 889,
+        "hp": 5364,
+        "spd": 109,
+        "def": 592,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17097,
+        "atk": 1119,
+        "hp": 6266,
+        "spd": 109,
+        "def": 627,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Rin": {
     "_id": "rin",
     "name": "Rin",
@@ -26070,6 +26254,98 @@
       }
     }
   },
+  "Shuna": {
+    "_id": "shuna",
+    "name": "Shuna",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "manauser",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shunaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shunaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10356,
+        "atk": 400,
+        "hp": 3527,
+        "spd": 99,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11883,
+        "atk": 520,
+        "hp": 3972,
+        "spd": 103,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12923,
+        "atk": 499,
+        "hp": 4435,
+        "spd": 99,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15106,
+        "atk": 649,
+        "hp": 5254,
+        "spd": 103,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
+      }
+    }
+  },
   "Sigret": {
     "_id": "sigret",
     "name": "Sigret",
@@ -26945,6 +27221,98 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.3,
+        "efr": 0
+      }
+    }
+  },
+  "Spirit Eye Celine": {
+    "_id": "spirit-eye-celine",
+    "name": "Spirit Eye Celine",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "assassin",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/spiritEyeCelinePortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/spiritEyeCelinePanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11478,
+        "atk": 793,
+        "hp": 4267,
+        "spd": 113,
+        "def": 381,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16901,
+        "atk": 1158,
+        "hp": 5016,
+        "spd": 122,
+        "def": 532,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14337,
+        "atk": 989,
+        "hp": 5364,
+        "spd": 113,
+        "def": 473,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16901,
+        "atk": 1158,
+        "hp": 5016,
+        "spd": 122,
+        "def": 532,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
         "efr": 0
       }
     }
