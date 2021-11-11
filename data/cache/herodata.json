@@ -111,6 +111,102 @@
       }
     }
   },
+  "Adin": {
+    "_id": "adin",
+    "name": "adin",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "assassin",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/adinPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/adinPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 9881,
+        "atk": 633,
+        "hp": 3302,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11477,
+        "atk": 828,
+        "hp": 3642,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12333,
+        "atk": 789,
+        "hp": 4152,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14563,
+        "atk": 1081,
+        "hp": 4572,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Adlay": {
     "_id": "adlay",
     "name": "Adlay",
@@ -26021,6 +26117,124 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0
+      }
+    }
+  },
+  "Shadow Knight Pyllis": {
+    "_id": "shadow-knight-pyllis",
+    "name": "Shadow Knight Pyllis",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "dark",
+    "role": "knight",
+    "zodiac": "crab",
+    "self_devotion": {
+      "type": "def",
+      "grades": {
+        "D": 18,
+        "C": 27,
+        "B": 36,
+        "A": 45,
+        "S": 54,
+        "SS": 63,
+        "SSS": 72
+      }
+    },
+    "devotion": {
+      "type": "def",
+      "grades": {
+        "D": 12,
+        "C": 18,
+        "B": 24,
+        "A": 30,
+        "S": 36,
+        "SS": 42,
+        "SSS": 48
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shadowKnightPyllisPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shadowKnightPyllisPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10588,
+        "atk": 429,
+        "hp": 4138,
+        "spd": 91,
+        "def": 520,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12139,
+        "atk": 549,
+        "hp": 5098,
+        "spd": 91,
+        "def": 535,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 685,
+        "overrideHp": 6403,
+        "overrideDef": 703,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 6,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13214,
+        "atk": 535,
+        "hp": 5203,
+        "spd": 91,
+        "def": 645,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15518,
+        "atk": 685,
+        "hp": 6403,
+        "spd": 91,
+        "def": 703,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 685,
+        "overrideHp": 6403,
+        "overrideDef": 703,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 6,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
       }
     }
   },
