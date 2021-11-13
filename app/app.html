@@ -233,12 +233,19 @@ window.jQuery = $;
               </div>
               <div class="horizontalSpace"></div>
 
+              <select id="optionsEnhanceLimit" class="optionsExcludeGearFrom">
+                <option value="0" data-t>+0 and higher</option>
+                <option value="3" data-t>+3 and higher</option>
+                <option value="6" data-t>+6 and higher</option>
+                <option value="9" data-t>+9 and higher</option>
+                <option value="12" data-t>+12 and higher</option>
+                <option value="15" data-t>+15 only</option>
+              </select><br>
+              <div class="horizontalSpace" ></div>
 
               <select multiple="multiple" id="optionsExcludeGearFrom" class="optionsExcludeGearFrom">
               </select><br>
-
             </div>
-
 
             <div class="vertical"></div>
 
@@ -407,7 +414,7 @@ window.jQuery = $;
 
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Top %</div>
-                <input class="sliderInput" id="filterSliderInput" type="number" value="100">
+                <input class="sliderInput" id="filterSliderInput" type="number" value="100" readonly>
                 <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="10" max="100" value="100" step="1"></div><!--
                 <div class="sliderContainer"><input class="slider" id="filterSlider" type="range" min="0" max="100" value="100" step="5"></div> -->
               </div>
@@ -646,6 +653,14 @@ window.jQuery = $;
     </div>
 
     <div id="multi-optimizer-section" class="tab-panel">
+        <div class="multiOptimizerControlPanel">
+          <b><input type="submit" value="Guide" class="gearPreviewButton" id="multiGuide" data-t ></b><br>
+          <input type="submit" value="Start all" class="gearPreviewButton" id="multiStartAll" data-t ><br>
+          <input type="submit" value="Cancel all" class="gearPreviewButton" id="multiCancelAll" data-t ><br>
+          <input type="submit" value="Remove all" class="gearPreviewButton" id="multiRemoveAll" data-t ><br>
+          <input type="submit" value="Deselect all" class="gearPreviewButton" id="multiDeselectAll" data-t ><br>
+        </div>
+        <div class="horizontalLine inactiveColorBorder"></div>
     </div>
 
 
@@ -1457,7 +1472,9 @@ Status: Off - Start the detector and interact with an ingame item (for example, 
 
       <input type="submit" class="importerButton" value="Stop item detector" id="stopCompanion" data-t> -->
 
-      Click on the magnifying glass on an item to analyze it.
+      <div class="enhanceGuide" data-t>
+        Click on the magnifying glass on an item to analyze it.
+      </div>
 
       <div class="enhanceContainer">
         <div class="gearTabPreview" id="enhanceTabPreview">
@@ -1526,7 +1543,7 @@ Status: Off - Start the detector and interact with an ingame item (for example, 
             <p data-t>Open Epic 7, and load into the lobby</p>
           </li>
           <li>
-            <p data-t>Optionally, if you want to load your storage items</p>
+            <p data-t>Optionally, if you want to load your storage items, open the storage menu after loading in the lobby</p>
           </li>
           <li>
             <p data-t>Click the <b>Stop scanning</b> button below</p>
@@ -1621,7 +1638,7 @@ Status: Off - Start the detector and interact with an ingame item (for example, 
             <p data-t>Open Epic 7, and load into the lobby</p>
           </li>
           <li>
-            <p data-t>Optionally, if you want to load your storage items</p>
+            <p data-t>Optionally, if you want to load your storage items, open the storage menu after loading in the lobby</p>
           </li>
           <li>
             <p data-t>Click the <b>Stop scanning</b> button below</p>
@@ -1844,6 +1861,23 @@ Status: Off - Start the detector and interact with an ingame item (for example, 
         </div>
 
         <div class="toggleRow">
+          <div class="switch">
+            <input id="settingPenSet" type="checkbox" class="switch-input" />
+            <label for="settingPenSet" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Use penetration set bonus for damage optimization
+          </div>
+        </div>
+
+        <div class="toggleRow">
+          <input type="text" id="settingPenDefense" class="settingsNumber">
+          <div class="switchText" data-t>
+            Target's defense for penetration set (Recommended: 1,500, Min 0, Max 10k)
+          </div>
+        </div>
+
+        <div class="toggleRow">
           <input type="text" id="settingMaxResults" class="settingsNumber">
           <div class="switchText" data-t>
             Maximum optimization results (Recommended: 5,000,000, Min 10k, Max 100m)
@@ -1858,7 +1892,7 @@ Status: Off - Start the detector and interact with an ingame item (for example, 
 
        </br>
        <div>
-            <h2>Default settings for newly added heroes</h2>
+            <h2 data-t>Default settings for newly added heroes</h2>
        </div>
 
         <div class="horizontalSpace"></div>
@@ -1922,7 +1956,7 @@ Status: Off - Start the detector and interact with an ingame item (for example, 
 
        </br>
        <div>
-            <h2>Languages</h2>
+            <h2 data-t>Languages</h2>
        </div>
 
        <div class="toggleRow">

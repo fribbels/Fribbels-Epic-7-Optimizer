@@ -64,7 +64,7 @@ module.exports = {
 
             scoredArchetypes.push({
                 score: score / scale * (match || (item.gear == "Weapon" || item.gear == "Helmet" || item.gear == "Armor") ? 1 : 0.25),
-                name: archetype.name
+                name: i18next.t(archetype.name)
             })
         }
 

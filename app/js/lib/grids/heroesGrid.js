@@ -224,6 +224,12 @@ function buildGrid(localeText) {
             width: 47,
             sortable: true,
             sortingOrder: ['desc', 'asc', null],
+            cellStyle: {
+                'height': '100%',
+                'display': 'flex ',
+                'justify-content': 'center',
+                'align-items': 'center ',
+            },
         },
 
         columnDefs: [
@@ -276,6 +282,9 @@ function buildGrid(localeText) {
         onFilterChanged: onFilterChanged,
         suppressMoveWhenRowDragging: true,
         onRowDoubleClicked: onRowDoubleClicked,
+        suppressCellSelection: true,
+        enableRangeSelection: false,
+
         animateRows: true,
         immutableData: true,
         suppressDragLeaveHidesColumns: true,
@@ -330,6 +339,8 @@ function buildGrid(localeText) {
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
         suppressDragLeaveHidesColumns: true,
+        suppressCellSelection: true,
+        enableRangeSelection: false,
         // animateRows: true,
         // immutableData: true,
         // getRowNodeId: (data) => {

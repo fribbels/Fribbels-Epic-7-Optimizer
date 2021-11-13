@@ -2,24 +2,24 @@
 # yarn lockfile v1
 
 
-"@ag-grid-community/client-side-row-model@25.1.0":
-  "integrity" "sha512-/SLSXYO2Nn8SkoI65/0g7TWNZpP6OaRjvT8ncoTOXgT1g+mY1CeWROUtKccTjMtwOiam1Dn7oAImq0utDoEFjw=="
-  "resolved" "https://registry.npmjs.org/@ag-grid-community/client-side-row-model/-/client-side-row-model-25.1.0.tgz"
-  "version" "25.1.0"
+"@ag-grid-community/client-side-row-model@26.1.0":
+  "integrity" "sha512-TiucVpkRvZmzuS59JP3Lg1059Frt6dCPKwV1ZUT8LdShjHOdqIaDrquAuQPdTRXMenJdE9/ghOb4Odb4XJkFbw=="
+  "resolved" "https://registry.npmjs.org/@ag-grid-community/client-side-row-model/-/client-side-row-model-26.1.0.tgz"
+  "version" "26.1.0"
   dependencies:
-    "@ag-grid-community/core" "~25.1.0"
+    "@ag-grid-community/core" "~26.1.0"
 
-"@ag-grid-community/core@~25.1.0", "@ag-grid-community/core@25.1.0":
-  "integrity" "sha512-svbWNlNVtBHJZWs+JgaCsQctW5W/tuOiuO1bbm4vYQA2M6tXAgg4BaDpuHScG8w3ZlOhlz5jkrh8l96ODbAuQA=="
-  "resolved" "https://registry.npmjs.org/@ag-grid-community/core/-/core-25.1.0.tgz"
-  "version" "25.1.0"
+"@ag-grid-community/core@~26.1.0", "@ag-grid-community/core@26.1.0":
+  "integrity" "sha512-oFqPkVnmYYUcPmjv+6ZdrbMcAoiBg13UcyokYCxqHK4OiT+QuV51eTVgZKt3YpcVoQV9Pa3KdSSjJu0IvbALFA=="
+  "resolved" "https://registry.npmjs.org/@ag-grid-community/core/-/core-26.1.0.tgz"
+  "version" "26.1.0"
 
-"@ag-grid-community/infinite-row-model@25.1.0":
-  "integrity" "sha512-CZKmS6cqeAW11TyNaU+Kz4tweJLkXTftqc7qNpSD0eyTN1D8KX0jsd9d9cM/VRkrWZwi9RhbsioTWH/v9cIWrA=="
-  "resolved" "https://registry.npmjs.org/@ag-grid-community/infinite-row-model/-/infinite-row-model-25.1.0.tgz"
-  "version" "25.1.0"
+"@ag-grid-community/infinite-row-model@26.1.0":
+  "integrity" "sha512-7Up8kVpY27OjI8AIu9gtmfWAC//GYMH7sacBaHz58HJY83V7phnwhpEEh6z/bsvQ2YFtpfHafjJWg6dwINtwCw=="
+  "resolved" "https://registry.npmjs.org/@ag-grid-community/infinite-row-model/-/infinite-row-model-26.1.0.tgz"
+  "version" "26.1.0"
   dependencies:
-    "@ag-grid-community/core" "~25.1.0"
+    "@ag-grid-community/core" "~26.1.0"
 
 "@babel/helper-validator-identifier@^7.14.9":
   "integrity" "sha512-pQYxPY0UP6IHISRitNe8bsijHex4TWZXi2HwKVsjPiltzlhse2znVcm9Ace510VT1kxIHjGJCZZQBX2gJDbo0g=="
@@ -399,10 +399,10 @@
   "resolved" "https://registry.npmjs.org/after/-/after-0.8.2.tgz"
   "version" "0.8.2"
 
-"ag-grid-community@^25.1.0":
-  "integrity" "sha512-sKJp6SZG8J50OlOeECtrLFSp/iwdx1mcG0+BmIkHsXmWoyXv5ZaTJyVg1/hMk6s3JVTm1ipg6LepbTaigWEL2A=="
-  "resolved" "https://registry.npmjs.org/ag-grid-community/-/ag-grid-community-25.1.0.tgz"
-  "version" "25.1.0"
+"ag-grid-community@26.1.0":
+  "integrity" "sha512-vGnbiaxN6TxsDGcC2uIOrgjx+zwXlBK99aYiWcuiyzSPvNpz1fG29nSNx/fMeVRzc3FOru8h8vvk41vszh5AMg=="
+  "resolved" "https://registry.npmjs.org/ag-grid-community/-/ag-grid-community-26.1.0.tgz"
+  "version" "26.1.0"
 
 "animate.css@^4.1.1":
   "integrity" "sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ=="

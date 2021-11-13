@@ -103,7 +103,7 @@ var processes = [];
 //     setDetector(true);
 // }).listen(PORT, HOST);
 
-console.log('Server listening on ' + HOST +':'+ PORT);
+// console.log('Server listening on ' + HOST +':'+ PORT);
 
 
 

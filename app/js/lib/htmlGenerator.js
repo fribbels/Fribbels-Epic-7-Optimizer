@@ -81,11 +81,51 @@ function statToText(stat, baseStats, item, showMaxSpeed) {
     }
 }
 
+function rateBaseScore(stats, baseStats) {
+    const atkScore = (stats.AttackPercent + (stats.Attack / baseStats.atk * 100));
+    const hpScore = (stats.HealthPercent  + (stats.Health / baseStats.hp * 100));
+    const defScore = (stats.DefensePercent + (stats.Defense / baseStats.def * 100));
+    const spdScore = (stats.Speed) * 2;
+    const crScore = (stats.CriticalHitChancePercent) * 8/5;
+    const cdScore = (stats.CriticalHitDamagePercent) * 8/7;
+    const effScore = (stats.EffectivenessPercent);
+    const resScore = (stats.EffectResistancePercent);
+    const score = atkScore + hpScore + defScore + spdScore + crScore + cdScore + effScore + resScore;
+
+    return score;
+}
+
+function hasFlat(item) {
+    for (var substat of item.substats) {
+        if (substat.type == "Defense" || substat.type == "Attack" || substat.type == "Health") {
+            return true;
+        }
+    }
+    return false;
+}
+
 function wssToText(item) {
-    if (Reforge.isReforgeable(item)) {
-        return item.wss + " ➤ " + item.reforgedWss;
+    // console.warn("WSS TO TEXT", item)
+    if (item.equippedByName && hasFlat(item)) {
+        const baseStats = HeroData.getBaseStatsByName(item.equippedByName).lv60SixStarFullyAwakened;
+        baseStats.atk = baseStats.bonusStats.overrideAtk || baseStats.atk;
+        baseStats.hp = baseStats.bonusStats.overrideHp || baseStats.hp;
+        baseStats.def = baseStats.bonusStats.overrideDef || baseStats.def;
+
+        const score = Math.round(rateBaseScore(item.augmentedStats, baseStats))
+        const reforgedScore = Math.round(rateBaseScore(item.reforgedStats, baseStats))
+
+        if (Reforge.isReforgeable(item)) {
+            return `${item.wss} (${score}) ➤ ${item.reforgedWss} (${reforgedScore})`;
+        } else {
+            return `${item.wss} (${score})`
+        }
     } else {
-        return item.wss
+        if (Reforge.isReforgeable(item)) {
+            return item.wss + " ➤ " + item.reforgedWss;
+        } else {
+            return item.wss
+        }
     }
 }
 
@@ -437,10 +477,10 @@ function editItemDisplay(item, checkboxPrefix) {
     // }
 
     if (Reforge.isReforgeableNow(item)) {
-        return `<img src="${Assets.getEdit()}"    class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false)'></img>
-                <img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", true)'></img>`
+        return `<img src="${Assets.getEdit()}"    class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false, "${checkboxPrefix}")'></img>
+                <img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", true, "${checkboxPrefix}")'></img>`
     }
-    return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
+    return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false, "${checkboxPrefix}")'></img>`
 }
 
 function styleEnhance(enhance) {
@@ -455,9 +495,9 @@ function editLockDisplay(item, checkboxPrefix) {
     // }
 
     if (!item.locked) {
-        return `<img src="${Assets.getLock()}" style="opacity:0.12" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
+        return `<img src="${Assets.getLock()}" style="opacity:0.12" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}", "${checkboxPrefix}")'}></img>`
     }
-    return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
+    return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}", "${checkboxPrefix}")'}></img>`
 }
 
 function styleLevel(item) {

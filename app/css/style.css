@@ -736,15 +736,15 @@ input[type=number]::-webkit-outer-spin-button {
 
 /*https://stackoverflow.com/questions/50862009/how-to-disable-selection-of-cells-in-ag-grid*/
 
-.ag-cell-focus,.ag-cell-no-focus{
+/*.ag-cell-focus,.ag-cell-no-focus{
   border:none !important;
-}
+}*/
 /* This CSS is to not apply the border for the column having 'no-border' class */
-.no-border.ag-cell:focus{
+/*.no-border.ag-cell:focus{
   border:none !important;
   outline: none;
 }
-
+*/
 .ag-floating-top {
   border-bottom: solid #828282 2px !important
 }
@@ -1790,20 +1790,24 @@ input:checked + .darkSlider:before {
 
 .multiInfoPanel {
   padding: 5px 8px 5px 8px;
-  width: 150px;
+  width: 142px;
   flex-grow: 0;
   flex-shrink: 0;
   line-height: 14px;
+  margin-right: 5px;
+  border-radius: 7px;
 }
 
 .multiTopRow {
   display: flex;
   flex-direction: row;
-  height: 300px;
+  height: 310px;
 }
 
 .multiGrid {
-  width: 1200px;
+  min-width: 1200px;
+  flex-grow: 1;
+  margin-right: 15px;
 }
 
 .editFiltersDialog {
@@ -1811,4 +1815,41 @@ input:checked + .darkSlider:before {
   flex-direction: row;
   text-align: left;
   font-size: 14px;
+}
+/*
+.ag-theme-balham .ag-ltr .ag-cell-range-single-cell, .ag-theme-balham .ag-ltr .ag-cell-range-single-cell.ag-cell-range-handle, .ag-theme-balham .ag-ltr .ag-context-menu-open .ag-cell-focus:not(.ag-cell-range-selected), .ag-theme-balham .ag-ltr .ag-has-focus .ag-cell-focus:not(.ag-cell-range-selected), .ag-theme-balham .ag-ltr .ag-has-focus .ag-full-width-row.ag-row-focus .ag-cell-wrapper.ag-row-group, .ag-theme-balham .ag-rtl .ag-cell-range-single-cell, .ag-theme-balham .ag-rtl .ag-cell-range-single-cell.ag-cell-range-handle, .ag-theme-balham .ag-rtl .ag-context-menu-open .ag-cell-focus:not(.ag-cell-range-selected), .ag-theme-balham .ag-rtl .ag-has-focus .ag-cell-focus:not(.ag-cell-range-selected), .ag-theme-balham .ag-rtl .ag-has-focus .ag-full-width-row.ag-row-focus .ag-cell-wrapper.ag-row-group {
+  border: 1px solid transparent;
+}
+
+.ag-theme-balham .ag-cell, .ag-theme-balham .ag-full-width-row .ag-cell-wrapper.ag-row-group {
+  border: none !important;
+}*/
+
+.injectedSummaryRow {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
+.injectedSummaryComponent {
+  width: 200px;
+}
+.multiSpace {
+  height: 1px;
+  display: block;
+}
+.multiOptimizerControlPanel {
+  display: flex;
+  flex-direction: row;
+  margin-left: 8px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.inactiveColorBorder {
+  border-color: var(--inactive-color);
+}
+
+.enhanceGuide {
+  margin-left: 10px;
+  margin-top: 10px;
 }

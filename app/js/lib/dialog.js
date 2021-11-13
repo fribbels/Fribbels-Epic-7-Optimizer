@@ -203,6 +203,17 @@ module.exports = {
         })
     },
 
+    multiOptimizerGuide: (html) => {
+        Swal.fire({
+            icon: 'info',
+            html: html,
+            width: 900,
+            confirmButtonText: i18next.t("OK"),
+            allowOutsideClick: outsideClickDisable
+            // cancelButtonText: i18next.t("Cancel")
+        })
+    },
+
     changeArtifact: (level) => {
         const name = $('#editArtifact').val();
 
@@ -286,7 +297,7 @@ module.exports = {
                             <div class="editGearFormVertical"></div>
 
                             <div class="editGearFormHalf">
-                                <p style="color: var(--font-color)" data-t>${i18next.t("Add any other stats")}</p>
+                                <p style="color: var(--font-color)" data-t>${i18next.t("Add any other non item bonus stats")}</p>
 
                                 <div class="editGearFormRow">
                                     <div class="editGearStatLabel" data-t>${i18next.t("Attack")}</div>
@@ -440,49 +451,56 @@ module.exports = {
                         <div class="editFiltersDialog">
                             <div id="options-panel" class="constraints-panel-col-small">
                               <div class="panelLabel">
-                                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="optionsTooltip"></img>
-                                <div class="panelLabelText" id="optionsLabel" data-content=" (clear)" data-t>Options</div>
+                                <div class="panelLabelText" id="optionsLabel" data-t>${i18next.t("Options")}</div>
                               </div>
                               <div>
                                 <input type="checkbox" id="inputPredictReforges${index}" class="optimizer-checkbox" checked>
-                                <label for="inputPredictReforges" data-t>Use reforged stats</label>
+                                <label for="inputPredictReforges${index}" data-t>${i18next.t("Use reforged stats")}</label>
                               </div>
 
                               <div>
                                 <input type="checkbox" id="inputOrderedHeroPriority${index}" class="optimizer-checkbox">
-                                <label for="inputOrderedHeroPriority" data-t>Use hero priority</label>
+                                <label for="inputOrderedHeroPriority${index}" data-t>${i18next.t("Use hero priority")}</label>
                               </div>
 
                               <div>
                                 <input type="checkbox" id="inputSubstatMods${index}" class="optimizer-checkbox">
-                                <label for="inputSubstatMods" data-t>Use substat mods</label>
+                                <label for="inputSubstatMods${index}" data-t>${i18next.t("Use substat mods")}</label>
                               </div>
 
                               <div style="display:none">
                                 <input type="checkbox" id="inputOnlyMaxedGear${index}" class="optimizer-checkbox">
-                                <label for="inputOnlyMaxedGear" data-t>Only maxed gear</label>
+                                <label for="inputOnlyMaxedGear${index}" data-t>${i18next.t("Only maxed gear")}</label>
                               </div>
 
                               <div>
                                 <input type="checkbox" id="inputAllowLockedItems${index}" class="optimizer-checkbox">
-                                <label for="inputAllowLockedItems" data-t>Locked items</label>
+                                <label for="inputAllowLockedItems${index}" data-t>${i18next.t("Locked items")}</label>
                               </div>
 
                               <div>
                                 <input type="checkbox" id="inputAllowEquippedItems${index}" class="optimizer-checkbox">
-                                <label for="inputAllowEquippedItems" data-t>Equipped items</label>
+                                <label for="inputAllowEquippedItems${index}" data-t>${i18next.t("Equipped items")}</label>
                               </div>
 
                               <div>
                                 <input type="checkbox" id="inputKeepCurrentItems${index}" class="optimizer-checkbox">
-                                <label for="inputKeepCurrentItems" data-t>Keep current</label>
+                                <label for="inputKeepCurrentItems${index}" data-t>${i18next.t("Keep current")}</label>
                               </div>
                               <div class="horizontalSpace"></div>
 
+                              <select id="optionsEnhanceLimit${index}" class="optionsExcludeGearFrom">
+                                <option value="0" data-t>${i18next.t("+0 and higher")}</option>
+                                <option value="3" data-t>${i18next.t("+3 and higher")}</option>
+                                <option value="6" data-t>${i18next.t("+6 and higher")}</option>
+                                <option value="9" data-t>${i18next.t("+9 and higher")}</option>
+                                <option value="12" data-t>${i18next.t("+12 and higher")}</option>
+                                <option value="15" data-t>${i18next.t("+15 only")}</option>
+                              </select><br>
+                              <div class="horizontalSpace" ></div>
 
                               <select multiple="multiple" id="optionsExcludeGearFrom${index}" class="optionsExcludeGearFrom">
                               </select><br>
-
                             </div>
 
 
@@ -490,97 +508,95 @@ module.exports = {
 
                             <div id="placeholder-panel" class="constraints-panel-col-small">
                               <div class="panelLabel">
-                                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterStatsTooltip"></img>
-                                <div class="panelLabelText" id="statsLabel" data-content=" (clear)" data-t>Stat filters</div>
+                                <div class="panelLabelText" id="statsLabel${index}" data-t>${i18next.t("Stat filters")}</div>
                               </div>
                               <input type="number" id="inputMinAtkLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>Atk</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Atk")}</div>
                               <input type="number" id="inputMaxAtkLimit${index}" class="optimizer-number-input stat-number-input"><br>
 
                               <input type="number" id="inputMinDefLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>Def</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Def")}</div>
                               <input type="number" id="inputMaxDefLimit${index}" class="optimizer-number-input stat-number-input"><br>
 
                               <input type="number" id="inputMinHpLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>Hp</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Hp")}</div>
                               <input type="number" id="inputMaxHpLimit${index}" class="optimizer-number-input stat-number-input"><br>
 
                               <input type="number" id="inputMinSpdLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>Spd</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Spd")}</div>
                               <input type="number" id="inputMaxSpdLimit${index}" class="optimizer-number-input stat-number-input"><br>
 
                               <input type="number" id="inputMinCrLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>CRate</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("CRate")}</div>
                               <input type="number" id="inputMaxCrLimit${index}" class="optimizer-number-input stat-number-input"><br>
 
                               <input type="number" id="inputMinCdLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>CDmg</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("CDmg")}</div>
                               <input type="number" id="inputMaxCdLimit${index}" class="optimizer-number-input stat-number-input"><br>
 
                               <input type="number" id="inputMinEffLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>Eff</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Eff")}</div>
                               <input type="number" id="inputMaxEffLimit${index}" class="optimizer-number-input stat-number-input"><br>
 
                               <input type="number" id="inputMinResLimit${index}" class="optimizer-number-input stat-number-input">
-                              <div class="inputStatLabel" data-t>Res</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Res")}</div>
                               <input type="number" id="inputMaxResLimit${index}" class="optimizer-number-input stat-number-input"><br>
                             </div>
 
                             <div id="placeholder-panel" class="constraints-panel-col-small">
                               <div class="panelLabel">
-                                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterRatingsTooltip"></img>
-                                <div class="panelLabelText" id="ratingsLabel" data-content=" (clear)" data-t>Rating filters</div>
+                                <div class="panelLabelText" id="ratingsLabel${index}" data-t>${i18next.t("Rating filters")}</div>
                               </div>
                               <input type="number" id="inputMinCpLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Cp</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Cp")}</div>
                               <input type="number" id="inputMaxCpLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinHppsLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>HpS</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("HpS")}</div>
                               <input type="number" id="inputMaxHppsLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinEhpLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Ehp</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Ehp")}</div>
                               <input type="number" id="inputMaxEhpLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinEhppsLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>EhpS</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("EhpS")}</div>
                               <input type="number" id="inputMaxEhppsLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinDmgLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Dmg</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Dmg")}</div>
                               <input type="number" id="inputMaxDmgLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinDmgpsLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>DmgS</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("DmgS")}</div>
                               <input type="number" id="inputMaxDmgpsLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinMcdmgLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Mcd</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Mcd")}</div>
                               <input type="number" id="inputMaxMcdmgLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinMcdmgpsLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>McdS</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("McdS")}</div>
                               <input type="number" id="inputMaxMcdmgpsLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinDmgHLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>DmgH</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("DmgH")}</div>
                               <input type="number" id="inputMaxDmgHLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinScoreLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Score</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Score")}</div>
                               <input type="number" id="inputMaxScoreLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinPriorityLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Prio</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Prio")}</div>
                               <input type="number" id="inputMaxPriorityLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinUpgradesLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Upg</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Upg")}</div>
                               <input type="number" id="inputMaxUpgradesLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinConversionsLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>Conv</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("Conv")}</div>
                               <input type="number" id="inputMaxConversionsLimit${index}" class="optimizer-number-input rating-number-input"><br>
                             </div>
 
@@ -589,55 +605,54 @@ module.exports = {
                             <div id="stat-priority-panel" class="constraints-panel-col">
 
                               <div class="panelLabel">
-                                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="substatPriorityTooltip"></img>
-                                <div class="panelLabelText" id="substatPriorityLabel" data-t>Substat priority (clear)</div>
+                                <div class="panelLabelText" id="substatPriorityLabel${index}" data-t>${i18next.t("Substat priority")}</div>
                               </div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Atk</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Atk")}</div>
                                 <input class="sliderInput" id="atkSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="atkSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Def</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Def")}</div>
                                 <input class="sliderInput" id="defSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="defSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Hp</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Hp")}</div>
                                 <input class="sliderInput" id="hpSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="hpSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Spd</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Spd")}</div>
                                 <input class="sliderInput" id="spdSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="spdSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Cr</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Cr")}</div>
                                 <input class="sliderInput" id="crSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="crSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Cd</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Cd")}</div>
                                 <input class="sliderInput" id="cdSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="cdSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Eff</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Eff")}</div>
                                 <input class="sliderInput" id="effSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="effSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
 
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Res</div>
+                                <div class="sliderLabel" data-t>${i18next.t("Res")}</div>
                                 <input class="sliderInput" id="resSlider${index}Input" type="number" value="0" readonly>
                                 <div class="sliderContainer"><input class="slider" id="resSlider${index}" type="range" min="-1" max="3" value="0" step="1"></div>
                               </div>
@@ -652,8 +667,8 @@ module.exports = {
                               <div class="horizontalSpace" ></div>
 
                               <div class="sliderRow">
-                                <div class="sliderLabel" data-t>Top %</div>
-                                <input class="sliderInput" id="filterSlider${index}Input" type="number" value="100">
+                                <div class="sliderLabel" data-t>${i18next.t("Top %")}</div>
+                                <input class="sliderInput" id="filterSlider${index}Input" type="number" value="100" readonly>
                                 <div class="sliderContainer"><input class="slider" id="filterSlider${index}" type="range" min="10" max="100" value="100" step="1"></div><!--
                                 <div class="sliderContainer"><input class="slider" id="filterSlider${index}" type="range" min="0" max="100" value="100" step="5"></div> -->
                               </div>
@@ -662,122 +677,119 @@ module.exports = {
 
                             <div id="constraints-focus-panel" class="constraints-panel-col">
                               <div class="panelLabel">
-                                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="accessoryMainStatsTooltip"></img>
-                                <div class="panelLabelText" id="accessorySetsLabel" data-content=" (clear)" data-t>Accessory main stats</div>
+                                <div class="panelLabelText" id="accessorySetsLabel" data-t>${i18next.t("Accessory main stats")}</div>
                               </div>
                               <select multiple="multiple" id="inputNecklaceStat${index}" class="inputGearFilterSelect">
-                                <option value="CriticalHitChancePercent" data-t>Crit Chance</option>
-                                <option value="CriticalHitDamagePercent" data-t>Crit Damage</option>
-                                <option value="AttackPercent" data-t>Attack %</option>
-                                <option value="Attack" data-t>Attack</option>
-                                <option value="HealthPercent" data-t>Health %</option>
-                                <option value="Health" data-t>Health</option>
-                                <option value="DefensePercent" data-t>Defense %</option>
-                                <option value="Defense" data-t>Defense</option>
+                                <option value="CriticalHitChancePercent" data-t>${i18next.t("Crit Chance")}</option>
+                                <option value="CriticalHitDamagePercent" data-t>${i18next.t("Crit Damage")}</option>
+                                <option value="AttackPercent" data-t>${i18next.t("Attack %")}</option>
+                                <option value="Attack" data-t>${i18next.t("Attack")}</option>
+                                <option value="HealthPercent" data-t>${i18next.t("Health %")}</option>
+                                <option value="Health" data-t>${i18next.t("Health")}</option>
+                                <option value="DefensePercent" data-t>${i18next.t("Defense %")}</option>
+                                <option value="Defense" data-t>${i18next.t("Defense")}</option>
                               </select><br>
 
                               <select multiple="multiple" id="inputRingStat${index}" class="inputGearFilterSelect">
-                                <option value="EffectivenessPercent" data-t>Effectiveness</option>
-                                <option value="EffectResistancePercent" data-t>Effect Resistance</option>
-                                <option value="AttackPercent" data-t>Attack %</option>
-                                <option value="Attack" data-t>Attack</option>
-                                <option value="HealthPercent" data-t>Health %</option>
-                                <option value="Health" data-t>Health</option>
-                                <option value="DefensePercent" data-t>Defense %</option>
-                                <option value="Defense" data-t>Defense</option>
+                                <option value="EffectivenessPercent" data-t>${i18next.t("Effectiveness")}</option>
+                                <option value="EffectResistancePercent" data-t>${i18next.t("Effect Resistance")}</option>
+                                <option value="AttackPercent" data-t>${i18next.t("Attack %")}</option>
+                                <option value="Attack" data-t>${i18next.t("Attack")}</option>
+                                <option value="HealthPercent" data-t>${i18next.t("Health %")}</option>
+                                <option value="Health" data-t>${i18next.t("Health")}</option>
+                                <option value="DefensePercent" data-t>${i18next.t("Defense %")}</option>
+                                <option value="Defense" data-t>${i18next.t("Defense")}</option>
                               </select><br>
 
                               <select multiple="multiple" id="inputBootsStat${index}" class="inputGearFilterSelect">
-                                <option value="Speed" data-t>Speed</option>
-                                <option value="AttackPercent" data-t>Attack %</option>
-                                <option value="Attack" data-t>Attack</option>
-                                <option value="HealthPercent" data-t>Health %</option>
-                                <option value="Health" data-t>Health</option>
-                                <option value="DefensePercent" data-t>Defense %</option>
-                                <option value="Defense" data-t>Defense</option>
+                                <option value="Speed" data-t>${i18next.t("Speed")}</option>
+                                <option value="AttackPercent" data-t>${i18next.t("Attack %")}</option>
+                                <option value="Attack" data-t>${i18next.t("Attack")}</option>
+                                <option value="HealthPercent" data-t>${i18next.t("Health %")}</option>
+                                <option value="Health" data-t>${i18next.t("Health")}</option>
+                                <option value="DefensePercent" data-t>${i18next.t("Defense %")}</option>
+                                <option value="Defense" data-t>${i18next.t("Defense")}</option>
                               </select><br>
 
                               <div class="panelLabel">
-                                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="setsTooltip"></img>
-                                <div class="panelLabelText" data-t>Sets</div>
+                                <div class="panelLabelText" data-t>${i18next.t("Sets")}</div>
                               </div>
                               <select multiple="multiple" id="inputSet1${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="4 Piece" data-t>
-                                  <option value="AttackSet" data-t>Attack</option>
-                                  <option value="CounterSet" data-t>Counter</option>
-                                  <option value="DestructionSet" data-t>Destruction</option>
-                                  <option value="InjurySet" data-t>Injury</option>
-                                  <option value="LifestealSet" data-t>Lifesteal</option>
-                                  <option value="RageSet" data-t>Rage</option>
-                                  <option value="RevengeSet" data-t>Revenge</option>
-                                  <option value="SpeedSet" data-t>Speed</option>
+                                  <option value="AttackSet" data-t>${i18next.t("Attack")}</option>
+                                  <option value="CounterSet" data-t>${i18next.t("Counter")}</option>
+                                  <option value="DestructionSet" data-t>${i18next.t("Destruction")}</option>
+                                  <option value="InjurySet" data-t>${i18next.t("Injury")}</option>
+                                  <option value="LifestealSet" data-t>${i18next.t("Lifesteal")}</option>
+                                  <option value="RageSet" data-t>${i18next.t("Rage")}</option>
+                                  <option value="RevengeSet" data-t>${i18next.t("Revenge")}</option>
+                                  <option value="SpeedSet" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>Critical</option>
-                                  <option value="DefenseSet" data-t>Defense</option>
-                                  <option value="HealthSet" data-t>Health</option>
-                                  <option value="HitSet" data-t>Hit</option>
-                                  <option value="ImmunitySet" data-t>Immunity</option>
-                                  <option value="PenetrationSet" data-t>Penetration</option>
-                                  <option value="ResistSet" data-t>Resist</option>
-                                  <option value="UnitySet" data-t>Unity</option>
+                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
+                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
+                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
+                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
+                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
+                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
 
                               <select multiple="multiple" id="inputSet2${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>Critical</option>
-                                  <option value="DefenseSet" data-t>Defense</option>
-                                  <option value="HealthSet" data-t>Health</option>
-                                  <option value="HitSet" data-t>Hit</option>
-                                  <option value="ImmunitySet" data-t>Immunity</option>
-                                  <option value="PenetrationSet" data-t>Penetration</option>
-                                  <option value="ResistSet" data-t>Resist</option>
-                                  <option value="UnitySet" data-t>Unity</option>
+                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
+                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
+                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
+                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
+                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
+                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
 
                               <select multiple="multiple" id="inputSet3${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>Critical</option>
-                                  <option value="DefenseSet" data-t>Defense</option>
-                                  <option value="HealthSet" data-t>Health</option>
-                                  <option value="HitSet" data-t>Hit</option>
-                                  <option value="ImmunitySet" data-t>Immunity</option>
-                                  <option value="PenetrationSet" data-t>Penetration</option>
-                                  <option value="ResistSet" data-t>Resist</option>
-                                  <option value="UnitySet" data-t>Unity</option>
+                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
+                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
+                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
+                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
+                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
+                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select>
 
                               <div class="panelLabel">
-                                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="excludeTooltip"></img>
-                                <div class="panelLabelText" data-t>Exclude</div>
+                                <div class="panelLabelText" data-t>${i18next.t("Exclude")}</div>
                               </div>
                               <select multiple="multiple" id="inputExcludeSet${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="4 Piece" data-t>
-                                  <option value="AttackSet" data-t>Attack</option>
-                                  <option value="CounterSet" data-t>Counter</option>
-                                  <option value="DestructionSet" data-t>Destruction</option>
-                                  <option value="InjurySet" data-t>Injury</option>
-                                  <option value="LifestealSet" data-t>Lifesteal</option>
-                                  <option value="RageSet" data-t>Rage</option>
-                                  <option value="RevengeSet" data-t>Revenge</option>
-                                  <option value="SpeedSet" data-t>Speed</option>
+                                  <option value="AttackSet" data-t>${i18next.t("Attack")}</option>
+                                  <option value="CounterSet" data-t>${i18next.t("Counter")}</option>
+                                  <option value="DestructionSet" data-t>${i18next.t("Destruction")}</option>
+                                  <option value="InjurySet" data-t>${i18next.t("Injury")}</option>
+                                  <option value="LifestealSet" data-t>${i18next.t("Lifesteal")}</option>
+                                  <option value="RageSet" data-t>${i18next.t("Rage")}</option>
+                                  <option value="RevengeSet" data-t>${i18next.t("Revenge")}</option>
+                                  <option value="SpeedSet" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>Critical</option>
-                                  <option value="DefenseSet" data-t>Defense</option>
-                                  <option value="HealthSet" data-t>Health</option>
-                                  <option value="HitSet" data-t>Hit</option>
-                                  <option value="ImmunitySet" data-t>Immunity</option>
-                                  <option value="PenetrationSet" data-t>Penetration</option>
-                                  <option value="ResistSet" data-t>Resist</option>
-                                  <option value="UnitySet" data-t>Unity</option>
+                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
+                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
+                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
+                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
+                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
+                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
                             </div>
@@ -819,6 +831,13 @@ module.exports = {
                         displayTitle: true,
                         selectAll: true
                     };
+                    const enhanceOptions = {
+                        maxHeight: 500,
+                        showClear: false,
+                        minimumCountSelected: 99,
+                        displayTitle: true,
+                        selectAll: false,
+                    };
 
                     $('#inputSet1' + index).multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder: i18next.t("4 or 2 piece sets")}));
                     $('#inputSet2' + index).multipleSelect(Object.assign({}, groupSelectMultipleSelectOptions, {placeholder: i18next.t("2 piece sets")}));
@@ -830,6 +849,7 @@ module.exports = {
 
                     const getAllHeroesResponse = await Api.getAllHeroes();
                     const optimizerAllowGearFromSelector = document.getElementById('optionsExcludeGearFrom' + index)
+                    const optimizerEnhanceLimit = document.getElementById('optionsEnhanceLimit' + index)
                     const heroes = getAllHeroesResponse.heroes;
                     Utils.sortByAttribute(heroes, "name");
                     console.log("getAllHeroesResponse", getAllHeroesResponse)
@@ -850,7 +870,21 @@ module.exports = {
                         $('#optionsExcludeGearFrom').multipleSelect('refresh')
                         Settings.saveSettings();
                     })
-                    OptimizerTab.loadPreviousHeroFilters({hero: hero}, index, false);
+
+                    $('#optionsEnhanceLimit' + index).change(() => {
+                        const selects = $('#optionsEnhanceLimit' + index).multipleSelect('getSelects');
+                        $('#optionsEnhanceLimit').multipleSelect('setSelects', selects)
+                        $('#optionsEnhanceLimit').multipleSelect('refresh')
+                        Settings.saveSettings();
+                    })
+
+                    $('#optionsEnhanceLimit' + index).multipleSelect(Object.assign({}, enhanceOptions, {placeholder: i18next.t("Minimum enhance"), selectAll: false}));
+                    const selects = $('#optionsEnhanceLimit').multipleSelect('getSelects');
+                    console.warn("index", index, $('#optionsEnhanceLimit' + index))
+                    $('#optionsEnhanceLimit' + index).multipleSelect('setSelects', selects)
+                    $('#optionsEnhanceLimit' + index).multipleSelect('refresh')
+
+                    OptimizerTab.loadPreviousHeroFilters({hero: hero}, index, false, 'multiOptimizer');
                 },
                 focusConfirm: false,
                 showCancelButton: true,
@@ -1335,6 +1369,7 @@ module.exports = {
                             type: document.getElementById('editGearMainStatType').value,
                             value: parseInt(document.getElementById('editGearMainStatValue').value),
                         },
+                        name: item.name,
                         enhance: parseInt(document.getElementById('editGearEnhance').value) || 0,
                         level: parseInt(document.getElementById('editGearLevel').value) || 0,
                         locked: document.getElementById('editGearLocked').checked,

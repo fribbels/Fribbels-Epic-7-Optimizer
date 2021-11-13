@@ -113,7 +113,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         ZarrocConverter.initialize();
         OptimizerTab.initialize();
         OptimizerGrid.initialize();
-        MultiOptimizerTab.initialize();
         ItemsTab.initialize();
         ItemsGrid.initialize();
         HeroesTab.initialize();
@@ -122,6 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         await Settings.initialize();
         Saves.initialize();
         await Saves.loadAutoSave();
+        MultiOptimizerTab.initialize();
 
         Tooltip.initialize();
         ColorPicker.initialize();

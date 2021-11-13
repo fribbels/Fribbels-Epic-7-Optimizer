@@ -266,8 +266,8 @@ module.exports = {
         nrInput.addEventListener('input',  ev => sliderEl['rangeslider-js'].update({value: ev.target.value}))
     },
 
-    applyItemFilters: async (params, heroResponse, allItemsResponse, submit) => {
-        const gearMainFilters = Selectors.getGearMainFilters();
+    applyItemFilters: async (params, heroResponse, allItemsResponse, submit, allowedHeroIds, overrideGearMainFilters) => {
+        const gearMainFilters = overrideGearMainFilters || Selectors.getGearMainFilters();
         const getAllItemsResponse = allItemsResponse;
         const hero = heroResponse.hero;
         const baseStats = heroResponse.baseStats;
@@ -283,6 +283,11 @@ module.exports = {
         }
 
         console.log("Optimization params", params);
+
+        if (params.enhanceLimit) {
+            const limit = params.enhanceLimit.length > 0 ? parseInt(params.enhanceLimit[0]) : 0;
+            items = items.filter(x => x.enhance >= limit);
+        }
 
         if (params.inputExcludeSet.length > 0) {
             items = items.filter(x => !params.inputExcludeSet.includes(x.set));
@@ -332,8 +337,9 @@ module.exports = {
             }
 
             // higherPriorityItems = higherPriorityItems.filter(x => !!x);
+            higherPriorityHeroes = higherPriorityHeroes.filter(x => !(allowedHeroIds || []).includes(x))
             items = items.filter(x => !higherPriorityHeroes.includes(x.equippedById))
-            console.warn(higherPriorityHeroes);
+            console.warn("DEBUG FILTER", higherPriorityHeroes, allowedHeroIds);
         }
 
         if (params.inputKeepCurrentItems) {
@@ -418,6 +424,7 @@ module.exports = {
         const setFilters = Selectors.getSetFilters(index);
         const mainFilters = Selectors.getGearMainFilters(index);
         const excludeFilter = Selectors.getExcludeGearFrom(index);
+        const enhanceLimit = Selectors.getEnhanceLimit(index);
         const setFormat = getSetFormat(setFilters.sets, showError);
         console.log("SETFORMAT", setFormat);
 
@@ -523,13 +530,14 @@ module.exports = {
         request.inputBootsStat = mainFilters[2];
 
         request.excludeFilter = excludeFilter;
+        request.enhanceLimit = enhanceLimit;
 
         request.setFormat = setFormat;
 
         return request;
     },
 
-    loadPreviousHeroFilters: async (heroResponse, index, recalc) => {
+    loadPreviousHeroFilters: async (heroResponse, index, recalc, tab) => {
         if (index == null || index == undefined) {
             index = '';
         }
@@ -645,11 +653,13 @@ module.exports = {
             recalculateFilters(null, heroResponse);
         }
         fixSliders(index)
-        calculatePlaceholderRatings(index)
+        if (tab != 'multiOptimizer') {
+            calculatePlaceholderRatings(index)
+        }
     },
 
     // True if blocking error
-    warnParams: (params) => {
+    warnParams: (params, overridePermutations) => {
         if (params.inputFilterPriority == 100
         &&  params.inputAtkPriority == 0
         &&  params.inputHpPriority == 0
@@ -691,7 +701,7 @@ module.exports = {
             Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
         }
 
-        if (permutations >= 5_000_000_000) {
+        if ((overridePermutations ? overridePermutations : permutations) >= 5_000_000_000) {
             Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
         }
         return false;
@@ -741,12 +751,12 @@ module.exports = {
         })
     },
 
-    editGearFromIcon: (id, reforge) => {
-        editGearFromIcon(id, reforge);
+    editGearFromIcon: (id, reforge, checkboxPrefix) => {
+        editGearFromIcon(id, reforge, checkboxPrefix);
     },
 
-    lockGearFromIcon: (id) => {
-        lockGearFromIcon(id);
+    lockGearFromIcon: (id, checkboxPrefix) => {
+        lockGearFromIcon(id, checkboxPrefix);
     },
 
     getCurrentExecutionId: () => {
@@ -836,9 +846,9 @@ function clearOptions() {
     $("#inputKeepCurrentItems").prop('checked', optimizerSettings.settingDefaultKeepCurrent);
 }
 
-async function editGearFromIcon(id, reforge) {
+async function editGearFromIcon(id, reforge, checkboxPrefix) {
     const result = await Api.getItemById(id);
-    console.log(result.item);
+    console.log("a1", result.item);
     const editedItem = await Dialog.editGearDialog(result.item, true, reforge);
 
     ItemAugmenter.augment([editedItem])
@@ -851,9 +861,13 @@ async function editGearFromIcon(id, reforge) {
     Saves.autoSave();
     HeroesGrid.redrawPreview();
     HeroesGrid.refresh();
+
+    if (checkboxPrefix == "enhanceTab") {
+        EnhancingTab.redrawEnhanceGuideFromRemoteId(editedItem.id);
+    }
 }
 
-async function lockGearFromIcon(id) {
+async function lockGearFromIcon(id, checkboxPrefix) {
     const result = await Api.getItemById(id);
     console.log(result.item);
 
@@ -870,6 +884,10 @@ async function lockGearFromIcon(id) {
     drawPreview();
     Saves.autoSave();
     HeroesGrid.redrawPreview();
+
+    if (checkboxPrefix == "enhanceTab") {
+        EnhancingTab.redrawEnhanceGuideFromRemoteId(id);
+    }
 }
 
 function redrawHeroImage() {
@@ -1003,7 +1021,7 @@ async function addBuild() {
     }
 
     await Api.addBuild(heroId, row);
-    await Api.editResultRows(parseInt(rowId), "star");
+    await Api.editResultRows(parseInt(rowId), "star", currentExecutionId);
 
     row.property = "star";
     node.updateData(row);
@@ -1027,7 +1045,7 @@ async function removeBuild() {
     console.log("REMOVE BUILD", row)
 
     await Api.removeBuild(heroId, row);
-    await Api.editResultRows(parseInt(rowId), "not star");
+    await Api.editResultRows(parseInt(rowId), "not star", currentExecutionId);
 
     row.property = "not star";
     node.updateData(row);
@@ -1188,7 +1206,7 @@ async function submitOptimizationRequest() {
         var searchedStr = Number(searchedCount).toLocaleString();
         var resultsStr = Number(resultsCounter).toLocaleString();
 
-        var maxResults = parseInt(Settings.parseMaxResults() || 0);
+        var maxResults = parseInt(Settings.parseNumberValue('settingMaxResults') || 0);
         if (result.results >= maxResults) {
             Dialog.info('Search terminated after the result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
         } else {

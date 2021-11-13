@@ -20,5 +20,7 @@ public class SetSettingsRequest extends Request {
 
     private boolean settingUnlockOnUnequip;
     private boolean settingRageSet;
+    private boolean settingPenSet;
     private Integer settingMaxResults;
+    private Integer settingPenDefense;
 }

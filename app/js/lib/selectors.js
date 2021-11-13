@@ -40,6 +40,13 @@ module.exports = {
             //     return el.html()
             // }
         };
+        const enhanceOptions = {
+            maxHeight: 500,
+            showClear: false,
+            minimumCountSelected: 99,
+            displayTitle: true,
+            selectAll: false,
+        };
         const excludeEquippedSelectOptions = {
             maxHeight: 450,
             showClear: true,
@@ -85,6 +92,9 @@ module.exports = {
         $('#addHeroesSelector').multipleSelect(Object.assign({}, addHeroSelectorOptions, {placeholder: i18next.t("Hero")}))
 
         $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder: i18next.t("Exclude equipped"), selectAll: true},{formatSelectAll () {return i18next.t('[Select all]')}}));
+        $('#optionsEnhanceLimit').multipleSelect(Object.assign({}, enhanceOptions, {placeholder: i18next.t("Minimum enhance"), selectAll: false}));
+
+        // $('#optionsExcludeGearFrom' + index).multipleSelect('setSelects', ["0", "3", "6", "9", "12", "15"])
 
         console.log("DONE INITIALIZING SELECTORS");
     },
@@ -95,8 +105,23 @@ module.exports = {
             // customFilter: Utils.customFilter,
             filterAcceptOnEnter: true
         };
+        // $('#' + id).multipleSelect(Object.assign({}, heroSelectorOptions, {placeholder: i18next.t("Hero")}))
+
+        const selects = $('#' + id).multipleSelect('getSelects')
+        // const selects = $('#optionsExcludeGearFrom').multipleSelect('getSelects');
+        $('#' + id).multipleSelect('refresh')
+        $('#' + id).multipleSelect('setSelects', selects)
+    },
+
+    setMultiHeroSelector: (id) => {
+        const heroSelectorOptions = {
+            filter: true,
+            // customFilter: Utils.customFilter,
+            filterAcceptOnEnter: true
+        };
         $('#' + id).multipleSelect(Object.assign({}, heroSelectorOptions, {placeholder: i18next.t("Hero")}))
     },
+
 
     refreshAllowGearFrom: (index) => {
         if (index == null || index == undefined) {
@@ -121,6 +146,16 @@ module.exports = {
 
         console.log("Exclude", exclude);
         return exclude;
+    },
+
+    getEnhanceLimit: (index) => {
+        if (index == null || index == undefined) {
+            index = '';
+        }
+        const enhanceLimit = $('#optionsEnhanceLimit' + index).multipleSelect('getSelects')
+
+        console.log("Enhance limit", enhanceLimit);
+        return enhanceLimit;
     },
 
     getGearMainFilters: (index) => {

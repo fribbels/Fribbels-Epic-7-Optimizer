@@ -157,6 +157,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     public String handleOptimizationFilterRequest(final OptimizationRequest request) {
         final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
 
+        if (optimizationDb == null) {
+            return "";
+        }
+
         final boolean hasExcludedGearIds = CollectionUtils.isNotEmpty(request.getExcludedGearIds());
         final Map<String, String> excludedGearIds = new HashMap<>();
         if (hasExcludedGearIds) {
@@ -274,6 +278,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             return gson.toJson(response);
         }
         final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
+        if (optimizationDb == null) {
+            return "";
+        }
 
         final String heroId = request.getOptimizationRequest().getHeroId();
         final List<HeroStats> builds = heroDb.getBuildsForHero(heroId);
@@ -308,6 +315,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private String handleEditResultRowsRequest(final EditResultRowsRequest request) {
         final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
+        if (optimizationDb == null) {
+            return "";
+        }
 
         final HeroStats[] heroStats = optimizationDb.getRows(request.getIndex(), request.getIndex() + 1);
         if (heroStats.length == 0) {
@@ -324,6 +334,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     public String optimize(final OptimizationRequest request, final HeroStats unused) {
         final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
+        if (optimizationDb == null) {
+            return "";
+        }
 
         inProgress = true;
         final HeroStats base = baseStatsDb.getBaseStatsByName(request.hero.name, request.hero.getStars());

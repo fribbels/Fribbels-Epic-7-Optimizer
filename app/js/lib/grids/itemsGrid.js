@@ -117,6 +117,8 @@ module.exports = {
             animateRows: true,
             suppressDragLeaveHidesColumns: true,
             immutableData: true,
+            suppressCellSelection: true,
+            enableRangeSelection: false,
             getRowNodeId: (data) => {
                 return data.id;
             },

@@ -5,7 +5,7 @@
     "name": "Fribbels",
     "url": "https://github.com/fribbels/Fribbels-Epic-7-Optimizer"
   },
-  "version": "1.8.0-alpha.1",
+  "version": "1.8.0-beta.1",
   "description": "Epic 7 Gear Optimizer",
   "main": "./main.prod.js",
   "scripts": {
@@ -14,12 +14,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ag-grid-community/client-side-row-model": "25.1.0",
-    "@ag-grid-community/core": "25.1.0",
-    "@ag-grid-community/infinite-row-model": "25.1.0",
+    "@ag-grid-community/client-side-row-model": "26.1.0",
+    "@ag-grid-community/core": "26.1.0",
+    "@ag-grid-community/infinite-row-model": "26.1.0",
     "@fontsource/fira-sans-condensed": "^4.2.2",
     "@fortawesome/fontawesome-free": "^5.15.1",
-    "ag-grid-community": "^25.1.0",
+    "ag-grid-community": "26.1.0",
     "animate.css": "^4.1.1",
     "awesome-notifications": "^3.1.1",
     "axios": "^0.21.0",

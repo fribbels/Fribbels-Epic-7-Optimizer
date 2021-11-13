@@ -315,6 +315,8 @@ function buildGrid(localeText) {
         suppressScrollOnNewData: true,
         onCellMouseOver: cellMouseOver,
         onCellMouseOut: cellMouseOut,
+        suppressCellSelection: true,
+        enableRangeSelection: false,
         navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "optimizerGrid"),
         suppressDragLeaveHidesColumns: true,
     };

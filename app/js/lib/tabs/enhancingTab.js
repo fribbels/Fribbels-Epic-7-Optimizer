@@ -305,6 +305,7 @@ module.exports = {
             72,
             80
         ]
+        var percent = Utils.round10ths(item.reforgedWss/maxScore*100)
         var option = {
             tooltip: {
                 formatter: '{a} <br/>{b} : {c}%'
@@ -320,7 +321,7 @@ module.exports = {
                 splitNumber: 8,
                 detail: {
                     // formatter: '{value}',
-                    formatter: '{value}' + ' of ' + maxScore + '\n ' + Utils.round10ths(item.reforgedWss/maxScore*100) + '%',
+                    formatter: '{value}' + ' / ' + maxScore + '\n ' + percent + '%',
                     fontSize: 18,
                     lineHeight: 20,
                     offsetCenter: [0, '15%'],
@@ -350,17 +351,23 @@ module.exports = {
                 },
                 data: [{
                     value: item.reforgedWss,
-                    name: 'SCORE'
+                    name: i18next.t('SCORE')
                 }],
                 pointer: {
                     icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
-                    length: '12%',
+                    length: '25%',
                     width: 20,
-                    offsetCenter: [0, '-60%'],
+                    offsetCenter: [0, '-40%'],
                     itemStyle: {
                         color: 'auto'
                     }
                 },
+                tooltip: {
+                    trigger: false,
+                    formatter: function (value) {
+                        return "asdffsd" + value;
+                    }
+                }
             }]
         };
 
@@ -458,7 +465,7 @@ module.exports = {
                     {
                         // value: [1, 2, 3, 4,5,6,7],
                         value: ratings.map(x => Utils.round100ths(x.score)),
-                        name: 'Archetypes'
+                        name: i18next.t('Archetypes')
                     },
                 ]
             }]
@@ -507,13 +514,13 @@ module.exports = {
                 },
                 yAxis: {
                     type: 'category',
-                    data: [statToReadableText[stat.type]]
+                    data: [i18next.t(statToReadableText[stat.type])]
                 },
                 series: [
                     {
                         type: 'bar',
                         stack: 'total',
-                        name: 'Minimum possible stats',
+                        name: i18next.t('Minimum possible stats'),
                         label: {
                             show: min < 1 ? false : true,
                             position: 'inside',
@@ -531,7 +538,7 @@ module.exports = {
                     {
                         type: 'bar',
                         stack: 'total',
-                        name: 'Rolled stats',
+                        name: i18next.t('Rolled stats'),
                         label: {
                             show: rolled < 1 ? false : true,
                             position: 'inside',
@@ -548,7 +555,7 @@ module.exports = {
                     },
                     {
                         type: 'bar',
-                        name: 'Missing potential rolls',
+                        name: i18next.t('Missing potential stats'),
                         stack: 'total',
                         label: {
                             show: missing < 1 ? false : true,
