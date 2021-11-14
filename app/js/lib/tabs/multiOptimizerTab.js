@@ -605,6 +605,7 @@ function clearHeroOptions(id) {
       select.options[i] = null;
     }
 }
+
 const tinygradient = require('tinygradient');
 const colorPicker = require('../colorPicker');
 
@@ -1089,7 +1090,7 @@ async function handleStartOptimizationRequest(index, callback) {
             * rings.length
             * boots.length;
 
-    $(`#summaryPanel1-${index}`).text("Permutations: " + Number(permutations).toLocaleString());
+    $(`#summaryPanel1-${index}`).text(i18next.t("Permutations")+": " + Number(permutations).toLocaleString());
 
 
     if (OptimizerTab.warnParams(params, permutations)) {
@@ -1108,8 +1109,8 @@ async function handleStartOptimizationRequest(index, callback) {
             var searchedStr = Number(searchedCount).toLocaleString();
             var resultsStr = Number(resultsCounter).toLocaleString();
 
-            $(`#summaryPanel2-${index}`).text("Searched: " + searchedStr);
-            $(`#summaryPanel3-${index}`).text("Results: " + resultsStr);
+            $(`#summaryPanel2-${index}`).text(i18next.t("Searched")+": " + searchedStr);
+            $(`#summaryPanel3-${index}`).text(i18next.t("Results")+": " + resultsStr);
         })
     }
 
@@ -1137,7 +1138,7 @@ async function handleStartOptimizationRequest(index, callback) {
         if (result.results >= maxResults) {
             Dialog.info('Search terminated after the result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
         } else {
-            $(`#summaryPanel1-${index}`).text("Permutations: " + searchedStr);
+            $(`#summaryPanel1-${index}`).text(i18next.t("Permutations")+": " + searchedStr);
         }
 
         // $('#searchedPermutationsNum').text(searchedStr);
@@ -1145,8 +1146,8 @@ async function handleStartOptimizationRequest(index, callback) {
         // OptimizerGrid.reloadData();
         // console.log("REFRESHED");
 
-        $(`#summaryPanel2-${index}`).text("Searched: " + searchedStr);
-        $(`#summaryPanel3-${index}`).text("Results: " + resultsStr);
+        $(`#summaryPanel2-${index}`).text(i18next.t("Searched")+": " + searchedStr);
+        $(`#summaryPanel3-${index}`).text(i18next.t("Results")+": " + resultsStr);
         const grid = multiOptimizerHeroes[index].grid;
         grid.gridOptions.api.setDatasource(getDataSource(index, grid, multiOptimizerHeroes[index]));
         if (callback) callback("OK");

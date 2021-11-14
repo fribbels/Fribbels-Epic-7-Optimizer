@@ -1002,8 +1002,8 @@
   "XVIII. The Moon": "XVIII. The Moon",
   "Use penetration set bonus for damage optimization": "配裝時計算穿透套裝效果",
   "Target's defense for penetration set (Recommended: 1,500, Min 0, Max 10k)": "目標防禦(用於計算穿透套傷害 推薦值: 1,500, 最低 0, 最高 10k)",
-  "Click on the magnifying glass on an item to analyze it.": "點選裝備上的眼鏡圖示分析裝備.",
-  "Enhancing": "強化",
+  "Click on the magnifying glass on an item to analyze it.": "點選裝備上的🔍圖示分析裝備.",
+  "Enhancing": "強化分析",
   "Multi-Optimizer": "批量配裝",
   "Guide": "說明",
   "Start all": "全部開始",
@@ -1052,5 +1052,10 @@
   "Minimum possible stats": "最小值",
   "Rolled stats": "目前跳值",
   "Missing potential stats": "與完美最大值差距",
-  "Add any other non item bonus stats": "添加其它非裝備加成屬性"
+  "Add any other non item bonus stats": "添加其它非裝備加成屬性",
+  "Select which items to import":"選擇要導入的裝備類型",
+  "Select which heroes to import":"選擇要導入的英雄類型",
+  "Only import heroes already in optimizer":"僅導入配裝器裏已有的英雄",
+  "+15 and up": "+15或以上",
+  "Eff Res":"效果抵抗"
 }

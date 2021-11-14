@@ -1118,6 +1118,8 @@
     "universalify" "^0.1.0"
 
 "fs@latest":
+  "integrity" "sha1-invTcYa23d84E/I4WLV+yq9eQdQ="
+  "resolved" "https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz"
   "version" "0.0.1-security"
 
 "function-bind@^1.1.1":
@@ -1481,6 +1483,8 @@
   "version" "2.0.1"
 
 "jimp@latest":
+  "integrity" "sha512-+EKVxbR36Td7Hfd23wKGIeEyHbxShZDX6L8uJkgVW3ESA9GiTEPK08tG1XI2r/0w5Ch0HyJF5kPqF9K7EmGjaw=="
+  "resolved" "https://registry.npmjs.org/jimp/-/jimp-0.16.1.tgz"
   "version" "0.16.1"
   dependencies:
     "@babel/runtime" "^7.7.2"
@@ -2421,6 +2425,8 @@
   "version" "1.0.0"
 
 "tree-kill@latest":
+  "integrity" "sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A=="
+  "resolved" "https://registry.npmjs.org/tree-kill/-/tree-kill-1.2.2.tgz"
   "version" "1.2.2"
 
 "tslib@2.0.3":
@@ -2513,6 +2519,8 @@
   "version" "1.0.1"
 
 "uuid@latest":
+  "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"
 
 "vary@~1.1.2":
