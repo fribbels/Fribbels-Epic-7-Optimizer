@@ -65,7 +65,7 @@ module.exports = {
                     function(currentValue, currentIndex, listObj) {
                         // console.log(currentValue.nodeName);
                         let tmpText = {untransString: []};
-                        if (['LABEL', 'A', 'TEXT', 'H2', 'U', 'B', 'DIV', 'SPAN', 'OPTION', 'BUTTON'].includes(currentValue.nodeName)) {
+                        if (['LABEL', 'A', 'TEXT', 'H1', 'H2', 'H3', 'U', 'B', 'DIV', 'SPAN', 'OPTION', 'BUTTON'].includes(currentValue.nodeName)) {
                             var textkey = (currentValue.innerText).trim();
                             // console.log('true!'+textkey);
                             currentValue.innerText = i18next.t(textkey)

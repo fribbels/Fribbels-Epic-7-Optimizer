@@ -73,7 +73,18 @@ function initializeBlank(index) {
 
     $('#multi-optimizer-section').append(html);
 
-    var localeText = AG_GRID_LOCALE_EN;
+    if (i18next.language == 'zh') {
+      var localeText = AG_GRID_LOCALE_ZH;
+    } else if (i18next.language == 'zh-TW') {
+      var localeText = AG_GRID_LOCALE_ZH_TW;
+    } else if (i18next.language == 'fr') {
+      var localeText = AG_GRID_LOCALE_FR;
+    } else if (i18next.language == 'ja') {
+      var localeText = AG_GRID_LOCALE_JA;
+    } else {
+      var localeText = AG_GRID_LOCALE_EN;
+    }
+    console.log('localeText:'+localeText);
     const DIGITS_2 = 35;
     const DIGITS_3 = 41;
     const DIGITS_4 = 45;
@@ -446,7 +457,7 @@ module.exports = {
     },
 
     initialize: async () => {
-        initializeBlank(0)
+              initializeBlank(0)
 
         document.getElementById('multiGuide').addEventListener("click", async () => {
             Dialog.multiOptimizerGuide(
@@ -605,6 +616,7 @@ function clearHeroOptions(id) {
       select.options[i] = null;
     }
 }
+
 const tinygradient = require('tinygradient');
 const colorPicker = require('../colorPicker');
 
@@ -1089,7 +1101,7 @@ async function handleStartOptimizationRequest(index, callback) {
             * rings.length
             * boots.length;
 
-    $(`#summaryPanel1-${index}`).text("Permutations: " + Number(permutations).toLocaleString());
+    $(`#summaryPanel1-${index}`).text(i18next.t("Permutations")+": " + Number(permutations).toLocaleString());
 
 
     if (OptimizerTab.warnParams(params, permutations)) {
@@ -1108,8 +1120,8 @@ async function handleStartOptimizationRequest(index, callback) {
             var searchedStr = Number(searchedCount).toLocaleString();
             var resultsStr = Number(resultsCounter).toLocaleString();
 
-            $(`#summaryPanel2-${index}`).text("Searched: " + searchedStr);
-            $(`#summaryPanel3-${index}`).text("Results: " + resultsStr);
+            $(`#summaryPanel2-${index}`).text(i18next.t("Searched")+": " + searchedStr);
+            $(`#summaryPanel3-${index}`).text(i18next.t("Results")+": " + resultsStr);
         })
     }
 
@@ -1137,7 +1149,7 @@ async function handleStartOptimizationRequest(index, callback) {
         if (result.results >= maxResults) {
             Dialog.info('Search terminated after the result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
         } else {
-            $(`#summaryPanel1-${index}`).text("Permutations: " + searchedStr);
+            $(`#summaryPanel1-${index}`).text(i18next.t("Permutations")+": " + searchedStr);
         }
 
         // $('#searchedPermutationsNum').text(searchedStr);
@@ -1145,8 +1157,8 @@ async function handleStartOptimizationRequest(index, callback) {
         // OptimizerGrid.reloadData();
         // console.log("REFRESHED");
 
-        $(`#summaryPanel2-${index}`).text("Searched: " + searchedStr);
-        $(`#summaryPanel3-${index}`).text("Results: " + resultsStr);
+        $(`#summaryPanel2-${index}`).text(i18next.t("Searched")+": " + searchedStr);
+        $(`#summaryPanel3-${index}`).text(i18next.t("Results")+": " + resultsStr);
         const grid = multiOptimizerHeroes[index].grid;
         grid.gridOptions.api.setDatasource(getDataSource(index, grid, multiOptimizerHeroes[index]));
         if (callback) callback("OK");

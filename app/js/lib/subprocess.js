@@ -50,7 +50,9 @@ module.exports = {
             await module.exports.kill();
         }
 
-        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
+        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+          shell: true, stdio: ['pipe', 'pipe', 'pipe'], detached: false
+      })
         pid = child.pid;
 
         child.on('close', (code) => {
