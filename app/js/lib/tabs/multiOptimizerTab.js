@@ -73,7 +73,18 @@ function initializeBlank(index) {
 
     $('#multi-optimizer-section').append(html);
 
-    var localeText = AG_GRID_LOCALE_EN;
+    if (i18next.language == 'zh') {
+      var localeText = AG_GRID_LOCALE_ZH;
+    } else if (i18next.language == 'zh-TW') {
+      var localeText = AG_GRID_LOCALE_ZH_TW;
+    } else if (i18next.language == 'fr') {
+      var localeText = AG_GRID_LOCALE_FR;
+    } else if (i18next.language == 'ja') {
+      var localeText = AG_GRID_LOCALE_JA;
+    } else {
+      var localeText = AG_GRID_LOCALE_EN;
+    }
+    console.log('localeText:'+localeText);
     const DIGITS_2 = 35;
     const DIGITS_3 = 41;
     const DIGITS_4 = 45;
@@ -446,7 +457,7 @@ module.exports = {
     },
 
     initialize: async () => {
-        initializeBlank(0)
+              initializeBlank(0)
 
         document.getElementById('multiGuide').addEventListener("click", async () => {
             Dialog.multiOptimizerGuide(
