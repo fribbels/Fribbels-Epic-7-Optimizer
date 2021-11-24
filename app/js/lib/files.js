@@ -2,6 +2,7 @@ var fs = require('fs');
 var os = require('os');
 var path = require("path");
 var electron = require('electron');
+const remote = require('@electron/remote');
 
 module.exports = {
     listFilesInFolder: (path) => {
@@ -73,15 +74,15 @@ module.exports = {
     getRootPath: () => {
         if (os.platform() == 'darwin') {
             if (__dirname.includes('app.asar')) {
-                return path.resolve(electron.remote.app.getAppPath(), '../../');
+                return path.resolve(remote.app.getAppPath(), '../../');
             }
-            return path.resolve(electron.remote.app.getAppPath(), '../');
+            return path.resolve(remote.app.getAppPath(), '../');
         }
 
         if (__dirname.includes('app.asar')) {
-            return path.dirname(electron.remote.app.getPath("exe"));
+            return path.dirname(remote.app.getPath("exe"));
         }
-        return path.resolve(electron.remote.app.getAppPath(), '../')
+        return path.resolve(remote.app.getAppPath(), '../')
     },
 
     getDataPath: () => {

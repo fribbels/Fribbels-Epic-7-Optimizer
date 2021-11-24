@@ -1,5 +1,7 @@
 // Libs
 
+process.env.ELECTRON_NO_ATTACH_CONSOLE = true;
+
 (function(){
     var original = console.error;
     console.error = function() {

@@ -14,6 +14,7 @@ import path from 'path';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+const remoteMain = require("@electron/remote/main");
 // import MenuBuilder from './menu';
 
 const isMac = process.platform === 'darwin'
@@ -155,17 +156,23 @@ const createWindow = async () => {
       (process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true') && process.env.ERB_SECURE !== 'true' ?
       {
         nodeIntegration: true,
-        enableRemoteModule: true
+        enableRemoteModule: true,
+        contextIsolation: false
       } :
       {
         preload: path.join(__dirname, 'dist/renderer.prod.js'),
         nodeIntegration: true,
-        enableRemoteModule: true
+        enableRemoteModule: true,
+        contextIsolation: false
       },
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
   // mainWindow.webContents.openDevTools();
+
+
+  remoteMain.initialize();
+  require('@electron/remote/main').enable(mainWindow.webContents)
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
