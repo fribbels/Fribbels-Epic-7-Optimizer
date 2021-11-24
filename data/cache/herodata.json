@@ -1112,7 +1112,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1100_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1100_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc102301",
+        "id": "exc102301",
+        "name": "Grudge Marble",
+        "description": "A marble filled with the grudges of people who pledged their souls and loyalty to Kayron",
+        "unit": "c1023",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11960,
@@ -13082,7 +13096,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c3026_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c3026_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc106601",
+        "id": "exc106601",
+        "name": "Dragon Emerald",
+        "description": "Jewelry that Luna's father passed on to her. It is the only thing her mother left behind when she left.",
+        "unit": "c1066",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10990,
@@ -14860,6 +14888,19 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1113_l.png"
     },
     "ex_equip": [
+      {
+        "_id": "exc102301",
+        "id": "exc102301",
+        "name": "Grudge Marble",
+        "description": "A marble filled with the grudges of people who pledged their souls and loyalty to Kayron",
+        "unit": "c1023",
+        "role": "assassin",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        }
+      }
     ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
@@ -29937,6 +29978,98 @@
         "spd": 112,
         "def": 553,
         "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Zahhak": {
+    "_id": "zahhak",
+    "name": "Zahhak",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "warrior",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/zahhakPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/zahhakPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11782,
+        "atk": 757,
+        "hp": 4074,
+        "spd": 115,
+        "def": 446,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13380,
+        "atk": 945,
+        "hp": 4414,
+        "spd": 119,
+        "def": 446,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14700,
+        "atk": 943,
+        "hp": 5122,
+        "spd": 115,
+        "def": 553,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17246,
+        "atk": 1177,
+        "hp": 5542,
+        "spd": 119,
+        "def": 553,
+        "chc": 0.27,
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0,

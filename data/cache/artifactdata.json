@@ -1567,6 +1567,20 @@
       "health": 21
     }
   },
+  "Pure White Trust": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0126.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0126_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0126_l.jpg"
+    },
+    "name": "Pure White Trust",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    }
+  },
   "Radiant Forever": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0045.png",
