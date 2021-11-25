@@ -313,6 +313,7 @@ module.exports = {
 }
 
 function post(api, request) {
+    console.log("Call: ", api);
     return new Promise((resolve, reject) => {
         axios.post(endpoint + api, request)
         .then(response => {

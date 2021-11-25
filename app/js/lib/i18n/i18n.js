@@ -128,3 +128,14 @@ module.exports = {
 
     }
 }
+
+function fillMissingStrings(zh, dest) {
+    for (key of Object.keys(zh)) {
+        if (!dest[key]) {
+            dest[key] = "*TEMP* " + key
+        }
+    }
+
+
+    console.log(JSON.stringify(dest, null, 2))
+}

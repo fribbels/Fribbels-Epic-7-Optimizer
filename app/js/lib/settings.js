@@ -1,5 +1,5 @@
-const { remote } = require('electron')
-const dialog = remote.dialog;
+const remote = require('@electron/remote');
+const dialog = remote.dialog
 const currentWindow = remote.getCurrentWindow();
 const documentsPath = remote.app.getPath('documents');
 const savesFolder = documentsPath + '/FribbelsOptimizerSaves';

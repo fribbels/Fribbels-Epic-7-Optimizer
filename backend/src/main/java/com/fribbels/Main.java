@@ -54,6 +54,7 @@ public class Main {
         server.createContext("/ocr", new OcrRequestHandler());
 
         System.out.println("START BACKEND");
+        System.err.println("START BACKEND");
         server.setExecutor(executorService);
         server.start();
     }

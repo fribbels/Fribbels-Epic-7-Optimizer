@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { remote } = require('electron')
+const remote = require('@electron/remote');
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
