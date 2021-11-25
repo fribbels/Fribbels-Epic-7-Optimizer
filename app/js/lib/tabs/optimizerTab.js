@@ -5,37 +5,8 @@ var currentFilteredItems = [];
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
+var currentExecutionId;
 var resized = false;
-
-function buildSlider(slider) {
-    var sliderEl = document.querySelector(slider);
-    var nrInput = document.querySelector(slider + 'Input');
-    rangesliderJs.create(sliderEl, {
-        onSlideEnd: val => {
-            nrInput.setAttribute('value', val)
-            recalculateFilters();
-        },
-        onSlide: val => {
-            nrInput.setAttribute('value', val)
-        },
-    })
-    nrInput.addEventListener('input',  ev => sliderEl['rangeslider-js'].update({value: ev.target.value}))
-}
-
-function buildTopSlider(slider) {
-    var sliderEl = document.querySelector(slider);
-    var nrInput = document.querySelector(slider + 'Input');
-    rangesliderJs.create(sliderEl, {
-        onSlideEnd: val => {
-            nrInput.setAttribute('value', Math.round(0.01 * Math.pow(val, 2)))
-            recalculateFilters();
-        },
-        onSlide: val => {
-            nrInput.setAttribute('value', Math.round(0.01 * Math.pow(val, 2)))
-        },
-    })
-    nrInput.addEventListener('input',  ev => sliderEl['rangeslider-js'].update({value: ev.target.value}))
-}
 
 function inputDisplayNumber(value) {
     if (value == 0 || value == 2147483647) {
@@ -54,138 +25,56 @@ function inputDisplayNumberNumber(value, base) {
     return value;
 }
 
-function fixSliders() {
+function fixSliders(index) {
+    if (index == null || index == undefined) {
+        index = '';
+    }
     // if (!resized) {
     //     console.log("NOT FIXING")
     //     return;
     // }
     console.log("Fixing sliders")
-    document.querySelector('#atkSlider')['rangeslider-js'].update()
-    document.querySelector('#hpSlider')['rangeslider-js'].update()
-    document.querySelector('#defSlider')['rangeslider-js'].update()
-    document.querySelector('#spdSlider')['rangeslider-js'].update()
-    document.querySelector('#crSlider')['rangeslider-js'].update()
-    document.querySelector('#cdSlider')['rangeslider-js'].update()
-    document.querySelector('#effSlider')['rangeslider-js'].update()
-    document.querySelector('#resSlider')['rangeslider-js'].update()
-    document.querySelector('#filterSlider')['rangeslider-js'].update()
+    document.querySelector('#atkSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#hpSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#defSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#spdSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#crSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#cdSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#effSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#resSlider' + index)['rangeslider-js'].update()
+    document.querySelector('#filterSlider' + index)['rangeslider-js'].update()
 
     resized = false;
 }
 
-async function loadPreviousHeroFilters(heroResponse) {
-    const heroId = document.getElementById('inputHeroAdd').value;
-    if (!heroResponse) {
-        heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
-    }
-
-    const hero = heroResponse.hero;
-    const request = hero.optimizationRequest;
-
-    if (!hero) return;
-    if (!request) {
-        const optimizerSettings = Settings.getOptimizerOptions();
-
-        $("#inputPredictReforges").prop('checked', optimizerSettings.settingDefaultUseReforgedStats);
-        $("#inputSubstatMods").prop('checked', optimizerSettings.settingDefaultUseSubstatMods);
-        $("#inputAllowLockedItems").prop('checked', optimizerSettings.settingDefaultLockedItems);
-        $("#inputAllowEquippedItems").prop('checked', optimizerSettings.settingDefaultEquippedItems);
-        $("#inputOrderedHeroPriority").prop('checked', optimizerSettings.settingDefaultUseHeroPriority);
-        $("#inputKeepCurrentItems").prop('checked', optimizerSettings.settingDefaultKeepCurrent);
-        return;
-    }
-
-    $("#inputMinAtkLimit").val(inputDisplayNumber(request.inputAtkMinLimit))
-    $("#inputMaxAtkLimit").val(inputDisplayNumber(request.inputAtkMaxLimit))
-    $("#inputMinHpLimit").val(inputDisplayNumber(request.inputHpMinLimit))
-    $("#inputMaxHpLimit").val(inputDisplayNumber(request.inputHpMaxLimit))
-    $("#inputMaxHpLimit").val(inputDisplayNumber(request.inputHpMaxLimit));
-    $("#inputMinDefLimit").val(inputDisplayNumber(request.inputDefMinLimit));
-    $("#inputMaxDefLimit").val(inputDisplayNumber(request.inputDefMaxLimit));
-    $("#inputMinSpdLimit").val(inputDisplayNumber(request.inputSpdMinLimit));
-    $("#inputMaxSpdLimit").val(inputDisplayNumber(request.inputSpdMaxLimit));
-    $("#inputMinCrLimit").val(inputDisplayNumber(request.inputCrMinLimit));
-    $("#inputMaxCrLimit").val(inputDisplayNumber(request.inputCrMaxLimit));
-    $("#inputMinCdLimit").val(inputDisplayNumber(request.inputCdMinLimit));
-    $("#inputMaxCdLimit").val(inputDisplayNumber(request.inputCdMaxLimit));
-    $("#inputMinEffLimit").val(inputDisplayNumber(request.inputEffMinLimit));
-    $("#inputMaxEffLimit").val(inputDisplayNumber(request.inputEffMaxLimit));
-    $("#inputMinResLimit").val(inputDisplayNumber(request.inputResMinLimit));
-    $("#inputMaxResLimit").val(inputDisplayNumber(request.inputResMaxLimit));
-
-    $("#inputMinCpLimit").val(inputDisplayNumber(request.inputMinCpLimit));
-    $("#inputMaxCpLimit").val(inputDisplayNumber(request.inputMaxCpLimit));
-    $("#inputMinHppsLimit").val(inputDisplayNumber(request.inputMinHppsLimit));
-    $("#inputMaxHppsLimit").val(inputDisplayNumber(request.inputMaxHppsLimit));
-    $("#inputMinEhpLimit").val(inputDisplayNumber(request.inputMinEhpLimit));
-    $("#inputMaxEhpLimit").val(inputDisplayNumber(request.inputMaxEhpLimit));
-    $("#inputMinEhppsLimit").val(inputDisplayNumber(request.inputMinEhppsLimit));
-    $("#inputMaxEhppsLimit").val(inputDisplayNumber(request.inputMaxEhppsLimit));
-    $("#inputMinDmgLimit").val(inputDisplayNumber(request.inputMinDmgLimit));
-    $("#inputMaxDmgLimit").val(inputDisplayNumber(request.inputMaxDmgLimit));
-    $("#inputMinDmgpsLimit").val(inputDisplayNumber(request.inputMinDmgpsLimit));
-    $("#inputMaxDmgpsLimit").val(inputDisplayNumber(request.inputMaxDmgpsLimit));
-    $("#inputMinMcdmgLimit").val(inputDisplayNumber(request.inputMinMcdmgLimit));
-    $("#inputMaxMcdmgLimit").val(inputDisplayNumber(request.inputMaxMcdmgLimit));
-    $("#inputMinMcdmgpsLimit").val(inputDisplayNumber(request.inputMinMcdmgpsLimit));
-    $("#inputMaxMcdmgpsLimit").val(inputDisplayNumber(request.inputMaxMcdmgpsLimit));
-
-    $("#inputMinDmgHLimit").val(inputDisplayNumber(request.inputMinDmgHLimit));
-    $("#inputMaxDmgHLimit").val(inputDisplayNumber(request.inputMaxDmgHLimit));
-    $("#inputMinUpgradesLimit").val(inputDisplayNumber(request.inputMinUpgradesLimit));
-    $("#inputMaxUpgradesLimit").val(inputDisplayNumber(request.inputMaxUpgradesLimit));
-    $("#inputMinConversionsLimit").val(inputDisplayNumber(request.inputMinConversionsLimit));
-    $("#inputMaxConversionsLimit").val(inputDisplayNumber(request.inputMaxConversionsLimit));
-    $("#inputMinScoreLimit").val(inputDisplayNumber(request.inputMinScoreLimit));
-    $("#inputMaxScoreLimit").val(inputDisplayNumber(request.inputMaxScoreLimit));
-    $("#inputMinPriorityLimit").val(inputDisplayNumber(request.inputMinPriorityLimit));
-    $("#inputMaxPriorityLimit").val(inputDisplayNumber(request.inputMaxPriorityLimit));
-
-    const optimizerSettings = Settings.getOptimizerOptions();
-
-    $("#inputPredictReforges").prop('checked',     isNullUndefined(request.inputPredictReforges)     ? optimizerSettings.settingDefaultUseReforgedStats : request.inputPredictReforges);
-    $("#inputSubstatMods").prop('checked',         isNullUndefined(request.inputSubstatMods)         ? optimizerSettings.settingDefaultUseSubstatMods   : request.inputSubstatMods);
-    $("#inputAllowLockedItems").prop('checked',    isNullUndefined(request.inputAllowLockedItems)    ? optimizerSettings.settingDefaultLockedItems      : request.inputAllowLockedItems);
-    $("#inputAllowEquippedItems").prop('checked',  isNullUndefined(request.inputAllowEquippedItems)  ? optimizerSettings.settingDefaultEquippedItems    : request.inputAllowEquippedItems);
-    $("#inputKeepCurrentItems").prop('checked',    isNullUndefined(request.inputKeepCurrentItems)    ? optimizerSettings.settingDefaultKeepCurrent      : request.inputKeepCurrentItems);
-    $("#inputOrderedHeroPriority").prop('checked', isNullUndefined(request.inputOrderedHeroPriority) ? optimizerSettings.settingDefaultUseHeroPriority  : request.inputOrderedHeroPriority);
-
-    document.querySelector('#atkSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
-    document.querySelector('#atkSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
-
-    document.querySelector('#hpSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputHpPriority)})
-    document.querySelector('#hpSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputHpPriority))
-
-    document.querySelector('#defSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputDefPriority)})
-    document.querySelector('#defSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputDefPriority))
-
-    document.querySelector('#spdSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputSpdPriority)})
-    document.querySelector('#spdSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputSpdPriority))
-
-    document.querySelector('#crSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputCrPriority)})
-    document.querySelector('#crSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputCrPriority))
-
-    document.querySelector('#cdSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputCdPriority)})
-    document.querySelector('#cdSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputCdPriority))
-
-    document.querySelector('#effSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputEffPriority)})
-    document.querySelector('#effSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputEffPriority))
-
-    document.querySelector('#resSlider')['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputResPriority)})
-    document.querySelector('#resSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputResPriority))
-
-    document.querySelector('#filterSlider')['rangeslider-js'].update({value: Math.sqrt(inputDisplayNumberNumber(request.inputFilterPriority) / 0.01)})
-    document.querySelector('#filterSliderInput').setAttribute('value', inputDisplayNumberNumber(request.inputFilterPriority, 100))
-
-    // $('#forceNumberSelect').val(inputDisplayNumberNumber(request.inputForceNumberSelect))
-
-    Selectors.setGearMainAndSetsFromRequest(request);
-    recalculateFilters(null, heroResponse);
-    fixSliders()
-}
-
 function isNullUndefined(x) {
     return x === null || x === undefined;
+}
+
+function calculatePlaceholderRatings(index) {
+    if (index == null || index == undefined) {
+        index = '';
+    }
+
+    const minDef = readNumber('inputMinDefLimit' + index)
+    const minHp = readNumber('inputMinHpLimit' + index)
+
+    if (minDef == undefined || minHp == undefined || minDef == 0 || minHp == 0) {
+        $("#inputMinEhpLimit" + index).attr("placeholder", "");
+    } else {
+        const ehp = Math.floor(minHp * (minDef / 300 + 1));
+        $("#inputMinEhpLimit" + index).attr("placeholder", ehp);
+    }
+
+    const minAtk = readNumber('inputMinAtkLimit' + index)
+    const minCd = readNumber('inputMinCdLimit' + index)
+
+    if (minAtk == undefined || minCd == undefined || minAtk == 0 || minCd == 0) {
+        $("#inputMinMcdmgLimit" + index).attr("placeholder", "");
+    } else {
+        const mcd = minAtk * minCd / 100;
+        $("#inputMinMcdmgLimit" + index).attr("placeholder", mcd);
+    }
 }
 
 module.exports = {
@@ -195,6 +84,21 @@ module.exports = {
             resized = true;
             fixSliders()
         });
+
+        document.getElementById('inputMinDefLimit').addEventListener("change", () => {
+            calculatePlaceholderRatings()
+        });
+        document.getElementById('inputMinHpLimit').addEventListener("change", () => {
+            calculatePlaceholderRatings()
+        });
+
+        document.getElementById('inputMinAtkLimit').addEventListener("change", () => {
+            calculatePlaceholderRatings()
+        });
+        document.getElementById('inputMinCdLimit').addEventListener("change", () => {
+            calculatePlaceholderRatings()
+        });
+
 
         document.getElementById('submitOptimizerRequest').addEventListener("click", () => {
             submitOptimizationRequest()
@@ -268,7 +172,7 @@ module.exports = {
             recalculateFilters();
             redrawHeroImage();
             module.exports.redrawHeroSelector();
-            loadPreviousHeroFilters(heroResponse);
+            module.exports.loadPreviousHeroFilters(heroResponse, null, true);
             OptimizerGrid.setPinnedHero(heroResponse.hero);
             StatPreview.draw(heroResponse.hero, heroResponse.hero)
         });
@@ -317,15 +221,490 @@ module.exports = {
         //     recalculateFilters();
         // });
 
-        buildSlider('#atkSlider')
-        buildSlider('#hpSlider')
-        buildSlider('#defSlider')
-        buildSlider('#spdSlider')
-        buildSlider('#crSlider')
-        buildSlider('#cdSlider')
-        buildSlider('#effSlider')
-        buildSlider('#resSlider')
-        buildTopSlider('#filterSlider')
+        module.exports.buildSlider('#atkSlider', true)
+        module.exports.buildSlider('#hpSlider', true)
+        module.exports.buildSlider('#defSlider', true)
+        module.exports.buildSlider('#spdSlider', true)
+        module.exports.buildSlider('#crSlider', true)
+        module.exports.buildSlider('#cdSlider', true)
+        module.exports.buildSlider('#effSlider', true)
+        module.exports.buildSlider('#resSlider', true)
+        module.exports.buildTopSlider('#filterSlider', true)
+    },
+
+    buildSlider: (slider, recalc) => {
+        var sliderEl = document.querySelector(slider);
+        var nrInput = document.querySelector(slider + 'Input');
+        rangesliderJs.create(sliderEl, {
+            onSlideEnd: val => {
+                nrInput.setAttribute('value', val)
+                if (recalc) {
+                    recalculateFilters();
+                }
+            },
+            onSlide: val => {
+                nrInput.setAttribute('value', val)
+            },
+        })
+        nrInput.addEventListener('input',  ev => sliderEl['rangeslider-js'].update({value: ev.target.value}))
+    },
+
+    buildTopSlider: (slider, recalc) => {
+        var sliderEl = document.querySelector(slider);
+        var nrInput = document.querySelector(slider + 'Input');
+        rangesliderJs.create(sliderEl, {
+            onSlideEnd: val => {
+                nrInput.setAttribute('value', Math.round(0.01 * Math.pow(val, 2)))
+                if (recalc) {
+                    recalculateFilters();
+                }
+            },
+            onSlide: val => {
+                nrInput.setAttribute('value', Math.round(0.01 * Math.pow(val, 2)))
+            },
+        })
+        nrInput.addEventListener('input',  ev => sliderEl['rangeslider-js'].update({value: ev.target.value}))
+    },
+
+    applyItemFilters: async (params, heroResponse, allItemsResponse, submit, allowedHeroIds, overrideGearMainFilters) => {
+        const gearMainFilters = overrideGearMainFilters || Selectors.getGearMainFilters();
+        const getAllItemsResponse = allItemsResponse;
+        const hero = heroResponse.hero;
+        const baseStats = heroResponse.baseStats;
+        const heroId = hero.id;
+        var allItems = getAllItemsResponse.items;
+        var items = allItems;
+
+        const allHeroesResponse = await Api.getAllHeroes()
+        const heroes = allHeroesResponse.heroes;
+
+        if (!params.inputSets) {
+            params.inputSets = [params.inputSetsOne, params.inputSetsTwo, params.inputSetsThree]
+        }
+
+        console.log("Optimization params", params);
+
+        if (params.enhanceLimit) {
+            const limit = params.enhanceLimit.length > 0 ? parseInt(params.enhanceLimit[0]) : 0;
+            items = items.filter(x => x.enhance >= limit);
+        }
+
+        if (params.inputExcludeSet.length > 0) {
+            items = items.filter(x => !params.inputExcludeSet.includes(x.set));
+        }
+
+        if (params.excludeFilter.length > 0) {
+            items = items.filter(x => !params.excludeFilter.includes(x.equippedById) || x.equippedById == heroId);
+        }
+
+        // if (params.inputOnlyMaxedGear) {
+        //     items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
+        // }
+
+        if (isFourAndTwoPieceSets(params.inputSets) || isTwoAndTwoAndTwoPieceSets(params.inputSets)) {
+            const possibleSets = params.inputSets.flat();
+            items = items.filter(x => possibleSets.includes(x.set));
+        }
+
+        if (!params.inputAllowEquippedItems) {
+            items = items.filter(x => !x.equippedById || x.equippedById == heroId);
+        }
+
+        if (!params.inputAllowLockedItems) {
+            items = items.filter(x => !x.locked || x.equippedById == heroId);
+        }
+
+        if (params.inputOrderedHeroPriority) {
+            // todo
+            console.warn(heroes, hero);
+            // var higherPriorityItems = [];
+            var higherPriorityHeroes = [];
+            for (var i = 0; i < heroes.length; i++) {
+                if (heroes[i].id == hero.id) {
+                    break;
+                }
+
+                higherPriorityHeroes.push(heroes[i].id);
+
+                // higherPriorityItems.push(
+                //     heroes[i].equipment.Weapon?.id,
+                //     heroes[i].equipment.Helmet?.id,
+                //     heroes[i].equipment.Armor?.id,
+                //     heroes[i].equipment.Necklace?.id,
+                //     heroes[i].equipment.Ring?.id,
+                //     heroes[i].equipment.Boots?.id
+                // )
+            }
+
+            // higherPriorityItems = higherPriorityItems.filter(x => !!x);
+            higherPriorityHeroes = higherPriorityHeroes.filter(x => !(allowedHeroIds || []).includes(x))
+            items = items.filter(x => !higherPriorityHeroes.includes(x.equippedById))
+            console.warn("DEBUG FILTER", higherPriorityHeroes, allowedHeroIds);
+        }
+
+        if (params.inputKeepCurrentItems) {
+            if (!hero.equipment) {
+                items = [];
+                hero.equipment = {};
+            }
+
+            const equipped = Object.values(hero.equipment);
+            for (var i = 0; i < 6; i++) {
+                const item = equipped[i];
+                if (item) {
+                    items = items.filter(x => {
+                        const passFilter = item.gear != x.gear || item.equippedById == x.equippedById;
+                        // if (!passFilter)
+                        //     console.log(x);
+                        return passFilter;
+                    })
+                }
+            }
+        }
+
+        for (var i = 0; i < gearMainFilters.length; i++) {
+            const filter = gearMainFilters[i];
+            if (filter.length == 0)
+                continue;
+            if (i == 0)
+                items = items.filter(x => filter.includes(x.main.type) && x.gear == "Necklace" || x.gear != "Necklace")
+            if (i == 1)
+                items = items.filter(x => filter.includes(x.main.type) && x.gear == "Ring" || x.gear != "Ring")
+            if (i == 2)
+                items = items.filter(x => filter.includes(x.main.type) && x.gear == "Boots" || x.gear != "Boots")
+        }
+
+        if (params.inputPredictReforges) {
+            console.log("Predict reforges enabled")
+            ItemAugmenter.augment(items);
+            items.forEach(x => {
+                if (Reforge.isReforgeableNow(x)) {
+                    x.substats.forEach(substat => {
+                        if (substat.reforgedValue) {
+                            substat.value = substat.reforgedValue;
+                        }
+                    });
+
+                    x.main.value = x.main.reforgedValue;
+                }
+            })
+        }
+
+        items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit);
+
+        items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems, params.inputPredictReforges, params.inputSubstatMods)
+
+        items = items.sort((a, b) => {
+            return a.set-b.set;
+        })
+
+        const prioritizedItems = [];
+        for (var item of items) {
+            if (params.inputSetsOne.includes(item.set)) {
+                prioritizedItems.unshift(item);
+            } else {
+                prioritizedItems.push(item);
+            }
+        }
+
+        console.log("Filtered items", prioritizedItems.length)
+        currentFilteredItems = prioritizedItems;
+        return {
+            items,
+            allItems
+        };
+    },
+
+    getOptimizationRequestParams: (showError, index) => {
+        if (index == null || index == undefined) {
+            index = '';
+        }
+        const request = new OptimizationRequest();
+
+        const setFilters = Selectors.getSetFilters(index);
+        const mainFilters = Selectors.getGearMainFilters(index);
+        const excludeFilter = Selectors.getExcludeGearFrom(index);
+        const enhanceLimit = Selectors.getEnhanceLimit(index);
+        const setFormat = getSetFormat(setFilters.sets, showError);
+        console.log("SETFORMAT", setFormat);
+
+        request.inputPredictReforges   = readCheckbox('inputPredictReforges' + index);
+        request.inputSubstatMods   = readCheckbox('inputSubstatMods' + index);
+        request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems' + index);
+        request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems' + index);
+        request.inputOrderedHeroPriority   = readCheckbox('inputOrderedHeroPriority' + index);
+        request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems' + index);
+        request.inputOnlyMaxedGear   = readCheckbox('inputOnlyMaxedGear' + index);
+        // request.inputOver85   = readCheckbox('inputOver85');
+        // request.inputOnlyPlus15Gear   = readCheckbox('inputOnlyPlus15Gear');
+
+        request.inputAtkMinLimit = readNumber('inputMinAtkLimit' + index);
+        request.inputAtkMaxLimit = readNumber('inputMaxAtkLimit' + index);
+        request.inputHpMinLimit  = readNumber('inputMinHpLimit' + index);
+        request.inputHpMaxLimit  = readNumber('inputMaxHpLimit' + index);
+        request.inputDefMinLimit = readNumber('inputMinDefLimit' + index);
+        request.inputDefMaxLimit = readNumber('inputMaxDefLimit' + index);
+        request.inputSpdMinLimit = readNumber('inputMinSpdLimit' + index);
+        request.inputSpdMaxLimit = readNumber('inputMaxSpdLimit' + index);
+        request.inputCrMinLimit  = readNumber('inputMinCrLimit' + index);
+        request.inputCrMaxLimit  = readNumber('inputMaxCrLimit' + index);
+        request.inputCdMinLimit  = readNumber('inputMinCdLimit' + index);
+        request.inputCdMaxLimit  = readNumber('inputMaxCdLimit' + index);
+        request.inputEffMinLimit = readNumber('inputMinEffLimit' + index);
+        request.inputEffMaxLimit = readNumber('inputMaxEffLimit' + index);
+        request.inputResMinLimit = readNumber('inputMinResLimit' + index);
+        request.inputResMaxLimit = readNumber('inputMaxResLimit' + index);
+
+        request.inputMinCpLimit = readNumber('inputMinCpLimit' + index);
+        request.inputMaxCpLimit = readNumber('inputMaxCpLimit' + index);
+        request.inputMinHppsLimit = readNumber('inputMinHppsLimit' + index);
+        request.inputMaxHppsLimit = readNumber('inputMaxHppsLimit' + index);
+        request.inputMinEhpLimit = readNumber('inputMinEhpLimit' + index);
+        request.inputMaxEhpLimit = readNumber('inputMaxEhpLimit' + index);
+        request.inputMinEhppsLimit = readNumber('inputMinEhppsLimit' + index);
+        request.inputMaxEhppsLimit = readNumber('inputMaxEhppsLimit' + index);
+        request.inputMinDmgLimit = readNumber('inputMinDmgLimit' + index);
+        request.inputMaxDmgLimit = readNumber('inputMaxDmgLimit' + index);
+        request.inputMinDmgpsLimit = readNumber('inputMinDmgpsLimit' + index);
+        request.inputMaxDmgpsLimit = readNumber('inputMaxDmgpsLimit' + index);
+        request.inputMinMcdmgLimit = readNumber('inputMinMcdmgLimit' + index);
+        request.inputMaxMcdmgLimit = readNumber('inputMaxMcdmgLimit' + index);
+        request.inputMinMcdmgpsLimit = readNumber('inputMinMcdmgpsLimit' + index);
+        request.inputMaxMcdmgpsLimit = readNumber('inputMaxMcdmgpsLimit' + index);
+
+        request.inputMinDmgHLimit = readNumber('inputMinDmgHLimit' + index);
+        request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit' + index);
+        request.inputMinUpgradesLimit = readNumber('inputMinUpgradesLimit' + index);
+        request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit' + index);
+        request.inputMinConversionsLimit = readNumber('inputMinConversionsLimit' + index);
+        request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit' + index);
+        request.inputMinScoreLimit = readNumber('inputMinScoreLimit' + index);
+        request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit' + index);
+        request.inputMinPriorityLimit = readNumber('inputMinPriorityLimit' + index);
+        request.inputMaxPriorityLimit = readNumber('inputMaxPriorityLimit' + index);
+
+        // request.inputAtkMinForce = readNumber('inputMinAtkForce');
+        // request.inputAtkMaxForce = readNumber('inputMaxAtkForce');
+        // request.inputAtkPercentMinForce = readNumber('inputMinAtkPercentForce');
+        // request.inputAtkPercentMaxForce = readNumber('inputMaxAtkPercentForce');
+        // request.inputSpdMinForce = readNumber('inputMinSpdForce');
+        // request.inputSpdMaxForce = readNumber('inputMaxSpdForce');
+        // request.inputCrMinForce = readNumber('inputMinCrForce');
+        // request.inputCrMaxForce = readNumber('inputMaxCrForce');
+        // request.inputCdMinForce = readNumber('inputMinCdForce');
+        // request.inputCdMaxForce = readNumber('inputMaxCdForce');
+        // request.inputHpMinForce = readNumber('inputMinHpForce');
+        // request.inputHpMaxForce = readNumber('inputMaxHpForce');
+        // request.inputHpPercentMinForce = readNumber('inputMinHpPercentForce');
+        // request.inputHpPercentMaxForce = readNumber('inputMaxHpPercentForce');
+        // request.inputDefMinForce = readNumber('inputMinDefForce');
+        // request.inputDefMaxForce = readNumber('inputMaxDefForce');
+        // request.inputDefPercentMinForce = readNumber('inputMinDefPercentForce');
+        // request.inputDefPercentMaxForce = readNumber('inputMaxDefPercentForce');
+        // request.inputEffMinForce = readNumber('inputMinEffForce');
+        // request.inputEffMaxForce = readNumber('inputMaxEffForce');
+        // request.inputResMinForce = readNumber('inputMinResForce');
+        // request.inputResMaxForce = readNumber('inputMaxResForce');
+
+        request.inputAtkPriority = readNumber('atkSlider' + index + 'Input');
+        request.inputHpPriority = readNumber('hpSlider' + index + 'Input');
+        request.inputDefPriority = readNumber('defSlider' + index + 'Input');
+        request.inputSpdPriority = readNumber('spdSlider' + index + 'Input');
+        request.inputCrPriority = readNumber('crSlider' + index + 'Input');
+        request.inputCdPriority = readNumber('cdSlider' + index + 'Input');
+        request.inputEffPriority = readNumber('effSlider' + index + 'Input');
+        request.inputResPriority = readNumber('resSlider' + index + 'Input');
+        request.inputFilterPriority = readNumber('filterSlider' + index + 'Input');
+
+        // request.inputForceNumberSelect = readNumber('forceNumberSelect')
+
+        request.inputSets = setFilters.sets;
+
+        request.inputSetsOne = setFilters.sets[0];
+        request.inputSetsTwo = setFilters.sets[1];
+        request.inputSetsThree = setFilters.sets[2];
+        request.inputExcludeSet = setFilters.exclude;
+
+        request.inputNecklaceStat = mainFilters[0];
+        request.inputRingStat = mainFilters[1];
+        request.inputBootsStat = mainFilters[2];
+
+        request.excludeFilter = excludeFilter;
+        request.enhanceLimit = enhanceLimit;
+
+        request.setFormat = setFormat;
+
+        return request;
+    },
+
+    loadPreviousHeroFilters: async (heroResponse, index, recalc, tab) => {
+        if (index == null || index == undefined) {
+            index = '';
+        }
+
+        if (!heroResponse) {
+            const heroId = document.getElementById('inputHeroAdd').value;
+            heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
+        }
+
+        const hero = heroResponse.hero;
+        const request = hero.optimizationRequest;
+
+        if (!hero) return;
+        if (!request) {
+            const optimizerSettings = Settings.getOptimizerOptions();
+
+            $("#inputPredictReforges" + index).prop('checked', optimizerSettings.settingDefaultUseReforgedStats);
+            $("#inputSubstatMods" + index).prop('checked', optimizerSettings.settingDefaultUseSubstatMods);
+            $("#inputAllowLockedItems" + index).prop('checked', optimizerSettings.settingDefaultLockedItems);
+            $("#inputAllowEquippedItems" + index).prop('checked', optimizerSettings.settingDefaultEquippedItems);
+            $("#inputOrderedHeroPriority" + index).prop('checked', optimizerSettings.settingDefaultUseHeroPriority);
+            $("#inputKeepCurrentItems" + index).prop('checked', optimizerSettings.settingDefaultKeepCurrent);
+            return;
+        }
+
+        $("#inputMinAtkLimit" + index).val(inputDisplayNumber(request.inputAtkMinLimit))
+        $("#inputMaxAtkLimit" + index).val(inputDisplayNumber(request.inputAtkMaxLimit))
+        $("#inputMinHpLimit" + index).val(inputDisplayNumber(request.inputHpMinLimit))
+        $("#inputMaxHpLimit" + index).val(inputDisplayNumber(request.inputHpMaxLimit))
+        $("#inputMaxHpLimit" + index).val(inputDisplayNumber(request.inputHpMaxLimit));
+        $("#inputMinDefLimit" + index).val(inputDisplayNumber(request.inputDefMinLimit));
+        $("#inputMaxDefLimit" + index).val(inputDisplayNumber(request.inputDefMaxLimit));
+        $("#inputMinSpdLimit" + index).val(inputDisplayNumber(request.inputSpdMinLimit));
+        $("#inputMaxSpdLimit" + index).val(inputDisplayNumber(request.inputSpdMaxLimit));
+        $("#inputMinCrLimit" + index).val(inputDisplayNumber(request.inputCrMinLimit));
+        $("#inputMaxCrLimit" + index).val(inputDisplayNumber(request.inputCrMaxLimit));
+        $("#inputMinCdLimit" + index).val(inputDisplayNumber(request.inputCdMinLimit));
+        $("#inputMaxCdLimit" + index).val(inputDisplayNumber(request.inputCdMaxLimit));
+        $("#inputMinEffLimit" + index).val(inputDisplayNumber(request.inputEffMinLimit));
+        $("#inputMaxEffLimit" + index).val(inputDisplayNumber(request.inputEffMaxLimit));
+        $("#inputMinResLimit" + index).val(inputDisplayNumber(request.inputResMinLimit));
+        $("#inputMaxResLimit" + index).val(inputDisplayNumber(request.inputResMaxLimit));
+
+        $("#inputMinCpLimit" + index).val(inputDisplayNumber(request.inputMinCpLimit));
+        $("#inputMaxCpLimit" + index).val(inputDisplayNumber(request.inputMaxCpLimit));
+        $("#inputMinHppsLimit" + index).val(inputDisplayNumber(request.inputMinHppsLimit));
+        $("#inputMaxHppsLimit" + index).val(inputDisplayNumber(request.inputMaxHppsLimit));
+        $("#inputMinEhpLimit" + index).val(inputDisplayNumber(request.inputMinEhpLimit));
+        $("#inputMaxEhpLimit" + index).val(inputDisplayNumber(request.inputMaxEhpLimit));
+        $("#inputMinEhppsLimit" + index).val(inputDisplayNumber(request.inputMinEhppsLimit));
+        $("#inputMaxEhppsLimit" + index).val(inputDisplayNumber(request.inputMaxEhppsLimit));
+        $("#inputMinDmgLimit" + index).val(inputDisplayNumber(request.inputMinDmgLimit));
+        $("#inputMaxDmgLimit" + index).val(inputDisplayNumber(request.inputMaxDmgLimit));
+        $("#inputMinDmgpsLimit" + index).val(inputDisplayNumber(request.inputMinDmgpsLimit));
+        $("#inputMaxDmgpsLimit" + index).val(inputDisplayNumber(request.inputMaxDmgpsLimit));
+        $("#inputMinMcdmgLimit" + index).val(inputDisplayNumber(request.inputMinMcdmgLimit));
+        $("#inputMaxMcdmgLimit" + index).val(inputDisplayNumber(request.inputMaxMcdmgLimit));
+        $("#inputMinMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMinMcdmgpsLimit));
+        $("#inputMaxMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMaxMcdmgpsLimit));
+
+        $("#inputMinDmgHLimit" + index).val(inputDisplayNumber(request.inputMinDmgHLimit));
+        $("#inputMaxDmgHLimit" + index).val(inputDisplayNumber(request.inputMaxDmgHLimit));
+        $("#inputMinUpgradesLimit" + index).val(inputDisplayNumber(request.inputMinUpgradesLimit));
+        $("#inputMaxUpgradesLimit" + index).val(inputDisplayNumber(request.inputMaxUpgradesLimit));
+        $("#inputMinConversionsLimit" + index).val(inputDisplayNumber(request.inputMinConversionsLimit));
+        $("#inputMaxConversionsLimit" + index).val(inputDisplayNumber(request.inputMaxConversionsLimit));
+        $("#inputMinScoreLimit" + index).val(inputDisplayNumber(request.inputMinScoreLimit));
+        $("#inputMaxScoreLimit" + index).val(inputDisplayNumber(request.inputMaxScoreLimit));
+        $("#inputMinPriorityLimit" + index).val(inputDisplayNumber(request.inputMinPriorityLimit));
+        $("#inputMaxPriorityLimit" + index).val(inputDisplayNumber(request.inputMaxPriorityLimit));
+
+        const optimizerSettings = Settings.getOptimizerOptions();
+
+        $("#inputPredictReforges" + index).prop('checked',     isNullUndefined(request.inputPredictReforges)     ? optimizerSettings.settingDefaultUseReforgedStats : request.inputPredictReforges);
+        $("#inputSubstatMods" + index).prop('checked',         isNullUndefined(request.inputSubstatMods)         ? optimizerSettings.settingDefaultUseSubstatMods   : request.inputSubstatMods);
+        $("#inputAllowLockedItems" + index).prop('checked',    isNullUndefined(request.inputAllowLockedItems)    ? optimizerSettings.settingDefaultLockedItems      : request.inputAllowLockedItems);
+        $("#inputAllowEquippedItems" + index).prop('checked',  isNullUndefined(request.inputAllowEquippedItems)  ? optimizerSettings.settingDefaultEquippedItems    : request.inputAllowEquippedItems);
+        $("#inputKeepCurrentItems" + index).prop('checked',    isNullUndefined(request.inputKeepCurrentItems)    ? optimizerSettings.settingDefaultKeepCurrent      : request.inputKeepCurrentItems);
+        $("#inputOrderedHeroPriority" + index).prop('checked', isNullUndefined(request.inputOrderedHeroPriority) ? optimizerSettings.settingDefaultUseHeroPriority  : request.inputOrderedHeroPriority);
+
+        document.querySelector('#atkSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputAtkPriority)})
+        document.querySelector('#atkSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputAtkPriority))
+
+        document.querySelector('#hpSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputHpPriority)})
+        document.querySelector('#hpSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputHpPriority))
+
+        document.querySelector('#defSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputDefPriority)})
+        document.querySelector('#defSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputDefPriority))
+
+        document.querySelector('#spdSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputSpdPriority)})
+        document.querySelector('#spdSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputSpdPriority))
+
+        document.querySelector('#crSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputCrPriority)})
+        document.querySelector('#crSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputCrPriority))
+
+        document.querySelector('#cdSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputCdPriority)})
+        document.querySelector('#cdSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputCdPriority))
+
+        document.querySelector('#effSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputEffPriority)})
+        document.querySelector('#effSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputEffPriority))
+
+        document.querySelector('#resSlider' + index)['rangeslider-js'].update({value: inputDisplayNumberNumber(request.inputResPriority)})
+        document.querySelector('#resSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputResPriority))
+
+        document.querySelector('#filterSlider' + index)['rangeslider-js'].update({value: Math.sqrt(inputDisplayNumberNumber(request.inputFilterPriority) / 0.01)})
+        document.querySelector('#filterSlider' + index + 'Input').setAttribute('value', inputDisplayNumberNumber(request.inputFilterPriority, 100))
+
+        // $('#forceNumberSelect').val(inputDisplayNumberNumber(request.inputForceNumberSelect))
+
+        Selectors.setGearMainAndSetsFromRequest(request, index);
+
+        if (recalc) {
+            recalculateFilters(null, heroResponse);
+        }
+        fixSliders(index)
+        if (tab != 'multiOptimizer') {
+            calculatePlaceholderRatings(index)
+        }
+    },
+
+    // True if blocking error
+    warnParams: (params, overridePermutations) => {
+        if (params.inputFilterPriority == 100
+        &&  params.inputAtkPriority == 0
+        &&  params.inputHpPriority == 0
+        &&  params.inputDefPriority == 0
+        &&  params.inputSpdPriority == 0
+        &&  params.inputCrPriority == 0
+        &&  params.inputCdPriority == 0
+        &&  params.inputEffPriority == 0
+        &&  params.inputResPriority == 0) {
+            Notifier.info("No stat priority selected. For best results, use the stat priority filter.")
+        } else if (params.inputFilterPriority == 100) {
+            Dialog.error("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
+            return true;
+        } else if (params.inputFilterPriority != 100
+        &&  params.inputAtkPriority == 0
+        &&  params.inputHpPriority == 0
+        &&  params.inputDefPriority == 0
+        &&  params.inputSpdPriority == 0
+        &&  params.inputCrPriority == 0
+        &&  params.inputCdPriority == 0
+        &&  params.inputEffPriority == 0
+        &&  params.inputResPriority == 0) {
+            Dialog.error("Top % was selected but no stat priorities are assigned. Assign stat priorities otherwise the filter will not work.")
+            return true;
+        }
+
+        if (params.inputSetsOne && params.inputSetsOne.length == 0) {
+            Notifier.info("No sets were selected. For best results, select at least one set.")
+        }
+
+        if (params.inputDefMinLimit > 10000) {
+            Dialog.error("Your minimum defense filter is over 10,000, did you mean HP?");
+            return true;
+        }
+
+        if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
+        &&  params.inputRingStat && params.inputRingStat.length == 0
+        &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
+            Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
+        }
+
+        if ((overridePermutations ? overridePermutations : permutations) >= 5_000_000_000) {
+            Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
+        }
+        return false;
     },
 
     drawPreview: (gearIds, mods) => {
@@ -372,16 +751,16 @@ module.exports = {
         })
     },
 
-    getOptimizationRequestParams: () => {
-        return getOptimizationRequestParams();
+    editGearFromIcon: (id, reforge, checkboxPrefix) => {
+        editGearFromIcon(id, reforge, checkboxPrefix);
     },
 
-    editGearFromIcon: (id, reforge) => {
-        editGearFromIcon(id, reforge);
+    lockGearFromIcon: (id, checkboxPrefix) => {
+        lockGearFromIcon(id, checkboxPrefix);
     },
 
-    lockGearFromIcon: (id) => {
-        lockGearFromIcon(id);
+    getCurrentExecutionId: () => {
+        return currentExecutionId;
     },
 
     redrawHeroSelector: async () => {
@@ -467,9 +846,9 @@ function clearOptions() {
     $("#inputKeepCurrentItems").prop('checked', optimizerSettings.settingDefaultKeepCurrent);
 }
 
-async function editGearFromIcon(id, reforge) {
+async function editGearFromIcon(id, reforge, checkboxPrefix) {
     const result = await Api.getItemById(id);
-    console.log(result.item);
+    console.log("a1", result.item);
     const editedItem = await Dialog.editGearDialog(result.item, true, reforge);
 
     ItemAugmenter.augment([editedItem])
@@ -482,9 +861,13 @@ async function editGearFromIcon(id, reforge) {
     Saves.autoSave();
     HeroesGrid.redrawPreview();
     HeroesGrid.refresh();
+
+    if (checkboxPrefix == "enhanceTab") {
+        EnhancingTab.redrawEnhanceGuideFromRemoteId(editedItem.id);
+    }
 }
 
-async function lockGearFromIcon(id) {
+async function lockGearFromIcon(id, checkboxPrefix) {
     const result = await Api.getItemById(id);
     console.log(result.item);
 
@@ -501,6 +884,10 @@ async function lockGearFromIcon(id) {
     drawPreview();
     Saves.autoSave();
     HeroesGrid.redrawPreview();
+
+    if (checkboxPrefix == "enhanceTab") {
+        EnhancingTab.redrawEnhanceGuideFromRemoteId(id);
+    }
 }
 
 function redrawHeroImage() {
@@ -547,7 +934,7 @@ async function recalculateFilters(e, heroResponse) {
         return;
     }
 
-    const params = getOptimizationRequestParams();
+    const params = module.exports.getOptimizationRequestParams();
 
     if (!heroResponse) {
         heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
@@ -555,7 +942,7 @@ async function recalculateFilters(e, heroResponse) {
 
     const allItemsResponse = await Api.getAllItems();
 
-    applyItemFilters(params, heroResponse, allItemsResponse, false).then(result => {
+    module.exports.applyItemFilters(params, heroResponse, allItemsResponse, false).then(result => {
         var items = result.items;
         var allItems = result.allItems;
 
@@ -634,7 +1021,7 @@ async function addBuild() {
     }
 
     await Api.addBuild(heroId, row);
-    await Api.editResultRows(parseInt(rowId), "star");
+    await Api.editResultRows(parseInt(rowId), "star", currentExecutionId);
 
     row.property = "star";
     node.updateData(row);
@@ -658,7 +1045,7 @@ async function removeBuild() {
     console.log("REMOVE BUILD", row)
 
     await Api.removeBuild(heroId, row);
-    await Api.editResultRows(parseInt(rowId), "not star");
+    await Api.editResultRows(parseInt(rowId), "not star", currentExecutionId);
 
     row.property = "not star";
     node.updateData(row);
@@ -688,7 +1075,7 @@ async function equipSelectedGear() {
     }
 
     await Api.addBuild(heroId, row);
-    await Api.editResultRows(parseInt(rowId), "star");
+    await Api.editResultRows(parseInt(rowId), "star", currentExecutionId);
 
     row.property = "star";
     node.updateData(row);
@@ -737,198 +1124,10 @@ async function unlockSelectedGear() {
     Saves.autoSave();
 }
 
-async function applyItemFilters(params, heroResponse, allItemsResponse, submit) {
-    const gearMainFilters = Selectors.getGearMainFilters();
-    const getAllItemsResponse = allItemsResponse;
-    const hero = heroResponse.hero;
-    const baseStats = heroResponse.baseStats;
-    const heroId = hero.id;
-    var allItems = getAllItemsResponse.items;
-    var items = allItems;
-
-    const allHeroesResponse = await Api.getAllHeroes()
-    const heroes = allHeroesResponse.heroes;
-
-    console.log("Optimization params", params);
-
-    if (params.inputExcludeSet.length > 0) {
-        items = items.filter(x => !params.inputExcludeSet.includes(x.set));
-    }
-
-    if (params.excludeFilter.length > 0) {
-        items = items.filter(x => !params.excludeFilter.includes(x.equippedById) || x.equippedById == heroId);
-    }
-
-    // if (params.inputOnlyMaxedGear) {
-    //     items = items.filter(x => x.enhance == 15 && !Reforge.isReforgeable(x));
-    // }
-
-    if (isFourAndTwoPieceSets(params.inputSets) || isTwoAndTwoAndTwoPieceSets(params.inputSets)) {
-        const possibleSets = params.inputSets.flat();
-        items = items.filter(x => possibleSets.includes(x.set));
-    }
-
-    if (!params.inputAllowEquippedItems) {
-        items = items.filter(x => !x.equippedById || x.equippedById == heroId);
-    }
-
-    if (!params.inputAllowLockedItems) {
-        items = items.filter(x => !x.locked || x.equippedById == heroId);
-    }
-
-    if (params.inputOrderedHeroPriority) {
-        // todo
-        console.warn(heroes, hero);
-        // var higherPriorityItems = [];
-        var higherPriorityHeroes = [];
-        for (var i = 0; i < heroes.length; i++) {
-            if (heroes[i].id == hero.id) {
-                break;
-            }
-
-            higherPriorityHeroes.push(heroes[i].id);
-
-            // higherPriorityItems.push(
-            //     heroes[i].equipment.Weapon?.id,
-            //     heroes[i].equipment.Helmet?.id,
-            //     heroes[i].equipment.Armor?.id,
-            //     heroes[i].equipment.Necklace?.id,
-            //     heroes[i].equipment.Ring?.id,
-            //     heroes[i].equipment.Boots?.id
-            // )
-        }
-
-        // higherPriorityItems = higherPriorityItems.filter(x => !!x);
-        items = items.filter(x => !higherPriorityHeroes.includes(x.equippedById))
-        console.warn(higherPriorityHeroes);
-    }
-
-    if (params.inputKeepCurrentItems) {
-        if (!hero.equipment) {
-            items = [];
-            hero.equipment = {};
-        }
-
-        const equipped = Object.values(hero.equipment);
-        for (var i = 0; i < 6; i++) {
-            const item = equipped[i];
-            if (item) {
-                items = items.filter(x => {
-                    const passFilter = item.gear != x.gear || item.equippedById == x.equippedById;
-                    // if (!passFilter)
-                    //     console.log(x);
-                    return passFilter;
-                })
-            }
-        }
-    }
-
-    for (var i = 0; i < gearMainFilters.length; i++) {
-        const filter = gearMainFilters[i];
-        if (filter.length == 0)
-            continue;
-        if (i == 0)
-            items = items.filter(x => filter.includes(x.main.type) && x.gear == "Necklace" || x.gear != "Necklace")
-        if (i == 1)
-            items = items.filter(x => filter.includes(x.main.type) && x.gear == "Ring" || x.gear != "Ring")
-        if (i == 2)
-            items = items.filter(x => filter.includes(x.main.type) && x.gear == "Boots" || x.gear != "Boots")
-    }
-
-    if (params.inputPredictReforges) {
-        console.log("Predict reforges enabled")
-        ItemAugmenter.augment(items);
-        items.forEach(x => {
-            if (Reforge.isReforgeableNow(x)) {
-                x.substats.forEach(substat => {
-                    if (substat.reforgedValue) {
-                        substat.value = substat.reforgedValue;
-                    }
-                });
-
-                x.main.value = x.main.reforgedValue;
-            }
-        })
-    }
-
-    items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit);
-
-    items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems, params.inputPredictReforges, params.inputSubstatMods)
-
-    items = items.sort((a, b) => {
-        return a.set-b.set;
-    })
-
-    const prioritizedItems = [];
-    for (var item of items) {
-        if (params.inputSetsOne.includes(item.set)) {
-            prioritizedItems.unshift(item);
-        } else {
-            prioritizedItems.push(item);
-        }
-    }
-
-    console.log("Filtered items", prioritizedItems.length)
-    currentFilteredItems = prioritizedItems;
-    return {
-        items,
-        allItems
-    };
-}
-
-// True if blocking error
-function warnParams(params) {
-    if (params.inputFilterPriority == 100
-    &&  params.inputAtkPriority == 0
-    &&  params.inputHpPriority == 0
-    &&  params.inputDefPriority == 0
-    &&  params.inputSpdPriority == 0
-    &&  params.inputCrPriority == 0
-    &&  params.inputCdPriority == 0
-    &&  params.inputEffPriority == 0
-    &&  params.inputResPriority == 0) {
-        Notifier.info("No stat priority selected. For best results, use the stat priority filter.")
-    } else if (params.inputFilterPriority == 100) {
-        Dialog.error("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
-        return true;
-    } else if (params.inputFilterPriority != 100
-    &&  params.inputAtkPriority == 0
-    &&  params.inputHpPriority == 0
-    &&  params.inputDefPriority == 0
-    &&  params.inputSpdPriority == 0
-    &&  params.inputCrPriority == 0
-    &&  params.inputCdPriority == 0
-    &&  params.inputEffPriority == 0
-    &&  params.inputResPriority == 0) {
-        Dialog.error("Top % was selected but no stat priorities are assigned. Assign stat priorities otherwise the filter will not work.")
-        return true;
-    }
-
-    if (params.inputSetsOne && params.inputSetsOne.length == 0) {
-        Notifier.info("No sets were selected. For best results, select at least one set.")
-    }
-
-    if (params.inputDefMinLimit > 10000) {
-        Dialog.error("Your minimum defense filter is over 10,000, did you mean HP?");
-        return true;
-    }
-
-    if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
-    &&  params.inputRingStat && params.inputRingStat.length == 0
-    &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
-        Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
-    }
-
-    if (permutations >= 5_000_000_000) {
-        Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
-    }
-    return false;
-}
-
 async function submitOptimizationFilterRequest() {
-    const params = getOptimizationRequestParams();
+    const params = module.exports.getOptimizationRequestParams();
     getSetFormat(params.inputSets, true);
-    if (warnParams(params)) {
+    if (module.exports.warnParams(params)) {
         return;
     }
 
@@ -936,6 +1135,8 @@ async function submitOptimizationFilterRequest() {
     const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     params.hero = heroResponse.hero;
     OptimizerGrid.showLoadingOverlay();
+    params.executionId = currentExecutionId;
+
     Api.submitOptimizationFilterRequest(params).then(response => {
         console.warn("Optimization filter response", response);
         OptimizerGrid.reloadData();
@@ -952,7 +1153,7 @@ async function submitOptimizationRequest() {
     }
 
     // console.log(ItemSerializer.serializeToArr(getAllItemsResponse.items));
-    const params = getOptimizationRequestParams(true);
+    const params = module.exports.getOptimizationRequestParams(true);
     const heroId = document.getElementById('inputHeroAdd').value;
 
     const allItemsResponse = await Api.getAllItems();
@@ -960,7 +1161,7 @@ async function submitOptimizationRequest() {
     const hero = heroResponse.hero;
     const baseStats = heroResponse.baseStats;
 
-    var filterResult = await applyItemFilters(params, heroResponse, allItemsResponse, true);
+    var filterResult = await module.exports.applyItemFilters(params, heroResponse, allItemsResponse, true);
     var items = filterResult.items;
 
     console.log("OPTIMIZING HERO", hero);
@@ -979,7 +1180,7 @@ async function submitOptimizationRequest() {
         Notifier.warn("Your hero does not have an artifact equipped, use the 'Add Bonus Stats' button on the Heroes page to add artifact stats");
     }
 
-    if (warnParams(params)) {
+    if (module.exports.warnParams(params)) {
         return;
     }
 
@@ -991,6 +1192,10 @@ async function submitOptimizationRequest() {
     // Subprocess.sendString(str)
     progressTimer = setInterval(updateProgress, 150)
 
+    await Api.deleteExecution(currentExecutionId);
+    currentExecutionId = await Api.prepareExecution();
+    mergedRequest.executionId = currentExecutionId;
+
     const results = Api.submitOptimizationRequest(mergedRequest).then(result => {
         console.log("RESPONSE RECEIVED", result);
         clearInterval(progressTimer);
@@ -1001,7 +1206,7 @@ async function submitOptimizationRequest() {
         var searchedStr = Number(searchedCount).toLocaleString();
         var resultsStr = Number(resultsCounter).toLocaleString();
 
-        var maxResults = parseInt(Settings.parseMaxResults() || 0);
+        var maxResults = parseInt(Settings.parseNumberValue('settingMaxResults') || 0);
         if (result.results >= maxResults) {
             Dialog.info('Search terminated after the result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
         } else {
@@ -1053,123 +1258,6 @@ function hasFourPieceSet(set) {
 }
 function hasTwoPieceSet(set) {
     return set.filter(x => twoPieceSets.includes(x)).length > 0;
-}
-
-function getOptimizationRequestParams(showError) {
-    const request = new OptimizationRequest();
-
-    const setFilters = Selectors.getSetFilters();
-    const mainFilters = Selectors.getGearMainFilters();
-    const excludeFilter = Selectors.getExcludeGearFrom();
-    const setFormat = getSetFormat(setFilters.sets, showError);
-    console.log("SETFORMAT", setFormat);
-
-    request.inputPredictReforges   = readCheckbox('inputPredictReforges');
-    request.inputSubstatMods   = readCheckbox('inputSubstatMods');
-    request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems');
-    request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems');
-    request.inputOrderedHeroPriority   = readCheckbox('inputOrderedHeroPriority');
-    request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems');
-    request.inputOnlyMaxedGear   = readCheckbox('inputOnlyMaxedGear');
-    // request.inputOver85   = readCheckbox('inputOver85');
-    // request.inputOnlyPlus15Gear   = readCheckbox('inputOnlyPlus15Gear');
-
-    request.inputAtkMinLimit = readNumber('inputMinAtkLimit');
-    request.inputAtkMaxLimit = readNumber('inputMaxAtkLimit');
-    request.inputHpMinLimit  = readNumber('inputMinHpLimit');
-    request.inputHpMaxLimit  = readNumber('inputMaxHpLimit');
-    request.inputDefMinLimit = readNumber('inputMinDefLimit');
-    request.inputDefMaxLimit = readNumber('inputMaxDefLimit');
-    request.inputSpdMinLimit = readNumber('inputMinSpdLimit');
-    request.inputSpdMaxLimit = readNumber('inputMaxSpdLimit');
-    request.inputCrMinLimit  = readNumber('inputMinCrLimit');
-    request.inputCrMaxLimit  = readNumber('inputMaxCrLimit');
-    request.inputCdMinLimit  = readNumber('inputMinCdLimit');
-    request.inputCdMaxLimit  = readNumber('inputMaxCdLimit');
-    request.inputEffMinLimit = readNumber('inputMinEffLimit');
-    request.inputEffMaxLimit = readNumber('inputMaxEffLimit');
-    request.inputResMinLimit = readNumber('inputMinResLimit');
-    request.inputResMaxLimit = readNumber('inputMaxResLimit');
-
-    request.inputMinCpLimit = readNumber('inputMinCpLimit');
-    request.inputMaxCpLimit = readNumber('inputMaxCpLimit');
-    request.inputMinHppsLimit = readNumber('inputMinHppsLimit');
-    request.inputMaxHppsLimit = readNumber('inputMaxHppsLimit');
-    request.inputMinEhpLimit = readNumber('inputMinEhpLimit');
-    request.inputMaxEhpLimit = readNumber('inputMaxEhpLimit');
-    request.inputMinEhppsLimit = readNumber('inputMinEhppsLimit');
-    request.inputMaxEhppsLimit = readNumber('inputMaxEhppsLimit');
-    request.inputMinDmgLimit = readNumber('inputMinDmgLimit');
-    request.inputMaxDmgLimit = readNumber('inputMaxDmgLimit');
-    request.inputMinDmgpsLimit = readNumber('inputMinDmgpsLimit');
-    request.inputMaxDmgpsLimit = readNumber('inputMaxDmgpsLimit');
-    request.inputMinMcdmgLimit = readNumber('inputMinMcdmgLimit');
-    request.inputMaxMcdmgLimit = readNumber('inputMaxMcdmgLimit');
-    request.inputMinMcdmgpsLimit = readNumber('inputMinMcdmgpsLimit');
-    request.inputMaxMcdmgpsLimit = readNumber('inputMaxMcdmgpsLimit');
-
-    request.inputMinDmgHLimit = readNumber('inputMinDmgHLimit');
-    request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit');
-    request.inputMinUpgradesLimit = readNumber('inputMinUpgradesLimit');
-    request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit');
-    request.inputMinConversionsLimit = readNumber('inputMinConversionsLimit');
-    request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit');
-    request.inputMinScoreLimit = readNumber('inputMinScoreLimit');
-    request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit');
-    request.inputMinPriorityLimit = readNumber('inputMinPriorityLimit');
-    request.inputMaxPriorityLimit = readNumber('inputMaxPriorityLimit');
-
-    // request.inputAtkMinForce = readNumber('inputMinAtkForce');
-    // request.inputAtkMaxForce = readNumber('inputMaxAtkForce');
-    // request.inputAtkPercentMinForce = readNumber('inputMinAtkPercentForce');
-    // request.inputAtkPercentMaxForce = readNumber('inputMaxAtkPercentForce');
-    // request.inputSpdMinForce = readNumber('inputMinSpdForce');
-    // request.inputSpdMaxForce = readNumber('inputMaxSpdForce');
-    // request.inputCrMinForce = readNumber('inputMinCrForce');
-    // request.inputCrMaxForce = readNumber('inputMaxCrForce');
-    // request.inputCdMinForce = readNumber('inputMinCdForce');
-    // request.inputCdMaxForce = readNumber('inputMaxCdForce');
-    // request.inputHpMinForce = readNumber('inputMinHpForce');
-    // request.inputHpMaxForce = readNumber('inputMaxHpForce');
-    // request.inputHpPercentMinForce = readNumber('inputMinHpPercentForce');
-    // request.inputHpPercentMaxForce = readNumber('inputMaxHpPercentForce');
-    // request.inputDefMinForce = readNumber('inputMinDefForce');
-    // request.inputDefMaxForce = readNumber('inputMaxDefForce');
-    // request.inputDefPercentMinForce = readNumber('inputMinDefPercentForce');
-    // request.inputDefPercentMaxForce = readNumber('inputMaxDefPercentForce');
-    // request.inputEffMinForce = readNumber('inputMinEffForce');
-    // request.inputEffMaxForce = readNumber('inputMaxEffForce');
-    // request.inputResMinForce = readNumber('inputMinResForce');
-    // request.inputResMaxForce = readNumber('inputMaxResForce');
-
-    request.inputAtkPriority = readNumber('atkSliderInput');
-    request.inputHpPriority = readNumber('hpSliderInput');
-    request.inputDefPriority = readNumber('defSliderInput');
-    request.inputSpdPriority = readNumber('spdSliderInput');
-    request.inputCrPriority = readNumber('crSliderInput');
-    request.inputCdPriority = readNumber('cdSliderInput');
-    request.inputEffPriority = readNumber('effSliderInput');
-    request.inputResPriority = readNumber('resSliderInput');
-    request.inputFilterPriority = readNumber('filterSliderInput');
-
-    // request.inputForceNumberSelect = readNumber('forceNumberSelect')
-
-    request.inputSets = setFilters.sets;
-
-    request.inputSetsOne = setFilters.sets[0];
-    request.inputSetsTwo = setFilters.sets[1];
-    request.inputSetsThree = setFilters.sets[2];
-    request.inputExcludeSet = setFilters.exclude;
-
-    request.inputNecklaceStat = mainFilters[0];
-    request.inputRingStat = mainFilters[1];
-    request.inputBootsStat = mainFilters[2];
-
-    request.excludeFilter = excludeFilter;
-
-    request.setFormat = setFormat;
-
-    return request;
 }
 
 function readNumber(id) {

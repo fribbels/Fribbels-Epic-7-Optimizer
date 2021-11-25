@@ -574,21 +574,21 @@
                 "type": "skill",
                 "stat": null,
                 "value": 0,
-                "description": "Has a 20% chance to increase Combat Readiness of the caster by 10% when using X-Slash.",
+                "description": "Has a 20% chance to increase Combat Readiness of the caster by 10% when using X-Slash.",
                 "upgrade": "+20% effect chance"
               },
               {
                 "type": "skill",
                 "stat": null,
                 "value": 0,
-                "description": "Has a 50% chance to increase Combat Readiness of the caster by 10% when using X-Slash.",
+                "description": "Has a 50% chance to increase Combat Readiness of the caster by 10% when using X-Slash.",
                 "upgrade": "+30% effect chance"
               },
               {
                 "type": "skill",
                 "stat": null,
                 "value": 0,
-                "description": "Has a 100% chance to increase Combat Readiness of the caster by 10% when using X-Slash.",
+                "description": "Has a 100% chance to increase Combat Readiness of the caster by 10% when using X-Slash.",
                 "upgrade": "+50% effect chance"
               }
             ]
@@ -611,21 +611,21 @@
                 "type": "skill",
                 "stat": null,
                 "value": 0,
-                "description": "Has a 20% chance to increase Combat Readiness of the caster by 20% when using Purifying Flame.",
+                "description": "Has a 20% chance to increase Combat Readiness of the caster by 20% when using Purifying Flame.",
                 "upgrade": "+20% effect chance"
               },
               {
                 "type": "skill",
                 "stat": null,
                 "value": 0,
-                "description": "Has a 50% chance to increase Combat Readiness of the caster by 20% when using Purifying Flame.",
+                "description": "Has a 50% chance to increase Combat Readiness of the caster by 20% when using Purifying Flame.",
                 "upgrade": "+30% effect chance"
               },
               {
                 "type": "skill",
                 "stat": null,
                 "value": 0,
-                "description": "Has a 100% chance to increase Combat Readiness of the caster by 20% when using Purifying Flame.",
+                "description": "Has a 100% chance to increase Combat Readiness of the caster by 20% when using Purifying Flame.",
                 "upgrade": "+50% effect chance"
               }
             ]
@@ -3255,7 +3255,7 @@
           {
             "skill": 3,
             "description": "Decreases Combat Readiness of all enemies by 15% when using Razorwind Fan.",
-            "skill_description": "Attacks all enemies by creating a powerful gust of wind, with a {{variable}} chance to decrease Defense for 2 turns, before decreasing Combat Readiness by 15%. Effect chance increases by 20% when Razorwind Fan is triggered by Windbreak Fan.",
+            "skill_description": "Attacks all enemies by creating a powerful gust of wind, with a {{variable}} chance to decrease Defense for 2 turns, before decreasing Combat Readiness by 15%. Effect chance increases by 20% when Razorwind Fan is triggered by Windbreak Fan.",
             "values": [
               18
             ],
@@ -4378,7 +4378,7 @@
           {
             "skill": 3,
             "description": "Decreases Combat Readiness of all enemies by 15% when using Razorwind Fan.",
-            "skill_description": "Attacks all enemies by creating a powerful gust of wind, with a {{variable}} chance to decrease Defense for 2 turns, before decreasing Combat Readiness by 15%. Effect chance increases by 20% when Razorwind Fan is triggered by Windbreak Fan.",
+            "skill_description": "Attacks all enemies by creating a powerful gust of wind, with a {{variable}} chance to decrease Defense for 2 turns, before decreasing Combat Readiness by 15%. Effect chance increases by 20% when Razorwind Fan is triggered by Windbreak Fan.",
             "values": [
               18
             ],
@@ -6142,14 +6142,14 @@
           {
             "skill": 2,
             "description": "Dispels one buff from all enemies after using Steel Cloudburst.",
-            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to dispel one buff. Damage dealt increases proportional to the caster's max Health.",
+            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to dispel one buff. Damage dealt increases proportional to the caster's max Health.",
             "values": [],
             "_id": 1
           },
           {
             "skill": 2,
             "description": "Makes all enemies unhealable for 2 turns when using Steel Cloudburst.",
-            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to make them unhealable for 2 turns. Damage dealt increases proportional to the caster's max Health.",
+            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to make them unhealable for 2 turns. Damage dealt increases proportional to the caster's max Health.",
             "values": [
               17,
               27
@@ -13832,7 +13832,7 @@
         "skills": [
           {
             "skill": 2,
-            "description": "Grants a barrier to all allies when using Spirit's Protection. Barrier strength increases proportional to the caster's Attack.",
+            "description": "Grants a barrier to all allies when using Spirit's Protection. Barrier strength increases proportional to the caster's Attack.",
             "skill_description": "Attacks with spirit power, and casts a barrier over all allies for 2 turns. Barrier strength is proportional to the caster's Attack.",
             "values": [
               5
@@ -21442,7 +21442,7 @@
         "_id": "exc104401",
         "id": "exc104401",
         "name": "A Rabbit's Wild Nature",
-        "description": "A whip used to train beasts. It is said that beasts are more obedient when tamed with this whip.",
+        "description": "A whip used to train beasts. It is said that beasts are more obedient when tamed with this whip.",
         "unit": "c1044",
         "role": "warrior",
         "rarity": 5,
@@ -22687,6 +22687,99 @@
   "Ran": {
     "_id": "ran",
     "name": "Ran",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "assassin",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ranPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ranPanel.png"
+    },
+    "ex_equip": [
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11117,
+        "atk": 713,
+        "hp": 3913,
+        "spd": 123,
+        "def": 390,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12898,
+        "atk": 897,
+        "hp": 4253,
+        "spd": 125,
+        "def": 390,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13872,
+        "atk": 889,
+        "hp": 4920,
+        "spd": 123,
+        "def": 483,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16285,
+        "atk": 1119,
+        "hp": 5340,
+        "spd": 129,
+        "def": 483,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Ras": {
+    "_id": "ras",
+    "name": "Ras",
     "moonlight": false,
     "rarity": 5,
     "attribute": "ice",
@@ -25058,7 +25151,7 @@
           {
             "skill": 1,
             "description": "75% chance to dispel one buff from the enemy when using Gravity Arrow.",
-            "skill_description": "Shoots gravity arrows at the enemy, decreasing Combat Readiness by {{variable}}, with a 75% chance to dispel one buff, and increasing Combat Readiness of the caster by {{variable}}.",
+            "skill_description": "Shoots gravity arrows at the enemy, decreasing Combat Readiness by {{variable}}, with a 75% chance to dispel one buff, and increasing Combat Readiness of the caster by {{variable}}.",
             "values": [],
             "_id": 0
           },
@@ -26506,6 +26599,98 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0
+      }
+    }
+  },
+  "Shuna": {
+    "_id": "shuna",
+    "name": "Shuna",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "manauser",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shunaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shunaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10356,
+        "atk": 400,
+        "hp": 3527,
+        "spd": 99,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11883,
+        "atk": 520,
+        "hp": 3972,
+        "spd": 103,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12923,
+        "atk": 499,
+        "hp": 4435,
+        "spd": 99,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15106,
+        "atk": 649,
+        "hp": 5254,
+        "spd": 103,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18
       }
     }
   },

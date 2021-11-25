@@ -24,14 +24,20 @@ import java.util.List;
 @AllArgsConstructor
 public class OptimizationRequest extends Request {
 
+    private String executionId;
+
     private String heroId;
     public Hero hero;
     private List<Item> items;
 
+    private List<List<Set>> inputSets;
     private List<Set> inputSetsOne;
     private List<Set> inputSetsTwo;
     private List<Set> inputSetsThree;
     private List<Set> inputExcludeSet;
+
+    private List<String> excludeFilter;
+    private List<String> excludedGearIds;
 
     private List<StatType> inputNecklaceStat;
     private List<StatType> inputRingStat;

@@ -11,6 +11,8 @@ import java.util.Map;
 public class StatCalculator {
 
     public static boolean SETTING_RAGE_SET = true;
+    public static boolean SETTING_PEN_SET = true;
+    public static int SETTING_PEN_DEFENSE = 1500;
 
     private float atkSetBonus;
     private float hpSetBonus;
@@ -26,6 +28,8 @@ public class StatCalculator {
     private float bonusMaxHp;
     private float bonusMaxDef;
 
+    private float penSetDmgBonus;
+
     public StatCalculator() {
 
     }
@@ -34,6 +38,7 @@ public class StatCalculator {
         atkSetBonus = 0.45f * base.atk;
         hpSetBonus = 0.20f * base.hp;
         defSetBonus = 0.20f * base.def;
+
         speedSetBonus = 0.25f * base.spd;
         revengeSetBonus = 0.12f * base.spd;
 
@@ -50,6 +55,8 @@ public class StatCalculator {
             bonusMaxHp = 1 + base.bonusStats.bonusMaxHpPercent/100f;
             bonusMaxDef = 1 + base.bonusStats.bonusMaxDefPercent/100f;
         }
+
+        penSetDmgBonus = (SETTING_PEN_DEFENSE/300f + 1) / (0.00283333f * SETTING_PEN_DEFENSE + 1);
     }
 
     public HeroStats addAccumulatorArrsToHero(final HeroStats base,
@@ -103,14 +110,15 @@ public class StatCalculator {
         final int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
         final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 1.3f : 1;
+        final float penMultiplier = SETTING_PEN_SET && sets[13] > 1 ? penSetDmgBonus : 1;
         final float spdDiv1000 = (float)spd/1000;
 
         final int ehp = (int) (hp * (def/300 + 1));
         final int hpps = (int) (hp*spdDiv1000);
         final int ehpps = (int) ((float)ehp*spdDiv1000);
-        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier);
+        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier);
         final int dmgps = (int) ((float)dmg*spdDiv1000);
-        final int mcdmg = (int) (atk * critDamage * rageMultiplier);
+        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
         final int dmgh = (int) ((cd * hp)/1000);
 

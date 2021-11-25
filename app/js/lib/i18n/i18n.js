@@ -5,10 +5,11 @@ module.exports = {
         require(Files.path(Files.getDataPath() + '/locales/zh/gridlocale.js'))
         require(Files.path(Files.getDataPath() + '/locales/zh-TW/gridlocale.js'))
         require(Files.path(Files.getDataPath() + '/locales/fr/gridlocale.js'))
+        require(Files.path(Files.getDataPath() + '/locales/ja/gridlocale.js'))
 
         window.i18next.use(window.i18nextHttpBackend).use(window.i18nextBrowserLanguageDetector).init({
             debug: 'true',
-            preload: ['en', 'zh', 'zh-TW', 'dev'],
+            preload: ['en', 'zh', 'zh-TW', 'fr', 'ja', 'dev'],
             detection: {
                 // order and from where user language should be detected
                 order: ['querystring', 'cookie', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
@@ -64,7 +65,7 @@ module.exports = {
                     function(currentValue, currentIndex, listObj) {
                         // console.log(currentValue.nodeName);
                         let tmpText = {untransString: []};
-                        if (['LABEL', 'A', 'TEXT', 'H2', 'U', 'B', 'DIV', 'SPAN', 'OPTION', 'BUTTON'].includes(currentValue.nodeName)) {
+                        if (['LABEL', 'A', 'TEXT', 'H1', 'H2', 'H3', 'U', 'B', 'DIV', 'SPAN', 'OPTION', 'BUTTON'].includes(currentValue.nodeName)) {
                             var textkey = (currentValue.innerText).trim();
                             // console.log('true!'+textkey);
                             currentValue.innerText = i18next.t(textkey)

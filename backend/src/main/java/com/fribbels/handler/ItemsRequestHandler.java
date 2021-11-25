@@ -32,6 +32,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -80,6 +81,10 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 case "/items/getItemsByIds":
                     final IdsRequest getItemsByIdsRequest = parseRequest(exchange, IdsRequest.class);
                     sendResponse(exchange, getItemsByIds(getItemsByIdsRequest));
+                    return;
+                case "/items/getItemByIngameId":
+                    final IdRequest getItemByIngameIdRequest = parseRequest(exchange, IdRequest.class);
+                    sendResponse(exchange, getItemByIngameId(getItemByIngameIdRequest));
                     return;
                 case "/items/lockItems":
                     final IdsRequest lockItemsRequest = parseRequest(exchange, IdsRequest.class);
@@ -584,6 +589,22 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         System.out.println(item);
         final GetItemByIdResponse response = GetItemByIdResponse.builder()
                 .item(item)
+                .build();
+
+        return toJson(response);
+    }
+
+    public String getItemByIngameId(final IdRequest request) {
+        final List<Item> items = itemDb.getAllItems();
+        final Optional<Item> match = items.stream()
+                .filter(x -> StringUtils.equals(x.getIngameId(), request.getId()))
+                .findFirst();
+
+        System.out.println(request);
+        System.out.println(match);
+
+        final GetItemByIdResponse response = GetItemByIdResponse.builder()
+                .item(match.orElse(null))
                 .build();
 
         return toJson(response);

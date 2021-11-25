@@ -307,7 +307,7 @@ module.exports = {
 
 
         document.getElementById('importMergeFileSelect').addEventListener("click", async () => {
-            const enhanceLimit = parseInt($('#importLimitEnhance').val());
+            const enhanceLimit = parseInt(document.querySelector('input[name="gearImporterEnhanceRadio"]:checked').value);
             const options = {
                 title: "Load file",
                 defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
@@ -350,8 +350,8 @@ module.exports = {
         })
 
         document.getElementById('importMergeHeroesFileSelect').addEventListener("click", async () => {
-            const enhanceLimit = parseInt($('#importHeroesLimitEnhance').val());
-            const heroFilter = $('#importHeroesLimitHeroes').val();
+            const enhanceLimit = parseInt(document.querySelector('input[name="heroImporterEnhanceRadio"]:checked').value);
+            const heroFilter = document.querySelector('input[name="heroImporterHeroRadio"]:checked').value;
 
             const options = {
                 title: "Load file",

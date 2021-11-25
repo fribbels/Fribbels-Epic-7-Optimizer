@@ -14,6 +14,7 @@ import lombok.experimental.Wither;
 
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
 @Wither

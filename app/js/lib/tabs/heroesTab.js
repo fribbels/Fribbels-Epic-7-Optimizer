@@ -250,6 +250,7 @@ module.exports = {
 
         document.getElementById('tab4label').addEventListener("click", () => {
             module.exports.redraw();
+            HeroesGrid.refreshBuilds();
         });
 
         Api.getAllHeroes(useReforgedStats).then(response => {

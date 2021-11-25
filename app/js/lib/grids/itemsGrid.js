@@ -55,6 +55,8 @@ module.exports = {
           var localeText = AG_GRID_LOCALE_ZH_TW;
         } else if (i18next.language == 'fr') {
           var localeText = AG_GRID_LOCALE_FR;
+        } else if (i18next.language == 'ja') {
+          var localeText = AG_GRID_LOCALE_JA;
         } else {
           var localeText = AG_GRID_LOCALE_EN;
         }
@@ -96,8 +98,8 @@ module.exports = {
                 {headerName: i18next.t('Equipped'), field: 'equippedByName', width: 120, cellRenderer: (params) => renderStat(i18next.t(params.value))},
                 // {headerName: i18next.t('Mconf'), field: 'mconfidence', width: 50},
                 // {headerName: i18next.t('Material'), field: 'material', width: 120},
-                {headerName: i18next.t('Locked'), field: 'locked', cellRenderer: (params) => params.value == true ? i18next.t('yes') : i18next.t('no')},
-                {headerName: i18next.t('Mods'), field: 'disableMods', cellRenderer: (params) => params.value == true ? i18next.t('no') : i18next.t('yes')},
+                {headerName: i18next.t('Locked'), field: 'locked', cellRenderer: (params) => params.value == true ? i18next.t('yes') : i18next.t('')},
+                {headerName: i18next.t('noMod'), field: 'disableMods', cellRenderer: (params) => params.value == true ? i18next.t('yes') : i18next.t('')},
                 // {headerName: i18next.t('Actions'), field: 'id', cellRenderer: renderActions},
                 {headerName: i18next.t('Duplicate'), field: 'duplicateId', hide: true},
                 {headerName: 'AllowedMods', field: 'allowedMods', hide: true},
@@ -115,7 +117,10 @@ module.exports = {
             suppressScrollOnNewData: true,
             navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "itemsGrid", navigateCallback),
             animateRows: true,
+            suppressDragLeaveHidesColumns: true,
             immutableData: true,
+            suppressCellSelection: true,
+            enableRangeSelection: false,
             getRowNodeId: (data) => {
                 return data.id;
             },
@@ -446,7 +451,7 @@ function renderActions(params) {
 
 function columnGradient(params) {
     try {
-        if (!params || params.value == undefined) return;
+        // if (!params || params.value == undefined) return;
         var colId = params.column.colId;
         var value = params.value;
 
@@ -489,6 +494,7 @@ function scoreColumnGradient(params) {
 }
 
 function aggregateCurrentGearStats(items) {
+    console.log("Aggregating", items)
     const statsToAggregate = [
         "augmentedStats.AttackPercent",
         "augmentedStats.Attack",
@@ -506,7 +512,7 @@ function aggregateCurrentGearStats(items) {
     var count = items.length;
 
     for (var stat of statsToAggregate) {
-        const arrSum = arr => arr.reduce((a,b) => a + b[stat], 0);
+        const arrSum = arr => arr.reduce((a, b) => a + b.augmentedStats[stat.split(".")[1]], 0);
 
         var max = Math.max(...getField(items, stat));
         var sum = arrSum(items);
@@ -518,6 +524,8 @@ function aggregateCurrentGearStats(items) {
             avg
         }
     }
+
+    console.log("Aggregated", currentAggregate)
 }
 
 function getField(items, stat) {
@@ -595,7 +603,7 @@ async function drawPreview(item) {
 
     // TODO ADD STAT SELECTOR
     const html = HtmlGenerator.buildItemPanel(item, "itemsGrid", baseStats, "Speed")
-    document.getElementById("gearTabPreview").innerHTML = html;
+    document.getElementById("gearTabPreview").innerHTML = html
 }
 
 function onRowSelected(event) {
@@ -605,5 +613,8 @@ function onRowSelected(event) {
 
         // Testing purposes
         // Reforge.calculateMaxes(event.data);
+        Reforge.unreforgeItem(event.data);
+        console.log(event.data);
+        // GearRating.rate(event.data);
     }
 }

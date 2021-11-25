@@ -22,7 +22,7 @@ module.exports = {
     kill: async() => {
         try {
             // const killPortOutput = await killPort(8130, 'tcp')
-            console.log(killPortOutput);
+            // console.log(killPortOutput);
         } catch (e) {
             console.warn("Error killing existing subprocess", e);
         }
@@ -50,7 +50,9 @@ module.exports = {
             await module.exports.kill();
         }
 
-        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
+        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+            shell: true, stdio: ['pipe', 'pipe', 'pipe'], detached: false
+        })
         pid = child.pid;
 
         child.on('close', (code) => {
@@ -64,7 +66,12 @@ module.exports = {
             Dialog.htmlError(defaultJavaError);
         });
 
+        child.on('error', (e) => {
+            console.error("err", e);
+        });
+
         child.stderr.on('data', (data) => {
+            console.error("A", data)
             const str = data.toString()
             console.error(str);
             Notifier.error("Subprocess error - " + str);
@@ -72,11 +79,12 @@ module.exports = {
         })
 
         child.stdout.on('data', (data) => {
+            console.error("B", data)
             if (!initialized) {
                 initialized = true;
                 callback()
-                // var str = data.toString();
-                // console.log(str);
+                var str = data.toString();
+                console.log(str);
             } else {
 
             }
@@ -87,6 +95,12 @@ module.exports = {
             treekill(child.pid, 'SIGTERM', () => {
                 ipc.send('closed');
             });
+            if (scannerChild)
+                scannerChild.kill()
+            if (itemTrackerChild)
+                itemTrackerChild.kill()
+            if(findCommandSpawn)
+                findCommandSpawn.kill()
         });
 
         window.onbeforeunload = (e) => {
@@ -95,6 +109,13 @@ module.exports = {
             treekill(child.pid, 'SIGTERM', () => {
                 console.log("Terminated child");
             });
+            if (scannerChild)
+                scannerChild.kill()
+            if (itemTrackerChild)
+                itemTrackerChild.kill()
+            if(findCommandSpawn)
+                findCommandSpawn.kill()
+            Scanner.end();
         };
 
         return child;

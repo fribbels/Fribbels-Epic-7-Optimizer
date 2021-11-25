@@ -131,7 +131,20 @@ x=""; for (var i= 0; i < 107; i++) {if(i!=13)x+=n[12][i].data} finishedReading([
 4079 to grey 3984
 4615 to white 3654
 
+var count = 10;
+var win = 0;
+for (var j = 0; j < count; j++) {
+    var spirit = 50
+    for (var i = 0; i < 6; i++) {
+        if (Math.random() < 0.85) spirit += 10
+    }
+    for (var i = 0; i < 3; i++) {
+        if (Math.random() < 0.85) spirit += 5
+    }
+    if (spirit >= 100) win += 1
+}
 
+console.log(win + " / " + count + " = " + (win/count))
 
     "assets": {
       "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",

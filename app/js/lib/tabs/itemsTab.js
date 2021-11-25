@@ -73,6 +73,7 @@ module.exports = {
         });
 
         document.getElementById('tab3label').addEventListener("click", () => {
+            itemsGrid.gridOptions.api.refreshView();
             module.exports.redraw();
         });
     },

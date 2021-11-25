@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import lombok.Getter;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,8 +48,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     public static int SETTING_MAXIMUM_RESULTS = 5_000_000;
 
-    private OptimizationDb optimizationDb;
     private BaseStatsDb baseStatsDb;
+    private Map<String, OptimizationDb> optimizationDbs;
     private HeroDb heroDb;
     private boolean inProgress = false;
 
@@ -57,12 +59,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private AtomicLong searchedCounter = new AtomicLong(0);
     private AtomicLong resultsCounter = new AtomicLong(0);
 
-    public OptimizationRequestHandler(final OptimizationDb optimizationDb,
-                                      final BaseStatsDb baseStatsDb,
+    public OptimizationRequestHandler(final BaseStatsDb baseStatsDb,
                                       final HeroDb heroDb) {
-        this.optimizationDb = optimizationDb;
         this.baseStatsDb = baseStatsDb;
         this.heroDb = heroDb;
+        optimizationDbs = new HashMap<>();
     }
 
     @Override
@@ -74,6 +75,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         try {
             switch (path) {
+                case "/optimization/prepareExecution":
+                    sendResponse(exchange, prepareExecution());
+                    System.out.println("Sent response");
+                    return;
+                case "/optimization/deleteExecution":
+                    final IdRequest deleteExecutionRequest = parseRequest(exchange, IdRequest.class);
+                    sendResponse(exchange, deleteExecutionRequest(deleteExecutionRequest));
+                    System.out.println("Sent response");
                 case "/optimization/optimizationRequest":
                     Main.interrupt = false;
                     final OptimizationRequest optimizationRequest = parseRequest(exchange, OptimizationRequest.class);
@@ -146,6 +155,20 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public String handleOptimizationFilterRequest(final OptimizationRequest request) {
+        final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
+
+        if (optimizationDb == null) {
+            return "";
+        }
+
+        final boolean hasExcludedGearIds = CollectionUtils.isNotEmpty(request.getExcludedGearIds());
+        final Map<String, String> excludedGearIds = new HashMap<>();
+        if (hasExcludedGearIds) {
+            for (final String gearId : request.getExcludedGearIds()) {
+                excludedGearIds.put(gearId, gearId);
+            }
+        }
+
         heroDb.saveOptimizationRequest(request);
         final HeroStats[] heroStats = optimizationDb.getAllHeroStats();
         final int[] indices = new int[heroStats.length];
@@ -155,9 +178,21 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         for (int i = 0; i < heroStats.length; i++) {
             final HeroStats heroStatsInstance = heroStats[i];
             if (passesUpdatedFilter(request, heroStatsInstance)) {
-                indices[count] = i;
-                ids.add(heroStatsInstance.getId());
-                count++;
+                boolean passesGearIdFilter = true;
+                if (hasExcludedGearIds) {
+                    for (final String gearId : heroStatsInstance.items) {
+                        if (excludedGearIds.containsKey(gearId)) {
+                            passesGearIdFilter = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (passesGearIdFilter) {
+                    indices[count] = i;
+                    ids.add(heroStatsInstance.getId());
+                    count++;
+                }
             }
         }
 
@@ -195,9 +230,26 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return true;
     }
 
+    public String prepareExecution() {
+        final String executionId = UUID.randomUUID().toString();
+
+        optimizationDbs.put(executionId, new OptimizationDb());
+
+        return executionId;
+    }
+
+    public String deleteExecutionRequest(final IdRequest request) {
+        if (request.getId() == null) {
+            return "";
+        }
+
+        optimizationDbs.remove(request.getId());
+
+        return "";
+    }
+
     public String handleOptimizationRequest(final OptimizationRequest request) {
         try {
-            optimizationDb = new OptimizationDb();
             heroDb.saveOptimizationRequest(request);
             System.gc();
             return optimize(request, HeroStats.builder()
@@ -218,6 +270,18 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     private String handleGetResultRowsRequest(final GetResultRowsRequest request) {
+        if (request.getExecutionId() == null) {
+            final GetResultRowsResponse response = GetResultRowsResponse.builder()
+                    .heroStats(new HeroStats[]{})
+                    .maximum(0)
+                    .build();
+            return gson.toJson(response);
+        }
+        final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
+        if (optimizationDb == null) {
+            return "";
+        }
+
         final String heroId = request.getOptimizationRequest().getHeroId();
         final List<HeroStats> builds = heroDb.getBuildsForHero(heroId);
         final java.util.Set<String> buildHashes = builds.stream()
@@ -229,6 +293,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         if (heroStats != null) {
             for (final HeroStats build : heroStats) {
+                if (build == null) {
+                    continue;
+                }
                 final String hash = build.getBuildHash();
                 if (buildHashes.contains(hash)) {
                     build.setProperty("star");
@@ -247,6 +314,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     private String handleEditResultRowsRequest(final EditResultRowsRequest request) {
+        final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
+        if (optimizationDb == null) {
+            return "";
+        }
+
         final HeroStats[] heroStats = optimizationDb.getRows(request.getIndex(), request.getIndex() + 1);
         if (heroStats.length == 0) {
             return "";
@@ -261,6 +333,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public String optimize(final OptimizationRequest request, final HeroStats unused) {
+        final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
+        if (optimizationDb == null) {
+            return "";
+        }
+
         inProgress = true;
         final HeroStats base = baseStatsDb.getBaseStatsByName(request.hero.name, request.hero.getStars());
         System.out.println("Started optimization request");

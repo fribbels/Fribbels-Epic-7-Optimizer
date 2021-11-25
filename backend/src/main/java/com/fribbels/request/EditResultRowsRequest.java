@@ -12,6 +12,7 @@ import lombok.ToString;
 @ToString
 public class EditResultRowsRequest extends Request {
 
+    private String executionId;
     private int index;
     private String property;
 }

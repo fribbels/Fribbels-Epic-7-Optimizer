@@ -166,7 +166,14 @@ module.exports = {
 
 async function fetchCache(url) {
     console.log("Fetching from url: " + url);
-    const response = await fetch(url);
+    var myHeaders = new Headers();
+    myHeaders.append('pragma', 'no-cache');
+    myHeaders.append('cache-control', 'no-cache');
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: myHeaders,
+    });
     const text = await response.text();
     const json = JSON.parse(text);
     console.log("Finished fetching from url: " + url);
