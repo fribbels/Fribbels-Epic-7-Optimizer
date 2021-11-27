@@ -1040,7 +1040,7 @@
   "This tool is for building multiple heroes simultaneously, who share similar gear requirements.": "この機能は似た装備を必要とする複数の英雄のビルドを同時に作る事ができます。",
   "Instructions": "使い方",
   "First, add all the heroes that you want to optimize.": "はじめに、最適化したい英雄を全て追加します",
-  "Heroes must have filters to optimizer, click 'Edit filters' to change their stat and item filters.": "各英雄にはフィルタが必要になります。「フィルタの編集」をクリックしてステータスと装備のフィルタを変更してください。",
+  "Heroes must have filters to optimize, click 'Edit filters' to change their stat and item filters.": "各英雄にはフィルタが必要になります。「フィルタの編集」をクリックしてステータスと装備のフィルタを変更してください。",
   "Lower your permutations as much as possible. Aim for < 5 million results total across all heroes.": "出来る限り順列数を下げてください。全ての英雄の合計値が500万以下になるように調節してください。",
   "Click 'Start all' to begin optimizing all selected heroes, then wait for results.": "「全て開始する」をクリックすると選択した英雄すべての最適化が始まります。結果が表示されるまで待機してください。",
   "Once finished, select a row to filter out builds containing the row's items from other heroes.": "行を選択すると、その行の装備を含むビルドが他の英雄のビルドから除外されます。",
