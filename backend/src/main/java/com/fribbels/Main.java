@@ -29,9 +29,19 @@ public class Main {
     private static final OptimizationDb optimizationDb = new OptimizationDb();
 
     public static boolean interrupt = false;
+    public static int THREADS = 10;
 
     public static void main(String[] args) throws Exception {
-        executorService = Executors.newFixedThreadPool(10);
+        try {
+            int threadsToUse = Runtime.getRuntime().availableProcessors() * 2;
+            if (threadsToUse > THREADS) {
+                THREADS = threadsToUse;
+            }
+        } catch (final RuntimeException e) {
+            System.out.println("Error setting number of threads, defaulting to 10" + e);
+        }
+
+        executorService = Executors.newFixedThreadPool(THREADS);
         start();
     }
 
@@ -53,7 +63,7 @@ public class Main {
         server.createContext("/heroes", heroesRequestHandler);
         server.createContext("/ocr", new OcrRequestHandler());
 
-        System.out.println("START BACKEND");
+        System.out.println("START BACKEND WITH " + THREADS + " THREADS");
 
         server.setExecutor(executorService);
         server.start();

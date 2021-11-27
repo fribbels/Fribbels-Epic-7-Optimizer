@@ -136,6 +136,5 @@ function fillMissingStrings(zh, dest) {
         }
     }
 
-
     console.log(JSON.stringify(dest, null, 2))
 }

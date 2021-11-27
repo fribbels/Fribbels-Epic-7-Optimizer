@@ -472,7 +472,7 @@ ${i18next.t("This tool is for building multiple heroes simultaneously, who share
     <li>${i18next.t("Instructions")}</li>
     <ul>
         <li>${i18next.t("First, add all the heroes that you want to optimize.")}</li>
-        <li>${i18next.t("Heroes must have filters to optimizer, click 'Edit filters' to change their stat and item filters.")}</li>
+        <li>${i18next.t("Heroes must have filters to optimize, click 'Edit filters' to change their stat and item filters.")}</li>
         <li>${i18next.t("Lower your permutations as much as possible. Aim for < 5 million results total across all heroes.")}</li>
         <li>${i18next.t("Click 'Start all' to begin optimizing all selected heroes, then wait for results.")}</li>
         <li>${i18next.t("Once finished, select a row to filter out builds containing the row's items from other heroes.")}</li>
@@ -782,43 +782,6 @@ function getDataSource(index, grid, multiHero) {
         },
     }
 }
-// const datasource = {
-//     async getRows(params) {
-//         console.log("DEBUG getRows params", params);
-//         const startRow = params.startRow;
-//         const endRow = params.endRow;
-//         const sortColumn = params.sortModel.length ? params.sortModel[0].colId : null;
-//         const sortOrder = params.sortModel.length ? params.sortModel[0].sort : null;
-
-//         global.optimizerGrid = optimizerGrid;
-
-//         optimizerGrid.gridOptions.api.showLoadingOverlay();
-//         const heroId = document.getElementById('inputHeroAdd').value;
-//         const optimizationRequest = OptimizerTab.getOptimizationRequestParams();
-//         optimizationRequest.heroId = heroId;
-
-//         const request = {
-//             startRow: startRow,
-//             endRow: endRow,
-//             sortColumn: sortColumn,
-//             sortOrder: sortOrder,
-//             optimizationRequest: optimizationRequest
-//         }
-
-//         const getResultRowsResponse = Api.getResultRows(request).then(getResultRowsResponse => {
-//             console.log("GetResultRowsResponse", getResultRowsResponse);
-//             aggregateCurrentHeroStats(getResultRowsResponse.heroStats)
-//             optimizerGrid.gridOptions.api.hideOverlay();
-//             params.successCallback(getResultRowsResponse.heroStats, getResultRowsResponse.maximum)
-
-//             var pinned = optimizerGrid.gridOptions.api.getPinnedTopRow(0);
-//             if (pinned) {
-//                 optimizerGrid.gridOptions.api.setPinnedTopRowData([pinned.data])
-//             }
-//         });
-//     },
-// }
-
 
 function getField(heroStats, stat) {
     return heroStats.map(x => x[stat]);
@@ -1125,7 +1088,10 @@ async function handleStartOptimizationRequest(index, callback) {
         })
     }
 
-    progressTimer = setInterval(updateProgress, 150)
+    if (progressTimer) {
+        clearInterval(progressTimer);
+    }
+    progressTimer = setInterval(updateProgress, 500)
 
     const oldExecutionId = multiOptimizerHeroes[index].executionId;
     await Api.deleteExecution(oldExecutionId);

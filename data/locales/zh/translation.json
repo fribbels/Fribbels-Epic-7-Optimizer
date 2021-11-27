@@ -1030,7 +1030,7 @@
   "This tool is for building multiple heroes simultaneously, who share similar gear requirements.": "这个工具方便同时给多个有相似装备需求的英雄配装.",
   "Instructions": "操作方法",
   "First, add all the heroes that you want to optimize.": "首先, 添加多个你想配装的英雄.",
-  "Heroes must have filters to optimizer, click 'Edit filters' to change their stat and item filters.": "英雄必须有装备筛选条件, 点击 '修改筛选条件' 来修改装备的筛选条件.",
+  "Heroes must have filters to optimize, click 'Edit filters' to change their stat and item filters.": "英雄必须有装备筛选条件, 点击 '修改筛选条件' 来修改装备的筛选条件.",
   "Lower your permutations as much as possible. Aim for < 5 million results total across all heroes.": "尽量减少排列组合数量. 全英雄装备排列组合最好低于500万.",
   "Click 'Start all' to begin optimizing all selected heroes, then wait for results.": "点击'全部开始'开始配装, 请耐心等待结果.",
   "Once finished, select a row to filter out builds containing the row's items from other heroes.": "计算完成后, 选中一行配装会在其它英雄的配装里排除这行装备.",
