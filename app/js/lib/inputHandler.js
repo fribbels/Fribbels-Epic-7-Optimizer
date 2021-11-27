@@ -150,7 +150,7 @@ function setupLinks() {
     });
 
     $('#donateBadge').on('click', (event) => {
-        electron.shell.openExternal('https://www.paypal.com/donate?business=FKESQZAXPN7B8&item_name=Support+Epic+7+Gear+Optimizer%21&currency_code=USD');
+        electron.shell.openExternal('https://www.buymeacoffee.com/fribbels');
     });
 
     $('#githubBadge').on('click', (event) => {
