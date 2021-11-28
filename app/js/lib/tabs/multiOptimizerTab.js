@@ -491,10 +491,12 @@ ${i18next.t("This tool is for building multiple heroes simultaneously, who share
         });
 
         document.getElementById('multiStartAll').addEventListener("click", async () => {
+            interrupt = false
             var index = 0;
             const callback = (result) => {
                 if (result == "OK") {
                     if (index >= multiOptimizerHeroes.length || interrupt) {
+                        console.log("index >= len, interrupt", index, multiOptimizerHeroes.length, interrupt)
                         return;
                     }
 

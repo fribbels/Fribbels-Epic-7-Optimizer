@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.0-beta.1";
+const currentVersion = "1.8.0-beta.3";
 
 global.TEST = false;
 /********************************************************************************************
@@ -47,6 +47,7 @@ module.exports = {
     <li>Enhance limit optimizer setting</li>
     <li>Scores now use reforged values</li>
     <li>Added per-unit score evaluation</li>
+    <li>Increasing optimization threads based on CPU core count</li>
 </ul>
 `
         );

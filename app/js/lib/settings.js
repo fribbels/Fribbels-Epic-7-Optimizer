@@ -153,13 +153,16 @@ module.exports = {
         }
 
         console.log("LOAD SETTINGS", settingsPath);
-        const text = await Files.readFileSync(Files.path(settingsPath));
+        var settings;
         try {
-            JSON.parse(text)
+            const text = await Files.readFileSync(Files.path(settingsPath));
+            settings = JSON.parse(text)
         } catch (e) {
+            settings = module.exports.getDefaultSettings();
             Notifier.error(`There was an error parsing the ${Files.path(settingsPath)} file. Please repair the file or delete it.`)
+            Notifier.error(`Using default settings instead.`)
         }
-        const settings = JSON.parse(text);
+
         console.log("LOADING SETTINGS", settings);
 
         function isNullUndefined(x) {
