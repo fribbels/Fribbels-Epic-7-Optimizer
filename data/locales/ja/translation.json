@@ -845,7 +845,7 @@
   "Import all 6 star heroes": "星6の英雄すべてをインポート",
   "Import all 5+ star heroes": "星5以上の英雄すべてをインポート",
   "Import gear from screenshots": "スクリーンショットから装備をインポートする",
-  "Use <b>merge</b> to update all your gear with new screenshots.</br>": "新しいスクリーンショットですべての装備を更新して<b>統合</b>する。</br>",
+  "Use <b>merge</b> to update all your gear with new screenshots.": "新しいスクリーンショットですべての装備を更新して<b>統合</b>する。",
   "Use <b>add</b> only if you're using screenshots and want to update a small number of gears. Can cause duplicate gear if the screenshots include existing gear.</br>": "<b>追加</b>はスクリーンショットを使用していて、少数の装備を更新したい場合にのみ使用してください。スクリーンショットに既存の装備が含まれている場合、装備が重複する可能性があります。",
   "Check for updates": "アップデートを確認",
   "<b>Cp - </b> Combat power, as you would find it ingame, but without factoring in skill enhances. Useful for world boss units.": "<b>CP - </b> ゲーム内で確認できる戦闘力です。ただしスキル強化分を考慮していません。ボスユニットなどに有効です。",

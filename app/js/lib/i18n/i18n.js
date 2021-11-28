@@ -119,13 +119,6 @@ module.exports = {
                 }
             }
         });
-
-        function clearlocalCache() {
-            console.log('Language Cache Cleared!');
-            localStorage.clear();
-            i18next.reloadResources();
-        };
-
     }
 }
 
@@ -138,3 +131,9 @@ function fillMissingStrings(zh, dest) {
 
     console.log(JSON.stringify(dest, null, 2))
 }
+
+function clearlocalCache() {
+    console.log('Language Cache Cleared!');
+    localStorage.clear();
+    i18next.reloadResources();
+};
