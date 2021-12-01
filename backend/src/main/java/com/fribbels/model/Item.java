@@ -65,6 +65,8 @@ public class Item {
     private String duplicateId;
     private String allowedMods;
 
+    public float[] tempStatAccArr;
+
     public String toString() {
         return new Gson().toJson(this);
     }

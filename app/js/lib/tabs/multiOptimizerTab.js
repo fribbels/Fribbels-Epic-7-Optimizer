@@ -295,6 +295,7 @@ function initializeBlank(index) {
 
         drawMultiPreview(selectedGear, getSelectedGearMods(grid), index)
         setPinnedHero(index, hero);
+        Saves.autoSave();
     });
 
     document.getElementById('multiRemove' + index).addEventListener("click", async () => {
