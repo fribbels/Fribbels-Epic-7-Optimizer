@@ -12,10 +12,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.aparapi:aparapi:2.0.0" level="project" />
-    <orderEntry type="library" name="Maven: com.aparapi:aparapi-jni:1.4.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.bcel:bcel:6.4.1" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.13.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.jr:jackson-jr-all:2.12.0-rc1" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:22.0" level="project" />
@@ -75,9 +71,9 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.7.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.4" level="project" />
-    <orderEntry type="library" name="Maven: com.aparapi:aparapi:2.0.0" level="project" />
-    <orderEntry type="library" name="Maven: com.aparapi:aparapi-jni:1.4.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.bcel:bcel:6.4.1" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.13.1" level="project" />
+    <orderEntry type="library" name="Maven: com.aparapi:aparapi:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.aparapi:aparapi-jni:1.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.bcel:bcel:6.5.0" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.13.6" level="project" />
   </component>
 </module>

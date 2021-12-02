@@ -6,20 +6,31 @@ import lombok.Setter;
 @Setter
 public class GpuOptimizer extends Kernel {
 
+//    private float[] flattenedNecklaceAccs;
+//    private float[] flattenedRingAccs;
+    private float[] flattenedWeaponAccs;
+    private float[] flattenedHelmetAccs;
+    private float[] flattenedArmorAccs;
     private float[] flattenedNecklaceAccs;
     private float[] flattenedRingAccs;
     private float[] flattenedBootAccs;
 
+    private int wSize;
+    private int hSize;
+    private int aSize;
     private int nSize;
     private int rSize;
     private int bSize;
 
-    private int wSet;
-    private int hSet;
-    private int aSet;
-
     private int argSize;
     private int outputArgs;
+
+//    private float[] weaponAccumulatorArr;
+//    private float[] helmetAccumulatorArr;
+//    private float[] armorAccumulatorArr;
+//    private float[] necklaceAccumulatorArr;
+//    private float[] ringAccumulatorArr;
+//    private float[] bootAccumulatorArr;
 
     private float bonusBaseAtk;
     private float bonusBaseHp;
@@ -39,10 +50,6 @@ public class GpuOptimizer extends Kernel {
     private int SETTING_RAGE_SET;
     private int SETTING_PEN_SET;
 
-    private float[] weaponAccumulatorArr;
-    private float[] helmetAccumulatorArr;
-    private float[] armorAccumulatorArr;
-
     private float baseCr;
     private float baseCd;
     private float baseEff;
@@ -61,7 +68,9 @@ public class GpuOptimizer extends Kernel {
     private float aeiRes;
     private float aeiSpeed;
 
-    private float[] results;
+//    private float[] results;
+    private boolean[] passes;
+    private int iteration;
 
     int minimum(int a, int b) {
         return b+((a-b)&((a-b)>>31));
@@ -73,14 +82,63 @@ public class GpuOptimizer extends Kernel {
 
     @Override
     public void run() {
-        final int i = getGlobalId();
+        final int id = getGlobalId();
+        final long i = 65536 * iteration + id;
 
-        if (i < nSize * rSize * bSize) {
-            final int n = i / (rSize * bSize);
-            final int r = (i / bSize) % rSize;
-            final int b = i % bSize;
+        if (i < ((long)(wSize)) * hSize * aSize * nSize * rSize * bSize) {
+            final int b = (int)(i % bSize);
+            final int r = (int)(( ( i - b ) / bSize ) %  rSize);
+            final int n = (int)(( ( i - r * bSize - b ) / (bSize * rSize) ) % nSize);
+            final int a = (int)(( ( i - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize);
+            final int h = (int)(( ( i - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize);
+            final int w = (int)(( ( i - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize);
 
-            // accs3
+            //            // accs3
+            final float wAtk =   flattenedWeaponAccs[w * argSize + 0];
+            final float wHp =    flattenedWeaponAccs[w * argSize + 1];
+            final float wDef =   flattenedWeaponAccs[w * argSize + 2];
+            final float wMain1 = flattenedWeaponAccs[w * argSize + 3];
+            final float wMain2 = flattenedWeaponAccs[w * argSize + 4];
+            final float wMain3 = flattenedWeaponAccs[w * argSize + 5];
+            final float wCr =    flattenedWeaponAccs[w * argSize + 6];
+            final float wCd =    flattenedWeaponAccs[w * argSize + 7];
+            final float wEff =   flattenedWeaponAccs[w * argSize + 8];
+            final float wRes =   flattenedWeaponAccs[w * argSize + 9];
+            final float wSpeed = flattenedWeaponAccs[w * argSize + 10];
+            final float wScore = flattenedWeaponAccs[w * argSize + 11];
+            final float wSet =   flattenedWeaponAccs[w * argSize + 12];
+
+            //            // accs3
+            final float hAtk =   flattenedHelmetAccs[h * argSize + 0];
+            final float hHp =    flattenedHelmetAccs[h * argSize + 1];
+            final float hDef =   flattenedHelmetAccs[h * argSize + 2];
+            final float hMain1 = flattenedHelmetAccs[h * argSize + 3];
+            final float hMain2 = flattenedHelmetAccs[h * argSize + 4];
+            final float hMain3 = flattenedHelmetAccs[h * argSize + 5];
+            final float hCr =    flattenedHelmetAccs[h * argSize + 6];
+            final float hCd =    flattenedHelmetAccs[h * argSize + 7];
+            final float hEff =   flattenedHelmetAccs[h * argSize + 8];
+            final float hRes =   flattenedHelmetAccs[h * argSize + 9];
+            final float hSpeed = flattenedHelmetAccs[h * argSize + 10];
+            final float hScore = flattenedHelmetAccs[h * argSize + 11];
+            final float hSet =   flattenedHelmetAccs[h * argSize + 12];
+
+            //            // accs3
+            final float aAtk =   flattenedArmorAccs[a * argSize + 0];
+            final float aHp =    flattenedArmorAccs[a * argSize + 1];
+            final float aDef =   flattenedArmorAccs[a * argSize + 2];
+            final float aMain1 = flattenedArmorAccs[a * argSize + 3];
+            final float aMain2 = flattenedArmorAccs[a * argSize + 4];
+            final float aMain3 = flattenedArmorAccs[a * argSize + 5];
+            final float aCr =    flattenedArmorAccs[a * argSize + 6];
+            final float aCd =    flattenedArmorAccs[a * argSize + 7];
+            final float aEff =   flattenedArmorAccs[a * argSize + 8];
+            final float aRes =   flattenedArmorAccs[a * argSize + 9];
+            final float aSpeed = flattenedArmorAccs[a * argSize + 10];
+            final float aScore = flattenedArmorAccs[a * argSize + 11];
+            final float aSet =   flattenedArmorAccs[a * argSize + 12];
+
+            //            // accs3
             final float nAtk =   flattenedNecklaceAccs[n * argSize + 0];
             final float nHp =    flattenedNecklaceAccs[n * argSize + 1];
             final float nDef =   flattenedNecklaceAccs[n * argSize + 2];
@@ -94,8 +152,8 @@ public class GpuOptimizer extends Kernel {
             final float nSpeed = flattenedNecklaceAccs[n * argSize + 10];
             final float nScore = flattenedNecklaceAccs[n * argSize + 11];
             final float nSet =   flattenedNecklaceAccs[n * argSize + 12];
-
-            // accs4
+//
+//            // accs4
             final float rAtk =   flattenedRingAccs[r * argSize + 0];
             final float rHp =    flattenedRingAccs[r * argSize + 1];
             final float rDef =   flattenedRingAccs[r * argSize + 2];
@@ -125,46 +183,64 @@ public class GpuOptimizer extends Kernel {
             final float bScore = flattenedBootAccs[b * argSize + 11];
             final float bSet =   flattenedBootAccs[b * argSize + 12];
 
-//            final int[] sets = new int[16];
-//            sets[wSet]++;
-//            sets[hSet]++;
-//            sets[aSet]++;
-//            sets[(int)nSet]++;
-//            sets[(int)rSet]++;
-//            sets[(int)bSet]++;
+            int[] sets = new int[16];
 
-            results[i * outputArgs + wSet + 21]++;
-            results[i * outputArgs + hSet + 21]++;
-            results[i * outputArgs + aSet + 21]++;
-            results[i * outputArgs + (int)nSet + 21]++;
-            results[i * outputArgs + (int)rSet + 21]++;
-            results[i * outputArgs + (int)bSet + 21]++;
+            sets[(int)wSet] += 1;
+            sets[(int)hSet] += 1;
+            sets[(int)aSet] += 1;
+            sets[(int)nSet] += 1;
+            sets[(int)rSet] += 1;
+            sets[(int)bSet] += 1;
 
-            final int hpSet = (int)results[i * outputArgs + 0 + 21] / 2;
-            final int defSet = (int)results[i * outputArgs + 1 + 21] / 2;
-            final int atkSet = (int)results[i * outputArgs + 2 + 21] / 4;
-            final int speedSet = (int)results[i * outputArgs + 3 + 21] / 4;
-            final int crSet = (int)results[i * outputArgs + 4 + 21] / 2;
-            final int effSet = (int)results[i * outputArgs + 5 + 21] / 2;
-            final int cdSet = (int)results[i * outputArgs + 6 + 21] / 4;
-            final int lifestealSet = (int)results[i * outputArgs + 7 + 21] / 4;
-            final int counterSet = (int)results[i * outputArgs + 8 + 21] / 4;
-            final int resSet = (int)results[i * outputArgs + 9 + 21] / 2;
-            final int unitySet = (int)results[i * outputArgs + 10 + 21] / 2;
-            final int rageSet = (int)results[i * outputArgs + 11 + 21] / 4;
-            final int immunitySet = (int)results[i * outputArgs + 12 + 21] / 2;
-            final int penSet = (int)results[i * outputArgs + 13 + 21] / 2;
-            final int revengeSet = (int)results[i * outputArgs + 14 + 21] / 4;
-            final int injurySet = (int)results[i * outputArgs + 15 + 21] / 4;
+            final int hpSet = (int)sets[0] / 2;
+            final int defSet = (int)sets[1] / 2;
+            final int atkSet = (int)sets[2] / 4;
+            final int speedSet = (int)sets[3] / 4;
+            final int crSet = (int)sets[4] / 2;
+            final int effSet = (int)sets[5] / 2;
+            final int cdSet = (int)sets[6] / 4;
+            final int lifestealSet = (int)sets[7] / 4;
+            final int counterSet = (int)sets[8] / 4;
+            final int resSet = (int)sets[9] / 2;
+            final int unitySet = (int)sets[10] / 2;
+            final int rageSet = (int)sets[11] / 4;
+            final int immunitySet = (int)sets[12] / 2;
+            final int penSet = (int)sets[13] / 2;
+            final int revengeSet = (int)sets[14] / 4;
+            final int injurySet = (int)sets[15] / 4;
 
-            final float atk =  ((bonusBaseAtk  + weaponAccumulatorArr[0]+helmetAccumulatorArr[0]+armorAccumulatorArr[0]+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
-            final float hp =   ((bonusBaseHp   + weaponAccumulatorArr[1]+helmetAccumulatorArr[1]+armorAccumulatorArr[1]+nHp+rHp+bHp + (minimum(hpSet, 1) * hpSetBonus)) * bonusMaxHp);
-            final float def =  ((bonusBaseDef  + weaponAccumulatorArr[2]+helmetAccumulatorArr[2]+armorAccumulatorArr[2]+nDef+rDef+bDef + (minimum(defSet, 1) * defSetBonus)) * bonusMaxDef);
-            final float cr =   minimum(100, (int) (baseCr  + weaponAccumulatorArr[6]+helmetAccumulatorArr[6]+armorAccumulatorArr[6]+nCr+rCr+nCr + (minimum(crSet, 1) * 12) + bonusCr + aeiCr));
-            final int cd =     minimum(350, (int) (baseCd  + weaponAccumulatorArr[7]+helmetAccumulatorArr[7]+armorAccumulatorArr[7]+nCd+rCd+bCd + (cdSet * 40) + bonusCd + aeiCd));
-            final int eff =  (int) (baseEff   + weaponAccumulatorArr[8]+helmetAccumulatorArr[8]+armorAccumulatorArr[8]+nEff+rEff+bEff + (minimum(effSet, 1) * 20) + bonusEff + aeiEff);
-            final int res =  (int) (baseRes   + weaponAccumulatorArr[9]+helmetAccumulatorArr[9]+armorAccumulatorArr[9]+nRes+rRes+bRes + (minimum(resSet, 1) * 20) + bonusRes + aeiRes);
-            final int spd =  (int) (baseSpeed   + weaponAccumulatorArr[10]+helmetAccumulatorArr[10]+armorAccumulatorArr[10]+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + bonusSpeed + aeiSpeed);
+//            results[i * outputArgs + (int)wSet + 21]++;
+//            results[i * outputArgs + (int)hSet + 21]++;
+//            results[i * outputArgs + (int)aSet + 21]++;
+//            results[i * outputArgs + (int)nSet + 21]++;
+//            results[i * outputArgs + (int)rSet + 21]++;
+//            results[i * outputArgs + (int)bSet + 21]++;
+
+//            final int hpSet = (int)results[i * outputArgs + 0 + 21] / 2;
+//            final int defSet = (int)results[i * outputArgs + 1 + 21] / 2;
+//            final int atkSet = (int)results[i * outputArgs + 2 + 21] / 4;
+//            final int speedSet = (int)results[i * outputArgs + 3 + 21] / 4;
+//            final int crSet = (int)results[i * outputArgs + 4 + 21] / 2;
+//            final int effSet = (int)results[i * outputArgs + 5 + 21] / 2;
+//            final int cdSet = (int)results[i * outputArgs + 6 + 21] / 4;
+//            final int lifestealSet = (int)results[i * outputArgs + 7 + 21] / 4;
+//            final int counterSet = (int)results[i * outputArgs + 8 + 21] / 4;
+//            final int resSet = (int)results[i * outputArgs + 9 + 21] / 2;
+//            final int unitySet = (int)results[i * outputArgs + 10 + 21] / 2;
+//            final int rageSet = (int)results[i * outputArgs + 11 + 21] / 4;
+//            final int immunitySet = (int)results[i * outputArgs + 12 + 21] / 2;
+//            final int penSet = (int)results[i * outputArgs + 13 + 21] / 2;
+//            final int revengeSet = (int)results[i * outputArgs + 14 + 21] / 4;
+//            final int injurySet = (int)results[i * outputArgs + 15 + 21] / 4;
+
+            final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
+            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (minimum(hpSet, 1) * hpSetBonus)) * bonusMaxHp);
+            final float def =  ((bonusBaseDef  + wDef+hDef+aDef+nDef+rDef+bDef + (minimum(defSet, 1) * defSetBonus)) * bonusMaxDef);
+            final float cr =   minimum(100, (int) (baseCr  + wCr+hCr+aCr+nCr+rCr+bCr + (minimum(crSet, 1) * 12) + bonusCr + aeiCr));
+            final int cd =     minimum(350, (int) (baseCd  + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 40) + bonusCd + aeiCd));
+            final int eff =  (int) (baseEff   + wEff+hEff+aEff+nEff+rEff+bEff + (minimum(effSet, 1) * 20) + bonusEff + aeiEff);
+            final int res =  (int) (baseRes   + wRes+hRes+aRes+nRes+rRes+bRes + (minimum(resSet, 1) * 20) + bonusRes + aeiRes);
+            final int spd =  (int) (baseSpeed   + wSpeed+hSpeed+aSpeed+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + bonusSpeed + aeiSpeed);
 
             //        final int atk = (int) (((base.atk + mapAccumulatorArrsToFloat(0, accs)  + (sets[2] > 1 ? sets[2] / 4 * 0.35f * base.atk : 0) + base.atk * hero.bonusAtkPercent / 100f) + hero.bonusAtk) * (1 + base.bonusMaxAtkPercent/100f));
             //        final int hp = (int) (((base.hp   + mapAccumulatorArrsToFloat(1, accs)  + (sets[0] > 1 ? sets[0] / 2 * 0.15f * base.hp : 0) + base.hp * hero.bonusHpPercent / 100f) + hero.bonusHp) * (1 + base.bonusMaxHpPercent/100f));
@@ -195,29 +271,43 @@ public class GpuOptimizer extends Kernel {
             final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
             final int dmgh = (int) ((cd * hp)/1000);
 
-            final int score = (int) (weaponAccumulatorArr[11]+helmetAccumulatorArr[11]+armorAccumulatorArr[11]+nScore+rScore+bScore);
-            results[i * outputArgs + 0] = atk;
-            results[i * outputArgs + 1] = hp;
-            results[i * outputArgs + 2] = def;
-            results[i * outputArgs + 3] = cr;
-            results[i * outputArgs + 4] = cd;
-            results[i * outputArgs + 5] = eff;
-            results[i * outputArgs + 6] = res;
-            results[i * outputArgs + 7] = spd;
-            results[i * outputArgs + 8] = cp;
-            results[i * outputArgs + 9] = ehp;
-            results[i * outputArgs + 10] = hpps;
-            results[i * outputArgs + 11] = ehpps;
-            results[i * outputArgs + 12] = dmg;
-            results[i * outputArgs + 13] = dmgps;
-            results[i * outputArgs + 14] = mcdmg;
-            results[i * outputArgs + 15] = mcdmgps;
-            results[i * outputArgs + 16] = dmgh;
-            results[i * outputArgs + 17] = score;
-            // counts
-            results[i * outputArgs + 18] = n;
-            results[i * outputArgs + 19] = r;
-            results[i * outputArgs + 20] = b;
+            final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
+
+
+
+            float hpMinFilter = 15000;
+            float hpMaxFilter = 18000;
+
+            float pass = min(max(hpMinFilter, hp), hpMaxFilter);
+            boolean p = pass != hpMinFilter && pass != hpMaxFilter;
+
+            passes[id] = p;
+//            t = 10k, 20k, 30k | 15k 20k 25k
+
+
+
+//            results[i * outputArgs + 0] = atk;
+//            results[i * outputArgs + 1] = hp;
+//            results[i * outputArgs + 2] = def;
+//            results[i * outputArgs + 3] = cr;
+//            results[i * outputArgs + 4] = cd;
+//            results[i * outputArgs + 5] = eff;
+//            results[i * outputArgs + 6] = res;
+//            results[i * outputArgs + 7] = spd;
+//            results[i * outputArgs + 8] = cp;
+//            results[i * outputArgs + 9] = ehp;
+//            results[i * outputArgs + 10] = hpps;
+//            results[i * outputArgs + 11] = ehpps;
+//            results[i * outputArgs + 12] = dmg;
+//            results[i * outputArgs + 13] = dmgps;
+//            results[i * outputArgs + 14] = mcdmg;
+//            results[i * outputArgs + 15] = mcdmgps;
+//            results[i * outputArgs + 16] = dmgh;
+//            results[i * outputArgs + 17] = score;
+//            // counts
+////            results[i * outputArgs + 18] = n;
+////            results[i * outputArgs + 19] = r;
+//            results[i * outputArgs + 20] = b;
             // sets
             //                                results[i * outputArgs + 21] = wSet;
             //                                results[i * outputArgs + 22] = hSet;

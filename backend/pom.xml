@@ -82,7 +82,7 @@
         <dependency>
             <groupId>com.aparapi</groupId>
             <artifactId>aparapi</artifactId>
-            <version>2.0.0</version>
+            <version>3.0.0</version>
         </dependency>
 
     </dependencies>

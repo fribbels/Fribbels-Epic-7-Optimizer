@@ -1,8 +1,11 @@
 package com.fribbels;
 
 import com.aparapi.Kernel;
+import com.aparapi.ProfileInfo;
+import com.aparapi.ProfileReport;
 import com.aparapi.Range;
 import com.aparapi.device.Device;
+import com.aparapi.exception.QueryFailedException;
 import com.fribbels.core.StatCalculator;
 import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
@@ -17,6 +20,7 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.net.BindException;
 import java.net.InetSocketAddress;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -40,26 +44,23 @@ public class Main {
         return (i >> 31) | (-i >>> 31);
     }
 
-    public static void main3(String[] args) {
-//        int a = 8; int b = 5;
-//        System.out.println(b+((a-b)&((a-b)>>31)));
+    public static void main2(String[] args) throws QueryFailedException {
+        int size = 20_000_000;
+        final float inA[] = new float[size];
+        final float inB[] = new float[size];
 
-        //        int size = 200_000_000;
-//        final float inA[] = new float[size];
-//        final float inB[] = new float[size];
-//
-//        for (int i = 0; i < size; i++) {
-//            inA[i] = i;
-//            inB[i] = size - i;
-//        }
-//
-//        assert (inA.length == inB.length);
-//        final float result[] = new float[inA.length];
-//
-//
-//        Kernel kernel = new Kernel() {
-//            @Override
-//            public void run() {
+        for (int i = 0; i < size; i++) {
+            inA[i] = i;
+            inB[i] = size - i;
+        }
+
+        assert (inA.length == inB.length);
+        final float result[] = new float[size];
+
+
+        Kernel kernel = new Kernel() {
+            @Override
+            public void run() {
 //                int i = getGlobalId();
 //                result[i] += inA[i] / inB[i] / 1235f * (inB[i] / inA[i]);
 //                result[i] += inA[i] / inB[i] / 1238f * (inB[i] / inA[i]);
@@ -74,41 +75,56 @@ public class Main {
 //                result[i] += inA[i] / inB[i] / 1239f * (inB[i] / inA[i]);
 //                result[i] += inA[i] / inB[i] / 12323f * (inB[i] / inA[i]);
 //                result[i] += inA[i] / inB[i] / 12354f * (inB[i] / inA[i]);
-//            }
-//        };
-//
-//
-//
+            }
+        };
+
+        kernel.setExplicit(true);
+
+
 //        for (int i = 0; i < 20; i++) {
 //            long startTime = System.currentTimeMillis();
-//            Range range = Range.create(result.length);
-//            kernel.execute(range);
+//            Range range = Range.create(512);
+//
+//            int maxLocalSize = kernel.getKernelMaxWorkGroupSize(kernel.getTargetDevice());
+//            final Range r = kernel.getTargetDevice().createRange(512, 256);
+//
+//            kernel.execute(r);
 //            System.out.printf("time taken: %s ms%n", System.currentTimeMillis() - startTime);
-//            System.out.println(result[10]);
+//
+//            List<ProfileInfo> profileInfo = kernel.getProfileInfo();
+//            //
+//            for (final ProfileInfo p : profileInfo) {
+//                System.out.print(" " + p.getType() + " " + p.getLabel() + " " + (p.getStart() / 1000) + " .. "
+//                        + (p.getEnd() / 1000) + " " + ((p.getEnd() - p.getStart()) / 1000) + "us");
+//                System.out.println("-----");
+//            }
 //        }
-//
-//
-//        System.out.printf("-----");
-//
-//
-//        long startTime2 = System.currentTimeMillis();
-//        for (int i = 0; i < size; i++) {
-//            result[i] += inA[i] / inB[i] / 1235f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1238f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1239f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1230f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1231f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1233f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1234f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1236f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1237f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1238f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 1239f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 12323f * (inB[i] / inA[i]);
-//            result[i] += inA[i] / inB[i] / 12354f * (inB[i] / inA[i]);
-//        }
-//        System.out.printf("time taken: %s ms%n", System.currentTimeMillis() - startTime2);
-//        System.out.println(result[10]);
+
+
+
+
+
+        System.out.printf("===============");
+
+
+        long startTime2 = System.currentTimeMillis();
+        for (int i = 0; i < size; i++) {
+            result[i] += inA[i] / inB[i] / 1235f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1238f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1239f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1230f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1231f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1233f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1234f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1236f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1237f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1238f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 1239f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 12323f * (inB[i] / inA[i]);
+            result[i] += inA[i] / inB[i] / 12354f * (inB[i] / inA[i]);
+        }
+        System.out.printf("time taken: %s ms%n", System.currentTimeMillis() - startTime2);
+        System.out.println(result[10]);
 
     }
 
