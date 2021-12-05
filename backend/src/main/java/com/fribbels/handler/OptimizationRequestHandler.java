@@ -572,12 +572,13 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final boolean[] passes = new boolean[max];
 
             final Range range = kernel.getTargetDevice().createRange(max, 256);
+
+//            float[] debug = new float[max];
+//            kernel.setDebug(debug);
+
             kernel.setIteration(finalI);
             kernel.setPasses(passes);
             kernel.execute(range);
-
-            //            float[] debug = new float[max];
-            //            kernel.setDebug(debug);
 
             executorService.submit(() -> {
                 searchedCounter.addAndGet(max);
@@ -586,7 +587,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     final long iteration = ((long) finalI) * max + j;
                     if (iteration >= maxPerms)
                         break;
-                    //                System.out.println(debug[j]);
+
+//                                    System.out.println(debug[j]);
 
                     if (passes[j]) {
 

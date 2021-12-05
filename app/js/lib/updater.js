@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.0-beta.3";
+const currentVersion = "0.0.1-gpu.1";
 
 global.TEST = false;
 /********************************************************************************************
