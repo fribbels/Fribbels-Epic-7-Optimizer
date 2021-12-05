@@ -556,6 +556,482 @@ public class GpuOptimizer extends Kernel {
     }
 }
 
+/*
+Compiled opencl
+
+
+#pragma OPENCL EXTENSION cl_khr_fp64 : enable
+
+typedef struct This_s{
+   int max;
+   int iteration;
+   int wSize;
+   int hSize;
+   int aSize;
+   int nSize;
+   int rSize;
+   int bSize;
+   int argSize;
+   __constant float *flattenedWeaponAccs;
+   __constant float *flattenedHelmetAccs;
+   __constant float *flattenedArmorAccs;
+   __constant float *flattenedNecklaceAccs;
+   __constant float *flattenedRingAccs;
+   __constant float *flattenedBootAccs;
+   __local int *localSetsBuffer;
+   float bonusBaseAtk;
+   float atkSetBonus;
+   float bonusMaxAtk;
+   float bonusBaseHp;
+   float hpSetBonus;
+   float bonusMaxHp;
+   float bonusBaseDef;
+   float defSetBonus;
+   float bonusMaxDef;
+   float baseCr;
+   float bonusCr;
+   float aeiCr;
+   float baseCd;
+   float bonusCd;
+   float aeiCd;
+   float baseEff;
+   float bonusEff;
+   float aeiEff;
+   float baseRes;
+   float bonusRes;
+   float aeiRes;
+   float baseSpeed;
+   float speedSetBonus;
+   float revengeSetBonus;
+   float bonusSpeed;
+   float aeiSpeed;
+   int SETTING_RAGE_SET;
+   int SETTING_PEN_SET;
+   float penSetDmgBonus;
+   int inputAtkMinLimit;
+   int inputAtkMaxLimit;
+   int inputHpMinLimit;
+   int inputHpMaxLimit;
+   int inputDefMinLimit;
+   int inputDefMaxLimit;
+   int inputSpdMinLimit;
+   int inputSpdMaxLimit;
+   int inputCrMinLimit;
+   int inputCrMaxLimit;
+   int inputCdMinLimit;
+   int inputCdMaxLimit;
+   int inputEffMinLimit;
+   int inputEffMaxLimit;
+   int inputResMinLimit;
+   int inputResMaxLimit;
+   int inputMinCpLimit;
+   int inputMaxCpLimit;
+   int inputMinHppsLimit;
+   int inputMaxHppsLimit;
+   int inputMinEhpLimit;
+   int inputMaxEhpLimit;
+   int inputMinEhppsLimit;
+   int inputMaxEhppsLimit;
+   int inputMinDmgLimit;
+   int inputMaxDmgLimit;
+   int inputMinDmgpsLimit;
+   int inputMaxDmgpsLimit;
+   int inputMinMcdmgLimit;
+   int inputMaxMcdmgLimit;
+   int inputMinMcdmgpsLimit;
+   int inputMaxMcdmgpsLimit;
+   int inputMinDmgHLimit;
+   int inputMaxDmgHLimit;
+   int inputMinScoreLimit;
+   int inputMaxScoreLimit;
+   int inputMinPriorityLimit;
+   int inputMaxPriorityLimit;
+   int inputMinUpgradesLimit;
+   int inputMaxUpgradesLimit;
+   int inputMinConversionsLimit;
+   int inputMaxConversionsLimit;
+   __global char  *passes;
+   __constant char  *boolArr;
+   int passid;
+}This;
+int get_pass_id(This *this){
+   return this->passid;
+}
+__kernel void run(
+   int max,
+   int iteration,
+   int wSize,
+   int hSize,
+   int aSize,
+   int nSize,
+   int rSize,
+   int bSize,
+   int argSize,
+   __constant float *flattenedWeaponAccs,
+   __constant float *flattenedHelmetAccs,
+   __constant float *flattenedArmorAccs,
+   __constant float *flattenedNecklaceAccs,
+   __constant float *flattenedRingAccs,
+   __constant float *flattenedBootAccs,
+   __local int *localSetsBuffer,
+   float bonusBaseAtk,
+   float atkSetBonus,
+   float bonusMaxAtk,
+   float bonusBaseHp,
+   float hpSetBonus,
+   float bonusMaxHp,
+   float bonusBaseDef,
+   float defSetBonus,
+   float bonusMaxDef,
+   float baseCr,
+   float bonusCr,
+   float aeiCr,
+   float baseCd,
+   float bonusCd,
+   float aeiCd,
+   float baseEff,
+   float bonusEff,
+   float aeiEff,
+   float baseRes,
+   float bonusRes,
+   float aeiRes,
+   float baseSpeed,
+   float speedSetBonus,
+   float revengeSetBonus,
+   float bonusSpeed,
+   float aeiSpeed,
+   int SETTING_RAGE_SET,
+   int SETTING_PEN_SET,
+   float penSetDmgBonus,
+   int inputAtkMinLimit,
+   int inputAtkMaxLimit,
+   int inputHpMinLimit,
+   int inputHpMaxLimit,
+   int inputDefMinLimit,
+   int inputDefMaxLimit,
+   int inputSpdMinLimit,
+   int inputSpdMaxLimit,
+   int inputCrMinLimit,
+   int inputCrMaxLimit,
+   int inputCdMinLimit,
+   int inputCdMaxLimit,
+   int inputEffMinLimit,
+   int inputEffMaxLimit,
+   int inputResMinLimit,
+   int inputResMaxLimit,
+   int inputMinCpLimit,
+   int inputMaxCpLimit,
+   int inputMinHppsLimit,
+   int inputMaxHppsLimit,
+   int inputMinEhpLimit,
+   int inputMaxEhpLimit,
+   int inputMinEhppsLimit,
+   int inputMaxEhppsLimit,
+   int inputMinDmgLimit,
+   int inputMaxDmgLimit,
+   int inputMinDmgpsLimit,
+   int inputMaxDmgpsLimit,
+   int inputMinMcdmgLimit,
+   int inputMaxMcdmgLimit,
+   int inputMinMcdmgpsLimit,
+   int inputMaxMcdmgpsLimit,
+   int inputMinDmgHLimit,
+   int inputMaxDmgHLimit,
+   int inputMinScoreLimit,
+   int inputMaxScoreLimit,
+   int inputMinPriorityLimit,
+   int inputMaxPriorityLimit,
+   int inputMinUpgradesLimit,
+   int inputMaxUpgradesLimit,
+   int inputMinConversionsLimit,
+   int inputMaxConversionsLimit,
+   __global char  *passes,
+   __constant char  *boolArr,
+   int passid
+){
+   This thisStruct;
+   This* this=&thisStruct;
+   this->max = max;
+   this->iteration = iteration;
+   this->wSize = wSize;
+   this->hSize = hSize;
+   this->aSize = aSize;
+   this->nSize = nSize;
+   this->rSize = rSize;
+   this->bSize = bSize;
+   this->argSize = argSize;
+   this->flattenedWeaponAccs = flattenedWeaponAccs;
+   this->flattenedHelmetAccs = flattenedHelmetAccs;
+   this->flattenedArmorAccs = flattenedArmorAccs;
+   this->flattenedNecklaceAccs = flattenedNecklaceAccs;
+   this->flattenedRingAccs = flattenedRingAccs;
+   this->flattenedBootAccs = flattenedBootAccs;
+   this->localSetsBuffer = localSetsBuffer;
+   this->bonusBaseAtk = bonusBaseAtk;
+   this->atkSetBonus = atkSetBonus;
+   this->bonusMaxAtk = bonusMaxAtk;
+   this->bonusBaseHp = bonusBaseHp;
+   this->hpSetBonus = hpSetBonus;
+   this->bonusMaxHp = bonusMaxHp;
+   this->bonusBaseDef = bonusBaseDef;
+   this->defSetBonus = defSetBonus;
+   this->bonusMaxDef = bonusMaxDef;
+   this->baseCr = baseCr;
+   this->bonusCr = bonusCr;
+   this->aeiCr = aeiCr;
+   this->baseCd = baseCd;
+   this->bonusCd = bonusCd;
+   this->aeiCd = aeiCd;
+   this->baseEff = baseEff;
+   this->bonusEff = bonusEff;
+   this->aeiEff = aeiEff;
+   this->baseRes = baseRes;
+   this->bonusRes = bonusRes;
+   this->aeiRes = aeiRes;
+   this->baseSpeed = baseSpeed;
+   this->speedSetBonus = speedSetBonus;
+   this->revengeSetBonus = revengeSetBonus;
+   this->bonusSpeed = bonusSpeed;
+   this->aeiSpeed = aeiSpeed;
+   this->SETTING_RAGE_SET = SETTING_RAGE_SET;
+   this->SETTING_PEN_SET = SETTING_PEN_SET;
+   this->penSetDmgBonus = penSetDmgBonus;
+   this->inputAtkMinLimit = inputAtkMinLimit;
+   this->inputAtkMaxLimit = inputAtkMaxLimit;
+   this->inputHpMinLimit = inputHpMinLimit;
+   this->inputHpMaxLimit = inputHpMaxLimit;
+   this->inputDefMinLimit = inputDefMinLimit;
+   this->inputDefMaxLimit = inputDefMaxLimit;
+   this->inputSpdMinLimit = inputSpdMinLimit;
+   this->inputSpdMaxLimit = inputSpdMaxLimit;
+   this->inputCrMinLimit = inputCrMinLimit;
+   this->inputCrMaxLimit = inputCrMaxLimit;
+   this->inputCdMinLimit = inputCdMinLimit;
+   this->inputCdMaxLimit = inputCdMaxLimit;
+   this->inputEffMinLimit = inputEffMinLimit;
+   this->inputEffMaxLimit = inputEffMaxLimit;
+   this->inputResMinLimit = inputResMinLimit;
+   this->inputResMaxLimit = inputResMaxLimit;
+   this->inputMinCpLimit = inputMinCpLimit;
+   this->inputMaxCpLimit = inputMaxCpLimit;
+   this->inputMinHppsLimit = inputMinHppsLimit;
+   this->inputMaxHppsLimit = inputMaxHppsLimit;
+   this->inputMinEhpLimit = inputMinEhpLimit;
+   this->inputMaxEhpLimit = inputMaxEhpLimit;
+   this->inputMinEhppsLimit = inputMinEhppsLimit;
+   this->inputMaxEhppsLimit = inputMaxEhppsLimit;
+   this->inputMinDmgLimit = inputMinDmgLimit;
+   this->inputMaxDmgLimit = inputMaxDmgLimit;
+   this->inputMinDmgpsLimit = inputMinDmgpsLimit;
+   this->inputMaxDmgpsLimit = inputMaxDmgpsLimit;
+   this->inputMinMcdmgLimit = inputMinMcdmgLimit;
+   this->inputMaxMcdmgLimit = inputMaxMcdmgLimit;
+   this->inputMinMcdmgpsLimit = inputMinMcdmgpsLimit;
+   this->inputMaxMcdmgpsLimit = inputMaxMcdmgpsLimit;
+   this->inputMinDmgHLimit = inputMinDmgHLimit;
+   this->inputMaxDmgHLimit = inputMaxDmgHLimit;
+   this->inputMinScoreLimit = inputMinScoreLimit;
+   this->inputMaxScoreLimit = inputMaxScoreLimit;
+   this->inputMinPriorityLimit = inputMinPriorityLimit;
+   this->inputMaxPriorityLimit = inputMaxPriorityLimit;
+   this->inputMinUpgradesLimit = inputMinUpgradesLimit;
+   this->inputMaxUpgradesLimit = inputMaxUpgradesLimit;
+   this->inputMinConversionsLimit = inputMinConversionsLimit;
+   this->inputMaxConversionsLimit = inputMaxConversionsLimit;
+   this->passes = passes;
+   this->boolArr = boolArr;
+   this->passid = passid;
+   {
+      int id = get_global_id(0);
+      int localId = get_local_id(0);
+      int setJump = localId * 16;
+      long i = ((long)this->max * (long)this->iteration) + (long)id;
+      if ((i - ((((((long)this->wSize * (long)this->hSize) * (long)this->aSize) * (long)this->nSize) * (long)this->rSize) * (long)this->bSize))<0){
+         int b = (int)(i % (long)this->bSize);
+         int r = (int)(((i - (long)b) / (long)this->bSize) % (long)this->rSize);
+         int n = (int)((((i - (long)(r * this->bSize)) - (long)b) / (long)(this->bSize * this->rSize)) % (long)this->nSize);
+         int a = (int)(((((i - (long)((n * this->rSize) * this->bSize)) - (long)(r * this->bSize)) - (long)b) / (long)((this->bSize * this->rSize) * this->nSize)) % (long)this->aSize);
+         int h = (int)((((((i - (long)(((a * this->nSize) * this->rSize) * this->bSize)) - (long)((n * this->rSize) * this->bSize)) - (long)(r * this->bSize)) - (long)b) / (long)(((this->bSize * this->rSize) * this->nSize) * this->aSize)) % (long)this->hSize);
+         int w = (int)(((((((i - (long)((((h * this->aSize) * this->nSize) * this->rSize) * this->bSize)) - (long)(((a * this->nSize) * this->rSize) * this->bSize)) - (long)((n * this->rSize) * this->bSize)) - (long)(r * this->bSize)) - (long)b) / (long)((((this->bSize * this->rSize) * this->nSize) * this->aSize) * this->hSize)) % (long)this->wSize);
+         int wargSize = w * this->argSize;
+         float wAtk = this->flattenedWeaponAccs[wargSize];
+         float wHp = this->flattenedWeaponAccs[(wargSize + 1)];
+         float wDef = this->flattenedWeaponAccs[(wargSize + 2)];
+         float wCr = this->flattenedWeaponAccs[(wargSize + 6)];
+         float wCd = this->flattenedWeaponAccs[(wargSize + 7)];
+         float wEff = this->flattenedWeaponAccs[(wargSize + 8)];
+         float wRes = this->flattenedWeaponAccs[(wargSize + 9)];
+         float wSpeed = this->flattenedWeaponAccs[(wargSize + 10)];
+         float wScore = this->flattenedWeaponAccs[(wargSize + 11)];
+         float wSet = this->flattenedWeaponAccs[(wargSize + 12)];
+         float wPrio = this->flattenedWeaponAccs[(wargSize + 13)];
+         float wUpg = this->flattenedWeaponAccs[(wargSize + 14)];
+         float wConv = this->flattenedWeaponAccs[(wargSize + 15)];
+         int hargSize = h * this->argSize;
+         float hAtk = this->flattenedHelmetAccs[hargSize];
+         float hHp = this->flattenedHelmetAccs[(hargSize + 1)];
+         float hDef = this->flattenedHelmetAccs[(hargSize + 2)];
+         float hCr = this->flattenedHelmetAccs[(hargSize + 6)];
+         float hCd = this->flattenedHelmetAccs[(hargSize + 7)];
+         float hEff = this->flattenedHelmetAccs[(hargSize + 8)];
+         float hRes = this->flattenedHelmetAccs[(hargSize + 9)];
+         float hSpeed = this->flattenedHelmetAccs[(hargSize + 10)];
+         float hScore = this->flattenedHelmetAccs[(hargSize + 11)];
+         float hSet = this->flattenedHelmetAccs[(hargSize + 12)];
+         float hPrio = this->flattenedHelmetAccs[(hargSize + 13)];
+         float hUpg = this->flattenedHelmetAccs[(hargSize + 14)];
+         float hConv = this->flattenedHelmetAccs[(hargSize + 15)];
+         int aargSize = a * this->argSize;
+         float aAtk = this->flattenedArmorAccs[aargSize];
+         float aHp = this->flattenedArmorAccs[(aargSize + 1)];
+         float aDef = this->flattenedArmorAccs[(aargSize + 2)];
+         float aCr = this->flattenedArmorAccs[(aargSize + 6)];
+         float aCd = this->flattenedArmorAccs[(aargSize + 7)];
+         float aEff = this->flattenedArmorAccs[(aargSize + 8)];
+         float aRes = this->flattenedArmorAccs[(aargSize + 9)];
+         float aSpeed = this->flattenedArmorAccs[(aargSize + 10)];
+         float aScore = this->flattenedArmorAccs[(aargSize + 11)];
+         float aSet = this->flattenedArmorAccs[(aargSize + 12)];
+         float aPrio = this->flattenedArmorAccs[(aargSize + 13)];
+         float aUpg = this->flattenedArmorAccs[(aargSize + 14)];
+         float aConv = this->flattenedArmorAccs[(aargSize + 15)];
+         int nargSize = n * this->argSize;
+         float nAtk = this->flattenedNecklaceAccs[nargSize];
+         float nHp = this->flattenedNecklaceAccs[(nargSize + 1)];
+         float nDef = this->flattenedNecklaceAccs[(nargSize + 2)];
+         float nCr = this->flattenedNecklaceAccs[(nargSize + 6)];
+         float nCd = this->flattenedNecklaceAccs[(nargSize + 7)];
+         float nEff = this->flattenedNecklaceAccs[(nargSize + 8)];
+         float nRes = this->flattenedNecklaceAccs[(nargSize + 9)];
+         float nSpeed = this->flattenedNecklaceAccs[(nargSize + 10)];
+         float nScore = this->flattenedNecklaceAccs[(nargSize + 11)];
+         float nSet = this->flattenedNecklaceAccs[(nargSize + 12)];
+         float nPrio = this->flattenedNecklaceAccs[(nargSize + 13)];
+         float nUpg = this->flattenedNecklaceAccs[(nargSize + 14)];
+         float nConv = this->flattenedNecklaceAccs[(nargSize + 15)];
+         int rargSize = r * this->argSize;
+         float rAtk = this->flattenedRingAccs[rargSize];
+         float rHp = this->flattenedRingAccs[(rargSize + 1)];
+         float rDef = this->flattenedRingAccs[(rargSize + 2)];
+         float rCr = this->flattenedRingAccs[(rargSize + 6)];
+         float rCd = this->flattenedRingAccs[(rargSize + 7)];
+         float rEff = this->flattenedRingAccs[(rargSize + 8)];
+         float rRes = this->flattenedRingAccs[(rargSize + 9)];
+         float rSpeed = this->flattenedRingAccs[(rargSize + 10)];
+         float rScore = this->flattenedRingAccs[(rargSize + 11)];
+         float rSet = this->flattenedRingAccs[(rargSize + 12)];
+         float rPrio = this->flattenedRingAccs[(rargSize + 13)];
+         float rUpg = this->flattenedRingAccs[(rargSize + 14)];
+         float rConv = this->flattenedRingAccs[(rargSize + 15)];
+         int bargSize = b * this->argSize;
+         float bAtk = this->flattenedBootAccs[bargSize];
+         float bHp = this->flattenedBootAccs[(bargSize + 1)];
+         float bDef = this->flattenedBootAccs[(bargSize + 2)];
+         float bCr = this->flattenedBootAccs[(bargSize + 6)];
+         float bCd = this->flattenedBootAccs[(bargSize + 7)];
+         float bEff = this->flattenedBootAccs[(bargSize + 8)];
+         float bRes = this->flattenedBootAccs[(bargSize + 9)];
+         float bSpeed = this->flattenedBootAccs[(bargSize + 10)];
+         float bScore = this->flattenedBootAccs[(bargSize + 11)];
+         float bSet = this->flattenedBootAccs[(bargSize + 12)];
+         float bPrio = this->flattenedBootAccs[(bargSize + 13)];
+         float bUpg = this->flattenedBootAccs[(bargSize + 14)];
+         float bConv = this->flattenedBootAccs[(bargSize + 15)];
+         this->localSetsBuffer[setJump]  = 0;
+         this->localSetsBuffer[setJump + 1]  = 0;
+         this->localSetsBuffer[setJump + 2]  = 0;
+         this->localSetsBuffer[setJump + 3]  = 0;
+         this->localSetsBuffer[setJump + 4]  = 0;
+         this->localSetsBuffer[setJump + 5]  = 0;
+         this->localSetsBuffer[setJump + 6]  = 0;
+         this->localSetsBuffer[setJump + 7]  = 0;
+         this->localSetsBuffer[setJump + 8]  = 0;
+         this->localSetsBuffer[setJump + 9]  = 0;
+         this->localSetsBuffer[setJump + 10]  = 0;
+         this->localSetsBuffer[setJump + 11]  = 0;
+         this->localSetsBuffer[setJump + 12]  = 0;
+         this->localSetsBuffer[setJump + 13]  = 0;
+         this->localSetsBuffer[setJump + 14]  = 0;
+         this->localSetsBuffer[setJump + 15]  = 0;
+         this->localSetsBuffer[(int)wSet + setJump]  = this->localSetsBuffer[(int)wSet + setJump] + 1;
+         this->localSetsBuffer[(int)hSet + setJump]  = this->localSetsBuffer[(int)hSet + setJump] + 1;
+         this->localSetsBuffer[(int)aSet + setJump]  = this->localSetsBuffer[(int)aSet + setJump] + 1;
+         this->localSetsBuffer[(int)nSet + setJump]  = this->localSetsBuffer[(int)nSet + setJump] + 1;
+         this->localSetsBuffer[(int)rSet + setJump]  = this->localSetsBuffer[(int)rSet + setJump] + 1;
+         this->localSetsBuffer[(int)bSet + setJump]  = this->localSetsBuffer[(int)bSet + setJump] + 1;
+         int hpSet = this->localSetsBuffer[setJump] / 2;
+         int defSet = this->localSetsBuffer[(setJump + 1)] / 2;
+         int atkSet = this->localSetsBuffer[(setJump + 2)] / 4;
+         int speedSet = this->localSetsBuffer[(setJump + 3)] / 4;
+         int crSet = this->localSetsBuffer[(setJump + 4)] / 2;
+         int effSet = this->localSetsBuffer[(setJump + 5)] / 2;
+         int cdSet = this->localSetsBuffer[(setJump + 6)] / 4;
+         int resSet = this->localSetsBuffer[(setJump + 9)] / 2;
+         int rageSet = this->localSetsBuffer[(setJump + 11)] / 4;
+         int penSet = this->localSetsBuffer[(setJump + 13)] / 2;
+         int revengeSet = this->localSetsBuffer[(setJump + 14)] / 4;
+         float atk = (((((((this->bonusBaseAtk + wAtk) + hAtk) + aAtk) + nAtk) + rAtk) + bAtk) + ((float)atkSet * this->atkSetBonus)) * this->bonusMaxAtk;
+         float hp = (((((((this->bonusBaseHp + wHp) + hHp) + aHp) + nHp) + rHp) + bHp) + ((float)hpSet * this->hpSetBonus)) * this->bonusMaxHp;
+         float def = (((((((this->bonusBaseDef + wDef) + hDef) + aDef) + nDef) + rDef) + bDef) + ((float)defSet * this->defSetBonus)) * this->bonusMaxDef;
+         int cr = (int)(((((((((this->baseCr + wCr) + hCr) + aCr) + nCr) + rCr) + bCr) + (float)(crSet * 12)) + this->bonusCr) + this->aeiCr);
+         int cd = (int)(((((((((this->baseCd + wCd) + hCd) + aCd) + nCd) + rCd) + bCd) + (float)(cdSet * 40)) + this->bonusCd) + this->aeiCd);
+         int eff = (int)(((((((((this->baseEff + wEff) + hEff) + aEff) + nEff) + rEff) + bEff) + (float)(effSet * 20)) + this->bonusEff) + this->aeiEff);
+         int res = (int)(((((((((this->baseRes + wRes) + hRes) + aRes) + nRes) + rRes) + bRes) + (float)(resSet * 20)) + this->bonusRes) + this->aeiRes);
+         int spd = (int)((((((((((this->baseSpeed + wSpeed) + hSpeed) + aSpeed) + nSpeed) + rSpeed) + bSpeed) + ((float)speedSet * this->speedSetBonus)) + ((float)revengeSet * this->revengeSetBonus)) + this->bonusSpeed) + this->aeiSpeed);
+         float critRate = (float)min(100, cr) / 100.0f;
+         float critDamage = (float)min(350, cd) / 100.0f;
+         int cp = (int)(((((double)((atk * 1.6f) + (((atk * 1.6f) * critRate) * critDamage)) * (1.0 + (double)(((float)spd - 45.0f) * 0.02f))) + (double)hp) + (double)(def * 9.3f)) * (double)(1.0f + ((((float)res / 100.0f) + ((float)eff / 100.0f)) / 4.0f)));
+         float rageMultiplier = fmax(1.0f, ((float)(rageSet * this->SETTING_RAGE_SET) * 1.3f));
+         float penMultiplier = fmax(1.0f, ((float)(min(penSet, 1) * this->SETTING_PEN_SET) * this->penSetDmgBonus));
+         float spdDiv1000 = (float)spd / 1000.0f;
+         int ehp = (int)(hp * ((def / 300.0f) + 1.0f));
+         int hpps = (int)(hp * spdDiv1000);
+         int ehpps = (int)((float)ehp * spdDiv1000);
+         int dmg = (int)(((((critRate * atk) * critDamage) + ((1.0f - critRate) * atk)) * rageMultiplier) * penMultiplier);
+         int dmgps = (int)((float)dmg * spdDiv1000);
+         int mcdmg = (int)(((atk * critDamage) * rageMultiplier) * penMultiplier);
+         int mcdmgps = (int)((float)mcdmg * spdDiv1000);
+         int dmgh = (int)(((float)cd * hp) / 1000.0f);
+         int score = (int)(((((wScore + hScore) + aScore) + nScore) + rScore) + bScore);
+         int priority = (int)(((((wPrio + hPrio) + aPrio) + nPrio) + rPrio) + bPrio);
+         int upgrades = (int)(((((wUpg + hUpg) + aUpg) + nUpg) + rUpg) + bUpg);
+         int conversions = (int)(((((wConv + hConv) + aConv) + nConv) + rConv) + bConv);
+         char f1 = (atk<(float)this->inputAtkMinLimit || atk>(float)this->inputAtkMaxLimit || hp<(float)this->inputHpMinLimit || hp>(float)this->inputHpMaxLimit || def<(float)this->inputDefMinLimit || def>(float)this->inputDefMaxLimit || spd<this->inputSpdMinLimit || spd>this->inputSpdMaxLimit || cr<this->inputCrMinLimit || cr>this->inputCrMaxLimit || cd<this->inputCdMinLimit || cd>this->inputCdMaxLimit || eff<this->inputEffMinLimit || eff>this->inputEffMaxLimit || res<this->inputResMinLimit || res>this->inputResMaxLimit || cp<this->inputMinCpLimit || cp>this->inputMaxCpLimit)?1:0;
+         char f2 = (hpps<this->inputMinHppsLimit || hpps>this->inputMaxHppsLimit || ehp<this->inputMinEhpLimit || ehp>this->inputMaxEhpLimit || ehpps<this->inputMinEhppsLimit || ehpps>this->inputMaxEhppsLimit || dmg<this->inputMinDmgLimit || dmg>this->inputMaxDmgLimit || dmgps<this->inputMinDmgpsLimit || dmgps>this->inputMaxDmgpsLimit || mcdmg<this->inputMinMcdmgLimit || mcdmg>this->inputMaxMcdmgLimit || mcdmgps<this->inputMinMcdmgpsLimit || mcdmgps>this->inputMaxMcdmgpsLimit || dmgh<this->inputMinDmgHLimit || dmgh>this->inputMaxDmgHLimit || score<this->inputMinScoreLimit || score>this->inputMaxScoreLimit)?1:0;
+         char f3 = (priority<this->inputMinPriorityLimit || priority>this->inputMaxPriorityLimit || upgrades<this->inputMinUpgradesLimit || upgrades>this->inputMaxUpgradesLimit || conversions<this->inputMinConversionsLimit || conversions>this->inputMaxConversionsLimit)?1:0;
+         int iWset = (int)wSet;
+         int iHset = (int)hSet;
+         int iAset = (int)aSet;
+         int iNset = (int)nSet;
+         int iRset = (int)rSet;
+         int iBset = (int)bSet;
+         int index = (((((iWset * 1048576) + (iHset * 65536)) + (iAset * 4096)) + (iNset * 256)) + (iRset * 16)) + iBset;
+         this->passes[id]  = (f1==0 && f2==0 && f3==0 && this->boolArr[index]!=0)?1:0;
+      }
+      return;
+   }
+}
+
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    public void setFilters(OptimizationRequest request) {
 //        int filters = 21;
