@@ -43,6 +43,25 @@ public class Main {
         // HD, Section 2-7
         return (i >> 31) | (-i >>> 31);
     }
+    public static void main1(String[] args) throws QueryFailedException {
+        int size = 1;
+        final int result[] = new int[size];
+        final int inA[] = new int[size];
+        inA[0] = 234;
+
+
+        Kernel kernel = new Kernel() {
+            @Override
+            public void run() {
+                result[0] = ((inA[0] ^ 1) >> 31) * -1;
+            }
+        };
+
+        kernel.execute(1);
+
+
+        System.out.println(result[0]);
+    }
 
     public static void main2(String[] args) throws QueryFailedException {
         int size = 20_000_000;
