@@ -159,7 +159,11 @@ public class Main {
             if (threadsToUse > THREADS) {
                 THREADS = threadsToUse;
             }
+        } catch (final RuntimeException e) {
+            System.err.println("Error setting number of threads, defaulting to 10" + e);
+        }
 
+        try {
             Kernel kernel = new Kernel() {
                 @Override
                 public void run() {
@@ -167,11 +171,10 @@ public class Main {
                 }
             };
 
-            System.out.println("Best device: " + KernelManager.instance().bestDevice());
-            System.out.println("Work group size: " + kernel.getKernelMaxWorkGroupSize(KernelManager.instance().bestDevice()));
-
+            System.err.println("Not an error - just debugging:\nBest device: " + KernelManager.instance().bestDevice());
+            System.err.println("Not an error - just debugging:\nWork group size: " + kernel.getKernelMaxWorkGroupSize(KernelManager.instance().bestDevice()));
         } catch (final RuntimeException e) {
-            System.out.println("Error setting number of threads, defaulting to 10" + e);
+            System.err.println("Error setting up GPU");
         }
 
         System.out.println("START");
