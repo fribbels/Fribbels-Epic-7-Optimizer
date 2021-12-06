@@ -1,4 +1,4 @@
-package com.fribbels.aparapi;
+package com.fribbels.gpu;
 
 import com.aparapi.Kernel;
 import com.fribbels.model.Hero;
@@ -7,126 +7,129 @@ import com.fribbels.request.OptimizationRequest;
 import lombok.Setter;
 
 @Setter
-public class GpuOptimizer extends Kernel {
+public class GpuOptimizerKernel extends Kernel {
 
-    @Constant private final float[] flattenedWeaponAccs;
-    @Constant private final float[] flattenedHelmetAccs;
-    @Constant private final float[] flattenedArmorAccs;
-    @Constant private final float[] flattenedNecklaceAccs;
-    @Constant private final float[] flattenedRingAccs;
-    @Constant private final float[] flattenedBootAccs;
+    @Constant final float[] flattenedWeaponAccs;
+    @Constant final float[] flattenedHelmetAccs;
+    @Constant final float[] flattenedArmorAccs;
+    @Constant final float[] flattenedNecklaceAccs;
+    @Constant final float[] flattenedRingAccs;
+    @Constant final float[] flattenedBootAccs;
 
-    @Constant private final int wSize;
-    @Constant private final int hSize;
-    @Constant private final int aSize;
-    @Constant private final int nSize;
-    @Constant private final int rSize;
-    @Constant private final int bSize;
+    @Constant final int wSize;
+    @Constant final int hSize;
+    @Constant final int aSize;
+    @Constant final int nSize;
+    @Constant final int rSize;
+    @Constant final int bSize;
 
-    @Constant private final int argSize;
+    @Constant final int argSize;
 
-    @Constant private final float bonusBaseAtk;
-    @Constant private final float bonusBaseHp;
-    @Constant private final float bonusBaseDef;
+    @Constant final float bonusBaseAtk;
+    @Constant final float bonusBaseHp;
+    @Constant final float bonusBaseDef;
 
-    @Constant private final float atkSetBonus;
-    @Constant private final float hpSetBonus;
-    @Constant private final float defSetBonus;
-    @Constant private final float speedSetBonus;
-    @Constant private final float revengeSetBonus;
-    @Constant private final float penSetDmgBonus;
+    @Constant final float atkSetBonus;
+    @Constant final float hpSetBonus;
+    @Constant final float defSetBonus;
+    @Constant final float speedSetBonus;
+    @Constant final float revengeSetBonus;
+    @Constant final float penSetDmgBonus;
 
-    @Constant private final float bonusMaxAtk;
-    @Constant private final float bonusMaxHp;
-    @Constant private final float bonusMaxDef;
+    @Constant final float bonusMaxAtk;
+    @Constant final float bonusMaxHp;
+    @Constant final float bonusMaxDef;
 
-    @Constant private final int SETTING_RAGE_SET;
-    @Constant private final int SETTING_PEN_SET;
+    @Constant final int SETTING_RAGE_SET;
+    @Constant final int SETTING_PEN_SET;
 
-    @Constant private final float baseCr;
-    @Constant private final float baseCd;
-    @Constant private final float baseEff;
-    @Constant private final float baseRes;
-    @Constant private final float baseSpeed;
+    @Constant final float baseCr;
+    @Constant final float baseCd;
+    @Constant final float baseEff;
+    @Constant final float baseRes;
+    @Constant final float baseSpeed;
 
-    @Constant private final float bonusCr;
-    @Constant private final float bonusCd;
-    @Constant private final float bonusEff;
-    @Constant private final float bonusRes;
-    @Constant private final float bonusSpeed;
+    @Constant final float bonusCr;
+    @Constant final float bonusCd;
+    @Constant final float bonusEff;
+    @Constant final float bonusRes;
+    @Constant final float bonusSpeed;
 
-    @Constant private final float aeiCr;
-    @Constant private final float aeiCd;
-    @Constant private final float aeiEff;
-    @Constant private final float aeiRes;
-    @Constant private final float aeiSpeed;
+    @Constant final float aeiCr;
+    @Constant final float aeiCd;
+    @Constant final float aeiEff;
+    @Constant final float aeiRes;
+    @Constant final float aeiSpeed;
 
-    @Constant private final boolean[] boolArr;
-    @Constant private final int max;
+    @Constant final boolean[] boolArr;
+    @Constant final int[] setPermutationIndicesPlusOne;
+    final int[] setSolutionCounters;
+    @Constant final int max;
 
     // Attempt at optimizing filters
-    //    @Constant private final int[] sumValues = new int[] {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // 21 values, one per filter
-    //    @Constant private final int[] sumValues = new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // 21 values, one per filter
-    //    @Constant private final boolean[] boolValues = new boolean[] {false, true, true}; // 21 values, one per filter
-    //    @Constant private final int[] optimizerMinFilters;
-    //    @Constant private final int[] optimizerMaxFilters;
-    //    @Constant private final int[] optimizerFilterIndices;
-    //    @Constant private final int optimizerFilterSize;
-    //    @Constant private final int[] intArr;
+    //    @Constant final int[] sumValues = new int[] {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // 21 values, one per filter
+    //    @Constant final int[] sumValues = new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // 21 values, one per filter
+    //    @Constant final boolean[] boolValues = new boolean[] {false, true, true}; // 21 values, one per filter
+    //    @Constant final int[] optimizerMinFilters;
+    //    @Constant final int[] optimizerMaxFilters;
+    //    @Constant final int[] optimizerFilterIndices;
+    //    @Constant final int optimizerFilterSize;
+    //    @Constant final int[] intArr;
 
-    @Constant private final int inputAtkMinLimit;
-    @Constant private final int inputAtkMaxLimit;
-    @Constant private final int inputHpMinLimit;
-    @Constant private final int inputHpMaxLimit;
-    @Constant private final int inputDefMinLimit;
-    @Constant private final int inputDefMaxLimit;
-    @Constant private final int inputSpdMinLimit;
-    @Constant private final int inputSpdMaxLimit;
-    @Constant private final int inputCrMinLimit;
-    @Constant private final int inputCrMaxLimit;
-    @Constant private final int inputCdMinLimit;
-    @Constant private final int inputCdMaxLimit;
-    @Constant private final int inputEffMinLimit;
-    @Constant private final int inputEffMaxLimit;
-    @Constant private final int inputResMinLimit;
-    @Constant private final int inputResMaxLimit;
-    @Constant private final int inputMinCpLimit;
-    @Constant private final int inputMaxCpLimit;
-    @Constant private final int inputMinHppsLimit;
-    @Constant private final int inputMaxHppsLimit;
-    @Constant private final int inputMinEhpLimit;
-    @Constant private final int inputMaxEhpLimit;
-    @Constant private final int inputMinEhppsLimit;
-    @Constant private final int inputMaxEhppsLimit;
-    @Constant private final int inputMinDmgLimit;
-    @Constant private final int inputMaxDmgLimit;
-    @Constant private final int inputMinDmgpsLimit;
-    @Constant private final int inputMaxDmgpsLimit;
-    @Constant private final int inputMinMcdmgLimit;
-    @Constant private final int inputMaxMcdmgLimit;
-    @Constant private final int inputMinMcdmgpsLimit;
-    @Constant private final int inputMaxMcdmgpsLimit;
+    @Constant final int inputAtkMinLimit;
+    @Constant final int inputAtkMaxLimit;
+    @Constant final int inputHpMinLimit;
+    @Constant final int inputHpMaxLimit;
+    @Constant final int inputDefMinLimit;
+    @Constant final int inputDefMaxLimit;
+    @Constant final int inputSpdMinLimit;
+    @Constant final int inputSpdMaxLimit;
+    @Constant final int inputCrMinLimit;
+    @Constant final int inputCrMaxLimit;
+    @Constant final int inputCdMinLimit;
+    @Constant final int inputCdMaxLimit;
+    @Constant final int inputEffMinLimit;
+    @Constant final int inputEffMaxLimit;
+    @Constant final int inputResMinLimit;
+    @Constant final int inputResMaxLimit;
+    @Constant final int inputMinCpLimit;
+    @Constant final int inputMaxCpLimit;
+    @Constant final int inputMinHppsLimit;
+    @Constant final int inputMaxHppsLimit;
+    @Constant final int inputMinEhpLimit;
+    @Constant final int inputMaxEhpLimit;
+    @Constant final int inputMinEhppsLimit;
+    @Constant final int inputMaxEhppsLimit;
+    @Constant final int inputMinDmgLimit;
+    @Constant final int inputMaxDmgLimit;
+    @Constant final int inputMinDmgpsLimit;
+    @Constant final int inputMaxDmgpsLimit;
+    @Constant final int inputMinMcdmgLimit;
+    @Constant final int inputMaxMcdmgLimit;
+    @Constant final int inputMinMcdmgpsLimit;
+    @Constant final int inputMaxMcdmgpsLimit;
 
-    @Constant private final int inputMinDmgHLimit;
-    @Constant private final int inputMaxDmgHLimit;
-    @Constant private final int inputMinUpgradesLimit;
-    @Constant private final int inputMaxUpgradesLimit;
-    @Constant private final int inputMinConversionsLimit;
-    @Constant private final int inputMaxConversionsLimit;
-    @Constant private final int inputMinScoreLimit;
-    @Constant private final int inputMaxScoreLimit;
-    @Constant private final int inputMinPriorityLimit;
-    @Constant private final int inputMaxPriorityLimit;
+    @Constant final int inputMinDmgHLimit;
+    @Constant final int inputMaxDmgHLimit;
+    @Constant final int inputMinUpgradesLimit;
+    @Constant final int inputMaxUpgradesLimit;
+    @Constant final int inputMinConversionsLimit;
+    @Constant final int inputMaxConversionsLimit;
+    @Constant final int inputMinScoreLimit;
+    @Constant final int inputMaxScoreLimit;
+    @Constant final int inputMinPriorityLimit;
+    @Constant final int inputMaxPriorityLimit;
 
-    private float[] debug;
+    float[] debug;
 
-    private int iteration;
-    private boolean[] passes;
+    int iteration;
+    boolean[] passes;
+    @Constant final int[] setSolutionBitMasks;
 
-    @Local final int[] localSetsBuffer = new int[256 * 16];
+    @Local int[] localSetsBuffer = new int[256 * 16];
 //    @Local final float[] localStatBuffer = new float[256 * 21];
 
-    public GpuOptimizer(
+    public GpuOptimizerKernel(
             final OptimizationRequest request,
             final float[] flattenedWeaponAccs,
             final float[] flattenedHelmetAccs,
@@ -157,7 +160,8 @@ public class GpuOptimizer extends Kernel {
             final int nSize,
             final int rSize,
             final int bSize,
-            final int max
+            final int max,
+            final int[] setSolutionBitMasks
     ) {
         this.flattenedWeaponAccs = flattenedWeaponAccs;
         this.flattenedHelmetAccs = flattenedHelmetAccs;
@@ -332,6 +336,9 @@ public class GpuOptimizer extends Kernel {
 
         this.max = max;
         this.boolArr = request.boolArr;
+        this.setPermutationIndicesPlusOne = request.setPermutationIndicesPlusOne;
+        this.setSolutionCounters = request.setSolutionCounters;
+        this.setSolutionBitMasks = setSolutionBitMasks;
     }
 
     int oneIfNegativeElseZero(int a) {
@@ -446,41 +453,98 @@ public class GpuOptimizer extends Kernel {
             final float bUpg =   flattenedBootAccs[bargSize + 14];
             final float bConv =  flattenedBootAccs[bargSize + 15];
 
-            localSetsBuffer[setJump] = 0;
-            localSetsBuffer[setJump + 1] = 0;
-            localSetsBuffer[setJump + 2] = 0;
-            localSetsBuffer[setJump + 3] = 0;
-            localSetsBuffer[setJump + 4] = 0;
-            localSetsBuffer[setJump + 5] = 0;
-            localSetsBuffer[setJump + 6] = 0;
-            localSetsBuffer[setJump + 7] = 0;
-            localSetsBuffer[setJump + 8] = 0;
-            localSetsBuffer[setJump + 9] = 0;
-            localSetsBuffer[setJump + 10] = 0;
-            localSetsBuffer[setJump + 11] = 0;
-            localSetsBuffer[setJump + 12] = 0;
-            localSetsBuffer[setJump + 13] = 0;
-            localSetsBuffer[setJump + 14] = 0;
-            localSetsBuffer[setJump + 15] = 0;
+            final int iWset = (int)wSet;
+            final int iHset = (int)hSet;
+            final int iAset = (int)aSet;
+            final int iNset = (int)nSet;
+            final int iRset = (int)rSet;
+            final int iBset = (int)bSet;
 
-            localSetsBuffer[(int)wSet + setJump] += 1;
-            localSetsBuffer[(int)hSet + setJump] += 1;
-            localSetsBuffer[(int)aSet + setJump] += 1;
-            localSetsBuffer[(int)nSet + setJump] += 1;
-            localSetsBuffer[(int)rSet + setJump] += 1;
-            localSetsBuffer[(int)bSet + setJump] += 1;
+            final int setIndex = iWset * 1048576
+                    + iHset * 65536
+                    + iAset * 4096
+                    + iNset * 256
+                    + iRset * 16
+                    + iBset;
 
-            final int hpSet = localSetsBuffer[setJump] / 2;
-            final int defSet = localSetsBuffer[setJump + 1] / 2;
-            final int atkSet = localSetsBuffer[setJump + 2] / 4;
-            final int speedSet = localSetsBuffer[setJump + 3] / 4;
-            final int crSet = localSetsBuffer[setJump + 4] / 2;
-            final int effSet = localSetsBuffer[setJump + 5] / 2;
-            final int cdSet = localSetsBuffer[setJump + 6] / 4;
-            final int resSet = localSetsBuffer[setJump + 9] / 2;
-            final int rageSet = localSetsBuffer[setJump + 11] / 4;
-            final int penSet = localSetsBuffer[setJump + 13] / 2;
-            final int revengeSet = localSetsBuffer[setJump + 14] / 4;
+
+            // 0 hp3
+            // 1 hp2
+            // 2 hp1
+            // 3 def3
+            // 4 def2
+            // 5 def1
+            // 6 atk
+            // 7 speed
+            // 8 crit3
+            // 9 crit2
+            // 10 crit1
+            // 11 hit3
+            // 12 hit2
+            // 13 hit1
+            // 14 destr
+            // 15 lifesteal
+            // 16 counter
+            // 17 res3
+            // 18 res2
+            // 19 res1
+            // 20 unity
+            // 21 rage
+            // 22 immu
+            // 23 pen
+            // 24 revenge
+            // 25 injury
+
+            //            debug[id] = min(1, longSetMasks[setIndex] & (1 << 7));
+
+            final int hpSet = min(1, setSolutionBitMasks[setIndex] & (1)) + min(1, setSolutionBitMasks[setIndex] & (1 << 1)) + min(1, setSolutionBitMasks[setIndex] & (1 << 2));
+            final int defSet = min(1, setSolutionBitMasks[setIndex] & (1 << 3)) + min(1, setSolutionBitMasks[setIndex] & (1 << 4)) + min(1, setSolutionBitMasks[setIndex] & (1 << 5));
+            final int atkSet = min(1, setSolutionBitMasks[setIndex] & (1 << 6));
+            final int speedSet = min(1, setSolutionBitMasks[setIndex] & (1 << 7));
+            final int crSet = min(1, setSolutionBitMasks[setIndex] & (1 << 8)) + min(1, setSolutionBitMasks[setIndex] & (1 << 9)) + min(1, setSolutionBitMasks[setIndex] & (1 << 10));
+            final int effSet = min(1, setSolutionBitMasks[setIndex] & (1 << 11)) + min(1, setSolutionBitMasks[setIndex] & (1 << 12)) + min(1, setSolutionBitMasks[setIndex] & (1 << 13));
+            final int cdSet = min(1, setSolutionBitMasks[setIndex] & (1 << 14));
+            final int resSet = min(1, setSolutionBitMasks[setIndex] & (1 << 17)) + min(1, setSolutionBitMasks[setIndex] & (1 << 18)) + min(1, setSolutionBitMasks[setIndex] & (1 << 19));
+            final int rageSet = min(1, setSolutionBitMasks[setIndex] & (1 << 21));
+            final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
+            final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
+
+// Set calculations using localbuffer instead off mask
+//            localSetsBuffer[setJump] = 0;
+//            localSetsBuffer[setJump + 1] = 0;
+//            localSetsBuffer[setJump + 2] = 0;
+//            localSetsBuffer[setJump + 3] = 0;
+//            localSetsBuffer[setJump + 4] = 0;
+//            localSetsBuffer[setJump + 5] = 0;
+//            localSetsBuffer[setJump + 6] = 0;
+//            localSetsBuffer[setJump + 7] = 0;
+//            localSetsBuffer[setJump + 8] = 0;
+//            localSetsBuffer[setJump + 9] = 0;
+//            localSetsBuffer[setJump + 10] = 0;
+//            localSetsBuffer[setJump + 11] = 0;
+//            localSetsBuffer[setJump + 12] = 0;
+//            localSetsBuffer[setJump + 13] = 0;
+//            localSetsBuffer[setJump + 14] = 0;
+//            localSetsBuffer[setJump + 15] = 0;
+
+//            localSetsBuffer[(int)wSet + setJump] += 1;
+//            localSetsBuffer[(int)hSet + setJump] += 1;
+//            localSetsBuffer[(int)aSet + setJump] += 1;
+//            localSetsBuffer[(int)nSet + setJump] += 1;
+//            localSetsBuffer[(int)rSet + setJump] += 1;
+//            localSetsBuffer[(int)bSet + setJump] += 1;
+
+//            final int hpSet = localSetsBuffer[setJump + 0] / 2;
+//            final int defSet = localSetsBuffer[setJump + 1] / 2;
+//            final int atkSet = localSetsBuffer[setJump + 2] / 4;
+//            final int speedSet = localSetsBuffer[setJump + 3] / 4;
+//            final int crSet = localSetsBuffer[setJump + 4] / 2;
+//            final int effSet = localSetsBuffer[setJump + 5] / 2;
+//            final int cdSet = localSetsBuffer[setJump + 6] / 4;
+//            final int resSet = localSetsBuffer[setJump + 9] / 2;
+//            final int rageSet = localSetsBuffer[setJump + 11] / 4;
+//            final int penSet = localSetsBuffer[setJump + 13] / 2;
+//            final int revengeSet = localSetsBuffer[setJump + 14] / 4;
 
             final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
             final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus)) * bonusMaxHp);
@@ -536,22 +600,8 @@ public class GpuOptimizer extends Kernel {
                     ||  upgrades < inputMinUpgradesLimit || upgrades > inputMaxUpgradesLimit
                     ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit;
 
-            final int iWset = (int)wSet;
-            final int iHset = (int)hSet;
-            final int iAset = (int)aSet;
-            final int iNset = (int)nSet;
-            final int iRset = (int)rSet;
-            final int iBset = (int)bSet;
 
-            final int index = iWset * 1048576
-                    + iHset * 65536
-                    + iAset * 4096
-                    + iNset * 256
-                    + iRset * 16
-                    + iBset;
-
-            //            debug[id] = critRate;
-            passes[id] = !(f1 || f2 || f3) && boolArr[index];
+            passes[id] = !(f1 || f2 || f3) && setPermutationIndicesPlusOne[setIndex] > 0;
         }
     }
 }

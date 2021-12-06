@@ -49,6 +49,7 @@ module.exports = {
         $("#settingPenDefense").on("keyup", formatNumbersOnKey);
 
         const settingsIds = [
+            'settingGpu',
             'settingUnlockOnUnequip',
             'settingMaxResults',
             'settingPenDefense',
@@ -110,6 +111,7 @@ module.exports = {
 
     getDefaultSettings: () => {
         return {
+            settingGpu: true,
             settingUnlockOnUnequip: true,
             settingRageSet: true,
             settingPenSet: true,
@@ -169,6 +171,7 @@ module.exports = {
             return x === null || x === undefined;
         }
 
+        document.getElementById('settingGpu').checked = isNullUndefined(settings.settingGpu) ? true : settings.settingGpu;
         document.getElementById('settingUnlockOnUnequip').checked = isNullUndefined(settings.settingUnlockOnUnequip) ? true : settings.settingUnlockOnUnequip;
         document.getElementById('settingRageSet').checked = isNullUndefined(settings.settingRageSet) ? true : settings.settingRageSet;
         document.getElementById('settingPenSet').checked = isNullUndefined(settings.settingPenSet) ? true : settings.settingPenSet;
@@ -192,6 +195,10 @@ module.exports = {
 
         if (isNullUndefined(settings.settingPenSet)) {
             settings.settingPenSet = true;
+        }
+
+        if (isNullUndefined(settings.settingGpu)) {
+            settings.settingGpu = true;
         }
 
         if (settings.settingMaxResults) {
@@ -268,6 +275,7 @@ module.exports = {
 
         console.log("SAVE SETTINGS");
         const settings = {
+            settingGpu: document.getElementById('settingGpu').checked,
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
             settingPenSet: document.getElementById('settingPenSet').checked,

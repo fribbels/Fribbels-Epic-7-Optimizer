@@ -1,19 +1,17 @@
 package com.fribbels.handler;
 
 import com.aparapi.Kernel;
-import com.aparapi.ProfileInfo;
-import com.aparapi.ProfileReport;
 import com.aparapi.Range;
-import com.aparapi.device.Device;
+import com.aparapi.internal.kernel.KernelManager;
 import com.fribbels.Main;
-import com.fribbels.aparapi.GpuOptimizer;
+import com.fribbels.gpu.GpuOptimizerKernel;
+import com.fribbels.gpu.SetFormat000OptimizerKernel;
 import com.fribbels.core.StatCalculator;
 import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.OptimizationDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.enums.Set;
-import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
@@ -47,16 +45,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.fribbels.core.StatCalculator.SETTING_PEN_DEFENSE;
-
 public class OptimizationRequestHandler extends RequestHandler implements HttpHandler {
 
     public static int SETTING_MAXIMUM_RESULTS = 5_000_000;
+    public static boolean SETTING_GPU = true;
 
     private BaseStatsDb baseStatsDb;
     private Map<String, OptimizationDb> optimizationDbs;
@@ -69,11 +67,90 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private AtomicLong searchedCounter = new AtomicLong(0);
     private AtomicLong resultsCounter = new AtomicLong(0);
 
+    private int[] setSolutionBitMasks;
+
     public OptimizationRequestHandler(final BaseStatsDb baseStatsDb,
                                       final HeroDb heroDb) {
         this.baseStatsDb = baseStatsDb;
         this.heroDb = heroDb;
         optimizationDbs = new HashMap<>();
+
+        ExecutorService t = Executors.newFixedThreadPool(1);
+        t.execute(() -> {
+            setSolutionBitMasks = new int[16777216];
+            int count = 0;
+            for (int a = 0; a < 16; a++) {
+                for (int b = 0; b < 16; b++) {
+                    for (int c = 0; c < 16; c++) {
+                        for (int d = 0; d < 16; d++) {
+                            for (int e = 0; e < 16; e++) {
+                                for (int f = 0; f < 16; f++) {
+                                    int[] sets = new int[]{a, b, c, d, e, f};
+                                    int[] counters = convertSetsToSetCounters(sets);
+
+                                    int l = 0;
+
+                                    l += counters[15] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[14] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[13] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[12] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[11] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[10] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[9] / 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[9] / 2 - 1 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[9] / 2 - 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[8] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[7] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[6] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[5] / 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[5] / 2 - 1 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[5] / 2 - 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[4] / 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[4] / 2 - 1 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[4] / 2 - 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[3] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[2] / 4 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[1] / 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[1] / 2 - 1 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[1] / 2 - 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[0] / 2 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[0] / 2 - 1 > 0 ? 1 : 0;
+                                    l <<= 1;
+                                    l += counters[0] / 2 - 2 > 0 ? 1 : 0;
+
+                                    setSolutionBitMasks[count] = l;
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -384,8 +461,22 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return output;
     }
 
+    // Compute a power of two less than or equal to `n`
+    public static int findPreviousPowerOf2(int n) {
+        // set all bits after the last set bit
+        n = n | (n >> 1);
+        n = n | (n >> 2);
+        n = n | (n >> 4);
+        n = n | (n >> 8);
+        n = n | (n >> 16);
+
+        // drop all but the last set bit from `n`
+        return n - (n >> 1);
+    }
+
     @SneakyThrows
     public String optimize(final OptimizationRequest request, final HeroStats unused) {
+        long startTime = System.currentTimeMillis();
         final StatCalculator statCalculator = new StatCalculator();
         final OptimizationDb optimizationDb = optimizationDbs.get(request.getExecutionId());
         if (optimizationDb == null) {
@@ -462,8 +553,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final float[] flattenedRingAccs = flattenAccArrs(allrings, statCalculator);
         final float[] flattenedBootAccs = flattenAccArrs(allboots, statCalculator);
 
-
-
         final Hero hero = request.hero;
 
         final float atkSetBonus = 0.45f * base.atk;
@@ -473,9 +562,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final float speedSetBonus = 0.25f * base.spd;
         final float revengeSetBonus = 0.12f * base.spd;
 
-        float bonusBaseAtk = base.atk + base.atk * (hero.bonusAtkPercent + hero.aeiAtkPercent) / 100f + hero.bonusAtk + hero.aeiAtk;
-        float bonusBaseHp = base.hp + base.hp * (hero.bonusHpPercent + hero.aeiHpPercent) / 100f + hero.bonusHp + hero.aeiHp;
-        float bonusBaseDef = base.def + base.def * (hero.bonusDefPercent + hero.aeiDefPercent) / 100f + hero.bonusDef + hero.aeiDef;
+        final float bonusBaseAtk = base.atk + base.atk * (hero.bonusAtkPercent + hero.aeiAtkPercent) / 100f + hero.bonusAtk + hero.aeiAtk;
+        final float bonusBaseHp = base.hp + base.hp * (hero.bonusHpPercent + hero.aeiHpPercent) / 100f + hero.bonusHp + hero.aeiHp;
+        final float bonusBaseDef = base.def + base.def * (hero.bonusDefPercent + hero.aeiDefPercent) / 100f + hero.bonusDef + hero.aeiDef;
 
         final float bonusMaxAtk;
         final float bonusMaxHp;
@@ -496,539 +585,261 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final int SETTING_RAGE_SET = StatCalculator.SETTING_RAGE_SET ? 1 : 0;
         final int SETTING_PEN_SET = StatCalculator.SETTING_PEN_SET ? 1 : 0;
 
-        long count = 0;
-        //        int max = 65536;
-        //        int max = 1048576;
-        final int max = 2097152;
-        final int argSize = 16;
+        if (SETTING_GPU) {
+            // GPU Optimize
 
-        final GpuOptimizer kernel = new GpuOptimizer(
-                request,
-                flattenedWeaponAccs,
-                flattenedHelmetAccs,
-                flattenedArmorAccs,
-                flattenedNecklaceAccs,
-                flattenedRingAccs,
-                flattenedBootAccs,
-                bonusBaseAtk,
-                bonusBaseDef,
-                bonusBaseHp,
-                atkSetBonus,
-                hpSetBonus,
-                defSetBonus,
-                speedSetBonus,
-                revengeSetBonus,
-                penSetDmgBonus,
-                bonusMaxAtk,
-                bonusMaxDef,
-                bonusMaxHp,
-                SETTING_RAGE_SET,
-                SETTING_PEN_SET,
-                base,
-                hero,
-                argSize,
-                wSize,
-                hSize,
-                aSize,
-                nSize,
-                rSize,
-                bSize,
-                max);
+            final int max = 2097152;
+            final int argSize = 16;
 
-        kernel.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.GPU);
+            final GpuOptimizerKernel kernel = selectKernel(
+                    request,
+                    flattenedWeaponAccs,
+                    flattenedHelmetAccs,
+                    flattenedArmorAccs,
+                    flattenedNecklaceAccs,
+                    flattenedRingAccs,
+                    flattenedBootAccs,
+                    bonusBaseAtk,
+                    bonusBaseDef,
+                    bonusBaseHp,
+                    atkSetBonus,
+                    hpSetBonus,
+                    defSetBonus,
+                    speedSetBonus,
+                    revengeSetBonus,
+                    penSetDmgBonus,
+                    bonusMaxAtk,
+                    bonusMaxDef,
+                    bonusMaxHp,
+                    SETTING_RAGE_SET,
+                    SETTING_PEN_SET,
+                    base,
+                    hero,
+                    argSize,
+                    wSize,
+                    hSize,
+                    aSize,
+                    nSize,
+                    rSize,
+                    bSize,
+                    max, setSolutionBitMasks
+            );
 
-        boolean exit = false;
+            final int maxWorkGroupSize = findPreviousPowerOf2(
+                    kernel.getKernelMaxWorkGroupSize(KernelManager.instance().bestDevice()));
 
-        final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
-//
-//        int maxLocalSize = kernel.getKernelMaxWorkGroupSize(kernel.getTargetDevice());
-//        final Range range = kernel.getTargetDevice().createRange(maxPerms + (256 - maxPerms % 256), 256);
-//
-//        int outputArgs = 37;
-////        float[] results = new float[maxPerms * outputArgs];
-//        boolean[] passes = new boolean[maxPerms];
-//
-//        //        kernel.setResults(results);
-//        kernel.setPasses(passes);
-//
-//        System.out.println("RANGE" + range + " " + range.getMaxWorkGroupSize());
-//        kernel.execute(range);
+            kernel.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.GPU);
 
-//        System.out.println("ARRSIZE " + maxPerms);
-//        System.out.println("ARRSIZE " + 1_048_576L);
-//        System.out.println("ARRSIZE " + (maxPerms / 1_048_576L));
-//        System.out.println("ARRSIZE " + ((int)(maxPerms / 1_048_576L)));
-//        System.out.println("ARRSIZE " + ((int)(maxPerms / 1_048_576L)));
-//        System.out.println("ARRSIZE " + (((int)(maxPerms / 1_048_576L))));
-//        System.out.println("ARRSIZE " + (((int)(maxPerms / 1_048_576L)) + 1));
+            final AtomicBoolean exit = new AtomicBoolean(false);
 
-//        final boolean[][] passResults = new boolean[((int)(maxPerms / 1_048_576L)) + 1][1_048_576];
+            final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
 
-//
+            for (int i = 0; i < maxPerms / max + 1; i++) {
+                if (exit.get() || Main.interrupt) break;
 
-        for (int i = 0; i < maxPerms / max + 1; i++) {
-            if (exit || Main.interrupt) break;
-            final int finalI = i;
-            final boolean[] passes = new boolean[max];
+                final int finalI = i;
+                final boolean[] passes = new boolean[max];
 
-            final Range range = kernel.getTargetDevice().createRange(max, 256);
+                final Range range = kernel.getTargetDevice().createRange(max, maxWorkGroupSize);
 
-//            float[] debug = new float[max];
-//            kernel.setDebug(debug);
+                //            float[] debug = new float[max];
+                //            kernel.setDebug(debug);
 
-            kernel.setIteration(finalI);
-            kernel.setPasses(passes);
-            kernel.execute(range);
+                kernel.setIteration(finalI);
+                kernel.setPasses(passes);
+                kernel.execute(range);
 
-            executorService.submit(() -> {
-                searchedCounter.addAndGet(max);
+                executorService.submit(() -> {
+                    searchedCounter.addAndGet(Math.min(max,maxPerms));
 
-                for (int j = 0; j < max; j++) {
-                    final long iteration = ((long) finalI) * max + j;
-                    if (iteration >= maxPerms)
-                        break;
+                    for (int j = 0; j < max; j++) {
+                        final long iteration = ((long) finalI) * max + j;
+                        if (iteration >= maxPerms)
+                            break;
 
-//                                    System.out.println(debug[j]);
+                        //                    System.out.println(longSetMasks[0]);
+                        //                    System.out.println(debug[j]);
 
-                    if (passes[j]) {
+                        if (passes[j]) {
+                            final int b = (int)(iteration % bSize);
+                            final int r = (int)((( iteration - b ) / bSize ) %  rSize);
+                            final int n = (int)((( iteration - r * bSize - b ) / (bSize * rSize) ) % nSize);
+                            final int a = (int)((( iteration - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize);
+                            final int h = (int)((( iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize);
+                            final int w = (int)((( iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize);
 
-                        final int b = (int)(iteration % bSize);
-                        final int r = (int)((( iteration - b ) / bSize ) %  rSize);
-                        final int n = (int)((( iteration - r * bSize - b ) / (bSize * rSize) ) % nSize);
-                        final int a = (int)((( iteration - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize);
-                        final int h = (int)((( iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize);
-                        final int w = (int)((( iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize);
+                            final Item weapon = allweapons[w];
+                            final Item helmet = allhelmets[h];
+                            final Item armor = allarmors[a];
+                            final Item necklace = allnecklaces[n];
+                            final Item ring = allrings[r];
+                            final Item boots = allboots[b];
 
-                        //                    if (b < 0 || r < 0 || n < 0 || a < 0 || h < 0 || w < 0) {
-                        //                        System.out.println("-----");
-                        //                        System.out.println(iteration);
-                        //                        System.out.println(i);
-                        //                        System.out.println(j);
-                        //                        System.out.println("-----");
-                        //                        System.out.println(bSize);
-                        //                        System.out.println(rSize);
-                        //                        System.out.println(nSize);
-                        //                        System.out.println(aSize);
-                        //                        System.out.println(hSize);
-                        //                        System.out.println(wSize);
-                        //                        System.out.println("-----");
-                        //                        System.out.println(b);
-                        //                        System.out.println(r);
-                        //                        System.out.println(n);
-                        //                        System.out.println(a);
-                        //                        System.out.println(h);
-                        //                        System.out.println(w);
-                        //                        System.out.println("-----");
-                        //                    }
-                        final Item weapon = allweapons[w];
-                        final Item helmet = allhelmets[h];
-                        final Item armor = allarmors[a];
-                        final Item necklace = allnecklaces[n];
-                        final Item ring = allrings[r];
-                        final Item boots = allboots[b];
+                            final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
+                            final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
 
-                        final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
-                        final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
+                            final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
+                            final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                            final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
+                            final HeroStats result = statCalculator.addAccumulatorArrsToHero(
+                                    base,
+                                    new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr},
+                                    collectedSets,
+                                    request.hero,
+                                    reforges,
+                                    conversions,
+                                    priority);
 
-//                        count++;
+                            result.setSets(collectedSets);
+                            result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a].getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
+                            result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a].getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
+                            result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a].getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
 
-                        final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
-                        final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
-                        final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
-                        final HeroStats result = statCalculator.addAccumulatorArrsToHero(
-                                base,
-                                new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr},
-                                collectedSets,
-                                request.hero,
-                                reforges,
-                                conversions,
-                                priority);
+                            final long resultsIndex = resultsCounter.getAndIncrement();
+                            result.setId("" + resultsIndex);
+                            resultHeroStats[(int) resultsIndex] = result;
+                            resultInts[(int) resultsIndex] = iteration;
 
-                        result.setSets(collectedSets);
-                        result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a].getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
-                        result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a].getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
-                        result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a].getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
-
-                        final long resultsIndex = resultsCounter.getAndIncrement();
-                        resultHeroStats[(int) resultsIndex] = result;
-                        resultInts[(int) resultsIndex] = iteration;
-
-                        if (resultsIndex == MAXIMUM_RESULTS - 1) {
-                            maxReached.set(MAXIMUM_RESULTS - 1);
+                            if (resultsIndex == MAXIMUM_RESULTS - 1) {
+                                maxReached.set(MAXIMUM_RESULTS - 1);
+                                exit.set(true);
+                                return;
+                            }
+                            if (resultsIndex >= MAXIMUM_RESULTS) {
+                                exit.set(true);
+                                return;
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
+        } else {
+            // CPU Optimize
+
+            for (int w = 0; w < wSize; w++) {
+                final Item weapon = itemsByGear.get(Gear.WEAPON).get(w);
+                final long finalW = w;
+
+                executorService.submit(() -> {
+                    boolean exit = false;
+                    try {
+
+                        final float[] weaponAccumulatorArr = statCalculator.getStatAccumulatorArr(base, weapon, accumulatorArrsByItemId, useReforgeStats);
+
+                        for (int h = 0; h < hSize; h++) {
+                            final Item helmet = itemsByGear.get(Gear.HELMET).get(h);
+                            final float[] helmetAccumulatorArr = statCalculator.getStatAccumulatorArr(base, helmet, accumulatorArrsByItemId, useReforgeStats);
+
+                            for (int a = 0; a < aSize; a++) {
+                                final Item armor = itemsByGear.get(Gear.ARMOR).get(a);
+                                final float[] armorAccumulatorArr = statCalculator.getStatAccumulatorArr(base, armor, accumulatorArrsByItemId, useReforgeStats);
+
+                                // For 4 piece sets, we can short circuit if the first 3 pieces don't match possible sets,
+                                // but only if the items are sorted & prioritized by set.
+                                if (isShortCircuitable4PieceSet) {
+                                    if (!(firstSets.contains(weapon.getSet())
+                                            ||    firstSets.contains(helmet.getSet())
+                                            ||    firstSets.contains(armor.getSet()))) {
+                                        // continue not return because other helmets may work
+                                        break;
+                                    }
+                                }
+
+                                for (int n = 0; n < nSize; n++) {
+                                    final Item necklace = itemsByGear.get(Gear.NECKLACE).get(n);
+                                    final float[] necklaceAccumulatorArr = statCalculator.getStatAccumulatorArr(base, necklace, accumulatorArrsByItemId, useReforgeStats);
+
+                                    for (int r = 0; r < rSize; r++) {
+                                        final Item ring = itemsByGear.get(Gear.RING).get(r);
+                                        final float[] ringAccumulatorArr = statCalculator.getStatAccumulatorArr(base, ring, accumulatorArrsByItemId, useReforgeStats);
+
+                                        for (int b = 0; b < bSize; b++) {
+                                            if (Main.interrupt) {
+                                                executorService.shutdownNow();
+                                                return;
+                                            }
+                                            if (exit) return;
+
+                                            final Item boots = itemsByGear.get(Gear.BOOTS).get(b);
+                                            final float[] bootsAccumulatorArr = statCalculator.getStatAccumulatorArr(base, boots, accumulatorArrsByItemId, useReforgeStats);
+
+                                            final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
+                                            final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
+                                            final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
+                                            final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                            final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
+                                            final HeroStats result = statCalculator.addAccumulatorArrsToHero(
+                                                    base,
+                                                    new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr},
+                                                    collectedSets,
+                                                    request.hero,
+                                                    reforges,
+                                                    conversions,
+                                                    priority);
+                                            searchedCounter.getAndIncrement();
+                                            //                                        final boolean passesFilter = true;
+
+                                            final boolean passesFilter = passesFilter(result, request, collectedSets);
+                                            result.setSets(collectedSets);
+                                            if (passesFilter) {
+                                                final long resultsIndex = resultsCounter.getAndIncrement();
+                                                if (resultsIndex < MAXIMUM_RESULTS) {
+                                                    result.setId("" + resultsIndex);
+
+                                                    final long index1D = finalW * hSize * aSize * nSize * rSize * bSize + h * aSize * nSize * rSize * bSize + a * nSize * rSize * bSize + n * rSize * bSize + r * bSize + b;
+
+                                                    result.setItems(ImmutableList.of(
+                                                            weapon.getId(),
+                                                            helmet.getId(),
+                                                            armor.getId(),
+                                                            necklace.getId(),
+                                                            ring.getId(),
+                                                            boots.getId()
+                                                    ));
+                                                    result.setModIds(ImmutableList.of(
+                                                            weapon.getModId(),
+                                                            helmet.getModId(),
+                                                            armor.getModId(),
+                                                            necklace.getModId(),
+                                                            ring.getModId(),
+                                                            boots.getModId()
+                                                    ));
+                                                    result.setMods(Lists.newArrayList(
+                                                            weapon.getMod(),
+                                                            helmet.getMod(),
+                                                            armor.getMod(),
+                                                            necklace.getMod(),
+                                                            ring.getMod(),
+                                                            boots.getMod()
+                                                    ));
+
+                                                    resultHeroStats[(int) resultsIndex] = result;
+                                                    resultInts[(int) resultsIndex] = index1D;
+
+                                                    if (resultsIndex == MAXIMUM_RESULTS-1) {
+                                                        maxReached.set(MAXIMUM_RESULTS-1);
+                                                    }
+                                                } else {
+                                                    System.out.println("EXIT");
+                                                    exit = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
         }
 
+
         System.out.println("DONE");
-        System.out.println("DONE");
-        System.out.println("DONE");
-        System.out.println("DONE");
-        System.out.println("DONE");
-
-//        long count = 0;
-//        for (int i = 0; i < maxPerms / 1_048_576 + 1; i++) {
-//            for (int j = 0; j < 1_048_576; j++) {
-//                if (passResults[i][j]) {
-//                    count++;
-//                }
-//            }
-//        }
-
-        System.out.println("PASS " + count);
-//            final HeroStats result = new HeroStats((int) results[i * outputArgs + 0], (int) results[i * outputArgs + 1], (int) results[i * outputArgs + 2], (int) results[i * outputArgs + 3], (int) results[i * outputArgs + 4], (int) results[i * outputArgs + 5], (int) results[i * outputArgs + 6], 0, (int) results[i * outputArgs + 7], (int) results[i * outputArgs + 8], (int) results[i * outputArgs + 9], (int) results[i * outputArgs + 10], (int) results[i * outputArgs + 11], (int) results[i * outputArgs + 12], (int) results[i * outputArgs + 13], (int) results[i * outputArgs + 14], (int) results[i * outputArgs + 15], (int) results[i * outputArgs + 16], 6, 6, (int) results[i * outputArgs + 17], 6, base.bonusStats, null, null, null, null, null, null, null);
-//
-//            searchedCounter.getAndIncrement();
-//
-//            final int[] collectedSets = new int[]{(int) results[i * outputArgs + 21], (int) results[i * outputArgs + 22], (int) results[i * outputArgs + 23], (int) results[i * outputArgs + 24], (int) results[i * outputArgs + 25], (int) results[i * outputArgs + 26], (int) results[i * outputArgs + 27], (int) results[i * outputArgs + 28], (int) results[i * outputArgs + 29], (int) results[i * outputArgs + 30], (int) results[i * outputArgs + 31], (int) results[i * outputArgs + 32], (int) results[i * outputArgs + 33], (int) results[i * outputArgs + 34], (int) results[i * outputArgs + 35], (int) results[i * outputArgs + 36]};
-//
-//            //                            System.out.println(w + " " + h + " " + a + " " + (int)results[i * outputArgs + 18] + " " + (int)results[i * outputArgs + 19] + " " + (int)results[i * outputArgs + 20]);
-//            //                            for (int x = 0; x < 16; x++) {
-//            //                                System.out.println(Arrays.asList(collectedSets[x]));
-//            //                            }
-//
-//            final boolean passesFilter = passesFilter(result, request, collectedSets);
-//            result.setSets(collectedSets);
-//            if (passesFilter) {
-//                final long resultsIndex = resultsCounter.getAndIncrement();
-//                if (resultsIndex < MAXIMUM_RESULTS) {
-//                    result.setId("" + resultsIndex);
-//
-//                    final long index1D = i;
-////                    final long index1D = finalW * hSize * aSize * nSize * rSize * bSize + h * aSize * nSize * rSize * bSize + a * nSize * rSize * bSize + (int) results[i * outputArgs + 18] * rSize * bSize + (int) results[i * outputArgs + 19] * bSize + (int) results[i * outputArgs + 20];
-//
-//                    final int bI = i % bSize;
-//                    final int rI = ( ( i - bI ) / bSize ) %  rSize;
-//                    final int nI = ( ( i - rI * bSize - bI ) / (bSize * rSize) ) % nSize;
-//                    final int aI = ( ( i - nI * rSize * bSize - rI * bSize - bI ) / (bSize * rSize * nSize) ) % aSize;
-//                    final int hI = ( ( i - aI * nSize * rSize * bSize - nI * rSize * bSize - rI * bSize - bI) / (bSize * rSize * nSize * aSize) ) % hSize;
-//                    final int wI = ( ( i - hI * aSize * nSize * rSize * bSize - aI * nSize * rSize * bSize - nI * rSize * bSize - rI * bSize - bI) / (bSize * rSize * nSize * aSize * hSize) ) % wSize;
-//
-//
-//                    result.setItems(ImmutableList.of(allweapons[wI].getId(), allhelmets[hI].getId(), allarmors[aI].getId(), allnecklaces[nI].id, allrings[rI].id, allboots[bI].id));
-//                    result.setModIds(ImmutableList.of(allweapons[wI].getModId(), allhelmets[hI].getModId(), allarmors[aI].getModId(), allnecklaces[nI].modId, allrings[rI].modId, allboots[bI].modId));
-//                    result.setMods(Lists.newArrayList(allweapons[wI].getMod(), allhelmets[hI].getMod(), allarmors[aI].getMod(), allnecklaces[nI].getMod(), allrings[rI].getMod(), allboots[bI].getMod()));
-//
-//                    resultHeroStats[(int) resultsIndex] = result;
-//                    resultInts[(int) resultsIndex] = index1D;
-//
-//                    if (resultsIndex == MAXIMUM_RESULTS - 1) {
-//                        maxReached.set(MAXIMUM_RESULTS - 1);
-//                    }
-//                } else {
-//                    System.out.println("EXIT");
-//                    exit = true;
-//                    break;
-//                }
-//            }
-//
-//
-
-
-
-
-
-
-
-
-            //        for (int w = 0; w < wSize; w++) {
-            //            final Item weapon = allweapons[w];
-            //            final long finalW = w;
-            //
-            //            try {
-            //                final float[] weaponAccumulatorArr = weapon.tempStatAccArr;
-            //
-            //                for (int h = 0; h < hSize; h++) {
-            //                    if (Main.interrupt || exit) {
-            //                        break;
-            //                    }
-            //
-            //
-            //                    final Item helmet = allhelmets[h];
-            //                    final float[] helmetAccumulatorArr = helmet.tempStatAccArr;
-            //
-            //                    for (int a = 0; a < aSize; a++) {
-            //                        if (Main.interrupt || exit) {
-            //                            break;
-            //                        }
-            //
-            //                        final Item armor = allarmors[a];
-            //                        final float[] armorAccumulatorArr = armor.tempStatAccArr;
-            //
-            //                        // For 4 piece sets, we can short circuit if the first 3 pieces don't match possible sets,
-            //                        // but only if the items are sorted & prioritized by set.
-            //                        if (isShortCircuitable4PieceSet) {
-            //                            if (!(firstSets.contains(weapon.getSet())
-            //                                    ||    firstSets.contains(helmet.getSet())
-            //                                    ||    firstSets.contains(armor.getSet()))) {
-            //                                // continue not return because other helmets may work
-            //                                break;
-            //                            }
-            //                        }
-            //
-            //                        for (int n = 0; n < nSize; n++) {
-            //                            final Item necklace = allnecklaces[n];
-            //                            final float[] necklaceAccumulatorArr = necklace.tempStatAccArr;
-            //
-            //                            for (int r = 0; r < rSize; r++) {
-            //                                if (Main.interrupt || exit) {
-            //                                    break;
-            //                                }
-            //
-            //                                final Item ring = allrings[r];
-            //                                final float[] ringAccumulatorArr = ring.tempStatAccArr;
-            //
-            //                                int endSize = bSize;
-            //                                int outputArgs = 37;
-            //                                float[] results = new float[endSize * outputArgs];
-            //
-            //                                int argSize = 13;
-            //
-            //                                final float[] flattenedBootAccs = flattenAccArrs(allboots, statCalculator);
-            //
-            //                                final int wSet = weapon.set.index;
-            //                                final int hSet = helmet.set.index;
-            //                                final int aSet = armor.set.index;
-            //                                final int nSet = necklace.set.index;
-            //                                final int rSet = ring.set.index;
-            //
-            //                                kernel.setFlattenedBootAccs(flattenedBootAccs);
-            //
-            //                                kernel.setBSize(bSize);
-            //
-            //                                kernel.setWSet(wSet);
-            //                                kernel.setHSet(hSet);
-            //                                kernel.setASet(aSet);
-            //                                kernel.setNSet(nSet);
-            //                                kernel.setRSet(rSet);
-            //
-            //                                kernel.setArgSize(argSize);
-            //                                kernel.setOutputArgs(outputArgs);
-            //
-            //                                kernel.setWeaponAccumulatorArr(weaponAccumulatorArr);
-            //                                kernel.setHelmetAccumulatorArr(helmetAccumulatorArr);
-            //                                kernel.setArmorAccumulatorArr(armorAccumulatorArr);
-            //                                kernel.setNecklaceAccumulatorArr(necklaceAccumulatorArr);
-            //                                kernel.setRingAccumulatorArr(ringAccumulatorArr);
-            //
-            //                                kernel.setResults(results);
-            //
-            //                                int localPermutations = allboots.length;
-            //                                Range range = Range.create(localPermutations);
-            //                                kernel.setExplicit(true);
-            //                                kernel.execute(range);
-            //
-            //                                kernel.get(results);
-            //
-            //                                List<ProfileInfo> profileInfo = kernel.getProfileInfo();
-            ////
-            //                                for (final ProfileInfo p : profileInfo) {
-            //                                    System.out.print(" " + p.getType() + " " + p.getLabel() + " " + (p.getStart() / 1000) + " .. "
-            //                                            + (p.getEnd() / 1000) + " " + ((p.getEnd() - p.getStart()) / 1000) + "us");
-            //                                    System.out.println("-----");
-            //                                }
-            //
-            //                                for (int i = 0; i < endSize; i++) {
-            //                                    final HeroStats result = new HeroStats(
-            //                                            (int)results[i * outputArgs + 0],
-            //                                            (int)results[i * outputArgs + 1],
-            //                                            (int)results[i * outputArgs + 2],
-            //                                            (int)results[i * outputArgs + 3],
-            //                                            (int)results[i * outputArgs + 4],
-            //                                            (int)results[i * outputArgs + 5],
-            //                                            (int)results[i * outputArgs + 6],
-            //                                            0,
-            //                                            (int)results[i * outputArgs + 7],
-            //                                            (int)results[i * outputArgs + 8],
-            //                                            (int)results[i * outputArgs + 9],
-            //                                            (int)results[i * outputArgs + 10],
-            //                                            (int)results[i * outputArgs + 11],
-            //                                            (int)results[i * outputArgs + 12],
-            //                                            (int)results[i * outputArgs + 13],
-            //                                            (int)results[i * outputArgs + 14],
-            //                                            (int)results[i * outputArgs + 15],
-            //                                            (int)results[i * outputArgs + 16],
-            //                                            6,
-            //                                            6,
-            //                                            (int)results[i * outputArgs + 17],
-            //                                            6,
-            //                                            base.bonusStats, null, null, null, null, null, null, null);
-            //
-            //                                    searchedCounter.getAndIncrement();
-            //
-            //                                    final int[] collectedSets = new int[]{
-            //                                            (int) results[i * outputArgs + 21],
-            //                                            (int) results[i * outputArgs + 22],
-            //                                            (int) results[i * outputArgs + 23],
-            //                                            (int) results[i * outputArgs + 24],
-            //                                            (int) results[i * outputArgs + 25],
-            //                                            (int) results[i * outputArgs + 26],
-            //                                            (int) results[i * outputArgs + 27],
-            //                                            (int) results[i * outputArgs + 28],
-            //                                            (int) results[i * outputArgs + 29],
-            //                                            (int) results[i * outputArgs + 30],
-            //                                            (int) results[i * outputArgs + 31],
-            //                                            (int) results[i * outputArgs + 32],
-            //                                            (int) results[i * outputArgs + 33],
-            //                                            (int) results[i * outputArgs + 34],
-            //                                            (int) results[i * outputArgs + 35],
-            //                                            (int) results[i * outputArgs + 36]
-            //                                    };
-            //
-            //                                    //                            System.out.println(w + " " + h + " " + a + " " + (int)results[i * outputArgs + 18] + " " + (int)results[i * outputArgs + 19] + " " + (int)results[i * outputArgs + 20]);
-            //                                    //                            for (int x = 0; x < 16; x++) {
-            //                                    //                                System.out.println(Arrays.asList(collectedSets[x]));
-            //                                    //                            }
-            //
-            //                                    final boolean passesFilter = passesFilter(result, request, collectedSets);
-            //                                    result.setSets(collectedSets);
-            //                                    if (passesFilter) {
-            //                                        final long resultsIndex = resultsCounter.getAndIncrement();
-            //                                        if (resultsIndex < MAXIMUM_RESULTS) {
-            //                                            result.setId("" + resultsIndex);
-            //
-            //                                            final long index1D = finalW * hSize * aSize * nSize * rSize * bSize + h * aSize * nSize * rSize * bSize + a * nSize * rSize * bSize + (int)results[i* outputArgs + 18] * rSize * bSize + (int)results[i* outputArgs + 19] * bSize + (int)results[i* outputArgs + 20];
-            //
-            //                                            result.setItems(ImmutableList.of(
-            //                                                    weapon.getId(),
-            //                                                    helmet.getId(),
-            //                                                    armor.getId(),
-            //                                                    necklace.id,
-            //                                                    ring.id,
-            //                                                    allboots[(int)results[i* outputArgs + 20]].id
-            //                                            ));
-            //                                            result.setModIds(ImmutableList.of(
-            //                                                    weapon.getModId(),
-            //                                                    helmet.getModId(),
-            //                                                    armor.getModId(),
-            //                                                    necklace.modId,
-            //                                                    ring.modId,
-            //                                                    allboots[(int)results[i* outputArgs + 20]].modId
-            //                                            ));
-            //                                            result.setMods(Lists.newArrayList(
-            //                                                    weapon.getMod(),
-            //                                                    helmet.getMod(),
-            //                                                    armor.getMod(),
-            //                                                    necklace.getMod(),
-            //                                                    ring.getMod(),
-            //                                                    allboots[(int)results[i* outputArgs + 20]].getMod()
-            //                                            ));
-            //
-            //                                            resultHeroStats[(int) resultsIndex] = result;
-            //                                            resultInts[(int) resultsIndex] = index1D;
-            //
-            //                                            if (resultsIndex == MAXIMUM_RESULTS-1) {
-            //                                                maxReached.set(MAXIMUM_RESULTS-1);
-            //                                            }
-            //                                        } else {
-            //                                            System.out.println("EXIT");
-            //                                            exit = true;
-            //                                            break;
-            //                                        }
-            //                                    }
-            //                                }
-            //                            }
-            //                        }
-            //
-            ////                        int multipleOf128 = localPermutations + (128 - localPermutations % 128);
-            //
-            ////                        Range range = Range.create(localPermutations);
-            ////                        kernel.execute(range);
-            //
-            //
-            //
-            //
-            ////                        for (int n = 0; n < nSize; n++) {
-            ////                            final Item necklace = allnecklaces[n];
-            ////                            final float[] necklaceAccumulatorArr = necklace.tempStatAccArr;
-            ////
-            ////                            for (int r = 0; r < rSize; r++) {
-            ////                                final Item ring = allrings[r];
-            ////                                final float[] ringAccumulatorArr = ring.tempStatAccArr;
-            ////
-            ////                                for (int b = 0; b < bSize; b++) {
-            ////                                    if (Main.interrupt) {
-            ////                                        break;
-            ////                                    }
-            ////                                    if (exit) break;
-            ////
-            ////                                    final Item boots = allboots[b];
-            ////                                    final float[] bootsAccumulatorArr = boots.tempStatAccArr;
-            ////
-            ////                                    //
-            ////
-            ////                                    final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
-            ////                                    final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
-            ////                                    final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
-            ////                                    final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
-            ////                                    final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
-            ////                                    final HeroStats result = statCalculator.addAccumulatorArrsToHero(
-            ////                                            base,
-            ////                                            new float[][]{weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr},
-            ////                                            collectedSets,
-            ////                                            request.hero,
-            ////                                            reforges,
-            ////                                            conversions,
-            ////                                            priority);
-            ////                                    searchedCounter.getAndIncrement();
-            ////
-            ////                                    final boolean passesFilter = passesFilter(result, request, collectedSets);
-            ////                                    result.setSets(collectedSets);
-            ////                                    if (passesFilter) {
-            ////                                        final long resultsIndex = resultsCounter.getAndIncrement();
-            ////                                        if (resultsIndex < MAXIMUM_RESULTS) {
-            ////                                            result.setId("" + resultsIndex);
-            ////
-            ////                                            final long index1D = finalW * hSize * aSize * nSize * rSize * bSize + h * aSize * nSize * rSize * bSize + a * nSize * rSize * bSize + n * rSize * bSize + r * bSize + b;
-            ////
-            ////                                            result.setItems(ImmutableList.of(
-            ////                                                    weapon.getId(),
-            ////                                                    helmet.getId(),
-            ////                                                    armor.getId(),
-            ////                                                    necklace.getId(),
-            ////                                                    ring.getId(),
-            ////                                                    boots.getId()
-            ////                                            ));
-            ////                                            result.setModIds(ImmutableList.of(
-            ////                                                    weapon.getModId(),
-            ////                                                    helmet.getModId(),
-            ////                                                    armor.getModId(),
-            ////                                                    necklace.getModId(),
-            ////                                                    ring.getModId(),
-            ////                                                    boots.getModId()
-            ////                                            ));
-            ////                                            result.setMods(Lists.newArrayList(
-            ////                                                    weapon.getMod(),
-            ////                                                    helmet.getMod(),
-            ////                                                    armor.getMod(),
-            ////                                                    necklace.getMod(),
-            ////                                                    ring.getMod(),
-            ////                                                    boots.getMod()
-            ////                                            ));
-            ////
-            ////                                            resultHeroStats[(int) resultsIndex] = result;
-            ////                                            resultInts[(int) resultsIndex] = index1D;
-            ////
-            ////                                            if (resultsIndex == MAXIMUM_RESULTS-1) {
-            ////                                                maxReached.set(MAXIMUM_RESULTS-1);
-            ////                                            }
-            ////                                        } else {
-            ////                                            System.out.println("EXIT");
-            ////                                            exit = true;
-            ////                                            break;
-            ////                                        }
-            ////                                    }
-            ////                                }
-            ////                            }
-            ////                        }
-            //                    }
-            //                }
-            //            } catch (Exception e) {
-            //                e.printStackTrace();
-            //            }
-            //        }
-
+        System.out.printf("*** Time taken: %s ms%n", System.currentTimeMillis() - startTime);
 
         try {
             executorService.shutdown();
@@ -1057,7 +868,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         }
 
         inProgress = false;
+
         return "";
+    }
+
+    public void optimizeKernel() {
+
     }
 
     public int[] convertSetsArrayIntoIndexArray(final int[] sets) {
@@ -1071,6 +887,16 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     count++;
                 }
             }
+        }
+
+        return output;
+    }
+
+    public int[] convertSetsToSetCounters(final int[] sets) {
+        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        for (int i = 0; i < sets.length; i++) {
+            output[sets[i]]++;
         }
 
         return output;
@@ -1147,21 +973,23 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     // https://java2blog.com/permutations-array-java/
     public List<List<Integer>> permute(int[] arr) {
-        List<List<Integer>> list = new ArrayList<>();
+        final List<List<Integer>> list = new ArrayList<>();
         permuteHelper(list, new ArrayList<>(), arr, new boolean[arr.length]);
 
         return list;
     }
 
-    private void permuteHelper(List<List<Integer>> list, List<Integer> resultList, int [] arr, boolean [] used){
+    private void permuteHelper(final List<List<Integer>> list,
+                               final List<Integer> resultList,
+                               final int [] arr,
+                               final boolean [] used) {
 
         // Base case
-        if(resultList.size() == arr.length){
+        if (resultList.size() == arr.length) {
             list.add(new ArrayList<>(resultList));
-        } else{
-            for(int i = 0; i < arr.length; i++){
-                if(used[i] || i > 0 && arr[i] == arr[i-1] && !used[i - 1])
-                {
+        } else {
+            for (int i = 0; i < arr.length; i++) {
+                if (used[i] || i > 0 && arr[i] == arr[i-1] && !used[i - 1]) {
                     // If element is already used
                     continue;
                 }
@@ -1180,7 +1008,13 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public void addCalculatedFields(OptimizationRequest request) {
-        boolean[] permutations = new boolean[16777216];
+        final boolean[] permutations = new boolean[16777216];
+        final int[] setPermutationIndicesPlusOne = new int[16777216];
+        long[] longSetMasks = new long[16777216];
+        int[] setSolutionCounters;
+
+        setSolutionCounters = new int[1];
+
         final List<Set> inputSets1 = getSetsOrElseAll(request.getInputSetsOne());
         final List<Set> inputSets2 = getSetsOrElseAll(request.getInputSetsTwo());
         final List<Set> inputSets3 = getSetsOrElseAll(request.getInputSetsThree());
@@ -1190,21 +1024,30 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             // [0][0][0] All valid
 
             Arrays.fill(permutations, true);
+            setSolutionCounters = new int[1];
+            setPermutationIndicesPlusOne[0] = 1;
         } else if (setFormat == 1) {
             // [4][2][0]
 
             for (Set set1 : inputSets1) {
                 for (Set set2 : inputSets2) {
                     final int[] indices = ArrayUtils.addAll(set1.getIndices(), set2.getIndices());
-                    Arrays.sort(indices);
 
                     List<List<Integer>> allSolutions = permute(indices);
-                    System.out.println(allSolutions);
+
+                    setSolutionCounters = new int[allSolutions.size() * 16];
                     for (int i = 0; i < allSolutions.size(); i++) {
-                        final int index1D = calculateSetIndex(allSolutions.get(i).stream().mapToInt(x->x).toArray());
+                        final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
+                        final int index1D = calculateSetIndex(solution);
+
+                        int[] setSolutionCounter = convertSetsToSetCounters(solution);
+                        for (int j = 0; j < 16; j++) {
+                            setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+                        }
+
                         permutations[index1D] = true;
+                        setPermutationIndicesPlusOne[index1D] = i + 1;
                     }
-//                    }
                     //                    System.out.println(Arrays.toString(indices));
                     //                    System.out.println(set1);
                     //                    System.out.println(set2);
@@ -1224,12 +1067,20 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                         indicesInstance[4] = a;
                         indicesInstance[5] = b;
 
-                        Arrays.sort(indicesInstance);
+                        List<List<Integer>> allSolutions = permute(indicesInstance);
 
-                        List<List<Integer>> allSolutions = permute(indices);
-                        for (int i = 0; i < 720; i++) {
-                            final int index1D = calculateSetIndex(allSolutions.get(i).stream().mapToInt(x->x).toArray());
+                        setSolutionCounters = new int[allSolutions.size() * 16];
+                        for (int i = 0; i < allSolutions.size(); i++) {
+                            final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
+                            final int index1D = calculateSetIndex(solution);
+
+                            int[] setSolutionCounter = convertSetsToSetCounters(solution);
+                            for (int j = 0; j < 16; j++) {
+                                setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+                            }
+
                             permutations[index1D] = true;
+                            setPermutationIndicesPlusOne[index1D] = i + 1;
                         }
                         //                        System.out.println(Arrays.toString(indicesInstance));
                         //                        System.out.println(set1);
@@ -1254,12 +1105,20 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                 indicesInstance[4] = c;
                                 indicesInstance[5] = d;
 
-                                Arrays.sort(indicesInstance);
+                                List<List<Integer>> allSolutions = permute(indicesInstance);
 
-                                List<List<Integer>> allSolutions = permute(indices);
-                                for (int i = 0; i < 720; i++) {
-                                    final int index1D = calculateSetIndex(allSolutions.get(i).stream().mapToInt(x->x).toArray());
+                                setSolutionCounters = new int[allSolutions.size() * 16];
+                                for (int i = 0; i < allSolutions.size(); i++) {
+                                    final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
+                                    final int index1D = calculateSetIndex(solution);
+
+                                    int[] setSolutionCounter = convertSetsToSetCounters(solution);
+                                    for (int j = 0; j < 16; j++) {
+                                        setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+                                    }
+
                                     permutations[index1D] = true;
+                                    setPermutationIndicesPlusOne[index1D] = i + 1;
                                 }
                                 //                                System.out.println(Arrays.toString(indicesInstance));
                                 //                                System.out.println(set1);
@@ -1283,12 +1142,20 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                             indicesInstance[4] = a;
                             indicesInstance[5] = b;
 
-                            Arrays.sort(indicesInstance);
+                            List<List<Integer>> allSolutions = permute(indicesInstance);
 
-                            List<List<Integer>> allSolutions = permute(indices);
-                            for (int i = 0; i < 720; i++) {
-                                final int index1D = calculateSetIndex(allSolutions.get(i).stream().mapToInt(x->x).toArray());
+                            setSolutionCounters = new int[allSolutions.size() * 16];
+                            for (int i = 0; i < allSolutions.size(); i++) {
+                                final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
+                                final int index1D = calculateSetIndex(solution);
+
+                                int[] setSolutionCounter = convertSetsToSetCounters(solution);
+                                for (int j = 0; j < 16; j++) {
+                                    setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+                                }
+
                                 permutations[index1D] = true;
+                                setPermutationIndicesPlusOne[index1D] = i + 1;
                             }
                             //                            System.out.println(Arrays.toString(indicesInstance));
                             //                            System.out.println(set1);
@@ -1306,12 +1173,21 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 for (Set set2 : inputSets2) {
                     for (Set set3 : inputSets3) {
                         final int[] indices = ArrayUtils.addAll(ArrayUtils.addAll(set1.getIndices(), set2.getIndices()), set3.getIndices());
-                        Arrays.sort(indices);
 
                         List<List<Integer>> allSolutions = permute(indices);
-                        for (int i = 0; i < 720; i++) {
-                            final int index1D = calculateSetIndex(allSolutions.get(i).stream().mapToInt(x->x).toArray());
+
+                        setSolutionCounters = new int[allSolutions.size() * 16];
+                        for (int i = 0; i < allSolutions.size(); i++) {
+                            final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
+                            final int index1D = calculateSetIndex(solution);
+
+                            int[] setSolutionCounter = convertSetsToSetCounters(solution);
+                            for (int j = 0; j < 16; j++) {
+                                setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+                            }
+
                             permutations[index1D] = true;
+                            setPermutationIndicesPlusOne[index1D] = i + 1;
                         }
                         //                        System.out.println(Arrays.toString(indices));
                         //                        System.out.println(set1);
@@ -1327,6 +1203,114 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         }
 
         request.setBoolArr(permutations);
+        request.setSetPermutationIndicesPlusOne(setPermutationIndicesPlusOne);
+        request.setSetSolutionCounters(setSolutionCounters);
+    }
+
+    public static GpuOptimizerKernel selectKernel(
+            final OptimizationRequest request,
+            final float[] flattenedWeaponAccs,
+            final float[] flattenedHelmetAccs,
+            final float[] flattenedArmorAccs,
+            final float[] flattenedNecklaceAccs,
+            final float[] flattenedRingAccs,
+            final float[] flattenedBootAccs,
+            final float bonusBaseAtk,
+            final float bonusBaseDef,
+            final float bonusBaseHp,
+            final float atkSetBonus,
+            final float hpSetBonus,
+            final float defSetBonus,
+            final float speedSetBonus,
+            final float revengeSetBonus,
+            final float penSetDmgBonus,
+            final float bonusMaxAtk,
+            final float bonusMaxDef,
+            final float bonusMaxHp,
+            final int SETTING_RAGE_SET,
+            final int SETTING_PEN_SET,
+            final HeroStats base,
+            final Hero hero,
+            final int argSize,
+            final int wSize,
+            final int hSize,
+            final int aSize,
+            final int nSize,
+            final int rSize,
+            final int bSize,
+            final int max,
+            final int[] longSetMasks
+    ) {
+        if (request.getSetFormat() == 0) {
+            return new SetFormat000OptimizerKernel(
+                    request,
+                    flattenedWeaponAccs,
+                    flattenedHelmetAccs,
+                    flattenedArmorAccs,
+                    flattenedNecklaceAccs,
+                    flattenedRingAccs,
+                    flattenedBootAccs,
+                    bonusBaseAtk,
+                    bonusBaseDef,
+                    bonusBaseHp,
+                    atkSetBonus,
+                    hpSetBonus,
+                    defSetBonus,
+                    speedSetBonus,
+                    revengeSetBonus,
+                    penSetDmgBonus,
+                    bonusMaxAtk,
+                    bonusMaxDef,
+                    bonusMaxHp,
+                    SETTING_RAGE_SET,
+                    SETTING_PEN_SET,
+                    base,
+                    hero,
+                    argSize,
+                    wSize,
+                    hSize,
+                    aSize,
+                    nSize,
+                    rSize,
+                    bSize,
+                    max,
+                    longSetMasks
+            );
+        }
+        return new GpuOptimizerKernel(
+                request,
+                flattenedWeaponAccs,
+                flattenedHelmetAccs,
+                flattenedArmorAccs,
+                flattenedNecklaceAccs,
+                flattenedRingAccs,
+                flattenedBootAccs,
+                bonusBaseAtk,
+                bonusBaseDef,
+                bonusBaseHp,
+                atkSetBonus,
+                hpSetBonus,
+                defSetBonus,
+                speedSetBonus,
+                revengeSetBonus,
+                penSetDmgBonus,
+                bonusMaxAtk,
+                bonusMaxDef,
+                bonusMaxHp,
+                SETTING_RAGE_SET,
+                SETTING_PEN_SET,
+                base,
+                hero,
+                argSize,
+                wSize,
+                hSize,
+                aSize,
+                nSize,
+                rSize,
+                bSize,
+                max,
+                longSetMasks
+        );
     }
 }
 
