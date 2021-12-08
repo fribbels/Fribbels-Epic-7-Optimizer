@@ -9582,9 +9582,9 @@
       }
     }
   },
-  "Conquerer Lilias": {
-    "_id": "conquerer-lilias",
-    "name": "Conquerer Lilias",
+  "Conqueror Lilias": {
+    "_id": "conqueror-lilias",
+    "name": "Conqueror Lilias",
     "moonlight": true,
     "rarity": 5,
     "attribute": "light",
