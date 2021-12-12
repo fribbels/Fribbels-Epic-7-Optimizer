@@ -59,13 +59,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private BaseStatsDb baseStatsDb;
     private Map<String, OptimizationDb> optimizationDbs;
     private HeroDb heroDb;
-    private boolean inProgress = false;
+    public static boolean inProgress = false;
 
     private static final Gson gson = new Gson();
     private static final int SET_COUNT = 16;
     @Getter
     private AtomicLong searchedCounter = new AtomicLong(0);
     private AtomicLong resultsCounter = new AtomicLong(0);
+    private AtomicLong iterationCounter = new AtomicLong(0);
 
     private int[] setSolutionBitMasks;
 
@@ -507,15 +508,16 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final int MAXIMUM_RESULTS = SETTING_MAXIMUM_RESULTS;
         final HeroStats[] resultHeroStats = new HeroStats[MAXIMUM_RESULTS];
-        final long[] resultInts = new long[MAXIMUM_RESULTS];
+//        final long[] resultInts = new long[MAXIMUM_RESULTS];
         System.out.println("Finished allocating memory");
 
         final Map<Gear, List<Item>> itemsByGear = buildItemsByGear(items);
 
         final Map<String, float[]> accumulatorArrsByItemId = new ConcurrentHashMap<>(new HashMap<>());
-        final ExecutorService executorService = Executors.newFixedThreadPool(8);
+        final ExecutorService executorService = Executors.newFixedThreadPool(2);
         searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
+        iterationCounter = new AtomicLong(0);
 
         final int wSize = itemsByGear.get(Gear.WEAPON).size();
         final int hSize = itemsByGear.get(Gear.HELMET).size();
@@ -543,7 +545,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final boolean isShortCircuitable4PieceSet = request.getSetFormat() == 1 || request.getSetFormat() == 2;
 
         System.out.println("OUTPUTSTART");
-//        StatCalculator.setBaseValues(base, request.hero);
+
         statCalculator.setBaseValues(base, request.hero);
 
         final float[] flattenedWeaponAccs = flattenAccArrs(allweapons, statCalculator);
@@ -584,6 +586,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final int SETTING_RAGE_SET = StatCalculator.SETTING_RAGE_SET ? 1 : 0;
         final int SETTING_PEN_SET = StatCalculator.SETTING_PEN_SET ? 1 : 0;
+
+        final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
 
         if (SETTING_GPU) {
             // GPU Optimize
@@ -632,8 +636,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
             final AtomicBoolean exit = new AtomicBoolean(false);
 
-            final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
-
             for (int i = 0; i < maxPerms / max + 1; i++) {
                 if (exit.get() || Main.interrupt) break;
 
@@ -654,8 +656,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                     for (int j = 0; j < max; j++) {
                         final long iteration = ((long) finalI) * max + j;
-                        if (iteration >= maxPerms)
-                            break;
 
                         //                    System.out.println(longSetMasks[0]);
                         //                    System.out.println(debug[j]);
@@ -698,14 +698,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                             final long resultsIndex = resultsCounter.getAndIncrement();
                             result.setId("" + resultsIndex);
                             resultHeroStats[(int) resultsIndex] = result;
-                            resultInts[(int) resultsIndex] = iteration;
 
-                            if (resultsIndex == MAXIMUM_RESULTS - 1) {
+                            if (resultsIndex >= MAXIMUM_RESULTS - 1) {
                                 maxReached.set(MAXIMUM_RESULTS - 1);
-                                exit.set(true);
-                                return;
-                            }
-                            if (resultsIndex >= MAXIMUM_RESULTS) {
                                 exit.set(true);
                                 return;
                             }
@@ -814,7 +809,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                                     ));
 
                                                     resultHeroStats[(int) resultsIndex] = result;
-                                                    resultInts[(int) resultsIndex] = index1D;
+//                                                    resultInts[(int) resultsIndex] = index1D;
 
                                                     if (resultsIndex == MAXIMUM_RESULTS-1) {
                                                         maxReached.set(MAXIMUM_RESULTS-1);
@@ -831,6 +826,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                             }
                         }
                     } catch (Exception e) {
+                        inProgress = false;
                         e.printStackTrace();
                     }
                 });
@@ -854,16 +850,18 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 System.out.println("OPTIMIZATION_REQUEST_END");
                 System.out.println("PROGRESS: [" + size + "]");
                 OptimizationResponse response = OptimizationResponse.builder()
-                        .searched(searchedCounter.get())
+                        .searched(Math.min(searchedCounter.get(), maxPerms))
                         .results(resultsCounter.get())
                         .build();
 
                 inProgress = false;
                 return gson.toJson(response);
             } catch (Exception e) {
+                inProgress = false;
                 e.printStackTrace();
             }
         } catch (Exception e) {
+            inProgress = false;
             e.printStackTrace();
         }
 

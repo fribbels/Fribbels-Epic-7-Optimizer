@@ -295,7 +295,7 @@ function initializeBlank(index) {
 
         drawMultiPreview(selectedGear, getSelectedGearMods(grid), index)
         setPinnedHero(index, hero);
-        Saves.autosave()
+        Saves.autoSave()
     });
 
     document.getElementById('multiRemove' + index).addEventListener("click", async () => {
@@ -539,6 +539,10 @@ ${i18next.t("This tool is for building multiple heroes simultaneously, who share
 
             for (var i = 0; i < multiOptimizerHeroes.length; i++) {
                 const optimizerHeroSelector = document.getElementById('addMultiOptimizerHeroesSelector' + i)
+                if (!optimizerHeroSelector) {
+                    continue;
+                }
+                
                 const options = optimizerHeroSelector.options;
                 var selected = Array.apply(null, options).filter(x => x.selected)
                 selected = selected.length ? selected[0] : null;
@@ -823,7 +827,7 @@ function drawMultiPreview(gearIds, mods, index) {
         return;
     }
 
-    const moddedGear = ModificationFilter.getModsByIds(gearIds, mods);
+    const moddedGear = ModificationFilter.getModsByIds(gearIds, mods, index);
     console.log("Modded gear results", moddedGear)
 
     Api.getItemsByIds(gearIds).then(async (response) => {
@@ -1022,7 +1026,7 @@ async function handleStartOptimizationRequest(index, callback) {
 
     const gearMainFilters = [params.inputNecklaceStat, params.inputRingStat, params.inputBootsStat]
 
-    var filterResult = await OptimizerTab.applyItemFilters(params, heroResponse, allItemsResponse, true, allowedHeroIds, gearMainFilters);
+    var filterResult = await OptimizerTab.applyItemFilters(params, heroResponse, allItemsResponse, true, allowedHeroIds, gearMainFilters, index);
 
     // OptimizerGrid.setPinnedHero(hero);
 
@@ -1094,7 +1098,7 @@ async function handleStartOptimizationRequest(index, callback) {
     if (progressTimer) {
         clearInterval(progressTimer);
     }
-    progressTimer = setInterval(updateProgress, 500)
+    progressTimer = setInterval(updateProgress, 400)
 
     const oldExecutionId = multiOptimizerHeroes[index].executionId;
     await Api.deleteExecution(oldExecutionId);

@@ -1,5 +1,8 @@
 const stringSimilarity = require('string-similarity');
 
+function isItemModded(item) {
+    return item.substats.filter(x => x.modified).length > 0;
+}
 
 function statToText(stat, baseStats, item, showMaxSpeed) {
     if (!stat) {
@@ -12,8 +15,10 @@ function statToText(stat, baseStats, item, showMaxSpeed) {
     var unpercentedStat = shortenStats(stat.type);
     var value;
 
-    if (item.alreadyPredictedReforge || !Reforge.isReforgeable(item)) {
+    if (Reforge.isReforgeable(item) && stat.modified) {
         value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats, false);
+    } else if (item.alreadyPredictedReforge || !Reforge.isReforgeable(item) || isItemModded(item)) {
+        value = stat.type.includes('Percent') ? stat.reforgedValue + "%" : getPercentageEquivalent(stat, baseStats, false);
     } else {
         const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
         const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : getPercentageEquivalent(stat, baseStats, true);
@@ -116,13 +121,21 @@ function wssToText(item) {
         const reforgedScore = Math.round(rateBaseScore(item.reforgedStats, baseStats))
 
         if (Reforge.isReforgeable(item)) {
-            return `${item.wss} (${score}) ➤ ${item.reforgedWss} (${reforgedScore})`;
+            if (isItemModded(item)) {
+                return `${item.reforgedWss} (${reforgedScore})`;
+            } else {
+                return `${item.wss} (${score}) ➤ ${item.reforgedWss} (${reforgedScore})`;
+            }
         } else {
             return `${item.wss} (${score})`
         }
     } else {
         if (Reforge.isReforgeable(item)) {
-            return item.wss + " ➤ " + item.reforgedWss;
+            if (isItemModded(item)) {
+                return item.reforgedWss;
+            } else {
+                return item.wss + " ➤ " + item.reforgedWss;   
+            }
         } else {
             return item.wss
         }
@@ -311,7 +324,7 @@ module.exports = {
         }
     },
 
-    buildItemPanel(item, checkboxPrefix, baseStats) {
+    buildItemPanel(item, checkboxPrefix, baseStats, mods) {
         if (!item) {
             return `
 

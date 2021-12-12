@@ -44,6 +44,7 @@ public class SystemRequestHandler extends RequestHandler implements HttpHandler 
 
     private String interrupt() {
         Main.interrupt = true;
+        OptimizationRequestHandler.inProgress = false;
         System.out.println("INTERRUPT MAIN");
         return "";
     }
