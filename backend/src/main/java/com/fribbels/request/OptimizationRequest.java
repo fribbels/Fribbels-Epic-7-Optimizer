@@ -142,5 +142,7 @@ public class OptimizationRequest extends Request {
 
     // calculated fields
     public boolean[] boolArr;
+    public int[] setPermutationIndicesPlusOne;
+    public int[] setSolutionCounters;
     private int setFormat;
 }

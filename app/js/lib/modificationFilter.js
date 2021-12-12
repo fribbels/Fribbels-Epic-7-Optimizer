@@ -15,14 +15,37 @@ const statList = [
 ]
 
 var moddedItems = {}
+var multiModdedItems = [
+
+]
+
+function createMultiOptimizerSlotIfNotExistsAndReturnsMultiOrNot(index) {
+    if (index == null || index == undefined) {
+        return false;
+    }
+
+    if (multiModdedItems[index] == undefined || multiModdedItems[index] == null) {
+        multiModdedItems[index] = {};
+    }
+    return true;
+}
 
 module.exports = {
-    getModsByIds: (gearIds, mods) => {
-        console.log(moddedItems)
+    getModsByIds: (gearIds, mods, index) => {
+        var modCollection;
+        var isMulti = createMultiOptimizerSlotIfNotExistsAndReturnsMultiOrNot(index);
+
+        if (isMulti) {
+            console.log("MultiOptimizer modded items", moddedItems)
+            modCollection = multiModdedItems[index];
+        } else {
+            console.log("SingleOptimizer modded items", moddedItems)
+            modCollection = moddedItems;
+        }
 
         const result = []
         for (var i = 0; i < mods.length; i++) {
-            const jsonString = JSON.stringify(moddedItems[gearIds[i]]);
+            const jsonString = JSON.stringify(modCollection[gearIds[i]]);
             if (!jsonString) {
                 result.push(undefined)
                 continue;
@@ -56,7 +79,8 @@ module.exports = {
         return result;
     },
 
-    apply: (items, enableMods, hero, submit) => {
+    apply: (items, enableMods, hero, submit, index) => {
+        var isMulti = createMultiOptimizerSlotIfNotExistsAndReturnsMultiOrNot(index)
 
         if (enableMods && (!hero.keepStats || hero.keepStats.length == 0)) {
             if (submit) {
@@ -68,12 +92,16 @@ module.exports = {
         if (!enableMods || !hero.limitRolls || (hero.rollQuality == undefined || hero.rollQuality == null)) {
             for (var item of items) {
                 item.modId = item.id;
-                moddedItems[item.id] = item;
+                if (isMulti) {
+                    multiModdedItems[index][item.id] = item;
+                } else {
+                    moddedItems[item.id] = item;
+                }
             }
             return items;
         }
 
-        moddedItems = {}
+        newModdedItems = {}
 
         var keepList = hero.keepStats || [];
         var ignoreList = hero.ignoreStats || [];
@@ -88,7 +116,7 @@ module.exports = {
 
         for (item of items) {
             item.modId = item.id;
-            moddedItems[item.id] = item;
+            newModdedItems[item.id] = item;
             item.upgradeable = 0;
             newItems.push(item);
 
@@ -207,7 +235,7 @@ module.exports = {
                         value: substatCopy.value,
                         index: i
                     }
-                    moddedItems[itemCopy.modId] = itemCopy;
+                    newModdedItems[itemCopy.modId] = itemCopy;
 
                     newItems.push(itemCopy)
                 }
@@ -216,6 +244,12 @@ module.exports = {
             // console.log(item);
             // console.log(tempNewItems);
             // newItems.push.apply(newItems, tempNewItems)
+        }
+
+        if (isMulti) {
+            multiModdedItems[index] = newModdedItems;
+        } else {
+            moddedItems = newModdedItems;
         }
 
         console.warn("newItems", items, newItems);

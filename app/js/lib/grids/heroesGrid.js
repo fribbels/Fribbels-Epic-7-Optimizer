@@ -600,7 +600,7 @@ async function onBuildRowSelected(event) {
 
             // const itemId = itemIds[i];
             const displayId = Constants.gearDisplayIdByIndex[i];
-            const html = HtmlGenerator.buildItemPanel(item, "heroesGrid", baseStats)
+            const html = HtmlGenerator.buildItemPanel(item, "heroesGrid", baseStats, mods)
             document.getElementById(displayId).innerHTML = html;
         }
     }

@@ -30,7 +30,7 @@ module.exports = {
         renderDiff(before, after, 'res')
 
         $('#setBefore').html(renderSets(before.equipment, 'previewSet'));
-        $('#setAfter').html(GridRenderer.renderSets(after.sets, 'previewSet'));
+        $('#setAfter').html(renderSets(after.sets, 'previewSet'));
     },
 }
 

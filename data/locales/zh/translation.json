@@ -1062,5 +1062,6 @@
   "Select which heroes to import":"选择要导入的英雄类型",
   "Only import heroes already in optimizer":"只导入配装器里已有的英雄",
   "+15 and up": "+15或以上",
-  "Eff Res":"效果抵抗"
+  "Eff Res":"效果抵抗",
+  "GPU accelerated optimization (Disable this option if you notice errors or decreased performance)": "GPU加速 (如果出错或性能下降请禁用该选项)"
 }

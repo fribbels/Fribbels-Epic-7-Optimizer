@@ -266,7 +266,7 @@ module.exports = {
         nrInput.addEventListener('input',  ev => sliderEl['rangeslider-js'].update({value: ev.target.value}))
     },
 
-    applyItemFilters: async (params, heroResponse, allItemsResponse, submit, allowedHeroIds, overrideGearMainFilters) => {
+    applyItemFilters: async (params, heroResponse, allItemsResponse, submit, allowedHeroIds, overrideGearMainFilters, index) => {
         const gearMainFilters = overrideGearMainFilters || Selectors.getGearMainFilters();
         const getAllItemsResponse = allItemsResponse;
         const hero = heroResponse.hero;
@@ -390,7 +390,7 @@ module.exports = {
             })
         }
 
-        items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit);
+        items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit, index);
 
         items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems, params.inputPredictReforges, params.inputSubstatMods)
 
@@ -701,9 +701,9 @@ module.exports = {
             Notifier.warn("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
         }
 
-        if ((overridePermutations ? overridePermutations : permutations) >= 5_000_000_000) {
-            Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
-        }
+        // if ((overridePermutations ? overridePermutations : permutations) >= 5_000_000_000) {
+        //     Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
+        // }
         return false;
     },
 
@@ -1190,7 +1190,10 @@ async function submitOptimizationRequest() {
     console.log("Sending request:", mergedRequest)
     OptimizerGrid.showLoadingOverlay();
     // Subprocess.sendString(str)
-    progressTimer = setInterval(updateProgress, 150)
+    if (progressTimer) {
+        clearInterval(progressTimer)
+    }
+    progressTimer = setInterval(updateProgress, 200)
 
     await Api.deleteExecution(currentExecutionId);
     currentExecutionId = await Api.prepareExecution();
@@ -1198,7 +1201,9 @@ async function submitOptimizationRequest() {
 
     const results = Api.submitOptimizationRequest(mergedRequest).then(result => {
         console.log("RESPONSE RECEIVED", result);
-        clearInterval(progressTimer);
+        if (progressTimer) {
+            clearInterval(progressTimer)
+        }
         // $('#estimatedPermutations').text(Number(permutations).toLocaleString());
         var searchedCount = result.searched;
         var resultsCounter = result.results;

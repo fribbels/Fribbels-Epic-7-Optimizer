@@ -1071,5 +1071,6 @@
   "Select which heroes to import": "インポートする英雄の選択",
   "Only import heroes already in optimizer": "最適器に登録されている英雄のみをインポートする",
   "+15 and up": "+15以上",
-  "Eff Res": "*効果抵抗"
+  "Eff Res": "効果抵抗",
+  "GPU accelerated optimization (Disable this option if you notice errors or decreased performance)": "GPUアクセラレーションによる最適化(エラーやパフォーマンスの低下が見られる場合は、このオプションを無効にしてください)"
 }

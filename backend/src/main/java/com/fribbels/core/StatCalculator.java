@@ -59,6 +59,16 @@ public class StatCalculator {
         penSetDmgBonus = (SETTING_PEN_DEFENSE/300f + 1) / (0.00283333f * SETTING_PEN_DEFENSE + 1);
     }
 
+    public float[] getNewStatAccumulatorArr(final HeroStats base,
+                                            final Item item,
+                                            final Map<String, float[]> accumulatorsByItemId,
+                                            final boolean useReforgeStats) {
+
+        final float[] accumulator = buildStatAccumulatorArr(base, item, useReforgeStats);
+        item.tempStatAccArr = accumulator;
+        return accumulator;
+    }
+
     public HeroStats addAccumulatorArrsToHero(final HeroStats base,
                                                      final float[][] accs,
                                                      final int[] sets,
