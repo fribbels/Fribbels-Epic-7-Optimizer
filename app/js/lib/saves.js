@@ -1,4 +1,4 @@
-const { remote } = require('electron')
+const remote = require('@electron/remote');
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
 
@@ -49,7 +49,7 @@ module.exports = {
 
         try {
             const data = await Files.readFileSync(Files.path(autoSavePath));
-            module.exports.loadSavedData(JSON.parse(data));
+            await module.exports.loadSavedData(JSON.parse(data));
             console.log(JSON.parse(data));
         } catch (e) {
             // Notifier.error("Failed to load autosave - " + e);

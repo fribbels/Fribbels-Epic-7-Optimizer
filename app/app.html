@@ -1,5 +1,6 @@
 <head>
 <script>
+global = globalThis //<- this should be enough
 global.$ = require('jquery');
 window.$ = $;
 window.jQuery = $;
@@ -47,9 +48,12 @@ window.jQuery = $;
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" checked>
   <label for="tab1" class="tabLabel" id="tab1label" data-t>Optimizer</label>
+
+  <input type="radio" name="tabset" id="tab2">
+  <label for="tab2" class="tabLabel" id="tab2label" data-t>Multi-Optimizer</label>
   <!-- Tab 2 -->
-  <input type="radio" name="tabset" id="tab2" style="display: none">
-  <label for="tab2" class="tabLabel" style="display: none" data-t>Ocr Debugger</label>
+  <!--   <input type="radio" name="tabset" id="tab3" style="display: none">
+  <label for="tab3" class="tabLabel" style="display: none" data-t>Ocr Debugger</label> -->
   <!-- Tab 3 -->
   <input type="radio" name="tabset" id="tab3" >
   <label for="tab3" class="tabLabel" id="tab3label" data-t>Gear</label>
@@ -57,18 +61,21 @@ window.jQuery = $;
   <input type="radio" name="tabset" id="tab4" >
   <label for="tab4" class="tabLabel" id="tab4label" data-t>Heroes</label>
   <!-- Tab 5 -->
-  <input type="radio" name="tabset" id="tab5" >
-  <label for="tab5" class="tabLabel" data-t>Importer</label>
-  <!-- Tab 6 -->
-  <input type="radio" name="tabset" id="tab6" >
-  <label for="tab6" class="tabLabel" data-t>Settings</label>
-  <!-- Tab 7 -->
-  <input type="radio" name="tabset" id="tab7" >
-  <label for="tab7" class="tabLabel" data-t>Information</label>
-  <!-- Tab 10 -->
-  <input type="radio" name="tabset" id="tab10" style="display: none">
-  <label for="tab10" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
+  <input type="radio" name="tabset" id="tab5">
+  <label for="tab5" class="tabLabel" id="tab5label" data-t>Enhancing</label>
 
+  <input type="radio" name="tabset" id="tab6" >
+  <label for="tab6" class="tabLabel" data-t>Importer</label>
+  <!-- Tab 6 -->
+  <input type="radio" name="tabset" id="tab7" >
+  <label for="tab7" class="tabLabel" data-t>Settings</label>
+  <!-- Tab 7 -->
+  <input type="radio" name="tabset" id="tab8" >
+  <label for="tab8" class="tabLabel" data-t>Information</label>
+  <!-- Tab 10 -->
+<!--   <input type="radio" name="tabset" id="tab10" style="display: none">
+  <label for="tab10" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
+ -->
   <div id="hoverDiv"></div>
   <div class="tab-panels">
     <div id="optimizer-section" class="tab-panel">
@@ -227,12 +234,19 @@ window.jQuery = $;
               </div>
               <div class="horizontalSpace"></div>
 
+              <select id="optionsEnhanceLimit" class="optionsExcludeGearFrom">
+                <option value="0" data-t>+0 and higher</option>
+                <option value="3" data-t>+3 and higher</option>
+                <option value="6" data-t>+6 and higher</option>
+                <option value="9" data-t>+9 and higher</option>
+                <option value="12" data-t>+12 and higher</option>
+                <option value="15" data-t>+15 only</option>
+              </select><br>
+              <div class="horizontalSpace" ></div>
 
               <select multiple="multiple" id="optionsExcludeGearFrom" class="optionsExcludeGearFrom">
               </select><br>
-
             </div>
-
 
             <div class="vertical"></div>
 
@@ -639,6 +653,16 @@ window.jQuery = $;
       </div>
     </div>
 
+    <div id="multi-optimizer-section" class="tab-panel">
+        <div class="multiOptimizerControlPanel">
+          <b><input type="submit" value="Guide" class="gearPreviewButton" id="multiGuide" data-t ></b><br>
+          <input type="submit" value="Start all" class="gearPreviewButton" id="multiStartAll" data-t ><br>
+          <input type="submit" value="Cancel all" class="gearPreviewButton" id="multiCancelAll" data-t ><br>
+          <input type="submit" value="Remove all" class="gearPreviewButton" id="multiRemoveAll" data-t ><br>
+          <input type="submit" value="Deselect all" class="gearPreviewButton" id="multiDeselectAll" data-t ><br>
+        </div>
+        <div class="horizontalLine inactiveColorBorder"></div>
+    </div>
 
 
 
@@ -648,9 +672,7 @@ window.jQuery = $;
 
 
 
-
-
-
+<!--
     <div id="ocr-debugger-section" class="tab-panel">
       <a>Url:</a><br>
       <input type="text" id="ocr-test-input-url" value="" style="width:800px"><br>
@@ -694,7 +716,7 @@ window.jQuery = $;
       <img src="" id="ocr-test-crop6"/>
     </div>
 
-
+ -->
 
 
 
@@ -1436,6 +1458,49 @@ window.jQuery = $;
 
 
 
+    <div id="enhancingSection" class="tab-panel">
+
+<!--       <div id="detectorStatus">
+        <div id="statusSymbol">
+
+        </div>
+        <div id="statusText">
+Status: Off - Start the detector and interact with an ingame item (for example, un/locking it) to continue
+        </div>
+      </div>
+
+      <input type="submit" class="importerButton" value="Start item detector" id="startCompanion" data-t>
+
+      <input type="submit" class="importerButton" value="Stop item detector" id="stopCompanion" data-t> -->
+
+      <div class="enhanceGuide" data-t>
+        Click on the magnifying glass on an item to analyze it.
+      </div>
+
+      <div class="enhanceContainer">
+        <div class="gearTabPreview" id="enhanceTabPreview">
+        </div>
+        <div class="barsContainer">
+          <div class="bars" id="stat1bars">
+          </div>
+          <div class="bars" id="stat2bars">
+          </div>
+          <div class="bars" id="stat3bars">
+          </div>
+          <div class="bars" id="stat4bars">
+          </div>
+        </div>
+      </div>
+
+      <div class="enhanceSecondRow">
+        <div class="enhanceChart" id="chart1">
+        </div>
+
+        <div class="radarChart" id="chart2">
+        </div>
+      </div>
+    </div>
+
 
     <div id="importer-section" class="tab-panel">
 
@@ -1479,6 +1544,9 @@ window.jQuery = $;
             <p data-t>Open Epic 7, and load into the lobby</p>
           </li>
           <li>
+            <p data-t>Optionally, if you want to load your storage items, open the storage menu after loading in the lobby</p>
+          </li>
+          <li>
             <p data-t>Click the <b>Stop scanning</b> button below</p>
           </li>
           <li>
@@ -1492,16 +1560,30 @@ window.jQuery = $;
           </li>
         </ol>
 
-        <select id="importLimitEnhance" class="importerButton">
-          <option value=0 data-t>All</option>
-          <option value=3 data-t>+3 and up</option>
-          <option value=6 selected data-t>+6 and up</option>
-          <option value=9 data-t>+9 and up</option>
-          <option value=12 data-t>+12 and up</option>
-          <option value=15 >+15</option>
-        </select>
+        <h3 data-t>Options</h3>
 
-        <br>
+        <p data-t>Select which items to import</p>
+
+        <div>
+          <input type="radio" id="gearImporterEnhanceRadioChoice1" name="gearImporterEnhanceRadio" value=0>
+          <label class="importerRadioLabel" for="gearImporterEnhanceRadioChoice1" data-t>All</label>
+
+          <input type="radio" id="gearImporterEnhanceRadioChoice2" name="gearImporterEnhanceRadio" value=3>
+          <label class="importerRadioLabel" for="gearImporterEnhanceRadioChoice2" data-t>+3 and up</label>
+
+          <input type="radio" id="gearImporterEnhanceRadioChoice3" name="gearImporterEnhanceRadio" value=6 checked>
+          <label class="importerRadioLabel" for="gearImporterEnhanceRadioChoice3" data-t>+6 and up</label>
+
+          <input type="radio" id="gearImporterEnhanceRadioChoice4" name="gearImporterEnhanceRadio" value=9>
+          <label class="importerRadioLabel" for="gearImporterEnhanceRadioChoice4" data-t>+9 and up</label>
+
+          <input type="radio" id="gearImporterEnhanceRadioChoice5" name="gearImporterEnhanceRadio" value=12>
+          <label class="importerRadioLabel" for="gearImporterEnhanceRadioChoice5" data-t>+12 and up</label>
+
+          <input type="radio" id="gearImporterEnhanceRadioChoice6" name="gearImporterEnhanceRadio" value=15>
+          <label class="importerRadioLabel" for="gearImporterEnhanceRadioChoice6" data-t>+15 and up</label>
+        </div>
+
         <br>
 
 
@@ -1525,9 +1607,10 @@ window.jQuery = $;
 
 
         <text data-t>
-          Use <b>merge</b> to update all your gear after using the scanner or screenshot tool.</br>
+          Use <b>merge</b> to update all your gear after using the scanner or screenshot tool.
         </text>
 
+        <br>
         <br>
 
 
@@ -1536,8 +1619,6 @@ window.jQuery = $;
 
         </br></br>
       </div>
-
-
 
 
       <button type="button" class="collapsible" id="importCollapseButton2" data-t>Import heroes and gear automatically</button>
@@ -1559,6 +1640,9 @@ window.jQuery = $;
             <p data-t>Open Epic 7, and load into the lobby</p>
           </li>
           <li>
+            <p data-t>Optionally, if you want to load your storage items, open the storage menu after loading in the lobby</p>
+          </li>
+          <li>
             <p data-t>Click the <b>Stop scanning</b> button below</p>
           </li>
           <li>
@@ -1572,6 +1656,45 @@ window.jQuery = $;
           </li>
         </ol>
 
+
+        <h3 data-t>Options</h3>
+
+        <p data-t>Select which items to import</p>
+
+        <div>
+          <input type="radio" id="heroImporterEnhanceRadioChoice1" name="heroImporterEnhanceRadio" value=0>
+          <label class="importerRadioLabel" for="heroImporterEnhanceRadioChoice1" data-t>All</label>
+
+          <input type="radio" id="heroImporterEnhanceRadioChoice2" name="heroImporterEnhanceRadio" value=3>
+          <label class="importerRadioLabel" for="heroImporterEnhanceRadioChoice2" data-t>+3 and up</label>
+
+          <input type="radio" id="heroImporterEnhanceRadioChoice3" name="heroImporterEnhanceRadio" value=6 checked>
+          <label class="importerRadioLabel" for="heroImporterEnhanceRadioChoice3" data-t>+6 and up</label>
+
+          <input type="radio" id="heroImporterEnhanceRadioChoice4" name="heroImporterEnhanceRadio" value=9>
+          <label class="importerRadioLabel" for="heroImporterEnhanceRadioChoice4" data-t>+9 and up</label>
+
+          <input type="radio" id="heroImporterEnhanceRadioChoice5" name="heroImporterEnhanceRadio" value=12>
+          <label class="importerRadioLabel" for="heroImporterEnhanceRadioChoice5" data-t>+12 and up</label>
+
+          <input type="radio" id="heroImporterEnhanceRadioChoice6" name="heroImporterEnhanceRadio" value=15>
+          <label class="importerRadioLabel" for="heroImporterEnhanceRadioChoice6" data-t>+15 and up</label>
+        </div>
+
+        <p data-t>Select which heroes to import</p>
+
+        <div>
+          <input type="radio" id="heroImporterHeroRadioChoice1" name="heroImporterHeroRadio" value="optimizer" checked>
+          <label class="importerRadioLabel" for="heroImporterHeroRadioChoice1" data-t>Only import heroes already in optimizer</label>
+
+          <input type="radio" id="heroImporterHeroRadioChoice2" name="heroImporterHeroRadio" value="sixstar">
+          <label class="importerRadioLabel" for="heroImporterHeroRadioChoice2" data-t>Import all 6 star heroes</label>
+
+          <input type="radio" id="heroImporterHeroRadioChoice3" name="heroImporterHeroRadio" value="fivestar">
+          <label class="importerRadioLabel" for="heroImporterHeroRadioChoice3" data-t>Import all 5+ star heroes</label>
+        </div>
+
+<!--
         <select id="importHeroesLimitEnhance" class="importerButton">
           <option value=0 data-t>All</option>
           <option value=3 data-t>+3 and up</option>
@@ -1589,8 +1712,7 @@ window.jQuery = $;
           <option value="sixstar" data-t>Import all 6 star heroes</option>
           <option value="fivestar" data-t>Import all 5+ star heroes</option>
         </select>
-
-        <br>
+ -->
         <br>
 
 
@@ -1614,9 +1736,10 @@ window.jQuery = $;
 
 
         <text data-t>
-          Use <b>merge</b> to update all your gear after using the scanner or screenshot tool.</br>
+          Use <b>merge</b> to update all your gear after using the scanner or screenshot tool.
         </text>
 
+        <br>
         <br>
 
 
@@ -1700,7 +1823,7 @@ window.jQuery = $;
       </div>
 
 
-      <button type="button" class="collapsible" id="importCollapseButton3" data-t>Erase all optimizer data</button>
+      <button type="button" class="collapsible" id="importCollapseButton3" data-t>Erase all optimizer hero and gear data</button>
       <div class="content" id="importCollapseContent3">
         <input type="submit" class="importerButton" value="Erase data" id="eraseButton" data-t>
       </div>
@@ -1719,6 +1842,16 @@ window.jQuery = $;
 
 
        <input type="submit" style="display:none" id="clearlocalCache" onclick="clearlocalCache()" value="Clear language cache" data-t>
+
+        <div class="toggleRow">
+          <div class="switch">
+            <input id="settingGpu" type="checkbox" class="switch-input" />
+            <label for="settingGpu" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            GPU accelerated optimization (Disable this option if you notice errors or decreased performance)
+          </div>
+        </div>
 
         <div class="toggleRow">
           <div class="switch">
@@ -1741,6 +1874,23 @@ window.jQuery = $;
         </div>
 
         <div class="toggleRow">
+          <div class="switch">
+            <input id="settingPenSet" type="checkbox" class="switch-input" />
+            <label for="settingPenSet" class="switch-label"></label>
+          </div>
+          <div class="switchText" data-t>
+            Use penetration set bonus for damage optimization
+          </div>
+        </div>
+
+        <div class="toggleRow">
+          <input type="text" id="settingPenDefense" class="settingsNumber">
+          <div class="switchText" data-t>
+            Target's defense for penetration set (Recommended: 1,500, Min 0, Max 10k)
+          </div>
+        </div>
+
+        <div class="toggleRow">
           <input type="text" id="settingMaxResults" class="settingsNumber">
           <div class="switchText" data-t>
             Maximum optimization results (Recommended: 5,000,000, Min 10k, Max 100m)
@@ -1755,7 +1905,7 @@ window.jQuery = $;
 
        </br>
        <div>
-            <h2 data-t>New Hero Optimizer Settings</h2>
+            <h2 data-t>Default settings for newly added heroes</h2>
        </div>
 
         <div class="horizontalSpace"></div>
@@ -1819,7 +1969,7 @@ window.jQuery = $;
 
        </br>
        <div>
-            <h2>Languages</h2>
+            <h2 data-t>Languages</h2>
        </div>
 
        <div class="toggleRow">
@@ -1927,6 +2077,7 @@ window.jQuery = $;
       <img class="badgeIcon" id="donateBadge" src="./assets/badgedonate_dt.png"></img>
       <p data-t>Support the optimizer and future updates!</p>
 
+
       <h1 data-t>Thank you</h1>
       <p class="thankYouContainer" data-t>
         I want to thank the entire community for all the love and support that you've shown for the optimizer. This project has been a bunch of fun to build, and I hope you find it just as enjoyable to optimize and gear your favorite characters. Please feel free to reach out to me on the Discord server for setup help, ideas and suggestions, signing up as beta tester, or just come by to chat!
@@ -1951,8 +2102,6 @@ window.jQuery = $;
           <p data-t>Beta testers - for helping to find bugs and providing valuable feedback</p>
         </li>
       </ul>
-
-      </br>
 
       <h1 id="version" data-t>Current version</h1>
 

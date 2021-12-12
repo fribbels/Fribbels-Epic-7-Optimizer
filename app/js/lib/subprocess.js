@@ -9,7 +9,7 @@ global.pid = null;
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
-const killPort = require('kill-port');
+const { killPortProcess } = require('kill-port-process');
 const { default: i18next } = require('i18next');
 
 var errors = "";
@@ -21,14 +21,16 @@ const defaultJavaError = `Unable to load Java. Please check that you have the <a
 module.exports = {
     kill: async() => {
         try {
-            // const killPortOutput = await killPort(8130, 'tcp')
-            console.log(killPortOutput);
+            console.log("Try killport")
+            const killPortOutput = await killPortProcess(8130)
+            console.log("Done killport", killPortOutput);
         } catch (e) {
             console.warn("Error killing existing subprocess", e);
         }
     },
 
     initialize: async (callback) => {
+        console.log("Initialize backend, checking javaversion")
         javaversion(function(err, notRecognized, notCorrectVersion, not64Bit) {
             if (err) {
                 Notifier.warn("Unable to detect java version");
@@ -46,12 +48,28 @@ module.exports = {
             }
         })
 
-        if (TEST == false) {
-            await module.exports.kill();
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {shell: true, detached: false})
+        console.log("Finished calling javaversion")
+
+        if (TEST == false) {
+            // try {
+            //     await module.exports.kill();
+            // } catch (e) {
+            //     console.warn("Error killing port")
+            // }
+        }
+
+        console.log("Spawning backend child")
+
+        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+            shell: true, stdio: ['pipe', 'pipe', 'pipe'], detached: false
+        })
         pid = child.pid;
+
+        console.log("Child PID: ", pid)
 
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);
@@ -64,9 +82,13 @@ module.exports = {
             Dialog.htmlError(defaultJavaError);
         });
 
+        child.on('error', (e) => {
+            console.error("Subprocess error: " + e);
+            console.warn(e)
+        });
+
         child.stderr.on('data', (data) => {
             const str = data.toString()
-            console.error(str);
             Notifier.error("Subprocess error - " + str);
             errors += data.toString();
         })
@@ -75,8 +97,8 @@ module.exports = {
             if (!initialized) {
                 initialized = true;
                 callback()
-                // var str = data.toString();
-                // console.log(str);
+                var str = data.toString();
+                console.log(str);
             } else {
 
             }
@@ -87,6 +109,12 @@ module.exports = {
             treekill(child.pid, 'SIGTERM', () => {
                 ipc.send('closed');
             });
+            if (scannerChild)
+                scannerChild.kill()
+            if (itemTrackerChild)
+                itemTrackerChild.kill()
+            if(findCommandSpawn)
+                findCommandSpawn.kill()
         });
 
         window.onbeforeunload = (e) => {
@@ -95,7 +123,16 @@ module.exports = {
             treekill(child.pid, 'SIGTERM', () => {
                 console.log("Terminated child");
             });
+            if (scannerChild)
+                scannerChild.kill()
+            if (itemTrackerChild)
+                itemTrackerChild.kill()
+            if(findCommandSpawn)
+                findCommandSpawn.kill()
+            Scanner.end();
         };
+
+        console.log("Finished initializing subprocess")
 
         return child;
     },
@@ -115,7 +152,6 @@ module.exports = {
 }
 
 function javaversion(callback) {
-console.log('1');
     var spawn = require('child_process').spawn('java', ['-version']);
 
     spawn.on('error', function(err){

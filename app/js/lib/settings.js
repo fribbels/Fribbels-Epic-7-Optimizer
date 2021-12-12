@@ -1,5 +1,5 @@
-const { remote } = require('electron')
-const dialog = remote.dialog;
+const remote = require('@electron/remote');
+const dialog = remote.dialog
 const currentWindow = remote.getCurrentWindow();
 const documentsPath = remote.app.getPath('documents');
 const savesFolder = documentsPath + '/FribbelsOptimizerSaves';
@@ -10,6 +10,7 @@ const settingsPath = defaultPath + "/settings.ini";
 var pathOverride;
 
 var excludeSelects = [];
+var enhanceLimit = 0;
 var defaultOptimizerSettings = {
     settingDefaultUseReforgedStats: true,
     settingDefaultUseHeroPriority: false,
@@ -19,35 +20,41 @@ var defaultOptimizerSettings = {
     settingDefaultKeepCurrent: false,
 }
 
+function formatNumbersOnKey(event) {
+    // When user select text in the document, also abort.
+    var selection = window.getSelection().toString();
+    if (selection !== '') {
+        return;
+    }
+    // When the arrow keys are pressed, abort.
+    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+        return;
+    }
+    var $this = $(this);
+    // Get the value.
+    var input = $this.val();
+    input = input.replace(/[\D\s\._\-]+/g, "");
+    input = input?parseInt(input, 10):0;
+    $this.val(function () {
+        return (input === 0)?"":input.toLocaleString("en-US");
+    });
+}
+
 module.exports = {
     initialize: async () => {
         await module.exports.loadSettings();
 
         // Format numbers
-        $("#settingMaxResults").on("keyup", function(event ) {
-            // When user select text in the document, also abort.
-            var selection = window.getSelection().toString();
-            if (selection !== '') {
-                return;
-            }
-            // When the arrow keys are pressed, abort.
-            if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
-                return;
-            }
-            var $this = $(this);
-            // Get the value.
-            var input = $this.val();
-            input = input.replace(/[\D\s\._\-]+/g, "");
-            input = input?parseInt(input, 10):0;
-            $this.val(function () {
-                return (input === 0)?"":input.toLocaleString("en-US");
-            });
-        });
+        $("#settingMaxResults").on("keyup", formatNumbersOnKey);
+        $("#settingPenDefense").on("keyup", formatNumbersOnKey);
 
         const settingsIds = [
+            'settingGpu',
             'settingUnlockOnUnequip',
             'settingMaxResults',
+            'settingPenDefense',
             'settingRageSet',
+            'settingPenSet',
             'settingDefaultUseReforgedStats',
             'settingDefaultUseHeroPriority',
             'settingDefaultUseSubstatMods',
@@ -57,6 +64,7 @@ module.exports = {
         ];
 
         $('#optionsExcludeGearFrom').change(module.exports.saveSettings)
+        $('#optionsEnhanceLimit').change(module.exports.saveSettings)
         $('#darkSlider').change(module.exports.saveSettings)
 
         for (var id of settingsIds) {
@@ -103,12 +111,17 @@ module.exports = {
 
     getDefaultSettings: () => {
         return {
+            settingGpu: true,
             settingUnlockOnUnequip: true,
             settingRageSet: true,
+            settingPenSet: true,
             settingMaxResults: 5_000_000,
+            settingPenDefense: 1_500,
             settingDefaultPath: defaultPath,
             settingExcludeEquipped: [],
+            settingEnhanceLimit: 0,
             settingDarkMode: true,
+            settingArchetypes: GearRating.getDefaultArchetypes(),
             settingDefaultUseReforgedStats: true,
             settingDefaultUseHeroPriority: false,
             settingDefaultUseSubstatMods: false,
@@ -126,8 +139,8 @@ module.exports = {
         }
     },
 
-    parseMaxResults: () => {
-        var value = document.getElementById('settingMaxResults').value;
+    parseNumberValue: (id) => {
+        var value = document.getElementById(id).value;
         value = value.replace(/,/g, "")
 
         return parseInt(value);
@@ -142,16 +155,26 @@ module.exports = {
         }
 
         console.log("LOAD SETTINGS", settingsPath);
-        const text = await Files.readFileSync(Files.path(settingsPath));
-        const settings = JSON.parse(text);
+        var settings;
+        try {
+            const text = await Files.readFileSync(Files.path(settingsPath));
+            settings = JSON.parse(text)
+        } catch (e) {
+            settings = module.exports.getDefaultSettings();
+            Notifier.error(`There was an error parsing the ${Files.path(settingsPath)} file. Please repair the file or delete it.`)
+            Notifier.error(`Using default settings instead.`)
+        }
+
         console.log("LOADING SETTINGS", settings);
 
         function isNullUndefined(x) {
             return x === null || x === undefined;
         }
 
-        document.getElementById('settingUnlockOnUnequip').checked = settings.settingUnlockOnUnequip;
-        document.getElementById('settingRageSet').checked = settings.settingRageSet;
+        document.getElementById('settingGpu').checked = isNullUndefined(settings.settingGpu) ? true : settings.settingGpu;
+        document.getElementById('settingUnlockOnUnequip').checked = isNullUndefined(settings.settingUnlockOnUnequip) ? true : settings.settingUnlockOnUnequip;
+        document.getElementById('settingRageSet').checked = isNullUndefined(settings.settingRageSet) ? true : settings.settingRageSet;
+        document.getElementById('settingPenSet').checked = isNullUndefined(settings.settingPenSet) ? true : settings.settingPenSet;
         document.getElementById('settingDefaultUseReforgedStats').checked = isNullUndefined(settings.settingDefaultUseReforgedStats) ? true : settings.settingDefaultUseReforgedStats;
         document.getElementById('settingDefaultUseHeroPriority').checked = settings.settingDefaultUseHeroPriority;
         document.getElementById('settingDefaultUseSubstatMods').checked = settings.settingDefaultUseSubstatMods;
@@ -170,8 +193,26 @@ module.exports = {
 
         console.warn("changing path override to: " + pathOverride);
 
+        if (isNullUndefined(settings.settingPenSet)) {
+            settings.settingPenSet = true;
+        }
+
+        if (isNullUndefined(settings.settingGpu)) {
+            settings.settingGpu = true;
+        }
+
         if (settings.settingMaxResults) {
             document.getElementById('settingMaxResults').value = settings.settingMaxResults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+            document.getElementById('settingMaxResults').value = "5,000,000";
+            settings.settingMaxResults = 5_000_000;
+        }
+
+        if (settings.settingPenDefense) {
+            document.getElementById('settingPenDefense').value = settings.settingPenDefense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+            document.getElementById('settingPenDefense').value = "1,500";
+            settings.settingPenDefense = 1_500;
         }
 
         if (settings.settingDarkMode) {
@@ -185,6 +226,11 @@ module.exports = {
             $('#optionsExcludeGearFrom').multipleSelect('setSelects', settings.settingExcludeEquipped)
             console.log("AFTER", $('#optionsExcludeGearFrom').multipleSelect('getSelects'))
             excludeSelects = settings.settingExcludeEquipped;
+        }
+
+        if (settings.settingEnhanceLimit) {
+            $('#optionsEnhanceLimit').multipleSelect('setSelects', settings.settingEnhanceLimit)
+            enhanceLimit = settings.settingEnhanceLimit;
         }
 
   // "settingBackgroundColor": "#212529",
@@ -211,6 +257,10 @@ module.exports = {
             module.exports.saveSettings();
         }
 
+        if (settings.settingArchetypes) {
+            GearRating.setArchetypes(settings.settingArchetypes)
+        }
+
         $('#selectDefaultFolderSubmitOutputText').text(settings.settingDefaultPath || defaultPath);
         Api.setSettings(settings);
     },
@@ -225,19 +275,24 @@ module.exports = {
 
         console.log("SAVE SETTINGS");
         const settings = {
+            settingGpu: document.getElementById('settingGpu').checked,
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
+            settingPenSet: document.getElementById('settingPenSet').checked,
             settingDefaultUseReforgedStats: document.getElementById('settingDefaultUseReforgedStats').checked,
             settingDefaultUseHeroPriority: document.getElementById('settingDefaultUseHeroPriority').checked,
             settingDefaultUseSubstatMods: document.getElementById('settingDefaultUseSubstatMods').checked,
             settingDefaultLockedItems: document.getElementById('settingDefaultLockedItems').checked,
             settingDefaultEquippedItems: document.getElementById('settingDefaultEquippedItems').checked,
             settingDefaultKeepCurrent: document.getElementById('settingDefaultKeepCurrent').checked,
-            settingMaxResults: parseInt(module.exports.parseMaxResults() || 5_000_000),
+            settingMaxResults: parseInt(module.exports.parseNumberValue('settingMaxResults') || 5_000_000),
+            settingPenDefense: parseInt(module.exports.parseNumberValue('settingPenDefense') || 1_500),
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
+            settingEnhanceLimit: $('#optionsEnhanceLimit').multipleSelect('getSelects'),
             settingDarkMode: document.getElementById('darkSlider').checked,
             settingVersion: Updater.getCurrentVersion(),
+            settingArchetypes: GearRating.getArchetypes(),
             settingBackgroundColor: document.getElementById('backgroundColorPicker').value,
             settingTextColorPicker: document.getElementById('textColorPicker').value,
             settingAccentColorPicker: document.getElementById('accentColorPicker').value,
@@ -257,6 +312,7 @@ module.exports = {
         }
 
         excludeSelects = settings.settingExcludeEquipped;
+        enhanceLimit = settings.settingEnhanceLimit;
 
         Files.saveFile(settingsPath, JSON.stringify(settings, null, 2))
         Api.setSettings(settings);

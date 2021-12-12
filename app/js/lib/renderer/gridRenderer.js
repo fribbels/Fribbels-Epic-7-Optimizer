@@ -9,8 +9,8 @@ module.exports = {
         return renderStar(value);
     },
 
-    arrowKeyNavigator: (binding, gridName, callback) => {
-        return navigateToNextCell(binding, gridName, callback);
+    arrowKeyNavigator: (binding, gridName, callback, customGridGetter) => {
+        return navigateToNextCell(binding, gridName, callback, customGridGetter);
     }
 }
 
@@ -65,7 +65,7 @@ var KEY_UP = 38;
 var KEY_RIGHT = 39;
 var KEY_DOWN = 40;
 
-function navigateToNextCell(params, gridName, callback) {
+function navigateToNextCell(params, gridName, callback, customGridGetter) {
   return function(params) {
     var grid;
     if (gridName == "heroesGrid") {
@@ -76,9 +76,12 @@ function navigateToNextCell(params, gridName, callback) {
       grid = buildsGrid;
     } else if (gridName == "itemsGrid") {
       grid = itemsGrid;
+    } else if (gridName == "multiGrid") {
+      console.log(customGridGetter)
+      grid = customGridGetter.call()
     }
     if (!grid) {
-      console.warn("!GRID", params, grid);
+      console.warn("!GRID " + gridName, params, grid);
 
       return;
     }

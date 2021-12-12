@@ -21,6 +21,7 @@ import com.fribbels.request.HeroesRequest;
 import com.fribbels.request.IdRequest;
 import com.fribbels.request.IdsRequest;
 import com.fribbels.request.ModStatsRequest;
+import com.fribbels.request.OptimizationRequest;
 import com.fribbels.request.ReorderRequest;
 import com.fribbels.response.GetAllHeroesResponse;
 import com.fribbels.response.GetHeroByIdResponse;
@@ -129,6 +130,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                     final ReorderRequest reorderRequest = parseRequest(exchange, ReorderRequest.class);
                     sendResponse(exchange, reorderHeroes(reorderRequest));
                     return;
+                case "/heroes/saveOptimizationRequest":
+                    final OptimizationRequest optimizationRequest = parseRequest(exchange, OptimizationRequest.class);
+                    sendResponse(exchange, saveOptimizationRequest(optimizationRequest));
+                    return;
 
                 default:
                     System.out.println("No handler found for " + path);
@@ -208,6 +213,27 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         return "";
     }
 
+    public String saveOptimizationRequest(final OptimizationRequest request) {
+        heroDb.saveOptimizationRequest(request);
+//        if (request.getHero() == null || request.getHero().getId() == null) return "";
+//
+//        final String heroId = request.getHero().getId();
+//        final Hero hero = heroDb.getHeroById(heroId);
+//
+//        if (hero == null) return "";
+//
+//        final OptimizationRequest existingRequest = hero.getOptimizationRequest();
+//
+//        existingRequest.set
+//
+//        hero.setOptimizationRequest(request
+//                .withHero(null)
+//                .withItems(null)
+//                .withBoolArr(null));
+//        heroDb.saveOptimizationRequest(optimizationRequest);
+        return "";
+    }
+
     public String setBaseStats(final BaseStatsRequest request) {
         baseStatsDb.setBaseStatsByName(request.getBaseStatsByName());
 
@@ -243,20 +269,24 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     public String getAllHeroes(final GetAllHeroesRequest request) {
-        final List<Hero> rawHeroes = heroDb.getAllHeroes();
-        final List<Hero> heroes = rawHeroes.stream().map(x -> x.withCp(x.getCp())).collect(Collectors.toList());
+        try {
+            final List<Hero> rawHeroes = heroDb.getAllHeroes();
+            final List<Hero> heroes = rawHeroes.stream().map(x -> x.withCp(x.getCp())).collect(Collectors.toList());
 
-//        System.out.println("Heroes" + heroes);
+            //        System.out.println("Heroes" + heroes);
 
-        for (final Hero hero : heroes) {
-            addStatsToHero(hero, request.isUseReforgeStats());
+            for (final Hero hero : heroes) {
+                addStatsToHero(hero, request.isUseReforgeStats());
+            }
+
+            final GetAllHeroesResponse response = GetAllHeroesResponse.builder().heroes(heroes).build();
+
+            return toJson(response);
+        } catch (final RuntimeException e) {
+            System.err.println("err" + e);
+            e.printStackTrace();
+            throw(e);
         }
-
-        final GetAllHeroesResponse response = GetAllHeroesResponse.builder()
-                .heroes(heroes)
-                .build();
-
-        return toJson(response);
     }
 
     private void addStatsToHero(final Hero hero, final boolean useReforgeStats) {

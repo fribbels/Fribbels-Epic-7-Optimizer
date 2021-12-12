@@ -54,6 +54,8 @@ module.exports = {
           var localeText = AG_GRID_LOCALE_ZH_TW;
         } else if (i18next.language == 'fr') {
           var localeText = AG_GRID_LOCALE_FR;
+        } else if (i18next.language == 'ja') {
+          var localeText = AG_GRID_LOCALE_JA;
         } else {
           var localeText = AG_GRID_LOCALE_EN;
         }
@@ -174,6 +176,8 @@ const datasource = {
             sortOrder: sortOrder,
             optimizationRequest: optimizationRequest
         }
+
+        request.executionId = OptimizerTab.getCurrentExecutionId();
 
         const getResultRowsResponse = Api.getResultRows(request).then(getResultRowsResponse => {
             console.log("GetResultRowsResponse", getResultRowsResponse);
@@ -313,7 +317,10 @@ function buildGrid(localeText) {
         suppressScrollOnNewData: true,
         onCellMouseOver: cellMouseOver,
         onCellMouseOut: cellMouseOut,
+        suppressCellSelection: true,
+        enableRangeSelection: false,
         navigateToNextCell: GridRenderer.arrowKeyNavigator(this, "optimizerGrid"),
+        suppressDragLeaveHidesColumns: true,
     };
 
     const gridDiv = document.getElementById('myGrid');

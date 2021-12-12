@@ -1,5 +1,7 @@
 // Libs
 
+process.env.ELECTRON_NO_ATTACH_CONSOLE = true;
+
 (function(){
     var original = console.error;
     console.error = function() {
@@ -45,7 +47,9 @@ global.ColorPicker = require('./colorPicker');
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
 global.OptimizerTab = require('./tabs/optimizerTab');
+global.MultiOptimizerTab = require('./tabs/multiOptimizerTab');
 global.ItemsTab = require('./tabs/itemsTab');
+global.EnhancingTab = require('./tabs/enhancingTab');
 
 // Grid
 global.HeroesGrid = require('./grids/heroesGrid');
@@ -74,6 +78,7 @@ global.Heroes = Enums.Heroes;
 global.Stat = require('../models/stat').Stat;
 global.Item = require('../models/item').Item;
 global.MainStatFixer = require('./mainStatFixer');
+global.GearRating = require('./gearRating');
 global.OptimizationRequest = require('../models/optimizationRequest').OptimizationRequest;
 global.Importer = require('./importer');
 global.ItemAugmenter = require('./itemAugmenter');
@@ -102,11 +107,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     await I18n.initialize();
 
     Subprocess.initialize(async () => {
-        Selectors.initialize();
-        Dialog.initialize();
-        Notifier.initialize();
-
         await HeroData.initialize();
+
+        Notifier.initialize();
+        Dialog.initialize();
+        Selectors.initialize();
+
         ZarrocConverter.initialize();
         OptimizerTab.initialize();
         OptimizerGrid.initialize();
@@ -117,10 +123,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         await Settings.initialize();
         Saves.initialize();
-        Saves.loadAutoSave();
+        await Saves.loadAutoSave();
+        MultiOptimizerTab.initialize();
 
         Tooltip.initialize();
         ColorPicker.initialize();
+        EnhancingTab.initialize();
     });
     Scanner.initialize();
     Updater.checkForUpdates();
@@ -143,7 +151,7 @@ function setupLinks() {
     });
 
     $('#donateBadge').on('click', (event) => {
-        electron.shell.openExternal('https://www.paypal.com/donate?business=FKESQZAXPN7B8&item_name=Support+Epic+7+Gear+Optimizer%21&currency_code=USD');
+        electron.shell.openExternal('https://www.buymeacoffee.com/fribbels');
     });
 
     $('#githubBadge').on('click', (event) => {

@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.7.3";
+const currentVersion = "1.8.0-beta.4";
 
 global.TEST = true;
 /********************************************************************************************
@@ -24,30 +24,30 @@ module.exports = {
     getCurrentVersion: () => {
         return currentVersion;
     },
-
+/*
+- Hero tab double click
+- Magnifying glass
+*/
     showNewFeatures: (text) => {
         Dialog.showNewFeatures(
 `
 <h2>
-    New in v1.7.3
+    New in v1.8
 </h2>
 <ul class="newFeatures">
-    <li>Updated Ram's +30% atk passive and Summertime Iseria +30% atk passive</li>
-    <li>Added editing of substat modded flag</li>
-    <li>Added French translation</li>
-</ul>
-<h2>
-    New in v1.7.2
-</h2>
-<ul class="newFeatures">
-    <li>Updated ML Ken's +30% eff res buff</li>
-    <li>Added new default optimizer settings to Settings tab</li>
-</ul>
-<h2>
-    New in v1.7.1
-</h2>
-<ul class="newFeatures">
-    <li>Updated stats for Health / Defense / Attack / Revenge sets</li>
+    <li>Enhancing tab with item analyzer</li>
+    <li>Click on the magnifying glass to load item details</li>
+    <li>Can now double click a hero on the Heroes tab to load them on Optimizer tab</li>
+    <li>Added item attribute to disable modifications on the item</li>
+    <li>Added custom dark theme colors</li>
+    <li>Customizeable gear archetypes in settings file</li>
+    <li>Ehp and Mcd preview in filters</li>
+    <li>5 star hero indicator</li>
+    <li>Penetration set used in dmg calculation & target defense setting</li>
+    <li>Enhance limit optimizer setting</li>
+    <li>Scores now use reforged values</li>
+    <li>Added per-unit score evaluation</li>
+    <li>Increasing optimization threads based on CPU core count</li>
 </ul>
 `
         );

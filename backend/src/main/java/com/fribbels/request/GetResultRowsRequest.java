@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class GetResultRowsRequest extends Request {
 
+    private String executionId;
     private int startRow;
     private int endRow;
     private OptimizationColumn sortColumn;

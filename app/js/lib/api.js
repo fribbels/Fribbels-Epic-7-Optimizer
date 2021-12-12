@@ -123,6 +123,12 @@ module.exports = {
         });
     },
 
+    getItemByIngameId: async (id) => {
+        return post('/items/getItemByIngameId', {
+            id: id
+        });
+    },
+
     getItemsByIds: async (ids) => {
         return post('/items/getItemsByIds', {
             ids: ids
@@ -271,15 +277,30 @@ module.exports = {
             build: build
         });
     },
-    editResultRows: async (index, property) => {
+    editResultRows: async (index, property, executionId) => {
         return post('/optimization/editResultRows', {
             index: index,
-            property: property
+            property: property,
+            executionId: executionId
+        });
+    },
+
+    prepareExecution: async () => {
+        return post('/optimization/prepareExecution');
+    },
+
+    deleteExecution: async (id) => {
+        return post('/optimization/deleteExecution', {
+            id: id
         });
     },
 
     submitOptimizationRequest: async (request) => {
         return post('/optimization/optimizationRequest', request);
+    },
+
+    saveOptimizationRequest: async (request) => {
+        return post('/heroes/saveOptimizationRequest', request);
     },
 
     submitOptimizationFilterRequest: async (request) => {
@@ -292,6 +313,7 @@ module.exports = {
 }
 
 function post(api, request) {
+    console.log("Call: ", api);
     return new Promise((resolve, reject) => {
         axios.post(endpoint + api, request)
         .then(response => {

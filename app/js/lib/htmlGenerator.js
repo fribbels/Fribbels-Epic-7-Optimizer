@@ -1,7 +1,10 @@
 const stringSimilarity = require('string-similarity');
 
+function isItemModded(item) {
+    return item.substats.filter(x => x.modified).length > 0;
+}
 
-function statToText(stat, baseStats, item) {
+function statToText(stat, baseStats, item, showMaxSpeed) {
     if (!stat) {
         return {
             type: '',
@@ -9,11 +12,13 @@ function statToText(stat, baseStats, item) {
         }
     }
 
-    const unpercentedStat = shortenStats(stat.type);
+    var unpercentedStat = shortenStats(stat.type);
     var value;
 
-    if (item.alreadyPredictedReforge || !Reforge.isReforgeable(item)) {
+    if (Reforge.isReforgeable(item) && stat.modified) {
         value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats, false);
+    } else if (item.alreadyPredictedReforge || !Reforge.isReforgeable(item) || isItemModded(item)) {
+        value = stat.type.includes('Percent') ? stat.reforgedValue + "%" : getPercentageEquivalent(stat, baseStats, false);
     } else {
         const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
         const reforgedValue = stat.type.includes('Percent') ? stat.reforgedValue + "%" : getPercentageEquivalent(stat, baseStats, true);
@@ -42,6 +47,36 @@ function statToText(stat, baseStats, item) {
     }
     // console.log(modifier.grade, modifier.stat, stat.rolls, item, item.level)
 
+    if (stat.type == "Speed" && item.enhance != 15 && showMaxSpeed === true) {
+        var speedStats = item.substats.filter(x => x.type == "Speed")
+        var roundedEnhance = Math.floor(item.enhance / 3) * 3;
+        var maxSpeed = 0;
+        if (speedStats.length > 0) {
+            var speedStat = speedStats[0];
+            var rolls = speedStat.rolls;
+            var enhance = item.enhance;
+            var rollsLeft = Math.ceil(15 - item.enhance)/3;
+
+            var potentialRolls = Constants.speedByItemTypeAlreadyRolled[item.rank][roundedEnhance];
+
+            var reforgedValue = item.level == 90 ? speedStat.value : speedStat.reforgedValue;
+
+            console.warn(reforgedValue)
+            console.warn(Constants.speedRollsToValue[potentialRolls + rolls] - Constants.speedRollsToValue[rolls])
+            console.warn("------------------------")
+            maxSpeed = reforgedValue + potentialRolls * 4 + (item.level == 85 ? Constants.speedRollsToValue[potentialRolls + rolls] - Constants.speedRollsToValue[rolls] : 0);
+        } else {
+            var potentialRolls = Constants.speedByItemTypeNotYetRolled[item.rank][roundedEnhance];
+            maxSpeed = potentialRolls * 4 + (item.level == 85 ? Constants.speedRollsToValue[potentialRolls] : 0);
+
+            console.warn(potentialRolls)
+            console.warn(Constants.speedRollsToValue[potentialRolls])
+            console.warn("------------------------")
+        }
+
+        unpercentedStat = unpercentedStat + "  (Max: " + maxSpeed + ")";
+    }
+
     return {
         type: unpercentedStat,
         value: value,
@@ -51,11 +86,59 @@ function statToText(stat, baseStats, item) {
     }
 }
 
+function rateBaseScore(stats, baseStats) {
+    const atkScore = (stats.AttackPercent + (stats.Attack / baseStats.atk * 100));
+    const hpScore = (stats.HealthPercent  + (stats.Health / baseStats.hp * 100));
+    const defScore = (stats.DefensePercent + (stats.Defense / baseStats.def * 100));
+    const spdScore = (stats.Speed) * 2;
+    const crScore = (stats.CriticalHitChancePercent) * 8/5;
+    const cdScore = (stats.CriticalHitDamagePercent) * 8/7;
+    const effScore = (stats.EffectivenessPercent);
+    const resScore = (stats.EffectResistancePercent);
+    const score = atkScore + hpScore + defScore + spdScore + crScore + cdScore + effScore + resScore;
+
+    return score;
+}
+
+function hasFlat(item) {
+    for (var substat of item.substats) {
+        if (substat.type == "Defense" || substat.type == "Attack" || substat.type == "Health") {
+            return true;
+        }
+    }
+    return false;
+}
+
 function wssToText(item) {
-    if (Reforge.isReforgeable(item)) {
-        return item.wss + " ➤ " + item.reforgedWss;
+    // console.warn("WSS TO TEXT", item)
+    if (item.equippedByName && hasFlat(item)) {
+        const baseStats = HeroData.getBaseStatsByName(item.equippedByName).lv60SixStarFullyAwakened;
+        baseStats.atk = baseStats.bonusStats.overrideAtk || baseStats.atk;
+        baseStats.hp = baseStats.bonusStats.overrideHp || baseStats.hp;
+        baseStats.def = baseStats.bonusStats.overrideDef || baseStats.def;
+
+        const score = Math.round(rateBaseScore(item.augmentedStats, baseStats))
+        const reforgedScore = Math.round(rateBaseScore(item.reforgedStats, baseStats))
+
+        if (Reforge.isReforgeable(item)) {
+            if (isItemModded(item)) {
+                return `${item.reforgedWss} (${reforgedScore})`;
+            } else {
+                return `${item.wss} (${score}) ➤ ${item.reforgedWss} (${reforgedScore})`;
+            }
+        } else {
+            return `${item.wss} (${score})`
+        }
     } else {
-        return item.wss
+        if (Reforge.isReforgeable(item)) {
+            if (isItemModded(item)) {
+                return item.reforgedWss;
+            } else {
+                return item.wss + " ➤ " + item.reforgedWss;   
+            }
+        } else {
+            return item.wss
+        }
     }
 }
 
@@ -241,7 +324,7 @@ module.exports = {
         }
     },
 
-    buildItemPanel(item, checkboxPrefix, baseStats) {
+    buildItemPanel(item, checkboxPrefix, baseStats, mods) {
         if (!item) {
             return `
 
@@ -280,7 +363,7 @@ module.exports = {
 
         const materialImage = getMaterialImage(item);
 
-        const html = `
+        var html = `
 <div class="itemDisplayHeader">
   <img src="${gearImage}" class="gearTypeImg" ${styleForImage(item.rank)}></img>
   <div class="itemDisplayHeaderData">
@@ -335,17 +418,28 @@ module.exports = {
 </div>
 <div class="itemDisplayFooter">
   <div class="itemDisplayFooterIconContainer">
-      ${checkboxPrefix == "itemsGrid" ? "" : `<input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>`}
+      ${checkboxPrefix == "itemsGrid" || checkboxPrefix == "enhanceTab" ? "" : `<input type="checkbox" class="itemPreviewCheckbox" id="${checkboxPrefix + item.gear}" checked>`}
       <div class="itemDisplayFooterSet">
         <img src="${setImage}" class="itemDisplaySetImg"></img>
       </div>
   </div>
   <div class="itemDisplayFooterIconContainer">
-      ${editItemDisplay(item)}
-      ${editLockDisplay(item)}
+      ${magnify(item, checkboxPrefix)}
+      ${editItemDisplay(item, checkboxPrefix)}
+      ${editLockDisplay(item, checkboxPrefix)}
   </div>
 </div>
         `
+
+//         if (checkboxPrefix == "itemsGrid") {
+//             html +=
+// `
+// Possible score range: 10 - 22</br>
+// Actual score: 15</br>
+// Percentage: 56%</br>
+// `
+//         }
+
         return html;
     }
 }
@@ -385,12 +479,21 @@ const huntImageBySet = {
     PenetrationSet: "./assets/reforgeC.png",
 }
 
-function editItemDisplay(item) {
+
+function magnify(item, checkboxPrefix) {
+    return `<img src="${Assets.getMagnify()}" class="itemDisplayEditImg" onclick='EnhancingTab.redrawEnhanceGuideFromRemoteId("${item.id}")'></img>`
+}
+
+function editItemDisplay(item, checkboxPrefix) {
+    // if (checkboxPrefix == "enhanceTab") {
+    //     return '';
+    // }
+
     if (Reforge.isReforgeableNow(item)) {
-        return `<img src="${Assets.getEdit()}"    class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false)'></img>
-                <img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", true)'></img>`
+        return `<img src="${Assets.getEdit()}"    class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false, "${checkboxPrefix}")'></img>
+                <img src="${Assets.getReforge()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", true, "${checkboxPrefix}")'></img>`
     }
-    return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}")'></img>`
+    return `<img src="${Assets.getEdit()}" class="itemDisplayEditImg" onclick='OptimizerTab.editGearFromIcon("${item.id}", false, "${checkboxPrefix}")'></img>`
 }
 
 function styleEnhance(enhance) {
@@ -399,11 +502,15 @@ function styleEnhance(enhance) {
     }
 }
 
-function editLockDisplay(item) {
+function editLockDisplay(item, checkboxPrefix) {
+    // if (checkboxPrefix == "enhanceTab") {
+    //     return '';
+    // }
+
     if (!item.locked) {
-        return `<img src="${Assets.getLock()}" style="opacity:0.12" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
+        return `<img src="${Assets.getLock()}" style="opacity:0.12" class="itemDisplayLockImgTransparent" onclick='OptimizerTab.lockGearFromIcon("${item.id}", "${checkboxPrefix}")'}></img>`
     }
-    return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}")'}></img>`
+    return `<img src="${Assets.getLock()}" class="itemDisplayLockImg" onclick='OptimizerTab.lockGearFromIcon("${item.id}", "${checkboxPrefix}")'}></img>`
 }
 
 function styleLevel(item) {

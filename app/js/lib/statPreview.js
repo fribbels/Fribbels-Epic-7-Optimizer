@@ -29,10 +29,69 @@ module.exports = {
         renderDiff(before, after, 'eff')
         renderDiff(before, after, 'res')
 
-        $('#setBefore').html(GridRenderer.renderSets(before.sets, 'previewSet'));
-        $('#setAfter').html(GridRenderer.renderSets(after.sets, 'previewSet'));
+        $('#setBefore').html(renderSets(before.equipment, 'previewSet'));
+        $('#setAfter').html(renderSets(after.sets, 'previewSet'));
     },
 }
+
+const fourPieceSets = [
+    "AttackSet",
+    "SpeedSet",
+    "DestructionSet",
+    "LifestealSet",
+    "CounterSet",
+    "RageSet",
+    "RevengeSet",
+    "InjurySet"
+]
+
+function renderSets(equipment) {
+    if (!equipment) return;
+
+    const setNames = Object.values(equipment).map(x => x.set);
+    const setCounters = [
+        Math.floor(setNames.filter(x => x == "HealthSet").length),
+        Math.floor(setNames.filter(x => x == "DefenseSet").length),
+        Math.floor(setNames.filter(x => x == "AttackSet").length),
+        Math.floor(setNames.filter(x => x == "SpeedSet").length),
+        Math.floor(setNames.filter(x => x == "CriticalSet").length),
+        Math.floor(setNames.filter(x => x == "HitSet").length),
+        Math.floor(setNames.filter(x => x == "DestructionSet").length),
+        Math.floor(setNames.filter(x => x == "LifestealSet").length),
+        Math.floor(setNames.filter(x => x == "CounterSet").length),
+        Math.floor(setNames.filter(x => x == "ResistSet").length),
+        Math.floor(setNames.filter(x => x == "UnitySet").length),
+        Math.floor(setNames.filter(x => x == "RageSet").length),
+        Math.floor(setNames.filter(x => x == "ImmunitySet").length),
+        Math.floor(setNames.filter(x => x == "PenetrationSet").length),
+        Math.floor(setNames.filter(x => x == "RevengeSet").length),
+        Math.floor(setNames.filter(x => x == "InjurySet").length)
+    ]
+
+    const sets = [];
+    for (var i = 0; i < setCounters.length; i++) {
+        const setsFound = Math.floor(setCounters[i] / Constants.piecesBySetIndex[i]);
+        for (var j = 0; j < setsFound; j++) {
+            sets.push(Constants.setsByIndex[i]);
+        }
+    }
+
+    sets.sort((a, b) => {
+        if (fourPieceSets.includes(a)) {
+            return -1;
+        } else if (fourPieceSets.includes(b)) {
+            return 1;
+        } else {
+            return a.localeCompare(b);
+        }
+    })
+
+    const images = sets.map(x => '<img class="optimizerSetIcon" src=' + Assets.getSetAsset(x) + '></img>');
+    // console.log("RenderSets images", images);
+    return images.join("");
+}
+
+// 38821f
 
 function renderDiff(before, after, field, id) {
     const value = after[field] - before[field];
