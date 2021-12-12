@@ -1062,5 +1062,6 @@
   "Select which heroes to import": "Sélectionner les héros à importer",
   "Only import heroes already in optimizer": "Importer uniquement les héros déjà dans l'optimiseur",
   "+15 and up": "+15 et plus",
-  "Eff Res": "Res. d'effet"
+  "Eff Res": "Res. d'effet",
+  "GPU accelerated optimization (Disable this option if you notice errors or decreased performance)": "Optimisation accélérée via GPU (Désactivez cette option si vous remarquez des erreurs ou des pertes de performance)"
 }
