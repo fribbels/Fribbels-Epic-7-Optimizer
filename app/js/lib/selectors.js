@@ -27,18 +27,22 @@ module.exports = {
             // hideOptgroupCheckboxes: true,
             minimumCountSelected: 99,
             displayTitle: true,
+            displayValues: true,
             selectAll: false,
-            // textTemplate: function (el) {
-            //     const val = el.html();
-            //     const assetKey = val + "Set";
+            textTemplate: function (el) {
+                const val = el.html();
+                const assetKey = val + "Set";
 
-            //     if (Object.keys(assetsBySet).includes(assetKey)) {
-            //         const asset = assetsBySet[assetKey];
-            //         return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
-            //     }
+                if (Object.keys(assetsBySet).includes(assetKey)) {
+                    const asset = assetsBySet[assetKey];
+                    return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
+                }
 
-            //     return el.html()
-            // }
+                return el.html()
+            },
+            styler: function (row) {
+                return '';
+            }
         };
         const enhanceOptions = {
             maxHeight: 500,
@@ -174,10 +178,10 @@ module.exports = {
         if (index == null || index == undefined) {
             index = '';
         }
-        const inputSet1 = $('#inputSet1' + index).multipleSelect('getSelects')
-        const inputSet2 = $('#inputSet2' + index).multipleSelect('getSelects')
-        const inputSet3 = $('#inputSet3' + index).multipleSelect('getSelects')
-        const inputExcludeSet = $('#inputExcludeSet' + index).multipleSelect('getSelects')
+        const inputSet1 = $('#inputSet1' + index).multipleSelect('getSelects').map(x => x + "Set")
+        const inputSet2 = $('#inputSet2' + index).multipleSelect('getSelects').map(x => x + "Set")
+        const inputSet3 = $('#inputSet3' + index).multipleSelect('getSelects').map(x => x + "Set")
+        const inputExcludeSet = $('#inputExcludeSet' + index).multipleSelect('getSelects').map(x => x + "Set")
 
         console.log("Set selectors", inputSet1, inputSet2, inputSet3, inputExcludeSet);
         return {
@@ -198,9 +202,9 @@ module.exports = {
 
     setGearMainAndSetsFromRequest: (request, index) => {
         console.warn("SETS", request, index);
-        $('#inputSet1' + index).multipleSelect('setSelects', request.inputSetsOne || [])
-        $('#inputSet2' + index).multipleSelect('setSelects', request.inputSetsTwo || [])
-        $('#inputSet3' + index).multipleSelect('setSelects', request.inputSetsThree || [])
+        $('#inputSet1' + index).multipleSelect('setSelects', request.inputSetsOne.map(x => x.replace("Set", "")) || [])
+        $('#inputSet2' + index).multipleSelect('setSelects', request.inputSetsTwo.map(x => x.replace("Set", "")) || [])
+        $('#inputSet3' + index).multipleSelect('setSelects', request.inputSetsThree.map(x => x.replace("Set", "")) || [])
         $('#inputNecklaceStat' + index).multipleSelect('setSelects', request.inputNecklaceStat || [])
         $('#inputRingStat' + index).multipleSelect('setSelects', request.inputRingStat || [])
         $('#inputBootsStat' + index).multipleSelect('setSelects', request.inputBootsStat || [])

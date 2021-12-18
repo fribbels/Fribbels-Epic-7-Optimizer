@@ -1788,14 +1788,15 @@ input:checked + .darkSlider:before {
 
 .selectorSetImage {
   height: 26px;
-  margin-right: 2px;
+  margin-right: 4px;
+  margin-left: -2px;
 }
 .selectorSetText {
   height: 26px;
 }
 .selectorSetContainer {
-/*  display: flex;
-  flex-direction: row;*/
+  display: flex;
+  flex-direction: row;
 }
 .importerRadioLabel {
   margin-right: 20px;

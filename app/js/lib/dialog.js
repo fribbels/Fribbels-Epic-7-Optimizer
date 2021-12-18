@@ -209,7 +209,7 @@ module.exports = {
             html: html,
             width: 900,
             confirmButtonText: i18next.t("OK"),
-            allowOutsideClick: outsideClickDisable
+            // allowOutsideClick: outsideClickDisable
             // cancelButtonText: i18next.t("Cancel")
         })
     },
@@ -717,52 +717,52 @@ module.exports = {
                               <select multiple="multiple" id="inputSet1${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="4 Piece" data-t>
-                                  <option value="AttackSet" data-t>${i18next.t("Attack")}</option>
-                                  <option value="CounterSet" data-t>${i18next.t("Counter")}</option>
-                                  <option value="DestructionSet" data-t>${i18next.t("Destruction")}</option>
-                                  <option value="InjurySet" data-t>${i18next.t("Injury")}</option>
-                                  <option value="LifestealSet" data-t>${i18next.t("Lifesteal")}</option>
-                                  <option value="RageSet" data-t>${i18next.t("Rage")}</option>
-                                  <option value="RevengeSet" data-t>${i18next.t("Revenge")}</option>
-                                  <option value="SpeedSet" data-t>${i18next.t("Speed")}</option>
+                                  <option value="Attack" data-t>${i18next.t("Attack")}</option>
+                                  <option value="Counter" data-t>${i18next.t("Counter")}</option>
+                                  <option value="Destruction" data-t>${i18next.t("Destruction")}</option>
+                                  <option value="Injury" data-t>${i18next.t("Injury")}</option>
+                                  <option value="Lifesteal" data-t>${i18next.t("Lifesteal")}</option>
+                                  <option value="Rage" data-t>${i18next.t("Rage")}</option>
+                                  <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
+                                  <option value="Speed" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
-                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
-                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
-                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
-                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
-                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
-                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
-                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Critical" data-t>${i18next.t("Critical")}</option>
+                                  <option value="Defense" data-t>${i18next.t("Defense")}</option>
+                                  <option value="Health" data-t>${i18next.t("Health")}</option>
+                                  <option value="Hit" data-t>${i18next.t("Hit")}</option>
+                                  <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
 
                               <select multiple="multiple" id="inputSet2${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
-                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
-                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
-                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
-                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
-                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
-                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
-                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Critical" data-t>${i18next.t("Critical")}</option>
+                                  <option value="Defense" data-t>${i18next.t("Defense")}</option>
+                                  <option value="Health" data-t>${i18next.t("Health")}</option>
+                                  <option value="Hit" data-t>${i18next.t("Hit")}</option>
+                                  <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
 
                               <select multiple="multiple" id="inputSet3${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
-                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
-                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
-                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
-                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
-                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
-                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
-                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Critical" data-t>${i18next.t("Critical")}</option>
+                                  <option value="Defense" data-t>${i18next.t("Defense")}</option>
+                                  <option value="Health" data-t>${i18next.t("Health")}</option>
+                                  <option value="Hit" data-t>${i18next.t("Hit")}</option>
+                                  <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select>
 
@@ -772,24 +772,24 @@ module.exports = {
                               <select multiple="multiple" id="inputExcludeSet${index}" class="inputSetFilterSelect">
                                 <!-- <option value="None" data-t>None</option> -->
                                 <optgroup label="4 Piece" data-t>
-                                  <option value="AttackSet" data-t>${i18next.t("Attack")}</option>
-                                  <option value="CounterSet" data-t>${i18next.t("Counter")}</option>
-                                  <option value="DestructionSet" data-t>${i18next.t("Destruction")}</option>
-                                  <option value="InjurySet" data-t>${i18next.t("Injury")}</option>
-                                  <option value="LifestealSet" data-t>${i18next.t("Lifesteal")}</option>
-                                  <option value="RageSet" data-t>${i18next.t("Rage")}</option>
-                                  <option value="RevengeSet" data-t>${i18next.t("Revenge")}</option>
-                                  <option value="SpeedSet" data-t>${i18next.t("Speed")}</option>
+                                  <option value="Attack" data-t>${i18next.t("Attack")}</option>
+                                  <option value="Counter" data-t>${i18next.t("Counter")}</option>
+                                  <option value="Destruction" data-t>${i18next.t("Destruction")}</option>
+                                  <option value="Injury" data-t>${i18next.t("Injury")}</option>
+                                  <option value="Lifesteal" data-t>${i18next.t("Lifesteal")}</option>
+                                  <option value="Rage" data-t>${i18next.t("Rage")}</option>
+                                  <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
+                                  <option value="Speed" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
-                                  <option value="CriticalSet" data-t>${i18next.t("Critical")}</option>
-                                  <option value="DefenseSet" data-t>${i18next.t("Defense")}</option>
-                                  <option value="HealthSet" data-t>${i18next.t("Health")}</option>
-                                  <option value="HitSet" data-t>${i18next.t("Hit")}</option>
-                                  <option value="ImmunitySet" data-t>${i18next.t("Immunity")}</option>
-                                  <option value="PenetrationSet" data-t>${i18next.t("Penetration")}</option>
-                                  <option value="ResistSet" data-t>${i18next.t("Resist")}</option>
-                                  <option value="UnitySet" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Critical" data-t>${i18next.t("Critical")}</option>
+                                  <option value="Defense" data-t>${i18next.t("Defense")}</option>
+                                  <option value="Health" data-t>${i18next.t("Health")}</option>
+                                  <option value="Hit" data-t>${i18next.t("Hit")}</option>
+                                  <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
+                                  <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
+                                  <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
                             </div>
@@ -807,12 +807,30 @@ module.exports = {
                     OptimizerTab.buildSlider('#resSlider' + index);
                     OptimizerTab.buildTopSlider('#filterSlider' + index);
 
+                    const assetsBySet = Assets.getAssetsBySet();
+
                     const groupSelectMultipleSelectOptions = {
                         maxHeight: 500,
                         showClear: true,
+                        // hideOptgroupCheckboxes: true,
                         minimumCountSelected: 99,
                         displayTitle: true,
+                        displayValues: true,
                         selectAll: false,
+                        textTemplate: function (el) {
+                            const val = el.html();
+                            const assetKey = val + "Set";
+
+                            if (Object.keys(assetsBySet).includes(assetKey)) {
+                                const asset = assetsBySet[assetKey];
+                                return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
+                            }
+
+                            return el.html()
+                        },
+                        styler: function (row) {
+                            return '';
+                        }
                     };
                     const excludeEquippedSelectOptions = {
                         maxHeight: 450,
