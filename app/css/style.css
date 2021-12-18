@@ -1462,9 +1462,8 @@ body.dark-theme input {
   flex-direction: row;
   align-items: center;
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 15px;
-
 }
 .darkModeToggleContainer h1 {
   color: var(--font-color);
@@ -1476,6 +1475,20 @@ body.dark-theme input {
   padding: 10px 20px;
   border: 0;
   border-radius: 5px;
+}
+.coffeeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  top: 7px;
+  right: 80px;
+}
+.coffeeContainerImage {
+    height: 32px;
+    cursor: pointer;
 }
 
 /* The switch - the box around the slider */

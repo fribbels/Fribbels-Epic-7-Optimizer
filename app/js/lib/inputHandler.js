@@ -157,6 +157,10 @@ function setupLinks() {
     $('#githubBadge').on('click', (event) => {
         electron.shell.openExternal('https://github.com/fribbels/Fribbels-Epic-7-Optimizer');
     });
+
+    $('#coffeeImage').on('click', (event) => {
+        electron.shell.openExternal('https://www.buymeacoffee.com/fribbels');
+    });
 }
 
 
