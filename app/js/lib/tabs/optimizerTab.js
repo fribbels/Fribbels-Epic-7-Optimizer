@@ -119,6 +119,7 @@ module.exports = {
         document.getElementById('submitOptimizerReset').addEventListener("click", () => {
             clearRatings();
             clearStats();
+            calculatePlaceholderRatings();
             // clearForce();
 
             Selectors.clearGearMainAndSets();
@@ -833,6 +834,7 @@ function clearRatings() {
 }
 function clearStats() {
     $(".stat-number-input").val("")
+    calculatePlaceholderRatings();
 }
 
 function clearOptions() {
