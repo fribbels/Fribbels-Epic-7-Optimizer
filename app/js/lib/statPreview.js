@@ -29,8 +29,8 @@ module.exports = {
         renderDiff(before, after, 'eff')
         renderDiff(before, after, 'res')
 
-        $('#setBefore').html(renderSets(before.equipment, 'previewSet'));
-        $('#setAfter').html(renderSets(after.sets, 'previewSet'));
+        $('#setBefore').html(renderSets(before.equipment, 'previewSet', false));
+        $('#setAfter').html(renderSets(after.sets, 'previewSet', true));
     },
 }
 
@@ -45,28 +45,35 @@ const fourPieceSets = [
     "InjurySet"
 ]
 
-function renderSets(equipment) {
+function renderSets(equipment, name, isAfter) {
     if (!equipment) return;
 
-    const setNames = Object.values(equipment).map(x => x.set);
-    const setCounters = [
-        Math.floor(setNames.filter(x => x == "HealthSet").length),
-        Math.floor(setNames.filter(x => x == "DefenseSet").length),
-        Math.floor(setNames.filter(x => x == "AttackSet").length),
-        Math.floor(setNames.filter(x => x == "SpeedSet").length),
-        Math.floor(setNames.filter(x => x == "CriticalSet").length),
-        Math.floor(setNames.filter(x => x == "HitSet").length),
-        Math.floor(setNames.filter(x => x == "DestructionSet").length),
-        Math.floor(setNames.filter(x => x == "LifestealSet").length),
-        Math.floor(setNames.filter(x => x == "CounterSet").length),
-        Math.floor(setNames.filter(x => x == "ResistSet").length),
-        Math.floor(setNames.filter(x => x == "UnitySet").length),
-        Math.floor(setNames.filter(x => x == "RageSet").length),
-        Math.floor(setNames.filter(x => x == "ImmunitySet").length),
-        Math.floor(setNames.filter(x => x == "PenetrationSet").length),
-        Math.floor(setNames.filter(x => x == "RevengeSet").length),
-        Math.floor(setNames.filter(x => x == "InjurySet").length)
-    ]
+    var setCounters;
+
+    if (isAfter) {
+        setCounters = equipment;
+    } else {
+        const setNames = Object.values(equipment).map(x => x.set);
+        setCounters = [
+            Math.floor(setNames.filter(x => x == "HealthSet").length),
+            Math.floor(setNames.filter(x => x == "DefenseSet").length),
+            Math.floor(setNames.filter(x => x == "AttackSet").length),
+            Math.floor(setNames.filter(x => x == "SpeedSet").length),
+            Math.floor(setNames.filter(x => x == "CriticalSet").length),
+            Math.floor(setNames.filter(x => x == "HitSet").length),
+            Math.floor(setNames.filter(x => x == "DestructionSet").length),
+            Math.floor(setNames.filter(x => x == "LifestealSet").length),
+            Math.floor(setNames.filter(x => x == "CounterSet").length),
+            Math.floor(setNames.filter(x => x == "ResistSet").length),
+            Math.floor(setNames.filter(x => x == "UnitySet").length),
+            Math.floor(setNames.filter(x => x == "RageSet").length),
+            Math.floor(setNames.filter(x => x == "ImmunitySet").length),
+            Math.floor(setNames.filter(x => x == "PenetrationSet").length),
+            Math.floor(setNames.filter(x => x == "RevengeSet").length),
+            Math.floor(setNames.filter(x => x == "InjurySet").length)
+        ]
+    }
+
 
     const sets = [];
     for (var i = 0; i < setCounters.length; i++) {

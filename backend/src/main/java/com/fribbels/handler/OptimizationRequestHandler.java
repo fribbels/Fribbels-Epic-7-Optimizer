@@ -2,8 +2,10 @@ package com.fribbels.handler;
 
 import com.aparapi.Kernel;
 import com.aparapi.Range;
+import com.aparapi.device.Device;
 import com.aparapi.internal.kernel.KernelManager;
 import com.fribbels.Main;
+import com.fribbels.db.ItemDb;
 import com.fribbels.gpu.GpuOptimizerKernel;
 import com.fribbels.gpu.SetFormat000OptimizerKernel;
 import com.fribbels.core.StatCalculator;
@@ -59,6 +61,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private BaseStatsDb baseStatsDb;
     private Map<String, OptimizationDb> optimizationDbs;
     private HeroDb heroDb;
+    private ItemDb itemDb;
     public static boolean inProgress = false;
 
     private static final Gson gson = new Gson();
@@ -70,13 +73,17 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private int[] setSolutionBitMasks;
 
+    private boolean canUseGpu = true;
+
     public OptimizationRequestHandler(final BaseStatsDb baseStatsDb,
-                                      final HeroDb heroDb) {
+                                      final HeroDb heroDb,
+                                      final ItemDb itemDb) {
         this.baseStatsDb = baseStatsDb;
         this.heroDb = heroDb;
+        this.itemDb = itemDb;
         optimizationDbs = new HashMap<>();
 
-        ExecutorService t = Executors.newFixedThreadPool(1);
+        ExecutorService t = Executors.newFixedThreadPool(2);
         t.execute(() -> {
             setSolutionBitMasks = new int[16777216];
             int count = 0;
@@ -150,6 +157,38 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                         }
                     }
                 }
+            }
+        });
+
+        t.execute(() -> {
+            try {
+                final boolean isIntel = KernelManager
+                        .instance()
+                        .bestDevice()
+                        .toString()
+                        .toLowerCase()
+                        .contains("intel");
+                if (isIntel) {
+                    System.out.println("Disabling GPU acceleration: Intel card detected");
+                    canUseGpu = false;
+                    return;
+                }
+
+                final Kernel testKernel = new Kernel() {
+                    @Override
+                    public void run() {
+
+                    }
+                };
+                if (!testKernel.isRunningCL()) {
+                    System.out.println("Disabling GPU acceleration: Non CL device detected");
+                    canUseGpu = false;
+                    return;
+                }
+
+            } catch (final Exception e) {
+                canUseGpu = false;
+                System.out.println("Error detecting GPU");
             }
         });
     }
@@ -490,6 +529,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         addCalculatedFields(request);
         final boolean useReforgeStats = request.getInputPredictReforges();
         final List<Item> rawItems = request.getItems();
+        rawItems.forEach(x -> itemDb.calculateWss(x));
 
         final List<Set> firstSets = request.getInputSetsOne();
         rawItems.sort(Comparator.comparing(Item::getSet));
@@ -589,7 +629,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
 
-        if (SETTING_GPU) {
+        if (SETTING_GPU && canUseGpu && maxPerms >= 20_000_000) {
             // GPU Optimize
 
             final int max = 2097152;
@@ -713,7 +753,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
             for (int w = 0; w < wSize; w++) {
                 final Item weapon = itemsByGear.get(Gear.WEAPON).get(w);
-                final long finalW = w;
+//                final long finalW = w;
 
                 executorService.submit(() -> {
                     boolean exit = false;
@@ -781,7 +821,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                                 if (resultsIndex < MAXIMUM_RESULTS) {
                                                     result.setId("" + resultsIndex);
 
-                                                    final long index1D = finalW * hSize * aSize * nSize * rSize * bSize + h * aSize * nSize * rSize * bSize + a * nSize * rSize * bSize + n * rSize * bSize + r * bSize + b;
+//                                                    final long index1D = finalW * hSize * aSize * nSize * rSize * bSize + h * aSize * nSize * rSize * bSize + a * nSize * rSize * bSize + n * rSize * bSize + r * bSize + b;
 
                                                     result.setItems(ImmutableList.of(
                                                             weapon.getId(),

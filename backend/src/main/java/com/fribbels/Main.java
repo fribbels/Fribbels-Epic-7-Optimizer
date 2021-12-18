@@ -40,6 +40,8 @@ public class Main {
     public static int THREADS = 10;
 
     public static void main(String[] args) throws Exception {
+        System.out.println(KernelManager.instance().bestDevice().getType());
+
         try {
             final int threadsToUse = Runtime.getRuntime().availableProcessors() * 2;
             if (threadsToUse > THREADS) {
@@ -69,7 +71,7 @@ public class Main {
 
         server.createContext("/system", new SystemRequestHandler());
         server.createContext("/items", new ItemsRequestHandler(itemDb, heroDb, baseStatsDb, heroesRequestHandler));
-        server.createContext("/optimization", new OptimizationRequestHandler(baseStatsDb, heroDb));
+        server.createContext("/optimization", new OptimizationRequestHandler(baseStatsDb, heroDb, itemDb));
         server.createContext("/heroes", heroesRequestHandler);
         server.createContext("/ocr", new OcrRequestHandler());
 
@@ -77,5 +79,26 @@ public class Main {
 
         server.setExecutor(executorService);
         server.start();
+    }
+
+    public static void mainGpuDebugger(String[] args) throws Exception {
+        System.out.println("** GPU DEBUGGER **");
+
+        System.out.println("** Best device: **\n" + KernelManager.instance().bestDevice());
+
+        try {
+            Kernel kernel = new Kernel() {
+                @Override
+                public void run() {
+
+                }
+            };
+
+            System.out.println("** Target device: **\n" + kernel.getTargetDevice());
+            System.out.println("** OpenCl enabled: **" + kernel.isRunningCL());
+        } catch (final Exception e) {
+            System.out.println("** Error running OpenCl: **\n" + e);
+        }
+
     }
 }
