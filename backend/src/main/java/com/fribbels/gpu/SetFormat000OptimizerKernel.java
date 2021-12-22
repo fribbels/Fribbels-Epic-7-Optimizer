@@ -137,7 +137,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int resSet = min(1, setSolutionBitMasks[setIndex] & (1 << 17)) + min(1, setSolutionBitMasks[setIndex] & (1 << 18)) + min(1, setSolutionBitMasks[setIndex] & (1 << 19));
             final int rageSet = min(1, setSolutionBitMasks[setIndex] & (1 << 21));
             final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
-            final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
+            final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 24));
 
             final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
             final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus)) * bonusMaxHp);

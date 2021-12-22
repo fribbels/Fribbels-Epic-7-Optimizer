@@ -507,7 +507,7 @@ public class GpuOptimizerKernel extends Kernel {
             final int resSet = min(1, setSolutionBitMasks[setIndex] & (1 << 17)) + min(1, setSolutionBitMasks[setIndex] & (1 << 18)) + min(1, setSolutionBitMasks[setIndex] & (1 << 19));
             final int rageSet = min(1, setSolutionBitMasks[setIndex] & (1 << 21));
             final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
-            final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
+            final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 24));
 
 // Set calculations using localbuffer instead off mask
 //            localSetsBuffer[setJump] = 0;

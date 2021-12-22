@@ -17,6 +17,7 @@ import com.fribbels.enums.Set;
 import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
+import com.fribbels.model.PassesContainer;
 import com.fribbels.request.EditResultRowsRequest;
 import com.fribbels.request.GetResultRowsRequest;
 import com.fribbels.request.IdRequest;
@@ -42,6 +43,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -632,7 +634,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         if (SETTING_GPU && canUseGpu && maxPerms >= 20_000_000) {
             // GPU Optimize
 
-            final int max = 2097152;
+//            final int max = 2097152;
+            final int max = 1048576;
             final int argSize = 16;
 
             final GpuOptimizerKernel kernel = selectKernel(
@@ -669,30 +672,59 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     max, setSolutionBitMasks
             );
 
-            final int maxWorkGroupSize = findPreviousPowerOf2(
-                    kernel.getKernelMaxWorkGroupSize(KernelManager.instance().bestDevice()));
+            int maxWorkGroupSize = 64;
+
+            try {
+                final Device bestDevice = KernelManager.instance().bestDevice();
+                System.out.println(bestDevice);
+
+                final int kernelMaxWorkGroupSize = kernel.getKernelMaxWorkGroupSize(bestDevice);
+                System.out.println("Kernel max work group size: " + kernelMaxWorkGroupSize);
+
+                maxWorkGroupSize = kernelMaxWorkGroupSize;
+                System.out.println("Kernel max work group size power of 2: " + maxWorkGroupSize);
+            } catch (final Exception e) {
+                System.out.println("Could not find max work group size. Defaulting. " + e);
+            }
 
             kernel.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.GPU);
 
             final AtomicBoolean exit = new AtomicBoolean(false);
 
+            final Map<String, PassesContainer> passesPool = new HashMap<>();
+
             for (int i = 0; i < maxPerms / max + 1; i++) {
                 if (exit.get() || Main.interrupt) break;
 
                 final int finalI = i;
-                final boolean[] passes = new boolean[max];
+
+                final boolean[] passes;
+                final String passesId;
+                final Optional<PassesContainer> containerOptional = passesPool.values().stream().filter(x -> !x.isLocked()).findFirst();
+                if (containerOptional.isPresent()) {
+                    final PassesContainer container = containerOptional.get();
+                    passes = container.getPasses();
+                    passesId = container.getId();
+                    container.setLocked(true);
+                } else {
+                    passes = new boolean[max];
+                    passesId = "" + i;
+                    passesPool.put(passesId, PassesContainer
+                            .builder()
+                            .id(passesId)
+                            .passes(passes)
+                            .locked(true)
+                            .build());
+                }
 
                 final Range range = kernel.getTargetDevice().createRange(max, maxWorkGroupSize);
-
-                //            float[] debug = new float[max];
-                //            kernel.setDebug(debug);
 
                 kernel.setIteration(finalI);
                 kernel.setPasses(passes);
                 kernel.execute(range);
 
                 executorService.submit(() -> {
-                    searchedCounter.addAndGet(Math.min(max,maxPerms));
+                    searchedCounter.addAndGet(Math.min(max, maxPerms));
 
                     for (int j = 0; j < max; j++) {
                         final long iteration = ((long) finalI) * max + j;
@@ -701,6 +733,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                         //                    System.out.println(debug[j]);
 
                         if (passes[j]) {
+                            if (iteration >= maxPerms) {
+                                return;
+                            }
+
                             final int b = (int)(iteration % bSize);
                             final int r = (int)((( iteration - b ) / bSize ) %  rSize);
                             final int n = (int)((( iteration - r * bSize - b ) / (bSize * rSize) ) % nSize);
@@ -746,6 +782,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                             }
                         }
                     }
+
+                    passesPool.get(passesId).setLocked(false);
                 });
             }
         } else {

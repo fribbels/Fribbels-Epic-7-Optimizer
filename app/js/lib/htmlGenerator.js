@@ -4,7 +4,7 @@ function isItemModded(item) {
     return item.substats.filter(x => x.modified).length > 0;
 }
 
-function statToText(stat, baseStats, item, showMaxSpeed) {
+function statToText(stat, baseStats, item, checkboxPrefix) {
     if (!stat) {
         return {
             type: '',
@@ -15,9 +15,9 @@ function statToText(stat, baseStats, item, showMaxSpeed) {
     var unpercentedStat = shortenStats(stat.type);
     var value;
 
-    if (Reforge.isReforgeable(item) && stat.modified) {
+    if (Reforge.isReforgeable(item) && stat.modified && (stat.originalType)) {
         value = stat.type.includes('Percent') ? stat.value + "%" : getPercentageEquivalent(stat, baseStats, false);
-    } else if (item.alreadyPredictedReforge || !Reforge.isReforgeable(item) || isItemModded(item)) {
+    } else if (item.alreadyPredictedReforge || !Reforge.isReforgeable(item)) {
         value = stat.type.includes('Percent') ? stat.reforgedValue + "%" : getPercentageEquivalent(stat, baseStats, false);
     } else {
         const unreforgedValue = stat.type.includes('Percent') ? stat.value + "%" : stat.value;
@@ -121,7 +121,7 @@ function wssToText(item) {
         const reforgedScore = Math.round(rateBaseScore(item.reforgedStats, baseStats))
 
         if (Reforge.isReforgeable(item)) {
-            if (isItemModded(item)) {
+            if (isItemModded(item) && item.substats.filter(x => x.originalType).length > 0) {
                 return `${item.reforgedWss} (${reforgedScore})`;
             } else {
                 return `${item.wss} (${score}) ➤ ${item.reforgedWss} (${reforgedScore})`;
@@ -131,7 +131,7 @@ function wssToText(item) {
         }
     } else {
         if (Reforge.isReforgeable(item)) {
-            if (isItemModded(item)) {
+            if (isItemModded(item) && item.substats.filter(x => x.originalType).length > 0) {
                 return item.reforgedWss;
             } else {
                 return item.wss + " ➤ " + item.reforgedWss;   
@@ -347,11 +347,11 @@ module.exports = {
 
         ItemAugmenter.augment([item])
 
-        const main = statToText(item.main, baseStats, item);
-        const substat0 = statToText(item.substats[0], baseStats, item);
-        const substat1 = statToText(item.substats[1], baseStats, item);
-        const substat2 = statToText(item.substats[2], baseStats, item);
-        const substat3 = statToText(item.substats[3], baseStats, item);
+        const main = statToText(item.main, baseStats, item, checkboxPrefix);
+        const substat0 = statToText(item.substats[0], baseStats, item, checkboxPrefix);
+        const substat1 = statToText(item.substats[1], baseStats, item, checkboxPrefix);
+        const substat2 = statToText(item.substats[2], baseStats, item, checkboxPrefix);
+        const substat3 = statToText(item.substats[3], baseStats, item, checkboxPrefix);
 
         const score = wssToText(item);
 
