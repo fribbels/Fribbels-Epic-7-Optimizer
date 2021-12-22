@@ -17070,6 +17070,98 @@
       }
     }
   },
+  "Laika": {
+    "_id": "laika",
+    "name": "Laika",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "ranger",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.048,
+        "A": 0.072,
+        "S": 0.096,
+        "SS": 0.12,
+        "SSS": 0.144
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/laikaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/laikaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11517,
+        "atk": 720,
+        "hp": 3881,
+        "spd": 114,
+        "def": 460,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13288,
+        "atk": 904,
+        "hp": 4221,
+        "spd": 114,
+        "def": 460,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14378,
+        "atk": 898,
+        "hp": 4879,
+        "spd": 114,
+        "def": 571,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16848,
+        "atk": 1182,
+        "hp": 5299,
+        "spd": 114,
+        "def": 571,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Landy": {
     "_id": "landy",
     "name": "Landy",

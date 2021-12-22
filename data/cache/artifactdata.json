@@ -1021,6 +1021,20 @@
       "health": 65
     }
   },
+  "Glo-Wings 21": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0036.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0036_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0036_l.jpg"
+    },
+    "name": "Glo-Wings 21",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Goblin's Lamp": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art3_13.png",
