@@ -321,15 +321,28 @@ function post(api, request) {
             console.log("Api call", api, request, response);
 
             if (response.data == "ERROR") {
-                console.error("Subprocess error: " + api);
+
+                if (api.includes("/optimization")) {
+                    console.error("Subprocess error. If you are using GPU acceleration, try disabling it on the settings tab.\n" + api);
+                    Notifier.error("Subprocess error. If you are using GPU acceleration, try disabling it on the settings tab.\n" + api);
+                } else {
+                    console.error("Subprocess error: " + api);
+                    Notifier.error("Subprocess error - " + api);
+                }
             }
 
             resolve(response.data);
         })
         .catch(error => {
-            console.error("Java process failed. Please try restarting your app and check that you've installed the correct version of Java.", api, request, error);
-            Notifier.error("Java process failed. Please try restarting your app and check that you've installed the correct version of Java");
-            reject(error);
+            if (error.includes("aparapi")) {
+                console.error("Java process failed. If you are using GPU acceleration, try disabling it on the settings tab. Please try restarting your app and check that you've installed the correct version of Java.", api, request, error);
+                Notifier.error("Java process failed. If you are using GPU acceleration, try disabling it on the settings tab. Please try restarting your app and check that you've installed the correct version of Java");
+                reject(error);
+            } else {
+                console.error("Java process failed. Please try restarting your app and check that you've installed the correct version of Java.", api, request, error);
+                Notifier.error("Java process failed. Please try restarting your app and check that you've installed the correct version of Java");
+                reject(error);
+            }
         })
     })
 }

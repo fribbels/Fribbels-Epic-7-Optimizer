@@ -2,7 +2,7 @@ const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
 const currentVersion = "1.8.0-beta.4";
 
-global.TEST = true;
+global.TEST = false;
 /********************************************************************************************
     Release checklist:
     - update changelog
@@ -30,29 +30,25 @@ module.exports = {
 */
     showNewFeatures: (text) => {
         Dialog.showNewFeatures(
+            
+    // MultiOptimizer
+    // Enhancing
+    // Enhance limit filters
+    // Item storage import
+    // Erase all data 
+    // JA translation
+    // Custom colors
+    // Disable mods on item
+    // Double click to go to hero 
+    // 5 star hero name display
+    // Pen set  
+    // Ehp/Mcd preview
+    // GPU
 `
 <h2>
     New in v1.8
 </h2>
 <ul class="newFeatures">
-    MultiOptimizer
-    Enhancing
-    Enhance limit filters
-    Item storage import
-    Erase all data 
-    JA translation
-    Custom colors
-    Disable mods on item
-    Double click to go to hero 
-    5 star hero name display
-    Pen set  
-    Ehp/Mcd preview
-    GPU
-    
-
-
-
-
     <li>Enhancing tab with item analyzer</li>
     <li>Click on the magnifying glass to load item details</li>
     <li>Can now double click a hero on the Heroes tab to load them on Optimizer tab</li>

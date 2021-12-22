@@ -89,7 +89,13 @@ module.exports = {
 
         child.stderr.on('data', (data) => {
             const str = data.toString()
-            Notifier.error("Subprocess error - " + str);
+
+            if (str.includes("aparapi")) {
+                Notifier.error("Subprocess error. If you are using GPU acceleration, try disabling it on the settings tab.\n" + str);
+            } else {
+                Notifier.error("Subprocess error - " + str);
+            }
+
             errors += data.toString();
         })
 
