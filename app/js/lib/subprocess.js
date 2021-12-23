@@ -90,7 +90,9 @@ module.exports = {
         child.stderr.on('data', (data) => {
             const str = data.toString()
 
-            if (str.includes("aparapi")) {
+            if (str.includes("aparapi") && str.includes("Ensure that OpenCL is in your PATH (windows) or in LD_LIBRARY_PATH (linux).")) {
+                
+            } else if (str.includes("aparapi")) {
                 Notifier.error("Subprocess error. If you are using GPU acceleration, try disabling it on the settings tab.\n" + str);
             } else {
                 Notifier.error("Subprocess error - " + str);
