@@ -4,7 +4,7 @@ function isItemModded(item) {
     return item.substats.filter(x => x.modified).length > 0;
 }
 
-function statToText(stat, baseStats, item, checkboxPrefix) {
+function statToText(stat, baseStats, item, checkboxPrefix, showMaxSpeed) {
     if (!stat) {
         return {
             type: '',
