@@ -30,38 +30,28 @@ module.exports = {
 */
     showNewFeatures: (text) => {
         Dialog.showNewFeatures(
-            
-    // MultiOptimizer
-    // Enhancing
-    // Enhance limit filters
-    // Item storage import
-    // Erase all data 
-    // JA translation
-    // Custom colors
-    // Disable mods on item
-    // Double click to go to hero 
-    // 5 star hero name display
-    // Pen set  
-    // Ehp/Mcd preview
-    // GPU
+
 `
 <h2>
     New in v1.8
 </h2>
 <ul class="newFeatures">
-    <li>Enhancing tab with item analyzer</li>
-    <li>Click on the magnifying glass to load item details</li>
-    <li>Can now double click a hero on the Heroes tab to load them on Optimizer tab</li>
-    <li>Added item attribute to disable modifications on the item</li>
-    <li>Added custom dark theme colors</li>
-    <li>Customizeable gear archetypes in settings file</li>
-    <li>Ehp and Mcd preview in filters</li>
-    <li>5 star hero indicator</li>
-    <li>Penetration set used in dmg calculation & target defense setting</li>
-    <li>Enhance limit optimizer setting</li>
-    <li>Scores now use reforged values</li>
-    <li>Added per-unit score evaluation</li>
-    <li>Increasing optimization threads based on CPU core count</li>
+    <li>GPU acceleration for optimizer. (Disable in settings if issues arise)</li>
+    <li>Multi-Optimizer tab for optimizing multiple units simultaneously</li>
+    <li>Enhancing tab with item & substat rolls analyzer</li>
+    <li>Click on the magnifying glass on an item to load analysis</li>
+    <li>Customizable dark mode colors for the UI</li>
+    <li>Penetration set damage bonus will be added to Dmg/Mcd calculations</li>
+    <li>Double click a hero on the Heroes tab to load them in Optimizer tab</li>
+    <li>Added an item attribute to disable modifications on the item</li>
+    <li>Ehp and Mcd values can be previewed in filters</li>
+    <li>Heroes tab now shows 5* hero indicators</li>
+    <li>All scores now use reforged values</li>
+    <li>Storage items can now be imported - Open storage menu during scan</li>
+    <li>Added "Erase all data" button on Importer tab</li>
+    <li>Added Japanese translation</li>
+    <li>Added +0/3/6/9/12/15 gear and above optimizer setting</li>
+    <li>Added score evaluation based on each unit's base stats</li>
 </ul>
 `
         );
