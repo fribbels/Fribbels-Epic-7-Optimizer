@@ -12203,6 +12203,487 @@
       }
     }
   },
+  "Euglmomorain": {
+    "_id": "euglmomorain",
+    "name": "Euglmomorain",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "light",
+    "role": "manauser",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "def",
+      "grades": {
+        "D": 12,
+        "C": 18,
+        "B": 24,
+        "A": 30,
+        "S": 36,
+        "SS": 42,
+        "SSS": 48
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {
+      "tree": [
+        [
+          {
+            "id": 1,
+            "position": 1,
+            "require_id": null,
+            "enhancements": [
+              {
+                "type": "stat",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Effect Resistance.",
+                "upgrade": null
+              },
+              {
+                "type": "stat",
+                "stat": "res",
+                "value": 0.03,
+                "description": "Increases Effect Resistance by 3%.",
+                "upgrade": "+3% Effect Resistance"
+              },
+              {
+                "type": "stat",
+                "stat": "res",
+                "value": 0.05,
+                "description": "Increases Effect Resistance by 8%.",
+                "upgrade": "+5% Effect Resistance"
+              },
+              {
+                "type": "stat",
+                "stat": "res",
+                "value": 0.07,
+                "description": "Increases Effect Resistance by 15%.",
+                "upgrade": "+7% Effect Resistance"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "position": 2,
+            "require_id": null,
+            "enhancements": [
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a chance to grant continuous healing to all allies for 1 turn.",
+                "upgrade": null
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 2% chance to grant continuous healing to all allies for 1 turn.",
+                "upgrade": "+2% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 5% chance to grant continuous healing to all allies for 1 turn.",
+                "upgrade": "+3% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 10% chance to grant continuous healing to all allies for 1 turn.",
+                "upgrade": "+5% effect chance"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "position": 3,
+            "require_id": null,
+            "enhancements": [
+              {
+                "type": "stat",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Health.",
+                "upgrade": null
+              },
+              {
+                "type": "stat",
+                "stat": "max_hp_rate",
+                "value": 0.02,
+                "description": "Increases Health by 2%.",
+                "upgrade": "+2% Health"
+              },
+              {
+                "type": "stat",
+                "stat": "max_hp_rate",
+                "value": 0.03,
+                "description": "Increases Health by 5%.",
+                "upgrade": "+3% Health"
+              },
+              {
+                "type": "stat",
+                "stat": "max_hp_rate",
+                "value": 0.05,
+                "description": "Increases Health by 10%.",
+                "upgrade": "+5% Health"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "id": 4,
+            "position": 3,
+            "require_id": null,
+            "enhancements": [
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Sleep Sorcery's sleep effect chance.",
+                "upgrade": null
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Sleep Sorcery's sleep effect chance by 3%.",
+                "upgrade": "+3% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Sleep Sorcery's sleep effect chance by 8%.",
+                "upgrade": "+5% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Sleep Sorcery's sleep effect chance by 15%.",
+                "upgrade": "+7% effect chance"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "id": 5,
+            "position": 1,
+            "require_id": 1,
+            "enhancements": [
+              {
+                "type": "stat",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Effect Resistance.",
+                "upgrade": null
+              },
+              {
+                "type": "stat",
+                "stat": "res",
+                "value": 0.07,
+                "description": "Increases Effect Resistance by 7%.",
+                "upgrade": "+7% Effect Resistance"
+              },
+              {
+                "type": "stat",
+                "stat": "res",
+                "value": 0.08,
+                "description": "Increases Effect Resistance by 15%.",
+                "upgrade": "+8% Effect Resistance"
+              },
+              {
+                "type": "stat",
+                "stat": "res",
+                "value": 0.1,
+                "description": "Increases Effect Resistance by 25%.",
+                "upgrade": "+10% Effect Resistance"
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "position": 2,
+            "require_id": 2,
+            "enhancements": [
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a chance to dispel one additional debuff.",
+                "upgrade": null
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 5% chance to dispel one additional debuff.",
+                "upgrade": "+5% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 13% chance to dispel one additional debuff.",
+                "upgrade": "+8% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 25% chance to dispel one additional debuff.",
+                "upgrade": "+12% effect chance"
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "position": 3,
+            "require_id": null,
+            "enhancements": [
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Effect Resistance of all allies.",
+                "upgrade": null
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Effect Resistance of all allies by 1%.",
+                "upgrade": "+1% Effect Resistance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Effect Resistance of all allies by 2.5%.",
+                "upgrade": "+1.5% Effect Resistance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases Effect Resistance of all allies by 5%.",
+                "upgrade": "+2.5% Effect Resistance"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "id": 8,
+            "position": 1,
+            "require_id": 5,
+            "enhancements": [
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases the caster's Combat Readiness after using Purification when the caster's Effect Resistance is 100% or more.",
+                "upgrade": null
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases the caster's Combat Readiness by 2% after using Purification when the caster's Effect Resistance is 100% or more.",
+                "upgrade": "+2% Combat Readiness"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases the caster's Combat Readiness by 5% after using Purification when the caster's Effect Resistance is 100% or more.",
+                "upgrade": "+3% Combat Readiness"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Increases the caster's Combat Readiness by 10% after using Purification when the caster's Effect Resistance is 100% or more.",
+                "upgrade": "+5% Combat Readiness"
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "position": 2,
+            "require_id": 6,
+            "enhancements": [
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Has a chance to reset cooldown of Purification if the caster is not debuffed at the beginning of the turn.",
+                "upgrade": null
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Has a 10% chance to reset cooldown of Purification if the caster is not debuffed at the beginning of the turn.",
+                "upgrade": "+10% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Has a 25% chance to reset cooldown of Purification if the caster is not debuffed at the beginning of the turn.",
+                "upgrade": "+15% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "Has a 50% chance to reset cooldown of Purification if the caster is not debuffed at the beginning of the turn.",
+                "upgrade": "+25% effect chance"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "id": 10,
+            "position": 2,
+            "require_id": 9,
+            "enhancements": [
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a chance to heal all allies additionally, regardless of debuffs.",
+                "upgrade": null
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 20% chance to heal all allies additionally, regardless of debuffs.",
+                "upgrade": "+20% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 50% chance to heal all allies additionally, regardless of debuffs.",
+                "upgrade": "+30% effect chance"
+              },
+              {
+                "type": "skill",
+                "stat": null,
+                "value": 0,
+                "description": "When using Purification, has a 100% chance to heal all allies additionally, regardless of debuffs.",
+                "upgrade": "+50% effect chance"
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/euglmomorainPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/euglmomorainPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 9236,
+        "atk": 313,
+        "hp": 3270,
+        "spd": 94,
+        "def": 511,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 10755,
+        "atk": 433,
+        "hp": 3904,
+        "spd": 94,
+        "def": 556,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4231,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.4
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 11520,
+        "atk": 390,
+        "hp": 4111,
+        "spd": 94,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 13775,
+        "atk": 540,
+        "hp": 4900,
+        "spd": 94,
+        "def": 729,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5312,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": -3
+      }
+    }
+  },
   "Fairytale Tenebria": {
     "_id": "fairytale-tenebria",
     "name": "Fairytale Tenebria",

@@ -134,7 +134,7 @@ var archetypes = [
         Necklace: ["CriticalHitChancePercent", "CriticalHitDamagePercent", "Health", "Defense", "Attack"],
         Ring: ["Health", "Defense", "Attack"],
         Boots: ["Speed", "Health", "Defense", "Attack"],
-        scale: 13,
+        scale: 12,
         Attack: 2,
         Defense: 2,
         Health: 3,
