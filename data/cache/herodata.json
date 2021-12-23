@@ -17551,9 +17551,9 @@
       }
     }
   },
-  "Laika": {
-    "_id": "laika",
-    "name": "Laika",
+  "Command Model Laika": {
+    "_id": "command-model-laika",
+    "name": "Command Model Laika",
     "moonlight": false,
     "rarity": 5,
     "attribute": "wind",
