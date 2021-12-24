@@ -475,6 +475,7 @@ input {
   border-left: 1px solid #e8e8e8;
   height: 90%;
   margin-top: 15px;
+  border-color: #2d313600 !important;
 }
 
 .shortVertical {

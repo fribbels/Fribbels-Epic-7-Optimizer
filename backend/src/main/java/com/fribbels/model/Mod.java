@@ -95,6 +95,6 @@ public class Mod {
             stats.setSpeed(value);
         }
 
-        System.out.println("Finished modding, " + stats);
+//        System.out.println("Finished modding, " + stats);
     }
 }

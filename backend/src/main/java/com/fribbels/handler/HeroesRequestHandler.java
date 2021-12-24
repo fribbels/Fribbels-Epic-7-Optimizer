@@ -290,9 +290,9 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     private void addStatsToHero(final Hero hero, final boolean useReforgeStats) {
-        if ("Angelic Montmorancy".equals(hero.getName())) {
-            System.out.println("p");
-        }
+//        if ("Angelic Montmorancy".equals(hero.getName())) {
+//            System.out.println("p");
+//        }
 
         final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
 

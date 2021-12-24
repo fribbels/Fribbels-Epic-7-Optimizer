@@ -13,24 +13,24 @@ green  00be9b
 
 
 */
-function redraw() {
-    userGradient.gradient = tinygradient([
-        {color: myColors.bad, pos: 0}, // red
-        {color: myColors.neutral, pos: 0.5},
-        {color: myColors.good, pos: 1} // green
-    ]);
-
-
-    try {
-        global.itemsGrid.gridOptions.api.redrawRows();
-        global.buildsGrid.gridOptions.api.redrawRows();
-        global.optimizerGrid.gridOptions.api.redrawRows();
-    } catch (e) {
-
-    }
-}
 
 module.exports = {
+
+    redraw: () => {
+        userGradient.gradient = tinygradient([
+            {color: myColors.bad, pos: 0}, // red
+            {color: myColors.neutral, pos: 0.5},
+            {color: myColors.good, pos: 1} // green
+        ]);
+
+        try {
+            global.itemsGrid.gridOptions.api.redrawRows();
+            global.buildsGrid.gridOptions.api.redrawRows();
+            global.optimizerGrid.gridOptions.api.redrawRows();
+        } catch (e) {
+
+        }
+    },
     loadColorSettings: (settings) => {
         if (settings.settingBackgroundColor) {
             document.documentElement.style.setProperty('--bg-color', settings.settingBackgroundColor);
@@ -59,13 +59,13 @@ module.exports = {
             document.getElementById('redColorPicker').value = settings.settingRedColorPicker;
             myColors.bad = settings.settingRedColorPicker;
 
-            redraw();
+            module.exports.redraw();
         }
         if (settings.settingNeutralColorPicker) {
             myColors.neutral = settings.settingNeutralColorPicker;
             document.getElementById('neutralColorPicker').value = settings.settingNeutralColorPicker;
 
-            redraw();
+            module.exports.redraw();
         }
         if (settings.settingGreenColorPicker) {
             document.documentElement.style.setProperty('--accent-green', settings.settingGreenColorPicker);
@@ -75,7 +75,7 @@ module.exports = {
 
             darkUserGradient.gradient = tinygradient(myColors.neutral, myColors.good);
 
-            redraw();
+            module.exports.redraw();
         }
     },
 
@@ -165,7 +165,7 @@ module.exports = {
             document.getElementById('redColorPicker').value = "#5A1A06";
             myColors.bad = '#5A1A06';
 
-            redraw();
+            module.exports.redraw();
             Settings.saveSettings();
         }, false)
 
@@ -173,7 +173,7 @@ module.exports = {
             myColors.neutral = '#343127';
             document.getElementById('neutralColorPicker').value = "#343127";
 
-            redraw();
+            module.exports.redraw();
             Settings.saveSettings();
         }, false);
 
@@ -185,7 +185,7 @@ module.exports = {
 
             darkUserGradient.gradient = tinygradient(myColors.neutral, myColors.good);
 
-            redraw();
+            module.exports.redraw();
             Settings.saveSettings();
         }, false);
 
@@ -322,7 +322,7 @@ function LightenDarkenColor(col, amt) {
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
 }
 
-var myColors = {
+global.myColors = {
     bad:'#5A1A06', neutral:'#343127', good:'#38821F'
 }
 
@@ -334,4 +334,4 @@ var userGradient = {gradient:tinygradient([
     {color: myColors.good, pos: 1} // green
 ])};
 
-var darkUserGradient = {gradient:tinygradient(myColors.good, myColors.neutral)};
+global.darkUserGradient = {gradient:tinygradient(myColors.good, myColors.neutral)};
