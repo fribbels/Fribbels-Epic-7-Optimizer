@@ -318,7 +318,7 @@ Please read these instructions carefully! Here is a step by step video guide to 
 2. Install **Java 8 - 64 bit**
     * Mac needs both JRE and JDK:
     * JRE: https://java.com/en/download/manual.jsp - Get the 64-bit offline installer
-    * JDK: https://www.oracle.com/java/technologies/javase-downloads.html
+    * JDK: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html
     * After installing, restart your computer (required!)
   3. Follow the steps to use either the auto importer or screenshot importer
 
