@@ -167,6 +167,7 @@ module.exports = {
         }
 
         console.warn(JSON.stringify(gear.substats, null, 2));
+
         console.warn("range: " + minPossibleUnreforgedScore + " - " + maxPossibleUnreforgedScore);
         console.warn("actual", actualUnreforgedScore);
         console.warn("percent", (actualUnreforgedScore - minPossibleUnreforgedScore) / (maxPossibleUnreforgedScore - minPossibleUnreforgedScore) * 100);
@@ -201,13 +202,48 @@ grade  power
 // DEF 7 - 14
 // ATT 14 - 28
 
+Reforge
+hp + 56
+def + 9
+atk + 11
+
+min atk = 2.37 * 14 * 1 = 33.18
+min hp = 3.5 * 45 * 1 = 157.5
+min def = 4 * 7 * 1 = 28
+
 max atk = 1.67 * 28 * 1 = 46.76
 max hp = 2.25 * 90 * 1 = 202.5
 max def = 2.5 * 14 * 1 = 35
+
 11/9/56
 346.56
 1551
 264
+
+prereforge 85
+atk range: 33 - 46
+def range: 28 - 35
+hp range: 157 - 202
+
+postreforge 90
+atk range: 44 - 57
+def range: 37 - 44
+hp range: 213 - 258
+
+90s
+
+min atk = 2.37 * 16 * 1 = 37.92
+min hp = 3.5 * 51 * 1 = 178.5
+min def = 4 * 8 * 1 = 32
+
+max atk = 1.67 * 32 * 1 = 53.44
+max hp = 2.25 * 102 * 1 = 229.5
+max def = 2.5 * 16 * 1 = 40
+
+90s
+atk range: 37 - 53 (45)
+def range: 32 - 40 (36)
+hp range: 178 - 229 (203.5)
 
 */
 
@@ -556,39 +592,39 @@ function getItemReforgedStats(gear) {
         const substat = gear.substats[i];
         const value = substat.value;
         if (plainStats.includes(substat.type)) {
-            substat.max = Math.floor(value/4)
-            substat.min = Math.ceil(value/8)
-            substat.multi = 6;
+            substat.max = Math.floor(value/(gear.level == 88 ? 5 : 4))
+            substat.min = Math.ceil(value/(gear.level == 88 ? 9 : 8))
+            substat.multi = (gear.level == 88 ? 7 : 6);
         }
         if (substat.type == "CriticalHitChancePercent") {
-            substat.max = Math.floor(value/3)
-            substat.min = Math.ceil(value/5)
-            substat.multi = 4;
+            substat.max = Math.floor(value/(gear.level == 88 ? 3 : 3))
+            substat.min = Math.ceil(value/(gear.level == 88 ? 6 : 5))
+            substat.multi = (gear.level == 88 ? 4.5 : 4);
         }
         if (substat.type == "CriticalHitDamagePercent") {
-            substat.max = Math.floor(value/4)
-            substat.min = Math.ceil(value/7)
-            substat.multi = 5.5;
+            substat.max = Math.floor(value/(gear.level == 88 ? 4 : 4))
+            substat.min = Math.ceil(value/(gear.level == 88 ? 8 : 7))
+            substat.multi = (gear.level == 88 ? 6 : 5.5);
         }
         if (substat.type == "Attack") {
-            substat.max = Math.round(value/39)
+            substat.max = Math.round(value/(gear.level == 88 ? 45 : 39))
             substat.min = substat.max;
-            substat.multi = 39;
+            substat.multi = (gear.level == 88 ? 45 : 39);
         }
         if (substat.type == "Defense") {
-            substat.max = Math.round(value/31)
+            substat.max = Math.round(value/(gear.level == 88 ? 36 : 31))
             substat.min = substat.max;
-            substat.multi = 31;
+            substat.multi = (gear.level == 88 ? 36 : 31);
         }
         if (substat.type == "Health") {
-            substat.max = Math.round(value/174)
+            substat.max = Math.round(value/(gear.level == 88 ? 203 : 174))
             substat.min = substat.max;
-            substat.multi = 174;
+            substat.multi = (gear.level == 88 ? 203 : 174);
         }
         if (substat.type == "Speed") {
-            substat.max = Math.round(value/2);
-            substat.min = Math.ceil(value/4);
-            substat.multi = 3;
+            substat.max = Math.round(value/(gear.level == 88 ? 2 : 2));
+            substat.min = Math.ceil(value/(gear.level == 88 ? 5 : 4));
+            substat.multi = (gear.level == 88 ? 3.5 : 3);
         }
     }
 

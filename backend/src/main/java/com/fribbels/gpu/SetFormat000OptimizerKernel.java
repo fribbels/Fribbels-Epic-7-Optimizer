@@ -164,7 +164,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int dmgps = (int) ((float)dmg*spdDiv1000);
             final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier);
             final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-            final int dmgh = (int) ((cd * hp)/1000);
+            final int dmgh = (int) ((cd * hp * penMultiplier)/1000);
 
             final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);
