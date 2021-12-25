@@ -111,8 +111,6 @@ module.exports = {
                         }
                     });
                     console.log("there has untranslated strings in data-t type", untransTexts);
-                    //recall the update function to correctly translate the current version key
-                    updater.checkForUpdates();
             } else {
                 if (!text_en) {
                     var text_en = text
