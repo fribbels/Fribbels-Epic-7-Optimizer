@@ -64,7 +64,8 @@ module.exports = {
 
         console.log("Spawning backend child")
 
-        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+        child = spawn('java', ['-jar', '-XX:MaxRAMFraction=1', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+        // child = spawn('java', ['-jar', '-Xmx16384m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
             shell: true, stdio: ['pipe', 'pipe', 'pipe'], detached: false
         })
         pid = child.pid;

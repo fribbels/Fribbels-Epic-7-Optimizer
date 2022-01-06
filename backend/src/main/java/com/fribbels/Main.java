@@ -7,6 +7,7 @@ import com.aparapi.Range;
 import com.aparapi.device.Device;
 import com.aparapi.exception.QueryFailedException;
 import com.aparapi.internal.kernel.KernelManager;
+import com.aparapi.internal.opencl.OpenCLPlatform;
 import com.fribbels.core.StatCalculator;
 import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
@@ -38,8 +39,12 @@ public class Main {
 
     public static boolean interrupt = false;
     public static int THREADS = 10;
+    public static long BEST_DEVICE_ID = 0;
 
     public static void main(String[] args) throws Exception {
+        final Device device = KernelManager.instance().bestDevice();
+        BEST_DEVICE_ID = device.getDeviceId();
+
         System.out.println(KernelManager.instance().bestDevice().getType());
 
         try {

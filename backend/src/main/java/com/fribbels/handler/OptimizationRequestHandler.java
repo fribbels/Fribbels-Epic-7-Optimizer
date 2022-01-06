@@ -3,7 +3,9 @@ package com.fribbels.handler;
 import com.aparapi.Kernel;
 import com.aparapi.Range;
 import com.aparapi.device.Device;
+import com.aparapi.device.OpenCLDevice;
 import com.aparapi.internal.kernel.KernelManager;
+import com.aparapi.internal.opencl.OpenCLPlatform;
 import com.fribbels.Main;
 import com.fribbels.db.ItemDb;
 import com.fribbels.gpu.GpuOptimizerKernel;
@@ -187,6 +189,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     canUseGpu = false;
                     return;
                 }
+                testKernel.dispose();
 
             } catch (final Exception e) {
                 canUseGpu = false;
@@ -556,7 +559,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final Map<Gear, List<Item>> itemsByGear = buildItemsByGear(items);
 
         final Map<String, float[]> accumulatorArrsByItemId = new ConcurrentHashMap<>(new HashMap<>());
-        final ExecutorService executorService = Executors.newFixedThreadPool(2);
+        final ExecutorService executorService = Executors.newFixedThreadPool(1);
         searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
         iterationCounter = new AtomicLong(0);
@@ -631,6 +634,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
 
+        GpuOptimizerKernel kernel = null;
+
         if (SETTING_GPU && canUseGpu && maxPerms >= 20_000_000) {
             // GPU Optimize
 
@@ -638,7 +643,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final int max = 1048576;
             final int argSize = 16;
 
-            final GpuOptimizerKernel kernel = selectKernel(
+            kernel = selectKernel(
                     request,
                     flattenedWeaponAccs,
                     flattenedHelmetAccs,
@@ -675,16 +680,25 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             int maxWorkGroupSize = 64;
 
             try {
-                final Device bestDevice = KernelManager.instance().bestDevice();
+//                final Device bestDevice = KernelManager.instance().bestDevice();
+
+                List<OpenCLPlatform> platforms = OpenCLPlatform.getUncachedOpenCLPlatforms();
+                final Optional<OpenCLDevice> bestDevice = platforms.stream()
+                        .flatMap(x -> x.getOpenCLDevices().stream())
+                        .filter(x -> x.getDeviceId() == Main.BEST_DEVICE_ID)
+                        .findFirst();
+
+
                 System.out.println(bestDevice);
 
-                final int kernelMaxWorkGroupSize = kernel.getKernelMaxWorkGroupSize(bestDevice);
+                final int kernelMaxWorkGroupSize = kernel.getKernelMaxWorkGroupSize(bestDevice.get());
                 System.out.println("Kernel max work group size: " + kernelMaxWorkGroupSize);
 
                 maxWorkGroupSize = kernelMaxWorkGroupSize;
                 System.out.println("Kernel max work group size power of 2: " + maxWorkGroupSize);
             } catch (final Exception e) {
-                System.out.println("Could not find max work group size. Defaulting. " + e);
+                e.printStackTrace();
+                System.out.println("Could not find max work group size. Defaulting.");
             }
 
             kernel.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.GPU);
@@ -717,11 +731,24 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                             .build());
                 }
 
-                final Range range = kernel.getTargetDevice().createRange(max, maxWorkGroupSize);
+                List<OpenCLPlatform> platforms = OpenCLPlatform.getUncachedOpenCLPlatforms();
+                final Optional<OpenCLDevice> bestDevice = platforms.stream()
+                        .flatMap(x -> x.getOpenCLDevices().stream())
+                        .filter(x -> x.getDeviceId() == Main.BEST_DEVICE_ID)
+                        .findFirst();
+
+                final Range range = bestDevice.get().createRange(max, maxWorkGroupSize);
 
                 kernel.setIteration(finalI);
                 kernel.setPasses(passes);
-                kernel.execute(range);
+
+                try {
+                    kernel.execute(range);
+                } catch (final Exception e) {
+                    System.err.println("GPU error, please try again. " + e);
+                    inProgress = false;
+                    return "";
+                }
 
                 executorService.submit(() -> {
                     searchedCounter.addAndGet(Math.min(max, maxPerms));
@@ -903,7 +930,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                 }
                             }
                         }
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
                         inProgress = false;
                         e.printStackTrace();
                     }
@@ -933,17 +960,28 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                         .build();
 
                 inProgress = false;
+
+                if (kernel != null) {
+                    System.out.println("DISPOSE");
+                    kernel.dispose();
+                }
+
                 return gson.toJson(response);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 inProgress = false;
                 e.printStackTrace();
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             inProgress = false;
             e.printStackTrace();
         }
 
         inProgress = false;
+
+        if (kernel != null) {
+            System.out.println("DISPOSE");
+            kernel.dispose();
+        }
 
         return "";
     }
