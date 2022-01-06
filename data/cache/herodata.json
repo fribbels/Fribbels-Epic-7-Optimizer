@@ -14129,6 +14129,102 @@
       }
     }
   },
+  "Hasol": {
+    "_id": "hasol",
+    "name": "Hasol",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "dark",
+    "role": "knight",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "max_hp",
+      "grades": {
+        "D": 180,
+        "C": 270,
+        "B": 360,
+        "A": 450,
+        "S": 540,
+        "SS": 630,
+        "SSS": 720
+      }
+    },
+    "devotion": {
+      "type": "def",
+      "grades": {
+        "D": 12,
+        "C": 18,
+        "B": 24,
+        "A": 30,
+        "S": 36,
+        "SS": 42,
+        "SSS": 48
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/hasolPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/hasolPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10317,
+        "atk": 444,
+        "hp": 4009,
+        "spd": 101,
+        "def": 480,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11779,
+        "atk": 564,
+        "hp": 4709,
+        "spd": 105,
+        "def": 480,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.06,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12881,
+        "atk": 553,
+        "hp": 5041,
+        "spd": 101,
+        "def": 596,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15140,
+        "atk": 758,
+        "hp": 6002,
+        "spd": 101,
+        "def": 639,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Haste": {
     "_id": "haste",
     "name": "Haste",
@@ -15223,6 +15319,102 @@
         "hp": 6002,
         "spd": 112,
         "def": 553,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Januta": {
+    "_id": "januta",
+    "name": "Januta",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "fire",
+    "role": "warrior",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "D": 0.028,
+        "C": 0.042,
+        "B": 0.056,
+        "A": 0.07,
+        "S": 0.084,
+        "SS": 0.098,
+        "SSS": 0.112
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/janutaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/janutaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10445,
+        "atk": 677,
+        "hp": 3559,
+        "spd": 101,
+        "def": 438,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11978,
+        "atk": 878,
+        "hp": 3899,
+        "spd": 101,
+        "def": 438,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13027,
+        "atk": 843,
+        "hp": 4475,
+        "spd": 101,
+        "def": 543,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15164,
+        "atk": 1144,
+        "hp": 4895,
+        "spd": 101,
+        "def": 543,
         "chc": 0.22999999999999998,
         "chd": 1.5,
         "dac": 0.05,
@@ -21837,6 +22029,102 @@
       }
     }
   },
+  "Muwi": {
+    "_id": "muwi",
+    "name": "Muwi",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "ice",
+    "role": "assassin",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/muwiPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/muwiPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10006,
+        "atk": 655,
+        "hp": 3720,
+        "spd": 108,
+        "def": 364,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11607,
+        "atk": 833,
+        "hp": 4171,
+        "spd": 108,
+        "def": 364,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12495,
+        "atk": 816,
+        "hp": 4677,
+        "spd": 108,
+        "def": 452,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14773,
+        "atk": 1039,
+        "hp": 5517,
+        "spd": 108,
+        "def": 452,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Nemunas": {
     "_id": "nemunas",
     "name": "Nemunas",
@@ -22019,6 +22307,102 @@
         "def": 564,
         "chc": 0.27,
         "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Orte": {
+    "_id": "orte",
+    "name": "Orte",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "assassin",
+    "zodiac": "waterbearer",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ortePortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ortePanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10006,
+        "atk": 655,
+        "hp": 3720,
+        "spd": 108,
+        "def": 364,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11607,
+        "atk": 833,
+        "hp": 4171,
+        "spd": 108,
+        "def": 364,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12495,
+        "atk": 816,
+        "hp": 4677,
+        "spd": 108,
+        "def": 452,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14773,
+        "atk": 857,
+        "hp": 4531,
+        "spd": 125,
+        "def": 483,
+        "chc": 0.35,
+        "chd": 1.5,
         "dac": 0.05,
         "eff": 0,
         "efr": 0
@@ -30080,6 +30464,102 @@
         "chd": 1.6,
         "dac": 0.05,
         "eff": 0.0,
+        "efr": 0
+      }
+    }
+  },
+  "Yoonryoung": {
+    "_id": "yoonryoung",
+    "name": "Yoonryoung",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "light",
+    "role": "knight",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "max_hp",
+      "grades": {
+        "D": 180,
+        "C": 270,
+        "B": 360,
+        "A": 450,
+        "S": 540,
+        "SS": 630,
+        "SSS": 720
+      }
+    },
+    "devotion": {
+      "type": "def",
+      "grades": {
+        "D": 12,
+        "C": 18,
+        "B": 24,
+        "A": 30,
+        "S": 36,
+        "SS": 42,
+        "SSS": 48
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/yoonryoungPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/yoonryoungPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10317,
+        "atk": 444,
+        "hp": 4009,
+        "spd": 101,
+        "def": 480,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11779,
+        "atk": 564,
+        "hp": 4709,
+        "spd": 105,
+        "def": 480,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.06,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12881,
+        "atk": 553,
+        "hp": 5041,
+        "spd": 101,
+        "def": 596,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15140,
+        "atk": 703,
+        "hp": 5914,
+        "spd": 105,
+        "def": 596,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
         "efr": 0
       }
     }

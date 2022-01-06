@@ -1483,6 +1483,20 @@
       "health": 76
     }
   },
+  "Nostalgic Music Box": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art5_6.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art5_6_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art5_6_l.jpg"
+    },
+    "name": "Nostalgic Music Box",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    }
+  },
   "Oath Key": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art3_22.png",
