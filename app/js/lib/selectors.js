@@ -27,22 +27,23 @@ module.exports = {
             // hideOptgroupCheckboxes: true,
             minimumCountSelected: 99,
             displayTitle: true,
-            displayValues: true,
             selectAll: false,
-            textTemplate: function (el) {
-                const val = el.html();
-                const assetKey = val + "Set";
+            // textTemplate: function (el) {
+            //     const val = el.html();
+            //     const enValue = el.val();
+            //     const fixedHtml = el.html().replace(enValue, i18next.t(enValue))
+            //     const assetKey = enValue + "Set";
 
-                if (Object.keys(assetsBySet).includes(assetKey)) {
-                    const asset = assetsBySet[assetKey];
-                    return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
-                }
+            //     if (Object.keys(assetsBySet).includes(assetKey)) {
+            //         const asset = assetsBySet[assetKey];
+            //         return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${fixedHtml}</div></div>`
+            //     }
 
-                return el.html()
-            },
-            styler: function (row) {
-                return '';
-            }
+            //     return fixedHtml
+            // },
+            // styler: function (row) {
+            //     return '';
+            // }
         };
         const enhanceOptions = {
             maxHeight: 500,

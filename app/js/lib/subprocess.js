@@ -10,7 +10,7 @@ const electron = require('electron');
 const ipc = electron.ipcRenderer;
 
 const { killPortProcess } = require('kill-port-process');
-const { default: i18next } = require('i18next');
+// const { default: i18next } = require('i18next');
 
 var errors = "";
 var killed = false;
@@ -70,7 +70,24 @@ module.exports = {
         })
         pid = child.pid;
 
-        console.log("Child PID: ", pid)
+        console.log("Child PID: ", pid, initialized)
+
+        child.stdout.on('data', (data) => {
+            if (!initialized) {
+                initialized = true;
+                callback()
+                var str = data.toString();
+                console.log(str);
+            } else {
+
+            }
+        });
+
+        setInterval(() => {
+            if (child) {
+                child.stdout.write("");
+            }
+        }, 100)
 
         child.on('close', (code) => {
             console.log(`Java child process exited with code ${code}`);
@@ -101,17 +118,6 @@ module.exports = {
 
             errors += data.toString();
         })
-
-        child.stdout.on('data', (data) => {
-            if (!initialized) {
-                initialized = true;
-                callback()
-                var str = data.toString();
-                console.log(str);
-            } else {
-
-            }
-        });
 
         ipc.on('app-close', _ => {
             killed = true;

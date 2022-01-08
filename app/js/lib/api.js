@@ -334,9 +334,10 @@ function post(api, request) {
             resolve(response.data);
         })
         .catch(error => {
-            if (error && error.includes("aparapi") && error.includes("Ensure that OpenCL is in your PATH (windows) or in LD_LIBRARY_PATH (linux).")) {
+            var errStr = error.toString() + error.stack
+            if (errStr && errStr.includes("aparapi") && errStr.includes("Ensure that OpenCL is in your PATH (windows) or in LD_LIBRARY_PATH (linux).")) {
 
-            } else if (error && error.includes("aparapi")) {
+            } else if (errStr && errStr.includes("aparapi")) {
                 console.error("Java process failed. If you are using GPU acceleration, try disabling it on the settings tab. Please try restarting your app and check that you've installed the correct version of Java.", api, request, error);
                 Notifier.error("Java process failed. If you are using GPU acceleration, try disabling it on the settings tab. Please try restarting your app and check that you've installed the correct version of Java");
                 reject(error);
