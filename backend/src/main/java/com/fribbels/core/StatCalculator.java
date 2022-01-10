@@ -130,7 +130,7 @@ public class StatCalculator {
         final int dmgps = (int) ((float)dmg*spdDiv1000);
         final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-        final int dmgh = (int) ((critDamage * hp)/1000 * rageMultiplier * penMultiplier);
+        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier);
 
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 

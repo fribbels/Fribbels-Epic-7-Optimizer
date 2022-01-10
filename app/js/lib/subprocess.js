@@ -64,8 +64,8 @@ module.exports = {
 
         console.log("Spawning backend child")
 
-        child = spawn('java', ['-jar', '-XX:MaxRAMFraction=1', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
-        // child = spawn('java', ['-jar', '-Xmx16384m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+        // child = spawn('java', ['-jar', '-XX:MaxRAMFraction=1', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
             shell: true, stdio: ['pipe', 'pipe', 'pipe'], detached: false
         })
         pid = child.pid;
@@ -109,6 +109,8 @@ module.exports = {
             const str = data.toString()
 
             if (str.includes("aparapi") && str.includes("Ensure that OpenCL is in your PATH (windows) or in LD_LIBRARY_PATH (linux).")) {
+                
+            } else if (str.includes("untested")) {
                 
             } else if (str.includes("aparapi")) {
                 Notifier.error("Subprocess error. If you are using GPU acceleration, try disabling it on the settings tab.\n" + str);
