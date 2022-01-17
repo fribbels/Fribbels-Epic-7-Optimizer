@@ -50,6 +50,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -559,7 +560,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final Map<Gear, List<Item>> itemsByGear = buildItemsByGear(items);
 
         final Map<String, float[]> accumulatorArrsByItemId = new ConcurrentHashMap<>(new HashMap<>());
-        final ExecutorService executorService = Executors.newFixedThreadPool(1);
+        final ExecutorService executorService = Executors.newFixedThreadPool(2);
         searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
         iterationCounter = new AtomicLong(0);
@@ -634,7 +635,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
 
-        GpuOptimizerKernel kernel = null;
+        final GpuOptimizerKernel kernel;
 
         if (SETTING_GPU && canUseGpu && maxPerms >= 20_000_000) {
             // GPU Optimize
@@ -677,141 +678,166 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     max, setSolutionBitMasks
             );
 
-            int maxWorkGroupSize = 64;
-
             try {
-//                final Device bestDevice = KernelManager.instance().bestDevice();
 
-                List<OpenCLPlatform> platforms = OpenCLPlatform.getUncachedOpenCLPlatforms();
-                final Optional<OpenCLDevice> bestDevice = platforms.stream()
-                        .flatMap(x -> x.getOpenCLDevices().stream())
-                        .filter(x -> x.getDeviceId() == Main.BEST_DEVICE_ID)
-                        .findFirst();
-
-
-                System.out.println(bestDevice);
-
-                final int kernelMaxWorkGroupSize = kernel.getKernelMaxWorkGroupSize(bestDevice.get());
-                System.out.println("Kernel max work group size: " + kernelMaxWorkGroupSize);
-
-                maxWorkGroupSize = kernelMaxWorkGroupSize;
-                System.out.println("Kernel max work group size power of 2: " + maxWorkGroupSize);
-            } catch (final Exception e) {
-                e.printStackTrace();
-                System.out.println("Could not find max work group size. Defaulting.");
-            }
-
-            kernel.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.GPU);
-
-            final AtomicBoolean exit = new AtomicBoolean(false);
-
-            final Map<String, PassesContainer> passesPool = new HashMap<>();
-
-            for (int i = 0; i < maxPerms / max + 1; i++) {
-                if (exit.get() || Main.interrupt) break;
-
-                final int finalI = i;
-
-                final boolean[] passes;
-                final String passesId;
-                final Optional<PassesContainer> containerOptional = passesPool.values().stream().filter(x -> !x.isLocked()).findFirst();
-                if (containerOptional.isPresent()) {
-                    final PassesContainer container = containerOptional.get();
-                    passes = container.getPasses();
-                    passesId = container.getId();
-                    container.setLocked(true);
-                } else {
-                    passes = new boolean[max];
-                    passesId = "" + i;
-                    passesPool.put(passesId, PassesContainer
-                            .builder()
-                            .id(passesId)
-                            .passes(passes)
-                            .locked(true)
-                            .build());
-                }
-
-                List<OpenCLPlatform> platforms = OpenCLPlatform.getUncachedOpenCLPlatforms();
-                final Optional<OpenCLDevice> bestDevice = platforms.stream()
-                        .flatMap(x -> x.getOpenCLDevices().stream())
-                        .filter(x -> x.getDeviceId() == Main.BEST_DEVICE_ID)
-                        .findFirst();
-
-                final Range range = bestDevice.get().createRange(max, maxWorkGroupSize);
-
-                kernel.setIteration(finalI);
-                kernel.setPasses(passes);
+                int maxWorkGroupSize = 64;
 
                 try {
-                    kernel.execute(range);
+                    //                final Device bestDevice = KernelManager.instance().bestDevice();
+
+                    List<OpenCLPlatform> platforms = OpenCLPlatform.getUncachedOpenCLPlatforms();
+                    final Optional<OpenCLDevice> bestDevice = platforms.stream()
+                            .flatMap(x -> x.getOpenCLDevices().stream())
+                            .filter(x -> x.getDeviceId() == Main.BEST_DEVICE_ID)
+                            .findFirst();
+
+                    System.out.println(bestDevice);
+
+                    final int kernelMaxWorkGroupSize = kernel.getKernelMaxWorkGroupSize(bestDevice.get());
+                    System.out.println("Kernel max work group size: " + kernelMaxWorkGroupSize);
+
+                    maxWorkGroupSize = kernelMaxWorkGroupSize;
+                    System.out.println("Kernel max work group size power of 2: " + maxWorkGroupSize);
                 } catch (final Exception e) {
-                    System.err.println("GPU error, please try again. " + e);
-                    inProgress = false;
-                    return "";
+                    e.printStackTrace();
+                    System.out.println("Could not find max work group size. Defaulting.");
                 }
 
-                executorService.submit(() -> {
-                    searchedCounter.addAndGet(Math.min(max, maxPerms));
+                final int finalMaxWorkGroupSize = maxWorkGroupSize;
 
-                    for (int j = 0; j < max; j++) {
-                        final long iteration = ((long) finalI) * max + j;
+                kernel.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.GPU);
 
-                        //                    System.out.println(longSetMasks[0]);
-                        //                    System.out.println(debug[j]);
+                final AtomicBoolean exit = new AtomicBoolean(false);
+                final AtomicInteger executionCounter = new AtomicInteger(0);
 
-                        if (passes[j]) {
-                            if (iteration >= maxPerms) {
-                                return;
-                            }
+                final Map<String, PassesContainer> passesPool = new HashMap<>();
 
-                            final int b = (int)(iteration % bSize);
-                            final int r = (int)((( iteration - b ) / bSize ) %  rSize);
-                            final int n = (int)((( iteration - r * bSize - b ) / (bSize * rSize) ) % nSize);
-                            final int a = (int)((( iteration - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize);
-                            final int h = (int)((( iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize);
-                            final int w = (int)((( iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize);
+                for (int i = 0; i < maxPerms / max + 1; i++) {
+                    if (exit.get() || Main.interrupt)
+                        break;
 
-                            final Item weapon = allweapons[w];
-                            final Item helmet = allhelmets[h];
-                            final Item armor = allarmors[a];
-                            final Item necklace = allnecklaces[n];
-                            final Item ring = allrings[r];
-                            final Item boots = allboots[b];
+                    final int finalI = i;
 
-                            final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
-                            final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
+                    final boolean[] passes;
+                    final String passesId;
+                    final Optional<PassesContainer> containerOptional = passesPool.values()
+                            .stream()
+                            .filter(x -> !x.isLocked())
+                            .findFirst();
+                    if (containerOptional.isPresent()) {
+                        final PassesContainer container = containerOptional.get();
+                        passes = container.getPasses();
+                        passesId = container.getId();
+                        container.setLocked(true);
+                    } else {
+                        try {
+                            passes = new boolean[max];
+                            passesId = "" + finalI;
+                            passesPool.put(passesId, PassesContainer.builder()
+                                    .id(passesId)
+                                    .passes(passes)
+                                    .locked(true)
+                                    .build());
+                        } catch (final OutOfMemoryError e) {
+                            e.printStackTrace();
+                            inProgress = false;
 
-                            final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
-                            final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
-                            final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
-                            final HeroStats result = statCalculator.addAccumulatorArrsToHero(
-                                    base,
-                                    new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr},
-                                    collectedSets,
-                                    request.hero,
-                                    reforges,
-                                    conversions,
-                                    priority);
-
-                            result.setSets(collectedSets);
-                            result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a].getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
-                            result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a].getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
-                            result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a].getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
-
-                            final long resultsIndex = resultsCounter.getAndIncrement();
-                            result.setId("" + resultsIndex);
-                            resultHeroStats[(int) resultsIndex] = result;
-
-                            if (resultsIndex >= MAXIMUM_RESULTS - 1) {
-                                maxReached.set(MAXIMUM_RESULTS - 1);
-                                exit.set(true);
-                                return;
-                            }
+                            break;
                         }
                     }
 
-                    passesPool.get(passesId).setLocked(false);
-                });
+                    List<OpenCLPlatform> platforms = OpenCLPlatform.getUncachedOpenCLPlatforms();
+                    final Optional<OpenCLDevice> bestDevice = platforms.stream()
+                            .flatMap(x -> x.getOpenCLDevices().stream())
+                            .filter(x -> x.getDeviceId() == Main.BEST_DEVICE_ID)
+                            .findFirst();
+
+                    while(executionCounter.get() > 1 && !exit.get() && !Main.interrupt) {
+                        Thread.sleep(10);
+                    }
+
+                    executionCounter.incrementAndGet();
+
+                    final Range range = bestDevice.get().createRange(max, finalMaxWorkGroupSize);
+                    kernel.setIteration(finalI);
+                    kernel.setPasses(passes);
+                    try {
+                        kernel.execute(range);
+                    } catch (final Exception e) {
+                        System.err.println("GPU error, please try again. " + e);
+                        inProgress = false;
+                        break;
+                    }
+
+
+                    executorService.submit(() -> {
+
+                        searchedCounter.addAndGet(Math.min(max, maxPerms));
+
+                        for (int j = 0; j < max; j++) {
+                            final long iteration = ((long) finalI) * max + j;
+
+                            //                    System.out.println(longSetMasks[0]);
+                            //                    System.out.println(debug[j]);
+
+                            if (passes[j]) {
+                                if (iteration >= maxPerms) {
+                                    break;
+                                }
+                                if (Main.interrupt || exit.get()) {
+                                    break;
+                                }
+
+                                final int b = (int) (iteration % bSize);
+                                final int r = (int) (((iteration - b) / bSize) % rSize);
+                                final int n = (int) (((iteration - r * bSize - b) / (bSize * rSize)) % nSize);
+                                final int a = (int) (((iteration - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize)) % aSize);
+                                final int h = (int) (((iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize)) % hSize);
+                                final int w = (int) (((iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize)) % wSize);
+
+                                final Item weapon = allweapons[w];
+                                final Item helmet = allhelmets[h];
+                                final Item armor = allarmors[a];
+                                final Item necklace = allnecklaces[n];
+                                final Item ring = allrings[r];
+                                final Item boots = allboots[b];
+
+                                final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
+                                final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
+
+                                final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
+                                final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
+                                final HeroStats result = statCalculator.addAccumulatorArrsToHero(base, new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr}, collectedSets, request.hero, reforges, conversions, priority);
+
+                                result.setSets(collectedSets);
+                                result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a]
+                                        .getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
+                                result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a]
+                                        .getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
+                                result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a]
+                                        .getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
+
+                                final long resultsIndex = resultsCounter.getAndIncrement();
+                                result.setId("" + resultsIndex);
+                                resultHeroStats[(int) resultsIndex] = result;
+
+                                if (resultsIndex >= MAXIMUM_RESULTS - 1) {
+                                    maxReached.set(MAXIMUM_RESULTS - 1);
+                                    exit.set(true);
+                                    break;
+                                }
+                            }
+                        }
+
+                        passesPool.get(passesId).setLocked(false);
+                        executionCounter.decrementAndGet();
+                    });
+
+                }
+            } finally {
+                System.out.println("DISPOSE");
+                kernel.dispose();
             }
         } else {
             // CPU Optimize
@@ -961,11 +987,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                 inProgress = false;
 
-                if (kernel != null) {
-                    System.out.println("DISPOSE");
-                    kernel.dispose();
-                }
-
                 return gson.toJson(response);
             } catch (final Exception e) {
                 inProgress = false;
@@ -977,11 +998,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         }
 
         inProgress = false;
-
-        if (kernel != null) {
-            System.out.println("DISPOSE");
-            kernel.dispose();
-        }
 
         return "";
     }

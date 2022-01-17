@@ -64,8 +64,10 @@ module.exports = {
 
         console.log("Spawning backend child")
 
+        var maxRamGb = parseInt(Settings.parseNumberValue('settingMaxRamGb') || 6);
+
         // child = spawn('java', ['-jar', '-XX:MaxRAMFraction=1', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
-        child = spawn('java', ['-jar', '-Xmx4096m', `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
+        child = spawn('java', ['-jar', `-Xmx${maxRamGb}G`, `"${Files.getDataPath() + '/jar/backend.jar'}"`], {
             shell: true, stdio: ['pipe', 'pipe', 'pipe'], detached: false
         })
         pid = child.pid;
@@ -85,7 +87,11 @@ module.exports = {
 
         setInterval(() => {
             if (child) {
-                child.stdout.write("");
+                try {
+                    child.stdout.write("");
+                } catch (e) {
+                    console.warn(e)
+                }
             }
         }, 100)
 

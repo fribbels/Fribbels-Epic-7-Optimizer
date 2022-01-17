@@ -10,7 +10,7 @@ module.exports = {
         if (!gear || !gear.name) {
             return false;
         }
-        return Utils.stringDistance("Gaveleets", gear.name) > 0.25 && gear.level == 85;
+        return Utils.stringDistance("Gaveleet's", gear.name) > 0.25 && gear.level == 85;
     },
 
     // Allow only reforging of +15 gear

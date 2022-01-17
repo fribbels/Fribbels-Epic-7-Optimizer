@@ -46,12 +46,14 @@ module.exports = {
 
         // Format numbers
         $("#settingMaxResults").on("keyup", formatNumbersOnKey);
+        $("#settingMaxRamGb").on("keyup", formatNumbersOnKey);
         $("#settingPenDefense").on("keyup", formatNumbersOnKey);
 
         const settingsIds = [
             'settingGpu',
             'settingUnlockOnUnequip',
             'settingMaxResults',
+            'settingMaxRamGb',
             'settingPenDefense',
             'settingRageSet',
             'settingPenSet',
@@ -116,6 +118,7 @@ module.exports = {
             settingRageSet: true,
             settingPenSet: true,
             settingMaxResults: 5_000_000,
+            settingMaxRamGb: 6,
             settingPenDefense: 1_500,
             settingDefaultPath: defaultPath,
             settingExcludeEquipped: [],
@@ -208,6 +211,13 @@ module.exports = {
             settings.settingMaxResults = 5_000_000;
         }
 
+        if (settings.settingMaxRamGb) {
+            document.getElementById('settingMaxRamGb').value = settings.settingMaxRamGb.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+            document.getElementById('settingMaxRamGb').value = "6";
+            settings.settingMaxRamGb = 6;
+        }
+
         if (settings.settingPenDefense) {
             document.getElementById('settingPenDefense').value = settings.settingPenDefense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         } else {
@@ -286,6 +296,7 @@ module.exports = {
             settingDefaultEquippedItems: document.getElementById('settingDefaultEquippedItems').checked,
             settingDefaultKeepCurrent: document.getElementById('settingDefaultKeepCurrent').checked,
             settingMaxResults: parseInt(module.exports.parseNumberValue('settingMaxResults') || 5_000_000),
+            settingMaxRamGb: parseInt(module.exports.parseNumberValue('settingMaxRamGb') || 6),
             settingPenDefense: parseInt(module.exports.parseNumberValue('settingPenDefense') || 1_500),
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),

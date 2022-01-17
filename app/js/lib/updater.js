@@ -54,7 +54,7 @@ module.exports = {
     <li>Added score evaluation based on each unit's base stats</li>
 </ul>
 <h2>
-    New in v1.8.1 & v1.8.2
+    New in v1.8.1 & v1.8.2 & v1.8.3
 </h2>
 <ul class="newFeatures">
     <li>Fixing a couple bugs</li>
