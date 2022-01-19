@@ -74,11 +74,13 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     @Getter
     private AtomicLong searchedCounter = new AtomicLong(0);
     private AtomicLong resultsCounter = new AtomicLong(0);
-    private AtomicLong iterationCounter = new AtomicLong(0);
 
     private int[] setSolutionBitMasks;
 
     private boolean canUseGpu = true;
+
+    private boolean[] permutations = new boolean[16777216];
+    private int[] setPermutationIndicesPlusOne = new int[16777216];
 
     public OptimizationRequestHandler(final BaseStatsDb baseStatsDb,
                                       final HeroDb heroDb,
@@ -88,7 +90,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         this.itemDb = itemDb;
         optimizationDbs = new HashMap<>();
 
-        ExecutorService t = Executors.newFixedThreadPool(2);
+        ExecutorService t = Executors.newFixedThreadPool(3);
+
         t.execute(() -> {
             setSolutionBitMasks = new int[16777216];
             int count = 0;
@@ -163,6 +166,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     }
                 }
             }
+        });
+
+        t.execute(() -> {
+            permutations = new boolean[16777216];
+            setPermutationIndicesPlusOne = new int[16777216];
         });
 
         t.execute(() -> {
@@ -553,6 +561,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final List<Item> items = priorityItems;
 
         final int MAXIMUM_RESULTS = SETTING_MAXIMUM_RESULTS;
+        System.out.println("Start allocating memory");
         final HeroStats[] resultHeroStats = new HeroStats[MAXIMUM_RESULTS];
 //        final long[] resultInts = new long[MAXIMUM_RESULTS];
         System.out.println("Finished allocating memory");
@@ -563,7 +572,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final ExecutorService executorService = Executors.newFixedThreadPool(2);
         searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
-        iterationCounter = new AtomicLong(0);
 
         final int wSize = itemsByGear.get(Gear.WEAPON).size();
         final int hSize = itemsByGear.get(Gear.HELMET).size();
@@ -1138,12 +1146,13 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public void addCalculatedFields(OptimizationRequest request) {
-        final boolean[] permutations = new boolean[16777216];
-        final int[] setPermutationIndicesPlusOne = new int[16777216];
-        long[] longSetMasks = new long[16777216];
-        int[] setSolutionCounters;
+//        final boolean[] permutations = new boolean[16777216];
+//        final int[] setPermutationIndicesPlusOne = new int[16777216];
+        Arrays.fill(permutations, false);
+        Arrays.fill(setPermutationIndicesPlusOne, 0);
+//        int[] setSolutionCounters;
 
-        setSolutionCounters = new int[1];
+//        setSolutionCounters = new int[1];
 
         final List<Set> inputSets1 = getSetsOrElseAll(request.getInputSetsOne());
         final List<Set> inputSets2 = getSetsOrElseAll(request.getInputSetsTwo());
@@ -1154,7 +1163,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             // [0][0][0] All valid
 
             Arrays.fill(permutations, true);
-            setSolutionCounters = new int[1];
+//            setSolutionCounters = new int[1];
             setPermutationIndicesPlusOne[0] = 1;
         } else if (setFormat == 1) {
             // [4][2][0]
@@ -1165,16 +1174,16 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                     List<List<Integer>> allSolutions = permute(indices);
 
-                    setSolutionCounters = new int[allSolutions.size() * 16];
+//                    setSolutionCounters = new int[allSolutions.size() * 16];
                     for (int i = 0; i < allSolutions.size(); i++) {
                         final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
                         final int index1D = calculateSetIndex(solution);
 
-                        int[] setSolutionCounter = convertSetsToSetCounters(solution);
-                        for (int j = 0; j < 16; j++) {
-                            setSolutionCounters[i*16 + j] = setSolutionCounter[j];
-                        }
-
+//                        int[] setSolutionCounter = convertSetsToSetCounters(solution);
+//                        for (int j = 0; j < 16; j++) {
+//                            setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+//                        }
+//
                         permutations[index1D] = true;
                         setPermutationIndicesPlusOne[index1D] = i + 1;
                     }
@@ -1199,16 +1208,16 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                         List<List<Integer>> allSolutions = permute(indicesInstance);
 
-                        setSolutionCounters = new int[allSolutions.size() * 16];
+//                        setSolutionCounters = new int[allSolutions.size() * 16];
                         for (int i = 0; i < allSolutions.size(); i++) {
                             final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
                             final int index1D = calculateSetIndex(solution);
 
-                            int[] setSolutionCounter = convertSetsToSetCounters(solution);
-                            for (int j = 0; j < 16; j++) {
-                                setSolutionCounters[i*16 + j] = setSolutionCounter[j];
-                            }
-
+//                            int[] setSolutionCounter = convertSetsToSetCounters(solution);
+//                            for (int j = 0; j < 16; j++) {
+//                                setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+//                            }
+//
                             permutations[index1D] = true;
                             setPermutationIndicesPlusOne[index1D] = i + 1;
                         }
@@ -1221,7 +1230,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             }
         } else if (setFormat == 3) {
             // [2][0][0]
-
             final int[] missing = new int[]{0, 0, 0, 0};
             for (Set set1 : inputSets1) {
                 final int[] indices = ArrayUtils.addAll(set1.getIndices(), missing);
@@ -1235,18 +1243,18 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                 indicesInstance[4] = c;
                                 indicesInstance[5] = d;
 
-                                List<List<Integer>> allSolutions = permute(indicesInstance);
+                                final List<List<Integer>> allSolutions = permute(indicesInstance);
 
-                                setSolutionCounters = new int[allSolutions.size() * 16];
+//                                setSolutionCounters = new int[allSolutions.size() * 16];
                                 for (int i = 0; i < allSolutions.size(); i++) {
                                     final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
                                     final int index1D = calculateSetIndex(solution);
 
-                                    int[] setSolutionCounter = convertSetsToSetCounters(solution);
-                                    for (int j = 0; j < 16; j++) {
-                                        setSolutionCounters[i*16 + j] = setSolutionCounter[j];
-                                    }
-
+//                                    int[] setSolutionCounter = convertSetsToSetCounters(solution);
+//                                    for (int j = 0; j < 16; j++) {
+//                                        setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+//                                    }
+//
                                     permutations[index1D] = true;
                                     setPermutationIndicesPlusOne[index1D] = i + 1;
                                 }
@@ -1259,6 +1267,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     }
                 }
             }
+
         } else if (setFormat == 4) {
             // [2][2][0]
 
@@ -1274,16 +1283,16 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                             List<List<Integer>> allSolutions = permute(indicesInstance);
 
-                            setSolutionCounters = new int[allSolutions.size() * 16];
+//                            setSolutionCounters = new int[allSolutions.size() * 16];
                             for (int i = 0; i < allSolutions.size(); i++) {
                                 final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
                                 final int index1D = calculateSetIndex(solution);
 
-                                int[] setSolutionCounter = convertSetsToSetCounters(solution);
-                                for (int j = 0; j < 16; j++) {
-                                    setSolutionCounters[i*16 + j] = setSolutionCounter[j];
-                                }
-
+//                                int[] setSolutionCounter = convertSetsToSetCounters(solution);
+//                                for (int j = 0; j < 16; j++) {
+//                                    setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+//                                }
+//
                                 permutations[index1D] = true;
                                 setPermutationIndicesPlusOne[index1D] = i + 1;
                             }
@@ -1306,16 +1315,16 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                         List<List<Integer>> allSolutions = permute(indices);
 
-                        setSolutionCounters = new int[allSolutions.size() * 16];
+//                        setSolutionCounters = new int[allSolutions.size() * 16];
                         for (int i = 0; i < allSolutions.size(); i++) {
                             final int[] solution = allSolutions.get(i).stream().mapToInt(x->x).toArray();
                             final int index1D = calculateSetIndex(solution);
 
-                            int[] setSolutionCounter = convertSetsToSetCounters(solution);
-                            for (int j = 0; j < 16; j++) {
-                                setSolutionCounters[i*16 + j] = setSolutionCounter[j];
-                            }
-
+//                            int[] setSolutionCounter = convertSetsToSetCounters(solution);
+//                            for (int j = 0; j < 16; j++) {
+//                                setSolutionCounters[i*16 + j] = setSolutionCounter[j];
+//                            }
+//
                             permutations[index1D] = true;
                             setPermutationIndicesPlusOne[index1D] = i + 1;
                         }
@@ -1334,7 +1343,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         request.setBoolArr(permutations);
         request.setSetPermutationIndicesPlusOne(setPermutationIndicesPlusOne);
-        request.setSetSolutionCounters(setSolutionCounters);
+//        request.setSetSolutionCounters(setSolutionCounters);
+
     }
 
     public static GpuOptimizerKernel selectKernel(

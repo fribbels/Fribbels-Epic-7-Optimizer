@@ -1367,7 +1367,7 @@ body.dark-theme input {
   display: inline-block;
   vertical-align: middle;
   text-align: left;
-  width: 77px;
+  min-width: 77px;
 }
 .setPreviewAfter {
   display: inline-block;

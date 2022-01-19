@@ -352,7 +352,7 @@ public class GpuOptimizerKernel extends Kernel {
     public void run() {
         final int id = getGlobalId();
         final int localId = getLocalId();
-        final int setJump = localId * 16;
+//        final int setJump = localId * 16;
 
         final long i = ((long)max) * iteration + id;
         if (i < ((long)(wSize)) * hSize * aSize * nSize * rSize * bSize) {
@@ -607,7 +607,7 @@ public class GpuOptimizerKernel extends Kernel {
 }
 
 /*
-Compiled opencl
+Compiled opencl OUTDATED
 
 
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
