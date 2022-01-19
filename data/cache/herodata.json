@@ -13814,7 +13814,25 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2086_su.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2086_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc104901",
+        "id": "exc104901",
+        "name": "Prototype Crown",
+        "description": "Equipment that contains a set of emergency commands and looks like a tiny crown.",
+        "unit": "c1049",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        },
+        "skills": [],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1049.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11328,
@@ -20509,7 +20527,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1096_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1096_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc102301",
+        "id": "exc102301",
+        "name": "Grudge Marble",
+        "description": "A marble filled with the grudges of people who pledged their souls and loyalty to Kayron",
+        "unit": "c1023",
+        "role": "mage",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11710,
@@ -29326,7 +29358,25 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1050_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1050_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101601",
+        "id": "exc101601",
+        "name": "Azure Dragon's Spirit",
+        "description": "A ribbon with special powers that allows the wearer to harness their innate dragon powers.",
+        "unit": "c1016",
+        "role": "mage",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "skills": [],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1016.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 12147,
