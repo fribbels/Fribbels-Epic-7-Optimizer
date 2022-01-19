@@ -18112,6 +18112,98 @@
       }
     }
   },
+  "Lionheart Cermia": {
+    "_id": "lionheart-cermia",
+    "name": "Lionheart Cermia",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "warrior",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.048,
+        "A": 0.072,
+        "S": 0.096,
+        "SS": 0.12,
+        "SSS": 0.144
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/lionheartCermiaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/lionheartCermiaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 12008,
+        "atk": 822,
+        "hp": 4074,
+        "spd": 105,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13727,
+        "atk": 1040,
+        "hp": 4414,
+        "spd": 105,
+        "def": 472,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14982,
+        "atk": 1025,
+        "hp": 5122,
+        "spd": 105,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17416,
+        "atk": 966,
+        "hp": 5663,
+        "spd": 112,
+        "def": 668,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.3
+      }
+    }
+  },
   "Little Queen Charlotte": {
     "_id": "little-queen-charlotte",
     "name": "Little Queen Charlotte",
@@ -22757,6 +22849,99 @@
         "dac": 0.05,
         "eff": 0.18,
         "efr": 0.18
+      }
+    }
+  },
+  "Peira": {
+    "_id": "peira",
+    "name": "Peira",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "assassin",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/peiraPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/peiraPanel.png"
+    },
+    "ex_equip": [
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11117,
+        "atk": 713,
+        "hp": 3913,
+        "spd": 123,
+        "def": 390,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12898,
+        "atk": 897,
+        "hp": 4253,
+        "spd": 125,
+        "def": 390,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13872,
+        "atk": 889,
+        "hp": 4920,
+        "spd": 123,
+        "def": 483,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16285,
+        "atk": 1075,
+        "hp": 5562,
+        "spd": 128,
+        "def": 487,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
       }
     }
   },

@@ -1035,6 +1035,20 @@
       "health": 32
     }
   },
+  "Goblet of Oath": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+    },
+    "name": "Goblet of Oath",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Goblin's Lamp": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art3_13.png",
