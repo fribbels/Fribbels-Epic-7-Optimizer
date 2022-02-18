@@ -3836,6 +3836,99 @@
       }
     }
   },
+  "Bad Cat Armin": {
+    "_id": "bad-cat-armin",
+    "name": "Bad Cat Armin",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "dark",
+    "role": "warrior",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "C": 0.042,
+        "B": 0.063,
+        "A": 0.084,
+        "S": 0.105,
+        "SS": 0.126,
+        "SSS": 0.147
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": false,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/badCatArminPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/badCatArminPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11889,
+        "atk": 713,
+        "hp": 4267,
+        "spd": 109,
+        "def": 477,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13440,
+        "atk": 897,
+        "hp": 4735,
+        "spd": 109,
+        "def": 505,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14842,
+        "atk": 889,
+        "hp": 5364,
+        "spd": 109,
+        "def": 592,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17097,
+        "atk": 912,
+        "hp": 5871,
+        "spd": 115,
+        "def": 614,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Baiken": {
     "_id": "baiken",
     "name": "Baiken",
@@ -14954,6 +15047,120 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0
+      }
+    }
+  },
+  "Hwayoung": {
+    "_id": "hwayoung",
+    "name": "Hwayoung",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "warrior",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": false,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/hwayoungPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/hwayoungPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11889,
+        "atk": 713,
+        "hp": 4267,
+        "spd": 109,
+        "def": 477,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13440,
+        "atk": 897,
+        "hp": 4735,
+        "spd": 109,
+        "def": 505,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.5,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14842,
+        "atk": 889,
+        "hp": 5364,
+        "spd": 109,
+        "def": 592,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17097,
+        "atk": 1119,
+        "hp": 6266,
+        "spd": 109,
+        "def": 627,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 50,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },

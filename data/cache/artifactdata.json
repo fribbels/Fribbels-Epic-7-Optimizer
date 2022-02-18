@@ -1203,6 +1203,20 @@
       "health": 51
     }
   },
+  "Indestructible Gaiters": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0036.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0036_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0036_l.jpg"
+    },
+    "name": "Indestructible Gaiters",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Infinity Basket": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art4_16.png",

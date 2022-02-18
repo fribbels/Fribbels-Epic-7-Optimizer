@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.2";
+const currentVersion = "v1.8.3-beta.1";
 
 global.TEST = true;
 /********************************************************************************************
@@ -54,10 +54,11 @@ module.exports = {
     <li>Added score evaluation based on each unit's base stats</li>
 </ul>
 <h2>
-    New in v1.8.1 & v1.8.2 & v1.8.3
+    New in v1.8.3
 </h2>
 <ul class="newFeatures">
-    <li>Fixing a couple bugs</li>
+    <li>Added Korean translation</li>
+    <li>Fixing memory leaks & added max RAM limit setting</li>
 </ul>
 `
         );
