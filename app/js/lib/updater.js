@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "v1.8.3-beta.1";
+const currentVersion = "1.8.3";
 
-global.TEST = true;
+global.TEST = false;
 /********************************************************************************************
     Release checklist:
     - update changelog
