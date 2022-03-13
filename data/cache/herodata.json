@@ -23280,6 +23280,98 @@
       }
     }
   },
+  "Pirate Captain Flan": {
+    "_id": "pirate-captain-flan",
+    "name": "Pirate Captain Flan",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "ranger",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": false,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/pirateCaptainFlanPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/pirateCaptainFlanPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11517,
+        "atk": 720,
+        "hp": 3881,
+        "spd": 114,
+        "def": 460,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13288,
+        "atk": 904,
+        "hp": 4221,
+        "spd": 114,
+        "def": 460,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14378,
+        "atk": 898,
+        "hp": 4879,
+        "spd": 114,
+        "def": 571,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16848,
+        "atk": 1182,
+        "hp": 5299,
+        "spd": 114,
+        "def": 571,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Politis": {
     "_id": "politis",
     "name": "Politis",
@@ -30095,6 +30187,242 @@
         "dac": 0.05,
         "eff": 0.18,
         "efr": 0
+      }
+    }
+  },
+  "Verdant Adin": {
+    "_id": "verdant-adin",
+    "name": "Verdant Adin",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "assassin",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/verdantAdinPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/verdantAdinPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 9881,
+        "atk": 633,
+        "hp": 3302,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11477,
+        "atk": 828,
+        "hp": 3642,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0.2,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12333,
+        "atk": 789,
+        "hp": 4152,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14563,
+        "atk": 1081,
+        "hp": 4572,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0.2,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
+  "Vigilante Leader Glenn": {
+    "_id": "vigilante-leader-glenn",
+    "name": "Vigilante Leader Glenn",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "ranger",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/vigilanteLeaderGlennPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/vigilanteLeaderGlennPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10026,
+        "atk": 567,
+        "hp": 3527,
+        "spd": 110,
+        "def": 424,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11520,
+        "atk": 704,
+        "hp": 3867,
+        "spd": 110,
+        "def": 424,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 1026,
+        "overrideHp": 5298,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12504,
+        "atk": 707,
+        "hp": 4435,
+        "spd": 110,
+        "def": 525,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14585,
+        "atk": 920,
+        "hp": 4855,
+        "spd": 110,
+        "def": 525,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 1026,
+        "overrideHp": 5298,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
