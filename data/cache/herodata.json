@@ -11776,7 +11776,47 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1091_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1091_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc202201",
+        "id": "exc202201",
+        "name": "Ruele's Sad Promise",
+        "description": "A mysterious concoction of life created by combining the laws of light and nature and the love of a noble soul.",
+        "unit": "c2022",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "res",
+          "value": 0.08
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Dispels one debuff from the ally with the lowest Health when using Key to an Oath.",
+            "skill_description": "Attacks the enemy with a staff and heals the ally with the lowest Health, before dispelling one debuff. Healing increases proportional to the target's max Health.",
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Has a 30% chance to reset skill cooldown of Regen when using Regen.",
+            "skill_description": "Blesses an ally, recovering their Health and increasing their Combat Readiness by 50%. Healing increases proportional to the caster's max Health. When this skill is used, has a 30% chance to reset this skill's cooldown.",
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases skill cooldown of Destina's Grace by 1 turn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2022.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10356,
@@ -15546,6 +15586,98 @@
         "def": 553,
         "chc": 0.22999999999999998,
         "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Jack-O": {
+    "_id": "jack-o",
+    "name": "Jack-O",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "warrior",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/jackoPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/jackoPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11958,
+        "atk": 793,
+        "hp": 4267,
+        "spd": 109,
+        "def": 446,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13624,
+        "atk": 984,
+        "hp": 4607,
+        "spd": 109,
+        "def": 446,
+        "chc": 0.22999999999999998,
+        "chd": 1.55,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14926,
+        "atk": 989,
+        "hp": 5364,
+        "spd": 109,
+        "def": 553,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17106,
+        "atk": 1228,
+        "hp": 5784,
+        "spd": 109,
+        "def": 553,
+        "chc": 0.22999999999999998,
+        "chd": 1.65,
         "dac": 0.05,
         "eff": 0,
         "efr": 0
@@ -24252,7 +24384,47 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1090_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1090_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc202201",
+        "id": "exc202201",
+        "name": "Ruele's Sad Promise",
+        "description": "A mysterious concoction of life created by combining the laws of light and nature and the love of a noble soul.",
+        "unit": "c2022",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "res",
+          "value": 0.08
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Dispels one debuff from the ally with the lowest Health when using Key to an Oath.",
+            "skill_description": "Attacks the enemy with a staff and heals the ally with the lowest Health, before dispelling one debuff. Healing increases proportional to the target's max Health.",
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Has a 30% chance to reset skill cooldown of Regen when using Regen.",
+            "skill_description": "Blesses an ally, recovering their Health and increasing their Combat Readiness by 50%. Healing increases proportional to the caster's max Health. When this skill is used, has a 30% chance to reset this skill's cooldown.",
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases skill cooldown of Destina's Grace by 1 turn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2022.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 9979,
@@ -31092,7 +31264,52 @@
       "image": "https://assets.epicsevendb.com/_source/face/c2020_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c2020_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100301",
+        "id": "exc100301",
+        "name": "Valkyrie Wing",
+        "description": "A mysterious circlet that symbolizes strength and beauty, and is the source of Rose's Fighting Spirit.",
+        "unit": "c1003",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Activates each effect regardless of current Health when using Sequential Cutter.",
+            "skill_description": "Attacks with a sword, with a {{variable}} chance to provoke for 1 turn, before increasing Defense of the caster for 1 turn. Damage dealt increases proportional to the caster's Defense.",
+            "values": [
+              25,
+              2
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Applies the same effect to the caster when using Shield of Light.",
+            "skill_description": "Covers an ally and the caster with the Shield of Light, dispelling two debuffs and granting a barrier for 2 turns before increasing Combat Readiness by {{variable}}. Barrier strength is proportional to the caster's Defense.",
+            "values": [
+              5
+            ],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases skill cooldown of Goddess of Victory by 1 turn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1003.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10941,
