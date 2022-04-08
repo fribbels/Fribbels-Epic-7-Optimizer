@@ -1234,7 +1234,7 @@
   "Iron Fan": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0038.png",
-      "image": "https://assets.epicsevendb.com/_source/item_arti/art0038_fu.png",
+      "image": "httcauses://assets.epicsevendb.com/_source/item_arti/art0038_fu.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0038_l.jpg"
     },
     "name": "Iron Fan",
@@ -1803,6 +1803,20 @@
     "stats": {
       "attack": 18,
       "health": 27
+    }
+  },
+  "Scroll of Shadows": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art5_5_l.jpg"
+    },
+    "name": "Scroll of Shadows",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
     }
   },
   "Secret Art - Storm Sword": {

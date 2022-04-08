@@ -2948,6 +2948,98 @@
       }
     }
   },
+  "Aria": {
+    "_id": "aria",
+    "name": "Aria",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "mage",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "def_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ariaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/ariaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 12163,
+        "atk": 713,
+        "hp": 3881,
+        "spd": 111,
+        "def": 542,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13970,
+        "atk": 833,
+        "hp": 4221,
+        "spd": 115,
+        "def": 542,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.06,
+        "efr": 0.18
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 15180,
+        "atk": 889,
+        "hp": 4879,
+        "spd": 111,
+        "def": 673,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17925,
+        "atk": 1039,
+        "hp": 5299,
+        "spd": 115,
+        "def": 673,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0.18
+      }
+    }
+  },
   "Armin": {
     "_id": "armin",
     "name": "Armin",
@@ -15597,7 +15689,7 @@
     "name": "Jack-O",
     "moonlight": false,
     "rarity": 5,
-    "attribute": "ice",
+    "attribute": "fire",
     "role": "warrior",
     "zodiac": "bull",
     "self_devotion": {
