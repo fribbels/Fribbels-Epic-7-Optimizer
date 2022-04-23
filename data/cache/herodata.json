@@ -9201,14 +9201,14 @@
     "role": "assassin",
     "zodiac": "scorpion",
     "self_devotion": {
-      "type": "coop",
+      "type": "att_rate",
       "grades": {
-        "C": 0.014,
-        "B": 0.021,
-        "A": 0.028,
-        "S": 0.035,
-        "SS": 0.042,
-        "SSS": 0.049
+        "C": 0.04,
+        "B": 0.06,
+        "A": 0.08,
+        "S": 0.1,
+        "SS": 0.12,
+        "SSS": 0.14
       }
     },
     "devotion": {

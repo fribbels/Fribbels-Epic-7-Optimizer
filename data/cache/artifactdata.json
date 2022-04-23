@@ -1245,6 +1245,20 @@
       "health": 32
     }
   },
+  "Jack-O's Symbol": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Jack-O's Symbol",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Junkyard Dog": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0052.png",
