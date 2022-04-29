@@ -29512,16 +29512,6 @@
     "role": "warrior",
     "zodiac": "maiden",
     "self_devotion": {
-      "type": "max_hp_rate",
-      "grades": {
-        "B": 0.036,
-        "A": 0.054,
-        "S": 0.072,
-        "SS": 0.09,
-        "SSS": 0.108
-      }
-    },
-    "devotion": {
       "type": "att_rate",
       "grades": {
         "B": 0.06,
@@ -29529,6 +29519,16 @@
         "S": 0.12,
         "SS": 0.15,
         "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
       },
       "slots": {
         "1": true,
