@@ -29503,6 +29503,98 @@
       }
     }
   },
+  "Taeyou": {
+    "_id": "taeyou",
+    "name": "Taeyou",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "warrior",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/taeyouPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/taeyouPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11777,
+        "atk": 713,
+        "hp": 3913,
+        "spd": 111,
+        "def": 497,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13569,
+        "atk": 833,
+        "hp": 4253,
+        "spd": 115,
+        "def": 497,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14700,
+        "atk": 889,
+        "hp": 4920,
+        "spd": 111,
+        "def": 617,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17434,
+        "atk": 1039,
+        "hp": 5340,
+        "spd": 115,
+        "def": 617,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Tamarinne": {
     "_id": "tamarinne",
     "name": "Tamarinne",
