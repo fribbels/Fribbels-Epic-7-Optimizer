@@ -2001,6 +2001,20 @@
       "health": 32
     }
   },
+  "Spear of Purification": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Spear of Purification",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Spirit's Breath": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0049.png",
