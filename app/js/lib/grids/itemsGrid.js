@@ -93,10 +93,10 @@ module.exports = {
                 {headerName: i18next.t('Def'), field: 'augmentedStats.Defense', cellRenderer: (params) => params.value == 0 ? "" : params.value},
                 {headerName: i18next.t('Eff'), field: 'augmentedStats.EffectivenessPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
                 {headerName: i18next.t('Res'), field: 'augmentedStats.EffectResistancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: i18next.t('Score'), field: 'reforgedWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: i18next.t('dScore'), field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: i18next.t('sScore'), field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: i18next.t('cScore'), field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: i18next.t('Score'), field: 'reforgedWss', width: 50, cellStyle: scoreColumnGradient, filter: 'agNumberColumnFilter'},
+                {headerName: i18next.t('dScore'), field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient, filter: 'agNumberColumnFilter'},
+                {headerName: i18next.t('sScore'), field: 'supportWss', width: 50, cellStyle: scoreColumnGradient, filter: 'agNumberColumnFilter'},
+                {headerName: i18next.t('cScore'), field: 'combatWss', width: 50, cellStyle: scoreColumnGradient, filter: 'agNumberColumnFilter'},
                 {headerName: i18next.t('Equipped'), field: 'equippedByName', width: 120, cellRenderer: (params) => renderStat(i18next.t(params.value))},
                 // {headerName: i18next.t('Mconf'), field: 'mconfidence', width: 50},
                 // {headerName: i18next.t('Material'), field: 'material', width: 120},
@@ -361,13 +361,16 @@ module.exports = {
         for (var stat of statList) {
             itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + stat).setModel(null);
         }
-        if (substatFilter) {
-            const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
 
-            substatFilterComponent.setModel({
-                type: 'notEqual',
-                filter: 0
-            });
+        if (substatFilter) {
+            substatFilter.forEach(function (substat, index) {
+                const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substat);
+    
+                substatFilterComponent.setModel({
+                    type: 'notEqual',
+                    filter: 0
+                });
+            })
         }
 
         const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');

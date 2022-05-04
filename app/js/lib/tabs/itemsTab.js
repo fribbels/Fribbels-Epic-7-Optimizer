@@ -212,19 +212,30 @@ const hintString = `${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" i
     Saves.autoSave();
 }
 
-function setupFilterListener(elementId, filter, filterContent) {
+function setupFilterListener(elementId, filter, filterContent, multiSelect = false) {
     document.getElementById(elementId).addEventListener('click', () => {
         const element = $('#' + elementId);
         element.toggleClass("gearTabButtonSelected");
-        elementsByFilter[filter].forEach(x => {
-            if (x != elementId) {
-                $('#' + x).removeClass("gearTabButtonSelected")
+        if (multiSelect) {
+            if (filters[filter] == null)
+                filters[filter] = []
+
+            if (element.hasClass("gearTabButtonSelected")) {
+                filters[filter].push(filterContent)
+            } else {
+                filters[filter].pop(filterContent);
             }
-        })
-        if (element.hasClass("gearTabButtonSelected")) {
-            filters[filter] = filterContent
         } else {
-            filters[filter] = null;
+            elementsByFilter[filter].forEach(x => {
+                if (x != elementId) {
+                    $('#' + x).removeClass("gearTabButtonSelected")
+                }
+            })
+            if (element.hasClass("gearTabButtonSelected")) {
+                filters[filter] = filterContent
+            } else {
+                filters[filter] = null;
+            }
         }
         console.log("Updated filters", filters)
         ItemsGrid.refreshFilters(filters);
@@ -378,17 +389,17 @@ function setupEventListeners() {
     setupClearListener("clearMainStatFilter", "statFilter")
 
     // Sub
-    setupFilterListener("subStatAttackPercentFilter", "substatFilter", "AttackPercent")
-    setupFilterListener("subStatAttackFilter", "substatFilter", "Attack")
-    setupFilterListener("subStatDefensePercentFilter", "substatFilter", "DefensePercent")
-    setupFilterListener("subStatDefenseFilter", "substatFilter", "Defense")
-    setupFilterListener("subStatHealthPercentFilter", "substatFilter", "HealthPercent")
-    setupFilterListener("subStatHealthFilter", "substatFilter", "Health")
-    setupFilterListener("subStatCrFilter", "substatFilter", "CriticalHitChancePercent")
-    setupFilterListener("subStatCdFilter", "substatFilter", "CriticalHitDamagePercent")
-    setupFilterListener("subStatEffFilter", "substatFilter", "EffectivenessPercent")
-    setupFilterListener("subStatEffResFilter", "substatFilter", "EffectResistancePercent")
-    setupFilterListener("subStatSpeedFilter", "substatFilter", "Speed")
+    setupFilterListener("subStatAttackPercentFilter", "substatFilter", "AttackPercent", true)
+    setupFilterListener("subStatAttackFilter", "substatFilter", "Attack", true)
+    setupFilterListener("subStatDefensePercentFilter", "substatFilter", "DefensePercent", true)
+    setupFilterListener("subStatDefenseFilter", "substatFilter", "Defense", true)
+    setupFilterListener("subStatHealthPercentFilter", "substatFilter", "HealthPercent", true)
+    setupFilterListener("subStatHealthFilter", "substatFilter", "Health", true)
+    setupFilterListener("subStatCrFilter", "substatFilter", "CriticalHitChancePercent", true)
+    setupFilterListener("subStatCdFilter", "substatFilter", "CriticalHitDamagePercent", true)
+    setupFilterListener("subStatEffFilter", "substatFilter", "EffectivenessPercent", true)
+    setupFilterListener("subStatEffResFilter", "substatFilter", "EffectResistancePercent", true)
+    setupFilterListener("subStatSpeedFilter", "substatFilter", "Speed", true)
 
     setupClearListener("clearSubStatFilter", "substatFilter")
 
