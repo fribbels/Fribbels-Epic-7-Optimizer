@@ -261,24 +261,17 @@ var processes = [];
 // }
 
 function findcommand() {
-    if (Files.isMac()) {
-        console.log("Detecting python on mac, using python");
-        return;
-    } else {
-        command = 'py'
-    }
-
-    console.log("Detecting python, using py for now");
-    try {
-        findCommandSpawn = childProcess.spawn('py');
-        findCommandSpawn.on('error', function(err){
-            console.warn("Error spawning python detector, using python instead", err)
-            command = 'python'
-        })
-    } catch (e) {
-        console.warn("Error trying to detect py, using python instead", e)
-        command = 'python';
-    }
+    const commands = ["py", "python", "python3"];
+    commands.every((command) => {
+        const { error, status } = childProcess.spawnSync(command);
+        if (error || status !== 0) {
+            console.warn(`Error spawning ${command}`);
+            return true;
+        } else {
+            console.log(`Using ${command}`);
+            global.command = command;
+        }
+    });
 }
 
 async function finishedReading(data, scanType) {
