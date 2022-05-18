@@ -10684,7 +10684,47 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1076_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1076_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107601",
+        "id": "exc107601",
+        "name": "Halted Pocketwatch",
+        "description": "Diene's pocketwatch where she keeps a dried forget-me-not inside. The watch's hands are halted at the exact time of Diene's most beautiful moment of her life.",
+        "unit": "c1076",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Increase Combat Readiness of the ally with the highest Attack by 5% when using Light of Judgment. When the caster has a buff, the effect is doubled.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Blessings of the Goddess's barrier strength is increased by 10%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Increases Combat Readiness of all allies by 15% when using Blessings of the Goddess",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1003.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10356,
@@ -15086,6 +15126,124 @@
       }
     }
   },
+  "Holy Flame Adin": {
+    "_id": "holy-flame-adin",
+    "name": "Holy Flame Adin",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "fire",
+    "role": "assassin",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/holyFlameAdinPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/holyFlameAdinPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 9881,
+        "atk": 633,
+        "hp": 3302,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11477,
+        "atk": 828,
+        "hp": 3642,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 923,
+        "overrideHp": 4137,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12333,
+        "atk": 789,
+        "hp": 4152,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14563,
+        "atk": 1081,
+        "hp": 4572,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 1199,
+        "overrideHp": 5194,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0.25,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
   "Hurado": {
     "_id": "hurado",
     "name": "Hurado",
@@ -15540,7 +15698,47 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2085_su.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2085_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc208501",
+        "id": "exc208501",
+        "name": "Flame Armband",
+        "description": "A staff decorated with a bright red orb that encapsulates both the spirit of charity, and the unwavering determination of Achates.",
+        "unit": "c2085",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 2,
+            "description": "Blazing Fury increases Combat Readiness of the caster by an additional 5%.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Grants immunity to the caster for 2 turns when using Blazing Fury.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Silences the target for 1 turn when using Flames of Destruction. When the caster is granted vigor, ignores Effect Resistance. This effect is applied before inflicting burn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2033.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11276,
@@ -32045,7 +32243,47 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/zahhakPanel.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc111901",
+        "id": "exc111901",
+        "name": "A Spell of Tragic Love",
+        "description": "A talisman given by Amid long ago. Though it does not have any noticeable effects, Zahhak cherishes it more than anything.",
+        "unit": "c1119",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        },
+        "skills": [
+          {
+            "skill": 2,
+            "description": "Increases Attack of the target and the caster for 2 turns when using Elaborate Plan.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 3,
+            "description": "Inflicts resource reduction on the target by 60% before the skill's effect when using Execute.",
+            "skill_description": null,
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases skill cooldown of Execute by 1 turn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2033.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11782,
