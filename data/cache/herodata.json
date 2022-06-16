@@ -10684,47 +10684,7 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1076_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1076_l.png"
     },
-    "ex_equip": [
-      {
-        "_id": "exc107601",
-        "id": "exc107601",
-        "name": "Halted Pocketwatch",
-        "description": "Diene's pocketwatch where she keeps a dried forget-me-not inside. The watch's hands are halted at the exact time of Diene's most beautiful moment of her life.",
-        "unit": "c1076",
-        "role": "manauser",
-        "rarity": 5,
-        "stat": {
-          "type": "speed",
-          "value": 5
-        },
-        "skills": [
-          {
-            "skill": 1,
-            "description": "Increase Combat Readiness of the ally with the highest Attack by 5% when using Light of Judgment. When the caster has a buff, the effect is doubled.",
-            "skill_description": null,
-            "values": [],
-            "_id": 0
-          },
-          {
-            "skill": 2,
-            "description": "Blessings of the Goddess's barrier strength is increased by 10%.",
-            "skill_description": null,
-            "values": [],
-            "_id": 1
-          },
-          {
-            "skill": 2,
-            "description": "Increases Combat Readiness of all allies by 15% when using Blessings of the Goddess",
-            "skill_description": null,
-            "values": [],
-            "_id": 2
-          }
-        ],
-        "assets": {
-          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1003.png"
-        }
-      }
-    ],
+    "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10356,
@@ -11729,9 +11689,9 @@
         "efr": 0,
         "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
-        "bonusMaxHpPercent": 20,
+        "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
-        "overrideHp": 0,
+        "overrideHp": 5926,
         "overrideDef": 0,
         "overrideAdditionalCr": 0,
         "overrideAdditionalCd": 0,
@@ -11764,9 +11724,9 @@
         "efr": 0,
         "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
-        "bonusMaxHpPercent": 20,
+        "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
-        "overrideHp": 0,
+        "overrideHp": 7444,
         "overrideDef": 0,
         "overrideAdditionalCr": 0,
         "overrideAdditionalCd": 0,
@@ -15698,47 +15658,7 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2085_su.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2085_l.png"
     },
-    "ex_equip": [
-      {
-        "_id": "exc208501",
-        "id": "exc208501",
-        "name": "Flame Armband",
-        "description": "A staff decorated with a bright red orb that encapsulates both the spirit of charity, and the unwavering determination of Achates.",
-        "unit": "c2085",
-        "role": "warrior",
-        "rarity": 5,
-        "stat": {
-          "type": "att_rate",
-          "value": 0.07
-        },
-        "skills": [
-          {
-            "skill": 2,
-            "description": "Blazing Fury increases Combat Readiness of the caster by an additional 5%.",
-            "skill_description": null,
-            "values": [],
-            "_id": 0
-          },
-          {
-            "skill": 2,
-            "description": "Grants immunity to the caster for 2 turns when using Blazing Fury.",
-            "skill_description": null,
-            "values": [],
-            "_id": 1
-          },
-          {
-            "skill": 3,
-            "description": "Silences the target for 1 turn when using Flames of Destruction. When the caster is granted vigor, ignores Effect Resistance. This effect is applied before inflicting burn.",
-            "skill_description": null,
-            "values": [],
-            "_id": 2
-          }
-        ],
-        "assets": {
-          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2033.png"
-        }
-      }
-    ],
+    "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11276,
@@ -32067,6 +31987,98 @@
       }
     }
   },
+  "Yulha": {
+    "_id": "yuhla",
+    "name": "Yulha",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "knight",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/yulhaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/yulhaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 12001,
+        "atk": 596,
+        "hp": 4685,
+        "spd": 98,
+        "def": 528,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13591,
+        "atk": 716,
+        "hp": 5446,
+        "spd": 100,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14985,
+        "atk": 744,
+        "hp": 5890,
+        "spd": 98,
+        "def": 655,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17114,
+        "atk": 894,
+        "hp": 6840,
+        "spd": 104,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Yuna": {
     "_id": "yuna",
     "name": "Yuna",
@@ -32243,47 +32255,7 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/zahhakPanel.png"
     },
-    "ex_equip": [
-      {
-        "_id": "exc111901",
-        "id": "exc111901",
-        "name": "A Spell of Tragic Love",
-        "description": "A talisman given by Amid long ago. Though it does not have any noticeable effects, Zahhak cherishes it more than anything.",
-        "unit": "c1119",
-        "role": "warrior",
-        "rarity": 5,
-        "stat": {
-          "type": "att_rate",
-          "value": 0.07
-        },
-        "skills": [
-          {
-            "skill": 2,
-            "description": "Increases Attack of the target and the caster for 2 turns when using Elaborate Plan.",
-            "skill_description": null,
-            "values": [],
-            "_id": 0
-          },
-          {
-            "skill": 3,
-            "description": "Inflicts resource reduction on the target by 60% before the skill's effect when using Execute.",
-            "skill_description": null,
-            "values": [],
-            "_id": 1
-          },
-          {
-            "skill": 3,
-            "description": "Decreases skill cooldown of Execute by 1 turn.",
-            "skill_description": null,
-            "values": [],
-            "_id": 2
-          }
-        ],
-        "assets": {
-          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2033.png"
-        }
-      }
-    ],
+    "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11782,
