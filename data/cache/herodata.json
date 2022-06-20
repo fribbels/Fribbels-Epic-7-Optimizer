@@ -32067,6 +32067,98 @@
       }
     }
   },
+  "Yulha": {
+    "_id": "yuhla",
+    "name": "Yulha",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "knight",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/yulhaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/yulhaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 12001,
+        "atk": 596,
+        "hp": 4685,
+        "spd": 98,
+        "def": 528,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13591,
+        "atk": 716,
+        "hp": 5446,
+        "spd": 100,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14985,
+        "atk": 744,
+        "hp": 5890,
+        "spd": 98,
+        "def": 655,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17114,
+        "atk": 894,
+        "hp": 6840,
+        "spd": 104,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Yuna": {
     "_id": "yuna",
     "name": "Yuna",

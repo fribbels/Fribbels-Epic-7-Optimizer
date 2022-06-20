@@ -349,6 +349,20 @@
       "health": 32
     }
   },
+  "Blazing Full Moon Trophy": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Blazing Full Moon Trophy",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    }
+  },
   "Blessings of Camaraderie": {
     "assets": {
       "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
@@ -1031,8 +1045,8 @@
     "rarity": 5,
     "role": "ranger",
     "stats": {
-      "attack": 21,
-      "health": 32
+      "attack": 15,
+      "health": 54
     }
   },
   "Goblet of Oath": {
@@ -2013,6 +2027,20 @@
     "stats": {
       "attack": 21,
       "health": 32
+    }
+  },
+  "Sphere of Sadism": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Sphere of Sadism",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
     }
   },
   "Spirit's Breath": {
