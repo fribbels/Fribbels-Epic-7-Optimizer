@@ -262,14 +262,16 @@ var processes = [];
 
 function findcommand() {
     const commands = ["py", "python", "python3"];
-    commands.every((command) => {
+    
+    commands.find((command) => {
         const { error, status } = childProcess.spawnSync(command);
+
         if (error || status !== 0) {
-            console.warn(`Error spawning ${command}`);
-            return true;
+            console.debug(`Unable to use ${command}`);
         } else {
             console.log(`Using ${command}`);
             global.command = command;
+            return true;
         }
     });
 }
