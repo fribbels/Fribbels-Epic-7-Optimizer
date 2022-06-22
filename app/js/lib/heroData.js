@@ -27,9 +27,9 @@ try {
            ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json?";
         } else {
            // file not found
-           console.log('Amazon is not available, using gitee');
-           HERO_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/herodata.json?";
-           ARTIFACT_CACHE = "https://triatk.gitee.io/fribbels-epic-7-optimizer/data/cache/artifactdata.json?";
+           console.log('Amazon is not available, using Azure');
+           HERO_CACHE = "https://fribbels-epic-7-optimizer-cn.azurewebsites.net/data/cache/herodata.json?";
+           ARTIFACT_CACHE = "https://fribbels-epic-7-optimizer-cn.azurewebsites.net/data/cache/artifactdata.json?";
         }
     });
 } catch (e) {
