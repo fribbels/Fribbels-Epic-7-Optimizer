@@ -25,7 +25,7 @@ const filters = {
     levelFilter: null,
     enhanceFilter: null,
     statFilter: null,
-    substatFilter: null,
+    substatFilter: new Set(),
     duplicateFilter: null,
     equippedOrNotFilter: null,
     modifyFilter: null,
@@ -212,7 +212,7 @@ const hintString = `${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" i
     Saves.autoSave();
 }
 
-function setupFilterListener(elementId, filter, filterContent) {
+function setupMonoFilterListener(elementId, filter, filterContent) {
     document.getElementById(elementId).addEventListener('click', () => {
         const element = $('#' + elementId);
         element.toggleClass("gearTabButtonSelected");
@@ -231,12 +231,43 @@ function setupFilterListener(elementId, filter, filterContent) {
     })
 }
 
+
+// currently only used for substats
+function setupMultiFilterListener(elementId, filter, filterContent) {
+    document.getElementById(elementId).addEventListener('click', () => {
+        const element = $('#' + elementId);
+        element.toggleClass("gearTabButtonSelected");
+        
+        if (filters[filter].has(filterContent)) {
+            filters[filter].delete(filterContent);
+        } else {
+            filters[filter].add(filterContent);
+        }
+        console.log("Updated filters", filters);
+        ItemsGrid.refreshFilters(filters);
+    })
+}
+
+function setupFilterListener(elementId, filter, filterContent) {
+    if (filter == 'substatFilter') {
+        setupMultiFilterListener(elementId, filter, filterContent);
+    } else {
+        setupMonoFilterListener(elementId, filter, filterContent);
+    }
+}
+
 function setupClearListener(elementId, filter) {
     document.getElementById(elementId).addEventListener('click', () => {
         elementsByFilter[filter].forEach(x => {
             $('#' + x).removeClass("gearTabButtonSelected")
         })
-        filters[filter] = null;
+        
+        if (filters[filter] instanceof Set) {
+            filters[filter].clear(); // multi filter categories
+        } else {
+            filters[filter] = null; // mono filter categories
+        }
+
         ItemsGrid.refreshFilters(filters);
     })
 }
@@ -441,7 +472,12 @@ function setupEventListeners() {
             elementsByFilter[key].forEach(x => {
                 $('#' + x).removeClass("gearTabButtonSelected")
             })
-            filters[key] = null;
+
+            if (filters[key] instanceof Set) {
+                filters[key].clear(); // multi filter categories
+            } else {
+                filters[key] = null; // mono filter categories
+            }
         }
         ItemsGrid.refreshFilters(filters);
     })

@@ -361,14 +361,18 @@ module.exports = {
         for (var stat of statList) {
             itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + stat).setModel(null);
         }
-        if (substatFilter) {
+
+        // multiple substats can be selected for filtering
+        // substatFilters would be a better name, but this needs to be changed in filters and elementsByFilter
+        // ultimately creating other inconsistencies (and being more invasive) - reconsider when doing large scale work
+        substatFilter.forEach(substatFilter => {
             const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
 
             substatFilterComponent.setModel({
                 type: 'notEqual',
                 filter: 0
             });
-        }
+        });
 
         const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');
         if (modifyFilter) {
