@@ -87,7 +87,7 @@ public class StatCalculator {
         final float hp =   ((bonusBaseHp   + accs0[1]+accs1[1]+accs2[1]+accs3[1]+accs4[1]+accs5[1] + (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0)) * bonusMaxHp);
         final float def =  ((bonusBaseDef  + accs0[2]+accs1[2]+accs2[2]+accs3[2]+accs4[2]+accs5[2] + (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) * bonusMaxDef);
         final float cr =         (base.cr  + accs0[6]+accs1[6]+accs2[6]+accs3[6]+accs4[6]+accs5[6] + (sets[4] > 1 ? sets[4] / 2 * 12 : 0) + hero.bonusCr + hero.aeiCr);
-        final int cd =   (int) (base.cd    + accs0[7]+accs1[7]+accs2[7]+accs3[7]+accs4[7]+accs5[7] + (sets[6] > 3 ? 40 : 0) + hero.bonusCd + hero.aeiCd);
+        final int cd =   (int) (base.cd    + accs0[7]+accs1[7]+accs2[7]+accs3[7]+accs4[7]+accs5[7] + (sets[6] > 3 ? 60 : 0) + hero.bonusCd + hero.aeiCd);
         final int eff =  (int) (base.eff   + accs0[8]+accs1[8]+accs2[8]+accs3[8]+accs4[8]+accs5[8] + (sets[5] > 1 ? sets[5] / 2 * 20 : 0) + hero.bonusEff + hero.aeiEff);
         final int res =  (int) (base.res   + accs0[9]+accs1[9]+accs2[9]+accs3[9]+accs4[9]+accs5[9] + (sets[9] > 1 ? sets[9] / 2 * 20 : 0) + hero.bonusRes + hero.aeiRes);
         final int spd =  (int) (base.spd   + accs0[10]+accs1[10]+accs2[10]+accs3[10]+accs4[10]+accs5[10] + (sets[3] > 3 ? speedSetBonus : 0) + (sets[14] > 3 ? revengeSetBonus : 0) + hero.bonusSpeed + hero.aeiSpeed);
