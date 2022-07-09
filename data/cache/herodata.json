@@ -29728,29 +29728,29 @@
   "Sylvan Sage Vivian": {
     "_id": "sylvan-sage-vivian",
     "name": "Sylvan Sage Vivian",
-    "moonlight": false,
+    "moonlight": true,
     "rarity": 5,
-    "attribute": "fire",
+    "attribute": "light",
     "role": "mage",
     "zodiac": "crab",
     "self_devotion": {
-      "type": "coop",
+      "type": "cri",
       "grades": {
-        "B": 0.02,
-        "A": 0.03,
-        "S": 0.04,
-        "SS": 0.05,
-        "SSS": 0.06
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
       }
     },
     "devotion": {
-      "type": "cri",
+      "type": "att_rate",
       "grades": {
-        "B": 0.048,
-        "A": 0.072,
-        "S": 0.096,
-        "SS": 0.12,
-        "SSS": 0.144
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
       },
       "slots": {
         "1": true,
