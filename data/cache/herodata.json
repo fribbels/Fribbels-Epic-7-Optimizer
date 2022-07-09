@@ -3013,7 +3013,7 @@
         "dac": 0.05,
         "eff": 0.06,
         "efr": 0.18,
-	    "bonusMaxAtkPercent": 0,
+        "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -3048,7 +3048,7 @@
         "dac": 0.05,
         "eff": 0.18,
         "efr": 0.18,
-	    "bonusMaxAtkPercent": 0,
+        "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -3059,7 +3059,7 @@
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
         "overrideAdditionalRes": 0
-      }
+      },
     }
   },
   "Armin": {
