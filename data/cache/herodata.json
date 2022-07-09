@@ -3047,7 +3047,7 @@
         "chd": 1.5,
         "dac": 0.05,
         "eff": 0.18,
-        "efr": 0.18
+        "efr": 0.18,
 		"bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
