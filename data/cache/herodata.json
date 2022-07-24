@@ -29199,6 +29199,7 @@
         "eff": 0,
         "efr": 0,
         "bonusMaxAtkPercent": 0,
+        "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 1159,
