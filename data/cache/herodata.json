@@ -2712,7 +2712,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1048_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1048_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101048",
+        "id": "exc101048",
+        "name": "Scarlet Tear",
+        "description": "Earrings bestowed to Aramintha from a nomad during her travels with Duren. No one knew that the trip was going to be their last one together.",
+        "unit": "c1048",
+        "role": "mage",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11781,
@@ -3059,7 +3073,7 @@
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
         "overrideAdditionalRes": 0
-      },
+      }
     }
   },
   "Armin": {
@@ -3898,7 +3912,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1015_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1015_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101015",
+        "id": "exc101015",
+        "name": "Cape of Selfish Interest",
+        "description": "A cape Baal made for Sezan after she became a doll. Baal is keeping it in his pocket, looking forward to her reaction when she sees it.",
+        "unit": "c1015",
+        "role": "mage",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11781,
@@ -5506,370 +5534,7 @@
         "4": true
       }
     },
-    "specialty_change": {
-      "tree": [
-        [
-          {
-            "id": 1,
-            "position": 1,
-            "require_id": null,
-            "enhancements": [
-              {
-                "type": "stat",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Health.",
-                "upgrade": null
-              },
-              {
-                "type": "stat",
-                "stat": "max_hp_rate",
-                "value": 0.05,
-                "description": "Increases Health by 5%.",
-                "upgrade": "+5% Health"
-              },
-              {
-                "type": "stat",
-                "stat": "max_hp_rate",
-                "value": 0.07,
-                "description": "Increases Health by 12%.",
-                "upgrade": "+7% Health"
-              },
-              {
-                "type": "stat",
-                "stat": "max_hp_rate",
-                "value": 0.08,
-                "description": "Increases Health by 20%.",
-                "upgrade": "+8% Health"
-              }
-            ]
-          },
-          {
-            "id": 2,
-            "position": 2,
-            "require_id": null,
-            "enhancements": [
-              {
-                "type": "stat",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Effectiveness.",
-                "upgrade": null
-              },
-              {
-                "type": "stat",
-                "stat": "acc",
-                "value": 0.02,
-                "description": "Increases Effectiveness by 2%.",
-                "upgrade": "+2% Effectiveness"
-              },
-              {
-                "type": "stat",
-                "stat": "acc",
-                "value": 0.03,
-                "description": "Increases Effectiveness by 5%.",
-                "upgrade": "+3% Effectiveness"
-              },
-              {
-                "type": "stat",
-                "stat": "acc",
-                "value": 0.05,
-                "description": "Increases Effectiveness by 10%.",
-                "upgrade": "+5% Effectiveness"
-              }
-            ]
-          },
-          {
-            "id": 3,
-            "position": 3,
-            "require_id": null,
-            "enhancements": [
-              {
-                "type": "stat",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Defense.",
-                "upgrade": null
-              },
-              {
-                "type": "stat",
-                "stat": "def_rate",
-                "value": 0.03,
-                "description": "Increases Defense by 3%.",
-                "upgrade": "+3% Defense"
-              },
-              {
-                "type": "stat",
-                "stat": "def_rate",
-                "value": 0.05,
-                "description": "Increases Defense by 8%.",
-                "upgrade": "+5% Defense"
-              },
-              {
-                "type": "stat",
-                "stat": "def_rate",
-                "value": 0.07,
-                "description": "Increases Defense by 15%.",
-                "upgrade": "+7% Defense"
-              }
-            ]
-          }
-        ],
-        [
-          {
-            "id": 4,
-            "position": 1,
-            "require_id": null,
-            "enhancements": [
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Hit Chance of all allies.",
-                "upgrade": null
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Hit Chance of all allies by 1%.",
-                "upgrade": "+1% Hit Chance"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Hit Chance of all allies by 2.5%.",
-                "upgrade": "+1.5% Hit Chance"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Hit Chance of all allies by 5%.",
-                "upgrade": "+2.5% Hit Chance"
-              }
-            ]
-          },
-          {
-            "id": 5,
-            "position": 2,
-            "require_id": null,
-            "enhancements": [
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Damage dealt increases when attacking a Dark elemental target.",
-                "upgrade": null
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Damage dealt increases by 5% when attacking a Dark elemental target.",
-                "upgrade": "+5% damage dealt"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Damage dealt increases by 12% when attacking a Dark elemental target.",
-                "upgrade": "+7% damage dealt"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Damage dealt increases by 20% when attacking a Dark elemental target.",
-                "upgrade": "+8% damage dealt"
-              }
-            ]
-          }
-        ],
-        [
-          {
-            "id": 6,
-            "position": 1,
-            "require_id": null,
-            "enhancements": [
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases damage dealt by Supreme Spear.",
-                "upgrade": null
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases damage dealt by Supreme Spear by 2%.",
-                "upgrade": "+2% damage dealt"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases damage dealt by Supreme Spear by 5%.",
-                "upgrade": "+3% damage dealt"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases damage dealt by Supreme Spear by 10%.",
-                "upgrade": "+5% damage dealt"
-              }
-            ]
-          },
-          {
-            "id": 7,
-            "position": 3,
-            "require_id": null,
-            "enhancements": [
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a chance to dispel a debuff from the caster when the caster's Health is 20% or less at the start of the turn.",
-                "upgrade": null
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a 20% chance to dispel a debuff from the caster when the caster's Health is 20% or less at the start of the turn.",
-                "upgrade": "+20% dispel chance"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a 50% chance to dispel from debuff on the caster when the caster's Health is 20% or less at the start of the turn.",
-                "upgrade": "+30% dispel chance"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a 100% chance to dispel a debuff from the caster when the caster's Health is 20% or less at the start of the turn.",
-                "upgrade": "+50% dispel chance"
-              }
-            ]
-          }
-        ],
-        [
-          {
-            "id": 8,
-            "position": 1,
-            "require_id": 6,
-            "enhancements": [
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Healing of Supreme Spear increases.",
-                "upgrade": null
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Healing of Supreme Spear increases by 40%.",
-                "upgrade": "+40% healing"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Healing of Supreme Spear increases by 100%.",
-                "upgrade": "+60% healing"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Healing of Supreme Spear increases by 200%.",
-                "upgrade": "+100% healing"
-              }
-            ]
-          },
-          {
-            "id": 9,
-            "position": 2,
-            "require_id": 5,
-            "enhancements": [
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a chance to inflict additional damage when attacking a Dark elemental target with Quick Pierce. Damage dealt increases proportional to the caster's Attack.",
-                "upgrade": null
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a 5% chance to inflict additional damage when attacking a Dark elemental target with Quick Pierce. Damage dealt increases proportional to the caster's Attack.",
-                "upgrade": "+5% effect chance"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a 15% chance to inflict additional damage when attacking a Dark elemental target with Quick Pierce. Damage dealt increases proportional to the caster's Attack.",
-                "upgrade": "+10% effect chance"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Has a 30% chance to inflict additional damage when attacking a Dark elemental target with Quick Pierce. Damage dealt increases proportional to the caster's Attack.",
-                "upgrade": "+15% effect chance"
-              }
-            ]
-          }
-        ],
-        [
-          {
-            "id": 10,
-            "position": 3,
-            "require_id": 7,
-            "enhancements": [
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Attack and Defense when the caster's Health is 50% or less.",
-                "upgrade": null
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Attack and Defense by 5% when the caster's Health is 50% or less.",
-                "upgrade": "+5% stat"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Attack and Defense by 12% when the caster's Health is 50% or less.",
-                "upgrade": "+7% stat"
-              },
-              {
-                "type": "skill",
-                "stat": null,
-                "value": 0,
-                "description": "Increases Attack and Defense by 20% when the caster's Health is 50% or less.",
-                "upgrade": "+8% stat"
-              }
-            ]
-          }
-        ]
-      ]
-    },
+    "specialty_change": {},
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/face/c4034_s.png",
       "image": "https://assets.epicsevendb.com/_source/face/c4034_su.png",
@@ -5903,10 +5568,10 @@
         "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
-        "overrideAtk": 0,
-        "overrideHp": 4915,
-        "overrideDef": 536,
-        "overrideAdditionalCr": 0,
+        "overrideAtk": 850,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.1,
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0.1,
@@ -5938,10 +5603,10 @@
         "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
-        "overrideAtk": 0,
-        "overrideHp": 6453,
-        "overrideDef": 665,
-        "overrideAdditionalCr": 0,
+        "overrideAtk": 1031,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.1,
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0.1,
@@ -8934,7 +8599,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1014_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1014_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101014",
+        "id": "exc101014",
+        "name": "Restrained Ferality",
+        "description": "A necklace given to Cidd by the Wild Dog Company after he accomplished his first mission. Apparently, Jenua pick the design himself.",
+        "unit": "c1014",
+        "role": "assassin",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10433,
@@ -24207,13 +23886,13 @@
       }
     },
     "devotion": {
-      "type": "max_hp_rate",
+      "type": "res",
       "grades": {
-        "B": 0.036,
-        "A": 0.054,
-        "S": 0.072,
-        "SS": 0.09,
-        "SSS": 0.108
+        "B": 0.048,
+        "A": 0.072,
+        "S": 0.096,
+        "SS": 0.12,
+        "SSS": 0.144
       },
       "slots": {
         "1": true,
@@ -24246,7 +23925,7 @@
       "lv50FiveStarFullyAwakened": {
         "cp": 12898,
         "atk": 897,
-        "hp": 4253,
+        "hp": 4285,
         "spd": 125,
         "def": 390,
         "chc": 0.22999999999999998,
@@ -24270,7 +23949,7 @@
       "lv60SixStarFullyAwakened": {
         "cp": 16285,
         "atk": 1119,
-        "hp": 5340,
+        "hp": 5380,
         "spd": 129,
         "def": 483,
         "chc": 0.22999999999999998,
@@ -27959,6 +27638,98 @@
       }
     }
   },
+  "Sharun": {
+    "_id": "sharun",
+    "name": "Sharun",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "manauser",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/sharunPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/sharunPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 13780,
+        "atk": 393,
+        "hp": 3913,
+        "spd": 100,
+        "def": 548,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 15694,
+        "atk": 513,
+        "hp": 4253,
+        "spd": 106,
+        "def": 580,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.06,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 17197,
+        "atk": 490,
+        "hp": 4920,
+        "spd": 100,
+        "def": 680,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 20045,
+        "atk": 640,
+        "hp": 5340,
+        "spd": 106,
+        "def": 720,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Shooting Star Achates": {
     "_id": "shooting-star-achates",
     "name": "Shooting Star Achates",
@@ -29209,9 +28980,123 @@
       }
     }
   },
+  "Summer Break Charlotte": {
+    "_id": "summer-break-charlotte",
+    "name": "Summer Break Charlotte",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "knight",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": false,
+        "2": false,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/summerBreakCharlottePortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/summerBreakCharlottePanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11895,
+        "atk": 611,
+        "hp": 4556,
+        "spd": 103,
+        "def": 511,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13243,
+        "atk": 767,
+        "hp": 4896,
+        "spd": 109,
+        "def": 511,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.2,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14850,
+        "atk": 762,
+        "hp": 5728,
+        "spd": 103,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16949,
+        "atk": 957,
+        "hp": 6148,
+        "spd": 109,
+        "def": 634,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.2,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
   "Summer's Disciple Alexa": {
     "_id": "summers-disciple-alexa",
-    "name": "Alexa",
+    "name": "Summer's Disciple Alexa",
     "moonlight": false,
     "rarity": 3,
     "attribute": "ice",
