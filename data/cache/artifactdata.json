@@ -1413,6 +1413,20 @@
       "health": 32
     }
   },
+  "Mature Sunglasses": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Mature Sunglasses",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Merciless Glutton": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0083.png",
