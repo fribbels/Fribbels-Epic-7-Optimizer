@@ -1423,8 +1423,8 @@
     "rarity": 5,
     "role": "knight",
     "stats": {
-      "attack": 9,
-      "health": 76
+      "attack": 15,
+      "health": 54
     }
   },
   "Merciless Glutton": {
@@ -2575,6 +2575,20 @@
       "health": 63
     }
   },
+  "VII. The Chariot": {
+    "assets": {
+      "icon": "",
+      "image": "",
+      "thumbnail": ""
+    },
+    "name": "VII. The Chariot",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    }
+  },
   "XIII. Death": {
     "assets": {
       "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
@@ -2596,6 +2610,20 @@
       "thumbnail": ""
     },
     "name": "XIV. Temperance",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    }
+  },
+  "XIX. The Sun": {
+    "assets": {
+      "icon": "",
+      "image": "",
+      "thumbnail": ""
+    },
+    "name": "XIX. The Sun",
     "rarity": 4,
     "role": "",
     "stats": {
