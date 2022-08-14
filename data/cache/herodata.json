@@ -21973,6 +21973,122 @@
       }
     }
   },
+  "Moon Bunny Dominiel": {
+    "_id": "moon-bunny-dominiel",
+    "name": "Moon Bunny Dominiel",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "light",
+    "role": "manauser",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "C": 0.04,
+        "B": 0.06,
+        "A": 0.08,
+        "S": 0.10,
+        "SS": 0.12,
+        "SSS": 0.14
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "C": 0.024,
+        "B": 0.036,
+        "A": 0.048,
+        "S": 0.06,
+        "SS": 0.072,
+        "SSS": 0.084
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/moonBunnyDominielPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/moonBunnyDominielPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 12893,
+        "atk": 400,
+        "hp": 3302,
+        "spd": 108,
+        "def": 508,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 14749,
+        "atk": 520,
+        "hp": 3642,
+        "spd": 114,
+        "def": 508,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.2
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 16095,
+        "atk": 499,
+        "hp": 4152,
+        "spd": 108,
+        "def": 631,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 18832,
+        "atk": 649,
+        "hp": 4572,
+        "spd": 114,
+        "def": 631,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.3,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.2
+      }
+    }
+  },
   "Mort": {
     "_id": "mort",
     "name": "Mort",
