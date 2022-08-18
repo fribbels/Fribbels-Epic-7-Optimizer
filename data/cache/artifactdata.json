@@ -1035,6 +1035,20 @@
       "health": 65
     }
   },
+  "Fullmetals Automail": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Fullmetals Automail",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    }
+  },
   "Glo-Wings 21": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0036.png",
@@ -1215,6 +1229,20 @@
     "stats": {
       "attack": 14,
       "health": 51
+    }
+  },
+  "Ignition Cloth Gloves": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Ignition Cloth Gloves",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
     }
   },
   "Indestructible Gaiters": {
@@ -1805,6 +1833,20 @@
       "health": 27
     }
   },
+  "Sacred Tree Branch": {
+    "assets": {
+      "icon": "",
+      "image": "",
+      "thumbnail": ""
+    },
+    "name": "Sacred Tree Branch",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Samsara Prayer Beads": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0104.png",
@@ -1898,6 +1940,20 @@
     "name": "Severed Horn Wand",
     "rarity": 5,
     "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
+  "Sharpshooters Handgun": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Sharpshooters Handgun",
+    "rarity": 5,
+    "role": "ranger",
     "stats": {
       "attack": 21,
       "health": 32
