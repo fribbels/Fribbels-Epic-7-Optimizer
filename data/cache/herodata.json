@@ -13446,7 +13446,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1087_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1087_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101087",
+        "id": "exc101087",
+        "name": "Indomitable Faith",
+        "description": "A crossbow made from the weapon Furious had used when he was serving with the Aakhen Army. It can shoot dozens of arrorws within a short period.",
+        "unit": "c1087",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10886,
@@ -17834,7 +17848,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/laikaPanel.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101099",
+        "id": "exc101099",
+        "name": "Prototype Memory Card",
+        "description": "A memory card that was installed in Laika when she was first produced. Brinus gave it to her in a small gift box and told her to go through its contents whenever Laika felt the need.",
+        "unit": "c1099",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11517,
@@ -26470,7 +26498,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c2029_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c2029_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc102029",
+        "id": "exc102029",
+        "name": "Golden Horn of Vengenance",
+        "description": "A slingshot he bought after selling everything that he inherited from his parents. He reconfigured the handle as a flute so that he can call Racoo.",
+        "unit": "c2029",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10782,
