@@ -2071,6 +2071,20 @@
       "health": 54
     }
   },
+  "Spatiotemporal Fan": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Spatiotemporal Fan",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Spear of a New Dawn": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0049.png",

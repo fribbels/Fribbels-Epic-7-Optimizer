@@ -3682,6 +3682,98 @@
       }
     }
   },
+  "Astromancer Elena": {
+    "_id": "astromancer-elena",
+    "name": "Astromancer Elena",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "ranger",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/astromancerElenaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/astromancerElenaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11491,
+        "atk": 684,
+        "hp": 4042,
+        "spd": 115,
+        "def": 455,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13144,
+        "atk": 824,
+        "hp": 4382,
+        "spd": 115,
+        "def": 455,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14339,
+        "atk": 853,
+        "hp": 5082,
+        "spd": 115,
+        "def": 564,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16680,
+        "atk": 1079,
+        "hp": 5502,
+        "spd": 115,
+        "def": 564,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Auxiliary Lots": {
     "_id": "auxiliary-lots",
     "name": "Auxiliary Lots",
@@ -9475,7 +9567,7 @@
     "rarity": 5,
     "attribute": "light",
     "role": "ranger",
-    "zodiac": "ram",
+    "zodiac": "bull",
     "self_devotion": {
       "type": "att_rate",
       "grades": {
@@ -9511,11 +9603,11 @@
     "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
-        "cp": 11517,
-        "atk": 720,
-        "hp": 3881,
-        "spd": 114,
-        "def": 460,
+        "cp": 14812,
+        "atk": 800,
+        "hp": 3752,
+        "spd": 109,
+        "def": 469,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
@@ -9523,23 +9615,23 @@
         "efr": 0
       },
       "lv50FiveStarFullyAwakened": {
-        "cp": 13288,
-        "atk": 904,
-        "hp": 4221,
-        "spd": 114,
-        "def": 460,
-        "chc": 0.15,
+        "cp": 16394,
+        "atk": 1016,
+        "hp": 4092,
+        "spd": 109,
+        "def": 469,
+        "chc": 0.23,
         "chd": 1.5,
         "dac": 0.05,
-        "eff": 0.18,
+        "eff": 0,
         "efr": 0
       },
       "lv60SixStarNoAwaken": {
-        "cp": 14378,
-        "atk": 898,
-        "hp": 4879,
-        "spd": 114,
-        "def": 571,
+        "cp": 18491,
+        "atk": 998,
+        "hp": 4718,
+        "spd": 109,
+        "def": 582,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
@@ -9547,7 +9639,7 @@
         "efr": 0
       },
       "lv60SixStarFullyAwakened": {
-        "cp": 16848,
+        "cp": 20727,
         "atk": 1327,
         "hp": 5138,
         "spd": 109,
@@ -15304,7 +15396,7 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 50,
+        "bonusMaxAtkPercent": 30,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -15339,7 +15431,7 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 50,
+        "bonusMaxAtkPercent": 30,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -19044,6 +19136,98 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0.30
+      }
+    }
+  },
+  "Lua": {
+    "_id": "Lua",
+    "name": "Lua",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "ranger",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.058,
+        "A": 0.087,
+        "S": 0.116,
+        "SS": 0.145,
+        "SSS": 0.174
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": false,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/luaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/luaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11648,
+        "atk": 684,
+        "hp": 4202,
+        "spd": 109,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 993,
+        "hp": 6002,
+        "spd": 120,
+        "def": 611,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14536,
+        "atk": 853,
+        "hp": 5284,
+        "spd": 109,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 993,
+        "hp": 6002,
+        "spd": 120,
+        "def": 611,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
