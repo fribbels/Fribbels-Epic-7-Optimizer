@@ -3682,6 +3682,98 @@
       }
     }
   },
+  "Astromancer Elena": {
+    "_id": "astromancer-elena",
+    "name": "Astromancer Elena",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "ranger",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/astromancerElenaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/astromancerElenaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11491,
+        "atk": 684,
+        "hp": 4042,
+        "spd": 115,
+        "def": 455,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13144,
+        "atk": 824,
+        "hp": 4382,
+        "spd": 115,
+        "def": 455,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14339,
+        "atk": 853,
+        "hp": 5082,
+        "spd": 115,
+        "def": 564,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16680,
+        "atk": 1079,
+        "hp": 5502,
+        "spd": 115,
+        "def": 564,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Auxiliary Lots": {
     "_id": "auxiliary-lots",
     "name": "Auxiliary Lots",
@@ -9468,6 +9560,98 @@
       }
     }
   },
+  "Commander Pavel": {
+    "_id": "commander-pavel",
+    "name": "Commander Pavel",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "ranger",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/commanderPavelPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/commanderPavelPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 14812,
+        "atk": 800,
+        "hp": 3752,
+        "spd": 109,
+        "def": 469,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16394,
+        "atk": 1016,
+        "hp": 4092,
+        "spd": 109,
+        "def": 469,
+        "chc": 0.23,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 18491,
+        "atk": 998,
+        "hp": 4718,
+        "spd": 109,
+        "def": 582,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 20727,
+        "atk": 1327,
+        "hp": 5138,
+        "spd": 109,
+        "def": 582,
+        "chc": 0.23,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Conqueror Lilias": {
     "_id": "conqueror-lilias",
     "name": "Conqueror Lilias",
@@ -11569,6 +11753,98 @@
       }
     }
   },
+  "Edward Elric": {
+    "_id": "edward-elric",
+    "name": "Edward Elric",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "warrior",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "res",
+      "grades": {
+        "B": 0.048,
+        "A": 0.072,
+        "S": 0.096,
+        "SS": 0.12,
+        "SSS": 0.144
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/edwardElricPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/edwardElricPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 9982,
+        "atk": 553,
+        "hp": 3720,
+        "spd": 96,
+        "def": 438,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11377,
+        "atk": 789,
+        "hp": 4735,
+        "spd": 117,
+        "def": 514,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12454,
+        "atk": 689,
+        "hp": 4677,
+        "spd": 96,
+        "def": 543,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14466,
+        "atk": 984,
+        "hp": 6266,
+        "spd": 117,
+        "def": 637,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Elena": {
     "_id": "elena",
     "name": "Elena",
@@ -13262,7 +13538,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1087_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1087_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101087",
+        "id": "exc101087",
+        "name": "Indomitable Faith",
+        "description": "A crossbow made from the weapon Furious had used when he was serving with the Aakhen Army. It can shoot dozens of arrorws within a short period.",
+        "unit": "c1087",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10886,
@@ -15106,7 +15396,7 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 50,
+        "bonusMaxAtkPercent": 30,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -15141,7 +15431,7 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 50,
+        "bonusMaxAtkPercent": 30,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -17650,7 +17940,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/laikaPanel.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101099",
+        "id": "exc101099",
+        "name": "Prototype Memory Card",
+        "description": "A memory card that was installed in Laika when she was first produced. Brinus gave it to her in a small gift box and told her to go through its contents whenever Laika felt the need.",
+        "unit": "c1099",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11517,
@@ -18832,6 +19136,98 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0.30
+      }
+    }
+  },
+  "Lua": {
+    "_id": "Lua",
+    "name": "Lua",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "ranger",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.058,
+        "A": 0.087,
+        "S": 0.116,
+        "SS": 0.145,
+        "SSS": 0.174
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": false,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/luaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/luaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11648,
+        "atk": 684,
+        "hp": 4202,
+        "spd": 109,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 993,
+        "hp": 6002,
+        "spd": 120,
+        "def": 611,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14536,
+        "atk": 853,
+        "hp": 5284,
+        "spd": 109,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 993,
+        "hp": 6002,
+        "spd": 120,
+        "def": 611,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
@@ -21970,6 +22366,122 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0.12
+      }
+    }
+  },
+  "Moon Bunny Dominiel": {
+    "_id": "moon-bunny-dominiel",
+    "name": "Moon Bunny Dominiel",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "light",
+    "role": "manauser",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "C": 0.04,
+        "B": 0.06,
+        "A": 0.08,
+        "S": 0.10,
+        "SS": 0.12,
+        "SSS": 0.14
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "C": 0.024,
+        "B": 0.036,
+        "A": 0.048,
+        "S": 0.06,
+        "SS": 0.072,
+        "SSS": 0.084
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/moonBunnyDominielPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/moonBunnyDominielPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 12893,
+        "atk": 400,
+        "hp": 3302,
+        "spd": 108,
+        "def": 508,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 14749,
+        "atk": 520,
+        "hp": 3642,
+        "spd": 114,
+        "def": 508,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.2
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 16095,
+        "atk": 499,
+        "hp": 4152,
+        "spd": 108,
+        "def": 631,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 18832,
+        "atk": 649,
+        "hp": 4572,
+        "spd": 114,
+        "def": 631,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.3,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.2
       }
     }
   },
@@ -26036,6 +26548,98 @@
       }
     }
   },
+  "Riza Hawkeye": {
+    "_id": "riza-hawkeye",
+    "name": "Riza Hawkeye",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "ranger",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": false,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/rizaHawkeyePortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/rizaHawkeyePanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11648,
+        "atk": 684,
+        "hp": 4202,
+        "spd": 109,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13285,
+        "atk": 804,
+        "hp": 4542,
+        "spd": 115,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14536,
+        "atk": 853,
+        "hp": 5284,
+        "spd": 109,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 1003,
+        "hp": 5704,
+        "spd": 115,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0.3,
+        "efr": 0
+      }
+    }
+  },
   "Roaming Warrior Leo": {
     "_id": "roaming-warrior-leo",
     "name": "Roaming Warrior Leo",
@@ -26078,7 +26682,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c2029_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c2029_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc102029",
+        "id": "exc102029",
+        "name": "Golden Horn of Vengenance",
+        "description": "A slingshot he bought after selling everything that he inherited from his parents. He reconfigured the handle as a flute so that he can call Racoo.",
+        "unit": "c2029",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10782,
@@ -26615,6 +27233,98 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0.12
+      }
+    }
+  },
+  "Roy Mustang": {
+    "_id": "roy-mustang",
+    "name": "Roy Mustang",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "mage",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/royMustangPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/royMustangPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11710,
+        "atk": 880,
+        "hp": 3045,
+        "spd": 106,
+        "def": 520,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13169,
+        "atk": 1079,
+        "hp": 3385,
+        "spd": 112,
+        "def": 520,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14604,
+        "atk": 1098,
+        "hp": 3828,
+        "spd": 106,
+        "def": 645,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16722,
+        "atk": 1412,
+        "hp": 4248,
+        "spd": 112,
+        "def": 645,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
