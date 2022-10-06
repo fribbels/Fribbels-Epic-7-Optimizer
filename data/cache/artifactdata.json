@@ -1651,6 +1651,20 @@
       "health": 32
     }
   },
+  "Prelude to a New Dawn": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Prelude to a New Dawn",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 15,
+      "health": 36
+    }
+  },
   "Portrait of the Saviors": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0048.png",
