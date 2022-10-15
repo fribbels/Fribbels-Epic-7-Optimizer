@@ -11704,11 +11704,11 @@
     "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
-        "cp": 10356,
-        "atk": 400,
-        "hp": 3527,
-        "spd": 99,
-        "def": 559,
+        "cp": 15349,
+        "atk": 837,
+        "hp": 3656,
+        "spd": 106,
+        "def": 525,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
@@ -11716,11 +11716,11 @@
         "efr": 0
       },
       "lv50FiveStarFullyAwakened": {
-        "cp": 11883,
-        "atk": 520,
-        "hp": 3972,
-        "spd": 103,
-        "def": 559,
+        "cp": 17217,
+        "atk": 1007,
+        "hp": 3996,
+        "spd": 106,
+        "def": 525,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
@@ -11728,11 +11728,11 @@
         "efr": 0.18
       },
       "lv60SixStarNoAwaken": {
-        "cp": 12923,
-        "atk": 499,
-        "hp": 4435,
-        "spd": 99,
-        "def": 694,
+        "cp": 19154,
+        "atk": 1043,
+        "hp": 4596,
+        "spd": 106,
+        "def": 652,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.05,
@@ -15396,7 +15396,7 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 50,
+        "bonusMaxAtkPercent": 30,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -15431,7 +15431,7 @@
         "dac": 0.05,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 50,
+        "bonusMaxAtkPercent": 30,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -31004,13 +31004,13 @@
     "role": "mage",
     "zodiac": "archer",
     "self_devotion": {
-      "type": "att_rate",
+      "type": "cri",
       "grades": {
-        "B": 0.06,
-        "A": 0.09,
-        "S": 0.12,
-        "SS": 0.15,
-        "SSS": 0.18
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
       }
     },
     "devotion": {
@@ -31359,6 +31359,124 @@
         "dac": 0.05,
         "eff": 0.18,
         "efr": 0
+      }
+    }
+  },
+  "Unbound Knight Arowell": {
+    "_id": "unbound-knight-arowell",
+    "name": "Unbound Knight Arowell",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "light",
+    "role": "knight",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "max_hp",
+      "grades": {
+        "D": 180,
+        "C": 270,
+        "B": 360,
+        "A": 450,
+        "S": 540,
+        "SS": 630,
+        "SSS": 720
+      }
+    },
+    "devotion": {
+      "type": "max_hp",
+      "grades": {
+        "D": 120,
+        "C": 180,
+        "B": 240,
+        "A": 300,
+        "S": 360,
+        "SS": 420,
+        "SSS": 480
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/unboundKnightArowellPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/unboundKnightArowellPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10476,
+        "atk": 487,
+        "hp": 3945,
+        "spd": 95,
+        "def": 497,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12124,
+        "atk": 607,
+        "hp": 4640,
+        "spd": 95,
+        "def": 511,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.12,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5429,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.35
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13081,
+        "atk": 608,
+        "hp": 4960,
+        "spd": 95,
+        "def": 617,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15498,
+        "atk": 758,
+        "hp": 5826,
+        "spd": 95,
+        "def": 672,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.05,
+        "eff": 0,
+        "efr": 0.12,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 6818,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.35
       }
     }
   },
