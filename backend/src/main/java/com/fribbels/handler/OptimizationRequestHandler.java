@@ -70,7 +70,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     public static boolean inProgress = false;
 
     private static final Gson gson = new Gson();
-    private static final int SET_COUNT = 16;
     @Getter
     private AtomicLong searchedCounter = new AtomicLong(0);
     private AtomicLong resultsCounter = new AtomicLong(0);
@@ -79,8 +78,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private boolean canUseGpu = true;
 
-    private boolean[] permutations = new boolean[16777216];
-    private int[] setPermutationIndicesPlusOne = new int[16777216];
+    public static final int SET_COUNT = 18;
+    public static final int ARG_COUNT = 16;
+
+    //
+    private static final int SET_EXPONENTIAL = 34012224; // 16 ^ 6
+
+    private boolean[] permutations = new boolean[SET_EXPONENTIAL];
+    private int[] setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
 
     public OptimizationRequestHandler(final BaseStatsDb baseStatsDb,
                                       final HeroDb heroDb,
@@ -93,19 +98,27 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         ExecutorService t = Executors.newFixedThreadPool(3);
 
         t.execute(() -> {
-            setSolutionBitMasks = new int[16777216];
+            setSolutionBitMasks = new int[SET_EXPONENTIAL];
             int count = 0;
-            for (int a = 0; a < 16; a++) {
-                for (int b = 0; b < 16; b++) {
-                    for (int c = 0; c < 16; c++) {
-                        for (int d = 0; d < 16; d++) {
-                            for (int e = 0; e < 16; e++) {
-                                for (int f = 0; f < 16; f++) {
+            for (int a = 0; a < SET_COUNT; a++) {
+                for (int b = 0; b < SET_COUNT; b++) {
+                    for (int c = 0; c < SET_COUNT; c++) {
+                        for (int d = 0; d < SET_COUNT; d++) {
+                            for (int e = 0; e < SET_COUNT; e++) {
+                                for (int f = 0; f < SET_COUNT; f++) {
                                     int[] sets = new int[]{a, b, c, d, e, f};
                                     int[] counters = convertSetsToSetCounters(sets);
 
                                     int l = 0;
 
+                                    l += counters[17] / 2 > 0 ? 1 : 0; // torrent 1
+                                    l <<= 1;
+                                    l += counters[17] / 2 - 1 > 0 ? 1 : 0; // torrent 2
+                                    l <<= 1;
+                                    l += counters[17] / 2 - 2 > 0 ? 1 : 0; // torrent 3
+                                    l <<= 1;
+                                    l += counters[16] / 4 > 0 ? 1 : 0; // protection
+                                    l <<= 1;
                                     l += counters[15] / 4 > 0 ? 1 : 0; // injury
                                     l <<= 1;
                                     l += counters[14] / 4 > 0 ? 1 : 0; // revenge
@@ -169,8 +182,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         });
 
         t.execute(() -> {
-            permutations = new boolean[16777216];
-            setPermutationIndicesPlusOne = new int[16777216];
+            permutations = new boolean[SET_EXPONENTIAL];
+            setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
         });
 
         t.execute(() -> {
@@ -361,6 +374,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.getMcdmg() < request.getInputMinMcdmgLimit() || heroStats.getMcdmg() > request.getInputMaxMcdmgLimit()
                 ||  heroStats.getMcdmgps() < request.getInputMinMcdmgpsLimit() || heroStats.getMcdmgps() > request.getInputMaxMcdmgpsLimit()
                 ||  heroStats.getDmgh() < request.getInputMinDmgHLimit() || heroStats.getDmgh() > request.getInputMaxDmgHLimit()
+                ||  heroStats.getDmgd() < request.getInputMinDmgDLimit() || heroStats.getDmgd() > request.getInputMaxDmgDLimit()
                 ||  heroStats.getScore() < request.getInputMinScoreLimit() || heroStats.getScore() > request.getInputMaxScoreLimit()
                 ||  heroStats.getPriority() < request.getInputMinPriorityLimit() || heroStats.getPriority() > request.getInputMaxPriorityLimit()
                 ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
@@ -480,19 +494,18 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public float[] flattenAccArrs(final Item[] items, final StatCalculator statCalculator) {
-        final int argCount = 16;
-        final int outputSize = items.length * argCount;
+        final int outputSize = items.length * ARG_COUNT;
         final float[] output = new float[outputSize];
 
         for (int i = 0; i < items.length; i++) {
             final Item item = items[i];
-            for (int j = 0; j < argCount - 4; j++) {
-                output[i*argCount + j] = item.tempStatAccArr[j];
+            for (int j = 0; j < ARG_COUNT - 4; j++) {
+                output[i*ARG_COUNT + j] = item.tempStatAccArr[j];
             }
-            output[i*argCount + argCount - 4] = item.set.index;
-            output[i*argCount + argCount - 3] = item.priority;
-            output[i*argCount + argCount - 2] = item.upgradeable;
-            output[i*argCount + argCount - 1] = item.convertable;
+            output[i*ARG_COUNT + ARG_COUNT - 4] = item.set.index;
+            output[i*ARG_COUNT + ARG_COUNT - 3] = item.priority;
+            output[i*ARG_COUNT + ARG_COUNT - 2] = item.upgradeable;
+            output[i*ARG_COUNT + ARG_COUNT - 1] = item.convertable;
 
             // 0 atk
             // 1 hp
@@ -650,7 +663,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
 //            final int max = 2097152;
             final int max = 1048576;
-            final int argSize = 16;
 
             kernel = selectKernel(
                     request,
@@ -676,7 +688,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     SETTING_PEN_SET,
                     base,
                     hero,
-                    argSize,
+                    ARG_COUNT,
                     wSize,
                     hSize,
                     aSize,
@@ -1031,7 +1043,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public int[] convertSetsToSetCounters(final int[] sets) {
-        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Length of SET_COUNT
 
         for (int i = 0; i < sets.length; i++) {
             output[sets[i]]++;
@@ -1058,6 +1070,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.mcdmg < request.inputMinMcdmgLimit || heroStats.mcdmg > request.inputMaxMcdmgLimit
                 ||  heroStats.mcdmgps < request.inputMinMcdmgpsLimit || heroStats.mcdmgps > request.inputMaxMcdmgpsLimit
                 ||  heroStats.dmgh < request.inputMinDmgHLimit || heroStats.dmgh > request.inputMaxDmgHLimit
+                ||  heroStats.dmgd < request.inputMinDmgDLimit || heroStats.dmgd > request.inputMaxDmgDLimit
                 ||  heroStats.score < request.inputMinScoreLimit || heroStats.score > request.inputMaxScoreLimit
                 ||  heroStats.priority < request.inputMinPriorityLimit || heroStats.priority > request.inputMaxPriorityLimit
                 ||  heroStats.upgrades < request.inputMinUpgradesLimit || heroStats.upgrades > request.inputMaxUpgradesLimit
@@ -1094,18 +1107,18 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return sets;
     }
 
-    private static final int POW_16_5 = 1048576;
-    private static final int POW_16_4 = 65536;
-    private static final int POW_16_3 = 4096;
-    private static final int POW_16_2 = 256;
-    private static final int POW_16_1 = 16;
+    private static final int POW_18_5 = 1889568;
+    private static final int POW_18_4 = 104976;
+    private static final int POW_18_3 = 5832;
+    private static final int POW_18_2 = 324;
+    private static final int POW_18_1 = 18;
 
-    public int calculateSetIndex(final int[] indices) { // sorted, size 6, elements [0-15]
-        return indices[0] * POW_16_5
-                + indices[1] * POW_16_4
-                + indices[2] * POW_16_3
-                + indices[3] * POW_16_2
-                + indices[4] * POW_16_1
+    public int calculateSetIndex(final int[] indices) { // sorted, size 6, elements [0-17]
+        return indices[0] * POW_18_5
+                + indices[1] * POW_18_4
+                + indices[2] * POW_18_3
+                + indices[3] * POW_18_2
+                + indices[4] * POW_18_1
                 + indices[5];
     }
 
@@ -1146,8 +1159,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public void addCalculatedFields(OptimizationRequest request) {
-//        final boolean[] permutations = new boolean[16777216];
-//        final int[] setPermutationIndicesPlusOne = new int[16777216];
+//        final boolean[] permutations = new boolean[SET_EXPONENTIAL];
+//        final int[] setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
         Arrays.fill(permutations, false);
         Arrays.fill(setPermutationIndicesPlusOne, 0);
 //        int[] setSolutionCounters;

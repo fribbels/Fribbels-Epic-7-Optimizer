@@ -120,11 +120,11 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int iRset = (int)rSet;
             final int iBset = (int)bSet;
 
-            final int setIndex = iWset * 1048576
-                    + iHset * 65536
-                    + iAset * 4096
-                    + iNset * 256
-                    + iRset * 16
+            final int setIndex = iWset * 1889568
+                    + iHset * 104976
+                    + iAset * 5832
+                    + iNset * 324
+                    + iRset * 18
                     + iBset;
 
             final int hpSet = min(1, setSolutionBitMasks[setIndex] & (1)) + min(1, setSolutionBitMasks[setIndex] & (1 << 1)) + min(1, setSolutionBitMasks[setIndex] & (1 << 2));
@@ -138,9 +138,10 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int rageSet = min(1, setSolutionBitMasks[setIndex] & (1 << 21));
             final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
             final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 24));
+            final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 26)) + min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28));
 
             final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
-            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus)) * bonusMaxHp);
+            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
             final float def =  ((bonusBaseDef  + wDef+hDef+aDef+nDef+rDef+bDef + (defSet * defSetBonus)) * bonusMaxDef);
             final int cr =     (int) (baseCr + wCr+hCr+aCr+nCr+rCr+bCr + (crSet * 12) + bonusCr + aeiCr);
             final int cd =     (int) (baseCd + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 60) + bonusCd + aeiCd);
@@ -155,16 +156,18 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
 
             final float rageMultiplier = max(1, rageSet * SETTING_RAGE_SET * 1.3f);
             final float penMultiplier = max(1, min(penSet, 1) * SETTING_PEN_SET * penSetDmgBonus);
+            final float torrentMultiplier = max(1, torrentSet * 1.1f);
             final float spdDiv1000 = (float)spd/1000;
 
             final int ehp = (int) (hp * (def/300 + 1));
             final int hpps = (int) (hp*spdDiv1000);
             final int ehpps = (int) ((float)ehp*spdDiv1000);
-            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier);
+            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
             final int dmgps = (int) ((float)dmg*spdDiv1000);
-            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier);
+            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
             final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier)/10);
+            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
+            final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
 
             final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);
@@ -188,6 +191,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
                     ||  mcdmg < inputMinMcdmgLimit || mcdmg > inputMaxMcdmgLimit
                     ||  mcdmgps < inputMinMcdmgpsLimit || mcdmgps > inputMaxMcdmgpsLimit
                     ||  dmgh < inputMinDmgHLimit || dmgh > inputMaxDmgHLimit
+                    ||  dmgd < inputMinDmgDLimit || dmgd > inputMaxDmgDLimit
                     ||  score < inputMinScoreLimit || score > inputMaxScoreLimit;
             final boolean f3 = priority < inputMinPriorityLimit || priority > inputMaxPriorityLimit
                     ||  upgrades < inputMinUpgradesLimit || upgrades > inputMaxUpgradesLimit

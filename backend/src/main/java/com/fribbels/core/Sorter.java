@@ -68,6 +68,9 @@ public class Sorter {
                     case DMGH:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgh));
                         break;
+                    case DMGD:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgd));
+                        break;
                     case UPGRADES:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getUpgrades));
                         break;
@@ -140,6 +143,9 @@ public class Sorter {
                         break;
                     case DMGH:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgh).reversed());
+                        break;
+                    case DMGD:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgd).reversed());
                         break;
                     case UPGRADES:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getUpgrades).reversed());

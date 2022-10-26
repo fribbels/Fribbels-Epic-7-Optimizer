@@ -583,6 +583,10 @@ module.exports = {
                               <div class="inputStatLabel" data-t>${i18next.t("DmgH")}</div>
                               <input type="number" id="inputMaxDmgHLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
+                              <input type="number" id="inputMinDmgDLimit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("DmgD")}</div>
+                              <input type="number" id="inputMaxDmgDLimit${index}" class="optimizer-number-input rating-number-input"><br>
+
                               <input type="number" id="inputMinScoreLimit${index}" class="optimizer-number-input rating-number-input">
                               <div class="inputStatLabel" data-t>${i18next.t("Score")}</div>
                               <input type="number" id="inputMaxScoreLimit${index}" class="optimizer-number-input rating-number-input"><br>

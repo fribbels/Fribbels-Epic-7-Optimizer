@@ -111,6 +111,8 @@ public class GpuOptimizerKernel extends Kernel {
 
     @Constant final int inputMinDmgHLimit;
     @Constant final int inputMaxDmgHLimit;
+    @Constant final int inputMinDmgDLimit;
+    @Constant final int inputMaxDmgDLimit;
     @Constant final int inputMinUpgradesLimit;
     @Constant final int inputMaxUpgradesLimit;
     @Constant final int inputMinConversionsLimit;
@@ -126,7 +128,7 @@ public class GpuOptimizerKernel extends Kernel {
     boolean[] passes;
     @Constant final int[] setSolutionBitMasks;
 
-    @Local int[] localSetsBuffer = new int[256 * 16];
+//    @Local int[] localSetsBuffer = new int[256 * 16];
 //    @Local final float[] localStatBuffer = new float[256 * 21];
 
     public GpuOptimizerKernel(
@@ -325,6 +327,8 @@ public class GpuOptimizerKernel extends Kernel {
 
         inputMinDmgHLimit = request.inputMinDmgHLimit;
         inputMaxDmgHLimit = request.inputMaxDmgHLimit;
+        inputMinDmgDLimit = request.inputMinDmgDLimit;
+        inputMaxDmgDLimit = request.inputMaxDmgDLimit;
         inputMinUpgradesLimit = request.inputMinUpgradesLimit;
         inputMaxUpgradesLimit = request.inputMaxUpgradesLimit;
         inputMinConversionsLimit = request.inputMinConversionsLimit;
@@ -351,8 +355,7 @@ public class GpuOptimizerKernel extends Kernel {
     @Override
     public void run() {
         final int id = getGlobalId();
-        final int localId = getLocalId();
-//        final int setJump = localId * 16;
+//        final int localId = getLocalId();
 
         final long i = ((long)max) * iteration + id;
         if (i < ((long)(wSize)) * hSize * aSize * nSize * rSize * bSize) {
@@ -460,13 +463,19 @@ public class GpuOptimizerKernel extends Kernel {
             final int iRset = (int)rSet;
             final int iBset = (int)bSet;
 
-            final int setIndex = iWset * 1048576
-                    + iHset * 65536
-                    + iAset * 4096
-                    + iNset * 256
-                    + iRset * 16
+            final int setIndex = iWset * 1889568
+                    + iHset * 104976
+                    + iAset * 5832
+                    + iNset * 324
+                    + iRset * 18
                     + iBset;
 
+//            final int setIndex = iWset * 1048576
+//                    + iHset * 65536
+//                    + iAset * 4096
+//                    + iNset * 256
+//                    + iRset * 16
+//                    + iBset;
 
             // 0 hp3
             // 1 hp2
@@ -508,8 +517,11 @@ public class GpuOptimizerKernel extends Kernel {
             final int rageSet = min(1, setSolutionBitMasks[setIndex] & (1 << 21));
             final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
             final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 24));
+//            final int protectionSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
+            final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 26)) + min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28));
 
-// Set calculations using localbuffer instead off mask
+
+            // Set calculations using localbuffer instead off mask
 //            localSetsBuffer[setJump] = 0;
 //            localSetsBuffer[setJump + 1] = 0;
 //            localSetsBuffer[setJump + 2] = 0;
@@ -547,7 +559,7 @@ public class GpuOptimizerKernel extends Kernel {
 //            final int revengeSet = localSetsBuffer[setJump + 14] / 4;
 
             final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
-            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus)) * bonusMaxHp);
+            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
             final float def =  ((bonusBaseDef  + wDef+hDef+aDef+nDef+rDef+bDef + (defSet * defSetBonus)) * bonusMaxDef);
             final int cr =     (int) (baseCr + wCr+hCr+aCr+nCr+rCr+bCr + (crSet * 12) + bonusCr + aeiCr);
             final int cd =     (int) (baseCd + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 60) + bonusCd + aeiCd);
@@ -562,16 +574,18 @@ public class GpuOptimizerKernel extends Kernel {
 
             final float rageMultiplier = max(1, rageSet * SETTING_RAGE_SET * 1.3f);
             final float penMultiplier = max(1, min(penSet, 1) * SETTING_PEN_SET * penSetDmgBonus);
+            final float torrentMultiplier = max(1, torrentSet * 1.1f);
             final float spdDiv1000 = (float)spd/1000;
 
             final int ehp = (int) (hp * (def/300 + 1));
             final int hpps = (int) (hp*spdDiv1000);
             final int ehpps = (int) ((float)ehp*spdDiv1000);
-            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier);
+            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
             final int dmgps = (int) ((float)dmg*spdDiv1000);
-            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier);
+            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
             final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier)/10);
+            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
+            final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
 
             final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);
@@ -595,13 +609,19 @@ public class GpuOptimizerKernel extends Kernel {
                     ||  mcdmg < inputMinMcdmgLimit || mcdmg > inputMaxMcdmgLimit
                     ||  mcdmgps < inputMinMcdmgpsLimit || mcdmgps > inputMaxMcdmgpsLimit
                     ||  dmgh < inputMinDmgHLimit || dmgh > inputMaxDmgHLimit
+                    ||  dmgd < inputMinDmgDLimit || dmgd > inputMaxDmgDLimit
                     ||  score < inputMinScoreLimit || score > inputMaxScoreLimit;
             final boolean f3 = priority < inputMinPriorityLimit || priority > inputMaxPriorityLimit
                     ||  upgrades < inputMinUpgradesLimit || upgrades > inputMaxUpgradesLimit
                     ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit;
 
 
+
+//            if (true)
+//                return;
+
             passes[id] = !(f1 || f2 || f3) && setPermutationIndicesPlusOne[setIndex] > 0;
+//            passes[id] = setIndex >= 340122242;
         }
     }
 }

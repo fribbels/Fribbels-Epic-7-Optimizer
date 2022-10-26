@@ -475,6 +475,8 @@ module.exports = {
 
         request.inputMinDmgHLimit = readNumber('inputMinDmgHLimit' + index);
         request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit' + index);
+        request.inputMinDmgDLimit = readNumber('inputMinDmgDLimit' + index);
+        request.inputMaxDmgDLimit = readNumber('inputMaxDmgDLimit' + index);
         request.inputMinUpgradesLimit = readNumber('inputMinUpgradesLimit' + index);
         request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit' + index);
         request.inputMinConversionsLimit = readNumber('inputMinConversionsLimit' + index);
@@ -601,6 +603,8 @@ module.exports = {
 
         $("#inputMinDmgHLimit" + index).val(inputDisplayNumber(request.inputMinDmgHLimit));
         $("#inputMaxDmgHLimit" + index).val(inputDisplayNumber(request.inputMaxDmgHLimit));
+        $("#inputMinDmgDLimit" + index).val(inputDisplayNumber(request.inputMinDmgDLimit));
+        $("#inputMaxDmgDLimit" + index).val(inputDisplayNumber(request.inputMaxDmgDLimit));
         $("#inputMinUpgradesLimit" + index).val(inputDisplayNumber(request.inputMinUpgradesLimit));
         $("#inputMaxUpgradesLimit" + index).val(inputDisplayNumber(request.inputMaxUpgradesLimit));
         $("#inputMinConversionsLimit" + index).val(inputDisplayNumber(request.inputMinConversionsLimit));

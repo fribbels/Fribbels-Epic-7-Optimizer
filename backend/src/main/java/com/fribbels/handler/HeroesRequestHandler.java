@@ -414,6 +414,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         build.mcdmg = finalStats.mcdmg;
         build.mcdmgps = finalStats.mcdmgps;
         build.dmgh = finalStats.dmgh;
+        build.dmgd = finalStats.dmgd;
         build.upgrades = finalStats.upgrades;
         build.score = finalStats.score;
         build.priority = finalStats.priority;

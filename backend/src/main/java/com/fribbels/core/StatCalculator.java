@@ -8,6 +8,8 @@ import com.fribbels.model.Item;
 
 import java.util.Map;
 
+import static com.fribbels.handler.OptimizationRequestHandler.SET_COUNT;
+
 public class StatCalculator {
 
     public static boolean SETTING_RAGE_SET = true;
@@ -84,7 +86,7 @@ public class StatCalculator {
         final float[] accs5 = accs[5];
 
         final float atk =  ((bonusBaseAtk  + accs0[0]+accs1[0]+accs2[0]+accs3[0]+accs4[0]+accs5[0] + (sets[2] > 3 ? atkSetBonus : 0)) * bonusMaxAtk);
-        final float hp =   ((bonusBaseHp   + accs0[1]+accs1[1]+accs2[1]+accs3[1]+accs4[1]+accs5[1] + (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0)) * bonusMaxHp);
+        final float hp =   ((bonusBaseHp   + accs0[1]+accs1[1]+accs2[1]+accs3[1]+accs4[1]+accs5[1] + (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/-2 : 0)) * bonusMaxHp);
         final float def =  ((bonusBaseDef  + accs0[2]+accs1[2]+accs2[2]+accs3[2]+accs4[2]+accs5[2] + (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) * bonusMaxDef);
         final float cr =         (base.cr  + accs0[6]+accs1[6]+accs2[6]+accs3[6]+accs4[6]+accs5[6] + (sets[4] > 1 ? sets[4] / 2 * 12 : 0) + hero.bonusCr + hero.aeiCr);
         final int cd =   (int) (base.cd    + accs0[7]+accs1[7]+accs2[7]+accs3[7]+accs4[7]+accs5[7] + (sets[6] > 3 ? 60 : 0) + hero.bonusCd + hero.aeiCd);
@@ -121,20 +123,22 @@ public class StatCalculator {
 
         final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 1.3f : 1;
         final float penMultiplier = SETTING_PEN_SET && sets[13] > 1 ? penSetDmgBonus : 1;
+        final float torrentMultiplier = sets[17] / 2 * 1.1f + 1;
         final float spdDiv1000 = (float)spd/1000;
 
         final int ehp = (int) (hp * (def/300 + 1));
         final int hpps = (int) (hp*spdDiv1000);
         final int ehpps = (int) ((float)ehp*spdDiv1000);
-        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier);
+        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
         final int dmgps = (int) ((float)dmg*spdDiv1000);
-        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier);
+        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier);
+        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int dmgd = (int) ((critDamage * def) * rageMultiplier * penMultiplier * torrentMultiplier);
 
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
-        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, upgrades, conversions, score, priority,
+        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, upgrades, conversions, score, priority,
                 base.bonusStats, null, null, null, null, null, null, null);
     }
 
@@ -193,7 +197,7 @@ public class StatCalculator {
     }
 
     public int[] buildSetsArr(final Item[] items) {
-        final int[] sets = new int[16];
+        final int[] sets = new int[SET_COUNT];
         sets[items[0].set.index]++;
         sets[items[1].set.index]++;
         sets[items[2].set.index]++;

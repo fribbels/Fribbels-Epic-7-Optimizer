@@ -217,11 +217,11 @@ module.exports = {
 }
 
 function buildGrid(localeText) {
-    const DIGITS_2 = 35;
+    const DIGITS_2 = 40;
     const DIGITS_3 = 40;
-    const DIGITS_4 = 48;
-    const DIGITS_5 = 53;
-    const DIGITS_6 = 60;
+    const DIGITS_4 = 44;
+    const DIGITS_5 = 48;
+    const DIGITS_6 = 55;
 
     const gridOptions = {
         defaultColDef: {
@@ -237,7 +237,7 @@ function buildGrid(localeText) {
         },
 
         columnDefs: [
-            {headerName: i18next.t('rank'), sortable: false, width: 65, field: 'index', rowDrag: true, rowDragText: (params, dragItemCount) => {
+            {headerName: i18next.t('rank'), sortable: false, width: 60, field: 'index', rowDrag: true, rowDragText: (params, dragItemCount) => {
                 console.log(params)
                 return params.rowNode.data.name;
             }},
@@ -245,7 +245,7 @@ function buildGrid(localeText) {
             {headerName: i18next.t('elem'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: i18next.t('class'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
             //{headerName: i18next.t('name'), field: 'name', width: 0, wrapText: true, cellStyle: {'display':'none'}},
-            {headerName: i18next.t('name'), field: 'label', width: 160, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}, cellRenderer: (params) => renderName(params)},
+            {headerName: i18next.t('name'), field: 'label', width: 150, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}, cellRenderer: (params) => renderName(params)},
             // {headerName: i18next.t('Stars'), field: 'rarity', width: 50},
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
@@ -266,6 +266,7 @@ function buildGrid(localeText) {
             {headerName: i18next.t('mcd'), field: 'mcdmg', width: 55, width: DIGITS_3},
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 55, width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: 55, width: DIGITS_5},
+            {headerName: i18next.t('dmgd'), field: 'dmgd', width: 55, width: DIGITS_5},
             {headerName: i18next.t('score'), field: 'score', width: 55, width: DIGITS_3},
             {headerName: i18next.t('upg'), field: 'upgrades', width: 65, width: DIGITS_2},
         ],
@@ -330,6 +331,7 @@ function buildGrid(localeText) {
             {headerName: i18next.t('mcd'), field: 'mcdmg', width: 55},
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 50},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: 50},
+            {headerName: i18next.t('dmgd'), field: 'dmgd', width: 50},
             {headerName: i18next.t('score'), field: 'score', width: 50},
             {headerName: i18next.t('upg'), field: 'upgrades', width: 65},
         ],
@@ -686,6 +688,7 @@ function updateCurrentAggregate(hero) {
         "mcdmg",
         "mcdmgps",
         "dmgh",
+        "dmgd",
         "score"
     ]
 

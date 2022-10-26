@@ -141,6 +141,7 @@ function initializeBlank(index) {
             {headerName: i18next.t('mcd'), field: 'mcdmg', width: DIGITS_5},
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: DIGITS_5},
+            {headerName: i18next.t('dmgd'), field: 'dmgd', width: DIGITS_5},
             {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
             {headerName: i18next.t('prio'), field: 'priority', width: DIGITS_3},
             {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2, width: 48},
@@ -708,6 +709,7 @@ function aggregateCurrentHeroStats(heroStats, index) {
         "mcdmg",
         "mcdmgps",
         "dmgh",
+        "dmgd",
         "score",
         "priority"
     ]

@@ -39,6 +39,7 @@ public class HeroStats {
     public int mcdmg;
     public int mcdmgps;
     public int dmgh;
+    public int dmgd;
 
     public int upgrades;
     public int conversions;

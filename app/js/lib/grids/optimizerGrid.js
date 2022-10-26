@@ -216,6 +216,7 @@ function aggregateCurrentHeroStats(heroStats) {
         "mcdmg",
         "mcdmgps",
         "dmgh",
+        "dmgd",
         "score",
         "priority"
     ]
@@ -262,10 +263,10 @@ function getField(heroStats, stat) {
 
 function buildGrid(localeText) {
 
-    const DIGITS_2 = 35;
-    const DIGITS_3 = 41;
-    const DIGITS_4 = 45;
-    const DIGITS_5 = 50;
+    const DIGITS_2 = 40;
+    const DIGITS_3 = 40;
+    const DIGITS_4 = 44;
+    const DIGITS_5 = 48;
     const DIGITS_6 = 55;
 
     const gridOptions = {
@@ -280,7 +281,7 @@ function buildGrid(localeText) {
         },
 
         columnDefs: [
-            {headerName: i18next.t('sets'), field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
+            {headerName: i18next.t('sets'), field: 'sets', width: 88, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
             {headerName: i18next.t('atk'), field: 'atk', width: DIGITS_4},
             {headerName: i18next.t('def'), field: 'def', width: DIGITS_4},
             {headerName: i18next.t('hp'), field: 'hp', width: DIGITS_5},
@@ -299,10 +300,11 @@ function buildGrid(localeText) {
             {headerName: i18next.t('mcd'), field: 'mcdmg', width: DIGITS_5},
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: DIGITS_5},
+            {headerName: i18next.t('dmgd'), field: 'dmgd', width: DIGITS_5},
             {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
             {headerName: i18next.t('prio'), field: 'priority', width: DIGITS_3},
-            {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2, width: 48},
-            {headerName: i18next.t('actions'), field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
+            {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2},
+            {headerName: i18next.t('actions'), field: 'property', width: 45, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',
