@@ -726,6 +726,7 @@ module.exports = {
                                   <option value="Destruction" data-t>${i18next.t("Destruction")}</option>
                                   <option value="Injury" data-t>${i18next.t("Injury")}</option>
                                   <option value="Lifesteal" data-t>${i18next.t("Lifesteal")}</option>
+                                  <option value="Protection" data-t>${i18next.t("Protection")}</option>
                                   <option value="Rage" data-t>${i18next.t("Rage")}</option>
                                   <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
                                   <option value="Speed" data-t>${i18next.t("Speed")}</option>
@@ -738,6 +739,7 @@ module.exports = {
                                   <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
                                   <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
@@ -752,6 +754,7 @@ module.exports = {
                                   <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
                                   <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
@@ -766,6 +769,7 @@ module.exports = {
                                   <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
                                   <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select>
@@ -781,6 +785,7 @@ module.exports = {
                                   <option value="Destruction" data-t>${i18next.t("Destruction")}</option>
                                   <option value="Injury" data-t>${i18next.t("Injury")}</option>
                                   <option value="Lifesteal" data-t>${i18next.t("Lifesteal")}</option>
+                                  <option value="Protection" data-t>${i18next.t("Protection")}</option>
                                   <option value="Rage" data-t>${i18next.t("Rage")}</option>
                                   <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
                                   <option value="Speed" data-t>${i18next.t("Speed")}</option>
@@ -793,6 +798,7 @@ module.exports = {
                                   <option value="Immunity" data-t>${i18next.t("Immunity")}</option>
                                   <option value="Penetration" data-t>${i18next.t("Penetration")}</option>
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
+                                  <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
                                 </optgroup>
                               </select><br>
@@ -1643,6 +1649,9 @@ function getGearSetOptionsHtml(item) {
 <option value="PenetrationSet" ${set == "PenetrationSet" ? "selected" : ""}>${i18next.t("Penetration")}</option>
 <option value="InjurySet" ${set == "InjurySet" ? "selected" : ""}>${i18next.t("Injury")}</option>
 <option value="RevengeSet" ${set == "RevengeSet" ? "selected" : ""}>${i18next.t("Revenge")}</option>
+<option value="ProtectionSet" ${set == "ProtectionSet" ? "selected" : ""}>${i18next.t("Protection")}</option>
+<option value="TorrentSet" ${set == "TorrentSet" ? "selected" : ""}>${i18next.t("Torrent")}</option>
+
 `
 }
 

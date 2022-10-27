@@ -469,6 +469,7 @@ const huntImageBySet = {
     HitSet: "./assets/reforgeW.png",
     DestructionSet: "./assets/reforgeB.png",
     LifestealSet: "./assets/reforgeB.png",
+    ProtectionSet: "./assets/reforgeG.png",
     CounterSet: "./assets/reforgeB.png",
     ResistSet: "./assets/reforgeB.png",
     UnitySet: "./assets/reforgeA.png",
@@ -477,6 +478,7 @@ const huntImageBySet = {
     RevengeSet: "./assets/reforgeC.png",
     InjurySet: "./assets/reforgeC.png",
     PenetrationSet: "./assets/reforgeC.png",
+    TorrentSet: "./assets/reforgeC.png",
 }
 
 

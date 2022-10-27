@@ -5,6 +5,7 @@ need to move other reused constants into here.
 
 module.exports = {
 
+    // Remember to update piecesBySetIndex too
     setsByIndex: [
         "HealthSet",
         "DefenseSet",
@@ -21,7 +22,9 @@ module.exports = {
         "ImmunitySet",
         "PenetrationSet",
         "RevengeSet",
-        "InjurySet"
+        "InjurySet",
+        "ProtectionSet",
+        "TorrentSet"
     ],
 
     piecesBySetIndex: [
@@ -40,7 +43,9 @@ module.exports = {
         2,
         2,
         4,
-        4
+        4,
+        4,
+        2,
     ],
 
     indexByGearType: {

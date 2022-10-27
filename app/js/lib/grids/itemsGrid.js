@@ -123,6 +123,8 @@ module.exports = {
             immutableData: true,
             suppressCellSelection: true,
             enableRangeSelection: false,
+            isExternalFilterPresent: ItemsTab.isExternalFilterPresent,
+            doesExternalFilterPass: ItemsTab.doesExternalFilterPass,
             getRowNodeId: (data) => {
                 return data.id;
             },
@@ -362,12 +364,12 @@ module.exports = {
             itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + stat).setModel(null);
         }
         if (substatFilter) {
-            const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
+            // const substatFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('augmentedStats.' + substatFilter);
 
-            substatFilterComponent.setModel({
-                type: 'notEqual',
-                filter: 0
-            });
+            // substatFilterComponent.setModel({
+            //     type: 'notEqual',
+            //     filter: 0
+            // });
         }
 
         const allowedModsFilterComponent = itemsGrid.gridOptions.api.getFilterInstance('allowedMods');

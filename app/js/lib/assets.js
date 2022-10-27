@@ -20,6 +20,8 @@ const assetsBySet = {
     "RevengeSet": "./assets/setrevenge.png",
     "InjurySet": "./assets/setinjury.png",
     "PenetrationSet": "./assets/setpenetration.png",
+    "ProtectionSet": "./assets/setprotection.png",
+    "TorrentSet": "./assets/settorrent.png",
 }
 
 const assetsByElement = {

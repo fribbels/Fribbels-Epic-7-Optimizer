@@ -20,7 +20,9 @@ const setEnum = {
     'RESIST': 'resist',
     'UNITY': 'unity',
     'RAGE': 'rage',
-    'IMMUNITY': 'immunity'
+    'IMMUNITY': 'immunity',
+    'TORRENT': 'torrent',
+    'PROTECTION': 'protection',
 };
 
 const rankEnum = {

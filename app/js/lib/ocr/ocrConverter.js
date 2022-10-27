@@ -116,6 +116,6 @@ const statOptions = [
 ];
 
 const setOptions = [
-    "HealthSet", "DefenseSet", "AttackSet", "SpeedSet", "CriticalSet", "HitSet", "DestructionSet", "LifestealSet", "CounterSet", "ResistSet", "UnitySet", "RageSet", "ImmunitySet", "PenetrationSet", "RevengeSet", "InjurySet"
+    "HealthSet", "DefenseSet", "AttackSet", "SpeedSet", "CriticalSet", "HitSet", "DestructionSet", "LifestealSet", "CounterSet", "ResistSet", "UnitySet", "RageSet", "ImmunitySet", "PenetrationSet", "RevengeSet", "InjurySet", "ProtectionSet", "TorrentSet"
 ]
 

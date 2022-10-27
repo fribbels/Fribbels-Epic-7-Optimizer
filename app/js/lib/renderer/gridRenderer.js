@@ -45,6 +45,7 @@ const fourPieceSets = [
     "SpeedSet",
     "DestructionSet",
     "LifestealSet",
+    "ProtectionSet",
     "CounterSet",
     "RageSet",
     "RevengeSet",

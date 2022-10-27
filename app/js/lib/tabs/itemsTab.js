@@ -25,13 +25,31 @@ const filters = {
     levelFilter: null,
     enhanceFilter: null,
     statFilter: null,
-    substatFilter: null,
+    substatFilter: [],
     duplicateFilter: null,
     equippedOrNotFilter: null,
     modifyFilter: null,
 }
 
 module.exports = {
+
+    isExternalFilterPresent: () => {
+        return filters.substatFilter.length > 0;
+    },
+
+    doesExternalFilterPass: (rowData) => {
+        var allMatch = true;
+        for (var i = 0; i < filters.substatFilter.length; i++) {
+            var sf = filters.substatFilter[i];
+            if (!rowData.data.substats.find((x) => {
+                return sf == x.type;
+            })) {
+                allMatch = false;
+                break;
+            }
+        }
+        return allMatch;
+    },
 
     getCurrentModifier: () => {
         return {
@@ -217,14 +235,25 @@ function setupFilterListener(elementId, filter, filterContent) {
         const element = $('#' + elementId);
         element.toggleClass("gearTabButtonSelected");
         elementsByFilter[filter].forEach(x => {
-            if (x != elementId) {
+            if (x != elementId && filter != "substatFilter") {
                 $('#' + x).removeClass("gearTabButtonSelected")
             }
         })
-        if (element.hasClass("gearTabButtonSelected")) {
-            filters[filter] = filterContent
+
+        if (filter == "substatFilter") {
+            // Enable multiple substat choices
+
+            if (element.hasClass("gearTabButtonSelected")) {
+                filters[filter].push(filterContent);
+            } else {
+                filters[filter] = filters[filter].filter(x => x != filterContent)
+            }
         } else {
-            filters[filter] = null;
+            if (element.hasClass("gearTabButtonSelected")) {
+                filters[filter] = filterContent
+            } else {
+                filters[filter] = null;
+            }
         }
         console.log("Updated filters", filters)
         ItemsGrid.refreshFilters(filters);
@@ -255,6 +284,7 @@ const elementsByFilter = {
         "attackSetFilter",
         "destructionSetFilter",
         "lifestealSetFilter",
+        "protectionSetFilter",
         "counterSetFilter",
         "rageSetFilter",
         "revengeSetFilter",
@@ -267,6 +297,7 @@ const elementsByFilter = {
         "immunitySetFilter",
         "unitySetFilter",
         "penetrationSetFilter",
+        "torrentSetFilter",
     ],
     statFilter: [
         "mainStatAttackFilter",
@@ -347,6 +378,7 @@ function setupEventListeners() {
     setupFilterListener("attackSetFilter", "setFilter", "AttackSet");
     setupFilterListener("destructionSetFilter", "setFilter", "DestructionSet");
     setupFilterListener("lifestealSetFilter", "setFilter", "LifestealSet");
+    setupFilterListener("protectionSetFilter", "setFilter", "ProtectionSet");
     setupFilterListener("counterSetFilter", "setFilter", "CounterSet");
     setupFilterListener("rageSetFilter", "setFilter", "RageSet");
     setupFilterListener("revengeSetFilter", "setFilter", "RevengeSet");
@@ -359,6 +391,7 @@ function setupEventListeners() {
     setupFilterListener("immunitySetFilter", "setFilter", "ImmunitySet");
     setupFilterListener("unitySetFilter", "setFilter", "UnitySet");
     setupFilterListener("penetrationSetFilter", "setFilter", "PenetrationSet");
+    setupFilterListener("torrentSetFilter", "setFilter", "TorrentSet");
 
     setupClearListener("clearSetFilter", "setFilter")
 
@@ -390,7 +423,7 @@ function setupEventListeners() {
     setupFilterListener("subStatEffResFilter", "substatFilter", "EffectResistancePercent")
     setupFilterListener("subStatSpeedFilter", "substatFilter", "Speed")
 
-    setupClearListener("clearSubStatFilter", "substatFilter")
+    // setupClearListener("clearSubStatFilter", "substatFilter")
 
     // Level
     setupFilterListener("level90Filter", "levelFilter", "90")
@@ -441,8 +474,29 @@ function setupEventListeners() {
             elementsByFilter[key].forEach(x => {
                 $('#' + x).removeClass("gearTabButtonSelected")
             })
-            filters[key] = null;
+            if (key == "substatFilter") {
+                filters[key] = [];
+            } else {
+                filters[key] = null;
+            }
         }
+        ItemsGrid.refreshFilters(filters);
+    })
+
+    // Button
+    document.getElementById('clearSubstatsFilter').addEventListener('click', () => {
+        filters["substatFilter"] = [];
+        elementsByFilter["substatFilter"].forEach(x => {
+            $('#' + x).removeClass("gearTabButtonSelected")
+        })
+        ItemsGrid.refreshFilters(filters);
+    })
+    // Text above buttons
+    document.getElementById('clearSubStatFilter').addEventListener('click', () => {
+        filters["substatFilter"] = [];
+        elementsByFilter["substatFilter"].forEach(x => {
+            $('#' + x).removeClass("gearTabButtonSelected")
+        })
         ItemsGrid.refreshFilters(filters);
     })
 

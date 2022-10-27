@@ -478,6 +478,7 @@ window.jQuery = $;
                   <option value="Destruction" data-t>Destruction</option>
                   <option value="Injury" data-t>Injury</option>
                   <option value="Lifesteal" data-t>Lifesteal</option>
+                  <option value="Protection" data-t>Protection</option>
                   <option value="Rage" data-t>Rage</option>
                   <option value="Revenge" data-t>Revenge</option>
                   <option value="Speed" data-t>Speed</option>
@@ -490,6 +491,7 @@ window.jQuery = $;
                   <option value="Immunity" data-t>Immunity</option>
                   <option value="Penetration" data-t>Penetration</option>
                   <option value="Resist" data-t>Resist</option>
+                  <option value="Torrent" data-t>Torrent</option>
                   <option value="Unity" data-t>Unity</option>
                 </optgroup>
               </select><br>
@@ -504,6 +506,7 @@ window.jQuery = $;
                   <option value="Immunity" data-t>Immunity</option>
                   <option value="Penetration" data-t>Penetration</option>
                   <option value="Resist" data-t>Resist</option>
+                  <option value="Torrent" data-t>Torrent</option>
                   <option value="Unity" data-t>Unity</option>
                 </optgroup>
               </select><br>
@@ -518,6 +521,7 @@ window.jQuery = $;
                   <option value="Immunity" data-t>Immunity</option>
                   <option value="Penetration" data-t>Penetration</option>
                   <option value="Resist" data-t>Resist</option>
+                  <option value="Torrent" data-t>Torrent</option>
                   <option value="Unity" data-t>Unity</option>
                 </optgroup>
               </select>
@@ -534,6 +538,7 @@ window.jQuery = $;
                   <option value="Destruction" data-t>Destruction</option>
                   <option value="Injury" data-t>Injury</option>
                   <option value="Lifesteal" data-t>Lifesteal</option>
+                  <option value="Protection" data-t>Protection</option>
                   <option value="Rage" data-t>Rage</option>
                   <option value="Revenge" data-t>Revenge</option>
                   <option value="Speed" data-t>Speed</option>
@@ -546,6 +551,7 @@ window.jQuery = $;
                   <option value="Immunity" data-t>Immunity</option>
                   <option value="Penetration" data-t>Penetration</option>
                   <option value="Resist" data-t>Resist</option>
+                  <option value="Torrent" data-t>Torrent</option>
                   <option value="Unity" data-t>Unity</option>
                 </optgroup>
               </select><br>
@@ -846,6 +852,11 @@ window.jQuery = $;
                     </div>
                   </div>
                   <div class="gearTabSquareButton">
+                    <div class="gearTabButton" id="protectionSetFilter">
+                      <img class="gearTabIcon gearTabIconSet" src="./assets/setprotection.png"></img>
+                    </div>
+                  </div>
+                  <div class="gearTabSquareButton">
                     <div class="gearTabButton" id="counterSetFilter">
                       <img class="gearTabIcon gearTabIconSet" src="./assets/setcounter.png"></img>
                     </div>
@@ -908,6 +919,11 @@ window.jQuery = $;
                   <div class="gearTabSquareButton">
                     <div class="gearTabButton" id="penetrationSetFilter">
                       <img class="gearTabIcon gearTabIconSet" src="./assets/setpenetration.png"></img>
+                    </div>
+                  </div>
+                  <div class="gearTabSquareButton">
+                    <div class="gearTabButton" id="torrentSetFilter">
+                      <img class="gearTabIcon gearTabIconSet" src="./assets/settorrent.png"></img>
                     </div>
                   </div>
                 </div>
@@ -1078,6 +1094,12 @@ window.jQuery = $;
                     <div class="gearTabButton" id="subStatSpeedFilter">
                       <img class="gearTabIcon" id="subStatSpeedFilterIcon" src="./assets/statspddark.png"></img>
                       <div class="gearTabButtonLabel" data-t>Speed</div>
+                    </div>
+                  </div>
+                  <div class="gearTabLongButton">
+                    <div class="gearTabButton clearSubstatsFilterButton" id="clearSubstatsFilter">
+                      <img class="gearTabIcon" id="clearSubstatsFilterIcon" src="./assets/trash.png" style="opacity:0.8"></img>
+                      <div class="gearTabButtonLabel" data-t>Clear</div>
                     </div>
                   </div>
                 </div>

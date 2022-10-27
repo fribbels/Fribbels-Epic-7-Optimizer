@@ -24,8 +24,8 @@ public enum Set {
     @SerializedName("PenetrationSet") PENETRATION (13, 2, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0}, new int[]{13, 13}, "PenetrationSet"),
     @SerializedName("RevengeSet")     REVENGE     (14, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0}, new int[]{14, 14, 14, 14}, "RevengeSet"),
     @SerializedName("InjurySet")      INJURY      (15, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0}, new int[]{15, 15, 15, 15}, "InjurySet"),
-    @SerializedName("ProtectionSet")  PROTECTION  (16, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0}, new int[]{16, 16, 16, 16}, "NewSetOne"),
-    @SerializedName("TorrentSet")     TORRENT     (17, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4}, new int[]{17, 17, 17, 17}, "NewSetTwo");
+    @SerializedName("ProtectionSet")  PROTECTION  (16, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0}, new int[]{16, 16, 16, 16}, "ProtectionSet"),
+    @SerializedName("TorrentSet")     TORRENT     (17, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2}, new int[]{17, 17}, "TorrentSet");
 
     public int index;
     private int count;

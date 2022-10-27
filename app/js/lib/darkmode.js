@@ -41,6 +41,7 @@ module.exports = {
             $("#subStatDefensePercentFilterIcon").attr("src", "./assets/statdefpercent_dt.png")
 
             $("#clearAllFilterIcon").attr("src", "./assets/trash_dt.png")
+            $("#clearSubstatsFilterIcon").attr("src", "./assets/trash_dt.png")
             $("#duplicateFilterIcon").attr("src", "./assets/copy_dt.png")
             $("#unequippedFilterIcon").attr("src", "./assets/unequipped_dt.png")
             $("img.tooltipImageLeft").attr("src", "./assets/tooltip_dt.png")
@@ -83,6 +84,7 @@ module.exports = {
             $("#subStatDefensePercentFilterIcon").attr("src", "./assets/statdefpercentdark.png")
 
             $("#clearAllFilterIcon").attr("src", "./assets/trash.png")
+            $("#clearSubstatsFilterIcon").attr("src", "./assets/trash.png")
             $("#duplicateFilterIcon").attr("src", "./assets/copy.png")
             $("#unequippedFilterIcon").attr("src", "./assets/unequipped.png")
             $("img.tooltipImageLeft").attr("src", "./assets/tooltip.png")

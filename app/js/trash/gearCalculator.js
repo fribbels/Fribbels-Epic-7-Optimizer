@@ -202,5 +202,7 @@ const indexBySetType = {
     "ImmunitySet": 12,
     "PenetrationSet": 13,
     "RevengeSet": 14,
-    "InjurySet": 15
+    "InjurySet": 15,
+    "ProtectionSet": 16,
+    "TorrentSet": 17,
 }

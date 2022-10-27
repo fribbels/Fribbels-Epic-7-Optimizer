@@ -574,7 +574,7 @@ public class GpuOptimizerKernel extends Kernel {
 
             final float rageMultiplier = max(1, rageSet * SETTING_RAGE_SET * 1.3f);
             final float penMultiplier = max(1, min(penSet, 1) * SETTING_PEN_SET * penSetDmgBonus);
-            final float torrentMultiplier = max(1, torrentSet * 1.1f);
+            final float torrentMultiplier = max(1, torrentSet * 0.1f + 1);
             final float spdDiv1000 = (float)spd/1000;
 
             final int ehp = (int) (hp * (def/300 + 1));

@@ -83,6 +83,7 @@ module.exports = {
 +'<p>'+i18next.t("<b>Mcd - </b> Max crit damage rating, measures damage at 100% crit chance. Example units: Arby, JKise.")+'</p>'
 +'<p>'+i18next.t("<b>McdS - </b> Max crit damage * Speed rating, measures damage at 100% crit chance vs speed.")+'</p>'
 +'<p>'+i18next.t("<b>DmgH - </b> Dmg * Hp rating, average damage rating, scaled by your units health. Useful for HP scaling bruisers.")+'</p>'
++'<p>'+i18next.t("<b>DmgD - </b> Dmg * Def rating, average damage rating, scaled by your units defense. Useful for defense scaling bruisers.")+'</p>'
 +'<p>'+i18next.t("<b>Score - </b> Sum of gear score of all 6 pieces.")+'</p>'
 +'<p>'+i18next.t("<b>Prio - </b> Sum of priority score of all 6 pieces, calculated using the Substat Priority filter values.")+'</p>'
 +'<p>'+i18next.t("<b>Upg - </b> Number of items to upgrade - including reforges and enhances. When substat mods are enabled, modified gear is considered upgradable.")+'</p>'
