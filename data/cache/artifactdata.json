@@ -2267,6 +2267,20 @@
       "health": 27
     }
   },
+  "Sword of Autumn Eclipse": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Sword of Autumn Eclipse",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    }
+  },
   "Sword of Ezera": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0046.png",
