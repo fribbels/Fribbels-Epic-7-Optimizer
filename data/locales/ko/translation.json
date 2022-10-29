@@ -389,7 +389,7 @@
   "yes": "예",
   "Yes": "예",
   "no": "아니오",
-  "Hero need a 6 item build before it can be saved": "영웅은 장비조합이 6개 있어야 저장할 수 있습니다.",
+  "Hero needs a 6 item build before it can be saved": "영웅은 장비조합이 6개 있어야 저장할 수 있습니다.",
   "Error": "에러",
   "Failed reading items, please try again. Unable to read items.": "장비를 읽어오는데 실패했습니다. 다시 시도해주세요. 장비를 읽을 수 없습니다.",
   "Failed reading items, please try again. No items were found.": "장비를 읽어오는데 실패했습니다. 다시 시도해주세요. 장비를 찾을 수 없습니다.",
