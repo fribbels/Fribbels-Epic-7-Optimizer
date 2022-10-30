@@ -1095,5 +1095,9 @@
   "Only import heroes already in optimizer": "Importer uniquement les héros déjà dans l'optimiseur",
   "+15 and up": "+15 et plus",
   "Eff Res": "Res. d'effet",
-  "GPU accelerated optimization (Disable this option if you notice errors or decreased performance)": "Optimisation accélérée via GPU (Désactivez cette option si vous remarquez des erreurs ou des pertes de performance)"
+  "GPU accelerated optimization (Disable this option if you notice errors or decreased performance)": "Optimisation accélérée via GPU (Désactivez cette option si vous remarquez des erreurs ou des pertes de performance)",
+  "DmgD": "DmgD",
+  "<b>DmgD - </b> Dmg * Def rating, average damage rating, scaled by your units defense. Useful for defense scaling bruisers.": "<b>DmgD - </b> Dmg * Def, niveau moyen des dommages en fonction de la défense de l'unité. Utile pour les bruisers basés sur la défense.",
+  "Torrent": "Tumulte",
+  "Protection": "Protection"
 }

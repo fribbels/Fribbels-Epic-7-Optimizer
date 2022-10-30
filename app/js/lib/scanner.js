@@ -794,6 +794,8 @@ const setsByIngameSet = {
     "set_scar": "InjurySet",
     "set_speed": "SpeedSet",
     "set_vampire": "LifestealSet",
+    "set_shield": "ProtectionSet",
+    "set_torrent": "TorrentSet",
 }
 
 async function postData(url = '', data = {}) {

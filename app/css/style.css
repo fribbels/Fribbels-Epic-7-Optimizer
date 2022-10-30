@@ -1872,3 +1872,6 @@ input:checked + .darkSlider:before {
   margin-left: 10px;
   margin-top: 10px;
 }
+.thankList {
+              line-height: 1em;
+}

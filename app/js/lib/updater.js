@@ -1,8 +1,9 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.4";
+const currentVersion = "1.8.5";
 
 global.TEST = false;
+
 /********************************************************************************************
     Release checklist:
     - update changelog
@@ -33,6 +34,14 @@ module.exports = {
 
 `
 <h2>
+    New in v1.8.5
+</h2>
+<ul class="newFeatures">
+    <li>Added Protection and Torrent sets</li>
+    <li>DmgD optimization rating for Dmg x Defense</li>
+    <li>Multiple substat selections on Gear tab</li>
+</ul>
+<h2>
     New in v1.8.0
 </h2>
 <ul class="newFeatures">
@@ -52,19 +61,6 @@ module.exports = {
     <li>Added Japanese translation</li>
     <li>Added +0/3/6/9/12/15 gear and above optimizer setting</li>
     <li>Added score evaluation based on each unit's base stats</li>
-</ul>
-<h2>
-    New in v1.8.3
-</h2>
-<ul class="newFeatures">
-    <li>Added Korean translation</li>
-    <li>Fixing memory leaks & added max RAM limit setting</li>
-</ul>
-<h2>
-    New in v1.8.4
-</h2>
-<ul class="newFeatures">
-    <li>Updated with destruction set buff</li>
 </ul>
 `
         );
