@@ -27624,6 +27624,124 @@
       }
     }
   },
+  "Savior Adin": {
+    "_id": "savior-adin",
+    "name": "Savior Adin",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "light",
+    "role": "assassin",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/saviorAdinPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/saviorAdinPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 9881,
+        "atk": 633,
+        "hp": 3302,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11477,
+        "atk": 828,
+        "hp": 3642,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 923,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.1,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 12333,
+        "atk": 789,
+        "hp": 4152,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14563,
+        "atk": 1081,
+        "hp": 4572,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 1199,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.1,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
   "Schuri": {
     "_id": "schuri",
     "name": "Schuri",
@@ -34052,6 +34170,98 @@
         "hp": 4733,
         "spd": 104,
         "def": 627,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
+  "Zio": {
+    "_id": "zio",
+    "name": "Zio",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "mage",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.090,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": false,
+        "2": true,
+        "3": false,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/zioPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/zioPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 15349,
+        "atk": 837,
+        "hp": 3656,
+        "spd": 106,
+        "def": 525,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 17217,
+        "atk": 1007,
+        "hp": 3996,
+        "spd": 106,
+        "def": 525,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.18
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 19154,
+        "atk": 1043,
+        "hp": 4596,
+        "spd": 106,
+        "def": 652,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 18123,
+        "atk": 1255,
+        "hp": 5016,
+        "spd": 106,
+        "def": 652,
         "chc": 0.27,
         "chd": 1.5,
         "dac": 0.03,
