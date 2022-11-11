@@ -191,7 +191,7 @@ module.exports = {
             console.warn("Save as build", row.items);
 
             if (row.items.length < 6) {
-                Notifier.warn("Hero need a 6 item build before it can be saved");
+                Notifier.warn("Hero needs a 6 item build before it can be saved");
                 return;
             }
 

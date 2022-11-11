@@ -389,7 +389,7 @@
   "yes": "oui",
   "Yes": "Oui",
   "no": "non",
-  "Hero need a 6 item build before it can be saved": "Un héros requiert un set complet de 6 pièces afin d'être sauvegardé",
+  "Hero needs a 6 item build before it can be saved": "Un héros requiert un set complet de 6 pièces afin d'être sauvegardé",
   "Error": "Erreur",
   "Failed reading items, please try again. Unable to read items.": "Échec de la lecture des équipements, veuillez réessayer. Impossible de lire les fichiers.",
   "Failed reading items, please try again. No items were found.": "Échec de la lecture des équipements, veuillez réessayer. Aucun fichier n'a été trouvé.",
