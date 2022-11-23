@@ -784,6 +784,166 @@
       }
     }
   },
+  "ae-NINGNING": {
+    "_id": "ae-ningning",
+    "name": "ae-NINGNING",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "manauser",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/aeNingningPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/aeNingningPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 921,
+        "hp": 5165,
+        "spd": 102,
+        "def": 497,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 785,
+        "hp": 5077,
+        "spd": 114,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.3
+      }
+    }
+  },
+  "ae-WINTER": {
+    "_id": "ae-winter",
+    "name": "ae-WINTER",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "assassin",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/aeWinterPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/aeWinterPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11648,
+        "atk": 684,
+        "hp": 4202,
+        "spd": 109,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13285,
+        "atk": 804,
+        "hp": 4542,
+        "spd": 115,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14536,
+        "atk": 853,
+        "hp": 5284,
+        "spd": 109,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 1057,
+        "hp": 5542,
+        "spd": 118,
+        "def": 532,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.3,
+        "efr": 0
+      }
+    }
+  },
   "Ainos": {
     "_id": "ainos",
     "name": "Ainos",
@@ -3578,7 +3738,24 @@
       "image": "https://assets.epicsevendb.com/_source/face/c2014_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c2014_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107101",
+        "id": "exc107101",
+        "name": "Citrine Treasure",
+        "description": "A beautiful brooch made by the world's greatest artisan using only the highest-grade materials.",
+        "unit": "c1071",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1071.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 10308,
@@ -5318,7 +5495,24 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1097_su.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1097_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107101",
+        "id": "exc107101",
+        "name": "Citrine Treasure",
+        "description": "A beautiful brooch made by the world's greatest artisan using only the highest-grade materials.",
+        "unit": "c1071",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1071.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11517,
@@ -14629,7 +14823,24 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1039_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1039_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc102301",
+        "id": "exc102301",
+        "name": "Grudge Marble",
+        "description": "A marble filled with the grudges of people who pledged their souls and loyalty to Kayron",
+        "unit": "c1023",
+        "role": "assassin",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        },
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1023.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11162,
