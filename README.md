@@ -145,7 +145,7 @@ Assign a priority to each substat type from -1 to 3. This will go through every 
  In this example we're mostly looking for a fast and tanky Ruele so we assign:
 - HP and Def a high rating of 3, since those are the highest priority stats
 - Speed a slightly lower rating of 2
-- And Res a rating of 1, as its a nice-to-have stat and can still be useful for her
+- And Res a rating of 1, as it's a nice-to-have stat and can still be useful for her
 - We don't particularly care about Attack/Crit Chance/Crit Damage/Effectiveness, so we leave those at 0
 
 Then, we set the Top % slider to 30%. This will take all your weapons, score them based on the priority defined above, then only considers the Top 30% of the scores for optimization. Then it does the same for helmets, armors, etc, and then the optimizer generates permutations based on those Top 30% gears.
@@ -216,7 +216,7 @@ The **Score** column is a stat I made up which is similar to WSS, with the diffe
     + Flat Defense * 4.99 / 31
     + Flat Hp * 3.09 / 174
 
-Its used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and compared it to the average stats of a base 5* unit at max level, and used that as a measure of how well the flat stats rolled. (For example, average roll flat def is 31, while the average flat def roll is worth 4.99% def on the average unit)
+It's used as a measure of how well your gear rolled, scaled by the max roll for 85 gear (using max of 4, not 5 for speed). I found the average rolls for flat stats and compared it to the average stats of a base 5* unit at max level, and used that as a measure of how well the flat stats rolled. (For example, average roll flat def is 31, while the average flat def roll is worth 4.99% def on the average unit)
 
 The other scores on this page are defined as:
 * dScore - DPS Score. This is the Score formula but only counting Attack/%, Crit Chance, Crit Damage, and Speed
@@ -514,7 +514,7 @@ There's still a lot of room to improve and I plan on adding new stuff as feedbac
   - Try restarting your computer, and reopen the app (there might be an old subprocess still kicking around)
 
 - If you're having trouble running the app after downloading:
-  - You might have downloaded the Source code instead of the the installer. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-Setup-1.x.x.exe' file (for Windows, use the dmg for mac), not the Source code
+  - You might have downloaded the Source code instead of the installer. Go to https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases and click on the 'FribbelsE7Optimizer-Setup-1.x.x.exe' file (for Windows, use the dmg for mac), not the Source code
 
 - If you see a "Error: EPERM: operation not permitted" error pop up while importing, there are a couple potential fixes:
   - Restart your computer, especially if you installed Java recently

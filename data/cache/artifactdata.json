@@ -937,6 +937,20 @@
       "health": 43
     }
   },
+  "EXIF Detective (E.d.) Gadget": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+    },
+    "name": "EXIF Detective (E.d.) Gadget",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Exorcist's Tonfa": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art3_16.png",
@@ -1665,6 +1679,20 @@
       "health": 36
     }
   },
+  "Prelude to a New Era": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Prelude to a New Era",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 15,
+      "health": 36
+    }
+  },
   "Portrait of the Saviors": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0048.png",
@@ -1915,6 +1943,20 @@
     "stats": {
       "attack": 15,
       "health": 54
+    }
+  },
+  "Seal of Capture": {
+	"assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Seal of Capture",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
     }
   },
   "Secret Art - Storm Sword": {
@@ -2281,6 +2323,20 @@
       "health": 54
     }
   },
+  "Sword of Cycling Seasons": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Sword of Cycling Seasons",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Sword of Ezera": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0046.png",
@@ -2391,6 +2447,20 @@
     "stats": {
       "attack": 19,
       "health": 30
+    }
+  },
+  "The Armament": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "The Armament",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
     }
   },
   "The Guardian Star’s Blessing": {

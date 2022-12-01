@@ -389,7 +389,7 @@
   "yes": "yes",
   "Yes": "Yes",
   "no": "no",
-  "Hero need a 6 item build before it can be saved": "Hero need a 6 item build before it can be saved",
+  "Hero needs a 6 item build before it can be saved": "Hero needs a 6 item build before it can be saved",
   "Error": "Error",
   "Failed reading items, please try again. Unable to read items.": "Failed reading items, please try again. Unable to read items.",
   "Failed reading items, please try again. No items were found.": "Failed reading items, please try again. No items were found.",
