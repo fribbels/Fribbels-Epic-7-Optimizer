@@ -1665,6 +1665,20 @@
       "health": 32
     }
   },
+  "P.O.S": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "P.O.S",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Prelude to a New Dawn": {
     "assets": {
       "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
