@@ -126,10 +126,6 @@ public class StatCalculator {
         final float torrentMultiplier = sets[17]/2 > 1 ? sets[17] / 2 * 0.1f + 1 : 1;
         final float spdDiv1000 = (float)spd/1000;
 
-        if (sets[17] > 1) {
-            System.out.println("test");
-        }
-
         final int ehp = (int) (hp * (def/300 + 1));
         final int hpps = (int) (hp*spdDiv1000);
         final int ehpps = (int) ((float)ehp*spdDiv1000);

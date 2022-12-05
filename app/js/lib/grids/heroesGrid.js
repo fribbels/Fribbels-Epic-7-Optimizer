@@ -242,10 +242,10 @@ function buildGrid(localeText) {
                 return params.rowNode.data.name;
             }},
             {headerName: i18next.t('icon'), sortable: false, field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
-            {headerName: i18next.t('elem'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
+            {headerName: i18next.t('elem'), field: 'attribute', width: 45, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: i18next.t('class'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
             //{headerName: i18next.t('name'), field: 'name', width: 0, wrapText: true, cellStyle: {'display':'none'}},
-            {headerName: i18next.t('name'), field: 'label', width: 150, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}, cellRenderer: (params) => renderName(params)},
+            {headerName: i18next.t('name'), field: 'label', width: 155, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}, cellRenderer: (params) => renderName(params)},
             // {headerName: i18next.t('Stars'), field: 'rarity', width: 50},
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},

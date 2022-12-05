@@ -73,7 +73,7 @@ for i in list(conf.ifaces.data.values()):
 def terminate():
     os._exit(0)
 
-t = threading.Timer(1800.0, terminate)
+t = threading.Timer(3600.0, terminate)
 t.start()
 
 loop = True
