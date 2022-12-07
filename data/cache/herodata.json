@@ -784,6 +784,99 @@
       }
     }
   },
+  "ae-GISELLE": {
+    "_id": "ae-giselle",
+    "name": "ae-GISELLE",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "mage",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "cri",
+      "grades": {
+        "C": 0.036,
+        "B": 0.054,
+        "A": 0.072,
+        "S": 0.09,
+        "SS": 0.108,
+        "SSS": 0.126
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/aeGisellePortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/aeGisellePanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11118,
+        "atk": 764,
+        "hp": 3238,
+        "spd": 101,
+        "def": 506,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12684,
+        "atk": 906,
+        "hp": 3578,
+        "spd": 101,
+        "def": 506,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13857,
+        "atk": 952,
+        "hp": 4071,
+        "spd": 101,
+        "def": 627,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16087,
+        "atk": 1286,
+        "hp": 4733,
+        "spd": 103,
+        "def": 652,
+        "chc": 0.27,
+        "chd": 1.6,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "ae-NINGNING": {
     "_id": "ae-ningning",
     "name": "ae-NINGNING",

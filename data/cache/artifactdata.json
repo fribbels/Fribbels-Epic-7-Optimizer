@@ -1049,6 +1049,20 @@
       "health": 65
     }
   },
+  "Frame of Light": {
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+    },
+    "name": "Frame of Light",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    }
+  },
   "Fullmetals Automail": {
     "assets": {
       "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
