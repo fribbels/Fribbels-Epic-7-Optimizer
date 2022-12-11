@@ -149,6 +149,9 @@ module.exports = {
     getMagnify: () => {
         return DarkMode.isDark() ? './assets/magnify_dt.png' : './assets/magnify.png';
     },
+    getLocate: () => {
+        return DarkMode.isDark() ? './assets/locate_dt.png' : './assets/locate.png';
+    },
     getReforge: () => {
         return DarkMode.isDark() ? './assets/reforge_dt.png' : './assets/reforge.png';
     },

@@ -504,7 +504,7 @@ input {
 
 .itemDisplayFooterSet {
   margin-top: 3px;
-  margin-right: 14px;
+  /*margin-right: 14px;*/
   height: 30px;
 }
 .itemDisplaySetImg {
@@ -1874,4 +1874,10 @@ input:checked + .darkSlider:before {
 }
 .thankList {
               line-height: 1em;
+}
+
+.locatorTip {
+  width: 113px;
+  font-size: 12.5px;
+  line-height: 17px;
 }

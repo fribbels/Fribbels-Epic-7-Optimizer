@@ -82,6 +82,7 @@ global.GearRating = require('./gearRating');
 global.OptimizationRequest = require('../models/optimizationRequest').OptimizationRequest;
 global.Importer = require('./importer');
 global.ItemAugmenter = require('./itemAugmenter');
+global.Locator = require('./locator');
 global.Ocr = require('./ocr/ocr');
 // global.Optimizer = require('./optimizer');
 // global.GearCalculator = require('./gearCalculator');
