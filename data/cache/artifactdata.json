@@ -1875,6 +1875,20 @@
       "health": 76
     }
   },
+  "Rocket Punch Gauntlet": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art5_1.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art5_1_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art5_1_l.jpg"
+    },
+    "name": "Rocket Punch Gauntlet",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    }
+  },
   "Rod of Amaryllis": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0001.png",
