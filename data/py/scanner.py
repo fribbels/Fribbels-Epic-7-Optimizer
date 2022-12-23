@@ -26,7 +26,7 @@ def try_buffer(currAck):
     print(hexStr);
     print('&');
 
-def check_packet(packet, index):
+def check_packet(packet):
     if IP in packet:
         if Raw in packet and packet[Raw].load:
             currAck = packet.ack
@@ -65,11 +65,9 @@ def thread_sniff():
     except:
         pass
 
-
 x = threading.Thread(target=thread_sniff)
 x.daemon = True;
 x.start()
-
 
 t = threading.Timer(3600.0, terminate)
 t.start()
