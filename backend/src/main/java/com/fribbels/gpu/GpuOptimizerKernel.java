@@ -518,7 +518,8 @@ public class GpuOptimizerKernel extends Kernel {
             final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
             final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 24));
 //            final int protectionSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
-            final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 26)) + min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28));
+//            final int injurySet = min(1, setSolutionBitMasks[setIndex] & (1 << 26));
+            final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28)) + min(1, setSolutionBitMasks[setIndex] & (1 << 29));
 
 
             // Set calculations using localbuffer instead off mask
@@ -574,7 +575,7 @@ public class GpuOptimizerKernel extends Kernel {
 
             final float rageMultiplier = max(1, rageSet * SETTING_RAGE_SET * 1.3f);
             final float penMultiplier = max(1, min(penSet, 1) * SETTING_PEN_SET * penSetDmgBonus);
-            final float torrentMultiplier = max(1, torrentSet * 0.1f + 1);
+            final float torrentMultiplier = max(1, 1 + torrentSet * 0.1f);
             final float spdDiv1000 = (float)spd/1000;
 
             final int ehp = (int) (hp * (def/300 + 1));
