@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.6";
+const currentVersion = "1.8.7";
 
-global.TEST = true;
+global.TEST = false;
 
 /********************************************************************************************
     Release checklist:
@@ -34,26 +34,11 @@ module.exports = {
 
 `
 <h2>
-    New in v1.8.6
+    New in v1.8.7
 </h2>
 <ul class="newFeatures">
-    <li>Bug fixes</li>
-</ul>
-<h2>
-    New in v1.8.0
-</h2>
-<ul class="newFeatures">
-    <li>GPU acceleration for optimizer. (Disable in settings if issues arise)</li>
-    <li>Multi-Optimizer tab for optimizing multiple units simultaneously</li>
-    <li>Enhancing tab with item & substat rolls analyzer</li>
-    <li>Click on the magnifying glass on an item to load analysis</li>
-    <li>Customizable dark mode colors for the UI</li>
-    <li>Penetration set damage bonus will be added to Dmg/Mcd calculations</li>
-    <li>Heroes tab now shows 5* hero indicators</li>
-    <li>All scores now use reforged values</li>
-    <li>Storage items can now be imported - Open storage menu during scan</li>
-    <li>Added +0/3/6/9/12/15 gear and above optimizer setting</li>
-    <li>Added score evaluation based on each unit's base stats</li>
+    <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory. Scan your inventory first for accurate results.</li>
+    <li>Torrent set bug fixes</li>
 </ul>
 `
         );
