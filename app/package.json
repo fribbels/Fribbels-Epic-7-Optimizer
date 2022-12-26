@@ -5,7 +5,7 @@
     "name": "Fribbels",
     "url": "https://github.com/fribbels/Fribbels-Epic-7-Optimizer"
   },
-  "version": "1.8.7",
+  "version": "1.8.8",
   "description": "Epic 7 Gear Optimizer",
   "main": "./main.prod.js",
   "scripts": {

@@ -26,7 +26,7 @@ def try_buffer(currAck):
     print(hexStr);
     print('&');
 
-def check_packet(packet):
+def check_packet(packet, index):
     if IP in packet:
         if Raw in packet and packet[Raw].load:
             currAck = packet.ack
@@ -53,21 +53,25 @@ def check_packet(packet):
                 # if 'F' in packet[TCP].flags:
                 #     try_buffer(currAck)
 
-def terminate():
-    os._exit(0)
-
-def thread_sniff():
+def thread_sniff(i, index):
     try:
-        # EpicSeven traffic was confirmed to travel over tcp port 3333 via Wireshark
-        # Omitting sniff() iface parameter to force all interfaces to be sniffed.
-        # This may lead to more processing but prevents needing to specify an network interface manually in some cases.
-        sniff(prn=lambda x: check_packet(x), filter="tcp and ( port 3333 )", session=TCPSession)
+        sniff(iface=i, prn=lambda x: check_packet(x, index), filter="tcp and ( port 3333 )", session=TCPSession)
     except:
         pass
 
-x = threading.Thread(target=thread_sniff)
-x.daemon = True;
-x.start()
+index = 0
+for i in list(conf.ifaces.data.values()):
+    try:
+        x = threading.Thread(target=thread_sniff, args=(i, index,))
+        x.daemon = True;
+        x.start()
+
+        index = index + 1
+    except:
+        pass
+
+def terminate():
+    os._exit(0)
 
 t = threading.Timer(3600.0, terminate)
 t.start()

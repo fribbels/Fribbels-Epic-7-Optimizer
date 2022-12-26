@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.7";
+const currentVersion = "1.8.8";
 
 global.TEST = false;
 
@@ -34,7 +34,7 @@ module.exports = {
 
 `
 <h2>
-    New in v1.8.7
+    New in v1.8.7 - 1.8.8
 </h2>
 <ul class="newFeatures">
     <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory. Scan your inventory first for accurate results.</li>
