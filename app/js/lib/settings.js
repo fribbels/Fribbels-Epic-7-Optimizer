@@ -337,6 +337,9 @@ module.exports = {
         enhanceLimit = settings.settingEnhanceLimit;
 
         Files.saveFile(settingsPath, JSON.stringify(settings, null, 2))
+        if (Files.isMac()) {
+            settings.settingGpu = false;
+        }
         Api.setSettings(settings);
     },
 }

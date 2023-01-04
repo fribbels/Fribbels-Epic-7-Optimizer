@@ -87,136 +87,153 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private boolean[] permutations = new boolean[SET_EXPONENTIAL];
     private int[] setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
 
+    public static OptimizationRequestHandler instance;
+
+    public void configureGpu(final boolean gpuEnabled) {
+        System.out.println("GPU acceleration enabled: " + gpuEnabled);
+        OptimizationRequestHandler.SETTING_GPU = gpuEnabled;
+
+        if (gpuEnabled) {
+            final Device device = KernelManager.instance().bestDevice();
+            Main.BEST_DEVICE_ID = device.getDeviceId();
+
+            System.out.println(KernelManager.instance().bestDevice().getType());
+
+
+            ExecutorService t = Executors.newFixedThreadPool(3);
+            t.execute(() -> {
+                setSolutionBitMasks = new int[SET_EXPONENTIAL];
+                int count = 0;
+                for (int a = 0; a < SET_COUNT; a++) {
+                    for (int b = 0; b < SET_COUNT; b++) {
+                        for (int c = 0; c < SET_COUNT; c++) {
+                            for (int d = 0; d < SET_COUNT; d++) {
+                                for (int e = 0; e < SET_COUNT; e++) {
+                                    for (int f = 0; f < SET_COUNT; f++) {
+                                        int[] sets = new int[]{a, b, c, d, e, f};
+                                        int[] counters = convertSetsToSetCounters(sets);
+
+                                        int l = 0;
+
+                                        l += counters[17] / 2 > 0 ? 1 : 0; // torrent 1
+                                        l <<= 1;
+                                        l += counters[17] / 2 - 1 > 0 ? 1 : 0; // torrent 2
+                                        l <<= 1;
+                                        l += counters[17] / 2 - 2 > 0 ? 1 : 0; // torrent 3
+                                        l <<= 1;
+                                        l += counters[16] / 4 > 0 ? 1 : 0; // protection
+                                        l <<= 1;
+                                        l += counters[15] / 4 > 0 ? 1 : 0; // injury
+                                        l <<= 1;
+                                        l += counters[14] / 4 > 0 ? 1 : 0; // revenge
+                                        l <<= 1;
+                                        l += counters[13] / 2 > 0 ? 1 : 0; // pen
+                                        l <<= 1;
+                                        l += counters[12] / 2 > 0 ? 1 : 0; // immunity
+                                        l <<= 1;
+                                        l += counters[11] / 4 > 0 ? 1 : 0; // rage
+                                        l <<= 1;
+                                        l += counters[10] / 2 > 0 ? 1 : 0; // unity - should be x3 but don't need it
+                                        l <<= 1;
+                                        l += counters[9] / 2 > 0 ? 1 : 0; // res1
+                                        l <<= 1;
+                                        l += counters[9] / 2 - 1 > 0 ? 1 : 0; // res2
+                                        l <<= 1;
+                                        l += counters[9] / 2 - 2 > 0 ? 1 : 0; // res3
+                                        l <<= 1;
+                                        l += counters[8] / 4 > 0 ? 1 : 0; // counter
+                                        l <<= 1;
+                                        l += counters[7] / 4 > 0 ? 1 : 0; // lifesteal
+                                        l <<= 1;
+                                        l += counters[6] / 4 > 0 ? 1 : 0; // destr
+                                        l <<= 1;
+                                        l += counters[5] / 2 > 0 ? 1 : 0; // hit1
+                                        l <<= 1;
+                                        l += counters[5] / 2 - 1 > 0 ? 1 : 0; // hit2
+                                        l <<= 1;
+                                        l += counters[5] / 2 - 2 > 0 ? 1 : 0; // hit3
+                                        l <<= 1;
+                                        l += counters[4] / 2 > 0 ? 1 : 0; // crit1
+                                        l <<= 1;
+                                        l += counters[4] / 2 - 1 > 0 ? 1 : 0; // crit2
+                                        l <<= 1;
+                                        l += counters[4] / 2 - 2 > 0 ? 1 : 0;  // crit3
+                                        l <<= 1;
+                                        l += counters[3] / 4 > 0 ? 1 : 0; // spd
+                                        l <<= 1;
+                                        l += counters[2] / 4 > 0 ? 1 : 0; // atk
+                                        l <<= 1;
+                                        l += counters[1] / 2 > 0 ? 1 : 0; // def1
+                                        l <<= 1;
+                                        l += counters[1] / 2 - 1 > 0 ? 1 : 0; // def2
+                                        l <<= 1;
+                                        l += counters[1] / 2 - 2 > 0 ? 1 : 0; // def3
+                                        l <<= 1;
+                                        l += counters[0] / 2 > 0 ? 1 : 0; // hp1
+                                        l <<= 1;
+                                        l += counters[0] / 2 - 1 > 0 ? 1 : 0; // hp2
+                                        l <<= 1;
+                                        l += counters[0] / 2 - 2 > 0 ? 1 : 0; // hp3
+
+                                        setSolutionBitMasks[count] = l;
+                                        count++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            t.execute(() -> {
+                try {
+                    final boolean isIntel = KernelManager
+                            .instance()
+                            .bestDevice()
+                            .toString()
+                            .toLowerCase()
+                            .contains("intel");
+                    if (isIntel) {
+                        System.out.println("Disabling GPU acceleration: Intel card detected");
+                        canUseGpu = false;
+                        return;
+                    }
+
+                    final Kernel testKernel = new Kernel() {
+                        @Override
+                        public void run() {
+
+                        }
+                    };
+                    if (!testKernel.isRunningCL()) {
+                        System.out.println("Disabling GPU acceleration: Non CL device detected");
+                        canUseGpu = false;
+                        return;
+                    }
+                    testKernel.dispose();
+
+                } catch (final Exception e) {
+                    canUseGpu = false;
+                    System.out.println("Error detecting GPU");
+                }
+            });
+        }
+    }
+
     public OptimizationRequestHandler(final BaseStatsDb baseStatsDb,
                                       final HeroDb heroDb,
                                       final ItemDb itemDb) {
         this.baseStatsDb = baseStatsDb;
         this.heroDb = heroDb;
         this.itemDb = itemDb;
+        this.instance = this;
         optimizationDbs = new HashMap<>();
 
         ExecutorService t = Executors.newFixedThreadPool(3);
 
         t.execute(() -> {
-            setSolutionBitMasks = new int[SET_EXPONENTIAL];
-            int count = 0;
-            for (int a = 0; a < SET_COUNT; a++) {
-                for (int b = 0; b < SET_COUNT; b++) {
-                    for (int c = 0; c < SET_COUNT; c++) {
-                        for (int d = 0; d < SET_COUNT; d++) {
-                            for (int e = 0; e < SET_COUNT; e++) {
-                                for (int f = 0; f < SET_COUNT; f++) {
-                                    int[] sets = new int[]{a, b, c, d, e, f};
-                                    int[] counters = convertSetsToSetCounters(sets);
-
-                                    int l = 0;
-
-                                    l += counters[17] / 2 > 0 ? 1 : 0; // torrent 1
-                                    l <<= 1;
-                                    l += counters[17] / 2 - 1 > 0 ? 1 : 0; // torrent 2
-                                    l <<= 1;
-                                    l += counters[17] / 2 - 2 > 0 ? 1 : 0; // torrent 3
-                                    l <<= 1;
-                                    l += counters[16] / 4 > 0 ? 1 : 0; // protection
-                                    l <<= 1;
-                                    l += counters[15] / 4 > 0 ? 1 : 0; // injury
-                                    l <<= 1;
-                                    l += counters[14] / 4 > 0 ? 1 : 0; // revenge
-                                    l <<= 1;
-                                    l += counters[13] / 2 > 0 ? 1 : 0; // pen
-                                    l <<= 1;
-                                    l += counters[12] / 2 > 0 ? 1 : 0; // immunity
-                                    l <<= 1;
-                                    l += counters[11] / 4 > 0 ? 1 : 0; // rage
-                                    l <<= 1;
-                                    l += counters[10] / 2 > 0 ? 1 : 0; // unity - should be x3 but don't need it
-                                    l <<= 1;
-                                    l += counters[9] / 2 > 0 ? 1 : 0; // res1
-                                    l <<= 1;
-                                    l += counters[9] / 2 - 1 > 0 ? 1 : 0; // res2
-                                    l <<= 1;
-                                    l += counters[9] / 2 - 2 > 0 ? 1 : 0; // res3
-                                    l <<= 1;
-                                    l += counters[8] / 4 > 0 ? 1 : 0; // counter
-                                    l <<= 1;
-                                    l += counters[7] / 4 > 0 ? 1 : 0; // lifesteal
-                                    l <<= 1;
-                                    l += counters[6] / 4 > 0 ? 1 : 0; // destr
-                                    l <<= 1;
-                                    l += counters[5] / 2 > 0 ? 1 : 0; // hit1
-                                    l <<= 1;
-                                    l += counters[5] / 2 - 1 > 0 ? 1 : 0; // hit2
-                                    l <<= 1;
-                                    l += counters[5] / 2 - 2 > 0 ? 1 : 0; // hit3
-                                    l <<= 1;
-                                    l += counters[4] / 2 > 0 ? 1 : 0; // crit1
-                                    l <<= 1;
-                                    l += counters[4] / 2 - 1 > 0 ? 1 : 0; // crit2
-                                    l <<= 1;
-                                    l += counters[4] / 2 - 2 > 0 ? 1 : 0;  // crit3
-                                    l <<= 1;
-                                    l += counters[3] / 4 > 0 ? 1 : 0; // spd
-                                    l <<= 1;
-                                    l += counters[2] / 4 > 0 ? 1 : 0; // atk
-                                    l <<= 1;
-                                    l += counters[1] / 2 > 0 ? 1 : 0; // def1
-                                    l <<= 1;
-                                    l += counters[1] / 2 - 1 > 0 ? 1 : 0; // def2
-                                    l <<= 1;
-                                    l += counters[1] / 2 - 2 > 0 ? 1 : 0; // def3
-                                    l <<= 1;
-                                    l += counters[0] / 2 > 0 ? 1 : 0; // hp1
-                                    l <<= 1;
-                                    l += counters[0] / 2 - 1 > 0 ? 1 : 0; // hp2
-                                    l <<= 1;
-                                    l += counters[0] / 2 - 2 > 0 ? 1 : 0; // hp3
-
-                                    setSolutionBitMasks[count] = l;
-                                    count++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        t.execute(() -> {
             permutations = new boolean[SET_EXPONENTIAL];
             setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
-        });
-
-        t.execute(() -> {
-            try {
-                final boolean isIntel = KernelManager
-                        .instance()
-                        .bestDevice()
-                        .toString()
-                        .toLowerCase()
-                        .contains("intel");
-                if (isIntel) {
-                    System.out.println("Disabling GPU acceleration: Intel card detected");
-                    canUseGpu = false;
-                    return;
-                }
-
-                final Kernel testKernel = new Kernel() {
-                    @Override
-                    public void run() {
-
-                    }
-                };
-                if (!testKernel.isRunningCL()) {
-                    System.out.println("Disabling GPU acceleration: Non CL device detected");
-                    canUseGpu = false;
-                    return;
-                }
-                testKernel.dispose();
-
-            } catch (final Exception e) {
-                canUseGpu = false;
-                System.out.println("Error detecting GPU");
-            }
         });
     }
 
