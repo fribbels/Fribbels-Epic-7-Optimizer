@@ -42,11 +42,6 @@ public class Main {
     public static long BEST_DEVICE_ID = 0;
 
     public static void main(String[] args) throws Exception {
-        final Device device = KernelManager.instance().bestDevice();
-        BEST_DEVICE_ID = device.getDeviceId();
-
-        System.out.println(KernelManager.instance().bestDevice().getType());
-
         try {
             final int threadsToUse = Runtime.getRuntime().availableProcessors() * 2;
             if (threadsToUse > THREADS) {
@@ -88,7 +83,6 @@ public class Main {
 
     public static void mainGpuDebugger(String[] args) throws Exception {
         System.out.println("** GPU DEBUGGER **");
-
         System.out.println("** Best device: **\n" + KernelManager.instance().bestDevice());
 
         try {

@@ -29184,6 +29184,124 @@
       }
     }
   },
+  "Shepherd Jena": {
+    "_id": "shepherd-jena",
+    "name": "Shepherd Jena",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "ice",
+    "role": "mage",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "att",
+      "grades": {
+        "D": 24,
+        "C": 36,
+        "B": 48,
+        "A": 60,
+        "S": 72,
+        "SS": 84,
+        "SSS": 96
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/face/c3052_s.png",
+      "image": "https://assets.epicsevendb.com/_source/face/c3052_su.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/face/c3052_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10601,
+        "atk": 691,
+        "hp": 3238,
+        "spd": 101,
+        "def": 483,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12313,
+        "atk": 852,
+        "hp": 3578,
+        "spd": 111,
+        "def": 483,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4499,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13223,
+        "atk": 862,
+        "hp": 4071,
+        "spd": 101,
+        "def": 599,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15808,
+        "atk": 1063,
+        "hp": 4491,
+        "spd": 111,
+        "def": 599,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 5549,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
   "Shooting Star Achates": {
     "_id": "shooting-star-achates",
     "name": "Shooting Star Achates",
