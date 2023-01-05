@@ -10681,6 +10681,98 @@
       }
     }
   },
+  "Death Dealer Ray": {
+    "_id": "death-dealer-ray",
+    "name": "Death Dealer Ray",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "manauser",
+    "zodiac": "crab",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.043,
+        "A": 0.065,
+        "S": 0.086,
+        "SS": 0.107,
+        "SSS": 0.129
+      },
+      "slots": {
+        "1": true,
+        "2": false,
+        "3": true,
+        "4": false
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/deathDealerRayPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/deathDealerRayPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 14075,
+        "atk": 378,
+        "hp": 3784,
+        "spd": 100,
+        "def": 590,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16072,
+        "atk": 498,
+        "hp": 4578,
+        "spd": 100,
+        "def": 625,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 17557,
+        "atk": 471,
+        "hp": 4758,
+        "spd": 100,
+        "def": 732,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 20427,
+        "atk": 621,
+        "hp": 6034,
+        "spd": 100,
+        "def": 775,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Desert Jewel Basar": {
     "_id": "desert-jewel-basar",
     "name": "Desert Jewel Basar",
@@ -29227,6 +29319,7 @@
       "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shepherdJenaPortrait.png",
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shepherdJenaPanel.png"
+    },
     "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
