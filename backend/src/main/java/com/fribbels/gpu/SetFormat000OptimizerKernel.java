@@ -171,6 +171,10 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
             final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
 
+            final int s1 = 1;
+            final int s2 = 2;
+            final int s3 = 3;
+
             final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);
             final int upgrades = (int) (wUpg+hUpg+aUpg+nUpg+rUpg+bUpg);
@@ -197,7 +201,10 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
                     ||  score < inputMinScoreLimit || score > inputMaxScoreLimit;
             final boolean f3 = priority < inputMinPriorityLimit || priority > inputMaxPriorityLimit
                     ||  upgrades < inputMinUpgradesLimit || upgrades > inputMaxUpgradesLimit
-                    ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit;
+                    ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit
+                    ||  s1 < inputMinS1Limit || s1 > inputMaxS1Limit
+                    ||  s2 < inputMinS2Limit || s2 > inputMaxS2Limit
+                    ||  s3 < inputMinS3Limit || s3 > inputMaxS3Limit;
 
 
             passes[id] = !(f1 || f2 || f3);

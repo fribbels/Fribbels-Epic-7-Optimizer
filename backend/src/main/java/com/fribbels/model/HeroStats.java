@@ -41,6 +41,10 @@ public class HeroStats {
     public int dmgh;
     public int dmgd;
 
+    public int s1;
+    public int s2;
+    public int s3;
+
     public int upgrades;
     public int conversions;
     public int score;

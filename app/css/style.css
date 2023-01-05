@@ -184,9 +184,20 @@ input[type=submit] {
 #myGrid {
   height: 100%;
   flex-grow: 2;
-  min-width: 1075px;
+  min-width: 1150px;
 }
+/*
+.ms-choice {
+  height: 22px;
+  font-size:  12px;
+}
+.ms-choice>span {
+  top: -2px;
+}*/
 
+#skillOptionsButton {
+  width: 100%;
+}
 .optimizer-equipped-section {
   display: flex;
   flex-direction: row;
@@ -220,7 +231,7 @@ input {
 }
 
 .constraints-panel-col {
-  padding: 5px 8px 5px 8px;
+  padding: 5px 5px 5px 5px;
   width: 200px;
   flex-grow: 1;
   line-height: 14px;
@@ -676,6 +687,10 @@ input[type=number]::-webkit-outer-spin-button {
   height: 29px;
   vertical-align: middle;
 }
+.shrinkSets {
+  height: 24px;
+  vertical-align: middle;
+}
 .optimizerStarIcon {
   height: 18px;
   vertical-align: middle;
@@ -837,7 +852,7 @@ input[type=number]::-webkit-outer-spin-button {
     min-width: 220px;
 }
 .constraints-right-panel {
-  width: 260px;
+  width: 210px;
   flex-shrink: 0;
   flex-grow: 0;
   display: flex;
@@ -908,7 +923,7 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 .gearActionButton {
-  width: 120px;
+  width: 102px;
   cursor: pointer;
   margin-right: 5px;
 }

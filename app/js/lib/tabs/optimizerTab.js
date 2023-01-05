@@ -473,6 +473,13 @@ module.exports = {
         request.inputMinMcdmgpsLimit = readNumber('inputMinMcdmgpsLimit' + index);
         request.inputMaxMcdmgpsLimit = readNumber('inputMaxMcdmgpsLimit' + index);
 
+        request.inputMinS1Limit = readNumber('inputMinS1Limit' + index);
+        request.inputMaxS1Limit = readNumber('inputMaxS1Limit' + index);
+        request.inputMinS2Limit = readNumber('inputMinS2Limit' + index);
+        request.inputMaxS2Limit = readNumber('inputMaxS2Limit' + index);
+        request.inputMinS3Limit = readNumber('inputMinS3Limit' + index);
+        request.inputMaxS3Limit = readNumber('inputMaxS3Limit' + index);
+
         request.inputMinDmgHLimit = readNumber('inputMinDmgHLimit' + index);
         request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit' + index);
         request.inputMinDmgDLimit = readNumber('inputMinDmgDLimit' + index);
@@ -600,6 +607,13 @@ module.exports = {
         $("#inputMaxMcdmgLimit" + index).val(inputDisplayNumber(request.inputMaxMcdmgLimit));
         $("#inputMinMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMinMcdmgpsLimit));
         $("#inputMaxMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMaxMcdmgpsLimit));
+
+        $("#inputMinS1Limit" + index).val(inputDisplayNumber(request.inputMinS1Limit));
+        $("#inputMaxS1Limit" + index).val(inputDisplayNumber(request.inputMaxS1Limit));
+        $("#inputMinS2Limit" + index).val(inputDisplayNumber(request.inputMinS2Limit));
+        $("#inputMaxS2Limit" + index).val(inputDisplayNumber(request.inputMaxS2Limit));
+        $("#inputMinS3Limit" + index).val(inputDisplayNumber(request.inputMinS3Limit));
+        $("#inputMaxS3Limit" + index).val(inputDisplayNumber(request.inputMaxS3Limit));
 
         $("#inputMinDmgHLimit" + index).val(inputDisplayNumber(request.inputMinDmgHLimit));
         $("#inputMaxDmgHLimit" + index).val(inputDisplayNumber(request.inputMaxDmgHLimit));

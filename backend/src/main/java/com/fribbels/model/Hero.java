@@ -44,6 +44,10 @@ public class Hero {
     public int dmgh;
     public int dmgd;
 
+    public int s1;
+    public int s2;
+    public int s3;
+
     public int upgrades;
     public int score;
     public int priority;
@@ -200,6 +204,10 @@ public class Hero {
         this.mcdmgps = heroStats.getMcdmgps();
         this.dmgh = heroStats.getDmgh();
         this.dmgd = heroStats.getDmgd();
+
+        this.s1 = heroStats.getS1();
+        this.s2 = heroStats.getS2();
+        this.s3 = heroStats.getS3();
 
         this.upgrades = heroStats.getUpgrades();
         this.score = heroStats.getScore();

@@ -602,6 +602,20 @@ module.exports = {
                               <input type="number" id="inputMinConversionsLimit${index}" class="optimizer-number-input rating-number-input">
                               <div class="inputStatLabel" data-t>${i18next.t("Conv")}</div>
                               <input type="number" id="inputMaxConversionsLimit${index}" class="optimizer-number-input rating-number-input"><br>
+
+
+                              <input type="number" id="inputMinS1Limit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("S1")}</div>
+                              <input type="number" id="inputMaxS1Limit${index}" class="optimizer-number-input rating-number-input"><br>
+
+                              <input type="number" id="inputMinS2Limit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("S2")}</div>
+                              <input type="number" id="inputMaxS2Limit${index}" class="optimizer-number-input rating-number-input"><br>
+
+                              <input type="number" id="inputMinS3Limit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("S3")}</div>
+                              <input type="number" id="inputMaxS3Limit${index}" class="optimizer-number-input rating-number-input"><br>
+
                             </div>
 
                             <div class="vertical"></div>

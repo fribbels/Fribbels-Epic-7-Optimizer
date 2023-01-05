@@ -237,7 +237,7 @@ window.jQuery = $;
               </div>
               <div class="horizontalSpace"></div>
 
-              <select id="optionsEnhanceLimit" class="optionsExcludeGearFrom">
+              <select id="optionsEnhanceLimit" class="optionsExcludeGearFrom optionsShortSelector">
                 <option value="0" data-t>+0 and higher</option>
                 <option value="3" data-t>+3 and higher</option>
                 <option value="6" data-t>+6 and higher</option>
@@ -247,8 +247,14 @@ window.jQuery = $;
               </select><br>
               <div class="horizontalSpace" ></div>
 
-              <select multiple="multiple" id="optionsExcludeGearFrom" class="optionsExcludeGearFrom">
+              <select multiple="multiple" id="optionsExcludeGearFrom" class="optionsExcludeGearFrom optionsShortSelector">
               </select><br>
+
+              <div class="horizontalSpace" ></div>
+              <div class="horizontalSpace" ></div>
+              <div class="horizontalSpace" ></div>
+
+              <input type="submit" class="gearActionButton" value="Change skill options" id="skillOptionsButton" data-t>
             </div>
 
             <div class="vertical"></div>
@@ -289,6 +295,28 @@ window.jQuery = $;
               <input type="number" id="inputMinResLimit" class="optimizer-number-input stat-number-input">
               <div class="inputStatLabel" data-t>Res</div>
               <input type="number" id="inputMaxResLimit" class="optimizer-number-input stat-number-input"><br>
+
+
+
+              <div class="horizontalSpace" ></div>
+              <div class="horizontalSpace" ></div>
+
+              <div class="panelLabel">
+                <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterStatsTooltip"></img>
+                <div class="panelLabelText" id="statsLabel" data-content=" (clear)" data-t>Stat filters</div>
+              </div>
+
+              <input type="number" id="inputMinS1Limit" class="optimizer-number-input stat-number-input">
+              <div class="inputStatLabel" data-t>S1</div>
+              <input type="number" id="inputMaxS1Limit" class="optimizer-number-input stat-number-input"><br>
+
+              <input type="number" id="inputMinS2Limit" class="optimizer-number-input stat-number-input">
+              <div class="inputStatLabel" data-t>S2</div>
+              <input type="number" id="inputMaxS2Limit" class="optimizer-number-input stat-number-input"><br>
+
+              <input type="number" id="inputMinS3Limit" class="optimizer-number-input stat-number-input">
+              <div class="inputStatLabel" data-t>S3</div>
+              <input type="number" id="inputMaxS3Limit" class="optimizer-number-input stat-number-input"><br>
             </div>
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
@@ -443,7 +471,7 @@ window.jQuery = $;
                 <option value="Health" data-t>Health</option>
                 <option value="DefensePercent" data-t>Defense %</option>
                 <option value="Defense" data-t>Defense</option>
-              </select><br>
+              </select>
 
               <select multiple="multiple" id="inputRingStat" class="inputGearFilterSelect">
                 <option value="EffectivenessPercent" data-t>Effectiveness</option>
@@ -572,27 +600,27 @@ window.jQuery = $;
                 </div>
 
                 <div class="leftRightText">
-                  <text id="" class="leftRightTextContent" data-t>Filtered weapons</text>
+                  <text id="" class="leftRightTextContent" data-t>Weapons</text>
                   <text id="filteredWeaponsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="l1" class="leftRightTextContent" data-t>Filtered helmets</text>
+                  <text id="l1" class="leftRightTextContent" data-t>Helmets</text>
                   <text id="filteredHelmetsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="l1" class="leftRightTextContent" data-t>Filtered armors</text>
+                  <text id="l1" class="leftRightTextContent" data-t>Armors</text>
                   <text id="filteredArmorsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="l1" class="leftRightTextContent" data-t>Filtered necklaces</text>
+                  <text id="l1" class="leftRightTextContent" data-t>Necklaces</text>
                   <text id="filteredNecklacesNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="a1" class="leftRightTextContent" data-t>Filtered rings</text>
+                  <text id="a1" class="leftRightTextContent" data-t>Rings</text>
                   <text id="filteredRingsNum" class="leftRightTextContent">0</text>
                 </div>
                 <div class="leftRightText">
-                  <text id="a1" class="leftRightTextContent" data-t>Filtered boots</text>
+                  <text id="a1" class="leftRightTextContent" data-t>Boots</text>
                   <text id="filteredBootsNum" class="leftRightTextContent">0</text>
                 </div>
 

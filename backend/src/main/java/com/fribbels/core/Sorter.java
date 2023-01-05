@@ -71,6 +71,15 @@ public class Sorter {
                     case DMGD:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgd));
                         break;
+                    case S1:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS1));
+                        break;
+                    case S2:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS2));
+                        break;
+                    case S3:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS3));
+                        break;
                     case UPGRADES:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getUpgrades));
                         break;
@@ -146,6 +155,15 @@ public class Sorter {
                         break;
                     case DMGD:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgd).reversed());
+                        break;
+                    case S1:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS1).reversed());
+                        break;
+                    case S2:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS2).reversed());
+                        break;
+                    case S3:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS3).reversed());
                         break;
                     case UPGRADES:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getUpgrades).reversed());

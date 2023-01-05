@@ -98,6 +98,14 @@ public class OptimizationRequest extends Request {
     public int inputMaxDmgHLimit = Integer.MAX_VALUE;
     public int inputMinDmgDLimit;
     public int inputMaxDmgDLimit = Integer.MAX_VALUE;
+
+    public int inputMinS1Limit;
+    public int inputMaxS1Limit = Integer.MAX_VALUE;
+    public int inputMinS2Limit;
+    public int inputMaxS2Limit = Integer.MAX_VALUE;
+    public int inputMinS3Limit;
+    public int inputMaxS3Limit = Integer.MAX_VALUE;
+
     public int inputMinUpgradesLimit;
     public int inputMaxUpgradesLimit = Integer.MAX_VALUE;
     public int inputMinConversionsLimit;

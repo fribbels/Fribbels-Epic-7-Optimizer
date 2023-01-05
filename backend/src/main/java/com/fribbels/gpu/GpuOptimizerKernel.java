@@ -113,6 +113,14 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final int inputMaxDmgHLimit;
     @Constant final int inputMinDmgDLimit;
     @Constant final int inputMaxDmgDLimit;
+
+    @Constant final int inputMinS1Limit;
+    @Constant final int inputMaxS1Limit;
+    @Constant final int inputMinS2Limit;
+    @Constant final int inputMaxS2Limit;
+    @Constant final int inputMinS3Limit;
+    @Constant final int inputMaxS3Limit;
+
     @Constant final int inputMinUpgradesLimit;
     @Constant final int inputMaxUpgradesLimit;
     @Constant final int inputMinConversionsLimit;
@@ -329,6 +337,14 @@ public class GpuOptimizerKernel extends Kernel {
         inputMaxDmgHLimit = request.inputMaxDmgHLimit;
         inputMinDmgDLimit = request.inputMinDmgDLimit;
         inputMaxDmgDLimit = request.inputMaxDmgDLimit;
+
+        inputMinS1Limit = request.inputMinS1Limit;
+        inputMaxS1Limit = request.inputMaxS1Limit;
+        inputMinS2Limit = request.inputMinS2Limit;
+        inputMaxS2Limit = request.inputMaxS2Limit;
+        inputMinS3Limit = request.inputMinS3Limit;
+        inputMaxS3Limit = request.inputMaxS3Limit;
+
         inputMinUpgradesLimit = request.inputMinUpgradesLimit;
         inputMaxUpgradesLimit = request.inputMaxUpgradesLimit;
         inputMinConversionsLimit = request.inputMinConversionsLimit;
@@ -588,6 +604,10 @@ public class GpuOptimizerKernel extends Kernel {
             final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
             final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
 
+            final int s1 = 1;
+            final int s2 = 2;
+            final int s3 = 3;
+
             final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);
             final int upgrades = (int) (wUpg+hUpg+aUpg+nUpg+rUpg+bUpg);
@@ -614,7 +634,10 @@ public class GpuOptimizerKernel extends Kernel {
                     ||  score < inputMinScoreLimit || score > inputMaxScoreLimit;
             final boolean f3 = priority < inputMinPriorityLimit || priority > inputMaxPriorityLimit
                     ||  upgrades < inputMinUpgradesLimit || upgrades > inputMaxUpgradesLimit
-                    ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit;
+                    ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit
+                    ||  s1 < inputMinS1Limit || s1 > inputMaxS1Limit
+                    ||  s2 < inputMinS2Limit || s2 > inputMaxS2Limit
+                    ||  s3 < inputMinS3Limit || s3 > inputMaxS3Limit;
 
 
 
