@@ -29224,10 +29224,9 @@
     },
     "specialty_change": {},
     "assets": {
-      "icon": "https://assets.epicsevendb.com/_source/face/c3052_s.png",
-      "image": "https://assets.epicsevendb.com/_source/face/c3052_su.png",
-      "thumbnail": "https://assets.epicsevendb.com/_source/face/c3052_l.png"
-    },
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shepherdJenaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/shepherdJenaPanel.png"
     "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
