@@ -68,6 +68,16 @@ module.exports = {
         });
     },
 
+    getSkillOptions: async (id) => {
+        return post('/heroes/getSkillOptions', {
+            id: id
+        });
+    },
+
+    setSkillOptions: async (skillOptions, heroId) => {
+        return post('/heroes/setSkillOptions', skillOptions);
+    },
+
     setModStats: async (modStats, heroId) => {
         return post('/heroes/setModStats', {
             discardStats: modStats.discardStats,

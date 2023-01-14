@@ -458,6 +458,7 @@ async function showBonusStatsWindow(row) {
     await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
     Notifier.success("Saved bonus stats");
 }
+
 function showEditHeroInfoPopups(name) {
     if (name == "Eaton") {
         Notifier.info("Eaton's 20% total Health bonus from S2 is already automatically added.")

@@ -84,6 +84,37 @@
         }
       }
     ],
+    "skills": {
+      "s1": [
+        {
+          "name": "s1",
+          "rate": 1,
+          "pow": 0.95
+        }
+      ],
+      "s2": [
+        {
+          "name": "s2 heal",
+          "rate": 0,
+          "pow": 0,
+          "selfHpScaling": 0.15
+        }
+      ],
+      "s3": [
+        {
+          "name": "s3 heal",
+          "rate": 0,
+          "pow": 0,
+          "selfHpScaling": 0.3
+        },
+        {
+          "name": "s3 heal soulburn",
+          "rate": 0,
+          "pow": 0,
+          "selfHpScaling": 0.5
+        }
+      ]
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14745,

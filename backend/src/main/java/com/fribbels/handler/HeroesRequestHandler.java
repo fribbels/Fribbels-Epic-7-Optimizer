@@ -11,18 +11,7 @@ import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
 import com.fribbels.model.Mod;
-import com.fribbels.request.BaseStatsRequest;
-import com.fribbels.request.BonusStatsRequest;
-import com.fribbels.request.BuildsRequest;
-import com.fribbels.request.EquipItemsOnHeroRequest;
-import com.fribbels.request.GetAllHeroesRequest;
-import com.fribbels.request.GetHeroByIdRequest;
-import com.fribbels.request.HeroesRequest;
-import com.fribbels.request.IdRequest;
-import com.fribbels.request.IdsRequest;
-import com.fribbels.request.ModStatsRequest;
-import com.fribbels.request.OptimizationRequest;
-import com.fribbels.request.ReorderRequest;
+import com.fribbels.request.*;
 import com.fribbels.response.GetAllHeroesResponse;
 import com.fribbels.response.GetHeroByIdResponse;
 import com.fribbels.response.HeroStatsResponse;
@@ -109,6 +98,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                 case "/heroes/setBonusStats":
                     final BonusStatsRequest bonusStatsRequest = parseRequest(exchange, BonusStatsRequest.class);
                     sendResponse(exchange, setBonusStats(bonusStatsRequest));
+                    return;
+                case "/heroes/setSkillOptions":
+                    final SkillOptionsRequest skillOptionsRequest = parseRequest(exchange, SkillOptionsRequest.class);
+                    sendResponse(exchange, setSkillOptions(skillOptionsRequest));
                     return;
                 case "/heroes/setModStats":
                     final ModStatsRequest modStatsRequest = parseRequest(exchange, ModStatsRequest.class);
@@ -245,6 +238,15 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         if (hero == null) return "";
 
         hero.setBonusStats(request);
+
+        return "";
+    }
+
+    public String setSkillOptions(final SkillOptionsRequest request) {
+        final Hero hero = heroDb.getHeroById(request.getHeroId());
+        if (hero == null) return "";
+
+        hero.setSkillOptions(request);
 
         return "";
     }

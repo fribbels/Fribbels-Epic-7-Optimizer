@@ -5,6 +5,7 @@ import com.fribbels.enums.StatType;
 import com.fribbels.request.BonusStatsRequest;
 import com.fribbels.request.ModStatsRequest;
 import com.fribbels.request.OptimizationRequest;
+import com.fribbels.request.SkillOptionsRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -111,6 +112,8 @@ public class Hero {
 
     private OptimizationRequest optimizationRequest;
 
+    private HeroSkillOptions skillOptions;
+
     public Item switchItem(final Item item) {
         final Gear gear = item.getGear();
         final Item previousItem = addToEquipment(gear, item);
@@ -171,6 +174,10 @@ public class Hero {
         this.eeNumber = bonusStats.getEeNumber();
 
         this.stars = bonusStats.getStars();
+    }
+
+    public void setSkillOptions(final SkillOptionsRequest request) {
+        this.skillOptions = request.getSkillOptions();
     }
 
     public Map<Gear, Item> getEquipment() {
