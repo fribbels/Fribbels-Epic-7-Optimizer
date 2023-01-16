@@ -25,6 +25,8 @@ public class SingleSkillOptions {
     public Boolean critDamageBuffEnabled;
     public Boolean vigorAttackBuffEnabled;
 
+    public Boolean applyToAllSkills;
+
     public Integer targetDefense;
     public Float targetDefenseIncreasePercent;
     public Float targetDamageReductionPercent;

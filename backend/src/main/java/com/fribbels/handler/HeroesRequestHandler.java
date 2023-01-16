@@ -243,6 +243,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     public String setSkillOptions(final SkillOptionsRequest request) {
+        System.out.println(request);
         final Hero hero = heroDb.getHeroById(request.getHeroId());
         if (hero == null) return "";
 

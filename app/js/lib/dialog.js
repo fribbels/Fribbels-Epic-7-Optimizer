@@ -239,7 +239,14 @@ module.exports = {
             const heroes = getAllHeroesResponse.heroes;
 
 
-            hero = {}
+
+
+            hero = heroes.find(x => x.id == heroId)
+            if (!hero) {
+                return;
+            }
+
+            // console.warn(hero);
             // const heroInfo = heroData[hero.name];
             // const ee = heroInfo.ex_equip[0];
 
@@ -268,13 +275,13 @@ module.exports = {
                             </div>
                             <div class="tabsContentWrapper">
                                 <div class="tabsContent active" id="home">
-                                    ${generateSkillOptionsHtml("s1")}
+                                    ${generateSkillOptionsHtml("s1", hero)}
                                 </div>
                                 <div class="tabsContent" id="about">
-                                    ${generateSkillOptionsHtml("s2")}
+                                    ${generateSkillOptionsHtml("s2", hero)}
                                 </div>
                                 <div class="tabsContent" id="contact">
-                                    ${generateSkillOptionsHtml("s3")}
+                                    ${generateSkillOptionsHtml("s3", hero)}
                                 </div>
                             </div>
                         </div>
@@ -1614,7 +1621,18 @@ module.exports = {
     }
 }
 
-function generateSkillOptionsHtml(prefix) {
+function safeGetSkill(hero, prefix) {
+    if (!hero.skillOptions) {
+        return {};
+    }
+
+    if (!hero.skillOptions[prefix]) {
+        return {};
+    }
+    return hero.skillOptions[prefix];
+}
+
+function generateSkillOptionsHtml(prefix, hero) {
     const html =
 `
 <div class="editGearFormRow">
@@ -1633,7 +1651,7 @@ function generateSkillOptionsHtml(prefix) {
     <div class="editGearFormHalf">
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Apply options to all skills")}</div>
-            <input type="checkbox" id="${prefix}EditApplyToAllSkills" checked>
+            <input type="checkbox" id="${prefix}EditApplyToAllSkills" ${safeGetSkill(hero, prefix).applyToAllSkills ? "checked" : ""}>
         </div>
     </div>
 </div>
@@ -1646,52 +1664,52 @@ function generateSkillOptionsHtml(prefix) {
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Attack % Imprint")}</div>
             <span class="valuePadding input-holder">
-                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditAttackPercentImprint" value="${""}">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditAttackPercentImprint" value="${safeGetSkill(hero, prefix).attackImprintPercent ? hero.skillOptions[prefix].attackImprintPercent : 0}">
             </span>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Attack % Increase")}</div>
             <span class="valuePadding input-holder">
-                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditAttackPercentIncrease" value="${""}">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditAttackPercentIncrease" value="${safeGetSkill(hero, prefix).attackIncreasePercent ? hero.skillOptions[prefix].attackIncreasePercent : 0}">
             </span>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Damage Increase")}</div>
             <span class="valuePadding input-holder">
-                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditDamageIncrease" value="${""}">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditDamageIncrease" value="${safeGetSkill(hero, prefix).damageIncreasePercent ? hero.skillOptions[prefix].damageIncreasePercent : 0}">
             </span>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Elemental Advantage")}</div>
-            <input type="checkbox" id="${prefix}EditElementalAdvantageBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditElementalAdvantageBox" ${safeGetSkill(hero, prefix).elementalAdvantageEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Decreased Attack")}</div>
-            <input type="checkbox" id="${prefix}EditDecreasedAttackBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditDecreasedAttackBox" ${safeGetSkill(hero, prefix).decreasedAttackBuffEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Attack Buff")}</div>
-            <input type="checkbox" id="${prefix}EditAttackBuffBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditAttackBuffBox" ${safeGetSkill(hero, prefix).attackBuffEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Greater Attack Buff")}</div>
-            <input type="checkbox" id="${prefix}EditGreaterAttackBuffBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditGreaterAttackBuffBox" ${safeGetSkill(hero, prefix).greaterAttackBuffEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Crit Damage Buff")}</div>
-            <input type="checkbox" id="${prefix}EditCritDamageBuffBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditCritDamageBuffBox" ${safeGetSkill(hero, prefix).critDamageBuffEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Vigor")}</div>
-            <input type="checkbox" id="${prefix}EditVigorAttackBuffBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditVigorAttackBuffBox" ${safeGetSkill(hero, prefix).vigorAttackBuffEnabled ? "checked" : ""}>
         </div>
     </div>
 
@@ -1701,49 +1719,49 @@ function generateSkillOptionsHtml(prefix) {
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Target Defense")}</div>
             <span class="valuePadding input-holder">
-                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDefense" value="${""}">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDefense" value="${safeGetSkill(hero, prefix).targetDefense ? hero.skillOptions[prefix].targetDefense : 0}">
             </span>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Defense Increase")}</div>
             <span class="valuePadding input-holder">
-                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDefenseIncrease" value="${""}">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDefenseIncrease" value="${safeGetSkill(hero, prefix).targetDefenseIncreasePercent ? hero.skillOptions[prefix].targetDefenseIncreasePercent : 0}">
             </span>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Damage Reduction")}</div>
             <span class="valuePadding input-holder">
-                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDamageReduction" value="${""}">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDamageReduction" value="${safeGetSkill(hero, prefix).targetDamageReductionPercent ? hero.skillOptions[prefix].targetDamageReductionPercent : 0}">
             </span>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Damage Transfer")}</div>
             <span class="valuePadding input-holder">
-                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDamageTransfer" value="${""}">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDamageTransfer" value="${safeGetSkill(hero, prefix).targetDamageTransferPercent ? hero.skillOptions[prefix].targetDamageTransferPercent : 0}">
             </span>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Defense Buff")}</div>
-            <input type="checkbox" id="${prefix}EditTargetDefenseBuffBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditTargetDefenseBuffBox" ${safeGetSkill(hero, prefix).targetDefenseBuffEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Vigor")}</div>
-            <input type="checkbox" id="${prefix}EditTargetVigorBuffBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditTargetVigorBuffBox" ${safeGetSkill(hero, prefix).targetVigorDefenseBuffEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Defense Break")}</div>
-            <input type="checkbox" id="${prefix}EditTargetDefenseBreakBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditTargetDefenseBreakBox" ${safeGetSkill(hero, prefix).targetDefenseBreakBuffEnabled ? "checked" : ""}>
         </div>
 
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Target")}</div>
-            <input type="checkbox" id="${prefix}EditTargetTargetBuffBox" ${false ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditTargetTargetBuffBox" ${safeGetSkill(hero, prefix).targetTargetBuffEnabled ? "checked" : ""}>
         </div>
     </div>
 </div>

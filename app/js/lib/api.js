@@ -75,7 +75,10 @@ module.exports = {
     },
 
     setSkillOptions: async (skillOptions, heroId) => {
-        return post('/heroes/setSkillOptions', skillOptions);
+        return post('/heroes/setSkillOptions', {
+            heroId: heroId,
+            skillOptions: skillOptions
+        });
     },
 
     setModStats: async (modStats, heroId) => {
