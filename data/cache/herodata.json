@@ -4991,6 +4991,142 @@
       }
     }
   },
+  "Beehoo": {
+    "_id": "beehoo",
+    "name": "Beehoo",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "ranger",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.036,
+        "A": 0.054,
+        "S": 0.072,
+        "SS": 0.09,
+        "SSS": 0.108
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/beehooPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/beehooFuriousPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 11648,
+        "atk": 684,
+        "hp": 4202,
+        "spd": 109,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 30,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13285,
+        "atk": 804,
+        "hp": 4542,
+        "spd": 115,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 30,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 14536,
+        "atk": 853,
+        "hp": 5284,
+        "spd": 109,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 30,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 1003,
+        "hp": 5704,
+        "spd": 115,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.3,
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 30,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
   "Belian": {
     "_id": "belian",
     "name": "Belian",
@@ -24152,6 +24288,100 @@
         "spd": 124,
         "def": 536,
         "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Peacemaker Furious": {
+    "_id": "peacemaker-furious",
+    "name": "Peacemaker Furious",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "dark",
+    "role": "ranger",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "C": 0.042,
+        "B": 0.063,
+        "A": 0.084,
+        "S": 0.105,
+        "SS": 0.126,
+        "SSS": 0.147
+      }
+    },
+    "devotion": {
+      "type": "speed",
+      "grades": {
+        "C": 3,
+        "B": 4,
+        "A": 6,
+        "S": 7,
+        "SS": 9,
+        "SSS": 10
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/peacemakerFuriousPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/peacemakerFuriousPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 10941,
+        "atk": 604,
+        "hp": 4138,
+        "spd": 106,
+        "def": 449,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12452,
+        "atk": 778,
+        "hp": 4726,
+        "spd": 106,
+        "def": 449,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 13659,
+        "atk": 753,
+        "hp": 5203,
+        "spd": 106,
+        "def": 557,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15955,
+        "atk": 970,
+        "hp": 5935,
+        "spd": 106,
+        "def": 557,
+        "chc": 0.27,
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0,
