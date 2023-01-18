@@ -87,14 +87,34 @@
     "skills": {
       "s1": [
         {
-          "name": "s1",
+          "name": "S1 crit",
+          "type": "damage",
+          "rate": 1,
+          "pow": 0.95
+        },
+        {
+          "name": "S1 crushing",
+          "type": "damage",
+          "rate": 1,
+          "pow": 0.95
+        },
+        {
+          "name": "S1 normal",
+          "type": "damage",
+          "rate": 1,
+          "pow": 0.95
+        },
+        {
+          "name": "S1 miss",
+          "type": "damage",
           "rate": 1,
           "pow": 0.95
         }
       ],
       "s2": [
         {
-          "name": "s2 heal",
+          "name": "S2 heal",
+          "type": "heal",
           "rate": 0,
           "pow": 0,
           "selfHpScaling": 0.15
@@ -102,13 +122,15 @@
       ],
       "s3": [
         {
-          "name": "s3 heal",
+          "name": "S3 heal",
+          "type": "heal",
           "rate": 0,
           "pow": 0,
           "selfHpScaling": 0.3
         },
         {
-          "name": "s3 heal soulburn",
+          "name": "S3 soulburn heal",
+          "type": "heal",
           "rate": 0,
           "pow": 0,
           "selfHpScaling": 0.5

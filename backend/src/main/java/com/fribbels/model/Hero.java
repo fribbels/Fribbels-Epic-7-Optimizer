@@ -113,6 +113,7 @@ public class Hero {
     private OptimizationRequest optimizationRequest;
 
     private HeroSkillOptions skillOptions;
+    private DamageMultipliers damageMultipliers;
 
     public Item switchItem(final Item item) {
         final Gear gear = item.getGear();

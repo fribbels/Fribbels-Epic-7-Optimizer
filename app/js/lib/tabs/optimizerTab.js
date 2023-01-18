@@ -832,11 +832,15 @@ module.exports = {
         // showEditHeroInfoPopups(row.name)
         const skillOptions = await Dialog.changeSkillOptionsDialog(heroId);
 
+        if (!skillOptions) {
+            return;
+        }
+
         console.warn("skillOptions", skillOptions)
 
         Api.setSkillOptions(skillOptions, heroId)
-
-        
+        Notifier.success("Saved skill options");
+        Saves.autoSave();
     }
 }
 
@@ -1215,7 +1219,8 @@ async function submitOptimizationRequest() {
         items: items,
         bonusHp: hero.bonusHp,
         bonusAtk: hero.bonusAtk,
-        hero: hero
+        hero: hero,
+        damageMultipliers: DamageCalc.getMultipliers(hero, hero.skillOptions)
     }
 
     if (!hero.artifactName || hero.artifactName == "None") {

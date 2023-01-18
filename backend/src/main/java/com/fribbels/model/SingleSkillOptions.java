@@ -25,6 +25,7 @@ public class SingleSkillOptions {
     public Boolean critDamageBuffEnabled;
     public Boolean vigorAttackBuffEnabled;
 
+    public String skillEffect;
     public Boolean applyToAllSkills;
 
     public Integer targetDefense;

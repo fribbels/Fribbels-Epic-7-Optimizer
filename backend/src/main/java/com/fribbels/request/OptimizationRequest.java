@@ -2,6 +2,7 @@ package com.fribbels.request;
 
 import com.fribbels.enums.Set;
 import com.fribbels.enums.StatType;
+import com.fribbels.model.DamageMultipliers;
 import com.fribbels.model.Hero;
 import com.fribbels.model.Item;
 import com.fribbels.model.Request;
@@ -28,6 +29,7 @@ public class OptimizationRequest extends Request {
 
     private String heroId;
     public Hero hero;
+    public DamageMultipliers damageMultipliers;
     private List<Item> items;
 
     private List<List<Set>> inputSets;

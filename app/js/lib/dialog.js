@@ -235,7 +235,6 @@ module.exports = {
     changeSkillOptionsDialog: async (heroId) => {
         return new Promise(async (resolve, reject) => {
             const getAllHeroesResponse = await Api.getAllHeroes();
-            const heroData = HeroData.getAllHeroData();
             const heroes = getAllHeroesResponse.heroes;
 
 
@@ -245,6 +244,7 @@ module.exports = {
             if (!hero) {
                 return;
             }
+            const heroData = HeroData.getHeroExtraInfo(hero.name)
 
             // console.warn(hero);
             // const heroInfo = heroData[hero.name];
@@ -258,12 +258,6 @@ module.exports = {
 
                     <p style="color: var(--font-color)" data-t>${i18next.t("Skill options")}</p>
                     <div class="horizontalSpace"></div>
-                    <div class="editGearFormRow">
-                        <div class="editSkillLabel" data-t>${i18next.t("Apply options to all skills")}</div>
-                        <input type="checkbox" id="editApplyToAllSkills" checked>
-                    </div>
-                    <div class="horizontalSpace"></div>
-                    <div class="horizontalSpace"></div>
                     <div class="horizontalSpace"></div>
 
                     <div class="editGearForm tabsWrapperBody">
@@ -275,13 +269,13 @@ module.exports = {
                             </div>
                             <div class="tabsContentWrapper">
                                 <div class="tabsContent active" id="home">
-                                    ${generateSkillOptionsHtml("s1", hero)}
+                                    ${generateSkillOptionsHtml("s1", hero, heroData)}
                                 </div>
                                 <div class="tabsContent" id="about">
-                                    ${generateSkillOptionsHtml("s2", hero)}
+                                    ${generateSkillOptionsHtml("s2", hero, heroData)}
                                 </div>
                                 <div class="tabsContent" id="contact">
-                                    ${generateSkillOptionsHtml("s3", hero)}
+                                    ${generateSkillOptionsHtml("s3", hero, heroData)}
                                 </div>
                             </div>
                         </div>
@@ -346,6 +340,9 @@ module.exports = {
                             greaterAttackBuffEnabled: (document.getElementById(`${skill}EditGreaterAttackBuffBox`).checked),
                             critDamageBuffEnabled: (document.getElementById(`${skill}EditCritDamageBuffBox`).checked),
                             vigorAttackBuffEnabled: (document.getElementById(`${skill}EditVigorAttackBuffBox`).checked),
+
+                            skillEffect: (document.getElementById(`${skill}SkillEffect`).value),
+                            applyToAllSkillsEnabled: (document.getElementById(`${skill}EditApplyToAllSkillsBox`).checked),
 
                             targetDefense: parseInt(document.getElementById(`${skill}EditTargetDefense`).value),
                             targetDefenseIncreasePercent: parseFloat(document.getElementById(`${skill}EditTargetDefenseIncrease`).value) || 0,
@@ -1632,15 +1629,20 @@ function safeGetSkill(hero, prefix) {
     return hero.skillOptions[prefix];
 }
 
-function generateSkillOptionsHtml(prefix, hero) {
+function generateSkillOptionsHtml(prefix, hero, heroData) {
+    var skillTypes = !heroData.skills ? [] : heroData.skills[prefix] 
+    var skillTypesHtml = ""
+    for (var skillType of skillTypes) {
+        skillTypesHtml += `<option value='${skillType.name}' ${safeGetSkill(hero, prefix).skillEffect == skillType.name ? "selected" : ""}>${skillType.name}</option>\n`
+    }
     const html =
 `
 <div class="editGearFormRow">
     <div class="editGearFormHalf">
         <div class="editGearFormRow">
             <div class="editSkillLabel" id="skillNumberLabel"  data-t>${i18next.t("Select Skill Effect")}</div>
-            <select id="${prefix}SkillEffect" class="editSkillSelect">
-                <option value=1 selected>S1 Crit</option>
+            <select id="${prefix}SkillEffect" class="editSkillSelect skillTypeSelect">
+                ${skillTypesHtml}
             </select>
         </div>
     </div>
@@ -1651,7 +1653,7 @@ function generateSkillOptionsHtml(prefix, hero) {
     <div class="editGearFormHalf">
         <div class="editGearFormRow">
             <div class="editSkillLabel" data-t>${i18next.t("Apply options to all skills")}</div>
-            <input type="checkbox" id="${prefix}EditApplyToAllSkills" ${safeGetSkill(hero, prefix).applyToAllSkills ? "checked" : ""}>
+            <input type="checkbox" id="${prefix}EditApplyToAllSkillsBox" ${safeGetSkill(hero, prefix).applyToAllSkills ? "checked" : ""}>
         </div>
     </div>
 </div>

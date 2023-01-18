@@ -1,10 +1,7 @@
 package com.fribbels.core;
 
 import com.fribbels.enums.StatType;
-import com.fribbels.model.AugmentedStats;
-import com.fribbels.model.Hero;
-import com.fribbels.model.HeroStats;
-import com.fribbels.model.Item;
+import com.fribbels.model.*;
 
 import java.util.Map;
 
@@ -135,16 +132,51 @@ public class StatCalculator {
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
         final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier * torrentMultiplier);
         final int dmgd = (int) ((critDamage * def) * rageMultiplier * penMultiplier * torrentMultiplier);
+/*
 
-        final int s1 = 1;
-        final int s2 = 2;
-        final int s3 = 3;
+(increase dmg) * [(atk + bonus atk) * (pow * multi) * (cdmg)]
 
+{[(ATK !!)(Atkmod)(Rate **)+(FlatMod)] * (1.871)+(Flat2Mod)} × (pow **)(a) +
+
+a = (EnhanceMod)(HitTypeMod)(ElementMod)(DamageUpMod)(TargetDebuffMod)
+rate -> scaling
+flatmod -> max hp/def scaling
+flat2mod -> ddj
+
+ */
+        DamageMultipliers multis = hero.getDamageMultipliers();
+        if (multis == null) {
+            multis = new DamageMultipliers();
+        }
+        final int s1 = (int)(((atk * multis.getAtkMods()[0] * multis.getRates()[0] + getFlatMod(multis, 0, hp)) * getTypeMultiplier(multis, 0)) * multis.getPows()[0] * multis.getMultis()[0]);
+        final int s2 = (int)(((atk * multis.getAtkMods()[1] * multis.getRates()[1] + getFlatMod(multis, 1, hp)) * getTypeMultiplier(multis, 1)) * multis.getPows()[1] * multis.getMultis()[1]);
+        final int s3 = (int)(((atk * multis.getAtkMods()[2] * multis.getRates()[2] + getFlatMod(multis, 2, hp)) * getTypeMultiplier(multis, 2)) * multis.getPows()[2] * multis.getMultis()[2]);
+
+//        final int s1 = 0;
+//        final int s2 = 0;
+//        final int s3 = 0;
+//
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
         return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps,
                 dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, s1, s2, s3, upgrades, conversions, score, priority,
                 base.bonusStats, null, null, null, null, null, null, null);
+    }
+
+    private float getTypeMultiplier(final DamageMultipliers damageMultipliers, final int skill) {
+        if (damageMultipliers.getTypes()[skill].equals("damage")) {
+            return 1.871f;
+        }
+        return 1f;
+    }
+
+    private float getFlatMod(final DamageMultipliers damageMultipliers, final int skill, final float hp) {
+        float value = 0;
+        if (damageMultipliers.getSelfHpScalings()[skill] != 0) {
+            value += damageMultipliers.getSelfHpScalings()[skill] * hp;
+        }
+
+        return value;
     }
 
     public float[] getStatAccumulatorArr(final HeroStats base,

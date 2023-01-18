@@ -97,6 +97,7 @@ global.fs = require('fs');
 global.Notifier = require('./notifier');
 global.Saves = require('./saves');
 global.Scanner = require('./scanner');
+global.DamageCalc = require('./damageCalc');
 const Jimp = require('jimp');
 
 document.addEventListener("DOMContentLoaded", async () => {
