@@ -18562,7 +18562,21 @@
       "image": "https://assets.epicsevendb.com/_source/face/c1070_su.png",
       "thumbnail": "https://assets.epicsevendb.com/_source/face/c1070_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100301",
+        "id": "exc100301",
+        "name": "Valkyrie Wing",
+        "description": "A mysterious circlet that symbolizes strength and beauty, and is the source of Rose's Fighting Spirit.",
+        "unit": "c1003",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 11948,
@@ -29454,7 +29468,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/sharunPanel.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc104601",
+        "id": "exc104601",
+        "name": "Eternal Rose",
+        "description": "A rose that Lidica picked when she was excommunicated from the Rose Apostles. It has been specially treated to ensure it never withers but also lost its scent in the process.",
+        "unit": "c1046",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarNoAwaken": {
         "cp": 13780,
