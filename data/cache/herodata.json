@@ -19676,6 +19676,99 @@
       }
     }
   },
+  "Lone Crescent Bellona": {
+    "_id": "lone-crescent-bellona",
+    "name": "Lone Crescent Bellona",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "warrior",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "devotion": {
+      "type": "def_rate",
+      "grades": {
+        "C": 0.024,
+        "B": 0.036,
+        "A": 0.048,
+        "S": 0.06,
+        "SS": 0.072,
+        "SSS": 0.084
+      },
+      "slots": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true
+      }
+    },
+    "specialty_change": {},
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/loneCrescentBellonaPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/loneCrescentBellonaPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarNoAwaken": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarNoAwaken": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Lorina": {
     "_id": "lorina",
     "name": "Lorina",
