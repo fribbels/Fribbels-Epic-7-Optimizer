@@ -26,7 +26,7 @@ function calculateRate(skill, hero, heroData, skillOptions) {
 function calculateAtkMod(skill, hero, heroData, skillOptions) {
     var atkMod = 1;
 
-    if (findSkill(skill, skillOptions, heroData).type == "damage") {
+    if (findSkill(skill, skillOptions, heroData).type == 0) {
         return atkMod;
     }
 
@@ -52,7 +52,7 @@ function calculateSelfHpScaling(skill, hero, heroData, skillOptions) {
 }
 
 function calculateType(skill, hero, heroData, skillOptions) {
-    return findSkill(skill, skillOptions, heroData).type || "damage";
+    return findSkill(skill, skillOptions, heroData).type || 0;
 }
 
 function getHitTypeMulti(skill, hero, heroData, skillOptions) {
@@ -74,13 +74,13 @@ function getHitTypeMulti(skill, hero, heroData, skillOptions) {
 function calculateMultis(skill, hero, heroData, skillOptions) {
     var multis = 1;
 
-    multis += findSkill(skill, skillOptions, heroData).type != "damage" ? 0 : getHitTypeMulti(skill, hero, heroData, skillOptions)
+    multis += findSkill(skill, skillOptions, heroData).type != 0 ? 0 : getHitTypeMulti(skill, hero, heroData, skillOptions)
 
-    if (skillOptions[skill].elementalAdvantageEnabled && findSkill(skill, skillOptions, heroData).type == "damage") {
+    if (skillOptions[skill].elementalAdvantageEnabled && findSkill(skill, skillOptions, heroData).type == 0) {
         multis *= 1.1
     }
 
-    if (skillOptions[skill].targetTargetBuffEnabled && findSkill(skill, skillOptions, heroData).type == "damage") {
+    if (skillOptions[skill].targetTargetBuffEnabled && findSkill(skill, skillOptions, heroData).type == 0) {
         multis *= 1.15
     }
 
