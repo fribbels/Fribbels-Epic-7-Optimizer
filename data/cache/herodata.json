@@ -3992,15 +3992,15 @@
     "role": "warrior",
     "zodiac": "lion",
     "self_devotion": {
-      "type": "att",
+      "type": "cri",
       "grades": {
-        "D": 36,
-        "C": 54,
-        "B": 72,
-        "A": 90,
-        "S": 108,
-        "SS": 126,
-        "SSS": 144
+        "D": 0.028,
+        "C": 0.042,
+        "B": 0.056,
+        "A": 0.07,
+        "S": 0.084,
+        "SS": 0.098,
+        "SSS": 0.112
       }
     },
     "assets": {
@@ -4505,15 +4505,15 @@
     "role": "warrior",
     "zodiac": "lion",
     "self_devotion": {
-      "type": "att",
+      "type": "cri",
       "grades": {
-        "D": 36,
-        "C": 54,
-        "B": 72,
-        "A": 90,
-        "S": 108,
-        "SS": 126,
-        "SSS": 144
+        "D": 0.028,
+        "C": 0.042,
+        "B": 0.056,
+        "A": 0.07,
+        "S": 0.084,
+        "SS": 0.098,
+        "SSS": 0.112
       }
     },
     "assets": {
