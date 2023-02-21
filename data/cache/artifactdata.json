@@ -993,6 +993,20 @@
       "health": 51
     }
   },
+  "Fan of Light and Dark": {
+    "assets": {
+      "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0016.png",
+      "image": "https://assets.epicsevendb.com/_source/item_arti/art0016_fu.png",
+      "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0016_l.jpg"
+    },
+    "name": "Fan of Light and Dark",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    }
+  },
   "Firm Shield": {
     "assets": {
       "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0018.png",
@@ -2811,6 +2825,20 @@
     "stats": {
       "attack": 7,
       "health": 63
+    }
+  },
+  "VI. The Lovers": {
+    "assets": {
+      "icon": "",
+      "image": "",
+      "thumbnail": ""
+    },
+    "name": "VI. The Lovers",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
     }
   },
   "XIII. Death": {
