@@ -1949,6 +1949,21 @@
       },
       "code":"ef305"
    },
+   "Records of Unity":{
+      "assets":{
+         "icon":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "image":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "thumbnail":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+      },
+      "name":"Records of Unity",
+      "rarity":4,
+      "role":"",
+      "stats":{
+         "attack":12,
+         "health":45
+      },
+      "code":"ef424"
+   },
    "Reingar's Special Drink":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0062.png",
