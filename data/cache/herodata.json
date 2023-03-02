@@ -1,5 +1,6 @@
 {
   "Achates": {
+    "code": "c1017",
     "_id": "achates",
     "name": "Achates",
     "moonlight": false,
@@ -66,6 +67,59 @@
         }
       }
     ],
+    "skills": {
+      "s1": [
+        {
+          "name": "S1 crit",
+          "type": 0,
+          "rate": 1,
+          "pow": 0.95
+        },
+        {
+          "name": "S1 crushing",
+          "type": 0,
+          "rate": 1,
+          "pow": 0.95
+        },
+        {
+          "name": "S1 normal",
+          "type": 0,
+          "rate": 1,
+          "pow": 0.95
+        },
+        {
+          "name": "S1 miss",
+          "type": 0,
+          "rate": 1,
+          "pow": 0.95
+        }
+      ],
+      "s2": [
+        {
+          "name": "S2 heal",
+          "type": 1,
+          "rate": 0,
+          "pow": 0,
+          "selfHpScaling": 0.15
+        }
+      ],
+      "s3": [
+        {
+          "name": "S3 heal",
+          "type": 1,
+          "rate": 0,
+          "pow": 0,
+          "selfHpScaling": 0.3
+        },
+        {
+          "name": "S3 soulburn heal",
+          "type": 1,
+          "rate": 0,
+          "pow": 0,
+          "selfHpScaling": 0.5
+        }
+      ]
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14745,
@@ -94,6 +148,7 @@
     }
   },
   "Adin": {
+    "code": "c3143",
     "_id": "adin",
     "name": "Adin",
     "moonlight": false,
@@ -147,6 +202,7 @@
     }
   },
   "Adlay": {
+    "code": "c3043",
     "_id": "adlay",
     "name": "Adlay",
     "moonlight": false,
@@ -200,6 +256,7 @@
     }
   },
   "Adventurer Ras": {
+    "code": "c5001",
     "_id": "adventurer-ras",
     "name": "Adventurer Ras",
     "moonlight": false,
@@ -275,6 +332,7 @@
     }
   },
   "ae-GISELLE": {
+    "code": "c1138",
     "_id": "ae-giselle",
     "name": "ae-GISELLE",
     "moonlight": true,
@@ -326,6 +384,7 @@
     }
   },
   "ae-KARINA": {
+    "code": "c1137",
     "_id": "ae-karina",
     "name": "ae-KARINA",
     "moonlight": false,
@@ -377,6 +436,7 @@
     }
   },
   "ae-NINGNING": {
+    "code": "c1140",
     "_id": "ae-ningning",
     "name": "ae-NINGNING",
     "moonlight": false,
@@ -428,6 +488,7 @@
     }
   },
   "ae-WINTER": {
+    "code": "c1139",
     "_id": "ae-winter",
     "name": "ae-WINTER",
     "moonlight": false,
@@ -479,6 +540,7 @@
     }
   },
   "Ainos": {
+    "code": "c3105",
     "_id": "ainos",
     "name": "Ainos",
     "moonlight": true,
@@ -532,6 +594,7 @@
     }
   },
   "Ains": {
+    "code": "c3093",
     "_id": "ains",
     "name": "Ains",
     "moonlight": false,
@@ -585,6 +648,7 @@
     }
   },
   "Aither": {
+    "code": "c1018",
     "_id": "aither",
     "name": "Aither",
     "moonlight": false,
@@ -638,6 +702,7 @@
     }
   },
   "Alencia": {
+    "code": "c1100",
     "_id": "alencia",
     "name": "Alencia",
     "moonlight": false,
@@ -703,6 +768,7 @@
     }
   },
   "Alexa": {
+    "code": "c3012",
     "_id": "alexa",
     "name": "Alexa",
     "moonlight": false,
@@ -756,6 +822,7 @@
     }
   },
   "All-Rounder Wanda": {
+    "code": "c4065",
     "_id": "allrounder-wanda",
     "name": "All-Rounder Wanda",
     "moonlight": true,
@@ -831,6 +898,7 @@
     }
   },
   "Ambitious Tywin": {
+    "code": "c2042",
     "_id": "ambitious-tywin",
     "name": "Ambitious Tywin",
     "moonlight": true,
@@ -882,6 +950,7 @@
     }
   },
   "Amid": {
+    "code": "c1143",
     "_id": "amid",
     "name": "Amid",
     "moonlight": false,
@@ -933,6 +1002,7 @@
     }
   },
   "Angel of Light Angelica": {
+    "code": "c6062",
     "_id": "angel-of-light-angelica",
     "name": "Angel of Light Angelica",
     "moonlight": true,
@@ -985,6 +1055,7 @@
     }
   },
   "Angelic Montmorancy": {
+    "code": "c4042",
     "_id": "angelic-montmorancy",
     "name": "Angelic Montmorancy",
     "moonlight": false,
@@ -1060,6 +1131,7 @@
     }
   },
   "Angelica": {
+    "code": "c1062",
     "_id": "angelica",
     "name": "Angelica",
     "moonlight": false,
@@ -1154,6 +1226,7 @@
     }
   },
   "Apocalypse Ravi": {
+    "code": "c2019",
     "_id": "apocalypse-ravi",
     "name": "Apocalypse Ravi",
     "moonlight": true,
@@ -1227,6 +1300,7 @@
     }
   },
   "Aramintha": {
+    "code": "c1048",
     "_id": "aramintha",
     "name": "Aramintha",
     "moonlight": false,
@@ -1292,6 +1366,7 @@
     }
   },
   "Arbiter Vildred": {
+    "code": "c2007",
     "_id": "arbiter-vildred",
     "name": "Arbiter Vildred",
     "moonlight": true,
@@ -1343,6 +1418,7 @@
     }
   },
   "Archdemon's Shadow": {
+    "code": "c5004",
     "_id": "archdemons-shadow",
     "name": "Archdemon's Shadow",
     "moonlight": true,
@@ -1394,6 +1470,7 @@
     }
   },
   "Aria": {
+    "code": "c1129",
     "_id": "aria",
     "name": "Aria",
     "moonlight": false,
@@ -1466,80 +1543,8 @@
       }
     }
   },
-  "Arunka": {
-    "_id": "arunka",
-    "name": "Arunka",
-    "moonlight": false,
-    "rarity": 5,
-    "attribute": "wind",
-    "role": "warrior",
-    "zodiac": "scorpion",
-    "self_devotion": {
-      "type": "att_rate",
-      "grades": {
-        "B": 0.06,
-        "A": 0.09,
-        "S": 0.12,
-        "SS": 0.15,
-        "SSS": 0.18
-      }
-    },
-    "assets": {
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1124_s.png",
-      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1124_l.png"
-    },
-    "ex_equip": [],
-    "calculatedStatus": {
-      "lv50FiveStarFullyAwakened": {
-        "cp": 16221,
-        "atk": 921,
-        "hp": 5165,
-        "spd": 102,
-        "def": 497,
-        "chc": 0.15,
-        "chd": 1.5,
-        "dac": 0.03,
-        "eff": 0,
-        "efr": 0,
-        "bonusMaxAtkPercent": 30,
-        "bonusMaxDefPercent": 0,
-        "bonusMaxHpPercent": 0,
-        "overrideAtk": 0,
-        "overrideHp": 0,
-        "overrideDef": 0,
-        "overrideAdditionalCr": 0,
-        "overrideAdditionalCd": 0,
-        "overrideAdditionalSpd": 0,
-        "overrideAdditionalEff": 0,
-        "overrideAdditionalRes": 0
-      },
-      "lv60SixStarFullyAwakened": {
-        "cp": 16221,
-        "atk": 1208,
-        "hp": 6488,
-        "spd": 102,
-        "def": 616,
-        "chc": 0.15,
-        "chd": 1.5,
-        "dac": 0.03,
-        "eff": 0,
-        "efr": 0,
-        "bonusMaxAtkPercent": 30,
-        "bonusMaxDefPercent": 0,
-        "bonusMaxHpPercent": 0,
-        "overrideAtk": 0,
-        "overrideHp": 0,
-        "overrideDef": 0,
-        "overrideAdditionalCr": 0,
-        "overrideAdditionalCd": 0,
-        "overrideAdditionalSpd": 0,
-        "overrideAdditionalEff": 0,
-        "overrideAdditionalRes": 0
-      }
-    }
-  },
   "Armin": {
+    "code": "c1008",
     "_id": "armin",
     "name": "Armin",
     "moonlight": false,
@@ -1634,6 +1639,7 @@
     }
   },
   "Arowell": {
+    "code": "c3004",
     "_id": "arowell",
     "name": "Arowell",
     "moonlight": true,
@@ -1686,7 +1692,82 @@
       }
     }
   },
+  "Arunka": {
+    "code": "c1124",
+    "_id": "arunka",
+    "name": "Arunka",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "warrior",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1124_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1124_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 921,
+        "hp": 5165,
+        "spd": 102,
+        "def": 497,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 1208,
+        "hp": 6488,
+        "spd": 102,
+        "def": 616,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 30,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
   "Assassin Cartuja": {
+    "code": "c2013",
     "_id": "assassin-cartuja",
     "name": "Assassin Cartuja",
     "moonlight": true,
@@ -1783,6 +1864,7 @@
     }
   },
   "Assassin Cidd": {
+    "code": "c2014",
     "_id": "assassin-cidd",
     "name": "Assassin Cidd",
     "moonlight": true,
@@ -1852,6 +1934,7 @@
     }
   },
   "Assassin Coli": {
+    "code": "c2033",
     "_id": "assassin-coli",
     "name": "Assassin Coli",
     "moonlight": true,
@@ -1952,6 +2035,7 @@
     }
   },
   "Astromancer Elena": {
+    "code": "c2091",
     "_id": "astromancer-elena",
     "name": "Astromancer Elena",
     "moonlight": true,
@@ -2003,6 +2087,7 @@
     }
   },
   "Auxiliary Lots": {
+    "code": "c2031",
     "_id": "auxiliary-lots",
     "name": "Auxiliary Lots",
     "moonlight": true,
@@ -2055,6 +2140,7 @@
     }
   },
   "Azalea": {
+    "code": "c3031",
     "_id": "azalea",
     "name": "Azalea",
     "moonlight": false,
@@ -2108,6 +2194,7 @@
     }
   },
   "Baal & Sezan": {
+    "code": "c1015",
     "_id": "baal-sezan",
     "name": "Baal & Sezan",
     "moonlight": false,
@@ -2173,6 +2260,7 @@
     }
   },
   "Bad Cat Armin": {
+    "code": "c6008",
     "_id": "bad-cat-armin",
     "name": "Bad Cat Armin",
     "moonlight": true,
@@ -2225,6 +2313,7 @@
     }
   },
   "Baiken": {
+    "code": "c1093",
     "_id": "baiken",
     "name": "Baiken",
     "moonlight": false,
@@ -2276,6 +2365,7 @@
     }
   },
   "Basar": {
+    "code": "c1053",
     "_id": "basar",
     "name": "Basar",
     "moonlight": false,
@@ -2327,6 +2417,7 @@
     }
   },
   "Bask": {
+    "code": "c3006",
     "_id": "bask",
     "name": "Bask",
     "moonlight": false,
@@ -2380,6 +2471,7 @@
     }
   },
   "Batisse": {
+    "code": "c3095",
     "_id": "batisse",
     "name": "Batisse",
     "moonlight": true,
@@ -2433,6 +2525,7 @@
     }
   },
   "Beehoo": {
+    "code": "c1141",
     "_id": "beehoo",
     "name": "Beehoo",
     "moonlight": false,
@@ -2506,6 +2599,7 @@
     }
   },
   "Belian": {
+    "code": "c1117",
     "_id": "belian",
     "name": "Belian",
     "moonlight": true,
@@ -2557,6 +2651,7 @@
     }
   },
   "Bellona": {
+    "code": "c1071",
     "_id": "bellona",
     "name": "Bellona",
     "moonlight": false,
@@ -2652,6 +2747,7 @@
     }
   },
   "Benevolent Romann": {
+    "code": "c2043",
     "_id": "benevolent-romann",
     "name": "Benevolent Romann",
     "moonlight": true,
@@ -2704,6 +2800,7 @@
     }
   },
   "Blaze Dingo": {
+    "code": "c2021",
     "_id": "blaze-dingo",
     "name": "Blaze Dingo",
     "moonlight": true,
@@ -2802,6 +2899,7 @@
     }
   },
   "Blood Blade Karin": {
+    "code": "c2011",
     "_id": "blood-blade-karin",
     "name": "Blood Blade Karin",
     "moonlight": true,
@@ -2854,6 +2952,7 @@
     }
   },
   "Blood Moon Haste": {
+    "code": "c2039",
     "_id": "blood-moon-haste",
     "name": "Blood Moon Haste",
     "moonlight": true,
@@ -2905,6 +3004,7 @@
     }
   },
   "Bomb Model Kanna": {
+    "code": "c1097",
     "_id": "bomb-model-kanna",
     "name": "Bomb Model Kanna",
     "moonlight": false,
@@ -2973,6 +3073,7 @@
     }
   },
   "Briar Witch Iseria": {
+    "code": "c2024",
     "_id": "briar-witch-iseria",
     "name": "Briar Witch Iseria",
     "moonlight": true,
@@ -3024,6 +3125,7 @@
     }
   },
   "Butcher Corps Inquisitor": {
+    "code": "c3001",
     "_id": "butcher-corps-inquisitor",
     "name": "Butcher Corps Inquisitor",
     "moonlight": false,
@@ -3077,6 +3179,7 @@
     }
   },
   "Camilla": {
+    "code": "c3124",
     "_id": "camilla",
     "name": "Camilla",
     "moonlight": false,
@@ -3130,6 +3233,7 @@
     }
   },
   "Captain Rikoris": {
+    "code": "c4034",
     "_id": "captain-rikoris",
     "name": "Captain Rikoris",
     "moonlight": true,
@@ -3205,6 +3309,7 @@
     }
   },
   "Carmainerose": {
+    "code": "c3071",
     "_id": "carmainerose",
     "name": "Carmainerose",
     "moonlight": false,
@@ -3258,6 +3363,7 @@
     }
   },
   "Carrot": {
+    "code": "c3051",
     "_id": "carrot",
     "name": "Carrot",
     "moonlight": false,
@@ -3311,6 +3417,7 @@
     }
   },
   "Cartuja": {
+    "code": "c1013",
     "_id": "cartuja",
     "name": "Cartuja",
     "moonlight": false,
@@ -3363,6 +3470,7 @@
     }
   },
   "Cecilia": {
+    "code": "c1002",
     "_id": "cecilia",
     "name": "Cecilia",
     "moonlight": false,
@@ -3457,6 +3565,7 @@
     }
   },
   "Celeste": {
+    "code": "c3064",
     "_id": "celeste",
     "name": "Celeste",
     "moonlight": true,
@@ -3510,6 +3619,7 @@
     }
   },
   "Celestial Mercedes": {
+    "code": "c2005",
     "_id": "celestial-mercedes",
     "name": "Celestial Mercedes",
     "moonlight": true,
@@ -3562,6 +3672,7 @@
     }
   },
   "Celine": {
+    "code": "c1103",
     "_id": "celine",
     "name": "Celine",
     "moonlight": false,
@@ -3655,6 +3766,7 @@
     }
   },
   "Cerise": {
+    "code": "c1081",
     "_id": "cerise",
     "name": "Cerise",
     "moonlight": false,
@@ -3706,6 +3818,7 @@
     }
   },
   "Cermia": {
+    "code": "c1079",
     "_id": "cermia",
     "name": "Cermia",
     "moonlight": false,
@@ -3805,6 +3918,7 @@
     }
   },
   "Challenger Dominiel": {
+    "code": "c2037",
     "_id": "challenger-dominiel",
     "name": "Challenger Dominiel",
     "moonlight": true,
@@ -3857,6 +3971,7 @@
     }
   },
   "Champion Zerato": {
+    "code": "c2010",
     "_id": "champion-zerato",
     "name": "Champion Zerato",
     "moonlight": true,
@@ -3909,6 +4024,7 @@
     }
   },
   "Chaos Inquisitor": {
+    "code": "c4001",
     "_id": "chaos-inquisitor",
     "name": "Chaos Inquisitor",
     "moonlight": false,
@@ -3984,6 +4100,7 @@
     }
   },
   "Chaos Sect Axe": {
+    "code": "c4025",
     "_id": "chaos-sect-axe",
     "name": "Chaos Sect Axe",
     "moonlight": true,
@@ -4059,6 +4176,7 @@
     }
   },
   "Charles": {
+    "code": "c1027",
     "_id": "charles",
     "name": "Charles",
     "moonlight": false,
@@ -4155,6 +4273,7 @@
     }
   },
   "Charlotte": {
+    "code": "c1009",
     "_id": "charlotte",
     "name": "Charlotte",
     "moonlight": false,
@@ -4248,6 +4367,7 @@
     }
   },
   "Chloe": {
+    "code": "c1049",
     "_id": "chloe",
     "name": "Chloe",
     "moonlight": false,
@@ -4348,6 +4468,7 @@
     }
   },
   "Choux": {
+    "code": "c1101",
     "_id": "choux",
     "name": "Choux",
     "moonlight": false,
@@ -4444,6 +4565,7 @@
     }
   },
   "Christy": {
+    "code": "c3123",
     "_id": "christy",
     "name": "Christy",
     "moonlight": false,
@@ -4497,6 +4619,7 @@
     }
   },
   "Church of Ilryos Axe": {
+    "code": "c3025",
     "_id": "church-of-ilryos-axe",
     "name": "Church of Ilryos Axe",
     "moonlight": true,
@@ -4550,6 +4673,7 @@
     }
   },
   "Cidd": {
+    "code": "c1014",
     "_id": "cidd",
     "name": "Cidd",
     "moonlight": false,
@@ -4616,6 +4740,7 @@
     }
   },
   "Clarissa": {
+    "code": "c1028",
     "_id": "clarissa",
     "name": "Clarissa",
     "moonlight": false,
@@ -4710,6 +4835,7 @@
     }
   },
   "Closer Charles": {
+    "code": "c2027",
     "_id": "closer-charles",
     "name": "Closer Charles",
     "moonlight": true,
@@ -4761,6 +4887,7 @@
     }
   },
   "Coli": {
+    "code": "c1033",
     "_id": "coli",
     "name": "Coli",
     "moonlight": false,
@@ -4813,6 +4940,7 @@
     }
   },
   "Commander Lorina": {
+    "code": "c4035",
     "_id": "commander-lorina",
     "name": "Commander Lorina",
     "moonlight": true,
@@ -4888,6 +5016,7 @@
     }
   },
   "Commander Pavel": {
+    "code": "c2080",
     "_id": "commander-pavel",
     "name": "Commander Pavel",
     "moonlight": true,
@@ -4939,6 +5068,7 @@
     }
   },
   "Conqueror Lilias": {
+    "code": "c2089",
     "_id": "conqueror-lilias",
     "name": "Conqueror Lilias",
     "moonlight": true,
@@ -4990,6 +5120,7 @@
     }
   },
   "Corvus": {
+    "code": "c1012",
     "_id": "corvus",
     "name": "Corvus",
     "moonlight": false,
@@ -5042,6 +5173,7 @@
     }
   },
   "Crescent Moon Rin": {
+    "code": "c2054",
     "_id": "crescent-moon-rin",
     "name": "Crescent Moon Rin",
     "moonlight": true,
@@ -5094,6 +5226,7 @@
     }
   },
   "Crimson Armin": {
+    "code": "c2008",
     "_id": "crimson-armin",
     "name": "Crimson Armin",
     "moonlight": true,
@@ -5146,6 +5279,7 @@
     }
   },
   "Crozet": {
+    "code": "c1036",
     "_id": "crozet",
     "name": "Crozet",
     "moonlight": false,
@@ -5198,6 +5332,7 @@
     }
   },
   "Dark Corvus": {
+    "code": "c2012",
     "_id": "dark-corvus",
     "name": "Dark Corvus",
     "moonlight": true,
@@ -5249,6 +5384,7 @@
     }
   },
   "Death Dealer Ray": {
+    "code": "c2090",
     "_id": "death-dealer-ray",
     "name": "Death Dealer Ray",
     "moonlight": true,
@@ -5300,6 +5436,7 @@
     }
   },
   "Desert Jewel Basar": {
+    "code": "c2053",
     "_id": "desert-jewel-basar",
     "name": "Desert Jewel Basar",
     "moonlight": true,
@@ -5351,6 +5488,7 @@
     }
   },
   "Designer Lilibet": {
+    "code": "c2095",
     "manual": true,
     "_id": "designer-lilibet",
     "name": "Designer Lilibet",
@@ -5403,6 +5541,7 @@
     }
   },
   "Destina": {
+    "code": "c2022",
     "_id": "destina",
     "name": "Destina",
     "moonlight": false,
@@ -5494,6 +5633,7 @@
     }
   },
   "Diene": {
+    "code": "c1076",
     "_id": "diene",
     "name": "Diene",
     "moonlight": false,
@@ -5585,6 +5725,7 @@
     }
   },
   "Dingo": {
+    "code": "c1021",
     "_id": "dingo",
     "name": "Dingo",
     "moonlight": false,
@@ -5637,6 +5778,7 @@
     }
   },
   "Dizzy": {
+    "code": "c1094",
     "_id": "dizzy",
     "name": "Dizzy",
     "moonlight": false,
@@ -5688,6 +5830,7 @@
     }
   },
   "Doll Maker Pearlhorizon": {
+    "code": "c4073",
     "_id": "doll-maker-pearlhorizon",
     "name": "Doll Maker Pearlhorizon",
     "moonlight": false,
@@ -5763,6 +5906,7 @@
     }
   },
   "Dominiel": {
+    "code": "c1037",
     "_id": "dominiel",
     "name": "Dominiel",
     "moonlight": false,
@@ -5815,6 +5959,7 @@
     }
   },
   "Doris": {
+    "code": "c3044",
     "_id": "doris",
     "name": "Doris",
     "moonlight": true,
@@ -5868,6 +6013,7 @@
     }
   },
   "Eaton": {
+    "code": "c3094",
     "_id": "eaton",
     "name": "Eaton",
     "moonlight": true,
@@ -5943,6 +6089,7 @@
     }
   },
   "Eda": {
+    "code": "c1111",
     "_id": "eda",
     "name": "Eda",
     "moonlight": false,
@@ -5994,6 +6141,7 @@
     }
   },
   "Edward Elric": {
+    "code": "c1134",
     "_id": "edward-elric",
     "name": "Edward Elric",
     "moonlight": false,
@@ -6045,6 +6193,7 @@
     }
   },
   "Elena": {
+    "code": "c1091",
     "_id": "elena",
     "name": "Elena",
     "moonlight": false,
@@ -6136,6 +6285,7 @@
     }
   },
   "Elphelt": {
+    "code": "c1105",
     "_id": "elphelt",
     "name": "Elphelt",
     "moonlight": false,
@@ -6187,6 +6337,7 @@
     }
   },
   "Elson": {
+    "code": "c3054",
     "_id": "elson",
     "name": "Elson",
     "moonlight": true,
@@ -6240,6 +6391,7 @@
     }
   },
   "Emilia": {
+    "code": "c1116",
     "_id": "emilia",
     "name": "Emilia",
     "moonlight": false,
@@ -6291,6 +6443,7 @@
     }
   },
   "Enott": {
+    "code": "c3022",
     "_id": "enott",
     "name": "Enott",
     "moonlight": false,
@@ -6344,6 +6497,7 @@
     }
   },
   "Ervalen": {
+    "code": "c1108",
     "_id": "ervalen",
     "name": "Ervalen",
     "moonlight": false,
@@ -6395,6 +6549,7 @@
     }
   },
   "Fairytale Tenebria": {
+    "code": "c5050",
     "_id": "fairytale-tenebria",
     "name": "Fairytale Tenebria",
     "moonlight": false,
@@ -6446,6 +6601,7 @@
     }
   },
   "Faithless Lidica": {
+    "code": "c2046",
     "_id": "faithless-lidica",
     "name": "Faithless Lidica",
     "moonlight": true,
@@ -6497,6 +6653,7 @@
     }
   },
   "Falconer Kluri": {
+    "code": "c4003",
     "_id": "falconer-kluri",
     "name": "Falconer Kluri",
     "moonlight": false,
@@ -6572,6 +6729,7 @@
     }
   },
   "Fallen Cecilia": {
+    "code": "c2002",
     "_id": "fallen-cecilia",
     "name": "Fallen Cecilia",
     "moonlight": true,
@@ -6623,6 +6781,7 @@
     }
   },
   "Fighter Maya": {
+    "code": "c2032",
     "_id": "fighter-maya",
     "name": "Fighter Maya",
     "moonlight": true,
@@ -6675,6 +6834,7 @@
     }
   },
   "Flan": {
+    "code": "c1110",
     "_id": "flan",
     "name": "Flan",
     "moonlight": false,
@@ -6726,6 +6886,7 @@
     }
   },
   "Free Spirit Tieria": {
+    "code": "c3026",
     "_id": "free-spirit-tieria",
     "name": "Free Spirit Tieria",
     "moonlight": true,
@@ -6792,6 +6953,7 @@
     }
   },
   "Furious": {
+    "code": "c1087",
     "_id": "furious",
     "name": "Furious",
     "moonlight": false,
@@ -6858,6 +7020,7 @@
     }
   },
   "General Purrgis": {
+    "code": "c2035",
     "_id": "general-purrgis",
     "name": "General Purrgis",
     "moonlight": true,
@@ -6952,6 +7115,7 @@
     }
   },
   "Glenn": {
+    "code": "c3103",
     "_id": "glenn",
     "name": "Glenn",
     "moonlight": false,
@@ -7005,6 +7169,7 @@
     }
   },
   "Gloomyrain": {
+    "code": "c3074",
     "_id": "gloomyrain",
     "name": "Gloomyrain",
     "moonlight": true,
@@ -7058,6 +7223,7 @@
     }
   },
   "Godmother": {
+    "code": "c3101",
     "_id": "godmother",
     "name": "Godmother",
     "moonlight": false,
@@ -7111,6 +7277,7 @@
     }
   },
   "Great Chief Khawana": {
+    "code": "c2086",
     "_id": "great-chief-khawana",
     "name": "Great Chief Khawana",
     "moonlight": true,
@@ -7181,6 +7348,7 @@
     }
   },
   "Guider Aither": {
+    "code": "c2018",
     "_id": "guider-aither",
     "name": "Guider Aither",
     "moonlight": true,
@@ -7281,6 +7449,7 @@
     }
   },
   "Gunther": {
+    "code": "c3024",
     "_id": "gunther",
     "name": "Gunther",
     "moonlight": true,
@@ -7359,6 +7528,7 @@
     }
   },
   "Hasol": {
+    "code": "c3135",
     "_id": "hasol",
     "name": "Hasol",
     "moonlight": true,
@@ -7412,6 +7582,7 @@
     }
   },
   "Haste": {
+    "code": "c1039",
     "_id": "haste",
     "name": "Haste",
     "moonlight": false,
@@ -7480,6 +7651,7 @@
     }
   },
   "Hataan": {
+    "code": "c3091",
     "_id": "hataan",
     "name": "Hataan",
     "moonlight": false,
@@ -7533,6 +7705,7 @@
     }
   },
   "Hazel": {
+    "code": "c3041",
     "_id": "hazel",
     "name": "Hazel",
     "moonlight": false,
@@ -7586,6 +7759,7 @@
     }
   },
   "Helen": {
+    "code": "c3122",
     "_id": "helen",
     "name": "Helen",
     "moonlight": false,
@@ -7639,6 +7813,7 @@
     }
   },
   "Helga": {
+    "code": "c3023",
     "_id": "helga",
     "name": "Helga",
     "moonlight": false,
@@ -7692,6 +7867,7 @@
     }
   },
   "Holiday Yufine": {
+    "code": "c5016",
     "_id": "holiday-yufine",
     "name": "Holiday Yufine",
     "moonlight": false,
@@ -7743,6 +7919,7 @@
     }
   },
   "Holy Flame Adin": {
+    "code": "c4141",
     "_id": "holy-flame-adin",
     "name": "Holy Flame Adin",
     "moonlight": false,
@@ -7818,6 +7995,7 @@
     }
   },
   "Hurado": {
+    "code": "c3055",
     "_id": "hurado",
     "name": "Hurado",
     "moonlight": true,
@@ -7871,6 +8049,7 @@
     }
   },
   "Hwayoung": {
+    "code": "c1128",
     "_id": "hwayoung",
     "name": "Hwayoung",
     "moonlight": false,
@@ -7944,6 +8123,7 @@
     }
   },
   "Ian": {
+    "code": "c3102",
     "_id": "ian",
     "name": "Ian",
     "moonlight": false,
@@ -7997,6 +8177,7 @@
     }
   },
   "Ilynav": {
+    "code": "c1113",
     "_id": "ilynav",
     "name": "Ilynav",
     "moonlight": false,
@@ -8062,6 +8243,7 @@
     }
   },
   "Inferno Khawazu": {
+    "code": "c2085",
     "_id": "inferno-khawazu",
     "name": "Inferno Khawazu",
     "moonlight": true,
@@ -8154,6 +8336,7 @@
     }
   },
   "Iseria": {
+    "code": "c1024",
     "_id": "iseria",
     "name": "Iseria",
     "moonlight": false,
@@ -8205,6 +8388,7 @@
     }
   },
   "Jack-O": {
+    "code": "c1130",
     "_id": "jack-o",
     "name": "Jack-O",
     "moonlight": false,
@@ -8256,6 +8440,7 @@
     }
   },
   "Januta": {
+    "code": "c3131",
     "_id": "januta",
     "name": "Januta",
     "moonlight": false,
@@ -8309,6 +8494,7 @@
     }
   },
   "Jecht": {
+    "code": "c3053",
     "_id": "jecht",
     "name": "Jecht",
     "moonlight": false,
@@ -8362,6 +8548,7 @@
     }
   },
   "Jena": {
+    "code": "c3052",
     "_id": "jena",
     "name": "Jena",
     "moonlight": false,
@@ -8415,6 +8602,7 @@
     }
   },
   "Judge Kise": {
+    "code": "c2006",
     "_id": "judge-kise",
     "name": "Judge Kise",
     "moonlight": true,
@@ -8466,6 +8654,7 @@
     }
   },
   "Judith": {
+    "code": "c3011",
     "_id": "judith",
     "name": "Judith",
     "moonlight": false,
@@ -8519,6 +8708,7 @@
     }
   },
   "Juni": {
+    "code": "c2013",
     "_id": "juni",
     "name": "Juni",
     "moonlight": false,
@@ -8572,6 +8762,7 @@
     }
   },
   "Karin": {
+    "code": "c1011",
     "_id": "karin",
     "name": "Karin",
     "moonlight": false,
@@ -8667,6 +8858,7 @@
     }
   },
   "Kawerik": {
+    "code": "c1073",
     "_id": "kawerik",
     "name": "Kawerik",
     "moonlight": false,
@@ -8766,6 +8958,7 @@
     }
   },
   "Kayron": {
+    "code": "c1023",
     "_id": "kayron",
     "name": "Kayron",
     "moonlight": false,
@@ -8860,6 +9053,7 @@
     }
   },
   "Ken": {
+    "code": "c1047",
     "_id": "ken",
     "name": "Ken",
     "moonlight": false,
@@ -8911,6 +9105,7 @@
     }
   },
   "Khawana": {
+    "code": "c1086",
     "_id": "khawana",
     "name": "Khawana",
     "moonlight": false,
@@ -8963,6 +9158,7 @@
     }
   },
   "Khawazu": {
+    "code": "c1085",
     "_id": "khawazu",
     "name": "Khawazu",
     "moonlight": false,
@@ -9015,6 +9211,7 @@
     }
   },
   "Kikirat v2": {
+    "code": "c3084",
     "_id": "kikirat-v2",
     "name": "Kikirat v2",
     "moonlight": true,
@@ -9068,6 +9265,7 @@
     }
   },
   "Kiris": {
+    "code": "c3063",
     "_id": "kiris",
     "name": "Kiris",
     "moonlight": false,
@@ -9121,6 +9319,7 @@
     }
   },
   "Kise": {
+    "code": "c1006",
     "_id": "kise",
     "name": "Kise",
     "moonlight": false,
@@ -9214,6 +9413,7 @@
     }
   },
   "Kitty Clarissa": {
+    "code": "c2028",
     "_id": "kitty-clarissa",
     "name": "Kitty Clarissa",
     "moonlight": true,
@@ -9306,6 +9506,7 @@
     }
   },
   "Kizuna AI": {
+    "code": "c1107",
     "_id": "kizuna-ai",
     "name": "Kizuna AI",
     "moonlight": false,
@@ -9358,6 +9559,7 @@
     }
   },
   "Kluri": {
+    "code": "c3003",
     "_id": "kluri",
     "name": "Kluri",
     "moonlight": false,
@@ -9411,6 +9613,7 @@
     }
   },
   "Krau": {
+    "code": "c1070",
     "_id": "krau",
     "name": "Krau",
     "moonlight": false,
@@ -9476,6 +9679,7 @@
     }
   },
   "Command Model Laika": {
+    "code": "c1099",
     "_id": "command-model-laika",
     "name": "Command Model Laika",
     "moonlight": false,
@@ -9541,6 +9745,7 @@
     }
   },
   "Landy": {
+    "code": "c1109",
     "_id": "landy",
     "name": "Landy",
     "moonlight": false,
@@ -9592,6 +9797,7 @@
     }
   },
   "Last Rider Krau": {
+    "code": "c2070",
     "_id": "last-rider-krau",
     "name": "Last Rider Krau",
     "moonlight": true,
@@ -9643,6 +9849,7 @@
     }
   },
   "Lena": {
+    "code": "c3092",
     "_id": "lena",
     "name": "Lena",
     "moonlight": false,
@@ -9718,6 +9925,7 @@
     }
   },
   "Leo": {
+    "code": "c1029",
     "_id": "leo",
     "name": "Leo",
     "moonlight": false,
@@ -9770,6 +9978,7 @@
     }
   },
   "Lidica": {
+    "code": "c1046",
     "_id": "lidica",
     "name": "Lidica",
     "moonlight": false,
@@ -9864,6 +10073,7 @@
     }
   },
   "Lilka": {
+    "code": "c3153",
     "_id": "lilka",
     "name": "Lilka",
     "moonlight": false,
@@ -9917,6 +10127,7 @@
     }
   },
   "Lilias": {
+    "code": "c1089",
     "_id": "lilias",
     "name": "Lilias",
     "moonlight": false,
@@ -9968,6 +10179,7 @@
     }
   },
   "Lilibet": {
+    "code": "c1095",
     "_id": "lilibet",
     "name": "Lilibet",
     "moonlight": false,
@@ -10062,6 +10274,7 @@
     }
   },
   "Lionheart Cermia": {
+    "code": "c2079",
     "_id": "lionheart-cermia",
     "name": "Lionheart Cermia",
     "moonlight": true,
@@ -10113,6 +10326,7 @@
     }
   },
   "Little Queen Charlotte": {
+    "code": "c2009",
     "_id": "little-queen-charlotte",
     "name": "Little Queen Charlotte",
     "moonlight": true,
@@ -10164,6 +10378,7 @@
     }
   },
   "Lone Crescent Bellona": {
+    "code": "c2071",
     "_id": "lone-crescent-bellona",
     "name": "Lone Crescent Bellona",
     "moonlight": true,
@@ -10215,6 +10430,7 @@
     }
   },
   "Lorina": {
+    "code": "c3035",
     "_id": "lorina",
     "name": "Lorina",
     "moonlight": true,
@@ -10268,6 +10484,7 @@
     }
   },
   "Lots": {
+    "code": "c1031",
     "_id": "lots",
     "name": "Lots",
     "moonlight": false,
@@ -10320,6 +10537,7 @@
     }
   },
   "Lua": {
+    "code": "c1126",
     "_id": "Lua",
     "name": "Lua",
     "moonlight": false,
@@ -10371,6 +10589,7 @@
     }
   },
   "Lucy": {
+    "code": "c3113",
     "_id": "lucy",
     "name": "Lucy",
     "moonlight": false,
@@ -10424,6 +10643,7 @@
     }
   },
   "Ludwig": {
+    "code": "c1069",
     "_id": "ludwig",
     "name": "Ludwig",
     "moonlight": false,
@@ -10517,6 +10737,7 @@
     }
   },
   "Luluca": {
+    "code": "c1082",
     "_id": "luluca",
     "name": "Luluca",
     "moonlight": false,
@@ -10615,6 +10836,7 @@
     }
   },
   "Luna": {
+    "code": "c1066",
     "_id": "luna",
     "name": "Luna",
     "moonlight": false,
@@ -10712,6 +10934,7 @@
     }
   },
   "Magic Scholar Doris": {
+    "code": "c4044",
     "_id": "magic-scholar-doris",
     "name": "Magic Scholar Doris",
     "moonlight": true,
@@ -10787,6 +11010,7 @@
     }
   },
   "Maid Chloe": {
+    "code": "c2049",
     "_id": "maid-chloe",
     "name": "Maid Chloe",
     "moonlight": true,
@@ -10838,6 +11062,7 @@
     }
   },
   "Martial Artist Ken": {
+    "code": "c2047",
     "_id": "martial-artist-ken",
     "name": "Martial Artist Ken",
     "moonlight": true,
@@ -10911,6 +11136,7 @@
     }
   },
   "Mascot Hazel": {
+    "code": "c4041",
     "_id": "mascot-hazel",
     "name": "Mascot Hazel",
     "moonlight": false,
@@ -10986,6 +11212,7 @@
     }
   },
   "Maya": {
+    "code": "c1032",
     "_id": "maya",
     "name": "Maya",
     "moonlight": false,
@@ -11038,6 +11265,7 @@
     }
   },
   "Mediator Kawerik": {
+    "code": "c2073",
     "_id": "mediator-kawerik",
     "name": "Mediator Kawerik",
     "moonlight": true,
@@ -11089,6 +11317,7 @@
     }
   },
   "Melany": {
+    "code": "c3121",
     "_id": "melany",
     "name": "Melany",
     "moonlight": false,
@@ -11142,6 +11371,7 @@
     }
   },
   "Melissa": {
+    "code": "c1096",
     "_id": "melissa",
     "name": "Melissa",
     "moonlight": false,
@@ -11207,6 +11437,7 @@
     }
   },
   "Mercedes": {
+    "code": "c0002",
     "_id": "mercedes",
     "name": "Mercedes",
     "moonlight": false,
@@ -11259,6 +11490,7 @@
     }
   },
   "Mercenary Helga": {
+    "code": "c4023",
     "_id": "mercenary-helga",
     "name": "Mercenary Helga",
     "moonlight": false,
@@ -11334,6 +11566,7 @@
     }
   },
   "Mighty Scout": {
+    "code": "m0063",
     "_id": "mighty-scout",
     "name": "Mighty Scout",
     "moonlight": false,
@@ -11386,6 +11619,7 @@
     }
   },
   "Milim": {
+    "code": "c1122",
     "_id": "milim",
     "name": "Milim",
     "moonlight": false,
@@ -11437,6 +11671,7 @@
     }
   },
   "Mirsa": {
+    "code": "c3014",
     "_id": "mirsa",
     "name": "Mirsa",
     "moonlight": true,
@@ -11490,6 +11725,7 @@
     }
   },
   "Mistychain": {
+    "code": "c3072",
     "_id": "mistychain",
     "name": "Mistychain",
     "moonlight": false,
@@ -11543,6 +11779,7 @@
     }
   },
   "Montmorancy": {
+    "code": "c3042",
     "_id": "montmorancy",
     "name": "Montmorancy",
     "moonlight": false,
@@ -11596,6 +11833,7 @@
     }
   },
   "Moon Bunny Dominiel": {
+    "code": "c6037",
     "_id": "moon-bunny-dominiel",
     "name": "Moon Bunny Dominiel",
     "moonlight": true,
@@ -11670,6 +11908,7 @@
     }
   },
   "Mort": {
+    "code": "c1104",
     "_id": "mort",
     "name": "Mort",
     "moonlight": false,
@@ -11763,6 +12002,7 @@
     }
   },
   "Mucacha": {
+    "code": "c3033",
     "_id": "mucacha",
     "name": "Mucacha",
     "moonlight": false,
@@ -11816,6 +12056,7 @@
     }
   },
   "Mui": {
+    "code": "c1044",
     "_id": "mui",
     "name": "Mui",
     "moonlight": false,
@@ -11913,6 +12154,7 @@
     }
   },
   "Muse Rima": {
+    "code": "c4062",
     "_id": "muse-rima",
     "name": "Muse Rima",
     "moonlight": false,
@@ -11988,6 +12230,7 @@
     }
   },
   "Muwi": {
+    "code": "c3132",
     "_id": "muwi",
     "name": "Muwi",
     "moonlight": false,
@@ -12041,6 +12284,7 @@
     }
   },
   "Nemunas": {
+    "code": "c3061",
     "_id": "nemunas",
     "name": "Nemunas",
     "moonlight": false,
@@ -12094,6 +12338,7 @@
     }
   },
   "Operator Sigret": {
+    "code": "c2072",
     "_id": "operator-sigret",
     "name": "Operator Sigret",
     "moonlight": true,
@@ -12145,6 +12390,7 @@
     }
   },
   "Orte": {
+    "code": "c3133",
     "_id": "orte",
     "name": "Orte",
     "moonlight": false,
@@ -12198,6 +12444,7 @@
     }
   },
   "Otillie": {
+    "code": "c3045",
     "_id": "otillie",
     "name": "Otillie",
     "moonlight": true,
@@ -12251,6 +12498,7 @@
     }
   },
   "Pavel": {
+    "code": "c1080",
     "_id": "pavel",
     "name": "Pavel",
     "moonlight": false,
@@ -12344,6 +12592,7 @@
     }
   },
   "Peacemaker Furious": {
+    "code": "c2087",
     "_id": "peacemaker-furious",
     "name": "Peacemaker Furious",
     "moonlight": true,
@@ -12396,6 +12645,7 @@
     }
   },
   "Pearlhorizon": {
+    "code": "c3073",
     "_id": "pearlhorizon",
     "name": "Pearlhorizon",
     "moonlight": false,
@@ -12449,6 +12699,7 @@
     }
   },
   "Peira": {
+    "code": "c1125",
     "_id": "peira",
     "name": "Peira",
     "moonlight": false,
@@ -12500,6 +12751,7 @@
     }
   },
   "Penelope": {
+    "code": "c3125",
     "_id": "penelope",
     "name": "Penelope",
     "moonlight": true,
@@ -12553,6 +12805,7 @@
     }
   },
   "Pirate Captain Flan": {
+    "code": "c2110",
     "_id": "pirate-captain-flan",
     "name": "Pirate Captain Flan",
     "moonlight": true,
@@ -12626,6 +12879,7 @@
     }
   },
   "Politis": {
+    "code": "c1112",
     "_id": "politis",
     "name": "Politis",
     "moonlight": false,
@@ -12677,6 +12931,7 @@
     }
   },
   "Purrgis": {
+    "code": "c1035",
     "_id": "purrgis",
     "name": "Purrgis",
     "moonlight": false,
@@ -12729,6 +12984,7 @@
     }
   },
   "Pyllis": {
+    "code": "c3005",
     "_id": "pyllis",
     "name": "Pyllis",
     "moonlight": true,
@@ -12782,6 +13038,7 @@
     }
   },
   "Ram": {
+    "code": "c1115",
     "_id": "ram",
     "name": "Ram",
     "moonlight": false,
@@ -12855,6 +13112,7 @@
     }
   },
   "Ran": {
+    "code": "c1118",
     "_id": "ran",
     "name": "Ran",
     "moonlight": false,
@@ -12906,6 +13164,7 @@
     }
   },
   "Ras": {
+    "code": "c1001",
     "_id": "ras",
     "name": "Ras",
     "moonlight": false,
@@ -12959,6 +13218,7 @@
     }
   },
   "Ravi": {
+    "code": "c1019",
     "_id": "ravi",
     "name": "Ravi",
     "moonlight": false,
@@ -13055,6 +13315,7 @@
     }
   },
   "Ray": {
+    "code": "c1090",
     "_id": "ray",
     "name": "Ray",
     "moonlight": false,
@@ -13146,6 +13407,7 @@
     }
   },
   "Rem": {
+    "code": "c1114",
     "_id": "rem",
     "name": "Rem",
     "moonlight": false,
@@ -13197,6 +13459,7 @@
     }
   },
   "Remnant Violet": {
+    "code": "c2074",
     "_id": "remnant-violet",
     "name": "Remnant Violet",
     "moonlight": true,
@@ -13248,6 +13511,7 @@
     }
   },
   "Requiemroar": {
+    "code": "c3075",
     "_id": "requiemroar",
     "name": "Requiemroar",
     "moonlight": true,
@@ -13301,6 +13565,7 @@
     }
   },
   "Researcher Carrot": {
+    "code": "c4051",
     "_id": "researcher-carrot",
     "name": "Researcher Carrot",
     "moonlight": false,
@@ -13376,6 +13641,7 @@
     }
   },
   "Righteous Thief Roozid": {
+    "code": "c4013",
     "_id": "righteous-thief-roozid",
     "name": "Righteous Thief Roozid",
     "moonlight": false,
@@ -13451,6 +13717,7 @@
     }
   },
   "Rikoris": {
+    "code": "c3034",
     "_id": "rikoris",
     "name": "Rikoris",
     "moonlight": true,
@@ -13504,6 +13771,7 @@
     }
   },
   "Rima": {
+    "code": "c3062",
     "_id": "rima",
     "name": "Rima",
     "moonlight": false,
@@ -13557,6 +13825,7 @@
     }
   },
   "Rimuru": {
+    "code": "c1121",
     "_id": "rimuru",
     "name": "Rimuru",
     "moonlight": false,
@@ -13608,6 +13877,7 @@
     }
   },
   "Rin": {
+    "code": "c1054",
     "_id": "rin",
     "name": "Rin",
     "moonlight": false,
@@ -13700,6 +13970,7 @@
     }
   },
   "Riza Hawkeye": {
+    "code": "c1136",
     "_id": "riza-hawkeye",
     "name": "Riza Hawkeye",
     "moonlight": false,
@@ -13751,6 +14022,7 @@
     }
   },
   "Roaming Warrior Leo": {
+    "code": "c2029",
     "_id": "roaming-warrior-leo",
     "name": "Roaming Warrior Leo",
     "moonlight": true,
@@ -13817,6 +14089,7 @@
     }
   },
   "Roana": {
+    "code": "c1102",
     "_id": "roana",
     "name": "Roana",
     "moonlight": false,
@@ -13868,6 +14141,7 @@
     }
   },
   "Romann": {
+    "code": "c1043",
     "_id": "romann",
     "name": "Romann",
     "moonlight": false,
@@ -13962,6 +14236,7 @@
     }
   },
   "Roozid": {
+    "code": "c3013",
     "_id": "roozid",
     "name": "Roozid",
     "moonlight": false,
@@ -14015,6 +14290,7 @@
     }
   },
   "Rose": {
+    "code": "c1003",
     "_id": "rose",
     "name": "Rose",
     "moonlight": false,
@@ -14112,6 +14388,7 @@
     }
   },
   "Roy Mustang": {
+    "code": "c1135",
     "_id": "roy-mustang",
     "name": "Roy Mustang",
     "moonlight": false,
@@ -14163,6 +14440,7 @@
     }
   },
   "Ruele of Light": {
+    "code": "c1022",
     "_id": "ruele-of-light",
     "name": "Ruele of Light",
     "moonlight": true,
@@ -14214,6 +14492,7 @@
     }
   },
   "Sage Baal & Sezan": {
+    "code": "c2015",
     "_id": "sage-baal-sezan",
     "name": "Sage Baal & Sezan",
     "moonlight": true,
@@ -14265,6 +14544,7 @@
     }
   },
   "Savior Adin": {
+    "code": "c4144",
     "_id": "savior-adin",
     "name": "Savior Adin",
     "moonlight": true,
@@ -14340,6 +14620,7 @@
     }
   },
   "Schuri": {
+    "code": "c1020",
     "_id": "schuri",
     "name": "Schuri",
     "moonlight": false,
@@ -14392,6 +14673,7 @@
     }
   },
   "Seaside Bellona": {
+    "code": "c5071",
     "_id": "seaside-bellona",
     "name": "Seaside Bellona",
     "moonlight": false,
@@ -14443,6 +14725,7 @@
     }
   },
   "Senya": {
+    "code": "c1106",
     "_id": "Senya",
     "name": "Senya",
     "moonlight": false,
@@ -14562,6 +14845,7 @@
     }
   },
   "Serene Purity Adin": {
+    "code": "c4142",
     "_id": "serene-purity-adin",
     "name": "Serene Purity Adin",
     "moonlight": false,
@@ -14637,6 +14921,7 @@
     }
   },
   "Serila": {
+    "code": "c1040",
     "_id": "serila",
     "name": "Serila",
     "moonlight": false,
@@ -14738,6 +15023,7 @@
     }
   },
   "Sez": {
+    "code": "c1038",
     "_id": "sez",
     "name": "Sez",
     "moonlight": false,
@@ -14789,6 +15075,7 @@
     }
   },
   "Shadow Knight Pyllis": {
+    "code": "c4005",
     "_id": "shadow-knight-pyllis",
     "name": "Shadow Knight Pyllis",
     "moonlight": true,
@@ -14864,6 +15151,7 @@
     }
   },
   "Shadow Rose": {
+    "code": "c2003",
     "_id": "shadow-rose",
     "name": "Shadow Rose",
     "moonlight": true,
@@ -14958,6 +15246,7 @@
     }
   },
   "Sharun": {
+    "code": "c1132",
     "_id": "sharun",
     "name": "Sharun",
     "moonlight": false,
@@ -15023,6 +15312,7 @@
     }
   },
   "Shepherd Jena": {
+    "code": "c4052",
     "_id": "shepherd-jena",
     "name": "Shepherd Jena",
     "moonlight": false,
@@ -15098,6 +15388,7 @@
     }
   },
   "Shooting Star Achates": {
+    "code": "c2017",
     "_id": "shooting-star-achates",
     "name": "Shooting Star Achates",
     "moonlight": true,
@@ -15150,6 +15441,7 @@
     }
   },
   "Shuna": {
+    "code": "c1123",
     "_id": "shuna",
     "name": "Shuna",
     "moonlight": false,
@@ -15201,6 +15493,7 @@
     }
   },
   "Sigret": {
+    "code": "c1072",
     "_id": "sigret",
     "name": "Sigret",
     "moonlight": false,
@@ -15295,6 +15588,7 @@
     }
   },
   "Silk": {
+    "code": "c1004",
     "_id": "silk",
     "name": "Silk",
     "moonlight": false,
@@ -15347,6 +15641,7 @@
     }
   },
   "Silver Blade Aramintha": {
+    "code": "c2048",
     "_id": "silver-blade-aramintha",
     "name": "Silver Blade Aramintha",
     "moonlight": true,
@@ -15398,6 +15693,7 @@
     }
   },
   "Sinful Angelica": {
+    "code": "c2062",
     "_id": "sinful-angelica",
     "name": "Sinful Angelica",
     "moonlight": true,
@@ -15450,6 +15746,7 @@
     }
   },
   "Sol": {
+    "code": "c1092",
     "_id": "sol",
     "name": "Sol",
     "moonlight": false,
@@ -15501,6 +15798,7 @@
     }
   },
   "Solitaria of the Snow": {
+    "code": "c2111",
     "_id": "solitaria-of-the-snow",
     "name": "Solitaria of the Snow",
     "moonlight": true,
@@ -15552,6 +15850,7 @@
     }
   },
   "Sonia": {
+    "code": "c3104",
     "_id": "sonia",
     "name": "Sonia",
     "moonlight": true,
@@ -15605,6 +15904,7 @@
     }
   },
   "Specimen Sez": {
+    "code": "c2038",
     "_id": "specimen-sez",
     "name": "Specimen Sez",
     "moonlight": true,
@@ -15656,6 +15956,7 @@
     }
   },
   "Specter Tenebria": {
+    "code": "c2050",
     "_id": "specter-tenebria",
     "name": "Specter Tenebria",
     "moonlight": true,
@@ -15707,6 +16008,7 @@
     }
   },
   "Spirit Eye Celine": {
+    "code": "c2103",
     "_id": "spirit-eye-celine",
     "name": "Spirit Eye Celine",
     "moonlight": true,
@@ -15758,6 +16060,7 @@
     }
   },
   "Straze": {
+    "code": "c1034",
     "_id": "straze",
     "name": "Straze",
     "moonlight": true,
@@ -15809,6 +16112,7 @@
     }
   },
   "Summer Break Charlotte": {
+    "code": "c5009",
     "_id": "summer-break-charlotte",
     "name": "Summer Break Charlotte",
     "moonlight": false,
@@ -15882,6 +16186,7 @@
     }
   },
   "Summer's Disciple Alexa": {
+    "code": "c4012",
     "_id": "summers-disciple-alexa",
     "name": "Summer's Disciple Alexa",
     "moonlight": false,
@@ -15957,6 +16262,7 @@
     }
   },
   "Summertime Iseria": {
+    "code": "c5024",
     "_id": "summertime-iseria",
     "name": "Summertime Iseria",
     "moonlight": false,
@@ -16030,6 +16336,7 @@
     }
   },
   "Surin": {
+    "code": "c1065",
     "_id": "surin",
     "name": "Surin",
     "moonlight": false,
@@ -16082,6 +16389,7 @@
     }
   },
   "Suthan": {
+    "code": "c3155",
     "_id": "suthan",
     "name": "Suthan",
     "moonlight": false,
@@ -16135,6 +16443,7 @@
     }
   },
   "Sven": {
+    "code": "c3015",
     "_id": "sven",
     "name": "Sven",
     "moonlight": true,
@@ -16188,6 +16497,7 @@
     }
   },
   "Sylvan Sage Vivian": {
+    "code": "c2088",
     "_id": "sylvan-sage-vivian",
     "name": "Sylvan Sage Vivian",
     "moonlight": true,
@@ -16239,6 +16549,7 @@
     }
   },
   "Taeyou": {
+    "code": "c1127",
     "_id": "taeyou",
     "name": "Taeyou",
     "moonlight": false,
@@ -16290,6 +16601,7 @@
     }
   },
   "Talaz": {
+    "code": "c3152",
     "_id": "talaz",
     "name": "Talaz",
     "moonlight": false,
@@ -16343,6 +16655,7 @@
     }
   },
   "Talia": {
+    "code": "c3154",
     "_id": "talia",
     "name": "Talia",
     "moonlight": false,
@@ -16396,6 +16709,7 @@
     }
   },
   "Tamarinne": {
+    "code": "c1067",
     "_id": "tamarinne",
     "name": "Tamarinne",
     "moonlight": false,
@@ -16447,6 +16761,7 @@
     }
   },
   "Taranor Guard": {
+    "code": "c3032",
     "_id": "taranor-guard",
     "name": "Taranor Guard",
     "moonlight": false,
@@ -16500,6 +16815,7 @@
     }
   },
   "Taranor Royal Guard": {
+    "code": "c3002",
     "_id": "taranor-royal-guard",
     "name": "Taranor Royal Guard",
     "moonlight": false,
@@ -16553,6 +16869,7 @@
     }
   },
   "Tempest Surin": {
+    "code": "c2065",
     "_id": "tempest-surin",
     "name": "Tempest Surin",
     "moonlight": true,
@@ -16605,6 +16922,7 @@
     }
   },
   "Tenebria": {
+    "code": "c1050",
     "_id": "tenebria",
     "name": "Tenebria",
     "moonlight": false,
@@ -16674,6 +16992,7 @@
     }
   },
   "Tieria": {
+    "code": "c3021",
     "_id": "tieria",
     "name": "Tieria",
     "moonlight": false,
@@ -16727,6 +17046,7 @@
     }
   },
   "Top Model Luluca": {
+    "code": "c2082",
     "_id": "top-model-luluca",
     "name": "Top Model Luluca",
     "moonlight": true,
@@ -16778,6 +17098,7 @@
     }
   },
   "Troublemaker Crozet": {
+    "code": "c2036",
     "_id": "troublemaker-crozet",
     "name": "Troublemaker Crozet",
     "moonlight": true,
@@ -16876,6 +17197,7 @@
     }
   },
   "Tywin": {
+    "code": "c1042",
     "_id": "tywin",
     "name": "Tywin",
     "moonlight": false,
@@ -16970,6 +17292,7 @@
     }
   },
   "Unbound Knight Arowell": {
+    "code": "c4004",
     "_id": "unbound-knight-arowell",
     "name": "Unbound Knight Arowell",
     "moonlight": true,
@@ -17045,6 +17368,7 @@
     }
   },
   "Verdant Adin": {
+    "code": "c4143",
     "_id": "verdant-adin",
     "name": "Verdant Adin",
     "moonlight": false,
@@ -17120,6 +17444,7 @@
     }
   },
   "Vigilante Leader Glenn": {
+    "code": "c4103",
     "_id": "vigilante-leader-glenn",
     "name": "Vigilante Leader Glenn",
     "moonlight": false,
@@ -17195,6 +17520,7 @@
     }
   },
   "Vildred": {
+    "code": "c1007",
     "_id": "vildred",
     "name": "Vildred",
     "moonlight": false,
@@ -17292,6 +17618,7 @@
     }
   },
   "Violet": {
+    "code": "c1074",
     "_id": "violet",
     "name": "Violet",
     "moonlight": false,
@@ -17343,6 +17670,7 @@
     }
   },
   "Vivian": {
+    "code": "c1088",
     "_id": "vivian",
     "name": "Vivian",
     "moonlight": false,
@@ -17434,6 +17762,7 @@
     }
   },
   "Wanda": {
+    "code": "c3065",
     "_id": "wanda",
     "name": "Wanda",
     "moonlight": true,
@@ -17487,6 +17816,7 @@
     }
   },
   "Wanderer Silk": {
+    "code": "c2004",
     "_id": "wanderer-silk",
     "name": "Wanderer Silk",
     "moonlight": true,
@@ -17586,6 +17916,7 @@
     }
   },
   "Watcher Schuri": {
+    "code": "c2020",
     "_id": "watcher-schuri",
     "name": "Watcher Schuri",
     "moonlight": true,
@@ -17683,6 +18014,7 @@
     }
   },
   "Wild Angara": {
+    "code": "m0171",
     "_id": "wild-angara",
     "name": "Wild Angara",
     "moonlight": false,
@@ -17735,6 +18067,7 @@
     }
   },
   "Yoonryoung": {
+    "code": "c3134",
     "_id": "yoonryoung",
     "name": "Yoonryoung",
     "moonlight": true,
@@ -17788,6 +18121,7 @@
     }
   },
   "Yufine": {
+    "code": "c1016",
     "_id": "yufine",
     "name": "Yufine",
     "moonlight": false,
@@ -17881,6 +18215,7 @@
     }
   },
   "Yulha": {
+    "code": "c1131",
     "_id": "yulha",
     "name": "Yulha",
     "moonlight": false,
@@ -17932,6 +18267,7 @@
     }
   },
   "Yuna": {
+    "code": "c1030",
     "_id": "yuna",
     "name": "Yuna",
     "moonlight": false,
@@ -18027,6 +18363,7 @@
     }
   },
   "Zahhak": {
+    "code": "c1119",
     "_id": "zahhak",
     "name": "Zahhak",
     "moonlight": false,
@@ -18118,6 +18455,7 @@
     }
   },
   "Zealot Carmainerose": {
+    "code": "c4071",
     "_id": "zealot-carmainerose",
     "name": "Zealot Carmainerose",
     "moonlight": false,
@@ -18193,6 +18531,7 @@
     }
   },
   "Zeno": {
+    "code": "c1083",
     "_id": "zeno",
     "name": "Zeno",
     "moonlight": false,
@@ -18244,6 +18583,7 @@
     }
   },
   "Zerato": {
+    "code": "c1010",
     "_id": "zerato",
     "name": "Zerato",
     "moonlight": false,
@@ -18296,6 +18636,7 @@
     }
   },
   "Zio": {
+    "code": "c1133",
     "_id": "zio",
     "name": "Zio",
     "moonlight": true,
