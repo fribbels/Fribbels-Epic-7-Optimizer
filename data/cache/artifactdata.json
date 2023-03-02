@@ -479,6 +479,21 @@
       },
       "code":"efw07"
    },
+   "Brilliant Confidence":{
+      "assets":{
+         "icon":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "image":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "thumbnail":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+      },
+      "name":"Brilliant Confidence",
+      "rarity":4,
+      "role":"",
+      "stats":{
+         "attack":12,
+         "health":45
+      },
+      "code":"ef426"
+   },
    "Butterfly Mandolin":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art3_18.png",
@@ -1379,6 +1394,21 @@
       },
       "code":"efm26"
    },
+   "III. The Empress":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0042.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0042_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0042_l.jpg"
+      },
+      "name":"III. The Empress",
+      "rarity":4,
+      "role":"",
+      "stats":{
+         "attack":7,
+         "health":63
+      },
+      "code":"ef428"
+   },
    "Indestructible Gaiters":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0036.png",
@@ -1423,6 +1453,21 @@
          "health":32
       },
       "code":"efr08"
+   },
+   "IV. The Emperor":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0042.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0042_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0042_l.jpg"
+      },
+      "name":"IV. The Emperor",
+      "rarity":4,
+      "role":"",
+      "stats":{
+         "attack":7,
+         "health":63
+      },
+      "code":"ef429"
    },
    "Jack-O's Symbol":{
       "assets":{
