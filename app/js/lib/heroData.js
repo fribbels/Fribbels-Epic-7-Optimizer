@@ -87,6 +87,61 @@ module.exports = {
         const baseStatsByName = {};
         Object.keys(heroesByName)
                 .forEach(x => {
+                    if (!heroesByName[x].skills) {
+                        heroesByName[x].skills = {
+          "s1": [
+            {
+              "name": "S1 crit",
+              "type": 0,
+              "rate": 1,
+              "pow": 0.95
+            },
+            {
+              "name": "S1 crushing",
+              "type": 0,
+              "rate": 1,
+              "pow": 0.95
+            },
+            {
+              "name": "S1 normal",
+              "type": 0,
+              "rate": 1,
+              "pow": 0.95
+            },
+            {
+              "name": "S1 miss",
+              "type": 0,
+              "rate": 1,
+              "pow": 0.95
+            }
+          ],
+          "s2": [
+            {
+              "name": "S2 heal",
+              "type": 1,
+              "rate": 0,
+              "pow": 0,
+              "selfHpScaling": 0.15
+            }
+          ],
+          "s3": [
+            {
+              "name": "S3 heal",
+              "type": 1,
+              "rate": 0,
+              "pow": 0,
+              "selfHpScaling": 0.3
+            },
+            {
+              "name": "S3 soulburn heal",
+              "type": 1,
+              "rate": 0,
+              "pow": 0,
+              "selfHpScaling": 0.5
+            }
+          ]
+        }
+                    }
                     const baseStats = module.exports.getBaseStatsByName(x);
                     baseStatsByName[x] = baseStats;
                 });

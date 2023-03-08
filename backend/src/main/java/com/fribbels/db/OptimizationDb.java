@@ -95,9 +95,9 @@ public class OptimizationDb {
             return;
         }
 
-        System.out.println("START SORT");
-        Sorter.sortHeroes(resultHeroStats, newColumn, newOrder);
-        System.out.println("END SORT");
+//        System.out.println("START SORT");
+//        Sorter.sortHeroes(resultHeroStats, newColumn, newOrder);
+//        System.out.println("END SORT");
 
         int count = 0;
         final int[] sortedFilteredIndices = new int[Integer.parseInt("" + maximum)];

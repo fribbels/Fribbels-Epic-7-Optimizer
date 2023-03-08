@@ -16,14 +16,14 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final float[] flattenedRingAccs;
     @Constant final float[] flattenedBootAccs;
 
-    @Constant final int wSize;
-    @Constant final int hSize;
-    @Constant final int aSize;
-    @Constant final int nSize;
-    @Constant final int rSize;
-    @Constant final int bSize;
+    @Constant final long wSize;
+    @Constant final long hSize;
+    @Constant final long aSize;
+    @Constant final long nSize;
+    @Constant final long rSize;
+    @Constant final long bSize;
 
-    @Constant final int argSize;
+    @Constant final long argSize;
 
     @Constant final float bonusBaseAtk;
     @Constant final float bonusBaseHp;
@@ -64,7 +64,7 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final boolean[] boolArr;
     @Constant final int[] setPermutationIndicesPlusOne;
     final int[] setSolutionCounters;
-    @Constant final int max;
+    @Constant final long max;
 
     // Attempt at optimizing filters
     //    @Constant final int[] sumValues = new int[] {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // 21 values, one per filter
@@ -163,14 +163,14 @@ public class GpuOptimizerKernel extends Kernel {
             final int SETTING_PEN_SET,
             final HeroStats base,
             final Hero hero,
-            final int argSize,
-            final int wSize,
-            final int hSize,
-            final int aSize,
-            final int nSize,
-            final int rSize,
-            final int bSize,
-            final int max,
+            final long argSize,
+            final long wSize,
+            final long hSize,
+            final long aSize,
+            final long nSize,
+            final long rSize,
+            final long bSize,
+            final long max,
             final int[] setSolutionBitMasks
     ) {
         this.flattenedWeaponAccs = flattenedWeaponAccs;
@@ -373,16 +373,16 @@ public class GpuOptimizerKernel extends Kernel {
         final int id = getGlobalId();
 //        final int localId = getLocalId();
 
-        final long i = ((long)max) * iteration + id;
-        if (i < ((long)(wSize)) * hSize * aSize * nSize * rSize * bSize) {
-            final int b = (int)(i % bSize);
-            final int r = (int)(( ( i - b ) / bSize ) %  rSize);
-            final int n = (int)(( ( i - r * bSize - b ) / (bSize * rSize) ) % nSize);
-            final int a = (int)(( ( i - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize);
-            final int h = (int)(( ( i - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize);
-            final int w = (int)(( ( i - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize);
+        final long i = max * iteration + id;
+        if (i < wSize * hSize * aSize * nSize * rSize * bSize) {
+            final long b = i % bSize;
+            final long r = ( ( i - b ) / bSize ) %  rSize;
+            final long n = ( ( i - r * bSize - b ) / (bSize * rSize) ) % nSize;
+            final long a = ( ( i - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize;
+            final long h = ( ( i - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize;
+            final long w = ( ( i - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize;
 
-            final int wargSize = w * argSize;
+            final int wargSize = (int)(w * argSize);
             final float wAtk =   flattenedWeaponAccs[wargSize];
             final float wHp =    flattenedWeaponAccs[wargSize + 1];
             final float wDef =   flattenedWeaponAccs[wargSize + 2];
@@ -397,7 +397,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float wUpg =   flattenedWeaponAccs[wargSize + 14];
             final float wConv =  flattenedWeaponAccs[wargSize + 15];
 
-            final int hargSize = h * argSize;
+            final int hargSize = (int)(h * argSize);
             final float hAtk =   flattenedHelmetAccs[hargSize];
             final float hHp =    flattenedHelmetAccs[hargSize + 1];
             final float hDef =   flattenedHelmetAccs[hargSize + 2];
@@ -412,7 +412,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float hUpg =   flattenedHelmetAccs[hargSize + 14];
             final float hConv =  flattenedHelmetAccs[hargSize + 15];
 
-            final int aargSize = a * argSize;
+            final int aargSize = (int)(a * argSize);
             final float aAtk =   flattenedArmorAccs[aargSize];
             final float aHp =    flattenedArmorAccs[aargSize + 1];
             final float aDef =   flattenedArmorAccs[aargSize + 2];
@@ -427,7 +427,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float aUpg =   flattenedArmorAccs[aargSize + 14];
             final float aConv =  flattenedArmorAccs[aargSize + 15];
 
-            final int nargSize = n * argSize;
+            final int nargSize = (int)(n * argSize);
             final float nAtk =   flattenedNecklaceAccs[nargSize];
             final float nHp =    flattenedNecklaceAccs[nargSize + 1];
             final float nDef =   flattenedNecklaceAccs[nargSize + 2];
@@ -442,7 +442,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float nUpg =   flattenedNecklaceAccs[nargSize + 14];
             final float nConv =  flattenedNecklaceAccs[nargSize + 15];
 
-            final int rargSize = r * argSize;
+            final int rargSize = (int)(r * argSize);
             final float rAtk =   flattenedRingAccs[rargSize];
             final float rHp =    flattenedRingAccs[rargSize + 1];
             final float rDef =   flattenedRingAccs[rargSize + 2];
@@ -457,7 +457,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float rUpg =   flattenedRingAccs[rargSize + 14];
             final float rConv =  flattenedRingAccs[rargSize + 15];
 
-            final int bargSize = b * argSize;
+            final int bargSize = (int)(b * argSize);
             final float bAtk =   flattenedBootAccs[bargSize];
             final float bHp =    flattenedBootAccs[bargSize + 1];
             final float bDef =   flattenedBootAccs[bargSize + 2];

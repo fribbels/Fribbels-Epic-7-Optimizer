@@ -606,12 +606,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
 
-        final int wSize = itemsByGear.get(Gear.WEAPON).size();
-        final int hSize = itemsByGear.get(Gear.HELMET).size();
-        final int aSize = itemsByGear.get(Gear.ARMOR).size();
-        final int nSize = itemsByGear.get(Gear.NECKLACE).size();
-        final int rSize = itemsByGear.get(Gear.RING).size();
-        final int bSize = itemsByGear.get(Gear.BOOTS).size();
+        final long wSize = itemsByGear.get(Gear.WEAPON).size();
+        final long hSize = itemsByGear.get(Gear.HELMET).size();
+        final long aSize = itemsByGear.get(Gear.ARMOR).size();
+        final long nSize = itemsByGear.get(Gear.NECKLACE).size();
+        final long rSize = itemsByGear.get(Gear.RING).size();
+        final long bSize = itemsByGear.get(Gear.BOOTS).size();
 
         final Item[] allweapons = itemsByGear.get(Gear.WEAPON).toArray(new Item[0]);
         final Item[] allhelmets = itemsByGear.get(Gear.HELMET).toArray(new Item[0]);
@@ -816,67 +816,70 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
 
                     executorService.submit(() -> {
+                        try {
+                            searchedCounter.addAndGet(Math.min(max, maxPerms));
 
-                        searchedCounter.addAndGet(Math.min(max, maxPerms));
+                            for (int j = 0; j < max; j++) {
+                                final long iteration = ((long) finalI) * max + j;
 
-                        for (int j = 0; j < max; j++) {
-                            final long iteration = ((long) finalI) * max + j;
+                                //                    System.out.println(longSetMasks[0]);
+                                //                    System.out.println(debug[j]);
 
-                            //                    System.out.println(longSetMasks[0]);
-                            //                    System.out.println(debug[j]);
+                                if (passes[j]) {
+                                    if (iteration >= maxPerms) {
+                                        break;
+                                    }
+                                    if (Main.interrupt || exit.get()) {
+                                        break;
+                                    }
 
-                            if (passes[j]) {
-                                if (iteration >= maxPerms) {
-                                    break;
-                                }
-                                if (Main.interrupt || exit.get()) {
-                                    break;
-                                }
+                                    final int b = (int) (iteration % bSize);
+                                    final int r = (int) (((iteration - b) / bSize) % rSize);
+                                    final int n = (int) (((iteration - r * bSize - b) / (bSize * rSize)) % nSize);
+                                    final int a = (int) (((iteration - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize)) % aSize);
+                                    final int h = (int) (((iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize)) % hSize);
+                                    final int w = (int) (((iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize)) % wSize);
 
-                                final int b = (int) (iteration % bSize);
-                                final int r = (int) (((iteration - b) / bSize) % rSize);
-                                final int n = (int) (((iteration - r * bSize - b) / (bSize * rSize)) % nSize);
-                                final int a = (int) (((iteration - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize)) % aSize);
-                                final int h = (int) (((iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize)) % hSize);
-                                final int w = (int) (((iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize)) % wSize);
+                                    final Item weapon = allweapons[w];
+                                    final Item helmet = allhelmets[h];
+                                    final Item armor = allarmors[a];
+                                    final Item necklace = allnecklaces[n];
+                                    final Item ring = allrings[r];
+                                    final Item boots = allboots[b];
 
-                                final Item weapon = allweapons[w];
-                                final Item helmet = allhelmets[h];
-                                final Item armor = allarmors[a];
-                                final Item necklace = allnecklaces[n];
-                                final Item ring = allrings[r];
-                                final Item boots = allboots[b];
+                                    final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
+                                    final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
 
-                                final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
-                                final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
+                                    final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
+                                    final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                    final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
+                                    final HeroStats result = statCalculator.addAccumulatorArrsToHero(base, new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr}, collectedSets, request.hero, reforges, conversions, priority);
 
-                                final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
-                                final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
-                                final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
-                                final HeroStats result = statCalculator.addAccumulatorArrsToHero(base, new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr}, collectedSets, request.hero, reforges, conversions, priority);
+                                    result.setSets(collectedSets);
+                                    result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a]
+                                            .getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
+                                    result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a]
+                                            .getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
+                                    result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a]
+                                            .getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
 
-                                result.setSets(collectedSets);
-                                result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a]
-                                        .getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
-                                result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a]
-                                        .getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
-                                result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a]
-                                        .getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
+                                    final long resultsIndex = resultsCounter.getAndIncrement();
+                                    result.setId("" + resultsIndex);
+                                    resultHeroStats[(int) resultsIndex] = result;
 
-                                final long resultsIndex = resultsCounter.getAndIncrement();
-                                result.setId("" + resultsIndex);
-                                resultHeroStats[(int) resultsIndex] = result;
-
-                                if (resultsIndex >= MAXIMUM_RESULTS - 1) {
-                                    maxReached.set(MAXIMUM_RESULTS - 1);
-                                    exit.set(true);
-                                    break;
+                                    if (resultsIndex >= MAXIMUM_RESULTS - 1) {
+                                        maxReached.set(MAXIMUM_RESULTS - 1);
+                                        exit.set(true);
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        passesPool.get(passesId).setLocked(false);
-                        executionCounter.decrementAndGet();
+                            passesPool.get(passesId).setLocked(false);
+                            executionCounter.decrementAndGet();
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
                     });
 
                 }
@@ -1412,14 +1415,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final int SETTING_PEN_SET,
             final HeroStats base,
             final Hero hero,
-            final int argSize,
-            final int wSize,
-            final int hSize,
-            final int aSize,
-            final int nSize,
-            final int rSize,
-            final int bSize,
-            final int max,
+            final long argSize,
+            final long wSize,
+            final long hSize,
+            final long aSize,
+            final long nSize,
+            final long rSize,
+            final long bSize,
+            final long max,
             final int[] longSetMasks
     ) {
         if (request.getSetFormat() == 0) {

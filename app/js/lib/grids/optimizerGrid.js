@@ -267,7 +267,7 @@ function getField(heroStats, stat) {
 function buildGrid(localeText) {
 
     const DIGITS_2 = 38;
-    const DIGITS_3 = 37;
+    const DIGITS_3 = 35;
     const DIGITS_4 = 42;
     const DIGITS_5 = 45;
     const DIGITS_6 = 50;
@@ -284,7 +284,7 @@ function buildGrid(localeText) {
         },
 
         columnDefs: [
-            {headerName: i18next.t('sets'), field: 'sets', width: 70, cellRenderer: (params) => GridRenderer.renderSets(params.value, "shrinkSets")},
+            {headerName: i18next.t('sets'), field: 'sets', width: 80, cellRenderer: (params) => GridRenderer.renderSets(params.value, "shrinkSets")},
             {headerName: i18next.t('atk'), field: 'atk', width: DIGITS_4},
             {headerName: i18next.t('def'), field: 'def', width: DIGITS_4},
             {headerName: i18next.t('hp'), field: 'hp', width: DIGITS_5},
