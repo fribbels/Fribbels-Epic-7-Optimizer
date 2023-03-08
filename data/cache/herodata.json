@@ -15772,9 +15772,9 @@
     "ex_equip": [],
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
-        "cp": 13219,
+        "cp": 13380,
         "atk": 945,
-        "hp": 4253,
+        "hp": 4414,
         "spd": 119,
         "def": 446,
         "chc": 0.19,
@@ -15784,9 +15784,9 @@
         "efr": 0
       },
       "lv60SixStarFullyAwakened": {
-        "cp": 17044,
+        "cp": 17246,
         "atk": 1177,
-        "hp": 5340,
+        "hp": 5542,
         "spd": 119,
         "def": 553,
         "chc": 0.27,
