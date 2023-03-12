@@ -89,59 +89,77 @@ module.exports = {
                 .forEach(x => {
                     if (!heroesByName[x].skills) {
                         heroesByName[x].skills = {
-          "s1": [
-            {
-              "name": "S1 crit",
-              "type": 0,
-              "rate": 1,
-              "pow": 0.95
-            },
-            {
-              "name": "S1 crushing",
-              "type": 0,
-              "rate": 1,
-              "pow": 0.95
-            },
-            {
-              "name": "S1 normal",
-              "type": 0,
-              "rate": 1,
-              "pow": 0.95
-            },
-            {
-              "name": "S1 miss",
-              "type": 0,
-              "rate": 1,
-              "pow": 0.95
-            }
-          ],
-          "s2": [
-            {
-              "name": "S2 heal",
-              "type": 1,
-              "rate": 0,
-              "pow": 0,
-              "selfHpScaling": 0.15
-            }
-          ],
-          "s3": [
-            {
-              "name": "S3 heal",
-              "type": 1,
-              "rate": 0,
-              "pow": 0,
-              "selfHpScaling": 0.3
-            },
-            {
-              "name": "S3 soulburn heal",
-              "type": 1,
-              "rate": 0,
-              "pow": 0,
-              "selfHpScaling": 0.5
-            }
-          ]
-        }
+      "S1": {
+        "hitTypes": ["normal"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["normal"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      }
+    }
                     }
+
+
+                    var s = heroesByName[x].skills;
+                    for (var skill of ["S1", "S2", "S3"]) {
+                        var skillData = s[skill];
+
+                        for (var z of skillData.hitTypes) {
+                            if (!skillData.options.find(y => y.name.includes(z))) {
+                                skillData.options.push({
+                                    name: skill + " " + z,
+                                    rate: skillData.rate,
+                                    pow: skillData.pow,
+                                    selfHpScaling: skillData.selfHpScaling,
+                                    selfAtkScaling: skillData.selfAtkScaling,
+                                    selfDefScaling: skillData.selfDefScaling,
+                                    selfSpdScaling: skillData.selfSpdScaling,
+                                    increasedValue: skillData.increasedValue,
+                                    extraSelfHpScaling: skillData.extraSelfHpScaling,
+                                    extraSelfDefScaling: skillData.extraSelfDefScaling,
+                                    extraSelfAtkScaling: skillData.extraSelfAtkScaling,
+                                    cdmgIncrease: skillData.cdmgIncrease,
+                                    penetration: skillData.penetration,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                    // pow: skillData.pow,
+                                });
+                            }
+                        }
+
+                        if (skillData.options.length == 0) {
+                            skillData.options.push({
+                                name: skill + " n/a",
+                                rate: 0,
+                                pow: 0,
+                            })
+                        }
+                    }
+
                     const baseStats = module.exports.getBaseStatsByName(x);
                     baseStatsByName[x] = baseStats;
                 });
@@ -205,7 +223,12 @@ module.exports = {
         const status = heroesByName[name].calculatedStatus;
         return {
             lv50FiveStarFullyAwakened: baseToStatObj(status.lv50FiveStarFullyAwakened),
-            lv60SixStarFullyAwakened: baseToStatObj(status.lv60SixStarFullyAwakened)
+            lv60SixStarFullyAwakened: baseToStatObj(status.lv60SixStarFullyAwakened),
+            skills: {
+                S1: heroesByName[name].skills.S1.options,
+                S2: heroesByName[name].skills.S2.options,
+                S3: heroesByName[name].skills.S3.options
+            }
         }
     },
 

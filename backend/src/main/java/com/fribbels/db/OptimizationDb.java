@@ -96,7 +96,7 @@ public class OptimizationDb {
         }
 
 //        System.out.println("START SORT");
-//        Sorter.sortHeroes(resultHeroStats, newColumn, newOrder);
+        Sorter.sortHeroes(resultHeroStats, newColumn, newOrder);
 //        System.out.println("END SORT");
 
         int count = 0;

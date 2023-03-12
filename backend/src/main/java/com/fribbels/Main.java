@@ -32,9 +32,9 @@ public class Main {
 
     private static HttpServer server;
     private static ExecutorService executorService;
-    private static final HeroDb heroDb = new HeroDb();
-    private static final ItemDb itemDb = new ItemDb(heroDb);
     private static final BaseStatsDb baseStatsDb = new BaseStatsDb();
+    private static final HeroDb heroDb = new HeroDb(baseStatsDb);
+    private static final ItemDb itemDb = new ItemDb(heroDb);
     private static final OptimizationDb optimizationDb = new OptimizationDb();
 
     public static boolean interrupt = false;

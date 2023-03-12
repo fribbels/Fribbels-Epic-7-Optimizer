@@ -68,57 +68,44 @@
       }
     ],
     "skills": {
-      "s1": [
-        {
-          "name": "S1 crit",
-          "type": 0,
-          "rate": 1,
-          "pow": 0.95
-        },
-        {
-          "name": "S1 crushing",
-          "type": 0,
-          "rate": 1,
-          "pow": 0.95
-        },
-        {
-          "name": "S1 normal",
-          "type": 0,
-          "rate": 1,
-          "pow": 0.95
-        },
-        {
-          "name": "S1 miss",
-          "type": 0,
-          "rate": 1,
-          "pow": 0.95
-        }
-      ],
-      "s2": [
-        {
-          "name": "S2 heal",
-          "type": 1,
-          "rate": 0,
-          "pow": 0,
-          "selfHpScaling": 0.15
-        }
-      ],
-      "s3": [
-        {
-          "name": "S3 heal",
-          "type": 1,
-          "rate": 0,
-          "pow": 0,
-          "selfHpScaling": 0.3
-        },
-        {
-          "name": "S3 soulburn heal",
-          "type": 1,
-          "rate": 0,
-          "pow": 0,
-          "selfHpScaling": 0.5
-        }
-      ]
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.3
+          },
+          {
+            "name": "S3 soulburn heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.5
+          }
+        ]
+      }
     },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
@@ -174,6 +161,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3143_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -228,6 +235,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3043_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11614,
@@ -282,6 +307,29 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5001_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfHpScaling": 0.04,
+        "increasedValue": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfHpScaling": 0.04,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12124,
@@ -356,6 +404,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1138_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12684,
@@ -408,6 +474,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1137_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfDefScaling": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfDefScaling": 0.5,
+        "extraSelfDefScaling": 1.4,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13403,
@@ -460,6 +547,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1140_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16221,
@@ -512,6 +617,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1139_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -566,6 +689,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3105_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13832,
@@ -620,6 +761,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3093_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11788,
@@ -674,6 +833,42 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1018_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15,
+            "selfAtkScaling": 0.35
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15,
+            "selfAtkScaling": 0.45
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13996,
@@ -740,6 +935,29 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.08,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.11,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.15,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13640,
@@ -794,6 +1012,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3012_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -848,6 +1086,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4065_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11667,
@@ -922,6 +1178,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2042_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.12,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13591,
@@ -974,6 +1250,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1143_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15716,
@@ -1027,6 +1319,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6062_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13090,
@@ -1081,6 +1389,40 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4042_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.07
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.35
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14246,
@@ -1198,6 +1540,40 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15120,
@@ -1250,6 +1626,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2019_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "selfHpScaling": 0.12,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.08
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfHpScaling": 0.2,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13640,
@@ -1338,6 +1743,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13525,
@@ -1390,6 +1815,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2007_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.975,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.04,
+        "pow": 0.85,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13126,
@@ -1442,6 +1885,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5004_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1.3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14048,
@@ -1494,6 +1957,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1129_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfDefScaling": 0.85,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1.3,
+        "selfDefScaling": 1.4,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfDefScaling": 1
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13970,
@@ -1611,6 +2103,32 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.9,
+        "selfDefScaling": 0.6,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfDefScaling": 0.6
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13184,
@@ -1665,6 +2183,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3004_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfHpScaling": 0.02,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "selfHpScaling": 0.15,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12124,
@@ -1717,6 +2255,25 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1124_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "penetration": 0.7,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16221,
@@ -1836,6 +2393,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12819,
@@ -1906,6 +2481,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "selfSpdScaling": 0.001,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11993,
@@ -2007,6 +2602,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.8,
+        "selfSpdScaling": 0.001125,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11777,
@@ -2059,6 +2674,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2091_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13144,
@@ -2112,6 +2745,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2031_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.8,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12736,
@@ -2166,6 +2817,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3031_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12002,
@@ -2232,6 +2903,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13525,
@@ -2285,6 +2976,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6008_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfHpScaling": 0.06,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 1,
+        "selfHpScaling": 0.16,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13440,
@@ -2337,6 +3048,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1093_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13275,
@@ -2389,6 +3120,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1053_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14048,
@@ -2443,6 +3194,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3006_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.9,
+        "selfHpScaling": 0.07,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfHpScaling": 0.12,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.3
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12037,
@@ -2497,6 +3277,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3095_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11888,
@@ -2549,6 +3349,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1141_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -2623,6 +3439,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1117_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1.05,
+        "selfHpScaling": 0.09,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1.3,
+        "selfHpScaling": 0.12,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13403,
@@ -2719,6 +3555,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -2772,6 +3628,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2043_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13090,
@@ -2871,6 +3745,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14809,
@@ -2924,6 +3818,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2011_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12463,
@@ -2976,6 +3888,36 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2039_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfHpScaling": 0.12,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.6
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0.3,
+        "pow": 1,
+        "selfHpScaling": 0.12,
+        "penetration": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16093,
@@ -3045,6 +3987,25 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.75,
+        "pow": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13288,
@@ -3097,6 +4058,28 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2024_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1,
+        "extraSelfAtkScaling": 0.3,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1.1,
+        "extraSelfAtkScaling": 0.3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13288,
@@ -3151,6 +4134,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3001_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.85,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11820,
@@ -3205,6 +4206,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3124_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16298,
@@ -3259,6 +4278,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4034_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11788,
@@ -3335,6 +4372,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3071_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12152,
@@ -3389,6 +4446,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3051_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfAtkScaling": 0.78
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11614,
@@ -3442,6 +4526,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1013_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.06,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "selfHpScaling": 0.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12802,
@@ -3537,6 +4641,29 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.07,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.4,
+        "pow": 1,
+        "selfHpScaling": 0.06,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1.05,
+        "selfHpScaling": 0.12,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13403,
@@ -3591,6 +4718,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3064_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11234,
@@ -3644,6 +4789,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2005_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12684,
@@ -3738,6 +4903,27 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "cdmgIncrease": 0.2,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.4,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13275,
@@ -3790,6 +4976,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1081_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12803,
@@ -3890,6 +5096,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.15,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13727,
@@ -3943,6 +5167,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2037_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12684,
@@ -3996,6 +5236,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2010_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13209,
@@ -4050,6 +5308,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4001_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.85,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11820,
@@ -4126,6 +5402,29 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4025_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfHpScaling": 0.06,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfHpScaling": 0.08,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "selfHpScaling": 0.2,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11978,
@@ -4245,6 +5544,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13243,
@@ -4339,6 +5658,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.4,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13494,
@@ -4440,6 +5777,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.7,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13380,
@@ -4537,6 +5894,29 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.11,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.15,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13730,
@@ -4591,6 +5971,31 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3123_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.12
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12320,
@@ -4645,6 +6050,29 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3025_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfHpScaling": 0.06,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfHpScaling": 0.08,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "selfHpScaling": 0.2,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11978,
@@ -4712,6 +6140,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.95,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "selfSpdScaling": 0.0021,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12112,
@@ -4807,6 +6255,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12841,
@@ -4859,6 +6327,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2027_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13275,
@@ -4912,6 +6398,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1033_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.3,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12463,
@@ -4966,6 +6472,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4035_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11978,
@@ -5040,6 +6564,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2080_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.75,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.75,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16394,
@@ -5092,6 +6636,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2089_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 17097,
@@ -5145,6 +6705,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1012_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfDefScaling": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.3,
+        "pow": 0.9,
+        "selfDefScaling": 0.7,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.5
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12802,
@@ -5198,6 +6787,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2054_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11777,
@@ -5251,6 +6860,23 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2008_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfDefScaling": 0.6,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12975,
@@ -5304,6 +6930,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1036_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1.05,
+        "selfDefScaling": 0.7,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 1
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.95,
+        "selfDefScaling": 0.6,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12936,
@@ -5356,6 +7011,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2012_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.07,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0,
+        "pow": 0.95,
+        "selfHpScaling": 0.25,
+        "penetration": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13730,
@@ -5408,6 +7084,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2090_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16072,
@@ -5460,6 +7152,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2053_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15700,
@@ -5513,6 +7221,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2095_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "selfDefScaling": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "selfDefScaling": 1.15,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13640,
@@ -5605,6 +7333,40 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.16
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.3
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16072,
@@ -5697,6 +7459,31 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15706,
@@ -5750,6 +7537,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1021_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12701,
@@ -5802,6 +7607,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1094_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["miss"],
+        "rate": 2.5,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13970,
@@ -5856,6 +7681,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4073_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12694,
@@ -5931,6 +7776,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1037_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.25
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.75,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13090,
@@ -5985,6 +7857,40 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3044_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.25
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14137,
@@ -6039,6 +7945,32 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3094_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "selfHpScaling": 0.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.361
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12139,
@@ -6113,6 +8045,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1111_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.05,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 17217,
@@ -6165,6 +8117,29 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1134_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.08,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "selfHpScaling": 0.25,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11377,
@@ -6257,6 +8232,33 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15706,
@@ -6309,6 +8311,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1105_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -6363,6 +8385,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3054_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.1
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14246,
@@ -6415,6 +8464,31 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1116_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15706,
@@ -6469,6 +8543,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3022_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12002,
@@ -6521,6 +8613,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1108_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.4,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13275,
@@ -6573,6 +8685,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5050_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13970,
@@ -6625,6 +8758,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2046_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.4,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13288,
@@ -6679,6 +8832,23 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4003_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.9,
+        "selfDefScaling": 0.7,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11779,
@@ -6753,6 +8923,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2002_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.07,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.65,
+        "pow": 0.95,
+        "selfHpScaling": 0.12,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13591,
@@ -6806,6 +9005,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2032_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfDefScaling": 0.75,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfDefScaling": 1.5,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12975,
@@ -6858,6 +9077,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1110_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -6925,6 +9160,27 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "cdmgIncrease": 0.2,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12701,
@@ -6992,6 +9248,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.65,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12530,
@@ -7087,6 +9361,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfHpScaling": 0.06,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfHpScaling": 0.08,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12802,
@@ -7141,6 +9435,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3103_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11520,
@@ -7195,6 +9507,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3074_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12597,
@@ -7249,6 +9579,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3101_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.65,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11667,
@@ -7320,6 +9668,31 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfAtkScaling": 0.5
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12997,
@@ -7421,6 +9794,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12997,
@@ -7475,6 +9868,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3024_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 1,
+        "pow": 0.85,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 2.2,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "bonusMaxAtkPercent": 75,
       "bonusMaxDefPercent": 0,
@@ -7554,6 +9965,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3135_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11779,
@@ -7623,6 +10054,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12981,
@@ -7677,6 +10128,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3091_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 0.95,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 0.85,
+        "selfSpdScaling": 0.00125,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -7731,6 +10202,42 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3041_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.3,
+            "selfAtkScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.3,
+            "selfAtkScaling": 0.12
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14054,
@@ -7785,6 +10292,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3122_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfDefScaling": 0.8,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "selfDefScaling": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfDefScaling": 0.8
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12139,
@@ -7839,6 +10375,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3023_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.55,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11710,
@@ -7891,6 +10445,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5016_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13440,
@@ -7945,6 +10517,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4141_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "TODO": "Inaccurate",
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -8021,6 +10614,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3055_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11922,
@@ -8073,6 +10684,34 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1128_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfAtkScaling": 0.45
+          }
+        ]
+      },
+      "S3": {
+        "TODO": "Pen",
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.25,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13440,
@@ -8149,6 +10788,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3102_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11323,
@@ -8215,6 +10872,29 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.08,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfHpScaling": 0.18,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.12,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13243,
@@ -8308,6 +10988,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12819,
@@ -8360,6 +11058,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1024_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13356,
@@ -8412,6 +11128,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1130_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.75,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13624,
@@ -10151,6 +12885,25 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1089_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "selfHpScaling": 0.12,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13403,
@@ -10246,6 +12999,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13440,
@@ -10298,6 +13071,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2079_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 0.9,
+        "selfDefScaling": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.3,
+        "pow": 0.9,
+        "selfDefScaling": 1.35,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13727,
@@ -10350,6 +13143,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2009_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13440,
@@ -10402,6 +13215,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2071_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16221,
@@ -10456,6 +13289,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3035_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11978,
@@ -10509,6 +13360,40 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1031_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.1
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14745,
@@ -10561,6 +13446,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1126_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16999,
@@ -10615,6 +13518,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3113_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "selfDefScaling": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "selfDefScaling": 1.15,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13894,
@@ -10709,6 +13632,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.65,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13169,
@@ -10808,6 +13751,33 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfAtkScaling": 0.375
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14048,
@@ -10906,6 +13876,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2.1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13440,
@@ -10960,6 +13948,40 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4044_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.25
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14137,
@@ -11034,6 +14056,31 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2049_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.12
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15694,
@@ -11086,6 +14133,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2047_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13727,
@@ -11162,6 +14229,42 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4041_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15,
+            "selfAtkScaling": 0.3
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.12,
+            "selfAtkScaling": 0.3
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14054,
@@ -11237,6 +14340,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1032_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.95,
+        "selfDefScaling": 0.75,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfDefScaling": 0.8,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13492,
@@ -11289,6 +14412,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2073_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfHpScaling": 0.04,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "selfHpScaling": 0.09,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13730,
@@ -11343,6 +14486,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3121_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11788,
@@ -11409,6 +14570,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13169,
@@ -11462,6 +14643,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c0002_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.15,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12684,
@@ -11516,6 +14717,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4023_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.55,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11710,
@@ -11591,6 +14810,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0063_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12452,
@@ -11643,6 +14882,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1122_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.7,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13929,
@@ -11697,6 +14956,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3014_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 0.85,
+        "selfSpdScaling": 0.0015,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11405,
@@ -11751,6 +15030,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3072_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11929,
@@ -11805,6 +15104,40 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3042_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.07
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.35
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14246,
@@ -11858,6 +15191,31 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6037_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.3045
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14749,
@@ -11974,6 +15332,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.08,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.15,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13243,
@@ -12028,6 +15406,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3033_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11710,
@@ -12126,6 +15524,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13569,
@@ -12180,6 +15598,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4062_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.8,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11248,
@@ -12256,6 +15692,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3132_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11607,
@@ -12310,6 +15766,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3061_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.8,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11520,
@@ -12362,6 +15836,28 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2072_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.75,
+        "pow": 1,
+        "selfSpdScaling": 0.075,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.1,
+        "selfSpdScaling": 0.001125,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13144,
@@ -12416,6 +15912,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3133_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.65,
+        "pow": 0.9,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "TODO": "def pen",
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11607,
@@ -12470,6 +15987,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3045_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12250,
@@ -12564,6 +16099,29 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1.1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfSpdScaling": 0.001125,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 1,
+        "selfSpdScaling": 0.0015,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12952,
@@ -12617,6 +16175,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2087_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.9,
+        "selfDefScaling": 0.8,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "TODO": "def pen",
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.9,
+        "selfDefScaling": 1.3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12452,
@@ -12671,6 +16250,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3073_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12694,
@@ -12723,6 +16322,25 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1125_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "TODO": "flat shield",
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12898,
@@ -12777,6 +16395,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3125_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfAtkScaling": 0.65
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1.2,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11607,
@@ -12829,6 +16474,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2110_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13288,
@@ -12903,6 +16566,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1112_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13525,
@@ -12956,6 +16639,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1035_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "selfHpScaling": 0.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12819,
@@ -13010,6 +16713,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3005_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfDefScaling": 0.5,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 0.95,
+        "selfDefScaling": 0.7,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12139,
@@ -13062,6 +16785,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1115_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13525,
@@ -13136,6 +16877,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1118_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.9,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12898,
@@ -13190,6 +16951,29 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1001_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfHpScaling": 0.04,
+        "increasedValue": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "selfHpScaling": 0.04,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12124,
@@ -13287,6 +17071,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13730,
@@ -13379,6 +17181,40 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15716,
@@ -13431,6 +17267,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1114_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16221,
@@ -13483,6 +17339,25 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2074_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.3,
+        "penetration": 0.5,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13126,
@@ -13537,6 +17412,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3075_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14181,
@@ -13591,6 +17484,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4051_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfAtkScaling": 0.78
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11614,
@@ -13667,6 +17587,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4013_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 10214,
@@ -13743,6 +17681,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3034_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11788,
@@ -13797,6 +17753,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3062_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.8,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11248,
@@ -13849,6 +17823,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1121_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.65,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13440,
@@ -13942,6 +17936,35 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.9,
+        "selfHpScaling": 0.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfHpScaling": 0.07,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14786,
@@ -13994,6 +18017,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1136_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.15,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -14061,6 +18102,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12468,
@@ -14113,6 +18174,40 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1102_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.0775
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.25
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16093,
@@ -14208,6 +18303,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.85,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12741,
@@ -14262,6 +18377,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3013_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 10214,
@@ -14360,6 +18493,32 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfDefScaling": 0.7,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfDefScaling": 1
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12975,
@@ -14412,6 +18571,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1135_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13169,
@@ -14464,6 +18641,32 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1022_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.81,
+        "pow": 0.95,
+        "selfHpScaling": 0.07,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.35
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16093,
@@ -14516,6 +18719,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2015_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1.3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "penetration": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13970,
@@ -14570,6 +18794,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4144_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1.3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "penetration": 0.5,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -14645,6 +18890,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1020_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12530,
@@ -14697,6 +18960,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5071_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "cdmgIncrease": 0.2,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13288,
@@ -14791,6 +19075,33 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfAtkScaling": 0.25
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 1.5,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "bonusMaxAtkPercent": 30,
       "bonusMaxDefPercent": 0,
@@ -14871,6 +19182,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4142_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -14995,6 +19326,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13166,
@@ -15047,6 +19398,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1038_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13275,
@@ -15101,6 +19470,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4005_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "selfDefScaling": 0.5,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 0.95,
+        "selfDefScaling": 0.7,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12139,
@@ -15218,6 +19607,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12456,
@@ -15284,6 +19693,33 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.1
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15694,
@@ -15338,6 +19774,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4052_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12313,
@@ -15413,6 +19867,31 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2017_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15120,
@@ -15465,6 +19944,32 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1123_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.75,
+        "pow": 1,
+        "selfHpScaling": 0.09,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.18
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15706,
@@ -15560,6 +20065,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.25,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.7,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13624,
@@ -15613,6 +20138,25 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1004_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.9,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12121,
@@ -15665,6 +20209,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2048_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13525,
@@ -15718,6 +20280,31 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2062_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.24
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14749,
@@ -15770,6 +20357,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1092_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13219,
@@ -15822,6 +20429,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2111_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13970,
@@ -15876,6 +20501,40 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3104_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.07
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.18
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14246,
@@ -15928,6 +20587,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2038_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "penetration": 0.3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13275,
@@ -15980,6 +20660,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2050_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13525,
@@ -16032,6 +20730,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2103_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 16901,
@@ -16084,6 +20798,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1034_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "penetration": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13624,
@@ -16136,6 +20871,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5009_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13243,
@@ -16212,6 +20965,27 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4012_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "TODO:": "find multis",
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -16286,6 +21060,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5024_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -16361,6 +21153,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1065_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.4,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12203,
@@ -16415,6 +21227,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3155_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12152,
@@ -16469,6 +21299,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3015_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11607,
@@ -16521,6 +21369,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2088_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13929,
@@ -16573,6 +21439,25 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1127_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.98,
+        "pow": 0.9,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13569,
@@ -16627,6 +21512,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3152_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11978,
@@ -16681,6 +21584,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3154_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.7
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11710,
@@ -16733,6 +21663,31 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1067_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.75,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.25
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15700,
@@ -16787,6 +21742,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3032_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11788,
@@ -16841,6 +21814,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3002_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "selfHpScaling": 0.025,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "selfHpScaling": 0.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12037,
@@ -16894,6 +21887,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2065_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.05,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12203,
@@ -16964,6 +21975,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1.05,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13929,
@@ -17018,6 +22049,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3021_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11377,
@@ -17070,6 +22119,25 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2082_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "selfSpdScaling": 0.0015,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13302,
@@ -17169,6 +22237,32 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "selfHpScaling": 0.04,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3":{
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 2
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12870,
@@ -17264,6 +22358,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "selfHpScaling": 0.04,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.95,
+        "selfHpScaling": 0.1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13403,
@@ -17318,6 +22432,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4004_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfHpScaling": 0.05,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 0.95,
+        "selfHpScaling": 0.15,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12124,
@@ -17394,6 +22528,21 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4143_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "TODO": "find multis",
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11477,
@@ -17470,6 +22619,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4103_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11520,
@@ -17590,6 +22757,28 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.95,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1,
+        "selfSpdScaling": 0.1125,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13126,
@@ -17642,6 +22831,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1074_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13275,
@@ -17734,6 +22950,24 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.05,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13302,
@@ -17788,6 +23022,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3065_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.8,
+        "pow": 0.9,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11667,
@@ -17888,6 +23140,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 0.9,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12475,
@@ -17986,6 +23258,27 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "penetration": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12452,
@@ -18039,6 +23332,20 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/m0171_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12452,
@@ -18093,6 +23400,33 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3134_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.16
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11779,
@@ -18187,6 +23521,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13624,
@@ -18239,6 +23593,35 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1131_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.35
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "penetration": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13591,
@@ -18335,6 +23718,25 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 0.8,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.8,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13356,
@@ -18427,6 +23829,33 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.9,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13380,
@@ -18481,6 +23910,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4071_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1.05,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12152,
@@ -18555,6 +24004,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1083_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "selfHpScaling": 0.12,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13970,
@@ -18608,6 +24077,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1010_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.05,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.95,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13209,
@@ -18660,6 +24149,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1133_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 17217,

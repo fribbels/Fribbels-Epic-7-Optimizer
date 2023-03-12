@@ -238,8 +238,6 @@ module.exports = {
             const heroes = getAllHeroesResponse.heroes;
 
 
-
-
             hero = heroes.find(x => x.id == heroId)
             if (!hero) {
                 return;
@@ -269,13 +267,13 @@ module.exports = {
                             </div>
                             <div class="tabsContentWrapper">
                                 <div class="tabsContent active" id="home">
-                                    ${generateSkillOptionsHtml("s1", hero, heroData)}
+                                    ${generateSkillOptionsHtml("S1", hero, heroData)}
                                 </div>
                                 <div class="tabsContent" id="about">
-                                    ${generateSkillOptionsHtml("s2", hero, heroData)}
+                                    ${generateSkillOptionsHtml("S2", hero, heroData)}
                                 </div>
                                 <div class="tabsContent" id="contact">
-                                    ${generateSkillOptionsHtml("s3", hero, heroData)}
+                                    ${generateSkillOptionsHtml("S3", hero, heroData)}
                                 </div>
                             </div>
                         </div>
@@ -326,7 +324,7 @@ module.exports = {
                     // const eeNumber = $('#editEe').val()
                     // const stars = $('#editStars').val()
 
-                    var skills = ["s1", "s2", "s3"]
+                    var skills = ["S1", "S2", "S3"]
                     const skillOptions = {}
 
                     for (var skill of skills) {
@@ -1632,7 +1630,11 @@ function safeGetSkill(hero, prefix) {
 function generateSkillOptionsHtml(prefix, hero, heroData) {
     var skillTypes = !heroData.skills ? [] : heroData.skills[prefix] 
     var skillTypesHtml = ""
-    for (var skillType of skillTypes) {
+    for (var skillType of skillTypes.options) {
+        console.warn("---")
+        console.warn(hero)
+        console.warn(safeGetSkill(hero, prefix))
+        console.warn(safeGetSkill(hero, prefix).skillEffect)
         skillTypesHtml += `<option value='${skillType.name}' ${safeGetSkill(hero, prefix).skillEffect == skillType.name ? "selected" : ""}>${skillType.name}</option>\n`
     }
     const html =

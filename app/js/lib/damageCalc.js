@@ -15,86 +15,95 @@
 
 
 
-function findSkill(skill, skillOptions, heroData) {
-    return heroData.skills[skill].find(x => x.name == skillOptions[skill].skillEffect) || heroData.skills[skill][0]
+function findSkill(skill, hero, heroData) {
+    var skillData = heroData.skills[skill];
+
+    console.warn(skillData)
+    console.warn(hero)
+    console.warn(heroData)
+
+    return skillData.options.find(x => x.name == hero.skillOptions[skill].skillEffect) || skillData.options[0]
 }
 
-function calculateRate(skill, hero, heroData, skillOptions) {
-    return findSkill(skill, skillOptions, heroData).rate;
-}
+// function calculateRate(skill, hero, heroData, skillOptions) {
+//     return findSkill(skill, skillOptions, heroData).rate;
+// }
 
-function calculateAtkMod(skill, hero, heroData, skillOptions) {
-    var atkMod = 1;
+// function calculateAtkMod(skill, hero, heroData, skillOptions) {
+//     var atkMod = 1;
 
-    if (findSkill(skill, skillOptions, heroData).type == 0) {
-        return atkMod;
-    }
+//     if (findSkill(skill, skillOptions, heroData).type == 0) {
+//         return atkMod;
+//     }
 
-    if (skillOptions[skill].greaterAttackBuffEnabled) {
-        atkMod += 0.75
-    } else if (skillOptions[skill].attackBuffEnabled) {
-        atkMod += 0.5
-    }
+//     if (skillOptions[skill].greaterAttackBuffEnabled) {
+//         atkMod += 0.75
+//     } else if (skillOptions[skill].attackBuffEnabled) {
+//         atkMod += 0.5
+//     }
 
-    if (skillOptions[skill].vigorAttackBuffEnabled) {
-        atkMod += 0.3
-    }
+//     if (skillOptions[skill].vigorAttackBuffEnabled) {
+//         atkMod += 0.3
+//     }
 
-    if (skillOptions[skill].decreasedAttackBuffEnabled) {
-        atkMod -= 0.5
-    }
+//     if (skillOptions[skill].decreasedAttackBuffEnabled) {
+//         atkMod -= 0.5
+//     }
 
-    return atkMod;
-}
+//     return atkMod;
+// }
 
-function calculateSelfHpScaling(skill, hero, heroData, skillOptions) {
-    return findSkill(skill, skillOptions, heroData).selfHpScaling || 0;
-}
+// function calculateSelfHpScaling(skill, hero, heroData, skillOptions) {
+//     return findSkill(skill, skillOptions, heroData).selfHpScaling || 0;
+// }
 
-function calculateType(skill, hero, heroData, skillOptions) {
-    return findSkill(skill, skillOptions, heroData).type || 0;
-}
+// function calculateType(skill, hero, heroData, skillOptions) {
+//     return findSkill(skill, skillOptions, heroData).type || 0;
+// }
 
-function getHitTypeMulti(skill, hero, heroData, skillOptions) {
-    if (!skillOptions[skill].skillEffect) {
+function getHitTypeMulti(skill, hero, heroData) {
+    if (!hero.skillOptions[skill].skillEffect) {
         return 0
     }
-    if (skillOptions[skill].skillEffect.includes("crit")) {
+    if (hero.skillOptions[skill].skillEffect.includes("crit")) {
         return 0
     }
-    if (skillOptions[skill].skillEffect.includes("crushing")) {
-        return 0.3 // 130%
+    if (hero.skillOptions[skill].skillEffect.includes("crushing")) {
+        return 1.3 // 130%
     }
-    if (skillOptions[skill].skillEffect.includes("miss")) {
-        return -0.25; // 75%
+    if (hero.skillOptions[skill].skillEffect.includes("normal")) {
+        return 1 // 130%
+    }
+    if (hero.skillOptions[skill].skillEffect.includes("miss")) {
+        return 0.75; // 75%
     }
     return 0
 }
 
-function calculateMultis(skill, hero, heroData, skillOptions) {
-    var multis = 1;
+// function calculateMultis(skill, hero, heroData, skillOptions) {
+//     var multis = 1;
 
-    multis += findSkill(skill, skillOptions, heroData).type != 0 ? 0 : getHitTypeMulti(skill, hero, heroData, skillOptions)
+//     multis += findSkill(skill, skillOptions, heroData).type != 0 ? 0 : getHitTypeMulti(skill, hero, heroData, skillOptions)
 
-    if (skillOptions[skill].elementalAdvantageEnabled && findSkill(skill, skillOptions, heroData).type == 0) {
-        multis *= 1.1
-    }
+//     if (skillOptions[skill].elementalAdvantageEnabled && findSkill(skill, skillOptions, heroData).type == 0) {
+//         multis *= 1.1
+//     }
 
-    if (skillOptions[skill].targetTargetBuffEnabled && findSkill(skill, skillOptions, heroData).type == 0) {
-        multis *= 1.15
-    }
+//     if (skillOptions[skill].targetTargetBuffEnabled && findSkill(skill, skillOptions, heroData).type == 0) {
+//         multis *= 1.15
+//     }
 
-    // Enhance mod
+//     // Enhance mod
 
-    // DamageUpMod
+//     // DamageUpMod
 
-    return multis
-}
+//     return multis
+// }
 
 module.exports = {
     getMultipliers: (hero, skillOptions) => {
         var heroData = HeroData.getHeroExtraInfo(hero.name)
-        fixSkillOptions(skillOptions);
+        fixSkillOptions(hero, heroData);
 
         var s1FlatMod = 0;
         var s2FlatMod = 0;
@@ -104,58 +113,56 @@ module.exports = {
         var s2FlatMod2 = 0;
         var s3FlatMod2 = 0;
 
-        var s1Multis = calculateMultis("s1", hero, heroData, skillOptions)
-        var s2Multis = calculateMultis("s2", hero, heroData, skillOptions)
-        var s3Multis = calculateMultis("s3", hero, heroData, skillOptions)
+        // var s1Multis = calculateMultis("S1", hero, heroData, skillOptions)
+        // var s2Multis = calculateMultis("S2", hero, heroData, skillOptions)
+        // var s3Multis = calculateMultis("S3", hero, heroData, skillOptions)
 
-        var s1Pow = heroData.skills.s1.find(x => x.name == skillOptions.s1.skillEffect).pow || 1;
-        var s2Pow = heroData.skills.s2.find(x => x.name == skillOptions.s2.skillEffect).pow || 1;
-        var s3Pow = heroData.skills.s3.find(x => x.name == skillOptions.s3.skillEffect).pow || 1;
+        // var s1Pow = heroData.skills.S1.find(x => x.name == skillOptions.S1.skillEffect).pow || 1;
+        // var s2Pow = heroData.skills.S2.find(x => x.name == skillOptions.S2.skillEffect).pow || 1;
+        // var s3Pow = heroData.skills.S3.find(x => x.name == skillOptions.S3.skillEffect).pow || 1;
 
+    // private Float[] selfHpScaling             = new Float[]{1f, 1f, 1f};
+    // private Float[] selfAtkScaling            = new Float[]{1f, 1f, 1f};
+    // private Float[] selfDefScaling            = new Float[]{1f, 1f, 1f};
+    // private Float[] selfSpdScaling            = new Float[]{1f, 1f, 1f};
+    // private Float[] constantValue             = new Float[]{1f, 1f, 1f};
+    // private Float[] selfAtkConstantValue      = new Float[]{1f, 1f, 1f};
+    // private Float[] conditionalIncreasedValue = new Float[]{1f, 1f, 1f};
+    // private Float[] defDiffPen                = new Float[]{1f, 1f, 1f};
+    // private Float[] defDiffPenMax             = new Float[]{1f, 1f, 1f};
+    // private Float[] atkDiffPen                = new Float[]{1f, 1f, 1f};
+    // private Float[] atkDiffPenMax             = new Float[]{1f, 1f, 1f};
+    // private Float[] spdDiffPen                = new Float[]{1f, 1f, 1f};
+    // private Float[] spdDiffPenMax             = new Float[]{1f, 1f, 1f};
+    // private Float[] penetration               = new Float[]{1f, 1f, 1f};
+    // private Float[] atkIncrease               = new Float[]{1f, 1f, 1f};
+        var skillNames = ["S1", "S2", "S3"]
         var result = {
-            types: [
-                calculateType("s1", hero, heroData, skillOptions),
-                calculateType("s2", hero, heroData, skillOptions),
-                calculateType("s3", hero, heroData, skillOptions),
-            ],
-            atkMods: [ // done
-                calculateAtkMod("s1", hero, heroData, skillOptions),
-                calculateAtkMod("s2", hero, heroData, skillOptions),
-                calculateAtkMod("s3", hero, heroData, skillOptions),
-            ],
-            rates: [ // done
-                calculateRate("s1", hero, heroData, skillOptions),
-                calculateRate("s2", hero, heroData, skillOptions),
-                calculateRate("s3", hero, heroData, skillOptions),
-            ],
-            flatMods: [
-                0,
-                0,
-                0,
-            ],
-            flatMods2: [
-                0,
-                0,
-                0,
-            ],
-            multis: [
-                s1Multis,
-                s2Multis,
-                s3Multis,
-            ],
-            pows: [
-                s1Pow,
-                s2Pow,
-                s3Pow,
-            ],
-            selfHpScalings: [
-                calculateSelfHpScaling("s1", hero, heroData, skillOptions),
-                calculateSelfHpScaling("s2", hero, heroData, skillOptions),
-                calculateSelfHpScaling("s3", hero, heroData, skillOptions),
-            ],
-            selfDefScalings: [
-            ],
-        };
+            selfSpdScaling:            skillNames.map(x => findSkill(x, hero, heroData).selfSpdScaling || 0),
+            selfHpScaling:             skillNames.map(x => findSkill(x, hero, heroData).selfHpScaling || 0),
+            selfAtkScaling:            skillNames.map(x => findSkill(x, hero, heroData).selfAtkScaling || 0),
+            selfDefScaling:            skillNames.map(x => findSkill(x, hero, heroData).selfDefScaling || 0),
+            extraSelfHpScaling:        skillNames.map(x => findSkill(x, hero, heroData).extraSelfHpScaling || 0),
+            extraSelfAtkScaling:       skillNames.map(x => findSkill(x, hero, heroData).extraSelfAtkScaling || 0),
+            extraSelfDefScaling:       skillNames.map(x => findSkill(x, hero, heroData).extraSelfDefScaling || 0),
+            constantValue:             skillNames.map(x => findSkill(x, hero, heroData).constantValue || 0),
+            selfAtkConstantValue:      skillNames.map(x => findSkill(x, hero, heroData).selfAtkConstantValue || 0),
+            increasedValue:            skillNames.map(x => findSkill(x, hero, heroData).increasedValue || 0),
+            defDiffPen:                skillNames.map(x => findSkill(x, hero, heroData).defDiffPen || 0),
+            defDiffPenMax:             skillNames.map(x => findSkill(x, hero, heroData).defDiffPenMax || 0),
+            atkDiffPen:                skillNames.map(x => findSkill(x, hero, heroData).atkDiffPen || 0),
+            atkDiffPenMax:             skillNames.map(x => findSkill(x, hero, heroData).atkDiffPenMax || 0),
+            spdDiffPen:                skillNames.map(x => findSkill(x, hero, heroData).spdDiffPen || 0),
+            spdDiffPenMax:             skillNames.map(x => findSkill(x, hero, heroData).spdDiffPenMax || 0),
+            penetration:               skillNames.map(x => findSkill(x, hero, heroData).penetration || 0),
+            atkIncrease:               skillNames.map(x => findSkill(x, hero, heroData).atkIncrease || 0),
+            cdmgIncrease:              skillNames.map(x => findSkill(x, hero, heroData).cdmgIncrease || 0),
+            rate:                      skillNames.map(x => findSkill(x, hero, heroData).rate || 0),
+            pow:                       skillNames.map(x => findSkill(x, hero, heroData).pow || 0),
+            crit:                      skillNames.map(x => findSkill(x, hero, heroData).name.includes("crit") ? 1 : 0),
+            support:                   skillNames.map(x => (findSkill(x, hero, heroData).name.includes("heal") || findSkill(x, hero, heroData).name.includes("barrier")) ? 1 : 0),
+            hitMulti:                  skillNames.map(x => getHitTypeMulti(x, hero, heroData) || 0),
+        }
 
         console.warn("calc")
         console.warn(skillOptions)
@@ -164,25 +171,25 @@ module.exports = {
         return result
     },
 }
-function fixSkillOptions(skillOptions) {
-    if (!skillOptions) {
-        skillOptions = {
-            s1: {},
-            s2: {},
-            s3: {}
+function fixSkillOptions(hero, heroData) {
+    if (!hero.skillOptions) {
+        hero.skillOptions = {
+            S1: {skillEffect: heroData.skills.S1.options[0].name},
+            S2: {skillEffect: heroData.skills.S2.options[0].name},
+            S3: {skillEffect: heroData.skills.S3.options[0].name},
         }
         return
     }
 
-    if (!skillOptions.s1) {
-        skillOptions.s1 = {}
+    if (!hero.skillOptions.S1) {
+        hero.skillOptions.S1 = {skillEffect: heroData.skills.S1.options[0].name}
     }
 
-    if (!skillOptions.s2) {
-        skillOptions.s2 = {}
+    if (!hero.skillOptions.S2) {
+        hero.skillOptions.S2 = {skillEffect: heroData.skills.S2.options[0].name}
     }
 
-    if (!skillOptions.s3) {
-        skillOptions.s3 = {}
+    if (!hero.skillOptions.S3) {
+        hero.skillOptions.S3 = {skillEffect: heroData.skills.S3.options[0].name}
     }
 }

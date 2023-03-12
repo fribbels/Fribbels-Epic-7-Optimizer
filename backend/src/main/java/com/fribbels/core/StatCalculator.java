@@ -3,6 +3,7 @@ package com.fribbels.core;
 import com.fribbels.enums.StatType;
 import com.fribbels.model.*;
 
+import javax.swing.*;
 import java.util.Map;
 
 import static com.fribbels.handler.OptimizationRequestHandler.SET_COUNT;
@@ -148,19 +149,51 @@ flat2mod -> ddj
         if (multis == null) {
             multis = new DamageMultipliers();
         }
-        final int s1 = (int)(((atk * multis.getAtkMods()[0] * multis.getRates()[0] + getFlatMod(multis, 0, hp)) * getTypeMultiplier(multis, 0)) * multis.getPows()[0] * multis.getMultis()[0]);
-        final int s2 = (int)(((atk * multis.getAtkMods()[1] * multis.getRates()[1] + getFlatMod(multis, 1, hp)) * getTypeMultiplier(multis, 1)) * multis.getPows()[1] * multis.getMultis()[1]);
-        final int s3 = (int)(((atk * multis.getAtkMods()[2] * multis.getRates()[2] + getFlatMod(multis, 2, hp)) * getTypeMultiplier(multis, 2)) * multis.getPows()[2] * multis.getMultis()[2]);
+//        final int s1 = (int)(((atk * multis.getAtkMods()[0] * multis.getRates()[0] + getFlatMod(multis, 0, hp)) * getTypeMultiplier(multis, 0)) * multis.getPows()[0] * multis.getMultis()[0]);
+//        final int s2 = (int)(((atk * multis.getAtkMods()[1] * multis.getRates()[1] + getFlatMod(multis, 1, hp)) * getTypeMultiplier(multis, 1)) * multis.getPows()[1] * multis.getMultis()[1]);
+//        final int s3 = (int)(((atk * multis.getAtkMods()[2] * multis.getRates()[2] + getFlatMod(multis, 2, hp)) * getTypeMultiplier(multis, 2)) * multis.getPows()[2] * multis.getMultis()[2]);
+        // (1 + multis.getAtkIncrease()[0])
 
-//        final int s1 = 0;
-//        final int s2 = 0;
-//        final int s3 = 0;
+        final int s1 = getSkillValue(multis, 0, atk, def, hp, spd, critDamage, torrentMultiplier);
+        final int s2 = getSkillValue(multis, 1, atk, def, hp, spd, critDamage, torrentMultiplier);
+        final int s3 = getSkillValue(multis, 2, atk, def, hp, spd, critDamage, torrentMultiplier);
 //
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
         return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps,
                 dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, s1, s2, s3, upgrades, conversions, score, priority,
                 base.bonusStats, null, null, null, null, null, null, null);
+    }
+
+    private int getSkillValue(final DamageMultipliers m,
+                              final int s,
+                              final float atk,
+                              final float def,
+                              final float hp,
+                              final float spd,
+                              final float critDamage,
+                              final float torrentMultiplier) {
+        final float statScalings =
+                        m.getSelfHpScaling()[s] *hp +
+                        m.getSelfAtkScaling()[s]*atk +
+                        m.getSelfDefScaling()[s]*def +
+                        m.getSelfSpdScaling()[s]*spd;
+        final float hitTypeMultis = m.getCrit()[s] * (critDamage+m.getCdmgIncrease()[s]) + m.getHitMulti()[s];
+        final float increasedValue = 1 + m.getIncreasedValue()[s];
+        final float dmgUpMod = 1 + m.getSelfSpdScaling()[s] * spd;
+        final float extraDamage = (
+                        m.getExtraSelfHpScaling()[s] *hp +
+                        m.getExtraSelfAtkScaling()[s]*atk +
+                        m.getExtraSelfDefScaling()[s]*def) * 1.871f * 1f/(1000f*0.3f/300f + 1f);
+        final float offensive = (atk * m.getRate()[s] + statScalings) * 1.871f * m.getPow()[s] * increasedValue * hitTypeMultis * dmgUpMod * torrentMultiplier;
+        final float support = m.getSelfHpScaling()[s] * hp * m.getSupport()[s] + m.getSelfAtkScaling()[s] * atk * m.getSupport()[s] + m.getSelfDefScaling()[s] * def * m.getSupport()[s];
+        final float defensive = 1f/(1000f*Math.max(0, 1-m.getPenetration()[s])/300f + 1f);
+        final int value = (int)(offensive * defensive + support + extraDamage);
+
+//        System.out.println("S" + (s+1) + " " + value + " " + (hitTypeMultis) + " " + (1.871f * m.getPow()[s]));
+//        System.out.println(m);
+
+        return value;
     }
 
     private float getTypeMultiplier(final DamageMultipliers damageMultipliers, final int skill) {
@@ -172,9 +205,9 @@ flat2mod -> ddj
 
     private float getFlatMod(final DamageMultipliers damageMultipliers, final int skill, final float hp) {
         float value = 0;
-        if (damageMultipliers.getSelfHpScalings()[skill] != 0) {
-            value += damageMultipliers.getSelfHpScalings()[skill] * hp;
-        }
+//        if (damageMultipliers.getSelfHpScalings()[skill] != 0) {
+//            value += damageMultipliers.getSelfHpScalings()[skill] * hp;
+//        }
 
         return value;
     }

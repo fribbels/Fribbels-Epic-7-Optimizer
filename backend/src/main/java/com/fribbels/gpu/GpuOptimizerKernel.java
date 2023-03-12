@@ -61,6 +61,25 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final float aeiRes;
     @Constant final float aeiSpeed;
 
+
+    @Constant final float s1Rate = 0;
+    @Constant final float s1Pow = 0;
+    @Constant final float s1SelfHpScaling = 0;
+    @Constant final float s1SelfAtkScaling = 0;
+    @Constant final float s1SelfDefScaling = 0;
+    @Constant final float s1SelfSpdScaling = 0;
+    @Constant final float s1ConstantValue = 0;
+    @Constant final float s1SelfAtkConstantValue = 0;
+    @Constant final float s1ConditionalIncreasedValue = 0;
+    @Constant final float s1DefDiffPen = 0;
+    @Constant final float s1DefDiffPenMax = 0;
+    @Constant final float s1AtkDiffPen = 0;
+    @Constant final float s1AtkDiffPenMax = 0;
+    @Constant final float s1SpdDiffPen = 0;
+    @Constant final float s1SpdDiffPenMax = 0;
+    @Constant final float s1Penetration = 0;
+    @Constant final float s1AtkIncrease = 0;
+
     @Constant final boolean[] boolArr;
     @Constant final int[] setPermutationIndicesPlusOne;
     final int[] setSolutionCounters;
@@ -604,9 +623,30 @@ public class GpuOptimizerKernel extends Kernel {
             final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
             final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
 
-            final int s1 = 1;
+            final int s1 = (int)(1.871 * atk * s1AtkIncrease * s1Rate + (s1SelfHpScaling*hp + s1SelfAtkScaling*atk + s1SelfDefScaling*def + s1SelfSpdScaling*spd)
+                    * (s1Pow) * (1/(1000/300 + 1))) ;
             final int s2 = 2;
             final int s3 = 3;
+
+// {1.871 * [(ATK)(Atkmod)(Rate)+(FlatMod)]} * (pow!)(EnhanceMod)(HitTypeMod)(ElementMod)(DamageUpMod)(TargetDebuffMod)
+            // flatmod
+
+//            @Constant final float s1SelfHpScaling = 0;
+//            @Constant final float s1SelfAtkScaling = 0;
+//            @Constant final float s1SelfDefScaling = 0;
+//            @Constant final float s1SelfSpdScaling = 0;
+
+//            @Constant final float s1ConstantValue = 0;
+//            @Constant final float s1SelfAtkConstantValue = 0;
+//            @Constant final float s1ConditionalIncreasedValue = 0;
+//            @Constant final float s1DefDiffPen = 0;
+//            @Constant final float s1DefDiffPenMax = 0;
+//            @Constant final float s1AtkDiffPen = 0;
+//            @Constant final float s1AtkDiffPenMax = 0;
+//            @Constant final float s1SpdDiffPen = 0;
+//            @Constant final float s1SpdDiffPenMax = 0;
+//            @Constant final float s1Penetration = 0;
+//           x @Constant final float s1AtkIncrease = 0;
 
             final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);

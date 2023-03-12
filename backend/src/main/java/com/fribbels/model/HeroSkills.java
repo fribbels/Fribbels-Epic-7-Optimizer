@@ -13,9 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class HeroSkillOptions {
+public class HeroSkills {
 
-    public SingleSkillOptions S1;
-    public SingleSkillOptions S2;
-    public SingleSkillOptions S3;
+    public SkillData[] S1;
+    public SkillData[] S2;
+    public SkillData[] S3;
 }
