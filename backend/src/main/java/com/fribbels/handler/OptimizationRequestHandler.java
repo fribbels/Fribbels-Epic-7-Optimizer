@@ -680,8 +680,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         hero.setDamageMultipliers(request.damageMultipliers);
 
-        System.out.println("multis");
-        System.out.println(request.damageMultipliers.toString());
+//        System.out.println("multis");
+//        System.out.println(request.damageMultipliers.toString());
 
         if (SETTING_GPU && canUseGpu && maxPerms >= 20_000_000) {
             // GPU Optimize
@@ -1048,10 +1048,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         inProgress = false;
 
         return "";
-    }
-
-    public void optimizeKernel() {
-
     }
 
     public int[] convertSetsArrayIntoIndexArray(final int[] sets) {

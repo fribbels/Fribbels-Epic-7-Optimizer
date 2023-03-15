@@ -1,6 +1,7 @@
 package com.fribbels.gpu;
 
 import com.aparapi.Kernel;
+import com.fribbels.model.DamageMultipliers;
 import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.request.OptimizationRequest;
@@ -60,25 +61,25 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final float aeiEff;
     @Constant final float aeiRes;
     @Constant final float aeiSpeed;
-
-
-    @Constant final float s1Rate = 0;
-    @Constant final float s1Pow = 0;
-    @Constant final float s1SelfHpScaling = 0;
-    @Constant final float s1SelfAtkScaling = 0;
-    @Constant final float s1SelfDefScaling = 0;
-    @Constant final float s1SelfSpdScaling = 0;
-    @Constant final float s1ConstantValue = 0;
-    @Constant final float s1SelfAtkConstantValue = 0;
-    @Constant final float s1ConditionalIncreasedValue = 0;
-    @Constant final float s1DefDiffPen = 0;
-    @Constant final float s1DefDiffPenMax = 0;
-    @Constant final float s1AtkDiffPen = 0;
-    @Constant final float s1AtkDiffPenMax = 0;
-    @Constant final float s1SpdDiffPen = 0;
-    @Constant final float s1SpdDiffPenMax = 0;
-    @Constant final float s1Penetration = 0;
-    @Constant final float s1AtkIncrease = 0;
+//
+//
+//    @Constant final float s1Rate;
+//    @Constant final float s1Pow;
+//    @Constant final float s1SelfHpScaling;
+//    @Constant final float s1SelfAtkScaling;
+//    @Constant final float s1SelfDefScaling;
+//    @Constant final float s1SelfSpdScaling;
+//    @Constant final float s1ConstantValue;
+//    @Constant final float s1SelfAtkConstantValue;
+//    @Constant final float s1ConditionalIncreasedValue;
+//    @Constant final float s1DefDiffPen;
+//    @Constant final float s1DefDiffPenMax;
+//    @Constant final float s1AtkDiffPen;
+//    @Constant final float s1AtkDiffPenMax;
+//    @Constant final float s1SpdDiffPen;
+//    @Constant final float s1SpdDiffPenMax;
+//    @Constant final float s1Penetration;
+//    @Constant final float s1AtkIncrease;
 
     @Constant final boolean[] boolArr;
     @Constant final int[] setPermutationIndicesPlusOne;
@@ -139,6 +140,35 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final int inputMaxS2Limit;
     @Constant final int inputMinS3Limit;
     @Constant final int inputMaxS3Limit;
+
+
+    @Constant final float[] rate;
+    @Constant final float[] pow;
+
+    @Constant final float[] selfHpScaling;
+    @Constant final float[] selfAtkScaling;
+    @Constant final float[] selfDefScaling;
+    @Constant final float[] selfSpdScaling;
+    @Constant final float[] constantValue;
+    @Constant final float[] selfAtkConstantValue;
+    @Constant final float[] increasedValue;
+    @Constant final float[] defDiffPen;
+    @Constant final float[] defDiffPenMax;
+    @Constant final float[] atkDiffPen;
+    @Constant final float[] atkDiffPenMax;
+    @Constant final float[] spdDiffPen;
+    @Constant final float[] spdDiffPenMax;
+    @Constant final float[] penetration;
+    @Constant final float[] atkIncrease;
+    @Constant final float[] cdmgIncrease;
+    @Constant final float[] crit;
+    @Constant final float[] damage;
+    @Constant final float[] support;
+    @Constant final float[] hitMulti;
+
+    @Constant final float[] extraSelfAtkScaling;
+    @Constant final float[] extraSelfDefScaling;
+    @Constant final float[] extraSelfHpScaling;
 
     @Constant final int inputMinUpgradesLimit;
     @Constant final int inputMaxUpgradesLimit;
@@ -373,11 +403,48 @@ public class GpuOptimizerKernel extends Kernel {
         inputMinPriorityLimit = request.inputMinPriorityLimit;
         inputMaxPriorityLimit = request.inputMaxPriorityLimit;
 
+//        s1SelfSpdScaling = hero
+
         this.max = max;
         this.boolArr = request.boolArr;
         this.setPermutationIndicesPlusOne = request.setPermutationIndicesPlusOne;
         this.setSolutionCounters = request.setSolutionCounters;
         this.setSolutionBitMasks = setSolutionBitMasks;
+
+        final DamageMultipliers dm = hero.getDamageMultipliers();
+
+        this.rate = floatArr(dm.getRate());
+        this.pow = floatArr(dm.getPow());
+        this.selfHpScaling = floatArr(dm.getSelfHpScaling());
+        this.selfAtkScaling = floatArr(dm.getSelfAtkScaling());
+        this.selfDefScaling = floatArr(dm.getSelfDefScaling());
+        this.selfSpdScaling = floatArr(dm.getSelfSpdScaling());
+        this.constantValue = floatArr(dm.getConstantValue());
+        this.selfAtkConstantValue = floatArr(dm.getSelfAtkConstantValue());
+        this.increasedValue = floatArr(dm.getIncreasedValue());
+        this.defDiffPen = floatArr(dm.getDefDiffPen());
+        this.defDiffPenMax = floatArr(dm.getDefDiffPenMax());
+        this.atkDiffPen = floatArr(dm.getAtkDiffPen());
+        this.atkDiffPenMax = floatArr(dm.getAtkDiffPenMax());
+        this.spdDiffPen = floatArr(dm.getSpdDiffPen());
+        this.spdDiffPenMax = floatArr(dm.getSpdDiffPenMax());
+        this.penetration = floatArr(dm.getPenetration());
+        this.atkIncrease = floatArr(dm.getAtkIncrease());
+        this.cdmgIncrease = floatArr(dm.getCdmgIncrease());
+        this.crit = floatArr(dm.getCrit());
+        this.damage = floatArr(dm.getDamage());
+        this.support = floatArr(dm.getSupport());
+        this.hitMulti = floatArr(dm.getHitMulti());
+        this.extraSelfAtkScaling = floatArr(dm.getExtraSelfAtkScaling());
+        this.extraSelfDefScaling = floatArr(dm.getExtraSelfDefScaling());
+        this.extraSelfHpScaling = floatArr(dm.getExtraSelfHpScaling());
+    }
+
+    private float[] floatArr(final Float[] arr) {
+        if (arr == null) {
+            return new float[]{0, 0, 0};
+        }
+        return new float[]{arr[0], arr[1], arr[2]};
     }
 
     int oneIfNegativeElseZero(int a) {
@@ -623,10 +690,9 @@ public class GpuOptimizerKernel extends Kernel {
             final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
             final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
 
-            final int s1 = (int)(1.871 * atk * s1AtkIncrease * s1Rate + (s1SelfHpScaling*hp + s1SelfAtkScaling*atk + s1SelfDefScaling*def + s1SelfSpdScaling*spd)
-                    * (s1Pow) * (1/(1000/300 + 1))) ;
-            final int s2 = 2;
-            final int s3 = 3;
+            final int s1 = getSkillValue(0, atk, def, hp, spd, critDamage, torrentMultiplier);
+            final int s2 = getSkillValue(1, atk, def, hp, spd, critDamage, torrentMultiplier);
+            final int s3 = getSkillValue(2, atk, def, hp, spd, critDamage, torrentMultiplier);
 
 // {1.871 * [(ATK)(Atkmod)(Rate)+(FlatMod)]} * (pow!)(EnhanceMod)(HitTypeMod)(ElementMod)(DamageUpMod)(TargetDebuffMod)
             // flatmod
@@ -679,14 +745,43 @@ public class GpuOptimizerKernel extends Kernel {
                     ||  s2 < inputMinS2Limit || s2 > inputMaxS2Limit
                     ||  s3 < inputMinS3Limit || s3 > inputMaxS3Limit;
 
-
-
 //            if (true)
 //                return;
 
             passes[id] = !(f1 || f2 || f3) && setPermutationIndicesPlusOne[setIndex] > 0;
 //            passes[id] = setIndex >= 340122242;
         }
+    }
+
+
+    private int getSkillValue(final int s,
+                              final float atk,
+                              final float def,
+                              final float hp,
+                              final float spd,
+                              final float critDamage,
+                              final float torrentMultiplier) {
+        final float statScalings =
+                        selfHpScaling[s] *hp +
+                        selfAtkScaling[s]*atk +
+                        selfDefScaling[s]*def +
+                        selfSpdScaling[s]*spd;
+        final float hitTypeMultis = crit[s] * (critDamage+cdmgIncrease[s]) + hitMulti[s];
+        final float increasedValueMulti = 1 + increasedValue[s];
+        final float dmgUpMod = 1 + selfSpdScaling[s] * spd;
+        final float extraDamage = (
+                        extraSelfHpScaling[s] *hp +
+                        extraSelfAtkScaling[s]*atk +
+                        extraSelfDefScaling[s]*def) * 1.871f * 1f/(1000f*0.3f/300f + 1f);
+        final float offensiveValue = (atk * rate[s] + statScalings) * 1.871f * pow[s] * increasedValueMulti * hitTypeMultis * dmgUpMod * torrentMultiplier;
+        final float supportValue = selfHpScaling[s] * hp * support[s] + selfAtkScaling[s] * atk * support[s] + selfDefScaling[s] * def * support[s];
+        final float defensiveValue = 1f/(1000f*max(0, 1-penetration[s])/300f + 1f);
+        final int value = (int)(offensiveValue * defensiveValue + supportValue + extraDamage);
+
+        //        System.out.println("S" + (s+1) + " " + value + " " + (hitTypeMultis) + " " + (1.871f * m.getPow()[s]));
+        //        System.out.println(m);
+
+        return value;
     }
 }
 

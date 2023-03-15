@@ -196,13 +196,6 @@ flat2mod -> ddj
         return value;
     }
 
-    private float getTypeMultiplier(final DamageMultipliers damageMultipliers, final int skill) {
-        if (damageMultipliers.getTypes()[skill].equals("damage")) {
-            return 1.871f;
-        }
-        return 1f;
-    }
-
     private float getFlatMod(final DamageMultipliers damageMultipliers, final int skill, final float hp) {
         float value = 0;
 //        if (damageMultipliers.getSelfHpScalings()[skill] != 0) {

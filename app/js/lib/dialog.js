@@ -250,7 +250,7 @@ module.exports = {
 
             const result = await Swal.fire({
                 title: '',
-                width: 900,
+                width: 500,
                 html: `
                     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
@@ -261,24 +261,53 @@ module.exports = {
                     <div class="editGearForm tabsWrapperBody">
                         <div class="tabsWrapper">
                             <div class="tabsButtonWrapper">
-                                <button class="tab-button active" style="border-top-left-radius: 10px;" data-id="home">S1</button>
-                                <button class="tab-button" data-id="about">S2</button>
-                                <button class="tab-button" style="border-top-right-radius: 10px;" data-id="contact">S3</button>
+                                <button class="tab-button active" style="border-top-left-radius: 10px;" data-id="a">S1</button>
+                                <button class="tab-button" data-id="b">S2</button>
+                                <button class="tab-button" style="border-top-right-radius: 10px;" data-id="c">S3</button>
                             </div>
                             <div class="tabsContentWrapper">
-                                <div class="tabsContent active" id="home">
+                                <div class="tabsContent active" id="a">
                                     ${generateSkillOptionsHtml("S1", hero, heroData)}
                                 </div>
-                                <div class="tabsContent" id="about">
+                                <div class="tabsContent" id="b">
                                     ${generateSkillOptionsHtml("S2", hero, heroData)}
                                 </div>
-                                <div class="tabsContent" id="contact">
+                                <div class="tabsContent" id="c">
                                     ${generateSkillOptionsHtml("S3", hero, heroData)}
                                 </div>
                             </div>
                         </div>
                     </div>
                 `,
+                // Disabled damage
+                // html: `
+                //     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
+
+                //     <p style="color: var(--font-color)" data-t>${i18next.t("Skill options")}</p>
+                //     <div class="horizontalSpace"></div>
+                //     <div class="horizontalSpace"></div>
+
+                //     <div class="editGearForm tabsWrapperBody">
+                //         <div class="tabsWrapper">
+                //             <div class="tabsButtonWrapper">
+                //                 <button class="tab-button active" style="border-top-left-radius: 10px;" data-id="home">S1</button>
+                //                 <button class="tab-button" data-id="about">S2</button>
+                //                 <button class="tab-button" style="border-top-right-radius: 10px;" data-id="contact">S3</button>
+                //             </div>
+                //             <div class="tabsContentWrapper">
+                //                 <div class="tabsContent active" id="home">
+                //                     ${generateSkillOptionsHtml("S1", hero, heroData)}
+                //                 </div>
+                //                 <div class="tabsContent" id="about">
+                //                     ${generateSkillOptionsHtml("S2", hero, heroData)}
+                //                 </div>
+                //                 <div class="tabsContent" id="contact">
+                //                     ${generateSkillOptionsHtml("S3", hero, heroData)}
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                // `,
                 didOpen: async () => {
                     // const options = {
                     //     filter: true,
@@ -1628,6 +1657,30 @@ function safeGetSkill(hero, prefix) {
 }
 
 function generateSkillOptionsHtml(prefix, hero, heroData) {
+    var skillTypes = !heroData.skills ? [] : heroData.skills[prefix]
+    var skillTypesHtml = ""
+    for (var skillType of skillTypes.options) {
+        console.warn("---")
+        console.warn(hero)
+        console.warn(safeGetSkill(hero, prefix))
+        console.warn(safeGetSkill(hero, prefix).skillEffect)
+        skillTypesHtml += `<option value='${skillType.name}' ${safeGetSkill(hero, prefix).skillEffect == skillType.name ? "selected" : ""}>${skillType.name}</option>\n`
+    }
+    const html =
+`
+<div class="editGearFormRow">
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" id="skillNumberLabel"  data-t>${i18next.t("Select Skill Effect")}</div>
+            <select id="${prefix}SkillEffect" class="editSkillSelect skillTypeSelect">
+                ${skillTypesHtml}
+            </select>
+        </div>
+</div>
+`
+    return html
+}
+
+function generateSkillOptionsHtmlOLDWITHDAMAGECALC(prefix, hero, heroData) {
     var skillTypes = !heroData.skills ? [] : heroData.skills[prefix] 
     var skillTypesHtml = ""
     for (var skillType of skillTypes.options) {
