@@ -6284,6 +6284,58 @@
       }
     }
   },
+  "Eligos": {
+    "code": "c1080",
+    "_id": "eligos",
+    "name": "Eligos",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "ranger",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/eligosPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/eligosPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12952,
+        "atk": 983,
+        "hp": 3964,
+        "spd": 124,
+        "def": 432,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16448,
+        "atk": 1283,
+        "hp": 4976,
+        "spd": 124,
+        "def": 536,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Elphelt": {
     "code": "c1105",
     "_id": "elphelt",
@@ -6857,7 +6909,50 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1110_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100201",
+        "id": "exc100201",
+        "name": "Black Winter Spear",
+        "description": "\"A requiem for the fallen heroes of Wintenberg.\" These are the words the blacksmith spoke as he offered this weapon to Cecilia.",
+        "unit": "c1002",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Increases decrease Defense chance by 10% when using Deliverance.",
+            "skill_description": null,
+            "values": [],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Dispels one buff from all enemies after using Steel Cloudburst.",
+            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to dispel one buff. Damage dealt increases proportional to the caster's max Health.",
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 2,
+            "description": "Makes all enemies unhealable for 2 turns when using Steel Cloudburst.",
+            "skill_description": "Attacks all enemies with a magical spear, with a {{variable}} chance to decrease Attack for 2 turns and a 100% chance to make them unhealable for 2 turns. Damage dealt increases proportional to the caster's max Health.",
+            "values": [
+              17,
+              27
+            ],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1002.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13285,
@@ -15717,7 +15812,52 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2062_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100301",
+        "id": "exc100301",
+        "name": "Valkyrie Wing",
+        "description": "A mysterious circlet that symbolizes strength and beauty, and is the source of Rose's Fighting Spirit.",
+        "unit": "c1003",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        },
+        "skills": [
+          {
+            "skill": 1,
+            "description": "Activates each effect regardless of current Health when using Sequential Cutter.",
+            "skill_description": "Attacks with a sword, with a {{variable}} chance to provoke for 1 turn, before increasing Defense of the caster for 1 turn. Damage dealt increases proportional to the caster's Defense.",
+            "values": [
+              25,
+              2
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "Applies the same effect to the caster when using Shield of Light.",
+            "skill_description": "Covers an ally and the caster with the Shield of Light, dispelling two debuffs and granting a barrier for 2 turns before increasing Combat Readiness by {{variable}}. Barrier strength is proportional to the caster's Defense.",
+            "values": [
+              5
+            ],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Decreases skill cooldown of Goddess of Victory by 1 turn.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1003.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 14749,
