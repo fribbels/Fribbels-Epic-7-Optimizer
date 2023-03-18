@@ -121,20 +121,21 @@ public class StatCalculator {
 
         final int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
-        final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 1.3f : 1;
+        final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 0.3f : 0;
+        final float torrentMultiplier = sets[17] > 1 ? sets[17] / 2 * 0.1f : 0;
+        final float pctDmgMultiplier = 1 + rageMultiplier + torrentMultiplier;
         final float penMultiplier = SETTING_PEN_SET && sets[13] > 1 ? penSetDmgBonus : 1;
-        final float torrentMultiplier = sets[17] > 1 ? sets[17] / 2 * 0.1f + 1 : 1;
         final float spdDiv1000 = (float)spd/1000;
 
         final int ehp = (int) (hp * (def/300 + 1));
         final int hpps = (int) (hp*spdDiv1000);
         final int ehpps = (int) ((float)ehp*spdDiv1000);
-        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * pctDmgMultiplier * penMultiplier);
         final int dmgps = (int) ((float)dmg*spdDiv1000);
-        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int mcdmg = (int) (atk * critDamage * pctDmgMultiplier * penMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier * torrentMultiplier);
-        final int dmgd = (int) ((critDamage * def) * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int dmgh = (int) ((critDamage * hp)/10 * pctDmgMultiplier * penMultiplier);
+        final int dmgd = (int) ((critDamage * def) * pctDmgMultiplier * penMultiplier);
 
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
