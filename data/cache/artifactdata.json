@@ -172,12 +172,12 @@
       },
       "name":"An Offer You Can't Refuse",
       "rarity":5,
-      "role":"",
+      "role":"ranger",
       "stats":{
          "attack":21,
          "health":32
       },
-      "code":""
+      "code":"efr24"
    },
    "Ancient Dragon's Legacy":{
       "assets":{

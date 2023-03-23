@@ -1469,6 +1469,58 @@
       }
     }
   },
+  "Architect Laika": {
+    "code": "",
+    "_id": "architect-laika",
+    "name": "Architect Laika",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "mage",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2099_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2099_l.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13675,
+        "atk": 1047,
+        "hp": 3385,
+        "spd": 115,
+        "def": 525,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17281,
+        "atk": 1306,
+        "hp": 4248,
+        "spd": 119,
+        "def": 652,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Aria": {
     "code": "c1129",
     "_id": "aria",
@@ -6285,7 +6337,7 @@
     }
   },
   "Eligos": {
-    "code": "c1080",
+    "code": "c1142",
     "_id": "eligos",
     "name": "Eligos",
     "moonlight": false,
@@ -6304,9 +6356,9 @@
       }
     },
     "assets": {
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/eligosPortrait.png",
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1142_s.png",
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/eligosPanel.png"
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1142_l.png"
     },
     "ex_equip": [],
     "calculatedStatus": {
