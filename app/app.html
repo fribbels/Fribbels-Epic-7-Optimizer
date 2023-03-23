@@ -75,6 +75,12 @@ window.jQuery = $;
   <!-- Tab 7 -->
   <input type="radio" name="tabset" id="tab8" >
   <label for="tab8" class="tabLabel" data-t>Information</label>
+
+  <input type="radio" name="tabset" id="tab9" disabled>
+  <label for="tab9" class="tabLabelLink" data-t onclick="electron.shell.openExternal('https://fribbels.github.io/e7/hero-library.html');" >Hero Library ⧉</label>
+
+  <input type="radio" name="tabset" id="tab10" disabled >
+  <label for="tab10" class="tabLabelLink" data-t onclick="electron.shell.openExternal('https://fribbels.github.io/e7/gw-meta.html');" >GW Meta ⧉</label>
   <!-- Tab 10 -->
 <!--   <input type="radio" name="tabset" id="tab10" style="display: none">
   <label for="tab10" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
@@ -1354,12 +1360,6 @@ window.jQuery = $;
           </div>
         </div>
       </div>
-<!--
-      <div id="setsFilterBar"></div>
-      <div id="statFilterBar"></div>
-      <div id="gearFilterBar"></div>
-      <div id="enhanceFilterBar"></div>
-      <div id="levelFilterBar"></div> -->
     </div>
 
 
@@ -1516,19 +1516,6 @@ window.jQuery = $;
 
 
     <div id="enhancingSection" class="tab-panel">
-
-<!--       <div id="detectorStatus">
-        <div id="statusSymbol">
-
-        </div>
-        <div id="statusText">
-Status: Off - Start the detector and interact with an ingame item (for example, un/locking it) to continue
-        </div>
-      </div>
-
-      <input type="submit" class="importerButton" value="Start item detector" id="startCompanion" data-t>
-
-      <input type="submit" class="importerButton" value="Stop item detector" id="stopCompanion" data-t> -->
 
       <div class="enhanceGuide" data-t>
         Click on the magnifying glass on an item to analyze it.
@@ -1751,25 +1738,6 @@ Status: Off - Start the detector and interact with an ingame item (for example, 
           <label class="importerRadioLabel" for="heroImporterHeroRadioChoice3" data-t>Import all 5+ star heroes</label>
         </div>
 
-<!--
-        <select id="importHeroesLimitEnhance" class="importerButton">
-          <option value=0 data-t>All</option>
-          <option value=3 data-t>+3 and up</option>
-          <option value=6 selected data-t>+6 and up</option>
-          <option value=9 data-t>+9 and up</option>
-          <option value=12 data-t>+12 and up</option>
-          <option value=15 >+15</option>
-        </select>
-
-        <br>
-        <br>
-
-        <select id="importHeroesLimitHeroes" class="importerButton">
-          <option value="optimizer" selected data-t>Only import optimizer heroes</option>
-          <option value="sixstar" data-t>Import all 6 star heroes</option>
-          <option value="fivestar" data-t>Import all 5+ star heroes</option>
-        </select>
- -->
         <br>
 
 

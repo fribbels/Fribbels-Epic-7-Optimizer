@@ -283,6 +283,7 @@ module.exports = {
     },
 
     redrawEnhanceGuide: async (item) => {
+        ItemSimulator.simulate(item);
         setTheme();
         Reforge.calculateMaxes(item);
         console.log("redraw", item);

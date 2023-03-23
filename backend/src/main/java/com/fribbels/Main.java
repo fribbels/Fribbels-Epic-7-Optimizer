@@ -67,6 +67,7 @@ public class Main {
             return;
         }
 
+
         final HeroesRequestHandler heroesRequestHandler = new HeroesRequestHandler(heroDb, baseStatsDb, itemDb, new StatCalculator());
 
         server.createContext("/system", new SystemRequestHandler());

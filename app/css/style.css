@@ -69,6 +69,9 @@
 .tabLabel {
   user-select: none;
 }
+.tabLabelLink {
+  user-select: none;
+}
 
 .tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
 .tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
@@ -99,7 +102,7 @@ input[type=submit] {
 .tabset > label {
   position: relative;
   display: inline-block;
-  padding: 5px 15px 10px;
+  padding: 5px 10px 10px;
   border: 1px solid transparent;
   border-bottom: 0;
   cursor: pointer;
@@ -109,7 +112,7 @@ input[type=submit] {
 .tabset > label::after {
   content: "";
   position: absolute;
-  left: 15px;
+  left: 10px;
   bottom: 6px;
   width: 22px;
   height: 3px;
@@ -1741,6 +1744,12 @@ input:checked + .darkSlider:before {
   padding-left: 10px;
 }
 #settingsTab {
+  padding-left: 10px;
+}
+#heroLibraryTab {
+  padding-left: 10px;
+}
+#gwMetaTab {
   padding-left: 10px;
 }
 .newFeatures {
