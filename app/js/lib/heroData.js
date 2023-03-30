@@ -115,44 +115,51 @@ module.exports = {
                     for (var skill of ["S1", "S2", "S3"]) {
                         var skillData = s[skill];
 
-                        for (var z of skillData.hitTypes) {
-                            if (!skillData.options.find(y => y.name.includes(z))) {
-                                skillData.options.push({
-                                    name: skill + " " + z,
-                                    rate: skillData.rate,
-                                    pow: skillData.pow,
-                                    selfHpScaling: skillData.selfHpScaling,
-                                    selfAtkScaling: skillData.selfAtkScaling,
-                                    selfDefScaling: skillData.selfDefScaling,
-                                    selfSpdScaling: skillData.selfSpdScaling,
-                                    increasedValue: skillData.increasedValue,
-                                    extraSelfHpScaling: skillData.extraSelfHpScaling,
-                                    extraSelfDefScaling: skillData.extraSelfDefScaling,
-                                    extraSelfAtkScaling: skillData.extraSelfAtkScaling,
-                                    cdmgIncrease: skillData.cdmgIncrease,
-                                    penetration: skillData.penetration,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                    // pow: skillData.pow,
-                                });
+                        if (skillData) {
+                            for (var z of skillData.hitTypes) {
+                                if (!skillData.options.find(y => y.name.includes(z))) {
+                                    skillData.options.push({
+                                        name: skill + " " + z,
+                                        rate: skillData.rate,
+                                        pow: skillData.pow,
+                                        selfHpScaling: skillData.selfHpScaling,
+                                        selfAtkScaling: skillData.selfAtkScaling,
+                                        selfDefScaling: skillData.selfDefScaling,
+                                        selfSpdScaling: skillData.selfSpdScaling,
+                                        increasedValue: skillData.increasedValue,
+                                        extraSelfHpScaling: skillData.extraSelfHpScaling,
+                                        extraSelfDefScaling: skillData.extraSelfDefScaling,
+                                        extraSelfAtkScaling: skillData.extraSelfAtkScaling,
+                                        cdmgIncrease: skillData.cdmgIncrease,
+                                        penetration: skillData.penetration,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                        // pow: skillData.pow,
+                                    });
+                                }
                             }
                         }
 
-                        if (skillData.options.length == 0) {
-                            skillData.options.push({
+                        if (!skillData) {
+                            s[skill] = {}
+                        }
+
+                        if (!s[skill].options || s[skill].options.length == 0) {
+                            s[skill].options = [];
+                            s[skill].options.push({
                                 name: skill + " n/a",
                                 rate: 0,
                                 pow: 0,

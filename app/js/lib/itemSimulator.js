@@ -169,10 +169,10 @@ module.exports = {
                         substat = substats[0]
                     }
                 }
-                console.log(Math.floor(Math.random() * 4))
-                console.log(substats)
-                console.log(substats[Math.floor(Math.random() * 4)])
-                console.log(substat)
+                // console.log(Math.floor(Math.random() * 4))
+                // console.log(substats)
+                // console.log(substats[Math.floor(Math.random() * 4)])
+                // console.log(substat)
                 console.log("--------------")
                 var group = substatGroupByType[substat.type]
 
@@ -230,10 +230,16 @@ module.exports = {
                 }
 
                 substat.gs = substatWeights[substat.type] * substat.value
-                substat.potentialGs =
+                substat.potentialGs = potentialGsByRolls[substat.rolls]
 
                 gs += substat.gs
             }
+
+            minGs =
+            for (var substatIndex = 0; substatIndex < substats.length; substatIndex++) {
+
+            }
+
 
             console.log(substats)
 
@@ -247,7 +253,12 @@ module.exports = {
 }
 
 const potentialGsByRolls = {
-    0: 8
+    0: 9,
+    1: 14,
+    2: 18,
+    3: 22,
+    4: 25,
+    5: 27
 }
 
 const substatGroupByType = {

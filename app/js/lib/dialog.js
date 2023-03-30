@@ -358,27 +358,27 @@ module.exports = {
 
                     for (var skill of skills) {
                         skillOptions[skill] = {
-                            attackImprintPercent: parseFloat(document.getElementById(`${skill}EditAttackPercentImprint`).value) || 0,
-                            attackIncreasePercent: parseFloat(document.getElementById(`${skill}EditAttackPercentIncrease`).value) || 0,
-                            damageIncreasePercent: parseFloat(document.getElementById(`${skill}EditDamageIncrease`).value) || 0,
-                            elementalAdvantageEnabled: (document.getElementById(`${skill}EditElementalAdvantageBox`).checked),
-                            decreasedAttackBuffEnabled: (document.getElementById(`${skill}EditDecreasedAttackBox`).checked),
-                            attackBuffEnabled: (document.getElementById(`${skill}EditAttackBuffBox`).checked),
-                            greaterAttackBuffEnabled: (document.getElementById(`${skill}EditGreaterAttackBuffBox`).checked),
-                            critDamageBuffEnabled: (document.getElementById(`${skill}EditCritDamageBuffBox`).checked),
-                            vigorAttackBuffEnabled: (document.getElementById(`${skill}EditVigorAttackBuffBox`).checked),
+                            // attackImprintPercent: parseFloat(document.getElementById(`${skill}EditAttackPercentImprint`).value) || 0,
+                            // attackIncreasePercent: parseFloat(document.getElementById(`${skill}EditAttackPercentIncrease`).value) || 0,
+                            // damageIncreasePercent: parseFloat(document.getElementById(`${skill}EditDamageIncrease`).value) || 0,
+                            // elementalAdvantageEnabled: (document.getElementById(`${skill}EditElementalAdvantageBox`).checked),
+                            // decreasedAttackBuffEnabled: (document.getElementById(`${skill}EditDecreasedAttackBox`).checked),
+                            // attackBuffEnabled: (document.getElementById(`${skill}EditAttackBuffBox`).checked),
+                            // greaterAttackBuffEnabled: (document.getElementById(`${skill}EditGreaterAttackBuffBox`).checked),
+                            // critDamageBuffEnabled: (document.getElementById(`${skill}EditCritDamageBuffBox`).checked),
+                            // vigorAttackBuffEnabled: (document.getElementById(`${skill}EditVigorAttackBuffBox`).checked),
 
                             skillEffect: (document.getElementById(`${skill}SkillEffect`).value),
-                            applyToAllSkillsEnabled: (document.getElementById(`${skill}EditApplyToAllSkillsBox`).checked),
+                            // applyToAllSkillsEnabled: (document.getElementById(`${skill}EditApplyToAllSkillsBox`).checked),
 
-                            targetDefense: parseInt(document.getElementById(`${skill}EditTargetDefense`).value),
-                            targetDefenseIncreasePercent: parseFloat(document.getElementById(`${skill}EditTargetDefenseIncrease`).value) || 0,
-                            targetDamageReductionPercent: parseFloat(document.getElementById(`${skill}EditTargetDamageReduction`).value) || 0,
-                            targetDamageTransferPercent: parseFloat(document.getElementById(`${skill}EditTargetDamageTransfer`).value) || 0,
-                            targetDefenseBuffEnabled: (document.getElementById(`${skill}EditTargetDefenseBuffBox`).checked),
-                            targetVigorDefenseBuffEnabled: (document.getElementById(`${skill}EditTargetVigorBuffBox`).checked),
-                            targetDefenseBreakBuffEnabled: (document.getElementById(`${skill}EditTargetDefenseBreakBox`).checked),
-                            targetTargetBuffEnabled: (document.getElementById(`${skill}EditTargetTargetBuffBox`).checked)
+                            // targetDefense: parseInt(document.getElementById(`${skill}EditTargetDefense`).value),
+                            // targetDefenseIncreasePercent: parseFloat(document.getElementById(`${skill}EditTargetDefenseIncrease`).value) || 0,
+                            // targetDamageReductionPercent: parseFloat(document.getElementById(`${skill}EditTargetDamageReduction`).value) || 0,
+                            // targetDamageTransferPercent: parseFloat(document.getElementById(`${skill}EditTargetDamageTransfer`).value) || 0,
+                            // targetDefenseBuffEnabled: (document.getElementById(`${skill}EditTargetDefenseBuffBox`).checked),
+                            // targetVigorDefenseBuffEnabled: (document.getElementById(`${skill}EditTargetVigorBuffBox`).checked),
+                            // targetDefenseBreakBuffEnabled: (document.getElementById(`${skill}EditTargetDefenseBreakBox`).checked),
+                            // targetTargetBuffEnabled: (document.getElementById(`${skill}EditTargetTargetBuffBox`).checked)
                         }
                     }
 

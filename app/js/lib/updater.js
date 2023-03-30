@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.8";
+const currentVersion = "1.9.0-beta.1";
 
 global.TEST = true;
 
@@ -34,13 +34,18 @@ module.exports = {
 
 `
 <h2>
-    New in v1.8.7 - 1.8.8
+    1.9.0 beta test
 </h2>
-<ul class="newFeatures">
-    <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory. Scan your inventory first for accurate results.</li>
-    <li>Torrent set bug fixes</li>
-</ul>
 `
+// `
+// <h2>
+//     New in v1.8.7 - 1.8.8
+// </h2>
+// <ul class="newFeatures">
+//     <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory. Scan your inventory first for accurate results.</li>
+//     <li>Torrent set bug fixes</li>
+// </ul>
+// `
         );
     },
 
