@@ -1,3 +1,5 @@
+const n = 25000;
+
 function possibleSubstatsByGear(item, substatTypes) {
     var gear = item.gear;
     return {
@@ -80,6 +82,10 @@ module.exports = {
 
     },
 
+    getSimulationN: () => {
+        return n;
+    },
+
     simulate: (item) => {
         if (item.enhance >= 15) {
             return;
@@ -107,7 +113,8 @@ module.exports = {
         var baseSubstats = item.substats;
         var substatTypeArr = []
         var gsArr = []
-        for (var i = 0; i < 100; i++) {
+        var moddedGsArr = []
+        for (var i = 0; i < n; i++) {
             var substats = []
             for (var j = 0; j < 4; j++) {
                 if (baseSubstats[j]) {
@@ -173,7 +180,7 @@ module.exports = {
                 // console.log(substats)
                 // console.log(substats[Math.floor(Math.random() * 4)])
                 // console.log(substat)
-                console.log("--------------")
+                // console.log("--------------")
                 var group = substatGroupByType[substat.type]
 
                 if (group == "Flat") {
@@ -230,24 +237,52 @@ module.exports = {
                 }
 
                 substat.gs = substatWeights[substat.type] * substat.value
-                substat.potentialGs = potentialGsByRolls[substat.rolls]
+                substat.potentialGs = potentialGsByRolls[substat.rolls - 1]
 
                 gs += substat.gs
             }
 
-            minGs =
+            var maxGsDiff = 0;
+            var maxGsDiffIndex = 0;
             for (var substatIndex = 0; substatIndex < substats.length; substatIndex++) {
-
+                var substat = substats[substatIndex]
+                var diff = substats[substatIndex].potentialGs - substatWeights[substat.type] * substat.value
+                if (diff > maxGsDiff) {
+                    maxGsDiff = diff;
+                    maxGsDiffIndex = substatIndex
+                }
             }
 
+            var moddedGs = 0;
+            if (maxGsDiff > 0) {
+                for (var substatIndex = 0; substatIndex < substats.length; substatIndex++) {
+                    var substat = substats[substatIndex]
+                    if (substatIndex == maxGsDiffIndex) {
+                        moddedGs += substat.potentialGs
+                    } else {
+                        moddedGs += substat.gs
+                    }
+                }
+            } else {
+                moddedGs = gs
+            }
 
-            console.log(substats)
+            // console.log("----------------")
+            // console.log(substats)
+            // console.log(gs)
+            // console.log(moddedGs)
 
-            gsArr.push(gs)
+            gsArr.push(Math.round(gs))
+            moddedGsArr.push(Math.round(moddedGs))
         }
 
-        console.log(gsArr)
-        console.log(reforgeable)
+        // console.log(gsArr)
+        // console.log(reforgeable)
+
+        return {
+            gsArr: gsArr,
+            moddedGsArr: moddedGsArr
+        }
 
     },
 }

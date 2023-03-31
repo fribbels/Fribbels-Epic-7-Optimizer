@@ -1772,14 +1772,16 @@ input:checked + .darkSlider:before {
   margin-left: 50px;
 }
 .enhanceChart {
-  width: 340px;
-  height:  340px;
+  width: 270px;
+  height:  290px;
+  margin-left: 30px;
+  padding-top: 10px;
 }
 
 .enhanceContainer {
   display: flex;
   flex-direction: row;
-  height: 300px;
+  height: 270px;
 }
 
 .bars {
@@ -1789,13 +1791,24 @@ input:checked + .darkSlider:before {
 
 .radarChart {
   margin-left: 50px;
-  width: 420px;
-  height:  320px;
+  width: 400px;
+  height:  250px;
+}
+
+.gsChart {
+  width: 820px;
+  height:  300px;
 }
 
 .enhanceSecondRow {
   display: flex;
   flex-direction: row;
+  height: 260px;
+}
+.enhanceThirdRow {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
 }
 .stats {
   min-width:  150px;
