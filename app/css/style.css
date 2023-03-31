@@ -102,7 +102,7 @@ input[type=submit] {
 .tabset > label {
   position: relative;
   display: inline-block;
-  padding: 5px 10px 10px;
+  padding: 5px 7px 10px;
   border: 1px solid transparent;
   border-bottom: 0;
   cursor: pointer;
@@ -112,9 +112,10 @@ input[type=submit] {
 .tabset > label::after {
   content: "";
   position: absolute;
-  left: 10px;
+  left: 7px;
   bottom: 6px;
-  width: 22px;
+  width: -webkit-fill-available;
+  margin-right: 14px;
   height: 3px;
   background: #8d8d8d;
 }
@@ -131,13 +132,12 @@ input[type=submit] {
 
 .tabset > input:checked + label {
   border-color: #ccc;
-  border-bottom: 1px solid #fff;
-  margin-bottom: -1px;
 }
 
 .tab-panel {
   padding: 4px 0;
   border-top: 1px solid #ccc;
+  white-space: normal;
 }
 
 .optimizer-panel {
@@ -175,6 +175,12 @@ input[type=submit] {
 
 .importer-section {
   padding-top: 10px;
+  white-space: nowrap;
+}
+
+.importerWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .optimization-results-panel {

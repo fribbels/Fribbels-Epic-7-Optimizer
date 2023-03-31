@@ -43,11 +43,11 @@ window.jQuery = $;
     <span class="darkSlider round"></span>
   </label>
 </div>
-<div class="coffeeContainer">
+<!-- <div class="coffeeContainer">
   <img class="coffeeContainerImage" id="coffeeImage" src="./assets/coffee.png">
-</div>
+</div> -->
 
-<div class="tabset">
+<div class="tabset" style="white-space: nowrap;">
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" checked>
   <label for="tab1" class="tabLabel" id="tab1label" data-t>Optimizer</label>
@@ -81,6 +81,12 @@ window.jQuery = $;
 
   <input type="radio" name="tabset" id="tab10" disabled >
   <label for="tab10" class="tabLabelLink" data-t onclick="electron.shell.openExternal('https://fribbels.github.io/e7/gw-meta.html');" >GW Meta ⧉</label>
+
+  <input type="radio" name="tabset" id="tab11" disabled >
+  <label for="tab11" class="tabLabelLink" data-t onclick="electron.shell.openExternal('https://www.buymeacoffee.com/fribbels');" >Donate ⧉</label>
+
+  <input type="radio" name="tabset" id="tab12" disabled >
+  <label for="tab12" class="tabLabelLink" data-t onclick="electron.shell.openExternal('https://discord.gg/rDmB4Un7qg');" >Discord ⧉</label>
   <!-- Tab 10 -->
 <!--   <input type="radio" name="tabset" id="tab10" style="display: none">
   <label for="tab10" class="tabLabel" style="display: none" data-t>Subprocess Debugger</label>
@@ -1552,6 +1558,7 @@ window.jQuery = $;
 
 
     <div id="importer-section" class="tab-panel">
+      <div class="importerWrapper">
 
 
       <button type="button" class="collapsible active" id="importCollapseButton1" data-t>Save / Load optimizer data</button>
@@ -1840,7 +1847,7 @@ window.jQuery = $;
 
 
 
-      <button type="button" class="collapsible" id="importCollapseButton2" data-t>Import gear from Zarroc optimizer</button>
+      <button type="button" class="collapsible" id="importCollapseButton2" style="display: none" data-t>Import gear from Zarroc optimizer</button>
       <div class="content" id="importCollapseContent2">
         <p data-t>
         Select the Zarroc optimizer file here.
@@ -1857,6 +1864,7 @@ window.jQuery = $;
       <div class="content" id="importCollapseContent3">
         <input type="submit" class="importerButton" value="Erase data" id="eraseButton" data-t>
       </div>
+    </div>
     </div>
 
 
