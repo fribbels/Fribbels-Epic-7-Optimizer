@@ -72,6 +72,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -94,12 +95,14 @@
         "options": [
           {
             "name": "S3 heal",
+            "targets": 0,
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.3
           },
           {
             "name": "S3 soulburn heal",
+            "targets": 0,
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.5
@@ -166,18 +169,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       }
     },
@@ -240,6 +246,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -250,6 +257,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -312,6 +320,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.04,
         "increasedValue": 0.1,
         "options": []
@@ -320,12 +329,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.04,
         "options": []
       }
@@ -409,6 +420,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -419,6 +431,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -479,6 +492,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 1,
         "options": []
       },
@@ -490,6 +504,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.5,
         "extraSelfDefScaling": 1.4,
         "options": []
@@ -552,12 +567,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -622,6 +639,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -632,6 +650,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -694,6 +713,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -704,6 +724,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -731,6 +752,102 @@
         "dac": 0.03,
         "eff": 0.12,
         "efr": 0.18
+      }
+    }
+  },
+  "Ainos 2.0": {
+    "code": "c4105",
+    "_id": "ainos-2.0",
+    "name": "Ainos 2.0",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "dark",
+    "role": "manauser",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4105_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4105_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13832,
+        "atk": 651,
+        "hp": 3128,
+        "spd": 107,
+        "def": 483,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.12,
+        "efr": 0.06,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4275,
+        "overrideDef": 688,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17640,
+        "atk": 812,
+        "hp": 3925,
+        "spd": 107,
+        "def": 599,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.12,
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 4275,
+        "overrideDef": 688,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -766,6 +883,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -776,6 +894,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -838,6 +957,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -940,6 +1060,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.08,
         "options": []
       },
@@ -947,6 +1068,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.11,
         "options": []
       },
@@ -954,6 +1076,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.15,
         "options": []
       }
@@ -1017,18 +1140,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -1091,6 +1217,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -1101,6 +1228,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -1183,6 +1311,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.1,
         "options": []
       },
@@ -1194,6 +1323,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.12,
         "options": []
       }
@@ -1255,6 +1385,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -1324,6 +1455,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -1394,6 +1526,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -1545,6 +1678,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -1631,6 +1765,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.12,
         "options": []
       },
@@ -1651,6 +1786,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.2,
         "options": []
       }
@@ -1748,18 +1884,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -1820,6 +1959,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.975,
         "pow": 1,
+        "targets": 2,
         "options": []
       },
       "S2": {
@@ -1830,6 +1970,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.04,
         "pow": 0.85,
+        "targets": 3,
         "options": []
       }
     },
@@ -1890,18 +2031,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1.3,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -1928,6 +2072,80 @@
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
+  "Architect Laika": {
+    "code": "c2099",
+    "_id": "architect-laika",
+    "name": "Architect Laika",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "mage",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2099_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2099_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.9,
+        "targets": 3,
+        "penetration": 0.8,
+        "selfSpdScaling": 0.001125,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13675,
+        "atk": 1047,
+        "hp": 3385,
+        "spd": 115,
+        "def": 525,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17281,
+        "atk": 1306,
+        "hp": 4248,
+        "spd": 119,
+        "def": 652,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
         "efr": 0
       }
     }
@@ -1962,6 +2180,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 2,
         "selfDefScaling": 0.85,
         "options": []
       },
@@ -1969,6 +2188,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1.3,
+        "targets": 3,
         "selfDefScaling": 1.4,
         "options": []
       },
@@ -2108,6 +2328,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.9,
+        "targets": 1,
         "selfDefScaling": 0.6,
         "options": []
       },
@@ -2188,6 +2409,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.02,
         "options": []
       },
@@ -2199,6 +2421,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.15,
         "options": []
       }
@@ -2260,16 +2483,31 @@
         "hitTypes": ["normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": [],
-        "options": []
+        "options": [
+          {
+            "name": "S1 proc normal",
+            "rate": 1.3,
+            "pow": 1.3,
+            "targets": 1
+          },
+          {
+            "name": "S1 proc miss",
+            "rate": 1.3,
+            "pow": 1.3,
+            "targets": 1
+          }
+        ]
       },
       "S3": {
         "hitTypes": ["normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "penetration": 0.7,
         "options": []
       }
@@ -2398,6 +2636,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -2408,6 +2647,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -2486,6 +2726,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -2497,6 +2738,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "selfSpdScaling": 0.001,
         "options": []
       }
@@ -2607,6 +2849,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -2618,6 +2861,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.8,
+        "targets": 1,
         "selfSpdScaling": 0.001125,
         "options": []
       }
@@ -2689,6 +2933,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       }
     },
@@ -2750,6 +2995,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -2760,6 +3006,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -2822,18 +3069,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -2908,18 +3158,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 2,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -2981,6 +3234,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.06,
         "options": []
       },
@@ -2992,6 +3246,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.16,
         "options": []
       }
@@ -3053,18 +3308,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.6,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -3125,18 +3383,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       }
     },
@@ -3199,6 +3460,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.9,
+        "targets": 1,
         "selfHpScaling": 0.07,
         "options": []
       },
@@ -3206,6 +3468,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.12,
         "options": []
       },
@@ -3282,18 +3545,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -3354,6 +3620,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -3444,17 +3711,23 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1.05,
+        "targets": 3,
         "selfHpScaling": 0.09,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.6,
+        "pow": 1.3,
+        "targets": 3,
+        "selfHpScaling": 0.045,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1.3,
+        "targets": 3,
         "selfHpScaling": 0.12,
         "options": []
       }
@@ -3560,18 +3833,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -3633,16 +3909,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -3750,12 +4031,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       },
       "S3": {
@@ -3823,6 +4106,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -3833,6 +4117,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       }
     },
@@ -3893,6 +4178,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.12,
         "options": []
       },
@@ -3913,6 +4199,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 0.3,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.12,
         "penetration": 1,
         "options": []
@@ -3992,6 +4279,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.75,
         "pow": 1,
+        "targets": 2,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -4003,6 +4291,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -4063,6 +4352,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 1,
+        "targets": 1,
         "extraSelfAtkScaling": 0.3,
         "options": []
       },
@@ -4076,6 +4366,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 1.1,
+        "targets": 3,
         "extraSelfAtkScaling": 0.3,
         "options": []
       }
@@ -4139,6 +4430,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -4149,6 +4441,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.85,
+        "targets": 1,
         "options": []
       }
     },
@@ -4211,6 +4504,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -4221,6 +4515,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -4283,6 +4578,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -4293,6 +4589,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -4377,18 +4674,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -4451,6 +4751,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -4470,6 +4771,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -4531,6 +4833,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.06,
         "options": []
       },
@@ -4542,6 +4845,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.05,
         "options": []
       }
@@ -4646,6 +4950,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.07,
         "options": []
       },
@@ -4653,6 +4958,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.4,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.06,
         "options": []
       },
@@ -4660,6 +4966,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1.05,
+        "targets": 3,
         "selfHpScaling": 0.12,
         "options": []
       }
@@ -4723,12 +5030,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       },
       "S3": {
@@ -4794,18 +5103,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 0.8,
+        "targets": 3,
         "options": []
       }
     },
@@ -4908,6 +5220,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "cdmgIncrease": 0.2,
         "options": []
       },
@@ -4915,12 +5228,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.4,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -4981,18 +5296,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -5101,6 +5419,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -5111,6 +5430,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.15,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -5172,6 +5492,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -5241,6 +5562,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 2,
         "options": []
       },
       "S2": {
@@ -5251,6 +5573,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -5313,6 +5636,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -5323,6 +5647,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.85,
+        "targets": 1,
         "options": []
       }
     },
@@ -5407,6 +5732,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.06,
         "options": []
       },
@@ -5414,6 +5740,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 3,
         "selfHpScaling": 0.08,
         "options": []
       },
@@ -5421,6 +5748,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "selfHpScaling": 0.2,
         "options": []
       }
@@ -5549,18 +5877,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -5663,6 +5994,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -5673,6 +6005,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.4,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       }
     },
@@ -5782,18 +6115,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.7,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       }
     },
@@ -5899,6 +6235,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.1,
         "options": []
       },
@@ -5906,6 +6243,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.11,
         "options": []
       },
@@ -5913,6 +6251,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.15,
         "options": []
       }
@@ -5976,6 +6315,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -6055,6 +6395,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.06,
         "options": []
       },
@@ -6062,6 +6403,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 3,
         "selfHpScaling": 0.08,
         "options": []
       },
@@ -6069,6 +6411,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "selfHpScaling": 0.2,
         "options": []
       }
@@ -6145,6 +6488,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.95,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -6156,6 +6500,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.6,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.0021,
         "options": []
       }
@@ -6260,18 +6605,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": [],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -6332,6 +6680,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -6342,6 +6691,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -6403,18 +6753,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.3,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -6477,6 +6830,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -6487,6 +6841,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -6569,18 +6924,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.75,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.75,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -6641,6 +6999,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -6710,6 +7069,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.9,
         "options": []
       },
@@ -6717,6 +7077,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.3,
         "pow": 0.9,
+        "targets": 3,
         "selfDefScaling": 0.7,
         "options": []
       },
@@ -6792,18 +7153,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.6,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -6865,6 +7229,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.6,
         "options": []
       },
@@ -6935,6 +7300,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1.05,
+        "targets": 1,
         "selfDefScaling": 0.7,
         "options": []
       },
@@ -6955,6 +7321,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 0.95,
+        "targets": 3,
         "selfDefScaling": 0.6,
         "options": []
       }
@@ -7016,6 +7383,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.07,
         "options": []
       },
@@ -7027,6 +7395,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 0,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.25,
         "penetration": 1,
         "options": []
@@ -7089,6 +7458,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -7157,6 +7527,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -7226,6 +7597,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 1,
         "options": []
       },
@@ -7237,6 +7609,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 3,
         "selfDefScaling": 1.15,
         "options": []
       }
@@ -7338,6 +7711,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -7464,6 +7838,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -7542,12 +7917,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
@@ -7612,18 +7989,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["miss"],
         "rate": 2.5,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -7686,18 +8066,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -7781,6 +8164,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -7800,6 +8184,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.75,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       }
     },
@@ -7862,6 +8247,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -7950,6 +8336,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.05,
         "options": []
       },
@@ -8050,18 +8437,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.05,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -8122,6 +8512,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.1,
         "options": []
       },
@@ -8129,6 +8520,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.08,
         "options": []
       },
@@ -8136,6 +8528,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.25,
         "options": []
       }
@@ -8237,6 +8630,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -8256,6 +8650,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -8283,6 +8678,81 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0.3
+      }
+    }
+  },
+  "Eligos": {
+    "code": "c1142",
+    "_id": "eligos",
+    "name": "Eligos",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "ranger",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1142_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1142_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.95,
+        "pow": 0.9,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1.3,
+        "targets": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12952,
+        "atk": 983,
+        "hp": 3964,
+        "spd": 124,
+        "def": 432,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16448,
+        "atk": 1283,
+        "hp": 4976,
+        "spd": 124,
+        "def": 536,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
@@ -8316,18 +8786,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1.1,
+        "targets": 1,
         "options": []
       }
     },
@@ -8390,12 +8863,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       },
       "S3": {
@@ -8469,6 +8944,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -8548,12 +9024,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -8618,18 +9096,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.4,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.6,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -8690,19 +9171,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
-        "selfHpScaling": 0.1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -8763,18 +9246,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.4,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -8837,6 +9323,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 0.9,
+        "targets": 1,
         "selfDefScaling": 0.7,
         "options": []
       },
@@ -8928,6 +9415,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.07,
         "options": []
       },
@@ -8948,6 +9436,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.65,
         "pow": 0.95,
+        "targets": 3,
         "selfHpScaling": 0.12,
         "options": []
       }
@@ -9010,6 +9499,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.75,
         "options": []
       },
@@ -9021,6 +9511,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 1.5,
         "options": []
       }
@@ -9082,6 +9573,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -9165,6 +9657,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "cdmgIncrease": 0.2,
         "options": []
       },
@@ -9172,12 +9665,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -9253,6 +9748,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -9263,6 +9759,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.65,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -9366,6 +9863,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.06,
         "options": []
       },
@@ -9377,6 +9875,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.08,
         "options": []
       }
@@ -9440,12 +9939,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -9512,6 +10013,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -9522,6 +10024,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -9584,12 +10087,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.65,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -9673,6 +10178,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -9799,18 +10305,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -9873,6 +10382,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 1,
         "pow": 0.85,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -9883,6 +10393,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 2.2,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -9970,6 +10481,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.05,
         "options": []
       },
@@ -9981,6 +10493,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.05,
         "options": []
       }
@@ -10059,18 +10572,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -10133,6 +10649,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 0.95,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -10140,6 +10657,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 0.85,
+        "targets": 1,
         "selfSpdScaling": 0.00125,
         "options": []
       },
@@ -10207,6 +10725,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -10297,6 +10816,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.8,
         "options": []
       },
@@ -10304,6 +10824,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 1,
         "options": []
       },
@@ -10380,12 +10901,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.55,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -10450,6 +10973,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S2": {
@@ -10460,6 +10984,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -10523,6 +11048,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -10535,6 +11061,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       }
     },
@@ -10619,6 +11146,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -10629,6 +11157,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -10689,6 +11218,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -10705,10 +11235,11 @@
         ]
       },
       "S3": {
-        "TODO": "Pen",
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.25,
         "pow": 1,
+        "targets": 1,
+        "penetration": 1,
         "options": []
       }
     },
@@ -10793,6 +11324,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -10803,6 +11335,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -10877,13 +11410,15 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
-        "selfHpScaling": 0.08,
+        "targets": 1,
+        "selfHpScaling": 0.1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.18,
         "options": []
       },
@@ -10891,7 +11426,8 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
-        "selfHpScaling": 0.12,
+        "targets": 3,
+        "selfHpScaling": 0.15,
         "options": []
       }
     },
@@ -10993,6 +11529,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -11003,6 +11540,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -11063,6 +11601,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -11073,6 +11612,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -11133,6 +11673,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.75,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -11143,6 +11684,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -11200,6 +11742,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3131_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11978,
@@ -11254,6 +11816,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3053_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.05,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.9,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13832,
@@ -11308,6 +11890,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3052_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 0.95,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12313,
@@ -11360,6 +11962,29 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2006_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13569,
@@ -11414,6 +12039,23 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3011_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11003,
@@ -11468,6 +12110,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3151_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1.1,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11710,
@@ -11564,6 +12226,30 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.95,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 0.9,
+        "targets": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 0.85,
+        "targets": 1,
+        "cdmgIncrease": 0.5,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12292,
@@ -11664,6 +12350,31 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 1,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.4,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "targets": 3,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13675,
@@ -11759,6 +12470,26 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.7,
+        "pow": 0.9,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12898,
@@ -11811,6 +12542,32 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1047_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "targets": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 0.9,
+        "targets": 1,
+        "selfHpScaling": 0.3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13730,
@@ -11864,6 +12621,30 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1086_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 3,
+        "selfSpdScaling": 0.00075,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12124,
@@ -11917,6 +12698,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1085_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.7,
+        "pow": 0.9,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12819,
@@ -11971,6 +12772,28 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3084_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "targets": 1,
+        "selfDefScaling": 0.7,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.4,
+        "pow": 1,
+        "targets": 3,
+        "selfDefScaling": 0.5,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12320,
@@ -12025,6 +12848,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3063_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11702,
@@ -12119,6 +12962,29 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13126,
@@ -12212,6 +13078,30 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 0.8,
+        "targets": 1,
+        "selfHpScaling": 0.06,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "targets": 3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12701,
@@ -12265,6 +13155,42 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1107_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.9,
+        "targets": 1,
+        "selfHpScaling": 0.12,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.145
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.182
+          }
+        ]
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15120,
@@ -12319,6 +13245,24 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3003_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 0.9,
+        "targets": 1,
+        "selfDefScaling": 0.7,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11779,
@@ -12385,6 +13329,32 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 1,
+        "selfHpScaling": 0.085,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "targets": 1,
+        "selfHpScaling": 0.13,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal", "miss"],
+        "rate": 0.3,
+        "pow": 1,
+        "targets": 1,
+        "penetration": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13718,
@@ -12451,6 +13421,25 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13288,
@@ -12503,6 +13492,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1109_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13356,
@@ -12555,6 +13564,38 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2070_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 1,
+        "selfHpScaling": 0.1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.105
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.3,
+        "pow": 1,
+        "targets": 3,
+        "selfHpScaling": 0.06,
+        "selfSpdScaling": 0.001125,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13718,
@@ -12609,6 +13650,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3092_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.15,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11788,
@@ -12684,6 +13745,29 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1029_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.35,
+        "pow": 1.05,
+        "targets": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.8,
+        "targets": 3,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12475,
@@ -12779,6 +13863,29 @@
         }
       }
     ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 12952,
@@ -12833,6 +13940,26 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3153_l.png"
     },
     "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.9,
+        "pow": 0.95,
+        "targets": 1,
+        "options": []
+      }
+    },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 11667,
@@ -12891,16 +14018,27 @@
         "rate": 0.8,
         "pow": 0.95,
         "selfHpScaling": 0.12,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": [],
-        "options": []
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -13004,18 +14142,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -13076,6 +14217,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 0.9,
+        "targets": 1,
         "selfDefScaling": 1,
         "options": []
       },
@@ -13087,6 +14229,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.3,
         "pow": 0.9,
+        "targets": 3,
         "selfDefScaling": 1.35,
         "options": []
       }
@@ -13148,18 +14291,18 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1,
-        "pow": 1,
+        "hitTypes": [],
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -13220,18 +14363,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -13294,6 +14440,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -13304,6 +14451,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -13365,6 +14513,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -13451,12 +14600,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -13521,21 +14672,30 @@
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.6,
-        "pow": 1,
-        "selfDefScaling": 1,
+        "rate": 1,
+        "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 0.95,
+        "targets": 3,
         "options": []
       },
       "S3": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.6,
-        "pow": 1,
-        "selfDefScaling": 1.15,
-        "options": []
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
       }
     },
     "calculatedStatus": {
@@ -13637,18 +14797,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.65,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       }
     },
@@ -13756,6 +14919,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -13775,6 +14939,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1.05,
+        "targets": 3,
         "options": []
       }
     },
@@ -13881,6 +15046,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2.1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -13891,6 +15057,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       }
     },
@@ -13953,6 +15120,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -14061,6 +15229,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -14138,18 +15307,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -14234,6 +15406,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -14242,7 +15415,7 @@
         "pow": 0,
         "options": [
           {
-            "name": "S3 heal",
+            "name": "S2 heal",
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.15,
@@ -14345,6 +15518,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 0.95,
+        "targets": 1,
         "selfDefScaling": 0.75,
         "options": []
       },
@@ -14352,6 +15526,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.8,
         "options": []
       },
@@ -14417,6 +15592,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.04,
         "options": []
       },
@@ -14424,6 +15600,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.09,
         "options": []
       },
@@ -14491,6 +15668,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -14501,6 +15679,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -14575,18 +15754,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -14648,18 +15830,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.95,
+        "targets": 2,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.15,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       }
     },
@@ -14722,12 +15907,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.55,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -14887,18 +16074,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.7,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -14961,6 +16151,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -14972,6 +16163,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 0.85,
+        "targets": 1,
         "selfSpdScaling": 0.0015,
         "options": []
       }
@@ -15035,18 +16227,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -15109,6 +16304,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -15196,6 +16392,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -15337,6 +16534,7 @@
         "hitTypes": [],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.08,
         "options": []
       },
@@ -15348,6 +16546,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.15,
         "options": []
       }
@@ -15411,6 +16610,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -15422,6 +16622,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       }
@@ -15529,18 +16730,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       }
     },
@@ -15603,12 +16807,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -15697,18 +16903,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -15771,12 +16980,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -15841,12 +17052,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.75,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.075,
         "options": []
       },
@@ -15854,6 +17067,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.1,
+        "targets": 3,
         "selfSpdScaling": 0.001125,
         "options": []
       }
@@ -15917,6 +17131,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.65,
         "pow": 0.9,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -15929,6 +17144,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       }
@@ -15992,6 +17208,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -16002,6 +17219,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -16104,6 +17322,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1.1,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -16111,6 +17330,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "selfSpdScaling": 0.001125,
         "options": []
       },
@@ -16118,6 +17338,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.0015,
         "options": []
       }
@@ -16180,6 +17401,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 0.9,
+        "targets": 1,
         "selfDefScaling": 0.8,
         "options": []
       },
@@ -16192,6 +17414,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 0.9,
+        "targets": 3,
         "selfDefScaling": 1.3,
         "options": []
       }
@@ -16255,18 +17478,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -16327,12 +17553,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
@@ -16400,6 +17628,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -16419,6 +17648,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1.2,
+        "targets": 1,
         "options": []
       }
     },
@@ -16479,6 +17709,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -16489,6 +17720,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -16571,18 +17803,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -16644,6 +17879,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.05,
         "options": []
       },
@@ -16655,6 +17891,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.1,
         "options": []
       }
@@ -16718,6 +17955,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.5,
         "options": []
       },
@@ -16729,6 +17967,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 0.95,
+        "targets": 1,
         "selfDefScaling": 0.7,
         "options": []
       }
@@ -16790,6 +18029,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -16800,6 +18040,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -16882,6 +18123,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.9,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -16893,6 +18135,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "selfSpdScaling": 0.00075,
         "options": []
       }
@@ -16956,6 +18199,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.04,
         "increasedValue": 0.1,
         "options": []
@@ -16964,12 +18208,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.04,
         "options": []
       }
@@ -17076,6 +18322,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -17086,6 +18333,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       }
     },
@@ -17186,6 +18434,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -17272,18 +18521,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -17344,6 +18596,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -17354,6 +18607,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.3,
+        "targets": 1,
         "penetration": 0.5,
         "options": []
       }
@@ -17417,6 +18671,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -17427,6 +18682,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -17489,6 +18745,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -17508,6 +18765,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -17592,12 +18850,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -17686,6 +18946,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -17696,6 +18957,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -17758,12 +19020,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -17828,18 +19092,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.65,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -17941,6 +19208,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.9,
+        "targets": 1,
         "selfHpScaling": 0.05,
         "options": []
       },
@@ -17948,6 +19216,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.07,
         "options": []
       },
@@ -18022,6 +19291,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.15,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -18032,6 +19302,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -18107,18 +19378,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -18179,6 +19453,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -18308,18 +19583,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.85,
+        "targets": 3,
         "options": []
       }
     },
@@ -18382,12 +19660,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -18498,6 +19778,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.7,
         "options": []
       },
@@ -18576,6 +19857,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -18586,6 +19868,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       }
     },
@@ -18646,6 +19929,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.81,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.07,
         "options": []
       },
@@ -18724,18 +20008,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 1.3,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "penetration": 1,
         "options": []
       }
@@ -18799,18 +20086,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1.3,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "penetration": 0.5,
         "options": []
       }
@@ -18895,6 +20185,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -18905,6 +20196,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -18965,18 +20257,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "cdmgIncrease": 0.2,
         "options": []
       }
@@ -19080,6 +20375,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 0.95,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -19099,6 +20395,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 1.5,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -19187,18 +20484,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       }
     },
@@ -19331,18 +20631,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       }
     },
@@ -19403,16 +20706,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -19475,6 +20783,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "selfDefScaling": 0.5,
         "options": []
       },
@@ -19486,6 +20795,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 0.95,
+        "targets": 1,
         "selfDefScaling": 0.7,
         "options": []
       }
@@ -19612,18 +20922,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.8,
+        "targets": 3,
         "options": []
       }
     },
@@ -19698,6 +21011,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -19717,6 +21031,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -19779,6 +21094,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -19789,6 +21105,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 0.95,
+        "targets": 3,
         "options": []
       }
     },
@@ -19872,6 +21189,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -19949,6 +21267,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.75,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.09,
         "options": []
       },
@@ -20070,18 +21389,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.25,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.7,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       }
     },
@@ -20143,6 +21465,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.9,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -20154,6 +21477,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 1.05,
+        "targets": 3,
         "options": []
       }
     },
@@ -20214,16 +21538,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.5,
+        "pow": 1.3,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -20285,6 +21614,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -20362,18 +21692,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.6,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -20434,16 +21767,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1.3,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -20506,6 +21844,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -20592,18 +21931,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "penetration": 0.3,
         "options": []
       }
@@ -20665,6 +22007,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 2,
         "options": []
       },
       "S2": {
@@ -20675,6 +22018,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -20735,10 +22079,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.3,
+        "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -20803,18 +22151,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.95,
         "pow": 1,
+        "targets": 3,
         "penetration": 1,
         "options": []
       }
@@ -20876,6 +22227,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -20886,6 +22238,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -20971,18 +22324,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0,
         "pow": 0,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0,
         "pow": 0,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0,
         "pow": 0,
+        "targets": 1,
         "options": []
       }
     },
@@ -21065,6 +22421,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21075,6 +22432,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -21158,18 +22516,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.4,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       }
     },
@@ -21232,6 +22593,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21242,6 +22604,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1.1,
+        "targets": 3,
         "options": []
       }
     },
@@ -21304,16 +22667,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.8,
+        "targets": 3,
         "options": []
       }
     },
@@ -21374,6 +22742,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21384,6 +22753,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -21444,17 +22814,23 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.98,
         "pow": 0.9,
+        "targets": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1.3,
+        "targets": 1,
+        "selfSpdScaling": 0.00075,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       }
     },
@@ -21517,6 +22893,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21527,6 +22904,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -21589,6 +22967,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21608,6 +22987,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -21668,6 +23048,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.75,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21747,6 +23128,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21757,6 +23139,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -21819,6 +23202,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.025,
         "options": []
       },
@@ -21830,6 +23214,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.05,
         "options": []
       }
@@ -21892,6 +23277,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -21902,6 +23288,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.05,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -21980,18 +23367,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1.05,
+        "targets": 3,
         "options": []
       }
     },
@@ -22054,6 +23444,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -22064,6 +23455,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -22124,6 +23516,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -22134,6 +23527,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.6,
         "pow": 1,
+        "targets": 1,
         "selfSpdScaling": 0.0015,
         "options": []
       }
@@ -22242,6 +23636,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.04,
         "options": []
       },
@@ -22363,17 +23758,28 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.04,
         "options": []
       },
       "S2": {
         "hitTypes": [],
-        "options": []
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.20
+          }
+        ]
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 0.95,
+        "targets": 3,
         "selfHpScaling": 0.1,
         "options": []
       }
@@ -22437,6 +23843,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.05,
         "options": []
       },
@@ -22448,6 +23855,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 0.95,
+        "targets": 1,
         "selfHpScaling": 0.15,
         "options": []
       }
@@ -22624,12 +24032,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -22762,6 +24172,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.95,
+        "targets": 2,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -22769,12 +24180,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.85,
         "pow": 1,
+        "targets": 3,
         "selfSpdScaling": 0.1125,
         "options": []
       }
@@ -22836,6 +24249,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -22855,6 +24269,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -22955,12 +24370,14 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.05,
         "pow": 0.9,
+        "targets": 3,
         "options": []
       },
       "S3": {
@@ -23027,6 +24444,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -23037,6 +24455,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.8,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       }
     },
@@ -23145,18 +24564,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.2,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.3,
         "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2,
         "pow": 0.8,
+        "targets": 1,
         "options": []
       }
     },
@@ -23263,18 +24685,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1.05,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.95,
+        "targets": 1,
         "penetration": 1,
         "options": []
       }
@@ -23405,6 +24830,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.8,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -23526,18 +24952,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.9,
         "pow": 1,
+        "targets": 3,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 2,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -23598,6 +25027,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.1,
         "options": []
       },
@@ -23618,6 +25048,7 @@
         "hitTypes": ["normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "penetration": 1,
         "options": []
       }
@@ -23723,6 +25154,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.6,
         "pow": 0.8,
+        "targets": 3,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -23734,6 +25166,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.8,
+        "targets": 3,
         "options": []
       }
     },
@@ -23834,6 +25267,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -23853,6 +25287,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.9,
         "pow": 1,
+        "targets": 1,
         "options": []
       }
     },
@@ -23915,18 +25350,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 1.05,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       }
     },
@@ -24009,6 +25447,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 1,
         "selfHpScaling": 0.1,
         "options": []
       },
@@ -24020,6 +25459,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.5,
         "pow": 1,
+        "targets": 3,
         "selfHpScaling": 0.12,
         "options": []
       }
@@ -24082,18 +25522,21 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.05,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.5,
         "pow": 0.95,
+        "targets": 1,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -24154,16 +25597,22 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "penetration": 0.5,
         "options": []
       },
       "S3": {
         "hitTypes": ["normal", "miss"],
         "rate": 0,
         "pow": 0,
+        "targets": 1,
         "options": []
       }
     },

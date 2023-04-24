@@ -20,6 +20,7 @@ public class DamageMultipliers {
 
     private Float[] rate           = new Float[]{1f, 1f, 1f};
     private Float[] pow            = new Float[]{1f, 1f, 1f};
+    private Integer[] targets      = new Integer[]{0, 0, 0};
 
     private Float[] selfHpScaling             = new Float[]{1f, 1f, 1f};
     private Float[] selfAtkScaling            = new Float[]{1f, 1f, 1f};
@@ -34,7 +35,7 @@ public class DamageMultipliers {
     private Float[] atkDiffPenMax             = new Float[]{1f, 1f, 1f};
     private Float[] spdDiffPen                = new Float[]{1f, 1f, 1f};
     private Float[] spdDiffPenMax             = new Float[]{1f, 1f, 1f};
-    private Float[] penetration               = new Float[]{1f, 1f, 1f};
+    private Float[] penetration               = new Float[]{0f, 0f, 0f};
     private Float[] atkIncrease               = new Float[]{1f, 1f, 1f};
     private Float[] cdmgIncrease              = new Float[]{1f, 1f, 1f};
     private Float[] crit                      = new Float[]{1f, 1f, 1f};

@@ -37,6 +37,8 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final float revengeSetBonus;
     @Constant final float penSetDmgBonus;
 
+    @Constant final float targetDefense;
+
     @Constant final float bonusMaxAtk;
     @Constant final float bonusMaxHp;
     @Constant final float bonusMaxDef;
@@ -144,6 +146,7 @@ public class GpuOptimizerKernel extends Kernel {
 
     @Constant final float[] rate;
     @Constant final float[] pow;
+    @Constant final int[] targets;
 
     @Constant final float[] selfHpScaling;
     @Constant final float[] selfAtkScaling;
@@ -205,6 +208,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float speedSetBonus,
             final float revengeSetBonus,
             final float penSetDmgBonus,
+            final float targetDefense,
             final float bonusMaxAtk,
             final float bonusMaxDef,
             final float bonusMaxHp,
@@ -316,6 +320,8 @@ public class GpuOptimizerKernel extends Kernel {
         this.revengeSetBonus = revengeSetBonus;
         this.penSetDmgBonus = penSetDmgBonus;
 
+        this.targetDefense = targetDefense;
+
         this.bonusMaxAtk = bonusMaxAtk;
         this.bonusMaxDef = bonusMaxDef;
         this.bonusMaxHp = bonusMaxHp;
@@ -415,6 +421,7 @@ public class GpuOptimizerKernel extends Kernel {
 
         this.rate = floatArr(dm.getRate());
         this.pow = floatArr(dm.getPow());
+        this.targets = flattenTargets(dm.getTargets());
         this.selfHpScaling = floatArr(dm.getSelfHpScaling());
         this.selfAtkScaling = floatArr(dm.getSelfAtkScaling());
         this.selfDefScaling = floatArr(dm.getSelfDefScaling());
@@ -446,6 +453,28 @@ public class GpuOptimizerKernel extends Kernel {
         }
         return new float[]{arr[0], arr[1], arr[2]};
     }
+
+    private int[] intArr(final Integer[] arr) {
+        if (arr == null) {
+            return new int[]{0, 0, 0};
+        }
+        return new int[]{arr[0], arr[1], arr[2]};
+    }
+
+    private int[] flattenTargets(final Integer[] arr) {
+        if (arr == null) {
+            return new int[]{0, 0, 0};
+        }
+        return new int[]{zeroOrOne(arr[0]), zeroOrOne(arr[1]), zeroOrOne(arr[2])};
+    }
+
+    private int zeroOrOne(final int i) {
+        if (i == 1) {
+            return 1;
+        }
+        return 0;
+    }
+
 
     int oneIfNegativeElseZero(int a) {
         return ((a ^ 1) >> 31) * -1;
@@ -675,24 +704,26 @@ public class GpuOptimizerKernel extends Kernel {
 
             final int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
-            final float rageMultiplier = max(1, rageSet * SETTING_RAGE_SET * 1.3f);
-            final float penMultiplier = max(1, min(penSet, 1) * SETTING_PEN_SET * penSetDmgBonus);
-            final float torrentMultiplier = max(1, 1 + torrentSet * 0.1f);
+            final float penSetOn = min(penSet, 1);
+            final float rageMultiplier = max(0, rageSet * SETTING_RAGE_SET * 0.3f);
+            final float penMultiplier = max(1, penSetOn * SETTING_PEN_SET * penSetDmgBonus);
+            final float torrentMultiplier = max(0, torrentSet * 0.1f);
             final float spdDiv1000 = (float)spd/1000;
+            final float pctDmgMultiplier = 1 + rageMultiplier + torrentMultiplier;
 
             final int ehp = (int) (hp * (def/300 + 1));
             final int hpps = (int) (hp*spdDiv1000);
             final int ehpps = (int) ((float)ehp*spdDiv1000);
-            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
+            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * pctDmgMultiplier);
             final int dmgps = (int) ((float)dmg*spdDiv1000);
-            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
+            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * pctDmgMultiplier);
             final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
-            final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
+            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * pctDmgMultiplier)/10);
+            final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * pctDmgMultiplier));
 
-            final int s1 = getSkillValue(0, atk, def, hp, spd, critDamage, torrentMultiplier);
-            final int s2 = getSkillValue(1, atk, def, hp, spd, critDamage, torrentMultiplier);
-            final int s3 = getSkillValue(2, atk, def, hp, spd, critDamage, torrentMultiplier);
+            final int s1 = getSkillValue(0, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+            final int s2 = getSkillValue(1, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+            final int s3 = getSkillValue(2, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
 
 // {1.871 * [(ATK)(Atkmod)(Rate)+(FlatMod)]} * (pow!)(EnhanceMod)(HitTypeMod)(ElementMod)(DamageUpMod)(TargetDebuffMod)
             // flatmod
@@ -760,7 +791,11 @@ public class GpuOptimizerKernel extends Kernel {
                               final float hp,
                               final float spd,
                               final float critDamage,
-                              final float torrentMultiplier) {
+                              final float pctDmgMultiplier,
+                              final float penSetOn) {
+//        final float effectiveDefense = targetDefense * targets[s] * penMultiplier
+//        final float realDefense = targetDefense * (penSetOn * 0.12f + 0);
+        final float realPenetration = (1 - penetration[s]) * (1 - penSetOn * 0.12f * targets[s]);
         final float statScalings =
                         selfHpScaling[s] *hp +
                         selfAtkScaling[s]*atk +
@@ -772,10 +807,10 @@ public class GpuOptimizerKernel extends Kernel {
         final float extraDamage = (
                         extraSelfHpScaling[s] *hp +
                         extraSelfAtkScaling[s]*atk +
-                        extraSelfDefScaling[s]*def) * 1.871f * 1f/(1000f*0.3f/300f + 1f);
-        final float offensiveValue = (atk * rate[s] + statScalings) * 1.871f * pow[s] * increasedValueMulti * hitTypeMultis * dmgUpMod * torrentMultiplier;
+                        extraSelfDefScaling[s]*def) * 1.871f * 1f/(targetDefense*0.3f/300f + 1f);
+        final float offensiveValue = (atk * rate[s] + statScalings) * 1.871f * pow[s] * increasedValueMulti * hitTypeMultis * dmgUpMod * pctDmgMultiplier;
         final float supportValue = selfHpScaling[s] * hp * support[s] + selfAtkScaling[s] * atk * support[s] + selfDefScaling[s] * def * support[s];
-        final float defensiveValue = 1f/(1000f*max(0, 1-penetration[s])/300f + 1f);
+        final float defensiveValue = 1f/(targetDefense*max(0, realPenetration)/300f + 1f);
         final int value = (int)(offensiveValue * defensiveValue + supportValue + extraDamage);
 
         //        System.out.println("S" + (s+1) + " " + value + " " + (hitTypeMultis) + " " + (1.871f * m.getPow()[s]));

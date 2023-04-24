@@ -59,6 +59,8 @@ module.exports = {
 
             artifactName: bonusStats.artifactName,
             artifactLevel: bonusStats.artifactLevel,
+            artifactAttack: bonusStats.artifactAttack,
+            artifactHealth: bonusStats.artifactHealth,
             imprintNumber: bonusStats.imprintNumber,
             eeNumber: bonusStats.eeNumber,
 

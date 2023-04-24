@@ -91,18 +91,21 @@ module.exports = {
                         heroesByName[x].skills = {
       "S1": {
         "hitTypes": ["normal"],
+        "targets": 0,
         "rate": 0,
         "pow": 0,
         "options": []
       },
       "S2": {
         "hitTypes": ["normal"],
+        "targets": 0,
         "rate": 0,
         "pow": 0,
         "options": []
       },
       "S3": {
         "hitTypes": ["normal"],
+        "targets": 0,
         "rate": 0,
         "pow": 0,
         "options": []
@@ -122,6 +125,7 @@ module.exports = {
                                         name: skill + " " + z,
                                         rate: skillData.rate,
                                         pow: skillData.pow,
+                                        targets: skillData.targets,
                                         selfHpScaling: skillData.selfHpScaling,
                                         selfAtkScaling: skillData.selfAtkScaling,
                                         selfDefScaling: skillData.selfDefScaling,
@@ -132,22 +136,6 @@ module.exports = {
                                         extraSelfAtkScaling: skillData.extraSelfAtkScaling,
                                         cdmgIncrease: skillData.cdmgIncrease,
                                         penetration: skillData.penetration,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
-                                        // pow: skillData.pow,
                                     });
                                 }
                             }
@@ -161,6 +149,7 @@ module.exports = {
                             s[skill].options = [];
                             s[skill].options.push({
                                 name: skill + " n/a",
+                                targets: 0,
                                 rate: 0,
                                 pow: 0,
                             })

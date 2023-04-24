@@ -18,6 +18,7 @@ public class SkillData {
     public String name;
     public Float rate = 0f;
     public Float pow = 0f;
+    public Integer targets = 0;
     public Float selfHpScaling = 0f;
     public Float selfAtkScaling = 0f;
     public Float selfDefScaling = 0f;

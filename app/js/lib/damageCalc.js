@@ -159,6 +159,7 @@ module.exports = {
             cdmgIncrease:              skillNames.map(x => findSkill(x, hero, heroData).cdmgIncrease || 0),
             rate:                      skillNames.map(x => findSkill(x, hero, heroData).rate || 0),
             pow:                       skillNames.map(x => findSkill(x, hero, heroData).pow || 0),
+            targets:                   skillNames.map(x => findSkill(x, hero, heroData).targets || 0),
             crit:                      skillNames.map(x => findSkill(x, hero, heroData).name.includes("crit") ? 1 : 0),
             support:                   skillNames.map(x => (findSkill(x, hero, heroData).name.includes("heal") || findSkill(x, hero, heroData).name.includes("barrier")) ? 1 : 0),
             hitMulti:                  skillNames.map(x => getHitTypeMulti(x, hero, heroData) || 0),

@@ -440,6 +440,9 @@ async function showBonusStatsWindow(row) {
 
             bonusStats.aeiHealth += artifactStats.health;
             bonusStats.aeiAttack += artifactStats.attack;
+            bonusStats.artifactHealth = artifactStats.health;
+            bonusStats.artifactAttack = artifactStats.attack;
+
         }
     }
 

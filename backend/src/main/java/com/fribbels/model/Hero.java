@@ -89,6 +89,9 @@ public class Hero {
     public float aeiEff;
     public float aeiRes;
 
+    public float artifactAttack;
+    public float artifactHealth;
+
     public String artifactName;
     public String artifactLevel;
     public String imprintNumber;
@@ -127,6 +130,7 @@ public class Hero {
             return DamageMultipliers.builder()
                     .rate(new Float[]{skills.S1[0].rate, skills.S2[0].rate, skills.S3[0].rate})
                     .pow(new Float[]{skills.S1[0].pow, skills.S2[0].pow, skills.S3[0].pow})
+                    .targets(new Integer[]{skills.S1[0].targets, skills.S2[0].targets, skills.S3[0].targets})
                     .selfHpScaling(new Float[]{skills.S1[0].selfHpScaling, skills.S2[0].selfHpScaling, skills.S3[0].selfHpScaling})
                     .selfAtkScaling(new Float[]{skills.S1[0].selfAtkScaling, skills.S2[0].selfAtkScaling, skills.S3[0].selfAtkScaling})
                     .selfDefScaling(new Float[]{skills.S1[0].selfDefScaling, skills.S2[0].selfDefScaling, skills.S3[0].selfDefScaling})
@@ -148,6 +152,7 @@ public class Hero {
             return DamageMultipliers.builder()
                     .rate(new Float[]{s1.rate, s2.rate, s3.rate})
                     .pow(new Float[]{s1.pow, s2.pow, s3.pow})
+                    .targets(new Integer[]{s1.targets, s2.targets, s3.targets})
                     .selfHpScaling(new Float[]{s1.selfHpScaling, s2.selfHpScaling, s3.selfHpScaling})
                     .selfAtkScaling(new Float[]{s1.selfAtkScaling, s2.selfAtkScaling, s3.selfAtkScaling})
                     .selfDefScaling(new Float[]{s1.selfDefScaling, s2.selfDefScaling, s3.selfDefScaling})
@@ -255,6 +260,9 @@ public class Hero {
         this.aeiCd = bonusStats.getAeiCd();
         this.aeiEff = bonusStats.getAeiEff();
         this.aeiRes = bonusStats.getAeiRes();
+
+        this.artifactAttack = bonusStats.getArtifactAttack();
+        this.artifactHealth = bonusStats.getArtifactHealth();
 
         this.artifactName = bonusStats.getArtifactName();
         this.artifactLevel = bonusStats.getArtifactLevel();

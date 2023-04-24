@@ -119,20 +119,22 @@ public class StatCalculator {
 
         final int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
-        final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 1.3f : 1;
+        final float penSetOn = sets[13] > 1 ? 1 : 0;
+        final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 0.3f : 0;
         final float penMultiplier = SETTING_PEN_SET && sets[13] > 1 ? penSetDmgBonus : 1;
-        final float torrentMultiplier = sets[17] > 1 ? sets[17] / 2 * 0.1f + 1 : 1;
+        final float torrentMultiplier = sets[17] > 1 ? sets[17] / 2 * 0.1f : 0;
         final float spdDiv1000 = (float)spd/1000;
+        final float pctDmgMultiplier = 1 + rageMultiplier + torrentMultiplier;
 
         final int ehp = (int) (hp * (def/300 + 1));
         final int hpps = (int) (hp*spdDiv1000);
         final int ehpps = (int) ((float)ehp*spdDiv1000);
-        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * pctDmgMultiplier);
         final int dmgps = (int) ((float)dmg*spdDiv1000);
-        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * pctDmgMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier * torrentMultiplier);
-        final int dmgd = (int) ((critDamage * def) * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier * pctDmgMultiplier);
+        final int dmgd = (int) ((critDamage * def) * rageMultiplier * penMultiplier * pctDmgMultiplier);
 /*
 
 (increase dmg) * [(atk + bonus atk) * (pow * multi) * (cdmg)]
@@ -154,11 +156,21 @@ flat2mod -> ddj
 //        final int s3 = (int)(((atk * multis.getAtkMods()[2] * multis.getRates()[2] + getFlatMod(multis, 2, hp)) * getTypeMultiplier(multis, 2)) * multis.getPows()[2] * multis.getMultis()[2]);
         // (1 + multis.getAtkIncrease()[0])
 
-        final int s1 = getSkillValue(multis, 0, atk, def, hp, spd, critDamage, torrentMultiplier);
-        final int s2 = getSkillValue(multis, 1, atk, def, hp, spd, critDamage, torrentMultiplier);
-        final int s3 = getSkillValue(multis, 2, atk, def, hp, spd, critDamage, torrentMultiplier);
+        final int s1 = getSkillValue(multis, 0, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+        final int s2 = getSkillValue(multis, 1, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+        final int s3 = getSkillValue(multis, 2, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
 //
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
+
+        final float bsHp = (hp - base.hp - hero.artifactHealth - (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/-2 : 0)) / base.hp * 100;
+//        hp: (row.hp - base.hp - artiHp - bonusSetMaxHp/100*base.hp - bonusSetTorrent/100*base.hp) / base.hp * 100,
+//                atk: (row.atk - base.atk - artiAtk - bonusSetAtt/100*base.atk) / base.atk * 100,
+//                def: (row.def - base.def - bonusSetDef/100*base.def) / base.def * 100,
+//                chc: (Math.min(100, row.chc) - base.chc*100 - bonusSetCri),
+//                chd: (Math.min(350, row.chd) - base.chd*100 - bonusSetCriDmg),
+//                eff: (row.eff - base.eff*100 - bonusSetAcc),
+//                res: (row.efr - base.efr*100 - bonusSetRes),
+//                spd: (row.spd - base.spd - bonusSetSpeed - bonusSetRevenge),
 
         return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps,
                 dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, s1, s2, s3, upgrades, conversions, score, priority,
@@ -172,7 +184,10 @@ flat2mod -> ddj
                               final float hp,
                               final float spd,
                               final float critDamage,
-                              final float torrentMultiplier) {
+                              final float pctDmgMultiplier,
+                              final float penSetOn) {
+        final int targets = m.getTargets()[s] == 1 ? 1 : 0;
+        final float realPenetration = (1 - m.getPenetration()[s]) * (1 - penSetOn * 0.15f * targets);
         final float statScalings =
                         m.getSelfHpScaling()[s] *hp +
                         m.getSelfAtkScaling()[s]*atk +
@@ -184,10 +199,10 @@ flat2mod -> ddj
         final float extraDamage = (
                         m.getExtraSelfHpScaling()[s] *hp +
                         m.getExtraSelfAtkScaling()[s]*atk +
-                        m.getExtraSelfDefScaling()[s]*def) * 1.871f * 1f/(1000f*0.3f/300f + 1f);
-        final float offensive = (atk * m.getRate()[s] + statScalings) * 1.871f * m.getPow()[s] * increasedValue * hitTypeMultis * dmgUpMod * torrentMultiplier;
+                        m.getExtraSelfDefScaling()[s]*def) * 1.871f * 1f/(StatCalculator.SETTING_PEN_DEFENSE*0.3f/300f + 1f);
+        final float offensive = (atk * m.getRate()[s] + statScalings) * 1.871f * m.getPow()[s] * increasedValue * hitTypeMultis * dmgUpMod * pctDmgMultiplier;
         final float support = m.getSelfHpScaling()[s] * hp * m.getSupport()[s] + m.getSelfAtkScaling()[s] * atk * m.getSupport()[s] + m.getSelfDefScaling()[s] * def * m.getSupport()[s];
-        final float defensive = 1f/(1000f*Math.max(0, 1-m.getPenetration()[s])/300f + 1f);
+        final float defensive = 1f/(StatCalculator.SETTING_PEN_DEFENSE*Math.max(0, realPenetration)/300f + 1f);
         final int value = (int)(offensive * defensive + support + extraDamage);
 
 //        System.out.println("S" + (s+1) + " " + value + " " + (hitTypeMultis) + " " + (1.871f * m.getPow()[s]));

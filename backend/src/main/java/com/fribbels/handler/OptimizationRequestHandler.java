@@ -674,11 +674,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final int SETTING_RAGE_SET = StatCalculator.SETTING_RAGE_SET ? 1 : 0;
         final int SETTING_PEN_SET = StatCalculator.SETTING_PEN_SET ? 1 : 0;
 
-        final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
+        final long maxPerms = wSize * hSize * aSize * nSize * rSize * bSize;
 
         final GpuOptimizerKernel kernel;
 
         hero.setDamageMultipliers(request.damageMultipliers);
+//        System.out.println();
 
 //        System.out.println("multis");
 //        System.out.println(request.damageMultipliers.toString());
@@ -706,6 +707,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     speedSetBonus,
                     revengeSetBonus,
                     penSetDmgBonus,
+                    StatCalculator.SETTING_PEN_DEFENSE,
                     bonusMaxAtk,
                     bonusMaxDef,
                     bonusMaxHp,
@@ -1404,6 +1406,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final float speedSetBonus,
             final float revengeSetBonus,
             final float penSetDmgBonus,
+            final float targetDefense,
             final float bonusMaxAtk,
             final float bonusMaxDef,
             final float bonusMaxHp,
@@ -1439,6 +1442,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     speedSetBonus,
                     revengeSetBonus,
                     penSetDmgBonus,
+                    targetDefense,
                     bonusMaxAtk,
                     bonusMaxDef,
                     bonusMaxHp,
@@ -1474,6 +1478,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 speedSetBonus,
                 revengeSetBonus,
                 penSetDmgBonus,
+                targetDefense,
                 bonusMaxAtk,
                 bonusMaxDef,
                 bonusMaxHp,
