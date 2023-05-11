@@ -480,12 +480,12 @@ module.exports = {
 
         // GS
 
-        if (item.enhance < 15) {
+        if (item.enhance < 16) {
             var gs = simulationResults.gsArr;
             var moddedGs = simulationResults.moddedGsArr
 
-            var min = Math.min(Math.min(...gs), Math.min(...moddedGs))
-            var max = Math.max(Math.max(...gs), Math.max(...moddedGs))
+            var min = Math.min(Math.min(...gs), Math.min(...moddedGs)) - 1
+            var max = Math.max(Math.max(...gs), Math.max(...moddedGs)) + 1
 
             function generateLineArr(gs, min, max) {
                 // var minGs = Math.min(...gs)
@@ -507,9 +507,14 @@ module.exports = {
                 for (var i = 0; i < yArr.length; i++) {
                     yArr[i] = yArr[i] / n * 100
                 }
-                console.warn(xArr)
-                console.warn(yArr)
 
+                if (item.enhance >= 15) {
+                    for (var i = 0; i <= yArr.length; i++) {
+                        if (yArr[i] == 0) {
+                            yArr[i] = undefined;
+                        }
+                    }
+                }
                 return {
                     xArr: xArr,
                     yArr: yArr,
@@ -534,13 +539,15 @@ module.exports = {
                     {
                         name: 'GS probabilities',
                         data: gsSeries.yArr,
-                        type: 'line',
+                        type: (item.enhance >= 15 ? 'scatter' : 'line'),
+                        areaStyle: {},
                         smooth: true
                     },
                     {
-                        name: 'GS probabilities with max mods',
+                        name: 'GS probabilities with max substat mod',
                         data: moddedGsSeries.yArr,
-                        type: 'line',
+                        type: (item.enhance >= 15 ? 'scatter' : 'line'),
+                        areaStyle: {},
                         smooth: true,
                         lineStyle: {color: '#71de7c'},
                         itemStyle: {color: '#71de7c'}

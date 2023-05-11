@@ -129,12 +129,12 @@ public class StatCalculator {
         final int ehp = (int) (hp * (def/300 + 1));
         final int hpps = (int) (hp*spdDiv1000);
         final int ehpps = (int) ((float)ehp*spdDiv1000);
-        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * pctDmgMultiplier);
+        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * penMultiplier * pctDmgMultiplier);
         final int dmgps = (int) ((float)dmg*spdDiv1000);
-        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * pctDmgMultiplier);
+        final int mcdmg = (int) (atk * critDamage * penMultiplier * pctDmgMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier * pctDmgMultiplier);
-        final int dmgd = (int) ((critDamage * def) * rageMultiplier * penMultiplier * pctDmgMultiplier);
+        final int dmgh = (int) ((critDamage * hp)/10 * penMultiplier * pctDmgMultiplier);
+        final int dmgd = (int) ((critDamage * def) * penMultiplier * pctDmgMultiplier);
 /*
 
 (increase dmg) * [(atk + bonus atk) * (pow * multi) * (cdmg)]

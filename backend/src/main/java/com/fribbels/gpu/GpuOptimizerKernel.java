@@ -714,12 +714,12 @@ public class GpuOptimizerKernel extends Kernel {
             final int ehp = (int) (hp * (def/300 + 1));
             final int hpps = (int) (hp*spdDiv1000);
             final int ehpps = (int) ((float)ehp*spdDiv1000);
-            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * pctDmgMultiplier);
+            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * penMultiplier * pctDmgMultiplier);
             final int dmgps = (int) ((float)dmg*spdDiv1000);
-            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * pctDmgMultiplier);
+            final int mcdmg = (int) (atk * critDamage * penMultiplier * pctDmgMultiplier);
             final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * pctDmgMultiplier)/10);
-            final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * pctDmgMultiplier));
+            final int dmgh = (int) ((critDamage * hp * penMultiplier * pctDmgMultiplier)/10);
+            final int dmgd = (int) ((critDamage * def * penMultiplier * pctDmgMultiplier));
 
             final int s1 = getSkillValue(0, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
             final int s2 = getSkillValue(1, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);

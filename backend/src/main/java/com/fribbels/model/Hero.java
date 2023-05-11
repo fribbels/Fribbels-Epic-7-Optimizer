@@ -126,6 +126,13 @@ public class Hero {
         if (damageMultipliers != null) {
             return damageMultipliers;
         }
+        if (skills == null) {
+            skills = HeroSkills.builder()
+                    .S1(new SkillData[]{SkillData.builder().build(), SkillData.builder().build(), SkillData.builder().build()})
+                    .S2(new SkillData[]{SkillData.builder().build(), SkillData.builder().build(), SkillData.builder().build()})
+                    .S3(new SkillData[]{SkillData.builder().build(), SkillData.builder().build(), SkillData.builder().build()})
+                    .build();
+        }
         if (skillOptions == null) {
             return DamageMultipliers.builder()
                     .rate(new Float[]{skills.S1[0].rate, skills.S2[0].rate, skills.S3[0].rate})

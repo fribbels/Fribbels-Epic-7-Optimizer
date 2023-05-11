@@ -265,7 +265,7 @@ module.exports = {
             //     HeroesGrid.refresh(response.heroes)
             //     redrawHeroInputSelector();
             // });
-            await showBonusStatsWindow(row);
+            await module.exports.showBonusStatsWindow(row);
             Saves.autoSave();
         });
 
@@ -389,77 +389,77 @@ module.exports = {
             equipped: new Array(6)
         }
     },
-}
 
-async function showBonusStatsWindow(row) {
-    showEditHeroInfoPopups(row.name)
-    const bonusStats = await Dialog.editHeroDialog(row);
+    showBonusStatsWindow: async (row) => {
+        showEditHeroInfoPopups(row.name)
+        const bonusStats = await Dialog.editHeroDialog(row);
 
-    if (!bonusStats) return;
+        if (!bonusStats) return;
 
-    const e7StatToBonusStat = {
-        "att_rate": "aeiAttackPercent",
-        "max_hp_rate": "aeiHealthPercent",
-        "def_rate": "aeiDefensePercent",
-        "att": "aeiAttack",
-        "max_hp": "aeiHealth",
-        "def": "aeiDefense",
-        "speed": "aeiSpeed",
-        "res": "aeiEffectResistance",
-        "cri": "aeiCritChance",
-        "cri_dmg": "aeiCritDamage",
-        "acc": "aeiEffectiveness",
-        "coop": "aeiDualAttackChance"
-    }
-
-    console.log("Bonus stats", bonusStats, row.id);
-
-    // Imprint
-    const imprintIngameType = bonusStats.heroInfo.self_devotion.type;
-    const imprintBonusType = e7StatToBonusStat[imprintIngameType];
-    const imprintNumberText = bonusStats.imprintNumber;
-    if (imprintNumberText != "None") {
-        const imprintNumber = parseFloat(imprintNumberText)
-
-        console.log("ADDING AEI IMPRINT", imprintNumber, imprintBonusType)
-
-        bonusStats[imprintBonusType] += imprintNumber;
-    }
-
-    // Artifact
-    const artifactName = bonusStats.artifactName;
-    if (artifactName != "None") {
-        const artifactLevelText = bonusStats.artifactLevel;
-        if (artifactLevelText != "None") {
-            const artifactLevel = parseInt(artifactLevelText);
-            const artifactStats = Artifact.getStats(artifactName, artifactLevel);
-
-            console.log("ADDING AEI ARTIFACT", artifactLevel)
-            console.log("ADDING AEI ARTIFACT", artifactLevelText)
-            console.log("ADDING AEI ARTIFACT", artifactName)
-
-            bonusStats.aeiHealth += artifactStats.health;
-            bonusStats.aeiAttack += artifactStats.attack;
-            bonusStats.artifactHealth = artifactStats.health;
-            bonusStats.artifactAttack = artifactStats.attack;
-
+        const e7StatToBonusStat = {
+            "att_rate": "aeiAttackPercent",
+            "max_hp_rate": "aeiHealthPercent",
+            "def_rate": "aeiDefensePercent",
+            "att": "aeiAttack",
+            "max_hp": "aeiHealth",
+            "def": "aeiDefense",
+            "speed": "aeiSpeed",
+            "res": "aeiEffectResistance",
+            "cri": "aeiCritChance",
+            "cri_dmg": "aeiCritDamage",
+            "acc": "aeiEffectiveness",
+            "coop": "aeiDualAttackChance"
         }
+
+        console.log("Bonus stats", bonusStats, row.id);
+
+        // Imprint
+        const imprintIngameType = bonusStats.heroInfo.self_devotion.type;
+        const imprintBonusType = e7StatToBonusStat[imprintIngameType];
+        const imprintNumberText = bonusStats.imprintNumber;
+        if (imprintNumberText != "None") {
+            const imprintNumber = parseFloat(imprintNumberText)
+
+            console.log("ADDING AEI IMPRINT", imprintNumber, imprintBonusType)
+
+            bonusStats[imprintBonusType] += imprintNumber;
+        }
+
+        // Artifact
+        const artifactName = bonusStats.artifactName;
+        if (artifactName != "None") {
+            const artifactLevelText = bonusStats.artifactLevel;
+            if (artifactLevelText != "None") {
+                const artifactLevel = parseInt(artifactLevelText);
+                const artifactStats = Artifact.getStats(artifactName, artifactLevel);
+
+                console.log("ADDING AEI ARTIFACT", artifactLevel)
+                console.log("ADDING AEI ARTIFACT", artifactLevelText)
+                console.log("ADDING AEI ARTIFACT", artifactName)
+
+                bonusStats.aeiHealth += artifactStats.health;
+                bonusStats.aeiAttack += artifactStats.attack;
+                bonusStats.artifactHealth = artifactStats.health;
+                bonusStats.artifactAttack = artifactStats.attack;
+
+            }
+        }
+
+        // EE
+        const eeNumberText = bonusStats.eeNumber;
+        if (eeNumberText != "None") {
+            const eeNumber = parseInt(eeNumberText);
+            const eeIngameType = bonusStats.ee.stat.type;
+            const eeBonusType = e7StatToBonusStat[eeIngameType];
+
+            console.log("ADDING AEI EE", eeBonusType, eeNumber)
+
+            bonusStats[eeBonusType] += eeNumber;
+        }
+
+        await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
+        Notifier.success("Saved bonus stats");
     }
-
-    // EE
-    const eeNumberText = bonusStats.eeNumber;
-    if (eeNumberText != "None") {
-        const eeNumber = parseInt(eeNumberText);
-        const eeIngameType = bonusStats.ee.stat.type;
-        const eeBonusType = e7StatToBonusStat[eeIngameType];
-
-        console.log("ADDING AEI EE", eeBonusType, eeNumber)
-
-        bonusStats[eeBonusType] += eeNumber;
-    }
-
-    await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
-    Notifier.success("Saved bonus stats");
 }
 
 function showEditHeroInfoPopups(name) {
@@ -522,7 +522,7 @@ function addHero(heroName, isBuild) {
 
         Api.getHeroById(newHero.id).then(async y => {
             const createdHero = y.hero;
-            await showBonusStatsWindow(createdHero);
+            await module.exports.showBonusStatsWindow(createdHero);
             Saves.autoSave();
         })
     })

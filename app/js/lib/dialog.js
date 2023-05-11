@@ -993,7 +993,7 @@ module.exports = {
                     const assetsBySet = Assets.getAssetsBySet();
 
                     const groupSelectMultipleSelectOptions = {
-                        maxHeight: 500,
+                        maxHeight: 600,
                         showClear: true,
                         // hideOptgroupCheckboxes: true,
                         minimumCountSelected: 99,

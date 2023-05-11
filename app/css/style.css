@@ -195,17 +195,18 @@ input[type=submit] {
   flex-grow: 2;
   min-width: 1150px;
 }
-/*
-.ms-choice {
-  height: 22px;
-  font-size:  12px;
-}
-.ms-choice>span {
-  top: -2px;
-}*/
 
-#skillOptionsButton {
+.optionsShortSelector > .ms-choice {
+  height: 23px;
+  font-size: 13px;
+}
+
+.gearActionButtonSmaller {
   width: 100%;
+  cursor: pointer;
+  margin-right: 5px;
+  height: 19px;
+  margin-bottom: 3px;
 }
 .optimizer-equipped-section {
   display: flex;
@@ -961,6 +962,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .optimizer-checkbox {
   cursor: pointer;
+  margin-bottom: 1px;
 }
 .gearActionButton {
   width: 102px;

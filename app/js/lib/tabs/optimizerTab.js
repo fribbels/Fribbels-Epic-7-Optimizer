@@ -227,6 +227,39 @@ module.exports = {
 
             Saves.autoSave();
         });
+
+        document.getElementById('addBonusStatsOptimizerButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+
+            const hero = (await Api.getHeroById(heroId)).hero;
+
+            await HeroesTab.showBonusStatsWindow(hero);
+            Saves.autoSave();
+        });
+
+        document.getElementById('addSubstatModsOptimizerButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+
+            const hero = (await Api.getHeroById(heroId)).hero;
+
+            const modStats = await Dialog.editModStatsDialog(hero);
+
+            // mods
+
+            await Api.setModStats(modStats, hero.id);
+            Notifier.success("Saved mod stats");
+            Saves.autoSave();
+
+            // var heroId = document.getElementById('inputHeroAdd').value;
+            // if (!heroId) return;
+            // console.log("addSkills", heroId);
+
+            // var skillOptions = await module.exports.showSkillOptionsWindow(heroId);
+
+            // Saves.autoSave();
+        });
         // document.getElementById('accessorySetsLabel').addEventListener("click", async () => {
         //     Selectors.clearGearMainAndSets();
         //     recalculateFilters();

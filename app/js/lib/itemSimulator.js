@@ -87,9 +87,6 @@ module.exports = {
     },
 
     simulate: (item) => {
-        if (item.enhance >= 15) {
-            return;
-        }
 
         var reforgeable = Reforge.isReforgeable(item);
 
