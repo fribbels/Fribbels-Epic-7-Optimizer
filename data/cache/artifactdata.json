@@ -359,6 +359,20 @@
       },
       "code":"efk09"
    },
+   "Benimaru's Tachi":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_5_l.jpg"
+      },
+      "name":"Benimaru's Tachi",
+      "rarity":5,
+      "role":"warrior",
+      "stats":{
+         "attack":15,
+         "health":54
+      }
+   },
    "Biting Wind Star":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0010.png",

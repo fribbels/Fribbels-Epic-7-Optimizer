@@ -2927,6 +2927,59 @@
       }
     }
   },
+  "Benimaru": {
+    "code": "c1049",
+    "_id": "benimaru",
+    "name": "Benimaru",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "warrior",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/benimaruPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/benimaruPanel.png"
+    },
+    "ex_equip": [
+    ],
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13380,
+        "atk": 945,
+        "hp": 4414,
+        "spd": 119,
+        "def": 446,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17246,
+        "atk": 1177,
+        "hp": 5542,
+        "spd": 119,
+        "def": 553,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Blaze Dingo": {
     "code": "c2021",
     "_id": "blaze-dingo",
@@ -11865,7 +11918,49 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1122_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc110301",
+        "id": "exc110301",
+        "name": "Reingar PSC Armband",
+        "description": "An armband Celine wore when she was a part of the Reingar Public Security Club. She keeps it with her to help remind her of those days.",
+        "unit": "c1103",
+        "role": "assassin",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        },
+        "skills": [
+          {
+            "skill": 2,
+            "description": "Grants the caster stealth for 2 turns after using Blink.",
+            "skill_description": "Attacks a random enemy with Blink when an enemy uses a non-attack skill. Can be activated once every 2 turns.\nBlink: Cuts the enemy in the blink of an eye, before granting the caster stealth for 2 turns. When the enemy is not an Elite or Boss monster, damage sharing effects are ignored.",
+            "values": [
+              15
+            ],
+            "_id": 0
+          },
+          {
+            "skill": 2,
+            "description": "When using Blink, damage dealt is increased by 10% and attacks the enemy with the highest Attack.",
+            "skill_description": "Attacks the enemy with the highest Attack with Blink when an enemy uses a non-attack skill. Can be activated once every 2 turns.\nBlink: Cuts the enemy in the blink of an eye. When the enemy is not an Elite or Boss monster, damage sharing effects are ignored.",
+            "values": [],
+            "_id": 1
+          },
+          {
+            "skill": 3,
+            "description": "Damage dealt is increased by 10% when using Thunderclap.",
+            "skill_description": null,
+            "values": [],
+            "_id": 2
+          }
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1103.png"
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 13929,
@@ -15687,7 +15782,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1123_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100301",
+        "id": "exc100301",
+        "name": "Valkyrie Wing",
+        "description": "A mysterious circlet that symbolizes strength and beauty, and is the source of Rose's Fighting Spirit.",
+        "unit": "c1003",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "max_hp_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 15706,
@@ -17461,6 +17570,58 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0.18
+      }
+    }
+  },
+  "Twisted Eidolon Kayron": {
+    "code": "c1074",
+    "_id": "twisted-eidolon-kayron",
+    "name": "Twisted Eidolon Kayron",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "assassin",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/twistedEidolonKayronPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/twistedEidolonKayronPanel.png"
+    },
+    "ex_equip": [],
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13275,
+        "atk": 984,
+        "hp": 4735,
+        "spd": 113,
+        "def": 381,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16901,
+        "atk": 1228,
+        "hp": 6266,
+        "spd": 113,
+        "def": 473,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
