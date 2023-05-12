@@ -2928,7 +2928,7 @@
     }
   },
   "Benimaru": {
-    "code": "c1049",
+    "code": "c1146",
     "_id": "benimaru",
     "name": "Benimaru",
     "moonlight": false,
@@ -17574,7 +17574,7 @@
     }
   },
   "Twisted Eidolon Kayron": {
-    "code": "c1074",
+    "code": "c2023",
     "_id": "twisted-eidolon-kayron",
     "name": "Twisted Eidolon Kayron",
     "moonlight": true,
@@ -17593,9 +17593,9 @@
       }
     },
     "assets": {
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/twistedEidolonKayronPortrait.png",
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2023_s.png",
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/twistedEidolonKayronPanel.png"
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2023_l.png"
     },
     "ex_equip": [],
     "calculatedStatus": {
