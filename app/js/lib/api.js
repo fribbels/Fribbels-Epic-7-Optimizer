@@ -103,6 +103,17 @@ module.exports = {
         });
     },
 
+    setArtifacts: async (artifactsByName) => {
+        var fixedModel = JSON.parse(JSON.stringify(artifactsByName))
+        for (var value of Object.values(fixedModel)) {
+            value.attack = value.stats.attack;
+            value.health = value.stats.health;
+        }
+        return post('/heroes/setArtifactStats', {
+            artifactStatsByName: fixedModel
+        });
+    },
+
     getBaseStats: async (name) => {
         return post('/heroes/getBaseStats', {
             id: name

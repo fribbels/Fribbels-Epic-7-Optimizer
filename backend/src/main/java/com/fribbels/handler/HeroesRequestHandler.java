@@ -1,6 +1,7 @@
 package com.fribbels.handler;
 
 import com.fribbels.core.StatCalculator;
+import com.fribbels.db.ArtifactStatsDb;
 import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
@@ -36,6 +37,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
     private final HeroDb heroDb;
     private final BaseStatsDb baseStatsDb;
+    private final ArtifactStatsDb artifactStatsDb;
     private final ItemDb itemDb;
     private StatCalculator statCalculator;
 
@@ -94,6 +96,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
                 case "/heroes/setBaseStats":
                     final BaseStatsRequest baseStatsRequest = parseRequest(exchange, BaseStatsRequest.class);
                     sendResponse(exchange, setBaseStats(baseStatsRequest));
+                    return;
+                case "/heroes/setArtifactStats":
+                    final ArtifactStatsRequest artifactStatsRequest = parseRequest(exchange, ArtifactStatsRequest.class);
+                    sendResponse(exchange, setArtifactsStats(artifactStatsRequest));
                     return;
                 case "/heroes/setBonusStats":
                     final BonusStatsRequest bonusStatsRequest = parseRequest(exchange, BonusStatsRequest.class);
@@ -229,6 +235,12 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
     public String setBaseStats(final BaseStatsRequest request) {
         baseStatsDb.setBaseStatsByName(request.getBaseStatsByName());
+
+        return "";
+    }
+
+    public String setArtifactsStats(final ArtifactStatsRequest request) {
+        artifactStatsDb.setArtifactStatsByName(request.getArtifactStatsByName());
 
         return "";
     }

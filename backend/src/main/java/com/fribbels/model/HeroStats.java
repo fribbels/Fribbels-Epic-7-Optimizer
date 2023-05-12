@@ -48,6 +48,7 @@ public class HeroStats {
     public int upgrades;
     public int conversions;
     public int score;
+    public int bs;
     public int priority;
 
     public BonusStats bonusStats;

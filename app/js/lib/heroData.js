@@ -160,6 +160,7 @@ module.exports = {
                     baseStatsByName[x] = baseStats;
                 });
 
+        await Api.setArtifacts(artifactsByName);
         await Api.setBaseStats(baseStatsByName);
     },
 

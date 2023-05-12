@@ -1213,6 +1213,20 @@ async function submitOptimizationFilterRequest() {
     const heroId = document.getElementById('inputHeroAdd').value;
     const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     params.hero = heroResponse.hero;
+    params.hero.artifactAttack = 0;
+    params.hero.artifactHp = 0;
+    console.error("DEBUG", params.hero)
+    if (params.hero.artifactName && params.hero.artifactName != "None") {
+        const artifactLevelText = params.hero.artifactLevel;
+        if (artifactLevelText != "None") {
+            const artifactLevel = parseInt(artifactLevelText);
+            const artifactStats = Artifact.getStats(params.hero.artifactName, 30);
+
+            params.hero.artifactHp += artifactStats.health;
+            params.hero.artifactAttack += artifactStats.attack;
+        }
+    }
+
     OptimizerGrid.showLoadingOverlay();
     params.executionId = currentExecutionId;
 
@@ -1240,6 +1254,7 @@ async function submitOptimizationRequest() {
     const hero = heroResponse.hero;
     const baseStats = heroResponse.baseStats;
 
+
     var filterResult = await module.exports.applyItemFilters(params, heroResponse, allItemsResponse, true);
     var items = filterResult.items;
 
@@ -1254,6 +1269,20 @@ async function submitOptimizationRequest() {
         bonusAtk: hero.bonusAtk,
         hero: hero,
         damageMultipliers: DamageCalc.getMultipliers(hero, hero.skillOptions)
+    }
+
+    request.hero.artifactAttack = 0;
+    request.hero.artifactHp = 0;
+    console.error("DEBUG", request.hero)
+    if (request.hero.artifactName && request.hero.artifactName != "None") {
+        const artifactLevelText = request.hero.artifactLevel;
+        if (artifactLevelText != "None") {
+            const artifactLevel = parseInt(artifactLevelText);
+            const artifactStats = Artifact.getStats(request.hero.artifactName, artifactLevel);
+
+            request.hero.artifactHp += artifactStats.health;
+            request.hero.artifactAttack += artifactStats.attack;
+        }
     }
 
     if (!hero.artifactName || hero.artifactName == "None") {

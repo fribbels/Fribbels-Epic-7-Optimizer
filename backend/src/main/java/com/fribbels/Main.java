@@ -9,6 +9,7 @@ import com.aparapi.exception.QueryFailedException;
 import com.aparapi.internal.kernel.KernelManager;
 import com.aparapi.internal.opencl.OpenCLPlatform;
 import com.fribbels.core.StatCalculator;
+import com.fribbels.db.ArtifactStatsDb;
 import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
@@ -32,6 +33,7 @@ public class Main {
 
     private static HttpServer server;
     private static ExecutorService executorService;
+    public static final ArtifactStatsDb artifactStatsDb = new ArtifactStatsDb();
     private static final BaseStatsDb baseStatsDb = new BaseStatsDb();
     private static final HeroDb heroDb = new HeroDb(baseStatsDb);
     private static final ItemDb itemDb = new ItemDb(heroDb);
@@ -68,7 +70,7 @@ public class Main {
         }
 
 
-        final HeroesRequestHandler heroesRequestHandler = new HeroesRequestHandler(heroDb, baseStatsDb, itemDb, new StatCalculator());
+        final HeroesRequestHandler heroesRequestHandler = new HeroesRequestHandler(heroDb, baseStatsDb, artifactStatsDb, itemDb, new StatCalculator());
 
         server.createContext("/system", new SystemRequestHandler());
         server.createContext("/items", new ItemsRequestHandler(itemDb, heroDb, baseStatsDb, heroesRequestHandler));

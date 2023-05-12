@@ -223,6 +223,7 @@ function aggregateCurrentHeroStats(heroStats) {
         "s2",
         "s3",
         "score",
+        "bs",
         "priority"
     ]
 
@@ -310,6 +311,7 @@ function buildGrid(localeText) {
             {headerName: i18next.t('s2'), field: 's2', width: DIGITS_5},
             {headerName: i18next.t('s3'), field: 's3', width: DIGITS_5},
             {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
+            {headerName: i18next.t('bs'), field: 'bs', width: DIGITS_3},
             {headerName: i18next.t('prio'), field: 'priority', width: DIGITS_3},
             {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2},
             {headerName: i18next.t('actions'), field: 'property', width: 45, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},

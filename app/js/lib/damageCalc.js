@@ -18,9 +18,9 @@
 function findSkill(skill, hero, heroData) {
     var skillData = heroData.skills[skill];
 
-    console.warn(skillData)
-    console.warn(hero)
-    console.warn(heroData)
+    // console.warn(skillData)
+    // console.warn(hero)
+    // console.warn(heroData)
 
     return skillData.options.find(x => x.name == hero.skillOptions[skill].skillEffect) || skillData.options[0]
 }
