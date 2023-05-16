@@ -498,10 +498,20 @@
       },
       "S2": {
         "hitTypes": [],
-        "options": []
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfDefScaling": 0.7
+          }
+        ]
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "with proc dmg",
         "rate": 0.5,
         "pow": 1,
         "targets": 1,
@@ -786,7 +796,7 @@
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
-        "pow": 0.9,
+        "pow": 1,
         "targets": 1,
         "options": []
       },
@@ -796,7 +806,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.95,
+        "rate": 0.9,
         "pow": 1,
         "targets": 3,
         "options": []
@@ -970,7 +980,7 @@
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.15,
-            "selfAtkScaling": 0.35
+            "selfAtkScaling": 0.45
           }
         ]
       },
@@ -984,7 +994,7 @@
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.15,
-            "selfAtkScaling": 0.45
+            "selfAtkScaling": 0.35
           }
         ]
       }
@@ -1066,6 +1076,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 0.5,
         "pow": 1,
         "targets": 1,
@@ -1784,8 +1795,8 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1,
-        "pow": 1,
+        "rate": 1.3,
+        "pow": 0.95,
         "targets": 1,
         "selfHpScaling": 0.2,
         "options": []
@@ -2115,6 +2126,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "80% penetration",
         "rate": 0.9,
         "pow": 0.9,
         "targets": 3,
@@ -2326,6 +2338,7 @@
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "single target",
         "rate": 0.8,
         "pow": 0.9,
         "targets": 1,
@@ -2410,7 +2423,7 @@
         "rate": 0.7,
         "pow": 0.95,
         "targets": 1,
-        "selfHpScaling": 0.02,
+        "selfHpScaling": 0.05,
         "options": []
       },
       "S2": {
@@ -2505,6 +2518,7 @@
       },
       "S3": {
         "hitTypes": ["normal", "miss"],
+        "note": "70% penetration",
         "rate": 0.9,
         "pow": 1,
         "targets": 1,
@@ -3550,8 +3564,9 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1,
-        "pow": 1,
+        "note": "S1 proc",
+        "rate": 0.5,
+        "pow": 0.95,
         "targets": 3,
         "options": []
       },
@@ -3624,7 +3639,11 @@
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["normal", "miss"],
+        "note": "S1 proc",
+        "rate": 1.2,
+        "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -3717,6 +3736,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 0.6,
         "pow": 1.3,
         "targets": 3,
@@ -3845,7 +3865,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.9,
+        "rate": 0.95,
         "pow": 1,
         "targets": 3,
         "options": []
@@ -3914,6 +3934,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 0.5,
         "pow": 1,
         "targets": 3,
@@ -3951,6 +3972,82 @@
         "dac": 0.03,
         "eff": 0.18,
         "efr": 0.18
+      }
+    }
+  },
+  "Benimaru": {
+    "code": "c1146",
+    "_id": "benimaru",
+    "name": "Benimaru",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "warrior",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/benimaruPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/benimaruPanel.png"
+    },
+    "ex_equip": [
+    ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.2,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13380,
+        "atk": 945,
+        "hp": 4414,
+        "spd": 119,
+        "def": 446,
+        "chc": 0.19,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17246,
+        "atk": 1177,
+        "hp": 5542,
+        "spd": 119,
+        "def": 553,
+        "chc": 0.27,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
@@ -4043,8 +4140,6 @@
       },
       "S3": {
         "hitTypes": [],
-        "rate": 1,
-        "pow": 1,
         "options": []
       }
     },
@@ -4350,6 +4445,7 @@
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "with proc damage",
         "rate": 0.85,
         "pow": 1,
         "targets": 1,
@@ -4364,6 +4460,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "with proc damage",
         "rate": 0.95,
         "pow": 1.1,
         "targets": 3,
@@ -5221,7 +5318,6 @@
         "rate": 1,
         "pow": 1,
         "targets": 1,
-        "cdmgIncrease": 0.2,
         "options": []
       },
       "S2": {
@@ -5430,6 +5526,7 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1.15,
         "pow": 0.9,
+        "penetration": 0.5,
         "targets": 1,
         "options": []
       }
@@ -6609,8 +6706,9 @@
         "options": []
       },
       "S2": {
-        "hitTypes": [],
-        "rate": 1,
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
+        "rate": 0.7,
         "pow": 1,
         "targets": 3,
         "options": []
@@ -6684,7 +6782,11 @@
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
+        "rate": 1.2,
+        "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -6936,6 +7038,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "70% penetration",
         "rate": 0.75,
         "pow": 1,
         "targets": 1,
@@ -7313,7 +7416,7 @@
             "name": "S2 barrier",
             "rate": 0,
             "pow": 0,
-            "selfHpScaling": 1
+            "selfHpScaling": 0.15
           }
         ]
       },
@@ -8639,7 +8742,7 @@
         "pow": 0,
         "options": [
           {
-            "name": "S3 heal",
+            "name": "S2 heal",
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.2
@@ -8712,6 +8815,7 @@
         "rate": 0.95,
         "pow": 0.9,
         "targets": 1,
+        "selfSpdScaling": 0.00075,
         "options": []
       },
       "S2": {
@@ -8949,7 +9053,16 @@
       },
       "S2": {
         "hitTypes": [],
-        "options": []
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
       },
       "S3": {
         "hitTypes": [],
@@ -8957,10 +9070,16 @@
         "pow": 0,
         "options": [
           {
-            "name": "S3 barrier",
+            "name": "S3 heal",
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.15
+          },
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
           }
         ]
       }
@@ -9658,7 +9777,6 @@
         "rate": 1,
         "pow": 1,
         "targets": 1,
-        "cdmgIncrease": 0.2,
         "options": []
       },
       "S2": {
@@ -11044,24 +11162,15 @@
     "ex_equip": [],
     "skills": {
       "S1": {
-        "TODO": "Inaccurate",
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1,
-        "pow": 0.95,
-        "targets": 1,
+        "hitTypes": [],
         "options": []
       },
       "S2": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.8,
-        "pow": 1,
+        "hitTypes": [],
         "options": []
       },
       "S3": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1.8,
-        "pow": 1.05,
-        "targets": 1,
+        "hitTypes": [],
         "options": []
       }
     },
@@ -11236,6 +11345,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "100% penetration",
         "rate": 1.25,
         "pow": 1,
         "targets": 1,
@@ -11538,6 +11648,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "no detonations",
         "rate": 0.7,
         "pow": 1,
         "targets": 1,
@@ -11677,7 +11788,11 @@
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 1,
         "options": []
       },
       "S3": {
@@ -12851,8 +12966,8 @@
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.9,
-        "pow": 1,
+        "rate": 1,
+        "pow": 0.9,
         "targets": 1,
         "options": []
       },
@@ -13348,6 +13463,7 @@
       },
       "S3": {
         "hitTypes": ["normal", "miss"],
+        "note": "no missing health",
         "rate": 0.3,
         "pow": 1,
         "targets": 1,
@@ -14036,7 +14152,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.9,
+        "rate": 1,
         "pow": 1,
         "targets": 3,
         "options": []
@@ -14300,6 +14416,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "not including splash",
         "rate": 1.5,
         "pow": 1,
         "targets": 1,
@@ -14522,7 +14639,7 @@
         "pow": 0,
         "options": [
           {
-            "name": "S3 heal",
+            "name": "S2 heal",
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.15
@@ -14679,7 +14796,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.8,
+        "rate": 0.9,
         "pow": 0.95,
         "targets": 3,
         "options": []
@@ -14809,9 +14926,11 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "60% penetration",
         "rate": 0.9,
         "pow": 0.95,
         "targets": 3,
+        "penetration": 0.6,
         "options": []
       }
     },
@@ -15044,6 +15163,7 @@
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "max hits",
         "rate": 2.1,
         "pow": 0.95,
         "targets": 1,
@@ -17057,9 +17177,11 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "100% penetration",
         "rate": 0.75,
         "pow": 1,
         "targets": 1,
+        "penetration": 1,
         "selfSpdScaling": 0.00075,
         "options": []
       },
@@ -17140,11 +17262,12 @@
         "options": []
       },
       "S3": {
-        "TODO": "def pen",
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "70% penetration",
         "rate": 0.7,
         "pow": 0.95,
         "targets": 1,
+        "penetration": 0.7,
         "selfSpdScaling": 0.00075,
         "options": []
       }
@@ -17410,11 +17533,12 @@
         "options": []
       },
       "S3": {
-        "TODO": "def pen",
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "60% penetration",
         "rate": 0.5,
         "pow": 0.9,
         "targets": 3,
+        "penetration": 0.6,
         "selfDefScaling": 1.3,
         "options": []
       }
@@ -17564,7 +17688,6 @@
         "options": []
       },
       "S3": {
-        "TODO": "flat shield",
         "hitTypes": [],
         "options": []
       }
@@ -18851,6 +18974,7 @@
         "rate": 0.8,
         "pow": 1,
         "targets": 1,
+        "selfSpdScaling": 0.00075,
         "options": []
       },
       "S2": {
@@ -18858,6 +18982,7 @@
         "rate": 1.2,
         "pow": 1,
         "targets": 1,
+        "selfSpdScaling": 0.001125,
         "options": []
       },
       "S3": {
@@ -19479,6 +19604,12 @@
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.25
+          },
+          {
+            "name": "S3 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.15
           }
         ]
       }
@@ -19661,6 +19792,7 @@
         "rate": 0.8,
         "pow": 1,
         "targets": 1,
+        "selfSpdScaling": 0.00075,
         "options": []
       },
       "S2": {
@@ -19668,6 +19800,7 @@
         "rate": 1.2,
         "pow": 1,
         "targets": 1,
+        "selfSpdScaling": 0.001125,
         "options": []
       },
       "S3": {
@@ -19861,7 +19994,12 @@
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
+        "rate": 0.8,
+        "pow": 1,
+        "targets": 1,
+        "penetration": 0.5,
         "options": []
       },
       "S3": {
@@ -20020,6 +20158,7 @@
       },
       "S3": {
         "hitTypes": ["normal", "miss"],
+        "note": "no missing health",
         "rate": 0.5,
         "pow": 1,
         "targets": 1,
@@ -21401,8 +21540,10 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "30% penetration",
         "rate": 1.7,
         "pow": 0.8,
+        "penetration": 0.3,
         "targets": 1,
         "options": []
       }
@@ -21772,6 +21913,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 0.8,
         "pow": 1.3,
         "targets": 3,
@@ -21853,7 +21995,7 @@
         "pow": 0,
         "options": [
           {
-            "name": "S3 heal",
+            "name": "S2 heal",
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.07
@@ -21943,10 +22085,11 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "100% penetration",
         "rate": 1.5,
         "pow": 1,
         "targets": 1,
-        "penetration": 0.3,
+        "penetration": 1,
         "options": []
       }
     },
@@ -22084,8 +22227,10 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 1.3,
         "pow": 0.9,
+        "penetration": 0.35,
         "targets": 1,
         "options": []
       },
@@ -22163,6 +22308,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "100% penetration",
         "rate": 0.95,
         "pow": 1,
         "targets": 3,
@@ -22320,25 +22466,15 @@
     "ex_equip": [],
     "skills": {
       "S1": {
-        "TODO:": "find multis",
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0,
-        "pow": 0,
-        "targets": 1,
+        "hitTypes": [],
         "options": []
       },
       "S2": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0,
-        "pow": 0,
-        "targets": 1,
+        "hitTypes": [],
         "options": []
       },
       "S3": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0,
-        "pow": 0,
-        "targets": 1,
+        "hitTypes": [],
         "options": []
       }
     },
@@ -22672,6 +22808,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 0.7,
         "pow": 1,
         "targets": 1,
@@ -22820,6 +22957,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 1.2,
         "pow": 1.3,
         "targets": 1,
@@ -23653,7 +23791,7 @@
             "name": "S3 barrier",
             "rate": 0,
             "pow": 0,
-            "selfHpScaling": 2
+            "selfHpScaling": 0.2
           }
         ]
       }
@@ -23682,6 +23820,81 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0.18
+      }
+    }
+  },
+  "Twisted Eidolon Kayron": {
+    "code": "c2023",
+    "_id": "twisted-eidolon-kayron",
+    "name": "Twisted Eidolon Kayron",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "assassin",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2023_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2023_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.85,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13275,
+        "atk": 984,
+        "hp": 4735,
+        "spd": 113,
+        "def": 381,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16901,
+        "atk": 1228,
+        "hp": 6266,
+        "spd": 113,
+        "def": 473,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
@@ -24964,8 +25177,10 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "70% penetration",
         "rate": 2,
         "pow": 0.95,
+        "penetration": 0.7,
         "targets": 1,
         "options": []
       }
@@ -25046,6 +25261,7 @@
       },
       "S3": {
         "hitTypes": ["normal", "miss"],
+        "note": "no missing health",
         "rate": 0.5,
         "pow": 1,
         "targets": 1,
@@ -25602,6 +25818,7 @@
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "S1 proc",
         "rate": 1,
         "pow": 1,
         "targets": 1,

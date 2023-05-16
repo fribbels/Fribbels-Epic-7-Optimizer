@@ -310,18 +310,17 @@ window.jQuery = $;
               <div class="inputStatLabel" data-t>Res</div>
               <input type="number" id="inputMaxResLimit" class="optimizer-number-input stat-number-input"><br>
 
+              <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
+              <div class="inputStatLabel" data-t>Cp</div>
+              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input rating-number-input"><br>
 
 
+
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
-              <div class="horizontalSpace" ></div>
-              <div class="horizontalSpace" ></div>
-              <div class="horizontalSpace" ></div>
-              <div class="horizontalSpace" ></div>
-              <div class="horizontalSpace" ></div>
-              <div class="horizontalSpace" ></div>
+              <div class="horizontalSpace" style="height:1px"></div>
 
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterSkillsTooltip"></img>
@@ -346,9 +345,6 @@ window.jQuery = $;
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterRatingsTooltip"></img>
                 <div class="panelLabelText" id="ratingsLabel" data-content=" (clear)" data-t>Rating filters</div>
               </div>
-              <input type="number" id="inputMinCpLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel" data-t>Cp</div>
-              <input type="number" id="inputMaxCpLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinHppsLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel" data-t>HpS</div>
@@ -387,8 +383,12 @@ window.jQuery = $;
               <input type="number" id="inputMaxDmgDLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinScoreLimit" class="optimizer-number-input rating-number-input">
-              <div class="inputStatLabel" data-t>Score</div>
+              <div class="inputStatLabel" data-t>GS</div>
               <input type="number" id="inputMaxScoreLimit" class="optimizer-number-input rating-number-input"><br>
+
+              <input type="number" id="inputMinBSLimit" class="optimizer-number-input rating-number-input">
+              <div class="inputStatLabel" data-t>BS</div>
+              <input type="number" id="inputMaxBSLimit" class="optimizer-number-input rating-number-input"><br>
 
               <input type="number" id="inputMinPriorityLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel" data-t>Prio</div>

@@ -250,7 +250,7 @@ module.exports = {
 
             const result = await Swal.fire({
                 title: '',
-                width: 500,
+                width: 600,
                 html: `
                     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
@@ -749,6 +749,10 @@ module.exports = {
                               <input type="number" id="inputMinScoreLimit${index}" class="optimizer-number-input rating-number-input">
                               <div class="inputStatLabel" data-t>${i18next.t("Score")}</div>
                               <input type="number" id="inputMaxScoreLimit${index}" class="optimizer-number-input rating-number-input"><br>
+
+                              <input type="number" id="inputMinBSLimit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("BS")}</div>
+                              <input type="number" id="inputMaxBSLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinPriorityLimit${index}" class="optimizer-number-input rating-number-input">
                               <div class="inputStatLabel" data-t>${i18next.t("Prio")}</div>
@@ -1660,11 +1664,8 @@ function generateSkillOptionsHtml(prefix, hero, heroData) {
     var skillTypes = !heroData.skills ? [] : heroData.skills[prefix]
     var skillTypesHtml = ""
     for (var skillType of skillTypes.options) {
-        console.warn("---")
-        console.warn(hero)
-        console.warn(safeGetSkill(hero, prefix))
-        console.warn(safeGetSkill(hero, prefix).skillEffect)
-        skillTypesHtml += `<option value='${skillType.name}' ${safeGetSkill(hero, prefix).skillEffect == skillType.name ? "selected" : ""}>${skillType.name}</option>\n`
+        var note = skillType.note ? " (" + skillType.note + ")" : "";
+        skillTypesHtml += `<option value='${skillType.name}' ${safeGetSkill(hero, prefix).skillEffect == skillType.name ? "selected" : ""}>${skillType.name + note}</option>\n`
     }
     const html =
 `

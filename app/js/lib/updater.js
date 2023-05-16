@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.9.0-beta.1";
+const currentVersion = "1.9.0-beta.2";
 
 global.TEST = true;
 
@@ -13,6 +13,14 @@ global.TEST = true;
     - update version in app package.json
     - update repo in project package.json
     - yarn package
+
+    Patch update checklist
+    - Update server temp unit ids
+    - Update server temp items
+    - Scan artifact ids, update artifact file
+    - Download unit images
+    - Upload herodata copy to server
+
 *********************************************************************************************/
 
 /********************************************************************************************

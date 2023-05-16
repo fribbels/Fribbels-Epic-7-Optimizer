@@ -269,7 +269,7 @@ function getField(heroStats, stat) {
 
 function buildGrid(localeText) {
 
-    const DIGITS_2 = 38;
+    const DIGITS_2 = 30;
     const DIGITS_3 = 35;
     const DIGITS_4 = 42;
     const DIGITS_5 = 45;
@@ -310,11 +310,11 @@ function buildGrid(localeText) {
             {headerName: i18next.t('s1'), field: 's1', width: DIGITS_5},
             {headerName: i18next.t('s2'), field: 's2', width: DIGITS_5},
             {headerName: i18next.t('s3'), field: 's3', width: DIGITS_5},
-            {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
+            {headerName: i18next.t('gs'), field: 'score', width: DIGITS_3},
             {headerName: i18next.t('bs'), field: 'bs', width: DIGITS_3},
             {headerName: i18next.t('prio'), field: 'priority', width: DIGITS_3},
             {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2},
-            {headerName: i18next.t('actions'), field: 'property', width: 45, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
+            {headerName: i18next.t(''), field: 'property', width: 25, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',

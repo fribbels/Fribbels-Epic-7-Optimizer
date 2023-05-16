@@ -164,19 +164,12 @@ flat2mod -> ddj
 //
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
-        float artifactHealth = 0;
-        float artifactAttack = 0;
-        if (!StringUtils.isBlank(hero.getArtifactName()) && !StringUtils.equals(hero.getArtifactName(), "None")) {
-            if (StringUtils.isBlank(hero.getArtifactLevel())) {
-                System.out.println("??");
-            }
-            final ArtifactStats artifactStats = Main.artifactStatsDb.getArtifactStats(hero.artifactName, Integer.parseInt(hero.getArtifactLevel()));
-            artifactHealth = artifactStats.getHealth();
-            artifactAttack = artifactStats.getAttack();
-        }
+//        final ArtifactStats artifactStats = Main.artifactStatsDb.getArtifactStats(hero.artifactName, Integer.parseInt(hero.getArtifactLevel()));
+//        final float artifactHealth = artifactStats.getHealth();
+//        final float artifactAttack = artifactStats.getAttack();
 
-        final float bsHp = (hp - base.hp - artifactHealth - (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/2 : 0)) / base.hp * 100;
-        final float bsAtk = (atk - base.atk - artifactAttack - (sets[2] > 1 ? sets[2] / 4 * atkSetBonus : 0)) / base.atk * 100;
+        final float bsHp = (hp - base.hp - hero.artifactHealth - (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/2 : 0)) / base.hp * 100;
+        final float bsAtk = (atk - base.atk - hero.artifactAttack - (sets[2] > 1 ? sets[2] / 4 * atkSetBonus : 0)) / base.atk * 100;
         final float bsDef = (def - base.def - (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) / base.def * 100;
         final float bsCr = (cr - base.cr - (sets[4] > 1 ? sets[4] / 2 * 12 : 0));
         final float bsCd = (cd - base.cd - (sets[6] > 3 ? 60 : 0));
@@ -194,19 +187,6 @@ flat2mod -> ddj
 //                spd: (row.spd - base.spd - bonusSetSpeed - bonusSetRevenge),
 
         final int bs = (int) (bsHp + bsAtk + bsDef + bsCr*1.6f + bsCd*1.14f + bsEff + bsRes + bsSpd*2);
-        if (hero.name.equals("Straze")) {
-            System.out.println("bsHp " + bsHp);
-            System.out.println("bsAtk " + bsAtk);
-            System.out.println("bsDef " + bsDef);
-            System.out.println("bsCr " + bsCr);
-            System.out.println("bsCd " + bsCd);
-            System.out.println("bsEff " + bsEff);
-            System.out.println("bsRes " + bsRes);
-            System.out.println("bsSpd " + bsSpd);
-            System.out.println("bs " + bs);
-            System.out.println("---------------");
-        }
-
 
         return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps,
                 dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, s1, s2, s3, upgrades, conversions, score, bs, priority,

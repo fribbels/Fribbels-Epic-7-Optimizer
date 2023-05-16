@@ -124,6 +124,7 @@ module.exports = {
                                     skillData.options.push({
                                         name: skill + " " + z,
                                         rate: skillData.rate,
+                                        note: skillData.note,
                                         pow: skillData.pow,
                                         targets: skillData.targets,
                                         selfHpScaling: skillData.selfHpScaling,

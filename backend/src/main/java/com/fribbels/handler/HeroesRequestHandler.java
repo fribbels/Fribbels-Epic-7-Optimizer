@@ -6,6 +6,7 @@ import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
 import com.fribbels.enums.Gear;
+import com.fribbels.model.ArtifactStats;
 import com.fribbels.model.AugmentedStats;
 import com.fribbels.model.BaseStats;
 import com.fribbels.model.Hero;
@@ -304,6 +305,13 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         }
     }
 
+    private int parseArtifactLevel(final String artifactLevel) {
+        if (StringUtils.isNumeric(artifactLevel)) {
+            return Integer.parseInt(artifactLevel);
+        }
+        return 0;
+    }
+
     private void addStatsToHero(final Hero hero, final boolean useReforgeStats) {
 //        if ("Angelic Montmorancy".equals(hero.getName())) {
 //            System.out.println("p");
@@ -311,6 +319,10 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
 
         final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
 
+        // Update artifact
+        final ArtifactStats artifactStats = artifactStatsDb.getArtifactStats(hero.getArtifactName(), parseArtifactLevel(hero.getArtifactLevel()));
+        hero.artifactHealth = artifactStats.getHealth();
+        hero.artifactAttack = artifactStats.getAttack();
 
         // Update equipment
         final Map<Gear, Item> equipment = hero.getEquipment();
@@ -367,6 +379,11 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     public boolean addStatsToBuild(final Hero hero, final HeroStats baseStats, final HeroStats build, final boolean useReforgeStats) {
+        // Update artifact
+        final ArtifactStats artifactStats = artifactStatsDb.getArtifactStats(hero.getArtifactName(), parseArtifactLevel(hero.getArtifactLevel()));
+        hero.artifactHealth = artifactStats.getHealth();
+        hero.artifactAttack = artifactStats.getAttack();
+
         final List<String> itemIds = build.getItems();
         final List<Item> items = itemDb.getItemsById(itemIds);
         for (final Item item : items) {
@@ -435,6 +452,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         build.s3 = finalStats.s3;
         build.upgrades = finalStats.upgrades;
         build.score = finalStats.score;
+        build.bs = finalStats.bs;
         build.priority = finalStats.priority;
         build.conversions = finalStats.conversions;
 

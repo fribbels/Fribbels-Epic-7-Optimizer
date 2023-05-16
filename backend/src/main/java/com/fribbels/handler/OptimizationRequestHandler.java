@@ -396,6 +396,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.getS2() < request.getInputMinS2Limit() || heroStats.getS2() > request.getInputMaxS2Limit()
                 ||  heroStats.getS3() < request.getInputMinS3Limit() || heroStats.getS3() > request.getInputMaxS3Limit()
                 ||  heroStats.getScore() < request.getInputMinScoreLimit() || heroStats.getScore() > request.getInputMaxScoreLimit()
+                ||  heroStats.getBs() < request.getInputMinBSLimit() || heroStats.getBs() > request.getInputMaxBSLimit()
                 ||  heroStats.getPriority() < request.getInputMinPriorityLimit() || heroStats.getPriority() > request.getInputMaxPriorityLimit()
                 ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
                 ||  heroStats.getConversions() < request.getInputMinConversionsLimit() || heroStats.getConversions() > request.getInputMaxConversionsLimit()
@@ -679,6 +680,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final GpuOptimizerKernel kernel;
 
         hero.setDamageMultipliers(request.damageMultipliers);
+
 //        System.out.println();
 
 //        System.out.println("multis");
@@ -1101,6 +1103,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.s2 < request.inputMinS2Limit || heroStats.s2 > request.inputMaxS2Limit
                 ||  heroStats.s3 < request.inputMinS3Limit || heroStats.s3 > request.inputMaxS3Limit
                 ||  heroStats.score < request.inputMinScoreLimit || heroStats.score > request.inputMaxScoreLimit
+                ||  heroStats.bs < request.inputMinBSLimit || heroStats.bs > request.inputMaxBSLimit
                 ||  heroStats.priority < request.inputMinPriorityLimit || heroStats.priority > request.inputMaxPriorityLimit
                 ||  heroStats.upgrades < request.inputMinUpgradesLimit || heroStats.upgrades > request.inputMaxUpgradesLimit
                 ||  heroStats.conversions < request.inputMinConversionsLimit || heroStats.conversions > request.inputMaxConversionsLimit

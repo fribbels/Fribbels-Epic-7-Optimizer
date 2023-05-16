@@ -533,7 +533,7 @@ module.exports = {
                     type: 'value'
                 },
                 legend: {
-                    data: ['GS probabilities', 'GS probabilities with max mods']
+                    data: ['GS probabilities', 'GS probabilities with max substat mod']
                 },
                 series: [
                     {

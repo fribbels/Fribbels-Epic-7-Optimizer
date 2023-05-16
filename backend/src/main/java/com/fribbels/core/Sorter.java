@@ -86,6 +86,9 @@ public class Sorter {
                     case SCORE:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getScore));
                         break;
+                    case BS:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getBs));
+                        break;
                     case PRIORITY:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getPriority));
                         break;
@@ -170,6 +173,9 @@ public class Sorter {
                         break;
                     case SCORE:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getScore).reversed());
+                        break;
+                    case BS:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getBs).reversed());
                         break;
                     case PRIORITY:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getPriority).reversed());

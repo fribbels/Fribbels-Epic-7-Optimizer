@@ -46,6 +46,9 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final int SETTING_RAGE_SET;
     @Constant final int SETTING_PEN_SET;
 
+    @Constant final float baseAtk;
+    @Constant final float baseHp;
+    @Constant final float baseDef;
     @Constant final float baseCr;
     @Constant final float baseCd;
     @Constant final float baseEff;
@@ -143,7 +146,6 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final int inputMinS3Limit;
     @Constant final int inputMaxS3Limit;
 
-
     @Constant final float[] rate;
     @Constant final float[] pow;
     @Constant final int[] targets;
@@ -173,12 +175,17 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final float[] extraSelfDefScaling;
     @Constant final float[] extraSelfHpScaling;
 
+    @Constant final float artifactHealth;
+    @Constant final float artifactAttack;
+
     @Constant final int inputMinUpgradesLimit;
     @Constant final int inputMaxUpgradesLimit;
     @Constant final int inputMinConversionsLimit;
     @Constant final int inputMaxConversionsLimit;
     @Constant final int inputMinScoreLimit;
     @Constant final int inputMaxScoreLimit;
+    @Constant final int inputMinBSLimit;
+    @Constant final int inputMaxBSLimit;
     @Constant final int inputMinPriorityLimit;
     @Constant final int inputMaxPriorityLimit;
 
@@ -329,6 +336,9 @@ public class GpuOptimizerKernel extends Kernel {
         this.SETTING_RAGE_SET = SETTING_RAGE_SET;
         this.SETTING_PEN_SET = SETTING_PEN_SET;
 
+        this.baseAtk = base.atk;
+        this.baseHp = base.hp;
+        this.baseDef = base.def;
         this.baseCr = base.cr;
         this.baseCd = base.cd;
         this.baseEff = base.eff;
@@ -400,12 +410,17 @@ public class GpuOptimizerKernel extends Kernel {
         inputMinS3Limit = request.inputMinS3Limit;
         inputMaxS3Limit = request.inputMaxS3Limit;
 
+        artifactAttack = request.hero.artifactAttack;
+        artifactHealth = request.hero.artifactHealth;
+
         inputMinUpgradesLimit = request.inputMinUpgradesLimit;
         inputMaxUpgradesLimit = request.inputMaxUpgradesLimit;
         inputMinConversionsLimit = request.inputMinConversionsLimit;
         inputMaxConversionsLimit = request.inputMaxConversionsLimit;
         inputMinScoreLimit = request.inputMinScoreLimit;
         inputMaxScoreLimit = request.inputMaxScoreLimit;
+        inputMinBSLimit = request.inputMinBSLimit;
+        inputMaxBSLimit = request.inputMaxBSLimit;
         inputMinPriorityLimit = request.inputMinPriorityLimit;
         inputMaxPriorityLimit = request.inputMaxPriorityLimit;
 
@@ -750,6 +765,26 @@ public class GpuOptimizerKernel extends Kernel {
             final int upgrades = (int) (wUpg+hUpg+aUpg+nUpg+rUpg+bUpg);
             final int conversions = (int) (wConv+hConv+aConv+nConv+rConv+bConv);
 
+            final float bsHp = (hp - baseHp - artifactHealth - (hpSet * hpSetBonus) + (torrentSet * hpSetBonus/2)) / baseHp * 100;
+            final float bsAtk = (atk - baseAtk - artifactAttack - (atkSet * atkSetBonus)) / baseAtk * 100;
+            final float bsDef = (def - baseDef - (defSet * defSetBonus)) / baseDef * 100;
+            final float bsCr = (cr - baseCr - (crSet * 12));
+            final float bsCd = (cd - baseCd - (cdSet * 60));
+            final float bsEff = (eff - baseEff - (effSet * 20));
+            final float bsRes = (res - baseRes - (resSet * 20));
+            final float bsSpd = (spd - baseSpeed - (speedSet * speedSetBonus) - (revengeSet * revengeSetBonus));
+
+//            final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
+//            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
+//            final float def =  ((bonusBaseDef  + wDef+hDef+aDef+nDef+rDef+bDef + (defSet * defSetBonus)) * bonusMaxDef);
+//            final int cr =     (int) (baseCr + wCr+hCr+aCr+nCr+rCr+bCr + (crSet * 12) + bonusCr + aeiCr);
+//            final int cd =     (int) (baseCd + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 60) + bonusCd + aeiCd);
+//            final int eff =    (int) (baseEff   + wEff+hEff+aEff+nEff+rEff+bEff + (effSet * 20) + bonusEff + aeiEff);
+//            final int res =    (int) (baseRes   + wRes+hRes+aRes+nRes+rRes+bRes + (resSet * 20) + bonusRes + aeiRes);
+//            final int spd =    (int) (baseSpeed + wSpeed+hSpeed+aSpeed+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + bonusSpeed + aeiSpeed);
+
+            final int bs = (int) (bsHp + bsAtk + bsDef + bsCr*1.6f + bsCd*1.14f + bsEff + bsRes + bsSpd*2);
+
             final boolean f1 = atk < inputAtkMinLimit || atk > inputAtkMaxLimit
                     ||  hp  < inputHpMinLimit  || hp > inputHpMaxLimit
                     ||  def < inputDefMinLimit || def > inputDefMaxLimit
@@ -774,7 +809,8 @@ public class GpuOptimizerKernel extends Kernel {
                     ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit
                     ||  s1 < inputMinS1Limit || s1 > inputMaxS1Limit
                     ||  s2 < inputMinS2Limit || s2 > inputMaxS2Limit
-                    ||  s3 < inputMinS3Limit || s3 > inputMaxS3Limit;
+                    ||  s3 < inputMinS3Limit || s3 > inputMaxS3Limit
+                    ||  bs < inputMinBSLimit || bs > inputMaxBSLimit;
 
 //            if (true)
 //                return;

@@ -157,6 +157,7 @@ module.exports = {
             penetration:               skillNames.map(x => findSkill(x, hero, heroData).penetration || 0),
             atkIncrease:               skillNames.map(x => findSkill(x, hero, heroData).atkIncrease || 0),
             cdmgIncrease:              skillNames.map(x => findSkill(x, hero, heroData).cdmgIncrease || 0),
+            note:                      skillNames.map(x => findSkill(x, hero, heroData).note || ""),
             rate:                      skillNames.map(x => findSkill(x, hero, heroData).rate || 0),
             pow:                       skillNames.map(x => findSkill(x, hero, heroData).pow || 0),
             targets:                   skillNames.map(x => findSkill(x, hero, heroData).targets || 0),

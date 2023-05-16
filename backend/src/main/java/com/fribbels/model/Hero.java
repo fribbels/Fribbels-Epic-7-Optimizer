@@ -54,6 +54,7 @@ public class Hero {
 
     public int upgrades;
     public int score;
+    public int bs;
     public int priority;
     public int conversions;
 
@@ -321,6 +322,7 @@ public class Hero {
 
         this.upgrades = heroStats.getUpgrades();
         this.score = heroStats.getScore();
+        this.bs = heroStats.getBs();
         this.priority = heroStats.getPriority();
         this.conversions = heroStats.getConversions();
     }

@@ -63,6 +63,9 @@ public class OptimizationRequest extends Request {
     private int spd;
     private int dac;
 
+    private float artifactAttack;
+    private float artifactHealth;
+
     public int inputAtkMinLimit;
     public int inputAtkMaxLimit = Integer.MAX_VALUE;
     public int inputHpMinLimit;
@@ -114,6 +117,8 @@ public class OptimizationRequest extends Request {
     public int inputMaxConversionsLimit = Integer.MAX_VALUE;
     public int inputMinScoreLimit;
     public int inputMaxScoreLimit = Integer.MAX_VALUE;
+    public int inputMinBSLimit;
+    public int inputMaxBSLimit = Integer.MAX_VALUE;
     public int inputMinPriorityLimit;
     public int inputMaxPriorityLimit = Integer.MAX_VALUE;
 

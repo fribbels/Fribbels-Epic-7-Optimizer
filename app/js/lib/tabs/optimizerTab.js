@@ -533,6 +533,8 @@ module.exports = {
         request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit' + index);
         request.inputMinScoreLimit = readNumber('inputMinScoreLimit' + index);
         request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit' + index);
+        request.inputMinBSLimit = readNumber('inputMinBSLimit' + index);
+        request.inputMaxBSLimit = readNumber('inputMaxBSLimit' + index);
         request.inputMinPriorityLimit = readNumber('inputMinPriorityLimit' + index);
         request.inputMaxPriorityLimit = readNumber('inputMaxPriorityLimit' + index);
 
@@ -668,6 +670,8 @@ module.exports = {
         $("#inputMaxConversionsLimit" + index).val(inputDisplayNumber(request.inputMaxConversionsLimit));
         $("#inputMinScoreLimit" + index).val(inputDisplayNumber(request.inputMinScoreLimit));
         $("#inputMaxScoreLimit" + index).val(inputDisplayNumber(request.inputMaxScoreLimit));
+        $("#inputMinBSLimit" + index).val(inputDisplayNumber(request.inputMinBSLimit));
+        $("#inputMaxBSLimit" + index).val(inputDisplayNumber(request.inputMaxBSLimit));
         $("#inputMinPriorityLimit" + index).val(inputDisplayNumber(request.inputMinPriorityLimit));
         $("#inputMaxPriorityLimit" + index).val(inputDisplayNumber(request.inputMaxPriorityLimit));
 
@@ -1214,15 +1218,14 @@ async function submitOptimizationFilterRequest() {
     const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     params.hero = heroResponse.hero;
     params.hero.artifactAttack = 0;
-    params.hero.artifactHp = 0;
-    console.error("DEBUG", params.hero)
+    params.hero.artifactHealth = 0;
     if (params.hero.artifactName && params.hero.artifactName != "None") {
         const artifactLevelText = params.hero.artifactLevel;
         if (artifactLevelText != "None") {
             const artifactLevel = parseInt(artifactLevelText);
-            const artifactStats = Artifact.getStats(params.hero.artifactName, 30);
+            const artifactStats = Artifact.getStats(params.hero.artifactName, artifactLevel);
 
-            params.hero.artifactHp += artifactStats.health;
+            params.hero.artifactHealth += artifactStats.health;
             params.hero.artifactAttack += artifactStats.attack;
         }
     }
@@ -1272,16 +1275,15 @@ async function submitOptimizationRequest() {
     }
 
     request.hero.artifactAttack = 0;
-    request.hero.artifactHp = 0;
-    console.error("DEBUG", request.hero)
+    request.hero.artifactHealth = 0;
     if (request.hero.artifactName && request.hero.artifactName != "None") {
         const artifactLevelText = request.hero.artifactLevel;
         if (artifactLevelText != "None") {
             const artifactLevel = parseInt(artifactLevelText);
             const artifactStats = Artifact.getStats(request.hero.artifactName, artifactLevel);
 
-            request.hero.artifactHp += artifactStats.health;
-            request.hero.artifactAttack += artifactStats.attack;
+            request.hero.artifactHealth = artifactStats.health;
+            request.hero.artifactAttack = artifactStats.attack;
         }
     }
 
