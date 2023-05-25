@@ -53,7 +53,6 @@ public class HeroDb {
         }
         for (int i = 0 ; i < newHeroes.size(); i++) {
             final Hero newHero = newHeroes.get(i);
-            System.out.println(newHero);
             newHero.setSkills(baseStatsDb.getBaseStatsByName(newHero.name).getSkills());
 
             sanitizeHero(newHero);

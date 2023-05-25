@@ -59,8 +59,8 @@ public class OptimizationDb {
     }
 
     public HeroStats[] getRows(final int startRow, final int endRow) {
-        System.out.println("Filtered indices.length " + filteredIndices.length);
-        System.out.println("FilteredIds size " + filteredIds.size());
+//        System.out.println("Filtered indices.length " + filteredIndices.length);
+//        System.out.println("FilteredIds size " + filteredIds.size());
 
         if (filteredIds.size() == 0) {
             return ArrayUtils.subarray(resultHeroStats, startRow, endRow);

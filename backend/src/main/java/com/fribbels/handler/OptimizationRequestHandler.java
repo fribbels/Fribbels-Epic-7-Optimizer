@@ -367,7 +367,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             }
         }
 
-        System.out.println("Indices count: " + count);
+//        System.out.println("Indices count: " + count);
         optimizationDb.setFilteredIds(ids, count);
 
         return "";
@@ -503,7 +503,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final HeroStats heroStat = heroStats[0];
 
         heroStat.setProperty(request.getProperty());
-        System.out.println(heroStat);
+//        System.out.println(heroStat);
 
         return "";
     }

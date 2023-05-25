@@ -164,6 +164,9 @@ input[type=submit] {
   margin-left: 1px;
   margin-right: 10px;
 }
+.controlsPanel {
+  width: 149px;
+}
 
 .importerButton {
   width: 200px;
