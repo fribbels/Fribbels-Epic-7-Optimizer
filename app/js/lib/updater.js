@@ -45,11 +45,10 @@ module.exports = {
     New in v1.9.0
 </h2>
 <ul class="newFeatures">
-    <li>Updated inventory item finder.</li>
-    <li>Skills</li>
-    <li>Build score</li>
-    <li>Fix substat mods permutations</li>
-    <li>Item simulator</li>
+    <li>Added damage calculations for hero S1/S2/S3 scaling multipliers</li>
+    <li>Added item enhancing simulator on Enhancing tab which predicts the probabilities of gear score ranges of upgrading an unfinished item to +15, along with its maximum substat mod potential</li>
+    <li>Added build score (BS) rating which takes into account gear score, along item main stats and hero-specific flat stat to percent equivalents</li>
+    <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory</li>
 </ul>
 `
         );

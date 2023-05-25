@@ -1274,6 +1274,21 @@
       },
       "code":"ef411"
    },
+   "Golden Rose":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0070.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0070_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0070_l.jpg"
+      },
+      "name":"Golden Rose",
+      "rarity":5,
+      "role":"warrior",
+      "stats":{
+         "attack":15,
+         "health":54
+      },
+      "code":""
+   },
    "Grail of Blood":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art3_1.png",
