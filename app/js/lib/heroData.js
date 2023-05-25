@@ -87,10 +87,81 @@ module.exports = {
         const baseStatsByName = {};
         Object.keys(heroesByName)
                 .forEach(x => {
+                    if (!heroesByName[x].skills) {
+                        heroesByName[x].skills = {
+      "S1": {
+        "hitTypes": ["normal"],
+        "targets": 0,
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["normal"],
+        "targets": 0,
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["normal"],
+        "targets": 0,
+        "rate": 0,
+        "pow": 0,
+        "options": []
+      }
+    }
+                    }
+
+
+                    var s = heroesByName[x].skills;
+                    for (var skill of ["S1", "S2", "S3"]) {
+                        var skillData = s[skill];
+
+                        if (skillData) {
+                            for (var z of skillData.hitTypes) {
+                                if (!skillData.options.find(y => y.name.includes(z))) {
+                                    skillData.options.push({
+                                        name: skill + " " + z,
+                                        rate: skillData.rate,
+                                        note: skillData.note,
+                                        pow: skillData.pow,
+                                        targets: skillData.targets,
+                                        selfHpScaling: skillData.selfHpScaling,
+                                        selfAtkScaling: skillData.selfAtkScaling,
+                                        selfDefScaling: skillData.selfDefScaling,
+                                        selfSpdScaling: skillData.selfSpdScaling,
+                                        increasedValue: skillData.increasedValue,
+                                        extraSelfHpScaling: skillData.extraSelfHpScaling,
+                                        extraSelfDefScaling: skillData.extraSelfDefScaling,
+                                        extraSelfAtkScaling: skillData.extraSelfAtkScaling,
+                                        cdmgIncrease: skillData.cdmgIncrease,
+                                        penetration: skillData.penetration,
+                                    });
+                                }
+                            }
+                        }
+
+                        if (!skillData) {
+                            s[skill] = {}
+                        }
+
+                        if (!s[skill].options || s[skill].options.length == 0) {
+                            s[skill].options = [];
+                            s[skill].options.push({
+                                name: skill + " n/a",
+                                targets: 0,
+                                rate: 0,
+                                pow: 0,
+                            })
+                        }
+                    }
+
                     const baseStats = module.exports.getBaseStatsByName(x);
                     baseStatsByName[x] = baseStats;
                 });
 
+        await Api.setArtifacts(artifactsByName);
         await Api.setBaseStats(baseStatsByName);
     },
 
@@ -150,7 +221,12 @@ module.exports = {
         const status = heroesByName[name].calculatedStatus;
         return {
             lv50FiveStarFullyAwakened: baseToStatObj(status.lv50FiveStarFullyAwakened),
-            lv60SixStarFullyAwakened: baseToStatObj(status.lv60SixStarFullyAwakened)
+            lv60SixStarFullyAwakened: baseToStatObj(status.lv60SixStarFullyAwakened),
+            skills: {
+                S1: heroesByName[name].skills.S1.options,
+                S2: heroesByName[name].skills.S2.options,
+                S3: heroesByName[name].skills.S3.options
+            }
         }
     },
 

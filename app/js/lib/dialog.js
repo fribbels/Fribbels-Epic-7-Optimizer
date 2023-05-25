@@ -231,6 +231,165 @@ module.exports = {
         $("select[id='editArtifactLevel']").find('option').remove().end().append(html);
     },
 
+
+    changeSkillOptionsDialog: async (heroId) => {
+        return new Promise(async (resolve, reject) => {
+            const getAllHeroesResponse = await Api.getAllHeroes();
+            const heroes = getAllHeroesResponse.heroes;
+
+
+            hero = heroes.find(x => x.id == heroId)
+            if (!hero) {
+                return;
+            }
+            const heroData = HeroData.getHeroExtraInfo(hero.name)
+
+            // console.warn(hero);
+            // const heroInfo = heroData[hero.name];
+            // const ee = heroInfo.ex_equip[0];
+
+            const result = await Swal.fire({
+                title: '',
+                width: 600,
+                html: `
+                    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
+
+                    <p style="color: var(--font-color)" data-t>${i18next.t("Skill options")}</p>
+                    <div class="horizontalSpace"></div>
+                    <div class="horizontalSpace"></div>
+
+                    <div class="editGearForm tabsWrapperBody">
+                        <div class="tabsWrapper">
+                            <div class="tabsButtonWrapper">
+                                <button class="tab-button active" style="border-top-left-radius: 10px;" data-id="a">S1</button>
+                                <button class="tab-button" data-id="b">S2</button>
+                                <button class="tab-button" style="border-top-right-radius: 10px;" data-id="c">S3</button>
+                            </div>
+                            <div class="tabsContentWrapper">
+                                <div class="tabsContent active" id="a">
+                                    ${generateSkillOptionsHtml("S1", hero, heroData)}
+                                </div>
+                                <div class="tabsContent" id="b">
+                                    ${generateSkillOptionsHtml("S2", hero, heroData)}
+                                </div>
+                                <div class="tabsContent" id="c">
+                                    ${generateSkillOptionsHtml("S3", hero, heroData)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                // Disabled damage
+                // html: `
+                //     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
+
+                //     <p style="color: var(--font-color)" data-t>${i18next.t("Skill options")}</p>
+                //     <div class="horizontalSpace"></div>
+                //     <div class="horizontalSpace"></div>
+
+                //     <div class="editGearForm tabsWrapperBody">
+                //         <div class="tabsWrapper">
+                //             <div class="tabsButtonWrapper">
+                //                 <button class="tab-button active" style="border-top-left-radius: 10px;" data-id="home">S1</button>
+                //                 <button class="tab-button" data-id="about">S2</button>
+                //                 <button class="tab-button" style="border-top-right-radius: 10px;" data-id="contact">S3</button>
+                //             </div>
+                //             <div class="tabsContentWrapper">
+                //                 <div class="tabsContent active" id="home">
+                //                     ${generateSkillOptionsHtml("S1", hero, heroData)}
+                //                 </div>
+                //                 <div class="tabsContent" id="about">
+                //                     ${generateSkillOptionsHtml("S2", hero, heroData)}
+                //                 </div>
+                //                 <div class="tabsContent" id="contact">
+                //                     ${generateSkillOptionsHtml("S3", hero, heroData)}
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                // `,
+                didOpen: async () => {
+                    // const options = {
+                    //     filter: true,
+                    //     maxHeight: 400,
+                    //     // customFilter: Utils.customFilter,
+                    //     filterAcceptOnEnter: true
+                    // }
+                    // const statSelectOptions = {
+                    //     maxHeight: 500,
+                    //     // customFilter: Utils.customFilter,
+                    // }
+
+                    // $('#editArtifact').multipleSelect(options)
+                    // $('#editArtifact').change(module.exports.changeArtifact)
+                    const tabs = document.querySelector(".tabsWrapper");
+                    const tabButton = document.querySelectorAll(".tab-button");
+                    const contents = document.querySelectorAll(".tabsContent");
+
+                    tabs.onclick = e => {
+                      const id = e.target.dataset.id;
+                      if (id) {
+                        tabButton.forEach(btn => {
+                          btn.classList.remove("active");
+                        });
+                        e.target.classList.add("active");
+
+                        contents.forEach(content => {
+                          content.classList.remove("active");
+                        });
+                        const element = document.getElementById(id);
+                        element.classList.add("active");
+                      }
+                    }
+                },
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: i18next.t("OK"),
+                cancelButtonText: i18next.t("Cancel"),
+                preConfirm: async () => {
+                    // const artifactName = $('#editArtifact').val();
+                    // const artifactLevel = $('#editArtifactLevel').val();
+                    // const imprintNumber = $('#editImprint').val();
+                    // const eeNumber = $('#editEe').val()
+                    // const stars = $('#editStars').val()
+
+                    var skills = ["S1", "S2", "S3"]
+                    const skillOptions = {}
+
+                    for (var skill of skills) {
+                        skillOptions[skill] = {
+                            // attackImprintPercent: parseFloat(document.getElementById(`${skill}EditAttackPercentImprint`).value) || 0,
+                            // attackIncreasePercent: parseFloat(document.getElementById(`${skill}EditAttackPercentIncrease`).value) || 0,
+                            // damageIncreasePercent: parseFloat(document.getElementById(`${skill}EditDamageIncrease`).value) || 0,
+                            // elementalAdvantageEnabled: (document.getElementById(`${skill}EditElementalAdvantageBox`).checked),
+                            // decreasedAttackBuffEnabled: (document.getElementById(`${skill}EditDecreasedAttackBox`).checked),
+                            // attackBuffEnabled: (document.getElementById(`${skill}EditAttackBuffBox`).checked),
+                            // greaterAttackBuffEnabled: (document.getElementById(`${skill}EditGreaterAttackBuffBox`).checked),
+                            // critDamageBuffEnabled: (document.getElementById(`${skill}EditCritDamageBuffBox`).checked),
+                            // vigorAttackBuffEnabled: (document.getElementById(`${skill}EditVigorAttackBuffBox`).checked),
+
+                            skillEffect: (document.getElementById(`${skill}SkillEffect`).value),
+                            // applyToAllSkillsEnabled: (document.getElementById(`${skill}EditApplyToAllSkillsBox`).checked),
+
+                            // targetDefense: parseInt(document.getElementById(`${skill}EditTargetDefense`).value),
+                            // targetDefenseIncreasePercent: parseFloat(document.getElementById(`${skill}EditTargetDefenseIncrease`).value) || 0,
+                            // targetDamageReductionPercent: parseFloat(document.getElementById(`${skill}EditTargetDamageReduction`).value) || 0,
+                            // targetDamageTransferPercent: parseFloat(document.getElementById(`${skill}EditTargetDamageTransfer`).value) || 0,
+                            // targetDefenseBuffEnabled: (document.getElementById(`${skill}EditTargetDefenseBuffBox`).checked),
+                            // targetVigorDefenseBuffEnabled: (document.getElementById(`${skill}EditTargetVigorBuffBox`).checked),
+                            // targetDefenseBreakBuffEnabled: (document.getElementById(`${skill}EditTargetDefenseBreakBox`).checked),
+                            // targetTargetBuffEnabled: (document.getElementById(`${skill}EditTargetTargetBuffBox`).checked)
+                        }
+                    }
+
+                    return skillOptions;
+                }
+            });
+
+            resolve(result.value);
+        });
+    },
+
     editHeroDialog: async (hero) => {
         return new Promise(async (resolve, reject) => {
             const getAllHeroesResponse = await Api.getAllHeroes();
@@ -588,8 +747,12 @@ module.exports = {
                               <input type="number" id="inputMaxDmgDLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinScoreLimit${index}" class="optimizer-number-input rating-number-input">
-                              <div class="inputStatLabel" data-t>${i18next.t("Score")}</div>
+                              <div class="inputStatLabel" data-t>${i18next.t("GS")}</div>
                               <input type="number" id="inputMaxScoreLimit${index}" class="optimizer-number-input rating-number-input"><br>
+
+                              <input type="number" id="inputMinBSLimit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("BS")}</div>
+                              <input type="number" id="inputMaxBSLimit${index}" class="optimizer-number-input rating-number-input"><br>
 
                               <input type="number" id="inputMinPriorityLimit${index}" class="optimizer-number-input rating-number-input">
                               <div class="inputStatLabel" data-t>${i18next.t("Prio")}</div>
@@ -602,6 +765,20 @@ module.exports = {
                               <input type="number" id="inputMinConversionsLimit${index}" class="optimizer-number-input rating-number-input">
                               <div class="inputStatLabel" data-t>${i18next.t("Conv")}</div>
                               <input type="number" id="inputMaxConversionsLimit${index}" class="optimizer-number-input rating-number-input"><br>
+
+
+                              <input type="number" id="inputMinS1Limit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("S1")}</div>
+                              <input type="number" id="inputMaxS1Limit${index}" class="optimizer-number-input rating-number-input"><br>
+
+                              <input type="number" id="inputMinS2Limit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("S2")}</div>
+                              <input type="number" id="inputMaxS2Limit${index}" class="optimizer-number-input rating-number-input"><br>
+
+                              <input type="number" id="inputMinS3Limit${index}" class="optimizer-number-input rating-number-input">
+                              <div class="inputStatLabel" data-t>${i18next.t("S3")}</div>
+                              <input type="number" id="inputMaxS3Limit${index}" class="optimizer-number-input rating-number-input"><br>
+
                             </div>
 
                             <div class="vertical"></div>
@@ -820,7 +997,7 @@ module.exports = {
                     const assetsBySet = Assets.getAssetsBySet();
 
                     const groupSelectMultipleSelectOptions = {
-                        maxHeight: 500,
+                        maxHeight: 600,
                         showClear: true,
                         // hideOptgroupCheckboxes: true,
                         minimumCountSelected: 99,
@@ -1472,7 +1649,183 @@ module.exports = {
     }
 }
 
+function safeGetSkill(hero, prefix) {
+    if (!hero.skillOptions) {
+        return {};
+    }
 
+    if (!hero.skillOptions[prefix]) {
+        return {};
+    }
+    return hero.skillOptions[prefix];
+}
+
+function generateSkillOptionsHtml(prefix, hero, heroData) {
+    var skillTypes = !heroData.skills ? [] : heroData.skills[prefix]
+    var skillTypesHtml = ""
+    for (var skillType of skillTypes.options) {
+        var note = skillType.note ? " (" + skillType.note + ")" : "";
+        skillTypesHtml += `<option value='${skillType.name}' ${safeGetSkill(hero, prefix).skillEffect == skillType.name ? "selected" : ""}>${skillType.name + note}</option>\n`
+    }
+    const html =
+`
+<div class="editGearFormRow">
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" id="skillNumberLabel"  data-t>${i18next.t("Select Skill Effect")}</div>
+            <select id="${prefix}SkillEffect" class="editSkillSelect skillTypeSelect">
+                ${skillTypesHtml}
+            </select>
+        </div>
+</div>
+`
+    return html
+}
+
+function generateSkillOptionsHtmlOLDWITHDAMAGECALC(prefix, hero, heroData) {
+    var skillTypes = !heroData.skills ? [] : heroData.skills[prefix] 
+    var skillTypesHtml = ""
+    for (var skillType of skillTypes.options) {
+        console.warn("---")
+        console.warn(hero)
+        console.warn(safeGetSkill(hero, prefix))
+        console.warn(safeGetSkill(hero, prefix).skillEffect)
+        skillTypesHtml += `<option value='${skillType.name}' ${safeGetSkill(hero, prefix).skillEffect == skillType.name ? "selected" : ""}>${skillType.name}</option>\n`
+    }
+    const html =
+`
+<div class="editGearFormRow">
+    <div class="editGearFormHalf">
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" id="skillNumberLabel"  data-t>${i18next.t("Select Skill Effect")}</div>
+            <select id="${prefix}SkillEffect" class="editSkillSelect skillTypeSelect">
+                ${skillTypesHtml}
+            </select>
+        </div>
+    </div>
+
+    <div class="editGearFormVerticalShort"></div>
+
+
+    <div class="editGearFormHalf">
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Apply options to all skills")}</div>
+            <input type="checkbox" id="${prefix}EditApplyToAllSkillsBox" ${safeGetSkill(hero, prefix).applyToAllSkills ? "checked" : ""}>
+        </div>
+    </div>
+</div>
+
+<div class="horizontalLineWithMoreSpace"></div>
+
+<div class="editGearFormRow">
+    <div class="editGearFormHalf">
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Attack % Imprint")}</div>
+            <span class="valuePadding input-holder">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditAttackPercentImprint" value="${safeGetSkill(hero, prefix).attackImprintPercent ? hero.skillOptions[prefix].attackImprintPercent : 0}">
+            </span>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Attack % Increase")}</div>
+            <span class="valuePadding input-holder">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditAttackPercentIncrease" value="${safeGetSkill(hero, prefix).attackIncreasePercent ? hero.skillOptions[prefix].attackIncreasePercent : 0}">
+            </span>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Damage Increase")}</div>
+            <span class="valuePadding input-holder">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditDamageIncrease" value="${safeGetSkill(hero, prefix).damageIncreasePercent ? hero.skillOptions[prefix].damageIncreasePercent : 0}">
+            </span>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Elemental Advantage")}</div>
+            <input type="checkbox" id="${prefix}EditElementalAdvantageBox" ${safeGetSkill(hero, prefix).elementalAdvantageEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Decreased Attack")}</div>
+            <input type="checkbox" id="${prefix}EditDecreasedAttackBox" ${safeGetSkill(hero, prefix).decreasedAttackBuffEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Attack Buff")}</div>
+            <input type="checkbox" id="${prefix}EditAttackBuffBox" ${safeGetSkill(hero, prefix).attackBuffEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Greater Attack Buff")}</div>
+            <input type="checkbox" id="${prefix}EditGreaterAttackBuffBox" ${safeGetSkill(hero, prefix).greaterAttackBuffEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Crit Damage Buff")}</div>
+            <input type="checkbox" id="${prefix}EditCritDamageBuffBox" ${safeGetSkill(hero, prefix).critDamageBuffEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Vigor")}</div>
+            <input type="checkbox" id="${prefix}EditVigorAttackBuffBox" ${safeGetSkill(hero, prefix).vigorAttackBuffEnabled ? "checked" : ""}>
+        </div>
+    </div>
+
+    <div class="editGearFormVerticalMed"></div>
+
+    <div class="editGearFormHalf">
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Target Defense")}</div>
+            <span class="valuePadding input-holder">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDefense" value="${safeGetSkill(hero, prefix).targetDefense ? hero.skillOptions[prefix].targetDefense : 0}">
+            </span>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Defense Increase")}</div>
+            <span class="valuePadding input-holder">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDefenseIncrease" value="${safeGetSkill(hero, prefix).targetDefenseIncreasePercent ? hero.skillOptions[prefix].targetDefenseIncreasePercent : 0}">
+            </span>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Damage Reduction")}</div>
+            <span class="valuePadding input-holder">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDamageReduction" value="${safeGetSkill(hero, prefix).targetDamageReductionPercent ? hero.skillOptions[prefix].targetDamageReductionPercent : 0}">
+            </span>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Damage Transfer")}</div>
+            <span class="valuePadding input-holder">
+                <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="${prefix}EditTargetDamageTransfer" value="${safeGetSkill(hero, prefix).targetDamageTransferPercent ? hero.skillOptions[prefix].targetDamageTransferPercent : 0}">
+            </span>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Defense Buff")}</div>
+            <input type="checkbox" id="${prefix}EditTargetDefenseBuffBox" ${safeGetSkill(hero, prefix).targetDefenseBuffEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Vigor")}</div>
+            <input type="checkbox" id="${prefix}EditTargetVigorBuffBox" ${safeGetSkill(hero, prefix).targetVigorDefenseBuffEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Defense Break")}</div>
+            <input type="checkbox" id="${prefix}EditTargetDefenseBreakBox" ${safeGetSkill(hero, prefix).targetDefenseBreakBuffEnabled ? "checked" : ""}>
+        </div>
+
+        <div class="editGearFormRow">
+            <div class="editSkillLabel" data-t>${i18next.t("Target")}</div>
+            <input type="checkbox" id="${prefix}EditTargetTargetBuffBox" ${safeGetSkill(hero, prefix).targetTargetBuffEnabled ? "checked" : ""}>
+        </div>
+    </div>
+</div>
+`
+    return html
+}
 
 function getEeHtml(hero, ee) {
     const statType = ee ? ee.stat.type : "None";

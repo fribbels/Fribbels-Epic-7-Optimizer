@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 
 public class HeroDb {
 
+    private BaseStatsDb baseStatsDb;
     private List<Hero> heroes;
 
-    public HeroDb() {
+    public HeroDb(final BaseStatsDb baseStatsDb) {
         heroes = new ArrayList<>();
+        this.baseStatsDb = baseStatsDb;
     }
 
     public void addHeroes(final List<Hero> newHeroes) {
@@ -51,6 +53,8 @@ public class HeroDb {
         }
         for (int i = 0 ; i < newHeroes.size(); i++) {
             final Hero newHero = newHeroes.get(i);
+            newHero.setSkills(baseStatsDb.getBaseStatsByName(newHero.name).getSkills());
+
             sanitizeHero(newHero);
             newHero.setIndex(i + 1);
         }

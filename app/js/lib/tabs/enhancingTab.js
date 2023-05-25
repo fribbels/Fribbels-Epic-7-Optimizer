@@ -3,6 +3,7 @@ var echarts = require('echarts');
 barsCharts = [undefined, undefined, undefined, undefined];
 guageChart = undefined;
 radarChart = undefined;
+gsChart = undefined;
 
 const maxes = {
     "Attack": 346 * 1.5,
@@ -251,6 +252,9 @@ module.exports = {
         var radarChartDom = document.getElementById('chart2');
         radarChart = echarts.init(radarChartDom, DarkMode.isDark() ? 'dark' : undefined);
 
+        var gsChartDom = document.getElementById('gsChart');
+        gsChart = echarts.init(gsChartDom, DarkMode.isDark() ? 'dark' : undefined);
+
         initializeBars()
         // const getAllItemsResponse = await Api.getAllItems();
         // const items = getAllItemsResponse.items;
@@ -283,6 +287,7 @@ module.exports = {
     },
 
     redrawEnhanceGuide: async (item) => {
+        var simulationResults = ItemSimulator.simulate(item);
         setTheme();
         Reforge.calculateMaxes(item);
         console.log("redraw", item);
@@ -473,6 +478,97 @@ module.exports = {
 
         option && radarChart.setOption(option);
 
+        // GS
+
+        if (item.enhance < 16) {
+            var gs = simulationResults.gsArr;
+            var moddedGs = simulationResults.moddedGsArr
+
+            var min = Math.min(Math.min(...gs), Math.min(...moddedGs)) - 1
+            var max = Math.max(Math.max(...gs), Math.max(...moddedGs)) + 1
+
+            function generateLineArr(gs, min, max) {
+                // var minGs = Math.min(...gs)
+                // var maxGs = Math.max(...gs)
+                var xArr = []
+                var yArr = []
+                var count = 0;
+                for (var i = min; i <= max; i++) {
+                    xArr[count] = i;
+                    yArr[count] = 0;
+                    count++;
+                }
+                for (var result of gs) {
+                    var index = result - min;
+                    yArr[index]++
+                }
+
+                var n = ItemSimulator.getSimulationN();
+                for (var i = 0; i < yArr.length; i++) {
+                    yArr[i] = yArr[i] / n * 100
+                }
+
+                if (item.enhance >= 15) {
+                    for (var i = 0; i <= yArr.length; i++) {
+                        if (yArr[i] == 0) {
+                            yArr[i] = undefined;
+                        }
+                    }
+                }
+                return {
+                    xArr: xArr,
+                    yArr: yArr,
+                }
+            }
+
+            var gsSeries = generateLineArr(gs, min, max)
+            var moddedGsSeries = generateLineArr(moddedGs, min, max)
+
+            var option = {
+                xAxis: {
+                    type: 'category',
+                    data: gsSeries.xArr
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                legend: {
+                    data: ['GS probabilities', 'GS probabilities with max substat mod']
+                },
+                series: [
+                    {
+                        name: 'GS probabilities',
+                        data: gsSeries.yArr,
+                        type: (item.enhance >= 15 ? 'scatter' : 'line'),
+                        areaStyle: {},
+                        smooth: true
+                    },
+                    {
+                        name: 'GS probabilities with max substat mod',
+                        data: moddedGsSeries.yArr,
+                        type: (item.enhance >= 15 ? 'scatter' : 'line'),
+                        areaStyle: {},
+                        smooth: true,
+                        lineStyle: {color: '#71de7c'},
+                        itemStyle: {color: '#71de7c'}
+                    },
+                ],
+                xAxis: {
+                    type: 'category',
+                    name: 'Gear score',
+                    data: gsSeries.xArr
+                },
+                yAxis: [{
+                    type: 'value',
+                    name: '% chance',
+                    tickAmount: 16
+                    // ...
+                }]
+            };
+            // option.yaxis.labels.formatter = val => val.toFixed(2)
+            option && gsChart.setOption(option);
+
+        }
         // Bars
 
         function buildBars(id, showAxis, item, index) {

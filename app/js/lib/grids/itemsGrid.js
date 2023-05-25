@@ -59,6 +59,8 @@ module.exports = {
           var localeText = AG_GRID_LOCALE_JA;
         } else if (i18next.language == 'ko') {
           var localeText = AG_GRID_LOCALE_KO;
+        } else if (i18next.language == 'ru') {
+          var localeText = AG_GRID_LOCALE_RU;
         } else {
           var localeText = AG_GRID_LOCALE_EN;
         }

@@ -58,6 +58,8 @@ module.exports = {
           var localeText = AG_GRID_LOCALE_JA;
         } else if (i18next.language == 'ko') {
           var localeText = AG_GRID_LOCALE_KO;
+        } else if (i18next.language == 'ru') {
+          var localeText = AG_GRID_LOCALE_RU;
         } else {
           var localeText = AG_GRID_LOCALE_EN;
         }
@@ -217,7 +219,11 @@ function aggregateCurrentHeroStats(heroStats) {
         "mcdmgps",
         "dmgh",
         "dmgd",
+        "s1",
+        "s2",
+        "s3",
         "score",
+        "bs",
         "priority"
     ]
 
@@ -263,11 +269,11 @@ function getField(heroStats, stat) {
 
 function buildGrid(localeText) {
 
-    const DIGITS_2 = 40;
-    const DIGITS_3 = 40;
-    const DIGITS_4 = 44;
-    const DIGITS_5 = 48;
-    const DIGITS_6 = 55;
+    const DIGITS_2 = 30;
+    const DIGITS_3 = 35;
+    const DIGITS_4 = 42;
+    const DIGITS_5 = 45;
+    const DIGITS_6 = 50;
 
     const gridOptions = {
         defaultColDef: {
@@ -281,7 +287,7 @@ function buildGrid(localeText) {
         },
 
         columnDefs: [
-            {headerName: i18next.t('sets'), field: 'sets', width: 88, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
+            {headerName: i18next.t('sets'), field: 'sets', width: 80, cellRenderer: (params) => GridRenderer.renderSets(params.value, "shrinkSets")},
             {headerName: i18next.t('atk'), field: 'atk', width: DIGITS_4},
             {headerName: i18next.t('def'), field: 'def', width: DIGITS_4},
             {headerName: i18next.t('hp'), field: 'hp', width: DIGITS_5},
@@ -301,10 +307,14 @@ function buildGrid(localeText) {
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: DIGITS_5},
             {headerName: i18next.t('dmgd'), field: 'dmgd', width: DIGITS_5},
-            {headerName: i18next.t('score'), field: 'score', width: DIGITS_3},
+            {headerName: i18next.t('s1'), field: 's1', width: DIGITS_5},
+            {headerName: i18next.t('s2'), field: 's2', width: DIGITS_5},
+            {headerName: i18next.t('s3'), field: 's3', width: DIGITS_5},
+            {headerName: i18next.t('gs'), field: 'score', width: DIGITS_3},
+            {headerName: i18next.t('bs'), field: 'bs', width: DIGITS_3},
             {headerName: i18next.t('prio'), field: 'priority', width: DIGITS_3},
             {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2},
-            {headerName: i18next.t('actions'), field: 'property', width: 45, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
+            {headerName: i18next.t(''), field: 'property', width: 25, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',

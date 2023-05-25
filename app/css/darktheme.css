@@ -272,3 +272,57 @@ input[type=checkbox]:checked:after {
 .active, .collapsible:hover {
   background-color: var(--inactive-color);
 }
+
+
+/* Tabs */
+
+
+.tabsWrapperBody {
+  text-align: center;
+/*  font-family: 'Jost', sans-serif;*/
+/*  background-color: var(--bg-color);*/
+}
+
+.tabsWrapper {
+/*  width: 700px;*/
+  margin: auto;
+/*  background-color: var(--inactive-color);*/
+  border-radius: 10px;
+/*  box-shadow: 0px 5px 15px rgba(0, 0, 0, .1);*/
+}
+
+.tabsButtonWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tab-button {
+  letter-spacing: 3px;
+  border: none;
+  padding: 10px;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.tab-button:hover {
+  background-color: var(--inactive-color);
+}
+
+.tab-button.active {
+  background-color: var(--inactive-color);
+}
+
+.tabsContent {
+  display: none;
+  padding: 10px 20px;
+  margin-top: 0px;
+
+}
+
+.tabsContent.active {
+  display: block;
+  background-color: var(--inactive-color);
+}

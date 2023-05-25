@@ -217,6 +217,49 @@ module.exports = {
             clearOptions();
             recalculateFilters();
         });
+
+        document.getElementById('skillOptionsButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+            console.log("addSkills", heroId);
+
+            var skillOptions = await module.exports.showSkillOptionsWindow(heroId);
+
+            Saves.autoSave();
+        });
+
+        document.getElementById('addBonusStatsOptimizerButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+
+            const hero = (await Api.getHeroById(heroId)).hero;
+
+            await HeroesTab.showBonusStatsWindow(hero);
+            Saves.autoSave();
+        });
+
+        document.getElementById('addSubstatModsOptimizerButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+
+            const hero = (await Api.getHeroById(heroId)).hero;
+
+            const modStats = await Dialog.editModStatsDialog(hero);
+
+            // mods
+
+            await Api.setModStats(modStats, hero.id);
+            Notifier.success("Saved mod stats");
+            Saves.autoSave();
+
+            // var heroId = document.getElementById('inputHeroAdd').value;
+            // if (!heroId) return;
+            // console.log("addSkills", heroId);
+
+            // var skillOptions = await module.exports.showSkillOptionsWindow(heroId);
+
+            // Saves.autoSave();
+        });
         // document.getElementById('accessorySetsLabel').addEventListener("click", async () => {
         //     Selectors.clearGearMainAndSets();
         //     recalculateFilters();
@@ -473,6 +516,13 @@ module.exports = {
         request.inputMinMcdmgpsLimit = readNumber('inputMinMcdmgpsLimit' + index);
         request.inputMaxMcdmgpsLimit = readNumber('inputMaxMcdmgpsLimit' + index);
 
+        request.inputMinS1Limit = readNumber('inputMinS1Limit' + index);
+        request.inputMaxS1Limit = readNumber('inputMaxS1Limit' + index);
+        request.inputMinS2Limit = readNumber('inputMinS2Limit' + index);
+        request.inputMaxS2Limit = readNumber('inputMaxS2Limit' + index);
+        request.inputMinS3Limit = readNumber('inputMinS3Limit' + index);
+        request.inputMaxS3Limit = readNumber('inputMaxS3Limit' + index);
+
         request.inputMinDmgHLimit = readNumber('inputMinDmgHLimit' + index);
         request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit' + index);
         request.inputMinDmgDLimit = readNumber('inputMinDmgDLimit' + index);
@@ -483,6 +533,8 @@ module.exports = {
         request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit' + index);
         request.inputMinScoreLimit = readNumber('inputMinScoreLimit' + index);
         request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit' + index);
+        request.inputMinBSLimit = readNumber('inputMinBSLimit' + index);
+        request.inputMaxBSLimit = readNumber('inputMaxBSLimit' + index);
         request.inputMinPriorityLimit = readNumber('inputMinPriorityLimit' + index);
         request.inputMaxPriorityLimit = readNumber('inputMaxPriorityLimit' + index);
 
@@ -601,6 +653,13 @@ module.exports = {
         $("#inputMinMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMinMcdmgpsLimit));
         $("#inputMaxMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMaxMcdmgpsLimit));
 
+        $("#inputMinS1Limit" + index).val(inputDisplayNumber(request.inputMinS1Limit));
+        $("#inputMaxS1Limit" + index).val(inputDisplayNumber(request.inputMaxS1Limit));
+        $("#inputMinS2Limit" + index).val(inputDisplayNumber(request.inputMinS2Limit));
+        $("#inputMaxS2Limit" + index).val(inputDisplayNumber(request.inputMaxS2Limit));
+        $("#inputMinS3Limit" + index).val(inputDisplayNumber(request.inputMinS3Limit));
+        $("#inputMaxS3Limit" + index).val(inputDisplayNumber(request.inputMaxS3Limit));
+
         $("#inputMinDmgHLimit" + index).val(inputDisplayNumber(request.inputMinDmgHLimit));
         $("#inputMaxDmgHLimit" + index).val(inputDisplayNumber(request.inputMaxDmgHLimit));
         $("#inputMinDmgDLimit" + index).val(inputDisplayNumber(request.inputMinDmgDLimit));
@@ -611,6 +670,8 @@ module.exports = {
         $("#inputMaxConversionsLimit" + index).val(inputDisplayNumber(request.inputMaxConversionsLimit));
         $("#inputMinScoreLimit" + index).val(inputDisplayNumber(request.inputMinScoreLimit));
         $("#inputMaxScoreLimit" + index).val(inputDisplayNumber(request.inputMaxScoreLimit));
+        $("#inputMinBSLimit" + index).val(inputDisplayNumber(request.inputMinBSLimit));
+        $("#inputMaxBSLimit" + index).val(inputDisplayNumber(request.inputMaxBSLimit));
         $("#inputMinPriorityLimit" + index).val(inputDisplayNumber(request.inputMinPriorityLimit));
         $("#inputMaxPriorityLimit" + index).val(inputDisplayNumber(request.inputMaxPriorityLimit));
 
@@ -801,6 +862,22 @@ module.exports = {
         recalculateFilters();
         Selectors.refreshInputHeroAdd();
         Selectors.refreshAllowGearFrom();
+    },
+
+
+    showSkillOptionsWindow: async (heroId) => {
+        // showEditHeroInfoPopups(row.name)
+        const skillOptions = await Dialog.changeSkillOptionsDialog(heroId);
+
+        if (!skillOptions) {
+            return;
+        }
+
+        console.warn("skillOptions", skillOptions)
+
+        Api.setSkillOptions(skillOptions, heroId)
+        Notifier.success("Saved skill options");
+        Saves.autoSave();
     }
 }
 
@@ -1140,6 +1217,19 @@ async function submitOptimizationFilterRequest() {
     const heroId = document.getElementById('inputHeroAdd').value;
     const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     params.hero = heroResponse.hero;
+    params.hero.artifactAttack = 0;
+    params.hero.artifactHealth = 0;
+    if (params.hero.artifactName && params.hero.artifactName != "None") {
+        const artifactLevelText = params.hero.artifactLevel;
+        if (artifactLevelText != "None") {
+            const artifactLevel = parseInt(artifactLevelText);
+            const artifactStats = Artifact.getStats(params.hero.artifactName, artifactLevel);
+
+            params.hero.artifactHealth += artifactStats.health;
+            params.hero.artifactAttack += artifactStats.attack;
+        }
+    }
+
     OptimizerGrid.showLoadingOverlay();
     params.executionId = currentExecutionId;
 
@@ -1167,6 +1257,7 @@ async function submitOptimizationRequest() {
     const hero = heroResponse.hero;
     const baseStats = heroResponse.baseStats;
 
+
     var filterResult = await module.exports.applyItemFilters(params, heroResponse, allItemsResponse, true);
     var items = filterResult.items;
 
@@ -1179,7 +1270,21 @@ async function submitOptimizationRequest() {
         items: items,
         bonusHp: hero.bonusHp,
         bonusAtk: hero.bonusAtk,
-        hero: hero
+        hero: hero,
+        damageMultipliers: DamageCalc.getMultipliers(hero, hero.skillOptions)
+    }
+
+    request.hero.artifactAttack = 0;
+    request.hero.artifactHealth = 0;
+    if (request.hero.artifactName && request.hero.artifactName != "None") {
+        const artifactLevelText = request.hero.artifactLevel;
+        if (artifactLevelText != "None") {
+            const artifactLevel = parseInt(artifactLevelText);
+            const artifactStats = Artifact.getStats(request.hero.artifactName, artifactLevel);
+
+            request.hero.artifactHealth = artifactStats.health;
+            request.hero.artifactAttack = artifactStats.attack;
+        }
     }
 
     if (!hero.artifactName || hero.artifactName == "None") {

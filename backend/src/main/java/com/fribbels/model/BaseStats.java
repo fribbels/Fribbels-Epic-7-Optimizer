@@ -11,4 +11,5 @@ public class BaseStats {
 
     private final HeroStats lv50FiveStarFullyAwakened;
     private final HeroStats lv60SixStarFullyAwakened;
+    private final HeroSkills skills;
 }

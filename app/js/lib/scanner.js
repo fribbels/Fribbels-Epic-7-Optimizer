@@ -313,6 +313,20 @@ async function finishedReading(data, scanType) {
             if (rawItems.length == 0) { // This case is impossible?
                 document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Item reading failed, please try again."));
                 Notifier.error("Failed reading items, please try again. No items were found.");
+                Dialog.htmlError(
+`
+No items were found during the scan. This can happen due to network compatibility issues. Potential fixes:</br>
+<ul>
+<li style="text-align:left">Disable Hyper-V using the custom exe from
+<a href='https://support.bluestacks.com/hc/en-us/articles/4409852112781-Solution-for-Incompatible-Windows-settings-on-BlueStacks-5-when-Hyper-V-is-enabled#%E2%80%9C2%E2%80%9D'>Bluestacks support</a>
+</li>
+<li style="text-align:left">Turn off any VPN before scanning</li>
+<li style="text-align:left">Unblock/allow an eception for the optimizer in your firewall</li>
+<li style="text-align:left">Disable "virtual machine platform" in the "Turn Windows features on/off" menu in the control panel</li>
+<li style="text-align:left">Your network connection might be unstable - Try a wired connection instead of wifi, or find a location with better connection</li>
+<li style="text-align:left">Try a different computer to run the importer</li>
+</ul>
+`);
                 return
             }
 

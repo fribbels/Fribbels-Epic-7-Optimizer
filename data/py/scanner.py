@@ -16,7 +16,6 @@ def try_buffer(currAck):
     for i in buffers:
         finalBuffer += i['data']
 
-
     hexStr = ''
     try:
         hexStr = finalBuffer.hex();

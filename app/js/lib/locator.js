@@ -102,10 +102,15 @@ function locateSingleItem(itemId, items) {
                 return difference;
             })
         } else {
-
             // floating point sort
 
             items.sort((x, y) => {
+                if (!y.op) {
+                    return 1;
+                }
+                if (!x.op) {
+                    return -1;
+                }
                 var yOpValues = y.op.slice(1).filter(x => opStatToSubstat[x[0]] == substat.type).map(x => parseFloat(x[1]))
                 var ySum = yOpValues.reduce((a, b) => a + b, 0)
 

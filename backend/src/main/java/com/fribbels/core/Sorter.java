@@ -71,11 +71,23 @@ public class Sorter {
                     case DMGD:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgd));
                         break;
+                    case S1:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS1));
+                        break;
+                    case S2:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS2));
+                        break;
+                    case S3:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS3));
+                        break;
                     case UPGRADES:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getUpgrades));
                         break;
                     case SCORE:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getScore));
+                        break;
+                    case BS:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getBs));
                         break;
                     case PRIORITY:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getPriority));
@@ -147,11 +159,23 @@ public class Sorter {
                     case DMGD:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getDmgd).reversed());
                         break;
+                    case S1:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS1).reversed());
+                        break;
+                    case S2:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS2).reversed());
+                        break;
+                    case S3:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getS3).reversed());
+                        break;
                     case UPGRADES:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getUpgrades).reversed());
                         break;
                     case SCORE:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getScore).reversed());
+                        break;
+                    case BS:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getBs).reversed());
                         break;
                     case PRIORITY:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getPriority).reversed());

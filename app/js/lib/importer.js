@@ -391,11 +391,18 @@ module.exports = {
                         continue;
                     }
 
+                    console.log(newHero)
+
                     newHero.rarity = newHero.data.rarity;
                     newHero.attribute = newHero.data.attribute;
                     newHero.role = newHero.data.role;
                     newHero.path = heroName;
                     newHero.stars = hero.stars;
+                    newHero.skills = {
+                        S1: newHero.data.skills.S1.options,
+                        S2: newHero.data.skills.S2.options,
+                        S3: newHero.data.skills.S3.options
+                    };
 
                     hero.data = newHero;
                     filteredHeroes.push(hero);

@@ -2,6 +2,7 @@ package com.fribbels.request;
 
 import com.fribbels.enums.Set;
 import com.fribbels.enums.StatType;
+import com.fribbels.model.DamageMultipliers;
 import com.fribbels.model.Hero;
 import com.fribbels.model.Item;
 import com.fribbels.model.Request;
@@ -28,6 +29,7 @@ public class OptimizationRequest extends Request {
 
     private String heroId;
     public Hero hero;
+    public DamageMultipliers damageMultipliers;
     private List<Item> items;
 
     private List<List<Set>> inputSets;
@@ -60,6 +62,9 @@ public class OptimizationRequest extends Request {
     private int res;
     private int spd;
     private int dac;
+
+    private float artifactAttack;
+    private float artifactHealth;
 
     public int inputAtkMinLimit;
     public int inputAtkMaxLimit = Integer.MAX_VALUE;
@@ -98,12 +103,22 @@ public class OptimizationRequest extends Request {
     public int inputMaxDmgHLimit = Integer.MAX_VALUE;
     public int inputMinDmgDLimit;
     public int inputMaxDmgDLimit = Integer.MAX_VALUE;
+
+    public int inputMinS1Limit;
+    public int inputMaxS1Limit = Integer.MAX_VALUE;
+    public int inputMinS2Limit;
+    public int inputMaxS2Limit = Integer.MAX_VALUE;
+    public int inputMinS3Limit;
+    public int inputMaxS3Limit = Integer.MAX_VALUE;
+
     public int inputMinUpgradesLimit;
     public int inputMaxUpgradesLimit = Integer.MAX_VALUE;
     public int inputMinConversionsLimit;
     public int inputMaxConversionsLimit = Integer.MAX_VALUE;
     public int inputMinScoreLimit;
     public int inputMaxScoreLimit = Integer.MAX_VALUE;
+    public int inputMinBSLimit;
+    public int inputMaxBSLimit = Integer.MAX_VALUE;
     public int inputMinPriorityLimit;
     public int inputMaxPriorityLimit = Integer.MAX_VALUE;
 

@@ -59,12 +59,27 @@ module.exports = {
 
             artifactName: bonusStats.artifactName,
             artifactLevel: bonusStats.artifactLevel,
+            artifactAttack: bonusStats.artifactAttack,
+            artifactHealth: bonusStats.artifactHealth,
             imprintNumber: bonusStats.imprintNumber,
             eeNumber: bonusStats.eeNumber,
 
             stars: bonusStats.stars,
 
             heroId: heroId
+        });
+    },
+
+    getSkillOptions: async (id) => {
+        return post('/heroes/getSkillOptions', {
+            id: id
+        });
+    },
+
+    setSkillOptions: async (skillOptions, heroId) => {
+        return post('/heroes/setSkillOptions', {
+            heroId: heroId,
+            skillOptions: skillOptions
         });
     },
 
@@ -85,6 +100,17 @@ module.exports = {
     setBaseStats: async (baseStatsByName) => {
         return post('/heroes/setBaseStats', {
             baseStatsByName: baseStatsByName
+        });
+    },
+
+    setArtifacts: async (artifactsByName) => {
+        var fixedModel = JSON.parse(JSON.stringify(artifactsByName))
+        for (var value of Object.values(fixedModel)) {
+            value.attack = value.stats.attack;
+            value.health = value.stats.health;
+        }
+        return post('/heroes/setArtifactStats', {
+            artifactStatsByName: fixedModel
         });
     },
 

@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.8";
+const currentVersion = "1.9.0";
 
 global.TEST = true;
 
@@ -13,6 +13,14 @@ global.TEST = true;
     - update version in app package.json
     - update repo in project package.json
     - yarn package
+
+    Patch update checklist
+    - Update server temp unit ids
+    - Update server temp items
+    - Scan artifact ids, update artifact file
+    - Download unit images
+    - Upload herodata copy to server
+
 *********************************************************************************************/
 
 /********************************************************************************************
@@ -34,11 +42,14 @@ module.exports = {
 
 `
 <h2>
-    New in v1.8.7 - 1.8.8
+    New in v1.9.0
 </h2>
 <ul class="newFeatures">
-    <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory. Scan your inventory first for accurate results.</li>
-    <li>Torrent set bug fixes</li>
+    <li>Updated inventory item finder.</li>
+    <li>Skills</li>
+    <li>Build score</li>
+    <li>Fix substat mods permutations</li>
+    <li>Item simulator</li>
 </ul>
 `
         );
