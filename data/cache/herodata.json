@@ -9760,7 +9760,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1110_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc111001",
+        "id": "exc111001",
+        "name": "Foreign Minister's Baton",
+        "description": "A baton with Politia's national flag attached to it. When Flan is in a good mood, she often performs flag magic for Landy.",
+        "unit": "c1110",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
