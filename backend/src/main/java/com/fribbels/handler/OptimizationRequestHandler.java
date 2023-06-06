@@ -680,6 +680,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final GpuOptimizerKernel kernel;
 
         hero.setDamageMultipliers(request.damageMultipliers);
+        heroDb.getHeroById(hero.getId()).setDamageMultipliers(request.getDamageMultipliers());
 
 //        System.out.println();
 

@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.9.0";
+const currentVersion = "1.9.1";
 
-global.TEST = true;
+global.TEST = false;
 
 /********************************************************************************************
     Release checklist:
@@ -33,14 +33,16 @@ module.exports = {
     getCurrentVersion: () => {
         return currentVersion;
     },
-/*
-- Hero tab double click
-- Magnifying glass
-*/
     showNewFeatures: (text) => {
         Dialog.showNewFeatures(
 
 `
+<h2>
+    New in v1.9.1
+</h2>
+<ul class="newFeatures">
+    <li>Fixes & improvements</li>
+</ul>
 <h2>
     New in v1.9.0
 </h2>

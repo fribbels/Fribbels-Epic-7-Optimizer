@@ -7115,6 +7115,7 @@
         "note": "70% penetration",
         "rate": 0.75,
         "pow": 1,
+        "penetration": 0.7,
         "targets": 1,
         "options": []
       }
@@ -21969,7 +21970,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2062_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100301",
+        "id": "exc100301",
+        "name": "Valkyrie Wing",
+        "description": "A mysterious circlet that symbolizes strength and beauty, and is the source of Rose's Fighting Spirit.",
+        "unit": "c1003",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],

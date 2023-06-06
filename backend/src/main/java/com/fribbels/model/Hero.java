@@ -127,7 +127,7 @@ public class Hero {
         if (damageMultipliers != null) {
             return damageMultipliers;
         }
-        if (skills == null) {
+        if (skills == null || skills.S1[0].name == null) {
             skills = HeroSkills.builder()
                     .S1(new SkillData[]{SkillData.builder().build(), SkillData.builder().build(), SkillData.builder().build()})
                     .S2(new SkillData[]{SkillData.builder().build(), SkillData.builder().build(), SkillData.builder().build()})

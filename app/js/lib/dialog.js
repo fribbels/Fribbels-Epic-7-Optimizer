@@ -1005,8 +1005,7 @@ module.exports = {
                         displayValues: true,
                         selectAll: false,
                         textTemplate: function (el) {
-                            const val = el.html();
-                            const assetKey = val + "Set";
+                            const assetKey = el[0].value + "Set";
 
                             if (Object.keys(assetsBySet).includes(assetKey)) {
                                 const asset = assetsBySet[assetKey];
