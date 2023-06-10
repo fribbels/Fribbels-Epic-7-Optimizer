@@ -11886,7 +11886,7 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.95,
+        "rate": 1,
         "pow": 1,
         "targets": 1,
         "options": []
@@ -18970,7 +18970,7 @@
     }
   },
   "Requiem Roana": {
-    "code": "c5004",
+    "code": "c2102",
     "_id": "requiem-roana",
     "name": "Requiem Roana",
     "moonlight": true,
@@ -22690,8 +22690,9 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1.8,
+        "rate": 1.5,
         "pow": 1,
+        "penetration": 0.5,
         "targets": 1,
         "options": []
       }

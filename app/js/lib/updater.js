@@ -2,7 +2,7 @@ const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
 const currentVersion = "1.9.1";
 
-global.TEST = false;
+global.TEST = true;
 
 /********************************************************************************************
     Release checklist:
@@ -20,6 +20,7 @@ global.TEST = false;
     - Scan artifact ids, update artifact file
     - Download unit images
     - Upload herodata copy to server
+    - Skill multipliers
 
 *********************************************************************************************/
 
