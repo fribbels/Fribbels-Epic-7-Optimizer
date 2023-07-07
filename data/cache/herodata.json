@@ -17380,13 +17380,15 @@
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
-        "targets": 1
+        "targets": 1,
+        "options": []
       },
       "S2": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 1,
         "pow": 1,
-        "targets": 3
+        "targets": 3,
+        "options": []
       },
       "S3": {
         "hitTypes": [],
@@ -20741,7 +20743,26 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5071_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc106601",
+        "id": "exc106601",
+        "name": "Dragon Emerald",
+        "description": "Jewelry that Luna's father passed on to her. It is the only thing her mother left behind when she left.",
+        "unit": "c1066",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        },
+        "skills": [
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1066.png"
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
@@ -23789,7 +23810,26 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2065_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc109501",
+        "id": "exc109501",
+        "name": "Soul Tailor",
+        "description": "A medal bestowed only to the most talented of tailors. As it is a family heirloom, Lilibet received it from her mother, with whom she has been separated from childhood.",
+        "unit": "c1095",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        },
+        "skills": [
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1095.png"
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
