@@ -12288,7 +12288,7 @@
     }
   },
   "Juni": {
-    "code": "c2013",
+    "code": "c3151",
     "_id": "juni",
     "name": "Juni",
     "moonlight": false,
@@ -17346,6 +17346,77 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0
+      }
+    }
+  },
+  "Ocean Breeze Luluca": {
+    "code": "c5082",
+    "_id": "ocean-breeze-luluca",
+    "name": "Ocean Breeze Luluca",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "manauser",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5082_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5082_l.png"
+    },
+    "ex_equip": [
+    ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 3
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 15706,
+        "atk": 520,
+        "hp": 3972,
+        "spd": 105,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.3
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 19986,
+        "atk": 649,
+        "hp": 5254,
+        "spd": 105,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.3
       }
     }
   },
@@ -22715,7 +22786,7 @@
         "overrideAtk": 0,
         "overrideHp": 0,
         "overrideDef": 0,
-        "overrideAdditionalCr": 0.2,
+        "overrideAdditionalCr": 0.3,
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
@@ -22738,7 +22809,7 @@
         "overrideAtk": 0,
         "overrideHp": 0,
         "overrideDef": 0,
-        "overrideAdditionalCr": 0.2,
+        "overrideAdditionalCr": 0.3,
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,

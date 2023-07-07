@@ -719,6 +719,21 @@
       },
       "code":"ef309"
    },
+   "Cutie Pando":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0035.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0035_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0035_l.jpg"
+      },
+      "name":"Cutie Pando",
+      "rarity":4,
+      "role":"",
+      "stats":{
+         "attack":12,
+         "health":45
+      },
+      "code":""
+   },
    "Daydream Joker":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art3_17.png",
@@ -2413,6 +2428,21 @@
          "health":32
       },
       "code":"efw19"
+   },
+   "Sole Consolation":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0001.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0001_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0001_l.jpg"
+      },
+      "name":"Sole Consolation",
+      "rarity":5,
+      "role":"manauser",
+      "stats":{
+         "attack":9,
+         "health":76
+      },
+      "code":"efh19"
    },
    "Song of Stars":{
       "assets":{
