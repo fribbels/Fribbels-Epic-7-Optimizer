@@ -2659,14 +2659,14 @@
     "role": "warrior",
     "zodiac": "scorpion",
     "self_devotion": {
-      "type": "att_rate",
+      "type": "acc",
       "grades": {
-        "C": 0.04,
-        "B": 0.06,
-        "A": 0.08,
-        "S": 0.1,
-        "SS": 0.12,
-        "SSS": 0.14
+        "C": 0.068,
+        "B": 0.102,
+        "A": 0.136,
+        "S": 0.17,
+        "SS": 0.204,
+        "SSS": 0.238
       }
     },
     "assets": {
