@@ -14076,6 +14076,73 @@
       }
     }
   },
+  "Lethe": {
+    "code": "c5149",
+    "_id": "lethe",
+    "name": "Lethe",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "knight",
+    "zodiac": "waterbearer",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/lethePortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/lethePanel.png"
+    },
+    "ex_equip": [
+    ],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 17097,
+        "atk": 885,
+        "hp": 6149,
+        "spd": 121,
+        "def": 613,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17097,
+        "atk": 885,
+        "hp": 6149,
+        "spd": 121,
+        "def": 613,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Lidica": {
     "code": "c1046",
     "_id": "lidica",
@@ -17267,6 +17334,73 @@
         "hp": 5517,
         "spd": 108,
         "def": 452,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Navy Captain Landy": {
+    "code": "",
+    "_id": "navy-captain-landy",
+    "name": "Navy Captain Landy",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "knight",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/navyCaptainLandyPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/navyCaptainLandyPanel.png"
+    },
+    "ex_equip": [
+    ],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13494,
+        "atk": 869,
+        "hp": 4639,
+        "spd": 99,
+        "def": 534,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17057,
+        "atk": 1134,
+        "hp": 5825,
+        "spd": 99,
+        "def": 662,
         "chc": 0.22999999999999998,
         "chd": 1.5,
         "dac": 0.03,

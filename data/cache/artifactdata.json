@@ -1964,6 +1964,21 @@
       },
       "code":"ef403"
    },
+   "Prayer of Solitude":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_5_l.jpg"
+      },
+      "name":"Prayer of Solitude",
+      "rarity":5,
+      "role":"warrior",
+      "stats":{
+         "attack":15,
+         "health":54
+      },
+      "code": "efw32"
+   },
    "Proof of Valor":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
