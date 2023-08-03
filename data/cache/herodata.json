@@ -14083,7 +14083,7 @@
     "moonlight": false,
     "rarity": 5,
     "attribute": "ice",
-    "role": "knight",
+    "role": "warrior",
     "zodiac": "waterbearer",
     "self_devotion": {
       "type": "acc",
@@ -17058,13 +17058,13 @@
     "role": "warrior",
     "zodiac": "maiden",
     "self_devotion": {
-      "type": "coop",
+      "type": "acc",
       "grades": {
-        "B": 0.02,
-        "A": 0.03,
-        "S": 0.04,
-        "SS": 0.05,
-        "SSS": 0.06
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
       }
     },
     "assets": {
@@ -17343,7 +17343,7 @@
     }
   },
   "Navy Captain Landy": {
-    "code": "",
+    "code": "c2109",
     "_id": "navy-captain-landy",
     "name": "Navy Captain Landy",
     "moonlight": true,
@@ -17362,9 +17362,9 @@
       }
     },
     "assets": {
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/navyCaptainLandyPortrait.png",
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2109_s.png",
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/navyCaptainLandyPanel.png"
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2109_l.png"
     },
     "ex_equip": [
     ],
@@ -24021,13 +24021,13 @@
     "role": "mage",
     "zodiac": "crab",
     "self_devotion": {
-      "type": "coop",
+      "type": "acc",
       "grades": {
-        "B": 0.02,
-        "A": 0.03,
-        "S": 0.04,
-        "SS": 0.05,
-        "SSS": 0.06
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
       }
     },
     "assets": {
