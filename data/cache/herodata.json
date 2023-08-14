@@ -13629,6 +13629,7 @@
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
         "pow": 1,
         "targets": 1,
         "options": []
@@ -16936,7 +16937,7 @@
     ],
     "skills": {
       "S1": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
         "rate": 0.7,
         "pow": 1,
         "targets": 1,
