@@ -11771,6 +11771,94 @@
       }
     }
   },
+  "Infinite Horizon Achates": {
+    "code": "c6017",
+    "_id": "infinite-horizon-achates",
+    "name": "Infinite Horizon Achates",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "light",
+    "role": "manauser",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "C": 0.068,
+        "B": 0.102,
+        "A": 0.136,
+        "S": 0.17,
+        "SS": 0.204,
+        "SSS": 0.238
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6017_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6017_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.18
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.2
+          }
+        ]
+      },
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 20659,
+        "atk": 576,
+        "hp": 5165,
+        "spd": 100,
+        "def": 767,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.12
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 20659,
+        "atk": 576,
+        "hp": 5165,
+        "spd": 100,
+        "def": 767,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.12
+      }
+    }
+  },
   "Iseria": {
     "code": "c1024",
     "_id": "iseria",
@@ -16342,7 +16430,7 @@
     "moonlight": false,
     "rarity": 2,
     "attribute": "wind",
-    "role": "warrior",
+    "role": "assassin",
     "zodiac": "goat",
     "self_devotion": {
       "type": "max_hp",
