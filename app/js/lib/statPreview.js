@@ -9,6 +9,7 @@ module.exports = {
         $('#cdStatBefore').text(before.cd)
         $('#effStatBefore').text(before.eff)
         $('#resStatBefore').text(before.res)
+        $('#gsStatBefore').text(before.score)
 
 
         $('#atkStatAfter').text(after.atk)
@@ -19,6 +20,7 @@ module.exports = {
         $('#cdStatAfter').text(after.cd)
         $('#effStatAfter').text(after.eff)
         $('#resStatAfter').text(after.res)
+        $('#gsStatAfter').text(after.score)
 
         renderDiff(before, after, 'atk')
         renderDiff(before, after, 'def')
@@ -28,6 +30,7 @@ module.exports = {
         renderDiff(before, after, 'cd')
         renderDiff(before, after, 'eff')
         renderDiff(before, after, 'res')
+        renderDiff(before, after, 'score')
 
         $('#setBefore').html(renderSets(before.equipment, 'previewSet', false));
         $('#setAfter').html(renderSets(after.sets, 'previewSet', true));
@@ -106,6 +109,9 @@ function renderDiff(before, after, field, id) {
     const value = after[field] - before[field];
     var text = Math.abs(value);
     var id = '#' + field + 'StatDiff';
+    if (field == 'score') {
+        id = '#gsStatDiff'
+    }
     var elem = $(id);
 
     if (value > 0) {

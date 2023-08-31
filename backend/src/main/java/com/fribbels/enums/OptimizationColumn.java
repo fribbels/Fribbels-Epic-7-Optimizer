@@ -32,6 +32,7 @@ public enum OptimizationColumn {
     @SerializedName("s3") S3,
     @SerializedName("upgrades") UPGRADES,
     @SerializedName("conversions") CONVERSIONS,
+    @SerializedName("eq") EQ,
     @SerializedName("score") SCORE,
     @SerializedName("bs") BS,
     @SerializedName("priority") PRIORITY,

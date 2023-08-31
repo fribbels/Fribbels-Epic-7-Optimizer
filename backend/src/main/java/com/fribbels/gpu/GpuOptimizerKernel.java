@@ -182,6 +182,8 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final int inputMaxUpgradesLimit;
     @Constant final int inputMinConversionsLimit;
     @Constant final int inputMaxConversionsLimit;
+    @Constant final int inputMinEquippedLimit;
+    @Constant final int inputMaxEquippedLimit;
     @Constant final int inputMinScoreLimit;
     @Constant final int inputMaxScoreLimit;
     @Constant final int inputMinBSLimit;
@@ -417,6 +419,8 @@ public class GpuOptimizerKernel extends Kernel {
         inputMaxUpgradesLimit = request.inputMaxUpgradesLimit;
         inputMinConversionsLimit = request.inputMinConversionsLimit;
         inputMaxConversionsLimit = request.inputMaxConversionsLimit;
+        inputMinEquippedLimit = request.inputMinEquippedLimit;
+        inputMaxEquippedLimit = request.inputMaxEquippedLimit;
         inputMinScoreLimit = request.inputMinScoreLimit;
         inputMaxScoreLimit = request.inputMaxScoreLimit;
         inputMinBSLimit = request.inputMinBSLimit;
@@ -526,6 +530,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float wPrio =  flattenedWeaponAccs[wargSize + 13];
             final float wUpg =   flattenedWeaponAccs[wargSize + 14];
             final float wConv =  flattenedWeaponAccs[wargSize + 15];
+            final float wEq =    flattenedWeaponAccs[wargSize + 16];
 
             final int hargSize = (int)(h * argSize);
             final float hAtk =   flattenedHelmetAccs[hargSize];
@@ -541,6 +546,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float hPrio =  flattenedHelmetAccs[hargSize + 13];
             final float hUpg =   flattenedHelmetAccs[hargSize + 14];
             final float hConv =  flattenedHelmetAccs[hargSize + 15];
+            final float hEq =    flattenedHelmetAccs[hargSize + 16];
 
             final int aargSize = (int)(a * argSize);
             final float aAtk =   flattenedArmorAccs[aargSize];
@@ -556,6 +562,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float aPrio =  flattenedArmorAccs[aargSize + 13];
             final float aUpg =   flattenedArmorAccs[aargSize + 14];
             final float aConv =  flattenedArmorAccs[aargSize + 15];
+            final float aEq =    flattenedArmorAccs[aargSize + 16];
 
             final int nargSize = (int)(n * argSize);
             final float nAtk =   flattenedNecklaceAccs[nargSize];
@@ -571,6 +578,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float nPrio =  flattenedNecklaceAccs[nargSize + 13];
             final float nUpg =   flattenedNecklaceAccs[nargSize + 14];
             final float nConv =  flattenedNecklaceAccs[nargSize + 15];
+            final float nEq =    flattenedNecklaceAccs[nargSize + 16];
 
             final int rargSize = (int)(r * argSize);
             final float rAtk =   flattenedRingAccs[rargSize];
@@ -586,6 +594,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float rPrio =  flattenedRingAccs[rargSize + 13];
             final float rUpg =   flattenedRingAccs[rargSize + 14];
             final float rConv =  flattenedRingAccs[rargSize + 15];
+            final float rEq =    flattenedRingAccs[rargSize + 16];
 
             final int bargSize = (int)(b * argSize);
             final float bAtk =   flattenedBootAccs[bargSize];
@@ -601,6 +610,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float bPrio =  flattenedBootAccs[bargSize + 13];
             final float bUpg =   flattenedBootAccs[bargSize + 14];
             final float bConv =  flattenedBootAccs[bargSize + 15];
+            final float bEq =    flattenedBootAccs[bargSize + 16];
 
             final int iWset = (int)wSet;
             final int iHset = (int)hSet;
@@ -764,6 +774,7 @@ public class GpuOptimizerKernel extends Kernel {
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);
             final int upgrades = (int) (wUpg+hUpg+aUpg+nUpg+rUpg+bUpg);
             final int conversions = (int) (wConv+hConv+aConv+nConv+rConv+bConv);
+            final int eq = (int) (wEq+hEq+aEq+nEq+rEq+bEq);
 
             final float bsHp = (hp - baseHp - artifactHealth - (hpSet * hpSetBonus) + (torrentSet * hpSetBonus/2)) / baseHp * 100;
             final float bsAtk = (atk - baseAtk - artifactAttack - (atkSet * atkSetBonus)) / baseAtk * 100;
@@ -807,6 +818,7 @@ public class GpuOptimizerKernel extends Kernel {
             final boolean f3 = priority < inputMinPriorityLimit || priority > inputMaxPriorityLimit
                     ||  upgrades < inputMinUpgradesLimit || upgrades > inputMaxUpgradesLimit
                     ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit
+                    ||  eq < inputMinEquippedLimit || eq > inputMaxEquippedLimit
                     ||  s1 < inputMinS1Limit || s1 > inputMaxS1Limit
                     ||  s2 < inputMinS2Limit || s2 > inputMaxS2Limit
                     ||  s3 < inputMinS3Limit || s3 > inputMaxS3Limit
@@ -831,7 +843,7 @@ public class GpuOptimizerKernel extends Kernel {
                               final float penSetOn) {
 //        final float effectiveDefense = targetDefense * targets[s] * penMultiplier
 //        final float realDefense = targetDefense * (penSetOn * 0.12f + 0);
-        final float realPenetration = (1 - penetration[s]) * (1 - penSetOn * 0.12f * targets[s]);
+        final float realPenetration = (1 - penetration[s]) * (1 - penSetOn * 0.15f * targets[s]);
         final float statScalings =
                         selfHpScaling[s] *hp +
                         selfAtkScaling[s]*atk +

@@ -77,6 +77,7 @@ public class StatCalculator {
                                                      final Hero hero,
                                                      final int upgrades,
                                                      final int conversions,
+                                                     final int alreadyEquipped,
                                                      final int priority) {
         final float[] accs0 = accs[0];
         final float[] accs1 = accs[1];
@@ -189,7 +190,7 @@ flat2mod -> ddj
         final int bs = (int) (bsHp + bsAtk + bsDef + bsCr*1.6f + bsCd*1.14f + bsEff + bsRes + bsSpd*2);
 
         return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps,
-                dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, s1, s2, s3, upgrades, conversions, score, bs, priority,
+                dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, s1, s2, s3, upgrades, conversions, alreadyEquipped, score, bs, priority,
                 base.bonusStats, null, null, null, null, null, null, null);
     }
 

@@ -285,7 +285,7 @@ input {
 
 #buttonSpace {
   width: 20px;
-      height: 5px;
+  height: 4px;
   display: inline-block;
 }
 
@@ -879,7 +879,7 @@ input[type=number]::-webkit-outer-spin-button {
   flex-direction: row;
 }
 .panelLabel {
-  line-height: 21px;
+  line-height: 15px;
   display:flex;
   flex-direction: row;
 }
@@ -905,6 +905,16 @@ input[type=number]::-webkit-outer-spin-button {
   flex-direction: column;
 }
 .inputHeroImage {
+  /*padding-top: 5px;*/
+  /*width: 100px;*/
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: relative;
+  top: 0px;
+  right: -35px;
+}
+.inputArtifactImage {
   padding-top: 5px;
   /*width: 100px;*/
   margin-left: auto;
@@ -912,13 +922,30 @@ input[type=number]::-webkit-outer-spin-button {
   display: block;
   position: absolute;
   top: 0px;
-  right: -15px;
+  width: 45px;
+  left: 0px;
+}
+.inputImprintImage {
+  padding-top: 5px;
+  /*width: 100px;*/
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: absolute;
+  top: 0px;
+  height: 25px;
+  width: auto;
+  left: 0px;
+  margin-top: 65px;
 }
 .inputHeroImageContainer {
     position: relative;
     overflow: hidden;
     width: 100%;
     height: 100px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 .checkbox {
     width: 18px;

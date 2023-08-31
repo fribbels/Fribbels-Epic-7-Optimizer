@@ -103,21 +103,24 @@ window.jQuery = $;
                 <div class="panelLabelText" data-t>Hero</div>
                 <img src="./assets/tooltip.png" class="tooltipImageRight" id="heroTooltip"></img>
               </div>
+
+
               <select id="inputHeroAdd" class="gearPreviewButton controlsPanel"></select>
 
 
-              <div class="horizontalSpace" ></div>
-
               <div class="inputHeroImageContainer">
-                <img src="" id="inputHeroImage" class="inputHeroImage"></img>
+                <img src="./assets/blank.png" id="inputHeroImage" class="inputHeroImage"></img>
+                <img src="./assets/blank.png" id="inputArtifactImage" class="inputArtifactImage"></img>
+                <img src="./assets/blank.png" id="inputImprintImage" class="inputImprintImage"></img>
               </div>
 
-              <div class="horizontalSpace" ></div>
               <input type="submit" value="Start" class="gearPreviewButton controlsPanel" id="submitOptimizerRequest" data-t ><br>
               <div class="horizontalSpace" ></div>
               <input type="submit" value="Filter" class="gearPreviewButton controlsPanel" id="submitOptimizerFilter" data-t ><br>
               <div class="horizontalSpace" ></div>
               <input type="submit" value="Cancel" class="gearPreviewButton controlsPanel" id="submitOptimizerCancel" data-t ><br>
+              <div class="horizontalSpace" ></div>
+              <input type="submit" value="Hero library" class="gearPreviewButton controlsPanel" id="submitOptimizerHeroLibrary" data-t >
               <div class="horizontalSpace" ></div>
               <input type="submit" value="Reset filters" class="gearPreviewButton controlsPanel" id="submitOptimizerReset" data-t >
 
@@ -195,6 +198,14 @@ window.jQuery = $;
                   <div class="statPreviewDiff" id="resStatDiff"></div>
                 </div>
 
+                <div class="statPreviewRow">
+                  <img src="./assets/star.png" class="statPreviewImg"></img>
+                  <div class="statPreviewBefore" id="gsStatBefore">0</div>
+                  <div class="statPreviewArrow">➤</div>
+                  <div class="statPreviewAfter" id="gsStatAfter"></div>
+                  <div class="statPreviewDiff" id="gsStatDiff"></div>
+                </div>
+
                 <div class="horizontalSpace"></div>
                 <div class="horizontalSpace"></div>
 
@@ -248,6 +259,10 @@ window.jQuery = $;
                 <label for="inputKeepCurrentItems" data-t>Keep current</label>
               </div>
               <div class="horizontalSpace"></div>
+              <div class="horizontalSpace"></div>
+              <div class="horizontalSpace"></div>
+              <div class="horizontalSpace"></div>
+              <div class="horizontalSpace" ></div>
 
               <select id="optionsEnhanceLimit" class="optionsExcludeGearFrom optionsShortSelector">
                 <option value="0" data-t>+0 and higher</option>
@@ -262,6 +277,7 @@ window.jQuery = $;
               <select multiple="multiple" id="optionsExcludeGearFrom" class="optionsExcludeGearFrom optionsShortSelector">
               </select><br>
 
+              <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
@@ -314,8 +330,11 @@ window.jQuery = $;
               <div class="inputStatLabel" data-t>Cp</div>
               <input type="number" id="inputMaxCpLimit" class="optimizer-number-input rating-number-input"><br>
 
+              <input type="number" id="inputMinItemGSLimit" class="optimizer-number-input rating-number-input">
+              <div class="inputStatLabel" data-t>ItemGS</div>
+              <input type="number" id="inputMaxItemGSLimit" class="optimizer-number-input rating-number-input"><br>
 
-
+              <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
               <div class="horizontalSpace" ></div>
@@ -324,20 +343,20 @@ window.jQuery = $;
 
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="filterSkillsTooltip"></img>
-                <div class="panelLabelText" id="statsLabel" data-content=" (clear)" data-t>Skill filters</div>
+                <div class="panelLabelText" id="skillsLabel" data-content=" (clear)" data-t>Skill filters</div>
               </div>
 
-              <input type="number" id="inputMinS1Limit" class="optimizer-number-input stat-number-input">
+              <input type="number" id="inputMinS1Limit" class="optimizer-number-input stat-number-input skill-number-input">
               <div class="inputStatLabel" data-t>S1</div>
-              <input type="number" id="inputMaxS1Limit" class="optimizer-number-input stat-number-input"><br>
+              <input type="number" id="inputMaxS1Limit" class="optimizer-number-input stat-number-input skill-number-input"><br>
 
-              <input type="number" id="inputMinS2Limit" class="optimizer-number-input stat-number-input">
+              <input type="number" id="inputMinS2Limit" class="optimizer-number-input stat-number-input skill-number-input">
               <div class="inputStatLabel" data-t>S2</div>
-              <input type="number" id="inputMaxS2Limit" class="optimizer-number-input stat-number-input"><br>
+              <input type="number" id="inputMaxS2Limit" class="optimizer-number-input stat-number-input skill-number-input"><br>
 
-              <input type="number" id="inputMinS3Limit" class="optimizer-number-input stat-number-input">
+              <input type="number" id="inputMinS3Limit" class="optimizer-number-input stat-number-input skill-number-input">
               <div class="inputStatLabel" data-t>S3</div>
-              <input type="number" id="inputMaxS3Limit" class="optimizer-number-input stat-number-input"><br>
+              <input type="number" id="inputMaxS3Limit" class="optimizer-number-input stat-number-input skill-number-input"><br>
             </div>
 
             <div id="placeholder-panel" class="constraints-panel-col-small">
@@ -401,6 +420,10 @@ window.jQuery = $;
               <input type="number" id="inputMinConversionsLimit" class="optimizer-number-input rating-number-input">
               <div class="inputStatLabel" data-t>Conv</div>
               <input type="number" id="inputMaxConversionsLimit" class="optimizer-number-input rating-number-input"><br>
+
+              <input type="number" id="inputMinEquippedLimit" class="optimizer-number-input rating-number-input">
+              <div class="inputStatLabel" data-t>Eq</div>
+              <input type="number" id="inputMaxEquippedLimit" class="optimizer-number-input rating-number-input"><br>
             </div>
 
             <div class="vertical"></div>
@@ -418,11 +441,15 @@ window.jQuery = $;
                 <div class="sliderContainer"><input class="slider" id="atkSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
+              <div class="horizontalSpace" ></div>
+
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Def</div>
                 <input class="sliderInput" id="defSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="defSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
+
+              <div class="horizontalSpace" ></div>
 
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Hp</div>
@@ -430,11 +457,15 @@ window.jQuery = $;
                 <div class="sliderContainer"><input class="slider" id="hpSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
+              <div class="horizontalSpace" ></div>
+
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Spd</div>
                 <input class="sliderInput" id="spdSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="spdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
+
+              <div class="horizontalSpace" ></div>
 
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Cr</div>
@@ -442,17 +473,23 @@ window.jQuery = $;
                 <div class="sliderContainer"><input class="slider" id="crSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
+              <div class="horizontalSpace" ></div>
+
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Cd</div>
                 <input class="sliderInput" id="cdSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="cdSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
 
+              <div class="horizontalSpace" ></div>
+
               <div class="sliderRow">
                 <div class="sliderLabel" data-t>Eff</div>
                 <input class="sliderInput" id="effSliderInput" type="number" value="0" readonly>
                 <div class="sliderContainer"><input class="slider" id="effSlider" type="range" min="-1" max="3" value="0" step="1"></div>
               </div>
+
+              <div class="horizontalSpace" ></div>
 
 
               <div class="sliderRow">
@@ -484,6 +521,8 @@ window.jQuery = $;
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="accessoryMainStatsTooltip"></img>
                 <div class="panelLabelText" id="accessorySetsLabel" data-content=" (clear)" data-t>Accessory main stats</div>
               </div>
+
+
               <select multiple="multiple" id="inputNecklaceStat" class="inputGearFilterSelect">
                 <option value="CriticalHitChancePercent" data-t>Crit Chance</option>
                 <option value="CriticalHitDamagePercent" data-t>Crit Damage</option>
@@ -516,10 +555,15 @@ window.jQuery = $;
                 <option value="Defense" data-t>Defense</option>
               </select><br>
 
+
+              <div class="horizontalSpace" ></div>
+
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="setsTooltip"></img>
                 <div class="panelLabelText" data-t>Sets</div>
               </div>
+
+
               <select multiple="multiple" id="inputSet1" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
                 <optgroup label="4 Piece" data-t>
@@ -576,10 +620,15 @@ window.jQuery = $;
                 </optgroup>
               </select>
 
+
+              <div class="horizontalSpace" ></div>
+
               <div class="panelLabel">
                 <img src="./assets/tooltip.png" class="tooltipImageLeft" id="excludeTooltip"></img>
                 <div class="panelLabelText" data-t>Exclude</div>
               </div>
+
+
               <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
                 <!-- <option value="None" data-t>None</option> -->
                 <optgroup label="4 Piece" data-t>

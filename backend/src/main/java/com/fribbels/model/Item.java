@@ -57,6 +57,7 @@ public class Item {
     public int reforgeable;
     public int upgradeable;
     public int convertable;
+    public int alreadyEquipped;
     public int priority;
     private int wss;
     private int reforgedWss;

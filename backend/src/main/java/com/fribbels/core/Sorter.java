@@ -95,6 +95,9 @@ public class Sorter {
                     case CONVERSIONS:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getConversions));
                         break;
+                    case EQ:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getEq));
+                        break;
                     default:
                         System.err.println("INVALID COLUMN " + column);
                 }
@@ -182,6 +185,9 @@ public class Sorter {
                         break;
                     case CONVERSIONS:
                         Arrays.sort(data, Comparator.comparingInt(HeroStats::getConversions).reversed());
+                        break;
+                    case EQ:
+                        Arrays.sort(data, Comparator.comparingInt(HeroStats::getEq).reversed());
                         break;
                     default:
                         System.err.println("INVALID COLUMN " + column);

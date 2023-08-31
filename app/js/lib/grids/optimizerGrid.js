@@ -90,6 +90,7 @@ module.exports = {
     },
 
     setPinnedHero: (hero) => {
+        hero.eq = 0
         optimizerGrid.gridOptions.api.setPinnedTopRowData([hero]);
         pinnedRow = hero;
         StatPreview.draw(pinnedRow, pinnedRow)
@@ -224,7 +225,8 @@ function aggregateCurrentHeroStats(heroStats) {
         "s3",
         "score",
         "bs",
-        "priority"
+        "priority",
+
     ]
 
     var count = heroStats.length;
@@ -270,10 +272,10 @@ function getField(heroStats, stat) {
 function buildGrid(localeText) {
 
     const DIGITS_2 = 30;
-    const DIGITS_3 = 35;
-    const DIGITS_4 = 42;
+    const DIGITS_3 = 34;
+    const DIGITS_4 = 39;
     const DIGITS_5 = 45;
-    const DIGITS_6 = 50;
+    const DIGITS_6 = 48;
 
     const gridOptions = {
         defaultColDef: {
@@ -306,13 +308,14 @@ function buildGrid(localeText) {
             {headerName: i18next.t('mcd'), field: 'mcdmg', width: DIGITS_5},
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: DIGITS_5},
-            {headerName: i18next.t('dmgd'), field: 'dmgd', width: DIGITS_5},
+            {headerName: i18next.t('dmgd'), field: 'dmgd', width: DIGITS_4},
             {headerName: i18next.t('s1'), field: 's1', width: DIGITS_5},
             {headerName: i18next.t('s2'), field: 's2', width: DIGITS_5},
             {headerName: i18next.t('s3'), field: 's3', width: DIGITS_5},
             {headerName: i18next.t('gs'), field: 'score', width: DIGITS_3},
             {headerName: i18next.t('bs'), field: 'bs', width: DIGITS_3},
             {headerName: i18next.t('prio'), field: 'priority', width: DIGITS_3},
+            {headerName: i18next.t('eq'), field: 'eq', width: DIGITS_2},
             {headerName: i18next.t('upg'), field: 'upgrades', width: DIGITS_2},
             {headerName: i18next.t(''), field: 'property', width: 25, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],

@@ -116,6 +116,11 @@ module.exports = {
         //     loadPreviousHeroFilters();
         // });
 
+        document.getElementById('submitOptimizerHeroLibrary').addEventListener("click", async () => {
+            const heroId = document.getElementById('inputHeroAdd').value;
+            const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
+            electron.shell.openExternal('https://fribbels.github.io/e7/hero-library.html?hero=' + heroResponse.hero.name);
+        });
         document.getElementById('submitOptimizerReset').addEventListener("click", () => {
             clearRatings();
             clearStats();
@@ -209,10 +214,10 @@ module.exports = {
             clearRatings();
             recalculateFilters();
         });
-        // document.getElementById('forceLabel').addEventListener("click", async () => {
-        //     clearForce();
-        //     recalculateFilters();
-        // });
+        document.getElementById('skillsLabel').addEventListener("click", async () => {
+            clearSkills();
+            recalculateFilters();
+        });
         document.getElementById('optionsLabel').addEventListener("click", async () => {
             clearOptions();
             recalculateFilters();
@@ -235,6 +240,7 @@ module.exports = {
             const hero = (await Api.getHeroById(heroId)).hero;
 
             await HeroesTab.showBonusStatsWindow(hero);
+            redrawHeroImage()
             Saves.autoSave();
         });
 
@@ -434,6 +440,13 @@ module.exports = {
             })
         }
 
+        const min = params.inputMinItemGSLimit == undefined ? 0 : params.inputMinItemGSLimit
+        const max = params.inputMaxItemGSLimit == undefined ? 99999999 : params.inputMaxItemGSLimit
+
+        items = items.filter(item => {
+            return item.reforgedWss > min && item.reforgedWss < max
+        })
+
         items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit, index);
 
         items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems, params.inputPredictReforges, params.inputSubstatMods)
@@ -472,13 +485,13 @@ module.exports = {
         const setFormat = getSetFormat(setFilters.sets, showError);
         console.log("SETFORMAT", setFormat);
 
-        request.inputPredictReforges   = readCheckbox('inputPredictReforges' + index);
         request.inputSubstatMods   = readCheckbox('inputSubstatMods' + index);
         request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems' + index);
         request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems' + index);
         request.inputOrderedHeroPriority   = readCheckbox('inputOrderedHeroPriority' + index);
         request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems' + index);
         request.inputOnlyMaxedGear   = readCheckbox('inputOnlyMaxedGear' + index);
+        request.inputPredictReforges   = request.inputSubstatMods || readCheckbox('inputPredictReforges' + index);
         // request.inputOver85   = readCheckbox('inputOver85');
         // request.inputOnlyPlus15Gear   = readCheckbox('inputOnlyPlus15Gear');
 
@@ -531,12 +544,16 @@ module.exports = {
         request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit' + index);
         request.inputMinConversionsLimit = readNumber('inputMinConversionsLimit' + index);
         request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit' + index);
+        request.inputMinEquippedLimit = readNumber('inputMinEquippedLimit' + index);
+        request.inputMaxEquippedLimit = readNumber('inputMaxEquippedLimit' + index);
         request.inputMinScoreLimit = readNumber('inputMinScoreLimit' + index);
         request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit' + index);
         request.inputMinBSLimit = readNumber('inputMinBSLimit' + index);
         request.inputMaxBSLimit = readNumber('inputMaxBSLimit' + index);
         request.inputMinPriorityLimit = readNumber('inputMinPriorityLimit' + index);
         request.inputMaxPriorityLimit = readNumber('inputMaxPriorityLimit' + index);
+        request.inputMinItemGSLimit = readNumber('inputMinItemGSLimit' + index);
+        request.inputMaxItemGSLimit = readNumber('inputMaxItemGSLimit' + index);
 
         // request.inputAtkMinForce = readNumber('inputMinAtkForce');
         // request.inputAtkMaxForce = readNumber('inputMaxAtkForce');
@@ -668,6 +685,8 @@ module.exports = {
         $("#inputMaxUpgradesLimit" + index).val(inputDisplayNumber(request.inputMaxUpgradesLimit));
         $("#inputMinConversionsLimit" + index).val(inputDisplayNumber(request.inputMinConversionsLimit));
         $("#inputMaxConversionsLimit" + index).val(inputDisplayNumber(request.inputMaxConversionsLimit));
+        $("#inputMinEquippedLimit" + index).val(inputDisplayNumber(request.inputMinEquippedLimit));
+        $("#inputMaxEquippedLimit" + index).val(inputDisplayNumber(request.inputMaxEquippedLimit));
         $("#inputMinScoreLimit" + index).val(inputDisplayNumber(request.inputMinScoreLimit));
         $("#inputMaxScoreLimit" + index).val(inputDisplayNumber(request.inputMaxScoreLimit));
         $("#inputMinBSLimit" + index).val(inputDisplayNumber(request.inputMinBSLimit));
@@ -913,6 +932,9 @@ function clearSubstatPriority() {
 function clearRatings() {
     $(".optimizer-number-input").val("")
 }
+function clearSkills() {
+    $(".skill-number-input").val("")
+}
 function clearStats() {
     $(".stat-number-input").val("")
     calculatePlaceholderRatings();
@@ -973,17 +995,40 @@ async function lockGearFromIcon(id, checkboxPrefix) {
     }
 }
 
-function redrawHeroImage() {
+async function redrawHeroImage() {
     const name = $( "#inputHeroAdd option:selected" ).attr("label")
+    const id = $( "#inputHeroAdd option:selected" ).attr('value')
     if (!name || name.length == 0) {
         $('#inputHeroImage').attr("src", Assets.getBlank());
         return;
     }
 
+
     const data = HeroData.getHeroExtraInfo(name);
     const image = data.assets.thumbnail;
-
     $('#inputHeroImage').attr("src", image);
+
+
+    const heroResponse = await Api.getHeroById(id, $('#inputPredictReforges').prop('checked'));
+    const hero = heroResponse.hero;
+    const artifact = hero.artifactName
+    const artifactData = HeroData.getArtifactByName(artifact)
+
+    if (artifactData) {
+        const artiUrl = `https://static.smilegatemegaport.com/event/live/epic7/guide/wearingStatus/images/artifact/${artifactData.code}_ico.png`
+        $('#inputArtifactImage').attr("src", artiUrl);
+    } else {
+        $('#inputArtifactImage').attr("src", Assets.getBlank());
+    }
+
+    const imprintNumber = Utils.round100ths(parseFloat(hero.imprintNumber)/100)
+    const imprintMatch = Object.entries(data.self_devotion.grades).filter(x => Utils.round100ths(x[1]) == imprintNumber)
+
+    if (imprintMatch.length > 0) {
+        $('#inputImprintImage').attr("src", `./assets/imprint${imprintMatch[0][0]}.png`);
+    } else {
+        $('#inputImprintImage').attr("src", Assets.getBlank());
+    }
 }
 
 function clearHeroOptions(id) {

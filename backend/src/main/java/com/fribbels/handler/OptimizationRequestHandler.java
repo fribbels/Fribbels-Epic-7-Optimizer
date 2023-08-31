@@ -36,6 +36,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private boolean canUseGpu = true;
 
     public static final int SET_COUNT = 18;
-    public static final int ARG_COUNT = 16;
+    public static final int ARG_COUNT = 17;
 
     //
     private static final int SET_EXPONENTIAL = 34012224; // 16 ^ 6
@@ -400,6 +401,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.getPriority() < request.getInputMinPriorityLimit() || heroStats.getPriority() > request.getInputMaxPriorityLimit()
                 ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
                 ||  heroStats.getConversions() < request.getInputMinConversionsLimit() || heroStats.getConversions() > request.getInputMaxConversionsLimit()
+                ||  heroStats.getEq() < request.getInputMinEquippedLimit() || heroStats.getEq() > request.getInputMaxEquippedLimit()
         ) {
             return false;
         }
@@ -520,13 +522,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         for (int i = 0; i < items.length; i++) {
             final Item item = items[i];
-            for (int j = 0; j < ARG_COUNT - 4; j++) {
+            for (int j = 0; j < ARG_COUNT - 5; j++) {
                 output[i*ARG_COUNT + j] = item.tempStatAccArr[j];
             }
-            output[i*ARG_COUNT + ARG_COUNT - 4] = item.set.index;
-            output[i*ARG_COUNT + ARG_COUNT - 3] = item.priority;
-            output[i*ARG_COUNT + ARG_COUNT - 2] = item.upgradeable;
-            output[i*ARG_COUNT + ARG_COUNT - 1] = item.convertable;
+            output[i*ARG_COUNT + ARG_COUNT - 5] = item.set.index;
+            output[i*ARG_COUNT + ARG_COUNT - 4] = item.priority;
+            output[i*ARG_COUNT + ARG_COUNT - 3] = item.upgradeable;
+            output[i*ARG_COUNT + ARG_COUNT - 2] = item.convertable;
+            output[i*ARG_COUNT + ARG_COUNT - 1] = item.alreadyEquipped;
 
             // 0 atk
             // 1 hp
@@ -544,6 +547,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             // 13 prio
             // 14 upg
             // 15 conv
+            // 16 eq
         }
 
         return output;
@@ -593,6 +597,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         priorityItems.addAll(otherItems);
         final List<Item> items = priorityItems;
+
+        items.forEach(item -> {
+            final String id = request.hero.getId();
+            final String equippedId = item.getEquippedById();
+
+            if (!StringUtils.equals(id, equippedId) && StringUtils.isNotBlank(equippedId)) {
+                item.alreadyEquipped = 1;
+            }
+        });
 
         final int MAXIMUM_RESULTS = SETTING_MAXIMUM_RESULTS;
         System.out.println("Start allocating memory");
@@ -857,8 +870,9 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                                     final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
                                     final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                    final int alreadyEquipped = weapon.alreadyEquipped + helmet.alreadyEquipped + armor.alreadyEquipped + necklace.alreadyEquipped + ring.alreadyEquipped + boots.alreadyEquipped;
                                     final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
-                                    final HeroStats result = statCalculator.addAccumulatorArrsToHero(base, new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr}, collectedSets, request.hero, reforges, conversions, priority);
+                                    final HeroStats result = statCalculator.addAccumulatorArrsToHero(base, new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr}, collectedSets, request.hero, reforges, conversions, alreadyEquipped, priority);
 
                                     result.setSets(collectedSets);
                                     result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a]
@@ -946,6 +960,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                             final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
                                             final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
                                             final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                            final int alreadyEquipped = weapon.alreadyEquipped + helmet.alreadyEquipped + armor.alreadyEquipped + necklace.alreadyEquipped + ring.alreadyEquipped + boots.alreadyEquipped;
                                             final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
                                             final HeroStats result = statCalculator.addAccumulatorArrsToHero(
                                                     base,
@@ -954,6 +969,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                                     request.hero,
                                                     reforges,
                                                     conversions,
+                                                    alreadyEquipped,
                                                     priority);
                                             searchedCounter.getAndIncrement();
                                             //                                        final boolean passesFilter = true;
@@ -1108,6 +1124,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.priority < request.inputMinPriorityLimit || heroStats.priority > request.inputMaxPriorityLimit
                 ||  heroStats.upgrades < request.inputMinUpgradesLimit || heroStats.upgrades > request.inputMaxUpgradesLimit
                 ||  heroStats.conversions < request.inputMinConversionsLimit || heroStats.conversions > request.inputMaxConversionsLimit
+                ||  heroStats.eq < request.inputMinEquippedLimit || heroStats.eq > request.inputMaxEquippedLimit
         ) {
             return false;
         }
