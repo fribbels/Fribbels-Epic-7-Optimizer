@@ -4569,6 +4569,90 @@
       }
     }
   },
+  "Brieg": {
+    "code": "c1145",
+    "_id": "brieg",
+    "name": "Brieg",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "knight",
+    "zodiac": "ram",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1145_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1145_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 1,
+        "selfHpScaling": 0.12,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S2 barrier",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.185
+          }
+        ]
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "with proc dmg",
+        "rate": 1,
+        "pow": 1,
+        "targets": 3,
+        "selfHpScaling": 0.22,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13403,
+        "atk": 658,
+        "hp": 5375,
+        "spd": 110,
+        "def": 523,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.06,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17219,
+        "atk": 821,
+        "hp": 6751,
+        "spd": 110,
+        "def": 648,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Butcher Corps Inquisitor": {
     "code": "c3001",
     "_id": "butcher-corps-inquisitor",
@@ -24874,6 +24958,79 @@
         "overrideAdditionalSpd": 5,
         "overrideAdditionalEff": 0.2,
         "overrideAdditionalRes": 0
+      }
+    }
+  },
+  "Veronica": {
+    "code": "c1150",
+    "_id": "veronica",
+    "name": "Veronica",
+    "moonlight": false,
+    "rarity": 4,
+    "attribute": "fire",
+    "role": "ranger",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "C": 0.042,
+        "B": 0.063,
+        "A": 0.084,
+        "S": 0.105,
+        "SS": 0.126,
+        "SSS": 0.147
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1150_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1150_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.8,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12121,
+        "atk": 910,
+        "hp": 3739,
+        "spd": 121,
+        "def": 418,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15378,
+        "atk": 1188,
+        "hp": 4693,
+        "spd": 121,
+        "def": 518,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
