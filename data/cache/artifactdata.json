@@ -524,6 +524,21 @@
       },
       "code":"ef426"
    },
+   "Broken Will of the Priest":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0070.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0070_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0070_l.jpg"
+      },
+      "name":"Broken Will of the Priest",
+      "rarity":5,
+      "role":"knight",
+      "stats":{
+         "attack":15,
+         "health":54
+      },
+      "code":""
+   },
    "Butterfly Mandolin":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art3_18.png",

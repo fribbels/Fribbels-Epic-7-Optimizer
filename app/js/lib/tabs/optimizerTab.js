@@ -1020,10 +1020,12 @@ async function redrawHeroImage() {
     } else {
         $('#inputArtifactImage').attr("src", Assets.getBlank());
     }
+    const imprintType = data.self_devotion.type;
 
-    const imprintNumber = Utils.round100ths(parseFloat(hero.imprintNumber)/100)
-    const imprintMatch = Object.entries(data.self_devotion.grades).filter(x => Utils.round100ths(x[1]) == imprintNumber)
+    const isFlat = imprintType == "max_hp" || imprintType == "att" || imprintType == "def"
 
+    const imprintNumber = isFlat ? parseInt(hero/imprintNumber) : Utils.round100ths(parseFloat(hero.imprintNumber)/100)
+    const imprintMatch = Object.entries(data.self_devotion.grades).filter(x => (isFlat ? parseInt(x[1]) : Utils.round100ths(x[1])) == imprintNumber)
     if (imprintMatch.length > 0) {
         $('#inputImprintImage').attr("src", `./assets/imprint${imprintMatch[0][0]}.png`);
     } else {
