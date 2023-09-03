@@ -437,7 +437,7 @@ async function launchItemTracker(command) {
     }
 }
 
-function launchScanner(command, scanType) {
+function launchScanner(command, scanType, port) {
     try {
         data = [];
 
@@ -453,7 +453,7 @@ function launchScanner(command, scanType) {
         let bufferArray = []
 
         try {
-            scannerChild = childProcess.spawn(command, [Files.path(Files.getDataPath() + '/py/scanner.py')])
+            scannerChild = childProcess.spawn(command, [Files.path(Files.getDataPath() + '/py/scanner.py'), port])
         } catch (e) {
             console.error(e)
             Notifier.error(i18next.t("Unable to start python script ") + e)
@@ -526,7 +526,7 @@ module.exports = {
     },
 
     start: (scanType) => {
-        launchScanner(command, scanType)
+        launchScanner(command, scanType, getScanPort(scanType))
     },
 
     switchApi: () => {
@@ -559,6 +559,17 @@ module.exports = {
             Dialog.htmlError(i18next.t("Unexpected error while scanning items. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again. Error: ") + e);
         }
     }
+}
+
+function getScanPort(scanType) {
+    isChinaServer = false
+    if (scanType == "heroes") {
+        isChinaServer = document.querySelector('input[name="heroImporterServerRadio"]:checked').value == "china";
+    } else {
+        isChinaServer = document.querySelector('input[name="gearImporterServerRadio"]:checked').value == "china";
+    }
+
+    return isChinaServer ? "5222" : "3333";
 }
 
 function convertUnits(rawUnits, scanType) {

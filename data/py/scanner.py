@@ -2,6 +2,9 @@ from scapy.all import *
 import io,sys,json,os
 import threading
 import time
+import sys
+
+port = sys.argv[1] if len(sys.argv) > 1 else 3333
 
 acks = {}
 prevAcks = [-1 for i in range(len(list(conf.ifaces.data.values())))];
@@ -52,16 +55,16 @@ def check_packet(packet, index):
                 # if 'F' in packet[TCP].flags:
                 #     try_buffer(currAck)
 
-def thread_sniff(i, index):
+def thread_sniff(i, index, port):
     try:
-        sniff(iface=i, prn=lambda x: check_packet(x, index), filter="tcp and ( port 3333 )", session=TCPSession)
+        sniff(iface=i, prn=lambda x: check_packet(x, index), filter=f"tcp and ( port {port} )", session=TCPSession)
     except:
         pass
 
 index = 0
 for i in list(conf.ifaces.data.values()):
     try:
-        x = threading.Thread(target=thread_sniff, args=(i, index,))
+        x = threading.Thread(target=thread_sniff, args=(i, index, port))
         x.daemon = True;
         x.start()
 
