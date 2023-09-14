@@ -25006,8 +25006,8 @@
   },
   "Urban Shadow Choux": {
     "code": "c2101",
-    "_id": "abigail",
-    "name": "Abigail",
+    "_id": "urban-shadow-choux",
+    "name": "Urban Shadow Choux",
     "moonlight": true,
     "rarity": 5,
     "attribute": "dark",
