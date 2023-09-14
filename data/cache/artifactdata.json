@@ -537,7 +537,7 @@
          "attack":15,
          "health":54
       },
-      "code":""
+      "code":"efk20"
    },
    "Butterfly Mandolin":{
       "assets":{
@@ -1423,6 +1423,21 @@
          "health":76
       },
       "code":"efk01"
+   },
+   "Hostess of the Banquet":{
+      "assets":{
+         "icon":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "image":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "thumbnail":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+      },
+      "name":"Hostess of the Banquet",
+      "rarity":5,
+      "role":"",
+      "stats":{
+         "attack":21,
+         "health":32
+      },
+      "code":""
    },
    "Idol's Cheer":{
       "assets":{
