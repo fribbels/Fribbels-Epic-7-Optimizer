@@ -6,24 +6,24 @@ import com.fribbels.request.OptimizationRequest;
 
 public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
 
-    public SetFormat000OptimizerKernel(final OptimizationRequest request, final float[] flattenedWeaponAccs, final float[] flattenedHelmetAccs, final float[] flattenedArmorAccs, final float[] flattenedNecklaceAccs, final float[] flattenedRingAccs, final float[] flattenedBootAccs, final float bonusBaseAtk, final float bonusBaseDef, final float bonusBaseHp, final float atkSetBonus, final float hpSetBonus, final float defSetBonus, final float speedSetBonus, final float revengeSetBonus, final float penSetDmgBonus, final float bonusMaxAtk, final float bonusMaxDef, final float bonusMaxHp, final int SETTING_RAGE_SET, final int SETTING_PEN_SET, final HeroStats base, final Hero hero, final int argSize, final int wSize, final int hSize, final int aSize, final int nSize, final int rSize, final int bSize, final int max, final int[] setSolutionBitMasks) {
-        super(request, flattenedWeaponAccs, flattenedHelmetAccs, flattenedArmorAccs, flattenedNecklaceAccs, flattenedRingAccs, flattenedBootAccs, bonusBaseAtk, bonusBaseDef, bonusBaseHp, atkSetBonus, hpSetBonus, defSetBonus, speedSetBonus, revengeSetBonus, penSetDmgBonus, bonusMaxAtk, bonusMaxDef, bonusMaxHp, SETTING_RAGE_SET, SETTING_PEN_SET, base, hero, argSize, wSize, hSize, aSize, nSize, rSize, bSize, max, setSolutionBitMasks);
+    public SetFormat000OptimizerKernel(final OptimizationRequest request, final float[] flattenedWeaponAccs, final float[] flattenedHelmetAccs, final float[] flattenedArmorAccs, final float[] flattenedNecklaceAccs, final float[] flattenedRingAccs, final float[] flattenedBootAccs, final float bonusBaseAtk, final float bonusBaseDef, final float bonusBaseHp, final float atkSetBonus, final float hpSetBonus, final float defSetBonus, final float speedSetBonus, final float revengeSetBonus, final float penSetDmgBonus, final float targetDefense, final float bonusMaxAtk, final float bonusMaxDef, final float bonusMaxHp, final int SETTING_RAGE_SET, final int SETTING_PEN_SET, final HeroStats base, final Hero hero, final long argSize, final long wSize, final long hSize, final long aSize, final long nSize, final long rSize, final long bSize, final long max, final int[] setSolutionBitMasks) {
+        super(request, flattenedWeaponAccs, flattenedHelmetAccs, flattenedArmorAccs, flattenedNecklaceAccs, flattenedRingAccs, flattenedBootAccs, bonusBaseAtk, bonusBaseDef, bonusBaseHp, atkSetBonus, hpSetBonus, defSetBonus, speedSetBonus, revengeSetBonus, penSetDmgBonus, targetDefense, bonusMaxAtk, bonusMaxDef, bonusMaxHp, SETTING_RAGE_SET, SETTING_PEN_SET, base, hero, argSize, wSize, hSize, aSize, nSize, rSize, bSize, max, setSolutionBitMasks);
     }
 
     @Override
     public void run() {
         final int id = getGlobalId();
 
-        final long i = ((long)max) * iteration + id;
-        if (i < ((long)(wSize)) * hSize * aSize * nSize * rSize * bSize) {
-            final int b = (int)(i % bSize);
-            final int r = (int)(( ( i - b ) / bSize ) %  rSize);
-            final int n = (int)(( ( i - r * bSize - b ) / (bSize * rSize) ) % nSize);
-            final int a = (int)(( ( i - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize);
-            final int h = (int)(( ( i - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize);
-            final int w = (int)(( ( i - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize);
+        final long i = max * iteration + id;
+        if (i < wSize * hSize * aSize * nSize * rSize * bSize) {
+            final long b = i % bSize;
+            final long r = ( ( i - b ) / bSize ) %  rSize;
+            final long n = ( ( i - r * bSize - b ) / (bSize * rSize) ) % nSize;
+            final long a = ( ( i - n * rSize * bSize - r * bSize - b ) / (bSize * rSize * nSize) ) % aSize;
+            final long h = ( ( i - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize) ) % hSize;
+            final long w = ( ( i - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize) ) % wSize;
 
-            final int wargSize = w * argSize;
+            final int wargSize = (int)(w * argSize);
             final float wAtk =   flattenedWeaponAccs[wargSize];
             final float wHp =    flattenedWeaponAccs[wargSize + 1];
             final float wDef =   flattenedWeaponAccs[wargSize + 2];
@@ -37,8 +37,9 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final float wPrio =  flattenedWeaponAccs[wargSize + 13];
             final float wUpg =   flattenedWeaponAccs[wargSize + 14];
             final float wConv =  flattenedWeaponAccs[wargSize + 15];
+            final float wEq =    flattenedWeaponAccs[wargSize + 16];
 
-            final int hargSize = h * argSize;
+            final int hargSize = (int)(h * argSize);
             final float hAtk =   flattenedHelmetAccs[hargSize];
             final float hHp =    flattenedHelmetAccs[hargSize + 1];
             final float hDef =   flattenedHelmetAccs[hargSize + 2];
@@ -52,8 +53,9 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final float hPrio =  flattenedHelmetAccs[hargSize + 13];
             final float hUpg =   flattenedHelmetAccs[hargSize + 14];
             final float hConv =  flattenedHelmetAccs[hargSize + 15];
+            final float hEq =    flattenedHelmetAccs[hargSize + 16];
 
-            final int aargSize = a * argSize;
+            final int aargSize = (int)(a * argSize);
             final float aAtk =   flattenedArmorAccs[aargSize];
             final float aHp =    flattenedArmorAccs[aargSize + 1];
             final float aDef =   flattenedArmorAccs[aargSize + 2];
@@ -67,8 +69,9 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final float aPrio =  flattenedArmorAccs[aargSize + 13];
             final float aUpg =   flattenedArmorAccs[aargSize + 14];
             final float aConv =  flattenedArmorAccs[aargSize + 15];
+            final float aEq =    flattenedArmorAccs[aargSize + 16];
 
-            final int nargSize = n * argSize;
+            final int nargSize = (int)(n * argSize);
             final float nAtk =   flattenedNecklaceAccs[nargSize];
             final float nHp =    flattenedNecklaceAccs[nargSize + 1];
             final float nDef =   flattenedNecklaceAccs[nargSize + 2];
@@ -82,8 +85,9 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final float nPrio =  flattenedNecklaceAccs[nargSize + 13];
             final float nUpg =   flattenedNecklaceAccs[nargSize + 14];
             final float nConv =  flattenedNecklaceAccs[nargSize + 15];
+            final float nEq =    flattenedNecklaceAccs[nargSize + 16];
 
-            final int rargSize = r * argSize;
+            final int rargSize = (int)(r * argSize);
             final float rAtk =   flattenedRingAccs[rargSize];
             final float rHp =    flattenedRingAccs[rargSize + 1];
             final float rDef =   flattenedRingAccs[rargSize + 2];
@@ -97,8 +101,9 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final float rPrio =  flattenedRingAccs[rargSize + 13];
             final float rUpg =   flattenedRingAccs[rargSize + 14];
             final float rConv =  flattenedRingAccs[rargSize + 15];
+            final float rEq =    flattenedRingAccs[rargSize + 16];
 
-            final int bargSize = b * argSize;
+            final int bargSize = (int)(b * argSize);
             final float bAtk =   flattenedBootAccs[bargSize];
             final float bHp =    flattenedBootAccs[bargSize + 1];
             final float bDef =   flattenedBootAccs[bargSize + 2];
@@ -112,6 +117,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final float bPrio =  flattenedBootAccs[bargSize + 13];
             final float bUpg =   flattenedBootAccs[bargSize + 14];
             final float bConv =  flattenedBootAccs[bargSize + 15];
+            final float bEq =    flattenedBootAccs[bargSize + 16];
 
             final int iWset = (int)wSet;
             final int iHset = (int)hSet;
@@ -138,7 +144,9 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int rageSet = min(1, setSolutionBitMasks[setIndex] & (1 << 21));
             final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
             final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 24));
-            final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 26)) + min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28));
+//            final int protectionSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
+//            final int injurySet = min(1, setSolutionBitMasks[setIndex] & (1 << 26));
+            final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28)) + min(1, setSolutionBitMasks[setIndex] & (1 << 29));
 
             final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
             final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
@@ -154,25 +162,52 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
 
             final int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
-            final float rageMultiplier = max(1, rageSet * SETTING_RAGE_SET * 1.3f);
-            final float penMultiplier = max(1, min(penSet, 1) * SETTING_PEN_SET * penSetDmgBonus);
-            final float torrentMultiplier = max(1, torrentSet * 0.1f + 1);
+            final float penSetOn = min(penSet, 1);
+            final float rageMultiplier = max(0, rageSet * SETTING_RAGE_SET * 0.3f);
+            final float penMultiplier = max(1, penSetOn * SETTING_PEN_SET * penSetDmgBonus);
+            final float torrentMultiplier = max(0, torrentSet * 0.1f);
             final float spdDiv1000 = (float)spd/1000;
+            final float pctDmgMultiplier = 1 + rageMultiplier + torrentMultiplier;
 
             final int ehp = (int) (hp * (def/300 + 1));
             final int hpps = (int) (hp*spdDiv1000);
             final int ehpps = (int) ((float)ehp*spdDiv1000);
-            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
+            final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * penMultiplier * pctDmgMultiplier);
             final int dmgps = (int) ((float)dmg*spdDiv1000);
-            final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
+            final int mcdmg = (int) (atk * critDamage * penMultiplier * pctDmgMultiplier);
             final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-            final int dmgh = (int) ((critDamage * hp * rageMultiplier * penMultiplier * torrentMultiplier)/10);
-            final int dmgd = (int) ((critDamage * def * rageMultiplier * penMultiplier * torrentMultiplier));
+            final int dmgh = (int) ((critDamage * hp * penMultiplier * pctDmgMultiplier)/10);
+            final int dmgd = (int) ((critDamage * def * penMultiplier * pctDmgMultiplier));
+
+            final int s1 = getSkillValue(0, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+            final int s2 = getSkillValue(1, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+            final int s3 = getSkillValue(2, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
 
             final int score = (int) (wScore+hScore+aScore+nScore+rScore+bScore);
             final int priority = (int) (wPrio+hPrio+aPrio+nPrio+rPrio+bPrio);
             final int upgrades = (int) (wUpg+hUpg+aUpg+nUpg+rUpg+bUpg);
             final int conversions = (int) (wConv+hConv+aConv+nConv+rConv+bConv);
+            final int eq = (int) (wEq+hEq+aEq+nEq+rEq+bEq);
+
+            final float bsHp = (hp - baseHp - artifactHealth - (hpSet * hpSetBonus) + (torrentSet * hpSetBonus/2)) / baseHp * 100;
+            final float bsAtk = (atk - baseAtk - artifactAttack - (atkSet * atkSetBonus)) / baseAtk * 100;
+            final float bsDef = (def - baseDef - (defSet * defSetBonus)) / baseDef * 100;
+            final float bsCr = (cr - baseCr - (crSet * 12));
+            final float bsCd = (cd - baseCd - (cdSet * 60));
+            final float bsEff = (eff - baseEff - (effSet * 20));
+            final float bsRes = (res - baseRes - (resSet * 20));
+            final float bsSpd = (spd - baseSpeed - (speedSet * speedSetBonus) - (revengeSet * revengeSetBonus));
+
+            //            final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
+            //            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
+            //            final float def =  ((bonusBaseDef  + wDef+hDef+aDef+nDef+rDef+bDef + (defSet * defSetBonus)) * bonusMaxDef);
+            //            final int cr =     (int) (baseCr + wCr+hCr+aCr+nCr+rCr+bCr + (crSet * 12) + bonusCr + aeiCr);
+            //            final int cd =     (int) (baseCd + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 60) + bonusCd + aeiCd);
+            //            final int eff =    (int) (baseEff   + wEff+hEff+aEff+nEff+rEff+bEff + (effSet * 20) + bonusEff + aeiEff);
+            //            final int res =    (int) (baseRes   + wRes+hRes+aRes+nRes+rRes+bRes + (resSet * 20) + bonusRes + aeiRes);
+            //            final int spd =    (int) (baseSpeed + wSpeed+hSpeed+aSpeed+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + bonusSpeed + aeiSpeed);
+
+            final int bs = (int) (bsHp + bsAtk + bsDef + bsCr*1.6f + bsCd*1.14f + bsEff + bsRes + bsSpd*2);
 
             final boolean f1 = atk < inputAtkMinLimit || atk > inputAtkMaxLimit
                     ||  hp  < inputHpMinLimit  || hp > inputHpMaxLimit
@@ -195,10 +230,48 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
                     ||  score < inputMinScoreLimit || score > inputMaxScoreLimit;
             final boolean f3 = priority < inputMinPriorityLimit || priority > inputMaxPriorityLimit
                     ||  upgrades < inputMinUpgradesLimit || upgrades > inputMaxUpgradesLimit
-                    ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit;
-
+                    ||  conversions < inputMinConversionsLimit || conversions > inputMaxConversionsLimit
+                    ||  eq < inputMinEquippedLimit || eq > inputMaxEquippedLimit
+                    ||  s1 < inputMinS1Limit || s1 > inputMaxS1Limit
+                    ||  s2 < inputMinS2Limit || s2 > inputMaxS2Limit
+                    ||  s3 < inputMinS3Limit || s3 > inputMaxS3Limit
+                    ||  bs < inputMinBSLimit || bs > inputMaxBSLimit;
 
             passes[id] = !(f1 || f2 || f3);
         }
+    }
+
+    private int getSkillValue(final int s,
+                              final float atk,
+                              final float def,
+                              final float hp,
+                              final float spd,
+                              final float critDamage,
+                              final float pctDmgMultiplier,
+                              final float penSetOn) {
+        //        final float effectiveDefense = targetDefense * targets[s] * penMultiplier
+        //        final float realDefense = targetDefense * (penSetOn * 0.12f + 0);
+        final float realPenetration = (1 - penetration[s]) * (1 - penSetOn * 0.15f * targets[s]);
+        final float statScalings =
+                selfHpScaling[s] *hp +
+                        selfAtkScaling[s]*atk +
+                        selfDefScaling[s]*def +
+                        selfSpdScaling[s]*spd;
+        final float hitTypeMultis = crit[s] * (critDamage+cdmgIncrease[s]) + hitMulti[s];
+        final float increasedValueMulti = 1 + increasedValue[s];
+        final float dmgUpMod = 1 + selfSpdScaling[s] * spd;
+        final float extraDamage = (
+                extraSelfHpScaling[s] *hp +
+                        extraSelfAtkScaling[s]*atk +
+                        extraSelfDefScaling[s]*def) * 1.871f * 1f/(targetDefense*0.3f/300f + 1f);
+        final float offensiveValue = (atk * rate[s] + statScalings) * 1.871f * pow[s] * increasedValueMulti * hitTypeMultis * dmgUpMod * pctDmgMultiplier;
+        final float supportValue = selfHpScaling[s] * hp * support[s] + selfAtkScaling[s] * atk * support[s] + selfDefScaling[s] * def * support[s];
+        final float defensiveValue = 1f/(targetDefense*max(0, realPenetration)/300f + 1f);
+        final int value = (int)(offensiveValue * defensiveValue + supportValue + extraDamage);
+
+        //        System.out.println("S" + (s+1) + " " + value + " " + (hitTypeMultis) + " " + (1.871f * m.getPow()[s]));
+        //        System.out.println(m);
+
+        return value;
     }
 }

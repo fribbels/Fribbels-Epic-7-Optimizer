@@ -50,6 +50,8 @@ module.exports = {
           var localeText = AG_GRID_LOCALE_JA;
         } else if (i18next.language == 'ko') {
           var localeText = AG_GRID_LOCALE_KO;
+        } else if (i18next.language == 'ru') {
+          var localeText = AG_GRID_LOCALE_RU;
         } else {
           var localeText = AG_GRID_LOCALE_EN;
         }
@@ -242,10 +244,10 @@ function buildGrid(localeText) {
                 return params.rowNode.data.name;
             }},
             {headerName: i18next.t('icon'), sortable: false, field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
-            {headerName: i18next.t('elem'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
+            {headerName: i18next.t('elem'), field: 'attribute', width: 45, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
             {headerName: i18next.t('class'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
             //{headerName: i18next.t('name'), field: 'name', width: 0, wrapText: true, cellStyle: {'display':'none'}},
-            {headerName: i18next.t('name'), field: 'label', width: 150, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}, cellRenderer: (params) => renderName(params)},
+            {headerName: i18next.t('name'), field: 'label', width: 155, wrapText: true, sortingOrder: ['asc', 'desc', null], cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}, cellRenderer: (params) => renderName(params)},
             // {headerName: i18next.t('Stars'), field: 'rarity', width: 50},
             // {headerName: i18next.t('Class'), field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
             {headerName: i18next.t('sets'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
@@ -267,7 +269,7 @@ function buildGrid(localeText) {
             {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 55, width: DIGITS_4},
             {headerName: i18next.t('dmgh'), field: 'dmgh', width: 55, width: DIGITS_5},
             {headerName: i18next.t('dmgd'), field: 'dmgd', width: 55, width: DIGITS_5},
-            {headerName: i18next.t('score'), field: 'score', width: 55, width: DIGITS_3},
+            {headerName: i18next.t('gs'), field: 'score', width: 55, width: DIGITS_3},
             {headerName: i18next.t('upg'), field: 'upgrades', width: 65, width: DIGITS_2},
         ],
         rowSelection: 'single',
@@ -302,7 +304,7 @@ function buildGrid(localeText) {
 
     const buildsGridOptions = {
         defaultColDef: {
-            width: 50,
+            width: 45,
             sortable: true,
             sortingOrder: ['desc', 'asc'],
             cellStyle: columnGradient,
@@ -316,24 +318,28 @@ function buildGrid(localeText) {
             {headerName: i18next.t('atk'), field: 'atk'},
             {headerName: i18next.t('def'), field: 'def'},
             {headerName: i18next.t('hp'), field: 'hp', width: 55},
-            {headerName: i18next.t('spd'), field: 'spd'},
-            {headerName: i18next.t('cr'), field: 'cr'},
-            {headerName: i18next.t('cd'), field: 'cd'},
-            {headerName: i18next.t('eff'), field: 'eff'},
-            {headerName: i18next.t('res'), field: 'res'},
+            {headerName: i18next.t('spd'), field: 'spd', width: 40},
+            {headerName: i18next.t('cr'), field: 'cr', width: 40},
+            {headerName: i18next.t('cd'), field: 'cd', width: 40},
+            {headerName: i18next.t('eff'), field: 'eff', width: 40},
+            {headerName: i18next.t('res'), field: 'res', width: 40},
             // {headerName: i18next.t('dac'), field: 'dac'},
-            {headerName: i18next.t('cp'), field: 'cp', width: 55},
-            {headerName: i18next.t('hps'), field: 'hpps', width: 50},
+            {headerName: i18next.t('cp'), field: 'cp', width: 50},
+            {headerName: i18next.t('hps'), field: 'hpps', width: 45},
             {headerName: i18next.t('ehp'), field: 'ehp', width: 55},
-            {headerName: i18next.t('ehps'), field: 'ehpps', width: 50},
+            {headerName: i18next.t('ehps'), field: 'ehpps', width: 45},
             {headerName: i18next.t('dmg'), field: 'dmg', width: 50},
-            {headerName: i18next.t('dmgs'), field: 'dmgps', width: 50},
-            {headerName: i18next.t('mcd'), field: 'mcdmg', width: 55},
-            {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 50},
-            {headerName: i18next.t('dmgh'), field: 'dmgh', width: 50},
-            {headerName: i18next.t('dmgd'), field: 'dmgd', width: 50},
-            {headerName: i18next.t('score'), field: 'score', width: 50},
-            {headerName: i18next.t('upg'), field: 'upgrades', width: 65},
+            {headerName: i18next.t('dmgs'), field: 'dmgps', width: 45},
+            {headerName: i18next.t('mcd'), field: 'mcdmg', width: 50},
+            {headerName: i18next.t('mcds'), field: 'mcdmgps', width: 45},
+            {headerName: i18next.t('dmgh'), field: 'dmgh', width: 45},
+            {headerName: i18next.t('dmgd'), field: 'dmgd', width: 45},
+            {headerName: i18next.t('s1'), field: 's1', width: 50},
+            {headerName: i18next.t('s2'), field: 's2', width: 50},
+            {headerName: i18next.t('s3'), field: 's3', width: 50},
+            {headerName: i18next.t('gs'), field: 'score', width: 40},
+            {headerName: i18next.t('bs'), field: 'bs', width: 40},
+            {headerName: i18next.t('upg'), field: 'upgrades', width: 35},
         ],
         rowHeight: 27,
         rowSelection: 'single',
@@ -692,7 +698,11 @@ function updateCurrentAggregate(hero) {
         "mcdmgps",
         "dmgh",
         "dmgd",
-        "score"
+        "s1",
+        "s2",
+        "s3",
+        "score",
+        "bs"
     ]
 
     const heroStats = hero.builds || [];

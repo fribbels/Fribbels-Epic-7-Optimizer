@@ -1,5 +1,13 @@
 const stringSimilarity = require('string-similarity');
 
+const tippy = require('tippy.js').default;
+
+tippy.setDefaultProps({
+    allowHTML: true,
+    placement: 'auto',
+    maxWidth: 550,
+});
+
 function isItemModded(item) {
     return item.substats.filter(x => x.modified).length > 0;
 }
@@ -424,6 +432,8 @@ module.exports = {
       </div>
   </div>
   <div class="itemDisplayFooterIconContainer">
+      ${storage(item)}
+      ${locate(item, checkboxPrefix)}
       ${magnify(item, checkboxPrefix)}
       ${editItemDisplay(item, checkboxPrefix)}
       ${editLockDisplay(item, checkboxPrefix)}
@@ -484,6 +494,18 @@ const huntImageBySet = {
 
 function magnify(item, checkboxPrefix) {
     return `<img src="${Assets.getMagnify()}" class="itemDisplayEditImg" onclick='EnhancingTab.redrawEnhanceGuideFromRemoteId("${item.id}")'></img>`
+}
+
+function locate(item, checkboxPrefix) {
+    return `<img src="${Assets.getLocate()}" class="itemDisplayEditImg locateTooltip${checkboxPrefix}" data-itemId="${item.ingameId}" onclick='Locator.locate("${item.ingameId}", "locateTooltip${checkboxPrefix}")'></img>`
+}
+
+function storage(item) {
+    const storage = item.storage;
+    if (!storage)
+        return ""; // blank transparent
+
+    return `<img src="${Assets.getStorage()}" class="itemDisplayEditImg"></img>`
 }
 
 function editItemDisplay(item, checkboxPrefix) {

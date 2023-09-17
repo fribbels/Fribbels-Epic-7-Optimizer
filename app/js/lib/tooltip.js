@@ -70,6 +70,9 @@ module.exports = {
         tippy('#filterStatsTooltip', {
             content: '<p>'+i18next.t("Select substat filters to filter results by. Left column is min (inclusive) and right column is max (inclusive).")+'</p>'});
 
+        tippy('#filterSkillsTooltip', {
+            content: '<p>'+i18next.t("Select skill damage filters. Skill options can be changed through the Change skill options menu. Heroes with extra procs on S1 and no S2 damage will have their S2 replaced with the S1 proc value.")+'</p>'});
+
         tippy('#filterRatingsTooltip', {
             content:
 

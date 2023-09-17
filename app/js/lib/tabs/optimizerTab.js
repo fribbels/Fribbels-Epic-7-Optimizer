@@ -116,6 +116,11 @@ module.exports = {
         //     loadPreviousHeroFilters();
         // });
 
+        document.getElementById('submitOptimizerHeroLibrary').addEventListener("click", async () => {
+            const heroId = document.getElementById('inputHeroAdd').value;
+            const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
+            electron.shell.openExternal('https://fribbels.github.io/e7/hero-library.html?hero=' + heroResponse.hero.name);
+        });
         document.getElementById('submitOptimizerReset').addEventListener("click", () => {
             clearRatings();
             clearStats();
@@ -209,13 +214,57 @@ module.exports = {
             clearRatings();
             recalculateFilters();
         });
-        // document.getElementById('forceLabel').addEventListener("click", async () => {
-        //     clearForce();
-        //     recalculateFilters();
-        // });
+        document.getElementById('skillsLabel').addEventListener("click", async () => {
+            clearSkills();
+            recalculateFilters();
+        });
         document.getElementById('optionsLabel').addEventListener("click", async () => {
             clearOptions();
             recalculateFilters();
+        });
+
+        document.getElementById('skillOptionsButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+            console.log("addSkills", heroId);
+
+            var skillOptions = await module.exports.showSkillOptionsWindow(heroId);
+
+            Saves.autoSave();
+        });
+
+        document.getElementById('addBonusStatsOptimizerButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+
+            const hero = (await Api.getHeroById(heroId)).hero;
+
+            await HeroesTab.showBonusStatsWindow(hero);
+            redrawHeroImage()
+            Saves.autoSave();
+        });
+
+        document.getElementById('addSubstatModsOptimizerButton').addEventListener("click", async () => {
+            var heroId = document.getElementById('inputHeroAdd').value;
+            if (!heroId) return;
+
+            const hero = (await Api.getHeroById(heroId)).hero;
+
+            const modStats = await Dialog.editModStatsDialog(hero);
+
+            // mods
+
+            await Api.setModStats(modStats, hero.id);
+            Notifier.success("Saved mod stats");
+            Saves.autoSave();
+
+            // var heroId = document.getElementById('inputHeroAdd').value;
+            // if (!heroId) return;
+            // console.log("addSkills", heroId);
+
+            // var skillOptions = await module.exports.showSkillOptionsWindow(heroId);
+
+            // Saves.autoSave();
         });
         // document.getElementById('accessorySetsLabel').addEventListener("click", async () => {
         //     Selectors.clearGearMainAndSets();
@@ -391,6 +440,13 @@ module.exports = {
             })
         }
 
+        const min = params.inputMinItemGSLimit == undefined ? 0 : params.inputMinItemGSLimit
+        const max = params.inputMaxItemGSLimit == undefined ? 99999999 : params.inputMaxItemGSLimit
+
+        items = items.filter(item => {
+            return item.reforgedWss > min && item.reforgedWss < max
+        })
+
         items = ModificationFilter.apply(items, params.inputSubstatMods, hero, submit, index);
 
         items = PriorityFilter.applyPriorityFilters(params, items, baseStats, allItems, params.inputPredictReforges, params.inputSubstatMods)
@@ -429,13 +485,13 @@ module.exports = {
         const setFormat = getSetFormat(setFilters.sets, showError);
         console.log("SETFORMAT", setFormat);
 
-        request.inputPredictReforges   = readCheckbox('inputPredictReforges' + index);
         request.inputSubstatMods   = readCheckbox('inputSubstatMods' + index);
         request.inputAllowLockedItems   = readCheckbox('inputAllowLockedItems' + index);
         request.inputAllowEquippedItems = readCheckbox('inputAllowEquippedItems' + index);
         request.inputOrderedHeroPriority   = readCheckbox('inputOrderedHeroPriority' + index);
         request.inputKeepCurrentItems   = readCheckbox('inputKeepCurrentItems' + index);
         request.inputOnlyMaxedGear   = readCheckbox('inputOnlyMaxedGear' + index);
+        request.inputPredictReforges   = request.inputSubstatMods || readCheckbox('inputPredictReforges' + index);
         // request.inputOver85   = readCheckbox('inputOver85');
         // request.inputOnlyPlus15Gear   = readCheckbox('inputOnlyPlus15Gear');
 
@@ -473,6 +529,13 @@ module.exports = {
         request.inputMinMcdmgpsLimit = readNumber('inputMinMcdmgpsLimit' + index);
         request.inputMaxMcdmgpsLimit = readNumber('inputMaxMcdmgpsLimit' + index);
 
+        request.inputMinS1Limit = readNumber('inputMinS1Limit' + index);
+        request.inputMaxS1Limit = readNumber('inputMaxS1Limit' + index);
+        request.inputMinS2Limit = readNumber('inputMinS2Limit' + index);
+        request.inputMaxS2Limit = readNumber('inputMaxS2Limit' + index);
+        request.inputMinS3Limit = readNumber('inputMinS3Limit' + index);
+        request.inputMaxS3Limit = readNumber('inputMaxS3Limit' + index);
+
         request.inputMinDmgHLimit = readNumber('inputMinDmgHLimit' + index);
         request.inputMaxDmgHLimit = readNumber('inputMaxDmgHLimit' + index);
         request.inputMinDmgDLimit = readNumber('inputMinDmgDLimit' + index);
@@ -481,10 +544,16 @@ module.exports = {
         request.inputMaxUpgradesLimit = readNumber('inputMaxUpgradesLimit' + index);
         request.inputMinConversionsLimit = readNumber('inputMinConversionsLimit' + index);
         request.inputMaxConversionsLimit = readNumber('inputMaxConversionsLimit' + index);
+        request.inputMinEquippedLimit = readNumber('inputMinEquippedLimit' + index);
+        request.inputMaxEquippedLimit = readNumber('inputMaxEquippedLimit' + index);
         request.inputMinScoreLimit = readNumber('inputMinScoreLimit' + index);
         request.inputMaxScoreLimit = readNumber('inputMaxScoreLimit' + index);
+        request.inputMinBSLimit = readNumber('inputMinBSLimit' + index);
+        request.inputMaxBSLimit = readNumber('inputMaxBSLimit' + index);
         request.inputMinPriorityLimit = readNumber('inputMinPriorityLimit' + index);
         request.inputMaxPriorityLimit = readNumber('inputMaxPriorityLimit' + index);
+        request.inputMinItemGSLimit = readNumber('inputMinItemGSLimit' + index);
+        request.inputMaxItemGSLimit = readNumber('inputMaxItemGSLimit' + index);
 
         // request.inputAtkMinForce = readNumber('inputMinAtkForce');
         // request.inputAtkMaxForce = readNumber('inputMaxAtkForce');
@@ -601,6 +670,13 @@ module.exports = {
         $("#inputMinMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMinMcdmgpsLimit));
         $("#inputMaxMcdmgpsLimit" + index).val(inputDisplayNumber(request.inputMaxMcdmgpsLimit));
 
+        $("#inputMinS1Limit" + index).val(inputDisplayNumber(request.inputMinS1Limit));
+        $("#inputMaxS1Limit" + index).val(inputDisplayNumber(request.inputMaxS1Limit));
+        $("#inputMinS2Limit" + index).val(inputDisplayNumber(request.inputMinS2Limit));
+        $("#inputMaxS2Limit" + index).val(inputDisplayNumber(request.inputMaxS2Limit));
+        $("#inputMinS3Limit" + index).val(inputDisplayNumber(request.inputMinS3Limit));
+        $("#inputMaxS3Limit" + index).val(inputDisplayNumber(request.inputMaxS3Limit));
+
         $("#inputMinDmgHLimit" + index).val(inputDisplayNumber(request.inputMinDmgHLimit));
         $("#inputMaxDmgHLimit" + index).val(inputDisplayNumber(request.inputMaxDmgHLimit));
         $("#inputMinDmgDLimit" + index).val(inputDisplayNumber(request.inputMinDmgDLimit));
@@ -609,8 +685,12 @@ module.exports = {
         $("#inputMaxUpgradesLimit" + index).val(inputDisplayNumber(request.inputMaxUpgradesLimit));
         $("#inputMinConversionsLimit" + index).val(inputDisplayNumber(request.inputMinConversionsLimit));
         $("#inputMaxConversionsLimit" + index).val(inputDisplayNumber(request.inputMaxConversionsLimit));
+        $("#inputMinEquippedLimit" + index).val(inputDisplayNumber(request.inputMinEquippedLimit));
+        $("#inputMaxEquippedLimit" + index).val(inputDisplayNumber(request.inputMaxEquippedLimit));
         $("#inputMinScoreLimit" + index).val(inputDisplayNumber(request.inputMinScoreLimit));
         $("#inputMaxScoreLimit" + index).val(inputDisplayNumber(request.inputMaxScoreLimit));
+        $("#inputMinBSLimit" + index).val(inputDisplayNumber(request.inputMinBSLimit));
+        $("#inputMaxBSLimit" + index).val(inputDisplayNumber(request.inputMaxBSLimit));
         $("#inputMinPriorityLimit" + index).val(inputDisplayNumber(request.inputMinPriorityLimit));
         $("#inputMaxPriorityLimit" + index).val(inputDisplayNumber(request.inputMaxPriorityLimit));
 
@@ -801,6 +881,22 @@ module.exports = {
         recalculateFilters();
         Selectors.refreshInputHeroAdd();
         Selectors.refreshAllowGearFrom();
+    },
+
+
+    showSkillOptionsWindow: async (heroId) => {
+        // showEditHeroInfoPopups(row.name)
+        const skillOptions = await Dialog.changeSkillOptionsDialog(heroId);
+
+        if (!skillOptions) {
+            return;
+        }
+
+        console.warn("skillOptions", skillOptions)
+
+        Api.setSkillOptions(skillOptions, heroId)
+        Notifier.success("Saved skill options");
+        Saves.autoSave();
     }
 }
 
@@ -835,6 +931,9 @@ function clearSubstatPriority() {
 
 function clearRatings() {
     $(".optimizer-number-input").val("")
+}
+function clearSkills() {
+    $(".skill-number-input").val("")
 }
 function clearStats() {
     $(".stat-number-input").val("")
@@ -896,17 +995,42 @@ async function lockGearFromIcon(id, checkboxPrefix) {
     }
 }
 
-function redrawHeroImage() {
+async function redrawHeroImage() {
     const name = $( "#inputHeroAdd option:selected" ).attr("label")
+    const id = $( "#inputHeroAdd option:selected" ).attr('value')
     if (!name || name.length == 0) {
         $('#inputHeroImage').attr("src", Assets.getBlank());
         return;
     }
 
+
     const data = HeroData.getHeroExtraInfo(name);
     const image = data.assets.thumbnail;
-
     $('#inputHeroImage').attr("src", image);
+
+
+    const heroResponse = await Api.getHeroById(id, $('#inputPredictReforges').prop('checked'));
+    const hero = heroResponse.hero;
+    const artifact = hero.artifactName
+    const artifactData = HeroData.getArtifactByName(artifact)
+
+    if (artifactData) {
+        const artiUrl = `https://static.smilegatemegaport.com/event/live/epic7/guide/wearingStatus/images/artifact/${artifactData.code}_ico.png`
+        $('#inputArtifactImage').attr("src", artiUrl);
+    } else {
+        $('#inputArtifactImage').attr("src", Assets.getBlank());
+    }
+    const imprintType = data.self_devotion.type;
+
+    const isFlat = imprintType == "max_hp" || imprintType == "att" || imprintType == "def"
+
+    const imprintNumber = isFlat ? parseInt(hero/imprintNumber) : Utils.round100ths(parseFloat(hero.imprintNumber)/100)
+    const imprintMatch = Object.entries(data.self_devotion.grades).filter(x => (isFlat ? parseInt(x[1]) : Utils.round100ths(x[1])) == imprintNumber)
+    if (imprintMatch.length > 0) {
+        $('#inputImprintImage').attr("src", `./assets/imprint${imprintMatch[0][0]}.png`);
+    } else {
+        $('#inputImprintImage').attr("src", Assets.getBlank());
+    }
 }
 
 function clearHeroOptions(id) {
@@ -1140,6 +1264,19 @@ async function submitOptimizationFilterRequest() {
     const heroId = document.getElementById('inputHeroAdd').value;
     const heroResponse = await Api.getHeroById(heroId, $('#inputPredictReforges').prop('checked'));
     params.hero = heroResponse.hero;
+    params.hero.artifactAttack = 0;
+    params.hero.artifactHealth = 0;
+    if (params.hero.artifactName && params.hero.artifactName != "None") {
+        const artifactLevelText = params.hero.artifactLevel;
+        if (artifactLevelText != "None") {
+            const artifactLevel = parseInt(artifactLevelText);
+            const artifactStats = Artifact.getStats(params.hero.artifactName, artifactLevel);
+
+            params.hero.artifactHealth += artifactStats.health;
+            params.hero.artifactAttack += artifactStats.attack;
+        }
+    }
+
     OptimizerGrid.showLoadingOverlay();
     params.executionId = currentExecutionId;
 
@@ -1167,6 +1304,7 @@ async function submitOptimizationRequest() {
     const hero = heroResponse.hero;
     const baseStats = heroResponse.baseStats;
 
+
     var filterResult = await module.exports.applyItemFilters(params, heroResponse, allItemsResponse, true);
     var items = filterResult.items;
 
@@ -1179,7 +1317,21 @@ async function submitOptimizationRequest() {
         items: items,
         bonusHp: hero.bonusHp,
         bonusAtk: hero.bonusAtk,
-        hero: hero
+        hero: hero,
+        damageMultipliers: DamageCalc.getMultipliers(hero, hero.skillOptions)
+    }
+
+    request.hero.artifactAttack = 0;
+    request.hero.artifactHealth = 0;
+    if (request.hero.artifactName && request.hero.artifactName != "None") {
+        const artifactLevelText = request.hero.artifactLevel;
+        if (artifactLevelText != "None") {
+            const artifactLevel = parseInt(artifactLevelText);
+            const artifactStats = Artifact.getStats(request.hero.artifactName, artifactLevel);
+
+            request.hero.artifactHealth = artifactStats.health;
+            request.hero.artifactAttack = artifactStats.attack;
+        }
     }
 
     if (!hero.artifactName || hero.artifactName == "None") {

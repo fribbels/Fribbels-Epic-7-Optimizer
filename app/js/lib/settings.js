@@ -48,6 +48,7 @@ module.exports = {
         $("#settingMaxResults").on("keyup", formatNumbersOnKey);
         $("#settingMaxRamGb").on("keyup", formatNumbersOnKey);
         $("#settingPenDefense").on("keyup", formatNumbersOnKey);
+        $("#settingLocatorWidth").on("keyup", formatNumbersOnKey);
 
         const settingsIds = [
             'settingGpu',
@@ -55,6 +56,7 @@ module.exports = {
             'settingMaxResults',
             'settingMaxRamGb',
             'settingPenDefense',
+            'settingLocatorWidth',
             'settingRageSet',
             'settingPenSet',
             'settingDefaultUseReforgedStats',
@@ -120,6 +122,7 @@ module.exports = {
             settingMaxResults: 5_000_000,
             settingMaxRamGb: 6,
             settingPenDefense: 1_500,
+            settingLocatorWidth: 5,
             settingDefaultPath: defaultPath,
             settingExcludeEquipped: [],
             settingEnhanceLimit: 0,
@@ -225,6 +228,13 @@ module.exports = {
             settings.settingPenDefense = 1_500;
         }
 
+        if (settings.settingLocatorWidth) {
+            document.getElementById('settingLocatorWidth').value = settings.settingLocatorWidth.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+            document.getElementById('settingLocatorWidth').value = "5";
+            settings.settingLocatorWidth = 5;
+        }
+
         if (settings.settingDarkMode) {
             document.getElementById('darkSlider').checked = true;
             DarkMode.toggle();
@@ -298,6 +308,7 @@ module.exports = {
             settingMaxResults: parseInt(module.exports.parseNumberValue('settingMaxResults') || 5_000_000),
             settingMaxRamGb: parseInt(module.exports.parseNumberValue('settingMaxRamGb') || 6),
             settingPenDefense: parseInt(module.exports.parseNumberValue('settingPenDefense') || 1_500),
+            settingLocatorWidth: parseInt(module.exports.parseNumberValue('settingLocatorWidth') || 5),
             settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingExcludeEquipped: $('#optionsExcludeGearFrom').multipleSelect('getSelects'),
             settingEnhanceLimit: $('#optionsEnhanceLimit').multipleSelect('getSelects'),
@@ -326,6 +337,9 @@ module.exports = {
         enhanceLimit = settings.settingEnhanceLimit;
 
         Files.saveFile(settingsPath, JSON.stringify(settings, null, 2))
+        if (Files.isMac()) {
+            settings.settingGpu = false;
+        }
         Api.setSettings(settings);
     },
 }

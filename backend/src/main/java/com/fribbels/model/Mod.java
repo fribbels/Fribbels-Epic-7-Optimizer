@@ -20,7 +20,7 @@ public class Mod {
     private Integer index;
 
     public String toString() {
-        System.out.println(new Gson().toJson(this));
+//        System.out.println(new Gson().toJson(this));
         return new Gson().toJson(this);
     }
 

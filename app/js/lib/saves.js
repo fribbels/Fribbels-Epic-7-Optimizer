@@ -37,7 +37,7 @@ module.exports = {
 
             return data;
         } catch (e) {
-            Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.")
+            Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode. Check if your saves folder is under OneDrive on the Settings tab, and if so, change it to somewhere else.")
         }
     },
 

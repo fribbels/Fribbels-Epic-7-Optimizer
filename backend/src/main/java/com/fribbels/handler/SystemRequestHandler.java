@@ -54,7 +54,7 @@ public class SystemRequestHandler extends RequestHandler implements HttpHandler 
         HeroesRequestHandler.SETTING_UNLOCK_ON_UNEQUIP = request.isSettingUnlockOnUnequip();
         StatCalculator.SETTING_RAGE_SET = request.isSettingRageSet();
         StatCalculator.SETTING_PEN_SET = request.isSettingPenSet();
-        OptimizationRequestHandler.SETTING_GPU = request.isSettingGpu();
+        OptimizationRequestHandler.instance.configureGpu(request.isSettingGpu());
 
         if (request.getSettingMaxResults() != null) {
             final int max = Math.max(Math.min(request.getSettingMaxResults(), 100_000_000), 10_000);

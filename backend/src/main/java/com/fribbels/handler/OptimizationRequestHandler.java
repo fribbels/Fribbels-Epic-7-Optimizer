@@ -36,6 +36,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private boolean canUseGpu = true;
 
     public static final int SET_COUNT = 18;
-    public static final int ARG_COUNT = 16;
+    public static final int ARG_COUNT = 17;
 
     //
     private static final int SET_EXPONENTIAL = 34012224; // 16 ^ 6
@@ -87,136 +88,153 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private boolean[] permutations = new boolean[SET_EXPONENTIAL];
     private int[] setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
 
+    public static OptimizationRequestHandler instance;
+
+    public void configureGpu(final boolean gpuEnabled) {
+        System.out.println("GPU acceleration enabled: " + gpuEnabled);
+        OptimizationRequestHandler.SETTING_GPU = gpuEnabled;
+
+        if (gpuEnabled) {
+            final Device device = KernelManager.instance().bestDevice();
+            Main.BEST_DEVICE_ID = device.getDeviceId();
+
+            System.out.println(KernelManager.instance().bestDevice().getType());
+
+
+            ExecutorService t = Executors.newFixedThreadPool(3);
+            t.execute(() -> {
+                setSolutionBitMasks = new int[SET_EXPONENTIAL];
+                int count = 0;
+                for (int a = 0; a < SET_COUNT; a++) {
+                    for (int b = 0; b < SET_COUNT; b++) {
+                        for (int c = 0; c < SET_COUNT; c++) {
+                            for (int d = 0; d < SET_COUNT; d++) {
+                                for (int e = 0; e < SET_COUNT; e++) {
+                                    for (int f = 0; f < SET_COUNT; f++) {
+                                        int[] sets = new int[]{a, b, c, d, e, f};
+                                        int[] counters = convertSetsToSetCounters(sets);
+
+                                        int l = 0;
+
+                                        l += counters[17] / 2 > 0 ? 1 : 0; // torrent 1
+                                        l <<= 1;
+                                        l += counters[17] / 2 - 1 > 0 ? 1 : 0; // torrent 2
+                                        l <<= 1;
+                                        l += counters[17] / 2 - 2 > 0 ? 1 : 0; // torrent 3
+                                        l <<= 1;
+                                        l += counters[16] / 4 > 0 ? 1 : 0; // protection
+                                        l <<= 1;
+                                        l += counters[15] / 4 > 0 ? 1 : 0; // injury
+                                        l <<= 1;
+                                        l += counters[14] / 4 > 0 ? 1 : 0; // revenge
+                                        l <<= 1;
+                                        l += counters[13] / 2 > 0 ? 1 : 0; // pen
+                                        l <<= 1;
+                                        l += counters[12] / 2 > 0 ? 1 : 0; // immunity
+                                        l <<= 1;
+                                        l += counters[11] / 4 > 0 ? 1 : 0; // rage
+                                        l <<= 1;
+                                        l += counters[10] / 2 > 0 ? 1 : 0; // unity - should be x3 but don't need it
+                                        l <<= 1;
+                                        l += counters[9] / 2 > 0 ? 1 : 0; // res1
+                                        l <<= 1;
+                                        l += counters[9] / 2 - 1 > 0 ? 1 : 0; // res2
+                                        l <<= 1;
+                                        l += counters[9] / 2 - 2 > 0 ? 1 : 0; // res3
+                                        l <<= 1;
+                                        l += counters[8] / 4 > 0 ? 1 : 0; // counter
+                                        l <<= 1;
+                                        l += counters[7] / 4 > 0 ? 1 : 0; // lifesteal
+                                        l <<= 1;
+                                        l += counters[6] / 4 > 0 ? 1 : 0; // destr
+                                        l <<= 1;
+                                        l += counters[5] / 2 > 0 ? 1 : 0; // hit1
+                                        l <<= 1;
+                                        l += counters[5] / 2 - 1 > 0 ? 1 : 0; // hit2
+                                        l <<= 1;
+                                        l += counters[5] / 2 - 2 > 0 ? 1 : 0; // hit3
+                                        l <<= 1;
+                                        l += counters[4] / 2 > 0 ? 1 : 0; // crit1
+                                        l <<= 1;
+                                        l += counters[4] / 2 - 1 > 0 ? 1 : 0; // crit2
+                                        l <<= 1;
+                                        l += counters[4] / 2 - 2 > 0 ? 1 : 0;  // crit3
+                                        l <<= 1;
+                                        l += counters[3] / 4 > 0 ? 1 : 0; // spd
+                                        l <<= 1;
+                                        l += counters[2] / 4 > 0 ? 1 : 0; // atk
+                                        l <<= 1;
+                                        l += counters[1] / 2 > 0 ? 1 : 0; // def1
+                                        l <<= 1;
+                                        l += counters[1] / 2 - 1 > 0 ? 1 : 0; // def2
+                                        l <<= 1;
+                                        l += counters[1] / 2 - 2 > 0 ? 1 : 0; // def3
+                                        l <<= 1;
+                                        l += counters[0] / 2 > 0 ? 1 : 0; // hp1
+                                        l <<= 1;
+                                        l += counters[0] / 2 - 1 > 0 ? 1 : 0; // hp2
+                                        l <<= 1;
+                                        l += counters[0] / 2 - 2 > 0 ? 1 : 0; // hp3
+
+                                        setSolutionBitMasks[count] = l;
+                                        count++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            t.execute(() -> {
+                try {
+                    final boolean isIntel = KernelManager
+                            .instance()
+                            .bestDevice()
+                            .toString()
+                            .toLowerCase()
+                            .contains("intel");
+                    if (isIntel) {
+                        System.out.println("Disabling GPU acceleration: Intel card detected");
+                        canUseGpu = false;
+                        return;
+                    }
+
+                    final Kernel testKernel = new Kernel() {
+                        @Override
+                        public void run() {
+
+                        }
+                    };
+                    if (!testKernel.isRunningCL()) {
+                        System.out.println("Disabling GPU acceleration: Non CL device detected");
+                        canUseGpu = false;
+                        return;
+                    }
+                    testKernel.dispose();
+
+                } catch (final Exception e) {
+                    canUseGpu = false;
+                    System.out.println("Error detecting GPU");
+                }
+            });
+        }
+    }
+
     public OptimizationRequestHandler(final BaseStatsDb baseStatsDb,
                                       final HeroDb heroDb,
                                       final ItemDb itemDb) {
         this.baseStatsDb = baseStatsDb;
         this.heroDb = heroDb;
         this.itemDb = itemDb;
+        this.instance = this;
         optimizationDbs = new HashMap<>();
 
         ExecutorService t = Executors.newFixedThreadPool(3);
 
         t.execute(() -> {
-            setSolutionBitMasks = new int[SET_EXPONENTIAL];
-            int count = 0;
-            for (int a = 0; a < SET_COUNT; a++) {
-                for (int b = 0; b < SET_COUNT; b++) {
-                    for (int c = 0; c < SET_COUNT; c++) {
-                        for (int d = 0; d < SET_COUNT; d++) {
-                            for (int e = 0; e < SET_COUNT; e++) {
-                                for (int f = 0; f < SET_COUNT; f++) {
-                                    int[] sets = new int[]{a, b, c, d, e, f};
-                                    int[] counters = convertSetsToSetCounters(sets);
-
-                                    int l = 0;
-
-                                    l += counters[17] / 2 > 0 ? 1 : 0; // torrent 1
-                                    l <<= 1;
-                                    l += counters[17] / 2 - 1 > 0 ? 1 : 0; // torrent 2
-                                    l <<= 1;
-                                    l += counters[17] / 2 - 2 > 0 ? 1 : 0; // torrent 3
-                                    l <<= 1;
-                                    l += counters[16] / 4 > 0 ? 1 : 0; // protection
-                                    l <<= 1;
-                                    l += counters[15] / 4 > 0 ? 1 : 0; // injury
-                                    l <<= 1;
-                                    l += counters[14] / 4 > 0 ? 1 : 0; // revenge
-                                    l <<= 1;
-                                    l += counters[13] / 2 > 0 ? 1 : 0; // pen
-                                    l <<= 1;
-                                    l += counters[12] / 2 > 0 ? 1 : 0; // immunity
-                                    l <<= 1;
-                                    l += counters[11] / 4 > 0 ? 1 : 0; // rage
-                                    l <<= 1;
-                                    l += counters[10] / 2 > 0 ? 1 : 0; // unity - should be x3 but don't need it
-                                    l <<= 1;
-                                    l += counters[9] / 2 > 0 ? 1 : 0; // res1
-                                    l <<= 1;
-                                    l += counters[9] / 2 - 1 > 0 ? 1 : 0; // res2
-                                    l <<= 1;
-                                    l += counters[9] / 2 - 2 > 0 ? 1 : 0; // res3
-                                    l <<= 1;
-                                    l += counters[8] / 4 > 0 ? 1 : 0; // counter
-                                    l <<= 1;
-                                    l += counters[7] / 4 > 0 ? 1 : 0; // lifesteal
-                                    l <<= 1;
-                                    l += counters[6] / 4 > 0 ? 1 : 0; // destr
-                                    l <<= 1;
-                                    l += counters[5] / 2 > 0 ? 1 : 0; // hit1
-                                    l <<= 1;
-                                    l += counters[5] / 2 - 1 > 0 ? 1 : 0; // hit2
-                                    l <<= 1;
-                                    l += counters[5] / 2 - 2 > 0 ? 1 : 0; // hit3
-                                    l <<= 1;
-                                    l += counters[4] / 2 > 0 ? 1 : 0; // crit1
-                                    l <<= 1;
-                                    l += counters[4] / 2 - 1 > 0 ? 1 : 0; // crit2
-                                    l <<= 1;
-                                    l += counters[4] / 2 - 2 > 0 ? 1 : 0;  // crit3
-                                    l <<= 1;
-                                    l += counters[3] / 4 > 0 ? 1 : 0; // spd
-                                    l <<= 1;
-                                    l += counters[2] / 4 > 0 ? 1 : 0; // atk
-                                    l <<= 1;
-                                    l += counters[1] / 2 > 0 ? 1 : 0; // def1
-                                    l <<= 1;
-                                    l += counters[1] / 2 - 1 > 0 ? 1 : 0; // def2
-                                    l <<= 1;
-                                    l += counters[1] / 2 - 2 > 0 ? 1 : 0; // def3
-                                    l <<= 1;
-                                    l += counters[0] / 2 > 0 ? 1 : 0; // hp1
-                                    l <<= 1;
-                                    l += counters[0] / 2 - 1 > 0 ? 1 : 0; // hp2
-                                    l <<= 1;
-                                    l += counters[0] / 2 - 2 > 0 ? 1 : 0; // hp3
-
-                                    setSolutionBitMasks[count] = l;
-                                    count++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        t.execute(() -> {
             permutations = new boolean[SET_EXPONENTIAL];
             setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
-        });
-
-        t.execute(() -> {
-            try {
-                final boolean isIntel = KernelManager
-                        .instance()
-                        .bestDevice()
-                        .toString()
-                        .toLowerCase()
-                        .contains("intel");
-                if (isIntel) {
-                    System.out.println("Disabling GPU acceleration: Intel card detected");
-                    canUseGpu = false;
-                    return;
-                }
-
-                final Kernel testKernel = new Kernel() {
-                    @Override
-                    public void run() {
-
-                    }
-                };
-                if (!testKernel.isRunningCL()) {
-                    System.out.println("Disabling GPU acceleration: Non CL device detected");
-                    canUseGpu = false;
-                    return;
-                }
-                testKernel.dispose();
-
-            } catch (final Exception e) {
-                canUseGpu = false;
-                System.out.println("Error detecting GPU");
-            }
         });
     }
 
@@ -350,7 +368,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             }
         }
 
-        System.out.println("Indices count: " + count);
+//        System.out.println("Indices count: " + count);
         optimizationDb.setFilteredIds(ids, count);
 
         return "";
@@ -375,10 +393,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.getMcdmgps() < request.getInputMinMcdmgpsLimit() || heroStats.getMcdmgps() > request.getInputMaxMcdmgpsLimit()
                 ||  heroStats.getDmgh() < request.getInputMinDmgHLimit() || heroStats.getDmgh() > request.getInputMaxDmgHLimit()
                 ||  heroStats.getDmgd() < request.getInputMinDmgDLimit() || heroStats.getDmgd() > request.getInputMaxDmgDLimit()
+                ||  heroStats.getS1() < request.getInputMinS1Limit() || heroStats.getS1() > request.getInputMaxS1Limit()
+                ||  heroStats.getS2() < request.getInputMinS2Limit() || heroStats.getS2() > request.getInputMaxS2Limit()
+                ||  heroStats.getS3() < request.getInputMinS3Limit() || heroStats.getS3() > request.getInputMaxS3Limit()
                 ||  heroStats.getScore() < request.getInputMinScoreLimit() || heroStats.getScore() > request.getInputMaxScoreLimit()
+                ||  heroStats.getBs() < request.getInputMinBSLimit() || heroStats.getBs() > request.getInputMaxBSLimit()
                 ||  heroStats.getPriority() < request.getInputMinPriorityLimit() || heroStats.getPriority() > request.getInputMaxPriorityLimit()
                 ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
                 ||  heroStats.getConversions() < request.getInputMinConversionsLimit() || heroStats.getConversions() > request.getInputMaxConversionsLimit()
+                ||  heroStats.getEq() < request.getInputMinEquippedLimit() || heroStats.getEq() > request.getInputMaxEquippedLimit()
         ) {
             return false;
         }
@@ -482,7 +505,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final HeroStats heroStat = heroStats[0];
 
         heroStat.setProperty(request.getProperty());
-        System.out.println(heroStat);
+//        System.out.println(heroStat);
 
         return "";
     }
@@ -499,13 +522,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         for (int i = 0; i < items.length; i++) {
             final Item item = items[i];
-            for (int j = 0; j < ARG_COUNT - 4; j++) {
+            for (int j = 0; j < ARG_COUNT - 5; j++) {
                 output[i*ARG_COUNT + j] = item.tempStatAccArr[j];
             }
-            output[i*ARG_COUNT + ARG_COUNT - 4] = item.set.index;
-            output[i*ARG_COUNT + ARG_COUNT - 3] = item.priority;
-            output[i*ARG_COUNT + ARG_COUNT - 2] = item.upgradeable;
-            output[i*ARG_COUNT + ARG_COUNT - 1] = item.convertable;
+            output[i*ARG_COUNT + ARG_COUNT - 5] = item.set.index;
+            output[i*ARG_COUNT + ARG_COUNT - 4] = item.priority;
+            output[i*ARG_COUNT + ARG_COUNT - 3] = item.upgradeable;
+            output[i*ARG_COUNT + ARG_COUNT - 2] = item.convertable;
+            output[i*ARG_COUNT + ARG_COUNT - 1] = item.alreadyEquipped;
 
             // 0 atk
             // 1 hp
@@ -523,6 +547,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             // 13 prio
             // 14 upg
             // 15 conv
+            // 16 eq
         }
 
         return output;
@@ -573,6 +598,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         priorityItems.addAll(otherItems);
         final List<Item> items = priorityItems;
 
+        items.forEach(item -> {
+            final String id = request.hero.getId();
+            final String equippedId = item.getEquippedById();
+
+            if (!StringUtils.equals(id, equippedId) && StringUtils.isNotBlank(equippedId)) {
+                item.alreadyEquipped = 1;
+            }
+        });
+
         final int MAXIMUM_RESULTS = SETTING_MAXIMUM_RESULTS;
         System.out.println("Start allocating memory");
         final HeroStats[] resultHeroStats = new HeroStats[MAXIMUM_RESULTS];
@@ -586,12 +620,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         searchedCounter = new AtomicLong(0);
         resultsCounter = new AtomicLong(0);
 
-        final int wSize = itemsByGear.get(Gear.WEAPON).size();
-        final int hSize = itemsByGear.get(Gear.HELMET).size();
-        final int aSize = itemsByGear.get(Gear.ARMOR).size();
-        final int nSize = itemsByGear.get(Gear.NECKLACE).size();
-        final int rSize = itemsByGear.get(Gear.RING).size();
-        final int bSize = itemsByGear.get(Gear.BOOTS).size();
+        final long wSize = itemsByGear.get(Gear.WEAPON).size();
+        final long hSize = itemsByGear.get(Gear.HELMET).size();
+        final long aSize = itemsByGear.get(Gear.ARMOR).size();
+        final long nSize = itemsByGear.get(Gear.NECKLACE).size();
+        final long rSize = itemsByGear.get(Gear.RING).size();
+        final long bSize = itemsByGear.get(Gear.BOOTS).size();
 
         final Item[] allweapons = itemsByGear.get(Gear.WEAPON).toArray(new Item[0]);
         final Item[] allhelmets = itemsByGear.get(Gear.HELMET).toArray(new Item[0]);
@@ -654,9 +688,17 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final int SETTING_RAGE_SET = StatCalculator.SETTING_RAGE_SET ? 1 : 0;
         final int SETTING_PEN_SET = StatCalculator.SETTING_PEN_SET ? 1 : 0;
 
-        final long maxPerms = ((long)wSize) * hSize * aSize * nSize * rSize * bSize;
+        final long maxPerms = wSize * hSize * aSize * nSize * rSize * bSize;
 
         final GpuOptimizerKernel kernel;
+
+        hero.setDamageMultipliers(request.damageMultipliers);
+        heroDb.getHeroById(hero.getId()).setDamageMultipliers(request.getDamageMultipliers());
+
+//        System.out.println();
+
+//        System.out.println("multis");
+//        System.out.println(request.damageMultipliers.toString());
 
         if (SETTING_GPU && canUseGpu && maxPerms >= 20_000_000) {
             // GPU Optimize
@@ -681,6 +723,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     speedSetBonus,
                     revengeSetBonus,
                     penSetDmgBonus,
+                    StatCalculator.SETTING_PEN_DEFENSE,
                     bonusMaxAtk,
                     bonusMaxDef,
                     bonusMaxHp,
@@ -791,67 +834,71 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
 
                     executorService.submit(() -> {
+                        try {
+                            searchedCounter.addAndGet(Math.min(max, maxPerms));
 
-                        searchedCounter.addAndGet(Math.min(max, maxPerms));
+                            for (int j = 0; j < max; j++) {
+                                final long iteration = ((long) finalI) * max + j;
 
-                        for (int j = 0; j < max; j++) {
-                            final long iteration = ((long) finalI) * max + j;
+                                //                    System.out.println(longSetMasks[0]);
+                                //                    System.out.println(debug[j]);
 
-                            //                    System.out.println(longSetMasks[0]);
-                            //                    System.out.println(debug[j]);
+                                if (passes[j]) {
+                                    if (iteration >= maxPerms) {
+                                        break;
+                                    }
+                                    if (Main.interrupt || exit.get()) {
+                                        break;
+                                    }
 
-                            if (passes[j]) {
-                                if (iteration >= maxPerms) {
-                                    break;
-                                }
-                                if (Main.interrupt || exit.get()) {
-                                    break;
-                                }
+                                    final int b = (int) (iteration % bSize);
+                                    final int r = (int) (((iteration - b) / bSize) % rSize);
+                                    final int n = (int) (((iteration - r * bSize - b) / (bSize * rSize)) % nSize);
+                                    final int a = (int) (((iteration - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize)) % aSize);
+                                    final int h = (int) (((iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize)) % hSize);
+                                    final int w = (int) (((iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize)) % wSize);
 
-                                final int b = (int) (iteration % bSize);
-                                final int r = (int) (((iteration - b) / bSize) % rSize);
-                                final int n = (int) (((iteration - r * bSize - b) / (bSize * rSize)) % nSize);
-                                final int a = (int) (((iteration - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize)) % aSize);
-                                final int h = (int) (((iteration - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize)) % hSize);
-                                final int w = (int) (((iteration - h * aSize * nSize * rSize * bSize - a * nSize * rSize * bSize - n * rSize * bSize - r * bSize - b) / (bSize * rSize * nSize * aSize * hSize)) % wSize);
+                                    final Item weapon = allweapons[w];
+                                    final Item helmet = allhelmets[h];
+                                    final Item armor = allarmors[a];
+                                    final Item necklace = allnecklaces[n];
+                                    final Item ring = allrings[r];
+                                    final Item boots = allboots[b];
 
-                                final Item weapon = allweapons[w];
-                                final Item helmet = allhelmets[h];
-                                final Item armor = allarmors[a];
-                                final Item necklace = allnecklaces[n];
-                                final Item ring = allrings[r];
-                                final Item boots = allboots[b];
+                                    final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
+                                    final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
 
-                                final Item[] collectedItems = new Item[]{weapon, helmet, armor, necklace, ring, boots};
-                                final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
+                                    final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
+                                    final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                    final int alreadyEquipped = weapon.alreadyEquipped + helmet.alreadyEquipped + armor.alreadyEquipped + necklace.alreadyEquipped + ring.alreadyEquipped + boots.alreadyEquipped;
+                                    final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
+                                    final HeroStats result = statCalculator.addAccumulatorArrsToHero(base, new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr}, collectedSets, request.hero, reforges, conversions, alreadyEquipped, priority);
 
-                                final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
-                                final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
-                                final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
-                                final HeroStats result = statCalculator.addAccumulatorArrsToHero(base, new float[][]{weapon.tempStatAccArr, helmet.tempStatAccArr, armor.tempStatAccArr, necklace.tempStatAccArr, ring.tempStatAccArr, boots.tempStatAccArr}, collectedSets, request.hero, reforges, conversions, priority);
+                                    result.setSets(collectedSets);
+                                    result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a]
+                                            .getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
+                                    result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a]
+                                            .getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
+                                    result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a]
+                                            .getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
 
-                                result.setSets(collectedSets);
-                                result.setItems(ImmutableList.of(allweapons[w].getId(), allhelmets[h].getId(), allarmors[a]
-                                        .getId(), allnecklaces[n].id, allrings[r].id, allboots[b].id));
-                                result.setModIds(ImmutableList.of(allweapons[w].getModId(), allhelmets[h].getModId(), allarmors[a]
-                                        .getModId(), allnecklaces[n].modId, allrings[r].modId, allboots[b].modId));
-                                result.setMods(Lists.newArrayList(allweapons[w].getMod(), allhelmets[h].getMod(), allarmors[a]
-                                        .getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
+                                    final long resultsIndex = resultsCounter.getAndIncrement();
+                                    result.setId("" + resultsIndex);
+                                    resultHeroStats[(int) resultsIndex] = result;
 
-                                final long resultsIndex = resultsCounter.getAndIncrement();
-                                result.setId("" + resultsIndex);
-                                resultHeroStats[(int) resultsIndex] = result;
-
-                                if (resultsIndex >= MAXIMUM_RESULTS - 1) {
-                                    maxReached.set(MAXIMUM_RESULTS - 1);
-                                    exit.set(true);
-                                    break;
+                                    if (resultsIndex >= MAXIMUM_RESULTS - 1) {
+                                        maxReached.set(MAXIMUM_RESULTS - 1);
+                                        exit.set(true);
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        passesPool.get(passesId).setLocked(false);
-                        executionCounter.decrementAndGet();
+                            passesPool.get(passesId).setLocked(false);
+                            executionCounter.decrementAndGet();
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
                     });
 
                 }
@@ -913,6 +960,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                             final int[] collectedSets = statCalculator.buildSetsArr(collectedItems);
                                             final int reforges = weapon.upgradeable + helmet.upgradeable + armor.upgradeable + necklace.upgradeable + ring.upgradeable + boots.upgradeable;
                                             final int conversions = weapon.convertable + helmet.convertable + armor.convertable + necklace.convertable + ring.convertable + boots.convertable;
+                                            final int alreadyEquipped = weapon.alreadyEquipped + helmet.alreadyEquipped + armor.alreadyEquipped + necklace.alreadyEquipped + ring.alreadyEquipped + boots.alreadyEquipped;
                                             final int priority = weapon.priority + helmet.priority + armor.priority + necklace.priority + ring.priority + boots.priority;
                                             final HeroStats result = statCalculator.addAccumulatorArrsToHero(
                                                     base,
@@ -921,6 +969,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                                     request.hero,
                                                     reforges,
                                                     conversions,
+                                                    alreadyEquipped,
                                                     priority);
                                             searchedCounter.getAndIncrement();
                                             //                                        final boolean passesFilter = true;
@@ -1022,10 +1071,6 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return "";
     }
 
-    public void optimizeKernel() {
-
-    }
-
     public int[] convertSetsArrayIntoIndexArray(final int[] sets) {
         final int[] output = new int[]{0, 0, 0, 0, 0, 0};
         int count = 0;
@@ -1071,10 +1116,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 ||  heroStats.mcdmgps < request.inputMinMcdmgpsLimit || heroStats.mcdmgps > request.inputMaxMcdmgpsLimit
                 ||  heroStats.dmgh < request.inputMinDmgHLimit || heroStats.dmgh > request.inputMaxDmgHLimit
                 ||  heroStats.dmgd < request.inputMinDmgDLimit || heroStats.dmgd > request.inputMaxDmgDLimit
+                ||  heroStats.s1 < request.inputMinS1Limit || heroStats.s1 > request.inputMaxS1Limit
+                ||  heroStats.s2 < request.inputMinS2Limit || heroStats.s2 > request.inputMaxS2Limit
+                ||  heroStats.s3 < request.inputMinS3Limit || heroStats.s3 > request.inputMaxS3Limit
                 ||  heroStats.score < request.inputMinScoreLimit || heroStats.score > request.inputMaxScoreLimit
+                ||  heroStats.bs < request.inputMinBSLimit || heroStats.bs > request.inputMaxBSLimit
                 ||  heroStats.priority < request.inputMinPriorityLimit || heroStats.priority > request.inputMaxPriorityLimit
                 ||  heroStats.upgrades < request.inputMinUpgradesLimit || heroStats.upgrades > request.inputMaxUpgradesLimit
                 ||  heroStats.conversions < request.inputMinConversionsLimit || heroStats.conversions > request.inputMaxConversionsLimit
+                ||  heroStats.eq < request.inputMinEquippedLimit || heroStats.eq > request.inputMaxEquippedLimit
         ) {
             return false;
         }
@@ -1377,6 +1427,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final float speedSetBonus,
             final float revengeSetBonus,
             final float penSetDmgBonus,
+            final float targetDefense,
             final float bonusMaxAtk,
             final float bonusMaxDef,
             final float bonusMaxHp,
@@ -1384,14 +1435,14 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final int SETTING_PEN_SET,
             final HeroStats base,
             final Hero hero,
-            final int argSize,
-            final int wSize,
-            final int hSize,
-            final int aSize,
-            final int nSize,
-            final int rSize,
-            final int bSize,
-            final int max,
+            final long argSize,
+            final long wSize,
+            final long hSize,
+            final long aSize,
+            final long nSize,
+            final long rSize,
+            final long bSize,
+            final long max,
             final int[] longSetMasks
     ) {
         if (request.getSetFormat() == 0) {
@@ -1412,6 +1463,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     speedSetBonus,
                     revengeSetBonus,
                     penSetDmgBonus,
+                    targetDefense,
                     bonusMaxAtk,
                     bonusMaxDef,
                     bonusMaxHp,
@@ -1447,6 +1499,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 speedSetBonus,
                 revengeSetBonus,
                 penSetDmgBonus,
+                targetDefense,
                 bonusMaxAtk,
                 bonusMaxDef,
                 bonusMaxHp,

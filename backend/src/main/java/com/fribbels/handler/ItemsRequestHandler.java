@@ -135,9 +135,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
 
             if (ingameId != null && itemsByIngameId.containsKey(ingameId) && itemsByHash.containsKey(item.getHash())) {
                 final List<Item> matchingItems = itemsByHash.get(item.getHash());
-                if (matchingItems == null) {
-                    System.out.println("1");
-                }
+
                 matchingItems.add(item);
                 continue;
             } else {
@@ -168,7 +166,8 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                 matchingExistingItem.setIngameId(newItem.getIngameId());
                 matchingExistingItem.setName(newItem.getName());
                 matchingExistingItem.setSubstats(newItem.getSubstats());
-                matchingExistingItem.setSubstats(newItem.getSubstats());
+                matchingExistingItem.setOp(newItem.getOp());
+                matchingExistingItem.setStorage(newItem.getStorage());
                 matchingExistingItem.setAugmentedStats(newItem.getAugmentedStats());
                 matchingExistingItem.setReforgedStats(newItem.getReforgedStats());
                 matchingExistingItem.setEnhance(newItem.getEnhance());
@@ -222,8 +221,9 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     matchingExistingItem.setIngameId(newItem.getIngameId());
                     matchingExistingItem.setName(newItem.getName());
                     matchingExistingItem.setSubstats(newItem.getSubstats());
+                    matchingExistingItem.setOp(newItem.getOp());
+                    matchingExistingItem.setStorage(newItem.getStorage());
                     matchingExistingItem.setMain(newItem.getMain());
-                    matchingExistingItem.setSubstats(newItem.getSubstats());
                     matchingExistingItem.setAugmentedStats(newItem.getAugmentedStats());
                     matchingExistingItem.setReforgedStats(newItem.getReforgedStats());
                     matchingExistingItem.setEnhance(newItem.getEnhance());
@@ -498,6 +498,8 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
             dbItem.setRank(item.getRank());
             dbItem.setSet(item.getSet());
             dbItem.setSubstats(item.getSubstats());
+            dbItem.setOp(item.getOp());
+            dbItem.setStorage(item.getStorage());
             dbItem.setReforgeable(item.getReforgeable());
             dbItem.setUpgradeable(item.getUpgradeable());
             dbItem.setConvertable(item.getConvertable());

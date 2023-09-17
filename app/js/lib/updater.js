@@ -1,8 +1,9 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.8.4";
+const currentVersion = "1.9.1";
 
-global.TEST = false;
+global.TEST = true;
+
 /********************************************************************************************
     Release checklist:
     - update changelog
@@ -12,6 +13,15 @@ global.TEST = false;
     - update version in app package.json
     - update repo in project package.json
     - yarn package
+
+    Patch update checklist
+    - Update server temp unit ids
+    - Update server temp items
+    - Scan artifact ids, update artifact file
+    - Download unit images
+    - Upload herodata copy to server
+    - Skill multipliers
+
 *********************************************************************************************/
 
 /********************************************************************************************
@@ -24,47 +34,24 @@ module.exports = {
     getCurrentVersion: () => {
         return currentVersion;
     },
-/*
-- Hero tab double click
-- Magnifying glass
-*/
     showNewFeatures: (text) => {
         Dialog.showNewFeatures(
 
 `
 <h2>
-    New in v1.8.0
+    New in v1.9.1
 </h2>
 <ul class="newFeatures">
-    <li>GPU acceleration for optimizer. (Disable in settings if issues arise)</li>
-    <li>Multi-Optimizer tab for optimizing multiple units simultaneously</li>
-    <li>Enhancing tab with item & substat rolls analyzer</li>
-    <li>Click on the magnifying glass on an item to load analysis</li>
-    <li>Customizable dark mode colors for the UI</li>
-    <li>Penetration set damage bonus will be added to Dmg/Mcd calculations</li>
-    <li>Double click a hero on the Heroes tab to load them in Optimizer tab</li>
-    <li>Added an item attribute to disable modifications on the item</li>
-    <li>Ehp and Mcd values can be previewed in filters</li>
-    <li>Heroes tab now shows 5* hero indicators</li>
-    <li>All scores now use reforged values</li>
-    <li>Storage items can now be imported - Open storage menu during scan</li>
-    <li>Added "Erase all data" button on Importer tab</li>
-    <li>Added Japanese translation</li>
-    <li>Added +0/3/6/9/12/15 gear and above optimizer setting</li>
-    <li>Added score evaluation based on each unit's base stats</li>
+    <li>Fixes & improvements</li>
 </ul>
 <h2>
-    New in v1.8.3
+    New in v1.9.0
 </h2>
 <ul class="newFeatures">
-    <li>Added Korean translation</li>
-    <li>Fixing memory leaks & added max RAM limit setting</li>
-</ul>
-<h2>
-    New in v1.8.4
-</h2>
-<ul class="newFeatures">
-    <li>Updated with destruction set buff</li>
+    <li>Added damage calculations for hero S1/S2/S3 scaling multipliers</li>
+    <li>Added item enhancing simulator on Enhancing tab which predicts the probabilities of gear score ranges of upgrading an unfinished item to +15, along with its maximum substat mod potential</li>
+    <li>Added build score (BS) rating which takes into account gear score, along item main stats and hero-specific flat stat to percent equivalents</li>
+    <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory</li>
 </ul>
 `
         );

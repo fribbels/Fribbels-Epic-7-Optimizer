@@ -123,7 +123,7 @@ module.exports = {
                 if (err) {
                     console.error(err)
                     if (isEpermError(err)) {
-                        Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.")
+                        Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode. Check if your saves folder is under OneDrive on the Settings tab, and if so, change it to somewhere else.")
                     } else {
                         Notifier.error(i18next.t("Unable to write file") + filename + " - " + err);
                     }
@@ -168,7 +168,7 @@ module.exports = {
                 if (err) {
                     console.error(err)
                     if (isEpermError(err)) {
-                        Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode.")
+                        Dialog.error("Unable to save file. Please try disabling your antivirus, or add the app as an exception, then restarting the app in admin mode. Check if your saves folder is under OneDrive on the Settings tab, and if so, change it to somewhere else.")
                     } else {
                         Notifier.error(i18next.t("Unable to write file") + filename + " - " + err);
                     }
@@ -391,11 +391,18 @@ module.exports = {
                         continue;
                     }
 
+                    console.log(newHero)
+
                     newHero.rarity = newHero.data.rarity;
                     newHero.attribute = newHero.data.attribute;
                     newHero.role = newHero.data.role;
                     newHero.path = heroName;
                     newHero.stars = hero.stars;
+                    newHero.skills = {
+                        S1: newHero.data.skills.S1.options,
+                        S2: newHero.data.skills.S2.options,
+                        S3: newHero.data.skills.S3.options
+                    };
 
                     hero.data = newHero;
                     filteredHeroes.push(hero);

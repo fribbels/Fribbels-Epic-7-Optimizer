@@ -71,98 +71,6 @@ module.exports = {
 
             existingBuild.name = buildName;
 
-            // Easter eggs
-            if (buildName == "duck mode") {
-                document.documentElement.style.setProperty('--bg-color', '#FFD500');
-
-                document.documentElement.style.setProperty('--font-color', '#C12F15');
-                document.documentElement.style.setProperty('--inactive-color', '#C12F15' + '3f');
-
-                document.documentElement.style.setProperty('--accent-color', '#FF0000');
-                document.documentElement.style.setProperty('--outline-color', '#FF0000' + '60');
-
-                document.documentElement.style.setProperty('--input-color', '#F5A325');
-                document.documentElement.style.setProperty('--btn-color', '#F5A325');
-
-                document.documentElement.style.setProperty('--grid-font-color', '#782302');
-
-                myColors.bad = '#F06B24';
-                myColors.neutral = '#F1D237';
-                myColors.good = '#FED920';
-                
-                darkUserGradient.gradient = tinygradient(myColors.neutral, myColors.good);
-
-                ColorPicker.redraw();
-            }
-            if (buildName && buildName.toLowerCase() == "fribbles i found a bug") {
-                const newHero = {
-                    id: uuidv4(),
-                    name: "Euglmomorain",
-                    data: euglmomorainData,
-                    equipped: new Array(6)
-                };
-
-                newHero.rarity = newHero.data.rarity;
-                newHero.attribute = newHero.data.attribute;
-                newHero.role = newHero.data.role;
-                newHero.path = "Euglmomorain";
-                newHero.stars = 6;
-
-                function baseToStatObj(stats) {
-                    return {
-                        atk: stats.atk,
-                        hp: stats.hp,
-                        def: stats.def,
-                        cr: Math.round(stats.chc * 100),
-                        cd: Math.round(stats.chd * 100),
-                        eff: Math.round(stats.eff * 100),
-                        res: Math.round(stats.efr * 100),
-                        spd: stats.spd,
-                        dac: Math.round(stats.dac * 100),
-                        bonusStats: {
-                            bonusMaxAtkPercent: stats.bonusMaxAtkPercent,
-                            bonusMaxDefPercent: stats.bonusMaxDefPercent,
-                            bonusMaxHpPercent: stats.bonusMaxHpPercent,
-                            overrideAtk: stats.overrideAtk,
-                            overrideHp: stats.overrideHp,
-                            overrideDef: stats.overrideDef,
-                            overrideAdditionalCr: Math.round(stats.overrideAdditionalCr * 100),
-                            overrideAdditionalCd: Math.round(stats.overrideAdditionalCd * 100),
-                            overrideAdditionalSpd: stats.overrideAdditionalSpd,
-                            overrideAdditionalEff: Math.round(stats.overrideAdditionalEff * 100),
-                            overrideAdditionalRes: Math.round(stats.overrideAdditionalRes * 100),
-                        }
-                    }
-                }
-
-                const status = euglmomorainData.calculatedStatus;
-                var euglmomorainBaseStats = {
-                    lv50FiveStarFullyAwakened: baseToStatObj(status.lv50FiveStarFullyAwakened),
-                    lv60SixStarFullyAwakened: baseToStatObj(status.lv60SixStarFullyAwakened)
-                }
-
-                const baseStatsByName = {};
-                Object.keys(HeroData.getAllHeroData())
-                        .forEach(x => {
-                            const baseStats = HeroData.getBaseStatsByName(x);
-                            baseStatsByName[x] = baseStats;
-                        });
-
-                baseStatsByName["Euglmomorain"] = euglmomorainBaseStats;
-                await Api.setBaseStats(baseStatsByName);
-
-                Api.addHeroes([newHero]).then(async x => {
-                    HeroData.getAllHeroData()["Euglmomorain"] = euglmomorainData
-                    await HeroesTab.redrawHeroInputSelector();
-                    const response = await Api.getAllHeroes(true)
-                    await HeroesGrid.refresh(response.heroes, newHero.id);
-
-                    Api.getHeroById(newHero.id).then(async y => {
-                        Saves.autoSave();
-                    })
-                })
-            }
-
             Api.editBuild(row.id, existingBuild).then(x => {
                 HeroesGrid.refreshBuilds();
                 Saves.autoSave();
@@ -191,7 +99,7 @@ module.exports = {
             console.warn("Save as build", row.items);
 
             if (row.items.length < 6) {
-                Notifier.warn("Hero need a 6 item build before it can be saved");
+                Notifier.warn("Hero needs a 6 item build before it can be saved");
                 return;
             }
 
@@ -265,7 +173,7 @@ module.exports = {
             //     HeroesGrid.refresh(response.heroes)
             //     redrawHeroInputSelector();
             // });
-            await showBonusStatsWindow(row);
+            await module.exports.showBonusStatsWindow(row);
             Saves.autoSave();
         });
 
@@ -389,75 +297,79 @@ module.exports = {
             equipped: new Array(6)
         }
     },
-}
 
-async function showBonusStatsWindow(row) {
-    showEditHeroInfoPopups(row.name)
-    const bonusStats = await Dialog.editHeroDialog(row);
+    showBonusStatsWindow: async (row) => {
+        showEditHeroInfoPopups(row.name)
+        const bonusStats = await Dialog.editHeroDialog(row);
 
-    if (!bonusStats) return;
+        if (!bonusStats) return;
 
-    const e7StatToBonusStat = {
-        "att_rate": "aeiAttackPercent",
-        "max_hp_rate": "aeiHealthPercent",
-        "def_rate": "aeiDefensePercent",
-        "att": "aeiAttack",
-        "max_hp": "aeiHealth",
-        "def": "aeiDefense",
-        "speed": "aeiSpeed",
-        "res": "aeiEffectResistance",
-        "cri": "aeiCritChance",
-        "cri_dmg": "aeiCritDamage",
-        "acc": "aeiEffectiveness",
-        "coop": "aeiDualAttackChance"
-    }
-
-    console.log("Bonus stats", bonusStats, row.id);
-
-    // Imprint
-    const imprintIngameType = bonusStats.heroInfo.self_devotion.type;
-    const imprintBonusType = e7StatToBonusStat[imprintIngameType];
-    const imprintNumberText = bonusStats.imprintNumber;
-    if (imprintNumberText != "None") {
-        const imprintNumber = parseFloat(imprintNumberText)
-
-        console.log("ADDING AEI IMPRINT", imprintNumber, imprintBonusType)
-
-        bonusStats[imprintBonusType] += imprintNumber;
-    }
-
-    // Artifact
-    const artifactName = bonusStats.artifactName;
-    if (artifactName != "None") {
-        const artifactLevelText = bonusStats.artifactLevel;
-        if (artifactLevelText != "None") {
-            const artifactLevel = parseInt(artifactLevelText);
-            const artifactStats = Artifact.getStats(artifactName, artifactLevel);
-
-            console.log("ADDING AEI ARTIFACT", artifactLevel)
-            console.log("ADDING AEI ARTIFACT", artifactLevelText)
-            console.log("ADDING AEI ARTIFACT", artifactName)
-
-            bonusStats.aeiHealth += artifactStats.health;
-            bonusStats.aeiAttack += artifactStats.attack;
+        const e7StatToBonusStat = {
+            "att_rate": "aeiAttackPercent",
+            "max_hp_rate": "aeiHealthPercent",
+            "def_rate": "aeiDefensePercent",
+            "att": "aeiAttack",
+            "max_hp": "aeiHealth",
+            "def": "aeiDefense",
+            "speed": "aeiSpeed",
+            "res": "aeiEffectResistance",
+            "cri": "aeiCritChance",
+            "cri_dmg": "aeiCritDamage",
+            "acc": "aeiEffectiveness",
+            "coop": "aeiDualAttackChance"
         }
+
+        console.log("Bonus stats", bonusStats, row.id);
+
+        // Imprint
+        const imprintIngameType = bonusStats.heroInfo.self_devotion.type;
+        const imprintBonusType = e7StatToBonusStat[imprintIngameType];
+        const imprintNumberText = bonusStats.imprintNumber;
+        if (imprintNumberText != "None") {
+            const imprintNumber = parseFloat(imprintNumberText)
+
+            console.log("ADDING AEI IMPRINT", imprintNumber, imprintBonusType)
+
+            bonusStats[imprintBonusType] += imprintNumber;
+        }
+
+        // Artifact
+        const artifactName = bonusStats.artifactName;
+        if (artifactName != "None") {
+            const artifactLevelText = bonusStats.artifactLevel;
+            if (artifactLevelText != "None") {
+                const artifactLevel = parseInt(artifactLevelText);
+                const artifactStats = Artifact.getStats(artifactName, artifactLevel);
+
+                console.log("ADDING AEI ARTIFACT", artifactLevel)
+                console.log("ADDING AEI ARTIFACT", artifactLevelText)
+                console.log("ADDING AEI ARTIFACT", artifactName)
+
+                bonusStats.aeiHealth += artifactStats.health;
+                bonusStats.aeiAttack += artifactStats.attack;
+                bonusStats.artifactHealth = artifactStats.health;
+                bonusStats.artifactAttack = artifactStats.attack;
+
+            }
+        }
+
+        // EE
+        const eeNumberText = bonusStats.eeNumber;
+        if (eeNumberText != "None") {
+            const eeNumber = parseInt(eeNumberText);
+            const eeIngameType = bonusStats.ee.stat.type;
+            const eeBonusType = e7StatToBonusStat[eeIngameType];
+
+            console.log("ADDING AEI EE", eeBonusType, eeNumber)
+
+            bonusStats[eeBonusType] += eeNumber;
+        }
+
+        await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
+        Notifier.success("Saved bonus stats");
     }
-
-    // EE
-    const eeNumberText = bonusStats.eeNumber;
-    if (eeNumberText != "None") {
-        const eeNumber = parseInt(eeNumberText);
-        const eeIngameType = bonusStats.ee.stat.type;
-        const eeBonusType = e7StatToBonusStat[eeIngameType];
-
-        console.log("ADDING AEI EE", eeBonusType, eeNumber)
-
-        bonusStats[eeBonusType] += eeNumber;
-    }
-
-    await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
-    Notifier.success("Saved bonus stats");
 }
+
 function showEditHeroInfoPopups(name) {
     if (name == "Eaton") {
         Notifier.info("Eaton's 20% total Health bonus from S2 is already automatically added.")
@@ -518,7 +430,7 @@ function addHero(heroName, isBuild) {
 
         Api.getHeroById(newHero.id).then(async y => {
             const createdHero = y.hero;
-            await showBonusStatsWindow(createdHero);
+            await module.exports.showBonusStatsWindow(createdHero);
             Saves.autoSave();
         })
     })

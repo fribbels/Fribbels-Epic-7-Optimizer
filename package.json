@@ -95,6 +95,15 @@
       "perMachine": true,
       "allowToChangeInstallationDirectory": true
     },
+    "mac": {
+      "target": {
+        "target": "default",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      }
+    },
     "linux": {
       "target": [
         "deb",

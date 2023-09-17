@@ -1,11 +1,11 @@
 package com.fribbels.core;
 
+import com.fribbels.Main;
 import com.fribbels.enums.StatType;
-import com.fribbels.model.AugmentedStats;
-import com.fribbels.model.Hero;
-import com.fribbels.model.HeroStats;
-import com.fribbels.model.Item;
+import com.fribbels.model.*;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.swing.*;
 import java.util.Map;
 
 import static com.fribbels.handler.OptimizationRequestHandler.SET_COUNT;
@@ -77,6 +77,7 @@ public class StatCalculator {
                                                      final Hero hero,
                                                      final int upgrades,
                                                      final int conversions,
+                                                     final int alreadyEquipped,
                                                      final int priority) {
         final float[] accs0 = accs[0];
         final float[] accs1 = accs[1];
@@ -121,25 +122,119 @@ public class StatCalculator {
 
         final int cp = (int) (((atk * 1.6f + atk * 1.6f * critRate * critDamage) * (1.0 + (spd - 45f) * 0.02f) + hp + def * 9.3f) * (1f + (res/100f + eff/100f) / 4f));
 
-        final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 1.3f : 1;
+        final float penSetOn = sets[13] > 1 ? 1 : 0;
+        final float rageMultiplier = SETTING_RAGE_SET && sets[11] > 3 ? 0.3f : 0;
         final float penMultiplier = SETTING_PEN_SET && sets[13] > 1 ? penSetDmgBonus : 1;
-        final float torrentMultiplier = sets[17] > 1 ? sets[17] / 2 * 0.1f + 1 : 1;
+        final float torrentMultiplier = sets[17] > 1 ? sets[17] / 2 * 0.1f : 0;
         final float spdDiv1000 = (float)spd/1000;
+        final float pctDmgMultiplier = 1 + rageMultiplier + torrentMultiplier;
 
         final int ehp = (int) (hp * (def/300 + 1));
         final int hpps = (int) (hp*spdDiv1000);
         final int ehpps = (int) ((float)ehp*spdDiv1000);
-        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int dmg = (int) (((critRate * atk * critDamage) + (1-critRate) * atk) * penMultiplier * pctDmgMultiplier);
         final int dmgps = (int) ((float)dmg*spdDiv1000);
-        final int mcdmg = (int) (atk * critDamage * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int mcdmg = (int) (atk * critDamage * penMultiplier * pctDmgMultiplier);
         final int mcdmgps = (int) ((float)mcdmg*spdDiv1000);
-        final int dmgh = (int) ((critDamage * hp)/10 * rageMultiplier * penMultiplier * torrentMultiplier);
-        final int dmgd = (int) ((critDamage * def) * rageMultiplier * penMultiplier * torrentMultiplier);
+        final int dmgh = (int) ((critDamage * hp)/10 * penMultiplier * pctDmgMultiplier);
+        final int dmgd = (int) ((critDamage * def) * penMultiplier * pctDmgMultiplier);
+/*
 
+(increase dmg) * [(atk + bonus atk) * (pow * multi) * (cdmg)]
+
+{[(ATK !!)(Atkmod)(Rate **)+(FlatMod)] * (1.871)+(Flat2Mod)} × (pow **)(a) +
+
+a = (EnhanceMod)(HitTypeMod)(ElementMod)(DamageUpMod)(TargetDebuffMod)
+rate -> scaling
+flatmod -> max hp/def scaling
+flat2mod -> ddj
+
+ */
+        DamageMultipliers multis = hero.getDamageMultipliers();
+        if (multis == null) {
+            multis = new DamageMultipliers();
+        }
+//        final int s1 = (int)(((atk * multis.getAtkMods()[0] * multis.getRates()[0] + getFlatMod(multis, 0, hp)) * getTypeMultiplier(multis, 0)) * multis.getPows()[0] * multis.getMultis()[0]);
+//        final int s2 = (int)(((atk * multis.getAtkMods()[1] * multis.getRates()[1] + getFlatMod(multis, 1, hp)) * getTypeMultiplier(multis, 1)) * multis.getPows()[1] * multis.getMultis()[1]);
+//        final int s3 = (int)(((atk * multis.getAtkMods()[2] * multis.getRates()[2] + getFlatMod(multis, 2, hp)) * getTypeMultiplier(multis, 2)) * multis.getPows()[2] * multis.getMultis()[2]);
+        // (1 + multis.getAtkIncrease()[0])
+
+        final int s1 = getSkillValue(multis, 0, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+        final int s2 = getSkillValue(multis, 1, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+        final int s3 = getSkillValue(multis, 2, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+//
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
-        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps, dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, upgrades, conversions, score, priority,
+//        final ArtifactStats artifactStats = Main.artifactStatsDb.getArtifactStats(hero.artifactName, Integer.parseInt(hero.getArtifactLevel()));
+//        final float artifactHealth = artifactStats.getHealth();
+//        final float artifactAttack = artifactStats.getAttack();
+
+        final float bsHp = (hp - base.hp - hero.artifactHealth - (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/2 : 0)) / base.hp * 100;
+        final float bsAtk = (atk - base.atk - hero.artifactAttack - (sets[2] > 1 ? sets[2] / 4 * atkSetBonus : 0)) / base.atk * 100;
+        final float bsDef = (def - base.def - (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) / base.def * 100;
+        final float bsCr = (cr - base.cr - (sets[4] > 1 ? sets[4] / 2 * 12 : 0));
+        final float bsCd = (cd - base.cd - (sets[6] > 3 ? 60 : 0));
+        final float bsEff = (eff - base.eff - (sets[5] > 1 ? sets[5] / 2 * 20 : 0));
+        final float bsRes = (res - base.res - (sets[9] > 1 ? sets[9] / 2 * 20 : 0));
+        final float bsSpd = (spd - base.spd - (sets[3] > 3 ? speedSetBonus : 0) - (sets[14] > 3 ? revengeSetBonus : 0));
+
+//        hp: (row.hp - base.hp - artiHp - bonusSetMaxHp/100*base.hp - bonusSetTorrent/100*base.hp) / base.hp * 100,
+//                atk: (row.atk - base.atk - artiAtk - bonusSetAtt/100*base.atk) / base.atk * 100,
+//                def: (row.def - base.def - bonusSetDef/100*base.def) / base.def * 100,
+//                chc: (Math.min(100, row.chc) - base.chc*100 - bonusSetCri),
+//                chd: (Math.min(350, row.chd) - base.chd*100 - bonusSetCriDmg),
+//                eff: (row.eff - base.eff*100 - bonusSetAcc),
+//                res: (row.efr - base.efr*100 - bonusSetRes),
+//                spd: (row.spd - base.spd - bonusSetSpeed - bonusSetRevenge),
+
+        final int bs = (int) (bsHp + bsAtk + bsDef + bsCr*1.6f + bsCd*1.14f + bsEff + bsRes + bsSpd*2);
+
+        return new HeroStats((int)atk, (int)hp, (int)def, (int) cr, cd, eff, res, 0, spd, cp, ehp, hpps, ehpps,
+                dmg, dmgps, mcdmg, mcdmgps, dmgh, dmgd, s1, s2, s3, upgrades, conversions, alreadyEquipped, score, bs, priority,
                 base.bonusStats, null, null, null, null, null, null, null);
+    }
+
+    private int getSkillValue(final DamageMultipliers m,
+                              final int s,
+                              final float atk,
+                              final float def,
+                              final float hp,
+                              final float spd,
+                              final float critDamage,
+                              final float pctDmgMultiplier,
+                              final float penSetOn) {
+        final int targets = m.getTargets()[s] == 1 ? 1 : 0;
+        final float realPenetration = (1 - m.getPenetration()[s]) * (1 - penSetOn * 0.15f * targets);
+        final float statScalings =
+                        m.getSelfHpScaling()[s] *hp +
+                        m.getSelfAtkScaling()[s]*atk +
+                        m.getSelfDefScaling()[s]*def +
+                        m.getSelfSpdScaling()[s]*spd;
+        final float hitTypeMultis = m.getCrit()[s] * (critDamage+m.getCdmgIncrease()[s]) + m.getHitMulti()[s];
+        final float increasedValue = 1 + m.getIncreasedValue()[s];
+        final float dmgUpMod = 1 + m.getSelfSpdScaling()[s] * spd;
+        final float extraDamage = (
+                        m.getExtraSelfHpScaling()[s] *hp +
+                        m.getExtraSelfAtkScaling()[s]*atk +
+                        m.getExtraSelfDefScaling()[s]*def) * 1.871f * 1f/(StatCalculator.SETTING_PEN_DEFENSE*0.3f/300f + 1f);
+        final float offensive = (atk * m.getRate()[s] + statScalings) * 1.871f * m.getPow()[s] * increasedValue * hitTypeMultis * dmgUpMod * pctDmgMultiplier;
+        final float support = m.getSelfHpScaling()[s] * hp * m.getSupport()[s] + m.getSelfAtkScaling()[s] * atk * m.getSupport()[s] + m.getSelfDefScaling()[s] * def * m.getSupport()[s];
+        final float defensive = 1f/(StatCalculator.SETTING_PEN_DEFENSE*Math.max(0, realPenetration)/300f + 1f);
+        final int value = (int)(offensive * defensive + support + extraDamage);
+
+//        System.out.println("S" + (s+1) + " " + value + " " + (hitTypeMultis) + " " + (1.871f * m.getPow()[s]));
+//        System.out.println(m);
+
+        return value;
+    }
+
+    private float getFlatMod(final DamageMultipliers damageMultipliers, final int skill, final float hp) {
+        float value = 0;
+//        if (damageMultipliers.getSelfHpScalings()[skill] != 0) {
+//            value += damageMultipliers.getSelfHpScalings()[skill] * hp;
+//        }
+
+        return value;
     }
 
     public float[] getStatAccumulatorArr(final HeroStats base,

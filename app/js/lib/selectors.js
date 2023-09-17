@@ -22,28 +22,26 @@ module.exports = {
 
         const assetsBySet = Assets.getAssetsBySet();
         const groupSelectMultipleSelectOptions = {
-            maxHeight: 500,
+            maxHeight: 600,
             showClear: true,
             // hideOptgroupCheckboxes: true,
             minimumCountSelected: 99,
             displayTitle: true,
+            displayValues: true,
             selectAll: false,
-            // textTemplate: function (el) {
-            //     const val = el.html();
-            //     const enValue = el.val();
-            //     const fixedHtml = el.html().replace(enValue, i18next.t(enValue))
-            //     const assetKey = enValue + "Set";
+            textTemplate: function (el) {
+                const assetKey = el[0].value + "Set";
 
-            //     if (Object.keys(assetsBySet).includes(assetKey)) {
-            //         const asset = assetsBySet[assetKey];
-            //         return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${fixedHtml}</div></div>`
-            //     }
+                if (Object.keys(assetsBySet).includes(assetKey)) {
+                    const asset = assetsBySet[assetKey];
+                    return `<div class="selectorSetContainer"><img class="selectorSetImage" src="${asset}"></img><div class="selectorSetText">${el.html()}</div></div>`
+                }
 
-            //     return fixedHtml
-            // },
-            // styler: function (row) {
-            //     return '';
-            // }
+                return el.html()
+            },
+            styler: function (row) {
+                return '';
+            }
         };
         const enhanceOptions = {
             maxHeight: 500,
@@ -98,6 +96,10 @@ module.exports = {
 
         $('#optionsExcludeGearFrom').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder: i18next.t("Exclude equipped"), selectAll: true},{formatSelectAll () {return i18next.t('[Select all]')}}));
         $('#optionsEnhanceLimit').multipleSelect(Object.assign({}, enhanceOptions, {placeholder: i18next.t("Minimum enhance"), selectAll: false}));
+
+        $('#optionsS1').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder: i18next.t("Exclude equipped"), selectAll: true},{formatSelectAll () {return i18next.t('[Select all]')}}));
+        $('#optionsS2').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder: i18next.t("Exclude equipped"), selectAll: true},{formatSelectAll () {return i18next.t('[Select all]')}}));
+        $('#optionsS3').multipleSelect(Object.assign({}, excludeEquippedSelectOptions, {placeholder: i18next.t("Exclude equipped"), selectAll: true},{formatSelectAll () {return i18next.t('[Select all]')}}));
 
         // $('#optionsExcludeGearFrom' + index).multipleSelect('setSelects', ["0", "3", "6", "9", "12", "15"])
 
@@ -203,13 +205,15 @@ module.exports = {
 
     setGearMainAndSetsFromRequest: (request, index) => {
         console.warn("SETS", request, index);
+        console.warn("SETS", request.inputExcludeSet);
+        console.warn("SETS", $('#inputExcludeSet' + index));
         $('#inputSet1' + index).multipleSelect('setSelects', request.inputSetsOne.map(x => x.replace("Set", "")) || [])
         $('#inputSet2' + index).multipleSelect('setSelects', request.inputSetsTwo.map(x => x.replace("Set", "")) || [])
         $('#inputSet3' + index).multipleSelect('setSelects', request.inputSetsThree.map(x => x.replace("Set", "")) || [])
+        $('#inputExcludeSet' + index).multipleSelect('setSelects', request.inputExcludeSet.map(x => x.replace("Set", "")) || [])
         $('#inputNecklaceStat' + index).multipleSelect('setSelects', request.inputNecklaceStat || [])
         $('#inputRingStat' + index).multipleSelect('setSelects', request.inputRingStat || [])
         $('#inputBootsStat' + index).multipleSelect('setSelects', request.inputBootsStat || [])
-        $('#inputExcludeSet' + index).multipleSelect('setSelects', request.inputExcludeSet || [])
     }
 }
 

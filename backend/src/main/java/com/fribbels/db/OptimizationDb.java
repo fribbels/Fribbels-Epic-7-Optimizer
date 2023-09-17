@@ -59,8 +59,8 @@ public class OptimizationDb {
     }
 
     public HeroStats[] getRows(final int startRow, final int endRow) {
-        System.out.println("Filtered indices.length " + filteredIndices.length);
-        System.out.println("FilteredIds size " + filteredIds.size());
+//        System.out.println("Filtered indices.length " + filteredIndices.length);
+//        System.out.println("FilteredIds size " + filteredIds.size());
 
         if (filteredIds.size() == 0) {
             return ArrayUtils.subarray(resultHeroStats, startRow, endRow);
@@ -95,9 +95,9 @@ public class OptimizationDb {
             return;
         }
 
-        System.out.println("START SORT");
+//        System.out.println("START SORT");
         Sorter.sortHeroes(resultHeroStats, newColumn, newOrder);
-        System.out.println("END SORT");
+//        System.out.println("END SORT");
 
         int count = 0;
         final int[] sortedFilteredIndices = new int[Integer.parseInt("" + maximum)];

@@ -16,9 +16,13 @@ public class BaseStatsDb {
         baseStatsByName = new HashMap<>();
     }
     public BaseStats getBaseStatsByName(final String name) {
+        if (!baseStatsByName.containsKey(name)) {
+            return null;
+        }
         return BaseStats.builder()
                 .lv50FiveStarFullyAwakened(getBaseStatsByName(name, 5))
                 .lv60SixStarFullyAwakened(getBaseStatsByName(name, 6))
+                .skills(baseStatsByName.get(name).getSkills())
                 .build();
     }
 
