@@ -30,10 +30,12 @@ module.exports = {
             if (result) {
                 var content = "";
 
+                if (result.unscannedItem) {
+                    content = "Rescan items to locate"
+                }
+
                 if (result.storage) {
                     content = "Item in storage"
-                } if (result.unscannedItem) {
-                    content = "Rescan items to locate"
                 } else {
                     content = `<div class="locatorTip">Substat: ${readableSubstatByName[result.substat]}</br>
                     Row: ${Math.floor(result.index / width) + 1} Column: ${result.index % width + 1}</br>
