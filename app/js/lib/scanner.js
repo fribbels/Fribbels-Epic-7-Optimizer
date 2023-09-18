@@ -545,6 +545,7 @@ module.exports = {
     end: async () => {
         try {
             scannerChild.stdin.write('END\n');
+            scannerChild.stdin.write('END\n');
 
             if (!scannerChild) {
                 console.error("No scan was started");

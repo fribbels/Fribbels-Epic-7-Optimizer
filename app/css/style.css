@@ -292,6 +292,7 @@ input {
 .gear-preview-row {
   padding: 12px 12px 5px;
   font-size: 13px;
+  width: 180px;
   height: 230px;
   border: 1px solid var(--inactive-color);
   margin-right: 10px;

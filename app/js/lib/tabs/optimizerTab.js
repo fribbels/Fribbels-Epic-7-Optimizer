@@ -1015,7 +1015,11 @@ async function redrawHeroImage() {
     const artifactData = HeroData.getArtifactByName(artifact)
 
     if (artifactData) {
-        const artiUrl = `https://static.smilegatemegaport.com/event/live/epic7/guide/wearingStatus/images/artifact/${artifactData.code}_ico.png`
+        let artiUrl = 'https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png'
+        if (artifactData.code && artifactData.code.length > 2) {
+            artiUrl = `https://static.smilegatemegaport.com/event/live/epic7/guide/wearingStatus/images/artifact/${artifactData.code}_ico.png`
+        }
+
         $('#inputArtifactImage').attr("src", artiUrl);
     } else {
         $('#inputArtifactImage').attr("src", Assets.getBlank());

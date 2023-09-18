@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.9.1";
+const currentVersion = "1.9.2-beta.2";
 
-global.TEST = true;
+global.TEST = false;
 
 /********************************************************************************************
     Release checklist:
@@ -39,10 +39,13 @@ module.exports = {
 
 `
 <h2>
-    New in v1.9.1
+    New in v1.9.2
 </h2>
 <ul class="newFeatures">
-    <li>Fixes & improvements</li>
+    <li>Artifact & self imprint display on optimizer tab</li>
+    <li>Per-item gs filter for optimization</li>
+    <li>Equipped column in optimizer tab</li>
+    <li>Importer scanner fixes</li>
 </ul>
 <h2>
     New in v1.9.0

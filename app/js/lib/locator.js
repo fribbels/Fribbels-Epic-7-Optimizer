@@ -23,9 +23,9 @@ module.exports = {
         var elements = document.querySelectorAll("." + selectorClass);
 
         for (var element of elements) {
-            console.log(element, element.dataset.itemid);
             var result = locateSingleItem(element.dataset.itemid, items);
             var width = parseInt(Settings.parseNumberValue('settingLocatorWidth') || 5);
+            console.log('locate', element, element.dataset.itemid, result);
 
             if (result) {
                 var content = "";
@@ -78,7 +78,7 @@ function locateSingleItem(itemId, items) {
     var item = items.find(x => x.ingameId == itemId)
 
     if (!item) {
-        console.log("No item matching id " + itemId)
+        console.log("No item matching ingame id " + itemId)
         return {
             unscannedItem: true
         };
