@@ -966,6 +966,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding-bottom: 5px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .tooltipImageLeft {
   height: 14px;
@@ -1491,38 +1492,41 @@ body.dark-theme input {
 }
 .gearGridContainer {
   flex-grow: 2;
-  min-height: 340px;
+  min-height: 350px;
   display: flex;
+  resize: vertical;
+  overflow: hidden;
 }
 #gear-grid {
   width: 100%;
-  height: 100%;
 }
 .gearSectionContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: 94%
 }
 .heroesSectionContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: 94%
 }
 .heroesTableContainer {
   min-height: 370px;
   height: 370px;
   flex-grow: 1;
   margin-top: 6px;
+  resize: vertical;
+  overflow: hidden;
 }
 .buildsTableContainer {
   min-height: 160px;
   height: 160px;
   flex-grow: 0.2;
   margin-bottom: 5px;
+  resize: vertical;
+  overflow: hidden;
 }
 #heroes-table {
   height: 100%;
