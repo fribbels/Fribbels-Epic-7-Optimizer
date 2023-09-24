@@ -1513,16 +1513,16 @@ body.dark-theme input {
   width: 100%;
 }
 .heroesTableContainer {
-  min-height: 370px;
-  height: 370px;
+  min-height: 200px;
+  height: 200px;
   flex-grow: 1;
   margin-top: 6px;
   resize: vertical;
   overflow: hidden;
 }
 .buildsTableContainer {
-  min-height: 160px;
-  height: 160px;
+  min-height: 193px;
+  height: 193px;
   flex-grow: 0.2;
   margin-bottom: 5px;
   resize: vertical;
