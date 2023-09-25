@@ -963,7 +963,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 400;
 }
 .heroesTabButtonRow {
-  padding-bottom: 5px;
+  padding-bottom: 4px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1073,7 +1073,7 @@ body.dark-theme input {
 }
 .gearTabFilters {
   height: 370px;
-  margin-left: 20px
+  margin-left: 10px
 }
 .gearTabIcon {
   display: block;
@@ -1386,7 +1386,7 @@ body.dark-theme input {
   min-width: 210px;
   padding: 30px;
   padding-right: 5px;
-  padding-left: 10px;
+  padding-left: 5px;
 }
 .optionsExcludeGearFrom {
   width: 150px;
@@ -1513,18 +1513,17 @@ body.dark-theme input {
   width: 100%;
 }
 .heroesTableContainer {
-  min-height: 200px;
-  height: 200px;
+  min-height: 360px;
+  height: 360px;
   flex-grow: 1;
   margin-top: 6px;
   resize: vertical;
   overflow: hidden;
 }
 .buildsTableContainer {
-  min-height: 193px;
-  height: 193px;
+  min-height: 163px;
+  height: 163px;
   flex-grow: 0.2;
-  margin-bottom: 5px;
   resize: vertical;
   overflow: hidden;
 }
