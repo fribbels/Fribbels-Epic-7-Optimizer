@@ -36,6 +36,10 @@ public class BonusStatsRequest extends Request {
     private float aeiEff;
     private float aeiRes;
 
+    private float finalAtkMultiplier;
+    private float finalDefMultiplier;
+    private float finalHpMultiplier;
+
     private float artifactAttack;
     private float artifactHealth;
 

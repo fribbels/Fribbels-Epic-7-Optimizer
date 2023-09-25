@@ -525,6 +525,33 @@ module.exports = {
                                         <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || ""}">
                                     </span>
                                 </div>
+
+
+                                <p style="color: var(--font-color)" data-t>${i18next.t("Final stat multipliers (e.g. Lethe artifact)")}</p>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Final Attack")}</div>
+                                    <div class="blankFormSpace"></div>
+                                    <span class="valuePadding input-holder-percent">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroFinalAtkMultiplier" value="${hero.finalAtkMultiplier || ""}">
+                                    </span>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Final Defense")}</div>
+                                    <div class="blankFormSpace"></div>
+                                    <span class="valuePadding input-holder-percent">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroFinalDefMultiplier" value="${hero.finalDefMultiplier || ""}">
+                                    </span>
+                                </div>
+
+                                <div class="editGearFormRow">
+                                    <div class="editGearStatLabel" data-t>${i18next.t("Final Health")}</div>
+                                    <div class="blankFormSpace"></div>
+                                    <span class="valuePadding input-holder-percent">
+                                        <input type="number" class="bonusStatInputPercent" max="100" accuracy="1" min="0" id="editHeroFinalHpMultiplier" value="${hero.finalHpMultiplier || ""}">
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -567,6 +594,10 @@ module.exports = {
                         critDamage: parseFloat(document.getElementById('editHeroBonusCritDamage').value),
                         effectiveness: parseFloat(document.getElementById('editHeroBonusEffectiveness').value),
                         effectResistance: parseFloat(document.getElementById('editHeroBonusEffectResistance').value),
+
+                        finalAtkMultiplier: parseFloat(document.getElementById('editHeroFinalAtkMultiplier').value),
+                        finalDefMultiplier: parseFloat(document.getElementById('editHeroFinalDefMultiplier').value),
+                        finalHpMultiplier: parseFloat(document.getElementById('editHeroFinalHpMultiplier').value),
 
                         aeiAttack: 0,
                         aeiDefense: 0,

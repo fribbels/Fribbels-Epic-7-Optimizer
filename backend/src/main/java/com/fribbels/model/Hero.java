@@ -90,6 +90,10 @@ public class Hero {
     public float aeiEff;
     public float aeiRes;
 
+    public float finalAtkMultiplier;
+    public float finalDefMultiplier;
+    public float finalHpMultiplier;
+
     public float artifactAttack;
     public float artifactHealth;
 
@@ -268,6 +272,10 @@ public class Hero {
         this.aeiCd = bonusStats.getAeiCd();
         this.aeiEff = bonusStats.getAeiEff();
         this.aeiRes = bonusStats.getAeiRes();
+
+        this.finalAtkMultiplier = bonusStats.getFinalAtkMultiplier();
+        this.finalDefMultiplier = bonusStats.getFinalDefMultiplier();
+        this.finalHpMultiplier = bonusStats.getFinalHpMultiplier();
 
         this.artifactAttack = bonusStats.getArtifactAttack();
         this.artifactHealth = bonusStats.getArtifactHealth();
