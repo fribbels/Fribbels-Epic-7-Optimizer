@@ -180,7 +180,17 @@ module.exports = {
         document.getElementById('removeHeroesSubmit').addEventListener("click", async () => {
             console.log("removeHeroesSubmit");
             const row = HeroesGrid.getSelectedRow();
-            if (!row) return;
+
+            let shouldReturn = false;
+            if (!row) {
+                shouldReturn = true;
+            } else if (row.builds.length) {
+                shouldReturn = !(await Dialog.confirmation("Are you sure you want to delete this hero? Their builds will also be removed."));
+            }
+
+            if (shouldReturn) {
+                return;
+            }
 
             Api.removeHeroById(row.id).then(async response => {
                 console.log("RESPONSE", response)
