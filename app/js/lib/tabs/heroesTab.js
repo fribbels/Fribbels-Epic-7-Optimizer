@@ -185,7 +185,7 @@ module.exports = {
             if (!row) {
                 shouldReturn = true;
             } else if (row.builds.length) {
-                shouldReturn = !(await Dialog.confirmation("Are you sure you want to delete this hero? Their builds will also be removed."));
+                shouldReturn = !(await Dialog.confirmation("Are you sure you want to remove this hero and their builds? This action cannot be undone."));
             }
 
             if (shouldReturn) {
