@@ -179,6 +179,12 @@ module.exports = {
 
         document.getElementById('removeHeroesSubmit').addEventListener("click", async () => {
             console.log("removeHeroesSubmit");
+
+            /*
+             * Refreshing here adds a little bit of latency but ensures the state is correct if user
+             * has added or removed builds since coming to the heroes tab.
+             */
+            await HeroesGrid.refresh();
             const row = HeroesGrid.getSelectedRow();
 
             let shouldReturn = false;
