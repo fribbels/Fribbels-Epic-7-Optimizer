@@ -1,11 +1,8 @@
 package com.fribbels.core;
 
-import com.fribbels.Main;
 import com.fribbels.enums.StatType;
 import com.fribbels.model.*;
-import org.apache.commons.lang3.StringUtils;
 
-import javax.swing.*;
 import java.util.Map;
 
 import static com.fribbels.handler.OptimizationRequestHandler.SET_COUNT;
@@ -49,13 +46,13 @@ public class StatCalculator {
         bonusBaseDef = base.def + base.def * (hero.bonusDefPercent + hero.aeiDefPercent) / 100f + hero.bonusDef + hero.aeiDef;
 
         if (base.bonusStats == null) {
-            bonusMaxAtk = 1;
-            bonusMaxHp = 1;
-            bonusMaxDef = 1;
+            bonusMaxAtk = 1 + hero.finalAtkMultiplier / 100;
+            bonusMaxHp = 1 + hero.finalHpMultiplier / 100;
+            bonusMaxDef = 1 + hero.finalDefMultiplier / 100;
         } else {
-            bonusMaxAtk = 1 + base.bonusStats.bonusMaxAtkPercent/100f;
-            bonusMaxHp = 1 + base.bonusStats.bonusMaxHpPercent/100f;
-            bonusMaxDef = 1 + base.bonusStats.bonusMaxDefPercent/100f;
+            bonusMaxAtk = 1 + base.bonusStats.bonusMaxAtkPercent/100f + hero.finalAtkMultiplier / 100;
+            bonusMaxHp = 1 + base.bonusStats.bonusMaxHpPercent/100f + hero.finalHpMultiplier / 100;
+            bonusMaxDef = 1 + base.bonusStats.bonusMaxDefPercent/100f + hero.finalDefMultiplier / 100;
         }
 
         penSetDmgBonus = (SETTING_PEN_DEFENSE/300f + 1) / (0.00283333f * SETTING_PEN_DEFENSE + 1);

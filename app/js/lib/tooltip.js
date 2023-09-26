@@ -68,7 +68,7 @@ module.exports = {
 //         });
 
         tippy('#filterStatsTooltip', {
-            content: '<p>'+i18next.t("Select substat filters to filter results by. Left column is min (inclusive) and right column is max (inclusive).")+'</p>'});
+            content: '<p>'+i18next.t("Select substat filters to filter results by. Left column is min (inclusive) and right column is max (inclusive).")+'</p>'+ i18next.t("ItemGS is the per-item filter for gear score, for example, used to find builds that only use items with > 70 GS.")});
 
         tippy('#filterSkillsTooltip', {
             content: '<p>'+i18next.t("Select skill damage filters. Skill options can be changed through the Change skill options menu. Heroes with extra procs on S1 and no S2 damage will have their S2 replaced with the S1 proc value.")+'</p>'});
@@ -87,10 +87,12 @@ module.exports = {
 +'<p>'+i18next.t("<b>McdS - </b> Max crit damage * Speed rating, measures damage at 100% crit chance vs speed.")+'</p>'
 +'<p>'+i18next.t("<b>DmgH - </b> Dmg * Hp rating, average damage rating, scaled by your units health. Useful for HP scaling bruisers.")+'</p>'
 +'<p>'+i18next.t("<b>DmgD - </b> Dmg * Def rating, average damage rating, scaled by your units defense. Useful for defense scaling bruisers.")+'</p>'
-+'<p>'+i18next.t("<b>Score - </b> Sum of gear score of all 6 pieces.")+'</p>'
++'<p>'+i18next.t("<b>GS - </b> Sum of gear score of all 6 pieces.")+'</p>'
++'<p>'+i18next.t("<b>BS - </b> Build score of the unit, taking into account main stats, imprint, flat stats base equivalent. For example, a crit chance necklace has more BS than crit dmg.")+'</p>'
 +'<p>'+i18next.t("<b>Prio - </b> Sum of priority score of all 6 pieces, calculated using the Substat Priority filter values.")+'</p>'
 +'<p>'+i18next.t("<b>Upg - </b> Number of items to upgrade - including reforges and enhances. When substat mods are enabled, modified gear is considered upgradable.")+'</p>'
 +'<p>'+i18next.t("<b>Conv - </b> Number of conversion material reforges in the results.")+'</p>'
++'<p>'+i18next.t("<b>Eq - </b> Number of items the build takes from other units equipped in the optimizer.")+'</p>'
 
         });
 

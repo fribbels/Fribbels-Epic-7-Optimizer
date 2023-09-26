@@ -165,6 +165,6 @@ module.exports = {
         return DarkMode.isDark() ? './assets/cycle_dt.png' : './assets/cycle.png';
     },
     getStorage: () => {
-        return DarkMode.isDark() ? './assets/storage_dt.png' : './assets/storage.png';
+        return DarkMode.isDark() ? './assets/bag_dt.png' : './assets/bag.png';
     },
 }

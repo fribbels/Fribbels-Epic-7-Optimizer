@@ -45,6 +45,10 @@ module.exports = {
             eff: bonusStats.effectiveness,
             res: bonusStats.effectResistance,
 
+            finalAtkMultiplier: bonusStats.finalAtkMultiplier,
+            finalDefMultiplier: bonusStats.finalDefMultiplier,
+            finalHpMultiplier: bonusStats.finalHpMultiplier,
+
             aeiAtk: bonusStats.aeiAttack,
             aeiDef: bonusStats.aeiDefense,
             aeiHp: bonusStats.aeiHealth,

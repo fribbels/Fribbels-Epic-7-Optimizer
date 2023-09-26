@@ -126,7 +126,7 @@
     "publish": {
       "provider": "github",
       "owner": "fribbels",
-      "repo": "Fribbels-Epic-7-Optimizer",
+      "repo": "crispy-tribble",
       "private": false
     }
   },

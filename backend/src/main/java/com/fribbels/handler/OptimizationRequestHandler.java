@@ -51,7 +51,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -674,13 +673,13 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final float bonusMaxDef;
 
         if (base.bonusStats == null) {
-            bonusMaxAtk = 1;
-            bonusMaxHp = 1;
-            bonusMaxDef = 1;
+            bonusMaxAtk = 1 + hero.finalAtkMultiplier / 100;
+            bonusMaxHp = 1 + hero.finalHpMultiplier / 100;
+            bonusMaxDef = 1 + hero.finalDefMultiplier / 100;
         } else {
-            bonusMaxAtk = 1 + base.bonusStats.bonusMaxAtkPercent/100f;
-            bonusMaxHp = 1 + base.bonusStats.bonusMaxHpPercent/100f;
-            bonusMaxDef = 1 + base.bonusStats.bonusMaxDefPercent/100f;
+            bonusMaxAtk = 1 + base.bonusStats.bonusMaxAtkPercent/100f + hero.finalAtkMultiplier / 100;
+            bonusMaxHp = 1 + base.bonusStats.bonusMaxHpPercent/100f + hero.finalHpMultiplier / 100;
+            bonusMaxDef = 1 + base.bonusStats.bonusMaxDefPercent/100f + hero.finalDefMultiplier / 100;
         }
 
         final float penSetDmgBonus = (StatCalculator.SETTING_PEN_DEFENSE/300f + 1) / (0.00283333f * StatCalculator.SETTING_PEN_DEFENSE + 1);
@@ -883,14 +882,15 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                             .getMod(), allnecklaces[n].getMod(), allrings[r].getMod(), allboots[b].getMod()));
 
                                     final long resultsIndex = resultsCounter.getAndIncrement();
-                                    result.setId("" + resultsIndex);
-                                    resultHeroStats[(int) resultsIndex] = result;
 
                                     if (resultsIndex >= MAXIMUM_RESULTS - 1) {
                                         maxReached.set(MAXIMUM_RESULTS - 1);
                                         exit.set(true);
                                         break;
                                     }
+
+                                    result.setId("" + resultsIndex);
+                                    resultHeroStats[(int) resultsIndex] = result;
                                 }
                             }
 

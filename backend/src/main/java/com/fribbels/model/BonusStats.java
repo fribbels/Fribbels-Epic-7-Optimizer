@@ -26,4 +26,5 @@ public class BonusStats {
     public int overrideAdditionalSpd;
     public int overrideAdditionalEff;
     public int overrideAdditionalRes;
+
 }

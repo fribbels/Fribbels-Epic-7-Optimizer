@@ -432,8 +432,7 @@ module.exports = {
       </div>
   </div>
   <div class="itemDisplayFooterIconContainer">
-      ${storage(item)}
-      ${locate(item, checkboxPrefix)}
+      ${storageOrLocator(item, checkboxPrefix)}
       ${magnify(item, checkboxPrefix)}
       ${editItemDisplay(item, checkboxPrefix)}
       ${editLockDisplay(item, checkboxPrefix)}
@@ -452,6 +451,13 @@ module.exports = {
 
         return html;
     }
+}
+
+function storageOrLocator(item, checkboxPrefix) {
+    if (item.storage) {
+        return storage(item, checkboxPrefix)
+    }
+    return locate(item, checkboxPrefix)
 }
 
 function getMaterialImage(item) {
@@ -500,12 +506,12 @@ function locate(item, checkboxPrefix) {
     return `<img src="${Assets.getLocate()}" class="itemDisplayEditImg locateTooltip${checkboxPrefix}" data-itemId="${item.ingameId}" onclick='Locator.locate("${item.ingameId}", "locateTooltip${checkboxPrefix}")'></img>`
 }
 
-function storage(item) {
+function storage(item, checkboxPrefix) {
     const storage = item.storage;
     if (!storage)
         return ""; // blank transparent
 
-    return `<img src="${Assets.getStorage()}" class="itemDisplayEditImg"></img>`
+    return `<img src="${Assets.getStorage()}" class="itemDisplayEditImg locateTooltip${checkboxPrefix}" data-itemId="${item.ingameId}" onclick='Locator.locate("${item.ingameId}", "locateTooltip${checkboxPrefix}")'></img>`
 }
 
 function editItemDisplay(item, checkboxPrefix) {
