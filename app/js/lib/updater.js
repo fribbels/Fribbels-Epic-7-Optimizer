@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.9.2-beta.3";
+const currentVersion = "1.9.2";
 
 global.TEST = false;
 
@@ -45,7 +45,9 @@ module.exports = {
     <li>Artifact & self imprint display on optimizer tab</li>
     <li>Per-item gs filter for optimization</li>
     <li>Equipped column in optimizer tab</li>
-    <li>Importer scanner fixes</li>
+    <li>Automatic importer improvements & added support for CN server</li>
+    <li>Added final atk/hp/def multipliers in bonus stats for calculating Lethe artifact for example</li>
+    <li>Resizable item/hero/build grids</li>
 </ul>
 <h2>
     New in v1.9.0
