@@ -17109,20 +17109,18 @@
       },
       "S2": {
         "hitTypes": [],
-        "rate": 0,
-        "pow": 0,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
         "options": [
           {
-            "name": "S2 barrier",
+            "name": "S3 barrier",
             "rate": 0,
             "pow": 0,
             "selfHpScaling": 0.3045
           }
         ]
-      },
-      "S3": {
-        "hitTypes": [],
-        "options": []
       }
     },
     "calculatedStatus": {
@@ -17170,7 +17168,7 @@
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
-        "overrideAdditionalRes": 0.2
+        "overrideAdditionalRes": 0.3
       }
     }
   },
@@ -17656,6 +17654,73 @@
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Nahkwol": {
+    "code": "",
+    "_id": "nahkwol",
+    "name": "Nahkwol",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "ranger",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/nahkwolPortrait.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/nahkwolBanner.png"
+    },
+    "ex_equip": [
+    ],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13285,
+        "atk": 804,
+        "hp": 4542,
+        "spd": 115,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 1003,
+        "hp": 5704,
+        "spd": 115,
+        "def": 585,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.3,
         "efr": 0
       }
     }

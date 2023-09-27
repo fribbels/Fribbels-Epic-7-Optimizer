@@ -989,6 +989,21 @@
       },
       "code":"efk02"
    },
+   "Elegiac Candles":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+      },
+      "name":"Elegiac Candles",
+      "rarity":5,
+      "role":"",
+      "stats":{
+         "attack":9,
+         "health":76
+      },
+      "code":""
+   },
    "Elf's Bow":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0014.png",
