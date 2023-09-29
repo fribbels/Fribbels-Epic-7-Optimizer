@@ -4,7 +4,7 @@
 ~dns
 
 = DNS request
-~ netaccess IP UDP DNS
+~ netaccess needs_root IP UDP DNS
 * A possible cause of failure could be that the open DNS (resolver1.opendns.com)
 * is not reachable or down.
 def _test():
@@ -17,22 +17,27 @@ def _test():
 
 dns_ans = retry_test(_test)
 
+= DNS labels
+~ DNS
+query = DNSQR(qname=b"www.secdev.org")
+assert query.qname == query.__class__(raw(query)).qname
+
 = DNS packet manipulation
-~ netaccess IP UDP DNS
+~ netaccess needs_root IP UDP DNS
 dns_ans.show()
 dns_ans.show2()
 dns_ans[DNS].an.show()
 dns_ans2 = IP(raw(dns_ans))
 DNS in dns_ans2
-assert(raw(dns_ans2) == raw(dns_ans))
+assert raw(dns_ans2) == raw(dns_ans)
 dns_ans2.qd.qname = "www.secdev.org."
 * We need to recalculate these values
-del(dns_ans2[IP].len)
-del(dns_ans2[IP].chksum)
-del(dns_ans2[UDP].len)
-del(dns_ans2[UDP].chksum)
-assert(b"\x03www\x06secdev\x03org\x00" in raw(dns_ans2))
-assert(DNS in IP(raw(dns_ans2)))
+del dns_ans2[IP].len
+del dns_ans2[IP].chksum
+del dns_ans2[UDP].len
+del dns_ans2[UDP].chksum
+assert b"\x03www\x06secdev\x03org\x00" in raw(dns_ans2)
+assert DNS in IP(raw(dns_ans2))
 assert raw(DNSRR(type='A', rdata='1.2.3.4')) == b'\x00\x00\x01\x00\x01\x00\x00\x00\x00\x00\x04\x01\x02\x03\x04'
 
 * DNS over UDP
@@ -83,7 +88,7 @@ assert pkt.an.getlayer(DNSRR, type=16).rdata == [b'txtvers=1', b'vs=190.9', b'ch
 = DNS advanced building
 ~ dns
 
-pkt = DNS(qr=1, aa=1, rd=1)
+pkt = DNS(qr=1, qd=None, aa=1, rd=1)
 pkt.an = DNSRR(type=12, rrname='_raop._tcp.local.', rdata='140C768FFE28@Freebox Server._raop._tcp.local.')/DNSRR(rrname='140C768FFE28@Freebox Server._raop._tcp.local.', type=16, rdata=[b'txtvers=1', b'vs=190.9', b'ch=2', b'sr=44100', b'ss=16', b'pw=false', b'et=0,1', b'ek=1', b'tp=TCP,UDP', b'am=FreeboxServer1,2', b'cn=0,1,2,3', b'md=0,2', b'sf=0x44', b'ft=0xBF0A00', b'sv=false', b'da=true', b'vn=65537', b'vv=2'])/DNSRRSRV(rrname='140C768FFE28@Freebox Server._raop._tcp.local.', target='Freebox-Server-3.local.', port=5000, type=33, rclass=32769)/DNSRR(rrname='Freebox-Server-3.local.', rdata='192.168.0.254', rclass=32769, type=1, ttl=120)
 
 pkt = DNS(raw(pkt))
@@ -160,26 +165,31 @@ DNS(s)
 
 = DNS record type 16 (TXT)
 
-p = DNS(raw(DNS(id=1,ra=1,an=DNSRR(rrname='scapy', type='TXT', rdata="niceday", ttl=1))))
+p = DNS(raw(DNS(id=1,ra=1,qd=None,an=DNSRR(rrname='scapy', type='TXT', rdata="niceday", ttl=1))))
 assert p[DNS].an.rdata == [b"niceday"]
 
-p = DNS(raw(DNS(id=1,ra=1,an=DNSRR(rrname='secdev', type='TXT', rdata=["sweet", "celestia"], ttl=1))))
+p = DNS(raw(DNS(id=1,ra=1,qd=None,an=DNSRR(rrname='secdev', type='TXT', rdata=["sweet", "celestia"], ttl=1))))
 assert p[DNS].an.rdata == [b"sweet", b"celestia"]
 assert raw(p) == b'\x00\x01\x01\x80\x00\x00\x00\x01\x00\x00\x00\x00\x06secdev\x00\x00\x10\x00\x01\x00\x00\x00\x01\x00\x0f\x05sweet\x08celestia'
 
 = DNS - Malformed DNS over TCP message
 
+_old_dbg = conf.debug_dissector
+conf.debug_dissector = True
+
 try:
-    p = IP(IP(raw(IP()/TCP()/DNS(length=28))[:-13]))
+    p = IP(raw(IP()/TCP()/DNS(qd=None,length=28))[:-13])
     assert False
 except Scapy_Exception as e:
     assert str(e) == "Malformed DNS message: too small!"
 
 try:
-    p = IP(raw(IP()/TCP()/DNS(length=28, qdcount=1)))
+    p = IP(raw(IP()/TCP()/DNS(qd=None,length=28, qdcount=1)))
     assert False
 except Scapy_Exception as e:
     assert str(e) == "Malformed DNS message: invalid length!"
+
+conf.debug_dissector = _old_dbg
 
 = DNS - dns_compress on decompressed packet
 
@@ -198,8 +208,34 @@ assert p.ns.rrname == b"google.com."
 assert p.ns.mname == b"ns1.google.com."
 assert p.ns.rname == b"dns-admin.google.com."
 
+= DNS - dns_compress on close indexes
+
+p = dns_compress(DNS(qd=DNSQR(qname=b'scapy.'), an=DNSRR(rrname=b'scapy.'), ar=DNSRROPT(rrname=b'.')))
+assert raw(p) == b'\x00\x00\x01\x00\x00\x01\x00\x01\x00\x00\x00\x01\x05scapy\x00\x00\x01\x00\x01\xc0\x0c\x00\x01\x00\x01\x00\x00\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00)\x10\x00\x00\x00\x80\x00\x00\x00'
+
+p = DNS(raw(p))
+assert p.qd.qname == b'scapy.'
+assert p.an.rrname == b'scapy.'
+assert p.ar.rrname == b'.'
+
 = DNS - dns_encode edge cases
 
 assert dns_encode(b"www.google.com") == b'\x03www\x06google\x03com\x00'
 assert dns_encode(b"*") == b'\x01*\x00'
 assert dns_encode(dns_encode(b"*")) == b'\x03\x01*\x00'
+
+= DNS - simple request
+
+assert raw(DNS()) == b'\x00\x00\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03www\x07example\x03com\x00\x00\x01\x00\x01'
+
+= DNS - preserve rdlen when rdata is not a compressed DNS string
+
+# RR type A
+dnsrr1 = Raw(b'\x01a\x01b\x01c\x00\x00\x01\x10\x00\x00\x00\x00\x01\x00\x04\x01\x02\x03\x04')
+# RR type NS & plain rdata
+dnsrr2 = Raw(b'\x02ns\xc0\x0e\x00\x02\x10\x00\x00\x00\x00\x01\x00\x06\x01x\x01y\x01z')
+# RR type NS & compressed rdata
+dnsrr3 = Raw(b'\x02ns\xc0\x0e\x00\x02\x10\x00\x00\x00\x00\x01\x00\x07\x04test\xc0\x0e')
+
+d = DNS(raw(DNS(ancount=3, an=dnsrr1/dnsrr2/dnsrr3)))
+assert d.an[0].rdlen == 4 and d.an[1].rdlen == 6 and d.an[2].rdlen is None

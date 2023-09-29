@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 Packet class
@@ -41,12 +41,13 @@ from scapy.config import conf, _version_checker
 from scapy.compat import raw, orb, bytes_encode
 from scapy.base_classes import BasePacket, Gen, SetGen, Packet_metaclass, \
     _CanvasDumpExtended
+from scapy.interfaces import _GlobInterfaceType
 from scapy.volatile import RandField, VolatileValue
 from scapy.utils import import_hexcap, tex_escape, colgen, issubtype, \
     pretty_list, EDecimal
 from scapy.error import Scapy_Exception, log_runtime, warning
-from scapy.extlib import PYX
-import scapy.modules.six as six
+from scapy.libs.test_pyx import PYX
+import scapy.libs.six as six
 
 # Typing imports
 from scapy.compat import (
@@ -84,8 +85,8 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         "packetfields",
         "original", "explicit", "raw_packet_cache",
         "raw_packet_cache_fields", "_pkt", "post_transforms",
-        # then payload and underlayer
-        "payload", "underlayer",
+        # then payload, underlayer and parent
+        "payload", "underlayer", "parent",
         "name",
         # used for sr()
         "_answered",
@@ -93,6 +94,7 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         "direction", "sniffed_on",
         # handle snaplen Vs real length
         "wirelen",
+        "comment"
     ]
     name = None
     fields_desc = []  # type: Sequence[AnyField]
@@ -126,10 +128,11 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
             print("%-20s  %s" % (lower.__name__, ", ".join("%-12s" % ("%s=%r" % i) for i in six.iteritems(fval))))  # noqa: E501
 
     def __init__(self,
-                 _pkt=b"",  # type: bytes
+                 _pkt=b"",  # type: Union[bytes, bytearray]
                  post_transform=None,  # type: Any
                  _internal=0,  # type: int
                  _underlayer=None,  # type: Optional[Packet]
+                 _parent=None,  # type: Optional[Packet]
                  **fields  # type: Any
                  ):
         # type: (...) -> None
@@ -147,13 +150,17 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         self.payload = NoPayload()
         self.init_fields()
         self.underlayer = _underlayer
+        self.parent = _parent
+        if isinstance(_pkt, bytearray):
+            _pkt = bytes(_pkt)
         self.original = _pkt
         self.explicit = 0
         self.raw_packet_cache = None  # type: Optional[bytes]
         self.raw_packet_cache_fields = None  # type: Optional[Dict[str, Any]]  # noqa: E501
         self.wirelen = None  # type: Optional[int]
         self.direction = None  # type: Optional[int]
-        self.sniffed_on = None  # type: Optional[str]
+        self.sniffed_on = None  # type: Optional[_GlobInterfaceType]
+        self.comment = None  # type: Optional[bytes]
         if _pkt:
             self.dissect(_pkt)
             if not _internal:
@@ -167,14 +174,16 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
                 value = fields.pop(fname)
             except KeyError:
                 continue
-            self.fields[fname] = self.get_field(fname).any2i(self, value)
+            self.fields[fname] = value if isinstance(value, RawVal) else \
+                self.get_field(fname).any2i(self, value)
         # The remaining fields are unknown
         for fname in fields:
             if fname in self.deprecated_fields:
                 # Resolve deprecated fields
                 value = fields[fname]
                 fname = self._resolve_alias(fname)
-                self.fields[fname] = self.get_field(fname).any2i(self, value)
+                self.fields[fname] = value if isinstance(value, RawVal) else \
+                    self.get_field(fname).any2i(self, value)
                 continue
             raise AttributeError(fname)
         if isinstance(post_transform, list):
@@ -185,40 +194,35 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
             self.post_transforms = [post_transform]
 
     _PickleType = Tuple[
-        bytes,
         Union[EDecimal, float],
         Optional[Union[EDecimal, float, None]],
         Optional[int],
-        Optional[str],
-        Optional[int]
+        Optional[_GlobInterfaceType],
+        Optional[int],
+        Optional[bytes],
     ]
 
     def __reduce__(self):
-        # type: () -> Tuple[Type[Packet], Tuple[()], Packet._PickleType]
+        # type: () -> Tuple[Type[Packet], Tuple[bytes], Packet._PickleType]
         """Used by pickling methods"""
-        return (self.__class__, (), (
-            self.build(),
+        return (self.__class__, (self.build(),), (
             self.time,
             self.sent_time,
             self.direction,
             self.sniffed_on,
             self.wirelen,
+            self.comment
         ))
-
-    def __getstate__(self):
-        # type: () -> Packet._PickleType
-        """Mark object as pickable"""
-        return self.__reduce__()[2]
 
     def __setstate__(self, state):
         # type: (Packet._PickleType) -> Packet
         """Rebuild state using pickable methods"""
-        self.__init__(state[0])  # type: ignore
-        self.time = state[1]
-        self.sent_time = state[2]
-        self.direction = state[3]
-        self.sniffed_on = state[4]
-        self.wirelen = state[5]
+        self.time = state[0]
+        self.sent_time = state[1]
+        self.direction = state[2]
+        self.sniffed_on = state[3]
+        self.wirelen = state[4]
+        self.comment = state[5]
         return self
 
     def __deepcopy__(self,
@@ -375,6 +379,20 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         # type: (Packet) -> None
         self.underlayer = None
 
+    def add_parent(self, parent):
+        # type: (Packet) -> None
+        """Set packet parent.
+        When packet is an element in PacketListField, parent field would
+        point to the list owner packet."""
+        self.parent = parent
+
+    def remove_parent(self, other):
+        # type: (Packet) -> None
+        """Remove packet parent.
+        When packet is an element in PacketListField, parent field would
+        point to the list owner packet."""
+        self.parent = None
+
     def copy(self):
         # type: () -> Packet
         """Returns a deep copy of the instance."""
@@ -383,6 +401,7 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         clone.default_fields = self.copy_fields_dict(self.default_fields)
         clone.overloaded_fields = self.overloaded_fields.copy()
         clone.underlayer = self.underlayer
+        clone.parent = self.parent
         clone.explicit = self.explicit
         clone.raw_packet_cache = self.raw_packet_cache
         clone.raw_packet_cache_fields = self.copy_fields_dict(
@@ -393,6 +412,7 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         clone.payload = self.payload.copy()
         clone.payload.add_underlayer(clone)
         clone.time = self.time
+        clone.comment = self.comment
         return clone
 
     def _resolve_alias(self, attr):
@@ -436,7 +456,7 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         except ValueError:
             return self.payload.__getattr__(attr)
         if fld is not None:
-            return fld.i2h(self, v)
+            return v if isinstance(v, RawVal) else fld.i2h(self, v)
         return v
 
     def setfieldval(self, attr, val):
@@ -449,7 +469,8 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
                 any2i = lambda x, y: y  # type: Callable[..., Any]
             else:
                 any2i = fld.any2i
-            self.fields[attr] = any2i(self, val)
+            self.fields[attr] = val if isinstance(val, RawVal) else \
+                any2i(self, val)
             self.explicit = 0
             self.raw_packet_cache = None
             self.raw_packet_cache_fields = None
@@ -463,8 +484,6 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
     def __setattr__(self, attr, val):
         # type: (str, Any) -> None
         if attr in self.__all_slots__:
-            if attr == "sent_time":
-                self.update_sent_time(val)
             return object.__setattr__(self, attr, val)
         try:
             return self.setfieldval(attr, val)
@@ -475,7 +494,7 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
     def delfieldval(self, attr):
         # type: (str) -> None
         if attr in self.fields:
-            del(self.fields[attr])
+            del self.fields[attr]
             self.explicit = 0  # in case a default value must be explicit
             self.raw_packet_cache = None
             self.raw_packet_cache_fields = None
@@ -563,8 +582,7 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
     else:
         def __str__(self):
             # type: () -> str
-            warning("Calling str(pkt) on Python 3 makes no sense!")
-            return str(self.build())
+            return self.summary()
 
     def __bytes__(self):
         # type: () -> bytes
@@ -658,7 +676,17 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
             if isinstance(val, RawVal):
                 p += bytes(val)
             else:
-                p = f.addfield(self, p, val)
+                try:
+                    p = f.addfield(self, p, val)
+                except Exception as ex:
+                    try:
+                        ex.args = (
+                            "While dissecting field '%s': " % f.name +
+                            ex.args[0],
+                        ) + ex.args[1:]
+                    except (AttributeError, IndexError):
+                        pass
+                    raise ex
         return p
 
     def do_build_payload(self):
@@ -709,7 +737,7 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         """
         DEV: called right after the current layer is build.
 
-        :param str pkt: the current packet (build by self_buil function)
+        :param str pkt: the current packet (build by self_build function)
         :param str pay: the packet payload (build by do_build_payload function)
         :return: a string of the packet with the payload
         """
@@ -1048,13 +1076,8 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
                     del self.fields[k]
         self.payload.hide_defaults()
 
-    def update_sent_time(self, time):
-        # type: (Optional[float]) -> None
-        """Use by clone_with to share the sent_time value"""
-        pass
-
-    def clone_with(self, payload=None, share_time=False, **kargs):
-        # type: (Optional[Any], bool, **Any) -> Any
+    def clone_with(self, payload=None, **kargs):
+        # type: (Optional[Any], **Any) -> Any
         pkt = self.__class__()
         pkt.explicit = 1
         pkt.fields = kargs
@@ -1062,26 +1085,21 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
         pkt.overloaded_fields = self.overloaded_fields.copy()
         pkt.time = self.time
         pkt.underlayer = self.underlayer
+        pkt.parent = self.parent
         pkt.post_transforms = self.post_transforms
         pkt.raw_packet_cache = self.raw_packet_cache
         pkt.raw_packet_cache_fields = self.copy_fields_dict(
             self.raw_packet_cache_fields
         )
         pkt.wirelen = self.wirelen
+        pkt.comment = self.comment
         if payload is not None:
             pkt.add_payload(payload)
-        if share_time:
-            # This binds the subpacket .sent_time to this layer
-            def _up_time(x, parent=self):
-                # type: (float, Packet) -> None
-                parent.sent_time = x
-            pkt.update_sent_time = _up_time  # type: ignore
         return pkt
 
     def __iter__(self):
         # type: () -> Iterator[Packet]
         """Iterates through all sub-packets generated by this Packet."""
-        # We use __iterlen__ as low as possible, to lower processing time
         def loop(todo, done, self=self):
             # type: (List[str], Dict[str, Any], Any) -> Iterator[Packet]
             if todo:
@@ -1101,19 +1119,13 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
                     payloads = SetGen([None])  # type: SetGen[Packet]
                 else:
                     payloads = self.payload
-                share_time = False
-                if self.fields == done and payloads.__iterlen__() == 1:
-                    # In this case, the packets are identical. Let's bind
-                    # their sent_time attribute for sending purpose
-                    share_time = True
                 for payl in payloads:
                     # Let's make sure subpackets are consistent
                     done2 = done.copy()
                     for k in done2:
                         if isinstance(done2[k], VolatileValue):
                             done2[k] = done2[k]._fix()
-                    pkt = self.clone_with(payload=payl, share_time=share_time,
-                                          **done2)
+                    pkt = self.clone_with(payload=payl, **done2)
                     yield pkt
 
         if self.explicit or self.raw_packet_cache is not None:
@@ -1125,42 +1137,6 @@ class Packet(six.with_metaclass(Packet_metaclass,  # type: ignore
                     if isinstance(v, VolatileValue)] + list(self.fields)
             done = {}
         return loop(todo, done)
-
-    def __iterlen__(self):
-        # type: () -> int
-        """Predict the total length of the iterator"""
-        fields = [key for (key, val) in itertools.chain(six.iteritems(self.default_fields),  # noqa: E501
-                  six.iteritems(self.overloaded_fields))
-                  if isinstance(val, VolatileValue)] + list(self.fields)
-        length = 1
-
-        def is_valid_gen_tuple(x):
-            # type: (Any) -> bool
-            if not isinstance(x, tuple):
-                return False
-            return len(x) == 2 and all(isinstance(z, int) for z in x)
-
-        for field in fields:
-            fld, val = self.getfield_and_val(field)
-            if hasattr(val, "__iterlen__"):
-                length *= val.__iterlen__()
-            elif is_valid_gen_tuple(val):
-                length *= (val[1] - val[0] + 1)
-            elif isinstance(val, list) and not fld.islist:
-                len2 = 0
-                for x in val:
-                    if hasattr(x, "__iterlen__"):
-                        len2 += x.__iterlen__()
-                    elif is_valid_gen_tuple(x):
-                        len2 += (x[1] - x[0] + 1)
-                    elif isinstance(x, list):
-                        len2 += len(x)
-                    else:
-                        len2 += 1
-                length *= len2 or 1
-        if not isinstance(self.payload, NoPayload):
-            return length * self.payload.__iterlen__()
-        return length
 
     def iterpayloads(self):
         # type: () -> Iterator[Packet]
@@ -1353,7 +1329,7 @@ values.
 
     def __delitem__(self, cls):
         # type: (Type[Packet]) -> None
-        del(self[cls].underlayer.payload)
+        del self[cls].underlayer.payload
 
     def __setitem__(self, cls, val):
         # type: (Type[Packet], Packet) -> None
@@ -1368,7 +1344,7 @@ values.
         return self.haslayer(cls)
 
     def route(self):
-        # type: () -> Tuple[Any, Optional[str], Optional[str]]
+        # type: () -> Tuple[Optional[str], Optional[str], Optional[str]]
         return self.payload.route()
 
     def fragment(self, *args, **kargs):
@@ -1586,15 +1562,18 @@ values.
                     if num > 1:
                         val = self.payload.sprintf("%%%s,%s:%s.%s%%" % (f, cls, num - 1, fld), relax)  # noqa: E501
                         f = "s"
-                    elif f[-1] == "r":  # Raw field value
-                        val = getattr(self, fld)
-                        f = f[:-1]
-                        if not f:
-                            f = "s"
                     else:
-                        val = getattr(self, fld)
-                        if fld in self.fieldtype:
-                            val = self.fieldtype[fld].i2repr(self, val)
+                        try:
+                            val = self.getfieldval(fld)
+                        except AttributeError:
+                            val = getattr(self, fld)
+                        if f[-1] == "r":  # Raw field value
+                            f = f[:-1]
+                            if not f:
+                                f = "s"
+                        else:
+                            if fld in self.fieldtype:
+                                val = self.fieldtype[fld].i2repr(self, val)
                 else:
                     val = self.payload.sprintf("%%%s%%" % sfclsfld, relax)
                     f = "s"
@@ -1671,81 +1650,23 @@ values.
                 fv = fv.command()
             elif fld.islist and fld.holds_packets and isinstance(fv, list):
                 fv = "[%s]" % ",".join(map(Packet.command, fv))
+            elif fld.islist and isinstance(fv, list):
+                fv = "[%s]" % ", ".join(
+                    getattr(x, 'command', lambda: repr(x))()
+                    for x in fv
+                )
             elif isinstance(fld, FlagsField):
                 fv = int(fv)
             elif callable(getattr(fv, 'command', None)):
                 fv = fv.command()
             else:
-                fv = repr(fv)
+                fv = repr(fld.i2h(self, fv))
             f.append("%s=%s" % (fn, fv))
         c = "%s(%s)" % (self.__class__.__name__, ", ".join(f))
         pc = self.payload.command()
         if pc:
             c += "/" + pc
         return c
-
-    def convert_to(self, other_cls, **kwargs):
-        # type: (Type[Packet], **Any) -> Packet
-        """Converts this Packet to another type.
-
-        This is not guaranteed to be a lossless process.
-
-        By default, this only implements conversion to ``Raw``.
-
-        :param other_cls: Reference to a Packet class to convert to.
-        :type other_cls: Type[scapy.packet.Packet]
-        :return: Converted form of the packet.
-        :rtype: other_cls
-        :raises TypeError: When conversion is not possible
-        """
-        if not issubtype(other_cls, Packet):
-            raise TypeError("{} must implement Packet".format(other_cls))
-
-        if other_cls is Raw:
-            return Raw(raw(self))
-
-        if "_internal" not in kwargs:
-            return other_cls.convert_packet(self, _internal=True, **kwargs)
-
-        raise TypeError("Cannot convert {} to {}".format(
-            type(self).__name__, other_cls.__name__))
-
-    @classmethod
-    def convert_packet(cls, pkt, **kwargs):
-        # type: (Packet, **Any) -> Packet
-        """Converts another packet to be this type.
-
-        This is not guaranteed to be a lossless process.
-
-        :param pkt: The packet to convert.
-        :type pkt: scapy.packet.Packet
-        :return: Converted form of the packet.
-        :rtype: cls
-        :raises TypeError: When conversion is not possible
-        """
-        if not isinstance(pkt, Packet):
-            raise TypeError("Can only convert Packets")
-
-        if "_internal" not in kwargs:
-            return pkt.convert_to(cls, _internal=True, **kwargs)
-
-        raise TypeError("Cannot convert {} to {}".format(
-            type(pkt).__name__, cls.__name__))
-
-    @classmethod
-    def convert_packets(cls,
-                        pkts,  # type: List[Packet]
-                        **kwargs  # type: Any
-                        ):
-        # type: (...) -> Iterator[Iterator[Packet]]
-        """Converts many packets to this type.
-
-        This is implemented as a generator.
-
-        See ``Packet.convert_packet``.
-        """
-        for pkt in pkts:
-            yield cls.convert_packet(pkt, **kwargs)
 
 
 class NoPayload(Packet):
@@ -1755,7 +1676,7 @@ class NoPayload(Packet):
         if singl is None:
             cls.__singl__ = singl = Packet.__new__(cls)
             Packet.__init__(singl)
-        return singl  # type: ignore
+        return singl
 
     def __init__(self, *args, **kargs):
         # type: (*Any, **Any) -> None
@@ -1778,6 +1699,14 @@ class NoPayload(Packet):
         pass
 
     def remove_underlayer(self, other):
+        # type: (Packet) -> None
+        pass
+
+    def add_parent(self, parent):
+        # type: (Any) -> None
+        pass
+
+    def remove_parent(self, other):
         # type: (Packet) -> None
         pass
 
@@ -1862,7 +1791,7 @@ class NoPayload(Packet):
 
     def answers(self, other):
         # type: (NoPayload) -> bool
-        return isinstance(other, NoPayload) or isinstance(other, conf.padding_layer)  # noqa: E501
+        return isinstance(other, (NoPayload, conf.padding_layer))  # noqa: E501
 
     def haslayer(self, cls, _subclass=None):
         # type: (Union[Type[Packet], str], Optional[bool]) -> int
@@ -1944,11 +1873,6 @@ class Raw(Packet):
             else:
                 return "Raw %r" % self.load
         return Packet.mysummary(self)
-
-    @classmethod
-    def convert_packet(cls, pkt, **kwargs):
-        # type: (Packet, **Any) -> Raw
-        return Raw(raw(pkt))
 
 
 class Padding(Raw):
@@ -2081,7 +2005,7 @@ def split_top_down(lower,  # type: Type[Packet]
         if any(k not in ofval or ofval[k] != v for k, v in six.iteritems(fval)):  # noqa: E501
             return
         upper._overload_fields = upper._overload_fields.copy()
-        del(upper._overload_fields[lower])
+        del upper._overload_fields[lower]
 
 
 @conf.commands.register
@@ -2513,7 +2437,7 @@ def rfc(cls, ret=False, legend=True):
         # The last field of above is shared with below
         if above[-1][2] == below[0][2]:
             # where the field in "above" starts
-            pos_above = sum(x[1] for x in above[:-1])
+            pos_above = sum(x[1] for x in above[:-1]) + len(above[:-1]) - 1
             # where the field in "below" ends
             pos_below = below[0][1]
             if pos_above < pos_below:

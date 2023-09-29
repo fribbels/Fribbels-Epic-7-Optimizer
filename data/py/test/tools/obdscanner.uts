@@ -1,16 +1,14 @@
 % Regression tests for obdscanner
-~ vcan_socket needs_root linux not_pypy
+~ vcan_socket needs_root linux not_pypy automotive_comm scanner
 
 + Configuration
 ~ conf
 
 = Imports
-import scapy.modules.six as six
+with open(scapy_path("test/contrib/automotive/interface_mockup.py")) as f:
+    exec(f.read())
 
-if six.PY3:
-    exec(open("test/contrib/automotive/interface_mockup.py").read())
-else:
-    execfile("test/contrib/automotive/interface_mockup.py")
+load_contrib("automotive.ecu", globals_dict=globals())
 
 + Usage tests
 
@@ -74,7 +72,7 @@ drain_bus(iface0)
 
 s3 = OBD()/OBD_S03_PR(dtcs=[OBD_DTC()])
 
-example_responses = [EcuResponse(session=range(0, 255), security_level=0, responses=s3)]
+example_responses = [EcuResponse(responses=s3)]
 
 with new_can_socket0() as isocan, ISOTPSocket(isocan, 0x7e8, 0x7e0, basecls=OBD, padding=True) as ecu, \
         new_can_socket0() as isocan2, ISOTPSocket(isocan2, 0x7e0, 0x7e8, basecls=OBD, padding=True) as tester:
@@ -110,14 +108,14 @@ s1_pid0F = OBD()/OBD_S01_PR(data_records=[OBD_S01_PR_Record()/OBD_PID0F(data=50)
 
 # Create answers for 'supported PIDs scan'
 example_responses = \
-    [EcuResponse(session=range(0, 255), security_level=0, responses=s3),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s6_mid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s8_tid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s9_iid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid03),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid0B),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid0F)]
+    [EcuResponse(responses=s3),
+     EcuResponse(responses=s1_pid00),
+     EcuResponse(responses=s6_mid00),
+     EcuResponse(responses=s8_tid00),
+     EcuResponse(responses=s9_iid00),
+     EcuResponse(responses=s1_pid03),
+     EcuResponse(responses=s1_pid0B),
+     EcuResponse(responses=s1_pid0F)]
 
 
 
@@ -129,14 +127,16 @@ with new_can_socket0() as isocan, ISOTPSocket(isocan, 0x7e8, 0x7e0, basecls=OBD,
     try:
         result = subprocess.Popen([sys.executable, "scapy/tools/automotive/obdscanner.py"] + can_socket_string_list + ["-s", "0x7e0", "-d", "0x7e8", "-t", "0.30"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         std_out1, std_err1 = result.communicate()
+        print(std_out2, std_err2)
         result = subprocess.Popen([sys.executable, "scapy/tools/automotive/obdscanner.py"] + can_socket_string_list + ["-s", "0x7e0", "-d", "0x7e8", "-t", "0.30"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         std_out2, std_err2 = result.communicate()
+        print(std_out2, std_err2)
     except Exception as e:
         print(e)
     finally:
         tester.send(b"\x01\xff\xff\xff\xff")
         sim.join(timeout=10)
-    expected_output = ["5 requests were sent, 4 answered", "2 requests were sent, 1 answered", "1 requests were sent, 1 answered"]
+    expected_output = ["supported_pids=PID0F+PID0B+PID03", "fuel_system1=OpenLoopInsufficientEngineTemperature fuel_system2=ClosedLoop", "data=100 kPa", "data=50.0 deg. C"]
     for out in expected_output:
         assert bytes_encode(out) in bytes_encode(std_out1) or bytes_encode(out) in bytes_encode(std_out2)  
 
@@ -155,14 +155,14 @@ s1_pid0F = OBD()/OBD_S01_PR(data_records=[OBD_S01_PR_Record()/OBD_PID0F(data=50)
 
 # Create answers for 'supported PIDs scan'
 example_responses = \
-    [EcuResponse(session=range(0, 255), security_level=0, responses=s3),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s6_mid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s8_tid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s9_iid00),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid03),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid0B),
-     EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid0F)]
+    [EcuResponse(responses=s3),
+     EcuResponse(responses=s1_pid00),
+     EcuResponse(responses=s6_mid00),
+     EcuResponse(responses=s8_tid00),
+     EcuResponse(responses=s9_iid00),
+     EcuResponse(responses=s1_pid03),
+     EcuResponse(responses=s1_pid0B),
+     EcuResponse(responses=s1_pid0F)]
 
 
 
@@ -174,14 +174,16 @@ with new_can_socket0() as isocan, ISOTPSocket(isocan, 0x7e8, 0x7e0, basecls=OBD,
     try:
         result = subprocess.Popen([sys.executable, "scapy/tools/automotive/obdscanner.py"] + can_socket_string_list + ["-s", "0x7e0", "-d", "0x7e8", "-t", "0.30", "-1"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         std_out1, std_err1 = result.communicate()
+        print(std_out1, std_err1)
         result = subprocess.Popen([sys.executable, "scapy/tools/automotive/obdscanner.py"] + can_socket_string_list + ["-s", "0x7e0", "-d", "0x7e8", "-t", "0.30", "-1"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         std_out2, std_err2 = result.communicate()
+        print(std_out2, std_err2)
     except Exception as e:
         print(e)
     finally:
         tester.send(b"\x01\xff\xff\xff\xff")
         sim.join(timeout=10)
-    expected_output = ["5 requests were sent, 4 answered"]
+    expected_output = ["supported_pids=PID0F+PID0B+PID03", "fuel_system1=OpenLoopInsufficientEngineTemperature fuel_system2=ClosedLoop", "data=100 kPa", "data=50.0 deg. C"]
     for out in expected_output:
         assert bytes_encode(out) in bytes_encode(std_out1) or bytes_encode(out) in bytes_encode(std_out2)
 
@@ -192,7 +194,7 @@ drain_bus(iface0)
 
 # Add unsupported PID
 s1_pid01 = OBD()/OBD_S01_PR(data_records=[OBD_S01_PR_Record()/OBD_PID01()])
-example_responses.append(EcuResponse(session=range(0, 255), security_level=0, responses=s1_pid01))
+example_responses.append(EcuResponse(responses=s1_pid01))
 
 with new_can_socket0() as isocan, ISOTPSocket(isocan, 0x7e8, 0x7e0, basecls=OBD, padding=True) as ecu, \
         new_can_socket0() as isocan2, ISOTPSocket(isocan2, 0x7e0, 0x7e8, basecls=OBD, padding=True) as tester:

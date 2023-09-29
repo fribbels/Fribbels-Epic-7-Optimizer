@@ -1,6 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2017 Maxence Tury
-# This program is published under a GPLv2 license
 
 """
 TLS handshake extensions.
@@ -178,7 +179,7 @@ class ServerName(Packet):
 class ServerListField(PacketListField):
     def i2repr(self, pkt, x):
         res = [p.servername for p in x]
-        return "[%s]" % b", ".join(res)
+        return "[%s]" % ", ".join(repr(x) for x in res)
 
 
 class ServerLenField(FieldLenField):
@@ -419,7 +420,7 @@ class TLS_Ext_ServerCertType(TLS_Ext_Unknown):                      # RFC 5081
 def _TLS_Ext_CertTypeDispatcher(m, *args, **kargs):
     """
     We need to select the correct one on dissection. We use the length for
-    that, as 1 for client version would emply an empty list.
+    that, as 1 for client version would imply an empty list.
     """
     tmp_len = struct.unpack("!H", m[2:4])[0]
     if tmp_len == 1:
@@ -498,7 +499,7 @@ class ProtocolName(Packet):
 class ProtocolListField(PacketListField):
     def i2repr(self, pkt, x):
         res = [p.protocol for p in x]
-        return "[%s]" % b", ".join(res)
+        return "[%s]" % ", ".join(repr(x) for x in res)
 
 
 class TLS_Ext_ALPN(TLS_Ext_PrettyPacketList):                       # RFC 7301
@@ -727,13 +728,12 @@ class _ExtensionsLenField(FieldLenField):
     def getfield(self, pkt, s):
         """
         We try to compute a length, usually from a msglen parsed earlier.
-        If this length is 0, we consider 'selection_present' (from RFC 5246)
-        to be False. This means that there should not be any length field.
-        However, with TLS 1.3, zero lengths are always explicit.
+        If we can not find any length, we consider 'extensions_present'
+        (from RFC 5246) to be False.
         """
         ext = pkt.get_field(self.length_of)
         tmp_len = ext.length_from(pkt)
-        if tmp_len is None or tmp_len <= 0:
+        if tmp_len is None or tmp_len < 0:
             v = pkt.tls_session.tls_version
             if v is None or v < 0x0304:
                 return s, None

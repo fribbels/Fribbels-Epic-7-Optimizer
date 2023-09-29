@@ -1,36 +1,26 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 Functions common to different architectures
 """
 
 import ctypes
-import socket
-import struct
-import time
-from scapy.consts import WINDOWS
 from scapy.config import conf
 from scapy.data import MTU, ARPHDR_ETHER, ARPHRD_TO_DLT
 from scapy.error import Scapy_Exception
-from scapy.interfaces import network_name, NetworkInterface
+from scapy.interfaces import network_name
 from scapy.libs.structures import bpf_program
+from scapy.utils import decode_locale_str
 
 # Type imports
 import scapy
 from scapy.compat import (
-    Callable,
-    List,
     Optional,
-    Tuple,
-    TypeVar,
     Union,
 )
-
-if not WINDOWS:
-    from fcntl import ioctl
 
 # From if.h
 _iff_flags = [
@@ -56,65 +46,6 @@ _iff_flags = [
     "ECHO"
 ]
 
-# UTILS
-
-
-def get_if(iff, cmd):
-    # type: (Union[NetworkInterface, str], int) -> bytes
-    """Ease SIOCGIF* ioctl calls"""
-
-    iff = network_name(iff)
-    sck = socket.socket()
-    try:
-        return ioctl(sck, cmd, struct.pack("16s16x", iff.encode("utf8")))
-    finally:
-        sck.close()
-
-
-def get_if_raw_hwaddr(iff,  # type: Union[NetworkInterface, str]
-                      siocgifhwaddr=None,  # type: Optional[int]
-                      ):
-    # type: (...) -> Tuple[int, bytes]
-    """Get the raw MAC address of a local interface.
-
-    This function uses SIOCGIFHWADDR calls, therefore only works
-    on some distros.
-
-    :param iff: the network interface name as a string
-    :returns: the corresponding raw MAC address
-    """
-    if siocgifhwaddr is None:
-        from scapy.arch import SIOCGIFHWADDR  # type: ignore
-        siocgifhwaddr = SIOCGIFHWADDR
-    return struct.unpack(  # type: ignore
-        "16xh6s8x",
-        get_if(iff, siocgifhwaddr)
-    )
-
-# SOCKET UTILS
-
-
-_T = TypeVar("_T")
-
-
-def _select_nonblock(sockets,  # type: List[_T]
-                     remain=None  # type: Optional[int]
-                     ):
-    # type: (...) -> Tuple[List[_T], Callable[['scapy.supersocket.SuperSocket'], Optional['scapy.packet.Packet']]]  # type: ignore # noqa: E501
-    """This function is called during sendrecv() routine to select
-    the available sockets.
-    """
-    # pcap sockets aren't selectable, so we return all of them
-    # and ask the selecting functions to use nonblock_recv instead of recv
-    def _sleep_nonblock_recv(self  # type: 'scapy.supersocket.SuperSocket'
-                             ):
-        # type: (...) -> 'Optional[scapy.packet.Packet]'
-        res = self.nonblock_recv()  # type: ignore
-        if res is None:
-            time.sleep(conf.recv_poll_rate)
-        return res  # type: ignore
-    # we enforce remain=None: don't wait.
-    return sockets, _sleep_nonblock_recv
 
 # BPF HANDLERS
 
@@ -155,6 +86,7 @@ def compile_filter(filter_exp,  # type: str
                 )
             iface = conf.iface
         # Try to guess linktype to avoid requiring root
+        from scapy.arch import get_if_raw_hwaddr
         try:
             arphd = get_if_raw_hwaddr(iface)[0]
             linktype = ARPHRD_TO_DLT.get(arphd)
@@ -165,7 +97,7 @@ def compile_filter(filter_exp,  # type: str
             linktype = ARPHDR_ETHER
     if linktype is not None:
         ret = pcap_compile_nopcap(
-            MTU, linktype, ctypes.byref(bpf), bpf_filter, 0, -1
+            MTU, linktype, ctypes.byref(bpf), bpf_filter, 1, -1
         )
     elif iface:
         err = create_string_buffer(PCAP_ERRBUF_SIZE)
@@ -173,11 +105,11 @@ def compile_filter(filter_exp,  # type: str
         pcap = pcap_open_live(
             iface_b, MTU, promisc, 0, err
         )
-        error = bytes(bytearray(err)).strip(b"\x00")
+        error = decode_locale_str(bytearray(err).strip(b"\x00"))
         if error:
             raise OSError(error)
         ret = pcap_compile(
-            pcap, ctypes.byref(bpf), bpf_filter, 0, -1
+            pcap, ctypes.byref(bpf), bpf_filter, 1, -1
         )
         pcap_close(pcap)
     if ret == -1:

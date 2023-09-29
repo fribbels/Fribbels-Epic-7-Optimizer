@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 Global variables and functions for handling external data sets.
@@ -9,7 +9,6 @@ Global variables and functions for handling external data sets.
 
 import calendar
 import os
-import re
 import warnings
 
 
@@ -17,7 +16,7 @@ from scapy.dadict import DADict, fixname
 from scapy.consts import FREEBSD, NETBSD, OPENBSD, WINDOWS
 from scapy.error import log_loading
 from scapy.compat import plain_str
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 from scapy.compat import (
     Any,
@@ -27,6 +26,7 @@ from scapy.compat import (
     List,
     Optional,
     Tuple,
+    Union,
     cast,
 )
 
@@ -132,6 +132,7 @@ DLT_BLUETOOTH_LE_LL = 251
 DLT_BLUETOOTH_LE_LL_WITH_PHDR = 256
 DLT_VSOCK = 271
 DLT_ETHERNET_MPACKET = 274
+DLT_LINUX_SLL2 = 276
 
 # From net/ipv6.h on Linux (+ Additions)
 IPV6_ADDR_UNICAST = 0x01
@@ -292,7 +293,6 @@ def load_protocols(filename, _fallback=None, _integer_base=10,
                    _cls=DADict[int, str]):
     # type: (str, Optional[bytes], int, type) -> DADict[int, str]
     """"Parse /etc/protocols and return values as a dictionary."""
-    spaces = re.compile(b"[ \t]+|\n")
     dct = _cls(_name=filename)  # type: DADict[int, str]
 
     def _process_data(fdesc):
@@ -305,7 +305,7 @@ def load_protocols(filename, _fallback=None, _integer_base=10,
                 line = line.strip()
                 if not line:
                     continue
-                lt = tuple(re.split(spaces, line))
+                lt = tuple(line.split())
                 if len(lt) < 2 or not lt[0]:
                     continue
                 dct[int(lt[1], _integer_base)] = fixname(lt[0])
@@ -366,10 +366,15 @@ def load_ethertypes(filename):
 
 
 def load_services(filename):
-    # type: (str) -> Tuple[DADict[int, str], DADict[int, str]]
-    spaces = re.compile(b"[ \t]+|\n")
+    # type: (str) -> Tuple[DADict[int, str], DADict[int, str], DADict[int, str]]  # noqa: E501
     tdct = DADict(_name="%s-tcp" % filename)  # type: DADict[int, str]
     udct = DADict(_name="%s-udp" % filename)  # type: DADict[int, str]
+    sdct = DADict(_name="%s-sctp" % filename)  # type: DADict[int, str]
+    dcts = {
+        b"tcp": tdct,
+        b"udp": udct,
+        b"sctp": sdct,
+    }
     try:
         with open(filename, "rb") as fdesc:
             for line in fdesc:
@@ -380,17 +385,16 @@ def load_services(filename):
                     line = line.strip()
                     if not line:
                         continue
-                    lt = tuple(re.split(spaces, line))
+                    lt = tuple(line.split())
                     if len(lt) < 2 or not lt[0]:
                         continue
-                    dtct = None
-                    if lt[1].endswith(b"/tcp"):
-                        dtct = tdct
-                    elif lt[1].endswith(b"/udp"):
-                        dtct = udct
-                    else:
+                    if b"/" not in lt[1]:
                         continue
-                    port = lt[1].split(b'/')[0]
+                    port, proto = lt[1].split(b"/", 1)
+                    try:
+                        dtct = dcts[proto]
+                    except KeyError:
+                        continue
                     name = fixname(lt[0])
                     if b"-" in port:
                         sport, eport = port.split(b"-")
@@ -407,7 +411,7 @@ def load_services(filename):
                     )
     except IOError:
         log_loading.info("Can't open /etc/services file")
-    return tdct, udct
+    return tdct, udct, sdct
 
 
 class ManufDA(DADict[str, Tuple[str, str]]):
@@ -506,15 +510,27 @@ def select_path(directories, filename):
 
 
 if WINDOWS:
-    IP_PROTOS = load_protocols(os.environ["SystemRoot"] + "\\system32\\drivers\\etc\\protocol")  # noqa: E501
-    TCP_SERVICES, UDP_SERVICES = load_services(os.environ["SystemRoot"] + "\\system32\\drivers\\etc\\services")  # noqa: E501
+    IP_PROTOS = load_protocols(os.path.join(
+        os.environ["SystemRoot"],
+        "system32",
+        "drivers",
+        "etc",
+        "protocol",
+    ))
+    TCP_SERVICES, UDP_SERVICES, SCTP_SERVICES = load_services(os.path.join(
+        os.environ["SystemRoot"],
+        "system32",
+        "drivers",
+        "etc",
+        "services",
+    ))
     # Default values, will be updated by arch.windows
     ETHER_TYPES = load_ethertypes(None)
     MANUFDB = ManufDA()
 else:
     IP_PROTOS = load_protocols("/etc/protocols")
     ETHER_TYPES = load_ethertypes("/etc/ethertypes")
-    TCP_SERVICES, UDP_SERVICES = load_services("/etc/services")
+    TCP_SERVICES, UDP_SERVICES, SCTP_SERVICES = load_services("/etc/services")
     MANUFDB = ManufDA()
     manuf_path = select_path(
         ['/usr', '/usr/local', '/opt', '/opt/wireshark',
@@ -531,12 +547,14 @@ else:
 #####################
 #  knowledge bases  #
 #####################
+KBBaseType = Optional[Union[str, List[Tuple[str, Dict[str, Dict[str, str]]]]]]
 
-class KnowledgeBase:
+
+class KnowledgeBase(object):
     def __init__(self, filename):
         # type: (Optional[Any]) -> None
         self.filename = filename
-        self.base = None  # type: Optional[str]
+        self.base = None  # type: KBBaseType
 
     def lazy_init(self):
         # type: () -> None
@@ -553,7 +571,7 @@ class KnowledgeBase:
             self.base = oldbase
 
     def get_base(self):
-        # type: () -> str
+        # type: () -> Union[str, List[Tuple[str, Dict[str,Dict[str,str]]]]]
         if self.base is None:
             self.lazy_init()
-        return cast(str, self.base)
+        return cast(Union[str, List[Tuple[str, Dict[str, Dict[str, str]]]]], self.base)

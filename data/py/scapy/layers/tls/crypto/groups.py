@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2007, 2008, 2009 Arnaud Ebalard
 #               2015, 2016, 2017 Maxence Tury
-# This program is published under a GPLv2 license
 
 """
 This is a register for DH groups from RFC 3526 and RFC 4306.
@@ -15,9 +16,10 @@ We also provide TLS identifiers for these DH groups and also the ECDH groups.
 from __future__ import absolute_import
 
 from scapy.config import conf
+from scapy.compat import bytes_int, int_bytes
 from scapy.error import warning
 from scapy.utils import long_converter
-import scapy.modules.six as six
+import scapy.libs.six as six
 if conf.crypto_valid:
     from cryptography.hazmat.backends import default_backend
     from cryptography.hazmat.primitives.asymmetric import dh, ec
@@ -443,11 +445,14 @@ _tls_named_groups.update(_tls_named_curves)
 
 def _tls_named_groups_import(group, pubbytes):
     if group in _tls_named_ffdh_groups:
+        # https://datatracker.ietf.org/doc/html/rfc8446#section-4.2.8.1
         params = _ffdh_groups[_tls_named_ffdh_groups[group]][0]
         pn = params.parameter_numbers()
-        public_numbers = dh.DHPublicNumbers(pubbytes, pn)
+        y = bytes_int(pubbytes)
+        public_numbers = dh.DHPublicNumbers(y, pn)
         return public_numbers.public_key(default_backend())
     elif group in _tls_named_curves:
+        # https://datatracker.ietf.org/doc/html/rfc8446#section-4.2.8.2
         if _tls_named_curves[group] in ["x25519", "x448"]:
             if conf.crypto_valid_advanced:
                 if _tls_named_curves[group] == "x25519":
@@ -472,10 +477,12 @@ def _tls_named_groups_import(group, pubbytes):
 
 def _tls_named_groups_pubbytes(privkey):
     if isinstance(privkey, dh.DHPrivateKey):
+        # https://datatracker.ietf.org/doc/html/rfc8446#section-4.2.8.1
         pubkey = privkey.public_key()
-        return pubkey.public_numbers().y
+        return int_bytes(pubkey.public_numbers().y, privkey.key_size)
     elif isinstance(privkey, (x25519.X25519PrivateKey,
                               x448.X448PrivateKey)):
+        # https://datatracker.ietf.org/doc/html/rfc8446#section-4.2.8.2
         pubkey = privkey.public_key()
         return pubkey.public_bytes(
             serialization.Encoding.Raw,

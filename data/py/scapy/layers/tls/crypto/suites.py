@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2007, 2008, 2009 Arnaud Ebalard
 #               2015, 2016, 2017 Maxence Tury
-# This program is published under a GPLv2 license
 
 """
 TLS cipher suites.
@@ -15,7 +16,7 @@ from scapy.layers.tls.crypto.kx_algs import _tls_kx_algs
 from scapy.layers.tls.crypto.hash import _tls_hash_algs
 from scapy.layers.tls.crypto.h_mac import _tls_hmac_algs
 from scapy.layers.tls.crypto.ciphers import _tls_cipher_algs
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 
 def get_algs_from_ciphersuite_name(ciphersuite_name):
@@ -1308,12 +1309,12 @@ def get_usable_ciphersuites(li, kx):
     res = []
     for c in li:
         if c in _tls_cipher_suites_cls:
-            ciph = _tls_cipher_suites_cls[c]
-            if ciph.usable:
+            cipher = _tls_cipher_suites_cls[c]
+            if cipher.usable:
                 # XXX select among RSA and ECDSA cipher suites
                 # according to the key(s) the server was given
-                if (ciph.kx_alg.anonymous or
-                   kx in ciph.kx_alg.name or
-                   ciph.kx_alg.name == "TLS13"):
+                if (cipher.kx_alg.anonymous or
+                   kx in cipher.kx_alg.name or
+                   cipher.kx_alg.name == "TLS13"):
                     res.append(c)
     return res

@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 LLMNR (Link Local Multicast Node Resolution).
@@ -18,7 +18,12 @@ from scapy.fields import BitEnumField, BitField, ShortField
 from scapy.packet import Packet, bind_layers, bind_bottom_up
 from scapy.compat import orb
 from scapy.layers.inet import UDP
-from scapy.layers.dns import DNSQRField, DNSRRField, DNSRRCountField
+from scapy.layers.dns import (
+    DNSQRField,
+    DNSRRField,
+    DNSRRCountField,
+    DNS_am,
+)
 
 
 _LLMNR_IPv6_mcast_Addr = "FF02:0:0:0:0:0:1:3"
@@ -38,14 +43,25 @@ class LLMNRQuery(Packet):
                    DNSRRCountField("ancount", None, "an"),
                    DNSRRCountField("nscount", None, "ns"),
                    DNSRRCountField("arcount", None, "ar"),
-                   DNSQRField("qd", "qdcount"),
-                   DNSRRField("an", "ancount"),
-                   DNSRRField("ns", "nscount"),
-                   DNSRRField("ar", "arcount", 0)]
+                   DNSQRField("qd", "qdcount", None),
+                   DNSRRField("an", "ancount", None),
+                   DNSRRField("ns", "nscount", None),
+                   DNSRRField("ar", "arcount", None, 0)]
     overload_fields = {UDP: {"sport": 5355, "dport": 5355}}
 
     def hashret(self):
         return struct.pack("!H", self.id)
+
+    def mysummary(self):
+        if self.an:
+            return "LLMNRResponse '%s' is at '%s'" % (
+                self.an.rrname.decode(),
+                self.an.rdata,
+            ), [UDP]
+        if self.qd:
+            return "LLMNRQuery who has '%s'" % (
+                self.qd.qname.decode(),
+            ), [UDP]
 
 
 class LLMNRResponse(LLMNRQuery):
@@ -73,5 +89,12 @@ class _LLMNR(Packet):
 bind_bottom_up(UDP, _LLMNR, dport=5355)
 bind_bottom_up(UDP, _LLMNR, sport=5355)
 bind_layers(UDP, _LLMNR, sport=5355, dport=5355)
+
+
+class LLMNR_am(DNS_am):
+    function_name = "llmnr_spoof"
+    filter = "udp port 5355"
+    cls = LLMNRQuery
+
 
 # LLMNRQuery(id=RandShort(), qd=DNSQR(qname="vista.")))

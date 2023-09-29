@@ -1,19 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2017 Alessio Deiana <adeiana@gmail.com>
 # 2017 Alexis Sultan <alexis.sultan@sfr.com>
-
-# This file is part of Scapy
-# Scapy is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# any later version.
-#
-# Scapy is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Scapy. If not, see <http://www.gnu.org/licenses/>.
 
 # scapy.contrib.description = GPRS Tunneling Protocol v2 (GTPv2)
 # scapy.contrib.status = loads
@@ -890,11 +879,11 @@ class IE_Indication(gtp.IE_Base):
         ConditionalField(
         BitField("WPMSI", 0, 1), lambda pkt: pkt.length > 5),
         ConditionalField(
-        BitField("5GSNN26", 0, 1), lambda pkt: pkt.length > 6),
+        BitField("_5GSNN26", 0, 1), lambda pkt: pkt.length > 6),
         ConditionalField(
         BitField("REPREFI", 0, 1), lambda pkt: pkt.length > 6),
         ConditionalField(
-        BitField("5GSIWKI", 0, 1), lambda pkt: pkt.length > 6),
+        BitField("_5GSIWKI", 0, 1), lambda pkt: pkt.length > 6),
         ConditionalField(
         BitField("EEVRSI", 0, 1), lambda pkt: pkt.length > 6),
         ConditionalField(
@@ -914,11 +903,11 @@ class IE_Indication(gtp.IE_Base):
         ConditionalField(
         BitField("N5GNMI", 0, 1), lambda pkt: pkt.length > 7),
         ConditionalField(
-        BitField("5GCNRS", 0, 1), lambda pkt: pkt.length > 7),
+        BitField("_5GCNRS", 0, 1), lambda pkt: pkt.length > 7),
         ConditionalField(
-        BitField("5GCNRI", 0, 1), lambda pkt: pkt.length > 7),
+        BitField("_5GCNRI", 0, 1), lambda pkt: pkt.length > 7),
         ConditionalField(
-        BitField("5SRHOI", 0, 1), lambda pkt: pkt.length > 7),
+        BitField("_5SRHOI", 0, 1), lambda pkt: pkt.length > 7),
         ConditionalField(
         BitField("ETHPDN", 0, 1), lambda pkt: pkt.length > 7),
 

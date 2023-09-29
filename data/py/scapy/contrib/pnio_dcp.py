@@ -1,19 +1,6 @@
-# coding: utf8
-
+# SPDX-License-Identifier: GPL-2.0-or-later
 # This file is part of Scapy
-# Scapy is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# any later version.
-#
-# Scapy is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Scapy. If not, see <http://www.gnu.org/licenses/>.
-
+# See https://scapy.net/ for more information
 # Copyright (C) 2019 Stefan Mehner (stefan.mehner@b-tu.de)
 
 # scapy.contrib.description = Profinet DCP layer
@@ -21,10 +8,25 @@
 
 from scapy.compat import orb
 from scapy.all import Packet, bind_layers, Padding
-from scapy.fields import ByteEnumField, ShortField, XShortField, \
-    ShortEnumField, FieldLenField, XByteField, XIntField, MultiEnumField, \
-    IPField, MACField, StrLenField, PacketListField, PadField, \
-    ConditionalField, LenField
+from scapy.fields import (
+    ByteEnumField,
+    ConditionalField,
+    FieldLenField,
+    FieldListField,
+    IPField,
+    LenField,
+    MACField,
+    MultiEnumField,
+    MultipleTypeField,
+    PacketListField,
+    PadField,
+    ShortEnumField,
+    ShortField,
+    StrLenField,
+    XByteField,
+    XIntField,
+    XShortField,
+)
 
 # minimum packet is 60 bytes.. 14 bytes are Ether()
 MIN_PACKET_LENGTH = 44
@@ -85,7 +87,8 @@ DCP_SUBOPTIONS = {
     0x01: {
         0x00: "Reserved",
         0x01: "MAC Address",
-        0x02: "IP Parameter"
+        0x02: "IP Parameter",
+        0x03: "Full IP Suite",
     },
     # device properties
     0x02: {
@@ -201,6 +204,27 @@ class DCPIPBlock(Packet):
         IPField("ip", "192.168.0.2"),
         IPField("netmask", "255.255.255.0"),
         IPField("gateway", "192.168.0.1"),
+        PadField(StrLenField("padding", b"\x00",
+                             length_from=lambda p: p.dcp_block_length % 2), 1,
+                 padwith=b"\x00")
+    ]
+
+    def extract_padding(self, s):
+        return '', s
+
+
+class DCPFullIPBlock(Packet):
+    fields_desc = [
+        ByteEnumField("option", 1, DCP_OPTIONS),
+        MultiEnumField("sub_option", 3, DCP_SUBOPTIONS, fmt='B',
+                       depends_on=lambda p: p.option),
+        LenField("dcp_block_length", None),
+        ShortEnumField("block_info", 1, IP_BLOCK_INFOS),
+        IPField("ip", "192.168.0.2"),
+        IPField("netmask", "255.255.255.0"),
+        IPField("gateway", "192.168.0.1"),
+        FieldListField("dnsaddr", [], IPField("", "0.0.0.0"),
+                       count_from=lambda x: 4),
         PadField(StrLenField("padding", b"\x00",
                              length_from=lambda p: p.dcp_block_length % 2), 1,
                  padwith=b"\x00")
@@ -372,6 +396,24 @@ class DCPDeviceInstanceBlock(Packet):
         return '', s
 
 
+class DCPOEMIDBlock(Packet):
+    fields_desc = [
+        ByteEnumField("option", 2, DCP_OPTIONS),
+        MultiEnumField("sub_option", 8, DCP_SUBOPTIONS, fmt='B',
+                       depends_on=lambda p: p.option),
+        LenField("dcp_block_length", None),
+        ShortEnumField("block_info", 0, BLOCK_INFOS),
+        XShortField("vendor_id", 0x002a),
+        XShortField("device_id", 0x0313),
+        PadField(StrLenField("padding", b"\x00",
+                             length_from=lambda p: p.dcp_block_length % 2), 1,
+                 padwith=b"\x00")
+    ]
+
+    def extract_padding(self, s):
+        return '', s
+
+
 class DCPControlBlock(Packet):
     fields_desc = [
         ByteEnumField("option", 5, DCP_OPTIONS),
@@ -385,6 +427,23 @@ class DCPControlBlock(Packet):
         PadField(StrLenField("padding", b"\x00",
                              length_from=lambda p: p.dcp_block_length % 2), 1,
                  padwith=b"\x00")
+    ]
+
+    def extract_padding(self, s):
+        return '', s
+
+
+class DCPDeviceInitiativeBlock(Packet):
+    """
+        device initiative DCP block
+    """
+    fields_desc = [
+        ByteEnumField("option", 6, DCP_OPTIONS),
+        MultiEnumField("sub_option", 1, DCP_SUBOPTIONS, fmt='B',
+                       depends_on=lambda p: p.option),
+        FieldLenField("dcp_block_length", None, length_of="device_initiative"),
+        ShortEnumField("block_info", 0, BLOCK_INFOS),
+        ShortField("device_initiative", 1),
     ]
 
     def extract_padding(self, s):
@@ -422,7 +481,7 @@ def guess_dcp_block_class(packet, **kargs):
                 0x05: "DCPDeviceOptionsBlock",
                 0x06: "DCPAliasNameBlock",
                 0x07: "DCPDeviceInstanceBlock",
-                0x08: "OEM Device ID"
+                0x08: "DCPOEMIDBlock"
             },
         # DHCP
         0x03:
@@ -452,7 +511,7 @@ def guess_dcp_block_class(packet, **kargs):
         0x06:
             {
                 0x00: "Reserved (0x00)",
-                0x01: "Device Initiative (0x01)"
+                0x01: "DCPDeviceInitiativeBlock"
             },
         # ALL Selector
         0xff:
@@ -539,13 +598,21 @@ class ProfinetDCP(Packet):
                                         BLOCK_QUALIFIERS),
                          lambda pkt: pkt.service_id == 4 and
                          pkt.service_type == 0),
-        # Name Of Station
-        ConditionalField(StrLenField("name_of_station", "et200sp",
-                         length_from=lambda x: x.dcp_block_length - 2),
-                         lambda pkt: pkt.service_id == 4 and
-                         pkt.service_type == 0 and pkt.option == 2 and
-                         pkt.sub_option == 2),
-
+        # (Common) Name Of Station
+        ConditionalField(
+            MultipleTypeField(
+                [
+                    (StrLenField("name_of_station", "et200sp",
+                                 length_from=lambda x: x.dcp_block_length - 2),
+                     lambda pkt: pkt.service_id == 4),
+                ],
+                StrLenField("name_of_station", "et200sp",
+                            length_from=lambda x: x.dcp_block_length),
+            ),
+            lambda pkt: pkt.service_type == 0 and pkt.option == 2 and
+            pkt.sub_option == 2
+        ),
+        # DCP SET REQUEST #
         # MAC
         ConditionalField(MACField("mac", "00:00:00:00:00:00"),
                          lambda pkt: pkt.service_id == 4 and
@@ -555,23 +622,25 @@ class ProfinetDCP(Packet):
         ConditionalField(IPField("ip", "192.168.0.2"),
                          lambda pkt: pkt.service_id == 4 and
                          pkt.service_type == 0 and pkt.option == 1 and
-                         pkt.sub_option == 2),
+                         pkt.sub_option in [2, 3]),
         ConditionalField(IPField("netmask", "255.255.255.0"),
                          lambda pkt: pkt.service_id == 4 and
                          pkt.service_type == 0 and pkt.option == 1 and
-                         pkt.sub_option == 2),
+                         pkt.sub_option in [2, 3]),
         ConditionalField(IPField("gateway", "192.168.0.1"),
                          lambda pkt: pkt.service_id == 4 and
                          pkt.service_type == 0 and pkt.option == 1 and
-                         pkt.sub_option == 2),
+                         pkt.sub_option in [2, 3]),
+
+        # Full IP
+        ConditionalField(FieldListField("dnsaddr", [], IPField("", "0.0.0.0"),
+                                        count_from=lambda x: 4),
+                         lambda pkt: pkt.service_id == 4 and
+                         pkt.service_type == 0 and pkt.option == 1 and
+                         pkt.sub_option == 3),
 
         # DCP IDENTIFY REQUEST #
-        # Name of station
-        ConditionalField(StrLenField("name_of_station", "et200sp",
-                                     length_from=lambda x: x.dcp_block_length),
-                         lambda pkt: pkt.service_id == 5 and
-                         pkt.service_type == 0 and pkt.option == 2 and
-                         pkt.sub_option == 2),
+        # Name of station (handled above)
 
         # Alias name
         ConditionalField(StrLenField("alias_name", "et200sp",

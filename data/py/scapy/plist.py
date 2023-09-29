@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 PacketList: holds several packets and allows to do operations on them.
@@ -15,15 +15,17 @@ from collections import defaultdict
 
 from scapy.compat import lambda_tuple_converter
 from scapy.config import conf
-from scapy.base_classes import BasePacket, BasePacketList, \
-    _CanvasDumpExtended, PacketList_metaclass
+from scapy.base_classes import (
+    BasePacket,
+    BasePacketList,
+    PacketList_metaclass,
+    SetGen,
+    _CanvasDumpExtended,
+)
 from scapy.utils import do_graph, hexdump, make_table, make_lined_table, \
     make_tex_table, issubtype
-from scapy.extlib import plt, Line2D, \
-    MATPLOTLIB_INLINED, MATPLOTLIB_DEFAULT_PLOT_KARGS
 from functools import reduce
-import scapy.modules.six as six
-from scapy.modules.six.moves import range, zip
+import scapy.libs.six as six
 
 # typings
 from scapy.compat import (
@@ -34,20 +36,30 @@ from scapy.compat import (
     Generic,
     Iterator,
     List,
+    NamedTuple,
     Optional,
     Tuple,
     Type,
     TypeVar,
     Union,
+    TYPE_CHECKING,
 )
 from scapy.packet import Packet
 
+if TYPE_CHECKING:
+    from scapy.libs.matplot import Line2D
 
 #############
 #  Results  #
 #############
 
-_Inner = TypeVar("_Inner", Packet, Tuple[Packet, Packet])
+
+QueryAnswer = NamedTuple(
+    "QueryAnswer",
+    [("query", Packet), ("answer", Packet)]
+)
+
+_Inner = TypeVar("_Inner", Packet, QueryAnswer)
 
 
 @six.add_metaclass(PacketList_metaclass)
@@ -163,10 +175,20 @@ class _PacketList(Generic[_Inner]):
                                   name="mod %s" % self.listname)
         return self.res.__getitem__(item)
 
-    def __add__(self, other):
-        # type: (_PacketList[_Inner]) -> _PacketList[_Inner]
-        return self.__class__(self.res + other.res,
-                              name="%s+%s" % (self.listname, other.listname))
+    _T = TypeVar('_T', 'SndRcvList', 'PacketList')
+
+    # Hinting hack: type self
+    def __add__(self,  # type: _PacketList._T  # type: ignore
+                other  # type: _PacketList._T
+                ):
+        # type: (...) -> _PacketList._T
+        return self.__class__(
+            self.res + other.res,
+            name="%s+%s" % (
+                self.listname,
+                other.listname
+            )
+        )
 
     def summary(self,
                 prn=None,  # type: Optional[Callable[..., Any]]
@@ -268,6 +290,13 @@ class _PacketList(Generic[_Inner]):
 
         lfilter: a truth function that decides whether a packet must be plotted
         """
+        # Defer imports of matplotlib until its needed
+        # because it has a heavy dep chain
+        from scapy.libs.matplot import (
+            plt,
+            MATPLOTLIB_INLINED,
+            MATPLOTLIB_DEFAULT_PLOT_KARGS
+        )
 
         # Python 2 backward compatibility
         f = lambda_tuple_converter(f)
@@ -306,6 +335,13 @@ class _PacketList(Generic[_Inner]):
 
         A list of matplotlib.lines.Line2D is returned.
         """
+        # Defer imports of matplotlib until its needed
+        # because it has a heavy dep chain
+        from scapy.libs.matplot import (
+            plt,
+            MATPLOTLIB_INLINED,
+            MATPLOTLIB_DEFAULT_PLOT_KARGS
+        )
 
         # Get the list of packets
         if lfilter is None:
@@ -339,6 +375,13 @@ class _PacketList(Generic[_Inner]):
 
         A list of matplotlib.lines.Line2D is returned.
         """
+        # Defer imports of matplotlib until its needed
+        # because it has a heavy dep chain
+        from scapy.libs.matplot import (
+            plt,
+            MATPLOTLIB_INLINED,
+            MATPLOTLIB_DEFAULT_PLOT_KARGS
+        )
 
         # Python 2 backward compatibility
         f = lambda_tuple_converter(f)
@@ -428,7 +471,7 @@ class _PacketList(Generic[_Inner]):
             p = self._elt2pkt(res)
             if p.haslayer(conf.padding_layer):
                 pad = p.getlayer(conf.padding_layer).load  # type: ignore
-                if pad == pad[0] * len(pad):
+                if pad == pad[:1] * len(pad):
                     continue
                 if lfilter is None or lfilter(p):
                     print("%s %s %s" % (conf.color_theme.id(i, fmt="%04i"),
@@ -719,39 +762,6 @@ class _PacketList(Generic[_Inner]):
             name, stats
         )
 
-    def convert_to(self,
-                   other_cls,  # type: Type[Packet]
-                   name=None,  # type: Optional[str]
-                   stats=None  # type: Optional[List[Type[Packet]]]
-                   ):
-        # type: (...) -> PacketList
-        """Converts all packets to another type.
-
-        See ``Packet.convert_to`` for more info.
-
-        :param other_cls: reference to a Packet class to convert to
-        :type other_cls: Type[scapy.packet.Packet]
-
-        :param name: optional name for the new PacketList
-        :type name: Optional[str]
-
-        :param stats: optional list of protocols to give stats on;
-                      if not specified, inherits from this PacketList.
-        :type stats: Optional[List[Type[scapy.packet.Packet]]]
-
-        :rtype: scapy.plist.PacketList
-        """
-        if name is None:
-            name = "{} converted to {}".format(
-                self.listname, other_cls.__name__)
-        if stats is None:
-            stats = self.stats
-
-        return PacketList(
-            [self._elt2pkt(p).convert_to(other_cls) for p in self.res],
-            name, stats
-        )
-
 
 class PacketList(_PacketList[Packet],
                  BasePacketList[Packet],
@@ -768,7 +778,7 @@ class PacketList(_PacketList[Packet],
         :return: ( (matched couples), (unmatched packets) )
         """
         remain = self.res[:]
-        sr = []  # type: List[Tuple[Packet, Packet]]
+        sr = []  # type: List[QueryAnswer]
         i = 0
         if lookahead is None or lookahead == 0:
             lookahead = len(remain)
@@ -779,13 +789,13 @@ class PacketList(_PacketList[Packet],
                 j += 1
                 r = remain[j]
                 if r.answers(s):
-                    sr.append((s, r))
+                    sr.append(QueryAnswer(s, r))
                     if multi:
                         remain[i]._answered = 1
                         remain[j]._answered = 2
                         continue
-                    del(remain[j])
-                    del(remain[i])
+                    del remain[j]
+                    del remain[i]
                     i -= 1
                     break
             i += 1
@@ -794,13 +804,21 @@ class PacketList(_PacketList[Packet],
         return SndRcvList(sr), PacketList(remain)
 
 
-class SndRcvList(_PacketList[Tuple[Packet, Packet]],
-                 BasePacketList[Tuple[Packet, Packet]],
+_PacketIterable = Union[
+    List[Packet],
+    Packet,
+    SetGen[Packet],
+    _PacketList[Packet]
+]
+
+
+class SndRcvList(_PacketList[QueryAnswer],
+                 BasePacketList[QueryAnswer],
                  _CanvasDumpExtended):
     __slots__ = []  # type: List[str]
 
     def __init__(self,
-                 res=None,  # type: Optional[Union[_PacketList[Tuple[Packet, Packet]], List[Tuple[Packet, Packet]]]]  # noqa: E501
+                 res=None,  # type: Optional[Union[_PacketList[QueryAnswer], List[QueryAnswer]]]  # noqa: E501
                  name="Results",  # type: str
                  stats=None  # type: Optional[List[Type[Packet]]]
                  ):
@@ -808,9 +826,9 @@ class SndRcvList(_PacketList[Tuple[Packet, Packet]],
         super(SndRcvList, self).__init__(res, name, stats)
 
     def _elt2pkt(self, elt):
-        # type: (Tuple[Packet, Packet]) -> Packet
+        # type: (QueryAnswer) -> Packet
         return elt[1]
 
     def _elt2sum(self, elt):
-        # type: (Tuple[Packet, Packet]) -> str
+        # type: (QueryAnswer) -> str
         return "%s ==> %s" % (elt[0].summary(), elt[1].summary())

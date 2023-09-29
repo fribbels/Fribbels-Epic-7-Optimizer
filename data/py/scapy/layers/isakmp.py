@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 ISAKMP (Internet Security Association and Key Management Protocol).
@@ -12,7 +12,7 @@ ISAKMP (Internet Security Association and Key Management Protocol).
 from __future__ import absolute_import
 import struct
 from scapy.config import conf
-from scapy.packet import Packet, bind_bottom_up, bind_top_down, bind_layers
+from scapy.packet import Packet, bind_bottom_up, bind_top_down
 from scapy.compat import chb
 from scapy.fields import ByteEnumField, ByteField, FieldLenField, FlagsField, \
     IntEnumField, IntField, PacketLenField, ShortEnumField, ShortField, \
@@ -103,10 +103,10 @@ for n in ISAKMPTransformTypes:
     for e in val[1]:
         tmp[val[1][e]] = e
     ISAKMPTransformNum[val[0]] = (n, tmp, val[2])
-del(n)
-del(e)
-del(tmp)
-del(val)
+del n
+del e
+del tmp
+del val
 
 
 class ISAKMPTransformSetField(StrLenField):
@@ -324,7 +324,7 @@ class ISAKMP_payload_Hash(ISAKMP_payload):
 
 bind_bottom_up(UDP, ISAKMP, dport=500)
 bind_bottom_up(UDP, ISAKMP, sport=500)
-bind_layers(UDP, ISAKMP, dport=500, sport=500)
+bind_top_down(UDP, ISAKMP, dport=500, sport=500)
 
 # Add building bindings
 # (Dissection bindings are located in ISAKMP_class.guess_payload_class)

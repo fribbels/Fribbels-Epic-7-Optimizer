@@ -1,4 +1,7 @@
-# Guillaume Valadon <guillaume@valadon.net>
+# SPDX-License-Identifier: GPL-2.0-only
+# This file is part of Scapy
+# See https://scapy.net/ for more information
+# Copyright (C) Guillaume Valadon <guillaume@valadon.net>
 
 """
 Scapy *BSD native support - core
@@ -18,23 +21,26 @@ import subprocess
 
 import scapy
 from scapy.arch.bpf.consts import BIOCSETF, SIOCGIFFLAGS, BIOCSETIF
-from scapy.arch.common import get_if, compile_filter, _iff_flags
-from scapy.arch.unix import in6_getifaddr
+from scapy.arch.common import compile_filter, _iff_flags
+from scapy.arch.unix import get_if, in6_getifaddr
 from scapy.compat import plain_str
 from scapy.config import conf
+from scapy.consts import LINUX
 from scapy.data import ARPHDR_LOOPBACK, ARPHDR_ETHER
 from scapy.error import Scapy_Exception, warning
 from scapy.interfaces import InterfaceProvider, IFACES, NetworkInterface, \
     network_name
 from scapy.pton_ntop import inet_ntop
-from scapy.modules.six.moves import range
+
+if LINUX:
+    raise OSError("BPF conflicts with Linux")
 
 
 # ctypes definitions
 
 LIBC = cdll.LoadLibrary(find_library("c"))
 
-LIBC.ioctl.argtypes = [c_int, c_ulong, c_char_p]
+LIBC.ioctl.argtypes = [c_int, c_ulong, ]
 LIBC.ioctl.restype = c_int
 
 # The following is implemented as of Python >= 3.3
@@ -70,10 +76,10 @@ def get_if_raw_addr(ifname):
     )
     stdout, stderr = subproc.communicate()
     if subproc.returncode:
-        warning("Failed to execute ifconfig: (%s)", plain_str(stderr))
+        warning("Failed to execute ifconfig: (%s)", plain_str(stderr).strip())
         return b"\0\0\0\0"
-    # Get IPv4 addresses
 
+    # Get IPv4 addresses
     addresses = [
         line.strip() for line in plain_str(stdout).splitlines()
         if "inet " in line
@@ -108,7 +114,7 @@ def get_if_raw_hwaddr(ifname):
     stdout, stderr = subproc.communicate()
     if subproc.returncode:
         raise Scapy_Exception("Failed to execute ifconfig: (%s)" %
-                              (plain_str(stderr)))
+                              plain_str(stderr).strip())
 
     # Get MAC addresses
     addresses = [
@@ -122,6 +128,11 @@ def get_if_raw_hwaddr(ifname):
     # Pack and return the MAC address
     mac = addresses[0].split(' ')[1]
     mac = [chr(int(b, 16)) for b in mac.split(':')]
+
+    # Check that the address length is correct
+    if len(mac) != 6:
+        raise Scapy_Exception("No MAC address found on %s !" % ifname)
+
     return (ARPHDR_ETHER, ''.join(mac))
 
 

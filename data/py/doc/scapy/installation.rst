@@ -18,12 +18,21 @@ Each of these steps can be done in a different way depending on your platform an
 Scapy versions
 ==============
 
-.. raw:: html
-
-   <div id="table_div" style="text-align:center;"></div>
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   <script type="text/javascript" src="https://scapy.net/assets/js/scapy_versions.js"></script>
-   <br />
++---------------+----------------+------------+----------------+------------+------------+------------+------------------+
+| Scapy version | Python 2.2-2.6 | Python 2.7 | Python 3.4-3.6 | Python 3.7 | Python 3.8 | Python 3.9 | Python 3.10-3.11 |
++===============+================+============+================+============+============+============+==================+
+| 2.3.3         |       ✅       |     ✅     |       ❌       |     ❌     |     ❌     |     ❌     |        ❌        |
++---------------+----------------+------------+----------------+------------+------------+------------+------------------+
+| 2.4.0         |       ❌       |     ✅     |       ✅       |     ❌     |     ❌     |     ❌     |        ❌        |
++---------------+----------------+------------+----------------+------------+------------+------------+------------------+
+| 2.4.2         |       ❌       |     ✅     |       ✅       |     ✅     |     ❌     |     ❌     |        ❌        |
++---------------+----------------+------------+----------------+------------+------------+------------+------------------+
+| 2.4.3-2.4.4   |       ❌       |     ✅     |       ✅       |     ✅     |     ✅     |     ❌     |        ❌        |
++---------------+----------------+------------+----------------+------------+------------+------------+------------------+
+| 2.4.5         |       ❌       |     ✅     |       ✅       |     ✅     |     ✅     |     ✅     |        ❌        |
++---------------+----------------+------------+----------------+------------+------------+------------+------------------+
+| 2.5.0         |       ❌       |     ✅     |       ✅       |     ✅     |     ✅     |     ✅     |        ✅        |
++---------------+----------------+------------+----------------+------------+------------+------------+------------------+
 
 .. note::
 
@@ -140,7 +149,7 @@ Here are the topics involved and some examples that you can use to try if your i
   .. note::
     ``Graphviz`` and ``ImageMagick`` need to be installed separately, using your platform-specific package manager.
 
-* 3D graphics. ``trace3D()`` needs `VPython-Jupyter <https://github.com/BruceSherwood/vpython-jupyter/>`_.
+* 3D graphics. ``trace3D()`` needs `VPython-Jupyter <https://github.com/vpython/vpython-jupyter/>`_.
 
   VPython-Jupyter is installable via ``pip install vpython``
 

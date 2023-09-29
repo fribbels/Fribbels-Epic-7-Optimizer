@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2007, 2008, 2009 Arnaud Ebalard
 #               2015, 2016 Maxence Tury
-# This program is published under a GPLv2 license
 
 """
 HMAC classes.
@@ -11,7 +12,7 @@ from __future__ import absolute_import
 import hmac
 
 from scapy.layers.tls.crypto.hash import _tls_hash_algs
-import scapy.modules.six as six
+import scapy.libs.six as six
 from scapy.compat import bytes_encode
 
 _SSLv3_PAD1_MD5 = b"\x36" * 48

@@ -1,8 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2008 Arnaud Ebalard <arnaud.ebalard@eads.net>
 #                                   <arno@natisbad.org>
 #   2015, 2016, 2017 Maxence Tury   <maxence.tury@ssi.gouv.fr>
-# This program is published under a GPLv2 license
 
 """
 High-level methods for PKI objects (X.509 certificates, CRLs, asymmetric keys).
@@ -33,8 +34,7 @@ import os
 import time
 
 from scapy.config import conf, crypto_validator
-import scapy.modules.six as six
-from scapy.modules.six.moves import range
+import scapy.libs.six as six
 from scapy.error import warning
 from scapy.utils import binrepr
 from scapy.asn1.asn1 import ASN1_BIT_STRING
@@ -446,7 +446,7 @@ class PrivKey(six.with_metaclass(_PrivKeyFactory, object)):
 
     def resignCert(self, cert):
         """ Rewrite the signature of either a Cert or an X509_Cert. """
-        return self.signTBSCert(cert.tbsCertificate)
+        return self.signTBSCert(cert.tbsCertificate, h=None)
 
     def verifyCert(self, cert):
         """ Verifies either a Cert or an X509_Cert. """
@@ -599,24 +599,16 @@ class Cert(six.with_metaclass(_CertMaker, object)):
         self.authorityKeyID = None
 
         self.notBefore_str = tbsCert.validity.not_before.pretty_time
-        notBefore = tbsCert.validity.not_before.val
-        if notBefore[-1] == "Z":
-            notBefore = notBefore[:-1]
         try:
-            _format = tbsCert.validity.not_before._format
-            self.notBefore = time.strptime(notBefore, _format)
-        except Exception:
+            self.notBefore = tbsCert.validity.not_before.datetime.timetuple()
+        except ValueError:
             raise Exception(error_msg)
         self.notBefore_str_simple = time.strftime("%x", self.notBefore)
 
         self.notAfter_str = tbsCert.validity.not_after.pretty_time
-        notAfter = tbsCert.validity.not_after.val
-        if notAfter[-1] == "Z":
-            notAfter = notAfter[:-1]
         try:
-            _format = tbsCert.validity.not_after._format
-            self.notAfter = time.strptime(notAfter, _format)
-        except Exception:
+            self.notAfter = tbsCert.validity.not_after.datetime.timetuple()
+        except ValueError:
             raise Exception(error_msg)
         self.notAfter_str_simple = time.strftime("%x", self.notAfter)
 

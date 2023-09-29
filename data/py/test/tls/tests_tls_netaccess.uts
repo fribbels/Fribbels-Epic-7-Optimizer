@@ -15,7 +15,7 @@
 from __future__ import print_function
 
 import sys, os, re, time, subprocess
-from scapy.modules.six.moves.queue import Queue
+from scapy.libs.six.moves.queue import Queue
 import threading
 
 from ast import literal_eval
@@ -24,7 +24,7 @@ import sys
 from contextlib import contextmanager
 from scapy.autorun import StringWriter
 
-from scapy.modules import six
+from scapy.libs import six
 
 from scapy.config import conf
 from scapy.layers.tls.automaton_srv import TLSServerAutomaton
@@ -117,12 +117,13 @@ def run_openssl_client(msg, suite="", version="", tls13=False, client_auth=False
     if sess_out:
         args.extend(["-sess_out", sess_out])
     p = subprocess.Popen(
-        args,
+        " ".join(args),
+        shell=True,
         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
     )
     msg += b"\nstop_server\n"
     out = p.communicate(input=msg)[0]
-    print(out.decode())
+    print(plain_str(out))
     if p.returncode != 0:
         raise RuntimeError("OpenSSL returned with error code %s" % p.returncode)
     else:
@@ -210,7 +211,7 @@ import sys, os, time, threading
 from scapy.layers.tls.automaton_cli import TLSClientAutomaton
 from scapy.layers.tls.handshake import TLSClientHello, TLS13ClientHello
 
-from scapy.modules.six.moves.queue import Queue
+from scapy.libs.six.moves.queue import Queue
 
 send_data = cipher_suite_code = version = None
 
@@ -342,7 +343,7 @@ test_tls_client("1305", "0304", client_auth=True)
 test_tls_client("1305", "0304", key_update=True)
 
 = Testing TLS server and client with TLS 1.3 and TLS_AES_128_CCM_8_SHA256 and session resumption
-~ crypto_advanced
+~ crypto_advanced not_pypy
 
 test_tls_client("1305", "0304", client_auth=True, sess_in_out=True)
 
@@ -366,10 +367,11 @@ load_layer("http")
 
 def _test_connection():
     a = TLSClientAutomaton.tlslink(HTTP, server="www.google.com", dport=443,
-                                   server_name="www.google.com")
+                                   server_name="www.google.com", debug=4)
     pkt = a.sr1(HTTP()/HTTPRequest(Host="www.google.com"),
                 session=TCPSession(app=True), timeout=2, retry=3)
     a.close()
+    assert pkt
     assert HTTPResponse in pkt
     assert b"</html>" in pkt[HTTPResponse].load
 

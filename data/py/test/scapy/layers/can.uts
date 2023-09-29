@@ -41,13 +41,15 @@ pkt.flags == 0x4
 = Read PCAP file
 * From https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=CANopen.pca
 
+conf.contribs['CAN']['swap-bytes'] = False
+
 from io import BytesIO
 pcap_fd = BytesIO(b'\xd4\xc3\xb2\xa1\x02\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00\xe3\x00\x00\x00\xe2\xf3mT\x93\x8c\x03\x00\t\x00\x00\x00\t\x00\x00\x00\x00\x00\x073\x01\x00\x00\x00\x00\xe2\xf3mT\xae\x8c\x03\x00\n\x00\x00\x00\n\x00\x00\x00\x00\x00\x00\x00\x02\x7f\x00\x00\x81\x00\xe2\xf3mTI\x8f\x03\x00\t\x00\x00\x00\t\x00\x00\x00\x00\x00\x07B\x01\x00\x00\x00\x00\xe2\xf3mTM\x8f\x03\x00\t\x00\x00\x00\t\x00\x00\x00\x00\x00\x07c\x01\x00\x00\x00\x00\xe2\xf3mTN\x8f\x03\x00\t\x00\x00\x00\t\x00\x00\x00\x00\x00\x07!\x01\x00\x00\x00\x00\xf8\xf3mTv\x98\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x7f\x00\x00@\x08\x10\x00\x00\x00\x00\x00\xf8\xf3mT\x96\x98\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x7f\x00\x00A\x08\x10\x00\x15\x00\x00\x00\xf8\xf3mT\xd4\x98\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x00\x00\x00`\x00\x00\x00\x00\x00\x00\x00\xf8\xf3mT\x12\x99\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x00\x00\x00\x80\x00\x00\x00!\x00\x00\x08\xf8\xf3mTC\x99\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x7f\x00\x00\x00UltraHi\xf8\xf3mTx\x99\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x00\x00\x00\x80\x00\x00\x00!\x00\x00\x08\xf8\xf3mT\xce\x99\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x00\x00\x00p\x00\x00\x00\x00\x00\x00\x00\xf8\xf3mT\xe0\x99\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x00\x00\x00\x80\x00\x00\x00!\x00\x00\x08\xf8\xf3mT \x9a\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x00\x00\x00\x80\x00\x00\x00!\x00\x00\x08\xf8\xf3mTo\x9a\x04\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x00\x00\x00\x80\x00\x00\x00!\x00\x00\x083\xf4mTw\xbe\t\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x7f\x00\x00@\x08\x10*\x00\x00\x00\x003\xf4mT4\xc0\t\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x00\x00\x00\x80\x08\x10*\x11\x00\t\x06i\xf4mT\xb0\x88\x0c\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x07\xe5\x08\x7f\x00\x00L\x00\x00\x00\x00\x00\x00\x00i\xf4mT+\x89\x0c\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x07\xe4\x08\x7f\x00\x00P\x00\x00\x00\x00\x00\x00\x00i\xf4mT-\x89\x0c\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x07\xe4\x08\x7f\x00\x00P\x00\x00\x00\x00\x00\x00\x00i\xf4mTS\x89\x0c\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x07\xe4\x08\x7f\x00\x00P\x00\x00\x00\x00\x00\x00\x00i\xf4mT\x99\x89\x0c\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x07\xe4\x08\x00\x00\x00P\x00\x00\x00\x00\x00\x00\x00\x8e\xf4mT\x86\xc4\x04\x00\n\x00\x00\x00\n\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x01B\x92\xf4mT\xae\xf0\x07\x00\n\x00\x00\x00\n\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\xba\xf4mT%\xaa\x0b\x00\n\x00\x00\x00\n\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x02c\xe8\xf4mT\xbc\x0f\x06\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x7f\x00\x00#\x00b\x01asdf\xe8\xf4mT\x07\x10\x06\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x00\x00\x00\x80\x00b\x01\x00\x00\x02\x06\x0f\xf5mT\x1c\x81\x00\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x7f\x00\x00@\x00b\x01\x00\x00\x00\x00\x0f\xf5mT\xfe\x81\x00\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x00\x00\x00\x80\x00b\x01\x00\x00\x02\x068\xf5mT\x19\xc3\x00\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x7f\x00\x00\xa0\x08\x10\x00\x10\x00\x00\x008\xf5mTg\xc3\x00\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x7f\x00\x00\xc2\x08\x10\x00\x15\x00\x00\x008\xf5mT\xd8\xc3\x00\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x00\x00\x00\x80\x00\x00\x00!\x00\x00\x088\xf5mT\x17\xc4\x00\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x06B\x08\x7f\x00\x00\xa3\x00\x00\x00\x00\x00\x00\x008\xf5mT\xca\xc4\x00\x00\x10\x00\x00\x00\x10\x00\x00\x00\x00\x00\x05\xc2\x08\x00\x00\x00\x80\x00\x00\x00!\x00\x00\x08')
 packets = rdpcap(pcap_fd)
 
 = Check if parsing worked: each packet has a CAN layer
 
-all(CAN in pkt for pkt in packets)
+assert all(CAN in pkt for pkt in packets)
 
 = Check if parsing worked: no packet has a Raw or Padding layer
 
@@ -55,25 +57,39 @@ not any(Raw in pkt or Padding in pkt for pkt in packets)
 
 = Identifiers
 
-set(pkt.identifier for pkt in packets) == {0, 1474, 1602, 1825, 1843, 1858, 1891, 2020, 2021}
+assert set(pkt.identifier for pkt in packets) == {0, 1474, 1602, 1825, 1843, 1858, 1891, 2020, 2021}
 
 = Flags
 
-set(pkt.flags for pkt in packets) == {0}
+assert set(pkt.flags for pkt in packets) == {0}
 
 = Data length
 
 set(pkt.length for pkt in packets) == {1, 2, 8}
 
+= read PCAP of a CookedLinux/SocketCAN capture with CANFD frames
+
+conf.contribs['CAN']['swap-bytes'] = True
+
+packets = rdpcap(scapy_path("/test/pcaps/canfd.pcap.gz"))
+
+= Check if parsing worked: each packet has a CANFD layer
+
+assert all(CANFD in pkt[1] for pkt in packets)
+
+assert all(pkt.identifier == 0x123 for pkt in packets)
+assert len(packets) == 4
+
 
 ############
 ############
 
-+ swap-bytes functionality (for PF_CAN socket interactions)
++ swap-bytes and remove-padding functionality (for PF_CAN socket interactions)
 
 = read PCAP of a CookedLinux/SocketCAN capture (CAN standard and extended)
 
 conf.contribs['CAN']['swap-bytes'] = True
+conf.contribs['CAN']['remove-padding'] = False
 pcap_fd_can_a = BytesIO(b'\xd4\xc3\xb2\xa1\x02\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00q\x00\x00\x00\x15f`Zv\xde\n\x00 \x00\x00\x00 \x00\x00\x00\x00\x01\x01\x18\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0c\xdf\x07\x00\x00\x03\x00\x00\x00\x02\x01\r\x00\x00\x00\x00\x00')
 packets_can_a = rdpcap(pcap_fd_can_a)
 pcap_fd_can_b = BytesIO(b'\xd4\xc3\xb2\xa1\x02\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00q\x00\x00\x00\xf4i`Z\xf3\x99\x07\x00 \x00\x00\x00 \x00\x00\x00\x00\x01\x01\x18\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0c\xf13\xdb\x98\x03\x00\x00\x00\x02\x01\r\x00\x00\x00\x00\x00')
@@ -116,9 +132,13 @@ p_too_much_data = CAN(flags='error', length=1, identifier=1234, data=b'\x01\x02'
 p = CAN(bytes(p_too_much_data))
 p.haslayer('Padding') and p['Padding'].load == b'\x02'
 
++ rdcandump
 
 = Check rdcandump default
 * default reading
+
+conf.contribs['CAN']['remove-padding'] = True
+
 pcap_fd = BytesIO(b'''(1539191392.761779) vcan0 123#11223344
                     (1539191470.820239) vcan0 123#11223344
                     (1539191471.503168) vcan0 123#11223344
@@ -127,9 +147,11 @@ pcap_fd = BytesIO(b'''(1539191392.761779) vcan0 123#11223344
                     (1539191494.084177) vcan0 1F334455#1122334455667788
                     (1539191494.724228) vcan0 1F334455#1122334455667788
                     (1539191495.148182) vcan0 1F334455#1122334455667788
-                    (1539191495.563320) vcan0 1F334455#1122334455667788''')
+                    (1539191495.563320) vcan0 1F334455#1122334455667788
+                    (1539191470.820239) vcan0 123##1112233445566778899aabbccddeeff
+                    (1539191495.563320) vcan0 1F334455##1112233445566778899aabbccddeeff''')
 packets = rdcandump(pcap_fd)
-assert len(packets) == 9
+assert len(packets) == 11
 assert packets[0].identifier == 0x123
 assert packets[8].identifier == 0x1F334455
 assert packets[8].flags == 0b100
@@ -137,6 +159,10 @@ assert packets[0].length == 4
 assert packets[8].length == 8
 assert packets[0].data == b'\x11\x22\x33\x44'
 assert packets[8].data == b'\x11\x22\x33\x44\x55\x66\x77\x88'
+assert packets[9].identifier == 0x123
+assert packets[10].identifier == 0x1F334455
+assert packets[9].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff'
+assert packets[10].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff'
 
 = Check rdcandump_iterable default
 * default reading
@@ -148,9 +174,11 @@ pcap_fd = BytesIO(b'''(1539191392.761779) vcan0 123#11223344
                     (1539191494.084177) vcan0 1F334455#1122334455667788
                     (1539191494.724228) vcan0 1F334455#1122334455667788
                     (1539191495.148182) vcan0 1F334455#1122334455667788
-                    (1539191495.563320) vcan0 1F334455#1122334455667788''')
+                    (1539191495.563320) vcan0 1F334455#1122334455667788
+                    (1539191470.820239) vcan0 123##1112233445566778899aabbccddeeff
+                    (1539191495.563320) vcan0 1F334455##1112233445566778899aabbccddeeff''')
 packets = [x for x in CandumpReader(pcap_fd)]
-assert len(packets) == 9
+assert len(packets) == 11
 assert packets[0].identifier == 0x123
 assert packets[8].identifier == 0x1F334455
 assert packets[8].flags == 0b100
@@ -158,6 +186,10 @@ assert packets[0].length == 4
 assert packets[8].length == 8
 assert packets[0].data == b'\x11\x22\x33\x44'
 assert packets[8].data == b'\x11\x22\x33\x44\x55\x66\x77\x88'
+assert packets[9].identifier == 0x123
+assert packets[10].identifier == 0x1F334455
+assert packets[9].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff'
+assert packets[10].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff'
 
 = Check rdcandump filter
 * interface filter 1
@@ -242,20 +274,27 @@ pcap_fd = BytesIO(b'''  vcan0  1F334455   [8]  11 22 33 44 55 66 77 88
   vcan0       1F3   [8]  11 22 33 44 55 66 77 88
   vcan0  1F334455   [8]  11 22 33 44 55 66 77 88
   vcan0  1F334455   [4]  11 22 33 44
-  vcan0       1F3   [4]  11 22 33 44''')
+  vcan0       1F3   [4]  11 22 33 44
+  vcan0  1F334455  [09]  11 22 33 44 55 66 77 88 99
+  vcan0       1F3  [09]  11 22 33 44 55 66 77 88 99
+  ''')
 packets = rdcandump(pcap_fd)
-assert len(packets) == 8
+assert len(packets) == 10
 packets[-1].show()
-assert packets[-1].identifier == 0x1F3
+assert packets[-3].identifier == 0x1F3
 assert packets[1].identifier == 0x1F3
 assert packets[0].identifier == 0x1F334455
 assert packets[0].flags == 0b100
-assert packets[-1].length == 4
+assert packets[-3].length == 4
 assert packets[0].length == 8
 assert packets[1].length == 8
-assert packets[-1].data == b'\x11\x22\x33\x44'
+assert packets[-1].length == 9
+assert packets[8].length == 9
+assert packets[-3].data == b'\x11\x22\x33\x44'
 assert packets[0].data == b'\x11\x22\x33\x44\x55\x66\x77\x88'
 assert packets[1].data == b'\x11\x22\x33\x44\x55\x66\x77\x88'
+assert packets[8].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99'
+assert packets[-1].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99'
 
 = interface not log file format filtered 1
 pcap_fd = BytesIO(b'''  vcan0  1F334455   [8]  11 22 33 44 55 66 77 88
@@ -266,19 +305,24 @@ pcap_fd = BytesIO(b'''  vcan0  1F334455   [8]  11 22 33 44 55 66 77 88
   vcan1  1F334455   [8]  11 22 33 44 55 66 77 88
   vcan1  1F334455   [4]  11 22 33 44
   vcan0       1F3   [4]  11 22 33 44
+  vcan0  1F334455  [09]  11 22 33 44 55 66 77 88 99
+  vcan1       1F3  [09]  11 22 33 44 55 66 77 88 99
 ''')
 packets = rdcandump(pcap_fd, interface="vcan0")
-assert len(packets) == 4
-assert packets[-1].identifier == 0x1F3
+assert len(packets) == 5
+assert packets[-2].identifier == 0x1F3
 assert packets[2].identifier == 0x1F3
 assert packets[0].identifier == 0x1F334455
+assert packets[-1].identifier == 0x1F334455
 assert packets[0].flags == 0b100
-assert packets[-1].length == 4
+assert packets[-2].length == 4
 assert packets[0].length == 8
 assert packets[2].length == 8
-assert packets[-1].data == b'\x11\x22\x33\x44'
+assert packets[-1].length == 9
+assert packets[-2].data == b'\x11\x22\x33\x44'
 assert packets[0].data == b'\x11\x22\x33\x44\x55\x66\x77\x88'
 assert packets[2].data == b'\x11\x22\x33\x44\x55\x66\x77\x88'
+assert packets[-1].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99'
 
 
 = interface not log file format filtered 2
@@ -378,9 +422,10 @@ pcap_fd = BytesIO(b'''(1539191392.761779) vcan0 123#11223344
                     (1539191494.084177) vcan0 00000055#1122334455667788
                     (1539191494.724228) vcan0 00000055#1122334455667788
                     (1539191495.148182) vcan0 00000055#1122334455667788
-                    (1539191495.563320) vcan0 00000055#1122334455667788''')
+                    (1539191495.563320) vcan0 00000055#1122334455667788
+                    (1539191494.724228) vcan0 00000055##1112233445566778899''')
 packets = rdcandump(pcap_fd)
-assert len(packets) == 9
+assert len(packets) == 10
 assert packets[0].identifier == 0x123
 assert packets[8].identifier == 0x55
 assert packets[8].flags == 0b100
@@ -388,6 +433,10 @@ assert packets[0].length == 4
 assert packets[8].length == 8
 assert packets[0].data == b'\x11\x22\x33\x44'
 assert packets[8].data == b'\x11\x22\x33\x44\x55\x66\x77\x88'
+assert packets[8].identifier == 0x55
+assert packets[8].flags == 0b100
+assert packets[9].length == 9
+assert packets[9].data == b'\x11\x22\x33\x44\x55\x66\x77\x88\x99'
 
 
 = interface not log file format

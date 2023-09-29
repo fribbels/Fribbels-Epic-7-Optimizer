@@ -4,6 +4,7 @@
     "test/scapy/layers/*.uts",
     "test/contrib/automotive/*.uts",
     "test/contrib/automotive/obd/*.uts",
+    "test/contrib/automotive/scanner/*.uts",
     "test/contrib/automotive/gm/*.uts",
     "test/contrib/automotive/bmw/*.uts",
     "test/contrib/automotive/xcp/*.uts",
@@ -14,7 +15,7 @@
     "test/windows.uts",
     "test/contrib/automotive/ecu_am.uts",
     "test/contrib/automotive/gm/gmlanutils.uts",
-    "test/contrib/isotp.uts",
+    "test/contrib/isotp_packet.uts",
     "test/contrib/isotpscan.uts"
   ],
   "onlyfailed": true,
@@ -27,8 +28,9 @@
   "kw_ko": [
     "linux",
     "windows",
-    "crypto_advanced",
     "ipv6",
-    "vcan_socket"
+    "vcan_socket",
+    "tun",
+    "tap"
   ]
 }

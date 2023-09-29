@@ -1,8 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
-# Copyright (C) Philippe Biondi <phil@secdev.org>
-# Copyright (C) Gabriel Potter <gabriel@potter.fr>
-# This program is published under a GPLv2 license
+# See https://scapy.net/ for more information
+# Copyright (C) Gabriel Potter <gabriel[]potter[]fr>
 
 """
 Default USB frames & Basic implementation
@@ -113,14 +112,14 @@ class USBpcap(Packet):
     def guess_payload_class(self, payload):
         if self.headerLen == 27:
             # No Transfer layer
-            return conf.raw_layer
+            return super(USBpcap, self).guess_payload_class(payload)
         if self.transfer == 0:
             return USBpcapTransferIsochronous
         elif self.transfer == 1:
             return USBpcapTransferInterrupt
         elif self.transfer == 2:
             return USBpcapTransferControl
-        return conf.raw_layer
+        return super(USBpcap, self).guess_payload_class(payload)
 
 
 class USBpcapTransferIsochronous(Packet):
@@ -258,7 +257,7 @@ if WINDOWS:
 
         @staticmethod
         def select(sockets, remain=None):
-            return sockets, None
+            return sockets
 
         def __init__(self, iface=None, *args, **karg):
             _usbpcap_check()

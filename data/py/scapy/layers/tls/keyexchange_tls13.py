@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2017 Maxence Tury
 #               2019 Romain Perez
-# This program is published under a GPLv2 license
 
 """
 TLS 1.3 key exchange logic.
@@ -11,9 +12,17 @@ import struct
 
 from scapy.config import conf, crypto_validator
 from scapy.error import log_runtime
-from scapy.fields import FieldLenField, IntField, PacketField, \
-    PacketListField, ShortEnumField, ShortField, StrFixedLenField, \
-    StrLenField
+from scapy.fields import (
+    FieldLenField,
+    IntField,
+    PacketField,
+    PacketListField,
+    ShortEnumField,
+    ShortField,
+    StrFixedLenField,
+    StrLenField,
+    XStrLenField,
+)
 from scapy.packet import Packet, Padding
 from scapy.layers.tls.extensions import TLS_Ext_Unknown, _tls_ext
 from scapy.layers.tls.crypto.groups import (
@@ -24,7 +33,7 @@ from scapy.layers.tls.crypto.groups import (
     _tls_named_groups_import,
     _tls_named_groups_pubbytes,
 )
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 if conf.crypto_valid:
     from cryptography.hazmat.primitives.asymmetric import ec
@@ -39,8 +48,8 @@ class KeyShareEntry(Packet):
     name = "Key Share Entry"
     fields_desc = [ShortEnumField("group", None, _tls_named_groups),
                    FieldLenField("kxlen", None, length_of="key_exchange"),
-                   StrLenField("key_exchange", "",
-                               length_from=lambda pkt: pkt.kxlen)]
+                   XStrLenField("key_exchange", "",
+                                length_from=lambda pkt: pkt.kxlen)]
 
     def __init__(self, *args, **kargs):
         self.privkey = None
@@ -113,7 +122,7 @@ class TLS_Ext_KeyShare_CH(TLS_Ext_Unknown):
             privshares = self.tls_session.tls13_client_privshares
             for kse in self.client_shares:
                 if kse.privkey:
-                    if _tls_named_curves[kse.group] in privshares:
+                    if _tls_named_groups[kse.group] in privshares:
                         pkt_info = pkt.firstlayer().summary()
                         log_runtime.info("TLS: group %s used twice in the same ClientHello [%s]", kse.group, pkt_info)  # noqa: E501
                         break
@@ -125,11 +134,11 @@ class TLS_Ext_KeyShare_CH(TLS_Ext_Unknown):
             for kse in self.client_shares:
                 if kse.pubkey:
                     pubshares = self.tls_session.tls13_client_pubshares
-                    if _tls_named_curves[kse.group] in pubshares:
+                    if _tls_named_groups[kse.group] in pubshares:
                         pkt_info = r.firstlayer().summary()
                         log_runtime.info("TLS: group %s used twice in the same ClientHello [%s]", kse.group, pkt_info)  # noqa: E501
                         break
-                    pubshares[_tls_named_curves[kse.group]] = kse.pubkey
+                    pubshares[_tls_named_groups[kse.group]] = kse.pubkey
         return super(TLS_Ext_KeyShare_CH, self).post_dissection(r)
 
 

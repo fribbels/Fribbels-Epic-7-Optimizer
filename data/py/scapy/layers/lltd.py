@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """LLTD Protocol
 
@@ -22,7 +22,7 @@ from scapy.layers.l2 import Ether
 from scapy.layers.inet import IPField
 from scapy.layers.inet6 import IP6Field
 from scapy.data import ETHER_ANY
-import scapy.modules.six as six
+import scapy.libs.six as six
 from scapy.compat import orb, chb
 
 
@@ -111,8 +111,8 @@ class LLTD(Packet):
 
     def hashret(self):
         tos, function = self.tos, self.function
-        return "%c%c" % self.answer_hashret.get((tos, function),
-                                                (tos, function))
+        return b"%c%c" % self.answer_hashret.get((tos, function),
+                                                 (tos, function))
 
     def answers(self, other):
         if not isinstance(other, LLTD):

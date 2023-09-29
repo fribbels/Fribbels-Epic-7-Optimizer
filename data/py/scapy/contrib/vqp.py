@@ -1,25 +1,22 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
 # This file is part of Scapy
-# Scapy is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# any later version.
-#
-# Scapy is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Scapy. If not, see <http://www.gnu.org/licenses/>.
+# See https://scapy.net/ for more information
 
 # scapy.contrib.description = VLAN Query Protocol
 # scapy.contrib.status = loads
 
-import struct
-
-from scapy.packet import Packet, bind_layers
-from scapy.fields import ByteEnumField, ByteField, ConditionalField, \
-    FieldLenField, IntEnumField, IntField, IPField, MACField, StrLenField
+from scapy.packet import Packet, bind_layers, bind_bottom_up
+from scapy.fields import (
+    ByteEnumField,
+    ByteField,
+    FieldLenField,
+    IPField,
+    IntEnumField,
+    IntField,
+    MACField,
+    MultipleTypeField,
+    StrLenField,
+)
 from scapy.layers.inet import UDP
 
 
@@ -51,26 +48,22 @@ class VQPEntry(Packet):
             3078: "ReqMACAddress", 3079: "unknown",
             3080: "ResMACAddress"
         }),
-        FieldLenField("len", None),
-        ConditionalField(IPField("datatom", "0.0.0.0"),
-                         lambda p: p.datatype == 3073),
-        ConditionalField(MACField("data", "00:00:00:00:00:00"),
-                         lambda p: p.datatype == 3078),
-        ConditionalField(MACField("data", "00:00:00:00:00:00"),
-                         lambda p: p.datatype == 3080),
-        ConditionalField(StrLenField("data", None,
-                                     length_from=lambda p: p.len),
-                         lambda p: p.datatype not in [3073, 3078, 3080]),
+        FieldLenField("len", None, length_of="data", fmt="H"),
+        MultipleTypeField(
+            [
+                (IPField("data", "0.0.0.0"),
+                    lambda p: p.datatype == 3073),
+                (MACField("data", "00:00:00:00:00:00"),
+                    lambda p: p.datatype in [3078, 3080]),
+            ],
+            StrLenField("data", None, length_from=lambda p: p.len)
+        )
     ]
 
-    def post_build(self, p, pay):
-        if self.len is None:
-            tmp_len = len(p.data)
-            p = p[:2] + struct.pack("!H", tmp_len) + p[4:]
-        return p
 
+bind_bottom_up(UDP, VQP, sport=1589)
+bind_bottom_up(UDP, VQP, dport=1589)
+bind_layers(UDP, VQP, sport=1589, dport=1589)
 
-bind_layers(UDP, VQP, sport=1589)
-bind_layers(UDP, VQP, dport=1589)
 bind_layers(VQP, VQPEntry,)
 bind_layers(VQPEntry, VQPEntry,)

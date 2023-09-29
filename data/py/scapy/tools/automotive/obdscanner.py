@@ -1,11 +1,9 @@
-#! /usr/bin/env python
-
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Andreas Korb <andreas.korb@e-mundo.de>
 # Copyright (C) Friedrich Feigel <friedrich.feigel@e-mundo.de>
 # Copyright (C) Nils Weiss <nils@we155.de>
-# This program is published under a GPLv2 license
 
 from __future__ import print_function
 
@@ -13,10 +11,11 @@ import getopt
 import sys
 import signal
 import re
+import traceback
 
 from ast import literal_eval
 
-import scapy.modules.six as six
+import scapy.libs.six as six
 from scapy.config import conf
 from scapy.consts import LINUX
 
@@ -26,7 +25,10 @@ if six.PY2 or not LINUX or conf.use_pypy:
 from scapy.contrib.isotp import ISOTPSocket                    # noqa: E402
 from scapy.contrib.cansocket import CANSocket, PYTHON_CAN      # noqa: E402
 from scapy.contrib.automotive.obd.obd import OBD               # noqa: E402
-from scapy.contrib.automotive.obd.scanner import OBD_Scanner, OBD_S01_Enumerator, OBD_S02_Enumerator, OBD_S03_Enumerator, OBD_S06_Enumerator, OBD_S07_Enumerator, OBD_S08_Enumerator, OBD_S09_Enumerator, OBD_S0A_Enumerator  # noqa: E402 E501
+from scapy.contrib.automotive.obd.scanner import OBD_Scanner, \
+    OBD_S01_Enumerator, OBD_S02_Enumerator, OBD_S03_Enumerator, \
+    OBD_S06_Enumerator, OBD_S07_Enumerator, OBD_S08_Enumerator, \
+    OBD_S09_Enumerator, OBD_S0A_Enumerator  # noqa: E402
 
 
 def signal_handler(sig, frame):
@@ -77,6 +79,32 @@ def usage(is_error):
           file=sys.stderr if is_error else sys.stdout)
 
 
+def get_can_socket(channel, interface, python_can_args):
+    if PYTHON_CAN:
+        if python_can_args:
+            arg_dict = dict((k, literal_eval(v)) for k, v in
+                            (pair.split('=') for pair in
+                             re.split(', | |,', python_can_args)))
+            return CANSocket(bustype=interface, channel=channel, **arg_dict)
+        else:
+            return CANSocket(bustype=interface, channel=channel)
+    else:
+        return CANSocket(channel=channel)
+
+
+def get_isotp_socket(csock, source, destination):
+    return ISOTPSocket(csock, source, destination, basecls=OBD, padding=True)
+
+
+def run_scan(isock, enumerators, full_scan, verbose, timeout):
+    s = OBD_Scanner(isock, test_cases=enumerators, full_scan=full_scan,
+                    debug=verbose,
+                    timeout=timeout)
+    print("Starting OBD-Scan...")
+    s.scan()
+    s.show_testcases()
+
+
 def main():
 
     channel = None
@@ -85,10 +113,9 @@ def main():
     destination = 0x7df
     timeout = 0.1
     full_scan = False
-    specific_scan = False
     verbose = False
     python_can_args = None
-    custom_enumerators = []
+    enumerators = []
     conf.verb = -1
 
     options = getopt.getopt(
@@ -118,29 +145,21 @@ def main():
             elif opt in ('-f', '--full'):
                 full_scan = True
             elif opt == '-1':
-                specific_scan = True
-                custom_enumerators += [OBD_S01_Enumerator]
+                enumerators += [OBD_S01_Enumerator]
             elif opt == '-2':
-                specific_scan = True
-                custom_enumerators += [OBD_S02_Enumerator]
+                enumerators += [OBD_S02_Enumerator]
             elif opt == '-3':
-                specific_scan = True
-                custom_enumerators += [OBD_S03_Enumerator]
+                enumerators += [OBD_S03_Enumerator]
             elif opt == '-6':
-                specific_scan = True
-                custom_enumerators += [OBD_S06_Enumerator]
+                enumerators += [OBD_S06_Enumerator]
             elif opt == '-7':
-                specific_scan = True
-                custom_enumerators += [OBD_S07_Enumerator]
+                enumerators += [OBD_S07_Enumerator]
             elif opt == '-8':
-                specific_scan = True
-                custom_enumerators += [OBD_S08_Enumerator]
+                enumerators += [OBD_S08_Enumerator]
             elif opt == '-9':
-                specific_scan = True
-                custom_enumerators += [OBD_S09_Enumerator]
+                enumerators += [OBD_S09_Enumerator]
             elif opt == '-A':
-                specific_scan = True
-                custom_enumerators += [OBD_S0A_Enumerator]
+                enumerators += [OBD_S0A_Enumerator]
             elif opt in ('-v', '--verbose'):
                 verbose = True
     except getopt.GetoptError as msg:
@@ -166,42 +185,27 @@ def main():
         sys.exit(1)
 
     csock = None
+    isock = None
     try:
-        if PYTHON_CAN:
-            if python_can_args:
-                arg_dict = dict((k, literal_eval(v)) for k, v in
-                                (pair.split('=') for pair in
-                                 re.split(', | |,', python_can_args)))
-                csock = CANSocket(bustype=interface, channel=channel,
-                                  **arg_dict)
-            else:
-                csock = CANSocket(bustype=interface, channel=channel)
-        else:
-            csock = CANSocket(channel=channel)
+        csock = get_can_socket(channel, interface, python_can_args)
+        isock = get_isotp_socket(csock, source, destination)
 
-        with ISOTPSocket(csock, source, destination,
-                         basecls=OBD, padding=True) as isock:
-            signal.signal(signal.SIGINT, signal_handler)
-            if specific_scan:
-                es = custom_enumerators
-            else:
-                es = OBD_Scanner.default_enumerator_clss
-            s = OBD_Scanner(isock, enumerators=es, full_scan=full_scan,
-                            verbose=verbose, timeout=timeout)
-            print("Starting OBD-Scan...")
-            s.scan()
-            for e in s.enumerators:
-                e.show()
+        signal.signal(signal.SIGINT, signal_handler)
+        run_scan(isock, enumerators, full_scan, verbose, timeout)
 
     except Exception as e:
         usage(True)
         print("\nSocket couldn't be created. Check your arguments.\n",
               file=sys.stderr)
         print(e, file=sys.stderr)
+        if verbose:
+            traceback.print_exc(file=sys.stderr)
         sys.exit(1)
 
     finally:
-        if csock is not None:
+        if isock:
+            isock.close()
+        if csock:
             csock.close()
 
 

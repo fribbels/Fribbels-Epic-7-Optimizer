@@ -1,8 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
-# Copyright (C) Philippe Biondi <phil@secdev.org>
-# Copyright (C) Gabriel Potter <gabriel@potter.fr>
-# This program is published under a GPLv2 license
+# See https://scapy.net/ for more information
+# Copyright (C) Gabriel Potter <gabriel[]potter[]fr>
 
 """
 Interfaces management
@@ -17,8 +16,8 @@ from scapy.consts import WINDOWS
 from scapy.utils import pretty_list
 from scapy.utils6 import in6_isvalid
 
-from scapy.modules.six.moves import UserDict
-import scapy.modules.six as six
+from scapy.libs.six.moves import UserDict
+import scapy.libs.six as six
 
 # Typing imports
 import scapy
@@ -186,6 +185,9 @@ class NetworkInterface(object):
     def __radd__(self, other):
         # type: (str) -> str
         return other + self.network_name
+
+
+_GlobInterfaceType = Union[NetworkInterface, str]
 
 
 class NetworkInterfaceDict(UserDict):
@@ -384,7 +386,7 @@ def dev_from_index(if_index):
 
 
 def resolve_iface(dev):
-    # type: (Union[NetworkInterface, str]) -> NetworkInterface
+    # type: (_GlobInterfaceType) -> NetworkInterface
     """
     Resolve an interface name into the interface
     """
@@ -410,7 +412,7 @@ def resolve_iface(dev):
 
 
 def network_name(dev):
-    # type: (Union[NetworkInterface, str]) -> str
+    # type: (_GlobInterfaceType) -> str
     """
     Resolves the device network name of a device or Scapy NetworkInterface
     """

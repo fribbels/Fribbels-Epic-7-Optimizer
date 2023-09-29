@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Nils Weiss <nils@we155.de>
-# This program is published under a GPLv2 license
 
 # scapy.contrib.description = Diagnostic over IP (DoIP) / ISO 13400
 # scapy.contrib.status = loads
@@ -12,9 +12,10 @@ import struct
 import socket
 import time
 
+from scapy.contrib.automotive import log_automotive
 from scapy.fields import ByteEnumField, ConditionalField, \
     XByteField, XShortField, XIntField, XShortEnumField, XByteEnumField, \
-    IntField, StrFixedLenField
+    IntField, StrFixedLenField, XStrField
 from scapy.packet import Packet, bind_layers, bind_bottom_up
 from scapy.supersocket import StreamSocket
 from scapy.layers.inet import TCP, UDP
@@ -24,6 +25,61 @@ from scapy.compat import Union, Tuple, Optional
 
 
 class DoIP(Packet):
+    """
+    Implementation of the DoIP (ISO 13400) protocol. DoIP packets can be sent
+    via UDP and TCP. Depending on the payload type, the correct connection
+    need to be chosen:
+
+    +--------------+--------------------------------------------------------------+-----------------+
+    | Payload Type | Payload Type Name                                            | Connection Kind |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0000       | Generic DoIP header negative acknowledge                     | UDP / TCP       |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0001       | Vehicle Identification request message                       | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0002       | Vehicle identification request message with EID              | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0003       | Vehicle identification request message with VIN              | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0004       | Vehicle announcement message/vehicle identification response | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0005       | Routing activation request                                   | TCP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0006       | Routing activation response                                  | TCP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0007       | Alive Check request                                          | TCP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x0008       | Alive Check response                                         | TCP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x4001       | IP entity status request                                     | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x4002       | DoIP entity status response                                  | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x4003       | Diagnostic power mode information request                    | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x4004       | Diagnostic power mode information response                   | UDP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x8001       | Diagnostic message                                           | TCP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x8002       | Diagnostic message positive acknowledgement                  | TCP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+    | 0x8003       | Diagnostic message negative acknowledgement                  | TCP             |
+    +--------------+--------------------------------------------------------------+-----------------+
+
+    Example with UDP:
+        >>> socket = L3RawSocket(iface="eth0")
+        >>> resp = socket.sr1(IP(dst="169.254.117.238")/UDP(dport=13400)/DoIP(payload_type=1))
+
+    Example with TCP:
+        >>> socket = DoIPSocket("169.254.117.238")
+        >>> pkt = DoIP(payload_type=0x8001, source_address=0xe80, target_address=0x1000) / UDS() / UDS_RDBI(identifiers=[0x1000])
+        >>> resp = socket.sr1(pkt, timeout=1)
+
+    Example with UDS:
+        >>> socket = UDS_DoIPSocket("169.254.117.238")
+        >>> pkt = UDS() / UDS_RDBI(identifiers=[0x1000])
+        >>> resp = socket.sr1(pkt, timeout=1)
+    """  # noqa: E501
     payload_types = {
         0x0000: "Generic DoIP header NACK",
         0x0001: "Vehicle identification request",
@@ -87,7 +143,8 @@ class DoIP(Packet):
         ConditionalField(XShortField("source_address", 0),
                          lambda p: p.payload_type in [5, 8, 0x8001, 0x8002, 0x8003]),  # noqa: E501
         ConditionalField(XByteEnumField("activation_type", 0, {
-            0: "Default", 1: "WWH-OBD", 0xe0: "Central security"
+            0: "Default", 1: "WWH-OBD", 0xe0: "Central security",
+            0x16: "Default", 0x116: "Diagnostic", 0xe016: "Central security"
         }), lambda p: p.payload_type in [5]),
         ConditionalField(XShortField("logical_address_tester", 0),
                          lambda p: p.payload_type in [6]),
@@ -101,7 +158,8 @@ class DoIP(Packet):
             0x04: "Routing activation denied due to missing authentication.",
             0x05: "Routing activation denied due to rejected confirmation.",
             0x06: "Routing activation denied due to unsupported routing activation type.",  # noqa: E501
-            0x07: "Reserved by ISO 13400.", 0x08: "Reserved by ISO 13400.",
+            0x07: "Routing activation denied because the specified activation type requires a secure TLS TCP_DATA socket.",  # noqa: E501
+            0x08: "Reserved by ISO 13400.",
             0x09: "Reserved by ISO 13400.", 0x0a: "Reserved by ISO 13400.",
             0x0b: "Reserved by ISO 13400.", 0x0c: "Reserved by ISO 13400.",
             0x0d: "Reserved by ISO 13400.", 0x0e: "Reserved by ISO 13400.",
@@ -111,7 +169,7 @@ class DoIP(Packet):
         }), lambda p: p.payload_type in [6]),
         ConditionalField(XIntField("reserved_iso", 0),
                          lambda p: p.payload_type in [5, 6]),
-        ConditionalField(XIntField("reserved_oem", 0),
+        ConditionalField(XStrField("reserved_oem", b""),
                          lambda p: p.payload_type in [5, 6]),
         ConditionalField(XByteEnumField("diagnostic_power_mode", 0, {
             0: "not ready", 1: "ready", 2: "not supported"
@@ -119,7 +177,7 @@ class DoIP(Packet):
         ConditionalField(ByteEnumField("node_type", 0, {
             0: "DoIP gateway", 1: "DoIP node"
         }), lambda p: p.payload_type in [0x4002]),
-        ConditionalField(XByteField("max_open_sockets", 0),
+        ConditionalField(XByteField("max_open_sockets", 1),
                          lambda p: p.payload_type in [0x4002]),
         ConditionalField(XByteField("cur_open_sockets", 0),
                          lambda p: p.payload_type in [0x4002]),
@@ -136,12 +194,14 @@ class DoIP(Packet):
             0x06: "Target unreachable", 0x07: "Unknown network",
             0x08: "Transport protocol error"
         }), lambda p: p.payload_type in [0x8003]),
+        ConditionalField(XStrField("previous_msg", b""),
+                         lambda p: p.payload_type in [0x8002, 0x8003])
     ]
 
     def answers(self, other):
         # type: (Packet) -> int
         """DEV: true if self is an answer from other"""
-        if other.__class__ == self.__class__:
+        if isinstance(other, type(self)):
             if self.payload_type == 0:
                 return 1
 
@@ -180,35 +240,116 @@ class DoIP(Packet):
 
 
 class DoIPSocket(StreamSocket):
+    """ Custom StreamSocket for DoIP communication. This sockets automatically
+    sends a routing activation request as soon as a TCP connection is
+    established.
+
+    :param ip: IP address of destination
+    :param port: destination port, usually 13400
+    :param activate_routing: If true, routing activation request is
+                             automatically sent
+    :param source_address: DoIP source address
+    :param target_address: DoIP target address, this is automatically
+                           determined if routing activation request is sent
+    :param activation_type: This allows to set a different activation type for
+                            the routing activation request
+    :param reserved_oem: Optional parameter to set value for reserved_oem field
+                         of routing activation request
+
+    Example:
+        >>> socket = DoIPSocket("169.254.0.131")
+        >>> pkt = DoIP(payload_type=0x8001, source_address=0xe80, target_address=0x1000) / UDS() / UDS_RDBI(identifiers=[0x1000])
+        >>> resp = socket.sr1(pkt, timeout=1)
+    """  # noqa: E501
     def __init__(self, ip='127.0.0.1', port=13400, activate_routing=True,
                  source_address=0xe80, target_address=0,
-                 activation_type=0):
-        # type: (str, int, bool, int, int, int) -> None
+                 activation_type=0, reserved_oem=b""):
+        # type: (str, int, bool, int, int, int, bytes) -> None
         self.ip = ip
         self.port = port
         self.source_address = source_address
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._init_socket()
+
+        if activate_routing:
+            self._activate_routing(
+                source_address, target_address, activation_type, reserved_oem)
+
+    def _init_socket(self, sock_family=socket.AF_INET):
+        # type: (int) -> None
+        s = socket.socket(sock_family, socket.SOCK_STREAM)
         s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.connect((self.ip, self.port))
         StreamSocket.__init__(self, s, DoIP)
 
+    def _activate_routing(self,
+                          source_address,  # type: int
+                          target_address,  # type: int
+                          activation_type,  # type: int
+                          reserved_oem=b""  # type: bytes
+                          ):  # type: (...) -> None
+        resp = self.sr1(
+            DoIP(payload_type=0x5, activation_type=activation_type,
+                 source_address=source_address, reserved_oem=reserved_oem),
+            verbose=False, timeout=1)
+        if resp and resp.payload_type == 0x6 and \
+                resp.routing_activation_response == 0x10:
+            self.target_address = target_address or \
+                resp.logical_address_doip_entity
+            log_automotive.info(
+                "Routing activation successful! Target address set to: 0x%x",
+                self.target_address)
+        else:
+            log_automotive.error(
+                "Routing activation failed! Response: %s", repr(resp))
+
+
+class DoIPSocket6(DoIPSocket):
+    """ Custom StreamSocket for DoIP communication over IPv6.
+    This sockets automatically sends a routing activation request as soon as
+    a TCP connection is established.
+
+    :param ip: IPv6 address of destination
+    :param port: destination port, usually 13400
+    :param activate_routing: If true, routing activation request is
+                             automatically sent
+    :param source_address: DoIP source address
+    :param target_address: DoIP target address, this is automatically
+                           determined if routing activation request is sent
+    :param activation_type: This allows to set a different activation type for
+                            the routing activation request
+    :param reserved_oem: Optional parameter to set value for reserved_oem field
+                         of routing activation request
+
+    Example:
+        >>> socket = DoIPSocket6("2001:16b8:3f0e:2f00:21a:37ff:febf:edb9")
+        >>> pkt = DoIP(payload_type=0x8001, source_address=0xe80, target_address=0x1000) / UDS() / UDS_RDBI(identifiers=[0x1000])
+        >>> resp = socket.sr1(pkt, timeout=1)
+    """  # noqa: E501
+    def __init__(self, ip='::1', port=13400, activate_routing=True,
+                 source_address=0xe80, target_address=0,
+                 activation_type=0, reserved_oem=b""):
+        # type: (str, int, bool, int, int, int, bytes) -> None
+        self.ip = ip
+        self.port = port
+        self.source_address = source_address
+        super(DoIPSocket6, self)._init_socket(socket.AF_INET6)
+
         if activate_routing:
-            resp = self.sr1(
-                DoIP(payload_type=0x5, activation_type=activation_type,
-                     source_address=source_address),
-                verbose=False, timeout=1)
-            if resp and resp.payload_type == 0x6 and \
-                    resp.routing_activation_response == 0x10:
-                self.target_address = target_address or \
-                    resp.logical_address_doip_entity
-                print("Routing activation successful! "
-                      "Target address set to: 0x%x" % self.target_address)
-            else:
-                print("Routing activation failed! Response: %s" % repr(resp))
+            super(DoIPSocket6, self)._activate_routing(
+                source_address, target_address, activation_type, reserved_oem)
 
 
 class UDS_DoIPSocket(DoIPSocket):
+    """
+    Application-Layer socket for DoIP endpoints. This socket takes care about
+    the encapsulation of UDS packets into DoIP packets.
+
+    Example:
+        >>> socket = UDS_DoIPSocket("169.254.117.238")
+        >>> pkt = UDS() / UDS_RDBI(identifiers=[0x1000])
+        >>> resp = socket.sr1(pkt, timeout=1)
+    """
     def send(self, x):
         # type: (Union[Packet, bytes]) -> int
         if isinstance(x, UDS):
@@ -231,6 +372,19 @@ class UDS_DoIPSocket(DoIPSocket):
             return pkt.payload
         else:
             return pkt
+
+
+class UDS_DoIPSocket6(DoIPSocket6, UDS_DoIPSocket):
+    """
+    Application-Layer socket for DoIP endpoints. This socket takes care about
+    the encapsulation of UDS packets into DoIP packets.
+
+    Example:
+        >>> socket = UDS_DoIPSocket6("2001:16b8:3f0e:2f00:21a:37ff:febf:edb9")
+        >>> pkt = UDS() / UDS_RDBI(identifiers=[0x1000])
+        >>> resp = socket.sr1(pkt, timeout=1)
+    """
+    pass
 
 
 bind_bottom_up(UDP, DoIP, sport=13400)

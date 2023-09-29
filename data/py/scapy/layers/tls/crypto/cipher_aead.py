@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2007, 2008, 2009 Arnaud Ebalard
 #               2015, 2016, 2017 Maxence Tury
-# This program is published under a GPLv2 license
 
 """
 Authenticated Encryption with Associated Data ciphers.
@@ -19,7 +20,7 @@ from scapy.config import conf
 from scapy.layers.tls.crypto.pkcs1 import pkcs_i2osp, pkcs_os2ip
 from scapy.layers.tls.crypto.common import CipherError
 from scapy.utils import strxor
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 if conf.crypto_valid:
     from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes  # noqa: E501

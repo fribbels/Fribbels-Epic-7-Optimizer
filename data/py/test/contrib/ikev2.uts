@@ -1,4 +1,9 @@
-% Ikev2 Tests
+% Ikev2 unit tests
+#
+# Type the following command to launch start the tests:
+# $ test/run_tests -P "load_contrib('ikev2')" -t test/contrib/ikev2.uts
+
+
 * Tests for the Ikev2 layer
 
 + Basic Layer Tests
@@ -47,7 +52,7 @@ packet = IP(dst = '192.168.1.10', src = '192.168.1.130') /\
        IKEv2_payload_Notify(next_payload = 'Notify', type = 16388, load = nat_detection_source_ip) /\
        IKEv2_payload_Notify(next_payload = 'None', type = 16389, load = nat_detection_destination_ip)
 
-assert raw(packet) == b'E\x00\x01L\x00\x01\x00\x00@\x11\xf5\xc3\xc0\xa8\x01\x82\xc0\xa8\x01\n\x11\x94\x01\xf4\x018\x97 KWdxMhjA\x00\x00\x00\x00\x00\x00\x00\x00! "\x08\x00\x00\x00\x00\x00\x00\x010"\x00\x000\x00\x00\x00,\x01\x01\x00\x04\x03\x00\x00\x0c\x01\x00\x00\x0c\x80\x0e\x00\x80\x03\x00\x00\x08\x02\x00\x00\x02\x03\x00\x00\x08\x03\x00\x00\x02\x00\x00\x00\x08\x04\x00\x00\x02(\x00\x00\x88\x00\x02\x00\x00\xbbA\xbbA\xcf\xaf4\xe3\xb3 \x96r\xae\xf1\xc5\x1b\x9dR\x91\x9f\x17\x81\xd0\xb4\xcd\x88\x9dJ\xaf\xe2ah\x87v\x00\x0c=\x901PZ\xef\xc0\x18ig\xea\xf5\xa7f7%\xfb\x10,Y\xc3\x9bzp\xd8\xd9\x16\x1c;\xd0\xebDX\x88\xb5\x02\x8e\xa0c\xba\n\xe0\x1f[?0\x80\x8akg\x10\xdc\x9b\xab`\x1eA\x16\x15}\x7fX\xcf\x83\\\xb63\xc6J\xbc\xb3\xa5\xc6\x1c">\x932S\x8b\xfc\x9f(,\xb6-\x1f\x00\xf4\xee\x88\x02)\x00\x00$\x8d\xfc\xf88L\\2\xf1\xb2\x94\xc6N\xabi\xf9\x8e\x9d\x8c\xf7\xe7\xf3R\x97\x1a\x91\xffgw\xd4}\xff\xed)\x00\x00\x1c\x00\x00@\x04\xe6L\x81\xc4\x15*\xd8;\xd6\xe05\x00\x9f\xbb\x90\x04\x06\xbe7\x1f\x00\x00\x00\x1c\x00\x00@\x05(\xcd\x99\xb9\xfa\x12geKS\xf6\x08\x87\xc9\xc3[\xcfg\xa8\xff'
+assert raw(packet) == b'E\x00\x01L\x00\x01\x00\x00@\x11\xf5\xc3\xc0\xa8\x01\x82\xc0\xa8\x01\n\x01\xf4\x01\xf4\x018\xa6\xc0KWdxMhjA\x00\x00\x00\x00\x00\x00\x00\x00! "\x08\x00\x00\x00\x00\x00\x00\x010"\x00\x000\x00\x00\x00,\x01\x01\x00\x04\x03\x00\x00\x0c\x01\x00\x00\x0c\x80\x0e\x00\x80\x03\x00\x00\x08\x02\x00\x00\x02\x03\x00\x00\x08\x03\x00\x00\x02\x00\x00\x00\x08\x04\x00\x00\x02(\x00\x00\x88\x00\x02\x00\x00\xbbA\xbbA\xcf\xaf4\xe3\xb3 \x96r\xae\xf1\xc5\x1b\x9dR\x91\x9f\x17\x81\xd0\xb4\xcd\x88\x9dJ\xaf\xe2ah\x87v\x00\x0c=\x901PZ\xef\xc0\x18ig\xea\xf5\xa7f7%\xfb\x10,Y\xc3\x9bzp\xd8\xd9\x16\x1c;\xd0\xebDX\x88\xb5\x02\x8e\xa0c\xba\n\xe0\x1f[?0\x80\x8akg\x10\xdc\x9b\xab`\x1eA\x16\x15}\x7fX\xcf\x83\\\xb63\xc6J\xbc\xb3\xa5\xc6\x1c">\x932S\x8b\xfc\x9f(,\xb6-\x1f\x00\xf4\xee\x88\x02)\x00\x00$\x8d\xfc\xf88L\\2\xf1\xb2\x94\xc6N\xabi\xf9\x8e\x9d\x8c\xf7\xe7\xf3R\x97\x1a\x91\xffgw\xd4}\xff\xed)\x00\x00\x1c\x00\x00@\x04\xe6L\x81\xc4\x15*\xd8;\xd6\xe05\x00\x9f\xbb\x90\x04\x06\xbe7\x1f\x00\x00\x00\x1c\x00\x00@\x05(\xcd\x99\xb9\xfa\x12geKS\xf6\x08\x87\xc9\xc3[\xcfg\xa8\xff'
 
 ## packets taken from
 ## https://github.com/wireshark/wireshark/blob/master/test/captures/ikev2-decrypt-aes128ccm12.pcap
@@ -68,7 +73,7 @@ assert b[IKEv2_payload_KE].load == b',f\xbe\xad\xb6\xce\x855\xd6!\x8c\xb4\x01\xa
 assert b[IKEv2_payload_Nonce].payload.type == 16388
 assert b[IKEv2_payload_Nonce].payload.payload.payload.next_payload == 0
 
-= Dissect Encrypted Inititor Request
+= Dissect Encrypted Initiator Request
 
 a = Ether(b"\x00!k\x91#H\xb8'\xeb\xa6XI\x08\x00E\x00\x00Yu\xe2@\x00@\x11AQ\xc0\xa8\x01\x02\xc0\xa8\x01\x0e\x01\xf4\x01\xf4\x00E}\xe0\xeahM!Yz\xfd6\xd9\xfe*\xb2-\xac#\xac. %\x08\x00\x00\x00\x02\x00\x00\x00=*\x00\x00!\xcc\xa0\xb3]\xe5\xab\xc5\x1c\x99\x87\xcb\xf1\xf5\xec\xff!\x0e\xb7g\xcd\xb8Qy8;\x96Mx\xe2")
 assert a[IKEv2_payload_Encrypted].next_payload == 42
@@ -92,6 +97,19 @@ assert isinstance(a, IKEv2_payload_CERT_CRL)
 assert isinstance(b, IKEv2_payload_CERT_STR)
 assert isinstance(c, IKEv2_payload_CERT_CRT)
 
+= Test Certs length calculations
+## For the length calculations see Figure 12 in RFC 7296
+a = IKEv2_payload_CERT_CRT(raw(IKEv2_payload_CERT_CRT()))
+assert len(a.x509Cert) > 0
+assert a.length == len(a.x509Cert) + 5
+
+b = IKEv2_payload_CERT_CRL(raw(IKEv2_payload_CERT_CRL()))
+assert len(b.x509CRL) > 0
+assert b.length == len(b.x509CRL) + 5
+
+c = IKEv2_payload_CERT_STR(raw(IKEv2_payload_CERT_STR(cert_data=b'dummy')))
+assert c.length == len(c.cert_data) + 5
+
 = Test TrafficSelector detection
 
 a = TrafficSelector(raw(IPv4TrafficSelector()))
@@ -102,6 +120,26 @@ assert isinstance(a, IPv4TrafficSelector)
 assert isinstance(b, IPv6TrafficSelector)
 assert isinstance(c, EncryptedTrafficSelector)
 
+= Test TSi with multiple TrafficSelector dissection
+
+a = IKEv2_payload_TSi()
+a.traffic_selector.extend(IPv4TrafficSelector() * 2)
+a.traffic_selector.extend(IPv6TrafficSelector() * 3)
+assert len(a.traffic_selector) == 5
+
+b = IKEv2_payload_TSi(raw(a))
+assert len(b.traffic_selector) == 5
+
+= Test automatic calculation of number_of_TSs field
+
+a = IKEv2_payload_TSi(traffic_selector=IPv4TrafficSelector() * 2)
+b = IKEv2_payload_TSi(raw(a))
+assert b.number_of_TSs == 2
+
+c = IKEv2_payload_TSr(traffic_selector=IPv4TrafficSelector() * 2)
+d = IKEv2_payload_TSr(raw(c))
+assert d.number_of_TSs == 2
+
 = IKEv2_payload_Encrypted_Fragment, simple tests
 
 s = b"\x00\x00\x00\x08\x00\x01\x00\x01"
@@ -109,3 +147,1226 @@ assert raw(IKEv2_payload_Encrypted_Fragment()) == s
 
 p = IKEv2_payload_Encrypted_Fragment(s)
 assert p.length == 8 and p.frag_number == 1
+
+
+= Build and dissect UDP encapsulated IKEv1 packets
+
+pkt = Ether() / IP() / UDP() / NON_ESP() / ISAKMP(init_cookie = b'\x01\x02\x03\x04\x05\x06\x07\x08', resp_cookie = b'\x08\x07\x06\x05\x04\x03\x02\x01')
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[NON_ESP].non_esp == 0x00
+assert pkt[ISAKMP].version == 0x10
+assert pkt[ISAKMP].init_cookie == b'\x01\x02\x03\x04\x05\x06\x07\x08'
+assert pkt[ISAKMP].resp_cookie == b'\x08\x07\x06\x05\x04\x03\x02\x01'
+
+pkt = Ether(raw(pkt))
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[NON_ESP].non_esp == 0x00
+assert pkt[ISAKMP].version == 0x10
+assert pkt[ISAKMP].init_cookie == b'\x01\x02\x03\x04\x05\x06\x07\x08'
+assert pkt[ISAKMP].resp_cookie == b'\x08\x07\x06\x05\x04\x03\x02\x01'
+
+
+# the IKEv1 and IKEv2 headers are compatible, so changing the version to 0x02...
+pkt[ISAKMP].version = 0x20
+# ...should turn the ISAKMP packet into an IKEv2 packet after building and dissecting
+pkt = Ether(raw(pkt))
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[NON_ESP].non_esp == 0x00
+assert pkt[IKEv2].version == 0x20
+assert pkt[IKEv2].init_SPI == b'\x01\x02\x03\x04\x05\x06\x07\x08'
+assert pkt[IKEv2].resp_SPI == b'\x08\x07\x06\x05\x04\x03\x02\x01'
+
+
+= Build and dissect UDP encapsulated IKEv2 packets
+
+pkt = Ether() / IP() / UDP() / NON_ESP() / IKEv2(init_SPI = b'\x01\x02\x03\x04\x05\x06\x07\x08', resp_SPI = b'\x08\x07\x06\x05\x04\x03\x02\x01')
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[NON_ESP].non_esp == 0x00
+assert pkt[IKEv2].version == 0x20
+assert pkt[IKEv2].init_SPI == b'\x01\x02\x03\x04\x05\x06\x07\x08'
+assert pkt[IKEv2].resp_SPI == b'\x08\x07\x06\x05\x04\x03\x02\x01'
+
+pkt = Ether(raw(pkt))
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[NON_ESP].non_esp == 0x00
+assert pkt[IKEv2].version == 0x20
+assert pkt[IKEv2].init_SPI == b'\x01\x02\x03\x04\x05\x06\x07\x08'
+assert pkt[IKEv2].resp_SPI == b'\x08\x07\x06\x05\x04\x03\x02\x01'
+
+# the IKEv1 and IKEv2 headers are compatible, so changing the version to 0x01...
+pkt[IKEv2].version = 0x10
+# ...should turn the IKEv2 packet into an ISAKMP packet after building and dissecting
+pkt = Ether(raw(pkt))
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[NON_ESP].non_esp == 0x00
+assert pkt[ISAKMP].version == 0x10
+assert pkt[ISAKMP].init_cookie == b'\x01\x02\x03\x04\x05\x06\x07\x08'
+assert pkt[ISAKMP].resp_cookie == b'\x08\x07\x06\x05\x04\x03\x02\x01'
+
+
+= Build and dissect UDP encapsulated ESP packets
+
+pkt = Ether() / IP() / UDP() / ESP(spi = 0x01020304)
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[ESP].spi == 0x01020304
+
+pkt = Ether(raw(pkt))
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[ESP].spi == 0x01020304
+
+= Build and dissect UDP encapsulated NAT-keepalive packets
+
+pkt = Ether() / IP() / UDP() / NAT_KEEPALIVE()
+pkt.show()
+assert pkt[UDP].sport == 4500
+assert pkt[UDP].dport == 4500
+assert pkt[NAT_KEEPALIVE].nat_keepalive == 0xFF
+
+pkt = Ether(b'DNm\xa4\xf6G`W\x18\x93\x9c\x7f\x08\x00E\x00\x00\x1d\xfb.\x00\x00\x80\x11\x9a\x16\xc0\xa8\x01\x1c>\x99\xa5-*\xca\x11\x94\x00\t\x1e\xf2\xff')
+pkt.show()
+assert pkt[UDP].dport == 4500
+assert pkt[NAT_KEEPALIVE].nat_keepalive == 0xFF
+
+
++ Wireshark Captures
+
+= IKEv2 key exchange with NAT-traversal
+
+* Loads and dissects the four frames of the key exchange from a Wireshark
+* capture and compares them with manually built scapy packets.
+
+pcap = rdpcap(scapy_path("/test/pcaps/ikev2_nat_t.pcapng"), count=4)
+
+ike_auth_request_encrypted_payload = binascii.unhexlify(''.join("""
+                             be11 14ab1abe02954640 ce512b03d6527a50
+dd17707ff420b9b5 b02d2874c57afdd3 fa95b15693017a12 8333c8d694f2cd61
+e98b0717f65e1860 430f0699a4174af6 a6c929ff4114b686 f201f471ff9b191e
+4d4cbd43dd994ef6 d5179b6845843d2d 1502f16d4356dc3b ad819c1b0549296b
+dbe479878dbc8a8b e71f9017946bc198 ef010f83a69a5d81 a312be0df9afa949
+e3f0807bd2785498 c0c492f0bcde5085 b2df1187657cbf23 e11c25558af278d0
+1bceadf5548a8990 a6adea270410cb16 1786e0798ed8f047 3442b43399e42122
+6f2ee1e2b0787dfc f56b7b32f3d0b02d 038764ce8ffee757 b94896763c68c2bb
+2a94dec851dcf7e4 489ba8e431d1c63c f5d19a097674b513 58e6b5052a87dd48
+bb3be834b06ab704 579fcac6f6bf647c 87b4c5c0b7353df6 0b55e32a75ac4ced
+3c1724d32a068207 226769352b08eefb 195da55e29c3eea1 05f0fd024029e0d7
+8b83757bd1b6052a 64febad6779cfca3 5b9a2529dc15d2a5 ee8825a2ab3e72ed
+e84aaeb86e8debd6 2a9b3d6503dd6c1a 7e03b87b81578dc0 fb087a5ad2d6bf6b
+d149d108defcabb5 721f8b4ebf1b9b78 80bdd2fc93856afe 4f54a32125964bbc
+fd917239f5af1db9 cd3d188ab7165826 7a445c13d2147169 5da3f3a674c2baaf
+5fd7636cc8ca4b43 142fd2588bb31fdd d6a42b20ebc03b01 04e8beb1356fc863
+0bd95de8574e16fe 14cfa9a6455e20e9 eb08bf632cea53e7 c614277e32fa81d9
+cb2efed29b04377a 748bfab753058349 f21a03fa5c5f478b c0bd993ca3e982b9
+d19fa8d24306e46a b41d9bbfd1d2e2da 112b6c840cc7b86b 8e005aa71b5339d1
+ff2eabb0124df2bf 910173c17380a7e3 85d22f94fa6e3f78 bce897a9a37e08c1
+1124661701dfd643 bba0c4ab4d8e19bb 95478e272d61c1a1 6d4e562f25c3c0a1
+69d39a84045183e2 684ac80ab6e18f20 dc4cc8d5b1d83293 07766d58695eff56
+14c207e045152933 07f9dbeb621e1c25 665f75f55e1ae90c aa43a500fa1ecf18
+3d7e7d46db8eae03 e1bc7a3aefab0c00 9884ca11e7889841 8459936a02699e5f
+7f798d3c81de4933 a7f14f62aa5c31ae 2693089ca1df68a5 2cd338d5d2539053
+5099dd4f0646318f 079822b43f5a47b7 db9eba75ef843a42 98fb9e695a349824
+bef5ee441997f7c5 303c4f8288bb8be1 6cc72fc348c777ec 7ce8b0f032633890
+f01fbeef028f3bb5 ffd1ec663e9304cf 745d4659fc67f32d cffffa9deae65066
+5a2779b742057d71 86bd2603ce0946c4 1589d63fae9c404d 6c7f793a436c775a
+d7d34f2dd609a272 4ac70b514a76d248 8eefb6fc2f3bd196 4dfc1a0d652e89a9
+e0b3278bc2c4c961 19df82bdc3b1f99d 399b0dbf62d23ea3 a7e940177525130b
+df5960b33b3d2d73 28d98a5fd9bbec2e 71404b77facc8053 a14feafd49bf150f
+450384b99d392549 31f06ac18d225368 5c52b4ee6ad50337 dbce7f72bf56e4bf
+55fdf3fd42c39c7d 65a48987ad84d1e0 c4e4543463c95a8e 646744240fdc00b6
+0c009f4afd15b800 182a5004e4062557 e7b20115e01d1cc3 5eb8d01e22f0bf2d
+bb2db84a970934d0 5f9b0d5e5350a45f 733a747e229eca56 087886a5c09efac8
+0c9545e6d849189b 40d7e7b9da4a9f04 9fb0273c3a2ad370 a84d5e7db14c362c
+c84483bbe70f2573 8116b11b877a7939 628a2dec6a590056 fdc7ce849770f12d
+0f63a701e672cf93 75c68c4325e60e3e ae46c7dd014df09d 4594339fa5e82ab3
+9de316df933694da e20120886403
+""".split()))
+
+
+ike_auth_response_encrypted_payload = binascii.unhexlify(''.join("""
+                             0fb3 4e8905b03a3d9b97 70f3e63428ab00be
+1bc29397bec721ef 9bd02e6cc64a309b 0c0dd67e4442f235 c201ccb5f6b8c8b0
+26baaaf0dce597c0 dd610ebbc4aa2d07 8cbd6fdc2dd879a9 f3216edaabd965d8
+5fe04a202615c5c6 08b0caf7db24dc08 4d0d86e560ccb75e 209941a2945bab45
+0795b96cc4f03752 163825f1be62d009 038f29f25956f3e9 3648ea647af4fbea
+52a19bbf16074ed3 9161cfd1a1695176 059cbfc48c57755f b1b1b397155171a0
+b11e10d3f476512b 73687912265ccb6f 1fef5aa5dee1ffc3 a5ecc574a76d529b
+884f819f859c015a a3977230a69657d7 1d54b5cfebcc135a 4010294fdc98db45
+e933cfeca0d638b1 f3f42c863be5501c 105ebc0efc4a8dd2 e48fdc4f35a59068
+5b1c073f6dd368fa 4ac1af60469f5ac0 d209445259a5ec1c e1ce59fad2dd60bb
+11eae2a678095d99 7b69733553933371 b083e1f94d5bd71d b9fc9167068f4565
+1f9de7b7cfa30e6f 54f65e2c9f1a6d88 ff7beff94532af43 ce9067db85fd3679
+5a8ad841889285f4 f27d740d8da1429b 0764f789f314e20f 5a08258b4bdfd75d
+7b7b9cb4b0bb7c2b a469ac24545f2fbe 0621bdaa76898cb6 cb3bbd334c6b6394
+ef7e1cf31df2dd0b 86089a654b942f6e fb7ee5ba401200e0 d727791fc3f978dc
+f446067cd054e664 69ea05784e61ce67 a1fe98a73d22962d 703ad51ff1091920
+f111c2f1535197f8 72471fc2b482b55b 15bfb7525c4c1b4d 8b9a1b98534dcea5
+8343e35e0ecb0164 953604b8687315b8 86509cc26b8730be f8ef669e77466628
+2da94192b67f0c4a 56ff1f7b3a080e4f 0e9ed767d497e8d3 1807169a7c62b80c
+c27c8e4907d59b02 a9d5fd0b9aa8ed96 7bd26a1ad6bce39b 562382ccfc6102d3
+5d4cefd222eadfc4 cffff96f16e69c4a 7b7367dbf48a13c2 1c95ef3b3bf7e1fb
+b240854e6c40b8a8 a8e957919e088d36 4e1da0c0130ae87b 83e980f6f14a9cfa
+fe8e956d489a03aa c365767ec06cee58 04ed81cfe559a8a5 ed00e0ae964e2705
+d2c9011390ba6afd 262b4527144ce8b6 4d438ebddd94eb2c e39c6c254547f0d4
+27b4abf5217c9588 f96dc393517bfab2 50153321ddced8e2 dbb52454e342a483
+1af575c5420b5d37 42aa9ae79e3e7187 3117fd36c856e1c0 317b4ad2d1d3fe38
+b528eb3438210e14 d10e5d2d9feff9d8 1f6fdefde57da710 db7f72e03d154aba
+61bacccd26c0a80f e710f55eb5bb59db 2c0aec7f1003fb4f 1ffd219932bc8e7f
+4f7ced086f6c3067 7610e78a6e8e04dc 330cd2da1ffb181a e09b5b52b9ea366b
+ea88329e2c2d6f51 68b1b2b7ac118861 a56cdc43402d89d6 26344a127a7cb39a
+3f2e1a8ae35b72fa c0b8eb83622cd944 fe86bc8f340ea1a0 81fb980c9e6baa8e
+f9c1b37d11b13d51 e0cf72aac6dbfab9 49f8443d4f3098f9 b022ea0fa25dd418
+f9cc26d0b8358ddd 778204fd9da6374a 46c4cc1777485acc b9c3975a1c12d9f3
+ac326a8e37ca3c17 31a0b6f163a4335c 1c589d52d8b82699 c0c1b31b6b58a7d6
+76d3eeca77a0b4ee 289b11494a217031 d464e32c28e7c109 5afdad0297c5dd65
+1ad1a856f330647a 4ba7be0eee67eace e4a8137709b1234e 07909fb464b5b4fe
+f63e8829a9f066dc ecb8c12cf91836cd 7b7300b86ecea0f7 467b2991832c8380
+3e5f02e1b663e064 e4bd991caa1bcadb 38d984595233f6aa 5c7079217ea5405e
+72a515e9f787d3d9 0a48cb098216f8ff a94ddd0bd8634d48 2f4ffcb96dd81e66
+0a4324eb34f6
+""".split()))
+
+
+frames = [
+    (
+        # i: frame number
+        0,
+        # title:
+        "IKE_SA_INIT request",
+        # data: raw frame data
+        binascii.unhexlify(''.join("""
+        005056eddb32000c 2930109e08004500 014cedc240004011 da45c0a8f583ac10
+        0f5c2aca11940138 97c9000000008992 2c915f35570e0000 0000000000002120
+        2208000000000000 012c220000280000 0024010100030300 000c01000014800e
+        0100030000080200 0005000000080400 0013280000480013 0000db253178440c
+        e776a794133cb8b6 9e5eb07473353657 0c64d7b630549c89 9c0712d828b37168
+        500885e051024578 afc75c101f73b894 3cad62d74a30f2be 1fca2b00002c09cb
+        538b2c3dbd4d0bb0 eec8d318cb801a9b 4715b207828d9b5f f1f4ec64ed588637
+        07bcf14ccf052b00 0014eb4c1b788afd 4a9cb7730a68d56c 53212b000014c61b
+        aca1f1a60cc10800 0000000000002b00 00184048b7d56ebc e88525e7de7f00d6
+        c2d3c00000002900 00144048b7d56ebc e88525e7de7f00d6 c2d3290000080000
+        402e290000080000 4016000000100000 402f000100020003 0004
+        """.split())),
+        # packet:  Ether / IP / UDP / NON_ESP / IKEv2 / ...
+        Ether(dst='00:50:56:ed:db:32', src='00:0c:29:30:10:9e', type='IPv4') /
+        IP(version=4, ihl=5, tos=0x0, len=332, id=60866, flags='DF', frag=0, ttl=64, proto='udp', chksum=0xda45, src='192.168.245.131', dst='172.16.15.92') /
+        UDP(sport=10954, dport=4500, len=312, chksum=0x97c9) /
+        NON_ESP() /
+        IKEv2(
+            init_SPI=b'\x89\x92\x2c\x91\x5f\x35\x57\x0e',
+            resp_SPI=b'\x00\x00\x00\x00\x00\x00\x00\x00',
+            next_payload='SA',
+            version=0x20,
+            exch_type='IKE_SA_INIT',
+            flags='Initiator',
+            id=0,
+            length=300
+        ) /
+        IKEv2_payload_SA(
+            next_payload='KE',
+            res=0,
+            length=40,
+            prop=IKEv2_payload_Proposal(
+                next_payload='last',
+                res=0,
+                length=36,
+                proposal=1,
+                proto='IKEv2',
+                SPIsize=0,
+                trans_nb=3,
+                SPI='',
+                trans=(
+                    IKEv2_payload_Transform(
+                        next_payload='Transform',
+                        res=0,
+                        length=12,
+                        transform_type='Encryption',
+                        res2=0,
+                        transform_id='AES-GCM-16ICV',
+                        key_length=256
+                    ) /
+                    IKEv2_payload_Transform(
+                        next_payload='Transform',
+                        res=0,
+                        length=8,
+                        transform_type='PRF',
+                        res2=0,
+                        transform_id='PRF_HMAC_SHA2_256'
+                    ) /
+                    IKEv2_payload_Transform(
+                        next_payload='last',
+                        res=0,
+                        length=8,
+                        transform_type='GroupDesc',
+                        res2=0,
+                        transform_id='256randECPgr'
+                    )
+                )
+            )
+        ) /
+        IKEv2_payload_KE(
+            next_payload='Nonce',
+            res=0,
+            length=72,
+            group='256randECPgr',
+            res2=0,
+            load=b'\xdb%1xD\x0c\xe7v\xa7\x94\x13<\xb8\xb6\x9e^\xb0ts56W\x0cd\xd7\xb60T\x9c\x89\x9c\x07\x12\xd8(\xb3qhP\x08\x85\xe0Q\x02Ex\xaf\xc7\\\x10\x1fs\xb8\x94<\xadb\xd7J0\xf2\xbe\x1f\xca'
+        ) /
+        IKEv2_payload_Nonce(
+            next_payload='VendorID',
+            res=0,
+            length=44,
+            load=b'\t\xcbS\x8b,=\xbdM\x0b\xb0\xee\xc8\xd3\x18\xcb\x80\x1a\x9bG\x15\xb2\x07\x82\x8d\x9b_\xf1\xf4\xecd\xedX\x867\x07\xbc\xf1L\xcf\x05'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=20,
+            vendorID=b'\xebL\x1bx\x8a\xfdJ\x9c\xb7s\nh\xd5lS!'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=20,
+            vendorID=b'\xc6\x1b\xac\xa1\xf1\xa6\x0c\xc1\x08\x00\x00\x00\x00\x00\x00\x00'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=24,
+            vendorID=b'@H\xb7\xd5n\xbc\xe8\x85%\xe7\xde\x7f\x00\xd6\xc2\xd3\xc0\x00\x00\x00'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='Notify',
+            res=0,
+            length=20,
+            vendorID=b'@H\xb7\xd5n\xbc\xe8\x85%\xe7\xde\x7f\x00\xd6\xc2\xd3'
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='Notify',
+            res=0,
+            length=8,
+            proto='Reserved',
+            SPIsize=0,
+            type='IKEV2_FRAGMENTATION_SUPPORTED',
+            SPI=b'',
+            load=b''
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='Notify',
+            res=0,
+            length=8,
+            proto='Reserved',
+            SPIsize=0,
+            type='REDIRECT_SUPPORTED',
+            SPI=b'',
+            load=b''
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='None',
+            res=0,
+            length=16,
+            proto='Reserved',
+            SPIsize=0,
+            type='SIGNATURE_HASH_ALGORITHMS',
+            SPI='',
+            load=b'\x00\x01\x00\x02\x00\x03\x00\x04'
+        )
+    ),
+    (
+        # i: frame number
+        1,
+        # title:
+        "IKE_SA_INIT response",
+        # data: raw frame data
+        binascii.unhexlify(''.join("""
+        000c2930109e0050 56eddb3208004500 0151a5dc00008011 2227ac100f5cc0a8
+        f58311942aca013d af99000000008992 2c915f35570e98d5 6d32e2a047422120
+        2220000000000000 0131220000280000 0024010100030300 000c01000014800e
+        0100030000080200 0005000000080400 0013280000480013 00001d9cd5974c95
+        0c95e0544483fb1f 7a9132f5fe8959c0 9ab3a54c779ff2bc f4522a030dc33b9d
+        5ddfeb99e028c0e8 ba7d80dfdcf12b15 16dbe180e6aec664 428b2600002c1d10
+        7dc5a7463da7d761 014139fb381af9cd 3b8c0181e6cd36a8 ae105e55aa7fe71f
+        5db1d36c29152b00 0005042b00001840 48b7d56ebce88525 e7de7f00d6c2d3c0
+        0000002b00001440 48b7d56ebce88525 e7de7f00d6c2d32b 000014c6f57ac398
+        f493208145b7581e 8789832900001485 817703c6e320d2ae 5a4dd02056c6d729
+        0000080000402e29 0000100000402f00 0100020003000400 00000800004014
+        """.split())),
+        # packet:  Ether / IP / UDP / NON_ESP / IKEv2 / ...
+        Ether(dst='00:0c:29:30:10:9e', src='00:50:56:ed:db:32', type='IPv4') /
+        IP(version=4, ihl=5, tos=0x0, len=337, id=42460, flags='', frag=0, ttl=128,
+           proto='udp', chksum=0x2227, src='172.16.15.92', dst='192.168.245.131') /
+        UDP(sport=4500, dport=10954, len=317, chksum=0xaf99) /
+        NON_ESP() /
+        IKEv2(
+            init_SPI=b'\x89\x92\x2c\x91\x5f\x35\x57\x0e',
+            resp_SPI=b'\x98\xd5\x6d\x32\xe2\xa0\x47\x42',
+            next_payload='SA',
+            version=0x20,
+            exch_type='IKE_SA_INIT',
+            flags='Response',
+            id=0,
+            length=305
+        ) /
+        IKEv2_payload_SA(
+            next_payload='KE',
+            res=0,
+            length=40,
+            prop=IKEv2_payload_Proposal(
+                next_payload='last',
+                res=0,
+                length=36,
+                proposal=1,
+                proto='IKEv2',
+                SPIsize=0,
+                trans_nb=3,
+                SPI='',
+                trans=(
+                    IKEv2_payload_Transform(
+                        next_payload='Transform',
+                        res=0,
+                        length=12,
+                        transform_type='Encryption',
+                        res2=0,
+                        transform_id='AES-GCM-16ICV',
+                        key_length=256
+                    ) /
+                    IKEv2_payload_Transform(
+                        next_payload='Transform',
+                        res=0,
+                        length=8,
+                        transform_type='PRF',
+                        res2=0,
+                        transform_id='PRF_HMAC_SHA2_256'
+                    ) /
+                    IKEv2_payload_Transform(
+                        next_payload='last',
+                        res=0,
+                        length=8,
+                        transform_type='GroupDesc',
+                        res2=0,
+                        transform_id='256randECPgr'
+                    )
+                )
+            )
+        ) /
+        IKEv2_payload_KE(
+            next_payload='Nonce',
+            res=0,
+            length=72,
+            group='256randECPgr',
+            res2=0,
+            load=b'\x1d\x9c\xd5\x97L\x95\x0c\x95\xe0TD\x83\xfb\x1fz\x912\xf5\xfe\x89Y\xc0\x9a\xb3\xa5Lw\x9f\xf2\xbc\xf4R*\x03\r\xc3;\x9d]\xdf\xeb\x99\xe0(\xc0\xe8\xba}\x80\xdf\xdc\xf1+\x15\x16\xdb\xe1\x80\xe6\xae\xc6dB\x8b'
+        ) /
+        IKEv2_payload_Nonce(
+            next_payload='CERTREQ',
+            res=0,
+            length=44,
+            load=b'\x1d\x10}\xc5\xa7F=\xa7\xd7a\x01A9\xfb8\x1a\xf9\xcd;\x8c\x01\x81\xe6\xcd6\xa8\xae\x10^U\xaa\x7f\xe7\x1f]\xb1\xd3l)\x15'
+        ) /
+        IKEv2_payload_CERTREQ(
+            next_payload='VendorID',
+            res=0,
+            length=5,
+            cert_type='X.509 Certificate - Signature',
+            cert_data=b''
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=24,
+            vendorID=b'@H\xb7\xd5n\xbc\xe8\x85%\xe7\xde\x7f\x00\xd6\xc2\xd3\xc0\x00\x00\x00'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=20,
+            vendorID=b'@H\xb7\xd5n\xbc\xe8\x85%\xe7\xde\x7f\x00\xd6\xc2\xd3'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=20,
+            vendorID=b'\xc6\xf5z\xc3\x98\xf4\x93 \x81E\xb7X\x1e\x87\x89\x83'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='Notify',
+            res=0,
+            length=20,
+            vendorID=b'\x85\x81w\x03\xc6\xe3 \xd2\xaeZM\xd0 V\xc6\xd7'
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='Notify',
+            res=0,
+            length=8,
+            proto='Reserved',
+            SPIsize=0,
+            type='IKEV2_FRAGMENTATION_SUPPORTED',
+            SPI=b'',
+            load=b''
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='Notify',
+            res=0,
+            length=16,
+            proto='Reserved',
+            SPIsize=0,
+            type='SIGNATURE_HASH_ALGORITHMS',
+            SPI=b'',
+            load=b'\x00\x01\x00\x02\x00\x03\x00\x04'
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='None',
+            res=0,
+            length=8,
+            proto='Reserved',
+            SPIsize=0,
+            type='MULTIPLE_AUTH_SUPPORTED'
+        )
+    ),
+    (
+        # i: frame number
+        2,
+        # title:
+        "IKE_AUTH request",
+        # data: raw frame data
+        binascii.unhexlify(''.join("""
+        005056eddb32000c 2930109e08004500 0520edc640004011 d66dc0a8f583ac10
+        0f5c2aca1194050c 8eb0000000008992 2c915f35570e98d5 6d32e2a047422e20
+        2308000000010000 0500230004e4
+        """.split())) + ike_auth_request_encrypted_payload,
+        # packet:  Ether / IP / UDP / NON_ESP / IKEv2 / ...
+        Ether(dst='00:50:56:ed:db:32', src='00:0c:29:30:10:9e', type='IPv4') /
+        IP(version=4, ihl=5, tos=0x0, len=1312, id=60870, flags='DF', frag=0, ttl=64,
+           proto='udp', chksum=0xd66d, src='192.168.245.131', dst='172.16.15.92') /
+        UDP(sport=10954, dport=4500, len=1292, chksum=0x8eb0) /
+        NON_ESP() /
+        IKEv2(
+            init_SPI=b'\x89\x92\x2c\x91\x5f\x35\x57\x0e',
+            resp_SPI=b'\x98\xd5\x6d\x32\xe2\xa0\x47\x42',
+            next_payload='Encrypted',
+            version=0x20,
+            exch_type='IKE_AUTH',
+            flags='Initiator',
+            id=1,
+            length=1280
+        ) /
+        IKEv2_payload_Encrypted(
+            next_payload='IDi',
+            res=0,
+            length=1252,
+            load = ike_auth_request_encrypted_payload
+        )
+    ),
+    (
+        # i: frame number
+        3,
+        # title:
+        "IKE_AUTH response",
+        # data: raw frame data
+        binascii.unhexlify(''.join("""
+        000c2930109e0050 56eddb3208004500 0518a5dd00008011 1e5fac100f5cc0a8
+        f58311942aca0504 886e000000008992 2c915f35570e98d5 6d32e2a047422e20
+        2320000000010000 04f8240004dc
+        """.split())) + ike_auth_response_encrypted_payload,
+        # packet:  Ether / IP / UDP / NON_ESP / IKEv2 / ...
+        Ether(dst='00:0c:29:30:10:9e', src='00:50:56:ed:db:32', type='IPv4') /
+        IP(version=4, ihl=5, tos=0x0, len=1304, id=42461, flags='', frag=0, ttl=128,
+           proto='udp', chksum=0x1e5f, src='172.16.15.92', dst='192.168.245.131') /
+        UDP(sport=4500, dport=10954, len=1284, chksum=0x886e) /
+        NON_ESP() /
+        IKEv2(
+            init_SPI=b'\x89\x92\x2c\x91\x5f\x35\x57\x0e',
+            resp_SPI=b'\x98\xd5\x6d\x32\xe2\xa0\x47\x42',
+            next_payload='Encrypted',
+            version=0x20,
+            exch_type='IKE_AUTH',
+            flags='Response',
+            id=1,
+            length=1272
+        ) /
+        IKEv2_payload_Encrypted(
+            next_payload='IDr',
+            res=0,
+            length=1244,
+            load=ike_auth_response_encrypted_payload
+        )
+    ),
+    (
+        # i: frame number
+        -2,
+        # title:
+        "IKE_AUTH request, decrypted",
+        binascii.unhexlify(''.join("""
+        005056eddb32000c 2930109e08004500 0520edc640004011 d66dc0a8f583ac10
+        0f5c2aca1194050c 8eb0000000008992 2c915f35570e98d5 6d32e2a047422320
+        2308000000010000 0500250000120300 0000696b6576322d 63657274290002dc
+        04308202d3308202 79a0030201020204 01000013300a0608 2a8648ce3d040302
+        304b310b30090603 5504061302444531 0f300d0603550408 130642617965726e
+        310c300a06035504 0a13034e4350311d 301b060355040313 144e43502044656d
+        6f20434120454343 2032303530302218 0f32303136303830 343038303031335a
+        180f323035303038 3035303830303133 5a3074310b300906 0355040613024445
+        311a301806035504 0a0c1144656d6f20 4f7267616e697a61 74696f6e3110300e
+        060355040b0c0744 656d6f204f553110 300e06035504030c 07436c69656e7431
+        3125302306092a86 4886f70d01090116 16636c69656e7431 4064656d6f2e6e63
+        702d652e636f6d30 59301306072a8648 ce3d020106082a86 48ce3d0301070342
+        0004b74572a1b5dd 1c4cafdab7f06a92 913cab7ee2a55106 efa4056e2dc17369
+        600510553454e37e 69e9a08c5abae5a0 5a77e01ebb04e4b2 72fe349f12a34088
+        ceeaa382011c3082 011830090603551d 1304023000300b06 03551d0f04040302
+        05a0301d0603551d 250416301406082b 0601050507030206 082b060105050703
+        07301d0603551d0e 041604145a5e6aa2 9f89959131c17018 ef64dc2a8a4a4a6a
+        30750603551d2304 6e306c801425db6d 44dec7a03eb5f862 3ab18784546a0f04
+        09a14fa44d304b31 0b30090603550406 13024445310f300d 0603550408130642
+        617965726e310c30 0a060355040a1303 4e4350311d301b06 0355040313144e43
+        502044656d6f2043 4120454343203230 3530820302000230 490603551d110442
+        3040a026060a2b06 0104018237140203 a0180c16436c6965 6e74314064656d6f
+        2e6e63702d652e63 6f6d8116436c6965 6e74314064656d6f 2e6e63702d652e63
+        6f6d300a06082a86 48ce3d0403020348 0030450220602d76 6db7e07b70d88e38
+        10acc6cd350ccdda 1e60d77bd36ed6e6 0f869ef371022100 d1e3d278fcacf41c
+        d8380691363ad393 3d6bc293fae9c847 ddf6187bb0f06f49 2900000801004000
+        2600000801004008 270000410491c1dc 0f2a8f0e3bd7da99 1a43a39226355e42
+        29bcb62a0e9de979 fda864e3f06460dc aaff850759f48956 233865214e9a10e6
+        376f4c59b5c02f36 6d2f00005c0e0000 000c300a06082a86 48ce3d0403023045
+        022100c1486ab5b3 db4c8b08f3ae0613 20104c826fb0803b a1e6e30d58c8000b
+        ac514202205865ea 41bc99e0adfa2856 770efaff530f2e85 50da1d86f8504df0
+        04025fb12d210000 8001000000000100 0000020000000300 00000400004e2200
+        0000080000000900 00000a0000001900 0000070000700000 0070010000700200
+        004e2600004e2700 0070030000700400 0070050000700600 0070070000700800
+        00700900004e2300 004e240000700a00 004e250006646562 69616e700a000664
+        656269616e2c0000 2400000020010304 02c1a9656b030000 0c01000014800e00
+        8000000008050000 002d000018010000 00070000100000ff ff00000000ffffff
+        ff2b000018010000 00070000100000ff ffc0a8e100c0a8e1 ff2b000014afcad7
+        1368a1f1c96b8696 fc775701002b0000 14c61baca1f1a60c c208000000000000
+        002900001c4e6350 0a09b8e83c80b693 36268ec8f6000c29 30109e0000290000
+        080000400c000000 0800004014
+        """.split())),
+        Ether(dst='00:50:56:ed:db:32', src='00:0c:29:30:10:9e', type='IPv4') /
+        IP(version=4, ihl=5, tos=0x0, len=1312, id=60870, flags='DF', frag=0, ttl=64, proto='udp', chksum=0xd66d, src='192.168.245.131', dst='172.16.15.92') /
+        UDP(sport=10954, dport=4500, len=1292, chksum=0x8eb0) /
+        NON_ESP(non_esp=0x0) /
+        IKEv2(
+            init_SPI=b'\x89\x92\x2c\x91\x5f\x35\x57\x0e',
+            resp_SPI=b'\x98\xd5m2\xe2\xa0GB',
+            next_payload='IDi',
+            version=0x20,
+            exch_type='IKE_AUTH',
+            flags='Initiator',
+            id=1,
+            length=1280
+        ) /
+        IKEv2_payload_IDi(
+            next_payload='CERT',
+            res=0,
+            length=18,
+            IDtype='Email_addr',
+            res2=0x0,
+            ID='ikev2-cert'
+        ) /
+        IKEv2_payload_CERT_CRT(
+            next_payload='Notify', res=0, length=732,
+            cert_type='X.509 Certificate - Signature',
+            x509Cert=X509_Cert(
+                tbsCertificate=X509_TBSCertificate(
+                    version=ASN1_INTEGER(2),
+                    serialNumber=ASN1_INTEGER(0x1000013),
+                    signature=X509_AlgorithmIdentifier(
+                        algorithm=ASN1_OID('ecdsa-with-SHA256'),
+                        parameters=None
+                    ),
+                    issuer=[
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('countryName'), value=ASN1_PRINTABLE_STRING(b'DE'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('stateOrProvinceName'), value=ASN1_PRINTABLE_STRING(b'Bayern'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('organizationName'), value=ASN1_PRINTABLE_STRING(b'NCP'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('commonName'), value=ASN1_PRINTABLE_STRING(b'NCP Demo CA ECC 2050')))
+                    ],
+                    validity=X509_Validity(
+                        not_before=ASN1_GENERALIZED_TIME('20160804080013Z'),
+                        not_after=ASN1_GENERALIZED_TIME('20500805080013Z')
+                    ),
+                    subject=[
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('countryName'), value=ASN1_PRINTABLE_STRING(b'DE'))),
+                        X509_RDN(rdn=(X509_AttributeTypeAndValue(type=ASN1_OID('organizationName'), value=ASN1_UTF8_STRING(b'Demo Organization')))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('organizationUnitName'), value=ASN1_UTF8_STRING(b'Demo OU'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('commonName'), value=ASN1_UTF8_STRING(b'Client1'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('emailAddress'), value=ASN1_IA5_STRING(b'client1@demo.ncp-e.com')))
+                    ],
+                    subjectPublicKeyInfo=X509_SubjectPublicKeyInfo(
+                        signatureAlgorithm=X509_AlgorithmIdentifier(
+                            algorithm=ASN1_OID('ecPublicKey'),
+                            parameters=ASN1_OID('prime256v1')),
+                        subjectPublicKey=ECDSAPublicKey(
+                            ecPoint=ASN1_BIT_STRING(
+                                '000001001011011101000101011100101010000110110101110111010001110'
+                                '001001100101011111101101010110111111100000110101010010010100100'
+                                '010011110010101011011111101110001010100101010100010000011011101'
+                                '111101001000000010101101110001011011100000101110011011010010110'
+                                '000000000101000100000101010100110100010101001110001101111110011'
+                                '010011110100110100000100011000101101010111010111001011010000001'
+                                '011010011101111110000000011110101110110000010011100100101100100'
+                                '111001011111110001101001001111100010010101000110100000010001000'
+                                '1100111011101010'))),
+                    issuerUniqueID=None,
+                    subjectUniqueID=None,
+                    extensions=[
+                        X509_Extension(
+                            extnID=ASN1_OID('basicConstraints'),
+                            critical=None,
+                            extnValue=X509_ExtBasicConstraints(cA=None, pathLenConstraint=None)
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('keyUsage'),
+                            critical=None,
+                            extnValue=X509_ExtKeyUsage(keyUsage=ASN1_BIT_STRING('101'))
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('extKeyUsage'),
+                            critical=None,
+                            extnValue=X509_ExtExtendedKeyUsage(
+                                extendedKeyUsage=[
+                                    ASN1P_OID(oid=ASN1_OID('clientAuth')),
+                                    ASN1P_OID(oid=ASN1_OID('ipsecUser'))
+                                ]
+                            )
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('subjectKeyIdentifier'),
+                            critical=None,
+                            extnValue=X509_ExtSubjectKeyIdentifier(
+                                keyIdentifier=ASN1_STRING(b'Z^j\xa2\x9f\x89\x95\x911\xc1p\x18\xefd\xdc*\x8aJJj')
+                            )
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('authorityKeyIdentifier'),
+                            critical=None,
+                            extnValue=X509_ExtAuthorityKeyIdentifier(
+                                keyIdentifier=ASN1_STRING(b'%\xdbmD\xde\xc7\xa0>\xb5\xf8b:\xb1\x87\x84Tj\x0f\x04\t'),
+                                authorityCertIssuer=X509_GeneralName(
+                                    generalName=X509_DirectoryName(
+                                        directoryName=[
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('countryName'), value=ASN1_PRINTABLE_STRING(b'DE'))),
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('stateOrProvinceName'), value=ASN1_PRINTABLE_STRING(b'Bayern'))),
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('organizationName'), value=ASN1_PRINTABLE_STRING(b'NCP'))),
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('commonName'), value=ASN1_PRINTABLE_STRING(b'NCP Demo CA ECC 2050')))
+                                        ]
+                                    )
+                                ),
+                                authorityCertSerialNumber=ASN1_INTEGER(0x20002)
+                            )
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('subjectAltName'),
+                            critical=None,
+                            extnValue=X509_ExtSubjectAltName(
+                                subjectAltName=[
+                                    X509_GeneralName(
+                                        generalName=X509_OtherName(
+                                            type_id=ASN1_OID('.1.3.6.1.4.1.311.20.2.3'),
+                                            value=ASN1_UTF8_STRING(b'Client1@demo.ncp-e.com')
+                                        )
+                                    ),
+                                    X509_GeneralName(
+                                        generalName=X509_RFC822Name(
+                                            rfc822Name=ASN1_IA5_STRING(b'Client1@demo.ncp-e.com')
+                                        )
+                                    )
+                                ]
+                            )
+                        )
+                    ]
+                ),
+                signatureAlgorithm=X509_AlgorithmIdentifier(
+                    algorithm=ASN1_OID('ecdsa-with-SHA256'),
+                    parameters=None
+                ),
+                signatureValue=ECDSASignature(
+                    r=ASN1_INTEGER(0x602d766db7e07b70d88e3810acc6cd350ccdda1e60d77bd36ed6e60f869ef371),
+                    s=ASN1_INTEGER(0xd1e3d278fcacf41cd8380691363ad3933d6bc293fae9c847ddf6187bb0f06f49)
+                )
+            )
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='Notify',
+            res=0,
+            length=8,
+            proto='IKE',
+            SPIsize=0,
+            type='INITIAL_CONTACT',
+            SPI='',
+            load=''
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='CERTREQ',
+            res=0,
+            length=8,
+            proto='IKE',
+            SPIsize=0,
+            type='HTTP_CERT_LOOKUP_SUPPORTED',
+            SPI='',
+            load=''
+        ) /
+        IKEv2_payload_CERTREQ(
+            next_payload='AUTH',
+            res=0,
+            length=65,
+            cert_type='X.509 Certificate - Signature',
+            cert_data=b'\x91\xc1\xdc\x0f*\x8f\x0e;\xd7\xda\x99\x1aC\xa3\x92&5^B)\xbc\xb6*\x0e\x9d\xe9y\xfd\xa8d\xe3\xf0d`\xdc\xaa\xff\x85\x07Y\xf4\x89V#8e!N\x9a\x10\xe67oLY\xb5\xc0/6m'
+        ) /
+        IKEv2_payload_AUTH(
+            next_payload='CP',
+            res=0,
+            length=92,
+            auth_type='Digital Signature',
+            res2=0x0,
+            load=b'\x0c0\n\x06\x08*\x86H\xce=\x04\x03\x020E\x02!\x00\xc1Hj\xb5\xb3\xdbL\x8b\x08\xf3\xae\x06\x13 \x10L\x82o\xb0\x80;\xa1\xe6\xe3\rX\xc8\x00\x0b\xacQB\x02 Xe\xeaA\xbc\x99\xe0\xad\xfa(Vw\x0e\xfa\xffS\x0f.\x85P\xda\x1d\x86\xf8PM\xf0\x04\x02_\xb1-'
+        ) /
+        IKEv2_payload_CP(
+            next_payload='SA',
+            res=0,
+            length=128,
+            CFGType='CFG_REQUEST',
+            res2=0x0,
+            attributes=[
+                ConfigurationAttribute(type='INTERNAL_IP4_ADDRESS', length=0, value=''),
+                ConfigurationAttribute(type='INTERNAL_IP4_NETMASK', length=0, value=''),
+                ConfigurationAttribute(type='INTERNAL_IP4_DNS', length=0, value=''),
+                ConfigurationAttribute(type='INTERNAL_IP4_NBNS', length=0, value=''),
+                ConfigurationAttribute(type=20002, length=0, value=''),
+                ConfigurationAttribute(type='INTERNAL_IP6_ADDRESS', length=0, value=''),
+                ConfigurationAttribute(type=9, length=0, value=''),
+                ConfigurationAttribute(type='INTERNAL_IP6_DNS', length=0, value=''),
+                ConfigurationAttribute(type='INTERNAL_DNS_DOMAIN', length=0, value=''),
+                ConfigurationAttribute(type='APPLICATION_VERSION', length=0, value=''),
+                ConfigurationAttribute(type=28672, length=0, value=''),
+                ConfigurationAttribute(type=28673, length=0, value=''),
+                ConfigurationAttribute(type=28674, length=0, value=''),
+                ConfigurationAttribute(type=20006, length=0, value=''),
+                ConfigurationAttribute(type=20007, length=0, value=''),
+                ConfigurationAttribute(type=28675, length=0, value=''),
+                ConfigurationAttribute(type=28676, length=0, value=''),
+                ConfigurationAttribute(type=28677, length=0, value=''),
+                ConfigurationAttribute(type=28678, length=0, value=''),
+                ConfigurationAttribute(type=28679, length=0, value=''),
+                ConfigurationAttribute(type=28680, length=0, value=''),
+                ConfigurationAttribute(type=28681, length=0, value=''),
+                ConfigurationAttribute(type=20003, length=0, value=''),
+                ConfigurationAttribute(type=20004, length=0, value=''),
+                ConfigurationAttribute(type=28682, length=0, value=''),
+                ConfigurationAttribute(type=20005, length=6, value='debian'),
+                ConfigurationAttribute(type=28682, length=6, value='debian')
+            ]
+        ) /
+        IKEv2_payload_SA(
+            next_payload='TSi',
+            res=0,
+            length=36,
+            prop=IKEv2_payload_Proposal(
+                next_payload='last',
+                res=0,
+                length=32,
+                proposal=1,
+                proto='ESP',
+                SPIsize=4,
+                trans_nb=2,
+                SPI=b'\xc1\xa9ek',
+                trans=IKEv2_payload_Transform(res=0, length=12, transform_type='Encryption', res2=0, transform_id='AES-GCM-16ICV', key_length=128) /
+                      IKEv2_payload_Transform(res=0, length=8, transform_type='Extended Sequence Number', res2=0, transform_id='No ESN')
+            )
+        ) /
+        IKEv2_payload_TSi(
+            next_payload='TSr',
+            res=0,
+            length=24,
+            number_of_TSs=1,
+            res2=0x0,
+            traffic_selector=[
+                IPv4TrafficSelector(TS_type='TS_IPV4_ADDR_RANGE',
+                                    IP_protocol_ID='All protocols',
+                                    length=16,
+                                    start_port=0,
+                                    end_port=65535,
+                                    starting_address_v4='0.0.0.0',
+                                    ending_address_v4='255.255.255.255')
+            ]
+        ) /
+        IKEv2_payload_TSr(
+            next_payload='VendorID',
+            res=0,
+            length=24,
+            number_of_TSs=1,
+            res2=0x0,
+            traffic_selector=[
+                IPv4TrafficSelector(
+                    TS_type='TS_IPV4_ADDR_RANGE',
+                    IP_protocol_ID='All protocols',
+                    length=16,
+                    start_port=0,
+                    end_port=65535,
+                    starting_address_v4='192.168.225.0',
+                    ending_address_v4='192.168.225.255')
+            ]
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=20,
+            vendorID=b'\xaf\xca\xd7\x13h\xa1\xf1\xc9k\x86\x96\xfcwW\x01\x00'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='VendorID',
+            res=0,
+            length=20,
+            vendorID=b'\xc6\x1b\xac\xa1\xf1\xa6\x0c\xc2\x08\x00\x00\x00\x00\x00\x00\x00'
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='Notify',
+            res=0,
+            length=28,
+            vendorID=b'NcP\n\t\xb8\xe8<\x80\xb6\x936&\x8e\xc8\xf6\x00\x0c)0\x10\x9e\x00\x00'
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='Notify',
+            res=0,
+            length=8,
+            proto='Reserved',
+            SPIsize=0,
+            type='MOBIKE_SUPPORTED',
+            SPI='',
+            load=''
+        ) /
+        IKEv2_payload_Notify(
+            next_payload=None,
+            res=0,
+            length=8,
+            proto='Reserved',
+            SPIsize=0,
+            type='MULTIPLE_AUTH_SUPPORTED'
+        )
+    ),
+    # IKE_AUTH response, decrypted
+    (
+        # i: frame number
+        -3,
+        # title:
+        "IKE_AUTH response, decrypted",
+        binascii.unhexlify(''.join("""
+        000c2930109e0050 56eddb3208004500 0518a5dd00008011 1e5fac100f5cc0a8
+        f58311942aca0504 886e000000008992 2c915f35570e98d5 6d32e2a047422420
+        2320000000010000 04f82500007e0900 00003074310b3009 0603550406130244
+        45311a3018060355 040a0c1144656d6f 204f7267616e697a 6174696f6e311030
+        0e060355040b0c07 44656d6f204f5531 10300e0603550403 0c07536572766572
+        313125302306092a 864886f70d010901 1616736572766572 314064656d6f2e6e
+        63702d652e636f6d 270002e604308202 dd30820283a00302 0102020401000016
+        300a06082a8648ce 3d040302304b310b 3009060355040613 024445310f300d06
+        0355040813064261 7965726e310c300a 060355040a13034e 4350311d301b0603
+        55040313144e4350 2044656d6f204341 2045434320323035 303022180f323031
+        3630383034303830 3031355a180f3230 3530303830353038 303031355a307431
+        0b30090603550406 13024445311a3018 060355040a0c1144 656d6f204f726761
+        6e697a6174696f6e 3110300e06035504 0b0c0744656d6f20 4f553110300e0603
+        5504030c07536572 7665723131253023 06092a864886f70d 0109011616736572
+        766572314064656d 6f2e6e63702d652e 636f6d3059301306 072a8648ce3d0201
+        06082a8648ce3d03 010703420004dec7 f4b2c8b2dc4d6345 ea1bc875c1076b55
+        d9dbc87d069d189b 3fd6bdffec3ec40a fc74a88583cc541b 46ada5e4040ce77d
+        6ab7745987296ec1 d236a878f394a382 0126308201223009 0603551d13040230
+        00300b0603551d0f 0404030205a03027 0603551d25042030 1e06082b06010505
+        07030106082b0601 050507030206082b 0601050507030630 1d0603551d0e0416
+        0414a54698574719 a02a49f01a2c9484 d482d94c27233075 0603551d23046e30
+        6c801425db6d44de c7a03eb5f8623ab1 8784546a0f0409a1 4fa44d304b310b30
+        0906035504061302 4445310f300d0603 5504081306426179 65726e310c300a06
+        0355040a13034e43 50311d301b060355 040313144e435020 44656d6f20434120
+        4543432032303530 8203020002304906 03551d1104423040 a026060a2b060104
+        018237140203a018 0c16536572766572 314064656d6f2e6e 63702d652e636f6d
+        8116536572766572 314064656d6f2e6e 63702d652e636f6d 300a06082a8648ce
+        3d04030203480030 4502205387d21afa 1bab56fc406f8176 8ae73fe18b93b4cf
+        f191fd01cda6fd92 020e95022100ee5f 6735a9f6d6b377e7 13cacdddd72fc7fb
+        a5d48258479ee1ed f2af2da848502f00 005c0e0000000c30 0a06082a8648ce3d
+        0403023045022078 d6a7e8b366bde8f9 c12f269f2bf64116 9511ce621a90059a
+        ed0fea47538b0e02 21008cf30813d135 aafe8e4dc0fdf2fd 595a9867f1a6083d
+        1e01a149c905ecf9 bfe62100005c0200 000000010004c0a8 e10a00020004ffff
+        ff004e240004c0a8 e101000300040000 0000000300040000 00004e220004ac10
+        0f5c4e2200040000 0000000400040000 0000000400040000 00004e2300040000
+        0000700200002800 0024000000200103 0402ac0faf030300 000c01000014800e
+        0080000000080500 00002c00002ccf0e 7950765db7f7371d bbdfa1720493c83c
+        1ba4dc3617c3192a 57b9285d9a630ac7 164611fdf42c2d00 0018010000000700
+        00100000ffffc0a8 e10ac0a8e10a2b00 0018010000000700 00100000ffffc0a8
+        e100c0a8e1ff2900 0014afcad71368a1 f1c96b8696fc7757 0100000000080000
+        400c
+        """.split())),
+        Ether(dst='00:0c:29:30:10:9e', src='00:50:56:ed:db:32', type='IPv4') /
+        IP(version=4, ihl=5, tos=0x0, len=1304, id=42461, flags='', frag=0, ttl=128, proto='udp', chksum=0x1e5f, src='172.16.15.92', dst='192.168.245.131') /
+        UDP(sport=4500, dport=10954, len=1284, chksum=0x886e) /
+        NON_ESP(non_esp=0x0) /
+        IKEv2(
+            init_SPI=b'\x89\x92\x2c\x91\x5f\x35\x57\x0e',
+            resp_SPI=b'\x98\xd5m2\xe2\xa0GB',
+            next_payload='IDr',
+            version=0x20,
+            exch_type='IKE_AUTH',
+            flags='Response',
+            id=1,
+            length=1272
+        ) /
+        IKEv2_payload_IDr(
+            next_payload='CERT',
+            res=0,
+            length=126,
+            IDtype=9,
+            res2=0x0,
+            ID=b'0t1\x0b0\t\x06\x03U\x04\x06\x13\x02DE1\x1a0\x18\x06\x03U\x04\n\x0c\x11Demo Organization1\x100\x0e\x06\x03U\x04\x0b\x0c\x07Demo OU1\x100\x0e\x06\x03U\x04\x03\x0c\x07Server11%0#\x06\t*\x86H\x86\xf7\r\x01\t\x01\x16\x16server1@demo.ncp-e.com'
+        ) /
+        IKEv2_payload_CERT_CRT(
+            next_payload='AUTH',
+            res=0,
+            length=742,
+            cert_type='X.509 Certificate - Signature',
+            x509Cert=X509_Cert(
+                tbsCertificate=X509_TBSCertificate(
+                    version=ASN1_INTEGER(2),
+                    serialNumber=ASN1_INTEGER(0x1000016),
+                    signature=X509_AlgorithmIdentifier(
+                        algorithm=ASN1_OID('ecdsa-with-SHA256'),
+                        parameters=None
+                    ),
+                    issuer=[
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('countryName'), value=ASN1_PRINTABLE_STRING(b'DE'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('stateOrProvinceName'), value=ASN1_PRINTABLE_STRING(b'Bayern'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('organizationName'), value=ASN1_PRINTABLE_STRING(b'NCP'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('commonName'), value=ASN1_PRINTABLE_STRING(b'NCP Demo CA ECC 2050')))
+                    ],
+                    validity=X509_Validity(
+                        not_before=ASN1_GENERALIZED_TIME('20160804080015Z'),
+                        not_after=ASN1_GENERALIZED_TIME('20500805080015Z')
+                    ),
+                    subject=[
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('countryName'), value=ASN1_PRINTABLE_STRING(b'DE'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('organizationName'), value=ASN1_UTF8_STRING(b'Demo Organization'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('organizationUnitName'), value=ASN1_UTF8_STRING(b'Demo OU'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('commonName'), value=ASN1_UTF8_STRING(b'Server1'))),
+                        X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('emailAddress'), value=ASN1_IA5_STRING(b'server1@demo.ncp-e.com')))
+                    ],
+                    subjectPublicKeyInfo=X509_SubjectPublicKeyInfo(
+                        signatureAlgorithm=X509_AlgorithmIdentifier(
+                            algorithm=ASN1_OID('ecPublicKey'),
+                            parameters=ASN1_OID('prime256v1')
+                        ),
+                        subjectPublicKey=ECDSAPublicKey(
+                            ecPoint=ASN1_BIT_STRING(
+                                '000001001101111011000111111101001011001011001000101100101101110'
+                                '001001101011000110100010111101010000110111100100001110101110000'
+                                '010000011101101011010101011101100111011011110010000111110100000'
+                                '110100111010001100010011011001111111101011010111101111111111110'
+                                '110000111110110001000000101011111100011101001010100010000101100'
+                                '000111100110001010100000110110100011010101101101001011110010000'
+                                '000100000011001110011101111101011010101011011101110100010110011'
+                                '000011100101001011011101100000111010010001101101010100001111000'
+                                '1111001110010100'
+                            )
+                        )
+                    ),
+                    issuerUniqueID=None,
+                    subjectUniqueID=None,
+                    extensions=[
+                        X509_Extension(
+                            extnID=ASN1_OID('basicConstraints'),
+                            critical=None,
+                            extnValue=X509_ExtBasicConstraints(cA=None, pathLenConstraint=None)
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('keyUsage'),
+                            critical=None,
+                            extnValue=X509_ExtKeyUsage(keyUsage=ASN1_BIT_STRING('101'))
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('extKeyUsage'),
+                            critical=None,
+                            extnValue=X509_ExtExtendedKeyUsage(
+                                extendedKeyUsage=[
+                                    ASN1P_OID(oid=ASN1_OID('serverAuth')),
+                                    ASN1P_OID(oid=ASN1_OID('clientAuth')),
+                                    ASN1P_OID(oid=ASN1_OID('ipsecTunnel'))
+                                ]
+                            )
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('subjectKeyIdentifier'),
+                            critical=None,
+                            extnValue=X509_ExtSubjectKeyIdentifier(
+                                keyIdentifier=ASN1_STRING(b"\xa5F\x98WG\x19\xa0*I\xf0\x1a,\x94\x84\xd4\x82\xd9L'#")
+                            )
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('authorityKeyIdentifier'),
+                            critical=None,
+                            extnValue=X509_ExtAuthorityKeyIdentifier(
+                                keyIdentifier=ASN1_STRING(b'%\xdbmD\xde\xc7\xa0>\xb5\xf8b:\xb1\x87\x84Tj\x0f\x04\t'),
+                                authorityCertIssuer=X509_GeneralName(
+                                    generalName=X509_DirectoryName(
+                                        directoryName=[
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('countryName'), value=ASN1_PRINTABLE_STRING(b'DE'))),
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('stateOrProvinceName'), value=ASN1_PRINTABLE_STRING(b'Bayern'))),
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('organizationName'), value=ASN1_PRINTABLE_STRING(b'NCP'))),
+                                            X509_RDN(rdn=X509_AttributeTypeAndValue(type=ASN1_OID('commonName'), value=ASN1_PRINTABLE_STRING(b'NCP Demo CA ECC 2050')))
+                                        ]
+                                    )
+                                ),
+                                authorityCertSerialNumber=ASN1_INTEGER(0x20002)
+                            )
+                        ),
+                        X509_Extension(
+                            extnID=ASN1_OID('subjectAltName'),
+                            critical=None,
+                            extnValue=X509_ExtSubjectAltName(
+                                subjectAltName=[
+                                    X509_GeneralName(
+                                        generalName=X509_OtherName(
+                                            type_id=ASN1_OID('.1.3.6.1.4.1.311.20.2.3'),
+                                            value=ASN1_UTF8_STRING(b'Server1@demo.ncp-e.com')
+                                        )
+                                    ),
+                                    X509_GeneralName(
+                                        generalName=X509_RFC822Name(
+                                            rfc822Name=ASN1_IA5_STRING(b'Server1@demo.ncp-e.com')
+                                        )
+                                    )
+                                ]
+                            )
+                        )
+                    ]
+                ),
+                signatureAlgorithm=X509_AlgorithmIdentifier(
+                    algorithm=ASN1_OID('ecdsa-with-SHA256'),
+                    parameters=None
+                ),
+                signatureValue=ECDSASignature(
+                    r=ASN1_INTEGER(0x5387d21afa1bab56fc406f81768ae73fe18b93b4cff191fd01cda6fd92020e95),
+                    s=ASN1_INTEGER(0xee5f6735a9f6d6b377e713cacdddd72fc7fba5d48258479ee1edf2af2da84850)
+                )
+            )
+        ) /
+        IKEv2_payload_AUTH(
+            next_payload='CP',
+            res=0,
+            length=92,
+            auth_type='Digital Signature',
+            res2=0x0,
+            load=b'\x0c0\n\x06\x08*\x86H\xce=\x04\x03\x020E\x02 x\xd6\xa7\xe8\xb3f\xbd\xe8\xf9\xc1/&\x9f+\xf6A\x16\x95\x11\xceb\x1a\x90\x05\x9a\xed\x0f\xeaGS\x8b\x0e\x02!\x00\x8c\xf3\x08\x13\xd15\xaa\xfe\x8eM\xc0\xfd\xf2\xfdYZ\x98g\xf1\xa6\x08=\x1e\x01\xa1I\xc9\x05\xec\xf9\xbf\xe6'
+        ) /
+        IKEv2_payload_CP(
+            next_payload='SA',
+            res=0,
+            length=92,
+            CFGType='CFG_REPLY',
+            res2=0x0,
+            attributes=[
+                ConfigurationAttribute(type='INTERNAL_IP4_ADDRESS', length=4, value='192.168.225.10'),
+                ConfigurationAttribute(type='INTERNAL_IP4_NETMASK', length=4, value='255.255.255.0'),
+                ConfigurationAttribute(type=20004, length=4, value=b'\xc0\xa8\xe1\x01'),
+                ConfigurationAttribute(type='INTERNAL_IP4_DNS', length=4, value='0.0.0.0'),
+                ConfigurationAttribute(type='INTERNAL_IP4_DNS', length=4, value='0.0.0.0'),
+                ConfigurationAttribute(type=20002, length=4, value=b'\xac\x10\x0f\x5c'),
+                ConfigurationAttribute(type=20002, length=4, value='\x00\x00\x00\x00'),
+                ConfigurationAttribute(type='INTERNAL_IP4_NBNS', length=4, value='0.0.0.0'),
+                ConfigurationAttribute(type='INTERNAL_IP4_NBNS', length=4, value='0.0.0.0'),
+                ConfigurationAttribute(type=20003, length=4, value=b'\x00\x00\x00\x00'),
+                ConfigurationAttribute(type=28674, length=0)
+            ]
+        ) /
+        IKEv2_payload_SA(
+            next_payload='Nonce',
+            res=0,
+            length=36,
+            prop=IKEv2_payload_Proposal(
+                res=0,
+                length=32,
+                proposal=1,
+                proto='ESP',
+                SPIsize=4,
+                trans_nb=2,
+                SPI=b'\xac\x0f\xaf\x03',
+                trans=IKEv2_payload_Transform(res=0, length=12, transform_type='Encryption', res2=0, transform_id='AES-GCM-16ICV', key_length=128) /
+                      IKEv2_payload_Transform(res=0, length=8, transform_type='Extended Sequence Number', res2=0, transform_id='No ESN')
+            )
+        ) /
+        IKEv2_payload_Nonce(
+            next_payload='TSi',
+            res=0,
+            length=44,
+            load=b'\xcf\x0eyPv]\xb7\xf77\x1d\xbb\xdf\xa1r\x04\x93\xc8<\x1b\xa4\xdc6\x17\xc3\x19*W\xb9(]\x9ac\n\xc7\x16F\x11\xfd\xf4,'
+        ) /
+        IKEv2_payload_TSi(
+            next_payload='TSr',
+            res=0,
+            length=24,
+            number_of_TSs=1,
+            res2=0x0,
+            traffic_selector=[
+                IPv4TrafficSelector(
+                    TS_type='TS_IPV4_ADDR_RANGE',
+                    IP_protocol_ID='All protocols',
+                    length=16,
+                    start_port=0,
+                    end_port=65535,
+                    starting_address_v4='192.168.225.10',
+                    ending_address_v4='192.168.225.10'
+                )
+            ]
+        ) /
+        IKEv2_payload_TSr(
+            next_payload='VendorID',
+            res=0,
+            length=24,
+            number_of_TSs=1,
+            res2=0x0,
+            traffic_selector=[
+                IPv4TrafficSelector(
+                    TS_type='TS_IPV4_ADDR_RANGE',
+                    IP_protocol_ID='All protocols',
+                    length=16,
+                    start_port=0,
+                    end_port=65535,
+                    starting_address_v4='192.168.225.0',
+                    ending_address_v4='192.168.225.255'
+                )
+            ]
+        ) /
+        IKEv2_payload_VendorID(
+            next_payload='Notify',
+            res=0,
+            length=20,
+            vendorID=b'\xaf\xca\xd7\x13h\xa1\xf1\xc9k\x86\x96\xfcwW\x01\x00'
+        ) /
+        IKEv2_payload_Notify(
+            next_payload='None',
+            res=0,
+            length=8,
+            proto='Reserved',
+            SPIsize=0,
+            type='MOBIKE_SUPPORTED'
+        )
+    ),
+]
+
+from __future__ import print_function
+
+for i, title, data, packet in frames:
+    print(title)
+    if i >= 0:
+        # the raw frame data coincides with the frame from the packet capture
+        assert data == raw(pcap[i])
+    # the scapy packet correctly describes the frame
+    assert raw(packet) == data
+    # reassembling the dissected frame yields the original frame
+    assert raw(Ether(data)) == data

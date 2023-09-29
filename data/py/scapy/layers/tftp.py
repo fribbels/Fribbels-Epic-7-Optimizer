@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 TFTP (Trivial File Transfer Protocol).
@@ -16,7 +16,6 @@ from scapy.fields import PacketListField, ShortEnumField, ShortField, \
     StrNullField
 from scapy.automaton import ATMT, Automaton
 from scapy.layers.inet import UDP, IP
-from scapy.modules.six.moves import range
 from scapy.config import conf
 from scapy.volatile import RandShort
 
@@ -83,7 +82,7 @@ class TFTP_ACK(Packet):
     def answers(self, other):
         if isinstance(other, TFTP_DATA):
             return self.block == other.block
-        elif isinstance(other, TFTP_RRQ) or isinstance(other, TFTP_WRQ) or isinstance(other, TFTP_OACK):  # noqa: E501
+        elif isinstance(other, (TFTP_RRQ, TFTP_WRQ, TFTP_OACK)):  # noqa: E501
             return self.block == 0
         return 0
 
@@ -109,10 +108,7 @@ class TFTP_ERROR(Packet):
                    StrNullField("errormsg", "")]
 
     def answers(self, other):
-        return (isinstance(other, TFTP_DATA) or
-                isinstance(other, TFTP_RRQ) or
-                isinstance(other, TFTP_WRQ) or
-                isinstance(other, TFTP_ACK))
+        return isinstance(other, (TFTP_DATA, TFTP_RRQ, TFTP_WRQ, TFTP_ACK))
 
     def mysummary(self):
         return self.sprintf("ERROR %errorcode%: %errormsg%"), [UDP]
@@ -123,7 +119,7 @@ class TFTP_OACK(Packet):
     fields_desc = []
 
     def answers(self, other):
-        return isinstance(other, TFTP_WRQ) or isinstance(other, TFTP_RRQ)
+        return isinstance(other, (TFTP_WRQ, TFTP_RRQ))
 
 
 bind_layers(UDP, TFTP, dport=69)

@@ -591,7 +591,7 @@ _all_aes_gcm_tests()
 
 
 = Crypto - AES cipher in CCM mode, checks from IEEE P1619.1
-~ crypto_advanced
+~ crypto_advanced libressl
 
 class _aes256ccm_test_1:
     k= b"\0"*32
@@ -649,7 +649,7 @@ _all_aes_ccm_tests()
 
 
 = Crypto - ChaCha20POly1305 test (test vector A.5 from RFC 7539)
-~ crypto_advanced
+~ crypto_advanced libressl
 
 import binascii
 def clean(s):
@@ -784,12 +784,12 @@ t4 = TLS(p4_certstat_ske_shd, tls_session=t3.tls_session)
 
 = Reading TLS test session - TLS Record header
 # We leave the possibility for some attributes to be either '' or None.
-assert(t1.type == 0x16)
-assert(t1.version == 0x0301)
-assert(t1.len == 213)
-assert(not t1.iv)
-assert(not t1.mac)
-assert(not t1.pad and not t1.padlen)
+assert t1.type == 0x16
+assert t1.version == 0x0301
+assert t1.len == 213
+assert not t1.iv
+assert not t1.mac
+assert not t1.pad and not t1.padlen
 len(t1.msg) == 1
 
 
@@ -799,18 +799,18 @@ TLSClientHello in t1
 
 = Reading TLS test session - ClientHello
 ch = t1.msg[0]
-assert(isinstance(ch, TLSClientHello))
-assert(ch.msgtype == 1)
-assert(ch.msglen == 209)
-assert(ch.version == 0x0303)
-assert(ch.gmt_unix_time == 0x17f24dc3)
-assert(ch.random_bytes == b'|\x19\xdb\xc3<\xb5J\x0b\x8d5\x81\xc5\xce\t 2\x08\xd8\xec\xd1\xf8"B\x9cW\xd0\x16v')
-assert(ch.sidlen == 0)
-assert(not ch.sid)
-assert(ch.cipherslen == 22)
-assert(ch.ciphers == [49195, 49199, 49162, 49161, 49171, 49172, 51, 57, 47, 53, 10])
-assert(ch.complen == 1)
-assert(ch.comp == [0])
+assert isinstance(ch, TLSClientHello)
+assert ch.msgtype == 1
+assert ch.msglen == 209
+assert ch.version == 0x0303
+assert ch.gmt_unix_time == 0x17f24dc3
+assert ch.random_bytes == b'|\x19\xdb\xc3<\xb5J\x0b\x8d5\x81\xc5\xce\t 2\x08\xd8\xec\xd1\xf8"B\x9cW\xd0\x16v'
+assert ch.sidlen == 0
+assert not ch.sid
+assert ch.cipherslen == 22
+assert ch.ciphers == [49195, 49199, 49162, 49161, 49171, 49172, 51, 57, 47, 53, 10]
+assert ch.complen == 1
+assert ch.comp == [0]
 
 
 = Reading TLS test session - ClientHello extensions
@@ -820,58 +820,58 @@ TLS_Ext_SupportedPointFormat, TLS_Ext_SessionTicket, TLS_Ext_NPN,
 TLS_Ext_ALPN, TLS_Ext_SignatureAlgorithms, TLS_Ext_CSR,
 OCSPStatusRequest)
 
-assert(ch.extlen == 146)
+assert ch.extlen == 146
 ext = ch.ext
-assert(len(ext) == 9)
-assert(isinstance(ext[0], TLS_Ext_ServerName))
-assert(ext[0].type == 0)
-assert(ext[0].len == 31)
-assert(ext[0].servernameslen == 29)
-assert(len(ext[0].servernames) == 1)
-assert(ext[0].servernames[0].nametype == 0)
-assert(ext[0].servernames[0].namelen == 26)
-assert(ext[0].servernames[0].servername == b"camo.githubusercontent.com")
-assert(isinstance(ext[1], TLS_Ext_RenegotiationInfo))
-assert(not ext[1].renegotiated_connection)
-assert(isinstance(ext[2], TLS_Ext_SupportedGroups))
-assert(ext[2].groups == [0x17, 0x18, 0x19])
-assert(isinstance(ext[3], TLS_Ext_SupportedPointFormat))
-assert(ext[3].ecpl == [0])
-assert(isinstance(ext[4], TLS_Ext_SessionTicket))
-assert(not ext[4].ticket)
-assert(isinstance(ext[5], TLS_Ext_NPN))
-assert(ext[5].protocols == [])
-assert(isinstance(ext[6], TLS_Ext_ALPN))
-assert(len(ext[6].protocols) == 6)
-assert(ext[6].protocols[-1].protocol == b"http/1.1")
-assert(isinstance(ext[7], TLS_Ext_CSR))
-assert(isinstance(ext[7].req[0], OCSPStatusRequest))
-assert(isinstance(ext[8], TLS_Ext_SignatureAlgorithms))
-assert(len(ext[8].sig_algs) == 10)
+assert len(ext) == 9
+assert isinstance(ext[0], TLS_Ext_ServerName)
+assert ext[0].type == 0
+assert ext[0].len == 31
+assert ext[0].servernameslen == 29
+assert len(ext[0].servernames) == 1
+assert ext[0].servernames[0].nametype == 0
+assert ext[0].servernames[0].namelen == 26
+assert ext[0].servernames[0].servername == b"camo.githubusercontent.com"
+assert isinstance(ext[1], TLS_Ext_RenegotiationInfo)
+assert not ext[1].renegotiated_connection
+assert isinstance(ext[2], TLS_Ext_SupportedGroups)
+assert ext[2].groups == [0x17, 0x18, 0x19]
+assert isinstance(ext[3], TLS_Ext_SupportedPointFormat)
+assert ext[3].ecpl == [0]
+assert isinstance(ext[4], TLS_Ext_SessionTicket)
+assert not ext[4].ticket
+assert isinstance(ext[5], TLS_Ext_NPN)
+assert ext[5].protocols == []
+assert isinstance(ext[6], TLS_Ext_ALPN)
+assert len(ext[6].protocols) == 6
+assert ext[6].protocols[-1].protocol == b"http/1.1"
+assert isinstance(ext[7], TLS_Ext_CSR)
+assert isinstance(ext[7].req[0], OCSPStatusRequest)
+assert isinstance(ext[8], TLS_Ext_SignatureAlgorithms)
+assert len(ext[8].sig_algs) == 10
 ext[8].sig_algs[-1] == 0x0202
 
 
 = Reading TLS test session - ServerHello
 from scapy.layers.tls.handshake import TLSServerHello
 
-assert(TLSServerHello in t2)
+assert TLSServerHello in t2
 sh = t2.msg[0]
-assert(isinstance(sh, TLSServerHello))
-assert(sh.gmt_unix_time == 0x46076ee2)
-assert(sh.random_bytes == b'\x0c\x97g\xb7o\xb6\x9b\x14\x19\xbd\xdd1\x80@\xaaQ+\xc2,\x19\x15"\x82\xe8\xc5,\xe8\x12')
-assert(sh.cipher == 0xc02f)
-assert(len(sh.ext) == 6)
+assert isinstance(sh, TLSServerHello)
+assert sh.gmt_unix_time == 0x46076ee2
+assert sh.random_bytes == b'\x0c\x97g\xb7o\xb6\x9b\x14\x19\xbd\xdd1\x80@\xaaQ+\xc2,\x19\x15"\x82\xe8\xc5,\xe8\x12'
+assert sh.cipher == 0xc02f
+assert len(sh.ext) == 6
 sh.ext[-1].protocols[-1].protocol == b"http/1.1"
 
 
 = Reading TLS test session - Certificate
 from scapy.layers.tls.cert import Cert
 cert = t3.msg[0]
-assert(cert.certslen == 2670)
-assert(len(cert.certs) == 2)
+assert cert.certslen == 2670
+assert len(cert.certs) == 2
 srv_cert = cert.certs[0][1]
-assert(isinstance(srv_cert, Cert))
-assert(srv_cert.serial == 0x077a5dc3362301f989fe54f7f86f3e64)
+assert isinstance(srv_cert, Cert)
+assert srv_cert.serial == 0x077a5dc3362301f989fe54f7f86f3e64
 srv_cert.subject['commonName'] == 'www.github.com'
 
 
@@ -884,8 +884,8 @@ isinstance(t4.payload.payload.payload, NoPayload)
 
 = Reading TLS test session - CertificateStatus
 from scapy.layers.tls.handshake import TLSCertificateStatus
-assert(isinstance(cert_stat, TLSCertificateStatus))
-assert(cert_stat.responselen == 471)
+assert isinstance(cert_stat, TLSCertificateStatus)
+assert cert_stat.responselen == 471
 cert_stat.response[0].responseStatus == 0
 # we leave the remaining OCSP tests to x509.uts
 
@@ -893,33 +893,33 @@ cert_stat.response[0].responseStatus == 0
 = Reading TLS test session - ServerKeyExchange
 from scapy.layers.tls.handshake import TLSServerKeyExchange
 from scapy.layers.tls.keyexchange import ServerECDHNamedCurveParams
-assert(isinstance(ske, TLSServerKeyExchange))
+assert isinstance(ske, TLSServerKeyExchange)
 p = ske.params
-assert(isinstance(p, ServerECDHNamedCurveParams))
-assert(p.named_curve == 0x0017)
-assert(orb(p.point[0]) == 4 and p.point[1:5] == b'\xc3\x9d\x1cD' and p.point[-4:] == b'X\x19\x03u')
-assert(ske.sig.sig_alg == 0x0601)
+assert isinstance(p, ServerECDHNamedCurveParams)
+assert p.named_curve == 0x0017
+assert orb(p.point[0]) == 4 and p.point[1:5] == b'\xc3\x9d\x1cD' and p.point[-4:] == b'X\x19\x03u'
+assert ske.sig.sig_alg == 0x0601
 ske.sig.sig_val[:4] == b'y\x8aQ\x11' and ske.sig.sig_val[-4:] == b'`15\xef'
 
 
 = Reading TLS test session - ServerHelloDone
 from scapy.layers.tls.handshake import TLSServerHelloDone
-assert(isinstance(shd, TLSServerHelloDone))
+assert isinstance(shd, TLSServerHelloDone)
 shd.msglen == 0
 
 = Reading TLS test session - Context checks after 1st RTT
 t = shd.tls_session
-assert(len(t.handshake_messages) == 6)
-assert(t.handshake_messages_parsed[-1] is shd)
-assert(t.tls_version == 0x0303)
-assert(t.client_kx_ffdh_params is None)
-assert(t.client_kx_ecdh_params is not None)
+assert len(t.handshake_messages) == 6
+assert t.handshake_messages_parsed[-1] is shd
+assert t.tls_version == 0x0303
+assert t.client_kx_ffdh_params is None
+assert t.client_kx_ecdh_params is not None
 pn = t.server_kx_pubkey.public_numbers()
 x = pkcs_i2osp(pn.x, pn.curve.key_size/8)
 y = pkcs_i2osp(pn.y, pn.curve.key_size/8)
-assert(x[:4] == b'\xc3\x9d\x1cD' and y[-4:] == b'X\x19\x03u')
-assert(t.rcs.row == "read")
-assert(t.wcs.row == "write")
+assert x[:4] == b'\xc3\x9d\x1cD' and y[-4:] == b'X\x19\x03u'
+assert t.rcs.row == "read"
+assert t.wcs.row == "write"
 t.rcs.ciphersuite.val == 0
 
 
@@ -937,49 +937,52 @@ ccs = t5.payload.msg[0]
 rec_fin = t5.payload.payload
 fin = t5.payload.payload.msg[0]
 isinstance(t5.payload.payload.payload, NoPayload)
-assert(isinstance(cke, TLSClientKeyExchange))
+assert isinstance(cke, TLSClientKeyExchange)
 k = cke.exchkeys
-assert(isinstance(k, ClientECDiffieHellmanPublic))
-assert(k.ecdh_Yclen == 65)
-assert(k.ecdh_Yc[:4] == b'\x04\xd2\x07\xce' and k.ecdh_Yc[-4:] == b'\xdc\x86[\xe7')
+assert isinstance(k, ClientECDiffieHellmanPublic)
+assert k.ecdh_Yclen == 65
+assert k.ecdh_Yc[:4] == b'\x04\xd2\x07\xce' and k.ecdh_Yc[-4:] == b'\xdc\x86[\xe7'
 
 
 = Reading TLS test session - ChangeCipherSpec
 from scapy.layers.tls.record import TLSChangeCipherSpec
-assert(isinstance(ccs, TLSChangeCipherSpec))
+assert isinstance(ccs, TLSChangeCipherSpec)
 ccs.msgtype == 1
 
 
 = Reading TLS test session - Finished
-assert(rec_fin.version == 0x0303)
-assert(rec_fin.deciphered_len == 16)
-assert(rec_fin.len == 40)
-assert(rec_fin.iv == b'\x00\x00\x00\x00\x00\x00\x00\x00')
-assert(rec_fin.mac == b'\xc7^\xc1\x8e\x81M\xff\x00\x0f}G\xf2\x8c\xab\n=')
-assert(not rec_fin.pad and not rec_fin.padlen)
+assert rec_fin.version == 0x0303
+assert rec_fin.deciphered_len == 16
+assert rec_fin.len == 40
+assert rec_fin.iv == b'\x00\x00\x00\x00\x00\x00\x00\x00'
+assert rec_fin.mac == b'\xc7^\xc1\x8e\x81M\xff\x00\x0f}G\xf2\x8c\xab\n='
+assert not rec_fin.pad and not rec_fin.padlen
 from scapy.layers.tls.record import _TLSEncryptedContent
-assert(isinstance(fin, _TLSEncryptedContent))
+assert isinstance(fin, _TLSEncryptedContent)
 fin.load == b'\xd9\xcb,\x8cM\xfd\xbc9\xaa\x05\xf3\xd3\xf3Z\x8a-'
 
 
 = Reading TLS test session - Ticket, CCS & Finished
+~ libressl
+
 from scapy.layers.tls.handshake import TLSNewSessionTicket
 t6 = TLS(p6_tick_ccs_fin, tls_session=t5.tls_session.mirror())
 tick = t6.msg[0]
-assert(isinstance(tick, TLSNewSessionTicket))
-assert(tick.msgtype == 4)
-assert(tick.lifetime == 1200)
-assert(tick.ticketlen == 192)
-assert(tick.ticket[:4] == b'c\xccwJ' and tick.ticket[-4:] == b'\xf3.\xcf\x04')
+assert isinstance(tick, TLSNewSessionTicket)
+assert tick.msgtype == 4
+assert tick.lifetime == 1200
+assert tick.ticketlen == 192
+assert tick.ticket[:4] == b'c\xccwJ' and tick.ticket[-4:] == b'\xf3.\xcf\x04'
 ccs = t6.payload.msg[0]
-assert(isinstance(ccs, TLSChangeCipherSpec))
+assert isinstance(ccs, TLSChangeCipherSpec)
 rec_fin = t6.getlayer(4)
-assert(rec_fin.iv == b'\xd8m\x92\t5YZ:')
-assert(rec_fin.mac == b'\xecguD\xa8\x87$<7+\n\x94\x1e9\x96\xfa')
-assert(isinstance(rec_fin.msg[0], _TLSEncryptedContent))
+assert rec_fin.iv == b'\xd8m\x92\t5YZ:'
+assert rec_fin.mac == b'\xecguD\xa8\x87$<7+\n\x94\x1e9\x96\xfa'
+assert isinstance(rec_fin.msg[0], _TLSEncryptedContent)
 rec_fin.msg[0].load == b'7\\)`\xaa`\x7ff\xcd\x10\xa9v\xa3*\x17\x1a'
 
 = Building x25519 ecdh_Yc
+~ libressl
 
 from scapy.layers.tls.record import TLS
 from scapy.layers.tls.handshake import TLSClientKeyExchange
@@ -1000,6 +1003,7 @@ pkt.exchkeys.fill_missing()
 assert len(pkt.exchkeys.ecdh_Yc) == 32
 
 = Reading TLS test session - Extended master secret
+~ libressl
 
 # See https://github.com/secdev/scapy/issues/2784
 
@@ -1050,6 +1054,8 @@ assert isinstance(l3.msg[0], TLSFinished)
 assert l3.msg[0][TLSFinished].vdata == b'\x15\xd6\xd5\xea\x84\xee\xb3\xdd\xd6\x10\xd8\x11'
 
 = Reading TLS test session - Encrypt-then-MAC extension
+~ libressl
+
 from scapy.layers.tls.cert import PrivKey
 from scapy.layers.tls.handshake import TLSFinished
 from scapy.layers.tls.record import TLS
@@ -1080,6 +1086,7 @@ assert server_finished.vdata == hex_bytes(b'42c9765e833997b6714fec75')
 ###
 
 = Reading TLS test session - Full TLSNewSessionTicket captured
+~ libressl
 import os
 filename = scapy_path("/test/pcaps/tls_new-session-ticket.pcap")
 a = rdpcap(filename)
@@ -1089,11 +1096,12 @@ assert pkt[TLS].msg[0].ticket == b'6k\x8b{\xa8\xaf\xf0\x8aG*\xdd\xc2\xf6\t\xde\x
 assert pkt[TLS].msg[0].lifetime == 3600
 
 = Reading TLS test session - ApplicationData
+~ libressl
 t7 = TLS(p7_data, tls_session=t6.tls_session.mirror())
-assert(t7.iv == b'\x00\x00\x00\x00\x00\x00\x00\x01')
-assert(t7.mac == b'>\x1dLb5\x8e+\x01n\xcb\x19\xcc\x17Ey\xc8')
-assert(not t7.pad and not t7.padlen)
-assert(isinstance(t7.msg[0], _TLSEncryptedContent))
+assert t7.iv == b'\x00\x00\x00\x00\x00\x00\x00\x01'
+assert t7.mac == b'>\x1dLb5\x8e+\x01n\xcb\x19\xcc\x17Ey\xc8'
+assert not t7.pad and not t7.padlen
+assert isinstance(t7.msg[0], _TLSEncryptedContent)
 len(t7.msg[0].load) == 478
 
 = Reading TLS msg dissect - Packet too small
@@ -1104,11 +1112,9 @@ from scapy.layers.tls.record import _TLSMsgListField
 # Unknown type
 assert isinstance(_TLSMsgListField.m2i(_TLSMsgListField("", []), TLS(type=0), b'\x00\x03\x03\x00\x03abc'), Raw)
 
-old_debug_dissector = conf.debug_dissector
-conf.debug_dissector = False
-# not even bytes to make it crash
-assert isinstance(_TLSMsgListField.m2i(_TLSMsgListField("", []), TLS(type=20), 1), Raw)
-conf.debug_dissector = old_debug_dissector
+with no_debug_dissector():
+    # not even bytes to make it crash
+    assert isinstance(_TLSMsgListField.m2i(_TLSMsgListField("", []), TLS(type=20), 1), Raw)
 
 = Test x25519 dissection in ServerKeyExchange
 
@@ -1195,9 +1201,9 @@ t.tls_session.server_rsa_key = key
 t = TLS(ck, tls_session=t.tls_session.mirror())
 t = TLS(fin, tls_session=t.tls_session.mirror())
 t = TLS(data, tls_session=t.tls_session.mirror())
-assert(len(t.msg) == 1)
-assert(isinstance(t.msg[0], TLSApplicationData))
-assert(t.msg[0].data == b"")
+assert len(t.msg) == 1
+assert isinstance(t.msg[0], TLSApplicationData)
+assert t.msg[0].data == b""
 t.getlayer(TLS, 2).msg[0].data == b"To boldly go where no man has gone before...\n"
 
 = Auto provide the session
@@ -1291,18 +1297,18 @@ from scapy.layers.tls.crypto.cipher_block import Cipher_AES_256_CBC
 sh = TLSServerHello(gmt_unix_time=0x41414141, random_bytes='B'*28, cipher=0xc014)
 t = TLS(msg=sh)
 t.raw_stateful()
-assert(isinstance(t.tls_session.pwcs.ciphersuite, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA))
-assert(isinstance(t.tls_session.pwcs.key_exchange, KX_ECDHE_RSA))
-assert(isinstance(t.tls_session.pwcs.cipher, Cipher_AES_256_CBC))
-assert(isinstance(t.tls_session.pwcs.hmac, Hmac_SHA))
+assert isinstance(t.tls_session.pwcs.ciphersuite, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA)
+assert isinstance(t.tls_session.pwcs.key_exchange, KX_ECDHE_RSA)
+assert isinstance(t.tls_session.pwcs.cipher, Cipher_AES_256_CBC)
+assert isinstance(t.tls_session.pwcs.hmac, Hmac_SHA)
 t.tls_session.server_random == b'A'*4+b'B'*28
 
 
 = Building packets - ChangeCipherSpec with forged, forbidden field values
 t = TLS(msg=TLSChangeCipherSpec())
-assert(raw(t) == b'\x14\x03\x03\x00\x01\x01')
+assert raw(t) == b'\x14\x03\x03\x00\x01\x01'
 t.len = 0
-assert(raw(t) == b'\x14\x03\x03\x00\x00\x01')
+assert raw(t) == b'\x14\x03\x03\x00\x00\x01'
 t.type = 0xde
 t.version = 0xadbe
 t.len = 0xefff
@@ -1332,7 +1338,8 @@ assert not TLSHelloRequest().tls_session_update(None)
 
 
 = Cryptography module is unavailable
-import scapy.modules.six as six
+~ mock
+import scapy.libs.six as six
 import mock
 
 @mock.patch("scapy.layers.tls.crypto.suites.get_algs_from_ciphersuite_name")
@@ -1350,13 +1357,9 @@ test_tls_without_cryptography()
 
 = Truncated TCP segment
 
-dd = conf.debug_dissector
-conf.debug_dissector = False
-
-pkt = Ether(hex_bytes('00155dfb587a00155dfb58430800450005dc54d3400070065564400410d40a00000d01bb044e8b86744e16063ac45010faf06ba9000016030317c30200005503035cb336a067d53a5d2cedbdfec666ac740afbd0637ddd13eddeab768c3c63abee20981a0000d245f1c905b329323ad67127cd4b907a49f775c331d0794149aca7cdc02800000d0005000000170000ff010001000b000ec6000ec300090530820901308206e9a00302010202132000036e72aded906765595fae000000036e72300d06092a864886f70d01010b050030818b310b30090603550406130255533113'))
-assert TLSServerHello in pkt
-
-conf.debug_dissector = dd
+with no_debug_dissector():
+    pkt = Ether(hex_bytes('00155dfb587a00155dfb58430800450005dc54d3400070065564400410d40a00000d01bb044e8b86744e16063ac45010faf06ba9000016030317c30200005503035cb336a067d53a5d2cedbdfec666ac740afbd0637ddd13eddeab768c3c63abee20981a0000d245f1c905b329323ad67127cd4b907a49f775c331d0794149aca7cdc02800000d0005000000170000ff010001000b000ec6000ec300090530820901308206e9a00302010202132000036e72aded906765595fae000000036e72300d06092a864886f70d01010b050030818b310b30090603550406130255533113'))
+    assert TLSServerHello in pkt
 
 ###############################################################################
 ########################### TLS Misc tests ####################################
@@ -1482,13 +1485,9 @@ assert raw(p) == a
 
 = Issue 2763
 
-dd = conf.debug_dissector
-conf.debug_dissector = False
-
-p = Ether(b'RU\x10\x00\x02\x02RT\x00\x124V\x08\x00E\x00\x05\xc8\r\xd8\x00\x00@\x06\x96\x9d\x9c&\xce\x12\xc0\xa8\xa5\xd9\x01\xbb\xc0\x1f\x00w$\x02\x03\xbe\xc5#P\x10#(\x0b\x9e\x00\x00\x16\x03\x03\x0e4\x02\x00\x00M\x03\x03^\xfa\xb5~\x88\xdf\xdc#}\'\xa0\xff\xa2\xe2\xb5\xec\x0e\x93\xa8\xe0\xde\x01[\x13[F\x151 x\xc6\xcc `)\x00\x00\x8aZ\x90l\xda\x0b\xe1\xec[i\x13\xa7\x8e\xb9a\x98"\x8a7L\x9d\x90\xe0\x01\x06c$9\xc0\'\x00\x00\x05\xff\x01\x00\x01\x00\x0b\x00\x0c\x8e\x00\x0c\x8b\x00\x06n0\x82\x06j0\x82\x05R\xa0\x03\x02\x01\x02\x02\x10EY\xe8\x1c\x1e\x9a\xe0?X\xaa\xc3\xbc\xcd`jh0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x0b\x05\x000\x81\x8f1\x0b0\t\x06\x03U\x04\x06\x13\x02GB1\x1b0\x19\x06\x03U\x04\x08\x13\x12Greater Manchester1\x100\x0e\x06\x03U\x04\x07\x13\x07Salford1\x180\x16\x06\x03U\x04\n\x13\x0fSectigo Limited1705\x06\x03U\x04\x03\x13.Sectigo RSA Domain Validation Secure Server CA0\x1e\x17\r190309000000Z\x17\r210308235959Z0W1!0\x1f\x06\x03U\x04\x0b\x13\x18Domain Control Validated1\x1d0\x1b\x06\x03U\x04\x0b\x13\x14PositiveSSL Wildcard1\x130\x11\x06\x03U\x04\x03\x0c\n*.mql5.net0\x82\x01"0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x01\x05\x00\x03\x82\x01\x0f\x000\x82\x01\n\x02\x82\x01\x01\x00\xcb\xbcn=\xbaGd\xe1XB\x07\xc9\xb1\xc8/\x86\xaa4Z\xbdNk\xfb\xffR\x8f\xe4\x1c^\x91m8\xb9^\x97\xa5\xd3N\xfb\x80\x92\x8ap\xda\x15\x9f\xee\xe7\xb3\xc8?\xb0>~\xaa\x07\x91\xb1\x99q\xe2\xe5\xc8\x9b\x1d5\xa0\x96,\x98\xdaW\x93\x95\x8e%\xe8\xd4L\xeb\xcbSg\x15"\xba\xb7\xc7\x1f\xe9\xd6\x1a\xe6E\x1d\xc8\x1e%\xd36\xe0/r\xd1\xce1C\xce\x91&\xa1\x08*R\xbf\x8cu\xb0\xda\x0e\x1e2\xd66\x1df&3\x9b\x03\x0b\xcam:\xf7\x12\xd9ud(\xae\xdc\xbci\x85\xbd\xcf\xeb{\x15:\xbd\x0e\x11\x1bi\xd8\xff]y~E\x15\x95\xee\xe9\xea\xc6Cr</\x0b\xe8\xc2\x9d\xe3\x83\x07R\xeb1\xf0\x93<|.\xf8G\xab\xa8=\xac\x16\x1d\xf9\x93%\x1b;)\xb2FN\x15\xc4\x17\xa9}\xb0\x80\xba\xfb\xc8\x15-G\x9e\x05\xe9\xf6\xc76\xc1\x9af\xa3\x91\n\xa4\x80,\x11=\x87\xec\xf9\xd6iJ\xd0\xbe\xc3K\x99J\xe7&\xc4\x86\x84:W\xc4/\x7f\x02\x03\x01\x00\x01\xa3\x82\x02\xf70\x82\x02\xf30\x1f\x06\x03U\x1d#\x04\x180\x16\x80\x14\x8d\x8c^\xc4T\xad\x8a\xe1w\xe9\x9b\xf9\x9b\x05\xe1\xb8\x01\x8da\xe10\x1d\x06\x03U\x1d\x0e\x04\x16\x04\x14z\x87\xb6T\xcbt:a\x03\xef:\x1f_\xad\xc0\x1cT\x15\x9d\xe30\x0e\x06\x03U\x1d\x0f\x01\x01\xff\x04\x04\x03\x02\x05\xa00\x0c\x06\x03U\x1d\x13\x01\x01\xff\x04\x020\x000\x1d\x06\x03U\x1d%\x04\x160\x14\x06\x08+\x06\x01\x05\x05\x07\x03\x01\x06\x08+\x06\x01\x05\x05\x07\x03\x020I\x06\x03U\x1d \x04B0@04\x06\x0b+\x06\x01\x04\x01\xb21\x01\x02\x02\x070%0#\x06\x08+\x06\x01\x05\x05\x07\x02\x01\x16\x17https://sectigo.com/CPS0\x08\x06\x06g\x81\x0c\x01\x02\x010\x81\x84\x06\x08+\x06\x01\x05\x05\x07\x01\x01\x04x0v0O\x06\x08+\x06\x01\x05\x05\x070\x02\x86Chttp://crt.sectigo.com/SectigoRSADomainValidationSecureServerCA.crt0#\x06\x08+\x06\x01\x05\x05\x070\x01\x86\x17http://ocsp.sectigo.com0\x1f\x06\x03U\x1d\x11\x04\x180\x16\x82\n*.mql5.net\x82\x08mql5.net0\x82\x01\x7f\x06\n+\x06\x01\x04\x01\xd6y\x02\x04\x02\x04\x82\x01o\x04\x82\x01k\x01i\x00v\x00\xbb\xd9\xdf\xbc\x1f\x8aq\xb5\x93\x94#\x97\xaa\x92{G8W\x95\n\xabR\xe8\x1a\x90\x96d6\x8e\x1e\xd1\x85\x00\x00\x01icH\xf8\x9b\x00\x00\x04\x03\x00G0E\x02 =\xab\xac\xefa \xc3\xf3J\xbb] w8\xc1+\xa9\x1b8\xcc\x94LP,T\xe0\x07\xe8\x87\x93s\xf5\x02!\x00\xf4D\x0e\x86a\xc9M\x8b\xc5\xf8\xec\x821\x9b\xbf]^\xacB1p\xfc\x8a\n\x07\xefz\xb6\x82 \xe0\xd5\x00v\x00D\x94e.\xb0\xee\xce\xaf\xc4@\x07\xd8\xa8\xfe(\xc0\xda\xe6\x82\xbe\xd8\xcb1\xb5?\xd33\x96\xb5\xb6\x81\xa8\x00\x00\x01icH\xf8\xdb\x00\x00\x04\x03\x00G0E\x02 ]\x91\x03.5\xaaA\xa82\xf4Bg\x08\xf7\xf1\x948N\x08,\xf5\x96\x01\x08\xdcM]&7J\xebv\x02!\x00\xeb\x90\r\xd5k\xf9\xa3L<\xc67]\xc5]\x16\xb2\x10\xed\xd5\x9b\xec\xdc$\xe1\xd5r+\x99\x19\xdbb\xe4\x00w\x00\\\xdcC\x92\xfe\xe6\xabED\xb1^\x9a\xd4V\xe6\x107\xfb\xd5\xfaG\xdc\xa1s\x94\xb2^\xe6\xf6\xc7\x0e\xca\x00\x00\x01icH\xf8\xe5\x00\x00\x04\x03\x00H0F\x02!\x00\x8f\xf5W\xd5 \xea\x02\xc4v\x1b\xd0h\x03\xe7`\xec\xdfp\xd7\xb8\x10\xd9nb7\xadDp\xf6V\xa0l\x02!\x00\xa9\x935\x94\xe3\xdb')
-assert raw(p[TLS]) == b'\x17\x03\x03\x0e4\x02\x00\x00M\x03\x03^\xfa\xb5~\x88\xdf\xdc#}\'\xa0\xff\xa2\xe2\xb5\xec\x0e\x93\xa8\xe0\xde\x01[\x13[F\x151 x\xc6\xcc `)\x00\x00\x8aZ\x90l\xda\x0b\xe1\xec[i\x13\xa7\x8e\xb9a\x98"\x8a7L\x9d\x90\xe0\x01\x06c$9\xc0\'\x00\x00\x05\xff\x01\x00\x01\x00\x0b\x00\x0c\x8e\x00\x0c\x8b\x00\x06n0\x82\x06j0\x82\x05R\xa0\x03\x02\x01\x02\x02\x10EY\xe8\x1c\x1e\x9a\xe0?X\xaa\xc3\xbc\xcd`jh0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x0b\x05\x000\x81\x8f1\x0b0\t\x06\x03U\x04\x06\x13\x02GB1\x1b0\x19\x06\x03U\x04\x08\x13\x12Greater Manchester1\x100\x0e\x06\x03U\x04\x07\x13\x07Salford1\x180\x16\x06\x03U\x04\n\x13\x0fSectigo Limited1705\x06\x03U\x04\x03\x13.Sectigo RSA Domain Validation Secure Server CA0\x1e\x17\r190309000000Z\x17\r210308235959Z0W1!0\x1f\x06\x03U\x04\x0b\x13\x18Domain Control Validated1\x1d0\x1b\x06\x03U\x04\x0b\x13\x14PositiveSSL Wildcard1\x130\x11\x06\x03U\x04\x03\x0c\n*.mql5.net0\x82\x01"0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x01\x05\x00\x03\x82\x01\x0f\x000\x82\x01\n\x02\x82\x01\x01\x00\xcb\xbcn=\xbaGd\xe1XB\x07\xc9\xb1\xc8/\x86\xaa4Z\xbdNk\xfb\xffR\x8f\xe4\x1c^\x91m8\xb9^\x97\xa5\xd3N\xfb\x80\x92\x8ap\xda\x15\x9f\xee\xe7\xb3\xc8?\xb0>~\xaa\x07\x91\xb1\x99q\xe2\xe5\xc8\x9b\x1d5\xa0\x96,\x98\xdaW\x93\x95\x8e%\xe8\xd4L\xeb\xcbSg\x15"\xba\xb7\xc7\x1f\xe9\xd6\x1a\xe6E\x1d\xc8\x1e%\xd36\xe0/r\xd1\xce1C\xce\x91&\xa1\x08*R\xbf\x8cu\xb0\xda\x0e\x1e2\xd66\x1df&3\x9b\x03\x0b\xcam:\xf7\x12\xd9ud(\xae\xdc\xbci\x85\xbd\xcf\xeb{\x15:\xbd\x0e\x11\x1bi\xd8\xff]y~E\x15\x95\xee\xe9\xea\xc6Cr</\x0b\xe8\xc2\x9d\xe3\x83\x07R\xeb1\xf0\x93<|.\xf8G\xab\xa8=\xac\x16\x1d\xf9\x93%\x1b;)\xb2FN\x15\xc4\x17\xa9}\xb0\x80\xba\xfb\xc8\x15-G\x9e\x05\xe9\xf6\xc76\xc1\x9af\xa3\x91\n\xa4\x80,\x11=\x87\xec\xf9\xd6iJ\xd0\xbe\xc3K\x99J\xe7&\xc4\x86\x84:W\xc4/\x7f\x02\x03\x01\x00\x01\xa3\x82\x02\xf70\x82\x02\xf30\x1f\x06\x03U\x1d#\x04\x180\x16\x80\x14\x8d\x8c^\xc4T\xad\x8a\xe1w\xe9\x9b\xf9\x9b\x05\xe1\xb8\x01\x8da\xe10\x1d\x06\x03U\x1d\x0e\x04\x16\x04\x14z\x87\xb6T\xcbt:a\x03\xef:\x1f_\xad\xc0\x1cT\x15\x9d\xe30\x0e\x06\x03U\x1d\x0f\x01\x01\xff\x04\x04\x03\x02\x05\xa00\x0c\x06\x03U\x1d\x13\x01\x01\xff\x04\x020\x000\x1d\x06\x03U\x1d%\x04\x160\x14\x06\x08+\x06\x01\x05\x05\x07\x03\x01\x06\x08+\x06\x01\x05\x05\x07\x03\x020I\x06\x03U\x1d \x04B0@04\x06\x0b+\x06\x01\x04\x01\xb21\x01\x02\x02\x070%0#\x06\x08+\x06\x01\x05\x05\x07\x02\x01\x16\x17https://sectigo.com/CPS0\x08\x06\x06g\x81\x0c\x01\x02\x010\x81\x84\x06\x08+\x06\x01\x05\x05\x07\x01\x01\x04x0v0O\x06\x08+\x06\x01\x05\x05\x070\x02\x86Chttp://crt.sectigo.com/SectigoRSADomainValidationSecureServerCA.crt0#\x06\x08+\x06\x01\x05\x05\x070\x01\x86\x17http://ocsp.sectigo.com0\x1f\x06\x03U\x1d\x11\x04\x180\x16\x82\n*.mql5.net\x82\x08mql5.net0\x82\x01\x7f\x06\n+\x06\x01\x04\x01\xd6y\x02\x04\x02\x04\x82\x01o\x04\x82\x01k\x01i\x00v\x00\xbb\xd9\xdf\xbc\x1f\x8aq\xb5\x93\x94#\x97\xaa\x92{G8W\x95\n\xabR\xe8\x1a\x90\x96d6\x8e\x1e\xd1\x85\x00\x00\x01icH\xf8\x9b\x00\x00\x04\x03\x00G0E\x02 =\xab\xac\xefa \xc3\xf3J\xbb] w8\xc1+\xa9\x1b8\xcc\x94LP,T\xe0\x07\xe8\x87\x93s\xf5\x02!\x00\xf4D\x0e\x86a\xc9M\x8b\xc5\xf8\xec\x821\x9b\xbf]^\xacB1p\xfc\x8a\n\x07\xefz\xb6\x82 \xe0\xd5\x00v\x00D\x94e.\xb0\xee\xce\xaf\xc4@\x07\xd8\xa8\xfe(\xc0\xda\xe6\x82\xbe\xd8\xcb1\xb5?\xd33\x96\xb5\xb6\x81\xa8\x00\x00\x01icH\xf8\xdb\x00\x00\x04\x03\x00G0E\x02 ]\x91\x03.5\xaaA\xa82\xf4Bg\x08\xf7\xf1\x948N\x08,\xf5\x96\x01\x08\xdcM]&7J\xebv\x02!\x00\xeb\x90\r\xd5k\xf9\xa3L<\xc67]\xc5]\x16\xb2\x10\xed\xd5\x9b\xec\xdc$\xe1\xd5r+\x99\x19\xdbb\xe4\x00w\x00\\\xdcC\x92\xfe\xe6\xabED\xb1^\x9a\xd4V\xe6\x107\xfb\xd5\xfaG\xdc\xa1s\x94\xb2^\xe6\xf6\xc7\x0e\xca\x00\x00\x01icH\xf8\xe5\x00\x00\x04\x03\x00H0F\x02!\x00\x8f\xf5W\xd5 \xea\x02\xc4v\x1b\xd0h\x03\xe7`\xec\xdfp\xd7\xb8\x10\xd9nb7\xadDp\xf6V\xa0l\x02!\x00\xa9\x935\x94\xe3\xdb'
-
-conf.debug_dissector = dd
+with no_debug_dissector():
+    p = Ether(b'RU\x10\x00\x02\x02RT\x00\x124V\x08\x00E\x00\x05\xc8\r\xd8\x00\x00@\x06\x96\x9d\x9c&\xce\x12\xc0\xa8\xa5\xd9\x01\xbb\xc0\x1f\x00w$\x02\x03\xbe\xc5#P\x10#(\x0b\x9e\x00\x00\x16\x03\x03\x0e4\x02\x00\x00M\x03\x03^\xfa\xb5~\x88\xdf\xdc#}\'\xa0\xff\xa2\xe2\xb5\xec\x0e\x93\xa8\xe0\xde\x01[\x13[F\x151 x\xc6\xcc `)\x00\x00\x8aZ\x90l\xda\x0b\xe1\xec[i\x13\xa7\x8e\xb9a\x98"\x8a7L\x9d\x90\xe0\x01\x06c$9\xc0\'\x00\x00\x05\xff\x01\x00\x01\x00\x0b\x00\x0c\x8e\x00\x0c\x8b\x00\x06n0\x82\x06j0\x82\x05R\xa0\x03\x02\x01\x02\x02\x10EY\xe8\x1c\x1e\x9a\xe0?X\xaa\xc3\xbc\xcd`jh0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x0b\x05\x000\x81\x8f1\x0b0\t\x06\x03U\x04\x06\x13\x02GB1\x1b0\x19\x06\x03U\x04\x08\x13\x12Greater Manchester1\x100\x0e\x06\x03U\x04\x07\x13\x07Salford1\x180\x16\x06\x03U\x04\n\x13\x0fSectigo Limited1705\x06\x03U\x04\x03\x13.Sectigo RSA Domain Validation Secure Server CA0\x1e\x17\r190309000000Z\x17\r210308235959Z0W1!0\x1f\x06\x03U\x04\x0b\x13\x18Domain Control Validated1\x1d0\x1b\x06\x03U\x04\x0b\x13\x14PositiveSSL Wildcard1\x130\x11\x06\x03U\x04\x03\x0c\n*.mql5.net0\x82\x01"0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x01\x05\x00\x03\x82\x01\x0f\x000\x82\x01\n\x02\x82\x01\x01\x00\xcb\xbcn=\xbaGd\xe1XB\x07\xc9\xb1\xc8/\x86\xaa4Z\xbdNk\xfb\xffR\x8f\xe4\x1c^\x91m8\xb9^\x97\xa5\xd3N\xfb\x80\x92\x8ap\xda\x15\x9f\xee\xe7\xb3\xc8?\xb0>~\xaa\x07\x91\xb1\x99q\xe2\xe5\xc8\x9b\x1d5\xa0\x96,\x98\xdaW\x93\x95\x8e%\xe8\xd4L\xeb\xcbSg\x15"\xba\xb7\xc7\x1f\xe9\xd6\x1a\xe6E\x1d\xc8\x1e%\xd36\xe0/r\xd1\xce1C\xce\x91&\xa1\x08*R\xbf\x8cu\xb0\xda\x0e\x1e2\xd66\x1df&3\x9b\x03\x0b\xcam:\xf7\x12\xd9ud(\xae\xdc\xbci\x85\xbd\xcf\xeb{\x15:\xbd\x0e\x11\x1bi\xd8\xff]y~E\x15\x95\xee\xe9\xea\xc6Cr</\x0b\xe8\xc2\x9d\xe3\x83\x07R\xeb1\xf0\x93<|.\xf8G\xab\xa8=\xac\x16\x1d\xf9\x93%\x1b;)\xb2FN\x15\xc4\x17\xa9}\xb0\x80\xba\xfb\xc8\x15-G\x9e\x05\xe9\xf6\xc76\xc1\x9af\xa3\x91\n\xa4\x80,\x11=\x87\xec\xf9\xd6iJ\xd0\xbe\xc3K\x99J\xe7&\xc4\x86\x84:W\xc4/\x7f\x02\x03\x01\x00\x01\xa3\x82\x02\xf70\x82\x02\xf30\x1f\x06\x03U\x1d#\x04\x180\x16\x80\x14\x8d\x8c^\xc4T\xad\x8a\xe1w\xe9\x9b\xf9\x9b\x05\xe1\xb8\x01\x8da\xe10\x1d\x06\x03U\x1d\x0e\x04\x16\x04\x14z\x87\xb6T\xcbt:a\x03\xef:\x1f_\xad\xc0\x1cT\x15\x9d\xe30\x0e\x06\x03U\x1d\x0f\x01\x01\xff\x04\x04\x03\x02\x05\xa00\x0c\x06\x03U\x1d\x13\x01\x01\xff\x04\x020\x000\x1d\x06\x03U\x1d%\x04\x160\x14\x06\x08+\x06\x01\x05\x05\x07\x03\x01\x06\x08+\x06\x01\x05\x05\x07\x03\x020I\x06\x03U\x1d \x04B0@04\x06\x0b+\x06\x01\x04\x01\xb21\x01\x02\x02\x070%0#\x06\x08+\x06\x01\x05\x05\x07\x02\x01\x16\x17https://sectigo.com/CPS0\x08\x06\x06g\x81\x0c\x01\x02\x010\x81\x84\x06\x08+\x06\x01\x05\x05\x07\x01\x01\x04x0v0O\x06\x08+\x06\x01\x05\x05\x070\x02\x86Chttp://crt.sectigo.com/SectigoRSADomainValidationSecureServerCA.crt0#\x06\x08+\x06\x01\x05\x05\x070\x01\x86\x17http://ocsp.sectigo.com0\x1f\x06\x03U\x1d\x11\x04\x180\x16\x82\n*.mql5.net\x82\x08mql5.net0\x82\x01\x7f\x06\n+\x06\x01\x04\x01\xd6y\x02\x04\x02\x04\x82\x01o\x04\x82\x01k\x01i\x00v\x00\xbb\xd9\xdf\xbc\x1f\x8aq\xb5\x93\x94#\x97\xaa\x92{G8W\x95\n\xabR\xe8\x1a\x90\x96d6\x8e\x1e\xd1\x85\x00\x00\x01icH\xf8\x9b\x00\x00\x04\x03\x00G0E\x02 =\xab\xac\xefa \xc3\xf3J\xbb] w8\xc1+\xa9\x1b8\xcc\x94LP,T\xe0\x07\xe8\x87\x93s\xf5\x02!\x00\xf4D\x0e\x86a\xc9M\x8b\xc5\xf8\xec\x821\x9b\xbf]^\xacB1p\xfc\x8a\n\x07\xefz\xb6\x82 \xe0\xd5\x00v\x00D\x94e.\xb0\xee\xce\xaf\xc4@\x07\xd8\xa8\xfe(\xc0\xda\xe6\x82\xbe\xd8\xcb1\xb5?\xd33\x96\xb5\xb6\x81\xa8\x00\x00\x01icH\xf8\xdb\x00\x00\x04\x03\x00G0E\x02 ]\x91\x03.5\xaaA\xa82\xf4Bg\x08\xf7\xf1\x948N\x08,\xf5\x96\x01\x08\xdcM]&7J\xebv\x02!\x00\xeb\x90\r\xd5k\xf9\xa3L<\xc67]\xc5]\x16\xb2\x10\xed\xd5\x9b\xec\xdc$\xe1\xd5r+\x99\x19\xdbb\xe4\x00w\x00\\\xdcC\x92\xfe\xe6\xabED\xb1^\x9a\xd4V\xe6\x107\xfb\xd5\xfaG\xdc\xa1s\x94\xb2^\xe6\xf6\xc7\x0e\xca\x00\x00\x01icH\xf8\xe5\x00\x00\x04\x03\x00H0F\x02!\x00\x8f\xf5W\xd5 \xea\x02\xc4v\x1b\xd0h\x03\xe7`\xec\xdfp\xd7\xb8\x10\xd9nb7\xadDp\xf6V\xa0l\x02!\x00\xa9\x935\x94\xe3\xdb')
+    assert raw(p[TLS]) == b'\x17\x03\x03\x0e4\x02\x00\x00M\x03\x03^\xfa\xb5~\x88\xdf\xdc#}\'\xa0\xff\xa2\xe2\xb5\xec\x0e\x93\xa8\xe0\xde\x01[\x13[F\x151 x\xc6\xcc `)\x00\x00\x8aZ\x90l\xda\x0b\xe1\xec[i\x13\xa7\x8e\xb9a\x98"\x8a7L\x9d\x90\xe0\x01\x06c$9\xc0\'\x00\x00\x05\xff\x01\x00\x01\x00\x0b\x00\x0c\x8e\x00\x0c\x8b\x00\x06n0\x82\x06j0\x82\x05R\xa0\x03\x02\x01\x02\x02\x10EY\xe8\x1c\x1e\x9a\xe0?X\xaa\xc3\xbc\xcd`jh0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x0b\x05\x000\x81\x8f1\x0b0\t\x06\x03U\x04\x06\x13\x02GB1\x1b0\x19\x06\x03U\x04\x08\x13\x12Greater Manchester1\x100\x0e\x06\x03U\x04\x07\x13\x07Salford1\x180\x16\x06\x03U\x04\n\x13\x0fSectigo Limited1705\x06\x03U\x04\x03\x13.Sectigo RSA Domain Validation Secure Server CA0\x1e\x17\r190309000000Z\x17\r210308235959Z0W1!0\x1f\x06\x03U\x04\x0b\x13\x18Domain Control Validated1\x1d0\x1b\x06\x03U\x04\x0b\x13\x14PositiveSSL Wildcard1\x130\x11\x06\x03U\x04\x03\x0c\n*.mql5.net0\x82\x01"0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x01\x05\x00\x03\x82\x01\x0f\x000\x82\x01\n\x02\x82\x01\x01\x00\xcb\xbcn=\xbaGd\xe1XB\x07\xc9\xb1\xc8/\x86\xaa4Z\xbdNk\xfb\xffR\x8f\xe4\x1c^\x91m8\xb9^\x97\xa5\xd3N\xfb\x80\x92\x8ap\xda\x15\x9f\xee\xe7\xb3\xc8?\xb0>~\xaa\x07\x91\xb1\x99q\xe2\xe5\xc8\x9b\x1d5\xa0\x96,\x98\xdaW\x93\x95\x8e%\xe8\xd4L\xeb\xcbSg\x15"\xba\xb7\xc7\x1f\xe9\xd6\x1a\xe6E\x1d\xc8\x1e%\xd36\xe0/r\xd1\xce1C\xce\x91&\xa1\x08*R\xbf\x8cu\xb0\xda\x0e\x1e2\xd66\x1df&3\x9b\x03\x0b\xcam:\xf7\x12\xd9ud(\xae\xdc\xbci\x85\xbd\xcf\xeb{\x15:\xbd\x0e\x11\x1bi\xd8\xff]y~E\x15\x95\xee\xe9\xea\xc6Cr</\x0b\xe8\xc2\x9d\xe3\x83\x07R\xeb1\xf0\x93<|.\xf8G\xab\xa8=\xac\x16\x1d\xf9\x93%\x1b;)\xb2FN\x15\xc4\x17\xa9}\xb0\x80\xba\xfb\xc8\x15-G\x9e\x05\xe9\xf6\xc76\xc1\x9af\xa3\x91\n\xa4\x80,\x11=\x87\xec\xf9\xd6iJ\xd0\xbe\xc3K\x99J\xe7&\xc4\x86\x84:W\xc4/\x7f\x02\x03\x01\x00\x01\xa3\x82\x02\xf70\x82\x02\xf30\x1f\x06\x03U\x1d#\x04\x180\x16\x80\x14\x8d\x8c^\xc4T\xad\x8a\xe1w\xe9\x9b\xf9\x9b\x05\xe1\xb8\x01\x8da\xe10\x1d\x06\x03U\x1d\x0e\x04\x16\x04\x14z\x87\xb6T\xcbt:a\x03\xef:\x1f_\xad\xc0\x1cT\x15\x9d\xe30\x0e\x06\x03U\x1d\x0f\x01\x01\xff\x04\x04\x03\x02\x05\xa00\x0c\x06\x03U\x1d\x13\x01\x01\xff\x04\x020\x000\x1d\x06\x03U\x1d%\x04\x160\x14\x06\x08+\x06\x01\x05\x05\x07\x03\x01\x06\x08+\x06\x01\x05\x05\x07\x03\x020I\x06\x03U\x1d \x04B0@04\x06\x0b+\x06\x01\x04\x01\xb21\x01\x02\x02\x070%0#\x06\x08+\x06\x01\x05\x05\x07\x02\x01\x16\x17https://sectigo.com/CPS0\x08\x06\x06g\x81\x0c\x01\x02\x010\x81\x84\x06\x08+\x06\x01\x05\x05\x07\x01\x01\x04x0v0O\x06\x08+\x06\x01\x05\x05\x070\x02\x86Chttp://crt.sectigo.com/SectigoRSADomainValidationSecureServerCA.crt0#\x06\x08+\x06\x01\x05\x05\x070\x01\x86\x17http://ocsp.sectigo.com0\x1f\x06\x03U\x1d\x11\x04\x180\x16\x82\n*.mql5.net\x82\x08mql5.net0\x82\x01\x7f\x06\n+\x06\x01\x04\x01\xd6y\x02\x04\x02\x04\x82\x01o\x04\x82\x01k\x01i\x00v\x00\xbb\xd9\xdf\xbc\x1f\x8aq\xb5\x93\x94#\x97\xaa\x92{G8W\x95\n\xabR\xe8\x1a\x90\x96d6\x8e\x1e\xd1\x85\x00\x00\x01icH\xf8\x9b\x00\x00\x04\x03\x00G0E\x02 =\xab\xac\xefa \xc3\xf3J\xbb] w8\xc1+\xa9\x1b8\xcc\x94LP,T\xe0\x07\xe8\x87\x93s\xf5\x02!\x00\xf4D\x0e\x86a\xc9M\x8b\xc5\xf8\xec\x821\x9b\xbf]^\xacB1p\xfc\x8a\n\x07\xefz\xb6\x82 \xe0\xd5\x00v\x00D\x94e.\xb0\xee\xce\xaf\xc4@\x07\xd8\xa8\xfe(\xc0\xda\xe6\x82\xbe\xd8\xcb1\xb5?\xd33\x96\xb5\xb6\x81\xa8\x00\x00\x01icH\xf8\xdb\x00\x00\x04\x03\x00G0E\x02 ]\x91\x03.5\xaaA\xa82\xf4Bg\x08\xf7\xf1\x948N\x08,\xf5\x96\x01\x08\xdcM]&7J\xebv\x02!\x00\xeb\x90\r\xd5k\xf9\xa3L<\xc67]\xc5]\x16\xb2\x10\xed\xd5\x9b\xec\xdc$\xe1\xd5r+\x99\x19\xdbb\xe4\x00w\x00\\\xdcC\x92\xfe\xe6\xabED\xb1^\x9a\xd4V\xe6\x107\xfb\xd5\xfaG\xdc\xa1s\x94\xb2^\xe6\xf6\xc7\x0e\xca\x00\x00\x01icH\xf8\xe5\x00\x00\x04\x03\x00H0F\x02!\x00\x8f\xf5W\xd5 \xea\x02\xc4v\x1b\xd0h\x03\xe7`\xec\xdfp\xd7\xb8\x10\xd9nb7\xadDp\xf6V\xa0l\x02!\x00\xa9\x935\x94\xe3\xdb'
 
 = Test TLS TCP defragmentation
 
@@ -1496,18 +1495,17 @@ import os
 
 filename = scapy_path("/test/pcaps/tls_tcp_frag.pcap.gz")
 
-dd = conf.debug_dissector
-conf.debug_dissector = False
-
-a = sniff(offline=filename, session=TCPSession)[0]
-
-conf.debug_dissector = dd
+with no_debug_dissector():
+    a = sniff(offline=filename, session=TCPSession)[0]
 
 assert len(a.msg) == 4
 assert isinstance(a.msg[0], TLSServerHello)
 assert isinstance(a.msg[1], TLSCertificate)
 assert isinstance(a.msg[2], TLSServerKeyExchange)
 assert isinstance(a.msg[3], TLSServerHelloDone)
+
+assert a.wirelen is None
+assert a[TCP].seq == 7808002
 
 = Issue 2527
 
@@ -1523,6 +1521,38 @@ r1 = TLS(b"\x16\x03\x01\x02\x00\x01\x00\x01\xfc\x03\x03\xf8\xb3\xdb\xcbp\xed8\x0
 r2 = TLS(b'\x16\x03\x03\x00U\x02\x00\x00Q\x03\x03 \xa5@2G~\xa3\xa9c\xb8\xa7\x00\t\x04Y\xf1\x1f\x1fJ\xd1\x89n\x1dut[~+\xdcQ\xdd\xe0 \x06\x00\xf5R\xdblQ\xb9z0\x97\x17\xff\x84{\xb6\xe8\xfe\xf1\xce&\x01TD\x13\xfd\xa7\xb6`u\xb8\x87\x00\x9d\x00\x00\t\xff\x01\x00\x01\x00\x00\x17\x00\x00\x16\x03\x03\x03n\x0b\x00\x03j\x00\x03g\x00\x03d0\x82\x03`0\x82\x02H\xa0\x03\x02\x01\x02\x02\t\x00\xebs\xb7\x1c>/\x9f\xdc0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x0b\x05\x000E1\x0b0\t\x06\x03U\x04\x06\x13\x02AU1\x130\x11\x06\x03U\x04\x08\x0c\nSome-State1!0\x1f\x06\x03U\x04\n\x0c\x18Internet Widgits Pty Ltd0\x1e\x17\r190215151403Z\x17\r290212151403Z0E1\x0b0\t\x06\x03U\x04\x06\x13\x02AU1\x130\x11\x06\x03U\x04\x08\x0c\nSome-State1!0\x1f\x06\x03U\x04\n\x0c\x18Internet Widgits Pty Ltd0\x82\x01"0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x01\x05\x00\x03\x82\x01\x0f\x000\x82\x01\n\x02\x82\x01\x01\x00\xd2\xf7\xd3k#:V\x196\x8f\xc3\xa7\xdb\x0f#d\xdcq\x98m\xd4\xee\xbc\xbe\xe8[x>\x13\x9c\xfe\xb0\xa8\r\xe5\x01G\xc96\xaa\x84#\x0e/\xa2\xeb\x91\xef\x177A\x03\x87\xb92D\n\xc7\xcf\xda<Yf\xee\xf8\x8fh\x8b\xcb\xeej]\r\xfa\xa0u\xb7}\xfe\x83o,\xb3\x187_\xf5\xbe+5\xf6\xd6-\xd7\xc4\xb1G"Og\xd5=\x95\xc7\xfc\xc1\x1c\xda{\xc6"6\x9bMJhVU\x16\x9f\xb2\x8ff\xe5\x11rO\x0c\x9a\xf2\xf7N\xa4\xcd\xf0\x9b\x92\xf9\x17$jX/g\xfa\xde>\xff~\xca,yMq<\x13\xf8\x0c\xd5?\x84z\xa1\x96\xd0\xad\xc0D\x94y\nb\x8e2\x7fKS\xd0[\x83\x02\\>\xa5A\x19_\x95<\xe6\xfc7\xed\xcch\xa8\xfdn\xcab\x1f8\xbc\x08\xbc-\x8dr\xcf\xcd\xf8\\h\xf9\xf4\xf4H[2\x13<c)\x9f\x85\xff\xd6+\xdeZ\x9dX^Z\x89o\x081\x94H\'\x7f\x19\xe8m]hx\xbcSv\x8b.\xf9\xb3!\x02\x03\x01\x00\x01\xa3S0Q0\x1d\x06\x03U\x1d\x0e\x04\x16\x04\x14\x82\x97\xfb\x8c\xf3\xd9\xdd\xf2\xf6\x0e\xc9\x0f\x92\x81\\(\xe3\xf3\xff50\x1f\x06\x03U\x1d#\x04\x180\x16\x80\x14\x82\x97\xfb\x8c\xf3\xd9\xdd\xf2\xf6\x0e\xc9\x0f\x92\x81\\(\xe3\xf3\xff50\x0f\x06\x03U\x1d\x13\x01\x01\xff\x04\x050\x03\x01\x01\xff0\r\x06\t*\x86H\x86\xf7\r\x01\x01\x0b\x05\x00\x03\x82\x01\x01\x00<\x00\x1f\x0f]\x10`r\xe0\xbe\xed\xfaG\x89S)\xd4b4"\x08\x0ef\xca\xa4\xbe\xb4\xc3\xd9\xb6\x86\x8f\xa1\x07F}a`\xe5\x12\xed\xe7\xcb\xbe\xfd\xeb\x17\xc0\x9b\x9fYO\x86\xf1\xa9\x92,\x98,\xcf\x96U\xd4\xd6~\xda\x06\x1ff~\xeb%\xfer\x03\xbe\xa0\x0e@\xf1P\xa4\x90\xa7\x8c\xa9c\xd8|\x18Z\xde\x8b|)OPR\xfb\x1e\x1e\xdb4\x03\x83\x1e3\xe4\x02l\x8eVq|\xb7{\xc3#!\x85\x8b\xe3zw\xfe\x7fU\x11\xef\x8c \x13\xc8n\'0\xc5\xb26hu\x13\x1c\xae\x0cv\x16\xfd\xc7\xc8`V\x96\x13>zh_  <\r\xb8\xe0\xff\x1d\x1aY\x91\xd2\xf0X\xf4\x8f \xb1\n_\xb0\xdf\'\xa1\xf9\x87L\xc0\xfe\x8dn\xbfw\xe9\xa7\xba8I\x0e\x9dc$\x1a\x0f\xb3\xfdw\x01\xff;\x13\x0c\x9a\xa7\xaaww\x02\x80\xb7\x00<\x1b\xb5\xe0xL4\xaa\xcbt\xce\x81\x14\x96\x0eP\xee\xe0F\x02\xa7\xab \xe5\xc8x\x02\x8eB\x92\xe9\x0e@\xfdc\x1f\xee\x16\x03\x03\x00\x04\x0e\x00\x00\x00', tls_session=r1.tls_session.mirror())
 assert r2.tls_session.tls_version == 0x303
 
+= PR/Issue 3295
+
+pkt = TLSServerHello(b"\x02\x00\x00\x28\x03\x03ABCDEFGHIJKLMNOPQRSTUVWXYZ012345\x00\x00\x39\x00\x00\x00")
+assert pkt.extlen == 0
+assert pkt.ext is None
+
+= Issue 3324 - FFDH support
+
+# Dissection
+
+hex_data = "16030102a8010002a4030330cc71861d50119dbe2b9c3a5207b7eff49aff19408096b32926d6fe8a4878e520c03832cba05660b5facc4b9991f3b006d326325ab1e0a9463287271952f4235f0004130200ff0100025700000020001e00001b6578616d706c653132333435362e6d79636f6d70616e792e636f6d000a000400020102002300000016000000170000000d000400020403002b0003020304002d00020101003302060204010202003476f00e12d8c768be0bd6db6af9e539441edd84b87178e8843bb2febc4b2097ac9619e65ed61837550e51834c32c7cb007b9b9a2f129d7127ee9f8bcbc2ba2141677300bc660d080d32257731d8d795bda7467df240cf07e8f1cde33bfc1f168385babee0f5834269f3c1070f7d89b3b9607b474edd306af54638d14e58cdc524b8972035a762dc446ef95b30a8c5e06876804ec9fb180f0255ea93b1438336e414761e1e1e2772909ce3fadc5282674337267f9697204b81a0b3ded2a3ecb03b46c1a4113e44b23a67d349b0406903b6acfdce0595e16b4f41dee9351f16e1267f9bdc6abbd897332552cb9b139f1556fc207fb8dee337d185acbe6b1b42c09751339e7d441933bec3cc4b24740b1640a2af73eadf700e0bee5065c38886f6a5983e1029f67085590f95f9546057725c004804cd97ed2c1c5ca0383751e77c087449719e65d9a39adad84e1bab92c0f9b7b472e58f60d4f81e3b622d7f62fd61c747e5951b54e9ef7b1a65b07e25c94baa7c19284ecf855a5cff7dae958359f3bd5d6184f11a3785026f8479d25595948160de89e8af62f306783c79b0bf28fb18da512737b52ede9f826ed95ed1ce8386e3ff3e74ba0b7ad82bef0c046223986475de12c9654f0fc3cb162d24ab02fe51120566bc993583e10149c16d953640357785e88748739cf84a3f0930fe5b4732f17f32e7e7fdf00023643a798cf7"
+
+key = "3476f00e12d8c768be0bd6db6af9e539441edd84b87178e8843bb2febc4b2097ac9619e65ed61837550e51834c32c7cb007b9b9a2f129d7127ee9f8bcbc2ba2141677300bc660d080d32257731d8d795bda7467df240cf07e8f1cde33bfc1f168385babee0f5834269f3c1070f7d89b3b9607b474edd306af54638d14e58cdc524b8972035a762dc446ef95b30a8c5e06876804ec9fb180f0255ea93b1438336e414761e1e1e2772909ce3fadc5282674337267f9697204b81a0b3ded2a3ecb03b46c1a4113e44b23a67d349b0406903b6acfdce0595e16b4f41dee9351f16e1267f9bdc6abbd897332552cb9b139f1556fc207fb8dee337d185acbe6b1b42c09751339e7d441933bec3cc4b24740b1640a2af73eadf700e0bee5065c38886f6a5983e1029f67085590f95f9546057725c004804cd97ed2c1c5ca0383751e77c087449719e65d9a39adad84e1bab92c0f9b7b472e58f60d4f81e3b622d7f62fd61c747e5951b54e9ef7b1a65b07e25c94baa7c19284ecf855a5cff7dae958359f3bd5d6184f11a3785026f8479d25595948160de89e8af62f306783c79b0bf28fb18da512737b52ede9f826ed95ed1ce8386e3ff3e74ba0b7ad82bef0c046223986475de12c9654f0fc3cb162d24ab02fe51120566bc993583e10149c16d953640357785e88748739cf84a3f0930fe5b4732f17f32e7e7fdf00023643a798cf7"
+
+tls_packet = TLS(hex_bytes(hex_data))
+assert tls_packet.msg[0].ext[8].client_shares[0].sprintf("%group%") == 'ffdhe4096'
+assert tls_packet.msg[0].ext[8].client_shares[0].key_exchange == hex_bytes(key)
+assert tls_packet.tls_session.tls13_client_pubshares['ffdhe4096'].key_size == 4096
+
+# Build
+
+tls_packet = TLS(msg=[TLSClientHello(ext=[TLS_Ext_KeyShare_CH(client_shares=[KeyShareEntry(group="ffdhe4096")])])])
+tls_packet.raw_stateful()
+assert tls_packet.tls_session.tls13_client_privshares['ffdhe4096'].key_size == 4096
+
+= OCSP: payload after OCSP - GH3291
+
+data = b'1603031616020000660303602161b58e22f4966f18f9aa6afd5759f343935ed437cf09c554dd27691a1eb420a13c0000eaad0a6cd4f11bfc59788daec98422be4f3810c19669207e509aaa11c03000001e000500000023000000100005000302683200170000ff01000100000000000b000d5d000d5a0007f6308207f2308205daa00302010202136b000006c55514d0a6c4891be20000000006c5300d06092a864886f70d01010b0500304f310b3009060355040613025553311e301c060355040a13154d6963726f736f667420436f72706f726174696f6e3120301e060355040313174d6963726f736f66742052534120544c53204341203031301e170d3230303930393231343530355a170d3231303930393231343530355a30223120301e060355040313177074692e73746f72652e6d6963726f736f66742e636f6d30820122300d06092a864886f70d01010105000382010f003082010a028201010094876b9572b7c3d7fbb2d569ffff6b8f716245a2d9b413c9e8238ee88d98b1002cec8c2198b52f3b7f0a679ceb1aeb2c1467d2eda3c71b4bb0756ba42354a956b8d40bd422921793b3dec0aab3f5e0b023bcb7dfdf48bd4b064c1a62255e9b58c16ad482087fd1505b01aad9474f06925f3821fbe92f680e87db3f0aa150e2066848f88ebe08d8280185bbba697b39d12e03eae6d4e481319432f2752793fcd125f2714cd92b37e3d9b8fcec7fd7b3c121fdedc42b50ff65f73352cbc1202ac59c846df2a9168c00fc4754f5e19c3b0503dbe4f58b0f8b3e0fa411d4dcb8e1acdef9a2ca7db52e282a14119e1ef3a867a3b7d8fdaccc27d3d2033bb5082a1b510203010001a38203f2308203ee30820105060a2b06010401d6790204020481f60481f300f10076007d3ef2f88fff88556824c2c0ca9e5289792bc50e78097f2e6a9768997e22f0d70000017474dd866500000403004730450221008886de3960d7fe8cbaa9bcf91f961d920af99ec72adaf07fb6f6e2759d6d045b02201f90de8ad6dc333cbf920fe6cd66b41d97a01397831b2ea39f618c1505ecc7e70077004494652eb0eeceafc44007d8a8fe28c0dae682bed8cb31b53fd33396b5b681a80000017474dd86d200000403004830460221008f66e7ce568540722b5a09d96bc08d78a1cc98dda6c7c2cda1daaa7ea49d75f302210099ccca061b9b31f938988f2e4182fcb39035f6e90d5dee8c928582bd4e5fb693302706092b060104018237150a041a3018300a06082b06010505070301300a06082b06010505070302303e06092b06010401823715070431302f06272b060104018237150887da867583eed90182c9851b81b59e6185f4eb60815d85868e4187c2985002016402012530818706082b06010505070101047b3079305306082b060105050730028647687474703a2f2f7777772e6d6963726f736f66742e636f6d2f706b692f6d73636f72702f4d6963726f736f6674253230525341253230544c53253230434125323030312e637274302206082b060105050730018616687474703a2f2f6f6373702e6d736f6373702e636f6d301d0603551d0e041604142746d09d123c3c91382ef590e0aab2a901f0d0c3300b0603551d0f0404030204b030780603551d110471306f821b7074692d696e742e73746f72652e6d6963726f736f66742e636f6d82177074692e73746f72652e6d6963726f736f66742e636f6d821a7074692d696e742e747261666669636d616e616765722e6e6574821b7074692d70726f642e747261666669636d616e616765722e6e65743081b00603551d1f0481a83081a53081a2a0819fa0819c864d687474703a2f2f6d7363726c2e6d6963726f736f66742e636f6d2f706b692f6d73636f72702f63726c2f4d6963726f736f6674253230525341253230544c53253230434125323030312e63726c864b687474703a2f2f63726c2e6d6963726f736f66742e636f6d2f706b692f6d73636f72702f63726c2f4d6963726f736f6674253230525341253230544c53253230434125323030312e63726c30570603551d200450304e304206092b0601040182372a013035303306082b060105050702011627687474703a2f2f7777772e6d6963726f736f66742e636f6d2f706b692f6d73636f72702f6370733008060667810c010201301f0603551d23041830168014b5760c3011cec792424d4cc75c2cc8a90ce80b64301d0603551d250416301406082b0601050507030106082b06010505070302300d06092a864886f70d01010b0500038202010086dd00ab90b01c8f5c87d59c2cc45e2cb81998699e5e97aeceea13670bbf2b76e9add7cd11bc4ef347dbab7ea7c28300223bd43e5d2904db1516c55572181534f4efc11eccf4d10a9c08ddfbff53cad870856e0e3377b7639cfc3de5d3c7ca8294cc6e7ac0cac0e1a3cd4b0b81cdcb2fa1dbf6ebc2659d6f1947e8047be27c02fba8b6a991837781cea269246353e5441aa33c8494d4591ee482f448bef23460578f96c5c1e92f5a7cd7c81815b40a7cc00aeee6976a708c1d236c7fe64a4a45f7fd83707c0e621ff7e78fe089dd3ff539148a0acba6a99a8ca630ef2e2c83529596bbb3fb1c9ea7f371158d70b36120217154003e791db16390877c83dd27543c15e73c1af5f22b4c7c73347a9b97de633abdd9413363877a8a428f18cd624e310e2ea17aa4740a167aabecfb5f5c244ef8ada6638f90592df625885b9a57ec478acca5ec2c35e6c66b597be4570057d6769f3e5c2487ea70f84ecabc0f4064bb0e7be746d652f3861b931eb0e75846253e7eeae987cf7d4193bd1dc85044ee798d821536944c7ade7e269b13e4ece47093c641e7fc8d31dc0e3d211d94e8b450cfed2733ad78fac2eae225acd505117c39243a8e24feebd47ff875643d1ef777dd2a1a18f370dd83fdf85ca2eadf3c46711aedc68fc13b1db8bf71e015c77f69882613ea096c216e759553ea475a48db8ac4e92b8b184b7dbc9d458758e85200055e3082055a30820442a00302010202100f14965f202069994fd5c7ac788941e2300d06092a864886f70d01010b0500305a310b300906035504061302494531123010060355040a130942616c74696d6f726531133011060355040b130a43796265725472757374312230200603550403131942616c74696d6f7265204379626572547275737420526f6f74301e170d3230303732313233303030305a170d3234313030383037303030305a304f310b3009060355040613025553311e301c060355040a13154d6963726f736f667420436f72706f726174696f6e3120301e060355040313174d6963726f736f66742052534120544c5320434120303130820222300d06092a864886f70d01010105000382020f003082020a0282020100aa6277cf9a63b20684f39036f499f31451abea950a3b4606fd11411ffe5b0658c9386e08fc4f4448cd3aa4f7bd1ea2e295b8be5120c5bfb270635d780c43c029cd64490996daafcefd055f2b2a91e8016e2e189b2c9cd0017f69f5ee3f53885cba056cbe2215671482f22cd2be5b6337ccaf6085e8966b6b8008a86ebe009c6b9570fce41812b11d1bb2c11331673334e625c9625b58827576f2fef23f3b16dfaa4283e3326d9b8e4326f0bd0e1fa1a73aaf2cc88ae6ea3ff9a5d2258f92aa1a08129cfeac4ac7c3eb8094ab8716d12349e7a4bbc791dfe679343f414aa73a26d2ea6f46e33873e6e5d491ae0b789e78a5ef96e373d8f79565e905bf4f5cff52a7f9cf08afa74d0999c071a3527aa53bd79b015403e3b662b05a279c30268eb64d56a117177a7b95a107ac5331b6d62e0fcd4174ecf101b2fd45bffc31e146423136431eb9aa055f847f91b18bae0fd754c3fdf064086ad39c8eea7934ec033d73e01b36d46811c75970b0877cc0dc6e45ca36ce43267702a9700de8b857544442c3fbac1b632608c2d2231f7f930b7c6f08549a2b4e5dce9fa53ed2985bd102dbf183ce3052483863f1b1fbed23d33e92b5278dd04273d79d236871ba595e0752a6964dbf7c4e6f742205c0538016d8604e97314f894e4863d8edf9e5c2d90eb20bf6694cbd4b01c9cbdd06bf3a02eb1cdd308b0d4a1460f9d5644f4344a1ed0203010001a382012530820121301d0603551d0e04160414b5760c3011cec792424d4cc75c2cc8a90ce80b64301f0603551d23041830168014e59d5930824758ccacfa085436867b3ab5044df0300e0603551d0f0101ff040403020186301d0603551d250416301406082b0601050507030106082b0601050507030230120603551d130101ff040830060101ff020100303406082b0601050507010104283026302406082b060105050730018618687474703a2f2f6f6373702e64696769636572742e636f6d303a0603551d1f04333031302fa02da02b8629687474703a2f2f63726c332e64696769636572742e636f6d2f4f6d6e69726f6f74323032352e63726c302a0603551d20042330213008060667810c0102013008060667810c010202300b06092b0601040182372a01300d06092a864886f70d01010b050003820101009f2bbe92675bda7b8aade8ff9d4d050eedb60d1541d1e615dc0360f9f422569c48f99daeda2b3ca8c0abd0ba95b8c8c1fd7c6371b6c87a889b3046a38e7d9602e3f82204efe036c06fc2bf2e0d6eedd676280d81873e9be7a7108cda661f4051eae7bebf4e6798bb5459636f42e30f31601964000f260c97d184c0a67a193b70de4526dc96463d9c663fe13a8238e53603042857a4e94b64a218886d60898d7abe10918bace63f3130bfeb64d79e8de9c192566e388d343faecd6c6b4252623cd46989e0a057590b839fc6722442f5080384ce1663f334f105763719b206de133e137061d304f2b8476f05e38a88302b47455e7954c5f9ddebfa3f785175d25b160006d6010006d2308206ce0a0100a08206c7308206c306092b0601050507300101048206b4308206b03081a5a21604149a0190a5b9942f43bc62113fcd3d404bead25250180f32303231303230383036303930325a307a3078304c300906052b0e03021a05000414521ee36c478119a9cb03fab74e57e1197af1818b0414b5760c3011cec792424d4cc75c2cc8a90ce80b6402136b000006c55514d0a6c4891be20000000006c58000180f32303231303230383036303930325aa011180f32303231303231323036303930325aa1023000300d06092a864886f70d01010b05000382010100784c3cee7765bf5cb164c0cf465462c37e97d11041443dcd9052e413747a71f8c37a051a29cdba11ea15cac3c252eeab533c7e9141431649a3a57a7dacc1fa697fdd360c139a35af181b7154574e7b87ade8da951d1894362082f80eb56d3775e729e930a097e72a7339e6e63719acc8166fd9c77c068cc75240a3b2149da8bcc24187addcfcc7330ad057b1d7a215380ea8e060b2a85330bc262c58e119672d846b87be7edf535d68a4bc2a643516df1c134401d96f0944d4d7ebe7a769ecdcfa90418486c9d62a9a4c46e232fa94221392f59a9c8df520b19e1214ed4ac70f54367b640924c48d2d3596056ff7424fc1734b98edc02dc67d8d72f6d10f44e8a08204f0308204ec308204e8308202d0a00302010202136b00086694d48d4b29943630f5000000086694300d06092a864886f70d01010b0500304f310b3009060355040613025553311e301c060355040a13154d6963726f736f667420436f72706f726174696f6e3120301e060355040313174d6963726f736f66742052534120544c53204341203031301e170d3231303230323139353831335a170d3232303230323139353831335a30353133303106035504030c2a4d6963726f736f66745f5253415f544c535f49737375696e675f43415f30315f4b657942696e64696e6730820122300d06092a864886f70d01010105000382010f003082010a0282010100b65a936febea1694e5de2b8dfc1997d265f3582b94f9be1fb56bb96e2191c5df170bb52d276c30c8fdc876f1e5b3d9b900571e17fd505534f56db0ab7953261a34911e9fb0340aac76c1baede9a580ee86eba49f0e3d7cddcc60d973c69afc157aaa5d2d6ede3cd7d9a265098ee932fde13049e0f1490b2bb88bd56b6e26033ad99f49f6b7366eb275e6550c6b74f1823ac6dcf86a843825ade03f670a7ce895c840a7cfca247bc94d608ee30feefa8346470bc69f0f2e847b5896b377d70fa20e99d3af06b2d8c286b512fad8070cdc33f3302f48ad02014a21de13d1a04fbdf6fca54cc7364e303a1b458d2093fb8e98f686c2d8da374e757f8ac25b2210e70203010001a381d63081d3301d0603551d0e041604149a0190a5b9942f43bc62113fcd3d404bead25250300e0603551d0f0101ff04040302078030130603551d25040c300a06082b06010505070309300f06092b060105050730010504020500301f0603551d23041830168014b5760c3011cec792424d4cc75c2cc8a90ce80b64303e06092b06010401823715070431302f06272b060104018237150887da867583eed90182c9851b81b59e6185f4eb60815d81cc9b4781c8e916020164020107301b06092b060104018237150a040e300c300a06082b06010505070309300d06092a864886f70d01010b0500038202010012d83b821ff2afc4d67c63cee2d9a1045c1a1f0628274e1da3ef03fcdc720d420423478090afe6cbbaf4c753fdcad04aef5ca919c96ab9b540a64cc23d24181e7016391e780ae56a0897a372ea9a93a959c0d713ae0cbd5e6ca420724a110ac0901d671ea8c57ba31db062a7df4bbc8cb78d820262f9ba12e4313edb85155f69c47a05fa6171958e6577b61910357a5940a3c3f186eb07a37968c7f17b5614603aae4e71cb2d5f122bbea187888452239cb9c0d338d913604034e4eb3be2639a15836d08b4b4f38287414e5cd144a23aa95edb59236205397263ead5b0ef1a2239f54149f9b5992a2964a28373652a1bb31a772a04c5d4eef2fd0e5853094590ccc5b1bcb9fc1910d31652cc8f2e72c685665834f3826613dd456655ae9c9f21283a1684123fa144bc3276f50ead086fd9c149b670b27804057472602a984a3de016f65bf0980baa8a0cbadd53b061800347fec63d80b0b68d164e295e682a890ae433c439ae04a31dd8b9260c81692a110e8583038e767ceab2b87db2067eeb1973aa5bbcd5f3b4fca071ca60361d9815e87c76c44e9791c7aa25defaaaa28d72c709ad434b44974ed50546b685e215c7a70065503f0014d5f9f1fdf851930af51e7c425d0ea0d966377f44d60bf6345a05d750d2de25ebb1957bdac56b1d9a3a4e556bf398e063062ea7e1400a279abb085c1fadb9e517231b5fdcb0d868c10c00016903001861040089499a5bf709647d1cd5e41d381c15ab96100c86f0d66d0ba53a224b2adb7897f63de0368a080e17e80da5f70505d58c5317cb047dfeeecc1c7e160fdbf4747c78fb2641b233ad509c12de3a83c3d9cab174c8ca3a748d43766a11eeaa3e8c080401006f041a8741e47e744c7b6b83abf44bc722ae7f1ca19e12989106c2a78a37c8713cac664d1d1dbff6a566b05f478f15123fb155850cafeb36120e9fb24ae4fc5f4c6e4614ebcaf1dab4a79405325d4774cef1c85facffdf57c182c7e22d29facb2ee7460b716aaa6b5e3235036d21a6212414f2d75fc85caa91317fcd0318c651f8459f32bfbda3f3b2e04c1f0c2f8982ea16d2df599133881106b27d53276703bc43230f0fdcadb8b1fe13101d1055a14d6cc6af8fa48d6dd23a0a36fb5d6ebb8f5021e3e20900b5de2442da9853d2446d75b1c2198d24cdc2a5a3d07a9aab451e196c6c49fce20bdb71a7190de2964afd934a7f14afb7872a49ab6a7a5cf2d30e000000'
+
+pkt = TLS(hex_bytes(data))
+assert [type(x) for x in pkt.msg] == [TLSServerHello, TLSCertificate, TLSCertificateStatus, TLSServerKeyExchange, TLSServerHelloDone]
+
 ###############################################################################
 ############################ Automaton behaviour ##############################
 ###############################################################################
@@ -1530,3 +1560,36 @@ assert r2.tls_session.tls_version == 0x303
 # see test/tls/tests_tls_netaccess.uts
 
 
+###############################################################################
+####################### Decrypt packets from a pcap ##########################
+###############################################################################
+
++ Decrypt packets from a pcap
+
+= pcap file & external TLS Key Log file
+
+bck_conf = conf
+conf.tls_session_enable = True
+conf.tls_nss_filename = scapy_path("doc/notebooks/tls/raw_data/tls_nss_example.keys.txt")
+
+packets = rdpcap(scapy_path("doc/notebooks/tls/raw_data/tls_nss_example.pcap"))
+assert b"GET /secret.txt HTTP/1.0\n" in packets[11].msg[0].data
+assert b"z2|gxarIKOxt,G1d>.Q2MzGY[k@" in packets[13].msg[0].data
+
+conf = bck_conf
+
+= pcapng file with a Decryption Secrets Block
+~ tshark linux
+
+import shutil
+if shutil.which("editcap"):
+    bck_conf = conf
+    key_log_path = scapy_path("doc/notebooks/tls/raw_data/tls_nss_example.keys.txt")
+    pcap_path = scapy_path("doc/notebooks/tls/raw_data/tls_nss_example.pcap")
+    pcapng_path = get_temp_file()
+    exit_status = os.system("editcap --inject-secrets tls,%s %s %s" % (key_log_path, pcap_path, pcapng_path))
+    assert exit_status == 0
+    packets = rdpcap(pcapng_path)
+    assert b"GET /secret.txt HTTP/1.0\n" in packets[11].msg[0].data
+    assert b"z2|gxarIKOxt,G1d>.Q2MzGY[k@" in packets[13].msg[0].data
+    conf = bck_conf

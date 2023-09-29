@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Nils Weiss <nils@we155.de>
-# This program is published under a GPLv2 license
 
 # scapy.contrib.description = BMW specific definitions for UDS
 # scapy.contrib.status = loads
@@ -10,7 +10,8 @@
 from scapy.packet import Packet, bind_layers
 from scapy.fields import ByteField, ShortField, ByteEnumField, X3BytesField, \
     StrField, StrFixedLenField, LEIntField, LEThreeBytesField, \
-    PacketListField, IntField, IPField, ThreeBytesField, ShortEnumField
+    PacketListField, IntField, IPField, ThreeBytesField, ShortEnumField, \
+    XStrFixedLenField
 from scapy.contrib.automotive.uds import UDS, UDS_RDBI, UDS_DSC, UDS_IOCBI, \
     UDS_RC, UDS_RD, UDS_RSDBI, UDS_RDBIPR
 
@@ -247,7 +248,7 @@ UDS.services[0xa5] = 'UnpackDS2Service'
 class SVK_DateField(LEThreeBytesField):
     def i2repr(self, pkt, x):
         x = self.addfield(pkt, b"", x)
-        return "%02X.%02X.20%02X" % (x[0], x[1], x[2])
+        return "%02X.%02X.20%02X" % (x[2], x[1], x[0])
 
 
 class SVK_Entry(Packet):
@@ -255,7 +256,7 @@ class SVK_Entry(Packet):
         ByteEnumField("processClass", 0, {1: "HWEL", 2: "HWAP", 4: "GWTB",
                                           5: "CAFD", 6: "BTLD", 7: "FLSL",
                                           8: "SWFL"}),
-        StrFixedLenField("svk_id", b"", length=4),
+        XStrFixedLenField("svk_id", b"", length=4),
         ByteField("mainVersion", 0),
         ByteField("subVersion", 0),
         ByteField("patchVersion", 0)]
@@ -275,10 +276,10 @@ class SVK(Packet):
         ByteEnumField("prog_status1", 0, prog_status_enum),
         ByteEnumField("prog_status2", 0, prog_status_enum),
         ShortField("entries_count", 0),
-        SVK_DateField("prog_date", b'\x00\x00\x00'),
+        SVK_DateField("prog_date", 0),
         ByteField("pad1", 0),
         LEIntField("prog_milage", 0),
-        StrFixedLenField("pad2", 0, length=5),
+        StrFixedLenField("pad2", b'\x00\x00\x00\x00\x00', length=5),
         PacketListField("entries", [], SVK_Entry,
                         count_from=lambda x: x.entries_count)]
 
@@ -293,9 +294,9 @@ class DIAG_SESSION_RESP(Packet):
 class IP_CONFIG_RESP(Packet):
     fields_desc = [
         ByteField('ADDRESS_FORMAT_ID', 0),
-        IPField('IP', ''),
-        IPField('SUBNETMASK', ''),
-        IPField('DEFAULT_GATEWAY', '')
+        IPField('IP', '192.168.0.10'),
+        IPField('SUBNETMASK', '255.255.255.0'),
+        IPField('DEFAULT_GATEWAY', '192.168.0.1')
     ]
 
 
@@ -336,8 +337,8 @@ class DEV_JOB_PR(Packet):
     ]
 
     def answers(self, other):
-        return other.__class__ == DEV_JOB \
-            and self.identifier == other.identifier
+        return isinstance(other, DEV_JOB) and \
+            self.identifier == other.identifier
 
 
 UDS.services[0xBF] = "DevelopmentJob"
@@ -362,7 +363,7 @@ class READ_MEM_PR(Packet):
 class WEBSERVER(Packet):
     fields_desc = [
         ByteField('enable', 1),
-        ThreeBytesField('password', b'123')
+        ThreeBytesField('password', 0x10203)
     ]
 
 
@@ -1883,7 +1884,7 @@ UDS_RDBI.dataIdentifiers[0x4080] = "AirbagLock_NEU"
 UDS_RDBI.dataIdentifiers[0x4140] = "BodyComConfig"
 UDS_RDBI.dataIdentifiers[0x4ab4] = "Betriebsstundenzaehler"
 UDS_RDBI.dataIdentifiers[0x5fc2] = "WDBI_DME_ABGLEICH_PROG_REQ"
-UDS_RDBI.dataIdentifiers[0xd114] = "Gesamtweg-Streckenzähler Offset"
+UDS_RDBI.dataIdentifiers[0xd114] = "Gesamtweg-Streckenzaehler Offset"
 UDS_RDBI.dataIdentifiers[0xd387] = "STATUS_DIEBSTAHLSCHUTZ"
 UDS_RDBI.dataIdentifiers[0xdb9c] = "InitStatusEngineAngle"
 UDS_RDBI.dataIdentifiers[0xEFE9] = "WakeupRegistry"
@@ -4832,7 +4833,7 @@ UDS_RC.routineControlIdentifiers[0x0204] = "readSWEProgrammingStatus"
 UDS_RC.routineControlIdentifiers[0x0205] = "readSWEDevelopmentInfo"
 UDS_RC.routineControlIdentifiers[0x0206] = "checkProgrammingPower"
 UDS_RC.routineControlIdentifiers[0x0207] = "VCM_Generiere_SVT"
-UDS_RC.routineControlIdentifiers[0x020b] = "Steuergerätetausch"
+UDS_RC.routineControlIdentifiers[0x020b] = "Steuergeraetetausch"
 UDS_RC.routineControlIdentifiers[0x020c] = "KeyExchange"
 UDS_RC.routineControlIdentifiers[0x020d] = "FingerprintExchange"
 UDS_RC.routineControlIdentifiers[0x020e] = "InternalAuthentication"

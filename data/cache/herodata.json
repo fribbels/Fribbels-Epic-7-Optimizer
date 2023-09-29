@@ -15943,7 +15943,7 @@
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
-        "overrideAdditionalRes": 0.3
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarFullyAwakened": {
         "cp": 17416,
@@ -15966,7 +15966,7 @@
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
-        "overrideAdditionalRes": 0.3
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -17145,7 +17145,7 @@
         "overrideAdditionalCd": 0,
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
-        "overrideAdditionalRes": 0.2
+        "overrideAdditionalRes": 0.3
       },
       "lv60SixStarFullyAwakened": {
         "cp": 18832,

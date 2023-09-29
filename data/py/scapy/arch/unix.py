@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 Common customizations for all Unix-like operating systems other than Linux
@@ -9,12 +9,15 @@ Common customizations for all Unix-like operating systems other than Linux
 
 import os
 import socket
+import struct
+from fcntl import ioctl
 
 import scapy.config
 import scapy.utils
 from scapy.config import conf
 from scapy.consts import FREEBSD, NETBSD, OPENBSD, SOLARIS
 from scapy.error import log_runtime, warning
+from scapy.interfaces import network_name, NetworkInterface
 from scapy.pton_ntop import inet_pton
 from scapy.utils6 import in6_getscope, construct_source_candidate_set
 from scapy.utils6 import in6_isvalid, in6_ismlladdr, in6_ismnladdr
@@ -25,7 +28,45 @@ from scapy.compat import (
     Optional,
     Tuple,
     Union,
+    cast,
 )
+
+
+def get_if(iff, cmd):
+    # type: (Union[NetworkInterface, str], int) -> bytes
+    """Ease SIOCGIF* ioctl calls"""
+
+    iff = network_name(iff)
+    sck = socket.socket()
+    try:
+        return ioctl(sck, cmd, struct.pack("16s16x", iff.encode("utf8")))
+    finally:
+        sck.close()
+
+
+def get_if_raw_hwaddr(iff,  # type: Union[NetworkInterface, str]
+                      siocgifhwaddr=None,  # type: Optional[int]
+                      ):
+    # type: (...) -> Tuple[int, bytes]
+    """Get the raw MAC address of a local interface.
+
+    This function uses SIOCGIFHWADDR calls, therefore only works
+    on some distros.
+
+    :param iff: the network interface name as a string
+    :returns: the corresponding raw MAC address
+    """
+
+    if siocgifhwaddr is None:
+        from scapy.arch import SIOCGIFHWADDR
+        siocgifhwaddr = SIOCGIFHWADDR
+    return cast(
+        "Tuple[int, bytes]",
+        struct.unpack(
+            "16xH6s8x",
+            get_if(iff, siocgifhwaddr)
+        )
+    )
 
 
 ##################
@@ -118,23 +159,22 @@ def read_routes():
             from scapy.arch import get_if_addr
             try:
                 ifaddr = get_if_addr(netif)
-                routes.append((dest, netmask, gw, netif, ifaddr, metric))
-            except OSError as exc:
-                if 'Device not configured' in str(exc):
+                if ifaddr == "0.0.0.0":
                     # This means the interface name is probably truncated by
                     # netstat -nr. We attempt to guess it's name and if not we
                     # ignore it.
                     guessed_netif = _guess_iface_name(netif)
                     if guessed_netif is not None:
                         ifaddr = get_if_addr(guessed_netif)
-                        routes.append((dest, netmask, gw, guessed_netif, ifaddr, metric))  # noqa: E501
+                        netif = guessed_netif
                     else:
                         log_runtime.info(
                             "Could not guess partial interface name: %s",
                             netif
                         )
-                else:
-                    raise
+                routes.append((dest, netmask, gw, netif, ifaddr, metric))
+            except OSError:
+                raise
         else:
             pending_if.append((dest, netmask, gw))
     f.close()

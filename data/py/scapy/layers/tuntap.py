@@ -1,9 +1,8 @@
-# -*- mode: python3; indent-tabs-mode: nil; tab-width: 4 -*-
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
 # Copyright (C) Michael Farrell <micolous+git@gmail.com>
-# This program is published under a GPLv2 license
 
 """
 Implementation of TUN/TAP interfaces.
@@ -24,13 +23,14 @@ from scapy.consts import BIG_ENDIAN, BSD, LINUX
 from scapy.data import ETHER_TYPES, MTU
 from scapy.error import warning, log_runtime
 from scapy.fields import Field, FlagsField, StrFixedLenField, XShortEnumField
+from scapy.interfaces import network_name
 from scapy.layers.inet import IP
 from scapy.layers.inet6 import IPv46, IPv6
 from scapy.layers.l2 import Ether
 from scapy.packet import Packet
 from scapy.supersocket import SimpleSocket
 
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 # Linux-specific defines (/usr/include/linux/if_tun.h)
 LINUX_TUNSETIFF = 0x400454ca
@@ -113,7 +113,9 @@ class TunTapInterface(SimpleSocket):
 
     def __init__(self, iface=None, mode_tun=None, default_read_size=MTU,
                  strip_packet_info=True, *args, **kwargs):
-        self.iface = bytes_encode(conf.iface if iface is None else iface)
+        self.iface = bytes_encode(
+            network_name(conf.iface if iface is None else iface)
+        )
 
         self.mode_tun = mode_tun
         if self.mode_tun is None:
@@ -186,7 +188,7 @@ class TunTapInterface(SimpleSocket):
                 flags = LINUX_IFF_TAP | LINUX_IFF_NO_PI
 
             tsetiff = raw(LinuxTunIfReq(
-                ifrn_name=bytes_encode(self.iface),
+                ifrn_name=self.iface,
                 ifru_flags=flags))
 
             ioctl(sock, LINUX_TUNSETIFF, tsetiff)
@@ -226,6 +228,7 @@ class TunTapInterface(SimpleSocket):
             return r
 
     def send(self, x):
+        # type: (Packet) -> int
         if hasattr(x, "sent_time"):
             x.sent_time = time.time()
 
@@ -240,8 +243,9 @@ class TunTapInterface(SimpleSocket):
         sx = raw(x)
 
         try:
-            self.outs.write(sx)
+            r = self.outs.write(sx)
             self.outs.flush()
+            return r
         except socket.error:
             log_runtime.error("%s send",
                               self.__class__.__name__, exc_info=True)

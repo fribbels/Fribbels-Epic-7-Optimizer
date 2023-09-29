@@ -1,0 +1,407 @@
+% Real-Time Publish-Subscribe Protocol (RTPS) dissection
+%
+% Copyright (C) 2021 Trend Micro Incorporated
+% Copyright (C) 2021 Alias Robotics S.L.
+%
+% This program is free software; you can redistribute it and/or modify it under
+% the terms of the GNU General Public License as published by the Free Software
+% Foundation; either version 2 of the License, or (at your option) any later
+% version.
+%
+% This program is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+% PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along with
+% this program; if not, write to the Free Software Foundation, Inc., 51 Franklin
+% Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+% RTPS layer test campaign
+
++ Syntax check
+= Import the RTPS layer
+from scapy.contrib.rtps import *
+pkt = b"\x52\x54\x50\x53\x02\x01\x01\x10\x57\x63\x10\x01\xd6\xab\x40\x7f" \
+      b"\x5b\xd9\xbb\x1c\x0e\x01\x0c\x00\x88\x2a\x10\x01\x5d\x8c\x97\x40" \
+      b"\x78\xb6\x2d\xc2\x09\x01\x08\x00\xf4\x50\x81\x60\x51\xdd\x5c\x1c" \
+      b"\x15\x05\x10\x01\x00\x00\x10\x00\x00\x01\x00\xc7\x00\x01\x00\xc2" \
+      b"\x00\x00\x00\x00\x01\x00\x00\x00\x00\x03\x00\x00\x15\x00\x04\x00" \
+      b"\x02\x01\x00\x00\x16\x00\x04\x00\x01\x10\x00\x00\x02\x00\x08\x00" \
+      b"\x0a\x00\x00\x00\x00\x00\x00\x00\x50\x00\x10\x00\x57\x63\x10\x01" \
+      b"\xd6\xab\x40\x7f\x5b\xd9\xbb\x1c\x00\x00\x01\xc1\x58\x00\x04\x00" \
+      b"\x3f\x0c\x00\x00\x0f\x00\x04\x00\x00\x00\x00\x00\x31\x00\x18\x00" \
+      b"\x01\x00\x00\x00\xbd\xeb\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" \
+      b"\x00\x00\x00\x00\xac\x11\x00\x02\x48\x00\x18\x00\x01\x00\x00\x00" \
+      b"\xe9\x1c\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" \
+      b"\xef\xff\x00\x01\x32\x00\x18\x00\x01\x00\x00\x00\xbd\xeb\x00\x00" \
+      b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xac\x11\x00\x02" \
+      b"\x33\x00\x18\x00\x01\x00\x00\x00\xe8\x1c\x00\x00\x00\x00\x00\x00" \
+      b"\x00\x00\x00\x00\x00\x00\x00\x00\xef\xff\x00\x01\x07\x80\x38\x00" \
+      b"\x00\x00\x00\x00\x2c\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" \
+      b"\x00\x00\x00\x00\x1d\x00\x00\x00\x74\x65\x73\x74\x2e\x6c\x6f\x63" \
+      b"\x61\x6c\x2f\x30\x2e\x38\x2e\x30\x2f\x4c\x69\x6e\x75\x78\x2f\x4c" \
+      b"\x69\x6e\x75\x78\x00\x00\x00\x00\x19\x80\x04\x00\x00\x80\x06\x00" \
+      b"\x01\x00\x00\x00"
+
++ Test endianness
+= PID_BUILTIN_ENDPOINT_QOS endianness
+assert raw(PID_BUILTIN_ENDPOINT_QOS(parameterId=119, parameterLength=0, parameterData=b"")) == b'w\x00\x00\x00'
+
+
++ Test RTPS
+= RTPS default header values
+pkt2 = RTPS()/RTPSMessage(submessages=[
+    RTPSSubMessage_HEARTBEAT(),
+    RTPSSubMessage_INFO_TS(),
+    RTPSSubMessage_DATA(),
+])
+assert bytes(RTPS()) == b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+
+= RTPS packet declaration
+pkt3 = RTPS(
+    protocolVersion=ProtocolVersionPacket(major=2, minor=1),
+    vendorId=VendorIdPacket(vendor_id=0x0110),
+    guidPrefix=GUIDPrefixPacket(
+        hostId=1466109953, appId=3601547391, instanceId=1540995868
+    ),
+    magic=b"RTPS",
+) / RTPSMessage(
+    submessages=[
+        RTPSSubMessage_INFO_DST(
+            submessageId=14,
+            submessageFlags=1,
+            octetsToNextHeader=12,
+            guidPrefix=GUIDPrefixPacket(
+                hostId=2284457985, appId=1569494848, instanceId=2025205186
+            ),
+        ),
+        RTPSSubMessage_INFO_TS(
+            submessageId=9,
+            submessageFlags=1,
+            octetsToNextHeader=8,
+            ts_seconds=1619087604,
+            ts_fraction=475848017,
+        ),
+        RTPSSubMessage_DATA(
+            submessageId=21,
+            submessageFlags=5,
+            octetsToNextHeader=272,
+            extraFlags=0,
+            octetsToInlineQoS=16,
+            readerEntityIdKey=256,
+            readerEntityIdKind=199,
+            writerEntityIdKey=256,
+            writerEntityIdKind=194,
+            writerSeqNumHi=0,
+            writerSeqNumLow=1,
+            data=DataPacket(
+                encapsulationKind=3,
+                encapsulationOptions=0,
+                parameterList=ParameterListPacket(
+                    parameterValues=[
+                        PID_PROTOCOL_VERSION(
+                            parameterId=21,
+                            parameterLength=4,
+                            protocolVersion=ProtocolVersionPacket(major=2, minor=1),
+                            padding=b"\x00\x00",
+                        ),
+                        PID_VENDOR_ID(
+                            parameterId=22,
+                            parameterLength=4,
+                            vendorId=VendorIdPacket(vendor_id=0x0110),
+                            padding=b"\x00\x00",
+                        ),
+                        PID_PARTICIPANT_LEASE_DURATION(
+                            parameterId=2,
+                            parameterLength=8,
+                            parameterData=b"\n\x00\x00\x00\x00\x00\x00\x00",
+                        ),
+                        PID_PARTICIPANT_GUID(
+                            parameterId=80,
+                            parameterLength=16,
+                            guid=GUIDPacket(
+                                hostId=1466109953,
+                                appId=3601547391,
+                                instanceId=1540995868,
+                                entityId=449,
+                            ),
+                        ),
+                        PID_BUILTIN_ENDPOINT_SET(
+                            parameterId=88,
+                            parameterLength=4,
+                            parameterData=b"?\x0c\x00\x00",
+                        ),
+                        PID_DOMAIN_ID(
+                            parameterId=15,
+                            parameterLength=4,
+                            parameterData=b"\x00\x00\x00\x00",
+                        ),
+                        PID_DEFAULT_UNICAST_LOCATOR(
+                            parameterId=49,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=1, port=60349, address="172.17.0.2"
+                            ),
+                        ),
+                        PID_DEFAULT_MULTICAST_LOCATOR(
+                            parameterId=72,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=1, port=7401, address="239.255.0.1"
+                            ),
+                        ),
+                        PID_METATRAFFIC_UNICAST_LOCATOR(
+                            parameterId=50,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=1, port=60349, address="172.17.0.2"
+                            ),
+                        ),
+                        PID_METATRAFFIC_MULTICAST_LOCATOR(
+                            parameterId=51,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=1, port=7400, address="239.255.0.1"
+                            ),
+                        ),
+                        PID_UNKNOWN(
+                            parameterId=32775,
+                            parameterLength=56,
+                            parameterData=b"\x00\x00\x00\x00,\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1d\x00\x00\x00test.local/0.8.0/Linux/Linux\x00\x00\x00\x00",
+                        ),
+                        PID_UNKNOWN(
+                            parameterId=32793,
+                            parameterLength=4,
+                            parameterData=b"\x00\x80\x06\x00",
+                        ),
+                    ],
+                    sentinel=PID_SENTINEL(parameterId=1, parameterLength=0),
+                ),
+            ),
+        ),
+    ]
+)
+
+= RTPS header dissect
+assert pkt3.build() == pkt
+
++ Test RTI RTPS
+= Test dissection
+d = b"\x52\x54\x50\x53\x02\x03\x01\x01\x01\x01\x30\xba\xa8\x7b\x1d\xce" \
+    b"\xb3\x29\x1e\x43\x09\x01\x08\x00\xd6\x64\xa8\x61\x16\x09\x34\x7c" \
+    b"\x15\x05\xdc\x02\x00\x00\x10\x00\x00\x00\x00\x00\x00\x01\x00\xc2" \
+    b"\x00\x00\x00\x00\x01\x00\x00\x00\x00\x03\x00\x00\x50\x00\x10\x00" \
+    b"\x01\x01\x30\xba\xa8\x7b\x1d\xce\xb3\x29\x1e\x43\x00\x00\x01\xc1" \
+    b"\x58\x00\x04\x00\x3f\x0c\x00\x00\x77\x00\x04\x00\x01\x00\x00\x00" \
+    b"\x15\x00\x04\x00\x02\x03\x00\x00\x16\x00\x04\x00\x01\x01\x00\x00" \
+    b"\x00\x80\x04\x00\x06\x00\x01\x00\x59\x00\x78\x01\x06\x00\x00\x00" \
+    b"\x16\x00\x00\x00\x64\x64\x73\x2e\x73\x79\x73\x5f\x69\x6e\x66\x6f" \
+    b"\x2e\x68\x6f\x73\x74\x6e\x61\x6d\x65\x00\x00\x00\x0d\x00\x00\x00" \
+    b"\x64\x66\x30\x62\x36\x64\x38\x33\x61\x62\x34\x36\x00\x00\x00\x00" \
+    b"\x18\x00\x00\x00\x64\x64\x73\x2e\x73\x79\x73\x5f\x69\x6e\x66\x6f" \
+    b"\x2e\x70\x72\x6f\x63\x65\x73\x73\x5f\x69\x64\x00\x05\x00\x00\x00" \
+    b"\x34\x38\x33\x30\x00\x00\x00\x00\x21\x00\x00\x00\x64\x64\x73\x2e" \
+    b"\x73\x79\x73\x5f\x69\x6e\x66\x6f\x2e\x65\x78\x65\x63\x75\x74\x61" \
+    b"\x62\x6c\x65\x5f\x66\x69\x6c\x65\x70\x61\x74\x68\x00\x00\x00\x00" \
+    b"\x42\x00\x00\x00\x2f\x75\x73\x72\x2f\x6c\x6f\x63\x61\x6c\x2f\x73" \
+    b"\x72\x63\x2f\x72\x74\x69\x2f\x72\x65\x73\x6f\x75\x72\x63\x65\x2f" \
+    b"\x61\x70\x70\x2f\x62\x69\x6e\x2f\x78\x36\x34\x4c\x69\x6e\x75\x78" \
+    b"\x32\x2e\x36\x67\x63\x63\x34\x2e\x34\x2e\x35\x2f\x72\x74\x69\x64" \
+    b"\x64\x73\x73\x70\x79\x00\x00\x00\x14\x00\x00\x00\x64\x64\x73\x2e" \
+    b"\x73\x79\x73\x5f\x69\x6e\x66\x6f\x2e\x74\x61\x72\x67\x65\x74\x00" \
+    b"\x14\x00\x00\x00\x78\x36\x34\x4c\x69\x6e\x75\x78\x32\x2e\x36\x67" \
+    b"\x63\x63\x34\x2e\x34\x2e\x35\x00\x20\x00\x00\x00\x64\x64\x73\x2e" \
+    b"\x73\x79\x73\x5f\x69\x6e\x66\x6f\x2e\x63\x72\x65\x61\x74\x69\x6f" \
+    b"\x6e\x5f\x74\x69\x6d\x65\x73\x74\x61\x6d\x70\x00\x14\x00\x00\x00" \
+    b"\x32\x30\x32\x31\x2d\x30\x36\x2d\x37\x20\x30\x34\x3a\x30\x39\x3a" \
+    b"\x30\x32\x5a\x00\x21\x00\x00\x00\x64\x64\x73\x2e\x73\x79\x73\x5f" \
+    b"\x69\x6e\x66\x6f\x2e\x65\x78\x65\x63\x75\x74\x69\x6f\x6e\x5f\x74" \
+    b"\x69\x6d\x65\x73\x74\x61\x6d\x70\x00\x00\x00\x00\x14\x00\x00\x00" \
+    b"\x32\x30\x32\x31\x2d\x31\x32\x2d\x31\x20\x30\x39\x3a\x31\x35\x3a" \
+    b"\x32\x39\x5a\x00\x31\x00\x18\x00\x01\x00\x00\x00\xf3\x1c\x00\x00" \
+    b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" \
+    b"\x31\x00\x18\x00\x00\x00\x00\x01\xf3\x1c\x00\x00\x61\xab\xd9\x79" \
+    b"\xb5\x7c\x13\xa5\x29\x49\x2c\xa3\x00\x00\x00\x00\x32\x00\x18\x00" \
+    b"\x01\x00\x00\x00\xf2\x1c\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" \
+    b"\x00\x00\x00\x00\x00\x00\x00\x00\x32\x00\x18\x00\x00\x00\x00\x01" \
+    b"\xf2\x1c\x00\x00\x61\xab\xd9\x79\xb5\x7c\x13\xa5\x29\x49\x2c\xa3" \
+    b"\x00\x00\x00\x00\x33\x00\x18\x00\x01\x00\x00\x00\xe8\x1c\x00\x00" \
+    b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xef\xff\x00\x01" \
+    b"\x02\x00\x08\x00\x06\x00\x00\x00\xff\xff\xff\x7f\x01\x80\x04\x00" \
+    b"\xff\xff\x00\x00\x62\x00\x28\x00\x22\x00\x00\x00\x52\x54\x49\x20" \
+    b"\x44\x61\x74\x61\x20\x44\x69\x73\x74\x72\x69\x62\x75\x74\x69\x6f" \
+    b"\x6e\x20\x53\x65\x72\x76\x69\x63\x65\x20\x53\x70\x79\x00\x00\x00" \
+    b"\x0f\x00\x04\x00\x00\x00\x00\x00\x0f\x80\x04\x00\x00\x00\x00\x00" \
+    b"\x10\x80\x14\x00\x02\x00\x00\x00\x01\x00\x00\x00\xe3\xff\x00\x00" \
+    b"\x00\x00\x00\x01\x00\x00\x01\x00\x16\x80\x08\x00\x10\x00\x00\x00" \
+    b"\x00\x00\x00\x00\x17\x80\x04\x00\x03\x00\x00\x00\x01\x00\x00\x00"
+
+p0 = RTPS(d)
+p1 = RTPS(
+    protocolVersion=ProtocolVersionPacket(major=2, minor=3),
+    vendorId=VendorIdPacket(vendor_id=0x0101),
+    guidPrefix=GUIDPrefixPacket(
+        hostId=16855226, appId=2826640846, instanceId=3005816387
+    ),
+    magic=b"RTPS",
+) / RTPSMessage(
+    submessages=[
+        RTPSSubMessage_INFO_TS(
+            submessageId=9,
+            submessageFlags=1,
+            octetsToNextHeader=8,
+            ts_seconds=1638425814,
+            ts_fraction=2083784982,
+        ),
+        RTPSSubMessage_DATA(
+            submessageId=21,
+            submessageFlags=5,
+            octetsToNextHeader=732,
+            extraFlags=0,
+            octetsToInlineQoS=16,
+            readerEntityIdKey=0,
+            readerEntityIdKind=0,
+            writerEntityIdKey=256,
+            writerEntityIdKind=194,
+            writerSeqNumHi=0,
+            writerSeqNumLow=1,
+            data=DataPacket(
+                encapsulationKind=3,
+                encapsulationOptions=0,
+                parameterList=ParameterListPacket(
+                    parameterValues=[
+                        PID_PARTICIPANT_GUID(
+                            parameterId=80,
+                            parameterLength=16,
+                            guid=GUIDPacket(
+                                hostId=16855226,
+                                appId=2826640846,
+                                instanceId=3005816387,
+                                entityId=449,
+                            ),
+                        ),
+                        PID_BUILTIN_ENDPOINT_SET(
+                            parameterId=88,
+                            parameterLength=4,
+                            parameterData=b"?\x0c\x00\x00",
+                        ),
+                        PID_BUILTIN_ENDPOINT_QOS(
+                            parameterId=119,
+                            parameterLength=4,
+                            parameterData=b"\x01\x00\x00\x00",
+                        ),
+                        PID_PROTOCOL_VERSION(
+                            parameterId=21,
+                            parameterLength=4,
+                            protocolVersion=ProtocolVersionPacket(major=2, minor=3),
+                            padding=b"\x00\x00",
+                        ),
+                        PID_VENDOR_ID(
+                            parameterId=22,
+                            parameterLength=4,
+                            vendorId=VendorIdPacket(vendor_id=0x0101),
+                            padding=b"\x00\x00",
+                        ),
+                        PID_PRODUCT_VERSION(
+                            parameterId=32768,
+                            parameterLength=4,
+                            productVersion=ProductVersionPacket(
+                                major=6, minor=0, release=1, revision=0
+                            ),
+                        ),
+                        PID_PROPERTY_LIST(
+                            parameterId=89,
+                            parameterLength=376,
+                            parameterData=b"\x06\x00\x00\x00\x16\x00\x00\x00dds.sys_info.hostname\x00\x00\x00\r\x00\x00\x00df0b6d83ab46\x00\x00\x00\x00\x18\x00\x00\x00dds.sys_info.process_id\x00\x05\x00\x00\x004830\x00\x00\x00\x00!\x00\x00\x00dds.sys_info.executable_filepath\x00\x00\x00\x00B\x00\x00\x00/usr/local/src/rti/resource/app/bin/x64Linux2.6gcc4.4.5/rtiddsspy\x00\x00\x00\x14\x00\x00\x00dds.sys_info.target\x00\x14\x00\x00\x00x64Linux2.6gcc4.4.5\x00 \x00\x00\x00dds.sys_info.creation_timestamp\x00\x14\x00\x00\x002021-06-7 04:09:02Z\x00!\x00\x00\x00dds.sys_info.execution_timestamp\x00\x00\x00\x00\x14\x00\x00\x002021-12-1 09:15:29Z\x00",
+                        ),
+                        PID_DEFAULT_UNICAST_LOCATOR(
+                            parameterId=49,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=1, port=7411, address="0.0.0.0"
+                            ),
+                        ),
+                        PID_DEFAULT_UNICAST_LOCATOR(
+                            parameterId=49,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=16777216,
+                                port=7411,
+                                hostId=b"a\xab\xd9y\xb5|\x13\xa5)I,\xa3\x00\x00\x00\x00",
+                            ),
+                        ),
+                        PID_METATRAFFIC_UNICAST_LOCATOR(
+                            parameterId=50,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=1, port=7410, address="0.0.0.0"
+                            ),
+                        ),
+                        PID_METATRAFFIC_UNICAST_LOCATOR(
+                            parameterId=50,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=16777216,
+                                port=7410,
+                                hostId=b"a\xab\xd9y\xb5|\x13\xa5)I,\xa3\x00\x00\x00\x00",
+                            ),
+                        ),
+                        PID_METATRAFFIC_MULTICAST_LOCATOR(
+                            parameterId=51,
+                            parameterLength=24,
+                            locator=LocatorPacket(
+                                locatorKind=1, port=7400, address="239.255.0.1"
+                            ),
+                        ),
+                        PID_PARTICIPANT_LEASE_DURATION(
+                            parameterId=2,
+                            parameterLength=8,
+                            parameterData=b"\x06\x00\x00\x00\xff\xff\xff\x7f",
+                        ),
+                        PID_PLUGIN_PROMISCUITY_KIND(
+                            parameterId=32769, parameterLength=4, promiscuityKind=65535
+                        ),
+                        PID_ENTITY_NAME(
+                            parameterId=98,
+                            parameterLength=40,
+                            parameterData=b'"\x00\x00\x00RTI Data Distribution Service Spy\x00\x00\x00',
+                        ),
+                        PID_DOMAIN_ID(
+                            parameterId=15,
+                            parameterLength=4,
+                            parameterData=b"\x00\x00\x00\x00",
+                        ),
+                        PID_RTI_DOMAIN_ID(
+                            parameterId=32783, parameterLength=4, domainId=0
+                        ),
+                        PID_TRANSPORT_INFO_LIST(
+                            transportInfo=[
+                                TransportInfoPacket(classID=1, messageSizeMax=65507),
+                                TransportInfoPacket(
+                                    classID=16777216, messageSizeMax=65536
+                                ),
+                            ],
+                            parameterId=32784,
+                            parameterLength=20,
+                            padding=b"\x02\x00\x00\x00",
+                        ),
+                        PID_REACHABILITY_LEASE_DURATION(
+                            parameterId=32790,
+                            parameterLength=8,
+                            lease_duration=LeaseDurationPacket(
+                                seconds=268435456, fraction=0
+                            ),
+                        ),
+                        PID_VENDOR_BUILTIN_ENDPOINT_SET(
+                            parameterId=32791, parameterLength=4, flags=3
+                        ),
+                    ],
+                    sentinel=PID_SENTINEL(parameterId=1, parameterLength=0),
+                ),
+            ),
+        ),
+    ]
+)
+assert p0.build() == d
+assert p1.build() == d
+assert p1 == p0

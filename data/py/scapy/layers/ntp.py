@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 NTP (Network Time Protocol).
@@ -25,8 +25,7 @@ from scapy.layers.inet import UDP
 from scapy.utils import lhex
 from scapy.compat import orb
 from scapy.config import conf
-import scapy.modules.six as six
-from scapy.modules.six.moves import range
+import scapy.libs.six as six
 
 
 #############################################################################
@@ -80,7 +79,10 @@ class TimeStampField(FixedPointField):
         val = self.i2h(pkt, val)
         if val < _NTP_BASETIME:
             return val
-        return time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime(val - _NTP_BASETIME))  # noqa: E501
+        return time.strftime(
+            "%a, %d %b %Y %H:%M:%S +0000",
+            time.gmtime(int(val - _NTP_BASETIME))
+        )
 
     def any2i(self, pkt, val):
         if isinstance(val, six.string_types):

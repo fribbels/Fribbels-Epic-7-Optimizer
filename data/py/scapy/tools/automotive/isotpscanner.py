@@ -1,8 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Nils Weiss <nils@we155.de>
 # Copyright (C) Alexander Schroeder <alexander1.schroeder@st.othr.de>
-# This program is published under a GPLv2 license
 
 from __future__ import print_function
 
@@ -10,26 +10,24 @@ import getopt
 import sys
 import signal
 import re
+import threading
 
 from ast import literal_eval
 
-import scapy.modules.six as six
+import scapy.libs.six as six
 from scapy.config import conf
 from scapy.consts import LINUX
+from scapy.compat import Tuple, Optional, Any
 
 if six.PY2 or not LINUX or conf.use_pypy:
     conf.contribs['CANSocket'] = {'use-python-can': True}
 
 from scapy.contrib.cansocket import CANSocket, PYTHON_CAN   # noqa: E402
-from scapy.contrib.isotp import ISOTPScan                   # noqa: E402
-
-
-def signal_handler(sig, frame):
-    print('Interrupting scan!')
-    sys.exit(0)
+from scapy.contrib.isotp import isotp_scan  # noqa: E402
 
 
 def usage(is_error):
+    # type: (bool) -> None
     print('''usage:\tisotpscanner [-i interface] [-c channel]
                 [-a python-can_args] [-n NOISE_LISTEN_TIME] [-t SNIFF_TIME]
                 [-x|--extended] [-C|--piso] [-v|--verbose] [-h|--help]
@@ -71,7 +69,33 @@ def usage(is_error):
           file=sys.stderr if is_error else sys.stdout)
 
 
+def create_socket(python_can_args, interface, channel):
+    # type: (Optional[str], Optional[str], str) -> Tuple[CANSocket, str]
+
+    if PYTHON_CAN:
+        if python_can_args:
+            interface_string = "CANSocket(bustype=" \
+                               "'%s', channel='%s', %s)" % \
+                               (interface, channel, python_can_args)
+            arg_dict = dict((k, literal_eval(v)) for k, v in
+                            (pair.split('=') for pair in
+                             re.split(', | |,', python_can_args)))
+            sock = CANSocket(bustype=interface, channel=channel,
+                             **arg_dict)
+        else:
+            interface_string = "CANSocket(bustype=" \
+                               "'%s', channel='%s')" % \
+                               (interface, channel)
+            sock = CANSocket(bustype=interface, channel=channel)
+    else:
+        sock = CANSocket(channel=channel)
+        interface_string = "\"%s\"" % channel
+
+    return sock, interface_string
+
+
 def main():
+    # type: () -> None
     extended = False
     piso = False
     verbose = False
@@ -148,42 +172,33 @@ def main():
         print("start must be equal or smaller than end.", file=sys.stderr)
         sys.exit(1)
 
-    sock = None
-
     try:
-        if PYTHON_CAN:
-            if python_can_args:
-                interface_string = "CANSocket(bustype=" \
-                                   "'%s', channel='%s', %s)" % \
-                                   (interface, channel, python_can_args)
-                arg_dict = dict((k, literal_eval(v)) for k, v in
-                                (pair.split('=') for pair in
-                                 re.split(', | |,', python_can_args)))
-                sock = CANSocket(bustype=interface, channel=channel,
-                                 **arg_dict)
-            else:
-                interface_string = "CANSocket(bustype=" \
-                                   "'%s', channel='%s')" % \
-                                   (interface, channel)
-                sock = CANSocket(bustype=interface, channel=channel)
-        else:
-            sock = CANSocket(channel=channel)
-            interface_string = "\"%s\"" % channel
+        sock, interface_string = \
+            create_socket(python_can_args, interface, channel)
 
         if verbose:
             print("Start scan (%s - %s)" % (hex(start), hex(end)))
 
-        signal.signal(signal.SIGINT, signal_handler)
+        stop_event = threading.Event()
 
-        result = ISOTPScan(sock,
-                           range(start, end + 1),
-                           extended_addressing=extended,
-                           noise_listen_time=noise_listen_time,
-                           sniff_time=float(sniff_time) / 1000,
-                           output_format="code" if piso else "text",
-                           can_interface=interface_string,
-                           extended_can_id=extended_can_id,
-                           verbose=verbose)
+        def signal_handler(*args):
+            # type: (Any) -> None
+            print('Interrupting scan!')
+            stop_event.set()
+
+        signal.signal(signal.SIGINT, signal_handler)
+        signal.signal(signal.SIGTERM, signal_handler)
+
+        result = isotp_scan(sock,
+                            range(start, end + 1),
+                            extended_addressing=extended,
+                            noise_listen_time=noise_listen_time,
+                            sniff_time=float(sniff_time) / 1000,
+                            output_format="code" if piso else "text",
+                            can_interface=interface_string,
+                            extended_can_id=extended_can_id,
+                            verbose=verbose,
+                            stop_event=stop_event)
 
         print("Scan: \n%s" % result)
 
@@ -195,7 +210,7 @@ def main():
         sys.exit(1)
 
     finally:
-        if sock is not None:
+        if sock is not None and not sock.closed:
             sock.close()
 
 

@@ -1,7 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
-# Copyright (C) Gabriel Potter <gabriel@potter.fr>
-# This program is published under a GPLv2 license
+# See https://scapy.net/ for more information
 
 """
 Python 2 and 3 link classes.
@@ -16,7 +15,7 @@ import socket
 import struct
 import sys
 
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 # Very important: will issue typing errors otherwise
 __all__ = [
@@ -25,23 +24,31 @@ __all__ = [
     'AnyStr',
     'Callable',
     'DefaultDict',
+    'Deque',
     'Dict',
     'Generic',
-    'Iterator',
     'IO',
+    'Iterable',
+    'Iterable',
+    'Iterator',
     'List',
     'Literal',
+    'NamedTuple',
+    'NewType',
     'NoReturn',
     'Optional',
     'Pattern',
     'Sequence',
     'Set',
     'Sized',
+    'TextIO',
     'Tuple',
     'Type',
     'TypeVar',
     'Union',
+    'ValuesView',
     'cast',
+    'overload',
     'FAKE_TYPING',
     'TYPE_CHECKING',
     # compat
@@ -87,6 +94,16 @@ except ImportError:
 # Import or create fake types
 
 
+# If your class uses a metaclass AND Generic, you'll need to
+# extend this class in the metaclass to avoid conflicts...
+# Of course we wouldn't need this on Python 3 :/
+class _Generic_metaclass(type):
+    if FAKE_TYPING:
+        def __getitem__(self, typ):
+            # type: (Any) -> Any
+            return self
+
+
 def _FakeType(name, cls=object):
     # type: (str, Optional[type]) -> Any
     class _FT(object):
@@ -94,7 +111,7 @@ def _FakeType(name, cls=object):
             # type: (str) -> None
             self.name = name
 
-        # make the objects subscriptable indefinetly
+        # make the objects subscriptable indefinitely
         def __getitem__(self, item):  # type: ignore
             return cls
 
@@ -117,22 +134,28 @@ if not FAKE_TYPING:
         AnyStr,
         Callable,
         DefaultDict,
+        Deque,
         Dict,
         Generic,
-        Iterator,
         IO,
+        Iterable,
+        Iterator,
         List,
+        NewType,
         NoReturn,
         Optional,
         Pattern,
         Sequence,
         Set,
         Sized,
+        TextIO,
         Tuple,
         Type,
         TypeVar,
         Union,
+        ValuesView,
         cast,
+        overload,
     )
 else:
     # Let's be creative and make some fake ones.
@@ -144,24 +167,57 @@ else:
     Callable = _FakeType("Callable")
     DefaultDict = _FakeType("DefaultDict",  # type: ignore
                             collections.defaultdict)
+    Deque = _FakeType("Deque")  # type: ignore
     Dict = _FakeType("Dict", dict)  # type: ignore
-    Generic = _FakeType("Generic")
-    Iterator = _FakeType("Iterator")  # type: ignore
     IO = _FakeType("IO")  # type: ignore
+    Iterable = _FakeType("Iterable")  # type: ignore
+    Iterator = _FakeType("Iterator")  # type: ignore
     List = _FakeType("List", list)  # type: ignore
-    NoReturn = _FakeType("NoReturn")  # type: ignore
+    NewType = _FakeType("NewType")
+    NoReturn = _FakeType("NoReturn")
     Optional = _FakeType("Optional")
     Pattern = _FakeType("Pattern")  # type: ignore
-    Sequence = _FakeType("Sequence")  # type: ignore
-    Set = _FakeType("Set", set)  # type: ignore
     Sequence = _FakeType("Sequence", list)  # type: ignore
+    Set = _FakeType("Set", set)  # type: ignore
+    TextIO = _FakeType("TextIO")  # type: ignore
     Tuple = _FakeType("Tuple")
     Type = _FakeType("Type", type)
     TypeVar = _FakeType("TypeVar")  # type: ignore
     Union = _FakeType("Union")
+    ValuesView = _FakeType("List", list)  # type: ignore
 
     class Sized(object):  # type: ignore
         pass
+
+    @six.add_metaclass(_Generic_metaclass)
+    class Generic(object):  # type: ignore
+        pass
+
+    overload = lambda x: x
+
+
+# Broken < Python 3.7
+if sys.version_info >= (3, 7):
+    from typing import NamedTuple
+else:
+    # Hack for Python < 3.7 - Implement NamedTuple pickling
+    def _unpickleNamedTuple(name, len_params, *args):
+        return collections.namedtuple(
+            name,
+            args[:len_params]
+        )(*args[len_params:])
+
+    def NamedTuple(name, params):
+        tup_params = tuple(x[0] for x in params)
+        cls = collections.namedtuple(name, tup_params)
+
+        class _NT(cls):
+            def __reduce__(self):
+                """Used by pickling methods"""
+                return (_unpickleNamedTuple,
+                        (name, len(tup_params)) + tup_params + tuple(self))
+        _NT.__name__ = cls.__name__
+        return _NT
 
 # Python 3.8 Only
 if sys.version_info >= (3, 8):
@@ -176,13 +232,7 @@ else:
     class AddressFamily:
         AF_INET = socket.AF_INET
         AF_INET6 = socket.AF_INET6
-
-
-class _Generic_metaclass(type):
-    if FAKE_TYPING:
-        def __getitem__(self, typ):
-            # type: (Any) -> Any
-            return self
+        AF_UNSPEC = socket.AF_UNSPEC
 
 
 ###########
@@ -291,6 +341,29 @@ def hex_bytes(x):
     # type: (AnyStr) -> bytes
     """De-hexify a str or a byte object"""
     return binascii.a2b_hex(bytes_encode(x))
+
+
+if six.PY2:
+    def int_bytes(x, size):
+        # type: (int, int) -> bytes
+        """Convert an int to an arbitrary sized bytes string"""
+        _hx = hex(x)[2:].strip("L")
+        return binascii.unhexlify("0" * (size * 2 - len(_hx)) + _hx)
+
+    def bytes_int(x):
+        # type: (bytes) -> int
+        """Convert an arbitrary sized bytes string to an int"""
+        return int(x.encode('hex'), 16)
+else:
+    def int_bytes(x, size):
+        # type: (int, int) -> bytes
+        """Convert an int to an arbitrary sized bytes string"""
+        return x.to_bytes(size, byteorder='big')
+
+    def bytes_int(x):
+        # type: (bytes) -> int
+        """Convert an arbitrary sized bytes string to an int"""
+        return int.from_bytes(x, "big")
 
 
 def base64_bytes(x):

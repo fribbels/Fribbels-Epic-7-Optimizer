@@ -1,17 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
 # This file is part of Scapy
-# Scapy is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# any later version.
-#
-# Scapy is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Scapy. If not, see <http://www.gnu.org/licenses/>.
-
+# See https://scapy.net/ for more information
 # Copyright (C) 2016 Gauthier Sebaux
 
 # scapy.contrib.description = ProfinetIO Remote Procedure Call (RPC)
@@ -24,21 +13,22 @@ PNIO RPC endpoints
 import struct
 from uuid import UUID
 
-from scapy.packet import Packet, bind_layers
+from scapy.packet import Packet, Raw, bind_layers
 from scapy.config import conf
-from scapy.fields import BitField, ByteField, BitEnumField, ConditionalField, \
-    FieldLenField, FieldListField, IntField, IntEnumField, \
+from scapy.fields import BitField, ByteField, BitEnumField, ByteEnumField, \
+    ConditionalField, FieldLenField, FieldListField, IntField, IntEnumField, \
     LenField, MACField, PadField, PacketField, PacketListField, \
     ShortEnumField, ShortField, StrFixedLenField, StrLenField, \
     UUIDField, XByteField, XIntField, XShortEnumField, XShortField
-from scapy.contrib.dce_rpc import DceRpc, EndiannessField, DceRpcPayload
+from scapy.layers.dcerpc import DceRpc4, DceRpc4Payload
+from scapy.contrib.rtps.common_types import EField
 from scapy.compat import bytes_hex
 from scapy.volatile import RandUUID
 
 # Block Packet
 BLOCK_TYPES_ENUM = {
-    0x0000: "AlarmNotification_High",
-    0x0001: "AlarmNotification_Low",
+    0x0001: "AlarmNotification_High",
+    0x0002: "AlarmNotification_Low",
     0x0008: "IODWriteReqHeader",
     0x0009: "IODReadReqHeader",
     0x0010: "DiagnosisData",
@@ -276,6 +266,44 @@ IOCR_BLOCK_REQ_IOCR_PROPERTIES = {
     0x4: "RT_CLASS_UDP",
 }
 
+MAU_TYPE = {
+    0x0000: "Radio",
+    0x001e: "1000-BaseT-FD"
+}
+
+MAU_EXTENSION = {
+    0x0000: "None",
+    0x0100: "Polymeric-Optical-Fiber"
+}
+
+LINKSTATE_LINK = {
+    0x0000: "Reserved",
+    0x0001: "Up",
+    0x0002: "Down",
+    0x0003: "Testing",
+    0x0004: "Unknown",
+    0x0005: "Dormant",
+    0x0006: "NotPresent",
+    0x0007: "LowerLayerDown",
+}
+
+LINKSTATE_PORT = {
+    0x0000: "Unknown",
+    0x0001: "Disabled/Discarding",
+    0x0002: "Blocking",
+    0x0003: "Listening",
+    0x0004: "Learning",
+    0x0005: "Forwarding",
+    0x0006: "Broken",
+    0x0007: "Reserved",
+}
+
+MEDIA_TYPE = {
+    0x00: "Unknown",
+    0x01: "Copper cable",
+    0x02: "Fiber optic cable",
+    0x03: "Radio communication"
+}
 
 # List of all valid activity UUIDs for the DceRpc layer with PROFINET RPC
 # endpoint.
@@ -474,6 +502,53 @@ class IODWriteRes(Block):
     block_type = 0x8008
 
 
+#     IODReadRe{q,s}
+class IODReadReq(Block):
+    """IODRead request block"""
+    fields_desc = [
+        BlockHeader,
+        ShortField("seqNum", 0),
+        UUIDField("ARUUID", None),
+        XIntField("API", 0),
+        XShortField("slotNumber", 0),
+        XShortField("subslotNumber", 0),
+        StrFixedLenField("padding", "", length=2),
+        XShortEnumField("index", 0, IOD_WRITE_REQ_INDEX),
+        LenField("recordDataLength", None, fmt="I"),
+        StrFixedLenField("RWPadding", "", length=24),
+    ]
+    block_type = 0x0009
+
+    def payload_length(self):
+        return self.recordDataLength
+
+    def get_response(self):
+        res = IODReadRes()
+        for field in ["seqNum", "ARUUID", "API", "slotNumber",
+                      "subslotNumber", "index"]:
+            res.setfieldval(field, self.getfieldval(field))
+        return res
+
+
+class IODReadRes(Block):
+    """IODRead response block"""
+    fields_desc = [
+        BlockHeader,
+        ShortField("seqNum", 0),
+        UUIDField("ARUUID", None),
+        XIntField("API", 0),
+        XShortField("slotNumber", 0),
+        XShortField("subslotNumber", 0),
+        StrFixedLenField("padding", "", length=2),
+        XShortEnumField("index", 0, IOD_WRITE_REQ_INDEX),
+        LenField("recordDataLength", None, fmt="I"),
+        XShortField("additionalValue1", 0),
+        XShortField("additionalValue2", 0),
+        StrFixedLenField("RWPadding", "", length=20),
+    ]
+    block_type = 0x8009
+
+
 F_PARAMETERS_BLOCK_ID = [
     "No_F_WD_Time2_No_F_iPar_CRC", "No_F_WD_Time2_F_iPar_CRC",
     "F_WD_Time2_No_F_iPar_CRC", "F_WD_Time2_F_iPar_CRC",
@@ -526,10 +601,11 @@ bind_layers(FParametersBlock, conf.padding_layer)
 #     IODWriteMultipleRe{q,s}
 class PadFieldWithLen(PadField):
     """PadField which handles the i2len function to include padding"""
+
     def i2len(self, pkt, val):
         """get the length of the field, including the padding length"""
         fld_len = self.fld.i2len(pkt, val)
-        return fld_len + self.padlen(fld_len)
+        return fld_len + self.padlen(fld_len, pkt)
 
 
 class IODWriteMultipleReq(Block):
@@ -566,7 +642,7 @@ class IODWriteMultipleReq(Block):
         fld, val = self.getfield_and_val("blocks")
         if fld.i2count(self, val) > 0:
             length = len(val[-1])
-            pad = fld.field.padlen(length)
+            pad = fld.field.padlen(length, self)
             if pad > 0:
                 p = p[:-pad]
                 # also reduce the recordDataLength accordingly
@@ -624,6 +700,76 @@ class IODWriteMultipleRes(Block):
             p = p[:2] + struct.pack("!H", 60) + p[4:]
 
         return Packet.post_build(self, p, pay)
+
+
+#     I&M0
+class IM0Block(Block):
+    """Identification and Maintenance 0"""
+    fields_desc = [
+        BlockHeader,
+        ByteField("VendorIDHigh", 0x00),
+        ByteField("VendorIDLow", 0x00),
+        StrFixedLenField("OrderID", "", length=20),
+        StrFixedLenField("IMSerialNumber", "", length=16),
+        ShortField("IMHardwareRevision", 0),
+        StrFixedLenField("IMSWRevisionPrefix", "V", length=1),
+        ByteField("IMSWRevisionFunctionalEnhancement", 0),
+        ByteField("IMSWRevisionBugFix", 0),
+        ByteField("IMSWRevisionInternalChange", 0),
+        ShortField("IMRevisionCounter", 0),
+        ShortField("IMProfileID", 0),
+        ShortField("IMProfileSpecificType", 0),
+        ByteField("IMVersionMajor", 1),
+        ByteField("IMVersionMinor", 1),
+        ShortField("IMSupported", 0x0),
+    ]
+
+    block_type = 0x0020
+
+
+#     I&M1
+class IM1Block(Block):
+    """Identification and Maintenance 1"""
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("IMTagFunction", "", length=32),
+        StrFixedLenField("IMTagLocation", "", length=22),
+    ]
+
+    block_type = 0x0021
+
+
+#     I&M2
+class IM2Block(Block):
+    """Identification and Maintenance 2"""
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("IMDate", "", length=16),
+    ]
+
+    block_type = 0x0022
+
+
+#     I&M3
+class IM3Block(Block):
+    """Identification and Maintenance 3"""
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("IMDescriptor", "", length=54),
+    ]
+
+    block_type = 0x0023
+
+
+#     I&M4
+class IM4Block(Block):
+    """Identification and Maintenance 4"""
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("IMSignature", "", 54)
+    ]
+
+    block_type = 0x0024
 
 
 #     ARBlockRe{q,s}
@@ -776,6 +922,128 @@ class IOCRBlockRes(Block):
     block_type = 0x8102
 
 
+class AdjustLinkState(Block):
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("padding", "", length=2),
+        XShortEnumField("LinkState", 0, LINKSTATE_LINK),
+        ShortField("AdjustProperties", 0)
+    ]
+
+    block_type = 0x021B
+
+
+class AdjustPeerToPeerBoundary(Block):
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("padding1", "", length=2),
+        IntField("peerToPeerBoundary", 0),
+        ShortField("adjustProperties", 0),
+        PadField(ShortField("padding2", 0), 2),
+    ]
+
+    block_type = 0x0224
+
+
+class AdjustDomainBoundary(Block):
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("padding1", "", length=2),
+        IntEnumField("DomainBoundaryIngress", 0, {
+            0x00: "No Block",
+            0x01: "Block",
+        }),
+        IntEnumField("DomainBoundaryEgress", 0, {
+            0x00: "No Block",
+            0x01: "Block",
+        }),
+        ShortField("adjustProperties", 0),
+        PadField(ShortField("padding2", 0), 2)
+    ]
+
+    block_type = 0x0209
+
+
+class AdjustMulticastBoundary(Block):
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("padding1", "", length=2),
+        IntField("MulticastAddress", 0),
+        ShortField("adjustProperties", 0),
+        PadField(ShortField("padding2", 0), 2)
+    ]
+
+    block_type = 0x0210
+
+
+class AdjustMauType(Block):
+    fields_desc = [
+        BlockHeader,
+        PadField(ShortField("padding", 0), 2),
+        XShortEnumField("MAUType", 1, MAU_TYPE),
+        ShortField("adjustProperties", 0),
+    ]
+
+    block_type = 0x020E
+
+
+class AdjustMauTypeExtension(Block):
+    fields_desc = [
+        BlockHeader,
+        PadField(ShortField("padding", 0), 2),
+        XShortEnumField("MAUTypeExtension", 0, MAU_EXTENSION),
+        ShortField("adjustProperties", 0),
+    ]
+
+    block_type = 0x0229
+
+
+class AdjustDCPBoundary(Block):
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("padding1", "", length=2),
+        IntField("dcpBoundary", 0),
+        ShortField("adjustProperties", 0),
+        PadField(ShortField("padding2", 0), 2),
+    ]
+
+    block_type = 0x0225
+
+
+PDPORT_ADJUST_BLOCK_ASSOCIATION = {
+    0x0209: AdjustDomainBoundary,
+    0x020e: AdjustMauType,
+    0x0210: AdjustMulticastBoundary,
+    0x021b: AdjustLinkState,
+    0x0224: AdjustPeerToPeerBoundary,
+    0x0225: AdjustDCPBoundary,
+    0x0229: AdjustMauTypeExtension,
+}
+
+
+def _guess_pdportadjust_block(_pkt, *args, **kargs):
+    cls = Block
+
+    btype = struct.unpack("!H", _pkt[:2])[0]
+    if btype in PDPORT_ADJUST_BLOCK_ASSOCIATION:
+        cls = PDPORT_ADJUST_BLOCK_ASSOCIATION[btype]
+
+    return cls(_pkt, *args, **kargs)
+
+
+class PDPortDataAdjust(Block):
+    fields_desc = [
+        BlockHeader,
+        StrFixedLenField("padding", "", length=2),
+        XShortField("slotNumber", 0),
+        XShortField("subslotNumber", 0),
+        PacketListField("blocks", [], _guess_pdportadjust_block,
+                        length_from=lambda p: p.block_length)
+    ]
+
+    block_type = 0x0202
+
+
 #     ExpectedSubmoduleBlockReq
 class ExpectedSubmoduleDataDescription(Packet):
     """Description of the data of a submodule"""
@@ -852,11 +1120,278 @@ class ExpectedSubmoduleBlockReq(Block):
         return None  # no response associated (should be modulediffblock)
 
 
+ALARM_CR_TYPE = {
+    0x0001: "AlarmCR",
+}
+
+ALARM_CR_TRANSPORT = {
+    0x0: "RTA_CLASS_1",
+    0x1: "RTA_CLASS_UDP"
+}
+
+
+class AlarmCRBlockReq(Block):
+    """Alarm CR block request"""
+    fields_desc = [
+        BlockHeader,
+        XShortEnumField("AlarmCRType", 1, ALARM_CR_TYPE),
+        ShortField("LT", 0x8892),
+        BitField("AlarmCRProperties_Priority", 0, 1),
+        BitEnumField("AlarmCRProperties_Transport", 0, 1, ALARM_CR_TRANSPORT),
+        BitField("AlarmCRProperties_Reserved1", 0, 22),
+        BitField("AlarmCRProperties_Reserved2", 0, 8),
+        ShortField("RTATimeoutFactor", 0x0001),
+        ShortField("RTARetries", 0x0003),
+        ShortField("LocalAlarmReference", 0x0003),
+        ShortField("MaxAlarmDataLength", 0x00C8),
+        ShortField("AlarmCRTagHeaderHigh", 0xC000),
+        ShortField("AlarmCRTagHeaderLow", 0xA000),
+    ]
+    # default block_type value
+    block_type = 0x0103
+
+    def post_build(self, p, pay):
+        # Set the LT based on transport
+        if self.AlarmCRProperties_Transport == 0x1:
+            p = p[:8] + struct.pack("!H", 0x0800) + p[10:]
+
+        return Block.post_build(self, p, pay)
+
+    def get_response(self):
+        """Generate the response block of this request.
+        Careful: it only sets the fields which can be set from the request
+        """
+        res = AlarmCRBlockRes()
+        for field in ["AlarmCRType", "LocalAlarmReference"]:
+            res.setfieldval(field, self.getfieldval(field))
+
+        res.block_type = self.block_type + 0x8000
+        return res
+
+
+class AlarmCRBlockRes(Block):
+    fields_desc = [
+        BlockHeader,
+        XShortEnumField("AlarmCRType", 1, ALARM_CR_TYPE),
+        ShortField("LocalAlarmReference", 0),
+        ShortField("MaxAlarmDataLength", 0)
+    ]
+    # default block_type value
+    block_type = 0x8103
+
+
+class AlarmItem(Packet):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        PacketField("load", "", Raw),
+    ]
+
+    def extract_padding(self, s):
+        return None, s  # No extra payload
+
+
+class MaintenanceItem(AlarmItem):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        BlockHeader,
+        StrFixedLenField("padding", "", length=2),
+        XIntField("MaintenanceStatus", 0),
+    ]
+
+
+class DiagnosisItem(AlarmItem):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        XShortField("ChannelNumber", 0),
+        XShortField("ChannelProperties", 0),
+        XShortField("ChannelErrorType", 0),
+        ConditionalField(
+            cond=lambda p: p.getfieldval("UserStructureIdentifier") in [
+                0x8002, 0x8003],
+            fld=XShortField("ExtChannelErrorType", 0)),
+        ConditionalField(
+            cond=lambda p: p.getfieldval("UserStructureIdentifier") in [
+                0x8002, 0x8003],
+            fld=XIntField("ExtChannelAddValue", 0)),
+        ConditionalField(
+            cond=lambda p: p.getfieldval("UserStructureIdentifier") == 0x8003,
+            fld=XIntField("QualifiedChannelQualifier", 0)),
+    ]
+
+
+class UploadRetrievalItem(AlarmItem):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        BlockHeader,
+        StrFixedLenField("padding", "", length=2),
+        XIntField("URRecordIndex", 0),
+        XIntField("URRecordLength", 0),
+    ]
+
+
+class iParameterItem(AlarmItem):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        BlockHeader,
+        StrFixedLenField("padding", "", length=2),
+        XIntField("iPar_Req_Header", 0),
+        XIntField("Max_Segm_Size", 0),
+        XIntField("Transfer_Index", 0),
+        XIntField("Total_iPar_Size", 0),
+    ]
+
+
+PE_OPERATIONAL_MODE = {
+    0x00: "PE_PowerOff",
+    0xF0: "PE_Operate",
+    0xFE: "PE_SleepModeWOL",
+    0xFF: "PE_ReadyToOperate",
+}
+PE_OPERATIONAL_MODE.update({i: "PE_EnergySavingMode_{}".format(i)
+                            for i in range(0x1, 0x20)})
+PE_OPERATIONAL_MODE.update({i: "Reserved" for i in range(0x20, 0xF0)})
+PE_OPERATIONAL_MODE.update({i: "Reserved" for i in range(0xF1, 0xFE)})
+
+
+class PE_AlarmItem(AlarmItem):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        BlockHeader,
+        ByteEnumField("PE_OperationalMode", 0, PE_OPERATIONAL_MODE),
+    ]
+
+
+class RS_AlarmItem(AlarmItem):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        XShortField("RS_AlarmInfo", 0),
+    ]
+
+
+class PRAL_AlarmItem(AlarmItem):
+    fields_desc = [
+        XShortField("UserStructureIdentifier", 0),
+        XShortField("ChannelNumber", 0),
+        XShortField("PRAL_ChannelProperties", 0),
+        XShortField("PRAL_Reason", 0),
+        XShortField("PRAL_ExtReason", 0),
+        StrLenField("PRAL_ReasonAddValue", "",
+                    length_from=lambda x:x.len - 10),
+    ]
+
+
+PNIO_RPC_ALARM_ASSOCIATION = {
+    "8000": DiagnosisItem,
+    "8002": DiagnosisItem,
+    "8003": DiagnosisItem,
+    "8100": MaintenanceItem,
+    "8200": UploadRetrievalItem,
+    "8201": iParameterItem,
+    "8300": RS_AlarmItem,
+    "8301": RS_AlarmItem,
+    "8302": RS_AlarmItem,
+    # "8303": RS_AlarmItem,
+    "8310": PE_AlarmItem,
+    "8320": PRAL_AlarmItem,
+}
+
+
+def _guess_alarm_payload(_pkt, *args, **kargs):
+    cls = AlarmItem
+
+    btype = bytes_hex(_pkt[:2]).decode("utf8")
+    if btype in PNIO_RPC_ALARM_ASSOCIATION:
+        cls = PNIO_RPC_ALARM_ASSOCIATION[btype]
+
+    return cls(_pkt, *args, **kargs)
+
+
+class AlarmNotificationPDU(Block):
+    fields_desc = [
+        # IEC-61158-6-10:2021, Table 513
+        BlockHeader,
+        ShortField("AlarmType", 0),
+        XIntField("API", 0),
+        ShortField("SlotNumber", 0),
+        ShortField("SubslotNumber", 0),
+        XIntField("ModuleIdentNumber", 0),
+        XIntField("SubmoduleIdentNUmber", 0),
+        XShortField("AlarmSpecifier", 0),
+        PacketListField("AlarmPayload", [], _guess_alarm_payload)
+    ]
+
+
+class AlarmNotification_High(AlarmNotificationPDU):
+    block_type = 0x0001
+
+
+class AlarmNotification_Low(AlarmNotificationPDU):
+    block_type = 0x0002
+
+
+PDU_TYPE_TYPE = {
+    0x01: "RTA_TYPE_DATA",
+    0x02: "RTA_TYPE_NACK",
+    0x03: "RTA_TYPE_ACK",
+    0x04: "RTA_TYPE_ERR",
+    0x05: "RTA_TYPE_FREQ",
+    0x06: "RTA_TYPE_FRSP",
+}
+PDU_TYPE_TYPE.update({i: "Reserved" for i in range(0x07, 0x10)})
+
+
+PDU_TYPE_VERSION = {
+    0x00: "Reserved",
+    0x01: "Version 1",
+    0x02: "Version 2",
+}
+PDU_TYPE_VERSION.update({i: "Reserved" for i in range(0x03, 0x10)})
+
+
+class PNIORealTimeAcyclicPDUHeader(Packet):
+    fields_desc = [
+        # IEC-61158-6-10:2021, Table 241
+        ShortField("AlarmDstEndpoint", 0),
+        ShortField("AlarmSrcEndpoint", 0),
+        BitEnumField("PDUTypeType", 0, 4, PDU_TYPE_TYPE),
+        BitEnumField("PDUTypeVersion", 0, 4, PDU_TYPE_VERSION),
+        BitField("AddFlags", 0, 8),
+        XShortField("SendSeqNum", 0),
+        XShortField("AckSeqNum", 0),
+        XShortField("VarPartLen", 0),
+    ]
+
+    def __new__(cls, name, bases, dct):
+        raise NotImplementedError()
+
+
+class Alarm_Low(Packet):
+    fields_desc = [
+        PNIORealTimeAcyclicPDUHeader,
+        PacketField("RTA_SDU", None, AlarmNotification_Low),
+    ]
+
+
+class Alarm_High(Packet):
+    fields_desc = [
+        PNIORealTimeAcyclicPDUHeader,
+        PacketField("RTA_SDU", None, AlarmNotification_High),
+    ]
+
+
 # PROFINET IO DCE/RPC PDU
 PNIO_RPC_BLOCK_ASSOCIATION = {
+    # I&M Records
+    "0020": IM0Block,
+    "0021": IM1Block,
+    "0022": IM2Block,
+    "0023": IM3Block,
+    "0024": IM4Block,
+
     # requests
     "0101": ARBlockReq,
     "0102": IOCRBlockReq,
+    "0103": AlarmCRBlockReq,
     "0104": ExpectedSubmoduleBlockReq,
     "0110": IODControlReq,
     "0111": IODControlReq,
@@ -866,10 +1401,12 @@ PNIO_RPC_BLOCK_ASSOCIATION = {
     "0116": IODControlReq,
     "0117": IODControlReq,
     "0118": IODControlReq,
+    "0202": PDPortDataAdjust,
 
     # responses
     "8101": ARBlockRes,
     "8102": IOCRBlockRes,
+    "8103": AlarmCRBlockRes,
     "8110": IODControlRes,
     "8111": IODControlRes,
     "8112": IODControlRes,
@@ -891,11 +1428,17 @@ def _guess_block_class(_pkt, *args, **kargs):
         else:
             cls = IODWriteReq
 
+    elif _pkt[:2] == b'\x00\x09':  # IODReadReq
+        cls = IODReadReq
+
     elif _pkt[:2] == b'\x80\x08':    # IODWriteRes
         if _pkt[34:36] == b'\xe0@':  # IODWriteMultipleRes
             cls = IODWriteMultipleRes
         else:
             cls = IODWriteRes
+
+    elif _pkt[:2] == b'\x80\x09':  # IODReadRes
+        cls = IODReadRes
 
     # Common cases
     else:
@@ -909,7 +1452,7 @@ def _guess_block_class(_pkt, *args, **kargs):
 def dce_rpc_endianess(pkt):
     """determine the symbol for the endianness of a the DCE/RPC"""
     try:
-        endianness = pkt.underlayer.endianness
+        endianness = pkt.underlayer.endian
     except AttributeError:
         # handle the case where a PNIO class is
         # built without its DCE-RPC under-layer
@@ -926,18 +1469,18 @@ def dce_rpc_endianess(pkt):
 class NDRData(Packet):
     """Base NDRData to centralize some fields. It can't be instantiated"""
     fields_desc = [
-        EndiannessField(
+        EField(
             FieldLenField("args_length", None, fmt="I", length_of="blocks"),
-            endianess_from=dce_rpc_endianess),
-        EndiannessField(
+            endianness_from=dce_rpc_endianess),
+        EField(
             FieldLenField("max_count", None, fmt="I", length_of="blocks"),
-            endianess_from=dce_rpc_endianess),
-        EndiannessField(
+            endianness_from=dce_rpc_endianess),
+        EField(
             IntField("offset", 0),
-            endianess_from=dce_rpc_endianess),
-        EndiannessField(
+            endianness_from=dce_rpc_endianess),
+        EField(
             FieldLenField("actual_count", None, fmt="I", length_of="blocks"),
-            endianess_from=dce_rpc_endianess),
+            endianness_from=dce_rpc_endianess),
         PacketListField("blocks", [], _guess_block_class,
                         length_from=lambda p: p.args_length)
     ]
@@ -949,19 +1492,19 @@ class NDRData(Packet):
 class PNIOServiceReqPDU(Packet):
     """PNIO PDU for RPC Request"""
     fields_desc = [
-        EndiannessField(
+        EField(
             FieldLenField("args_max", None, fmt="I", length_of="blocks"),
-            endianess_from=dce_rpc_endianess),
+            endianness_from=dce_rpc_endianess),
         NDRData,
     ]
     overload_fields = {
-        DceRpc: {
-            # random object_uuid in the appropriate range
-            "object_uuid": RandUUID("dea00000-6c97-11d1-8271-******"),
+        DceRpc4: {
+            # random object in the appropriate range
+            "object": RandUUID("dea00000-6c97-11d1-8271-******"),
             # interface uuid to send to a device
-            "interface_uuid": RPC_INTERFACE_UUID["UUID_IO_DeviceInterface"],
+            "if_id": RPC_INTERFACE_UUID["UUID_IO_DeviceInterface"],
             # Request DCE/RPC type
-            "type": 0,
+            "ptype": 0,
         },
     }
 
@@ -969,31 +1512,31 @@ class PNIOServiceReqPDU(Packet):
     def can_handle(cls, pkt, rpc):
         """heuristic guess_payload_class"""
         # type = 0 => request
-        if rpc.getfieldval("type") == 0 and \
-                str(rpc.object_uuid).startswith("dea00000-6c97-11d1-8271-"):
+        if rpc.ptype == 0 and \
+                str(rpc.object).startswith("dea00000-6c97-11d1-8271-"):
             return True
         return False
 
 
-DceRpcPayload.register_possible_payload(PNIOServiceReqPDU)
+DceRpc4Payload.register_possible_payload(PNIOServiceReqPDU)
 
 
 class PNIOServiceResPDU(Packet):
     """PNIO PDU for RPC Response"""
     fields_desc = [
-        EndiannessField(IntEnumField("status", 0, ["OK"]),
-                        endianess_from=dce_rpc_endianess),
+        EField(IntEnumField("status", 0, ["OK"]),
+               endianness_from=dce_rpc_endianess),
         NDRData,
     ]
     overload_fields = {
-        DceRpc: {
-            # random object_uuid in the appropriate range
-            "object_uuid": RandUUID("dea00000-6c97-11d1-8271-******"),
+        DceRpc4: {
+            # random object in the appropriate range
+            "object": RandUUID("dea00000-6c97-11d1-8271-******"),
             # interface uuid to send to a host
-            "interface_uuid": RPC_INTERFACE_UUID[
+            "if_id": RPC_INTERFACE_UUID[
                 "UUID_IO_ControllerInterface"],
             # Request DCE/RPC type
-            "type": 2,
+            "ptype": 2,
         },
     }
 
@@ -1001,10 +1544,10 @@ class PNIOServiceResPDU(Packet):
     def can_handle(cls, pkt, rpc):
         """heuristic guess_payload_class"""
         # type = 2 => response
-        if rpc.getfieldval("type") == 2 and \
-                str(rpc.object_uuid).startswith("dea00000-6c97-11d1-8271-"):
+        if rpc.ptype == 2 and \
+                str(rpc.object).startswith("dea00000-6c97-11d1-8271-"):
             return True
         return False
 
 
-DceRpcPayload.register_possible_payload(PNIOServiceResPDU)
+DceRpc4Payload.register_possible_payload(PNIOServiceResPDU)

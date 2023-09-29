@@ -1,8 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2007, 2008, 2009 Arnaud Ebalard
 #               2015, 2016, 2017 Maxence Tury
 #               2019 Romain Perez
-# This program is published under a GPLv2 license
 
 """
 TLS key exchange logic.
@@ -746,7 +747,7 @@ class ClientDiffieHellmanPublic(_GenericTLSSessionInheritance):
 
         if s.client_kx_privkey and s.server_kx_pubkey:
             pms = s.client_kx_privkey.exchange(s.server_kx_pubkey)
-            s.pre_master_secret = pms
+            s.pre_master_secret = pms.lstrip(b"\x00")
             if not s.extms or s.session_hash:
                 # If extms is set (extended master secret), the key will
                 # need the session hash to be computed. This is provided
@@ -780,7 +781,7 @@ class ClientDiffieHellmanPublic(_GenericTLSSessionInheritance):
 
         if s.server_kx_privkey and s.client_kx_pubkey:
             ZZ = s.server_kx_privkey.exchange(s.client_kx_pubkey)
-            s.pre_master_secret = ZZ
+            s.pre_master_secret = ZZ.lstrip(b"\x00")
             if not s.extms or s.session_hash:
                 s.compute_ms_and_derive_keys()
 

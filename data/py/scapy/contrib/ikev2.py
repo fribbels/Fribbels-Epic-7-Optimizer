@@ -1,18 +1,12 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
 # This file is part of Scapy
-# Scapy is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# any later version.
-#
-# Scapy is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Scapy. If not, see <http://www.gnu.org/licenses/>.
+# See https://scapy.net/ for more information
 
-# scapy.contrib.description = Internet Key Exchange v2 (IKEv2)
+"""
+Internet Key Exchange Protocol Version 2 (IKEv2), RFC 7296
+"""
+
+# scapy.contrib.description = Internet Key Exchange Protocol Version 2 (IKEv2), RFC 7296
 # scapy.contrib.status = loads
 
 import logging
@@ -21,19 +15,22 @@ import struct
 
 # Modified from the original ISAKMP code by Yaron Sheffer <yaronf.ietf@gmail.com>, June 2010.  # noqa: E501
 
-from scapy.packet import Packet, bind_layers, split_layers, Raw
+from scapy.packet import Packet, bind_top_down, bind_bottom_up, \
+    split_bottom_up, split_layers, Raw
 from scapy.fields import ByteEnumField, ByteField, ConditionalField, \
     FieldLenField, FlagsField, IP6Field, IPField, IntField, MultiEnumField, \
+    MultipleTypeField, \
     PacketField, PacketLenField, PacketListField, ShortEnumField, ShortField, \
-    StrFixedLenField, StrLenField, X3BytesField, XByteField
+    StrFixedLenField, StrLenField, X3BytesField, XByteField, XIntField
 from scapy.layers.x509 import X509_Cert, X509_CRL
 from scapy.layers.inet import IP, UDP
+from scapy.layers.ipsec import ESP
 from scapy.layers.isakmp import ISAKMP
 from scapy.sendrecv import sr
 from scapy.config import conf
 from scapy.volatile import RandString
 
-# see http://www.iana.org/assignments/ikev2-parameters for details
+# see https://www.iana.org/assignments/ikev2-parameters for details
 IKEv2AttributeTypes = {"Encryption": (1, {"DES-IV64": 1,
                                           "DES": 2,
                                           "3DES": 3,
@@ -56,6 +53,9 @@ IKEv2AttributeTypes = {"Encryption": (1, {"DES-IV64": 1,
                                           "Camellia-CCM-8ICV": 25,
                                           "Camellia-CCM-12ICV": 26,
                                           "Camellia-CCM-16ICV": 27,
+                                          "ChaCha20-Poly1305": 28,
+                                          "Kuzneychik-MGM-KTREE": 32,
+                                          "MAGMA-MGM-KTREE": 33,
                                           }, 0),
                        "PRF": (2, {"PRF_HMAC_MD5": 1,
                                    "PRF_HMAC_SHA1": 2,
@@ -65,6 +65,7 @@ IKEv2AttributeTypes = {"Encryption": (1, {"DES-IV64": 1,
                                    "PRF_HMAC_SHA2_384": 6,
                                    "PRF_HMAC_SHA2_512": 7,
                                    "PRF_AES128_CMAC": 8,
+                                   "PRF_HMAC_STREEBOG_512": 9,
                                    }, 0),
                        "Integrity": (3, {"HMAC-MD5-96": 1,
                                          "HMAC-SHA1-96": 2,
@@ -97,6 +98,14 @@ IKEv2AttributeTypes = {"Encryption": (1, {"DES-IV64": 1,
                                          "2048MODP256POSgr": 24,
                                          "192randECPgr": 25,
                                          "224randECPgr": 26,
+                                         "brainpoolP224r1gr": 27,
+                                         "brainpoolP256r1gr": 28,
+                                         "brainpoolP384r1gr": 29,
+                                         "brainpoolP512r1gr": 30,
+                                         "curve25519gr": 31,
+                                         "curve448gr": 32,
+                                         "GOST3410_2012_256": 33,
+                                         "GOST3410_2012_512": 34,
                                          }, 0),
                        "Extended Sequence Number": (5, {"No ESN": 0,
                                                         "ESN": 1}, 0),
@@ -209,6 +218,39 @@ IKEv2TrafficSelectorTypes = {
     7: "TS_IPV4_ADDR_RANGE",
     8: "TS_IPV6_ADDR_RANGE",
     9: "TS_FC_ADDR_RANGE"
+}
+
+IKEv2ConfigurationPayloadCFGTypes = {
+    1: "CFG_REQUEST",
+    2: "CFG_REPLY",
+    3: "CFG_SET",
+    4: "CFG_ACK"
+}
+
+IKEv2ConfigurationAttributeTypes = {
+    1: "INTERNAL_IP4_ADDRESS",
+    2: "INTERNAL_IP4_NETMASK",
+    3: "INTERNAL_IP4_DNS",
+    4: "INTERNAL_IP4_NBNS",
+    6: "INTERNAL_IP4_DHCP",
+    7: "APPLICATION_VERSION",
+    8: "INTERNAL_IP6_ADDRESS",
+    10: "INTERNAL_IP6_DNS",
+    12: "INTERNAL_IP6_DHCP",
+    13: "INTERNAL_IP4_SUBNET",
+    14: "SUPPORTED_ATTRIBUTES",
+    15: "INTERNAL_IP6_SUBNET",
+    16: "MIP6_HOME_PREFIX",
+    17: "INTERNAL_IP6_LINK",
+    18: "INTERNAL_IP6_PREFIX",
+    19: "HOME_AGENT_ADDRESS",
+    20: "P_CSCF_IP4_ADDRESS",
+    21: "P_CSCF_IP6_ADDRESS",
+    22: "FTT_KAT",
+    23: "EXTERNAL_SOURCE_IP4_NAT_INFO",
+    24: "TIMEOUT_PERIOD_FOR_LIVENESS_CHECK",
+    25: "INTERNAL_DNS_DOMAIN",
+    26: "INTERNAL_DNSSEC_TA"
 }
 
 IPProtocolIDs = {
@@ -374,17 +416,17 @@ IKEv2Transforms = {}
 for n in IKEv2TransformTypes:
     IKEv2Transforms[IKEv2TransformTypes[n][0]] = n
 
-del(n)
-del(e)
-del(tmp)
-del(val)
+del n
+del e
+del tmp
+del val
 
 # Note: Transform and Proposal can only be used inside the SA payload
 IKEv2_payload_type = ["None", "", "Proposal", "Transform"]
 
 IKEv2_payload_type.extend([""] * 29)
 IKEv2_payload_type.extend(["SA", "KE", "IDi", "IDr", "CERT", "CERTREQ", "AUTH", "Nonce", "Notify", "Delete",  # noqa: E501
-                           "VendorID", "TSi", "TSr", "Encrypted", "CP", "EAP", "", "", "", "", "Encrypted Fragment"])  # noqa: E501
+                           "VendorID", "TSi", "TSr", "Encrypted", "CP", "EAP", "", "", "", "", "Encrypted_Fragment"])  # noqa: E501
 
 IKEv2_exchange_type = [""] * 34
 IKEv2_exchange_type.extend(["IKE_SA_INIT", "IKE_AUTH", "CREATE_CHILD_SA",
@@ -417,6 +459,14 @@ class IKEv2(IKEv2_class):  # rfc4306
         IntField("id", 0),
         IntField("length", None)  # Length of total message: packets + all payloads  # noqa: E501
     ]
+
+    @classmethod
+    def dispatch_hook(cls, _pkt=None, *args, **kargs):
+        if _pkt and len(_pkt) >= 18:
+            version = struct.unpack("!B", _pkt[17:18])[0]
+            if version < 0x20:
+                return ISAKMP
+        return cls
 
     def guess_payload_class(self, payload):
         if self.flags & 1:
@@ -525,6 +575,9 @@ class TrafficSelector(Packet):
                 return RawTrafficSelector
         return IPv4TrafficSelector
 
+    def extract_padding(self, s):
+        return '', s
+
 
 class IPv4TrafficSelector(TrafficSelector):
     name = "IKEv2 IPv4 Traffic Selector"
@@ -586,9 +639,12 @@ class IKEv2_payload_TSi(IKEv2_class):
         ByteEnumField("next_payload", None, IKEv2_payload_type),
         ByteField("res", 0),
         FieldLenField("length", None, "traffic_selector", "H", adjust=lambda pkt, x:x + 8),  # noqa: E501
-        ByteField("number_of_TSs", 0),
+        FieldLenField("number_of_TSs", None, fmt="B",
+                      count_of="traffic_selector"),
         X3BytesField("res2", 0),
-        PacketListField("traffic_selector", None, TrafficSelector, length_from=lambda x:x.length - 8, count_from=lambda x:x.number_of_TSs),  # noqa: E501
+        PacketListField("traffic_selector", None, TrafficSelector,
+                        length_from=lambda x:x.length - 8,
+                        count_from=lambda x:x.number_of_TSs),
     ]
 
 
@@ -599,9 +655,12 @@ class IKEv2_payload_TSr(IKEv2_class):
         ByteEnumField("next_payload", None, IKEv2_payload_type),
         ByteField("res", 0),
         FieldLenField("length", None, "traffic_selector", "H", adjust=lambda pkt, x:x + 8),  # noqa: E501
-        ByteField("number_of_TSs", 0),
+        FieldLenField("number_of_TSs", None, fmt="B",
+                      count_of="traffic_selector"),
         X3BytesField("res2", 0),
-        PacketListField("traffic_selector", None, TrafficSelector, length_from=lambda x:x.length - 8, count_from=lambda x:x.number_of_TSs),  # noqa: E501
+        PacketListField("traffic_selector", None, TrafficSelector,
+                        length_from=lambda x:x.length - 8,
+                        count_from=lambda x:x.number_of_TSs),
     ]
 
 
@@ -666,7 +725,7 @@ class IKEv2_payload_KE(IKEv2_class):
     ]
 
 
-class IKEv2_payload_IDi(IKEv2_class):
+class IKEv2_payload_IDi(IKEv2_class):  # RFC 7296, section 3.5
     name = "IKEv2 Identification - Initiator"
     overload_fields = {IKEv2: {"next_payload": 35}}
     fields_desc = [
@@ -674,25 +733,33 @@ class IKEv2_payload_IDi(IKEv2_class):
         ByteField("res", 0),
         FieldLenField("length", None, "load", "H", adjust=lambda pkt, x:x + 8),
         ByteEnumField("IDtype", 1, {1: "IPv4_addr", 2: "FQDN", 3: "Email_addr", 5: "IPv6_addr", 11: "Key"}),  # noqa: E501
-        ByteEnumField("ProtoID", 0, {0: "Unused"}),
-        ShortEnumField("Port", 0, {0: "Unused"}),
-        #        IPField("IdentData","127.0.0.1"),
-        StrLenField("load", "", length_from=lambda x: x.length - 8),
+        X3BytesField("res2", 0),
+        MultipleTypeField(
+            [
+                (IPField("ID", "127.0.0.1"), lambda x: x.IDtype == 1),
+                (IP6Field("ID", "::1"), lambda x: x.IDtype == 5),
+            ],
+            StrLenField("ID", "", length_from=lambda x: x.length - 8),
+        )
     ]
 
 
-class IKEv2_payload_IDr(IKEv2_class):
+class IKEv2_payload_IDr(IKEv2_class):  # RFC 7296, section 3.5
     name = "IKEv2 Identification - Responder"
     overload_fields = {IKEv2: {"next_payload": 36}}
     fields_desc = [
         ByteEnumField("next_payload", None, IKEv2_payload_type),
         ByteField("res", 0),
-        FieldLenField("length", None, "load", "H", adjust=lambda pkt, x:x + 8),
+        FieldLenField("length", None, "ID", "H", adjust=lambda pkt, x:x + 8),
         ByteEnumField("IDtype", 1, {1: "IPv4_addr", 2: "FQDN", 3: "Email_addr", 5: "IPv6_addr", 11: "Key"}),  # noqa: E501
-        ByteEnumField("ProtoID", 0, {0: "Unused"}),
-        ShortEnumField("Port", 0, {0: "Unused"}),
-        #        IPField("IdentData","127.0.0.1"),
-        StrLenField("load", "", length_from=lambda x: x.length - 8),
+        X3BytesField("res2", 0),
+        MultipleTypeField(
+            [
+                (IPField("ID", "127.0.0.1"), lambda x: x.IDtype == 1),
+                (IP6Field("ID", "::1"), lambda x: x.IDtype == 5),
+            ],
+            StrLenField("ID", "", length_from=lambda x: x.length - 8),
+        )
     ]
 
 
@@ -704,6 +771,40 @@ class IKEv2_payload_Encrypted(IKEv2_class):
         ByteField("res", 0),
         FieldLenField("length", None, "load", "H", adjust=lambda pkt, x:x + 4),
         StrLenField("load", "", length_from=lambda x:x.length - 4),
+    ]
+
+
+class ConfigurationAttribute(Packet):
+    name = "IKEv2 Configuration Attribute"
+    fields_desc = [
+        ShortEnumField("type", 1, IKEv2ConfigurationAttributeTypes),
+        FieldLenField("length", None, "value", "H"),
+        MultipleTypeField(
+            [
+                (IPField("value", "127.0.0.1"),
+                 lambda x: x.length == 4 and x.type in (1, 2, 3, 4, 6, 20)),
+                (IP6Field("value", "::1"),
+                 lambda x: x.length == 16 and x.type in (10, 12, 21)),
+            ],
+            StrLenField("value", "", length_from=lambda x: x.length),
+        )
+    ]
+
+    def extract_padding(self, s):
+        return b'', s
+
+
+class IKEv2_payload_CP(IKEv2_class):  # RFC 7296, section 3.15
+    name = "IKEv2 Configuration"
+    overload_fields = {IKEv2: {"next_payload": 46}}
+    fields_desc = [
+        ByteEnumField("next_payload", None, IKEv2_payload_type),
+        ByteField("res", 0),
+        FieldLenField("length", None, "load", "H", adjust=lambda pkt, x:x + 8),
+        ByteEnumField("CFGType", 1, IKEv2ConfigurationPayloadCFGTypes),
+        X3BytesField("res2", 0),
+        PacketListField("attributes", None, ConfigurationAttribute,
+                        length_from=lambda x: x.length - 8),
     ]
 
 
@@ -750,7 +851,7 @@ class IKEv2_payload_CERT_CRT(IKEv2_payload_CERT):
     fields_desc = [
         ByteEnumField("next_payload", None, IKEv2_payload_type),
         ByteField("res", 0),
-        FieldLenField("length", None, "x509Cert", "H", adjust=lambda pkt, x: x + len(pkt.x509Cert) + 5),  # noqa: E501
+        FieldLenField("length", None, "x509Cert", "H", adjust=lambda pkt, x: x + 5),  # noqa: E501
         ByteEnumField("cert_type", 4, IKEv2CertificateEncodings),
         PacketLenField("x509Cert", X509_Cert(''), X509_Cert, length_from=lambda x:x.length - 5),  # noqa: E501
     ]
@@ -761,7 +862,7 @@ class IKEv2_payload_CERT_CRL(IKEv2_payload_CERT):
     fields_desc = [
         ByteEnumField("next_payload", None, IKEv2_payload_type),
         ByteField("res", 0),
-        FieldLenField("length", None, "x509CRL", "H", adjust=lambda pkt, x: x + len(pkt.x509CRL) + 5),  # noqa: E501
+        FieldLenField("length", None, "x509CRL", "H", adjust=lambda pkt, x: x + 5),  # noqa: E501
         ByteEnumField("cert_type", 7, IKEv2CertificateEncodings),
         PacketLenField("x509CRL", X509_CRL(''), X509_CRL, length_from=lambda x:x.length - 5),  # noqa: E501
     ]
@@ -787,11 +888,71 @@ for i, payloadname in enumerate(IKEv2_payload_type):
 del i, payloadname, name
 IKEv2_class._overload_fields = IKEv2_payload_type_overload.copy()
 
-split_layers(UDP, ISAKMP, sport=500)
-split_layers(UDP, ISAKMP, dport=500)
+# the upper bindings for port 500 to ISAKMP are handled by IKEv2.dispatch_hook
+split_bottom_up(UDP, ISAKMP, dport=500)
+split_bottom_up(UDP, ISAKMP, sport=500)
 
-bind_layers(UDP, IKEv2, dport=500, sport=500)  # TODO: distinguish IKEv1/IKEv2
-bind_layers(UDP, IKEv2, dport=4500, sport=4500)
+bind_bottom_up(UDP, IKEv2, dport=500)
+bind_bottom_up(UDP, IKEv2, sport=500)
+bind_top_down(UDP, IKEv2, dport=500, sport=500)
+
+
+split_layers(UDP, ESP, dport=4500)  # NAT-Traversal encapsulation
+split_layers(UDP, ESP, sport=4500)  # NAT-Traversal encapsulation
+
+
+# TODO: the bindings for NAT-traversal (UDP encapsulation on port 4500)
+#       actually belong into the scapy.layers.ipsec module. They will
+#       be moved there as soon as the IKEv2 protocol has been promoted
+#       from scapy.contrib to scapy.layers.
+
+class UDP_ENCAP(Packet):  # RFC 3948
+    """
+    UDP Encapsulation of IPsec ESP Packets [RFC3948] (for NAT-Traversal)
+    """
+    name = 'UDP_ENCAP'
+
+    @classmethod
+    def dispatch_hook(cls, _pkt=None, *args, **kargs):
+        if _pkt:
+            if len(_pkt) >= 4 and struct.unpack("!I", _pkt[0:4])[0] == 0x00:
+                return NON_ESP
+            elif len(_pkt) == 1 and struct.unpack("!B", _pkt)[0] == 0xff:
+                return NAT_KEEPALIVE
+            else:
+                return ESP
+        return cls
+
+
+class NON_ESP(Packet):  # RFC 3948, section 2.2
+
+    fields_desc = [
+        XIntField("non_esp", 0x0)
+    ]
+
+    def guess_payload_class(self, payload):
+        return IKEv2
+
+
+class NAT_KEEPALIVE(Packet):  # RFC 3948, section 2.2
+
+    fields_desc = [
+        XByteField("nat_keepalive", 0xFF)
+    ]
+
+    def guess_payload_class(self, payload):
+        return conf.raw_layer
+
+
+split_layers(UDP, ESP, dport=4500)
+split_layers(UDP, ESP, sport=4500)
+
+bind_bottom_up(UDP, UDP_ENCAP, dport=4500)
+bind_bottom_up(UDP, UDP_ENCAP, sport=4500)
+
+bind_top_down(UDP, ESP, dport=4500, sport=4500)
+bind_top_down(UDP, NON_ESP, dport=4500, sport=4500)
+bind_top_down(UDP, NAT_KEEPALIVE, dport=4500, sport=4500)
 
 
 def ikev2scan(ip, **kwargs):

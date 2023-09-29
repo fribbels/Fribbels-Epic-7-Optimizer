@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 Linux specific functions.
@@ -29,9 +29,8 @@ from scapy.consts import LINUX
 from scapy.arch.common import (
     _iff_flags,
     compile_filter,
-    get_if,
-    get_if_raw_hwaddr,
 )
+from scapy.arch.unix import get_if, get_if_raw_hwaddr
 from scapy.config import conf
 from scapy.data import MTU, ETH_P_ALL, SOL_PACKET, SO_ATTACH_FILTER, \
     SO_TIMESTAMPNS
@@ -49,8 +48,7 @@ from scapy.packet import Packet, Padding
 from scapy.pton_ntop import inet_ntop
 from scapy.supersocket import SuperSocket
 
-import scapy.modules.six as six
-from scapy.modules.six.moves import range
+import scapy.libs.six as six
 
 # Typing imports
 from scapy.compat import (
@@ -65,7 +63,7 @@ from scapy.compat import (
     Union,
 )
 
-# From bits/ioctls.h
+# From sockios.h
 SIOCGIFHWADDR = 0x8927          # Get hardware address
 SIOCGIFADDR = 0x8915          # get PA address
 SIOCGIFNETMASK = 0x891b          # get network PA mask
@@ -210,7 +208,7 @@ def get_alias_address(iface_name,  # type: str
 
     # Extract interfaces names
     out = struct.unpack("iL", ifreq)[0]
-    names_b = names_ar.tobytes() if six.PY3 else names_ar.tostring()
+    names_b = names_ar.tobytes() if six.PY3 else names_ar.tostring()  # type: ignore  # noqa: E501
     names = [names_b[i:i + offset].split(b'\0', 1)[0] for i in range(0, out, name_len)]  # noqa: E501
 
     # Look for the IP address
@@ -414,13 +412,17 @@ class LinuxInterfaceProvider(InterfaceProvider):
         data = {}
         ips = in6_getifaddr()
         for i in _get_if_list():
-            ifflags = struct.unpack("16xH14x", get_if(i, SIOCGIFFLAGS))[0]
-            index = get_if_index(i)
-            mac = scapy.utils.str2mac(
-                get_if_raw_hwaddr(i, siocgifhwaddr=SIOCGIFHWADDR)[1]
-            )
-            ip = None  # type: Optional[str]
-            ip = inet_ntop(socket.AF_INET, get_if_raw_addr(i))
+            try:
+                ifflags = struct.unpack("16xH14x", get_if(i, SIOCGIFFLAGS))[0]
+                index = get_if_index(i)
+                mac = scapy.utils.str2mac(
+                    get_if_raw_hwaddr(i, siocgifhwaddr=SIOCGIFHWADDR)[1]
+                )
+                ip = None  # type: Optional[str]
+                ip = inet_ntop(socket.AF_INET, get_if_raw_addr(i))
+            except IOError:
+                warning("Interface %s does not exist!", i)
+                continue
             if ip == "0.0.0.0":
                 ip = None
             ifflags = FlagValue(ifflags, _iff_flags)
@@ -479,10 +481,6 @@ class L2Socket(SuperSocket):
         self.iface = network_name(iface or conf.iface)
         self.type = type
         self.promisc = conf.sniff_promisc if promisc is None else promisc
-        if monitor is not None:
-            log_runtime.info(
-                "The 'monitor' argument has no effect on native linux sockets."
-            )
         self.ins = socket.socket(
             socket.AF_PACKET, socket.SOCK_RAW, socket.htons(type))
         self.ins.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 0)
@@ -495,7 +493,7 @@ class L2Socket(SuperSocket):
             if filter is not None:
                 try:
                     attach_filter(self.ins, filter, self.iface)
-                except ImportError as ex:
+                except (ImportError, Scapy_Exception) as ex:
                     log_runtime.error("Cannot set filter: %s", ex)
         if self.promisc:
             set_promisc(self.ins, self.iface)
@@ -547,7 +545,7 @@ class L2Socket(SuperSocket):
         if self.closed:
             return
         try:
-            if self.promisc and self.ins:
+            if self.promisc and getattr(self, "ins", None):
                 set_promisc(self.ins, self.iface, 0)
         except (AttributeError, OSError):
             pass
@@ -600,7 +598,7 @@ class L3PacketSocket(L2Socket):
         # type: (Packet) -> int
         iff = x.route()[0]
         if iff is None:
-            iff = conf.iface
+            iff = network_name(conf.iface)
         sdto = (iff, self.type)
         self.outs.bind(sdto)
         sn = self.outs.getsockname()

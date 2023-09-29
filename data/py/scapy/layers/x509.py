@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# Enhanced by Maxence Tury <maxence.tury@ssi.gouv.fr>
-# This program is published under a GPLv2 license
+# Acknowledgment: Maxence Tury <maxence.tury@ssi.gouv.fr>
+
+# Cool history about this file: http://natisbad.org/scapy/index.html
 
 """
 X.509 certificates.
@@ -238,11 +240,11 @@ _default_directoryName = [
     X509_RDN(),
     X509_RDN(
         rdn=[X509_AttributeTypeAndValue(
-            type="2.5.4.10",
+            type=ASN1_OID("2.5.4.10"),
             value=ASN1_PRINTABLE_STRING("Scapy, Inc."))]),
     X509_RDN(
         rdn=[X509_AttributeTypeAndValue(
-            type="2.5.4.3",
+            type=ASN1_OID("2.5.4.3"),
             value=ASN1_PRINTABLE_STRING("Scapy Default Name"))])
 ]
 
@@ -861,7 +863,7 @@ class _PacketFieldRaw(PacketField):
         remain = ""
         if conf.raw_layer in i:
             r = i[conf.raw_layer]
-            del(r.underlayer.payload)
+            del r.underlayer.payload
             remain = r.load
         return remain, i
 
@@ -882,11 +884,11 @@ _default_issuer = [
     X509_RDN(),
     X509_RDN(
         rdn=[X509_AttributeTypeAndValue(
-            type="2.5.4.10",
+            type=ASN1_OID("2.5.4.10"),
             value=ASN1_PRINTABLE_STRING("Scapy, Inc."))]),
     X509_RDN(
         rdn=[X509_AttributeTypeAndValue(
-            type="2.5.4.3",
+            type=ASN1_OID("2.5.4.3"),
             value=ASN1_PRINTABLE_STRING("Scapy Default Issuer"))])
 ]
 
@@ -894,11 +896,11 @@ _default_subject = [
     X509_RDN(),
     X509_RDN(
         rdn=[X509_AttributeTypeAndValue(
-            type="2.5.4.10",
+            type=ASN1_OID("2.5.4.10"),
             value=ASN1_PRINTABLE_STRING("Scapy, Inc."))]),
     X509_RDN(
         rdn=[X509_AttributeTypeAndValue(
-            type="2.5.4.3",
+            type=ASN1_OID("2.5.4.3"),
             value=ASN1_PRINTABLE_STRING("Scapy Default Subject"))])
 ]
 

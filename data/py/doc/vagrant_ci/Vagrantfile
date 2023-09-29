@@ -1,20 +1,25 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 Vagrant.configure("2") do |config|
 
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 1024
+    vb.cpus = 2
+  end
+
   config.vm.define "openbsd" do |bsd|
-    bsd.vm.box = "generic/openbsd6"
+    bsd.vm.box = "generic/openbsd7"
     bsd.vm.provision "shell", path: "provision_openbsd.sh"
   end
 
   config.vm.define "freebsd" do |bsd|
-    bsd.vm.box = "freebsd/FreeBSD-12.1-STABLE"
+    bsd.vm.box = "freebsd/FreeBSD-13.1-RELEASE"
     bsd.vm.provision "shell", path: "provision_freebsd.sh"
   end
 

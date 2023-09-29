@@ -1,10 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
-# Copyright (C) 2019 Gabriel Potter <gabriel@potter.fr>
+# See https://scapy.net/ for more information
 # Copyright (C) 2012 Luca Invernizzi <invernizzi.l@gmail.com>
 # Copyright (C) 2012 Steeve Barbeau <http://www.sbarbeau.fr>
-
-# This program is published under a GPLv2 license
+# Copyright (C) 2019 Gabriel Potter <gabriel[]potter[]fr>
 
 """
 HTTP 1.0 layer.
@@ -39,7 +38,6 @@ You can turn auto-decompression/auto-compression off with:
 # This file is a modified version of the former scapy_http plugin.
 # It was reimplemented for scapy 2.4.3+ using sessions, stream handling.
 # Original Authors : Steeve Barbeau, Luca Invernizzi
-# Originally published under a GPLv2 license
 
 import io
 import os
@@ -61,7 +59,7 @@ from scapy.utils import get_temp_file, ContextManagerSubprocess
 
 from scapy.layers.inet import TCP, TCP_client
 
-from scapy.modules import six
+from scapy.libs import six
 
 try:
     import brotli
@@ -263,7 +261,7 @@ def _dissect_headers(obj, s):
             continue
         obj.setfieldval(f.name, value)
     if headers:
-        headers = {key: value for key, value in six.itervalues(headers)}
+        headers = dict(six.itervalues(headers))
         obj.setfieldval('Unknown_Headers', headers)
     return first_line, body
 
@@ -580,7 +578,7 @@ class HTTP(Packet):
 
     # tcp_reassemble is used by TCPSession in session.py
     @classmethod
-    def tcp_reassemble(cls, data, metadata):
+    def tcp_reassemble(cls, data, metadata, _):
         detect_end = metadata.get("detect_end", None)
         is_unknown = metadata.get("detect_unknown", True)
         if not detect_end or is_unknown:
@@ -673,7 +671,7 @@ def http_request(host, path="/", port=80, timeout=3,
     :param path: the path of the request (default /)
     :param port: the port (default 80)
     :param timeout: timeout before None is returned
-    :param display: display the resullt in the default browser (default False)
+    :param display: display the result in the default browser (default False)
     :param raw: opens a raw socket instead of going through the OS's TCP
                 socket. Scapy will then use its own TCP client.
                 Careful, the OS might cancel the TCP connection with RST.
@@ -706,7 +704,7 @@ def http_request(host, path="/", port=80, timeout=3,
         iptables_rule = "iptables -%c INPUT -s %s -p tcp --sport 80 -j DROP"
         if iptables:
             host = str(Net(host))
-            assert(os.system(iptables_rule % ('A', host)) == 0)
+            assert os.system(iptables_rule % ('A', host)) == 0
         sock = TCP_client.tcplink(HTTP, host, port, debug=verbose,
                                   iface=iface)
     else:
@@ -726,7 +724,7 @@ def http_request(host, path="/", port=80, timeout=3,
         sock.close()
         if raw and iptables:
             host = str(Net(host))
-            assert(os.system(iptables_rule % ('D', host)) == 0)
+            assert os.system(iptables_rule % ('D', host)) == 0
     if ans:
         if display:
             if Raw not in ans:

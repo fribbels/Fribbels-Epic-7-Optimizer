@@ -1,22 +1,11 @@
-#############################################################################
-#                                                                           #
-#  inet6.py --- IPv6 support for Scapy                                      #
-#               see http://natisbad.org/IPv6/                               #
-#               for more information                                        #
-#                                                                           #
-#  Copyright (C) 2005  Guillaume Valadon <guedou@hongo.wide.ad.jp>          #
-#                      Arnaud Ebalard <arnaud.ebalard@eads.net>             #
-#                                                                           #
-#  This program is free software; you can redistribute it and/or modify it  #
-#  under the terms of the GNU General Public License version 2 as           #
-#  published by the Free Software Foundation.                               #
-#                                                                           #
-#  This program is distributed in the hope that it will be useful, but      #
-#  WITHOUT ANY WARRANTY; without even the implied warranty of               #
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU        #
-#  General Public License for more details.                                 #
-#                                                                           #
-#############################################################################
+# SPDX-License-Identifier: GPL-2.0-only
+# This file is part of Scapy
+# See https://scapy.net/ for more information
+# Copyright (C) Guillaume Valadon <guedou@hongo.wide.ad.jp>
+# Copyright (C) Arnaud Ebalard <arnaud.ebalard@eads.net>
+
+# Cool history about this file: http://natisbad.org/scapy/index.html
+
 
 """
 IPv6 (Internet Protocol v6).
@@ -36,9 +25,17 @@ from scapy.arch import get_if_hwaddr
 from scapy.as_resolvers import AS_resolver_riswhois
 from scapy.base_classes import Gen
 from scapy.compat import chb, orb, raw, plain_str, bytes_encode
+from scapy.consts import WINDOWS
 from scapy.config import conf
-from scapy.data import DLT_IPV6, DLT_RAW, DLT_RAW_ALT, ETHER_ANY, ETH_P_IPV6, \
-    MTU
+from scapy.data import (
+    DLT_IPV6,
+    DLT_RAW,
+    DLT_RAW_ALT,
+    ETHER_ANY,
+    ETH_P_ALL,
+    ETH_P_IPV6,
+    MTU,
+)
 from scapy.error import log_runtime, warning
 from scapy.fields import BitEnumField, BitField, ByteEnumField, ByteField, \
     DestIP6Field, FieldLenField, FlagsField, IntField, IP6Field, \
@@ -48,10 +45,10 @@ from scapy.fields import BitEnumField, BitField, ByteEnumField, ByteField, \
 from scapy.layers.inet import IP, IPTools, TCP, TCPerror, TracerouteResult, \
     UDP, UDPerror
 from scapy.layers.l2 import CookedLinux, Ether, GRE, Loopback, SNAP
-import scapy.modules.six as six
+import scapy.libs.six as six
 from scapy.packet import bind_layers, Packet, Raw
 from scapy.sendrecv import sendp, sniff, sr, srp1
-from scapy.supersocket import SuperSocket, L3RawSocket
+from scapy.supersocket import SuperSocket
 from scapy.utils import checksum, strxor
 from scapy.pton_ntop import inet_pton, inet_ntop
 from scapy.utils6 import in6_getnsma, in6_getnsmac, in6_isaddr6to4, \
@@ -553,16 +550,15 @@ class PseudoIPv6(Packet):  # IPv6 Pseudo-header for checksum computation
     name = "Pseudo IPv6 Header"
     fields_desc = [IP6Field("src", "::"),
                    IP6Field("dst", "::"),
-                   ShortField("uplen", None),
+                   IntField("uplen", None),
                    BitField("zero", 0, 24),
                    ByteField("nh", 0)]
 
 
-def in6_chksum(nh, u, p):
+def in6_pseudoheader(nh, u, plen):
+    # type: (int, IP, int) -> PseudoIPv6
     """
-    As Specified in RFC 2460 - 8.1 Upper-Layer Checksums
-
-    Performs IPv6 Upper Layer checksum computation.
+    Build an PseudoIPv6 instance as specified in RFC 2460 8.1
 
     This function operates by filling a pseudo header class instance
     (PseudoIPv6) with:
@@ -579,9 +575,8 @@ def in6_chksum(nh, u, p):
     :param u: upper layer instance (TCP, UDP, ICMPv6*, ). Instance must be
         provided with all under layers (IPv6 and all extension headers,
         for example)
-    :param p: the payload of the upper layer provided as a string
+    :param plen: the length of the upper layer and payload
     """
-
     ph6 = PseudoIPv6()
     ph6.nh = nh
     rthdr = 0
@@ -604,7 +599,7 @@ def in6_chksum(nh, u, p):
         u = u.underlayer
     if u is None:
         warning("No IPv6 underlayer to compute checksum. Leaving null.")
-        return 0
+        return None
     if hahdr:
         ph6.src = hahdr
     else:
@@ -613,7 +608,25 @@ def in6_chksum(nh, u, p):
         ph6.dst = rthdr
     else:
         ph6.dst = u.dst
-    ph6.uplen = len(p)
+    ph6.uplen = plen
+    return ph6
+
+
+def in6_chksum(nh, u, p):
+    """
+    As Specified in RFC 2460 - 8.1 Upper-Layer Checksums
+
+    See also `.in6_pseudoheader`
+
+    :param nh: value of upper layer protocol
+    :param u: upper layer instance (TCP, UDP, ICMPv6*, ). Instance must be
+        provided with all under layers (IPv6 and all extension headers,
+        for example)
+    :param p: the payload of the upper layer provided as a string
+    """
+    ph6 = in6_pseudoheader(nh, u, len(p))
+    if ph6 is None:
+        return 0
     ph6s = raw(ph6)
     return checksum(ph6s + p)
 
@@ -806,7 +819,7 @@ class _OptionsField(PacketListField):
             autopad = 1
 
         if not autopad:
-            return b"".join(map(str, x))
+            return b"".join(map(bytes, x))
 
         curpos = self.curpos
         s = b""
@@ -897,15 +910,24 @@ class IPv6ExtHdrRouting(_IPv6ExtHdr):
 
 #                         Segment Routing Header                            #
 
-# This implementation is based on draft 06, available at:
+# This implementation is based on RFC8754, but some older snippets come from:
 # https://tools.ietf.org/html/draft-ietf-6man-segment-routing-header-06
+
+_segment_routing_header_tlvs = {
+    # RFC 8754 sect 8.2
+    0: "Pad1 TLV",
+    1: "Ingress Node TLV",  # draft 06
+    2: "Egress Node TLV",  # draft 06
+    4: "PadN TLV",
+    5: "HMAC TLV",
+}
+
 
 class IPv6ExtHdrSegmentRoutingTLV(Packet):
     name = "IPv6 Option Header Segment Routing - Generic TLV"
-    fields_desc = [ByteField("type", 0),
+    # RFC 8754 sect 2.1
+    fields_desc = [ByteEnumField("type", None, _segment_routing_header_tlvs),
                    ByteField("len", 0),
-                   ByteField("reserved", 0),
-                   ByteField("flags", 0),
                    StrLenField("value", "", length_from=lambda pkt: pkt.len)]
 
     def extract_padding(self, p):
@@ -920,14 +942,15 @@ class IPv6ExtHdrSegmentRoutingTLV(Packet):
     @classmethod
     def dispatch_hook(cls, pkt=None, *args, **kargs):
         if pkt:
-            tmp_type = orb(pkt[0])
+            tmp_type = ord(pkt[:1])
             return cls.registered_sr_tlv.get(tmp_type, cls)
         return cls
 
 
 class IPv6ExtHdrSegmentRoutingTLVIngressNode(IPv6ExtHdrSegmentRoutingTLV):
     name = "IPv6 Option Header Segment Routing - Ingress Node TLV"
-    fields_desc = [ByteField("type", 1),
+    # draft-ietf-6man-segment-routing-header-06 3.1.1
+    fields_desc = [ByteEnumField("type", 1, _segment_routing_header_tlvs),
                    ByteField("len", 18),
                    ByteField("reserved", 0),
                    ByteField("flags", 0),
@@ -936,22 +959,46 @@ class IPv6ExtHdrSegmentRoutingTLVIngressNode(IPv6ExtHdrSegmentRoutingTLV):
 
 class IPv6ExtHdrSegmentRoutingTLVEgressNode(IPv6ExtHdrSegmentRoutingTLV):
     name = "IPv6 Option Header Segment Routing - Egress Node TLV"
-    fields_desc = [ByteField("type", 2),
+    # draft-ietf-6man-segment-routing-header-06 3.1.2
+    fields_desc = [ByteEnumField("type", 2, _segment_routing_header_tlvs),
                    ByteField("len", 18),
                    ByteField("reserved", 0),
                    ByteField("flags", 0),
                    IP6Field("egress_node", "::1")]
 
 
-class IPv6ExtHdrSegmentRoutingTLVPadding(IPv6ExtHdrSegmentRoutingTLV):
-    name = "IPv6 Option Header Segment Routing - Padding TLV"
-    fields_desc = [ByteField("type", 4),
+class IPv6ExtHdrSegmentRoutingTLVPad1(IPv6ExtHdrSegmentRoutingTLV):
+    name = "IPv6 Option Header Segment Routing - Pad1 TLV"
+    # RFC8754 sect 2.1.1.1
+    fields_desc = [ByteEnumField("type", 0, _segment_routing_header_tlvs),
                    FieldLenField("len", None, length_of="padding", fmt="B"),
                    StrLenField("padding", b"\x00", length_from=lambda pkt: pkt.len)]  # noqa: E501
 
 
+class IPv6ExtHdrSegmentRoutingTLVPadN(IPv6ExtHdrSegmentRoutingTLV):
+    name = "IPv6 Option Header Segment Routing - PadN TLV"
+    # RFC8754 sect 2.1.1.2
+    fields_desc = [ByteEnumField("type", 4, _segment_routing_header_tlvs),
+                   FieldLenField("len", None, length_of="padding", fmt="B"),
+                   StrLenField("padding", b"\x00", length_from=lambda pkt: pkt.len)]  # noqa: E501
+
+
+class IPv6ExtHdrSegmentRoutingTLVHMAC(IPv6ExtHdrSegmentRoutingTLV):
+    name = "IPv6 Option Header Segment Routing - HMAC TLV"
+    # RFC8754 sect 2.1.2
+    fields_desc = [ByteEnumField("type", 5, _segment_routing_header_tlvs),
+                   FieldLenField("len", None, length_of="hmac",
+                                 adjust=lambda _, x: x + 48),
+                   BitField("D", 0, 1),
+                   BitField("reserved", 0, 15),
+                   IntField("hmackeyid", 0),
+                   StrLenField("hmac", "",
+                               length_from=lambda pkt: pkt.len - 48)]
+
+
 class IPv6ExtHdrSegmentRouting(_IPv6ExtHdr):
     name = "IPv6 Option Header Segment Routing"
+    # RFC8754 sect 2. + flag bits from draft 06
     fields_desc = [ByteEnumField("nh", 59, ipv6nh),
                    ByteField("len", None),
                    ByteField("type", 4),
@@ -979,13 +1026,14 @@ class IPv6ExtHdrSegmentRouting(_IPv6ExtHdr):
         if self.len is None:
 
             # The extension must be align on 8 bytes
-            tmp_mod = (len(pkt) - 8) % 8
+            tmp_mod = (-len(pkt) + 8) % 8
             if tmp_mod == 1:
-                warning("IPv6ExtHdrSegmentRouting(): can't pad 1 byte!")
+                tlv = IPv6ExtHdrSegmentRoutingTLVPad1()
+                pkt += raw(tlv)
             elif tmp_mod >= 2:
                 # Add the padding extension
                 tmp_pad = b"\x00" * (tmp_mod - 2)
-                tlv = IPv6ExtHdrSegmentRoutingTLVPadding(padding=tmp_pad)
+                tlv = IPv6ExtHdrSegmentRoutingTLVPadN(padding=tmp_pad)
                 pkt += raw(tlv)
 
             tmp_len = (len(pkt) - 8) // 8
@@ -1058,7 +1106,7 @@ def defragment6(packets):
                 min_pos = 0
                 min_offset = cur_offset
         res.append(lst[min_pos])
-        del(lst[min_pos])
+        del lst[min_pos]
 
     # regenerate the fragmentable part
     fragmentable = b""
@@ -1077,7 +1125,7 @@ def defragment6(packets):
     q[IPv6ExtHdrFragment].underlayer.plen = len(fragmentable)
     del q[IPv6ExtHdrFragment].underlayer.payload
     q /= conf.raw_layer(load=fragmentable)
-    del(q.plen)
+    del q.plen
 
     if q[IPv6].underlayer:
         q[IPv6] = IPv6(raw(q[IPv6]))
@@ -1108,8 +1156,8 @@ def fragment6(pkt, fragSize):
         frag = IPv6ExtHdrFragment(nh=layer3.nh)
 
         layer3.remove_payload()
-        del(layer3.nh)
-        del(layer3.plen)
+        del layer3.nh
+        del layer3.plen
 
         frag.add_payload(data)
         layer3.add_payload(frag)
@@ -3316,7 +3364,7 @@ def traceroute6(target, dport=80, minttl=1, maxttl=30, sport=RandShort(),
     a = TracerouteResult6(a.res)
 
     if verbose:
-        a.display()
+        a.show()
 
     return a, b
 
@@ -3327,12 +3375,15 @@ def traceroute6(target, dport=80, minttl=1, maxttl=30, sport=RandShort(),
 #############################################################################
 
 
-class L3RawSocket6(L3RawSocket):
-    def __init__(self, type=ETH_P_IPV6, filter=None, iface=None, promisc=None, nofilter=0):  # noqa: E501
-        L3RawSocket.__init__(self, type, filter, iface, promisc)
-        # NOTE: if fragmentation is needed, it will be done by the kernel (RFC 2292)  # noqa: E501
-        self.outs = socket.socket(socket.AF_INET6, socket.SOCK_RAW, socket.IPPROTO_RAW)  # noqa: E501
-        self.ins = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(type))  # noqa: E501
+if not WINDOWS:
+    from scapy.supersocket import L3RawSocket
+
+    class L3RawSocket6(L3RawSocket):
+        def __init__(self, type=ETH_P_IPV6, filter=None, iface=None, promisc=None, nofilter=0):  # noqa: E501
+            # NOTE: if fragmentation is needed, it will be done by the kernel (RFC 2292)  # noqa: E501
+            self.outs = socket.socket(socket.AF_INET6, socket.SOCK_RAW, socket.IPPROTO_RAW)  # noqa: E501
+            self.ins = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(type))  # noqa: E501
+            self.iface = iface
 
 
 def IPv6inIP(dst='203.178.135.36', src=None):
@@ -3341,7 +3392,7 @@ def IPv6inIP(dst='203.178.135.36', src=None):
     if not conf.L3socket == _IPv6inIP:
         _IPv6inIP.cls = conf.L3socket
     else:
-        del(conf.L3socket)
+        del conf.L3socket
     return _IPv6inIP
 
 
@@ -3684,7 +3735,7 @@ def NDP_Attack_NA_Spoofing(iface=None, mac_src_filter=None, tgt_filter=None,
         reply_mac = get_if_hwaddr(iface)
     sniff_filter = "icmp6 and not ether src %s" % reply_mac
 
-    router = (router and 1) or 0  # Value of the R flags in NA
+    router = 1 if router else 0  # Value of the R flags in NA
 
     sniff(store=0,
           filter=sniff_filter,
@@ -3894,7 +3945,7 @@ def NDP_Attack_Kill_Default_Router(iface=None, mac_src_filter=None,
         while ICMPv6NDOptPrefixInfo in tmp:
             pio = tmp[ICMPv6NDOptPrefixInfo]
             tmp = pio.payload
-            del(pio.payload)
+            del pio.payload
             rep /= pio
 
         # ... and source link layer address option
@@ -4027,6 +4078,7 @@ _load_dict(ipv6nhcls)
 #############################################################################
 
 conf.l3types.register(ETH_P_IPV6, IPv6)
+conf.l3types.register_num2layer(ETH_P_ALL, IPv46)
 conf.l2types.register(31, IPv6)
 conf.l2types.register(DLT_IPV6, IPv6)
 conf.l2types.register(DLT_RAW, IPv46)
@@ -4036,7 +4088,12 @@ bind_layers(Ether, IPv6, type=0x86dd)
 bind_layers(CookedLinux, IPv6, proto=0x86dd)
 bind_layers(GRE, IPv6, proto=0x86dd)
 bind_layers(SNAP, IPv6, code=0x86dd)
-bind_layers(Loopback, IPv6, type=socket.AF_INET6)
+# AF_INET6 values are platform-dependent. For a detailed explaination, read
+# https://github.com/the-tcpdump-group/libpcap/blob/f98637ad7f086a34c4027339c9639ae1ef842df3/gencode.c#L3333-L3354  # noqa: E501
+if WINDOWS:
+    bind_layers(Loopback, IPv6, type=0x18)
+else:
+    bind_layers(Loopback, IPv6, type=socket.AF_INET6)
 bind_layers(IPerror6, TCPerror, nh=socket.IPPROTO_TCP)
 bind_layers(IPerror6, UDPerror, nh=socket.IPPROTO_UDP)
 bind_layers(IPv6, TCP, nh=socket.IPPROTO_TCP)

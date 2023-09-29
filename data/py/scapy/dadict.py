@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 Direct Access dictionary.
@@ -10,7 +10,7 @@ Direct Access dictionary.
 from __future__ import absolute_import
 from __future__ import print_function
 from scapy.error import Scapy_Exception
-import scapy.modules.six as six
+import scapy.libs.six as six
 from scapy.compat import plain_str
 
 from scapy.compat import (
@@ -22,7 +22,6 @@ from scapy.compat import (
     TypeVar,
     Union,
     cast,
-    _Generic_metaclass,
 )
 
 ###############################
@@ -55,7 +54,6 @@ _K = TypeVar('_K')  # Key type
 _V = TypeVar('_V')  # Value type
 
 
-@six.add_metaclass(_Generic_metaclass)
 class DADict(Generic[_K, _V]):
     """
     Direct Access Dictionary

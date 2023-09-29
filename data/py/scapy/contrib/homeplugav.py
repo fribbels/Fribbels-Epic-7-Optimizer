@@ -1,19 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
 # This file is part of Scapy
-# Scapy is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# any later version.
-#
-# Scapy is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Scapy. If not, see <http://www.gnu.org/licenses/>.
+# See https://scapy.net/ for more information
 
 # scapy.contrib.description = HomePlugAV Layer
 # scapy.contrib.status = loads
+
+"""
+HomePlugAV Layer for Scapy
+
+Copyright (C) FlUxIuS (Sebastien Dudek)
+
+HomePlugAV Management Message Type
+Key (type value) : Description
+"""
 
 from __future__ import absolute_import
 import struct
@@ -44,16 +43,7 @@ from scapy.fields import (
     XShortField,
 )
 from scapy.layers.l2 import Ether
-from scapy.modules.six.moves import range
 
-"""
-    Copyright (C) HomePlugAV Layer for Scapy by FlUxIuS (Sebastien Dudek)
-"""
-
-"""
-    HomePlugAV Management Message Type
-    Key (type value) : Description
-"""
 HPAVTypeList = {0xA000: "'Get Device/sw version Request'",
                 0xA001: "'Get Device/sw version Confirmation'",
                 0xA008: "'Read MAC Memory Request'",
@@ -703,7 +693,7 @@ class AutoConnection(Packet):
                    XByteField("ConnCoQoSPrio", 0x00),
                    ShortField("ConnRate", 0),
                    LEIntField("ConnTTL", 0),
-                   ShortField("CSPECversion", 0),
+                   ShortField("version", 0),
                    StrFixedLenField("VlanTag",
                                     b"\x00" * 4,
                                     4),
@@ -1199,7 +1189,7 @@ class ModulePIB(Packet):
                          lambda pkt:(0x1FBC >= pkt.__offset and 0x1FBD <= pkt.__offset + pkt.__length)),  # noqa: E501
         ConditionalField(XByteField("OptimizationBackwardCompatible", 0),
                          lambda pkt:(0x1FBD >= pkt.__offset and 0x1FBE <= pkt.__offset + pkt.__length)),  # noqa: E501
-        ConditionalField(XByteField("reserved_21", 0),
+        ConditionalField(XByteField("reserved_21b", 0),
                          lambda pkt:(0x1FBE >= pkt.__offset and 0x1FBF <= pkt.__offset + pkt.__length)),  # noqa: E501
         ConditionalField(XByteField("MaxPbsPerSymbol", 0),
                          lambda pkt:(0x1FBF >= pkt.__offset and 0x1FC0 <= pkt.__offset + pkt.__length)),  # noqa: E501

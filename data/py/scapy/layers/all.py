@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 All layers. Configurable with conf.load_layers.
@@ -15,7 +15,7 @@ from scapy.error import log_loading
 from scapy.main import load_layer
 
 import logging
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 ignored = list(six.moves.builtins.__dict__) + ["sys"]
 log = logging.getLogger("scapy.loading")
