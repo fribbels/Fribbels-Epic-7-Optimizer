@@ -2984,6 +2984,21 @@
       },
       "code":"efh11"
    },
+   "Tyrant's Descent":{
+      "assets":{
+         "icon":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "image":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",
+         "thumbnail":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png"
+      },
+      "name":"Tyrant's Descent",
+      "rarity":5,
+      "role":"warrior",
+      "stats":{
+         "attack":21,
+         "health":32
+      },
+      "code":""
+   },
    "Twilight Calamity":{
       "assets":{
          "icon":"",

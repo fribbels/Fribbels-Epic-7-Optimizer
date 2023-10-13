@@ -2,7 +2,7 @@ const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
 const currentVersion = "1.9.2";
 
-global.TEST = true;
+global.TEST = false;
 
 /********************************************************************************************
     Release checklist:
