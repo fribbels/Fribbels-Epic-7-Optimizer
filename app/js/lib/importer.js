@@ -2,7 +2,7 @@ const fs = require('fs');
 const remote = require('@electron/remote');
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
-
+const path = require('path')
 const documentsPath = remote.app.getPath('documents');
 const savesFolder = documentsPath + '/FribbelsOptimizerSaves';
 
@@ -51,7 +51,7 @@ module.exports = {
         document.getElementById('fileReadSubmit').addEventListener("click", async () => {
             const options = {
                 title: "Open folder",
-                defaultPath : Files.path(Settings.getDefaultPath() + 'gear.txt'),
+                defaultPath : path.join(Settings.getDefaultPath(), 'gear.txt'),
                 buttonLabel : "Open folder",
                 properties: ['openDirectory'],
                 // filters :[
@@ -64,10 +64,10 @@ module.exports = {
                 return console.warn("Invalid filename")
             };
 
-            const path = filenames[0];
-            const filesInFolder = Files.listFilesInFolder(Files.path(path));
+            const filePath = filenames[0];
+            const filesInFolder = Files.listFilesInFolder((filePath));
             const fullFilenames = filesInFolder.filter(x => !x.includes('debug'))
-                                               .map(x => path + "/" + x);
+                                               .map(x => filePath + "/" + x);
 
             console.log("FILENAMES", fullFilenames);
 
@@ -110,7 +110,7 @@ module.exports = {
 
             const options = {
                 title: "Save file",
-                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                defaultPath : path.join(Settings.getDefaultPath(),'gear.txt'),
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -119,7 +119,7 @@ module.exports = {
             const filename = dialog.showSaveDialogSync(currentWindow, options);
             if (!filename) return;
 
-            fs.writeFile(Files.path(filename), output, (err) => {
+            fs.writeFile(path.join(filename), output, (err) => {
                 if (err) {
                     console.error(err)
                     if (isEpermError(err)) {
@@ -154,7 +154,7 @@ module.exports = {
 
             const options = {
                 title: "Save file",
-                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                defaultPath : path.join(Settings.getDefaultPath(),'gear.txt'),
                 buttonLabel : "Save file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -164,7 +164,7 @@ module.exports = {
             const filename = dialog.showSaveDialogSync(currentWindow, options);
             if (!filename) return;
 
-            fs.writeFile(Files.path(filename), output, (err) => {
+            fs.writeFile(path.join(filename), output, (err) => {
                 if (err) {
                     console.error(err)
                     if (isEpermError(err)) {
@@ -182,7 +182,7 @@ module.exports = {
         // document.getElementById('importFileSelect').addEventListener("click", async () => {
         //     const options = {
         //         title: "Load file",
-        //         defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+        //         defaultPath : path.join(Settings.getDefaultPath() + '/gear.txt'),
         //         buttonLabel : "Load file",
         //         filters :[
         //             {name: 'TEXT/JSON', extensions: ['txt', 'json']},
@@ -197,7 +197,7 @@ module.exports = {
 
         //     const path = filenames[0];pps":0,"dmg":0,"
 
-        //     fs.readFile(Files.path(path), 'utf8', async function read(err, data) {
+        //     fs.readFile(path.join(path), 'utf8', async function read(err, data) {
         //         if (err) {
         //             throw err;
         //         }
@@ -223,7 +223,7 @@ module.exports = {
         document.getElementById('importScreenshotsFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                defaultPath : path.join(Settings.getDefaultPath(),'gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -236,9 +236,9 @@ module.exports = {
                 return console.warn("Invalid filename")
             };
 
-            const path = filenames[0];
+            const filePath = filenames[0];
 
-            const data = await Files.readFileSync(Files.path(path));
+            const data = await Files.readFileSync((filePath));
 
             try {
                 $('#importScreenshotsOutputText').text(i18next.t('Parsing data..'))
@@ -263,7 +263,7 @@ module.exports = {
         document.getElementById('importAppendFileSelect').addEventListener("click", async () => {
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                defaultPath : path.join(Settings.getDefaultPath() ,'gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -276,9 +276,9 @@ module.exports = {
                 return console.warn("Invalid filename")
             };
 
-            const path = filenames[0];
+            const filePath = filenames[0];
 
-            const data = await Files.readFileSync(Files.path(path));
+            const data = await Files.readFileSync((filePath));
 
             try {
                 $('#importAppendOutputText').text(i18next.t('Parsing data..'))
@@ -310,7 +310,7 @@ module.exports = {
             const enhanceLimit = parseInt(document.querySelector('input[name="gearImporterEnhanceRadio"]:checked').value);
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                defaultPath : path.join(Settings.getDefaultPath(),'gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -323,11 +323,11 @@ module.exports = {
                 return console.warn("Invalid filename")
             };
 
-            const path = filenames[0];
+            const filePath = filenames[0];
 
 
             try {
-                const data = Files.readFileSync(Files.path(path));
+                const data = Files.readFileSync((filePath));
                 $('#importMergeOutputText').text(i18next.t('Parsing data..'))
 
                 const parsedData = JSON.parse(data);
@@ -355,7 +355,7 @@ module.exports = {
 
             const options = {
                 title: "Load file",
-                defaultPath : Files.path(Settings.getDefaultPath() + '/gear.txt'),
+                defaultPath : path.join(Settings.getDefaultPath() ,'gear.txt'),
                 buttonLabel : "Load file",
                 filters :[
                     {name: 'TEXT', extensions: ['txt']},
@@ -368,9 +368,9 @@ module.exports = {
                 return console.warn("Invalid filename")
             };
 
-            const path = filenames[0];
+            const filePath = filenames[0];
 
-            var data = fs.readFileSync(Files.path(path), {encoding:'utf8', flag:'r'});
+            var data = fs.readFileSync((filePath), {encoding:'utf8', flag:'r'});
 
             $('#importMergeHeroesOutputText').text(i18next.t('Opening file..'))
 
