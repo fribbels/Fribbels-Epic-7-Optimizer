@@ -9531,6 +9531,83 @@
       }
     }
   },
+  "Ludwig": {
+    "code": "c2069",
+    "_id": "eternal-wanderer-ludwig",
+    "name": "Eternal Wanderer Ludwig",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "mage",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "cri",
+      "grades": {
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2069_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2069_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.6,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "note": "60% penetration",
+        "rate": 1,
+        "pow": 1,
+        "targets": 3,
+        "penetration": 0.6,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13169,
+        "atk": 1079,
+        "hp": 3385,
+        "spd": 112,
+        "def": 520,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16722,
+        "atk": 1412,
+        "hp": 4248,
+        "spd": 112,
+        "def": 645,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Fairytale Tenebria": {
     "code": "c5050",
     "_id": "fairytale-tenebria",
@@ -10103,6 +10180,100 @@
         "dac": 0.03,
         "eff": 0.18,
         "efr": 0
+      }
+    }
+  },
+  "Fumyr": {
+    "code": "c1147",
+    "_id": "fumyr",
+    "name": "Fumyr",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "mage",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1147_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1147_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.9,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.5,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13970,
+        "atk": 833,
+        "hp": 4221,
+        "spd": 115,
+        "def": 542,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.06,
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17925,
+        "atk": 1039,
+        "hp": 5299,
+        "spd": 115,
+        "def": 673,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -22692,6 +22863,108 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0
+      }
+    }
+  },
+  "Silvertide Christy": {
+    "code": "c4123",
+    "_id": "silvertide-christy",
+    "name": "Silvertide Christy",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "knight",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "D": 0.045,
+        "C": 0.068,
+        "B": 0.09,
+        "A": 0.112,
+        "S": 0.135,
+        "SS": 0.158,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4123_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c4123_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "rate": 0,
+        "pow": 0,
+        "options": [
+          {
+            "name": "S3 heal",
+            "rate": 0,
+            "pow": 0,
+            "selfHpScaling": 0.12
+          }
+        ]
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 12320,
+        "atk": 534,
+        "hp": 4542,
+        "spd": 90,
+        "def": 603,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.06,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0.35,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15835,
+        "atk": 667,
+        "hp": 5784,
+        "spd": 90,
+        "def": 749,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.18,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 5,
+        "overrideAdditionalEff": 0.35,
+        "overrideAdditionalRes": 0
       }
     }
   },

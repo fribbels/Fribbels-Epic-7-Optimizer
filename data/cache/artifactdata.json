@@ -3029,6 +3029,21 @@
       },
       "code":"efw06"
    },
+   "Umbral Keystones":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_2.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art5_2_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_2_l.jpg"
+      },
+      "name":"Umbral Keystones",
+      "rarity":5,
+      "role":"mage",
+      "stats":{
+         "attack":15,
+         "health":54
+      },
+      "code":"efm29"
+   },
    "Unfading Memories":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0079.png",
