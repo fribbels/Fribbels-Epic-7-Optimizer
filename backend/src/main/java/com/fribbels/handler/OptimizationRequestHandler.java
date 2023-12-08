@@ -883,8 +883,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                                     final long resultsIndex = resultsCounter.getAndIncrement();
 
-                                    if (resultsIndex >= MAXIMUM_RESULTS - 1) {
-                                        maxReached.set(MAXIMUM_RESULTS - 1);
+                                    if (resultsIndex >= MAXIMUM_RESULTS) {
+                                        maxReached.set(MAXIMUM_RESULTS);
                                         exit.set(true);
                                         break;
                                     }

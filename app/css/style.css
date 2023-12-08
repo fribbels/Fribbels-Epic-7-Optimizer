@@ -1505,6 +1505,7 @@ body.dark-theme input {
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  height: 95%;
 }
 .heroesSectionContainer {
   display: flex;
