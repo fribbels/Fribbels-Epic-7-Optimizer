@@ -1934,6 +1934,21 @@
       },
       "code":"ef423"
    },
+   "Old Gardening Shears":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+      },
+      "name":"Old Gardening Shears",
+      "rarity":5,
+      "role":"ranger",
+      "stats":{
+         "attack":9,
+         "health":76
+      },
+      "code":"efr26"
+   },
    "One Year of Gratitude":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0064.png",
