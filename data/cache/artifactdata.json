@@ -2354,6 +2354,21 @@
       },
       "code":"efa14"
    },
+   "Seductive Flower":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_2.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art5_2_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_2_l.jpg"
+      },
+      "name":"Seductive Flower",
+      "rarity":5,
+      "role":"assassin",
+      "stats":{
+         "attack":15,
+         "health":54
+      },
+      "code":"efa23"
+   },
    "Sepulcrum":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0054.png",
