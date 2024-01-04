@@ -359,6 +359,21 @@
       },
       "code":"efk09"
    },
+   "Beguiling Wings":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_2.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art5_2_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_2_l.jpg"
+      },
+      "name":"Beguiling Wings",
+      "rarity":5,
+      "role":"ranger",
+      "stats":{
+         "attack":15,
+         "health":54
+      },
+      "code":"efr27"
+   },
    "Benimaru's Tachi":{
       "assets":{
          "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",

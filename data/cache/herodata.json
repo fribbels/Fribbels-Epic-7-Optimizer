@@ -9034,6 +9034,72 @@
       }
     }
   },
+  "Dragon King Sharun": {
+    "code": "c2132",
+    "_id": "Dragon King Sharun",
+    "name": "Dragon King Sharun",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "manauser",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2132_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2132_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 921,
+        "hp": 5165,
+        "spd": 102,
+        "def": 497,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 785,
+        "hp": 5077,
+        "spd": 114,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.3,
+        "efr": 0
+      }
+    }
+  },
   "Eaton": {
     "code": "c3094",
     "_id": "eaton",
@@ -9642,6 +9708,72 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0.12
+      }
+    }
+  },
+  "Elvira": {
+    "code": "c1148",
+    "_id": "Elvira",
+    "name": "Elvira",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "assassin",
+    "zodiac": "goat",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1148_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1148_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13285,
+        "atk": 804,
+        "hp": 4542,
+        "spd": 115,
+        "def": 472,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17052,
+        "atk": 1057,
+        "hp": 5542,
+        "spd": 118,
+        "def": 532,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.3,
+        "efr": 0
       }
     }
   },
@@ -14868,6 +15000,74 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0.18
+      }
+    }
+  },
+  "Leah": {
+    "code": "c3163",
+    "_id": "Leah",
+    "name": "Leah",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "ranger",
+    "zodiac": "maiden",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3163_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3163_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11323,
+        "atk": 828,
+        "hp": 3546,
+        "spd": 118,
+        "def": 407,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14349,
+        "atk": 1081,
+        "hp": 4450,
+        "spd": 118,
+        "def": 504,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
