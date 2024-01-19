@@ -9075,27 +9075,27 @@
     },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
-        "cp": 16221,
-        "atk": 921,
-        "hp": 5165,
-        "spd": 102,
-        "def": 497,
+        "cp": 15694,
+        "atk": 513,
+        "hp": 4253,
+        "spd": 106,
+        "def": 580,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.03,
-        "eff": 0,
+        "eff": 0.06,
         "efr": 0
       },
       "lv60SixStarFullyAwakened": {
-        "cp": 16221,
-        "atk": 785,
-        "hp": 5077,
-        "spd": 114,
-        "def": 634,
+        "cp": 20045,
+        "atk": 640,
+        "hp": 5340,
+        "spd": 106,
+        "def": 720,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.03,
-        "eff": 0.3,
+        "eff": 0.18,
         "efr": 0
       }
     }
@@ -9721,7 +9721,7 @@
     "role": "assassin",
     "zodiac": "goat",
     "self_devotion": {
-      "type": "acc",
+      "type": "res",
       "grades": {
         "B": 0.09,
         "A": 0.135,
@@ -9761,7 +9761,18 @@
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0.18,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.50
       },
       "lv60SixStarFullyAwakened": {
         "cp": 17052,
@@ -9773,7 +9784,18 @@
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0.3,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0.50
       }
     }
   },
@@ -12383,7 +12405,7 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 30,
+        "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -12406,7 +12428,7 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0,
-        "bonusMaxAtkPercent": 30,
+        "bonusMaxAtkPercent": 0,
         "bonusMaxDefPercent": 0,
         "bonusMaxHpPercent": 0,
         "overrideAtk": 0,
@@ -13168,13 +13190,13 @@
     "role": "warrior",
     "zodiac": "maiden",
     "self_devotion": {
-      "type": "att_rate",
+      "type": "acc",
       "grades": {
-        "B": 0.06,
-        "A": 0.09,
-        "S": 0.12,
-        "SS": 0.15,
-        "SSS": 0.18
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
       }
     },
     "assets": {
