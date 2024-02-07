@@ -2774,6 +2774,21 @@
       },
       "code":"ef413"
    },
+   "Sweet Miracle":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_5_l.jpg"
+      },
+      "name":"Sweet Miracle",
+      "rarity":5,
+      "role":"warrior",
+      "stats":{
+         "attack":15,
+         "health":54
+      },
+      "code": "efw34"
+   },
    "Sword of Autumn Eclipse":{
       "assets":{
          "icon":"https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/app/assets/blank.png",

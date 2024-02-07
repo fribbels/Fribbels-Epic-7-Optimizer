@@ -7699,6 +7699,92 @@
       }
     }
   },
+  "Command Model Laika": {
+    "code": "c1099",
+    "_id": "command-model-laika",
+    "name": "Command Model Laika",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "ranger",
+    "zodiac": "twins",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1099_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1099_l.png"
+    },
+    "ex_equip": [
+      {
+        "_id": "exc101099",
+        "id": "exc101099",
+        "name": "Prototype Memory Card",
+        "description": "A memory card that was installed in Laika when she was first produced. Brinus gave it to her in a small gift box and told her to go through its contents whenever Laika felt the need.",
+        "unit": "c1099",
+        "role": "ranger",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
+    "skills": {
+      "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1,
+        "pow": 1,
+        "targets": 1,
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 3,
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13288,
+        "atk": 904,
+        "hp": 4221,
+        "spd": 114,
+        "def": 460,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16848,
+        "atk": 1182,
+        "hp": 5299,
+        "spd": 114,
+        "def": 571,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.18,
+        "efr": 0
+      }
+    }
+  },
   "Conqueror Lilias": {
     "code": "c2089",
     "_id": "conqueror-lilias",
@@ -14707,51 +14793,34 @@
       }
     }
   },
-  "Command Model Laika": {
-    "code": "c1099",
-    "_id": "command-model-laika",
-    "name": "Command Model Laika",
+  "Laia": {
+    "code": "c1159",
+    "_id": "laia",
+    "name": "Laia",
     "moonlight": false,
     "rarity": 5,
     "attribute": "wind",
-    "role": "ranger",
-    "zodiac": "twins",
+    "role": "warrior",
+    "zodiac": "ram",
     "self_devotion": {
-      "type": "acc",
+      "type": "max_hp_rate",
       "grades": {
-        "B": 0.09,
-        "A": 0.135,
-        "S": 0.18,
-        "SS": 0.225,
-        "SSS": 0.27
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
       }
     },
     "assets": {
-      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1099_s.png",
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1159_s.png",
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
-      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1099_l.png"
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1159_l.png"
     },
-    "ex_equip": [
-      {
-        "_id": "exc101099",
-        "id": "exc101099",
-        "name": "Prototype Memory Card",
-        "description": "A memory card that was installed in Laika when she was first produced. Brinus gave it to her in a small gift box and told her to go through its contents whenever Laika felt the need.",
-        "unit": "c1099",
-        "role": "ranger",
-        "rarity": 5,
-        "stat": {
-          "type": "speed",
-          "value": 5
-        }
-      }
-    ],
+    "ex_equip": [],
     "skills": {
       "S1": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1,
-        "pow": 1,
-        "targets": 1,
+        "hitTypes": [],
         "options": []
       },
       "S2": {
@@ -14759,36 +14828,33 @@
         "options": []
       },
       "S3": {
-        "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1.1,
-        "pow": 1,
-        "targets": 3,
+        "hitTypes": [],
         "options": []
       }
     },
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
-        "cp": 13288,
-        "atk": 904,
-        "hp": 4221,
-        "spd": 114,
-        "def": 460,
+        "cp": 11377,
+        "atk": 789,
+        "hp": 4735,
+        "spd": 117,
+        "def": 514,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.03,
-        "eff": 0.18,
+        "eff": 0,
         "efr": 0
       },
       "lv60SixStarFullyAwakened": {
-        "cp": 16848,
-        "atk": 1182,
-        "hp": 5299,
-        "spd": 114,
-        "def": 571,
+        "cp": 14466,
+        "atk": 984,
+        "hp": 6266,
+        "spd": 117,
+        "def": 637,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.03,
-        "eff": 0.18,
+        "eff": 0,
         "efr": 0
       }
     }
