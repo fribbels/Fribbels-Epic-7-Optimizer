@@ -762,7 +762,7 @@
          "attack":12,
          "health":45
       },
-      "code":""
+      "code":"ef434"
    },
    "Daydream Joker":{
       "assets":{
@@ -1467,7 +1467,7 @@
          "attack":21,
          "health":32
       },
-      "code":""
+      "code":"efa22"
    },
    "Idol's Cheer":{
       "assets":{
@@ -1993,6 +1993,21 @@
          "health":32
       },
       "code":"efr06"
+   },
+   "Our Beautiful Seasons":{
+      "assets":{
+         "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0045.png",
+         "image":"https://assets.epicsevendb.com/_source/item_arti/art0045_fu.png",
+         "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0045_l.jpg"
+      },
+      "name":"Our Beautiful Seasons",
+      "rarity":4,
+      "role":"",
+      "stats":{
+         "attack":18,
+         "health":27
+      },
+      "code":"ef435"
    },
    "P.O.S":{
       "assets":{
@@ -2787,7 +2802,7 @@
          "attack":15,
          "health":54
       },
-      "code": "efw34"
+      "code": "efw35"
    },
    "Sword of Autumn Eclipse":{
       "assets":{
@@ -3057,7 +3072,7 @@
          "attack":21,
          "health":32
       },
-      "code":""
+      "code":"efw33"
    },
    "Twilight Calamity":{
       "assets":{
