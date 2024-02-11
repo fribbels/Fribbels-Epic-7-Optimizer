@@ -67,7 +67,11 @@ def thread_sniff():
         # EpicSeven traffic was confirmed to travel over tcp port 3333 via Wireshark
         # Omitting sniff() iface parameter to force all interfaces to be sniffed.
         # This may lead to more processing but prevents needing to specify an network interface manually in some cases.
-        sniff(iface=get_working_ifaces(), prn=lambda x: check_packet(x), filter="tcp and ( port 5222 or port 3333 )", session=TCPSession)
+        if sys.platform == 'linux':
+            #use waydroid0 for linux
+            sniff(iface='waydroid0', prn=lambda x: check_packet(x), filter="tcp and ( port 5222 or port 3333)", session = TCPSession)
+        else:
+            sniff(iface=get_working_ifaces(), prn=lambda x: check_packet(x), filter="tcp and ( port 5222 or port 3333 )", session=TCPSession)
     except:
         pass
 

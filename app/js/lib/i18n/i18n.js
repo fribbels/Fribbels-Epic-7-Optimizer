@@ -1,13 +1,22 @@
 /* eslint-disable */
+const path = require('path'); //require path
 module.exports = {
+// changed to use path.join for platform independence
     initialize: async () => {
-        require(Files.path(Files.getDataPath() + '/locales/en/gridlocale.js'))
-        require(Files.path(Files.getDataPath() + '/locales/zh/gridlocale.js'))
-        require(Files.path(Files.getDataPath() + '/locales/ko/gridlocale.js'))
-        require(Files.path(Files.getDataPath() + '/locales/zh-TW/gridlocale.js'))
-        require(Files.path(Files.getDataPath() + '/locales/fr/gridlocale.js'))
-        require(Files.path(Files.getDataPath() + '/locales/ja/gridlocale.js'))
-        require(Files.path(Files.getDataPath() + '/locales/ru/gridlocale.js'))
+        const enPath = path.join(Files.getDataPath(),'locales','en','gridlocale.js');
+        require(enPath);
+        const zhPath = path.join(Files.getDataPath(),'locales','zh','gridlocale.js');
+        require(zhPath);
+        const koPath = path.join(Files.getDataPath(),'locales','ko','gridlocale.js');
+        require(koPath);
+        const zh_TWPath = path.join(Files.getDataPath(),'locales','zh-TW','gridlocale.js');
+        require(zh_TWPath);
+        const frPath = path.join(Files.getDataPath(),'locales','fr','gridlocale.js');
+        require(frPath);
+        const jaPath = path.join(Files.getDataPath(),'locales','ja','gridlocale.js');
+        require(jaPath);
+        const ruPath = path.join(Files.getDataPath(),'locales','ru','gridlocale.js');
+        require(ruPath);
 
         window.i18next.use(window.i18nextHttpBackend).use(window.i18nextBrowserLanguageDetector).init({
             debug: false,
@@ -48,8 +57,9 @@ module.exports = {
                 //   // expirationTime: 7*24*60*60*1000,
                 //   // store: window.localStorage
                 // }, {
-                loadPath: Files.path(Files.getDataPath() + '/locales/{{lng}}/{{ns}}.json'),
-                addPath: Files.path(Files.getDataPath() + '/locales/{{lng}}/{{ns}}.missing.json'),
+              // changed to use path.join for platform independence
+                loadPath: path.join(Files.getDataPath(), 'locales','{{lng}}','{{ns}}.json'),
+                addPath: path.join(Files.getDataPath(), 'locales','{{lng}}','{{ns}}.missing.json'),
                 // }]
             }
         });

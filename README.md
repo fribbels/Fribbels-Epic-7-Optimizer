@@ -1,6 +1,14 @@
+# LINUX SPECIFIC PARTS
+Most of the code relating to filepaths have been changed to use nodes path module for cross compatibility. GPU acceleration works as long as you have an opencl implementation. For now, the scanner/packet capturing script has been hardcoded for linux users to use waydroid. If you use something else, lets say a vm using androidx86 then you should change the interface in scanner.py. 
 
+## TODO
+- Maybe make the appimage functional. (The scanner.py file needs elevated permissions which I cannot get working using appimage format)
 
+- Maybe make an AUR package.
 
+- Make the scanner not hardcoded for a specific interface
+  
+- Fix any other bugs that pop up
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.

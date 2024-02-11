@@ -1,9 +1,9 @@
 const remote = require('@electron/remote');
 const dialog = remote.dialog;
 const currentWindow = remote.getCurrentWindow();
-
+const path = require('path');
 const documentsPath = remote.app.getPath('documents');
-const savesFolder = documentsPath + '/FribbelsOptimizerSaves';
+const savesFolder = path.join(documentsPath,'FribbelsOptimizerSaves');
 
 // const defaultPath = Files.isMac() ?
 //                     (Files.getDataPath() + "/saves/").replace(/\//g, "/") :
@@ -18,7 +18,8 @@ module.exports = {
 
     autoSave: async () => {
         module.exports.createFolder();
-        module.exports.saveData(Settings.getDefaultPath() + '/autosave.json');
+        const autoSavePath = path.join(Settings.getDefaultPath(), 'autosave.json');
+        module.exports.saveData(autoSavePath);
     },
 
     saveData: async (filename) => {
@@ -42,7 +43,7 @@ module.exports = {
     },
 
     loadAutoSave: async () => {
-        const autoSavePath = Settings.getDefaultPath() + '/autosave.json';
+        const autoSavePath = path.join(Settings.getDefaultPath(),'autosave.json');
 
         console.warn("Loading autosave: " + autoSavePath);
 
