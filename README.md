@@ -1,6 +1,3 @@
-
-
-
 # Fribbels Epic 7 Gear Optimizer
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
@@ -25,7 +22,7 @@ Here's what it looks like currently:
 
 ## Requirements
 - 64-bit Windows or MacOS
-- Java 8, 64-Bit installed (Please download if you don't yet have it: https://java.com/en/download/manual.jsp. For Windows, use the 'Windows Offline (64-bit)' installer)
+- Java 8+, 64-Bit installed (Please download if you don't yet have it: https://java.com/en/download/manual.jsp. For Windows, use the 'Windows Offline (64-bit)' installer)
 
 Check out the step-by-step video guide on how to install the app: https://www.youtube.com/watch?v=bDjP5eiOfK0
 
@@ -46,9 +43,7 @@ _________________
     + [Adding bonus stats](#adding-bonus-stats)
     + [Substat modification options](#substat-modification-options)
   * [Importer tab](#importer-tab)
-    + [Importing gear data](#importing-gear-data)
     + [Save or Load all optimizer data](#save-or-load-all-optimizer-data)
-    + [Import gear from Zarroc optimizer](#import-gear-from-zarroc-optimizer)
   * [Getting Started](#getting-started)
     + [Installing the app](#installing-the-app)
       - [Windows](#windows)
@@ -62,11 +57,12 @@ _________________
     + [Optimizing a unit](#optimizing-a-unit)
     + [Updating your gear](#updating-your-gear)
     + [Tips to get good optimization results](#tips-to-get-good-optimization-results)
-  * [TODO List](#todo-list)
   * [Troubleshooting](#troubleshooting)
     + [Automatic importer troubleshooting](#automatic-importer-troubleshooting)
     + [Optimizer troubleshooting](#optimizer-troubleshooting)
   * [Contributing to the project](#contributing-to-the-project)
+    + [Project status](#project-status)
+    + [Setup steps](#setup-steps)
   * [Contact me](#contact-me)
 
 ## Optimizer Tab
@@ -275,6 +271,8 @@ Please read these instructions carefully! Here is a step by step video guide to 
 
 #### Windows
 
+64 bit Java 8 or above is required:
+
 1. Install **Java 8 - 64 bit** https://java.com/en/download/manual.jsp - Get the Windows Offline (64-bit) installer
     * After installing, restart your computer (required!)
 2. On the [Releases](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/releases) page, choose the latest release, and download the file that looks like ``FribbelsE7Optimizer-Setup-1.x.x.exe`` then run the installer
@@ -307,13 +305,13 @@ Check out the step-by-step video guide to follow along with instructions: https:
 3. Restart your computer
 
 ##### First time  setup for the automatic importer on Mac
-1. Install [Python 3.4+](https://www.python.org/downloads/release/python-392/)
+1. Install [Python 3.4+](https://www.python.org/downloads/release/python-392/). This will require extra steps to set python3 as your default. Recommended to use pyenv (https://opensource.com/article/19/5/python-3-default-mac)
 2. Install [Wireshark](https://www.wireshark.org/download.html)
-3. During the Wireshark installation, also install ChmodBPF.pkg: [See image](https://i.imgur.com/FqV0BA5.png)
+4. During the Wireshark installation, also install ChmodBPF.pkg: [See image](https://i.imgur.com/FqV0BA5.png)
 3. Restart your computer
 
 ### Using the auto importer
-You can use the auto importer with an emulator, a phone, or M1 chip Macbook.
+You can use the auto importer with an emulator, a phone, or M1+ chip Macbook.
 
 ##### Running the automatic importer from an emulator or M1 macbook
 
@@ -424,9 +422,13 @@ _________________
 
 ## Contributing to the project
 
-If you want to contribute, come by the discord server to have a chat about what you want to do. There's a huge list of todo items and I'm happy to have people add to the code.
+If you want to contribute, come by the discord server to have a chat about what you want to do. We also have an ongoing translation project to translate the optimizer into various languages.
 
-We also have an ongoing translation project to translate the optimizer into various languages.
+### Project status
+
+The E7 optimizer is currently in maintenance mode - I'll be keeping the project updated with new units but new feature development is on pause.
+
+### Setup steps
 
 To run the frontend code locally,
 
@@ -440,12 +442,9 @@ To run the frontend code locally,
 5. To build and package the production executables: ``yarn package``
 
 To run the backend code requires some more setup, contact me for more info.
+
 ## Contact me
 
 Come join the Fribbels E7 Optimizer Discord server for questions or comments or ideas/suggestions: https://discord.gg/rDmB4Un7qg. If you ran into any issues, please check the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
 
-If you want to show support for the optimizer, you can [buy me a coffee](https://www.buymeacoffee.com/fribbels) or come say hi on Discord!
-
-## Project status
-
-The E7 optimizer is currently in maintenance mode - I'll be keeping the project updated with new units but feature development is on pause.
+If you want support the optimizer, you can [buy me a coffee](https://www.buymeacoffee.com/fribbels) or come say hi on Discord!
