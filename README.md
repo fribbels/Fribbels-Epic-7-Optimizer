@@ -48,17 +48,17 @@ _________________
   * [Importer tab](#importer-tab)
     + [Creating gear data from screenshots](#creating-gear-data-from-screenshots)
     + [Importing gear data](#importing-gear-data)
-    + [Save/Load all optimizer data](#save-load-all-optimizer-data)
+    + [Save or Load all optimizer data](#save-or-load-all-optimizer-data)
     + [Import gear from Zarroc optimizer](#import-gear-from-zarroc-optimizer)
   * [Getting Started](#getting-started)
     + [Installing the app](#installing-the-app)
       - [Windows](#windows)
       - [Mac OS](#mac-os)
     + [Setting up the auto importer](#setting-up-the-auto-importer)
-        * [First time  setup for the automatic importer on Windows](#first-time--setup-for-the-automatic-importer-on-windows)
+        * [First time setup for the automatic importer on Windows](#first-time-setup-for-the-automatic-importer-on-windows)
         * [First time  setup for the automatic importer on Mac](#first-time--setup-for-the-automatic-importer-on-mac)
     + [Using the auto importer](#using-the-auto-importer)
-        * [Running the automatic importer from an emulator/M1 macbook](#running-the-automatic-importer-from-an-emulator-m1-macbook)
+        * [Running the automatic importer from an emulator or M1 macbook](#running-the-automatic-importer-from-an-emulator-or-m1-macbook)
         * [Running the automatic importer from a phone](#running-the-automatic-importer-from-a-phone)
     + [Using the screenshot importer](#using-the-screenshot-importer)
         * [First time setup for the screenshot importer on Windows](#first-time-setup-for-the-screenshot-importer-on-windows)
@@ -66,14 +66,13 @@ _________________
         * [Screenshotting gear](#screenshotting-gear)
     + [Optimizing a unit](#optimizing-a-unit)
     + [Updating your gear](#updating-your-gear)
-    + [Tips to get good optimization results:](#tips-to-get-good-optimization-results-)
+    + [Tips to get good optimization results](#tips-to-get-good-optimization-results)
   * [TODO List](#todo-list)
   * [Troubleshooting](#troubleshooting)
     + [Automatic importer troubleshooting](#automatic-importer-troubleshooting)
     + [Optimizer troubleshooting](#optimizer-troubleshooting)
   * [Contributing to the project](#contributing-to-the-project)
   * [Contact me](#contact-me)
-
 
 ## Optimizer Tab
 
@@ -285,7 +284,7 @@ If you have new screenshot files to add to a save, use the Append option.
 
 If you already have a save, and you want to update your gear, use Merge to replace old items with new items.
 
-### Save/Load all optimizer data
+### Save or Load all optimizer data
 
 Once you make changes to your items/heroes, the changes should be saved before you close the app. You can choose a file to save it to, and then later on load that file to import the data back in.
 
@@ -345,7 +344,7 @@ Check out the step-by-step video guide to follow along with instructions: https:
 ### Using the auto importer
 You can use the auto importer with an emulator, a phone, or M1 chip Macbook.
 
-##### Running the automatic importer from an emulator/M1 macbook
+##### Running the automatic importer from an emulator or M1 macbook
 
 Check out the step-by-step video guide to follow along with instructions: https://youtu.be/bDjP5eiOfK0?t=357
 
@@ -431,7 +430,7 @@ _________________
 
 _________________
 
-### Tips to get good optimization results:
+### Tips to get good optimization results
 
 Here's some quick tips on getting the best results. This is assuming you've read the [Optimization panel](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#optimizer-tab) descriptions.
 
