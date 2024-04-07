@@ -22348,6 +22348,72 @@
       }
     }
   },
+  "Sea Phantom Politis": {
+    "code": "c2112",
+    "_id": "Sea Phantom Politis",
+    "name": "Sea Phantom Politis",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "ranger",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2112_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2112_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16999,
+        "atk": 797,
+        "hp": 4536,
+        "spd": 120,
+        "def": 492,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 21659,
+        "atk": 993,
+        "hp": 6002,
+        "spd": 120,
+        "def": 611,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Seaside Bellona": {
     "code": "c5071",
     "_id": "seaside-bellona",
