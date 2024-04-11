@@ -3418,5 +3418,50 @@
          "health":45
       },
       "code":"ef419"
-   }
+   },
+  "Staff of Ainz Ooal Gown":{
+    "assets":{
+      "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",
+      "image":"https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png",
+      "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_5_l.jpg"
+    },
+    "name":"Staff of Ainz Ooal Gown",
+    "rarity":5,
+    "role":"mage",
+    "stats":{
+      "attack":15,
+      "health":54
+    },
+    "code": ""
+  },
+  "3F":{
+    "assets":{
+      "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art5_5.png",
+      "image":"https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png",
+      "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art5_5_l.jpg"
+    },
+    "name":"3F",
+    "rarity":5,
+    "role":"knight",
+    "stats":{
+      "attack":15,
+      "health":54
+    },
+    "code": ""
+  },
+  "Pipette Lance":{
+    "assets":{
+      "icon":"https://assets.epicsevendb.com/_source/item_arti/icon_art0105.png",
+      "image":"https://assets.epicsevendb.com/_source/item_arti/art0105_fu.png",
+      "thumbnail":"https://assets.epicsevendb.com/_source/item_arti/art0105_l.jpg"
+    },
+    "name":"Pipette Lance",
+    "rarity":5,
+    "role":"warrior",
+    "stats":{
+      "attack":21,
+      "health":32
+    },
+    "code":""
+  }
 }

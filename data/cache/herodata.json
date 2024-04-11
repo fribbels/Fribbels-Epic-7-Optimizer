@@ -2570,7 +2570,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1129_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc202201",
+        "id": "exc202201",
+        "name": "Ruele's Sad Promise",
+        "description": "A mysterious concoction of life created by combining the laws of light and nature and the love of a noble soul.",
+        "unit": "c2022",
+        "role": "manauser",
+        "rarity": 5,
+        "stat": {
+          "type": "res",
+          "value": 0.08
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
@@ -4041,7 +4055,25 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1141_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc101601",
+        "id": "exc101601",
+        "name": "Azure Dragon's Spirit",
+        "description": "A ribbon with special powers that allows the wearer to harness their innate dragon powers.",
+        "unit": "c1016",
+        "role": "mage",
+        "rarity": 5,
+        "stat": {
+          "type": "acc",
+          "value": 0.08
+        },
+        "skills": [],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1016.png"
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["normal", "miss"],
@@ -6124,40 +6156,6 @@
         "stat": {
           "type": "att_rate",
           "value": 0.07
-        },
-        "skills": [
-          {
-            "skill": 1,
-            "description": "25% chance to grant an extra attack with the same skill when using Playing with Fire.",
-            "skill_description": "Attacks with a flaming sword, with a {{variable}} chance to make the target unhealable for 1 turn. Has a 25% chance to grant the caster an extra attack with the same skill.",
-            "values": [
-              27
-            ],
-            "_id": 0
-          },
-          {
-            "skill": 2,
-            "description": "Grants a barrier to the caster for 2 turns when using Hot Streak!. Barrier strength increases proportional to the caster’s Attack.",
-            "skill_description": "Shoots fire, granting the caster increased Attack (Greater) and a barrier for 2 turns, resetting the cooldown of All-In!, and granting an extra turn. Barrier strength is proportional to the caster's Attack.",
-            "values": [
-              44,
-              5,
-              35
-            ],
-            "_id": 1
-          },
-          {
-            "skill": 3,
-            "description": "Decreases skill cooldown of Hot Streak! by 2 turns when an enemy is defeated by All-In!.",
-            "skill_description": "Attacks with a blazing inferno, penetrating Defense by 50%. Decreases skill cooldown of Hot Streak! by 2 turns when an enemy is defeated.",
-            "values": [
-              34
-            ],
-            "_id": 2
-          }
-        ],
-        "assets": {
-          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1079.png"
         }
       }
     ],
@@ -9741,7 +9739,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1142_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107901",
+        "id": "exc107901",
+        "name": "Lucky Dice",
+        "description": "Dice used on the day Cermia won a once-in-a-lifetime jackpot. She holds onto them in hopes that they'll bring her that luck again one day.",
+        "unit": "c1079",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
@@ -19865,6 +19877,74 @@
       }
     }
   },
+  "Pernilla": {
+    "code": "c3165",
+    "_id": "Pernilla",
+    "name": "Pernilla",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "dark",
+    "role": "warrior",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3165_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3165_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11978,
+        "atk": 878,
+        "hp": 3899,
+        "spd": 101,
+        "def": 438,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 15164,
+        "atk": 1144,
+        "hp": 4895,
+        "spd": 101,
+        "def": 543,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Pirate Captain Flan": {
     "code": "c2110",
     "_id": "pirate-captain-flan",
@@ -20178,6 +20258,74 @@
         "spd": 91,
         "def": 703,
         "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
+  "Ragnvald": {
+    "code": "c3164",
+    "_id": "Ragnvald",
+    "name": "Ragnvald",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "ice",
+    "role": "assassin",
+    "zodiac": "lion",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3164_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3164_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11477,
+        "atk": 828,
+        "hp": 3642,
+        "spd": 111,
+        "def": 398,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14563,
+        "atk": 1081,
+        "hp": 4572,
+        "spd": 111,
+        "def": 494,
+        "chc": 0.22999999999999998,
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0,
@@ -25364,7 +25512,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1127_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107901",
+        "id": "exc107901",
+        "name": "Lucky Dice",
+        "description": "Dice used on the day Cermia won a once-in-a-lifetime jackpot. She holds onto them in hopes that they'll bring her that luck again one day.",
+        "unit": "c1079",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
