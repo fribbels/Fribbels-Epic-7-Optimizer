@@ -3432,7 +3432,7 @@
       "attack":15,
       "health":54
     },
-    "code": ""
+    "code": "efm30"
   },
   "3F":{
     "assets":{
@@ -3444,10 +3444,10 @@
     "rarity":5,
     "role":"knight",
     "stats":{
-      "attack":15,
-      "health":54
+      "attack":9,
+      "health":76
     },
-    "code": ""
+    "code": "efk21"
   },
   "Pipette Lance":{
     "assets":{
@@ -3462,6 +3462,6 @@
       "attack":21,
       "health":32
     },
-    "code":""
+    "code":"efw36"
   }
 }
