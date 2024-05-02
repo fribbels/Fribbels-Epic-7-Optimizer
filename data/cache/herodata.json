@@ -27591,6 +27591,73 @@
       }
     }
   },
+  "Wandering Prince Cidd": {
+    "code": "c6014",
+    "_id": "Wandering Prince Cidd",
+    "name": "Wandering Prince Cidd",
+    "moonlight": true,
+    "rarity": 4,
+    "attribute": "light",
+    "role": "mage",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "C": 0.068,
+        "B": 0.102,
+        "A": 0.136,
+        "S": 0.17,
+        "SS": 0.204,
+        "SSS": 0.238
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6014_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6014_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16087,
+        "atk": 818,
+        "hp": 4138,
+        "spd": 117,
+        "def": 491,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16087,
+        "atk": 1021,
+        "hp": 5474,
+        "spd": 117,
+        "def": 610,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Watcher Schuri": {
     "code": "c2020",
     "_id": "watcher-schuri",
