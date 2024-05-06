@@ -13459,7 +13459,10 @@
     "ex_equip": [],
     "skills": {
       "S1": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1
+        "pow": 0.9
+        "targets": 1
         "options": []
       },
       "S2": {
@@ -13467,7 +13470,11 @@
         "options": []
       },
       "S3": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.32
+        "pow": 0.95
+        "penetration": 1
+        "targets": 1
         "options": []
       }
     },
