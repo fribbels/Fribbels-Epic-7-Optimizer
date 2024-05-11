@@ -4495,6 +4495,72 @@
       }
     }
   },
+  "Birgitta": {
+    "code": "c1160",
+    "_id": "Birgitta",
+    "name": "Birgitta",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "manauser",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1160_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1160_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 921,
+        "hp": 5165,
+        "spd": 102,
+        "def": 497,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16221,
+        "atk": 785,
+        "hp": 5077,
+        "spd": 114,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0.3,
+        "efr": 0
+      }
+    }
+  },
   "Blaze Dingo": {
     "code": "c2021",
     "_id": "blaze-dingo",
@@ -9272,6 +9338,94 @@
       }
     }
   },
+  "Dragon Bride Senya": {
+    "code": "c2106",
+    "_id": "Dragon Bride Senya",
+    "name": "Dragon Bride Senya",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "knight",
+    "zodiac": "archer",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2106_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2106_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 13591,
+        "atk": 716,
+        "hp": 5446,
+        "spd": 100,
+        "def": 559,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 10,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17114,
+        "atk": 894,
+        "hp": 6840,
+        "spd": 104,
+        "def": 694,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 10,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
+      }
+    }
+  },
   "Dragon King Sharun": {
     "code": "c2132",
     "_id": "Dragon King Sharun",
@@ -13460,9 +13614,9 @@
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 1
-        "pow": 0.9
-        "targets": 1
+        "rate": 1,
+        "pow": 0.9,
+        "targets": 1,
         "options": []
       },
       "S2": {
@@ -13471,10 +13625,10 @@
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.32
-        "pow": 0.95
-        "penetration": 1
-        "targets": 1
+        "rate": 0.32,
+        "pow": 0.95,
+        "penetration": 1,
+        "targets": 1,
         "options": []
       }
     },
