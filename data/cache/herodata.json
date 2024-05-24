@@ -112,17 +112,23 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2016_l.png"
     },
     "ex_equip": [],
-    "skills": {
-      "S1": {
-        "hitTypes": [],
+    "S1": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 3,
+        "selfDefScaling": 0.9
         "options": []
       },
       "S2": {
         "hitTypes": [],
         "options": []
       },
-      "S3": {
-        "hitTypes": [],
+    "S3": {
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
