@@ -20930,17 +20930,23 @@
         "rate": 1,
         "pow": 1,
         "targets": 1,
+        "selfHpScaling": 0.08,
         "options": []
       },
       "S2": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 2.5,
+        "pow": 1,
+        "targets": 1,
+        "selfHpScaling": 0.08,
         "options": []
       },
       "S3": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
-        "rate": 0.85,
+        "rate": 1.2,
         "pow": 0.95,
         "targets": 3,
+        "selfHpScaling": 0.08,
         "options": []
       }
     },
