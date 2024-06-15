@@ -114,7 +114,11 @@
     "ex_equip": [],
     "skills": {
       "S1": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 0.7,
+        "pow": 1,
+        "targets": 3,
+        "selfDefScaling": 0.9,
         "options": []
       },
       "S2": {
@@ -122,7 +126,10 @@
         "options": []
       },
       "S3": {
-        "hitTypes": [],
+        "hitTypes": ["crit", "crushing", "normal", "miss"],
+        "rate": 1.1,
+        "pow": 1,
+        "targets": 3,
         "options": []
       }
     },
@@ -4367,7 +4374,24 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2043_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc203601",
+        "id": "exc203601",
+        "name": "Silver Lion's Protection",
+        "description": "A shield with a lion motif regarded by Troublemaker Crozet as his most valued possession, which he uses in honor of his one true love.",
+        "unit": "c2036",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "max_hp_rate",
+          "value": 0.07
+        },
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c2036.png"
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
@@ -4492,6 +4516,75 @@
         "dac": 0.03,
         "eff": 0,
         "efr": 0
+      }
+    }
+  },
+  "Bernard": {
+    "code": "c3162",
+    "_id": "Bernard",
+    "name": "Bernard",
+    "moonlight": false,
+    "rarity": 3,
+    "attribute": "wind",
+    "role": "manauser",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "max_hp",
+      "grades": {
+        "D": 180,
+        "C": 270,
+        "B": 360,
+        "A": 450,
+        "S": 540,
+        "SS": 630,
+        "SSS": 720
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3162_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3162_l.png"
+    },
+    "ex_equip": [
+    ],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 20057,
+        "atk": 476,
+        "hp": 3449,
+        "spd": 112,
+        "def": 486,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.18
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 20057,
+        "atk": 594,
+        "hp": 4329,
+        "spd": 112,
+        "def": 603,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.3
       }
     }
   },
@@ -15349,7 +15442,26 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c6011_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc109501",
+        "id": "exc109501",
+        "name": "Soul Tailor",
+        "description": "A medal bestowed only to the most talented of tailors. As it is a family heirloom, Lilibet received it from her mother, with whom she has been separated from childhood.",
+        "unit": "c1095",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        },
+        "skills": [
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1095.png"
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
