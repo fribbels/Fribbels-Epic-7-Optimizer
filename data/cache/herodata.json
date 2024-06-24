@@ -19525,10 +19525,10 @@
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 17685,
-        "atk": 713,
-        "hp": 3784,
-        "spd": 120,
-        "def": 494,
+        "atk": 613,
+        "hp": 6034,
+        "spd": 124,
+        "def": 613,
         "chc": 0.15,
         "chd": 1.5,
         "dac": 0.03,
@@ -19537,9 +19537,9 @@
       },
       "lv60SixStarFullyAwakened": {
         "cp": 17685,
-        "atk": 889,
-        "hp": 4758,
-        "spd": 120,
+        "atk": 613,
+        "hp": 6034,
+        "spd": 124,
         "def": 613,
         "chc": 0.15,
         "chd": 1.5,
