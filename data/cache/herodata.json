@@ -11018,6 +11018,72 @@
       }
     }
   },
+  "Festive Eda": {
+    "code": "c5111",
+    "_id": "Festive Eda",
+    "name": "Festive Eda",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "fire",
+    "role": "mage",
+    "zodiac": "fish",
+    "self_devotion": {
+      "type": "acc",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5111_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5111_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16357,
+        "atk": 1102,
+        "hp": 5782,
+        "spd": 120,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16357,
+        "atk": 1102,
+        "hp": 5782,
+        "spd": 120,
+        "def": 634,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Fighter Maya": {
     "code": "c2032",
     "_id": "fighter-maya",
@@ -19525,7 +19591,7 @@
     "calculatedStatus": {
       "lv50FiveStarFullyAwakened": {
         "cp": 17685,
-        "atk": 613,
+        "atk": 1039,
         "hp": 6034,
         "spd": 124,
         "def": 613,
@@ -19537,7 +19603,7 @@
       },
       "lv60SixStarFullyAwakened": {
         "cp": 17685,
-        "atk": 613,
+        "atk": 1039,
         "hp": 6034,
         "spd": 124,
         "def": 613,

@@ -3493,5 +3493,20 @@
             "health": 45
         },
         "code": ""
+    },
+    "Magic Bubble Maker": {
+        "assets": {
+            "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+            "image": "https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+            "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+        },
+        "name": "Magic Bubble Maker",
+        "rarity": 5,
+        "role": "",
+        "stats": {
+            "attack": 9,
+            "health": 76
+        },
+        "code": "efm31"
     }
 }
