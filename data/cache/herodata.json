@@ -2355,7 +2355,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2007_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107901",
+        "id": "exc107901",
+        "name": "Lucky Dice",
+        "description": "Dice used on the day Cermia won a once-in-a-lifetime jackpot. She holds onto them in hopes that they'll bring her that luck again one day.",
+        "unit": "c1079",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
@@ -4798,7 +4812,26 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2011_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc109501",
+        "id": "exc109501",
+        "name": "Soul Tailor",
+        "description": "A medal bestowed only to the most talented of tailors. As it is a family heirloom, Lilibet received it from her mother, with whom she has been separated from childhood.",
+        "unit": "c1095",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "cri",
+          "value": 0.06
+        },
+        "skills": [
+        ],
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1095.png"
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
@@ -5124,7 +5157,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2024_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc100301",
+        "id": "exc100301",
+        "name": "Valkyrie Wing",
+        "description": "A mysterious circlet that symbolizes strength and beauty, and is the source of Rose's Fighting Spirit.",
+        "unit": "c1003",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "speed",
+          "value": 5
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
@@ -15993,6 +16040,22 @@
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c5149_l.png"
     },
     "ex_equip": [
+      {
+        "_id": "exc104201",
+        "id": "exc104201",
+        "name": "Estyria",
+        "description": "A beautiful, silver sword that cuts through its enemies delicately, like the winter wind.",
+        "unit": "c1042",
+        "role": "knight",
+        "rarity": 5,
+        "stat": {
+          "type": "max_hp_rate",
+          "value": 0.07
+        },
+        "assets": {
+          "icon": "https://assets.epicsevendb.com/_source/item/icon_eq_exclusive_c1042.png"
+        }
+      }
     ],
     "skills": {
       "S1": {
