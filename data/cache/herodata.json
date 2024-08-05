@@ -10438,6 +10438,72 @@
       }
     }
   },
+  "Empyrean Ilynav": {
+    "code": "c1036",
+    "_id": "Empyrean Ilynav",
+    "name": "Empyrean Ilynav",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "light",
+    "role": "knight",
+    "zodiac": "crab",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2113_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2113_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16523,
+        "atk": 794,
+        "hp": 7332,
+        "spd": 95,
+        "def": 767,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 16523,
+        "atk": 794,
+        "hp": 7332,
+        "spd": 95,
+        "def": 767,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Enott": {
     "code": "c3022",
     "_id": "enott",
