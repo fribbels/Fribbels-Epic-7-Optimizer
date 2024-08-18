@@ -3508,5 +3508,20 @@
             "health": 76
         },
         "code": "efm31"
+    },
+    "Spotted Mouse Hair Tie": {
+        "assets": {
+            "icon": "https://assets.epicsevendb.com/_source/item_arti/icon_art0051.png",
+            "image": "https://assets.epicsevendb.com/_source/item_arti/art0051_fu.png",
+            "thumbnail": "https://assets.epicsevendb.com/_source/item_arti/art0051_l.jpg"
+        },
+        "name": "Spotted Mouse Hair Tie",
+        "rarity": 5,
+        "role": "manauser",
+        "stats": {
+            "attack": 9,
+            "health": 76
+        },
+        "code": "efh13"
     }
 }

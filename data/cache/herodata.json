@@ -10439,7 +10439,7 @@
     }
   },
   "Empyrean Ilynav": {
-    "code": "c1036",
+    "code": "c2113",
     "_id": "Empyrean Ilynav",
     "name": "Empyrean Ilynav",
     "moonlight": true,
@@ -11450,6 +11450,72 @@
         "dac": 0.03,
         "eff": 0.18,
         "efr": 0
+      }
+    }
+  },
+  "Frida": {
+    "code": "c1163",
+    "_id": "Frida",
+    "name": "Frida",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "ice",
+    "role": "manauser",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "res",
+      "grades": {
+        "B": 0.09,
+        "A": 0.135,
+        "S": 0.18,
+        "SS": 0.225,
+        "SSS": 0.27
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1163_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1163_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 15716,
+        "atk": 556,
+        "hp": 3867,
+        "spd": 117,
+        "def": 528,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.18
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 20057,
+        "atk": 694,
+        "hp": 4855,
+        "spd": 117,
+        "def": 655,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0.3
       }
     }
   },
