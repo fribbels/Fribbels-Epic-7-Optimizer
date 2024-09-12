@@ -1418,7 +1418,18 @@
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.2,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       },
       "lv60SixStarFullyAwakened": {
         "cp": 17360,
@@ -1430,7 +1441,18 @@
         "chd": 1.5,
         "dac": 0.03,
         "eff": 0,
-        "efr": 0
+        "efr": 0,
+        "bonusMaxAtkPercent": 0,
+        "bonusMaxDefPercent": 0,
+        "bonusMaxHpPercent": 0,
+        "overrideAtk": 0,
+        "overrideHp": 0,
+        "overrideDef": 0,
+        "overrideAdditionalCr": 0.2,
+        "overrideAdditionalCd": 0,
+        "overrideAdditionalSpd": 0,
+        "overrideAdditionalEff": 0,
+        "overrideAdditionalRes": 0
       }
     }
   },
@@ -11139,6 +11161,72 @@
       }
     }
   },
+  "Fenris": {
+    "code": "c1158",
+    "_id": "Fenris",
+    "name": "Fenris",
+    "moonlight": false,
+    "rarity": 5,
+    "attribute": "wind",
+    "role": "ranger",
+    "zodiac": "bull",
+    "self_devotion": {
+      "type": "att_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1158_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1158_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 16394,
+        "atk": 1016,
+        "hp": 4092,
+        "spd": 109,
+        "def": 469,
+        "chc": 0.23,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 20727,
+        "atk": 1327,
+        "hp": 5138,
+        "spd": 109,
+        "def": 582,
+        "chc": 0.23,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Festive Eda": {
     "code": "c5111",
     "_id": "Festive Eda",
@@ -12356,6 +12444,72 @@
         "overrideAdditionalSpd": 0,
         "overrideAdditionalEff": 0,
         "overrideAdditionalRes": 0
+      }
+    }
+  },
+  "Harsetti": {
+    "code": "c1153",
+    "_id": "Harsetti",
+    "name": "Harsetti",
+    "moonlight": true,
+    "rarity": 5,
+    "attribute": "dark",
+    "role": "mage",
+    "zodiac": "scales",
+    "self_devotion": {
+      "type": "max_hp_rate",
+      "grades": {
+        "B": 0.06,
+        "A": 0.09,
+        "S": 0.12,
+        "SS": 0.15,
+        "SSS": 0.18
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1153_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c1153_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 17685,
+        "atk": 1039,
+        "hp": 6034,
+        "spd": 124,
+        "def": 613,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 17685,
+        "atk": 1039,
+        "hp": 6034,
+        "spd": 124,
+        "def": 613,
+        "chc": 0.15,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
       }
     }
   },
@@ -14081,13 +14235,13 @@
     "role": "warrior",
     "zodiac": "maiden",
     "self_devotion": {
-      "type": "acc",
+      "type": "cri",
       "grades": {
-        "B": 0.09,
-        "A": 0.135,
-        "S": 0.18,
-        "SS": 0.225,
-        "SSS": 0.27
+        "B": 0.056,
+        "A": 0.084,
+        "S": 0.112,
+        "SS": 0.14,
+        "SSS": 0.168
       }
     },
     "assets": {
@@ -25384,7 +25538,21 @@
       "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
       "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c2050_l.png"
     },
-    "ex_equip": [],
+    "ex_equip": [
+      {
+        "_id": "exc107901",
+        "id": "exc107901",
+        "name": "Lucky Dice",
+        "description": "Dice used on the day Cermia won a once-in-a-lifetime jackpot. She holds onto them in hopes that they'll bring her that luck again one day.",
+        "unit": "c1079",
+        "role": "warrior",
+        "rarity": 5,
+        "stat": {
+          "type": "att_rate",
+          "value": 0.07
+        }
+      }
+    ],
     "skills": {
       "S1": {
         "hitTypes": ["crit", "crushing", "normal", "miss"],
