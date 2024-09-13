@@ -22053,6 +22053,74 @@
       }
     }
   },
+  "Revna": {
+    "code": "c3160",
+    "_id": "Revna",
+    "name": "Revna",
+    "moonlight": true,
+    "rarity": 3,
+    "attribute": "dark",
+    "role": "assassin",
+    "zodiac": "scorpion",
+    "self_devotion": {
+      "type": "att",
+      "grades": {
+        "D": 36,
+        "C": 54,
+        "B": 72,
+        "A": 90,
+        "S": 108,
+        "SS": 126,
+        "SSS": 144
+      }
+    },
+    "assets": {
+      "icon": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3160_s.png",
+      "image": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/question_circle.png",
+      "thumbnail": "https://raw.githubusercontent.com/fribbels/Fribbels-Epic-7-Optimizer/main/data/cachedimages/c3160_l.png"
+    },
+    "ex_equip": [],
+    "skills": {
+      "S1": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S2": {
+        "hitTypes": [],
+        "options": []
+      },
+      "S3": {
+        "hitTypes": [],
+        "options": []
+      }
+    },
+    "calculatedStatus": {
+      "lv50FiveStarFullyAwakened": {
+        "cp": 11607,
+        "atk": 833,
+        "hp": 4171,
+        "spd": 108,
+        "def": 364,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      },
+      "lv60SixStarFullyAwakened": {
+        "cp": 14773,
+        "atk": 1039,
+        "hp": 5517,
+        "spd": 108,
+        "def": 452,
+        "chc": 0.22999999999999998,
+        "chd": 1.5,
+        "dac": 0.03,
+        "eff": 0,
+        "efr": 0
+      }
+    }
+  },
   "Righteous Thief Roozid": {
     "code": "c4013",
     "_id": "righteous-thief-roozid",
