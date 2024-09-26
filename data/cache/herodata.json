@@ -28080,7 +28080,7 @@
         "rate": 0.85,
         "pow": 1,
         "targets": 3,
-        "selfSpdScaling": 0.1125,
+        "selfSpdScaling": 0.001125,
         "options": []
       }
     },
