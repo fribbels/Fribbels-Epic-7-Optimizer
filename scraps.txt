@@ -1,3 +1,43 @@
+function cleanHeroData(json) {
+  for (const [key, char] of Object.entries(json)) {
+    delete char['moonlight']
+
+    if (char.ex_equip && char.ex_equip.length) {
+      char.ex_equip = [
+        {
+          stat: char.ex_equip[0].stat
+        }
+      ]
+    } else {
+      char.ex_equip = []
+    }
+  }
+
+  console.log(JSON.stringify(json, null, 1))
+}
+
+cleanHeroData(herodata)
+
+
+##############
+
+
+function cleanArtifactData(json) {
+  for (const [key, artifact] of Object.entries(json)) {
+    delete artifact['assets']
+  }
+
+  console.log(JSON.stringify(json, null, 1))
+}
+
+cleanArtifactData(artifactData)
+
+
+
+
+
+
+
 CREATE TABLE item_info_1 AS
 SELECT
     *
