@@ -1,1 +1,2392 @@
-{"A Little Queen's Huge Crown":{"name":"A Little Queen's Huge Crown","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw21"},"A Song for Everybody":{"name":"A Song for Everybody","rarity":4,"role":"","stats":{"attack":15,"health":36},"code":"ef412"},"A Symbol of Unity":{"name":"A Symbol of Unity","rarity":5,"role":"","stats":{"attack":21,"health":32},"code":"ef504"},"Abyssal Crown":{"name":"Abyssal Crown","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm01"},"Adamant Shield":{"name":"Adamant Shield","rarity":4,"role":"knight","stats":{"attack":7,"health":63},"code":"efk04"},"Air-to-Surface Missile: MISHA":{"name":"Air-to-Surface Missile: MISHA","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr17"},"Alabastron":{"name":"Alabastron","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa12"},"Alencinox's Wrath":{"name":"Alencinox's Wrath","rarity":5,"role":"warrior","stats":{"attack":9,"health":76},"code":"efw13"},"Alexa's Basket":{"name":"Alexa's Basket","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa07"},"Alsacian Spear":{"name":"Alsacian Spear","rarity":3,"role":"","stats":{"attack":4,"health":58},"code":"ef307"},"Ambrote":{"name":"Ambrote","rarity":4,"role":"ranger","stats":{"attack":15,"health":36},"code":"efr07"},"An Offer You Can't Refuse":{"name":"An Offer You Can't Refuse","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr24"},"Ancient Dragon's Legacy":{"name":"Ancient Dragon's Legacy","rarity":5,"role":"knight","stats":{"attack":21,"health":32},"code":"efk14"},"Ancient Sheath":{"name":"Ancient Sheath","rarity":3,"role":"","stats":{"attack":14,"health":21},"code":"ef304"},"Andre's Crossbow":{"name":"Andre's Crossbow","rarity":4,"role":"ranger","stats":{"attack":18,"health":27},"code":"efr11"},"Anti-Magic Mask":{"name":"Anti-Magic Mask","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw23"},"Aqua Rose":{"name":"Aqua Rose","rarity":3,"role":"","stats":{"attack":1,"health":65},"code":"ef314"},"Ascending Axe":{"name":"Ascending Axe","rarity":3,"role":"","stats":{"attack":18,"health":7},"code":"ef315"},"Atma's Portal":{"name":"Atma's Portal","rarity":3,"role":"","stats":{"attack":4,"health":58},"code":"ef306"},"Aurius":{"name":"Aurius","rarity":4,"role":"knight","stats":{"attack":7,"health":63},"code":"efk03"},"Azure Comet":{"name":"Azure Comet","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw22"},"Barthez's Orbuculum":{"name":"Barthez's Orbuculum","rarity":4,"role":"mage","stats":{"attack":18,"health":27},"code":"efm15"},"Bastion of Hope":{"name":"Bastion of Hope","rarity":5,"role":"","stats":{"attack":9,"health":76},"code":"ef507"},"Bastion of Perlutia":{"name":"Bastion of Perlutia","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk09"},"Beguiling Wings":{"name":"Beguiling Wings","rarity":5,"role":"ranger","stats":{"attack":15,"health":54},"code":"efa24"},"Benimaru's Tachi":{"name":"Benimaru's Tachi","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw30"},"Biting Wind Star":{"name":"Biting Wind Star","rarity":1,"role":"","stats":{"attack":12,"health":4},"code":"ef104"},"Black Hand of the Goddess":{"name":"Black Hand of the Goddess","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm16"},"Blazing Full Moon Trophy":{"name":"Blazing Full Moon Trophy","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef425"},"Blessings of Camaraderie":{"name":"Blessings of Camaraderie","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef408"},"Blood-Seared Moon":{"name":"Blood-Seared Moon","rarity":5,"role":"","stats":{"attack":15,"health":54},"code":"ef506"},"Bloodbead Dagger":{"name":"Bloodbead Dagger","rarity":2,"role":"","stats":{"attack":16,"health":6},"code":"ef205"},"Bloodstone":{"name":"Bloodstone","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr01"},"Bloody Rose":{"name":"Bloody Rose","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm14"},"Border Coin":{"name":"Border Coin","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw07"},"Brilliant Confidence":{"name":"Brilliant Confidence","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef426"},"Broken Will of the Priest":{"name":"Broken Will of the Priest","rarity":5,"role":"knight","stats":{"attack":15,"health":54},"code":"efk20"},"Butterfly Mandolin":{"name":"Butterfly Mandolin","rarity":3,"role":"","stats":{"attack":9,"health":36},"code":"ef318"},"Card of Small Miracles":{"name":"Card of Small Miracles","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef401"},"Celestine":{"name":"Celestine","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh06"},"Champion's Trophy":{"name":"Champion's Trophy","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw18"},"Chatty":{"name":"Chatty","rarity":5,"role":"mage","stats":{"attack":18,"health":43},"code":"efm07"},"Circus Fantasia":{"name":"Circus Fantasia","rarity":5,"role":"warrior","stats":{"attack":9,"health":76},"code":"efw17"},"Cradle of Life":{"name":"Cradle of Life","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw16"},"Creation & Destruction":{"name":"Creation & Destruction","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw09"},"Crimson Moon of Nightmares":{"name":"Crimson Moon of Nightmares","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm18"},"Crimson Seed":{"name":"Crimson Seed","rarity":4,"role":"warrior","stats":{"attack":7,"health":63},"code":"efw10"},"Crown of Glory":{"name":"Crown of Glory","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk13"},"Cruel Mischief":{"name":"Cruel Mischief","rarity":5,"role":"","stats":{"attack":21,"health":32},"code":"ef503"},"Cursed Compass":{"name":"Cursed Compass","rarity":3,"role":"","stats":{"attack":16,"health":14},"code":"ef309"},"Cutie Pando":{"name":"Cutie Pando","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef434"},"Dark Blood Keeper":{"name":"Dark Blood Keeper","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa25"},"Daydream Joker":{"name":"Daydream Joker","rarity":3,"role":"","stats":{"attack":16,"health":14},"code":"ef317"},"Days of Destiny":{"name":"Days of Destiny","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef420"},"Deadly Sword":{"name":"Deadly Sword","rarity":2,"role":"","stats":{"attack":12,"health":19},"code":"ef201"},"Demon's Pistol":{"name":"Demon's Pistol","rarity":1,"role":"","stats":{"attack":12,"health":4},"code":"ef102"},"Devil's Brand":{"name":"Devil's Brand","rarity":3,"role":"","stats":{"attack":4,"health":58},"code":"ef312"},"Dignus Orb":{"name":"Dignus Orb","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm13"},"Doctor's Bag":{"name":"Doctor's Bag","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh12"},"Double-Edged Decrescent":{"name":"Double-Edged Decrescent","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa16"},"Draco Plate":{"name":"Draco Plate","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw11"},"Dream Scroll":{"name":"Dream Scroll","rarity":1,"role":"","stats":{"attack":2,"health":39},"code":"ef103"},"Durandal":{"name":"Durandal","rarity":5,"role":"warrior","stats":{"attack":18,"health":43},"code":"efw02"},"Dust Devil":{"name":"Dust Devil","rarity":4,"role":"assassin","stats":{"attack":18,"health":27},"code":"efa05"},"Dux Noctis":{"name":"Dux Noctis","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr12"},"Egg of Delusion":{"name":"Egg of Delusion","rarity":3,"role":"","stats":{"attack":16,"health":14},"code":"ef302"},"El's Fist":{"name":"El's Fist","rarity":4,"role":"warrior","stats":{"attack":12,"health":45},"code":"efw03"},"Elbris Ritual Sword":{"name":"Elbris Ritual Sword","rarity":5,"role":"knight","stats":{"attack":15,"health":54},"code":"efk02"},"Elegiac Candles":{"name":"Elegiac Candles","rarity":5,"role":"","stats":{"attack":9,"health":76},"code":"efr25"},"Elf's Bow":{"name":"Elf's Bow","rarity":2,"role":"","stats":{"attack":16,"health":6},"code":"ef202"},"Elyha's Knife":{"name":"Elyha's Knife","rarity":4,"role":"assassin","stats":{"attack":18,"health":27},"code":"efa04"},"Enhanced Gauntlet":{"name":"Enhanced Gauntlet","rarity":1,"role":"","stats":{"attack":2,"health":39},"code":"ef106"},"Envoy's Pipe":{"name":"Envoy's Pipe","rarity":3,"role":"","stats":{"attack":4,"health":58},"code":"ef319"},"Eternus":{"name":"Eternus","rarity":4,"role":"manauser","stats":{"attack":7,"health":63},"code":"efh08"},"Etica's Scepter":{"name":"Etica's Scepter","rarity":5,"role":"mage","stats":{"attack":18,"health":43},"code":"efm02"},"EXIF Detective (E.d.) Gadget":{"name":"EXIF Detective (E.d.) Gadget","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh17"},"Exorcist's Tonfa":{"name":"Exorcist's Tonfa","rarity":3,"role":"","stats":{"attack":16,"health":14},"code":"ef316"},"Fairy Tale for a Nightmare":{"name":"Fairy Tale for a Nightmare","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm19"},"Fairy's Grimoire":{"name":"Fairy's Grimoire","rarity":2,"role":"","stats":{"attack":3,"health":51},"code":"ef204"},"Fan of Light and Dark":{"name":"Fan of Light and Dark","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh18"},"Firm Shield":{"name":"Firm Shield","rarity":2,"role":"","stats":{"attack":2,"health":41},"code":"ef206"},"Flawless Garments":{"name":"Flawless Garments","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh15"},"Flower Shower":{"name":"Flower Shower","rarity":4,"role":"warrior","stats":{"attack":18,"health":27},"code":"efw15"},"Forest Totem":{"name":"Forest Totem","rarity":3,"role":"","stats":{"attack":1,"health":65},"code":"ef321"},"Frame of Light":{"name":"Frame of Light","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm28"},"Fullmetals Automail":{"name":"Fullmetals Automail","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw28"},"Glo-Wings 21":{"name":"Glo-Wings 21","rarity":5,"role":"ranger","stats":{"attack":15,"health":54},"code":"efr19"},"Goblet of Oath":{"name":"Goblet of Oath","rarity":5,"role":"assassin","stats":{"attack":9,"health":76},"code":"efa19"},"Goblin's Lamp":{"name":"Goblin's Lamp","rarity":3,"role":"","stats":{"attack":9,"health":36},"code":"ef313"},"Golden Cocoa Cookie":{"name":"Golden Cocoa Cookie","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef411"},"Golden Rose":{"name":"Golden Rose","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw31"},"Grail of Blood":{"name":"Grail of Blood","rarity":3,"role":"","stats":{"attack":14,"health":21},"code":"ef301"},"Guardian Ice Crystals":{"name":"Guardian Ice Crystals","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh14"},"Guide to a Decision":{"name":"Guide to a Decision","rarity":5,"role":"","stats":{"attack":9,"health":76},"code":"ef506"},"Guiding Light":{"name":"Guiding Light","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr13"},"Hell Cutter":{"name":"Hell Cutter","rarity":4,"role":"warrior","stats":{"attack":18,"health":27},"code":"efw04"},"Hilag Lance":{"name":"Hilag Lance","rarity":4,"role":"knight","stats":{"attack":10,"health":55},"code":"efk05"},"Holy Sacrifice":{"name":"Holy Sacrifice","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk01"},"Hostess of the Banquet":{"name":"Hostess of the Banquet","rarity":5,"role":"","stats":{"attack":21,"health":32},"code":"efa22"},"Idol's Cheer":{"name":"Idol's Cheer","rarity":5,"role":"manauser","stats":{"attack":15,"health":54},"code":"efh07"},"Iela Violin":{"name":"Iela Violin","rarity":4,"role":"mage","stats":{"attack":14,"health":51},"code":"efm08"},"Ignition Cloth Gloves":{"name":"Ignition Cloth Gloves","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm26"},"III. The Empress":{"name":"III. The Empress","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef428"},"Indestructible Gaiters":{"name":"Indestructible Gaiters","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw26"},"Infinity Basket":{"name":"Infinity Basket","rarity":4,"role":"ranger","stats":{"attack":18,"health":27},"code":"efr03"},"Iron Fan":{"name":"Iron Fan","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr08"},"IV. The Emperor":{"name":"IV. The Emperor","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef429"},"Jack-O's Symbol":{"name":"Jack-O's Symbol","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw25"},"Junkyard Dog":{"name":"Junkyard Dog","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw08"},"Justice for All":{"name":"Justice for All","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk07"},"Kal'adra":{"name":"Kal'adra","rarity":4,"role":"mage","stats":{"attack":18,"health":27},"code":"efm04"},"Knowledge Seed":{"name":"Knowledge Seed","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm20"},"Labyrinth Cube":{"name":"Labyrinth Cube","rarity":3,"role":"","stats":{"attack":9,"health":36},"code":"ef308"},"Last Teatime":{"name":"Last Teatime","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm17"},"Love Potion":{"name":"Love Potion","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef402"},"Magaraha's Tome":{"name":"Magaraha's Tome","rarity":4,"role":"manauser","stats":{"attack":7,"health":63},"code":"efh05"},"Magic for Friends":{"name":"Magic for Friends","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm23"},"Manica of Control":{"name":"Manica of Control","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa13"},"Mature Sunglasses":{"name":"Mature Sunglasses","rarity":5,"role":"knight","stats":{"attack":15,"health":54},"code":"efk18"},"Merciless Glutton":{"name":"Merciless Glutton","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw14"},"Midnight Bloom":{"name":"Midnight Bloom","rarity":4,"role":"","stats":{"attack":18,"health":27},"code":"ef406"},"Mighty Yaksha":{"name":"Mighty Yaksha","rarity":3,"role":"","stats":{"attack":9,"health":36},"code":"ef311"},"Moonlight Dreamblade":{"name":"Moonlight Dreamblade","rarity":4,"role":"assassin","stats":{"attack":18,"health":27},"code":"efa03"},"Moonlight's Vestige":{"name":"Moonlight's Vestige","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef415"},"Ms. Confille":{"name":"Ms. Confille","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr14"},"Necro & Undine":{"name":"Necro & Undine","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm10"},"New Year Cookies":{"name":"New Year Cookies","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef410"},"Noble Oath":{"name":"Noble Oath","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk06"},"Nostalgic Music Box":{"name":"Nostalgic Music Box","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef427"},"Oath Key":{"name":"Oath Key","rarity":3,"role":"","stats":{"attack":12,"health":28},"code":"ef322"},"Official Levulin Beach Volleyball":{"name":"Official Levulin Beach Volleyball","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef423"},"Old Gardening Shears":{"name":"Old Gardening Shears","rarity":5,"role":"ranger","stats":{"attack":9,"health":76},"code":"efr26"},"One Year of Gratitude":{"name":"One Year of Gratitude","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef405"},"Otherworldly Machinery":{"name":"Otherworldly Machinery","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr06"},"Our Beautiful Seasons":{"name":"Our Beautiful Seasons","rarity":4,"role":"","stats":{"attack":18,"health":27},"code":"ef435"},"P.O.S":{"name":"P.O.S","rarity":5,"role":"","stats":{"attack":9,"health":76},"code":"ef508"},"Prelude to a New Era":{"name":"Prelude to a New Era","rarity":4,"role":"","stats":{"attack":15,"health":36},"code":"ef432"},"Portrait of the Saviors":{"name":"Portrait of the Saviors","rarity":4,"role":"","stats":{"attack":15,"health":36},"code":"ef403"},"Prayer of Solitude":{"name":"Prayer of Solitude","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw32"},"Proof of Valor":{"name":"Proof of Valor","rarity":5,"role":"","stats":{"attack":9,"health":76},"code":"ef501"},"Prophetic Candlestick":{"name":"Prophetic Candlestick","rarity":3,"role":"","stats":{"attack":14,"health":21},"code":"ef303"},"Pure White Trust":{"name":"Pure White Trust","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw24"},"Radiant Forever":{"name":"Radiant Forever","rarity":4,"role":"mage","stats":{"attack":18,"health":27},"code":"efm09"},"Rainbow Scale":{"name":"Rainbow Scale","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef404"},"Ranon's Memorandum":{"name":"Ranon's Memorandum","rarity":3,"role":"","stats":{"attack":6,"health":51},"code":"ef305"},"Records of Unity":{"name":"Records of Unity","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef424"},"Reingar's Special Drink":{"name":"Reingar's Special Drink","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr10"},"Resolute Soldier Series":{"name":"Resolute Soldier Series","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef409"},"Rhianna & Luciella":{"name":"Rhianna & Luciella","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa01"},"Rise of a Monarch":{"name":"Rise of a Monarch","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk12"},"Rocket Punch Gauntlet":{"name":"Rocket Punch Gauntlet","rarity":5,"role":"knight","stats":{"attack":15,"health":54},"code":"efk19"},"Rod of Amaryllis":{"name":"Rod of Amaryllis","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh01"},"Rosa Hargana":{"name":"Rosa Hargana","rarity":4,"role":"ranger","stats":{"attack":18,"health":27},"code":"efr05"},"Sacred Tree Branch":{"name":"Sacred Tree Branch","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh16"},"Samsara Prayer Beads":{"name":"Samsara Prayer Beads","rarity":5,"role":"warrior","stats":{"attack":9,"health":76},"code":"efw20"},"Santa Muerte":{"name":"Santa Muerte","rarity":4,"role":"assassin","stats":{"attack":18,"health":27},"code":"efa06"},"Sashe Ithanes":{"name":"Sashe Ithanes","rarity":4,"role":"ranger","stats":{"attack":18,"health":27},"code":"efr04"},"Scroll of Shadows":{"name":"Scroll of Shadows","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm25"},"Seal of Capture":{"name":"Seal of Capture","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr22"},"Secret Art - Storm Sword":{"name":"Secret Art - Storm Sword","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa14"},"Seductive Flower":{"name":"Seductive Flower","rarity":5,"role":"assassin","stats":{"attack":15,"health":54},"code":"efa23"},"Sepulcrum":{"name":"Sepulcrum","rarity":4,"role":"warrior","stats":{"attack":12,"health":45},"code":"efw12"},"Severed Horn Wand":{"name":"Severed Horn Wand","rarity":5,"role":"","stats":{"attack":21,"health":32},"code":"efm22"},"Sharpshooters Handgun":{"name":"Sharpshooters Handgun","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr20"},"Shepherd of the Hollow":{"name":"Shepherd of the Hollow","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa15"},"Shepherds of Chaos":{"name":"Shepherds of Chaos","rarity":4,"role":"assassin","stats":{"attack":18,"health":27},"code":"efa10"},"Shimadra Staff":{"name":"Shimadra Staff","rarity":5,"role":"manauser","stats":{"attack":15,"health":54},"code":"efh02"},"Sigurd Scythe":{"name":"Sigurd Scythe","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw01"},"Silver Rain":{"name":"Silver Rain","rarity":4,"role":"assassin","stats":{"attack":18,"health":27},"code":"efa11"},"Sira-Ren":{"name":"Sira-Ren","rarity":4,"role":"mage","stats":{"attack":12,"health":45},"code":"efm05"},"Snow Crystal":{"name":"Snow Crystal","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw19"},"Sole Consolation":{"name":"Sole Consolation","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh19"},"Song of Stars":{"name":"Song of Stars","rarity":5,"role":"ranger","stats":{"attack":15,"health":54},"code":"efr02"},"Spatiotemporal Fan":{"name":"Spatiotemporal Fan","rarity":5,"role":"ranger","stats":{"attack":9,"health":76},"code":"efr21"},"Spear of a New Dawn":{"name":"Spear of a New Dawn","rarity":5,"role":"knight","stats":{"attack":21,"health":32},"code":"efk15"},"Spear of Purification":{"name":"Spear of Purification","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw27"},"Sphere of Inferno":{"name":"Sphere of Inferno","rarity":5,"role":"","stats":{"attack":21,"health":32},"code":"efr23"},"Sphere of Sadism":{"name":"Sphere of Sadism","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk17"},"Spirit's Breath":{"name":"Spirit's Breath","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm11"},"Spooky Solayu Stories":{"name":"Spooky Solayu Stories","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef407"},"Staff of Wisdom":{"name":"Staff of Wisdom","rarity":2,"role":"","stats":{"attack":9,"health":32},"code":"ef203"},"Star of the Deep Sea":{"name":"Star of the Deep Sea","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr18"},"Steadfast Gatekeeper":{"name":"Steadfast Gatekeeper","rarity":4,"role":"knight","stats":{"attack":10,"health":55},"code":"efk10"},"Stella Harpa":{"name":"Stella Harpa","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh09"},"Strak Gauntlet":{"name":"Strak Gauntlet","rarity":4,"role":"warrior","stats":{"attack":7,"health":63},"code":"efw05"},"Succubus Mirror":{"name":"Succubus Mirror","rarity":4,"role":"","stats":{"attack":8,"health":67},"code":"ef427"},"Super Duper Water Gun Shooter":{"name":"Super Duper Water Gun Shooter","rarity":4,"role":"","stats":{"attack":18,"health":27},"code":"ef413"},"Sweet Miracle":{"name":"Sweet Miracle","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw35"},"Sword of Autumn Eclipse":{"name":"Sword of Autumn Eclipse","rarity":5,"role":"warrior","stats":{"attack":15,"health":54},"code":"efw29"},"Sword of Cycling Seasons":{"name":"Sword of Cycling Seasons","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa20"},"Sword of Ezera":{"name":"Sword of Ezera","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk08"},"Sword of Judgment":{"name":"Sword of Judgment","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr09"},"Sword of Summer Twilight":{"name":"Sword of Summer Twilight","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa17"},"Sword of the Morning":{"name":"Sword of the Morning","rarity":3,"role":"","stats":{"attack":12,"health":28},"code":"ef310"},"Sword of the Sun":{"name":"Sword of the Sun","rarity":1,"role":"","stats":{"attack":9,"health":15},"code":"ef101"},"Sword of Winter Shadow":{"name":"Sword of Winter Shadow","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa18"},"Tagehel's Ancient Book":{"name":"Tagehel's Ancient Book","rarity":4,"role":"mage","stats":{"attack":12,"health":45},"code":"efm03"},"Tear of the Desert":{"name":"Tear of the Desert","rarity":4,"role":"mage","stats":{"attack":19,"health":30},"code":"efm12"},"The Armament":{"name":"The Armament","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa21"},"The Guardian Star's Blessing":{"name":"The Guardian Star's Blessing","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef421"},"Time Matter":{"name":"Time Matter","rarity":5,"role":"mage","stats":{"attack":18,"health":43},"code":"efm06"},"Timeless Anchor":{"name":"Timeless Anchor","rarity":3,"role":"","stats":{"attack":8,"health":44},"code":"ef320"},"To a New World":{"name":"To a New World","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef414"},"Torn Sleeve":{"name":"Torn Sleeve","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa09"},"Touch of Rekos":{"name":"Touch of Rekos","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh11"},"Tyrant's Descent":{"name":"Tyrant's Descent","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw33"},"Twilight Calamity":{"name":"Twilight Calamity","rarity":5,"role":"mage","stats":{"attack":21,"health":32},"code":"efm21"},"Uberius's Tooth":{"name":"Uberius's Tooth","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw06"},"Umbral Keystones":{"name":"Umbral Keystones","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm29"},"Unfading Memories":{"name":"Unfading Memories","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh10"},"Unseen Observer":{"name":"Unseen Observer","rarity":5,"role":"ranger","stats":{"attack":9,"health":76},"code":"efr16"},"Upgraded Dragon Knuckles":{"name":"Upgraded Dragon Knuckles","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm24"},"Venus Orb":{"name":"Venus Orb","rarity":1,"role":"","stats":{"attack":7,"health":24},"code":"ef105"},"Victorious Flag":{"name":"Victorious Flag","rarity":5,"role":"","stats":{"attack":21,"health":32},"code":"ef502"},"Violet Talisman":{"name":"Violet Talisman","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa08"},"Wall of Order":{"name":"Wall of Order","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr15"},"War Horn":{"name":"War Horn","rarity":5,"role":"","stats":{"attack":9,"health":76},"code":"ef505"},"Water's Origin":{"name":"Water's Origin","rarity":4,"role":"manauser","stats":{"attack":7,"health":63},"code":"efh03"},"Wind Rider":{"name":"Wind Rider","rarity":5,"role":"assassin","stats":{"attack":21,"health":32},"code":"efa02"},"Wings of Light and Shadow":{"name":"Wings of Light and Shadow","rarity":5,"role":"knight","stats":{"attack":21,"health":32},"code":"efk16"},"Wondrous Potion Vial":{"name":"Wondrous Potion Vial","rarity":4,"role":"manauser","stats":{"attack":7,"health":63},"code":"efh04"},"VII. The Chariot":{"name":"VII. The Chariot","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef431"},"VI. The Lovers":{"name":"VI. The Lovers","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef433"},"XIII. Death":{"name":"XIII. Death","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef417"},"XIV. Temperance":{"name":"XIV. Temperance","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef422"},"XIX. The Sun":{"name":"XIX. The Sun","rarity":4,"role":"","stats":{"attack":7,"health":63},"code":"ef430"},"XVI. The Tower":{"name":"XVI. The Tower","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef418"},"XVIII. The Moon":{"name":"XVIII. The Moon","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef419"},"Staff of Ainz Ooal Gown":{"name":"Staff of Ainz Ooal Gown","rarity":5,"role":"mage","stats":{"attack":15,"health":54},"code":"efm30"},"3F":{"name":"3F","rarity":5,"role":"knight","stats":{"attack":9,"health":76},"code":"efk21"},"Pipette Lance":{"name":"Pipette Lance","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw34"},"Ruyi Jingu Bang":{"name":"Ruyi Jingu Bang","rarity":5,"role":"warrior","stats":{"attack":21,"health":32},"code":"efw36"},"Midnight Pizza Delivery":{"name":"Midnight Pizza Delivery","rarity":4,"role":"","stats":{"attack":12,"health":45},"code":"ef439"},"Magic Bubble Maker":{"name":"Magic Bubble Maker","rarity":5,"role":"","stats":{"attack":9,"health":76},"code":"efm31"},"Spotted Mouse Hair Tie":{"name":"Spotted Mouse Hair Tie","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh21"},"Renewed Will":{"name":"Renewed Will","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr28"},"Bird's-Eye View":{"name":"Bird's-Eye View","rarity":5,"role":"manauser","stats":{"attack":9,"health":76},"code":"efh20"},"Dreamlike Holiday":{"name":"Dreamlike Holiday","rarity":5,"role":"ranger","stats":{"attack":21,"health":32},"code":"efr27"}}
+{
+  "A Little Queen's Huge Crown": {
+    "name": "A Little Queen's Huge Crown",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw21"
+  },
+  "A Song for Everybody": {
+    "name": "A Song for Everybody",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 15,
+      "health": 36
+    },
+    "code": "ef412"
+  },
+  "A Symbol of Unity": {
+    "name": "A Symbol of Unity",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "ef504"
+  },
+  "Abyssal Crown": {
+    "name": "Abyssal Crown",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm01"
+  },
+  "Adamant Shield": {
+    "name": "Adamant Shield",
+    "rarity": 4,
+    "role": "knight",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efk04"
+  },
+  "Air-to-Surface Missile: MISHA": {
+    "name": "Air-to-Surface Missile: MISHA",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr17"
+  },
+  "Alabastron": {
+    "name": "Alabastron",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa12"
+  },
+  "Alencinox's Wrath": {
+    "name": "Alencinox's Wrath",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efw13"
+  },
+  "Alexa's Basket": {
+    "name": "Alexa's Basket",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa07"
+  },
+  "Alsacian Spear": {
+    "name": "Alsacian Spear",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 4,
+      "health": 58
+    },
+    "code": "ef307"
+  },
+  "Ambrote": {
+    "name": "Ambrote",
+    "rarity": 4,
+    "role": "ranger",
+    "stats": {
+      "attack": 15,
+      "health": 36
+    },
+    "code": "efr07"
+  },
+  "An Offer You Can't Refuse": {
+    "name": "An Offer You Can't Refuse",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr24"
+  },
+  "Ancient Dragon's Legacy": {
+    "name": "Ancient Dragon's Legacy",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efk14"
+  },
+  "Ancient Sheath": {
+    "name": "Ancient Sheath",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 14,
+      "health": 21
+    },
+    "code": "ef304"
+  },
+  "Andre's Crossbow": {
+    "name": "Andre's Crossbow",
+    "rarity": 4,
+    "role": "ranger",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efr11"
+  },
+  "Anti-Magic Mask": {
+    "name": "Anti-Magic Mask",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw23"
+  },
+  "Aqua Rose": {
+    "name": "Aqua Rose",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 1,
+      "health": 65
+    },
+    "code": "ef314"
+  },
+  "Ascending Axe": {
+    "name": "Ascending Axe",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 18,
+      "health": 7
+    },
+    "code": "ef315"
+  },
+  "Atma's Portal": {
+    "name": "Atma's Portal",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 4,
+      "health": 58
+    },
+    "code": "ef306"
+  },
+  "Aurius": {
+    "name": "Aurius",
+    "rarity": 4,
+    "role": "knight",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efk03"
+  },
+  "Azure Comet": {
+    "name": "Azure Comet",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw22"
+  },
+  "Barthez's Orbuculum": {
+    "name": "Barthez's Orbuculum",
+    "rarity": 4,
+    "role": "mage",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efm15"
+  },
+  "Bastion of Hope": {
+    "name": "Bastion of Hope",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "ef507"
+  },
+  "Bastion of Perlutia": {
+    "name": "Bastion of Perlutia",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk09"
+  },
+  "Beguiling Wings": {
+    "name": "Beguiling Wings",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efa24"
+  },
+  "Benimaru's Tachi": {
+    "name": "Benimaru's Tachi",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw30"
+  },
+  "Biting Wind Star": {
+    "name": "Biting Wind Star",
+    "rarity": 1,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 4
+    },
+    "code": "ef104"
+  },
+  "Black Hand of the Goddess": {
+    "name": "Black Hand of the Goddess",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm16"
+  },
+  "Blazing Full Moon Trophy": {
+    "name": "Blazing Full Moon Trophy",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef425"
+  },
+  "Blessings of Camaraderie": {
+    "name": "Blessings of Camaraderie",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef408"
+  },
+  "Blood-Seared Moon": {
+    "name": "Blood-Seared Moon",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "ef506"
+  },
+  "Bloodbead Dagger": {
+    "name": "Bloodbead Dagger",
+    "rarity": 2,
+    "role": "",
+    "stats": {
+      "attack": 16,
+      "health": 6
+    },
+    "code": "ef205"
+  },
+  "Bloodstone": {
+    "name": "Bloodstone",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr01"
+  },
+  "Bloody Rose": {
+    "name": "Bloody Rose",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm14"
+  },
+  "Border Coin": {
+    "name": "Border Coin",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw07"
+  },
+  "Brilliant Confidence": {
+    "name": "Brilliant Confidence",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef426"
+  },
+  "Broken Will of the Priest": {
+    "name": "Broken Will of the Priest",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efk20"
+  },
+  "Butterfly Mandolin": {
+    "name": "Butterfly Mandolin",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 36
+    },
+    "code": "ef318"
+  },
+  "Card of Small Miracles": {
+    "name": "Card of Small Miracles",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef401"
+  },
+  "Celestine": {
+    "name": "Celestine",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh06"
+  },
+  "Champion's Trophy": {
+    "name": "Champion's Trophy",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw18"
+  },
+  "Chatty": {
+    "name": "Chatty",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 18,
+      "health": 43
+    },
+    "code": "efm07"
+  },
+  "Circus Fantasia": {
+    "name": "Circus Fantasia",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efw17"
+  },
+  "Cradle of Life": {
+    "name": "Cradle of Life",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw16"
+  },
+  "Creation & Destruction": {
+    "name": "Creation & Destruction",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw09"
+  },
+  "Crimson Moon of Nightmares": {
+    "name": "Crimson Moon of Nightmares",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm18"
+  },
+  "Crimson Seed": {
+    "name": "Crimson Seed",
+    "rarity": 4,
+    "role": "warrior",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efw10"
+  },
+  "Crown of Glory": {
+    "name": "Crown of Glory",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk13"
+  },
+  "Cruel Mischief": {
+    "name": "Cruel Mischief",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "ef503"
+  },
+  "Cursed Compass": {
+    "name": "Cursed Compass",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 16,
+      "health": 14
+    },
+    "code": "ef309"
+  },
+  "Cutie Pando": {
+    "name": "Cutie Pando",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef434"
+  },
+  "Dark Blood Keeper": {
+    "name": "Dark Blood Keeper",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa25"
+  },
+  "Daydream Joker": {
+    "name": "Daydream Joker",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 16,
+      "health": 14
+    },
+    "code": "ef317"
+  },
+  "Days of Destiny": {
+    "name": "Days of Destiny",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef420"
+  },
+  "Deadly Sword": {
+    "name": "Deadly Sword",
+    "rarity": 2,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 19
+    },
+    "code": "ef201"
+  },
+  "Demon's Pistol": {
+    "name": "Demon's Pistol",
+    "rarity": 1,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 4
+    },
+    "code": "ef102"
+  },
+  "Devil's Brand": {
+    "name": "Devil's Brand",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 4,
+      "health": 58
+    },
+    "code": "ef312"
+  },
+  "Dignus Orb": {
+    "name": "Dignus Orb",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm13"
+  },
+  "Doctor's Bag": {
+    "name": "Doctor's Bag",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh12"
+  },
+  "Double-Edged Decrescent": {
+    "name": "Double-Edged Decrescent",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa16"
+  },
+  "Draco Plate": {
+    "name": "Draco Plate",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw11"
+  },
+  "Dream Scroll": {
+    "name": "Dream Scroll",
+    "rarity": 1,
+    "role": "",
+    "stats": {
+      "attack": 2,
+      "health": 39
+    },
+    "code": "ef103"
+  },
+  "Durandal": {
+    "name": "Durandal",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 18,
+      "health": 43
+    },
+    "code": "efw02"
+  },
+  "Dust Devil": {
+    "name": "Dust Devil",
+    "rarity": 4,
+    "role": "assassin",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efa05"
+  },
+  "Dux Noctis": {
+    "name": "Dux Noctis",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr12"
+  },
+  "Egg of Delusion": {
+    "name": "Egg of Delusion",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 16,
+      "health": 14
+    },
+    "code": "ef302"
+  },
+  "El's Fist": {
+    "name": "El's Fist",
+    "rarity": 4,
+    "role": "warrior",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "efw03"
+  },
+  "Elbris Ritual Sword": {
+    "name": "Elbris Ritual Sword",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efk02"
+  },
+  "Elegiac Candles": {
+    "name": "Elegiac Candles",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efr25"
+  },
+  "Elf's Bow": {
+    "name": "Elf's Bow",
+    "rarity": 2,
+    "role": "",
+    "stats": {
+      "attack": 16,
+      "health": 6
+    },
+    "code": "ef202"
+  },
+  "Elyha's Knife": {
+    "name": "Elyha's Knife",
+    "rarity": 4,
+    "role": "assassin",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efa04"
+  },
+  "Enhanced Gauntlet": {
+    "name": "Enhanced Gauntlet",
+    "rarity": 1,
+    "role": "",
+    "stats": {
+      "attack": 2,
+      "health": 39
+    },
+    "code": "ef106"
+  },
+  "Envoy's Pipe": {
+    "name": "Envoy's Pipe",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 4,
+      "health": 58
+    },
+    "code": "ef319"
+  },
+  "Eternus": {
+    "name": "Eternus",
+    "rarity": 4,
+    "role": "manauser",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efh08"
+  },
+  "Etica's Scepter": {
+    "name": "Etica's Scepter",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 18,
+      "health": 43
+    },
+    "code": "efm02"
+  },
+  "EXIF Detective (E.d.) Gadget": {
+    "name": "EXIF Detective (E.d.) Gadget",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh17"
+  },
+  "Exorcist's Tonfa": {
+    "name": "Exorcist's Tonfa",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 16,
+      "health": 14
+    },
+    "code": "ef316"
+  },
+  "Fairy Tale for a Nightmare": {
+    "name": "Fairy Tale for a Nightmare",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm19"
+  },
+  "Fairy's Grimoire": {
+    "name": "Fairy's Grimoire",
+    "rarity": 2,
+    "role": "",
+    "stats": {
+      "attack": 3,
+      "health": 51
+    },
+    "code": "ef204"
+  },
+  "Fan of Light and Dark": {
+    "name": "Fan of Light and Dark",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh18"
+  },
+  "Firm Shield": {
+    "name": "Firm Shield",
+    "rarity": 2,
+    "role": "",
+    "stats": {
+      "attack": 2,
+      "health": 41
+    },
+    "code": "ef206"
+  },
+  "Flawless Garments": {
+    "name": "Flawless Garments",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh15"
+  },
+  "Flower Shower": {
+    "name": "Flower Shower",
+    "rarity": 4,
+    "role": "warrior",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efw15"
+  },
+  "Forest Totem": {
+    "name": "Forest Totem",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 1,
+      "health": 65
+    },
+    "code": "ef321"
+  },
+  "Frame of Light": {
+    "name": "Frame of Light",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm28"
+  },
+  "Fullmetals Automail": {
+    "name": "Fullmetals Automail",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw28"
+  },
+  "Glo-Wings 21": {
+    "name": "Glo-Wings 21",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efr19"
+  },
+  "Goblet of Oath": {
+    "name": "Goblet of Oath",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efa19"
+  },
+  "Goblin's Lamp": {
+    "name": "Goblin's Lamp",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 36
+    },
+    "code": "ef313"
+  },
+  "Golden Cocoa Cookie": {
+    "name": "Golden Cocoa Cookie",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef411"
+  },
+  "Golden Rose": {
+    "name": "Golden Rose",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw31"
+  },
+  "Grail of Blood": {
+    "name": "Grail of Blood",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 14,
+      "health": 21
+    },
+    "code": "ef301"
+  },
+  "Guardian Ice Crystals": {
+    "name": "Guardian Ice Crystals",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh14"
+  },
+  "Guide to a Decision": {
+    "name": "Guide to a Decision",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "ef506"
+  },
+  "Guiding Light": {
+    "name": "Guiding Light",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr13"
+  },
+  "Hell Cutter": {
+    "name": "Hell Cutter",
+    "rarity": 4,
+    "role": "warrior",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efw04"
+  },
+  "Hilag Lance": {
+    "name": "Hilag Lance",
+    "rarity": 4,
+    "role": "knight",
+    "stats": {
+      "attack": 10,
+      "health": 55
+    },
+    "code": "efk05"
+  },
+  "Holy Sacrifice": {
+    "name": "Holy Sacrifice",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk01"
+  },
+  "Hostess of the Banquet": {
+    "name": "Hostess of the Banquet",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa22"
+  },
+  "Idol's Cheer": {
+    "name": "Idol's Cheer",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efh07"
+  },
+  "Iela Violin": {
+    "name": "Iela Violin",
+    "rarity": 4,
+    "role": "mage",
+    "stats": {
+      "attack": 14,
+      "health": 51
+    },
+    "code": "efm08"
+  },
+  "Ignition Cloth Gloves": {
+    "name": "Ignition Cloth Gloves",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm26"
+  },
+  "III. The Empress": {
+    "name": "III. The Empress",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef428"
+  },
+  "Indestructible Gaiters": {
+    "name": "Indestructible Gaiters",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw26"
+  },
+  "Infinity Basket": {
+    "name": "Infinity Basket",
+    "rarity": 4,
+    "role": "ranger",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efr03"
+  },
+  "Iron Fan": {
+    "name": "Iron Fan",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr08"
+  },
+  "IV. The Emperor": {
+    "name": "IV. The Emperor",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef429"
+  },
+  "Jack-O's Symbol": {
+    "name": "Jack-O's Symbol",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw25"
+  },
+  "Junkyard Dog": {
+    "name": "Junkyard Dog",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw08"
+  },
+  "Justice for All": {
+    "name": "Justice for All",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk07"
+  },
+  "Kal'adra": {
+    "name": "Kal'adra",
+    "rarity": 4,
+    "role": "mage",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efm04"
+  },
+  "Knowledge Seed": {
+    "name": "Knowledge Seed",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm20"
+  },
+  "Labyrinth Cube": {
+    "name": "Labyrinth Cube",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 36
+    },
+    "code": "ef308"
+  },
+  "Last Teatime": {
+    "name": "Last Teatime",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm17"
+  },
+  "Love Potion": {
+    "name": "Love Potion",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef402"
+  },
+  "Magaraha's Tome": {
+    "name": "Magaraha's Tome",
+    "rarity": 4,
+    "role": "manauser",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efh05"
+  },
+  "Magic for Friends": {
+    "name": "Magic for Friends",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm23"
+  },
+  "Manica of Control": {
+    "name": "Manica of Control",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa13"
+  },
+  "Mature Sunglasses": {
+    "name": "Mature Sunglasses",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efk18"
+  },
+  "Merciless Glutton": {
+    "name": "Merciless Glutton",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw14"
+  },
+  "Midnight Bloom": {
+    "name": "Midnight Bloom",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "ef406"
+  },
+  "Mighty Yaksha": {
+    "name": "Mighty Yaksha",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 36
+    },
+    "code": "ef311"
+  },
+  "Moonlight Dreamblade": {
+    "name": "Moonlight Dreamblade",
+    "rarity": 4,
+    "role": "assassin",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efa03"
+  },
+  "Moonlight's Vestige": {
+    "name": "Moonlight's Vestige",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef415"
+  },
+  "Ms. Confille": {
+    "name": "Ms. Confille",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr14"
+  },
+  "Necro & Undine": {
+    "name": "Necro & Undine",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm10"
+  },
+  "New Year Cookies": {
+    "name": "New Year Cookies",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef410"
+  },
+  "Noble Oath": {
+    "name": "Noble Oath",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk06"
+  },
+  "Nostalgic Music Box": {
+    "name": "Nostalgic Music Box",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef427"
+  },
+  "Oath Key": {
+    "name": "Oath Key",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 28
+    },
+    "code": "ef322"
+  },
+  "Official Levulin Beach Volleyball": {
+    "name": "Official Levulin Beach Volleyball",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef423"
+  },
+  "Old Gardening Shears": {
+    "name": "Old Gardening Shears",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efr26"
+  },
+  "One Year of Gratitude": {
+    "name": "One Year of Gratitude",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef405"
+  },
+  "Otherworldly Machinery": {
+    "name": "Otherworldly Machinery",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr06"
+  },
+  "Our Beautiful Seasons": {
+    "name": "Our Beautiful Seasons",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "ef435"
+  },
+  "P.O.S": {
+    "name": "P.O.S",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "ef508"
+  },
+  "Prelude to a New Era": {
+    "name": "Prelude to a New Era",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 15,
+      "health": 36
+    },
+    "code": "ef432"
+  },
+  "Portrait of the Saviors": {
+    "name": "Portrait of the Saviors",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 15,
+      "health": 36
+    },
+    "code": "ef403"
+  },
+  "Prayer of Solitude": {
+    "name": "Prayer of Solitude",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw32"
+  },
+  "Proof of Valor": {
+    "name": "Proof of Valor",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "ef501"
+  },
+  "Prophetic Candlestick": {
+    "name": "Prophetic Candlestick",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 14,
+      "health": 21
+    },
+    "code": "ef303"
+  },
+  "Pure White Trust": {
+    "name": "Pure White Trust",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw24"
+  },
+  "Radiant Forever": {
+    "name": "Radiant Forever",
+    "rarity": 4,
+    "role": "mage",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efm09"
+  },
+  "Rainbow Scale": {
+    "name": "Rainbow Scale",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef404"
+  },
+  "Ranon's Memorandum": {
+    "name": "Ranon's Memorandum",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 6,
+      "health": 51
+    },
+    "code": "ef305"
+  },
+  "Records of Unity": {
+    "name": "Records of Unity",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef424"
+  },
+  "Reingar's Special Drink": {
+    "name": "Reingar's Special Drink",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr10"
+  },
+  "Resolute Soldier Series": {
+    "name": "Resolute Soldier Series",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef409"
+  },
+  "Rhianna & Luciella": {
+    "name": "Rhianna & Luciella",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa01"
+  },
+  "Rise of a Monarch": {
+    "name": "Rise of a Monarch",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk12"
+  },
+  "Rocket Punch Gauntlet": {
+    "name": "Rocket Punch Gauntlet",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efk19"
+  },
+  "Rod of Amaryllis": {
+    "name": "Rod of Amaryllis",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh01"
+  },
+  "Rosa Hargana": {
+    "name": "Rosa Hargana",
+    "rarity": 4,
+    "role": "ranger",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efr05"
+  },
+  "Sacred Tree Branch": {
+    "name": "Sacred Tree Branch",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh16"
+  },
+  "Samsara Prayer Beads": {
+    "name": "Samsara Prayer Beads",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efw20"
+  },
+  "Santa Muerte": {
+    "name": "Santa Muerte",
+    "rarity": 4,
+    "role": "assassin",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efa06"
+  },
+  "Sashe Ithanes": {
+    "name": "Sashe Ithanes",
+    "rarity": 4,
+    "role": "ranger",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efr04"
+  },
+  "Scroll of Shadows": {
+    "name": "Scroll of Shadows",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm25"
+  },
+  "Seal of Capture": {
+    "name": "Seal of Capture",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr22"
+  },
+  "Secret Art - Storm Sword": {
+    "name": "Secret Art - Storm Sword",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa14"
+  },
+  "Seductive Flower": {
+    "name": "Seductive Flower",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efa23"
+  },
+  "Sepulcrum": {
+    "name": "Sepulcrum",
+    "rarity": 4,
+    "role": "warrior",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "efw12"
+  },
+  "Severed Horn Wand": {
+    "name": "Severed Horn Wand",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm22"
+  },
+  "Sharpshooters Handgun": {
+    "name": "Sharpshooters Handgun",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr20"
+  },
+  "Shepherd of the Hollow": {
+    "name": "Shepherd of the Hollow",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa15"
+  },
+  "Shepherds of Chaos": {
+    "name": "Shepherds of Chaos",
+    "rarity": 4,
+    "role": "assassin",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efa10"
+  },
+  "Shimadra Staff": {
+    "name": "Shimadra Staff",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efh02"
+  },
+  "Sigurd Scythe": {
+    "name": "Sigurd Scythe",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw01"
+  },
+  "Silver Rain": {
+    "name": "Silver Rain",
+    "rarity": 4,
+    "role": "assassin",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "efa11"
+  },
+  "Sira-Ren": {
+    "name": "Sira-Ren",
+    "rarity": 4,
+    "role": "mage",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "efm05"
+  },
+  "Snow Crystal": {
+    "name": "Snow Crystal",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw19"
+  },
+  "Sole Consolation": {
+    "name": "Sole Consolation",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh19"
+  },
+  "Song of Stars": {
+    "name": "Song of Stars",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efr02"
+  },
+  "Spatiotemporal Fan": {
+    "name": "Spatiotemporal Fan",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efr21"
+  },
+  "Spear of a New Dawn": {
+    "name": "Spear of a New Dawn",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efk15"
+  },
+  "Spear of Purification": {
+    "name": "Spear of Purification",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw27"
+  },
+  "Sphere of Inferno": {
+    "name": "Sphere of Inferno",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr23"
+  },
+  "Sphere of Sadism": {
+    "name": "Sphere of Sadism",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk17"
+  },
+  "Spirit's Breath": {
+    "name": "Spirit's Breath",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm11"
+  },
+  "Spooky Solayu Stories": {
+    "name": "Spooky Solayu Stories",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef407"
+  },
+  "Staff of Wisdom": {
+    "name": "Staff of Wisdom",
+    "rarity": 2,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 32
+    },
+    "code": "ef203"
+  },
+  "Star of the Deep Sea": {
+    "name": "Star of the Deep Sea",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr18"
+  },
+  "Steadfast Gatekeeper": {
+    "name": "Steadfast Gatekeeper",
+    "rarity": 4,
+    "role": "knight",
+    "stats": {
+      "attack": 10,
+      "health": 55
+    },
+    "code": "efk10"
+  },
+  "Stella Harpa": {
+    "name": "Stella Harpa",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh09"
+  },
+  "Strak Gauntlet": {
+    "name": "Strak Gauntlet",
+    "rarity": 4,
+    "role": "warrior",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efw05"
+  },
+  "Succubus Mirror": {
+    "name": "Succubus Mirror",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 8,
+      "health": 67
+    },
+    "code": "ef427"
+  },
+  "Super Duper Water Gun Shooter": {
+    "name": "Super Duper Water Gun Shooter",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 18,
+      "health": 27
+    },
+    "code": "ef413"
+  },
+  "Sweet Miracle": {
+    "name": "Sweet Miracle",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw35"
+  },
+  "Sword of Autumn Eclipse": {
+    "name": "Sword of Autumn Eclipse",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efw29"
+  },
+  "Sword of Cycling Seasons": {
+    "name": "Sword of Cycling Seasons",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa20"
+  },
+  "Sword of Ezera": {
+    "name": "Sword of Ezera",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk08"
+  },
+  "Sword of Judgment": {
+    "name": "Sword of Judgment",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr09"
+  },
+  "Sword of Summer Twilight": {
+    "name": "Sword of Summer Twilight",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa17"
+  },
+  "Sword of the Morning": {
+    "name": "Sword of the Morning",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 28
+    },
+    "code": "ef310"
+  },
+  "Sword of the Sun": {
+    "name": "Sword of the Sun",
+    "rarity": 1,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 15
+    },
+    "code": "ef101"
+  },
+  "Sword of Winter Shadow": {
+    "name": "Sword of Winter Shadow",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa18"
+  },
+  "Tagehel's Ancient Book": {
+    "name": "Tagehel's Ancient Book",
+    "rarity": 4,
+    "role": "mage",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "efm03"
+  },
+  "Tear of the Desert": {
+    "name": "Tear of the Desert",
+    "rarity": 4,
+    "role": "mage",
+    "stats": {
+      "attack": 19,
+      "health": 30
+    },
+    "code": "efm12"
+  },
+  "The Armament": {
+    "name": "The Armament",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa21"
+  },
+  "The Guardian Star's Blessing": {
+    "name": "The Guardian Star's Blessing",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef421"
+  },
+  "Time Matter": {
+    "name": "Time Matter",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 18,
+      "health": 43
+    },
+    "code": "efm06"
+  },
+  "Timeless Anchor": {
+    "name": "Timeless Anchor",
+    "rarity": 3,
+    "role": "",
+    "stats": {
+      "attack": 8,
+      "health": 44
+    },
+    "code": "ef320"
+  },
+  "To a New World": {
+    "name": "To a New World",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef414"
+  },
+  "Torn Sleeve": {
+    "name": "Torn Sleeve",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa09"
+  },
+  "Touch of Rekos": {
+    "name": "Touch of Rekos",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh11"
+  },
+  "Tyrant's Descent": {
+    "name": "Tyrant's Descent",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw33"
+  },
+  "Twilight Calamity": {
+    "name": "Twilight Calamity",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efm21"
+  },
+  "Uberius's Tooth": {
+    "name": "Uberius's Tooth",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw06"
+  },
+  "Umbral Keystones": {
+    "name": "Umbral Keystones",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm29"
+  },
+  "Unfading Memories": {
+    "name": "Unfading Memories",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh10"
+  },
+  "Unseen Observer": {
+    "name": "Unseen Observer",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efr16"
+  },
+  "Upgraded Dragon Knuckles": {
+    "name": "Upgraded Dragon Knuckles",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm24"
+  },
+  "Venus Orb": {
+    "name": "Venus Orb",
+    "rarity": 1,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 24
+    },
+    "code": "ef105"
+  },
+  "Victorious Flag": {
+    "name": "Victorious Flag",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "ef502"
+  },
+  "Violet Talisman": {
+    "name": "Violet Talisman",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa08"
+  },
+  "Wall of Order": {
+    "name": "Wall of Order",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr15"
+  },
+  "War Horn": {
+    "name": "War Horn",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "ef505"
+  },
+  "Water's Origin": {
+    "name": "Water's Origin",
+    "rarity": 4,
+    "role": "manauser",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efh03"
+  },
+  "Wind Rider": {
+    "name": "Wind Rider",
+    "rarity": 5,
+    "role": "assassin",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efa02"
+  },
+  "Wings of Light and Shadow": {
+    "name": "Wings of Light and Shadow",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efk16"
+  },
+  "Wondrous Potion Vial": {
+    "name": "Wondrous Potion Vial",
+    "rarity": 4,
+    "role": "manauser",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "efh04"
+  },
+  "VII. The Chariot": {
+    "name": "VII. The Chariot",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef431"
+  },
+  "VI. The Lovers": {
+    "name": "VI. The Lovers",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef433"
+  },
+  "XIII. Death": {
+    "name": "XIII. Death",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef417"
+  },
+  "XIV. Temperance": {
+    "name": "XIV. Temperance",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef422"
+  },
+  "XIX. The Sun": {
+    "name": "XIX. The Sun",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 7,
+      "health": 63
+    },
+    "code": "ef430"
+  },
+  "XVI. The Tower": {
+    "name": "XVI. The Tower",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef418"
+  },
+  "XVIII. The Moon": {
+    "name": "XVIII. The Moon",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef419"
+  },
+  "Staff of Ainz Ooal Gown": {
+    "name": "Staff of Ainz Ooal Gown",
+    "rarity": 5,
+    "role": "mage",
+    "stats": {
+      "attack": 15,
+      "health": 54
+    },
+    "code": "efm30"
+  },
+  "3F": {
+    "name": "3F",
+    "rarity": 5,
+    "role": "knight",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efk21"
+  },
+  "Pipette Lance": {
+    "name": "Pipette Lance",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw34"
+  },
+  "Ruyi Jingu Bang": {
+    "name": "Ruyi Jingu Bang",
+    "rarity": 5,
+    "role": "warrior",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efw36"
+  },
+  "Midnight Pizza Delivery": {
+    "name": "Midnight Pizza Delivery",
+    "rarity": 4,
+    "role": "",
+    "stats": {
+      "attack": 12,
+      "health": 45
+    },
+    "code": "ef439"
+  },
+  "Magic Bubble Maker": {
+    "name": "Magic Bubble Maker",
+    "rarity": 5,
+    "role": "",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efm31"
+  },
+  "Spotted Mouse Hair Tie": {
+    "name": "Spotted Mouse Hair Tie",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh21"
+  },
+  "Renewed Will": {
+    "name": "Renewed Will",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr28"
+  },
+  "Bird's-Eye View": {
+    "name": "Bird's-Eye View",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh20"
+  },
+  "Dreamlike Holiday": {
+    "name": "Dreamlike Holiday",
+    "rarity": 5,
+    "role": "ranger",
+    "stats": {
+      "attack": 21,
+      "health": 32
+    },
+    "code": "efr27"
+  },
+  "Homage to Tarman": {
+    "name": "Homage to Tarman",
+    "rarity": 5,
+    "role": "manauser",
+    "stats": {
+      "attack": 9,
+      "health": 76
+    },
+    "code": "efh22"
+  }
+}
