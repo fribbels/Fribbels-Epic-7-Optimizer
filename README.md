@@ -2,6 +2,8 @@
 
 This is a tool for organizing gear and optimizing gear and unit builds for Epic 7. Gearing units can be time consuming and it's not easy to find optimal combinations of gear within the game, so I made this to help make the gearing process easier.
 
+Come join the Fribbels E7 Optimizer Discord server for announcements, troubleshooting, or ideas and suggestions! https://discord.gg/rDmB4Un7qg
+
 Please see the [**Getting Started**](https://github.com/fribbels/Fribbels-Epic-7-Optimizer#getting-started) section for instructions on how to use the optimizer.
 
 Features include:
@@ -50,7 +52,7 @@ _________________
         * [First time setup for the automatic importer on Windows](#first-time-setup-for-the-automatic-importer-on-windows)
         * [First time  setup for the automatic importer on Mac](#first-time--setup-for-the-automatic-importer-on-mac)
     + [Using the auto importer](#using-the-auto-importer)
-        * [Running the automatic importer from an Google Play Games Beta / Emulator / M1+ Macbook](#running-the-automatic-importer-from-an-google-play-games-beta--emulator--m1-macbook)
+        * [Running the automatic importer from an emulator or M1 macbook](#running-the-automatic-importer-from-an-emulator-or-m1-macbook)
         * [Running the automatic importer from a phone](#running-the-automatic-importer-from-a-phone)
     + [Optimizing a unit](#optimizing-a-unit)
     + [Updating your gear](#updating-your-gear)
@@ -59,7 +61,9 @@ _________________
     + [Automatic importer troubleshooting](#automatic-importer-troubleshooting)
     + [Optimizer troubleshooting](#optimizer-troubleshooting)
   * [Contributing to the project](#contributing-to-the-project)
+    + [Project status](#project-status)
     + [Setup steps](#setup-steps)
+  * [Contact me](#contact-me)
 
 ## Optimizer Tab
 
@@ -307,9 +311,9 @@ Check out the step-by-step video guide to follow along with instructions: https:
 3. Restart your computer
 
 ### Using the auto importer
-You can use the auto importer with Google Play Games Beta, any emulator, a phone, or M1+ chip Macbook.
+You can use the auto importer with an emulator, a phone, or M1+ chip Macbook.
 
-##### Running the automatic importer from an Google Play Games Beta / Emulator / M1+ Macbook
+##### Running the automatic importer from an emulator or M1 macbook
 
 Check out the step-by-step video guide to follow along with instructions: https://youtu.be/bDjP5eiOfK0?t=357
 
@@ -369,6 +373,7 @@ _________________
 
 ## Troubleshooting
 
+
 ### Automatic importer troubleshooting
 * If it takes longer than 30 seconds or no error shows up:
   * Make sure the requirements are installed (Python and Npcap for Windows, Python and Wireshark for Mac), or try reinstalling them.
@@ -380,6 +385,8 @@ _________________
     * Try importing on a non Hyper-V machine
     * Open the View Network Connections menu, and disable the Hyper-V Bluestacks network adapter, then use the mobile hotspot import option.
     * Or modify the scanner code to hardcode your network interface: https://github.com/fribbels/Fribbels-Epic-7-Optimizer/issues/50#issuecomment-804275567
+
+* Feel free to drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
 
 ### Optimizer troubleshooting
 
@@ -406,10 +413,38 @@ _________________
   - Right click the app and click Open from the menu
   - Try unzipping the file using Unarchiver from the app store instead of Archive Utility. [Example](https://i.imgur.com/y9uGQcH.png)
 
+- If a hero is missing from the drop down list, contact me to add it.
+
 - If you see a bunch of optimization result rows with the same stats, you probably have duplicate gear. [Example](https://i.imgur.com/hUcyN1I.png)
   - Use the Duplicates filter on the Gear screen to find and fix your duplicate gear. Alternatively Overwrite/Merge your gear data to start over. Be careful when using the Append option, because that can result in duplicate gear being added. Most of the time you'll want to use Merge.
 
+* Drop by the Discord server for help debugging other issues: https://discord.gg/rDmB4Un7qg
+
 ## Contributing to the project
 
-The E7 optimizer is currently in maintenance mode - I'll be keeping the project updated with new units but all new feature development is on pause.
+If you want to contribute, come by the discord server to have a chat about what you want to do. We also have an ongoing translation project to translate the optimizer into various languages.
 
+### Project status
+
+The E7 optimizer is currently in maintenance mode - I'll be keeping the project updated with new units but new feature development is on pause.
+
+### Setup steps
+
+To run the frontend code locally,
+
+1. Install requirements
+  1. Install node.js: https://nodejs.org/
+  2. Install python2 and python3: https://www.python.org/downloads/
+  3. Install yarn: ``npm install --global yarn``
+2. Check out the code
+3. Run ``npm install`` in the app's root directory
+4. To run the development version locally: ``yarn dev``
+5. To build and package the production executables: ``yarn package``
+
+To run the backend code requires some more setup, contact me for more info.
+
+## Contact me
+
+Come join the Fribbels E7 Optimizer Discord server for questions or comments or ideas/suggestions: https://discord.gg/rDmB4Un7qg. If you ran into any issues, please check the [troubleshooting](https://github.com/fribbels/Fribbels-Epic-7-Optimizer/#troubleshooting) section above first.
+
+If you want support the optimizer, you can [buy me a coffee](https://www.buymeacoffee.com/fribbels) or come say hi on Discord!

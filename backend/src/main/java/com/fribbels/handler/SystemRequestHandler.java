@@ -2,15 +2,11 @@ package com.fribbels.handler;
 
 import com.fribbels.Main;
 import com.fribbels.core.StatCalculator;
-import com.fribbels.request.BuildsRequest;
-import com.fribbels.request.HeroesRequest;
 import com.fribbels.request.SetSettingsRequest;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 public class SystemRequestHandler extends RequestHandler implements HttpHandler {
 
@@ -43,7 +39,7 @@ public class SystemRequestHandler extends RequestHandler implements HttpHandler 
     }
 
     private String interrupt() {
-        Main.interrupt = true;
+        Main.setInterrupt(true);
         OptimizationRequestHandler.inProgress = false;
         System.out.println("INTERRUPT MAIN");
         return "";
@@ -51,19 +47,19 @@ public class SystemRequestHandler extends RequestHandler implements HttpHandler 
 
     private String setSettings(final SetSettingsRequest request) {
         System.out.println(request);
-        HeroesRequestHandler.SETTING_UNLOCK_ON_UNEQUIP = request.isSettingUnlockOnUnequip();
-        StatCalculator.SETTING_RAGE_SET = request.isSettingRageSet();
-        StatCalculator.SETTING_PEN_SET = request.isSettingPenSet();
+        HeroesRequestHandler.setSettingUnlockOnUnequip(request.isSettingUnlockOnUnequip());
+        StatCalculator.setSettingRageSet(request.isSettingRageSet());
+        StatCalculator.setSettingPenSet(request.isSettingPenSet());
         OptimizationRequestHandler.instance.configureGpu(request.isSettingGpu());
 
         if (request.getSettingMaxResults() != null) {
-            final int max = Math.max(Math.min(request.getSettingMaxResults(), 100_000_000), 10_000);
-            OptimizationRequestHandler.SETTING_MAXIMUM_RESULTS = max;
+            final int max = Math.clamp(request.getSettingMaxResults(), 10_000, 100_000_000);
+            OptimizationRequestHandler.setSettingMaximumResults(max);
         }
 
         if (request.getSettingPenDefense() != null) {
-            final int max = Math.max(Math.min(request.getSettingPenDefense(), 10_000), 0);
-            StatCalculator.SETTING_PEN_DEFENSE = max;
+            final int max = Math.clamp(request.getSettingPenDefense(), 0, 10_000);
+            StatCalculator.setSettingPenDefense(max);
         }
 
         return "";

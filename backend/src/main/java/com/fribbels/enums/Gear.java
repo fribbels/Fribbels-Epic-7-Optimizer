@@ -4,33 +4,21 @@ import com.google.gson.annotations.SerializedName;
 
 public enum Gear {
 
-    @SerializedName("Weapon")   WEAPON,
-    @SerializedName("Helmet")   HELMET,
-    @SerializedName("Armor")    ARMOR,
-    @SerializedName("Necklace") NECKLACE,
-    @SerializedName("Ring")     RING,
-    @SerializedName("Boots")    BOOTS;
+    @SerializedName("Weapon")   WEAPON("Weapon"),
+    @SerializedName("Helmet")   HELMET("Helmet"),
+    @SerializedName("Armor")    ARMOR("Armor"),
+    @SerializedName("Necklace") NECKLACE("Necklace"),
+    @SerializedName("Ring")     RING("Ring"),
+    @SerializedName("Boots")    BOOTS("Boots");
+
+    private final String displayName;
+
+    Gear(final String displayName) {
+        this.displayName = displayName;
+    }
 
     @Override
     public String toString() {
-        if (this == Gear.WEAPON) {
-            return "Weapon";
-        }
-        if (this == Gear.HELMET) {
-            return "Helmet";
-        }
-        if (this == Gear.ARMOR) {
-            return "Armor";
-        }
-        if (this == Gear.NECKLACE) {
-            return "Necklace";
-        }
-        if (this == Gear.RING) {
-            return "Ring";
-        }
-        if (this == Gear.BOOTS) {
-            return "Boots";
-        }
-        return "";
+        return displayName;
     }
 }

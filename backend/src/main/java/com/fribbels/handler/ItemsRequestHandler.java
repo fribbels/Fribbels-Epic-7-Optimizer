@@ -1,12 +1,9 @@
 package com.fribbels.handler;
 
-import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
-import com.fribbels.enums.Gear;
 import com.fribbels.enums.HeroFilter;
 import com.fribbels.model.Hero;
-import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
 import com.fribbels.model.MergeHero;
 import com.fribbels.request.EquipItemsOnHeroRequest;
@@ -17,12 +14,9 @@ import com.fribbels.request.ItemsRequest;
 import com.fribbels.request.MergeRequest;
 import com.fribbels.response.GetAllItemsResponse;
 import com.fribbels.response.GetItemByIdResponse;
-import com.google.common.collect.ImmutableList;
-import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import lombok.AllArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +25,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,10 +34,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
 
     private final ItemDb itemDb;
     private final HeroDb heroDb;
-    private final BaseStatsDb baseStatsDb;
     private final HeroesRequestHandler heroesRequestHandler;
-
-    private static final Gson GSON = new Gson();
 
     @Override
     public void handle(final HttpExchange exchange) throws IOException {
@@ -112,208 +102,53 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         sendResponse(exchange, "ERROR");
     }
 
-    public String addItems(final ItemsRequest request) {
+    private String addItems(final ItemsRequest request) {
         itemDb.addItems(request.getItems());
 
         return "";
     }
 
-    public String mergeItems(final MergeRequest request) {
-        final List<Item> newItems = request.getItems()
-                .stream()
-                .filter(x -> x.getEnhance() >= request.getEnhanceLimit())
-                .collect(Collectors.toList());
+    private String mergeItems(final MergeRequest request) {
         final List<Item> existingItems = itemDb.getAllItems();
 
-        final Map<Integer, List<Item>> itemsByHash = new HashMap<>();
+        // Filter new items with enhance >= enhanceLimit
+        final List<Item> newItems = request.getItems().stream()
+                .filter(x -> x.getEnhance() >= request.getEnhanceLimit())
+                .toList();
+
         final Map<String, Item> itemsByIngameId = new HashMap<>();
 
-        // Note down matching items
+        // Populate map with existing items by ingameId
         for (final Item item : existingItems) {
-            // First check ingameId
             final String ingameId = item.getIngameId();
-
-            if (ingameId != null && itemsByIngameId.containsKey(ingameId) && itemsByHash.containsKey(item.getHash())) {
-                final List<Item> matchingItems = itemsByHash.get(item.getHash());
-
-                matchingItems.add(item);
-                continue;
-            } else {
+            if (ingameId != null) {
                 itemsByIngameId.put(ingameId, item);
             }
-
-            // Then check stats
-            final int hash = item.getHash();
-
-            if (itemsByHash.containsKey(hash)) {
-                final List<Item> matchingItems = itemsByHash.get(hash);
-                matchingItems.add(item);
-            } else {
-                itemsByHash.put(hash, new ArrayList<>(Collections.singletonList(item)));
-            }
         }
 
-        // Replace matching new items with their existing versions
-        for (int i = 0; i < newItems.size(); i++) {
-            final Item newItem = newItems.get(i);
-
-            // Check for ingameId matches first
+        // Iterate over new items and either update or insert
+        for (final Item newItem : newItems) {
             final String ingameId = newItem.getIngameId();
-
-            if (ingameId != null && itemsByIngameId.containsKey(ingameId)) {
-                final Item matchingExistingItem = itemsByIngameId.get(ingameId);
-
-                matchingExistingItem.setIngameId(newItem.getIngameId());
-                matchingExistingItem.setName(newItem.getName());
-                matchingExistingItem.setSubstats(newItem.getSubstats());
-                matchingExistingItem.setOp(newItem.getOp());
-                matchingExistingItem.setStorage(newItem.getStorage());
-                matchingExistingItem.setAugmentedStats(newItem.getAugmentedStats());
-                matchingExistingItem.setReforgedStats(newItem.getReforgedStats());
-                matchingExistingItem.setEnhance(newItem.getEnhance());
-                matchingExistingItem.setUpgradeable(newItem.getUpgradeable());
-                matchingExistingItem.setConvertable(newItem.getConvertable());
-                matchingExistingItem.setReforgeable(newItem.getReforgeable());
-                matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
-                matchingExistingItem.setIngameEquippedId(newItem.getIngameEquippedId());
-
-                // Special cases for merging unknown items
-                if (newItem.getLevel() == 0) {
-                    if (matchingExistingItem.getLevel() == null) {
-                        matchingExistingItem.setLevel(newItem.getLevel());
-                    } else {
-                        // Keep the existing level
-                    }
+            if (ingameId != null) {
+                final Item existingItem = itemsByIngameId.get(ingameId);
+                if (existingItem != null) {
+                    // Replace existing item (update logic)
+                    itemDb.replaceItems(newItem);
                 } else {
-                    matchingExistingItem.setLevel(newItem.getLevel());
-                }
-
-                if (newItem.getMain().getValue() == null || newItem.getMain().getValue() == 0) {
-                    if (matchingExistingItem.getMain().getValue() == null) {
-                        matchingExistingItem.setMain(newItem.getMain());
-                    } else {
-                        // Keep the existing main
-                    }
-                } else {
-                    matchingExistingItem.setMain(newItem.getMain());
-                }
-
-                newItems.set(i, matchingExistingItem);
-                continue;
-            }
-
-            // Then check stat matches
-            final int hash = newItem.getHash();
-
-            if (itemsByHash.containsKey(hash)) {
-                final List<Item> matchingItems = itemsByHash.get(hash);
-
-                if (!matchingItems.isEmpty()) {
-                    final Item matchingExistingItem = matchingItems.remove(0);
-
-//                    newItem.setEquippedById(matchingExistingItem.getEquippedById());
-//                    newItem.setEquippedByName(matchingExistingItem.getEquippedByName());
-//                    newItem.setHeroName(matchingExistingItem.getHeroName());
-//                    newItem.setLocked(matchingExistingItem.isLocked());
-//                    newItem.setDuplicateId(matchingExistingItem.getDuplicateId());
-                    newItems.set(i, matchingExistingItem);
-
-                    matchingExistingItem.setIngameId(newItem.getIngameId());
-                    matchingExistingItem.setName(newItem.getName());
-                    matchingExistingItem.setSubstats(newItem.getSubstats());
-                    matchingExistingItem.setOp(newItem.getOp());
-                    matchingExistingItem.setStorage(newItem.getStorage());
-                    matchingExistingItem.setMain(newItem.getMain());
-                    matchingExistingItem.setAugmentedStats(newItem.getAugmentedStats());
-                    matchingExistingItem.setReforgedStats(newItem.getReforgedStats());
-                    matchingExistingItem.setEnhance(newItem.getEnhance());
-                    matchingExistingItem.setLevel(newItem.getLevel());
-                    matchingExistingItem.setUpgradeable(newItem.getUpgradeable());
-                    matchingExistingItem.setConvertable(newItem.getConvertable());
-                    matchingExistingItem.setReforgeable(newItem.getReforgeable());
-                    matchingExistingItem.setDuplicateId(newItem.getDuplicateId());
-                    matchingExistingItem.setIngameEquippedId(newItem.getIngameEquippedId());
+                    // Insert new item
+                    itemDb.addItems(Collections.singletonList(newItem));
                 }
             }
         }
-
-        System.out.println(itemsByHash);
-        System.out.println(itemsByHash.size());
-
-        // Go through heroes and unequip unmatched items
-        final List<Hero> allHeroes = heroDb.getAllHeroes();
-        final Set<String> newItemIds = newItems.stream().map(Item::getId).collect(Collectors.toSet());
-
-        for (final Hero hero : allHeroes) {
-            final Map<Gear, Item> equipment = hero.getEquipment();
-            unequipIfNotExists(equipment, newItemIds, Gear.WEAPON);
-            unequipIfNotExists(equipment, newItemIds, Gear.HELMET);
-            unequipIfNotExists(equipment, newItemIds, Gear.ARMOR);
-            unequipIfNotExists(equipment, newItemIds, Gear.NECKLACE);
-            unequipIfNotExists(equipment, newItemIds, Gear.RING);
-            unequipIfNotExists(equipment, newItemIds, Gear.BOOTS);
-
-            final List<HeroStats> builds = hero.getBuilds();
-            if (builds == null) continue;
-
-            // Clean up builds
-            final List<HeroStats> buildsToRemove = new ArrayList<>();
-            for (final HeroStats build : hero.getBuilds()) {
-                final List<String> buildItems = build.getItems();
-                for (final String itemId : buildItems) {
-                    if (!newItemIds.contains(itemId)) {
-                        buildsToRemove.add(build);
-                    }
-                }
-            }
-            builds.removeAll(buildsToRemove);
-
-            for (final HeroStats build : hero.getBuilds()) {
-                final HeroStats baseStats = baseStatsDb.getBaseStatsByName(hero.getName(), hero.getStars());
-                if (build.getMods() != null && build.getMods().stream().anyMatch(Objects::nonNull)) {
-                    heroesRequestHandler.addStatsToBuild(hero, baseStats, build, true);
-                } else {
-                    heroesRequestHandler.addStatsToBuild(hero, baseStats, build, false);
-                }
-            }
-        }
-
-        for (final Item item : newItems) {
-            final String equippedBy = item.getEquippedById();
-            final Hero hero = heroDb.getHeroById(equippedBy);
-
-            if (hero == null) {
-                item.setEquippedByName(null);
-                item.setEquippedById(null);
-                continue;
-            }
-
-            final Map<Gear, Item> equipment = hero.getEquipment();
-            if (!equipment.containsKey(item.getGear())) {
-                item.setEquippedByName(null);
-                item.setEquippedById(null);
-                continue;
-            }
-
-            final Item equippedItem = equipment.get(item.getGear());
-            if (!StringUtils.equals(equippedItem.getId(), item.getId())) {
-                item.setEquippedByName(null);
-                item.setEquippedById(null);
-                continue;
-            }
-        }
-
-        itemDb.setItems(newItems);
 
         return "";
     }
 
-    public String mergeHeroes(final MergeRequest request) {
+    private String mergeHeroes(final MergeRequest request) {
         mergeItems(request);
 
         final List<Item> existingItems = itemDb.getAllItems();
         final Map<String, List<Item>> itemsByIngameEquippedId = existingItems.stream()
-                .peek(System.out::println)
                 .collect(Collectors.groupingBy(
                         Item::getIngameEquippedId,
                         Collectors.toList()));
@@ -325,7 +160,6 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                         MergeHero::getName,
                         x -> x,
                         (x, y) -> x));
-
 
         final List<Hero> existingHeroes = heroDb.getAllHeroes();
         final Map<String, Hero> existingHeroesByName = existingHeroes
@@ -342,17 +176,19 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                         final String name = hero.getName();
 
                         final MergeHero mergeHero = mergeHeroesByName.getOrDefault(name, null);
-                        if (mergeHero == null) return;
+                        if (mergeHero == null)
+                            return;
 
                         final String ingameHeroId = mergeHero.getId();
-                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId.getOrDefault(ingameHeroId, ImmutableList.of());
+                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId
+                                .getOrDefault(ingameHeroId, List.of());
 
                         heroesRequestHandler.equipItemsOnHero(EquipItemsOnHeroRequest.builder()
                                 .heroId(hero.getId())
                                 .itemIds(itemsEquippedByIngameHeroId
                                         .stream()
                                         .map(Item::getId)
-                                        .collect(Collectors.toList()))
+                                        .toList())
                                 .useReforgeStats(true)
                                 .build());
                     });
@@ -365,7 +201,8 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     .filter(x -> x.getStars() == 6)
                     .forEach(mergeHero -> {
                         final String name = mergeHero.getName();
-                        if (alreadyMergedNames.contains(name)) return;
+                        if (alreadyMergedNames.contains(name))
+                            return;
                         alreadyMergedNames.add(name);
 
                         final Hero hero;
@@ -375,7 +212,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                         } else {
                             heroesRequestHandler.addHeroes(HeroesRequest
                                     .builder()
-                                    .heroes(ImmutableList.of(mergeHero.getData()))
+                                    .heroes(List.of(mergeHero.getData()))
                                     .build());
 
                             hero = heroDb.getHeroById(mergeHero.getData().getId());
@@ -383,14 +220,15 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                         }
 
                         final String ingameHeroId = mergeHero.getId();
-                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId.getOrDefault(ingameHeroId, ImmutableList.of());
+                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId
+                                .getOrDefault(ingameHeroId, List.of());
 
                         heroesRequestHandler.equipItemsOnHero(EquipItemsOnHeroRequest.builder()
                                 .heroId(hero.getId())
                                 .itemIds(itemsEquippedByIngameHeroId
                                         .stream()
                                         .map(Item::getId)
-                                        .collect(Collectors.toList()))
+                                        .toList())
                                 .useReforgeStats(true)
                                 .build());
                     });
@@ -403,7 +241,8 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                     .filter(x -> x.getStars() == 6 || x.getStars() == 5)
                     .forEach(mergeHero -> {
                         final String name = mergeHero.getName();
-                        if (alreadyMergedNames.contains(name)) return;
+                        if (alreadyMergedNames.contains(name))
+                            return;
                         alreadyMergedNames.add(name);
 
                         final Hero hero;
@@ -413,7 +252,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                         } else {
                             heroesRequestHandler.addHeroes(HeroesRequest
                                     .builder()
-                                    .heroes(ImmutableList.of(mergeHero.getData()))
+                                    .heroes(List.of(mergeHero.getData()))
                                     .build());
 
                             hero = heroDb.getHeroById(mergeHero.getData().getId());
@@ -421,14 +260,15 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
                         }
 
                         final String ingameHeroId = mergeHero.getId();
-                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId.getOrDefault(ingameHeroId, ImmutableList.of());
+                        final List<Item> itemsEquippedByIngameHeroId = itemsByIngameEquippedId
+                                .getOrDefault(ingameHeroId, List.of());
 
                         heroesRequestHandler.equipItemsOnHero(EquipItemsOnHeroRequest.builder()
                                 .heroId(hero.getId())
                                 .itemIds(itemsEquippedByIngameHeroId
                                         .stream()
                                         .map(Item::getId)
-                                        .collect(Collectors.toList()))
+                                        .toList())
                                 .useReforgeStats(true)
                                 .build());
                     });
@@ -437,46 +277,13 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return "";
     }
 
-    private void unequipIfNotExists(final Map<Gear, Item> equipment, final Set<String> newItemIds, final Gear gear) {
-        if (equipment.containsKey(gear)) {
-            final Item item = equipment.get(gear);
-            if (!newItemIds.contains(item.getId())) {
-                equipment.remove(gear);
-            }
-        }
-
-    }
-
-    public String setItems(final ItemsRequest request) {
+    private String setItems(final ItemsRequest request) {
         itemDb.setItems(request.getItems());
 
         return "";
     }
 
-    public String setItemsWithHeroes(final ItemsRequest request) {
-        final List<Hero> allHeroes = heroDb.getAllHeroes();
-        final List<Item> newItems = request.getItems();
-        final Map<String, Hero> heroesByName = new HashMap<>();
-
-        allHeroes.forEach(x -> heroesByName.putIfAbsent(x.getName(), x));
-
-        for (final Item item : newItems) {
-            if (StringUtils.isBlank(item.getHeroName())) {
-                continue;
-            }
-
-            if (heroesByName.containsKey(item.getHeroName())) {
-                final Hero hero = heroesByName.get(item.getHeroName());
-                itemDb.equipItemOnHero(item.getId(), hero.getId());
-            }
-        }
-
-        itemDb.setItems(request.getItems());
-
-        return "";
-    }
-
-    public String editItems(final ItemsRequest request) {
+    private String editItems(final ItemsRequest request) {
         final List<Item> items = request.getItems();
         for (final Item item : items) {
             final Item dbItem = itemDb.getItemById(item.getId());
@@ -512,7 +319,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return "";
     }
 
-    public String lockItems(final IdsRequest request) {
+    private String lockItems(final IdsRequest request) {
         System.out.println(request);
         final List<Item> items = itemDb.getItemsById(request.getIds());
         for (final Item item : items) {
@@ -522,7 +329,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return "";
     }
 
-    public String unlockItems(final IdsRequest request) {
+    private String unlockItems(final IdsRequest request) {
         System.out.println(request);
         final List<Item> items = itemDb.getItemsById(request.getIds());
         for (final Item item : items) {
@@ -532,7 +339,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return "";
     }
 
-    public String deleteItems(final IdsRequest request) {
+    private String deleteItems(final IdsRequest request) {
         System.out.println(request.getIds());
         final List<Item> items = itemDb.getItemsById(request.getIds());
 
@@ -547,45 +354,17 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return "";
     }
 
-    public String getAllItems() {
+    private String getAllItems() {
         final List<Item> items = itemDb.getAllItems();
         augmentItemData(items);
         final GetAllItemsResponse response = GetAllItemsResponse.builder()
                 .items(items)
                 .build();
 
-        // clean up items equipped state
-//        final List<Hero> heroes = heroDb.getAllHeroes();
-//        for (final Item item : items) {
-//            final String equippedById = item.getEquippedById();
-//            final Hero hero = heroDb.getHeroById(equippedById);
-//
-//            if (hero == null || hero.getEquipment() == null) {
-//                clearItemEquipped(item);
-//                continue;
-//            }
-//
-//            final Item itemOnHero = hero.getEquipment().getOrDefault(item.getGear(), null);
-//            if (itemOnHero == null) {
-//                clearItemEquipped(item);
-//                continue;
-//            }
-//
-//            if (!StringUtils.equals(item.getId(), itemOnHero.getId())) {
-//                clearItemEquipped(item);
-//                continue;
-//            }
-//        }
-
         return toJson(response);
     }
 
-    private void clearItemEquipped(final Item item) {
-        item.setEquippedByName(null);
-        item.setEquippedById(null);
-    }
-
-    public String getItemById(final IdRequest request) {
+    private String getItemById(final IdRequest request) {
         final Item item = itemDb.getItemById(request.getId());
         System.out.println(request);
         System.out.println(item);
@@ -596,10 +375,10 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return toJson(response);
     }
 
-    public String getItemByIngameId(final IdRequest request) {
+    private String getItemByIngameId(final IdRequest request) {
         final List<Item> items = itemDb.getAllItems();
         final Optional<Item> match = items.stream()
-                .filter(x -> StringUtils.equals(x.getIngameId(), request.getId()))
+                .filter(x -> x.getIngameId().equals(request.getId()))
                 .findFirst();
 
         System.out.println(request);
@@ -612,7 +391,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         return toJson(response);
     }
 
-    public String getItemsByIds(final IdsRequest request) {
+    private String getItemsByIds(final IdsRequest request) {
         if (request.getIds() == null) {
             return "";
         }
@@ -620,7 +399,7 @@ public class ItemsRequestHandler extends RequestHandler implements HttpHandler {
         final List<Item> items = request.getIds()
                 .stream()
                 .map(itemDb::getItemById)
-                .collect(Collectors.toList());
+                .toList();
 
         final GetAllItemsResponse response = GetAllItemsResponse.builder()
                 .items(items)

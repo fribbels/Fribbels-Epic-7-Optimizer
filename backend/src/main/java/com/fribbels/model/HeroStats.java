@@ -20,48 +20,48 @@ import java.util.stream.Collectors;
 @ToString
 public class HeroStats {
 
-    public int atk;
-    public int hp;
-    public int def;
-    public int cr;
-    public int cd;
-    public int eff;
-    public int res;
-    public int dac;
-    public int spd;
-    public int cp;
+    private int atk;
+    private int hp;
+    private int def;
+    private int cr;
+    private int cd;
+    private int eff;
+    private int res;
+    private int dac;
+    private int spd;
+    private int cp;
 
-    public int ehp;
-    public int hpps;
-    public int ehpps;
-    public int dmg;
-    public int dmgps;
-    public int mcdmg;
-    public int mcdmgps;
-    public int dmgh;
-    public int dmgd;
+    private int ehp;
+    private int hpps;
+    private int ehpps;
+    private int dmg;
+    private int dmgps;
+    private int mcdmg;
+    private int mcdmgps;
+    private int dmgh;
+    private int dmgd;
 
-    public int s1;
-    public int s2;
-    public int s3;
+    private int s1;
+    private int s2;
+    private int s3;
 
-    public int upgrades;
-    public int conversions;
-    public int eq;
-    public int score;
-    public int bs;
-    public int priority;
+    private int upgrades;
+    private int conversions;
+    private int eq;
+    private int score;
+    private int bs;
+    private int priority;
 
-    public BonusStats bonusStats;
+    private BonusStats bonusStats;
 
-    public int[] sets;
+    private int[] sets;
 
-    public String id;
-    public String name;
-    public String property;
-    public List<String> items;
-    public List<String> modIds;
-    public List<Mod> mods;
+    private String id;
+    private String name;
+    private String property;
+    private List<String> items;
+    private List<String> modIds;
+    private List<Mod> mods;
 
     public String getBuildHash() {
         if (items == null || items.size() != 6) {
@@ -75,9 +75,8 @@ public class HeroStats {
                                                                       .map(Mod::toString)
                                                                       .collect(Collectors.joining("")));
             messageDigest.update(combinedItems.getBytes());
-            final String stringHash = new String(messageDigest.digest());
-
-            return stringHash;
+            
+            return new String(messageDigest.digest());
         } catch (final Exception e) {
             e.printStackTrace();
             return null;

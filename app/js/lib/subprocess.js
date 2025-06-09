@@ -2,7 +2,7 @@ var fs = require('fs');
 const { remote } = require('electron');
 const { exec } = require('child_process');
 const { spawn } = require('child_process');
-const treekill  = require('tree-kill');
+const treekill = require('tree-kill');
 global.child = null;
 global.pid = null;
 
@@ -19,7 +19,7 @@ var initialized = false;
 const defaultJavaError = `Unable to load Java. Please check that you have the <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#installing-the-app'>64-bit version of Java 8</a> installed and restart your computer. If you already have Java installed, follow this guide to <a href='https://www.geeksforgeeks.org/how-to-set-java-path-in-windows-and-linux/amp/'>set your Java path.</a>`;
 
 module.exports = {
-    kill: async() => {
+    kill: async () => {
         try {
             console.log("Try killport")
             const killPortOutput = await killPortProcess(8130)
@@ -31,7 +31,7 @@ module.exports = {
 
     initialize: async (callback) => {
         console.log("Initialize backend, checking javaversion")
-        javaversion(function(err, notRecognized, notCorrectVersion, not64Bit) {
+        javaversion(function (err, notRecognized, notCorrectVersion, not64Bit) {
             if (err) {
                 Notifier.warn("Unable to detect java version");
                 return;
@@ -75,15 +75,16 @@ module.exports = {
         console.log("Child PID: ", pid, initialized)
 
         child.stdout.on('data', (data) => {
+            var str = data.toString();
+
             if (!initialized) {
                 initialized = true;
-                callback()
-                var str = data.toString();
-                console.log(str);
-            } else {
-
+                callback();
             }
+
+            console.log(str);
         });
+
 
         setInterval(() => {
             if (child) {
@@ -115,9 +116,9 @@ module.exports = {
             const str = data.toString()
 
             if (str.includes("aparapi") && str.includes("Ensure that OpenCL is in your PATH (windows) or in LD_LIBRARY_PATH (linux).")) {
-                
+
             } else if (str.includes("untested")) {
-                
+
             } else if (str.includes("aparapi")) {
                 Notifier.error("Subprocess error. If you are using GPU acceleration, try disabling it on the settings tab.\n" + str);
             } else {
@@ -136,7 +137,7 @@ module.exports = {
                 scannerChild.kill()
             if (itemTrackerChild)
                 itemTrackerChild.kill()
-            if(findCommandSpawn)
+            if (findCommandSpawn)
                 findCommandSpawn.kill()
         });
 
@@ -150,7 +151,7 @@ module.exports = {
                 scannerChild.kill()
             if (itemTrackerChild)
                 itemTrackerChild.kill()
-            if(findCommandSpawn)
+            if (findCommandSpawn)
                 findCommandSpawn.kill()
             Scanner.end();
         };
@@ -177,11 +178,11 @@ module.exports = {
 function javaversion(callback) {
     var spawn = require('child_process').spawn('java', ['-version']);
 
-    spawn.on('error', function(err){
+    spawn.on('error', function (err) {
         return callback(err, null);
     })
 
-    spawn.stderr.on('data', function(data) {
+    spawn.stderr.on('data', function (data) {
         data = data.toString()
 
         console.log("Detecting java:", data);

@@ -11,4 +11,5 @@ public class ArtifactStats {
 
     private final Float attack;
     private final Float health;
+    // private final Float defense;
 }

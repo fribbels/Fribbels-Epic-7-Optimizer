@@ -9,8 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,6 +25,7 @@ public class HashItem {
     private Stat main;
     private AugmentedStats augmentedStats;
 
+    @Override
     public String toString() {
         return new Gson().toJson(this);
     }

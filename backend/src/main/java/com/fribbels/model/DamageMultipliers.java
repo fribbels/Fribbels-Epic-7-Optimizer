@@ -1,13 +1,6 @@
 package com.fribbels.model;
 
-import com.aparapi.Kernel;
-import com.fribbels.enums.Gear;
-import com.fribbels.enums.Rank;
-import com.fribbels.enums.Set;
-import com.google.gson.Gson;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter

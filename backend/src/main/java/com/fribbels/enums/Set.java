@@ -27,7 +27,7 @@ public enum Set {
     @SerializedName("ProtectionSet")  PROTECTION  (16, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0}, new int[]{16, 16, 16, 16}, "ProtectionSet"),
     @SerializedName("TorrentSet")     TORRENT     (17, 4, new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2}, new int[]{17, 17}, "TorrentSet");
 
-    public int index;
+    private int index;
     private int count;
     private int[] arr;
     private int[] indices;

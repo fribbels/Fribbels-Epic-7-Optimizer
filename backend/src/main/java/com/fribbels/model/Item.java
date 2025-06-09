@@ -10,24 +10,24 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Wither;
+import lombok.With;
 
 import java.util.List;
 
 @Builder
 @Getter
 @Setter
-@Wither
+@With
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Item {
 
     private Gear gear;
     private Rank rank;
-    public Set set;
+    private Set set;
 
     private Integer enhance;
-    public Integer level;
+    private Integer level;
 
     private Stat main;
     private List<Stat> substats;
@@ -42,10 +42,10 @@ public class Item {
     private Material material;
     private String mconfidence;
 
-    public String id;
-    public String modId;
-    public String ingameId;
-    public String ingameEquippedId;
+    private String id;
+    private String modId;
+    private String ingameId;
+    private String ingameEquippedId;
 
     private String equippedById;
     private String equippedByName;
@@ -53,12 +53,12 @@ public class Item {
 
     private boolean locked;
     private boolean disableMods;
-//    private boolean alreadyPredictedReforge;
-    public int reforgeable;
-    public int upgradeable;
-    public int convertable;
-    public int alreadyEquipped;
-    public int priority;
+
+    private int reforgeable;
+    private int upgradeable;
+    private int convertable;
+    private int alreadyEquipped;
+    private int priority;
     private int wss;
     private int reforgedWss;
     private int dpsWss;
@@ -68,8 +68,9 @@ public class Item {
     private String duplicateId;
     private String allowedMods;
 
-    public float[] tempStatAccArr;
+    private float[] tempStatAccArr;
 
+    @Override
     public String toString() {
         return new Gson().toJson(this);
     }

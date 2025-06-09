@@ -1,8 +1,6 @@
 package com.fribbels.request;
 
 import com.fribbels.model.ArtifactStats;
-import com.fribbels.model.BaseStats;
-import com.fribbels.model.HeroStats;
 import com.fribbels.model.Request;
 import lombok.Builder;
 import lombok.Getter;

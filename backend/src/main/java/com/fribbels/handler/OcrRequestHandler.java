@@ -1,16 +1,7 @@
 package com.fribbels.handler;
 
-import com.fribbels.Main;
-import com.fribbels.enums.Set;
-import com.fribbels.request.IdRequest;
-import com.fribbels.request.Ocr2Request;
-import com.fribbels.response.OcrResponse;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import org.apache.commons.lang3.StringUtils;
-import org.bytedeco.javacpp.BytePointer;
-import org.bytedeco.leptonica.PIX;
-import org.bytedeco.tesseract.TessBaseAPI;
+import static org.bytedeco.leptonica.global.leptonica.pixDestroy;
+import static org.bytedeco.leptonica.global.leptonica.pixRead;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,34 +11,27 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.bytedeco.leptonica.global.lept.pixDestroy;
-import static org.bytedeco.leptonica.global.lept.pixRead;
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.leptonica.PIX;
+import org.bytedeco.tesseract.TessBaseAPI;
+
+import com.fribbels.Main;
+import com.fribbels.enums.Set;
+import com.fribbels.request.IdRequest;
+import com.fribbels.request.Ocr2Request;
+import com.fribbels.response.OcrResponse;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
 public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
-    private TessBaseAPI tessBaseAPI;
-
     private static boolean initialized = false;
+    private static final int ENCHANCE_BUFFER_X = 50;
+    private static final int ENCHANCE_BUFFER_Y = 150;
 
-    public OcrRequestHandler() throws Exception {
-    }
+    private static TessBaseAPI tessBaseAPI;
 
-    private void initialize() throws Exception {
-        final String path = new File(Main.class.getProtectionDomain().getCodeSource().getLocation()
-                .toURI()).getParentFile().getParentFile().getParentFile().getPath();
-//        System.err.println("Path: " + path);
-
-        tessBaseAPI = new TessBaseAPI();
-        if (tessBaseAPI.Init(path + "/data/tessdata/eng.traineddata", "eng", 0) != 0) {
-            System.err.println("Could not initialize tesseract.");
-            System.exit(1);
-        }
-
-        tessBaseAPI.SetVariable("load_system_dawg", "false");
-        tessBaseAPI.SetVariable("load_freq_dawg", "false");
-        tessBaseAPI.SetVariable("classify_enable_learning", "0");
-        tessBaseAPI.SetVariable("user_defined_dpi", "70");
-        initialized = true;
+    public OcrRequestHandler() {
     }
 
     @Override
@@ -64,12 +48,12 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
             switch (path) {
                 case "/ocr":
-                    final IdRequest ocrRequest = parseRequest(exchange, IdRequest.class);
-                    sendResponse(exchange, handleOcrRequest(ocrRequest));
+                    final IdRequest ocrRequest = this.parseRequest(exchange, IdRequest.class);
+                    this.sendResponse(exchange, this.handleOcrRequest(ocrRequest));
                     return;
                 case "/ocr2":
-                    final Ocr2Request ocr2Request = parseRequest(exchange, Ocr2Request.class);
-                    sendResponse(exchange, handleOcr2Request(ocr2Request));
+                    final Ocr2Request ocr2Request = this.parseRequest(exchange, Ocr2Request.class);
+                    this.sendResponse(exchange, this.handleOcr2Request(ocr2Request));
                     return;
                 default:
                     System.out.println("No handler found for " + path);
@@ -78,7 +62,24 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
             e.printStackTrace();
         }
 
-        sendResponse(exchange, "ERROR");
+        this.sendResponse(exchange, "ERROR");
+    }
+
+    private static void initialize() throws Exception {
+        final String path = new File(Main.class.getProtectionDomain().getCodeSource().getLocation()
+                .toURI()).getParentFile().getParentFile().getParentFile().getPath();
+
+        tessBaseAPI = new TessBaseAPI();
+        if (tessBaseAPI.Init(path + "/data/tessdata/eng.traineddata", "eng", 0) != 0) {
+            System.err.println("Could not initialize tesseract.");
+            System.exit(1);
+        }
+
+        tessBaseAPI.SetVariable("load_system_dawg", "false");
+        tessBaseAPI.SetVariable("load_freq_dawg", "false");
+        tessBaseAPI.SetVariable("classify_enable_learning", "0");
+        tessBaseAPI.SetVariable("user_defined_dpi", "70");
+        initialized = true;
     }
 
     private String handleOcr2Request(final Ocr2Request request) {
@@ -94,22 +95,22 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
         final String substatsText;
         final String substatsNumbers;
 
-        if (request.getShifted()) {
-            enhance = readShiftedEnhance();
-            level = readShiftedLevel();
+        if (request.isShifted()) {
+            enhance = this.readShiftedEnhance();
+            level = this.readShiftedLevel();
         } else {
-            enhance = readEnhance();
-            level = readLevel();
+            enhance = this.readEnhance();
+            level = this.readLevel();
         }
 
         tessBaseAPI.SetImage(substatsImage);
 
-        if (request.getShifted()) {
-            substatsText = readShiftedSubstatsText();
-            substatsNumbers = readShiftedSubstatsNumbers();
+        if (request.isShifted()) {
+            substatsText = this.readShiftedSubstatsText();
+            substatsNumbers = this.readShiftedSubstatsNumbers();
         } else {
-            substatsText = readSubstatsText();
-            substatsNumbers = readSubstatsNumbers();
+            substatsText = this.readSubstatsText();
+            substatsNumbers = this.readSubstatsNumbers();
         }
 
         final OcrResponse ocrResponse = OcrResponse.builder()
@@ -123,7 +124,7 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
         pixDestroy(levelImage);
         pixDestroy(substatsImage);
-        return toJson(ocrResponse);
+        return this.toJson(ocrResponse);
     }
 
     private String handleOcrRequest(final IdRequest idRequest) {
@@ -132,17 +133,16 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
         tessBaseAPI.SetImage(image);
 
-        final Set set = readSet();
+        final Set set = this.readSet();
         final String title;
         final String main;
-//        final String hero = readEquippedBy();
 
-        if (isShiftedSet(set)) {
-            title = readShiftedTitle();
-            main = readShiftedMain();
+        if (this.isShiftedSet(set)) {
+            title = this.readShiftedTitle();
+            main = this.readShiftedMain();
         } else {
-            title = readTitle();
-            main = readMain();
+            title = this.readTitle();
+            main = this.readMain();
         }
 
         // Get OCR result
@@ -151,100 +151,107 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
                 .title(title)
                 .main(main)
                 .set(set.getName())
-//                .hero(hero)
+                // .hero(hero)
                 .build();
 
         System.out.println(ocrResponse);
 
         pixDestroy(image);
-        return toJson(ocrResponse);
+        return this.toJson(ocrResponse);
     }
 
-    private int enhanceBufferX = 50;
-    private int enhanceBufferY = 150;
-
-    private int substatsBufferX = 50;
-    private int substatsBufferY = 400;
-
     private String readTitle() {
-        setText();
-        return readRectangle(177, 185, 234, 170);
+        this.setText();
+        return this.readRectangle(177, 185, 234, 170);
     }
 
     private String readEnhance() {
-        setNumbersAndPlus();
-        return readRectangle(132-enhanceBufferX, 198-enhanceBufferY, 40, 19);
+        this.setNumbersAndPlus();
+        return this.readRectangle(132 - ENCHANCE_BUFFER_X, 198 - ENCHANCE_BUFFER_Y, 40, 19);
     }
 
     private String readLevel() {
-        setNumbers();
-        return readRectangle(65-enhanceBufferX, 212-enhanceBufferY, 25, 19);
+        this.setNumbers();
+        return this.readRectangle(65 - ENCHANCE_BUFFER_X, 212 - ENCHANCE_BUFFER_Y, 25, 19);
     }
 
     private String readMain() {
-        setNumbersAndTextAndPercentAndComma();
-        return readRectangle(85, 370, 318, 53);
+        this.setNumbersAndTextAndPercentAndComma();
+        return this.readRectangle(85, 370, 318, 53);
     }
 
     private String readSubstatsText() {
-        setText();
-        return readRectangle(0, 193, 1000, 580);
+        this.setText();
+        return this.readRectangle(0, 193, 1000, 580);
     }
 
     private String readSubstatsNumbers() {
-        setNumbersAndPercentAndComma();
-        return readRectangle(1041, 185, 354, 553);
-    }
-
-    private String readEquippedBy() {
-        setText();
-        return readRectangle(165, 825, 265, 34);
+        this.setNumbersAndPercentAndComma();
+        return this.readRectangle(1041, 185, 354, 553);
     }
 
     private String readShiftedTitle() {
-        setText();
-        return readRectangle(176, 160, 236, 170);
+        this.setText();
+        return this.readRectangle(176, 160, 236, 170);
     }
 
     private String readShiftedEnhance() {
-        setNumbersAndPlus();
-        return readRectangle(132-enhanceBufferX, 173-enhanceBufferY, 39, 20);
+        this.setNumbersAndPlus();
+        return this.readRectangle(132 - ENCHANCE_BUFFER_X, 173 - ENCHANCE_BUFFER_Y, 39, 20);
     }
 
     private String readShiftedLevel() {
-        setNumbers();
-        return readRectangle(65-enhanceBufferX, 188-enhanceBufferY, 27, 18);
+        this.setNumbers();
+        return this.readRectangle(65 - ENCHANCE_BUFFER_X, 188 - ENCHANCE_BUFFER_Y, 27, 18);
     }
 
     private String readShiftedMain() {
-        setNumbersAndTextAndPercentAndComma();
-        return readRectangle(84, 342, 323, 69);
+        this.setNumbersAndTextAndPercentAndComma();
+        return this.readRectangle(84, 342, 323, 69);
     }
 
     private String readShiftedSubstatsText() {
-        setText();
-        return readRectangle(0, 100, 1000, 567);
+        this.setText();
+        return this.readRectangle(0, 100, 1000, 567);
     }
 
     private String readShiftedSubstatsNumbers() {
-        setNumbersAndPercentAndComma();
-        return readRectangle(1034, 108, 339, 524);
+        this.setNumbersAndPercentAndComma();
+        return this.readRectangle(1034, 108, 339, 524);
     }
 
     private Set readSet() {
-        setText();
-        final String text = readRectangle(100, 572, 250, 69);
+        this.setText();
+        final String text = this.readRectangle(100, 572, 250, 69);
 
         final Map<Set, Integer> distances = Stream.of(Set.values()).collect(Collectors.toMap(
                 x -> x,
-                x -> StringUtils.getLevenshteinDistance(x.getName(), text)));
+                x -> this.levenshteinDistance(x.getName(), text)));
 
-        final Set likelySet = distances.entrySet().stream()
+        return distances.entrySet().stream()
                 .min(Comparator.comparingInt(Map.Entry::getValue))
                 .orElse(new AbstractMap.SimpleEntry<>(Set.SPEED, 0))
                 .getKey();
+    }
 
-        return likelySet;
+    private int levenshteinDistance(final String a, final String b) {
+        final int[][] dp = new int[a.length() + 1][b.length() + 1];
+
+        for (int i = 0; i <= a.length(); i++) {
+            for (int j = 0; j <= b.length(); j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = i;
+                } else {
+                    dp[i][j] = Math.min(
+                            dp[i - 1][j - 1] + (a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1),
+                            Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1));
+                }
+            }
+        }
+
+        return dp[a.length()][b.length()];
     }
 
     private String readRectangle(final int x, final int y, final int w, final int h) {
@@ -260,9 +267,9 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
 
     private boolean isShiftedSet(final Set set) {
         return set == Set.REVENGE
-        ||     set == Set.INJURY
-        ||     set == Set.PENETRATION
-        ||     set == Set.IMMUNITY;
+                || set == Set.INJURY
+                || set == Set.PENETRATION
+                || set == Set.IMMUNITY;
     }
 
     private void setNumbers() {
@@ -278,7 +285,8 @@ public class OcrRequestHandler extends RequestHandler implements HttpHandler {
     }
 
     private void setNumbersAndTextAndPercentAndComma() {
-        tessBaseAPI.SetVariable("tessedit_char_whitelist", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%,");
+        tessBaseAPI.SetVariable("tessedit_char_whitelist",
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%,");
     }
 
     private void setText() {
