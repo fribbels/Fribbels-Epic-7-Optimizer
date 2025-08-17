@@ -33,7 +33,7 @@ public class OptimizationDb {
     }
 
     public void setResultHeroes(final HeroStats[] newResultHeroStats, final long newMaximum) {
-        resultHeroStats = ArrayUtils.subarray(newResultHeroStats, 0, Integer.parseInt("" + newMaximum));
+        resultHeroStats = ArrayUtils.subarray(newResultHeroStats, 0, Integer.parseInt(String.valueOf(newMaximum)));
         maximum = newMaximum;
         filteredMaximum = 0;
         filteredIds = new HashSet<>();
@@ -97,10 +97,9 @@ public class OptimizationDb {
 
 //        System.out.println("START SORT");
         Sorter.sortHeroes(resultHeroStats, newColumn, newOrder);
-//        System.out.println("END SORT");
 
         int count = 0;
-        final int[] sortedFilteredIndices = new int[Integer.parseInt("" + maximum)];
+        final int[] sortedFilteredIndices = new int[Integer.parseInt(String.valueOf(maximum))];
         for (int i = 0; i < maximum; i++) {
             if (filteredIds.contains(resultHeroStats[i].getId())) {
                 sortedFilteredIndices[count] = i;

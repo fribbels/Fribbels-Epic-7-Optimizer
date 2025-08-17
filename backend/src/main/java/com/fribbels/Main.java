@@ -14,6 +14,9 @@ import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 public class Main {
@@ -40,6 +43,8 @@ public class Main {
     }
 
     System.out.println("START");
+
+    Logger.getLogger("com.aparapi").setLevel(Level.SEVERE);
 
     executorService = Executors.newFixedThreadPool(THREADS);
     start();

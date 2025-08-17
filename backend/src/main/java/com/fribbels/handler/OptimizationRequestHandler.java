@@ -7,15 +7,15 @@ import com.aparapi.device.OpenCLDevice;
 import com.aparapi.internal.kernel.KernelManager;
 import com.aparapi.internal.opencl.OpenCLPlatform;
 import com.fribbels.Main;
-import com.fribbels.db.ItemDb;
-import com.fribbels.gpu.GpuOptimizerKernel;
-import com.fribbels.gpu.SetFormat000OptimizerKernel;
 import com.fribbels.core.StatCalculator;
 import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
+import com.fribbels.db.ItemDb;
 import com.fribbels.db.OptimizationDb;
 import com.fribbels.enums.Gear;
 import com.fribbels.enums.Set;
+import com.fribbels.gpu.GpuOptimizerKernel;
+import com.fribbels.gpu.SetFormat000OptimizerKernel;
 import com.fribbels.model.Hero;
 import com.fribbels.model.HeroStats;
 import com.fribbels.model.Item;
@@ -39,15 +39,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,10 +55,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     public static int SETTING_MAXIMUM_RESULTS = 5_000_000;
     public static boolean SETTING_GPU = true;
 
-    private BaseStatsDb baseStatsDb;
-    private Map<String, OptimizationDb> optimizationDbs;
-    private HeroDb heroDb;
-    private ItemDb itemDb;
+    private final BaseStatsDb baseStatsDb;
+    private final Map<String, OptimizationDb> optimizationDbs;
+    private final HeroDb heroDb;
+    private final ItemDb itemDb;
     public static boolean inProgress = false;
 
     private static final Gson gson = new Gson();
@@ -226,7 +218,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         this.baseStatsDb = baseStatsDb;
         this.heroDb = heroDb;
         this.itemDb = itemDb;
-        this.instance = this;
+        instance = this;
         optimizationDbs = new HashMap<>();
 
         ExecutorService t = Executors.newFixedThreadPool(3);
@@ -374,37 +366,33 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     private boolean passesUpdatedFilter(final OptimizationRequest request, final HeroStats heroStats) {
-        if (heroStats.getAtk() < request.getInputAtkMinLimit() || heroStats.getAtk() > request.getInputAtkMaxLimit()
-                ||  heroStats.getHp()  < request.getInputHpMinLimit()  || heroStats.getHp() > request.getInputHpMaxLimit()
-                ||  heroStats.getDef() < request.getInputDefMinLimit() || heroStats.getDef() > request.getInputDefMaxLimit()
-                ||  heroStats.getSpd() < request.getInputSpdMinLimit() || heroStats.getSpd() > request.getInputSpdMaxLimit()
-                ||  heroStats.getCr() < request.getInputCrMinLimit()   || heroStats.getCr() > request.getInputCrMaxLimit()
-                ||  heroStats.getCd() < request.getInputCdMinLimit()   || heroStats.getCd() > request.getInputCdMaxLimit()
-                ||  heroStats.getEff() < request.getInputEffMinLimit() || heroStats.getEff() > request.getInputEffMaxLimit()
-                ||  heroStats.getRes() < request.getInputResMinLimit() || heroStats.getRes() > request.getInputResMaxLimit()
-                ||  heroStats.getCp() < request.getInputMinCpLimit() || heroStats.getCp() > request.getInputMaxCpLimit()
-                ||  heroStats.getHpps() < request.getInputMinHppsLimit() || heroStats.getHpps() > request.getInputMaxHppsLimit()
-                ||  heroStats.getEhp() < request.getInputMinEhpLimit() || heroStats.getEhp() > request.getInputMaxEhpLimit()
-                ||  heroStats.getEhpps() < request.getInputMinEhppsLimit() || heroStats.getEhpps() > request.getInputMaxEhppsLimit()
-                ||  heroStats.getDmg() < request.getInputMinDmgLimit() || heroStats.getDmg() > request.getInputMaxDmgLimit()
-                ||  heroStats.getDmgps() < request.getInputMinDmgpsLimit() || heroStats.getDmgps() > request.getInputMaxDmgpsLimit()
-                ||  heroStats.getMcdmg() < request.getInputMinMcdmgLimit() || heroStats.getMcdmg() > request.getInputMaxMcdmgLimit()
-                ||  heroStats.getMcdmgps() < request.getInputMinMcdmgpsLimit() || heroStats.getMcdmgps() > request.getInputMaxMcdmgpsLimit()
-                ||  heroStats.getDmgh() < request.getInputMinDmgHLimit() || heroStats.getDmgh() > request.getInputMaxDmgHLimit()
-                ||  heroStats.getDmgd() < request.getInputMinDmgDLimit() || heroStats.getDmgd() > request.getInputMaxDmgDLimit()
-                ||  heroStats.getS1() < request.getInputMinS1Limit() || heroStats.getS1() > request.getInputMaxS1Limit()
-                ||  heroStats.getS2() < request.getInputMinS2Limit() || heroStats.getS2() > request.getInputMaxS2Limit()
-                ||  heroStats.getS3() < request.getInputMinS3Limit() || heroStats.getS3() > request.getInputMaxS3Limit()
-                ||  heroStats.getScore() < request.getInputMinScoreLimit() || heroStats.getScore() > request.getInputMaxScoreLimit()
-                ||  heroStats.getBs() < request.getInputMinBSLimit() || heroStats.getBs() > request.getInputMaxBSLimit()
-                ||  heroStats.getPriority() < request.getInputMinPriorityLimit() || heroStats.getPriority() > request.getInputMaxPriorityLimit()
-                ||  heroStats.getUpgrades() < request.getInputMinUpgradesLimit() || heroStats.getUpgrades() > request.getInputMaxUpgradesLimit()
-                ||  heroStats.getConversions() < request.getInputMinConversionsLimit() || heroStats.getConversions() > request.getInputMaxConversionsLimit()
-                ||  heroStats.getEq() < request.getInputMinEquippedLimit() || heroStats.getEq() > request.getInputMaxEquippedLimit()
-        ) {
-            return false;
-        }
-        return true;
+        return heroStats.getAtk() >= request.getInputAtkMinLimit() && heroStats.getAtk() <= request.getInputAtkMaxLimit()
+            && heroStats.getHp() >= request.getInputHpMinLimit() && heroStats.getHp() <= request.getInputHpMaxLimit()
+            && heroStats.getDef() >= request.getInputDefMinLimit() && heroStats.getDef() <= request.getInputDefMaxLimit()
+            && heroStats.getSpd() >= request.getInputSpdMinLimit() && heroStats.getSpd() <= request.getInputSpdMaxLimit()
+            && heroStats.getCr() >= request.getInputCrMinLimit() && heroStats.getCr() <= request.getInputCrMaxLimit()
+            && heroStats.getCd() >= request.getInputCdMinLimit() && heroStats.getCd() <= request.getInputCdMaxLimit()
+            && heroStats.getEff() >= request.getInputEffMinLimit() && heroStats.getEff() <= request.getInputEffMaxLimit()
+            && heroStats.getRes() >= request.getInputResMinLimit() && heroStats.getRes() <= request.getInputResMaxLimit()
+            && heroStats.getCp() >= request.getInputMinCpLimit() && heroStats.getCp() <= request.getInputMaxCpLimit()
+            && heroStats.getHpps() >= request.getInputMinHppsLimit() && heroStats.getHpps() <= request.getInputMaxHppsLimit()
+            && heroStats.getEhp() >= request.getInputMinEhpLimit() && heroStats.getEhp() <= request.getInputMaxEhpLimit()
+            && heroStats.getEhpps() >= request.getInputMinEhppsLimit() && heroStats.getEhpps() <= request.getInputMaxEhppsLimit()
+            && heroStats.getDmg() >= request.getInputMinDmgLimit() && heroStats.getDmg() <= request.getInputMaxDmgLimit()
+            && heroStats.getDmgps() >= request.getInputMinDmgpsLimit() && heroStats.getDmgps() <= request.getInputMaxDmgpsLimit()
+            && heroStats.getMcdmg() >= request.getInputMinMcdmgLimit() && heroStats.getMcdmg() <= request.getInputMaxMcdmgLimit()
+            && heroStats.getMcdmgps() >= request.getInputMinMcdmgpsLimit() && heroStats.getMcdmgps() <= request.getInputMaxMcdmgpsLimit()
+            && heroStats.getDmgh() >= request.getInputMinDmgHLimit() && heroStats.getDmgh() <= request.getInputMaxDmgHLimit()
+            && heroStats.getDmgd() >= request.getInputMinDmgDLimit() && heroStats.getDmgd() <= request.getInputMaxDmgDLimit()
+            && heroStats.getS1() >= request.getInputMinS1Limit() && heroStats.getS1() <= request.getInputMaxS1Limit()
+            && heroStats.getS2() >= request.getInputMinS2Limit() && heroStats.getS2() <= request.getInputMaxS2Limit()
+            && heroStats.getS3() >= request.getInputMinS3Limit() && heroStats.getS3() <= request.getInputMaxS3Limit()
+            && heroStats.getScore() >= request.getInputMinScoreLimit() && heroStats.getScore() <= request.getInputMaxScoreLimit()
+            && heroStats.getBs() >= request.getInputMinBSLimit() && heroStats.getBs() <= request.getInputMaxBSLimit()
+            && heroStats.getPriority() >= request.getInputMinPriorityLimit() && heroStats.getPriority() <= request.getInputMaxPriorityLimit()
+            && heroStats.getUpgrades() >= request.getInputMinUpgradesLimit() && heroStats.getUpgrades() <= request.getInputMaxUpgradesLimit()
+            && heroStats.getConversions() >= request.getInputMinConversionsLimit() && heroStats.getConversions() <= request.getInputMaxConversionsLimit()
+            && heroStats.getEq() >= request.getInputMinEquippedLimit() && heroStats.getEq() <= request.getInputMaxEquippedLimit();
     }
 
     public String prepareExecution() {
@@ -521,9 +509,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         for (int i = 0; i < items.length; i++) {
             final Item item = items[i];
-            for (int j = 0; j < ARG_COUNT - 5; j++) {
-                output[i*ARG_COUNT + j] = item.tempStatAccArr[j];
-            }
+            System.arraycopy(item.tempStatAccArr, 0, output, i * 17 + 0, ARG_COUNT - 5);
             output[i*ARG_COUNT + ARG_COUNT - 5] = item.set.index;
             output[i*ARG_COUNT + ARG_COUNT - 4] = item.priority;
             output[i*ARG_COUNT + ARG_COUNT - 3] = item.upgradeable;
@@ -794,7 +780,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     } else {
                         try {
                             passes = new boolean[max];
-                            passesId = "" + finalI;
+                            passesId = String.valueOf(finalI);
                             passesPool.put(passesId, PassesContainer.builder()
                                     .id(passesId)
                                     .passes(passes)
@@ -889,7 +875,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                         break;
                                     }
 
-                                    result.setId("" + resultsIndex);
+                                    result.setId(String.valueOf(resultsIndex));
                                     resultHeroStats[(int) resultsIndex] = result;
                                 }
                             }
@@ -979,7 +965,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                                             if (passesFilter) {
                                                 final long resultsIndex = resultsCounter.getAndIncrement();
                                                 if (resultsIndex < MAXIMUM_RESULTS) {
-                                                    result.setId("" + resultsIndex);
+                                                    result.setId(String.valueOf(resultsIndex));
 
 //                                                    final long index1D = finalW * hSize * aSize * nSize * rSize * bSize + h * aSize * nSize * rSize * bSize + a * nSize * rSize * bSize + n * rSize * bSize + r * bSize + b;
 
@@ -1042,7 +1028,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             executorService.awaitTermination(50000000, TimeUnit.SECONDS);
 
             try {
-                final long size = maxReached.get() == MAXIMUM_RESULTS-1 ? MAXIMUM_RESULTS : resultsCounter.get();
+                final long size = Math.min(5000000, maxReached.get() == MAXIMUM_RESULTS-1 ? MAXIMUM_RESULTS : resultsCounter.get());
                 System.out.println("MaxReached: " + size);
 
                 optimizationDb.setResultHeroes(resultHeroStats, size);
@@ -1133,11 +1119,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         final int index = calculateSetIndex(indexArray);
         //        System.out.println(Arrays.toString(indexArray));
 
-        if (request.boolArr[index] == false) {
-            return false;
-        }
-
-        return true;
+        return request.boolArr[index];
     }
 
     public Map<Gear, List<Item>> buildItemsByGear(final List<Item> items) {
