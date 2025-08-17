@@ -347,8 +347,10 @@ module.exports = {
 
                 bonusStats.aeiHealth += artifactStats.health;
                 bonusStats.aeiAttack += artifactStats.attack;
+                bonusStats.aeiDefense += artifactStats.defense;
                 bonusStats.artifactHealth = artifactStats.health;
                 bonusStats.artifactAttack = artifactStats.attack;
+                bonusStats.artifactDefense = artifactStats.defense;
 
             }
         }

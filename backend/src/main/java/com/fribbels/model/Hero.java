@@ -6,15 +6,10 @@ import com.fribbels.request.BonusStatsRequest;
 import com.fribbels.request.ModStatsRequest;
 import com.fribbels.request.OptimizationRequest;
 import com.fribbels.request.SkillOptionsRequest;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Wither;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -96,6 +91,7 @@ public class Hero {
 
     public float artifactAttack;
     public float artifactHealth;
+    public float artifactDefense;
 
     public String artifactName;
     public String artifactLevel;
@@ -223,11 +219,7 @@ public class Hero {
         final Gear gear = item.getGear();
         final Item previousItem = addToEquipment(gear, item);
 
-        if (previousItem != null) {
-            return previousItem;
-        }
-
-        return null;
+        return previousItem;
     }
 
     private Item addToEquipment(final Gear gear, final Item item) {
@@ -279,6 +271,7 @@ public class Hero {
 
         this.artifactAttack = bonusStats.getArtifactAttack();
         this.artifactHealth = bonusStats.getArtifactHealth();
+        this.artifactDefense = bonusStats.getArtifactDefense();
 
         this.artifactName = bonusStats.getArtifactName();
         this.artifactLevel = bonusStats.getArtifactLevel();

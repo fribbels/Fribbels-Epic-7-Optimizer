@@ -6,13 +6,7 @@ import com.fribbels.db.BaseStatsDb;
 import com.fribbels.db.HeroDb;
 import com.fribbels.db.ItemDb;
 import com.fribbels.enums.Gear;
-import com.fribbels.model.ArtifactStats;
-import com.fribbels.model.AugmentedStats;
-import com.fribbels.model.BaseStats;
-import com.fribbels.model.Hero;
-import com.fribbels.model.HeroStats;
-import com.fribbels.model.Item;
-import com.fribbels.model.Mod;
+import com.fribbels.model.*;
 import com.fribbels.request.*;
 import com.fribbels.response.GetAllHeroesResponse;
 import com.fribbels.response.GetHeroByIdResponse;
@@ -323,6 +317,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final ArtifactStats artifactStats = artifactStatsDb.getArtifactStats(hero.getArtifactName(), parseArtifactLevel(hero.getArtifactLevel()));
         hero.artifactHealth = artifactStats.getHealth();
         hero.artifactAttack = artifactStats.getAttack();
+        hero.artifactDefense = artifactStats.getDefense();
 
         // Update equipment
         final Map<Gear, Item> equipment = hero.getEquipment();
@@ -383,6 +378,7 @@ public class HeroesRequestHandler extends RequestHandler implements HttpHandler 
         final ArtifactStats artifactStats = artifactStatsDb.getArtifactStats(hero.getArtifactName(), parseArtifactLevel(hero.getArtifactLevel()));
         hero.artifactHealth = artifactStats.getHealth();
         hero.artifactAttack = artifactStats.getAttack();
+        hero.artifactDefense = artifactStats.getDefense();
 
         final List<String> itemIds = build.getItems();
         final List<Item> items = itemDb.getItemsById(itemIds);

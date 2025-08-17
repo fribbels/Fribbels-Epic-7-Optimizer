@@ -823,7 +823,7 @@ module.exports = {
                         selectedGear[i].substats[j].reforgedValue = moddedGear[i].substats[j].reforgedValue;
                         selectedGear[i].substats[j].reforged = true;
                     }
-                    continue;
+
                 }
             }
 
@@ -1270,6 +1270,7 @@ async function submitOptimizationFilterRequest() {
     params.hero = heroResponse.hero;
     params.hero.artifactAttack = 0;
     params.hero.artifactHealth = 0;
+    params.hero.artifactDefense = 0;
     if (params.hero.artifactName && params.hero.artifactName != "None") {
         const artifactLevelText = params.hero.artifactLevel;
         if (artifactLevelText != "None") {
@@ -1278,6 +1279,7 @@ async function submitOptimizationFilterRequest() {
 
             params.hero.artifactHealth += artifactStats.health;
             params.hero.artifactAttack += artifactStats.attack;
+            params.hero.artifactDefense += artifactStats.defense;
         }
     }
 
@@ -1327,6 +1329,7 @@ async function submitOptimizationRequest() {
 
     request.hero.artifactAttack = 0;
     request.hero.artifactHealth = 0;
+    request.hero.artifactDefense = 0;
     if (request.hero.artifactName && request.hero.artifactName != "None") {
         const artifactLevelText = request.hero.artifactLevel;
         if (artifactLevelText != "None") {
@@ -1335,6 +1338,7 @@ async function submitOptimizationRequest() {
 
             request.hero.artifactHealth = artifactStats.health;
             request.hero.artifactAttack = artifactStats.attack;
+            request.hero.artifactDefense = artifactStats.defense;
         }
     }
 

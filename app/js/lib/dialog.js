@@ -222,7 +222,7 @@ module.exports = {
 
         for (var i = 30; i >= 0; i--) {
             var stats = Artifact.getStats(name, i)
-            html += `<option value="${i}" >${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")})</option>`
+            html += `<option value="${i}" >${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")}, ${stats.defense.toFixed(1)} ${i18next.t("def")})</option>`
         }
 
         $("select[id='editArtifactLevel']").find('option').remove().end().append(html);
@@ -1994,7 +1994,7 @@ function getArtifactEnhanceHtml(hero) {
         if (artifactLevel && artifactLevel != "None") {
             for (var i = 30; i >= 0; i--) {
                 var stats = Artifact.getStats(artifactName, i)
-                html += `<option value="${i}" ${artifactLevel == i ? "selected" : ""}>${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")})</option>`
+                html += `<option value="${i}" ${artifactLevel == i ? "selected" : ""}>${i} - (${stats.attack.toFixed(1)} ${i18next.t("atk")}, ${stats.health.toFixed(1)} ${i18next.t("hp")}, ${stats.defense.toFixed(1)} ${i18next.t("def")})</option>`
             }
 
         }

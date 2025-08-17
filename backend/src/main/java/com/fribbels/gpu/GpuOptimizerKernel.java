@@ -177,6 +177,7 @@ public class GpuOptimizerKernel extends Kernel {
 
     @Constant final float artifactHealth;
     @Constant final float artifactAttack;
+    @Constant final float artifactDefense;
 
     @Constant final int inputMinUpgradesLimit;
     @Constant final int inputMaxUpgradesLimit;
@@ -414,6 +415,7 @@ public class GpuOptimizerKernel extends Kernel {
 
         artifactAttack = request.hero.artifactAttack;
         artifactHealth = request.hero.artifactHealth;
+        artifactDefense = request.hero.artifactDefense;
 
         inputMinUpgradesLimit = request.inputMinUpgradesLimit;
         inputMaxUpgradesLimit = request.inputMaxUpgradesLimit;
@@ -778,7 +780,7 @@ public class GpuOptimizerKernel extends Kernel {
 
             final float bsHp = (hp - baseHp - artifactHealth - (hpSet * hpSetBonus) + (torrentSet * hpSetBonus/2)) / baseHp * 100;
             final float bsAtk = (atk - baseAtk - artifactAttack - (atkSet * atkSetBonus)) / baseAtk * 100;
-            final float bsDef = (def - baseDef - (defSet * defSetBonus)) / baseDef * 100;
+            final float bsDef = (def - baseDef - artifactDefense - (defSet * defSetBonus)) / baseDef * 100;
             final float bsCr = (cr - baseCr - (crSet * 12));
             final float bsCd = (cd - baseCd - (cdSet * 60));
             final float bsEff = (eff - baseEff - (effSet * 20));

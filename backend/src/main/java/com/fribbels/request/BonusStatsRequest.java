@@ -42,6 +42,7 @@ public class BonusStatsRequest extends Request {
 
     private float artifactAttack;
     private float artifactHealth;
+    private float artifactDefense;
 
     private String artifactName;
     private String artifactLevel;

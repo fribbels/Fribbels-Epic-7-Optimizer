@@ -65,6 +65,7 @@ module.exports = {
             artifactLevel: bonusStats.artifactLevel,
             artifactAttack: bonusStats.artifactAttack,
             artifactHealth: bonusStats.artifactHealth,
+            artifactDefense: bonusStats.artifactDefense,
             imprintNumber: bonusStats.imprintNumber,
             eeNumber: bonusStats.eeNumber,
 
@@ -112,6 +113,7 @@ module.exports = {
         for (var value of Object.values(fixedModel)) {
             value.attack = value.stats.attack;
             value.health = value.stats.health;
+            value.defense = value.stats.defense;
         }
         return post('/heroes/setArtifactStats', {
             artifactStatsByName: fixedModel

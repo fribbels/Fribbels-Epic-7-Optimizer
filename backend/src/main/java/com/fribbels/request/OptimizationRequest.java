@@ -6,12 +6,7 @@ import com.fribbels.model.DamageMultipliers;
 import com.fribbels.model.Hero;
 import com.fribbels.model.Item;
 import com.fribbels.model.Request;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Wither;
 
 import java.util.List;
@@ -65,6 +60,7 @@ public class OptimizationRequest extends Request {
 
     private float artifactAttack;
     private float artifactHealth;
+    private float artifactDefense;
 
     public int inputAtkMinLimit;
     public int inputAtkMaxLimit = Integer.MAX_VALUE;

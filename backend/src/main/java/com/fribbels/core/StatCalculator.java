@@ -168,7 +168,7 @@ flat2mod -> ddj
 
         final float bsHp = (hp - base.hp - hero.artifactHealth - (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/2 : 0)) / base.hp * 100;
         final float bsAtk = (atk - base.atk - hero.artifactAttack - (sets[2] > 1 ? sets[2] / 4 * atkSetBonus : 0)) / base.atk * 100;
-        final float bsDef = (def - base.def - (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) / base.def * 100;
+        final float bsDef = (def - base.def - hero.artifactDefense - (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) / base.def * 100;
         final float bsCr = (cr - base.cr - (sets[4] > 1 ? sets[4] / 2 * 12 : 0));
         final float bsCd = (cd - base.cd - (sets[6] > 3 ? 60 : 0));
         final float bsEff = (eff - base.eff - (sets[5] > 1 ? sets[5] / 2 * 20 : 0));

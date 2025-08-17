@@ -191,7 +191,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
 
             final float bsHp = (hp - baseHp - artifactHealth - (hpSet * hpSetBonus) + (torrentSet * hpSetBonus/2)) / baseHp * 100;
             final float bsAtk = (atk - baseAtk - artifactAttack - (atkSet * atkSetBonus)) / baseAtk * 100;
-            final float bsDef = (def - baseDef - (defSet * defSetBonus)) / baseDef * 100;
+            final float bsDef = (def - baseDef - artifactDefense - (defSet * defSetBonus)) / baseDef * 100;
             final float bsCr = (cr - baseCr - (crSet * 12));
             final float bsCd = (cd - baseCd - (cdSet * 60));
             final float bsEff = (eff - baseEff - (effSet * 20));
