@@ -49,7 +49,9 @@ const fourPieceSets = [
     "CounterSet",
     "RageSet",
     "RevengeSet",
-    "InjurySet"
+    "InjurySet",
+    "ReversalSet",
+    "RiposteSet",
 ]
 
 function renderStar(value) {

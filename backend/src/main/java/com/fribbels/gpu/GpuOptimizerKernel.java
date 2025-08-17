@@ -35,6 +35,7 @@ public class GpuOptimizerKernel extends Kernel {
     @Constant final float defSetBonus;
     @Constant final float speedSetBonus;
     @Constant final float revengeSetBonus;
+    @Constant final float reversalSetBonus;
     @Constant final float penSetDmgBonus;
 
     @Constant final float targetDefense;
@@ -217,6 +218,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float defSetBonus,
             final float speedSetBonus,
             final float revengeSetBonus,
+            final float reversalSetBonus,
             final float penSetDmgBonus,
             final float targetDefense,
             final float bonusMaxAtk,
@@ -328,6 +330,7 @@ public class GpuOptimizerKernel extends Kernel {
         this.defSetBonus = defSetBonus;
         this.speedSetBonus = speedSetBonus;
         this.revengeSetBonus = revengeSetBonus;
+        this.reversalSetBonus = reversalSetBonus;
         this.penSetDmgBonus = penSetDmgBonus;
 
         this.targetDefense = targetDefense;
@@ -621,12 +624,19 @@ public class GpuOptimizerKernel extends Kernel {
             final int iRset = (int)rSet;
             final int iBset = (int)bSet;
 
-            final int setIndex = iWset * 1889568
-                    + iHset * 104976
-                    + iAset * 5832
-                    + iNset * 324
-                    + iRset * 18
-                    + iBset;
+            final int setIndex = iWset * 3200000
+                + iHset * 160000
+                + iAset * 8000
+                + iNset * 400
+                + iRset * 20
+                + iBset;
+
+//            final int setIndex = iWset * 1889568
+//                    + iHset * 104976
+//                    + iAset * 5832
+//                    + iNset * 324
+//                    + iRset * 18
+//                    + iBset;
 
 //            final int setIndex = iWset * 1048576
 //                    + iHset * 65536
@@ -678,7 +688,7 @@ public class GpuOptimizerKernel extends Kernel {
 //            final int protectionSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
 //            final int injurySet = min(1, setSolutionBitMasks[setIndex] & (1 << 26));
             final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28)) + min(1, setSolutionBitMasks[setIndex] & (1 << 29));
-
+            final int reversalSet = min(1, setSolutionBitMasks[setIndex] & (1 << 30));
 
             // Set calculations using localbuffer instead off mask
 //            localSetsBuffer[setJump] = 0;
@@ -724,7 +734,7 @@ public class GpuOptimizerKernel extends Kernel {
             final int cd =     (int) (baseCd + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 60) + bonusCd + aeiCd);
             final int eff =    (int) (baseEff   + wEff+hEff+aEff+nEff+rEff+bEff + (effSet * 20) + bonusEff + aeiEff);
             final int res =    (int) (baseRes   + wRes+hRes+aRes+nRes+rRes+bRes + (resSet * 20) + bonusRes + aeiRes);
-            final int spd =    (int) (baseSpeed + wSpeed+hSpeed+aSpeed+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + bonusSpeed + aeiSpeed);
+            final int spd =    (int) (baseSpeed + wSpeed+hSpeed+aSpeed+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + (reversalSet * reversalSetBonus) + bonusSpeed + aeiSpeed);
 
             final float critRate = min(100, cr) / 100f;
             final float critDamage = min(350, cd) / 100f;
@@ -785,7 +795,7 @@ public class GpuOptimizerKernel extends Kernel {
             final float bsCd = (cd - baseCd - (cdSet * 60));
             final float bsEff = (eff - baseEff - (effSet * 20));
             final float bsRes = (res - baseRes - (resSet * 20));
-            final float bsSpd = (spd - baseSpeed - (speedSet * speedSetBonus) - (revengeSet * revengeSetBonus));
+            final float bsSpd = (spd - baseSpeed - (speedSet * speedSetBonus) - (revengeSet * revengeSetBonus) - (reversalSet * reversalSetBonus));
 
 //            final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
 //            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);

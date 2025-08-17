@@ -1411,7 +1411,7 @@ async function drawPreview() {
 }
 
 const fourPieceSets = [
-    "AttackSet", "SpeedSet", "DestructionSet", "LifestealSet", "ProtectionSet", "CounterSet",  "RageSet", "RevengeSet", "InjurySet"
+    "AttackSet", "SpeedSet", "DestructionSet", "LifestealSet", "ProtectionSet", "CounterSet",  "RageSet", "RevengeSet", "InjurySet", "ReversalSet", "RiposteSet"
 ]
 
 const twoPieceSets = [

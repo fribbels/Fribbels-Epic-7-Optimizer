@@ -18,6 +18,7 @@ public class StatCalculator {
     private float defSetBonus;
     private float speedSetBonus;
     private float revengeSetBonus;
+    private float reversalSetBonus;
 
     private float bonusBaseAtk;
     private float bonusBaseHp;
@@ -40,6 +41,7 @@ public class StatCalculator {
 
         speedSetBonus = 0.25f * base.spd;
         revengeSetBonus = 0.12f * base.spd;
+        reversalSetBonus = 0.15f * base.spd;
 
         bonusBaseAtk = base.atk + base.atk * (hero.bonusAtkPercent + hero.aeiAtkPercent) / 100f + hero.bonusAtk + hero.aeiAtk;
         bonusBaseHp = base.hp + base.hp * (hero.bonusHpPercent + hero.aeiHpPercent) / 100f + hero.bonusHp + hero.aeiHp;
@@ -90,7 +92,7 @@ public class StatCalculator {
         final int cd =   (int) (base.cd    + accs0[7]+accs1[7]+accs2[7]+accs3[7]+accs4[7]+accs5[7] + (sets[6] > 3 ? 60 : 0) + hero.bonusCd + hero.aeiCd);
         final int eff =  (int) (base.eff   + accs0[8]+accs1[8]+accs2[8]+accs3[8]+accs4[8]+accs5[8] + (sets[5] > 1 ? sets[5] / 2 * 20 : 0) + hero.bonusEff + hero.aeiEff);
         final int res =  (int) (base.res   + accs0[9]+accs1[9]+accs2[9]+accs3[9]+accs4[9]+accs5[9] + (sets[9] > 1 ? sets[9] / 2 * 20 : 0) + hero.bonusRes + hero.aeiRes);
-        final int spd =  (int) (base.spd   + accs0[10]+accs1[10]+accs2[10]+accs3[10]+accs4[10]+accs5[10] + (sets[3] > 3 ? speedSetBonus : 0) + (sets[14] > 3 ? revengeSetBonus : 0) + hero.bonusSpeed + hero.aeiSpeed);
+        final int spd =  (int) (base.spd   + accs0[10]+accs1[10]+accs2[10]+accs3[10]+accs4[10]+accs5[10] + (sets[3] > 3 ? speedSetBonus : 0) + (sets[14] > 3 ? revengeSetBonus : 0)  + (sets[18] > 3 ? reversalSetBonus : 0) + hero.bonusSpeed + hero.aeiSpeed);
 
 //        final int atk = (int) (((base.atk + mapAccumulatorArrsToFloat(0, accs)  + (sets[2] > 1 ? sets[2] / 4 * 0.35f * base.atk : 0) + base.atk * hero.bonusAtkPercent / 100f) + hero.bonusAtk) * (1 + base.bonusMaxAtkPercent/100f));
 //        final int hp = (int) (((base.hp   + mapAccumulatorArrsToFloat(1, accs)  + (sets[0] > 1 ? sets[0] / 2 * 0.15f * base.hp : 0) + base.hp * hero.bonusHpPercent / 100f) + hero.bonusHp) * (1 + base.bonusMaxHpPercent/100f));
@@ -173,7 +175,7 @@ flat2mod -> ddj
         final float bsCd = (cd - base.cd - (sets[6] > 3 ? 60 : 0));
         final float bsEff = (eff - base.eff - (sets[5] > 1 ? sets[5] / 2 * 20 : 0));
         final float bsRes = (res - base.res - (sets[9] > 1 ? sets[9] / 2 * 20 : 0));
-        final float bsSpd = (spd - base.spd - (sets[3] > 3 ? speedSetBonus : 0) - (sets[14] > 3 ? revengeSetBonus : 0));
+        final float bsSpd = (spd - base.spd - (sets[3] > 3 ? speedSetBonus : 0) - (sets[14] > 3 ? revengeSetBonus : 0) - (sets[18] > 3 ? reversalSetBonus : 0));
 
 //        hp: (row.hp - base.hp - artiHp - bonusSetMaxHp/100*base.hp - bonusSetTorrent/100*base.hp) / base.hp * 100,
 //                atk: (row.atk - base.atk - artiAtk - bonusSetAtt/100*base.atk) / base.atk * 100,
@@ -290,6 +292,7 @@ flat2mod -> ddj
 
     public int[] buildSetsArr(final Item[] items) {
         final int[] sets = new int[SET_COUNT];
+
         sets[items[0].set.index]++;
         sets[items[1].set.index]++;
         sets[items[2].set.index]++;

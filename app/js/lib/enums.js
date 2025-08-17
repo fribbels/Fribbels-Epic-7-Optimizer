@@ -23,6 +23,8 @@ const setEnum = {
     'IMMUNITY': 'immunity',
     'TORRENT': 'torrent',
     'PROTECTION': 'protection',
+    'REVERSAL': 'reversal',
+    'RIPOSTE': 'riposte',
 };
 
 const rankEnum = {
@@ -60,7 +62,7 @@ const heroes = {
             "eff": 0,
             "efr": 0,
             "dac": 0.05
-        }       
+        }
     }
 }
 

@@ -75,7 +75,7 @@ module.exports = {
                 const artifactOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/cache/artifactdata.json"));
                 artifactsByName = artifactOverride;
             } else {
-                const artifactOverride = JSON.parse(await Files.readFileSync(Files.getDataPath() + "/cache/artifactdata.json"));
+                const artifactOverride = await fetchCache(ARTIFACT_CACHE);
                 artifactsByName = artifactOverride;
             }
             console.warn("ARTIFACT OVERRIDES")

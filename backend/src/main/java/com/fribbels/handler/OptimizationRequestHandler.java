@@ -70,11 +70,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private boolean canUseGpu = true;
 
-    public static final int SET_COUNT = 18;
+    public static final int SET_COUNT = 20;
     public static final int ARG_COUNT = 17;
 
     //
-    private static final int SET_EXPONENTIAL = 34012224; // 16 ^ 6
+    private static final int SET_EXPONENTIAL = 64000000; // 20 ^ 6
 
     private boolean[] permutations = new boolean[SET_EXPONENTIAL];
     private int[] setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
@@ -107,6 +107,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                                         int l = 0;
 
+                                        l += counters[19] / 4 > 0 ? 1 : 0; // riposte
+                                        l <<= 1;
+                                        l += counters[18] / 4 > 0 ? 1 : 0; // reversal
+                                        l <<= 1;
                                         l += counters[17] / 2 > 0 ? 1 : 0; // torrent 1
                                         l <<= 1;
                                         l += counters[17] / 2 - 1 > 0 ? 1 : 0; // torrent 2
@@ -509,7 +513,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         for (int i = 0; i < items.length; i++) {
             final Item item = items[i];
-            System.arraycopy(item.tempStatAccArr, 0, output, i * 17 + 0, ARG_COUNT - 5);
+            System.arraycopy(item.tempStatAccArr, 0, output, i * 17, ARG_COUNT - 5);
             output[i*ARG_COUNT + ARG_COUNT - 5] = item.set.index;
             output[i*ARG_COUNT + ARG_COUNT - 4] = item.priority;
             output[i*ARG_COUNT + ARG_COUNT - 3] = item.upgradeable;
@@ -649,6 +653,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
         final float speedSetBonus = 0.25f * base.spd;
         final float revengeSetBonus = 0.12f * base.spd;
+        final float reversalSetBonus = 0.15f * base.spd;
 
         final float bonusBaseAtk = base.atk + base.atk * (hero.bonusAtkPercent + hero.aeiAtkPercent) / 100f + hero.bonusAtk + hero.aeiAtk;
         final float bonusBaseHp = base.hp + base.hp * (hero.bonusHpPercent + hero.aeiHpPercent) / 100f + hero.bonusHp + hero.aeiHp;
@@ -707,6 +712,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     defSetBonus,
                     speedSetBonus,
                     revengeSetBonus,
+                    reversalSetBonus,
                     penSetDmgBonus,
                     StatCalculator.SETTING_PEN_DEFENSE,
                     bonusMaxAtk,
@@ -1074,7 +1080,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public int[] convertSetsToSetCounters(final int[] sets) {
-        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Length of SET_COUNT
+        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Length of SET_COUNT
 
         for (int i = 0; i < sets.length; i++) {
             output[sets[i]]++;
@@ -1139,18 +1145,24 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return sets;
     }
 
-    private static final int POW_18_5 = 1889568;
-    private static final int POW_18_4 = 104976;
-    private static final int POW_18_3 = 5832;
-    private static final int POW_18_2 = 324;
-    private static final int POW_18_1 = 18;
+    private static final int POW_20_5 = 3200000;
+    private static final int POW_20_4 = 160000;
+    private static final int POW_20_3 = 8000;
+    private static final int POW_20_2 = 400;
+    private static final int POW_20_1 = 20;
+
+//    private static final int POW_18_5 = 1889568;
+//    private static final int POW_18_4 = 104976;
+//    private static final int POW_18_3 = 5832;
+//    private static final int POW_18_2 = 324;
+//    private static final int POW_18_1 = 18;
 
     public int calculateSetIndex(final int[] indices) { // sorted, size 6, elements [0-17]
-        return indices[0] * POW_18_5
-                + indices[1] * POW_18_4
-                + indices[2] * POW_18_3
-                + indices[3] * POW_18_2
-                + indices[4] * POW_18_1
+        return indices[0] * POW_20_5
+                + indices[1] * POW_20_4
+                + indices[2] * POW_20_3
+                + indices[3] * POW_20_2
+                + indices[4] * POW_20_1
                 + indices[5];
     }
 
@@ -1408,6 +1420,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final float defSetBonus,
             final float speedSetBonus,
             final float revengeSetBonus,
+            final float reversalSetBonus,
             final float penSetDmgBonus,
             final float targetDefense,
             final float bonusMaxAtk,
@@ -1444,6 +1457,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                     defSetBonus,
                     speedSetBonus,
                     revengeSetBonus,
+                    reversalSetBonus,
                     penSetDmgBonus,
                     targetDefense,
                     bonusMaxAtk,
@@ -1480,6 +1494,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
                 defSetBonus,
                 speedSetBonus,
                 revengeSetBonus,
+                reversalSetBonus,
                 penSetDmgBonus,
                 targetDefense,
                 bonusMaxAtk,

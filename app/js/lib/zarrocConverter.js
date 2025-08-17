@@ -128,7 +128,10 @@ const indexBySet = {
     "ResistSet": 9,
     "RageSet": 10,
     "ImmunitySet": 11,
-    "UnitySet": 12
+    "UnitySet": 12,
+    // Revisit
+    "ReversalSet": 13,
+    "RiposteSet": 14,
 }
 
 const indexByRank = {

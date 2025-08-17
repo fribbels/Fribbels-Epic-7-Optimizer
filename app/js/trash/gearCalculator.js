@@ -36,7 +36,7 @@ module.exports = {
             //     console.log(w, h, a, n, r, b);
             //     console.log(i, wLength, hLength, aLength, nLength, rLength, bLength);
             // }
-            
+
             const weaponAccumulatorArr = getStatAccumulatorArr(base, weapon, accumulatorArrsByItem);
             const helmetAccumulatorArr = getStatAccumulatorArr(base, helmet, accumulatorArrsByItem);
             const armorAccumulatorArr = getStatAccumulatorArr(base, armor, accumulatorArrsByItem);
@@ -45,7 +45,7 @@ module.exports = {
             const bootsAccumulatorArr = getStatAccumulatorArr(base, boots, accumulatorArrsByItem);
 
             const itemCombinationStats = addAccumulatorArrsToHero(
-                base, 
+                base,
                 [weaponAccumulatorArr, helmetAccumulatorArr, armorAccumulatorArr, necklaceAccumulatorArr, ringAccumulatorArr, bootsAccumulatorArr],
                 [weapon, helmet, armor, necklace, ring, boots],
                 setsBuffer.slice()
@@ -124,7 +124,7 @@ function calculateSets(items, setsBuffer) {
 }
 
 function addStatAccumulators(index, accs) {
-    return accs[0][index] 
+    return accs[0][index]
          + accs[1][index]
          + accs[2][index]
          + accs[3][index]
@@ -187,22 +187,24 @@ const indexByStatType = {
 }
 
 const indexBySetType = {
-    "HealthSet": 0, 
-    "DefenseSet": 1, 
-    "AttackSet": 2, 
-    "SpeedSet": 3, 
-    "CriticalSet": 4, 
-    "HitSet": 5, 
-    "DestructionSet": 6, 
-    "LifestealSet": 7, 
-    "CounterSet": 8, 
-    "ResistSet": 9, 
-    "UnitySet": 10, 
-    "RageSet": 11, 
+    "HealthSet": 0,
+    "DefenseSet": 1,
+    "AttackSet": 2,
+    "SpeedSet": 3,
+    "CriticalSet": 4,
+    "HitSet": 5,
+    "DestructionSet": 6,
+    "LifestealSet": 7,
+    "CounterSet": 8,
+    "ResistSet": 9,
+    "UnitySet": 10,
+    "RageSet": 11,
     "ImmunitySet": 12,
     "PenetrationSet": 13,
     "RevengeSet": 14,
     "InjurySet": 15,
     "ProtectionSet": 16,
     "TorrentSet": 17,
+    "ReversalSet": 18,
+    "RiposteSet": 19,
 }

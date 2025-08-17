@@ -942,6 +942,8 @@ module.exports = {
                                   <option value="Protection" data-t>${i18next.t("Protection")}</option>
                                   <option value="Rage" data-t>${i18next.t("Rage")}</option>
                                   <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
+                                  <option value="Reversal" data-t>${i18next.t("Reversal")}</option>
+                                  <option value="Riposte" data-t>${i18next.t("Riposte")}</option>
                                   <option value="Speed" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
@@ -1001,6 +1003,8 @@ module.exports = {
                                   <option value="Protection" data-t>${i18next.t("Protection")}</option>
                                   <option value="Rage" data-t>${i18next.t("Rage")}</option>
                                   <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
+                                  <option value="Reversal" data-t>${i18next.t("Reversal")}</option>
+                                  <option value="Riposte" data-t>${i18next.t("Riposte")}</option>
                                   <option value="Speed" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
@@ -2077,6 +2081,8 @@ function getGearSetOptionsHtml(item) {
 <option value="RevengeSet" ${set == "RevengeSet" ? "selected" : ""}>${i18next.t("Revenge")}</option>
 <option value="ProtectionSet" ${set == "ProtectionSet" ? "selected" : ""}>${i18next.t("Protection")}</option>
 <option value="TorrentSet" ${set == "TorrentSet" ? "selected" : ""}>${i18next.t("Torrent")}</option>
+<option value="ReversalSet" ${set == "ReversalSet" ? "selected" : ""}>${i18next.t("Reversal")}</option>
+<option value="RiposteSet" ${set == "RiposteSet" ? "selected" : ""}>${i18next.t("Riposte")}</option>
 
 `
 }

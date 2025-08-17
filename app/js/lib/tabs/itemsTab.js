@@ -289,6 +289,8 @@ const elementsByFilter = {
         "rageSetFilter",
         "revengeSetFilter",
         "injurySetFilter",
+        "reversalSetFilter",
+        "riposteSetFilter",
         "criticalSetFilter",
         "hitSetFilter",
         "healthSetFilter",
@@ -383,6 +385,8 @@ function setupEventListeners() {
     setupFilterListener("rageSetFilter", "setFilter", "RageSet");
     setupFilterListener("revengeSetFilter", "setFilter", "RevengeSet");
     setupFilterListener("injurySetFilter", "setFilter", "InjurySet");
+    setupFilterListener("reversalSetFilter", "setFilter", "ReversalSet");
+    setupFilterListener("riposteSetFilter", "setFilter", "RiposteSet");
     setupFilterListener("criticalSetFilter", "setFilter", "CriticalSet");
     setupFilterListener("hitSetFilter", "setFilter", "HitSet");
     setupFilterListener("healthSetFilter", "setFilter", "HealthSet");

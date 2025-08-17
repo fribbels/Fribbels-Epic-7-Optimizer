@@ -22,6 +22,8 @@ const assetsBySet = {
     "PenetrationSet": "./assets/setpenetration.png",
     "ProtectionSet": "./assets/setprotection.png",
     "TorrentSet": "./assets/settorrent.png",
+    "ReversalSet": "./assets/setreversal.png",
+    "RiposteSet": "./assets/setriposte.png",
 }
 
 const assetsByElement = {

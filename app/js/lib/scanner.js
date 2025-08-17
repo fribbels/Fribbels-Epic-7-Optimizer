@@ -266,7 +266,7 @@ function findcommand() {
     if (Files.isMac()) {
         commands = ["python3", "python", "py"];
     }
-    
+
     commands.find((command) => {
         const { error, status } = childProcess.spawnSync(command);
 
@@ -815,6 +815,9 @@ const setsByIngameSet = {
     "set_vampire": "LifestealSet",
     "set_shield": "ProtectionSet",
     "set_torrent": "TorrentSet",
+    // Revisit
+    "set_reversal": "ReversalSet",
+    "set_riposte": "RiposteSet",
 }
 
 async function postData(url = '', data = {}) {
