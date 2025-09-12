@@ -382,7 +382,7 @@ input {
   display: inline-block;
   width: 40px;
   text-align: center;
-
+  white-space: nowrap;
 }
 
 .sliderLabel {
