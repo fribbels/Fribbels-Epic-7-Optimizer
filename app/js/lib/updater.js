@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 global.ipcRenderer = ipcRenderer;
-const currentVersion = "1.9.2";
+const currentVersion = "1.10.0";
 
-global.TEST = true;
+global.TEST = false;
 
 /********************************************************************************************
     Release checklist:
@@ -39,24 +39,12 @@ module.exports = {
 
 `
 <h2>
-    New in v1.9.2
+    New in v1.10.0
 </h2>
 <ul class="newFeatures">
-    <li>Artifact & self imprint display on optimizer tab</li>
-    <li>Per-item gs filter for optimization</li>
-    <li>Equipped column in optimizer tab</li>
-    <li>Automatic importer improvements & added support for CN server</li>
-    <li>Added final atk/hp/def multipliers in bonus stats for calculating Lethe artifact for example</li>
-    <li>Resizable item/hero/build grids</li>
-</ul>
-<h2>
-    New in v1.9.0
-</h2>
-<ul class="newFeatures">
-    <li>Added damage calculations for hero S1/S2/S3 scaling multipliers</li>
-    <li>Added item enhancing simulator on Enhancing tab which predicts the probabilities of gear score ranges of upgrading an unfinished item to +15, along with its maximum substat mod potential</li>
-    <li>Added build score (BS) rating which takes into account gear score, along item main stats and hero-specific flat stat to percent equivalents</li>
-    <li>Added inventory item finder. Set your inventory width in settings, and click the target icon on items to locate them in your inventory</li>
+    <li>Added new Riposte and Reversal Sets</li>
+    <li>Added support for defense stat artifacts</li>
+    <li>Fixed various bugs</li>
 </ul>
 `
         );
