@@ -495,9 +495,8 @@ const huntImageBySet = {
     InjurySet: "./assets/reforgeC.png",
     PenetrationSet: "./assets/reforgeC.png",
     TorrentSet: "./assets/reforgeC.png",
-    // Revisit
-    ReversalSet: "./assets/reforgeC.png",
-    RiposteSet: "./assets/reforgeC.png",
+    ReversalSet: "./assets/reforgeOtherworld.png",
+    RiposteSet: "./assets/reforgeOtherworld.png",
 }
 
 

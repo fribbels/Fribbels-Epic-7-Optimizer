@@ -815,8 +815,7 @@ const setsByIngameSet = {
     "set_vampire": "LifestealSet",
     "set_shield": "ProtectionSet",
     "set_torrent": "TorrentSet",
-    // Revisit
-    "set_reversal": "ReversalSet",
+    "set_revenant": "ReversalSet",
     "set_riposte": "RiposteSet",
 }
 

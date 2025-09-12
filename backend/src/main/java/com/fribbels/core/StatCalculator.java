@@ -4,6 +4,7 @@ import com.fribbels.enums.StatType;
 import com.fribbels.model.*;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static com.fribbels.handler.OptimizationRequestHandler.SET_COUNT;
 
@@ -150,17 +151,18 @@ flat2mod -> ddj
 
  */
         DamageMultipliers multis = hero.getDamageMultipliers();
-        if (multis == null) {
-            multis = new DamageMultipliers();
+        int s1 = 0;
+        int s2 = 0;
+        int s3 = 0;
+
+        if (multis != null) {
+            s1 = getSkillValue(multis, 0, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+            s2 = getSkillValue(multis, 1, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
+            s3 = getSkillValue(multis, 2, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
         }
 //        final int s1 = (int)(((atk * multis.getAtkMods()[0] * multis.getRates()[0] + getFlatMod(multis, 0, hp)) * getTypeMultiplier(multis, 0)) * multis.getPows()[0] * multis.getMultis()[0]);
 //        final int s2 = (int)(((atk * multis.getAtkMods()[1] * multis.getRates()[1] + getFlatMod(multis, 1, hp)) * getTypeMultiplier(multis, 1)) * multis.getPows()[1] * multis.getMultis()[1]);
 //        final int s3 = (int)(((atk * multis.getAtkMods()[2] * multis.getRates()[2] + getFlatMod(multis, 2, hp)) * getTypeMultiplier(multis, 2)) * multis.getPows()[2] * multis.getMultis()[2]);
-        // (1 + multis.getAtkIncrease()[0])
-
-        final int s1 = getSkillValue(multis, 0, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
-        final int s2 = getSkillValue(multis, 1, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
-        final int s3 = getSkillValue(multis, 2, atk, def, hp, spd, critDamage, pctDmgMultiplier, penSetOn);
 //
         final int score = (int) (accs0[11]+accs1[11]+accs2[11]+accs3[11]+accs4[11]+accs5[11]);
 
@@ -202,7 +204,12 @@ flat2mod -> ddj
                               final float critDamage,
                               final float pctDmgMultiplier,
                               final float penSetOn) {
-        final int targets = m.getTargets()[s] == 1 ? 1 : 0;
+        final Integer[] targetsArr = m.getTargets();
+        if (Objects.equals(targetsArr[s], null)) {
+            return 0;
+        }
+
+        final int targets = targetsArr[s] == 1 ? 1 : 0;
         final float realPenetration = (1 - m.getPenetration()[s]) * (1 - penSetOn * 0.15f * targets);
         final float statScalings =
                         m.getSelfHpScaling()[s] *hp +

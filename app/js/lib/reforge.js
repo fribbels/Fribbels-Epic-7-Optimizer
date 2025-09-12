@@ -367,9 +367,8 @@ const nameBySetByGear = {
         InjurySet: "Demons Cursed Double Edged Sword",
         PenetrationSet: "Demons Cursed Double Edged Sword",
         TorrentSet: "Demons Cursed Double Edged Sword",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Bow of Agony",
+        RiposteSet: "Bow of Agony",
     },
     Helmet: {
         HealthSet: "Dark Steel Helm",
@@ -390,9 +389,8 @@ const nameBySetByGear = {
         InjurySet: "Demon's Cursed Horned Helm",
         PenetrationSet: "Demon's Cursed Horned Helm",
         TorrentSet: "Demon's Cursed Horned Helm",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Helmet of Agony",
+        RiposteSet: "Helmet of Agony",
     },
     Armor: {
         HealthSet: "Dark Steel Armor",
@@ -413,9 +411,8 @@ const nameBySetByGear = {
         InjurySet: "Demons Cursed Heavy Armor",
         PenetrationSet: "Demons Cursed Heavy Armor",
         TorrentSet: "Demons Cursed Heavy Armor",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Armor of Agony",
+        RiposteSet: "Armor of Agony",
     },
     Necklace: {
         HealthSet: "Dark Steel Warmer",
@@ -436,9 +433,8 @@ const nameBySetByGear = {
         InjurySet: "Demons Cursed Necklace",
         PenetrationSet: "Demons Cursed Necklace",
         TorrentSet: "Demons Cursed Necklace",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Shackles of Agony",
+        RiposteSet: "Shackles of Agony",
     },
     Ring: {
         HealthSet: "Dark Steel Gauntlet",
@@ -459,9 +455,8 @@ const nameBySetByGear = {
         InjurySet: "Demons Cursed Ring",
         PenetrationSet: "Demons Cursed Ring",
         TorrentSet: "Demons Cursed Ring",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Ring of Agony",
+        RiposteSet: "Ring of Agony",
     },
     Boots: {
         HealthSet: "Dark Steel Boots",
@@ -482,9 +477,8 @@ const nameBySetByGear = {
         InjurySet: "Demons Cursed Fine Boots",
         PenetrationSet: "Demons Cursed Fine Boots",
         TorrentSet: "Demons Cursed Fine Boots",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Boots of Agony",
+        RiposteSet: "Boots of Agony",
     }
 }
 
@@ -509,9 +503,8 @@ const reforgedNameBySetByGear = {
         InjurySet: "Dark Soul's Double-Edged Sword",
         PenetrationSet: "Dark Soul's Double-Edged Sword",
         TorrentSet: "Dark Soul's Double-Edged Sword",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Bow of Grudges",
+        RiposteSet: "Bow of Grudges",
     },
     Helmet: {
         HealthSet: "Dark Helm",
@@ -532,9 +525,8 @@ const reforgedNameBySetByGear = {
         InjurySet: "Dark Soul's Horned Helm",
         PenetrationSet: "Dark Soul's Horned Helm",
         TorrentSet: "Dark Soul's Horned Helm",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Helmet of Grudges",
+        RiposteSet: "Helmet of Grudges",
     },
     Armor: {
         HealthSet: "Dark Armor",
@@ -555,9 +547,8 @@ const reforgedNameBySetByGear = {
         InjurySet: "Dark Soul's Heavy Armor",
         PenetrationSet: "Dark Soul's Heavy Armor",
         TorrentSet: "Dark Soul's Heavy Armor",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Armor of Grudges",
+        RiposteSet: "Armor of Grudges",
     },
     Necklace: {
         HealthSet: "Dark Warmer",
@@ -578,9 +569,8 @@ const reforgedNameBySetByGear = {
         InjurySet: "Dark Soul's Necklace",
         PenetrationSet: "Dark Soul's Necklace",
         TorrentSet: "Dark Soul's Necklace",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Shackles of Grudges",
+        RiposteSet: "Shackles of Grudges",
     },
     Ring: {
         HealthSet: "Dark Gauntlet",
@@ -601,9 +591,8 @@ const reforgedNameBySetByGear = {
         InjurySet: "Dark Soul's Necklace",
         PenetrationSet: "Dark Soul's Necklace",
         TorrentSet: "Dark Soul's Necklace",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Ring of Grudges",
+        RiposteSet: "Ring of Grudges",
     },
     Boots: {
         HealthSet: "Dark Boots",
@@ -624,9 +613,8 @@ const reforgedNameBySetByGear = {
         InjurySet: "Dark Soul's Fine Boots",
         PenetrationSet: "Dark Soul's Fine Boots",
         TorrentSet: "Dark Soul's Fine Boots",
-        // Revisit
-        ReversalSet: "Demons Cursed Double Edged Sword",
-        RiposteSet: "Demons Cursed Double Edged Sword",
+        ReversalSet: "Boots of Grudges",
+        RiposteSet: "Boots of Grudges",
     }
 }
 
