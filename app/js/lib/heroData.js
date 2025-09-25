@@ -5,6 +5,7 @@ var eesByName = {};
 var HERO_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/herodata.json?";
 var ARTIFACT_CACHE = "http://e7-optimizer-game-data.s3-accelerate.amazonaws.com/artifactdata.json?";
 
+global.TEST = true
 
 function UrlExists(url, cb){
     jQuery.ajax({
