@@ -179,8 +179,24 @@ module.exports = {
 
         document.getElementById('removeHeroesSubmit').addEventListener("click", async () => {
             console.log("removeHeroesSubmit");
+
+            /*
+             * Refreshing here adds a little bit of latency but ensures the state is correct if user
+             * has added or removed builds since coming to the heroes tab.
+             */
+            await HeroesGrid.refresh();
             const row = HeroesGrid.getSelectedRow();
-            if (!row) return;
+
+            let shouldReturn = false;
+            if (!row) {
+                shouldReturn = true;
+            } else if (row.builds.length) {
+                shouldReturn = !(await Dialog.confirmation("Are you sure you want to remove this hero and their builds? This action cannot be undone."));
+            }
+
+            if (shouldReturn) {
+                return;
+            }
 
             Api.removeHeroById(row.id).then(async response => {
                 console.log("RESPONSE", response)
