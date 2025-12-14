@@ -277,7 +277,7 @@
     "Beguiling Wings": {
         "name": "Beguiling Wings",
         "rarity": 5,
-        "role": "ranger",
+        "role": "assassin",
         "stats": {
             "attack": 15,
             "health": 54,
@@ -1091,7 +1091,7 @@
     "Hostess of the Banquet": {
         "name": "Hostess of the Banquet",
         "rarity": 5,
-        "role": "",
+        "role": "assassin",
         "stats": {
             "attack": 21,
             "health": 32,
@@ -1795,7 +1795,7 @@
     "Severed Horn Wand": {
         "name": "Severed Horn Wand",
         "rarity": 5,
-        "role": "",
+        "role": "mage",
         "stats": {
             "attack": 21,
             "health": 32,
@@ -1949,7 +1949,7 @@
     "Sphere of Inferno": {
         "name": "Sphere of Inferno",
         "rarity": 5,
-        "role": "",
+        "role": "ranger",
         "stats": {
             "attack": 21,
             "health": 32,
@@ -2576,7 +2576,7 @@
     "Magic Bubble Maker": {
         "name": "Magic Bubble Maker",
         "rarity": 5,
-        "role": "",
+        "role": "mage",
         "stats": {
             "attack": 9,
             "health": 76,
@@ -2792,5 +2792,203 @@
             "defense": 0
         },
         "code": "efr30"
+    },
+    "Strike of Aspiration": {
+        "name": "Strike of Aspiration",
+        "rarity": 5,
+        "role": "warrior",
+        "stats": {
+            "attack": 15,
+            "health": 54,
+            "defense": 0
+        },
+        "code": "efw38"
+    },
+    "Thorn of the Blue Rose": {
+        "name": "Thorn of the Blue Rose",
+        "rarity": 5,
+        "role": "warrior",
+        "stats": {
+            "attack": 9,
+            "health": 0,
+            "defense": 11
+        },
+        "code": "efw37"
+    },
+    "Fullmetal's Automail": {
+        "name": "Fullmetal's Automail",
+        "rarity": 5,
+        "role": "warrior",
+        "stats": {
+            "attack": 15,
+            "health": 54,
+            "defense": 0
+        },
+        "code": "efw28"
+    },
+    "An Assassin’s Pledge": {
+        "name": "An Assassin’s Pledge",
+        "rarity": 5,
+        "role": "ranger",
+        "stats": {
+            "attack": 21,
+            "health": 32,
+            "defense": 0
+        },
+        "code": "efr29"
+    },
+    "Elegiac Candle": {
+        "name": "Elegiac Candle",
+        "rarity": 5,
+        "role": "ranger",
+        "stats": {
+            "attack": 9,
+            "health": 76,
+            "defense": 0
+        },
+        "code": "efr25"
+    },
+    "Sharpshooter's Handgun": {
+        "name": "Sharpshooter's Handgun",
+        "rarity": 5,
+        "role": "ranger",
+        "stats": {
+            "attack": 21,
+            "health": 32,
+            "defense": 0
+        },
+        "code": "efr20"
+    },
+    "Cure-All Magic Wand": {
+        "name": "Cure-All Magic Wand",
+        "rarity": 5,
+        "role": "manauser",
+        "stats": {
+            "attack": 9,
+            "health": 76,
+            "defense": 0
+        },
+        "code": "efh27"
+    },
+    "Queen’s Whistle": {
+        "name": "Queen’s Whistle",
+        "rarity": 5,
+        "role": "manauser",
+        "stats": {
+            "attack": 9,
+            "health": 76,
+            "defense": 0
+        },
+        "code": "efh26"
+    },
+    "Glorious Flag": {
+        "name": "Glorious Flag",
+        "rarity": 5,
+        "role": "assassin",
+        "stats": {
+            "attack": 15,
+            "health": 54,
+            "defense": 0
+        },
+        "code": "efa31"
+    },
+    "Master of the Nightmare": {
+        "name": "Master of the Nightmare",
+        "rarity": 5,
+        "role": "assassin",
+        "stats": {
+            "attack": 15,
+            "health": 54,
+            "defense": 0
+        },
+        "code": "efa30"
+    },
+    "Reingar Festival Dumpling": {
+        "name": "Reingar Festival Dumpling",
+        "rarity": 4,
+        "role": "",
+        "stats": {
+            "attack": 12,
+            "health": 45,
+            "defense": 0
+        },
+        "code": "ef443"
+    },
+    "XII. The Hanged Man": {
+        "name": "XII. The Hanged Man",
+        "rarity": 4,
+        "role": "",
+        "stats": {
+            "attack": 12,
+            "health": 45,
+            "defense": 0
+        },
+        "code": "ef442"
+    },
+    "XV. The Devil": {
+        "name": "XV. The Devil",
+        "rarity": 4,
+        "role": "",
+        "stats": {
+            "attack": 12,
+            "health": 45,
+            "defense": 0
+        },
+        "code": "ef441"
+    },
+    "Special Strawberry Cake": {
+        "name": "Special Strawberry Cake",
+        "rarity": 4,
+        "role": "",
+        "stats": {
+            "attack": 18,
+            "health": 27,
+            "defense": 0
+        },
+        "code": "ef440"
+    },
+    "XVII. The Star": {
+        "name": "XVII. The Star",
+        "rarity": 4,
+        "role": "",
+        "stats": {
+            "attack": 12,
+            "health": 45,
+            "defense": 0
+        },
+        "code": "ef438"
+    },
+    "Flames on a snowy mountain": {
+        "name": "Flames on a snowy mountain",
+        "rarity": 4,
+        "role": "",
+        "stats": {
+            "attack": 12,
+            "health": 45,
+            "defense": 0
+        },
+        "code": "ef437"
+    },
+    "New Year's Festival Souvenir": {
+        "name": "New Year's Festival Souvenir",
+        "rarity": 4,
+        "role": "",
+        "stats": {
+            "attack": 12,
+            "health": 45,
+            "defense": 0
+        },
+        "code": "ef436"
+    },
+    "Axe of Heavenly Mandate": {
+        "name": "Axe of Heavenly Mandate",
+        "rarity": 3,
+        "role": "",
+        "stats": {
+            "attack": 18,
+            "health": 7,
+            "defense": 0
+        },
+        "code": "ef315"
     }
 }
