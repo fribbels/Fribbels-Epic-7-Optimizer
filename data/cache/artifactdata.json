@@ -2826,17 +2826,6 @@
         },
         "code": "efw28"
     },
-    "An Assassin’s Pledge": {
-        "name": "An Assassin’s Pledge",
-        "rarity": 5,
-        "role": "ranger",
-        "stats": {
-            "attack": 21,
-            "health": 32,
-            "defense": 0
-        },
-        "code": "efr29"
-    },
     "Elegiac Candle": {
         "name": "Elegiac Candle",
         "rarity": 5,
@@ -2869,17 +2858,6 @@
             "defense": 0
         },
         "code": "efh27"
-    },
-    "Queen’s Whistle": {
-        "name": "Queen’s Whistle",
-        "rarity": 5,
-        "role": "manauser",
-        "stats": {
-            "attack": 9,
-            "health": 76,
-            "defense": 0
-        },
-        "code": "efh26"
     },
     "Glorious Flag": {
         "name": "Glorious Flag",
