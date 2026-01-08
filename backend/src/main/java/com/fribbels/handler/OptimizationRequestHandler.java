@@ -70,11 +70,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private boolean canUseGpu = true;
 
-    public static final int SET_COUNT = 20;
+    public static final int SET_COUNT = 22;
     public static final int ARG_COUNT = 17;
 
     //
-    private static final int SET_EXPONENTIAL = 64000000; // 20 ^ 6
+    private static final int SET_EXPONENTIAL = 113379904; // 22 ^ 6
 
     private boolean[] permutations = new boolean[SET_EXPONENTIAL];
     private int[] setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
@@ -1080,7 +1080,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public int[] convertSetsToSetCounters(final int[] sets) {
-        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Length of SET_COUNT
+        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Length of SET_COUNT
 
         for (int i = 0; i < sets.length; i++) {
             output[sets[i]]++;

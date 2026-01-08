@@ -87,7 +87,7 @@ public class StatCalculator {
         final float[] accs5 = accs[5];
 
         final float atk =  ((bonusBaseAtk  + accs0[0]+accs1[0]+accs2[0]+accs3[0]+accs4[0]+accs5[0] + (sets[2] > 3 ? atkSetBonus : 0)) * bonusMaxAtk);
-        final float hp =   ((bonusBaseHp   + accs0[1]+accs1[1]+accs2[1]+accs3[1]+accs4[1]+accs5[1] + (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/-2 : 0)) * bonusMaxHp);
+        final float hp =   ((bonusBaseHp   + accs0[1]+accs1[1]+accs2[1]+accs3[1]+accs4[1]+accs5[1] + (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[20] > 3 ? hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/-2 : 0)) * bonusMaxHp);
         final float def =  ((bonusBaseDef  + accs0[2]+accs1[2]+accs2[2]+accs3[2]+accs4[2]+accs5[2] + (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) * bonusMaxDef);
         final float cr =         (base.cr  + accs0[6]+accs1[6]+accs2[6]+accs3[6]+accs4[6]+accs5[6] + (sets[4] > 1 ? sets[4] / 2 * 12 : 0) + hero.bonusCr + hero.aeiCr);
         final int cd =   (int) (base.cd    + accs0[7]+accs1[7]+accs2[7]+accs3[7]+accs4[7]+accs5[7] + (sets[6] > 3 ? 60 : 0) + hero.bonusCd + hero.aeiCd);
@@ -170,7 +170,7 @@ flat2mod -> ddj
 //        final float artifactHealth = artifactStats.getHealth();
 //        final float artifactAttack = artifactStats.getAttack();
 
-        final float bsHp = (hp - base.hp - hero.artifactHealth - (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/2 : 0)) / base.hp * 100;
+        final float bsHp = (hp - base.hp - hero.artifactHealth - (sets[0] > 1 ? sets[0] / 2 * hpSetBonus : 0) - (sets[20] > 3 ? hpSetBonus : 0) + (sets[17] > 1 ? sets[17] / 2 * hpSetBonus/2 : 0)) / base.hp * 100;
         final float bsAtk = (atk - base.atk - hero.artifactAttack - (sets[2] > 1 ? sets[2] / 4 * atkSetBonus : 0)) / base.atk * 100;
         final float bsDef = (def - base.def - hero.artifactDefense - (sets[1] > 1 ? sets[1] / 2 * defSetBonus : 0)) / base.def * 100;
         final float bsCr = (cr - base.cr - (sets[4] > 1 ? sets[4] / 2 * 12 : 0));
