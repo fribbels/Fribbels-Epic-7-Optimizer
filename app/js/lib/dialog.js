@@ -2083,6 +2083,8 @@ function getGearSetOptionsHtml(item) {
 <option value="TorrentSet" ${set == "TorrentSet" ? "selected" : ""}>${i18next.t("Torrent")}</option>
 <option value="ReversalSet" ${set == "ReversalSet" ? "selected" : ""}>${i18next.t("Reversal")}</option>
 <option value="RiposteSet" ${set == "RiposteSet" ? "selected" : ""}>${i18next.t("Riposte")}</option>
+<option value="WarfareSet" ${set == "WarfareSet" ? "selected" : ""}>${i18next.t("Warfare")}</option>
+<option value="PursuitSet" ${set == "PursuitSet" ? "selected" : ""}>${i18next.t("Pursuit")}</option>
 
 `
 }

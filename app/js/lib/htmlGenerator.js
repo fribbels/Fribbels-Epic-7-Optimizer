@@ -497,6 +497,8 @@ const huntImageBySet = {
     TorrentSet: "./assets/reforgeC.png",
     ReversalSet: "./assets/reforgeOtherworld.png",
     RiposteSet: "./assets/reforgeOtherworld.png",
+    WarfareSet: "./assets/reforgeOtherworld.png",
+    PursuitSet: "./assets/reforgeOtherworld.png",
 }
 
 

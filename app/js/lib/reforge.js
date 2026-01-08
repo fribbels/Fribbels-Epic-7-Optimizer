@@ -369,6 +369,8 @@ const nameBySetByGear = {
         TorrentSet: "Demons Cursed Double Edged Sword",
         ReversalSet: "Bow of Agony",
         RiposteSet: "Bow of Agony",
+        WarfareSet: "Bow of Agony",
+        PursuitSet: "Bow of Agony",
     },
     Helmet: {
         HealthSet: "Dark Steel Helm",
@@ -391,6 +393,8 @@ const nameBySetByGear = {
         TorrentSet: "Demon's Cursed Horned Helm",
         ReversalSet: "Helmet of Agony",
         RiposteSet: "Helmet of Agony",
+        WarfareSet: "Helmet of Agony",
+        PursuitSet: "Helmet of Agony",
     },
     Armor: {
         HealthSet: "Dark Steel Armor",
@@ -413,6 +417,8 @@ const nameBySetByGear = {
         TorrentSet: "Demons Cursed Heavy Armor",
         ReversalSet: "Armor of Agony",
         RiposteSet: "Armor of Agony",
+        WarfareSet: "Armor of Agony",
+        PursuitSet: "Armor of Agony",
     },
     Necklace: {
         HealthSet: "Dark Steel Warmer",
@@ -435,6 +441,8 @@ const nameBySetByGear = {
         TorrentSet: "Demons Cursed Necklace",
         ReversalSet: "Shackles of Agony",
         RiposteSet: "Shackles of Agony",
+        WarfareSet: "Restraints of Agony",
+        PursuitSet: "Restraints of Agony",
     },
     Ring: {
         HealthSet: "Dark Steel Gauntlet",
@@ -457,6 +465,8 @@ const nameBySetByGear = {
         TorrentSet: "Demons Cursed Ring",
         ReversalSet: "Ring of Agony",
         RiposteSet: "Ring of Agony",
+        WarfareSet: "Ring of Agony",
+        PursuitSet: "Ring of Agony",
     },
     Boots: {
         HealthSet: "Dark Steel Boots",
@@ -479,6 +489,8 @@ const nameBySetByGear = {
         TorrentSet: "Demons Cursed Fine Boots",
         ReversalSet: "Boots of Agony",
         RiposteSet: "Boots of Agony",
+        WarfareSet: "Boots of Agony",
+        PursuitSet: "Boots of Agony",
     }
 }
 
@@ -505,6 +517,8 @@ const reforgedNameBySetByGear = {
         TorrentSet: "Dark Soul's Double-Edged Sword",
         ReversalSet: "Bow of Grudges",
         RiposteSet: "Bow of Grudges",
+        WarfareSet: "Bow of Grudges",
+        PursuitSet: "Bow of Grudges",
     },
     Helmet: {
         HealthSet: "Dark Helm",
@@ -527,6 +541,8 @@ const reforgedNameBySetByGear = {
         TorrentSet: "Dark Soul's Horned Helm",
         ReversalSet: "Helmet of Grudges",
         RiposteSet: "Helmet of Grudges",
+        WarfareSet: "Helmet of Grudges",
+        PursuitSet: "Helmet of Grudges",
     },
     Armor: {
         HealthSet: "Dark Armor",
@@ -549,6 +565,8 @@ const reforgedNameBySetByGear = {
         TorrentSet: "Dark Soul's Heavy Armor",
         ReversalSet: "Armor of Grudges",
         RiposteSet: "Armor of Grudges",
+        WarfareSet: "Armor of Grudges",
+        PursuitSet: "Armor of Grudges",
     },
     Necklace: {
         HealthSet: "Dark Warmer",
@@ -571,6 +589,8 @@ const reforgedNameBySetByGear = {
         TorrentSet: "Dark Soul's Necklace",
         ReversalSet: "Shackles of Grudges",
         RiposteSet: "Shackles of Grudges",
+        WarfareSet: "Cross of Grudges",
+        PursuitSet: "Cross of Grudges",
     },
     Ring: {
         HealthSet: "Dark Gauntlet",
@@ -593,6 +613,8 @@ const reforgedNameBySetByGear = {
         TorrentSet: "Dark Soul's Necklace",
         ReversalSet: "Ring of Grudges",
         RiposteSet: "Ring of Grudges",
+        WarfareSet: "Curse of Grudges",
+        PursuitSet: "Curse of Grudges",
     },
     Boots: {
         HealthSet: "Dark Boots",
@@ -615,6 +637,8 @@ const reforgedNameBySetByGear = {
         TorrentSet: "Dark Soul's Fine Boots",
         ReversalSet: "Boots of Grudges",
         RiposteSet: "Boots of Grudges",
+        WarfareSet: "Boots of Grudges",
+        PursuitSet: "Boots of Grudges",
     }
 }
 

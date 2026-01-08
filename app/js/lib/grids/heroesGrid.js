@@ -382,6 +382,7 @@ const fourPieceSets = [
     "InjurySet",
     "ReversalSet",
     "RiposteSet",
+    "WarfareSet",
 ]
 function renderSets(equipment) {
     if (!equipment) return;
@@ -408,6 +409,8 @@ function renderSets(equipment) {
         Math.floor(setNames.filter(x => x == "TorrentSet").length),
         Math.floor(setNames.filter(x => x == "ReversalSet").length),
         Math.floor(setNames.filter(x => x == "RiposteSet").length),
+        Math.floor(setNames.filter(x => x == "WarfareSet").length),
+        Math.floor(setNames.filter(x => x == "PursuitSet").length),
     ]
 
     const sets = [];

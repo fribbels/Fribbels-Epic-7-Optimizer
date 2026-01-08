@@ -27,6 +27,8 @@ module.exports = {
         "TorrentSet",
         "ReversalSet",
         "RiposteSet",
+        "WarfareSet",
+        "PursuitSet",
     ],
 
     piecesBySetIndex: [
@@ -50,6 +52,8 @@ module.exports = {
         2,
         4,
         4,
+        4,
+        2,
     ],
 
     indexByGearType: {

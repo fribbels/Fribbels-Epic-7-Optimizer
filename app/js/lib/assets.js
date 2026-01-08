@@ -24,6 +24,8 @@ const assetsBySet = {
     "TorrentSet": "./assets/settorrent.png",
     "ReversalSet": "./assets/setreversal.png",
     "RiposteSet": "./assets/setriposte.png",
+    "WarfareSet": "./assets/setwarfare.png",
+    "PursuitSet": "./assets/setpursuit.png",
 }
 
 const assetsByElement = {

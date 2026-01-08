@@ -223,7 +223,7 @@ async function unlockGear() {
     const items = ItemsGrid.getSelectedGear();
 
     await Api.unlockItems(items.map(x => x.id));
-const hintString = `${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" item(s).")}`;console.log("unlock item hint string", hintString);
+    const hintString = `${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" item(s).")}`; console.log("unlock item hint string", hintString);
     Notifier.quick(`${i18next.t("Unlocked ")}` + items.length + `${i18next.t(" item(s).")}`)
 
     module.exports.redraw();
@@ -387,6 +387,8 @@ function setupEventListeners() {
     setupFilterListener("injurySetFilter", "setFilter", "InjurySet");
     setupFilterListener("reversalSetFilter", "setFilter", "ReversalSet");
     setupFilterListener("riposteSetFilter", "setFilter", "RiposteSet");
+    setupFilterListener("warfareSetFilter", "setFilter", "WarfareSet");
+    setupFilterListener("pursuitSetFilter", "setFilter", "PursuitSet");
     setupFilterListener("criticalSetFilter", "setFilter", "CriticalSet");
     setupFilterListener("hitSetFilter", "setFilter", "HitSet");
     setupFilterListener("healthSetFilter", "setFilter", "HealthSet");
