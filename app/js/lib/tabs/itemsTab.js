@@ -300,6 +300,8 @@ const elementsByFilter = {
         "unitySetFilter",
         "penetrationSetFilter",
         "torrentSetFilter",
+        "warfareSetFilter",
+        "pursuitSetFilter",
     ],
     statFilter: [
         "mainStatAttackFilter",

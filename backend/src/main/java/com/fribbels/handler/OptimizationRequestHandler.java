@@ -107,6 +107,8 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                                         int l = 0;
 
+                                        l += counters[20] / 4 > 0 ? 1 : 0; // warfare (opener)
+                                        l <<= 1;
                                         l += counters[19] / 4 > 0 ? 1 : 0; // riposte
                                         l <<= 1;
                                         l += counters[18] / 4 > 0 ? 1 : 0; // reversal

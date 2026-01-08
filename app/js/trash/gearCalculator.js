@@ -207,4 +207,6 @@ const indexBySetType = {
     "TorrentSet": 17,
     "ReversalSet": 18,
     "RiposteSet": 19,
+    "WarfareSet": 20,
+    "PursuitSet": 21
 }

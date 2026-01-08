@@ -1411,11 +1411,11 @@ async function drawPreview() {
 }
 
 const fourPieceSets = [
-    "AttackSet", "SpeedSet", "DestructionSet", "LifestealSet", "ProtectionSet", "CounterSet",  "RageSet", "RevengeSet", "InjurySet", "ReversalSet", "RiposteSet"
+    "AttackSet", "SpeedSet", "DestructionSet", "LifestealSet", "ProtectionSet", "CounterSet",  "RageSet", "RevengeSet", "InjurySet", "ReversalSet", "RiposteSet", "WarfareSet"
 ]
 
 const twoPieceSets = [
-    "HealthSet", "DefenseSet", "CriticalSet", "HitSet", "ResistSet", "UnitySet", "ImmunitySet", "PenetrationSet", "TorrentSet"
+    "HealthSet", "DefenseSet", "CriticalSet", "HitSet", "ResistSet", "UnitySet", "ImmunitySet", "PenetrationSet", "TorrentSet", "PursuitSet"
 ]
 
 function isFourAndTwoPieceSets(sets) {

@@ -817,6 +817,8 @@ const setsByIngameSet = {
     "set_torrent": "TorrentSet",
     "set_revenant": "ReversalSet",
     "set_riposte": "RiposteSet",
+    "set_chase": "PursuitSet",
+    "set_opener": "WarfareSet"
 }
 
 async function postData(url = '', data = {}) {

@@ -155,9 +155,10 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
 //            final int injurySet = min(1, setSolutionBitMasks[setIndex] & (1 << 26));
             final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28)) + min(1, setSolutionBitMasks[setIndex] & (1 << 29));
             final int reversalSet = min(1, setSolutionBitMasks[setIndex] & (1 << 30));
+            final int warfareSet = min(1, setSolutionBitMasks[setIndex] & (1 << 31));
 
             final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
-            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
+            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + warfareSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
             final float def =  ((bonusBaseDef  + wDef+hDef+aDef+nDef+rDef+bDef + (defSet * defSetBonus)) * bonusMaxDef);
             final int cr =     (int) (baseCr + wCr+hCr+aCr+nCr+rCr+bCr + (crSet * 12) + bonusCr + aeiCr);
             final int cd =     (int) (baseCd + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 60) + bonusCd + aeiCd);
@@ -197,7 +198,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int conversions = (int) (wConv+hConv+aConv+nConv+rConv+bConv);
             final int eq = (int) (wEq+hEq+aEq+nEq+rEq+bEq);
 
-            final float bsHp = (hp - baseHp - artifactHealth - (hpSet * hpSetBonus) + (torrentSet * hpSetBonus/2)) / baseHp * 100;
+            final float bsHp = (hp - baseHp - artifactHealth - (hpSet * hpSetBonus) - (warfareSet * hpSetBonus) + (torrentSet * hpSetBonus/2)) / baseHp * 100;
             final float bsAtk = (atk - baseAtk - artifactAttack - (atkSet * atkSetBonus)) / baseAtk * 100;
             final float bsDef = (def - baseDef - artifactDefense - (defSet * defSetBonus)) / baseDef * 100;
             final float bsCr = (cr - baseCr - (crSet * 12));

@@ -132,6 +132,8 @@ const indexBySet = {
     // Revisit
     "ReversalSet": 13,
     "RiposteSet": 14,
+    "WarfareSet": 15,
+    "PursuitSet": 16,
 }
 
 const indexByRank = {

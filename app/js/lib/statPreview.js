@@ -49,6 +49,7 @@ const fourPieceSets = [
     "InjurySet",
     "ReversalSet",
     "RiposteSet",
+    "WarfareSet",
 ]
 
 function renderSets(equipment, name, isAfter) {
@@ -80,7 +81,9 @@ function renderSets(equipment, name, isAfter) {
             Math.floor(setNames.filter(x => x == "ProtectionSet").length),
             Math.floor(setNames.filter(x => x == "TorrentSet").length),
             Math.floor(setNames.filter(x => x == "ReversalSet").length),
-            Math.floor(setNames.filter(x => x == "RiposteSet").length)
+            Math.floor(setNames.filter(x => x == "RiposteSet").length),
+            Math.floor(setNames.filter(x => x == "WarfareSet").length),
+            Math.floor(setNames.filter(x => x == "PursuitSet").length),
         ]
     }
 
