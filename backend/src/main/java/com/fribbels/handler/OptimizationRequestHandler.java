@@ -66,7 +66,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     private AtomicLong searchedCounter = new AtomicLong(0);
     private AtomicLong resultsCounter = new AtomicLong(0);
 
-    private int[] setSolutionBitMasks;
+    private long[] setSolutionBitMasks;
 
     private boolean canUseGpu = true;
 
@@ -94,92 +94,102 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
             ExecutorService t = Executors.newFixedThreadPool(3);
             t.execute(() -> {
-                setSolutionBitMasks = new int[SET_EXPONENTIAL];
-                int count = 0;
-                for (int a = 0; a < SET_COUNT; a++) {
-                    for (int b = 0; b < SET_COUNT; b++) {
-                        for (int c = 0; c < SET_COUNT; c++) {
-                            for (int d = 0; d < SET_COUNT; d++) {
-                                for (int e = 0; e < SET_COUNT; e++) {
-                                    for (int f = 0; f < SET_COUNT; f++) {
-                                        int[] sets = new int[]{a, b, c, d, e, f};
-                                        int[] counters = convertSetsToSetCounters(sets);
+                try {
+                    System.out.println("Starting setSolutionBitMasks generation...");
+                    long start = System.currentTimeMillis();
+                    setSolutionBitMasks = new long[SET_EXPONENTIAL];
+                    int count = 0;
+                    for (int a = 0; a < SET_COUNT; a++) {
+                        for (int b = 0; b < SET_COUNT; b++) {
+                            for (int c = 0; c < SET_COUNT; c++) {
+                                for (int d = 0; d < SET_COUNT; d++) {
+                                    for (int e = 0; e < SET_COUNT; e++) {
+                                        for (int f = 0; f < SET_COUNT; f++) {
+                                            int[] sets = new int[]{a, b, c, d, e, f};
+                                            int[] counters = convertSetsToSetCounters(sets);
 
-                                        int l = 0;
+                                            long l = 0;
 
-                                        l += counters[20] / 4 > 0 ? 1 : 0; // warfare (opener)
-                                        l <<= 1;
-                                        l += counters[19] / 4 > 0 ? 1 : 0; // riposte
-                                        l <<= 1;
-                                        l += counters[18] / 4 > 0 ? 1 : 0; // reversal
-                                        l <<= 1;
-                                        l += counters[17] / 2 > 0 ? 1 : 0; // torrent 1
-                                        l <<= 1;
-                                        l += counters[17] / 2 - 1 > 0 ? 1 : 0; // torrent 2
-                                        l <<= 1;
-                                        l += counters[17] / 2 - 2 > 0 ? 1 : 0; // torrent 3
-                                        l <<= 1;
-                                        l += counters[16] / 4 > 0 ? 1 : 0; // protection
-                                        l <<= 1;
-                                        l += counters[15] / 4 > 0 ? 1 : 0; // injury
-                                        l <<= 1;
-                                        l += counters[14] / 4 > 0 ? 1 : 0; // revenge
-                                        l <<= 1;
-                                        l += counters[13] / 2 > 0 ? 1 : 0; // pen
-                                        l <<= 1;
-                                        l += counters[12] / 2 > 0 ? 1 : 0; // immunity
-                                        l <<= 1;
-                                        l += counters[11] / 4 > 0 ? 1 : 0; // rage
-                                        l <<= 1;
-                                        l += counters[10] / 2 > 0 ? 1 : 0; // unity - should be x3 but don't need it
-                                        l <<= 1;
-                                        l += counters[9] / 2 > 0 ? 1 : 0; // res1
-                                        l <<= 1;
-                                        l += counters[9] / 2 - 1 > 0 ? 1 : 0; // res2
-                                        l <<= 1;
-                                        l += counters[9] / 2 - 2 > 0 ? 1 : 0; // res3
-                                        l <<= 1;
-                                        l += counters[8] / 4 > 0 ? 1 : 0; // counter
-                                        l <<= 1;
-                                        l += counters[7] / 4 > 0 ? 1 : 0; // lifesteal
-                                        l <<= 1;
-                                        l += counters[6] / 4 > 0 ? 1 : 0; // destr
-                                        l <<= 1;
-                                        l += counters[5] / 2 > 0 ? 1 : 0; // hit1
-                                        l <<= 1;
-                                        l += counters[5] / 2 - 1 > 0 ? 1 : 0; // hit2
-                                        l <<= 1;
-                                        l += counters[5] / 2 - 2 > 0 ? 1 : 0; // hit3
-                                        l <<= 1;
-                                        l += counters[4] / 2 > 0 ? 1 : 0; // crit1
-                                        l <<= 1;
-                                        l += counters[4] / 2 - 1 > 0 ? 1 : 0; // crit2
-                                        l <<= 1;
-                                        l += counters[4] / 2 - 2 > 0 ? 1 : 0;  // crit3
-                                        l <<= 1;
-                                        l += counters[3] / 4 > 0 ? 1 : 0; // spd
-                                        l <<= 1;
-                                        l += counters[2] / 4 > 0 ? 1 : 0; // atk
-                                        l <<= 1;
-                                        l += counters[1] / 2 > 0 ? 1 : 0; // def1
-                                        l <<= 1;
-                                        l += counters[1] / 2 - 1 > 0 ? 1 : 0; // def2
-                                        l <<= 1;
-                                        l += counters[1] / 2 - 2 > 0 ? 1 : 0; // def3
-                                        l <<= 1;
-                                        l += counters[0] / 2 > 0 ? 1 : 0; // hp1
-                                        l <<= 1;
-                                        l += counters[0] / 2 - 1 > 0 ? 1 : 0; // hp2
-                                        l <<= 1;
-                                        l += counters[0] / 2 - 2 > 0 ? 1 : 0; // hp3
+                                            l += counters[21] / 2 > 0 ? 1L : 0L; // pursuit
+                                            l <<= 1;
+                                            l += counters[20] / 4 > 0 ? 1L : 0L; // warfare (opener)
+                                            l <<= 1;
+                                            l += counters[19] / 4 > 0 ? 1L : 0L; // riposte
+                                            l <<= 1;
+                                            l += counters[18] / 4 > 0 ? 1L : 0L; // reversal
+                                            l <<= 1;
+                                            l += counters[17] / 2 > 0 ? 1L : 0L; // torrent 1
+                                            l <<= 1;
+                                            l += counters[17] / 2 - 1 > 0 ? 1L : 0L; // torrent 2
+                                            l <<= 1;
+                                            l += counters[17] / 2 - 2 > 0 ? 1L : 0L; // torrent 3
+                                            l <<= 1;
+                                            l += counters[16] / 4 > 0 ? 1L : 0L; // protection
+                                            l <<= 1;
+                                            l += counters[15] / 4 > 0 ? 1L : 0L; // injury
+                                            l <<= 1;
+                                            l += counters[14] / 4 > 0 ? 1L : 0L; // revenge
+                                            l <<= 1;
+                                            l += counters[13] / 2 > 0 ? 1L : 0L; // pen
+                                            l <<= 1;
+                                            l += counters[12] / 2 > 0 ? 1L : 0L; // immunity
+                                            l <<= 1;
+                                            l += counters[11] / 4 > 0 ? 1L : 0L; // rage
+                                            l <<= 1;
+                                            l += counters[10] / 2 > 0 ? 1L : 0L; // unity - should be x3 but don't need it
+                                            l <<= 1;
+                                            l += counters[9] / 2 > 0 ? 1L : 0L; // res1
+                                            l <<= 1;
+                                            l += counters[9] / 2 - 1 > 0 ? 1L : 0L; // res2
+                                            l <<= 1;
+                                            l += counters[9] / 2 - 2 > 0 ? 1L : 0L; // res3
+                                            l <<= 1;
+                                            l += counters[8] / 4 > 0 ? 1L : 0L; // counter
+                                            l <<= 1;
+                                            l += counters[7] / 4 > 0 ? 1L : 0L; // lifesteal
+                                            l <<= 1;
+                                            l += counters[6] / 4 > 0 ? 1L : 0L; // destr
+                                            l <<= 1;
+                                            l += counters[5] / 2 > 0 ? 1L : 0L; // hit1
+                                            l <<= 1;
+                                            l += counters[5] / 2 - 1 > 0 ? 1L : 0L; // hit2
+                                            l <<= 1;
+                                            l += counters[5] / 2 - 2 > 0 ? 1L : 0L; // hit3
+                                            l <<= 1;
+                                            l += counters[4] / 2 > 0 ? 1L : 0L; // crit1
+                                            l <<= 1;
+                                            l += counters[4] / 2 - 1 > 0 ? 1L : 0L; // crit2
+                                            l <<= 1;
+                                            l += counters[4] / 2 - 2 > 0 ? 1L : 0L;  // crit3
+                                            l <<= 1;
+                                            l += counters[3] / 4 > 0 ? 1L : 0L; // spd
+                                            l <<= 1;
+                                            l += counters[2] / 4 > 0 ? 1L : 0L; // atk
+                                            l <<= 1;
+                                            l += counters[1] / 2 > 0 ? 1L : 0L; // def1
+                                            l <<= 1;
+                                            l += counters[1] / 2 - 1 > 0 ? 1L : 0L; // def2
+                                            l <<= 1;
+                                            l += counters[1] / 2 - 2 > 0 ? 1L : 0L; // def3
+                                            l <<= 1;
+                                            l += counters[0] / 2 > 0 ? 1L : 0L; // hp1
+                                            l <<= 1;
+                                            l += counters[0] / 2 - 1 > 0 ? 1L : 0L; // hp2
+                                            l <<= 1;
+                                            l += counters[0] / 2 - 2 > 0 ? 1L : 0L; // hp3
 
-                                        setSolutionBitMasks[count] = l;
-                                        count++;
+                                            setSolutionBitMasks[count] = l;
+                                            count++;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    System.out.println("Finished setSolutionBitMasks generation in " + (System.currentTimeMillis() - start) + "ms. First element: " + setSolutionBitMasks[0] + ", Last element: " + setSolutionBitMasks[setSolutionBitMasks.length - 1]);
+                } catch (Throwable e) {
+                     System.err.println("Error generating set solution bit masks: ");
+                     e.printStackTrace();
                 }
             });
 
@@ -423,6 +433,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         try {
             heroDb.saveOptimizationRequest(request);
             System.gc();
+
             return optimize(request, HeroStats.builder()
                     .atk(request.getAtk())
                     .hp(request.getHp())
@@ -1147,11 +1158,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return sets;
     }
 
-    private static final int POW_20_5 = 3200000;
-    private static final int POW_20_4 = 160000;
-    private static final int POW_20_3 = 8000;
-    private static final int POW_20_2 = 400;
-    private static final int POW_20_1 = 20;
+    private static final int POW_20_5 = 5153632;
+    private static final int POW_20_4 = 234256;
+    private static final int POW_20_3 = 10648;
+    private static final int POW_20_2 = 484;
+    private static final int POW_20_1 = 22;
 
 //    private static final int POW_18_5 = 1889568;
 //    private static final int POW_18_4 = 104976;
@@ -1440,7 +1451,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
             final long rSize,
             final long bSize,
             final long max,
-            final int[] longSetMasks
+            final long[] longSetMasks
     ) {
         if (request.getSetFormat() == 0) {
             return new SetFormat000OptimizerKernel(

@@ -197,7 +197,7 @@ public class GpuOptimizerKernel extends Kernel {
 
     int iteration;
     boolean[] passes;
-    @Constant final int[] setSolutionBitMasks;
+    @Constant final long[] setSolutionBitMasks;
 
 //    @Local int[] localSetsBuffer = new int[256 * 16];
 //    @Local final float[] localStatBuffer = new float[256 * 21];
@@ -236,7 +236,7 @@ public class GpuOptimizerKernel extends Kernel {
             final long rSize,
             final long bSize,
             final long max,
-            final int[] setSolutionBitMasks
+            final long[] setSolutionBitMasks
     ) {
         this.flattenedWeaponAccs = flattenedWeaponAccs;
         this.flattenedHelmetAccs = flattenedHelmetAccs;
@@ -624,11 +624,11 @@ public class GpuOptimizerKernel extends Kernel {
             final int iRset = (int)rSet;
             final int iBset = (int)bSet;
 
-            final int setIndex = iWset * 3200000
-                + iHset * 160000
-                + iAset * 8000
-                + iNset * 400
-                + iRset * 20
+            final int setIndex = iWset * 5153632
+                + iHset * 234256
+                + iAset * 10648
+                + iNset * 484
+                + iRset * 22
                 + iBset;
 
 //            final int setIndex = iWset * 1889568
@@ -674,22 +674,24 @@ public class GpuOptimizerKernel extends Kernel {
 
             //            debug[id] = min(1, longSetMasks[setIndex] & (1 << 7));
 
-            final int hpSet = min(1, setSolutionBitMasks[setIndex] & (1)) + min(1, setSolutionBitMasks[setIndex] & (1 << 1)) + min(1, setSolutionBitMasks[setIndex] & (1 << 2));
-            final int defSet = min(1, setSolutionBitMasks[setIndex] & (1 << 3)) + min(1, setSolutionBitMasks[setIndex] & (1 << 4)) + min(1, setSolutionBitMasks[setIndex] & (1 << 5));
-            final int atkSet = min(1, setSolutionBitMasks[setIndex] & (1 << 6));
-            final int speedSet = min(1, setSolutionBitMasks[setIndex] & (1 << 7));
-            final int crSet = min(1, setSolutionBitMasks[setIndex] & (1 << 8)) + min(1, setSolutionBitMasks[setIndex] & (1 << 9)) + min(1, setSolutionBitMasks[setIndex] & (1 << 10));
-            final int effSet = min(1, setSolutionBitMasks[setIndex] & (1 << 11)) + min(1, setSolutionBitMasks[setIndex] & (1 << 12)) + min(1, setSolutionBitMasks[setIndex] & (1 << 13));
-            final int cdSet = min(1, setSolutionBitMasks[setIndex] & (1 << 14));
-            final int resSet = min(1, setSolutionBitMasks[setIndex] & (1 << 17)) + min(1, setSolutionBitMasks[setIndex] & (1 << 18)) + min(1, setSolutionBitMasks[setIndex] & (1 << 19));
-            final int rageSet = min(1, setSolutionBitMasks[setIndex] & (1 << 21));
-            final int penSet = min(1, setSolutionBitMasks[setIndex] & (1 << 23));
-            final int revengeSet = min(1, setSolutionBitMasks[setIndex] & (1 << 24));
-//            final int protectionSet = min(1, setSolutionBitMasks[setIndex] & (1 << 25));
-//            final int injurySet = min(1, setSolutionBitMasks[setIndex] & (1 << 26));
-            final int torrentSet = min(1, setSolutionBitMasks[setIndex] & (1 << 27)) + min(1, setSolutionBitMasks[setIndex] & (1 << 28)) + min(1, setSolutionBitMasks[setIndex] & (1 << 29));
-            final int reversalSet = min(1, setSolutionBitMasks[setIndex] & (1 << 30));
-            final int warfareSet = min(1, setSolutionBitMasks[setIndex] & (1 << 31));
+            final int hpSet = (int)((setSolutionBitMasks[setIndex] & 1L) + ((setSolutionBitMasks[setIndex] >>> 1) & 1L) + ((setSolutionBitMasks[setIndex] >>> 2) & 1L));
+            final int defSet = (int)(((setSolutionBitMasks[setIndex] >>> 3) & 1L) + ((setSolutionBitMasks[setIndex] >>> 4) & 1L) + ((setSolutionBitMasks[setIndex] >>> 5) & 1L));
+            final int atkSet = (int)((setSolutionBitMasks[setIndex] >>> 6) & 1L);
+            final int speedSet = (int)((setSolutionBitMasks[setIndex] >>> 7) & 1L);
+            final int crSet = (int)(((setSolutionBitMasks[setIndex] >>> 8) & 1L) + ((setSolutionBitMasks[setIndex] >>> 9) & 1L) + ((setSolutionBitMasks[setIndex] >>> 10) & 1L));
+            final int effSet = (int)(((setSolutionBitMasks[setIndex] >>> 11) & 1L) + ((setSolutionBitMasks[setIndex] >>> 12) & 1L) + ((setSolutionBitMasks[setIndex] >>> 13) & 1L));
+            final int cdSet = (int)((setSolutionBitMasks[setIndex] >>> 14) & 1L);
+            final int resSet = (int)(((setSolutionBitMasks[setIndex] >>> 17) & 1L) + ((setSolutionBitMasks[setIndex] >>> 18) & 1L) + ((setSolutionBitMasks[setIndex] >>> 19) & 1L));
+            final int rageSet = (int)((setSolutionBitMasks[setIndex] >>> 21) & 1L);
+            final int penSet = (int)((setSolutionBitMasks[setIndex] >>> 23) & 1L);
+            final int revengeSet = (int)((setSolutionBitMasks[setIndex] >>> 24) & 1L);
+//            final int injurySet = (int)((setSolutionBitMasks[setIndex] >>> 25) & 1L);
+//            final int protectionSet = (int)((setSolutionBitMasks[setIndex] >>> 26) & 1L);
+            final int torrentSet = (int)(((setSolutionBitMasks[setIndex] >>> 27) & 1L) + ((setSolutionBitMasks[setIndex] >>> 28) & 1L) + ((setSolutionBitMasks[setIndex] >>> 29) & 1L));
+            final int reversalSet = (int)((setSolutionBitMasks[setIndex] >>> 30) & 1L);
+            final int riposteSet = (int)((setSolutionBitMasks[setIndex] >>> 31) & 1L);
+            final int warfareSet = (int)((setSolutionBitMasks[setIndex] >>> 32) & 1L);
+            final int pursuitSet = (int)((setSolutionBitMasks[setIndex] >>> 33) & 1L);
 
             // Set calculations using localbuffer instead off mask
 //            localSetsBuffer[setJump] = 0;
