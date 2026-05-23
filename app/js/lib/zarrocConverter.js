@@ -130,10 +130,10 @@ const indexBySet = {
     "ImmunitySet": 11,
     "UnitySet": 12,
     // Revisit
-    "ReversalSet": 13,
-    "RiposteSet": 14,
-    "WarfareSet": 15,
-    "PursuitSet": 16,
+    "ReversalSet": 18,
+    "RiposteSet": 19,
+    "WarfareSet": 20,
+    "PursuitSet": 21,
 }
 
 const indexByRank = {
