@@ -944,6 +944,8 @@ module.exports = {
                                   <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
                                   <option value="Reversal" data-t>${i18next.t("Reversal")}</option>
                                   <option value="Riposte" data-t>${i18next.t("Riposte")}</option>
+                                  <option value="Warfare" data-t>${i18next.t("Warfare")}</option>
+                                  <option value="Weakening" data-t>${i18next.t("Weakening")}</option>
                                   <option value="Speed" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
@@ -956,6 +958,8 @@ module.exports = {
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
                                   <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Pursuit" data-t>${i18next.t("Pursuit")}</option>
+                                  <option value="Fervor" data-t>${i18next.t("Fervor")}</option>
                                 </optgroup>
                               </select><br>
 
@@ -971,6 +975,8 @@ module.exports = {
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
                                   <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Pursuit" data-t>${i18next.t("Pursuit")}</option>
+                                  <option value="Fervor" data-t>${i18next.t("Fervor")}</option>
                                 </optgroup>
                               </select><br>
 
@@ -986,6 +992,8 @@ module.exports = {
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
                                   <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Pursuit" data-t>${i18next.t("Pursuit")}</option>
+                                  <option value="Fervor" data-t>${i18next.t("Fervor")}</option>
                                 </optgroup>
                               </select>
 
@@ -1005,6 +1013,8 @@ module.exports = {
                                   <option value="Revenge" data-t>${i18next.t("Revenge")}</option>
                                   <option value="Reversal" data-t>${i18next.t("Reversal")}</option>
                                   <option value="Riposte" data-t>${i18next.t("Riposte")}</option>
+                                  <option value="Warfare" data-t>${i18next.t("Warfare")}</option>
+                                  <option value="Weakening" data-t>${i18next.t("Weakening")}</option>
                                   <option value="Speed" data-t>${i18next.t("Speed")}</option>
                                 </optgroup>
                                 <optgroup label="2 Piece" data-t>
@@ -1017,6 +1027,8 @@ module.exports = {
                                   <option value="Resist" data-t>${i18next.t("Resist")}</option>
                                   <option value="Torrent" data-t>${i18next.t("Torrent")}</option>
                                   <option value="Unity" data-t>${i18next.t("Unity")}</option>
+                                  <option value="Pursuit" data-t>${i18next.t("Pursuit")}</option>
+                                  <option value="Fervor" data-t>${i18next.t("Fervor")}</option>
                                 </optgroup>
                               </select><br>
                             </div>
@@ -2085,6 +2097,8 @@ function getGearSetOptionsHtml(item) {
 <option value="RiposteSet" ${set == "RiposteSet" ? "selected" : ""}>${i18next.t("Riposte")}</option>
 <option value="WarfareSet" ${set == "WarfareSet" ? "selected" : ""}>${i18next.t("Warfare")}</option>
 <option value="PursuitSet" ${set == "PursuitSet" ? "selected" : ""}>${i18next.t("Pursuit")}</option>
+<option value="WeakeningSet" ${set == "WeakeningSet" ? "selected" : ""}>${i18next.t("Weakening")}</option>
+<option value="FervorSet" ${set == "FervorSet" ? "selected" : ""}>${i18next.t("Fervor")}</option>
 
 `
 }

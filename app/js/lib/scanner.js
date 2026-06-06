@@ -818,7 +818,9 @@ const setsByIngameSet = {
     "set_revenant": "ReversalSet",
     "set_riposte": "RiposteSet",
     "set_chase": "PursuitSet",
-    "set_opener": "WarfareSet"
+    "set_opener": "WarfareSet",
+    "set_weak": "WeakeningSet",
+    "set_might": "FervorSet"
 }
 
 async function postData(url = '', data = {}) {

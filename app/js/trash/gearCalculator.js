@@ -17,7 +17,7 @@ module.exports = {
         const bLength = itemsByGear[Gears.Boots].length;
 
         const accumulatorArrsByItem = {};
-        const setsBuffer = new Array(13).fill();
+        const setsBuffer = new Array(24).fill();
         const parsedResults = [];
 
         console.log("STARTINGPARSING", resultIndices.length)
@@ -90,7 +90,7 @@ function addAccumulatorArrsToHero(base, accs, items, setsBuffer) {
     const atk = Math.floor(base.atk + addStatAccumulators(0, accs)  + (sets[2] > 1 ? Math.floor(sets[2] / 4) * 0.35 * base.atk : 0));
     const hp =  Math.floor(base.hp  + addStatAccumulators(1, accs)  + (sets[0] > 1 ? Math.floor(sets[0] / 2) * 0.15 * base.hp  : 0));
     const def = Math.floor(base.def + addStatAccumulators(2, accs)  + (sets[1] > 1 ? Math.floor(sets[1] / 2) * 0.15 * base.def : 0));
-    const spd = (base.spd + addStatAccumulators(10, accs) + (sets[3] > 1 ? Math.floor(sets[3] / 4) * 0.25 * base.spd : 0));
+    const spd = (base.spd + addStatAccumulators(10, accs) + (sets[3] > 1 ? Math.floor(sets[3] / 4) * 0.25 * base.spd : 0) + (sets[22] > 1 ? Math.floor(sets[22] / 4) * 0.15 * base.spd : 0));
     const cr =  (base.cr  + addStatAccumulators(6, accs)  + (sets[4] > 1 ? Math.floor(sets[4] / 2) * 12 : 0));
     const cd =  (base.cd  + addStatAccumulators(7, accs)  + (sets[6] > 1 ? Math.floor(sets[6] / 4) * 40 : 0));
     const eff = (base.eff + addStatAccumulators(8, accs)  + (sets[5] > 1 ? Math.floor(sets[5] / 2) * 20 : 0));
@@ -208,5 +208,7 @@ const indexBySetType = {
     "ReversalSet": 18,
     "RiposteSet": 19,
     "WarfareSet": 20,
-    "PursuitSet": 21
+    "PursuitSet": 21,
+    "WeakeningSet": 22,
+    "FervorSet": 23
 }

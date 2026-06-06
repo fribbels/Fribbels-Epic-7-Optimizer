@@ -134,6 +134,8 @@ const indexBySet = {
     "RiposteSet": 14,
     "WarfareSet": 15,
     "PursuitSet": 16,
+    "WeakeningSet": 17,
+    "FervorSet": 18,
 }
 
 const indexByRank = {
@@ -157,4 +159,3 @@ const indexByStats = {
     "EffectivenessPercent": 9,
     "EffectResistancePercent": 10
 }
-

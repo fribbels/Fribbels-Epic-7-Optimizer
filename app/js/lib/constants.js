@@ -29,6 +29,8 @@ module.exports = {
         "RiposteSet",
         "WarfareSet",
         "PursuitSet",
+        "WeakeningSet",
+        "FervorSet",
     ],
 
     piecesBySetIndex: [
@@ -52,6 +54,8 @@ module.exports = {
         2,
         4,
         4,
+        4,
+        2,
         4,
         2,
     ],

@@ -126,11 +126,11 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int iRset = (int)rSet;
             final int iBset = (int)bSet;
 
-            final int setIndex = iWset * 5153632
-                + iHset * 234256
-                + iAset * 10648
-                + iNset * 484
-                + iRset * 22
+            final int setIndex = iWset * 7962624
+                + iHset * 331776
+                + iAset * 13824
+                + iNset * 576
+                + iRset * 24
                 + iBset;
 
 //            final int setIndex = iWset * 1889568
@@ -156,6 +156,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int torrentSet = (int)(((setSolutionBitMasks[setIndex] >>> 27) & 1L) + ((setSolutionBitMasks[setIndex] >>> 28) & 1L) + ((setSolutionBitMasks[setIndex] >>> 29) & 1L));
             final int reversalSet = (int)((setSolutionBitMasks[setIndex] >>> 30) & 1L);
             final int warfareSet = (int)((setSolutionBitMasks[setIndex] >>> 32) & 1L);
+            final int weakeningSet = (int)((setSolutionBitMasks[setIndex] >>> 34) & 1L);
 
             final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
             final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + warfareSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);
@@ -164,7 +165,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final int cd =     (int) (baseCd + wCd+hCd+aCd+nCd+rCd+bCd + (cdSet * 60) + bonusCd + aeiCd);
             final int eff =    (int) (baseEff   + wEff+hEff+aEff+nEff+rEff+bEff + (effSet * 20) + bonusEff + aeiEff);
             final int res =    (int) (baseRes   + wRes+hRes+aRes+nRes+rRes+bRes + (resSet * 20) + bonusRes + aeiRes);
-            final int spd =    (int) (baseSpeed + wSpeed+hSpeed+aSpeed+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + (reversalSet * reversalSetBonus) + bonusSpeed + aeiSpeed);
+            final int spd =    (int) (baseSpeed + wSpeed+hSpeed+aSpeed+nSpeed+rSpeed+bSpeed + (speedSet * speedSetBonus) + (revengeSet * revengeSetBonus) + (reversalSet * reversalSetBonus) + (weakeningSet * reversalSetBonus) + bonusSpeed + aeiSpeed);
 
             final float critRate = min(100, cr) / 100f;
             final float critDamage = min(350, cd) / 100f;
@@ -205,7 +206,7 @@ public class SetFormat000OptimizerKernel extends GpuOptimizerKernel {
             final float bsCd = (cd - baseCd - (cdSet * 60));
             final float bsEff = (eff - baseEff - (effSet * 20));
             final float bsRes = (res - baseRes - (resSet * 20));
-            final float bsSpd = (spd - baseSpeed - (speedSet * speedSetBonus) - (revengeSet * revengeSetBonus) - (reversalSet * reversalSetBonus));
+            final float bsSpd = (spd - baseSpeed - (speedSet * speedSetBonus) - (revengeSet * revengeSetBonus) - (reversalSet * reversalSetBonus) - (weakeningSet * reversalSetBonus));
 
             //            final float atk =  ((bonusBaseAtk  + wAtk+hAtk+aAtk+nAtk+rAtk+bAtk + (atkSet * atkSetBonus)) * bonusMaxAtk);
             //            final float hp =   ((bonusBaseHp   + wHp+hHp+aHp+nHp+rHp+bHp + (hpSet * hpSetBonus + torrentSet * hpSetBonus/-2)) * bonusMaxHp);

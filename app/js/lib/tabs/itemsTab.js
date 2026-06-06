@@ -302,6 +302,8 @@ const elementsByFilter = {
         "torrentSetFilter",
         "warfareSetFilter",
         "pursuitSetFilter",
+        "weakeningSetFilter",
+        "fervorSetFilter",
     ],
     statFilter: [
         "mainStatAttackFilter",
@@ -391,6 +393,8 @@ function setupEventListeners() {
     setupFilterListener("riposteSetFilter", "setFilter", "RiposteSet");
     setupFilterListener("warfareSetFilter", "setFilter", "WarfareSet");
     setupFilterListener("pursuitSetFilter", "setFilter", "PursuitSet");
+    setupFilterListener("weakeningSetFilter", "setFilter", "WeakeningSet");
+    setupFilterListener("fervorSetFilter", "setFilter", "FervorSet");
     setupFilterListener("criticalSetFilter", "setFilter", "CriticalSet");
     setupFilterListener("hitSetFilter", "setFilter", "HitSet");
     setupFilterListener("healthSetFilter", "setFilter", "HealthSet");

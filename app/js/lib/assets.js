@@ -26,6 +26,8 @@ const assetsBySet = {
     "RiposteSet": "./assets/setriposte.png",
     "WarfareSet": "./assets/setwarfare.png",
     "PursuitSet": "./assets/setpursuit.png",
+    "WeakeningSet": "./assets/setweakening.png",
+    "FervorSet": "./assets/setfervor.png",
 }
 
 const assetsByElement = {

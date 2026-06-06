@@ -70,11 +70,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
     private boolean canUseGpu = true;
 
-    public static final int SET_COUNT = 22;
+    public static final int SET_COUNT = 24;
     public static final int ARG_COUNT = 17;
 
     //
-    private static final int SET_EXPONENTIAL = 113379904; // 22 ^ 6
+    private static final int SET_EXPONENTIAL = 191102976; // 24 ^ 6
 
     private boolean[] permutations = new boolean[SET_EXPONENTIAL];
     private int[] setPermutationIndicesPlusOne = new int[SET_EXPONENTIAL];
@@ -110,6 +110,10 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 
                                             long l = 0;
 
+                                            l += counters[23] / 2 > 0 ? 1L : 0L; // fervor
+                                            l <<= 1;
+                                            l += counters[22] / 4 > 0 ? 1L : 0L; // weakening
+                                            l <<= 1;
                                             l += counters[21] / 2 > 0 ? 1L : 0L; // pursuit
                                             l <<= 1;
                                             l += counters[20] / 4 > 0 ? 1L : 0L; // warfare (opener)
@@ -1093,7 +1097,7 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
     }
 
     public int[] convertSetsToSetCounters(final int[] sets) {
-        final int[] output = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Length of SET_COUNT
+        final int[] output = new int[SET_COUNT];
 
         for (int i = 0; i < sets.length; i++) {
             output[sets[i]]++;
@@ -1158,11 +1162,11 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
         return sets;
     }
 
-    private static final int POW_20_5 = 5153632;
-    private static final int POW_20_4 = 234256;
-    private static final int POW_20_3 = 10648;
-    private static final int POW_20_2 = 484;
-    private static final int POW_20_1 = 22;
+    private static final int POW_SET_5 = SET_COUNT * SET_COUNT * SET_COUNT * SET_COUNT * SET_COUNT;
+    private static final int POW_SET_4 = SET_COUNT * SET_COUNT * SET_COUNT * SET_COUNT;
+    private static final int POW_SET_3 = SET_COUNT * SET_COUNT * SET_COUNT;
+    private static final int POW_SET_2 = SET_COUNT * SET_COUNT;
+    private static final int POW_SET_1 = SET_COUNT;
 
 //    private static final int POW_18_5 = 1889568;
 //    private static final int POW_18_4 = 104976;
@@ -1170,12 +1174,12 @@ public class OptimizationRequestHandler extends RequestHandler implements HttpHa
 //    private static final int POW_18_2 = 324;
 //    private static final int POW_18_1 = 18;
 
-    public int calculateSetIndex(final int[] indices) { // sorted, size 6, elements [0-17]
-        return indices[0] * POW_20_5
-                + indices[1] * POW_20_4
-                + indices[2] * POW_20_3
-                + indices[3] * POW_20_2
-                + indices[4] * POW_20_1
+    public int calculateSetIndex(final int[] indices) { // sorted, size 6
+        return indices[0] * POW_SET_5
+                + indices[1] * POW_SET_4
+                + indices[2] * POW_SET_3
+                + indices[3] * POW_SET_2
+                + indices[4] * POW_SET_1
                 + indices[5];
     }
 
