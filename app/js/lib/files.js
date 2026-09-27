@@ -65,10 +65,14 @@ module.exports = {
         return os.platform() == 'darwin';
     },
 
+    isWindows: () => {
+        return os.platform() == 'win32';
+    },
+
     path: (path) => {
-        return module.exports.isMac() ?
-                path.replace(/\//g, "/") :
-                path.replace(/\//g, "\\");
+        return module.exports.isWindows() ?
+                path.replace(/\//g, "\\") :
+                path.replace(/\\/g, "/");
     },
 
     getRootPath: () => {

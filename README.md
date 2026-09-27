@@ -19,8 +19,8 @@ Here's what it looks like currently:
 ![](https://i.imgur.com/vQ3tnol.png)
 
 ## Requirements
-- 64-bit Windows or MacOS
-- Java 8+, 64-Bit installed (Please download if you don't yet have it: https://java.com/en/download/manual.jsp. For Windows, use the 'Windows Offline (64-bit)' installer)
+- 64-bit Windows, MacOS, or Linux
+- Java 8+, 64-Bit installed (Please download if you don't yet have it: https://java.com/en/download/manual.jsp or install OpenJDK via your package manager)
 
 Check out the step-by-step video guide on how to install the app: https://www.youtube.com/watch?v=bDjP5eiOfK0
 
@@ -46,9 +46,11 @@ _________________
     + [Installing the app](#installing-the-app)
       - [Windows](#windows)
       - [Mac OS](#mac-os)
+      - [Linux](#linux)
     + [Setting up the auto importer](#setting-up-the-auto-importer)
         * [First time setup for the automatic importer on Windows](#first-time-setup-for-the-automatic-importer-on-windows)
-        * [First time  setup for the automatic importer on Mac](#first-time--setup-for-the-automatic-importer-on-mac)
+        * [First time setup for the automatic importer on Mac](#first-time--setup-for-the-automatic-importer-on-mac)
+        * [First time setup for the automatic importer on Linux](#first-time-setup-for-the-automatic-importer-on-linux)
     + [Using the auto importer](#using-the-auto-importer)
         * [Running the automatic importer from an Google Play Games Beta / Emulator / M1+ Macbook](#running-the-automatic-importer-from-an-google-play-games-beta--emulator--m1-macbook)
         * [Running the automatic importer from a phone](#running-the-automatic-importer-from-a-phone)
@@ -284,7 +286,30 @@ Please read these instructions carefully! Here is a step by step video guide to 
     * JRE: https://java.com/en/download/manual.jsp - Get the 64-bit offline installer
     * JDK: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html
     * After installing, restart your computer (required!)
-  3. Follow the steps to use either the auto importer
+3. Follow the steps to use either the auto importer
+
+#### Linux
+
+1. Install **Java 8+ (64-bit)** (e.g. OpenJDK 8, 11, 17, 21):
+   * **Arch / Manjaro**: `sudo pacman -S jre-openjdk`
+   * **Ubuntu / Debian**: `sudo apt install default-jre`
+   * **Fedora**: `sudo dnf install java-latest-openjdk`
+2. Follow the steps below for setting up the auto importer and running/building the app.
+
+##### Running from Source (Development / Custom Build)
+```bash
+# Ensure Node 14 is active
+fnm use 14  # or nvm use 14
+
+# Install dependencies (if not already done)
+yarn install
+
+# Run the app in development mode
+yarn dev
+
+# (Optional) To build a standalone Linux AppImage executable:
+yarn package-linux
+```
 
 _________________
 
@@ -300,11 +325,26 @@ Check out the step-by-step video guide to follow along with instructions: https:
 2. Install [Npcap](https://nmap.org/npcap/#download) for Windows. Click for [direct download link](https://nmap.org/npcap/dist/npcap-1.31.exe). During installation, enable the setting to "Support raw 802.11 traffic (and monitor mode) for wireless adapters".
 3. Restart your computer
 
-##### First time  setup for the automatic importer on Mac
+##### First time setup for the automatic importer on Mac
 1. Install [Python 3.4+](https://www.python.org/downloads/release/python-392/). This will require extra steps to set python3 as your default. Recommended to use pyenv (https://opensource.com/article/19/5/python-3-default-mac)
 2. Install [Wireshark](https://www.wireshark.org/download.html)
 4. During the Wireshark installation, also install ChmodBPF.pkg: [See image](https://i.imgur.com/FqV0BA5.png)
 3. Restart your computer
+
+##### First time setup for the automatic importer on Linux
+1. Install **Python 3** and the **Scapy** package:
+   * **Arch / Manjaro**: `sudo pacman -S python-scapy`
+   * **Ubuntu / Debian**: `sudo apt install python3-scapy`
+   * **Fedora**: `sudo dnf install python3-scapy`
+   * Or via pip: `pip install --user --break-system-packages scapy`
+2. Grant packet capture capabilities to Python (allows packet sniffing without running the whole app as root):
+   ```bash
+   sudo setcap cap_net_raw,cap_net_admin=eip $(readlink -f $(which python3))
+   ```
+3. (Optional) If you have Wireshark/tshark installed, ensure your user belongs to the `wireshark` group:
+   ```bash
+   sudo usermod -aG wireshark $USER
+   ```
 
 ### Using the auto importer
 You can use the auto importer with Google Play Games Beta, any emulator, a phone, or M1+ chip Macbook.

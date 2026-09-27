@@ -62,14 +62,50 @@ def check_packet(packet):
 def terminate():
     os._exit(0)
 
+#def thread_sniff():
+#    try:
+#        # EpicSeven traffic was confirmed to travel over tcp port 3333 via Wireshark
+#        # Omitting sniff() iface parameter to force all interfaces to be sniffed.
+#        # This may lead to more processing but prevents needing to specify an network interface manually in some cases.
+#        sniff(iface=get_working_ifaces(), prn=lambda x: check_packet(x), filter="tcp and ( port 5222 or port 3333 )", session=TCPSession)
+#    except:
+#        pass
+
+# Fix for Linux
+
 def thread_sniff():
     try:
-        # EpicSeven traffic was confirmed to travel over tcp port 3333 via Wireshark
-        # Omitting sniff() iface parameter to force all interfaces to be sniffed.
-        # This may lead to more processing but prevents needing to specify an network interface manually in some cases.
-        sniff(iface=get_working_ifaces(), prn=lambda x: check_packet(x), filter="tcp and ( port 5222 or port 3333 )", session=TCPSession)
-    except:
-        pass
+        interfaces = get_working_ifaces()
+
+        print(
+            "[SCANNER] Interfaces: {}".format(
+                ", ".join(str(iface) for iface in interfaces)
+            ),
+            file=sys.stderr
+        )
+        sys.stderr.flush()
+
+        sniff(
+            iface=interfaces,
+            prn=check_packet,
+            filter="tcp and (port 5222 or port 3333)",
+            session=TCPSession,
+            store=False
+        )
+
+    except PermissionError as error:
+        print(
+            "[SCANNER_ERROR] Permission denied while capturing packets: {}".format(error),
+            file=sys.stderr
+        )
+        sys.stderr.flush()
+
+    except Exception as error:
+        print(
+            "[SCANNER_ERROR] {}".format(error),
+            file=sys.stderr
+        )
+        sys.stderr.flush()
 
 x = threading.Thread(target=thread_sniff)
 x.daemon = True;

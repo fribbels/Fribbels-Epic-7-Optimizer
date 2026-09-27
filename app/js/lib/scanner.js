@@ -260,23 +260,55 @@ var processes = [];
 //     }
 // }
 
+//function findcommand() {
+//    var commands = ["py", "python", "python3"];
+
+//    if (Files.isMac()) {
+//        commands = ["python3", "python", "py"];
+//    }
+
+//    commands.find((command) => {
+//        const { error, status } = childProcess.spawnSync(command);
+
+//        if (error || status !== 0) {
+//            console.debug(`Unable to use ${command}`);
+//        } else {
+//            console.log(`Using ${command}`);
+//            global.command = command;
+//            return true;
+//        }
+//    });
+//}
+
+// Fix for Linux
+
 function findcommand() {
-    var commands = ["py", "python", "python3"];
+    let commands = ["py", "python", "python3"];
 
     if (Files.isMac()) {
         commands = ["python3", "python", "py"];
     }
 
-    commands.find((command) => {
-        const { error, status } = childProcess.spawnSync(command);
+    if (process.platform === "linux") {
+        commands = ["python3", "python"];
+    }
 
-        if (error || status !== 0) {
+    commands.find((command) => {
+        const result = childProcess.spawnSync(command, ["--version"], {
+            encoding: "utf8"
+        });
+
+        if (result.error || result.status !== 0) {
             console.debug(`Unable to use ${command}`);
-        } else {
-            console.log(`Using ${command}`);
-            global.command = command;
-            return true;
+            return false;
         }
+
+        console.log(
+            `Using ${command}: ${result.stdout || result.stderr}`
+        );
+
+        global.command = command;
+        return true;
     });
 }
 
@@ -463,17 +495,44 @@ function launchScanner(command, scanType) {
             console.log(`Python child process exited with code ${code}`);
         });
 
-        scannerChild.stderr.on('data', (data) => {
-            const str = data.toString()
+//        scannerChild.stderr.on('data', (data) => {
+//            const str = data.toString()
 
-            if (str.includes("Failed to execute")
-            || (str.includes("No IPv4 address"))) {
-                // Ignore these mac specific errors
+//            if (str.includes("Failed to execute")
+//            || (str.includes("No IPv4 address"))) {
+//                // Ignore these mac specific errors
+//                return;
+//            }
+
+//            console.error(str);
+//        })
+
+        // Fix for linux
+
+        scannerChild.stderr.on('data', (data) => {
+            const str = data.toString();
+
+            if (
+                str.includes("Failed to execute") ||
+                str.includes("No IPv4 address")
+            ) {
                 return;
             }
 
-            console.error(str);
-        })
+            console.error(`[Scanner] ${str}`);
+
+            if (str.includes("[SCANNER_ERROR]")) {
+                document
+                    .querySelectorAll('[id=loadFromGameExportOutputText]')
+                    .forEach(x => {
+                        x.value = str.replace("[SCANNER_ERROR]", "").trim();
+                    });
+
+                Notifier.error(
+                    str.replace("[SCANNER_ERROR]", "").trim()
+                );
+            }
+        });
 
         scannerChild.stdout.on('data', (message) => {
             message = message.toString()
@@ -542,25 +601,61 @@ module.exports = {
         // launchItemTracker(command);
     },
 
-    end: async () => {
-        try {
-            scannerChild.stdin.write('END\n');
-            scannerChild.stdin.write('END\n');
+//    end: async () => {
+//        try {
+//            scannerChild.stdin.write('END\n');
+//            scannerChild.stdin.write('END\n');
 
-            if (!scannerChild) {
-                console.error("No scan was started");
-                Notifier.error("No scan was started");
-                return
+//            if (!scannerChild) {
+//                console.error("No scan was started");
+//                Notifier.error("No scan was started");
+//                return
+//            }
+//            document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Reading items, this may take up to 30 seconds...\nData will appear here after it is done."));
+
+//            console.log("Stop scanning")
+//            scannerChild.stdin.write('END\n');
+//        } catch (e) {
+//            Dialog.htmlError(i18next.t("Unexpected error while scanning items. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again. Error: ") + e);
+//        }
+//    }
+//}
+
+// Logic corretion
+
+        end: async () => {
+            try {
+                if (!scannerChild) {
+                    console.error("No scan was started");
+                    Notifier.error("No scan was started");
+                    return;
+                }
+
+                document
+                    .querySelectorAll('[id=loadFromGameExportOutputText]')
+                    .forEach(x => {
+                        x.value = i18next.t(
+                            "Reading items, this may take up to 30 seconds...\nData will appear here after it is done."
+                        );
+                    });
+
+                console.log("Stop scanning");
+
+                scannerChild.stdin.write('END\n');
+
+            } catch (e) {
+                console.error(e);
+
+                Dialog.htmlError(
+                    i18next.t(
+                        "Unexpected error while scanning items. " +
+                        "Please check that you have Python and Wireshark installed correctly, " +
+                        "then try again. Error: "
+                    ) + e
+                );
             }
-            document.querySelectorAll('[id=loadFromGameExportOutputText]').forEach(x => x.value = i18next.t("Reading items, this may take up to 30 seconds...\nData will appear here after it is done."));
-
-            console.log("Stop scanning")
-            scannerChild.stdin.write('END\n');
-        } catch (e) {
-            Dialog.htmlError(i18next.t("Unexpected error while scanning items. Please check that you have <a href='https://github.com/fribbels/Fribbels-Epic-7-Optimizer#using-the-auto-importer'>Python and Wireshark installed</a> correctly, then try again. Error: ") + e);
         }
     }
-}
 
 function convertUnits(rawUnits, scanType) {
     console.warn(rawUnits);
