@@ -91,41 +91,15 @@ function locateSingleItem(itemId, items) {
     var minIndexSubstat = ""
 
     for (var substat of item.substats) {
-
-        if (!item.op) {
-
-            // naive
-
-            items.sort((x, y) => {
-                var difference = y.augmentedStats[substat.type] - x.augmentedStats[substat.type]
-                if (difference == 0) {
-                    return y.ingameId - x.ingameId;
-                }
-                return difference;
-            })
-        } else {
-            // floating point sort
-
-            items.sort((x, y) => {
-                if (!y.op) {
-                    return 1;
-                }
-                if (!x.op) {
-                    return -1;
-                }
-                var yOpValues = y.op.slice(1).filter(x => opStatToSubstat[x[0]] == substat.type).map(x => parseFloat(x[1]))
-                var ySum = yOpValues.reduce((a, b) => a + b, 0)
-
-                var xOpValues = x.op.slice(1).filter(x => opStatToSubstat[x[0]] == substat.type).map(x => parseFloat(x[1]))
-                var xSum = xOpValues.reduce((a, b) => a + b, 0)
-
-                var difference = ySum - xSum
-                if (difference == 0) {
-                    return y.ingameId - x.ingameId;
-                }
-                return difference;
-            })
-        }
+        items.sort((x, y) => {
+            var yValue = y.augmentedStats[substat.type] || 0;
+            var xValue = x.augmentedStats[substat.type] || 0;
+            var difference = yValue - xValue;
+            if (difference == 0) {
+                return y.ingameId - x.ingameId;
+            }
+            return difference;
+        })
 
         var currentIndex = items.findIndex(x => x.ingameId == item.ingameId)
         if (currentIndex < minIndex) {
@@ -139,19 +113,4 @@ function locateSingleItem(itemId, items) {
         index: minIndex,
         storage: item.storage || false
     }
-}
-
-var opStatToSubstat = {
-    "att_rate": "AttackPercent",
-    "max_hp_rate": "HealthPercent",
-    "def_rate": "DefensePercent",
-    "att": "Attack",
-    "max_hp": "Health",
-    "def": "Defense",
-    "speed": "Speed",
-    "res": "EffectResistancePercent",
-    "cri": "CriticalHitChancePercent",
-    "cri_dmg": "CriticalHitDamagePercent",
-    "acc": "EffectivenessPercent",
-    "coop": "DualAttackChancePercent"
 }
